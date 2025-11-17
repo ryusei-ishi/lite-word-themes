@@ -1,0 +1,45 @@
+.lw-pr-step-7 {
+  /* エディタ専用スタイル */
+  .lw-pr-step-7-item-controls {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 20;
+    display: flex;
+    gap: 4px;
+    padding: 4px;
+
+    button {
+      padding: 4px 8px;
+      font-size: 12px;
+      cursor: pointer;
+      border: 1px solid #ddd;
+      background: #fff;
+      border-radius: 3px;
+
+      &:hover:not(:disabled) {
+        background: #f0f0f0;
+      }
+
+      &:disabled {
+        opacity: 0.5;
+        cursor: not-allowed;
+      }
+
+      &.move-up-button,
+      &.move-down-button {
+        font-weight: bold;
+      }
+
+      &.remove-item-button {
+        color: #fff;
+        background: var(--color-accent);
+        border-color: var(--color-accent);
+
+        &:hover {
+          background: #d32f2f;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,154 @@
+
+.shin-gas-station-01-contact {
+    .lw_mail_form {
+      .form_group {
+        position: relative;
+        padding: 48px 0;
+        border-top: 2px solid #ebebeb;
+        grid-template-columns: 240px calc(100% - 240px);
+        @container (max-width: 800px) {
+          padding: 24px 8px 32px 8px;
+          grid-template-columns: 100%;
+        }
+        &::before,
+        &::after {
+          position: absolute;
+          left: 0;
+          width: 240px;
+          height: 2px;
+          content: "";
+          display: block;
+          background: var(--color-main);
+        }
+        &::before{
+          top: -2px;
+        }
+        &::after{
+          bottom: -2px;
+          display: none;
+        }
+        &.last_form{
+          border-bottom: 2px solid #ebebeb;
+          &::after{
+            display: block;
+          }
+        }
+        + .form_group {
+          margin-top: 0;
+        }
+        .label_in {
+          label {
+            justify-content: start;
+            align-items: center;
+            align-content: center;
+            gap: 12px;
+            .required {
+              padding: 4px;
+              font-size: 12px;
+              border-radius: 4px;
+              line-height: 1;
+              font-weight: 500;
+            }
+          }
+        }
+        .form_in {
+          padding-left: 40px;
+          @container (max-width: 800px) {
+            padding-left: 0;
+          }
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="url"],
+        input[type="password"],
+        textarea {
+          padding: 0.8em 0.8em 0.6em 1.5em;
+          line-height: 1.8em;
+          background:#F6F6F6;
+          border-radius: 8px;
+          border: none;
+          max-width: 480px;
+          @container (max-width: 800px) {
+            font-size: var(--font-size-post-df_tb);
+          }
+          @container (max-width:600px) {
+            font-size: var(--font-size-post-df_sp);
+          }
+          &:focus {
+            border-color: var(--color-main);
+            outline-color: var(--color-main);
+          }
+          // プレースホルダー
+          &::placeholder {
+            color: #C6C6C6;
+          }
+        }
+        select {
+          padding: 1em 0.8em 0.8em 1.2em;
+          max-width: 480px;
+          background:#F6F6F6;
+          border-radius: 8px;
+          border: none;
+          -webkit-appearance: none; /* Safari, Chrome */
+          -moz-appearance: none; /* Firefox */
+          appearance: none; /* 標準 */
+        }
+        .radio_in{
+          display: flex;
+          flex-wrap: wrap;
+          align-items: center;
+          align-content: center;
+          gap:20px;
+          label {
+            + label {
+              margin-top: 0 !important;
+            }
+            input{
+              width: 16px;
+              height: 16px;
+              accent-color: var(--color-main);
+            }
+          }
+        }
+      }
+    }
+    .consent_set{
+      .consent_text_wrap{
+        border-radius: 12px;
+        border: none !important;
+      }
+    }
+    .submit_wrap{
+      margin-top: 64px !important;
+      @media (max-width: 800px) {
+        margin-top: 48px !important;
+        
+      }
+      @media (max-width: 600px) {
+        margin-top: 32px !important;
+      }
+      button{
+        min-width: 300px !important;
+        height: 80px !important;
+        border-radius: 5em;
+        font-size: 24px !important;
+        font-weight: 600;
+        @media (max-width: 800px) {
+          min-width: 240px !important;
+          height: 64px !important;
+          font-size: 20px !important;
+          
+        }
+        @media (max-width: 600px) {
+          min-width: 200px !important;
+          height: 56px !important;
+          font-size: 18px !important;
+        }
+        svg{
+          display: none;
+        }
+      }
+    }
+  }
+  

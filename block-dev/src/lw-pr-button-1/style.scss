@@ -1,0 +1,167 @@
+.lw-pr-button-1 {
+    margin-top: 1em;
+    * {
+        box-sizing: border-box;
+    }
+
+    .wrap_btn {
+        padding-top: 22px;
+        display: flex;
+        justify-content: center;
+        font-size: 16px;
+        &.left{
+            justify-content: flex-start;
+            &.sp_center{
+                @media (max-width: 800px) {
+                    justify-content: center;
+                }
+            }
+            &.sp_right{
+                @media (max-width: 800px) {
+                    justify-content: flex-end;
+                }
+            }
+        }
+        &.center{
+            justify-content: center;
+            &.sp_left{
+                @media (max-width: 800px) {
+                    justify-content: flex-start;
+                }
+            }
+            &.sp_right{
+                @media (max-width: 800px) {
+                    justify-content: flex-end;
+                }
+            }
+        }
+        &.right{
+            justify-content: flex-end;
+            &.sp_center{
+                @media (max-width: 800px) {
+                    justify-content: center;
+                }
+            }
+            &.sp_left{
+                @media (max-width: 800px) {
+                    justify-content: flex-start;
+                }
+            }
+        }
+        .lw_btn_a {
+            position: relative;
+            padding: 1.5em 1em 1.2em 1em;
+            margin: 0 auto;
+            max-width: 340px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            border-radius: 4em;
+            border: 3px solid #ffffff;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+            transition: background var(--transition-duration, 0.3s) ease;
+            text-decoration: none;
+
+            @media (max-width: 800px) {
+                max-width: var(--max-width-sp, 300px) !important;
+            }
+
+            &:hover {
+                background: var(--hover-bg) !important;
+            }
+
+            // 震えるアニメーション
+            &.lw_btn_shake_light {
+                animation: lw_btn_shake_light var(--shake-interval, 3s) ease-in-out infinite;
+            }
+
+            &.lw_btn_shake_normal {
+                animation: lw_btn_shake_normal var(--shake-interval, 3s) ease-in-out infinite;
+            }
+
+            &.lw_btn_shake_strong {
+                animation: lw_btn_shake_strong var(--shake-interval, 3s) ease-in-out infinite;
+            }
+
+            .text_sub {
+                position: absolute;
+                top: -22px;
+                left: 0;
+                width: 100%;
+                display: flex;
+                justify-content: center;
+
+                .in {
+                    position: relative;
+                    z-index: 10;
+                    padding: 0.5em 2em;
+                    min-width: 20em;
+                    display: flex;
+                    align-items: center;
+                    justify-content: center;
+                    background: #f9bb00;
+                    line-height: 1.6;
+                    font-weight: 600;
+                    color: #000;
+                    font-size: var(--font-size-sub, 12px);
+                    border-radius: 3em;
+                }
+
+                .down {
+                    position: absolute;
+                    top: calc(100% - 10px);
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    width: 1em;
+                    aspect-ratio: 1 / 1;
+                    transform: rotate(45deg);
+                    background: #f9bb00;
+                }
+            }
+
+            .text_main {
+                font-size: var(--font-size-main, 20px);
+                font-weight: 700;
+                line-height: 1.5;
+                display: flex;
+                align-items: center;
+                text-align: center;
+
+                @media (max-width: 800px) {
+                    font-size: var(--font-size-main-sp, 18px) !important;
+                }
+
+                .icon {
+                    display: flex;
+                    align-items: center;
+                    width: 20px;
+                    height: auto;
+                    margin-right: 8px;
+
+                    svg {
+                        height: auto;
+                        width: 100%;
+                    }
+                }
+            }
+
+            .icon_right {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: 20px;
+                margin: auto;
+                height: 100%;
+                width: 20px;
+                display: flex;
+                align-items: center;
+
+                svg {
+                    height: auto;
+                    width: 100%;
+                }
+            }
+        }
+    }
+}

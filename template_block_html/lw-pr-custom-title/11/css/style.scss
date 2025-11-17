@@ -1,0 +1,54 @@
+.lw-pr-custom-title-11 {
+    margin-left: calc((100% - 100vw) / 2);
+    width: 100vw;
+}
+.wp-block {
+    &:has(.lw-pr-custom-title-11) {
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+.lw-pr-custom-title-11 {
+    margin: 1em 0;
+    font-size: 16px;
+    @media (max-width:800px) {
+        font-size: 14px;
+    }
+    @media (max-width:600px) {
+        font-size: 12px;
+    }
+    @media (max-width:400px) {
+        font-size: 10px;
+    }
+    &::after {
+        margin: 0 auto;
+        content: '';
+        width: 0;
+        height: 0;
+        display: block;
+        border-left: 2em solid transparent;
+        border-right: 2em solid transparent;
+        border-top: 1.4em solid var(--color-main);
+    }
+    .ttl {
+        padding: 1.2em 0.5em 1.25em 0.5em;
+        width: 100%;
+        background: var(--color-main);
+        color: #fff;
+        text-align: center;
+        .main {
+            display: block;
+            font-size: 2em;
+            line-height: 1.4;
+            + .sub{
+                margin-top: 0.2em;
+            }
+        }
+        .sub {
+            display: block;
+            font-size: 1em;
+            line-height: 1.6;
+        }
+    }
+}

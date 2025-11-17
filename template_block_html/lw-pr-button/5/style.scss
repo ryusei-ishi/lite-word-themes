@@ -1,0 +1,53 @@
+.lw-pr-button-5 {
+    margin-top: 1em;
+    * {
+        box-sizing: border-box;
+    }
+    .wrap_btn {
+        display: flex;
+        justify-content: center;
+        font-size: 16px;
+        .lw_btn_a {
+            position: relative;
+            padding: 0.6em 1.2em;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            // グラデーション
+            background: #e1a20e;
+            border-radius: 3em;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
+            text-decoration: none;
+            &:hover {
+                background: #c4880b;
+            }
+            .text_main {
+                font-size: 16px;
+                font-weight: 500;
+                line-height: 1.5;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                text-align: center;
+                @media (max-width: 800px) {
+                    font-size: 14px;
+                }
+                .icon {
+                    margin-right: 4px;
+                    display: flex;
+                    align-items: center;
+                    width: 24px;
+                    height: auto;
+                    svg {
+                        height: auto;
+                        width: 100%;
+                        fill: #fff;
+                    }
+                }
+            }
+        }
+    }
+}

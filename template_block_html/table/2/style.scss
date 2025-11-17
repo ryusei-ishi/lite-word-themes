@@ -1,0 +1,68 @@
+:root {
+    --table-item-first-width: 200px;
+    --table-item-gap: 2px;
+    --color-table-item-bd: #116ea7;
+    --color-table-head-item-bg: #116ea7;
+    --color-table-head-item-text: #ffffff;
+}
+.lw-pr-table-2 {
+    .wrap_table {
+        max-width: 680px;
+        margin: 0 auto;
+        * {
+            box-sizing: border-box;
+        }
+        .table_head,
+        .table_body {
+            width: 100%;
+            display: grid;
+            grid-template-columns: 
+                var(--table-item-first-width) 
+                calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap)) 
+                calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap)) 
+                calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap)) 
+                calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap)) 
+                calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap)) 
+                calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap)) 
+                calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap)) 
+                ;
+            gap: var(--table-item-gap);
+            @media (max-width: 700px) {
+                --table-item-first-width: 140px;
+            }
+            @media (max-width: 500px) {
+                --table-item-first-width: 108px;
+                --table-item-gap: 1px;
+            }
+            .item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid var(--color-table-item-bd);
+                aspect-ratio: 1;
+                font-size: 18px;
+                &.first {
+                    aspect-ratio: initial;
+                }
+                @media (max-width: 700px) {
+                    font-size: 16px;
+                }
+                @media (max-width: 500px) {
+                    font-size: 14px;
+                }
+                @media (max-width: 450px) {
+                    aspect-ratio: 1 / 1.2;
+                }
+            }
+        }
+        .table_head {
+            .item {
+                color: var(--color-table-head-item-text);
+                background: var(--color-table-head-item-bg);
+            }
+        }
+        .table_body {
+            margin-top: var(--table-item-gap);
+        }
+    }
+}

@@ -1,0 +1,424 @@
+.wp-block:has(.shin-gas-station-01-post-list) {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.wp-block:has(.shin-gas-station-01-post-list) .wp-block-wdl-shin-gas-station-01-post-list {
+  width: 100%;
+}
+
+.wp-block:has(.shin-gas-station-01-post-list) * {
+  box-sizing: border-box;
+  margin: 0;
+}
+
+.wp-block:has(.shin-gas-station-01-post-list) * ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.lw_content_wrap.page .wp-block-wdl-shin-gas-station-01-post-list {
+  margin-left: calc((100% - 100vw) / 2);
+  width: 100vw;
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list,
+[data-type="wdl/shin-gas-station-01-post-list"] {
+  position: relative;
+  z-index: 10;
+  margin: 108px 0;
+  padding: 0 68px;
+  box-sizing: border-box;
+}
+
+@container (max-width:1100px) {
+  .wp-block-wdl-shin-gas-station-01-post-list,
+  [data-type="wdl/shin-gas-station-01-post-list"] {
+    padding: 0 32px;
+  }
+}
+
+@container (max-width:800px) {
+  .wp-block-wdl-shin-gas-station-01-post-list,
+  [data-type="wdl/shin-gas-station-01-post-list"] {
+    margin: 64px 0;
+    padding: 0 24px;
+  }
+}
+
+@container (max-width:600px) {
+  .wp-block-wdl-shin-gas-station-01-post-list,
+  [data-type="wdl/shin-gas-station-01-post-list"] {
+    margin: 48px 0;
+    padding: 0 16px;
+  }
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list *,
+[data-type="wdl/shin-gas-station-01-post-list"] * {
+  box-sizing: border-box;
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list {
+  margin: 0 auto;
+  width: 100%;
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head {
+  position: relative;
+  margin-right: -12px;
+  padding-top: 80px;
+  padding-right: 12px;
+  padding-bottom: 16px;
+  width: calc(100% + 12px);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  overflow: hidden;
+}
+
+@container (max-width:800px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head {
+    padding-top: 0;
+  }
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head::after,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head::after {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  content: '';
+  display: block;
+  background: #ebebeb;
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head .sen,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head .sen {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  z-index: 5;
+  height: 2px;
+  width: 200px;
+  background: var(--color-main);
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head h2.title .main,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head h2.title .main {
+  position: relative;
+  z-index: 10;
+  font-size: 32px;
+  line-height: 1.5em;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+
+@container (max-width:800px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head h2.title .main,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head h2.title .main {
+    font-size: 28px;
+  }
+}
+
+@container (max-width:600px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head h2.title .main,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head h2.title .main {
+    font-size: 22px;
+  }
+}
+
+@container (max-width:500px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head h2.title .main,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head h2.title .main {
+    font-size: 20px;
+  }
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head h2.title .sub,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head h2.title .sub {
+  position: absolute;
+  right: 0;
+  bottom: -0.15em;
+  line-height: 1;
+  font-size: 180px;
+  color: #f7fcfd;
+}
+
+@container (max-width:900px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head h2.title .sub,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head h2.title .sub {
+    font-size: 120px;
+  }
+}
+
+@container (max-width:800px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head h2.title .sub,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head h2.title .sub {
+    display: none;
+  }
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head nav,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head nav {
+  position: relative;
+  z-index: 10;
+  margin-bottom: -20px;
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head nav a,
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head nav .a,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head nav a,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head nav .a {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head nav a .text,
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head nav .a .text,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head nav a .text,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head nav .a .text {
+  font-size: 14px;
+  color: #c6c6c6;
+}
+
+@container (max-width:800px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head nav a .text,
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head nav .a .text,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head nav a .text,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head nav .a .text {
+    font-size: 12px;
+  }
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head nav a svg,
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head nav .a svg,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head nav a svg,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head nav .a svg {
+  width: 40px;
+  height: auto;
+  transition: 0.3s;
+}
+
+@container (max-width:800px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head nav a svg,
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head nav .a svg,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head nav a svg,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head nav .a svg {
+    width: 32px;
+  }
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head nav a:hover svg,
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list .head nav .a:hover svg,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head nav a:hover svg,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list .head nav .a:hover svg {
+  transform: translateX(0.5em);
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap {
+  margin: 0;
+  width: 100%;
+  padding-inline-start: 0;
+  display: grid;
+  grid-template-columns: repeat(1, 1fr);
+  list-style: none;
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li {
+  border-bottom: 2px solid #ebebeb;
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a {
+  padding: 24px 0;
+  display: grid;
+  grid-template-columns: 200px calc(100% - 200px);
+  color: #000;
+  text-decoration: none;
+}
+
+@container (max-width:800px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a {
+    grid-template-columns: 160px calc(100% - 160px);
+  }
+}
+
+@media (max-width: 500px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a {
+    grid-template-columns: 112px calc(100% - 112px);
+  }
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a figure,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a figure {
+  margin: 0;
+  width: 100%;
+  aspect-ratio: 200 / 150;
+  border-radius: 20px;
+  overflow: hidden;
+}
+
+@media (max-width: 500px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a figure,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a figure {
+    border-radius: 16px;
+  }
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a figure img,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a figure img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: 0.6s;
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in {
+  padding: 12px 0 0 24px;
+  overflow: hidden;
+}
+
+@media (max-width: 400px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in {
+    padding: 12px;
+    padding-bottom: 0;
+  }
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in .data,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in .data {
+  display: flex;
+  align-items: center;
+  gap: 32px;
+}
+
+@container (max-width:600px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in .data,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in .data {
+    gap: 16px;
+  }
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in .data .cat,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in .data .cat {
+  font-size: 14px;
+  line-height: 1.2em;
+  color: var(color-main);
+  border-radius: 2px;
+  transition: 0.3s;
+  letter-spacing: 0;
+  text-transform: capitalize;
+}
+
+@container (max-width:600px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in .data .cat,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in .data .cat {
+    font-size: 11px;
+    line-height: 1;
+  }
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in .data .date,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in .data .date {
+  font-size: 14px;
+  opacity: 0.6;
+  line-height: 1;
+  font-weight: 400;
+  color: #c6c6c6;
+}
+
+@container (max-width:600px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in .data .date,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in .data .date {
+    font-size: 12px;
+  }
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in h3,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in h3 {
+  margin-top: 16px;
+  line-height: 1.7em;
+  font-size: 24px;
+  font-feature-settings: "palt";
+  transition: 0.6s;
+  letter-spacing: 0.08em;
+}
+
+@container (max-width:900px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in h3,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in h3 {
+    margin-top: 12px;
+    font-size: 20px;
+  }
+}
+
+@container (max-width:800px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in h3,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in h3 {
+    margin-top: 8px;
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 450px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in h3,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in h3 {
+    margin-top: 8px;
+    font-size: 14px;
+  }
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in p,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in p {
+  margin: 0;
+  line-height: 1.6em;
+  font-size: 12px;
+  transition: 0.6s;
+}
+
+@container (max-width:600px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in p,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in p {
+    font-size: 12px;
+  }
+}
+
+@container (max-width:400px) {
+  .wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in p,
+  [data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a .in p {
+    font-size: 11px;
+  }
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a:hover,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a:hover {
+  opacity: 1;
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a:hover img,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a:hover img {
+  transform: scale(1.1);
+}
+
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a:hover h3,
+.wp-block-wdl-shin-gas-station-01-post-list .shin-gas-station-01-post-list ul.post-list-3__wrap li a:hover p,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a:hover h3,
+[data-type="wdl/shin-gas-station-01-post-list"] .shin-gas-station-01-post-list ul.post-list-3__wrap li a:hover p {
+  opacity: 0.6;
+  color: var(--color-accent);
+}

@@ -1,0 +1,149 @@
+.lw_content_wrap.page {
+    .shin-gas-station-01-fv-lower-01 {
+        margin-left: calc((100% - 100vw) / 2);
+        width: 100vw;
+    }
+    &:has(.first_content + .shin-gas-station-01-fv-lower-01) {
+        .first_content {
+            display: none;
+        }
+        @media (max-width: 1080px) {
+            margin-top: 0 !important;
+        }
+        @media (max-width: 600px) {
+            margin-top: 0 !important;
+        }
+    }
+}
+[class*="header_ptn"] {
+    .inner {
+        &::after {
+            display: none !important;
+        }
+    }
+}
+.wp-block .shin-gas-station-01-fv-lower-01,
+.shin-gas-station-01-fv-lower-01 {
+    position: relative;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    align-content: center;
+    color: #fff;
+    background-size: cover;
+    background-position: center;
+    box-sizing: border-box;
+    border-radius: 0 0 160px 0;
+    overflow: hidden;
+    @container (max-width:980px) {
+        border-radius: 0 0 120px 0;
+    }
+    @container (max-width:800px) {
+        border-radius: 0 0 80px 0;
+    }
+    @container (max-width:600px) {
+        border-radius: 0 0 60px 0;
+    }
+    @container (max-width:500px) {
+        border-radius: 0 0 40px 0;
+    }
+    + .post_style > .wp-block-columns.has-background {
+        margin-top: 0;
+    }
+    .bg_image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        margin: auto;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        img {
+            object-fit: cover;
+            width: 100%;
+            height: 100%;
+        }
+    }
+    + p,
+    + h2,
+    + h3,
+    + h4,
+    + h5,
+    + h6 {
+        margin-top: 2.4em !important;
+    }
+    .filter {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: 0;
+        margin: auto;
+        width: 100%;
+        height: 100%;
+        mix-blend-mode: multiply;
+    }
+    .shin-gas-station-01-fv-lower-01_inner {
+        padding: 0 64px;
+        margin: 0 auto;
+        width: 100%;
+        @media (max-width: 1180px) {
+            padding: 0 44px;
+        }
+        @media (max-width: 800px) {
+            padding: 0 32px;
+        }
+        @media (max-width: 500px) {
+            padding: 0 20px;
+        }
+    }
+    h1 {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        .main {
+            display: block;
+            line-height: 1.8em;
+            font-size: 48px;
+            letter-spacing: 0.05em;
+            font-weight: 600;
+            color: #101010;
+            @container (max-width:980px) {
+                font-size: 40px;
+            }
+            @container (max-width:800px) {
+                font-size: 32px;
+            }
+            @container (max-width:600px) {
+                font-size: 28px;
+            }
+            @container (max-width:500px) {
+                font-size: 20px;
+            }
+            &:empty {
+                display: none;
+            }
+        }
+        .sub {
+            margin-top: 0.1em;
+            display: block;
+            line-height: 1.4em;
+            font-size: 14px;
+            letter-spacing: 0.05em;
+            font-weight: 500;
+            color: var(--color-main);
+            @container (max-width:800px) {
+                font-size: 12px;
+            }
+            @container (max-width:500px) {
+                font-size: 11px;
+            }
+            &:empty {
+                display: none;
+            }
+        }
+    }
+}

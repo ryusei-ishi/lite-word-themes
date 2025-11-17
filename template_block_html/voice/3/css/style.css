@@ -1,0 +1,297 @@
+.lw-pr-voice-3 {
+  position: relative;
+  z-index: 10;
+  padding: 0 24px;
+}
+
+@container (max-width: 800px) {
+  .lw-pr-voice-3 {
+    padding: 0;
+  }
+}
+
+.lw-pr-voice-3 > .inner {
+  max-width: var(--lw-pr-voice-3-max-width, var(--max-width-clm-1, 1120px));
+  margin: 0 auto;
+}
+
+.lw-pr-voice-3 > .inner .voice-swiper {
+  padding: 8px 8px 60px 8px;
+  position: relative;
+}
+
+@container (max-width: 800px) {
+  .lw-pr-voice-3 > .inner .voice-swiper {
+    padding: 8px 40px 50px;
+  }
+}
+
+@container (max-width: 600px) {
+  .lw-pr-voice-3 > .inner .voice-swiper {
+    padding: 0 30px 50px;
+  }
+}
+
+.lw-pr-voice-3 > .inner .voice-card {
+  background: #fff;
+  border-radius: 8px;
+  padding: 30px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 8px rgba(0, 0, 0, 0.08);
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.lw-pr-voice-3 > .inner .voice-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
+}
+
+.lw-pr-voice-3 > .inner .voice-card:hover .more-btn {
+  opacity: 0.85;
+}
+
+.lw-pr-voice-3 > .inner .voice-card .photo {
+  width: 100px;
+  height: 100px;
+  margin: 0 auto 20px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 3px solid #f0f0f0;
+}
+
+.lw-pr-voice-3 > .inner .voice-card .photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lw-pr-voice-3 > .inner .voice-card .name {
+  font-size: 1.1em;
+  font-weight: 600;
+  margin: 0 0 16px 0;
+  color: #333;
+}
+
+.lw-pr-voice-3 > .inner .voice-card .excerpt {
+  font-size: 0.9em;
+  line-height: 1.7em;
+  color: #666;
+  margin: 0 0 20px 0;
+  flex-grow: 1;
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.lw-pr-voice-3 > .inner .voice-card .more-btn {
+  display: inline-block;
+  padding: 8px 24px;
+  background: var(--color-btn-bg, var(--color-main, #333));
+  color: var(--color-btn-text, #fff);
+  font-size: 0.85em;
+  border-radius: 20px;
+  transition: opacity 0.3s ease;
+}
+
+.lw-pr-voice-3 > .inner .swiper-pagination {
+  bottom: 20px;
+}
+
+.lw-pr-voice-3 > .inner .swiper-pagination-bullet {
+  width: 10px;
+  height: 10px;
+  background: #ccc;
+  opacity: 1;
+  transition: all 0.3s ease;
+}
+
+.lw-pr-voice-3 > .inner .swiper-pagination-bullet-active {
+  background: var(--color-pagination, var(--color-main, #333));
+  width: 24px;
+  border-radius: 5px;
+}
+
+.lw-pr-voice-3 > .swiper-button-prev,
+.lw-pr-voice-3 > .swiper-button-next {
+  width: 44px;
+  height: 44px;
+  background: #fff;
+  border-radius: 50%;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  transition: all 0.3s ease;
+  margin-top: calc(0px - (var(--swiper-navigation-size) / 0.8));
+}
+
+.lw-pr-voice-3 > .swiper-button-prev:after,
+.lw-pr-voice-3 > .swiper-button-next:after {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-next-prev, var(--color-main, #333));
+}
+
+.lw-pr-voice-3 > .swiper-button-prev:hover,
+.lw-pr-voice-3 > .swiper-button-next:hover {
+  background: var(--color-next-prev, var(--color-main, #333));
+}
+
+.lw-pr-voice-3 > .swiper-button-prev:hover:after,
+.lw-pr-voice-3 > .swiper-button-next:hover:after {
+  color: #fff;
+}
+
+@container (max-width: 600px) {
+  .lw-pr-voice-3 > .swiper-button-prev,
+  .lw-pr-voice-3 > .swiper-button-next {
+    width: 36px;
+    height: 36px;
+  }
+  .lw-pr-voice-3 > .swiper-button-prev:after,
+  .lw-pr-voice-3 > .swiper-button-next:after {
+    font-size: 14px;
+  }
+}
+
+.lw-pr-voice-3 .voice-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  z-index: 999999999999999999999999999999;
+  width: 100%;
+  height: 100%;
+  z-index: 99999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  opacity: 0;
+  visibility: hidden;
+  transition: all 0.3s ease;
+}
+
+.lw-pr-voice-3 .voice-modal.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.lw-pr-voice-3 .voice-modal.active .modal-content {
+  transform: scale(1);
+}
+
+.lw-pr-voice-3 .voice-modal .modal-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.7);
+  cursor: pointer;
+}
+
+.lw-pr-voice-3 .voice-modal .modal-content {
+  position: relative;
+  z-index: 1;
+  background: #fff;
+  border-radius: 12px;
+  max-width: 600px;
+  width: calc(100% - 40px);
+  max-height: 90vh;
+  overflow-y: auto;
+  transform: scale(0.9);
+  transition: transform 0.3s ease;
+}
+
+.lw-pr-voice-3 .voice-modal .modal-content::-webkit-scrollbar {
+  width: 8px;
+}
+
+.lw-pr-voice-3 .voice-modal .modal-content::-webkit-scrollbar-track {
+  background: #f1f1f1;
+  border-radius: 10px;
+}
+
+.lw-pr-voice-3 .voice-modal .modal-content::-webkit-scrollbar-thumb {
+  background: #ccc;
+  border-radius: 10px;
+}
+
+.lw-pr-voice-3 .voice-modal .modal-content::-webkit-scrollbar-thumb:hover {
+  background: #aaa;
+}
+
+.lw-pr-voice-3 .voice-modal .modal-close {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 0, 0, 0.05);
+  border: none;
+  border-radius: 50%;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 2;
+  transition: all 0.3s ease;
+}
+
+.lw-pr-voice-3 .voice-modal .modal-close:hover {
+  background: rgba(0, 0, 0, 0.1);
+}
+
+.lw-pr-voice-3 .voice-modal .modal-close svg {
+  width: 20px;
+  height: 20px;
+  color: #666;
+}
+
+.lw-pr-voice-3 .voice-modal .modal-body {
+  padding: 50px 40px 40px;
+  text-align: center;
+}
+
+@container (max-width: 600px) {
+  .lw-pr-voice-3 .voice-modal .modal-body {
+    padding: 50px 24px 32px;
+  }
+}
+
+.lw-pr-voice-3 .voice-modal .modal-photo {
+  width: 120px;
+  height: 120px;
+  margin: 0 auto 24px;
+  border-radius: 50%;
+  overflow: hidden;
+  border: 4px solid #f0f0f0;
+}
+
+.lw-pr-voice-3 .voice-modal .modal-photo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lw-pr-voice-3 .voice-modal .modal-name {
+  font-size: 1.4em;
+  font-weight: 600;
+  margin: 0 0 8px 0;
+  color: #333;
+}
+
+.lw-pr-voice-3 .voice-modal .modal-meta {
+  font-size: 0.9em;
+  color: #999;
+  margin: 0 0 24px 0;
+}
+
+.lw-pr-voice-3 .voice-modal .modal-text {
+  font-size: 0.95em;
+  line-height: 1.9em;
+  color: #555;
+  text-align: left;
+  white-space: pre-line;
+}

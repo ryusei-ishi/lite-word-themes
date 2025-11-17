@@ -1,0 +1,7 @@
+{
+    "emmet.includeLanguages": {
+        "javascript": "javascript",
+        "javascriptreact": "javascriptreact",
+        "typescriptreact": "html"
+    }
+}

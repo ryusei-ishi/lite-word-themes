@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../LiteWord/assets/css/reset.min.css">
+    <link rel="stylesheet" href="../../../LiteWord/assets/css/common.min.css">
+    <link rel="stylesheet" href="../../../LiteWord/assets/css/page.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+    <div class="lw_content_wrap page">
+        <div class="main_content">
+            <section class="post_content">
+                <div class="post_style page">
+                    <div class="first_content"></div>
+                        <div class="paid-block-fv-12">
+                            <header class="fv_in_header">
+                                <h1 class="logo"><a href="">LOGO</a></h1>
+                                <nav class="fv_in_nav">
+                                    <ul>
+                                        <li><a href="">TOP</a></li>
+                                        <li><a href="">ABOUT</a></li>
+                                        <li><a href="">WORKS</a></li>
+                                        <li><a href="">BLOG</a></li>
+                                        <li><a href="">CONTACT</a></li>
+                                    </ul>
+                                </nav>
+                                <div class="ham_menu drawer_nav_open">
+                                    <div class="in">
+                                        <div></div>
+                                        <div></div>
+                                    </div>
+                                </div>
+                            </header>
+                            <div class="fv_inner">
+                                <h2>くらしを楽しく、美しく<br>くらしを楽しく、美しく</h2>
+                                <div class="cta_wrap">
+                                    <a href="">ご相談はこちら</a>
+                                    <a href="">お問い合わせ</a>
+                                </div>
+                            </div>
+                            <nav class="fv-12_news_list">
+                                <h3><span class="text">NEWS</span></h3>
+                                <div class="pagination">
+                                    <div class="prev">←</div>
+                                    <div class="page">1/4</div>
+                                    <div class="next">→</div>
+                                </div>
+                                <ul>
+                                    <li data-news-no="1" class="active">
+                                        <a href="">
+                                            <span class="date">2023.10.01</span>
+                                            <span class="title">新しいサービスを開始しました新しいサービスを開始しました新しいサービスを開始しました</span>
+                                        </a>
+                                    </li>
+                                    <li data-news-no="2">
+                                        <a href="">
+                                            <span class="date">2023.10.02</span>
+                                            <span class="title">新しいサービスを開始しました</span>
+                                        </a>
+                                    </li>
+                                    <li data-news-no="3">
+                                        <a href="">
+                                            <span class="date">2023.10.01</span>
+                                            <span class="title">新しいサービスを開始しました</span>
+                                        </a>
+                                    </li>
+                                    <li data-news-no="4">
+                                        <a href="">
+                                            <span class="date">2023.10.01</span>
+                                            <span class="title">新しいサービスを開始しました</span>
+                                        </a>
+                                    </li>
+                                   
+                                </ul>
+                                
+                            </nav>
+                            <div class="bg_filter"></div>
+                            <div class="bg_image">
+                                <img src="./image/bg.jpg" alt="">
+                            </div>
+                        </div>
+                       <script>
+                        (() => {
+                        'use strict';
+
+                        document.addEventListener('DOMContentLoaded', () => {
+
+                            /* ▼ .fv-12_news_list ごとに独立して動作 ▼ */
+                            document.querySelectorAll('.fv-12_news_list').forEach(list => {
+
+                            // 要素取得 ───────────────────────
+                            const btnPrev  = list.querySelector('.prev');
+                            const btnNext  = list.querySelector('.next');
+                            const pageText = list.querySelector('.page');
+                            const items    = Array.from(list.querySelectorAll('ul li'));
+                            const total    = items.length;
+
+                            // 現在のアクティブ index を返す
+                            const currentIndex = () => items.findIndex(li => li.classList.contains('active'));
+
+                            // アクティブ切り替え
+                            const setActive = i => {
+                                items.forEach(li => li.classList.remove('active'));
+                                items[i].classList.add('active');
+                                pageText.textContent = `${i + 1}/${total}`;
+                            };
+
+                            // ← prev
+                            btnPrev?.addEventListener('click', e => {
+                                e.preventDefault();
+                                const i = (currentIndex() - 1 + total) % total; // 先頭→末尾ループ
+                                setActive(i);
+                            });
+
+                            // → next
+                            btnNext?.addEventListener('click', e => {
+                                e.preventDefault();
+                                const i = (currentIndex() + 1) % total;         // 末尾→先頭ループ
+                                setActive(i);
+                            });
+                            });
+
+                        });
+                        })();
+                        </script>
+
+
+    
+                    <div class="last_content"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+    
+
+
+</body>
+</html>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>

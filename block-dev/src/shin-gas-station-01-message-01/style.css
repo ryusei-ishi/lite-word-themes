@@ -1,0 +1,159 @@
+.shin-gas-station-01-message-01 {
+  container-type: inline-size;
+  position: relative;
+  z-index: 10;
+  margin: 64px 0;
+}
+
+@container (max-width:500px) {
+  .shin-gas-station-01-message-01 {
+    margin: 32px 0;
+  }
+}
+
+.shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 80px;
+}
+
+@container (max-width:1000px) {
+  .shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap {
+    gap: 64px;
+  }
+}
+
+@container (max-width:800px) {
+  .shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap {
+    gap: 40px;
+  }
+}
+
+@container (max-width:650px) {
+  .shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+}
+
+.shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in h3.title {
+  margin: 0;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+}
+
+@container (max-width:650px) {
+  .shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in h3.title {
+    gap: 0;
+  }
+}
+
+.shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in h3.title .main {
+  font-weight: 500;
+  font-size: 40px;
+  line-height: 1.5em;
+  color: var(--color-main);
+}
+
+@container (max-width:1000px) {
+  .shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in h3.title .main {
+    font-size: 32px;
+  }
+}
+
+@container (max-width:650px) {
+  .shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in h3.title .main {
+    width: 100%;
+    font-size: 26px;
+  }
+}
+
+.shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in h3.title .sub {
+  margin-top: 0.5em;
+  flex-wrap: 500;
+  font-size: 16px;
+  line-height: 1.6em;
+  font-weight: 400;
+}
+
+@container (max-width:650px) {
+  .shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in h3.title .sub {
+    margin-top: 0.2em;
+    font-size: 11px;
+  }
+}
+
+.shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in h3.title .sub:empty {
+  display: none;
+}
+
+.shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in p.description {
+  margin: 0;
+  margin-top: 1.5em;
+  line-height: 2.5em;
+  font-size: 16px;
+  font-weight: 400;
+  white-space: pre-line;
+  color: var(--color-black);
+}
+
+@container (max-width:650px) {
+  .shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in p.description {
+    line-height: 2.2em;
+    font-size: 14.5px;
+  }
+}
+
+.shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in p.description:empty {
+  display: none;
+}
+
+.shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in .img_caption {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+
+.shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in .img_caption .sub {
+  font-size: 14px;
+  line-height: 2em;
+}
+
+@container (max-width:500px) {
+  .shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in .img_caption .sub {
+    font-size: 12px;
+  }
+}
+
+.shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in .img_caption .main {
+  margin-left: 16px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 2em;
+}
+
+@container (max-width:500px) {
+  .shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .text__in .img_caption .main {
+    font-size: 20px;
+  }
+}
+
+.shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .image figure.img {
+  aspect-ratio: 480 / 540;
+}
+
+.shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .image figure.img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 40px 40px 0 40px;
+}
+
+@container (max-width:500px) {
+  .shin-gas-station-01-message-01 .shin-gas-station-01-message-01__wrap .image figure.img img {
+    font-size: 20px;
+  }
+}

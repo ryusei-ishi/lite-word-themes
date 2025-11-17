@@ -1,0 +1,30 @@
+.lw_space_1{
+  display: flex;
+  gap:4px;
+  .pc,.tb,.sp{
+    flex: 1;
+  }
+}
+//フロントの時だけ
+.post_style{
+  .lw_space_1{
+    opacity: 0;
+    .pc{
+      @container (max-width:900px) {
+        display: none;
+      }
+    }
+    .tb{
+      display: none;
+      @container (max-width:900px) and (min-width:551px) {
+        display: block;
+      }
+    }
+    .sp{
+      display: none;
+      @container (max-width:550px) {
+        display: block;
+      }
+    }
+  }
+}

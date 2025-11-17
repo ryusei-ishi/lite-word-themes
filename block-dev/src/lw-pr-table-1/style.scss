@@ -1,0 +1,204 @@
+.lw_content_wrap.page {
+    .lw-pr-table-1 {
+        margin-left: calc((100% - 100vw) / 2);
+        width: 100vw;
+    }
+}
+.lw_content_wrap.single {
+    .lw-pr-table-1 {
+        margin-left: -40px;
+        margin-right: -40px;
+        width: calc(100% + 80px);
+        @container (max-width: 800px) {
+            margin-left: -32px;
+            margin-right: -32px;
+            width: calc(100% + 64px);
+        }
+        @container (max-width:600px) {
+            margin-left: -24px;
+            margin-right: -24px;
+            width: calc(100% + 48px);
+        }
+        @container (max-width:500px) {
+            margin-left: -20px;
+            margin-right: -20px;
+            width: calc(100% + 40px);
+        }
+    }
+}
+.wp-block {
+    &:has(.lw-pr-table-1) {
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+.lw-pr-table-1 {
+    margin: 32px 0;
+    padding: 0 24px;
+    overflow-x: auto;
+    font-size: var(--lw-table-font-size, 17px);
+
+    // スクロールバーを常に非表示
+    -ms-overflow-style: none; // IE、Edge
+    scrollbar-width: none; // Firefox
+    &::-webkit-scrollbar {
+        display: none; // Chrome、Safari、Opera
+    }
+
+    @media (max-width: 800px) {
+        font-size: var(--lw-table-font-size-sp, 16px) !important;
+    }
+
+    @media (max-width: 500px) {
+        padding: 0 24px 0 12px;
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+    .wrap_table {
+        margin: 0 auto;
+        width: var(--lw-table-width);
+        padding: 3px;
+
+        @media (max-width: 800px) {
+            width: var(--lw-table-width-sp) !important;
+        }
+
+        .cell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            line-height: var(--lw-table-line-height, 1.6);
+
+            // 各セルの幅設定
+            &:nth-child(1) {
+                width: var(--lw-table-cell-width-1);
+                @media (max-width: 800px) {
+                    width: var(--lw-table-cell-width-1-sp) !important;
+                }
+            }
+            &:nth-child(2) {
+                width: var(--lw-table-cell-width-2);
+                @media (max-width: 800px) {
+                    width: var(--lw-table-cell-width-2-sp) !important;
+                }
+            }
+            &:nth-child(3) {
+                width: var(--lw-table-cell-width-3);
+                @media (max-width: 800px) {
+                    width: var(--lw-table-cell-width-3-sp) !important;
+                }
+            }
+            &:nth-child(4) {
+                width: var(--lw-table-cell-width-4);
+                @media (max-width: 800px) {
+                    width: var(--lw-table-cell-width-4-sp) !important;
+                }
+            }
+            &:nth-child(5) {
+                width: var(--lw-table-cell-width-5);
+                @media (max-width: 800px) {
+                    width: var(--lw-table-cell-width-5-sp) !important;
+                }
+            }
+            &:nth-child(6) {
+                width: var(--lw-table-cell-width-6);
+                @media (max-width: 800px) {
+                    width: var(--lw-table-cell-width-6-sp) !important;
+                }
+            }
+            &:nth-child(7) {
+                width: var(--lw-table-cell-width-7);
+                @media (max-width: 800px) {
+                    width: var(--lw-table-cell-width-7-sp) !important;
+                }
+            }
+            &:nth-child(8) {
+                width: var(--lw-table-cell-width-8);
+                @media (max-width: 800px) {
+                    width: var(--lw-table-cell-width-8-sp) !important;
+                }
+            }
+
+            .text {
+                display: block;
+                width: 100%;
+                text-align: center;
+            }
+        }
+
+        .lw_table_head {
+            display: flex;
+            gap: var(--lw-table-gap-size, 3px);
+
+            .cell {
+                padding: 0.9em 0.7em;
+                font-size: var(--lw-table-font-size-header, 18px);
+                @media (max-width: 800px) {
+                    font-size: var(--lw-table-font-size-header-sp, 17px) !important;
+                }
+                // 角丸設定（2カラム目から）
+                &:nth-of-type(2) {
+                    border-top-left-radius: var(--lw-table-radius-size);
+                }
+
+                // 最後のセルの角丸
+                &:last-of-type {
+                    border-top-right-radius: var(--lw-table-radius-size);
+                }
+
+                &.none {
+                    background: none;
+                }
+            }
+        }
+
+        .lw_table_row {
+            margin-top: var(--lw-table-gap-size, 3px);
+            display: flex;
+            gap: var(--lw-table-gap-size, 3px);
+
+            &.first {
+                .cell {
+                    &.row_head {
+                        border-radius: var(--lw-table-radius-size) 0 0 0;
+                    }
+                }
+            }
+
+            &.last {
+                .cell {
+                    &.row_head {
+                        border-radius: 0 0 0 var(--lw-table-radius-size);
+                    }
+                    &:last-of-type {
+                        border-radius: 0 0 var(--lw-table-radius-size) 0;
+                    }
+                }
+            }
+
+            .cell {
+                padding: 0.9em 0.7em;
+                text-align: center;
+                line-height: var(--lw-table-line-height-cell, 1.6);
+                font-size: var(--lw-table-font-size-cell, 16px);
+                @media (max-width: 800px) {
+                    font-size: var(--lw-table-font-size-cell-sp, 15px);
+                }
+                &.row_head {
+                    line-height: var(--lw-table-line-height-row-header, 1.6);
+                    font-size: var(--lw-table-font-size-row-header, 16px);
+                    @media (max-width: 800px) {
+                        font-size: var(--lw-table-font-size-row-header-sp, 15px) !important;
+                    }
+                }
+            }
+        }
+    }
+    .lw-table-item-controls {
+        right: -47px;
+    }
+}

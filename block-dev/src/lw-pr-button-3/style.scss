@@ -1,0 +1,115 @@
+.lw-pr-button-3 {
+    margin-top: 1em;
+    * {
+        box-sizing: border-box;
+    }
+    .wrap_btn {
+        display: flex;
+        justify-content: center;
+        font-size: 16px;
+        &.left {
+            justify-content: flex-start;
+            &.sp_center {
+                @media (max-width: 800px) {
+                    justify-content: center;
+                }
+            }
+            &.sp_right {
+                @media (max-width: 800px) {
+                    justify-content: flex-end;
+                }
+            }
+        }
+        &.center {
+            justify-content: center;
+            &.sp_left {
+                @media (max-width: 800px) {
+                    justify-content: flex-start;
+                }
+            }
+            &.sp_right {
+                @media (max-width: 800px) {
+                    justify-content: flex-end;
+                }
+            }
+        }
+        &.right {
+            justify-content: flex-end;
+            &.sp_center {
+                @media (max-width: 800px) {
+                    justify-content: center;
+                }
+            }
+            &.sp_left {
+                @media (max-width: 800px) {
+                    justify-content: flex-start;
+                }
+            }
+        }
+        .lw_btn_a {
+            position: relative;
+            padding: 1.2em 1.5em;
+            max-width: 580px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            background: #e1a20e;
+            border-radius: 2px;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+            transition: background var(--transition-duration) ease;
+            text-decoration: none;
+            @media (max-width: 800px) {
+                max-width: var(--max-width-sp) !important;
+            }
+            &:hover {
+                background: var(--hover-bg) !important;
+            }
+            .text_sub {
+                width: 100%;
+                display: block;
+                line-height: 1.6;
+                font-weight: 500;
+                color: #fff;
+                font-size: var(--font-size-sub);
+                text-align: center;
+            }
+            .text_main {
+                font-size: var(--font-size-main);
+                font-weight: 500;
+                line-height: 1.5;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                text-align: center;
+                @media (max-width: 800px) {
+                    font-size: var(--font-size-main-sp) !important;
+                }
+                .icon {
+                    margin-left: -8px;
+                    margin-right: 4px;
+                    display: flex;
+                    align-items: center;
+                    width: 32px;
+                    height: auto;
+                    svg {
+                        height: auto;
+                        width: 100%;
+                    }
+                }
+            }
+        }
+        // 震えるアニメーションクラス
+        .lw_btn_shake_light {
+            animation: lw_btn_shake_light var(--shake-interval) ease-in-out infinite;
+        }
+        .lw_btn_shake_normal {
+            animation: lw_btn_shake_normal var(--shake-interval) ease-in-out infinite;
+        }
+        .lw_btn_shake_strong {
+            animation: lw_btn_shake_strong var(--shake-interval) ease-in-out infinite;
+        }
+    }
+}

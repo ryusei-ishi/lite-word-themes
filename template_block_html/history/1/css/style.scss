@@ -1,0 +1,82 @@
+.paid-block-history-1 {
+    border-left: 2px solid #ddd;
+    + .paid-block-history-1 {
+        .history__year {
+            dl.history__events {
+                .history__events_row {
+                    &:first-of-type {
+                        padding-top: 1.5em;
+                    }
+                }
+            }
+        }
+    }
+    .history__year {
+        position: relative;
+        padding-left: 1.5em;
+        display: grid;
+        align-content: start;
+        align-items: start;
+        grid-template-columns: 4.5em calc(100% - 4.5em);
+        @container (max-width:700px) {
+            display: block;
+        }
+        .history__point {
+            position: absolute;
+            top: 0.35em;
+            left: -0.55em;
+            width: 1em;
+            height: 1em;
+            border-radius: 50%;
+            background: #fff;
+            border: 2px solid #038e67;
+        }
+        h3.history__year-heading {
+            margin: 0;
+            padding: 0 0.5em;
+            height: 1.9em;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            background: #038e67;
+            color: #fff;
+            white-space: nowrap;
+            text-align: center;
+        }
+        dl.history__events {
+            padding-left: 1em;
+            @container (max-width:700px) {
+                padding-left: 0;
+            }
+            .history__events_row {
+                padding: 1.5em 0;
+                display: grid;
+                grid-template-columns: 2.5em calc(100% - 2.5em);
+                border-bottom: 1px dashed #ccc;
+                line-height: 2em;
+
+                &:first-of-type {
+                    padding-top: 0;
+                    @container (max-width:700px) {
+                        padding-top: 1.5em;
+                    }
+                }
+                &:last-of-type {
+                    @container (max-width:700px) {
+                        border-bottom: none;
+                    }
+                }
+                dt.history__dt {
+                    margin: 0;
+                    text-align: right;
+                }
+                dd.history__dd {
+                    padding-left: 3em;
+                    @container (max-width:800px) {
+                        padding-left: 1.5em;
+                    }
+                }
+            }
+        }
+    }
+}

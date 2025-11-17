@@ -1,0 +1,105 @@
+/**
+ * LiteWord – グラデーションテキスト 01
+ * フロントエンド用スタイル
+ */
+h1.lw-pr-text-1,
+h2.lw-pr-text-1,
+h3.lw-pr-text-1,
+h4.lw-pr-text-1,
+h5.lw-pr-text-1,
+h6.lw-pr-text-1,
+p.lw-pr-text-1,
+div.lw-pr-text-1,
+span.lw-pr-text-1 {
+  position: relative;
+  z-index: 10;
+  text-align: var(--lw-text-align-pc, left);
+  @media (max-width: 700px) {
+    text-align: var(--lw-text-align-sp, var(--lw-text-align-pc, left));
+  }
+  > span {
+    line-height: var(--lw-pr-text-1-line-height-pc, 1.5);
+    font-size: var(--lw-pr-text-1-font-size-pc, 1em);
+    caret-color: #000; // カーソルの色を黒に
+    @media (max-width:900px) {
+      font-size: var(--lw-pr-text-1-font-size-tab, var(--lw-pr-text-1-font-size-pc, 1em));
+      line-height: var(--lw-pr-text-1-line-height-tab, var(--lw-pr-text-1-line-height-pc, 1.5));
+    }
+    @media (max-width:600px) {
+      font-size: var(--lw-pr-text-1-font-size-sp, var(--lw-pr-text-1-font-size-tab, var(--lw-pr-text-1-font-size-pc, 1em)));
+      line-height: var(--lw-pr-text-1-line-height-sp, var(--lw-pr-text-1-line-height-tab, var(--lw-pr-text-1-line-height-pc, 1.5)));
+
+    }
+  }
+  
+  // グラデーションアニメーション
+  &.gradient-slide-anime {
+    background-image: var(--lw-pr-text-1-gradient, linear-gradient(270deg, #3b82f6, #06b6d4, #3b82f6));
+    background-size: 200% auto;
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+    animation: var(--lw-pr-text-1-gradient-anime-ptn, lw-pr-text-1-gradient-slide-anime-1)
+      var(--lw-pr-text-1-gradient-anime-time, 3s) var(--lw-pr-text-1-gradient-anime-movement, linear) infinite;
+  }
+
+}
+
+/* ----------------------------------------------------------
+ * アニメーションパターン定義
+ * -------------------------------------------------------- */
+
+// パターン1: 左から右へスライド
+@keyframes lw-pr-text-1-gradient-slide-anime-1 {
+  0% {
+    background-position: 0% center;
+  }
+  100% {
+    background-position: 200% center;
+  }
+}
+
+// パターン2: 右から左へスライド
+@keyframes lw-pr-text-1-gradient-slide-anime-2 {
+  0% {
+    background-position: 200% center;
+  }
+  100% {
+    background-position: 0% center;
+  }
+}
+
+// パターン3: 上から下へスライド
+@keyframes lw-pr-text-1-gradient-slide-anime-3 {
+  0% {
+    background-position: center 0%;
+  }
+  100% {
+    background-position: center 200%;
+  }
+}
+
+// パターン4: 下から上へスライド
+@keyframes lw-pr-text-1-gradient-slide-anime-4 {
+  0% {
+    background-position: center 200%;
+  }
+  100% {
+    background-position: center 0%;
+  }
+}
+
+// パターン5: ズームイン・アウト
+@keyframes lw-pr-text-1-gradient-slide-anime-5 {
+  0% {
+    background-size: 100% auto;
+  }
+  50% {
+    background-size: 300% auto;
+  }
+  100% {
+    background-size: 100% auto;
+  }
+}
+

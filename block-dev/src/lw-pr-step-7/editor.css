@@ -1,0 +1,46 @@
+@charset "UTF-8";
+.lw-pr-step-7 {
+  /* エディタ専用スタイル */
+}
+
+.lw-pr-step-7 .lw-pr-step-7-item-controls {
+  position: absolute;
+  top: 0;
+  right: 0;
+  z-index: 20;
+  display: flex;
+  gap: 4px;
+  padding: 4px;
+}
+
+.lw-pr-step-7 .lw-pr-step-7-item-controls button {
+  padding: 4px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  border: 1px solid #ddd;
+  background: #fff;
+  border-radius: 3px;
+}
+
+.lw-pr-step-7 .lw-pr-step-7-item-controls button:hover:not(:disabled) {
+  background: #f0f0f0;
+}
+
+.lw-pr-step-7 .lw-pr-step-7-item-controls button:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.lw-pr-step-7 .lw-pr-step-7-item-controls button.move-up-button, .lw-pr-step-7 .lw-pr-step-7-item-controls button.move-down-button {
+  font-weight: bold;
+}
+
+.lw-pr-step-7 .lw-pr-step-7-item-controls button.remove-item-button {
+  color: #fff;
+  background: var(--color-accent);
+  border-color: var(--color-accent);
+}
+
+.lw-pr-step-7 .lw-pr-step-7-item-controls button.remove-item-button:hover {
+  background: #d32f2f;
+}

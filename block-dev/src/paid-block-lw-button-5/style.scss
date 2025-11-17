@@ -1,0 +1,184 @@
+.paid-block-lw-button-5 {
+    position: relative;
+    z-index: 10;
+    margin: 2em 0;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0 40px;
+    @container (max-width:1000px) {
+        display: block;
+    }
+    * {
+        box-sizing: border-box;
+    }
+    &.position_left {
+        justify-content: flex-start;
+        @container (max-width:500px) {
+            .a_inner {
+                margin-left: auto;
+                margin-right: auto;
+               
+            }
+        }
+    }
+    &.position_center {
+        justify-content: center;
+        @container (max-width:1000px) {
+            .a_inner {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    }
+    &.position_right {
+        justify-content: flex-end;
+        @container (max-width:1000px) {
+            .a_inner {
+                margin-left: auto;
+            }
+        }
+        @container (max-width:500px) {
+            .a_inner {
+                margin-left: auto;
+                margin-right: auto;
+            }
+        }
+    }
+    .a_inner {
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        max-width: 340px;
+        overflow: hidden;
+        transition: opacity 0.3s;
+        @container (max-width:1000px) {
+            + .a_inner {
+                margin-top: 1em;
+            }
+        }
+        @container (max-width:500px) {
+            max-width: 300px;
+        }
+        a.a,
+        .a {
+            padding: 28px 40px;
+            width: 100%;
+            height: 100%;
+            min-height: 112px;
+            display: flex;
+            align-items: center;
+            line-height: 1.5em;
+            color: #fff;
+            cursor: pointer;
+            @container (max-width:500px) {
+                min-height: 104px;
+            }
+            &:has(.icon-svg) {
+                padding-left: 0;
+                .text_in{
+
+                    width: calc(100% - 80px);
+                    @container (max-width:500px) {
+                        width: calc(100% - 64px);
+                    }
+                }
+            }
+            .text_in {
+                height: 100%;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                flex-wrap: wrap;
+
+                .text_main {
+                    width: 100%;
+                    display: block;
+                    font-size: 24px;
+                    white-space: nowrap;
+                    font-feature-settings: "palt";
+                    @container (max-width:500px) {
+                        font-size: 22px;
+                    }
+                }
+                .text_sub {
+                    margin-top: 4px;
+                    width: 100%;
+                    display: block;
+                    font-size: 16px;
+                    line-height: 1.5em;
+                    white-space: nowrap;
+                    @container (max-width:500px) {
+                        font-size: 14px;
+                    }
+                }
+            }
+            &:after {
+                content: "";
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                z-index: -2;
+                width: 100%;
+                height: 50%;
+                background: #000;
+                opacity: 0.05;
+            }
+        }
+        .a_background {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -3;
+            width: 100%;
+            height: 100%;
+            transition: opacity 0.3s;
+        }
+        .a_in_border {
+            position: absolute;
+            top: 3px;
+            left: 3px;
+            z-index: -1;
+            width: calc(100% - 6px);
+            height: calc(100% - 6px);
+            transition: opacity 0.3s;
+        }
+        .icon-svg {
+            padding-left: 1%;
+            height: 100%;
+            width: 80px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            @container (max-width:500px) {
+                width: 64px;
+            }
+            .icon-svg-inner {
+                height: 100%;
+                display: flex;
+                align-items: center;
+            }
+            svg {
+                height: auto;
+                transition: transform 0.3s;
+                fill: #fff;
+            }
+        }
+        a {
+            &:hover {
+                .a_background {
+                    opacity: 0.8;
+                }
+                .icon-svg {
+                    svg {
+                        transform: translateX(3px);
+                    }
+                }
+            }
+        }
+        > p {
+            display: none;
+        }
+    }
+}

@@ -1,0 +1,345 @@
+.header_ptn_1 {
+  border: none;
+}
+
+.header_ptn_1::after {
+  display: none;
+}
+
+.lw_content_wrap.page .shin_gas_station_01_top {
+  margin-left: calc((100% - 100vw) / 2);
+  width: 100vw;
+}
+
+.lw_content_wrap.page:has(.first_content + .shin_gas_station_01_top) .first_content {
+  display: none;
+}
+
+@media (max-width: 1080px) {
+  .lw_content_wrap.page:has(.first_content + .shin_gas_station_01_top) {
+    margin-top: 0 !important;
+  }
+}
+
+@media (max-width: 600px) {
+  .lw_content_wrap.page:has(.first_content + .shin_gas_station_01_top) {
+    margin-top: 0 !important;
+  }
+}
+
+[class*="header_ptn"] .inner::after {
+  display: none !important;
+}
+
+.wp-block .shin_gas_station_01_top,
+.shin_gas_station_01_top {
+  position: relative;
+  z-index: 10;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  align-content: center;
+  color: #fff;
+  background-size: cover;
+  background-position: center;
+  box-sizing: border-box;
+}
+
+.wp-block .shin_gas_station_01_top + .post_style > .wp-block-columns.has-background,
+.shin_gas_station_01_top + .post_style > .wp-block-columns.has-background {
+  margin-top: 0;
+}
+
+.wp-block .shin_gas_station_01_top .bg_image,
+.shin_gas_station_01_top .bg_image {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: -1;
+  margin: auto;
+  width: calc(100% - 64px);
+  height: 100%;
+  border-radius: 40px;
+  overflow: hidden;
+}
+
+@media (max-width: 1080px) {
+  .wp-block .shin_gas_station_01_top .bg_image,
+  .shin_gas_station_01_top .bg_image {
+    width: calc(100% - 48px);
+  }
+}
+
+@media (max-width: 600px) {
+  .wp-block .shin_gas_station_01_top .bg_image,
+  .shin_gas_station_01_top .bg_image {
+    width: calc(100% - 32px);
+  }
+}
+
+.wp-block .shin_gas_station_01_top .bg_image img,
+.shin_gas_station_01_top .bg_image img {
+  object-fit: cover;
+  width: 100%;
+  height: 100%;
+}
+
+.wp-block .shin_gas_station_01_top + p,
+.wp-block .shin_gas_station_01_top + h2,
+.wp-block .shin_gas_station_01_top + h3,
+.wp-block .shin_gas_station_01_top + h4,
+.wp-block .shin_gas_station_01_top + h5,
+.wp-block .shin_gas_station_01_top + h6,
+.shin_gas_station_01_top + p,
+.shin_gas_station_01_top + h2,
+.shin_gas_station_01_top + h3,
+.shin_gas_station_01_top + h4,
+.shin_gas_station_01_top + h5,
+.shin_gas_station_01_top + h6 {
+  margin-top: 2.4em !important;
+}
+
+.wp-block .shin_gas_station_01_top .filter,
+.shin_gas_station_01_top .filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 0;
+  margin: auto;
+  width: calc(100% - 64px);
+  height: 100%;
+  mix-blend-mode: multiply;
+  border-radius: 40px;
+}
+
+@media (max-width: 1080px) {
+  .wp-block .shin_gas_station_01_top .filter,
+  .shin_gas_station_01_top .filter {
+    width: calc(100% - 48px);
+  }
+}
+
+@media (max-width: 600px) {
+  .wp-block .shin_gas_station_01_top .filter,
+  .shin_gas_station_01_top .filter {
+    width: calc(100% - 32px);
+  }
+}
+
+.wp-block .shin_gas_station_01_top .shin_gas_station_01_top_inner,
+.shin_gas_station_01_top .shin_gas_station_01_top_inner {
+  padding: 0 64px;
+  padding-top: 8%;
+  margin: 0 auto;
+  width: 100%;
+}
+
+@media (max-width: 1080px) {
+  .wp-block .shin_gas_station_01_top .shin_gas_station_01_top_inner,
+  .shin_gas_station_01_top .shin_gas_station_01_top_inner {
+    padding: 0 64px;
+    padding-top: 8%;
+  }
+}
+
+@media (max-width: 800px) {
+  .wp-block .shin_gas_station_01_top .shin_gas_station_01_top_inner,
+  .shin_gas_station_01_top .shin_gas_station_01_top_inner {
+    padding: 0 56px;
+    padding-top: 15%;
+  }
+}
+
+@media (max-width: 600px) {
+  .wp-block .shin_gas_station_01_top .shin_gas_station_01_top_inner,
+  .shin_gas_station_01_top .shin_gas_station_01_top_inner {
+    padding: 0 40px;
+    padding-top: 20%;
+  }
+}
+
+@media (max-width: 400px) {
+  .wp-block .shin_gas_station_01_top .shin_gas_station_01_top_inner,
+  .shin_gas_station_01_top .shin_gas_station_01_top_inner {
+    padding: 0 32px;
+    padding-top: 25%;
+  }
+}
+
+.wp-block .shin_gas_station_01_top h1,
+.shin_gas_station_01_top h1 {
+  position: relative;
+  z-index: 10;
+  width: 100%;
+}
+
+.wp-block .shin_gas_station_01_top h1 .sub,
+.shin_gas_station_01_top h1 .sub {
+  margin-bottom: 0.1em;
+  display: block;
+  line-height: 1.4em;
+  font-size: 16px;
+  letter-spacing: 0.05em;
+  font-weight: 500;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+@container (max-width:800px) {
+  .wp-block .shin_gas_station_01_top h1 .sub,
+  .shin_gas_station_01_top h1 .sub {
+    font-size: 14px;
+  }
+}
+
+@container (max-width:600px) {
+  .wp-block .shin_gas_station_01_top h1 .sub,
+  .shin_gas_station_01_top h1 .sub {
+    font-size: 12px;
+  }
+}
+
+.wp-block .shin_gas_station_01_top h1 .sub:empty,
+.shin_gas_station_01_top h1 .sub:empty {
+  display: none;
+}
+
+@container (max-width:800px) {
+  .wp-block .shin_gas_station_01_top h1 .sub:has( + .sub.sp),
+  .shin_gas_station_01_top h1 .sub:has( + .sub.sp) {
+    display: none;
+  }
+}
+
+.wp-block .shin_gas_station_01_top h1 .sub:has( + .sub.sp) + .sub.sp,
+.shin_gas_station_01_top h1 .sub:has( + .sub.sp) + .sub.sp {
+  display: none;
+}
+
+@container (max-width:800px) {
+  .wp-block .shin_gas_station_01_top h1 .sub:has( + .sub.sp) + .sub.sp,
+  .shin_gas_station_01_top h1 .sub:has( + .sub.sp) + .sub.sp {
+    display: block;
+  }
+}
+
+.wp-block .shin_gas_station_01_top h1 .main,
+.shin_gas_station_01_top h1 .main {
+  display: block;
+  line-height: 1.8em;
+  font-size: 64px;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+  font-feature-settings: "palt";
+}
+
+@container (max-width:980px) {
+  .wp-block .shin_gas_station_01_top h1 .main,
+  .shin_gas_station_01_top h1 .main {
+    font-size: 56px;
+  }
+}
+
+@container (max-width:800px) {
+  .wp-block .shin_gas_station_01_top h1 .main,
+  .shin_gas_station_01_top h1 .main {
+    font-size: 48px;
+  }
+}
+
+@container (max-width:600px) {
+  .wp-block .shin_gas_station_01_top h1 .main,
+  .shin_gas_station_01_top h1 .main {
+    font-size: 40px;
+  }
+}
+
+@container (max-width:500px) {
+  .wp-block .shin_gas_station_01_top h1 .main,
+  .shin_gas_station_01_top h1 .main {
+    font-size: 32px;
+  }
+}
+
+.wp-block .shin_gas_station_01_top h1 .main:empty,
+.shin_gas_station_01_top h1 .main:empty {
+  display: none;
+}
+
+@container (max-width:800px) {
+  .wp-block .shin_gas_station_01_top h1 .main:has( + .main.sp),
+  .shin_gas_station_01_top h1 .main:has( + .main.sp) {
+    display: none;
+  }
+}
+
+.wp-block .shin_gas_station_01_top h1 .main:has( + .main.sp) + .main.sp,
+.shin_gas_station_01_top h1 .main:has( + .main.sp) + .main.sp {
+  display: none;
+}
+
+@container (max-width:800px) {
+  .wp-block .shin_gas_station_01_top h1 .main:has( + .main.sp) + .main.sp,
+  .shin_gas_station_01_top h1 .main:has( + .main.sp) + .main.sp {
+    display: block;
+  }
+}
+
+.wp-block .shin_gas_station_01_top p,
+.shin_gas_station_01_top p {
+  margin-top: 0em;
+  margin-bottom: 0 !important;
+  position: relative;
+  z-index: 10;
+  width: 100%;
+  line-height: 1.6em;
+  font-size: 20px;
+  letter-spacing: 0.05em;
+  text-shadow: 0 0 6px rgba(0, 0, 0, 0.5);
+}
+
+@container (max-width:800px) {
+  .wp-block .shin_gas_station_01_top p,
+  .shin_gas_station_01_top p {
+    font-size: 18px;
+  }
+}
+
+@container (max-width:600px) {
+  .wp-block .shin_gas_station_01_top p,
+  .shin_gas_station_01_top p {
+    font-size: 16px;
+  }
+}
+
+@container (max-width:500px) {
+  .wp-block .shin_gas_station_01_top p,
+  .shin_gas_station_01_top p {
+    font-size: 14px;
+  }
+}
+
+.wp-block .shin_gas_station_01_top p:empty,
+.shin_gas_station_01_top p:empty {
+  display: none;
+}
+
+@container (max-width:800px) {
+  .wp-block .shin_gas_station_01_top p:has( + p.sp),
+  .shin_gas_station_01_top p:has( + p.sp) {
+    display: none;
+  }
+}
+
+.wp-block .shin_gas_station_01_top p:has( + p.sp) + p.sp,
+.shin_gas_station_01_top p:has( + p.sp) + p.sp {
+  display: none;
+}
+
+@container (max-width:800px) {
+  .wp-block .shin_gas_station_01_top p:has( + p.sp) + p.sp,
+  .shin_gas_station_01_top p:has( + p.sp) + p.sp {
+    display: block;
+  }
+}

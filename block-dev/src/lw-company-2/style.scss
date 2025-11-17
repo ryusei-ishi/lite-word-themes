@@ -1,0 +1,108 @@
+.wp-block-wdl-lw-company-2 {
+  margin: 2em auto;
+  width: 100%;
+  dl {
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    &.sp_clm_1,
+    &.dt_sp_full {
+      .company-profile-item {
+        @container (max-width:700px) {
+          grid-template-columns: 1fr;
+        }
+        dt {
+          @container (max-width:700px) {
+            text-align: left;
+          }
+        }
+        dd {
+          @container (max-width:700px) {
+            padding: 1.2em 1em;
+          }
+        }
+      }
+    }
+    .company-profile-item {
+      position: relative;
+      display: grid;
+      grid-template-columns: 180px calc(100% - 180px);
+      border-bottom: 1px solid #ccc;
+      @container (max-width:700px) {
+        grid-template-columns: 128px calc(100% - 128px);
+      }
+      @container (max-width:700px) {
+        grid-template-columns: 112px calc(100% - 112px);
+      }
+      &.dt_width_l {
+        grid-template-columns: 220px calc(100% - 220px);
+        @container (max-width:800px) {
+          grid-template-columns: 198px calc(100% - 198px);
+        }
+        @container (max-width:500px) {
+          grid-template-columns: 174px calc(100% - 174px);
+        }
+      }
+      &.dt_width_s {
+        grid-template-columns: 140px calc(100% - 140px);
+        @container (max-width:800px) {
+          grid-template-columns: 128px calc(100% - 128px);
+        }
+        @container (max-width:500px) {
+          grid-template-columns: 112px calc(100% - 112px);
+        }
+      }
+      &:last-of-type {
+        border-bottom: none;
+      }
+      &.font_size_l {
+        font-size: 20px;
+        @container (max-width:800px) {
+          font-size: 18px;
+        }
+        @container (max-width:500px) {
+          font-size: 16px;
+        }
+      }
+      &.font_size_m {
+        @container (max-width:500px) {
+          font-size: 14px;
+        }
+      }
+      &.font_size_s {
+        font-size: 15px;
+        @container (max-width:800px) {
+          font-size: 13px;
+        }
+        @container (max-width:500px) {
+          font-size: 11px;
+        }
+      }
+      dt,
+      dd {
+        margin: 0;
+        padding: 1em;
+        line-height: 1.6em;
+        font-size: 1em;
+        background: #fff;
+        @container (max-width:500px) {
+          font-size: 0.9em;
+        }
+      }
+      dt {
+        font-weight: bold;
+        background-color: #f0f0f0;
+        text-align: center;
+      }
+      .item-controls {
+        position: absolute;
+        top: 2px;
+        right: 2px;
+        height: calc(100% - 4px);
+      }
+    }
+  }
+}
+
+
+
+

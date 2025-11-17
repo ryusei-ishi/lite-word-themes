@@ -1,0 +1,259 @@
+.gas_station_01_info_list_01 {
+    > ul.list {
+        padding: 1px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        border-top: 1px solid #c6c6c6;
+        border-left: 1px solid #c6c6c6;
+        @media (max-width: 1100px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (max-width: 800px) {
+            grid-template-columns: repeat(1, 1fr);
+        }
+        li.item {
+            padding: 0 40px;
+            padding-bottom: 40px;
+            display: flex;
+            align-content: space-between;
+            flex-wrap: wrap;
+            background: #fff;
+            border-bottom: 1px solid #c6c6c6;
+            border-right: 1px solid #c6c6c6;
+            @media (max-width: 500px) {
+                padding: 0 32px;
+                padding-bottom: 32px;
+            }
+            .text_in {
+                h3.ttl {
+                    margin: 0;
+                    display: flex;
+                    flex-wrap: wrap;
+                    .no {
+                        margin-top: -1px;
+                        padding-top: 0.2em;
+                        border-top: 4px solid #e58a68;
+                        color: #e58a68;
+                        display: block;
+                        font-size: 64px;
+                        line-height: 1;
+                        font-weight: 400;
+                        @media (max-width: 500px) {
+                            font-size: 48px;
+                        }
+                    }
+                    .text {
+                        margin-top: 1.8em;
+                        width: 100%;
+                        font-weight: 600;
+                        font-size: 24px;
+                        color: #e58a68;
+                        @media (max-width: 500px) {
+                            font-size: 18px;
+                        }
+                    }
+                }
+                > p {
+                    margin-bottom: 0;
+                    font-size: 16px;
+                    line-height: 2;
+                    @media (max-width: 500px) {
+                        font-size: 14px;
+                    }
+                }
+            }
+            .bottom_content {
+                margin-top: 40px;
+                width: 100%;
+                aspect-ratio: 356 / 220;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                .image {
+                    img {
+                        width: 100%;
+                        object-fit: cover;
+                    }
+                }
+                .next_btn {
+                    > div {
+                        display: flex;
+                        align-items: center;
+                        font-size: 14px;
+                        color: #c6c6c6;
+                        svg {
+                            margin-left: 0.8em;
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
+.gas-station-01-list-2 {
+    position: relative;
+    z-index: 10;
+    padding-top: 160px;
+    margin-left: calc((100% - 100vw) / 2);
+    width: 100vw;
+    @media (max-width: 1000px) {
+        padding-top: 120px;
+    }
+    .bg_image {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -2;
+        width: 100%;
+        height: 100%;
+        max-height: 1200px;
+        .filter{
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 1;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.3);
+        }
+    }
+    h2.ttl {
+        color: #fff;
+        text-align: right;
+        .sub {
+            padding-right: 56px;
+            font-size: 32px;
+            display: block;
+            line-height: 1.4em;
+            @media (max-width: 1000px) {
+                padding-right: 32px;
+                font-size: 24px;
+            }
+            @media (max-width: 650px) {
+                padding-right: 24px;
+                font-size: 20px;
+            }
+            @media (max-width: 450px) {
+                font-size: 16px;
+            }
+        }
+        .main {
+            margin-bottom: -0.1em;
+            font-size: 200px;
+            display: block;
+            line-height: 1;
+            @media (max-width: 1300px) {
+                font-size: 160px;
+                
+            }
+            @media (max-width: 1000px) {
+                font-size: 120px;
+            }
+            @media (max-width: 800px) {
+                font-size: 100px;
+            }
+            @media (max-width: 650px) {
+                font-size: 15vw;
+            }
+        }
+    }
+    ul.list {
+        margin-left: auto;
+        padding: 64px;
+        width: 80%;
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 64px;
+        background: #fff;
+        border-radius: 160px 0 0 0;
+        @media (max-width: 1300px) {
+            width: 90%;
+        }
+        @media (max-width: 1000px) {
+            width: 80%;
+            grid-template-columns: repeat(1, 1fr);
+        }
+        @media (max-width: 800px) {
+            width: 90%;
+        }
+        @media (max-width: 550px) {
+            padding: 48px;
+            width: calc(100% - 32px);
+            border-radius: 130px 0 0 0;
+        }
+        @media (max-width: 450px) {
+            padding: 40px;
+            width: calc(100% - 24px);
+        }
+        @media (max-width: 400px) {
+            padding: 32px;
+            padding-right: 24px;
+            border-radius: 120px 0 0 0;
+        }
+        li.item {
+            &:first-of-type {
+                grid-column: span 2;
+                display: flex;
+                gap: 64px;
+                @media (max-width: 1000px) {
+                    grid-column: initial;
+                    display: block;
+                }
+                .image,
+                .text_in {
+                    flex: 1;
+                }
+            }
+            .image {
+                width: 100%;
+                border-radius: 80px 0 0 0;
+                overflow: hidden;
+                img {
+                    width: 100%;
+                    object-fit: cover;
+                    aspect-ratio: 16 / 12;
+                }
+            }
+            .text_in{
+                padding-top: 32px;
+                h3.ttl {
+                    span.sub{
+                        display: flex;
+                        align-items: center;
+                        color: #C6C6C6;
+                        font-size: 14px;
+                        font-weight: 400;
+                        .no {
+                            margin-right: 0.2em;
+                            font-size: 24px;
+                        }
+                    }
+                    span.main{
+                        margin-top: 0.5em;
+                        display: block;
+                        font-size: 24px;
+                        @media (max-width: 500px) {
+                            font-size: 20px;
+                        }
+                    }
+                }
+                p {
+                    margin: 1em 0;
+                    font-size: 16px;
+                    line-height: 2;
+                    @media (max-width: 500px) {
+                        font-size: 14px;
+                    }
+                }
+                .btn{
+                    display: flex;
+                    align-items: center;
+                    svg{
+                        margin-left: 1em;
+                    }
+                }
+            }
+        }
+    }
+}

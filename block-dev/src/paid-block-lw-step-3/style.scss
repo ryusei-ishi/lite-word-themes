@@ -1,0 +1,119 @@
+.paid-block-lw-step-3 {
+  margin: 32px 0;
+  @container (max-width:800px) {
+    margin: 24px 0;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  &.font_size_l {
+    font-size: 28px;
+    @container (max-width:800px) {
+      font-size: 24px;
+    }
+    @container (max-width:550px) {
+      font-size: 20px;
+    }
+  }
+  &.font_size_m {
+    font-size: 24px;
+    @container (max-width:800px) {
+      font-size: 22px;
+    }
+    @container (max-width:550px) {
+      font-size: 18px;
+    }
+  }
+  &.font_size_s {
+    font-size: 20px;
+    @container (max-width:800px) {
+      font-size: 18px;
+    }
+    @container (max-width:550px) {
+      font-size: 15px;
+    }
+  }
+  ul.lw-step-2__inner {
+    position: relative;
+    z-index: 10;
+    padding: 0;
+    container-type: inline-size;
+    margin-inline-start: 0;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    gap: 8px;
+    list-style: none;
+    @container (max-width:550px) {
+      gap: 4px;
+    }
+    li.lw-step-2__li {
+      position: relative;
+      display: flex;
+      background: #fff;
+      border-width: 2px;
+      border-style: solid;
+      border-radius: 10px;
+      overflow: hidden;
+      @container (max-width:550px) {
+        border-radius: 6px;
+      }
+      .lw-step-2__li_no {
+        margin: 0;
+        width: 2.4em;
+        height: 100%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 1.4em;
+        background: var(--color-main);
+        color: #fff;
+        text-align: center;
+      }
+      .lw-step-2__li_in {
+        padding: 1.2em 1em;
+        width: calc(100% - 3.4em);
+        p.ttl,
+        h2.ttl,
+        h3.ttl,
+        h4.ttl {
+          margin: 0;
+          font-size: 1em;
+          line-height: 1.4em;
+          + p.lw-step-2__li_text {
+            margin-top: 0.3em;
+          }
+        }
+        p.lw-step-2__li_text {
+          margin: 0;
+          color: #333;
+          white-space: pre-wrap;
+          font-size: 0.71em;
+        }
+      }
+    }
+  }
+  .lw-step-2__remove_btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    font-size: 12px;
+    color: #fff;
+    background: var(--color-accent);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .lw-step-2__add_btn {
+    position: relative;
+    z-index: 10;
+    margin: 0 auto;
+    margin-top: 32px;
+    padding: 12px 24px;
+    padding: 12px 24px;
+    width: 200px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}

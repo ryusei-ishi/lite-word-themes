@@ -1,0 +1,55 @@
+.shin-gas-station-01-custom-title-1 {
+  margin: 1.8em 0;
+  padding-bottom: 0 !important;
+  text-align: center;
+  border: none !important;
+  font-size: 17px;
+  .main {
+    position: relative;
+    display: block;
+    text-align: center;
+    font-size: 2.3em;
+    letter-spacing: 0.06em;
+    line-height: 1.4em;
+    font-weight: 400;
+    color: var(--color-main);
+    @container (max-width:800px) {
+      font-size: 2.1em;
+    }
+    @container (max-width:600px) {
+      font-size: 1.7em;
+    }
+    @container (max-width:500px) {
+      font-size: 1.4em;
+    }
+    @container (max-width:400px) {
+      font-size: 1.3em;
+    }
+    span{
+      display: inline-block;
+    }
+    &::after{
+      margin: 0.3em auto 0 auto;
+      width: 80px;
+      height: 1px;
+      display: block;
+      content: '';
+      background: #C6C6C6;
+    }
+  }
+}
+.post_style{
+  .shin-gas-station-01-custom-title-1 {
+    .main {
+      &:empty{
+        display: none;
+      }
+    }
+    .sub {
+      &:empty{
+        display: none;
+      }
+    }
+  }
+
+}  

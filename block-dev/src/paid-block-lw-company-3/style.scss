@@ -1,0 +1,119 @@
+.paid-block-lw-company-3 {
+  container-type: inline-size;
+  * {
+    box-sizing: border-box;
+  }
+  &.font_size_l {
+    font-size: 20px;
+    @container (max-width:800px) {
+      font-size: 18px;
+    }
+    @container (max-width:550px) {
+      font-size: 16px;
+    }
+  }
+  &.font_size_m {
+    font-size: 17px;
+    @container (max-width:800px) {
+      font-size: 16px;
+    }
+    @container (max-width:550px) {
+      font-size: 15px;
+    }
+  }
+  &.font_size_s {
+    font-size: 15px;
+    @container (max-width:800px) {
+      font-size: 14px;
+    }
+    @container (max-width:550px) {
+      font-size: 12px;
+    }
+  }
+  dl.lw-company-3__inner {
+    position: relative;
+    z-index: 10;
+    margin: 0;
+    margin-inline-start: 0;
+    margin: 0 auto;
+    width: 100%;
+    display: grid;
+    gap: 4px 0;
+    @container (max-width:550px) {
+      gap: 3px 0;
+    }
+
+    .lw-company-3__row {
+      display: grid;
+      &.dt_width_l {
+        grid-template-columns: 12em calc(100% - 12em);
+      }
+      &.dt_width_m {
+        grid-template-columns: 10em calc(100% - 10em);
+      }
+      &.dt_width_s {
+        grid-template-columns: 8em calc(100% - 8em);
+      }
+      &.sp_clm_1,
+      &.dt_sp_full {
+        @container (max-width:600px) {
+          grid-template-columns: 1fr;
+          dt.lw-company-3__dt {
+            border-radius: 0.4em 0.4em 0 0;
+            .lw-company-3__dt_arrow {
+              display: none;
+            }
+          }
+          dd.lw-company-3__dd {
+            border-radius: 0 0 0.4em 0.4em;
+            border-style: solid;
+            border-width: 0 1px 1px 1px;
+          }
+        }
+      }
+    }
+    dt.lw-company-3__dt,
+    dd.lw-company-3__dd {
+      margin: 0;
+      margin-inline-start: initial;
+      padding: 1em;
+      line-height: 1.6em;
+      font-feature-settings: "palt";
+    }
+    dt.lw-company-3__dt {
+      position: relative;
+      margin: 0;
+      height: 100%;
+      color: #fff;
+      border-radius: 0.4em 0 0 0.4em;
+      .lw-company-3__dt_arrow {
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: -0.5em;
+        margin: auto;
+        width: 1em;
+        height: 1em;
+        transform: rotate(45deg);
+      }
+    }
+    dd.lw-company-3__dd {
+      padding-left: 1.5em;
+      border: 1px solid var(--color-main);
+      border-width: 1px 1px 1px 0;
+      border-radius: 0 0.4em 0.4em 0;
+      background: #fff;
+    }
+  }
+  .lw-company-3__add_btn {
+    position: relative;
+    z-index: 10;
+    margin: 0 auto;
+    margin-top: 32px;
+    padding: 12px 24px;
+    padding: 12px 24px;
+    width: 200px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}

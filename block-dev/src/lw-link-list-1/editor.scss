@@ -1,0 +1,7 @@
+.wp-block{
+  &:has(.lw-link-list-1){
+      margin: 0;
+      width: 100%;
+      max-width: 100%;
+  }
+}

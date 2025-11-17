@@ -1,0 +1,40 @@
+.custom-title-6 {
+  margin: 1em 0;
+  container-type: inline-size;
+  padding-bottom: 0 !important;
+  border: none !important;
+  .main {
+    position: relative;
+    padding: 0.2em 0;
+    padding-left: 1em;
+    display: block;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-size: 24px;
+    line-height: 1.3em;
+    font-feature-settings: "palt";
+    @container (max-width:800px) {
+      font-size: 20px;
+    }
+    @container (max-width:500px) {
+      font-size: 18px;
+    }
+  }
+  .accent {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 0.35em;
+  }
+}
+
+.post_style {
+  .custom-title-6 {
+    .main {
+      &:empty {
+        display: none;
+      }
+    }
+  }
+}

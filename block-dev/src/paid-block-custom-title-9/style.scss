@@ -1,0 +1,123 @@
+p + .paid-block-custom-title-9,
+ul + .paid-block-custom-title-9,
+ol + .paid-block-custom-title-9{
+  margin-top: 2.5em;
+}
+.paid-block-custom-title-9 {
+  margin: 1em 0;
+  container-type: inline-size;
+  display: flex;
+  flex-wrap: wrap;
+  > h2.ttl,
+  > h3.ttl,
+  > h4.ttl,
+  > h5.ttl,
+  > h6.ttl {
+    position: relative;
+    margin-left: 0;
+    margin-right: 0;
+    padding-left: 1em;
+    width: 100%;
+    font-weight: 600;
+  }
+  &.size_l h2,
+  &.size_l h3,
+  &.size_l h4,
+  &.size_l h5,
+  &.size_l h6 {
+    font-size: 40px;
+    @container (max-width:800px) {
+      font-size: 32px;
+    }
+    @container (max-width:500px) {
+      font-size: 26px;
+    }
+  }
+  &.size_m h2,
+  &.size_m h3,
+  &.size_m h4,
+  &.size_m h5,
+  &.size_m h6 {
+    font-size: 32px;
+    @container (max-width:800px) {
+      font-size: 26px;
+    }
+    @container (max-width:500px) {
+      font-size: 22px;
+    }
+  }
+  &.size_s h2,
+  &.size_s h3,
+  &.size_s h4,
+  &.size_s h5,
+  &.size_s h6 {
+    font-size: 28px;
+    @container (max-width:800px) {
+      font-size: 22px;
+    }
+    @container (max-width:500px) {
+      font-size: 20px;
+    }
+  }
+  &.position_left {
+    justify-content: start;
+    text-align: left;
+  }
+  &.position_right {
+    justify-content: end;
+    text-align: right;
+    .border_inner {
+      flex-direction: row-reverse;
+    }
+  }
+  .sub {
+    margin-bottom: 0.1em;
+    width: 100%;
+    display: block;
+    font-size: 0.4em;
+    line-height: 1.6em;
+    font-feature-settings: "palt";
+  }
+  .main {
+    width: 100%;
+    display: block;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    line-height: 1.15em;
+    font-feature-settings: "palt";
+  }
+  .border_wrap {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 0.4em;
+    height: 100%;
+    overflow: hidden;
+    .border_inner {
+      height: 100%;
+      width: 100%;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      .border {
+        width: 100%;
+        height: 50%;
+        display: block;
+      }
+    }
+  }
+}
+
+.post_style {
+  .paid-block-custom-title-9 {
+    .main {
+      &:empty {
+        display: none;
+      }
+    }
+    .sub {
+      &:empty {
+        display: none;
+      }
+    }
+  }
+}

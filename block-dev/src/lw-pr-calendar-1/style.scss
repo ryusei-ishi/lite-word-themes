@@ -1,0 +1,90 @@
+:root {
+    --table-item-first-width: 200px;
+    --table-item-gap: 2px;
+    --color-table-item-bd: #116ea7;
+    --color-table-head-item-bg: #116ea7;
+    --color-table-head-item-text: #ffffff;
+    --color-table-body-item-text: #000000;
+    --color-table-body-item-first-text: #000000;
+}
+.lw-pr-calendar-1 {
+    .wrap_table {
+        max-width: 580px;
+        margin: 0 auto;
+        * {
+            box-sizing: border-box;
+        }
+        .table_head,
+        .table_body {
+            width: 100%;
+            display: grid;
+            grid-template-columns:
+                var(--table-item-first-width)
+                calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap))
+                calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap))
+                calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap))
+                calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap))
+                calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap))
+                calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap))
+                calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap));
+            gap: var(--table-item-gap);
+            @media (max-width: 700px) {
+                --table-item-first-width: 160px;
+            }
+            @media (max-width: 500px) {
+                --table-item-first-width: 120px;
+                --table-item-gap: 1px;
+            }
+            .item {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid var(--color-table-item-bd);
+                aspect-ratio: 1;
+
+                &.first {
+                    aspect-ratio: initial;
+                }
+
+                @media (max-width: 450px) {
+                    aspect-ratio: 1 / 1.2;
+                }
+            }
+        }
+        .table_head {
+            .item {
+                color: var(--color-table-head-item-text);
+                background: var(--color-table-head-item-bg);
+                border: none;
+                font-size: 22px;
+                @media (max-width: 600px) {
+                    font-size: 20px;
+                }
+                @media (max-width: 550px) {
+                    font-size: 16px;
+                }
+            }
+        }
+        .table_body {
+            margin-top: var(--table-item-gap);
+            color: var(--color-table-body-item-text);
+            font-size: 28px;
+            @media (max-width: 550px) {
+                font-size: 24px;
+            }
+            .item.first {
+                color: var(--color-table-body-item-first-text);
+                font-size: 22px;
+                @media (max-width: 700px) {
+                    font-size: 20px;
+                }
+                @media (max-width: 550px) {
+                    font-size: 16px;
+                }
+            }
+        }
+    }
+    .lw-table-item-controls {
+        right: -48px;
+    }
+}

@@ -1,0 +1,132 @@
+.shin-gas-station-01-company-01 {
+  container-type: inline-size;
+  margin: 40px 0;
+}
+
+@container (max-width:800px) {
+  .shin-gas-station-01-company-01 {
+    margin: 32px 0;
+  }
+}
+
+.shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner {
+  margin: 0 auto;
+  padding: 72px;
+  border: 1px solid var(--color-main);
+  border-radius: 80px;
+}
+
+@container (max-width:800px) {
+  .shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner {
+    padding: 48px;
+    border-radius: 56px;
+  }
+}
+
+@container (max-width:600px) {
+  .shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner {
+    border-radius: 40px;
+  }
+}
+
+@container (max-width:500px) {
+  .shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner {
+    padding: 32px 24px;
+    border-radius: 28px;
+  }
+}
+
+@media (max-width: 360px) {
+  .shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner {
+    padding: 28px 16px;
+    border-radius: 24px;
+  }
+}
+
+.shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl {
+  position: relative;
+  margin: 0;
+  display: grid;
+  grid-template-columns: 240px calc(100% - 240px);
+  border-top: 1px solid #EBEBEB;
+}
+
+@container (max-width:1000px) {
+  .shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl {
+    grid-template-columns: 200px calc(100% - 200px);
+  }
+}
+
+@container (max-width:800px) {
+  .shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl {
+    grid-template-columns: 164px calc(100% - 164px);
+  }
+}
+
+@container (max-width:500px) {
+  .shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl {
+    grid-template-columns: 120px calc(100% - 120px);
+  }
+}
+
+@container (max-width:400px) {
+  .shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl {
+    grid-template-columns: 108px calc(100% - 108px);
+  }
+}
+
+.shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl:first-of-type {
+  border-top: none;
+}
+
+.shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl:first-of-type dt, .shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl:first-of-type dd {
+  padding-top: 0;
+}
+
+.shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl:last-of-type dt, .shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl:last-of-type dd {
+  padding-bottom: 0;
+}
+
+.shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl dt, .shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl dd {
+  margin-inline-start: 0;
+  margin: 0;
+  padding: 40px 0 28px 0;
+  line-height: 1.6em;
+  font-size: 0.94em;
+}
+
+@container (max-width:800px) {
+  .shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl dt, .shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl dd {
+    padding: 32px 0 24px 0;
+    font-size: 0.8em;
+  }
+}
+
+@container (max-width:500px) {
+  .shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl dt, .shin-gas-station-01-company-01 .shin-gas-station-01-company-01__inner dl dd {
+    letter-spacing: 0;
+  }
+}
+
+.shin-gas-station-01-company-01 .shin-gas-station-01-company-01__remove_btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  font-size: 12px;
+  color: #fff !important;
+  background: var(--color-accent);
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.shin-gas-station-01-company-01 .shin-gas-station-01-company-01__add_btn {
+  position: relative;
+  z-index: 10;
+  margin: 0 auto;
+  margin-top: 32px;
+  padding: 12px 24px;
+  font-size: 16px;
+  cursor: pointer;
+}

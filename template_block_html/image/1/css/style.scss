@@ -1,0 +1,67 @@
+.paid-block-image-1 {
+  max-width: 430px;
+  .paid-block-image-1__inner {
+    position: relative;
+    z-index: 10;
+    padding: 20px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+    aspect-ratio: 400 / 340;
+    overflow: hidden;
+    border-radius: 0.9em;
+    font-size: 24px;
+    img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      z-index: -1;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+    .name_plate {
+      position: absolute;
+      bottom: 20px;
+      left: 20px;
+      z-index: 20;
+      min-width: 6em;
+      text-align: center;
+      background: #fc99aa;
+      border: 2px solid #fc99aa;
+      border-radius: 0.2em;
+      overflow: hidden;
+      .sub {
+        padding: 0.1em 0.2em;
+        display: block;
+        color: #fff;
+        font-size: 0.75em;
+        line-height: 1.4em;
+      }
+      .main {
+        padding: 0.4em 0.2em;
+        display: block;
+        background: #fff;
+        color: #000;
+        font-size: 1em;
+      }
+    }
+    .link_next {
+      position: relative;
+      z-index: 20;
+      width: 1.7em;
+      height: 1.7em;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: #fc99aa;
+      border-radius: 50%;
+      svg {
+        width: 0.7em;
+        height: 0.7em;
+        fill: #fff;
+      }
+    }
+  }
+}

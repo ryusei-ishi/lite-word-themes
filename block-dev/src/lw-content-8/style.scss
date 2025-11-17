@@ -1,0 +1,188 @@
+.lw_content_wrap.page {
+    .wp-block-wdl-lw-content-8 {
+        margin-left: calc((100% - 100vw) / 2);
+        width: 100vw;
+    }
+    &:has(.first_content + .wp-block-wdl-lw-content-8) {
+        .first_content {
+            display: none;
+        }
+    }
+}
+.wp-block {
+    &:has(.lw-content-8) {
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+.lw-content-8 {
+  margin: 40px 0;
+  padding: 0 24px;
+  container-type: inline-size;
+  @container (max-width:600px) {
+    margin: 32px 0;
+  }
+  @container (max-width:500px) {
+    margin: 24px 0;
+    padding: 0 16px;
+  }
+  * {
+    box-sizing: border-box;
+  }
+  ul.lw-content-8__inner {
+    position: relative;
+    z-index: 10;
+    margin: 0 auto;
+    padding: 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+    list-style: none;
+    @container (max-width:1000px) {
+      gap: 12px;
+    }
+    @container (max-width:800px) {
+      grid-template-columns: repeat(2, 1fr);
+    }
+    @container (max-width:550px) {
+      grid-template-columns: repeat(1, 1fr);
+    }
+    &.clm_2 {
+      grid-template-columns: repeat(2, 1fr);
+      gap: 40px;
+      @container (max-width:800px) {
+        gap: 24px 24px;
+      }
+      @container (max-width:600px) {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 16px;
+      }
+    }
+    &.clm_4 {
+      grid-template-columns: repeat(4, 1fr);
+      gap: 24px 16px;
+      @container (max-width:1000px) {
+        grid-template-columns: repeat(3, 1fr);
+      }
+      @container (max-width:800px) {
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px 20px;
+      }
+      @container (max-width:500px) {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 16px;
+      }
+    }
+    li.lw-content-8__li {
+      position: relative;
+      padding: 28px 24px 20px 24px;
+      border: 1px solid var(--color-main);
+      background: #fff;
+      a {
+        color: var(--color-black);
+        text-decoration: none;
+      }
+
+      h3.ttl,
+      h4.ttl,
+      p.ttl {
+        margin: 0;
+        width: 100%;
+        line-height: 1.5em;
+        letter-spacing: 0;
+        &.font_size_l {
+          font-size: 24px;
+          @container (max-width:800px) {
+            font-size: 22px;
+          }
+          @container (max-width:750px) {
+            font-size: 20px;
+          }
+        }
+        &.font_size_m {
+          font-size: 22px;
+          @container (max-width:800px) {
+            font-size: 20px;
+          }
+          @container (max-width:750px) {
+            font-size: 18px;
+          }
+        }
+        &.font_size_s {
+          font-size: 20px;
+          @container (max-width:800px) {
+            font-size: 18px;
+          }
+          @container (max-width:750px) {
+            font-size: 16px;
+          }
+        }
+        .sub {
+          margin-bottom: 8px;
+          padding: 0.4em 0.8em;
+          min-width: 6em;
+          display: inline-block;
+          line-height: 1.4em;
+          font-size: 0.6em;
+          border: 1px solid var(--color-main);
+          color: var(--color-main);
+          text-align: center;
+        }
+        .main {
+          padding: 0 0 0.3em 0;
+          display: block;
+          &.center {
+            text-align: center;
+          }
+        }
+      }
+
+      p.lw-content-8__text {
+        margin: 0;
+        margin-top: 0.8em;
+        line-height: 2em;
+        &.font_size_l {
+          font-size: 18px;
+          @container (max-width:800px) {
+            font-size: 17px;
+          }
+          @container (max-width:550px) {
+            font-size: 16px;
+          }
+        }
+        &.font_size_m {
+          font-size: 17px;
+          @container (max-width:550px) {
+            font-size: 15px;
+          }
+        }
+        &.font_size_s {
+          font-size: 15px;
+          @container (max-width:550px) {
+            font-size: 12px;
+          }
+        }
+      }
+    }
+  }
+
+  .lw-content-8__remove_btn {
+    font-size: 12px;
+    color: #fff !important;
+    background: var(--color-accent);
+    border: none;
+    border-radius: 2px;
+  }
+  .lw-content-8__add_btn {
+    position: relative;
+    z-index: 10;
+    margin: 0 auto;
+    margin-top: 32px;
+    padding: 12px 24px;
+    padding: 12px 24px;
+    width: 200px;
+    font-size: 16px;
+  }
+}

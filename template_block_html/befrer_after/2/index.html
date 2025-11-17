@@ -1,0 +1,127 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../LiteWord/assets/css/reset.min.css">
+    <link rel="stylesheet" href="../../../LiteWord/assets/css/common.min.css">
+    <link rel="stylesheet" href="../../../LiteWord/assets/css/page.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+    <div class="lw_content_wrap page">
+        <div class="main_content">
+            <section class="post_content">
+                <div class="post_style page">
+                    <div class="first_content"></div>
+                    <!-- paid-block-voice-2 -->
+                    <div class="paid-block-before-after-2">
+                        <div class="this_wrap">
+                          <!-- Beforeラベル -->
+                          <p class="label">before</p>
+                          <!-- Afterラベル -->
+                          <p class="label right">after</p>
+                          
+                          <!-- Before画像（通常フローにして高さを決める） -->
+                          <img 
+                            src="https://cdn.pixabay.com/photo/2017/05/13/07/42/loneliness-2308923_1280.jpg" 
+                            class="before-image" 
+                            alt="Before"
+                          >
+                          
+                          <!-- After画像をクリップして見せる領域 -->
+                          <div class="after-wrapper">
+                            <div class="after-inner">
+                              <img 
+                                src="https://cdn.pixabay.com/photo/2019/12/06/13/06/bridal-4677348_1280.jpg" 
+                                class="after-image" 
+                                alt="After"
+                              >
+                            </div>
+                          </div>
+                      
+                          <!-- スライダーライン -->
+                          <div class="slider-line">
+                            <div class="slider-circle">
+                              <!-- 左矢印アイコン -->
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 
+                                         12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 
+                                         73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 
+                                         45.3 0l192 192z"/>
+                              </svg>
+                              <!-- 右矢印アイコン -->
+                              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512">
+                                <path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 
+                                         12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 
+                                         73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 
+                                         45.3 0l192 192z"/>
+                              </svg>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                    <div class="last_content"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+<script>
+    const container = document.querySelector('.paid-block-before-after-2 .this_wrap');
+    const slider = document.querySelector('.paid-block-before-after-2 .slider-line');
+    const afterWrapper = document.querySelector('.paid-block-before-after-2 .after-wrapper');
+    
+    // 画像幅・スライダー位置を更新する関数
+    function updateSliderPosition(x) {
+      const rect = container.getBoundingClientRect();
+      let offsetX = x - rect.left;
+    
+      // 0 ～ 最大幅 に制限
+      offsetX = Math.max(0, Math.min(offsetX, rect.width));
+    
+      // After領域の幅を更新(画像自体は幅auto/高さ100%なので縮まず、隠れるだけ)
+      afterWrapper.style.width = offsetX + 'px';
+    
+      // スライダーラインのleft位置を更新
+      slider.style.left = offsetX + 'px';
+    }
+    
+    // PCマウス対応
+    container.addEventListener('mousemove', function (e) {
+      // 左クリックやドラッグ前提であればmousedown判定など入れても良い
+      updateSliderPosition(e.clientX);
+    });
+    
+    // スマホタッチ対応
+    container.addEventListener('touchmove', function (e) {
+      if (e.touches.length > 0) {
+        updateSliderPosition(e.touches[0].clientX);
+      }
+    }, { passive: false });
+    
+    // スマホでスクロールしないようにする
+    container.addEventListener('touchstart', function (e) {
+      e.preventDefault();
+    }, { passive: false });
+    </script>
+    
+</html>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+

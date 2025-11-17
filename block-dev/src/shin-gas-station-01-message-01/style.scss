@@ -1,0 +1,117 @@
+
+.shin-gas-station-01-message-01 {
+  container-type: inline-size;
+  position: relative;
+  z-index: 10;
+  margin: 64px 0;
+  @container (max-width:500px) {
+    margin: 32px 0;
+  }
+  .shin-gas-station-01-message-01__wrap{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap:80px;
+    @container (max-width:1000px) {
+      gap:64px;
+    }
+    @container (max-width:800px) {
+      gap:40px;
+    }
+    @container (max-width:650px) {
+      grid-template-columns: 1fr;
+      gap: 40px;
+    }
+    .text__in{
+      h3.title{
+        margin: 0;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        gap:12px;
+        @container (max-width:650px) {
+          gap:0;
+        }
+        .main{
+          font-weight: 500;
+          font-size: 40px;
+          line-height: 1.5em;
+          color: var(--color-main);
+          @container (max-width:1000px) {
+            font-size: 32px;
+          }
+          @container (max-width:650px) {
+            width: 100%;
+            font-size: 26px;
+          }
+        }
+        .sub{
+          margin-top:0.5em;
+          flex-wrap: 500;
+          font-size: 16px;
+          line-height: 1.6em;
+          font-weight: 400;
+          @container (max-width:650px) {
+            margin-top: 0.2em;
+            font-size: 11px;
+          }
+          &:empty{
+            display: none;
+          }
+        }
+      }
+      p.description{
+        margin: 0;
+        margin-top: 1.5em;
+        line-height: 2.5em;
+        font-size: 16px;
+        font-weight: 400;
+        white-space: pre-line;
+        color: var(--color-black);
+        @container (max-width:650px) {
+          line-height: 2.2em;
+          font-size: 14.5px;
+        }
+        &:empty{
+          display: none;
+        }
+      }
+      .img_caption{
+        margin-top: 24px;
+        display: flex;
+        align-items:center;
+        justify-content: end;
+        .sub{
+          font-size: 14px;
+          line-height: 2em;
+          @container (max-width:500px) {
+            font-size: 12px;
+          }
+        }
+        .main{
+          margin-left: 16px;
+          font-size: 24px;
+          font-weight: 500;
+          line-height: 2em;
+          @container (max-width:500px) {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+    .image{
+      figure.img{
+        aspect-ratio: 480 / 540;
+        img{
+          width: 100%;
+          height: 100%;
+          object-fit: cover;
+          border-radius: 40px 40px 0 40px;
+          @container (max-width:500px) {
+            font-size: 20px;
+          }
+        }
+      }
+    }
+  }
+
+}

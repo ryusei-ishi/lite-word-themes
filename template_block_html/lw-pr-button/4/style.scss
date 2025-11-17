@@ -1,0 +1,67 @@
+.lw-pr-button-4 {
+    * {
+        box-sizing: border-box;
+    }
+    .wrap_btn {
+        display: flex;
+        justify-content: center;
+        font-size: 16px;
+        .lw_btn_a {
+            position: relative;
+            padding: 1.2em 1.5em;
+            max-width: 580px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            background: #09488c;
+            border-radius: 2px;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+            transition: background 0.3s ease;
+            text-decoration: none;
+            @media (max-width: 800px) {
+                max-width: 480px;
+            }
+            &:hover {
+                background: #063366;
+            }
+            .text_sub {
+                width: 100%;
+                display: block;
+                line-height: 1.6;
+                font-weight: 500;
+                color: #fff;
+                font-size: 14px;
+                text-align: center;
+            }
+            .text_main {
+                font-size: 28px;
+                font-weight: 500;
+                line-height: 1.5;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                color: #fff;
+                text-align: center;
+                letter-spacing: 0.05em;
+                @media (max-width: 800px) {
+                    font-size: 18px;
+                }
+                .icon {
+                    margin-left: -8px;
+                    margin-right: 8px;
+                    display: flex;
+                    align-items: center;
+                    width: 32px;
+                    height: auto;
+                    svg {
+                        height: auto;
+                        width: 100%;
+                        fill: #fff;
+                    }
+                }
+            }
+        }
+    }
+}

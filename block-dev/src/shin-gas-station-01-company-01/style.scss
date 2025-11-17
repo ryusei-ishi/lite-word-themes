@@ -1,0 +1,96 @@
+.shin-gas-station-01-company-01 {
+  container-type: inline-size;
+  margin: 40px 0;
+  @container (max-width:800px) {
+    margin: 32px 0;
+  }
+  .shin-gas-station-01-company-01__inner {
+    margin: 0 auto;
+    padding: 72px;
+    border: 1px solid var(--color-main);
+    border-radius: 80px;
+    @container (max-width:800px) {
+      padding: 48px;
+      border-radius: 56px;
+    }
+    @container (max-width:600px) {
+      border-radius: 40px;
+    }
+    @container (max-width:500px) {
+      padding: 32px 24px;
+      border-radius: 28px;
+    }
+    @media (max-width: 360px) {
+      padding: 28px 16px;
+      border-radius: 24px;
+      
+    }
+    dl{
+      position: relative;
+      margin: 0;
+      display: grid;
+      grid-template-columns: 240px calc(100% - 240px);
+      border-top: 1px solid #EBEBEB;
+      @container (max-width:1000px) {
+        grid-template-columns: 200px calc(100% - 200px);
+      }
+      @container (max-width:800px) {
+        grid-template-columns: 164px calc(100% - 164px);
+      }
+      @container (max-width:500px) {
+        grid-template-columns: 120px calc(100% - 120px);
+      }
+      @container (max-width:400px) {
+        grid-template-columns: 108px calc(100% - 108px);
+      }
+      &:first-of-type{
+        border-top: none;
+      }
+      &:first-of-type{
+        dt,dd{
+          padding-top: 0;
+        }
+      }
+      &:last-of-type{
+        dt,dd{
+          padding-bottom: 0;
+        }
+      }
+      dt,dd{
+        margin-inline-start: 0;
+        margin: 0;
+        padding: 40px 0 28px 0;
+        line-height: 1.6em;
+        font-size: 0.94em;
+        @container (max-width:800px) {
+          padding: 32px 0 24px 0;
+          font-size: 0.8em;
+        }
+        @container (max-width:500px) {
+          letter-spacing: 0;
+        }
+      }
+    }
+  }
+  .shin-gas-station-01-company-01__remove_btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    font-size: 12px;
+    color: #fff !important;
+    background: var(--color-accent);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .shin-gas-station-01-company-01__add_btn {
+    position: relative;
+    z-index: 10;
+    margin: 0 auto;
+    margin-top: 32px;
+    padding: 12px 24px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,222 @@
+.shin-gas-station-01-shop-list-1 {
+  container-type: inline-size;
+  position: relative;
+  margin-bottom: 60px;
+  border-top: 2px solid #ebebeb;
+}
+
+.shin-gas-station-01-shop-list-1::before {
+  position: absolute;
+  left: 0;
+  top: -2px;
+  width: 200px;
+  height: 2px;
+  content: "";
+  display: block;
+  background: var(--color-main);
+}
+
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner {
+  padding-top: 60px;
+  display: grid;
+  grid-template-columns: 40% 60%;
+}
+
+@container (max-width: 650px) {
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner {
+    grid-template-columns: 1fr;
+  }
+}
+
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .image img {
+  width: 100%;
+  aspect-ratio: 420 / 320;
+  object-fit: cover;
+  display: block;
+}
+
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in {
+  padding-left: 40px;
+}
+
+@container (max-width: 800px) {
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in {
+    padding-left: 32px;
+  }
+}
+
+@container (max-width: 650px) {
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in {
+    margin-top: 24px;
+    padding: 0 2px;
+  }
+}
+
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in h3.ttl {
+  margin-bottom: 20px;
+  font-size: 24px;
+  font-weight: 500;
+  line-height: 1.6em;
+}
+
+@container (max-width: 800px) {
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in h3.ttl {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in h3.ttl {
+    margin-bottom: 16px;
+  }
+}
+
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div {
+  position: relative;
+  display: grid;
+  grid-template-columns: 154px calc(100% - 154px);
+  gap: 8px 0;
+}
+
+@container (max-width: 800px) {
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div {
+    grid-template-columns: 128px calc(100% - 128px);
+  }
+}
+
+@media (max-width: 500px) {
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div {
+    grid-template-columns: 108px calc(100% - 108px);
+  }
+}
+
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dt,
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dd {
+  position: relative;
+  line-height: 2em;
+  font-weight: 500;
+}
+
+@container (max-width: 800px) {
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dt,
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dd {
+    font-size: 14px;
+  }
+}
+
+@media (max-width: 500px) {
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dt,
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dd {
+    font-size: 13px;
+  }
+}
+
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dt a,
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dd a {
+  color: #c6c6c6;
+  font-weight: 600;
+}
+
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dt > p,
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dd > p {
+  margin: 0;
+}
+
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dt {
+  padding-left: 24px;
+  font-weight: 600;
+}
+
+@container (max-width: 800px) {
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dt {
+    padding-left: 20px;
+  }
+}
+
+@media (max-width: 500px) {
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dt {
+    padding-left: 18px;
+  }
+}
+
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dt::before {
+  position: absolute;
+  top: 0.55em;
+  left: 0;
+  width: 16px;
+  height: 16px;
+  content: "";
+  background: var(--color-main);
+  display: block;
+}
+
+@container (max-width: 800px) {
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dt::before {
+    top: 0.6em;
+    width: 12px;
+    height: 12px;
+  }
+}
+
+@media (max-width: 500px) {
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div dt::before {
+    top: 0.5em;
+  }
+}
+
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in dl > div button {
+  margin-top: -8px !important;
+  margin-left: auto !important;
+  padding: 0;
+  padding-bottom: 2px;
+  width: 40px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #df6464;
+  grid-column: span 2;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+  display: inline-block;
+  box-shadow: none;
+  font-size: 11px;
+}
+
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in ul.tag_list {
+  padding: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 8px;
+  margin-top: 20px;
+  max-width: 580px;
+}
+
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in ul.tag_list li {
+  padding: 4px 12px;
+  border-radius: 4em;
+  font-size: 14px;
+  line-height: 1;
+  font-weight: 600;
+  background: var(--color-main);
+  color: #fff;
+}
+
+@container (max-width: 800px) {
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in ul.tag_list li {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 500px) {
+  .shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .text_in ul.tag_list li {
+    font-size: 11px;
+  }
+}
+
+.shin-gas-station-01-shop-list-1 .shin-gas-station-01-shop-list-1_inner .components-button {
+  margin-top: 0 !important;
+  margin-left: auto !important;
+  display: block;
+}

@@ -1,0 +1,69 @@
+.lw-pr-button-2 {
+    * {
+        box-sizing: border-box;
+    }
+    .wrap_btn {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        font-size: 16px;
+        .text_sub {
+            margin-bottom: 6px;
+            width: 100%;
+            display: block;
+            line-height: 1.6;
+            font-weight: 500;
+            color: #000;
+            font-size: 16px;
+            text-align: center;
+        }
+        .lw_btn_a {
+            position: relative;
+            padding: 1.2em 1em 1.2em 1em;
+            max-width: 340px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            // グラデーション
+            background: linear-gradient(135deg, #224394 0%, #12346f 100%);
+            border-radius: 4em;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s ease;
+            text-decoration: none;
+            @media (max-width: 800px) {
+                max-width: 300px;
+                width: 100%;
+            }
+            &:hover {
+                transform: scale(1.03);
+            }
+            .text_main {
+                font-size: 20px;
+                font-weight: 500;
+                line-height: 1.5;
+                display: block;
+                color: #fff;
+                text-align: center;
+                @media (max-width: 800px) {
+                    font-size: 18px;
+                }
+            }
+            .icon {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: 20px;
+                margin: auto;
+                height: 100%;
+                width: 20px;
+                display: flex;
+                align-items: center;
+                svg {
+                    height: auto;
+                    width: 100%;
+                    fill: #fff;
+                }
+            }
+        }
+    }
+}

@@ -1,0 +1,32 @@
+.custom-title-3 {
+  border-bottom: none !important;
+  font-size: 20px;
+  &.center{
+    text-align: center;
+  }
+  &.right{
+    text-align: right;
+  }
+  .main > span {
+    display: block;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    font-size: 3em;
+    line-height: 1.3em;
+    font-family: var(--font-family-gothic);
+    font-feature-settings: "palt";
+  }
+  .accent{
+    margin: 0.5em 0 1em 0;
+    height: 0.4em;
+    width: 4.7em;
+    display: inline-block;
+  }
+  .span {
+    display: block;
+    font-size: 0.8em;
+    line-height: 1.8em;
+    letter-spacing: 0.1em;
+  }
+}
+

@@ -1,0 +1,285 @@
+// 固定ページ
+.lw_content_wrap.page {
+  .wp-block-wdl-lw-link-list-1 {
+    margin-left: calc((100% - 100vw) / 2);
+    width: 100vw;
+  }
+}
+// 投稿ページ
+.lw_content_wrap.single {
+  .wp-block-wdl-lw-link-list-1 {
+    margin-left: -40px;
+    margin-right: -40px;
+    width: calc(100% + 80px);
+    @container (max-width: 800px) {
+      margin-left: -32px;
+      margin-right: -32px;
+      width: calc(100% + 64px);
+    }
+    @container (max-width: 600px) {
+      margin-left: -24px;
+      margin-right: -24px;
+      width: calc(100% + 48px);
+    }
+    @container (max-width: 500px) {
+      margin-left: -20px;
+      margin-right: -20px;
+      width: calc(100% + 40px);
+    }
+  }
+}
+.post_style {
+  &:has(.first_content + .lw-link-list-1) {
+    .first_content {
+      display: none;
+    }
+  }
+  &:has(.lw-link-list-1 + .last_content) {
+    .last_content {
+      display: none;
+    }
+  }
+}
+.lw-link-list-1 {
+  position: relative;
+  z-index: 10;
+  padding: 64px 40px 64px 40px;
+  background-size: cover;
+  background-position: 0 0;
+  @container (max-width:1050px) {
+    padding: 56px 32px 64px 32px;
+  }
+  @container (max-width:450px) {
+    padding: 48px 24px 32px 24px;
+  }
+  &__filter {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    width: 100%;
+    height: 100%;
+    background: var(--color-main);
+    opacity: 0.8;
+  }
+  &.bg_hidden {
+    padding-top: 0;
+    padding-bottom: 0;
+    background: none;
+    h2.lw-link-list-1__title {
+      text-shadow: 0px 0px 4px rgba(0, 0, 0, 0.2);
+    }
+    .lw-link-list-1__filter {
+      display: none;
+    }
+    li.lw-link-list-1__li {
+      label {
+        color: #333;
+      }
+    }
+  }
+  h2.lw-link-list-1__title {
+    position: relative;
+    z-index: 10;
+    margin: 0;
+    text-align: center;
+    font-size: 40px;
+    line-height: 1.5em;
+    color: #fff;
+    @container (max-width:1050px) {
+      font-size: 32px;
+    }
+    @container (max-width:450px) {
+      font-size: 28px;
+    }
+  }
+  > p.lw-link-list-1__title_bottom {
+    position: relative;
+    z-index: 10;
+    margin-top: 1em;
+    color: #fff;
+    text-align: center;
+    @media (max-width: 600px) {
+      font-size: 15px;
+    }
+    &:empty {
+      display: none;
+    }
+  }
+  ul.lw-link-list-1__inner {
+    position: relative;
+    z-index: 10;
+    margin: 0 auto;
+    margin-top: 32px;
+    max-width: 1040px;
+    width: 100%;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 12px;
+    list-style: none;
+    @container (max-width:750px) {
+      grid-template-columns: repeat(1, 1fr);
+      &.clm_sp_2 {
+        grid-template-columns: repeat(2, 1fr);
+      }
+      &.clm_sp_3 {
+        grid-template-columns: repeat(3, 1fr);
+      }
+    }
+    &.clm_4 {
+      grid-template-columns: repeat(4, 1fr);
+      @container (max-width:1050px) {
+        grid-template-columns: repeat(3, 1fr);
+        &.clm_sp_3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        &.clm_sp_2 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+      @container (max-width:750px) {
+        grid-template-columns: repeat(1, 1fr);
+        &.clm_sp_2 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        &.clm_sp_3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+        
+      }
+    }
+    &.clm_3 {
+      grid-template-columns: repeat(3, 1fr);
+      @container (max-width:1050px) {
+        grid-template-columns: repeat(2, 1fr);
+        &.clm_sp_3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+      @container (max-width:750px) {
+        grid-template-columns: repeat(1, 1fr);
+        &.clm_sp_2 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        &.clm_sp_3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    }
+    &.clm_1 {
+      grid-template-columns: repeat(1, 1fr);
+      @container (max-width:750px) {
+        grid-template-columns: repeat(1, 1fr);
+        &.clm_sp_2 {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        &.clm_sp_3 {
+          grid-template-columns: repeat(3, 1fr);
+        }
+      }
+    }
+    li.lw-link-list-1__li {
+      a {
+        position: relative;
+        z-index: 10;
+        padding: 20px;
+        display: flex;
+        align-items: center;
+        border-radius: 2px;
+        box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
+        text-decoration: none;
+        border: 1px solid var(--color-main);
+        overflow: hidden;
+        @container (max-width:750px) {
+          padding: 16px;
+        }
+        .btn_bg_color {
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: -1;
+          width: 100%;
+          height: 100%;
+        }
+        .icon {
+          margin-right: 12px;
+          width: 1.5em;
+          height: 100%;
+          display: flex;
+          align-items: center;
+          justify-content: center;
+          fill: var(--color-accent);
+          svg {
+            width: 1.5em;
+            height: 1.5em;
+          }
+          &:empty {
+            display: none;
+          }
+        }
+        &:has(.icon){
+          .lw-link-list-1__text{
+             width: calc(100% - 1.5em);
+          }
+        }
+        .lw-link-list-1__text {
+          width: 100%;
+          p {
+            margin: 0;
+            color: #333;
+            white-space: pre-wrap;
+            @container (max-width:550px) {
+              font-size: 14px;
+            }
+          }
+        }
+      }
+    }
+    input,
+    .components-base-control,
+    select.components-select-control__input {
+      margin: 0 auto;
+      margin-top: 4px;
+      width: calc(100% - 16px);
+      display: block;
+      border-radius: 2px;
+      box-sizing: border-box;
+      label {
+        margin: 0;
+        margin-top: 12px;
+      }
+    }
+    label {
+      margin: 0 auto;
+      margin-top: 12px;
+      width: calc(100% - 16px);
+      display: block;
+      color: #fff;
+      font-size: 11px;
+      font-weight: 600;
+    }
+  }
+  .lw-link-list-1__remove_btn {
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    z-index: 10;
+    font-size: 12px;
+    color: #fff;
+    background: var(--color-accent);
+    border: none;
+    border-radius: 2px;
+    cursor: pointer;
+  }
+  .lw-link-list-1__add_btn {
+    position: relative;
+    z-index: 10;
+    margin: 0 auto;
+    margin-top: 32px;
+    padding: 12px 24px;
+    padding: 12px 24px;
+    width: 200px;
+    font-size: 16px;
+    cursor: pointer;
+  }
+}

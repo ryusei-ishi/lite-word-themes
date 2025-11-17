@@ -1,0 +1,63 @@
+.shin-gas-station-01-custom-title-1 {
+  margin: 1.8em 0;
+  padding-bottom: 0 !important;
+  text-align: center;
+  border: none !important;
+  font-size: 17px;
+}
+
+.shin-gas-station-01-custom-title-1 .main {
+  position: relative;
+  display: block;
+  text-align: center;
+  font-size: 2.3em;
+  letter-spacing: 0.06em;
+  line-height: 1.4em;
+  font-weight: 400;
+  color: var(--color-main);
+}
+
+@container (max-width:800px) {
+  .shin-gas-station-01-custom-title-1 .main {
+    font-size: 2.1em;
+  }
+}
+
+@container (max-width:600px) {
+  .shin-gas-station-01-custom-title-1 .main {
+    font-size: 1.7em;
+  }
+}
+
+@container (max-width:500px) {
+  .shin-gas-station-01-custom-title-1 .main {
+    font-size: 1.4em;
+  }
+}
+
+@container (max-width:400px) {
+  .shin-gas-station-01-custom-title-1 .main {
+    font-size: 1.3em;
+  }
+}
+
+.shin-gas-station-01-custom-title-1 .main span {
+  display: inline-block;
+}
+
+.shin-gas-station-01-custom-title-1 .main::after {
+  margin: 0.3em auto 0 auto;
+  width: 80px;
+  height: 1px;
+  display: block;
+  content: '';
+  background: #C6C6C6;
+}
+
+.post_style .shin-gas-station-01-custom-title-1 .main:empty {
+  display: none;
+}
+
+.post_style .shin-gas-station-01-custom-title-1 .sub:empty {
+  display: none;
+}

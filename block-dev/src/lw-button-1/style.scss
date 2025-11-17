@@ -1,0 +1,40 @@
+.wp-block-wdl-button-01 {
+    display: flex;
+    font-size: 18px;
+    justify-content: center;
+    &.align-flex-start {
+        justify-content: flex-start;
+    }
+    &.align-center {
+        justify-content: center;
+    }
+    &.align-flex-end {
+        justify-content: flex-end;
+    }
+    @media (max-width: 600px) {
+        font-size: 16px;
+        &.align-sp-flex-start {
+            justify-content: flex-start;
+        }
+        &.align-sp-center {
+            justify-content: center;
+        }
+        &.align-sp-flex-end {
+            justify-content: flex-end;
+        }
+    }
+    *{
+        box-sizing: border-box;
+    }
+    a {
+        width: 100%;
+        line-height: 1.5em;
+        transition: opacity 0.3s;
+        @media (max-width:600px) {
+            max-width: var(--button-01-max-width-sp) !important;
+        }
+        &:hover {
+            opacity: 0.8;
+        }
+    }
+}

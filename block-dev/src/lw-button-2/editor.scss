@@ -1,0 +1,49 @@
+.lw-button-02{
+    position: relative;
+    z-index: 10;
+    padding: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    * {
+        box-sizing: border-box;
+    }
+    .a_inner{
+        position: relative;
+        z-index: 10;
+        min-width: 320px;
+        overflow: hidden;
+        border-radius: 5em;
+        transition: opacity 0.3s;
+        border-style: solid;
+        @media (max-width: 400px) {
+            min-width: initial;
+            width: calc(100% - 32px);
+        }
+        a{
+            padding: 1em 3em;
+            min-width: 320px !important;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            line-height: 1.5em;
+            color: #fff;
+            @media (max-width: 400px) {
+                min-width: initial;
+            }
+            &:hover{
+                opacity: 0.8;
+            }
+        }
+        .a_background{
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            background: var(--color-main);
+        }
+    }
+}

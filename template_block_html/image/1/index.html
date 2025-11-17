@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="../../../LiteWord/assets/css/reset.min.css">
+    <link rel="stylesheet" href="../../../LiteWord/assets/css/common.min.css">
+    <link rel="stylesheet" href="../../../LiteWord/assets/css/page.min.css">
+    <link rel="stylesheet" href="./css/style.css">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,100..900;1,100..900&family=Noto+Sans+JP:wght@100..900&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400..700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/css/glide.core.min.css">
+    <script defer src="https://cdn.jsdelivr.net/npm/@glidejs/glide/dist/glide.min.js"></script>
+
+
+
+</head>
+
+<body>
+
+    <div class="paid- page">
+        <div class="main_content">
+            <section class="post_content">
+                <div class="post_style page">
+                    <div class="first_content"></div>
+                        <!-- paid-block-fv-8 に Glide.js の構造を適用 -->
+                        <div class="paid-block-image-1">
+                            <div class="paid-block-image-1__inner">
+                              <img src="https://cdn.pixabay.com/photo/2022/12/28/14/45/sunset-7683081_1280.jpg" alt="">
+                              <h3 class="name_plate">
+                                <span class="sub">主任</span>
+                                <span class="main">田中太郎</span>
+                              </h3>
+                              <div class="link_next">
+                                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>
+                              </div>
+                            </div>
+
+                        </div>
+                    <div class="last_content"></div>
+                </div>
+            </section>
+        </div>
+    </div>
+   
+
+</body>
+</html>
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+<script>
+  (function () {
+  document.addEventListener("DOMContentLoaded", function () {
+    let lw_swiperLoaded = false;
+
+    // .swiper が出てきたらCDNを読み込む（1回だけ）
+    function lw_waitForElement(selector, callback) {
+      const observer = new MutationObserver(() => {
+        const elements = document.querySelectorAll(selector);
+        if (elements.length > 0 && !lw_swiperLoaded) {
+          lw_swiperLoaded = true;
+          observer.disconnect();
+          callback(elements);
+        }
+      });
+      observer.observe(document.body, { childList: true, subtree: true });
+    }
+
+    // SwiperのCDNを読み込み
+    function lw_loadSwiperCDN(callback) {
+      // CSS
+      const link = document.createElement("link");
+      link.rel = "stylesheet";
+      link.href = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css";
+      document.head.appendChild(link);
+
+      // JS
+      const script = document.createElement("script");
+      script.src = "https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js";
+      script.onload = callback;
+      document.body.appendChild(script);
+    }
+
+    // .swiper が見つかったらCDNを読み込むだけ（初期化は外部JSに任せる）
+    lw_waitForElement(".swiper", function () {
+      lw_loadSwiperCDN(function () {
+        // SwiperのCDNが読み込まれたので、外部の初期化コードが動ける状態になります
+        const event = new CustomEvent("lw:swiperReady");
+        window.dispatchEvent(event); // 必要なら通知もできる
+      });
+    });
+  });
+})();
+
+
+</script>

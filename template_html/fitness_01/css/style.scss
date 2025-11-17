@@ -1,0 +1,703 @@
+//header
+.header_ptn_4 {
+    height: 80px;
+    background: #ffffff;
+    .header_inner {
+        width: 100%;
+        height: 100%;
+        display: flex;
+        justify-content: space-between;
+        .logo {
+            padding-left: 80px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            @media (max-width: 1300px) {
+                padding-left: 40px;
+            }
+            @media (max-width: 1024px) {
+                padding-left: 24px;
+            }
+
+            img {
+                height: 58px;
+                width: auto;
+            }
+        }
+        .header_nav {
+            height: 100%;
+            display: flex;
+            justify-content: end;
+            @media (max-width: 1024px) {
+                display: none;
+            }
+            > ul {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                > li {
+                    height: 100%;
+                    > a {
+                        padding: 0 2em;
+                        height: 100%;
+                        width: 100%;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        font-size: 16px;
+                        font-family: "Montserrat", sans-serif;
+                        color: #101010;
+                        transition: all 0.3s;
+                        &:hover {
+                            background: #ef2c00;
+                            color: #fff;
+                        }
+                    }
+                }
+            }
+            .cta {
+                padding: 0 1.2em;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #ef2c00;
+                border: 2px solid #ef2c00;
+                color: #fff;
+                text-align: center;
+                line-height: 1.4em;
+                font-size: 16px;
+                transition: 0.3s;
+                &:hover {
+                    background: #fff;
+                    color: #ef2c00;
+                }
+            }
+        }
+    }
+    .ham_btn {
+        display: none;
+    }
+}
+// shin_fitness_01_top_fv
+.lw_content_wrap.page {
+    &:has(.first_content + .shin_fitness_01_top_fv) {
+        .first_content {
+            display: none;
+        }
+    }
+}
+.shin_fitness_01_top_fv {
+    margin-left: calc((100% - 100vw) / 2);
+    width: 100vw;
+    display: flex;
+    @media (max-width: 850px) {
+        flex-wrap: wrap-reverse;
+    }
+    .inner {
+        padding-left: 100px;
+        width: 50%;
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        align-content: center;
+        @media (max-width: 1300px) {
+            padding-left: 64px;
+        }
+        @media (max-width: 1080px) {
+            padding-left: 40px;
+        }
+        @media (max-width: 850px) {
+            width: 60%;
+        }
+        @media (max-width: 650px) {
+            padding: 0 40px;
+            padding-top: 48px;
+            width: 100%;
+            justify-content: center;
+            text-align: center;
+        }
+        @media (max-width: 450px) {
+            text-align: left;
+        }
+        h1.title {
+            width: 100%;
+            .logo {
+                img {
+                    width: auto;
+                    height: 60px;
+                    @media (max-width: 1080px) {
+                        height: 50px;
+                    }
+                    @media (max-width: 650px) {
+                        height: 40px;
+                    }
+                }
+            }
+            .catch {
+                margin-top: 16px;
+                font-family: "Noto Sans JP", sans-serif;
+                font-weight: 400;
+                font-size: 38px;
+                line-height: 1.6em;
+                @media (max-width: 1300px) {
+                    font-size: 32px;
+                }
+                @media (max-width: 1080px) {
+                    font-size: 28px;
+                }
+                @media (max-width: 450px) {
+                    font-size: 25px;
+                }
+            }
+        }
+        p.description {
+            width: 100%;
+            font-family: "Montserrat", sans-serif;
+            color: #ef2c00;
+            font-weight: 600;
+            @media (max-width: 1080px) {
+                font-size: 14px;
+            }
+            @media (max-width: 450px) {
+                font-size: 12px;
+            }
+        }
+        .cta {
+            margin-top: 32px;
+            height: 60px;
+            min-width: 340px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #fff;
+            background: #ef2c00;
+            border: 2px solid #ef2c00;
+            transition: 0.3s;
+            @media (max-width: 1080px) {
+                margin-top: 16px;
+                min-width: 320px;
+            }
+            @media (max-width: 450px) {
+                min-width: 100%;
+                width: 100%;
+            }
+            &:hover {
+                background: #fff;
+                color: #ef2c00;
+            }
+        }
+    }
+    .image {
+        width: 50%;
+        aspect-ratio: 720 / 666;
+        @media (max-width: 850px) {
+            width: 40%;
+            aspect-ratio: 720 / 1140;
+        }
+        @media (max-width: 650px) {
+            width: 100%;
+            aspect-ratio: 720 / 480;
+        }
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    }
+}
+//custom-title-shin_fitness_01
+.custom-title-shin_fitness_01 {
+    margin: 1em 0;
+    margin-bottom: 1.5em;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
+    .main {
+        position: relative;
+        padding: 0.5em 2em;
+        border-top: 1px solid #ef2c00;
+        border-bottom: 1px solid #ef2c00;
+        font-size: 24px;
+        font-weight: 400;
+        overflow: hidden;
+        &::before,
+        &::after {
+            position: absolute;
+            width: 18px;
+            height: 18px;
+            content: "";
+            display: block;
+            background: #ef2c00;
+            transform: rotate(45deg);
+        }
+        &::before {
+            top: -9px;
+            left: -9px;
+        }
+        &::after {
+            bottom: -9px;
+            right: -9px;
+        }
+    }
+    .sub {
+        margin-top: 1em;
+        width: 100%;
+        color: #ef2c00;
+        font-family: Montserrat;
+        font-weight: 500;
+    }
+}
+// shin_fitness_01_point
+.shin_fitness_01_point {
+    margin: 0 auto;
+    margin-top: 40px;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    @container (max-width:1200px) {
+        gap:32px;
+    }
+    @container (max-width:1040px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    @container (max-width:650px) {
+        grid-template-columns: repeat(1, 1fr);
+    }
+    .shin_fitness_01_point__item {
+        position: relative;
+        padding: 18px;
+        padding-bottom: 0;
+        border-top: 1px solid #ef2c00;
+        overflow: hidden;
+        @container (max-width:900px) {
+            padding-right: 0;
+        }
+        &::before {
+            position: absolute;
+            top: -9px;
+            left: -9px;
+            width: 18px;
+            height: 18px;
+            content: "";
+            display: block;
+            background: #ef2c00;
+            transform: rotate(45deg);
+        }
+        .no {
+            color: #ef2c00;
+            font-family: Montserrat;
+            font-weight: 500;
+        }
+        h3.item_title {
+            margin: 1em 0;
+            font-size: 20px;
+            @media (max-width: 500px) {
+                font-size: 18px;
+            }
+        }
+        p.description {
+            line-height: 2.2em;
+            font-weight: 400;
+        }
+    }
+}
+// custom-title-shin_fitness_02
+h2.custom-title-shin_fitness_02 {
+    position: relative;
+    margin: 1em auto;
+    padding: 36px 16px 24px 16px;
+    max-width: 840px;
+    min-height: 200px;
+    display: flex;
+    align-content: center;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    text-align: center;
+    border: 1px solid #ef2c00;
+    overflow: hidden;
+    @container (max-width:1040px) {
+        min-height: 180px;
+    }
+    @container (max-width:500px) {
+        min-height: 160px;
+    }
+    &::before,
+    &::after {
+        position: absolute;
+        width: 40px;
+        height: 40px;
+        display: block;
+        content: "";
+        background: #ef2c00;
+        transform: rotate(45deg);
+    }
+    &::before {
+        top: -20px;
+        left: -20px;
+    }
+    &::after {
+        bottom: -20px;
+        right: -20px;
+    }
+    .main {
+        width: 100%;
+        font-size: 24px;
+        font-weight: 600;
+        @container (max-width:800px) {
+            font-size: 22px;
+        }
+        @container (max-width:600px) {
+            font-size: 22px;
+        }
+        @container (max-width:500px) {
+            font-size: 20px;
+        }
+    }
+    .sub {
+        margin-top: 1em;
+        font-size: 16px;
+        font-family: Montserrat;
+        color: #ef2c00;
+        font-weight: 500;
+        @container (max-width:500px) {
+            font-size: 14px;
+        }
+    }
+}
+.shin_fitness_01_content_01 {
+    margin: 80px auto;
+    max-width: 1240px;
+    display: flex;
+    align-items: start;
+    flex-wrap: wrap;
+    &.image_right {
+        flex-direction: row-reverse;
+        .text {
+            padding-left: 0;
+            padding-right: 5%;
+        }
+    }
+    .image {
+        min-height: 480px;
+        width: 58%;
+        @container (max-width:1300px) {
+            width: 50%;
+        }
+        @container (max-width:850px) {
+            min-height: auto;
+            width: 100%;
+        }
+        img {
+            height: 100%;
+            width: 100%;
+            object-fit: cover;
+        }
+    }
+    .text {
+        padding-top: 40px;
+        padding-left: 5%;
+        width: 40%;
+        @container (max-width:1300px) {
+            width: 50%;
+        }
+        @container (max-width:980px) {
+            padding-top: 0;
+        }
+        @container (max-width:850px) {
+            padding: 0;
+            padding-top: 32px;
+            width: 100%;
+        }
+        h3.title {
+            .sub {
+                margin-bottom: 1.5em;
+                font-size: 12px;
+                font-family: Montserrat;
+                color: #ef2c00;
+                font-weight: 500;
+                line-height: 1.6em;
+            }
+            .main {
+                font-size: 24px;
+                line-height: 1.4em;
+                @container (max-width:1080px) {
+                    font-size: 22px;
+                }
+                @container (max-width:500px) {
+                    font-size: 20px;
+                }
+            }
+        }
+        p.description {
+            font-size: 16px;
+            line-height: 2.4em;
+            font-weight: 400;
+        }
+        h3.title + p.description {
+            margin-top: 1.8em;
+        }
+    }
+}
+//shin_fitness_01_price
+.lw_content_wrap.page {
+    &:has(.first_content + .shin_fitness_01_price) {
+        .first_content {
+            display: none;
+        }
+    }
+}
+.shin_fitness_01_price {
+    position: relative;
+    z-index: 1;
+    margin-left: calc((100% - 100vw) / 2);
+    padding: 96px 24px;
+    width: 100vw;
+    background: #eaeaea;
+    @media (max-width: 980px) {
+        padding: 72px 0;
+    }
+    .filter {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        z-index: -1;
+        margin: auto;
+        width: 100%;
+        height: 672px;
+        background: #1f1f1f;
+        /* ボトムを斜めにする */
+        clip-path: polygon(0 0, 100% 0, 100% calc(100% - 25%), 0 100%);
+        @media (max-width: 1040px) {
+            height: 585px;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15%), 0 100%);
+        }
+        @media (max-width: 600px) {
+            height: 537px;
+            clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10%), 0 100%);
+        }
+    }
+    h2.title {
+        text-align: center;
+        .main {
+            color: #fff;
+            font-size: 24px;
+        }
+        .sub {
+            margin-top: 1.5em;
+            color: #ef2c00;
+            font-size: 16px;
+            font-family: Montserrat;
+            font-weight: 500;
+        }
+    }
+    .item_wrap {
+        margin: 0 auto;
+        margin-top: 40px;
+        max-width: 1240px;
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 40px;
+        @media (max-width: 980px) {
+            gap: 32px;
+            overflow-x: scroll;
+        }
+        .price_item {
+            @media (max-width: 980px) {
+                margin: 8px 0;
+                width: 320px;
+            }
+            @media (max-width: 600px) {
+                width: 280px;
+            }
+            &:first-of-type{
+                @media (max-width: 980px) {
+                    margin-left: 32px;
+                }
+                @media (max-width: 500px) {
+                    margin-left: 16px;
+                }
+            }
+            &:last-of-type{
+                @media (max-width: 980px) {
+                    margin-right: 64px;
+                }
+            }
+            .image {
+                position: relative;
+                z-index: 10;
+                aspect-ratio: 1/1.2;
+                img {
+                    width: 100%;
+                    height: 100%;
+                    object-fit: cover;
+                }
+                .catch {
+                    position: absolute;
+                    left: 0;
+                    bottom: -14px;
+                    z-index: 1;
+                    font-size: 54px;
+                    font-family: Montserrat;
+                    font-weight: 700;
+                    color: #fff;
+                    @container (max-width:1300px) {
+                        font-size: 48px;
+                    }
+                    @container (max-width:1080px){
+                        font-size: 40px
+                    }
+                    @media (max-width: 600px) {
+                        font-size: 38px;
+                    }
+                }
+                .bg_color {
+                    position: absolute;
+                    top: 8px;
+                    left: 8px;
+                    z-index: -1;
+                    width: 100%;
+                    height: 100%;
+                    background: #ef2c00;
+                }
+            }
+            .text {
+                margin-top: 40px;
+                .title {
+                    padding: 5px 6px 6px 6px;
+                    background: #ef2c00;
+                    color: #fff;
+                    .main {
+                        font-size: 24px;
+                        line-height: 1.6m;
+                        @container (max-width:1300px) {
+                            font-size: 22px;
+                        }
+                        @container (max-width:1080px) {
+                            font-size: 20px;
+                        }
+                    }
+                    .sub {
+                        margin-top: 2px;
+                        font-size: 16px;
+                        line-height: 1.5em;
+                        @container (max-width:1300px) {
+                            font-size: 14px;
+                        }
+                        @container (max-width:1080px) {
+                            font-size: 12px;
+                        }
+                    }
+                }
+                p.description {
+                    margin: 0;
+                    margin-top: 1em;
+                    font-size: 16px;
+                    line-height: 2em;
+                    font-weight: 400;
+                }
+            }
+            .price {
+                margin-top: 24px;
+                padding-top: 24px;
+                border-top: 1px solid #ef2c00;
+                font-size: 40px;
+                font-weight: 700;
+                color: #ef2c00;
+                text-align: center;
+            }
+        }
+    }
+    .cta_btn {
+        margin-top: 64px;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        a {
+            height: 60px;
+            min-width: 340px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: #ef2c00;
+            color: #fff;
+            border-radius: 4px;
+            @media (max-width: 400px) {
+                min-width: 100%;
+            }
+        }
+    }
+}
+//shin_fitness_01_access_01
+.shin_fitness_01_access_01 {
+    margin: 48px 0;
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .text_in {
+        width: 40%;
+        @container (max-width:1180px) {
+            padding-right: 40px;
+            width: 50%;
+        }
+        @container (max-width:850px) {
+            padding-right: 0;
+            width: 100%;
+        }
+        h3.title {
+            position: relative;
+            margin-bottom: 24px;
+            padding: 24px;
+            border-top: 1px solid #ef2c00;
+            font-size: 24px;
+            overflow: hidden;
+            &::before {
+                position: absolute;
+                top: -9px;
+                left: -9px;
+                width: 18px;
+                height: 18px;
+                content: "";
+                display: block;
+                background: #ef2c00;
+                transform: rotate(45deg);
+            }
+        }
+        dl {
+            padding-left: 24px;
+            display: grid;
+            grid-template-columns: 90px calc(100% - 90px);
+            gap: 1.4em;
+            @container (max-width:850px) {
+                margin-bottom: 56px;
+            }
+            dt {
+                .text {
+                    padding: 2px;
+                    text-align: center;
+                    background: #ef2c00;
+                    color: #fff;
+                }
+            }
+            dd {
+                line-height: 1.8em;
+            }
+        }
+    }
+    .map_in {
+        width: 50%;
+        @container (max-width:850px) {
+            width: 100%;
+        }
+        iframe {
+            width: 100%;
+            height: 400px;
+            @container (max-width:850px) {
+                height: 280px;
+            }
+        }
+    }
+}

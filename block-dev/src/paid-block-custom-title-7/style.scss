@@ -1,0 +1,125 @@
+.paid-block-custom-title-7 {
+  margin: 0;
+  container-type: inline-size;
+  display: flex;
+  flex-wrap: wrap;
+  >h2.ttl,>h3.ttl,>h4.ttl,>h5.ttl,>h6.ttl{
+    margin-left: 0;
+    margin-right: 0;
+  }
+  &.size_l h2,
+  &.size_l h3,
+  &.size_l h4,
+  &.size_l h5,
+  &.size_l h6 {
+    font-size: 40px;
+    @container (max-width:800px) {
+      font-size: 32px;
+    }
+    @container (max-width:500px) {
+      font-size: 26px;
+    }
+  }
+  &.size_m h2,
+  &.size_m h3,
+  &.size_m h4,
+  &.size_m h5,
+  &.size_m h6 {
+    font-size: 32px;
+    @container (max-width:800px) {
+      font-size: 26px;
+    }
+    @container (max-width:500px) {
+      font-size: 22px;
+    }
+  }
+  &.size_s h2,
+  &.size_s h3,
+  &.size_s h4,
+  &.size_s h5,
+  &.size_s h6 {
+    font-size: 28px;
+    @container (max-width:800px) {
+      font-size: 22px;
+    }
+    @container (max-width:500px) {
+      font-size: 20px;
+    }
+  }
+  &.position_left {
+    justify-content: start;
+    text-align: left;
+    .border_wrap{
+      justify-content: start;
+    }
+  }
+  &.position_center {
+    justify-content: center;
+    text-align: center;
+    .border_wrap{
+      justify-content: center;
+    }
+  }
+  &.position_right {
+    justify-content: end;
+    text-align: right;
+    .border_wrap{
+      justify-content: end;
+    }
+  }
+  .sub {
+    margin-bottom: 0.1em;
+    width: 100%;
+    display: block;
+    font-size: 0.4em;
+    line-height: 1.6em;
+    font-feature-settings: "palt";
+  }
+  .main {
+    width: 100%;
+    display: block;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    line-height: 1.35em;
+    font-feature-settings: "palt";
+    font-weight: 600;
+  }
+  .border_wrap {
+    margin-top: 0.4em;
+    height: 0.3em;
+    display: flex;
+    justify-content: center;
+    @container (max-width:800px) {
+      margin-top: 0.45em;
+    }
+    @container (max-width:500px) {
+      margin-top: 0.5em;
+    }
+    .border_inner {
+      height: 100%;
+      width: 5.4em;
+      display: flex;
+      box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+      overflow: hidden;
+      .border {
+        flex: 1;
+        display: block;
+      }
+    }
+  }
+}
+
+.post_style {
+  .paid-block-custom-title-7 {
+    .main {
+      &:empty {
+        display: none;
+      }
+    }
+    .sub {
+      &:empty {
+        display: none;
+      }
+    }
+  }
+}

@@ -1,0 +1,39 @@
+/**
+ * External dependencies
+ */
+import clsx from 'clsx';
+
+/**
+ * Internal dependencies
+ */
+import { Mark, MarkLabel } from './styles/range-control-styles';
+import { jsx as _jsx } from "react/jsx-runtime";
+import { Fragment as _Fragment } from "react/jsx-runtime";
+import { jsxs as _jsxs } from "react/jsx-runtime";
+export default function RangeMark(props) {
+  const {
+    className,
+    isFilled = false,
+    label,
+    style = {},
+    ...otherProps
+  } = props;
+  const classes = clsx('components-range-control__mark', isFilled && 'is-filled', className);
+  const labelClasses = clsx('components-range-control__mark-label', isFilled && 'is-filled');
+  return /*#__PURE__*/_jsxs(_Fragment, {
+    children: [/*#__PURE__*/_jsx(Mark, {
+      ...otherProps,
+      "aria-hidden": "true",
+      className: classes,
+      isFilled: isFilled,
+      style: style
+    }), label && /*#__PURE__*/_jsx(MarkLabel, {
+      "aria-hidden": "true",
+      className: labelClasses,
+      isFilled: isFilled,
+      style: style,
+      children: label
+    })]
+  });
+}
+//# sourceMappingURL=mark.js.map

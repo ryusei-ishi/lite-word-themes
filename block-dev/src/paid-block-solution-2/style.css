@@ -1,0 +1,201 @@
+.paid-block-solution-2 {
+  container-type: inline-size;
+  margin: 64px 0;
+}
+
+@container (max-width:600px) {
+  .paid-block-solution-2 {
+    margin: 32px 0;
+  }
+}
+
+.paid-block-solution-2 .paid-block-solution-2_inner {
+  border: 3px solid var(--color-main);
+  border-top: none;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+@container (max-width:600px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner {
+    margin: 0 -12px;
+    width: calc(100% + 24px);
+  }
+}
+
+.paid-block-solution-2 .paid-block-solution-2_inner h2.ttl {
+  margin: 0;
+  padding: 16px 12px;
+  background: var(--color-main);
+  color: #fff;
+  font-size: 32px;
+  text-align: center;
+  font-weight: 600;
+  line-height: 1.5;
+}
+
+@container (max-width:1000px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner h2.ttl {
+    font-size: 28px;
+  }
+}
+
+@container (max-width:800px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner h2.ttl {
+    font-size: 28px;
+  }
+}
+
+@container (max-width:700px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner h2.ttl {
+    font-size: 24px;
+  }
+}
+
+@container (max-width:600px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner h2.ttl {
+    font-size: 20px;
+  }
+}
+
+@container (max-width:500px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner h2.ttl {
+    padding: 12px 8px;
+    font-size: 18px;
+  }
+}
+
+@container (max-width:400px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner h2.ttl {
+    font-size: 16px;
+  }
+}
+
+.paid-block-solution-2 .paid-block-solution-2_inner ul.list {
+  padding: 0;
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+}
+
+.paid-block-solution-2 .paid-block-solution-2_inner ul.list li {
+  position: relative;
+  padding: 24px;
+  padding-bottom: 32px;
+}
+
+@container (max-width:900px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner ul.list li {
+    padding: 16px;
+    padding-bottom: 24px;
+  }
+}
+
+@container (max-width:700px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner ul.list li {
+    padding: 12px;
+    padding-bottom: 16px;
+  }
+}
+
+@container (max-width:500px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner ul.list li {
+    padding: 8px;
+  }
+}
+
+.paid-block-solution-2 .paid-block-solution-2_inner ul.list li + li::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 3px;
+  height: 100%;
+}
+
+.paid-block-solution-2 .paid-block-solution-2_inner ul.list li .img_wrap {
+  display: flex;
+  align-items: end;
+  justify-content: center;
+}
+
+.paid-block-solution-2 .paid-block-solution-2_inner ul.list li .img_wrap img {
+  max-width: 100%;
+  width: 100%;
+  aspect-ratio: 16 / 10;
+  object-fit: cover;
+}
+
+@media (max-width: 500px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner ul.list li .img_wrap img {
+    aspect-ratio: 16 / 12;
+  }
+}
+
+.paid-block-solution-2 .paid-block-solution-2_inner ul.list li .img_wrap.icon_image {
+  margin: 0 auto;
+  margin-top: 16px;
+  height: 100px;
+  width: 100%;
+  max-width: 120px;
+  aspect-ratio: initial;
+}
+
+@container (max-width:900px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner ul.list li .img_wrap.icon_image {
+    height: 64px;
+    max-width: 80px;
+  }
+}
+
+@container (max-width:700px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner ul.list li .img_wrap.icon_image {
+    margin-top: 12px;
+    height: 48px;
+    max-width: 72px;
+  }
+}
+
+@container (max-width:500px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner ul.list li .img_wrap.icon_image {
+    margin-top: 8px;
+    height: 40px;
+    max-width: 64px;
+  }
+}
+
+.paid-block-solution-2 .paid-block-solution-2_inner ul.list li .img_wrap.icon_image img {
+  object-fit: contain;
+  width: 100%;
+  height: 100%;
+}
+
+.paid-block-solution-2 .paid-block-solution-2_inner ul.list li .img_upload {
+  margin-top: 8px;
+}
+
+.paid-block-solution-2 .paid-block-solution-2_inner ul.list li > p {
+  margin: 16px 0 0 0;
+  font-size: 20px;
+  text-align: center;
+}
+
+@container (max-width:900px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner ul.list li > p {
+    font-size: 16px;
+  }
+}
+
+@container (max-width:700px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner ul.list li > p {
+    font-size: 14px;
+  }
+}
+
+@container (max-width:500px) {
+  .paid-block-solution-2 .paid-block-solution-2_inner ul.list li > p {
+    margin: 8px 0 0 0;
+    font-size: 11px;
+    letter-spacing: 0;
+  }
+}

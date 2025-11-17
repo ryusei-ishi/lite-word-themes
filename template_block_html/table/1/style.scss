@@ -1,0 +1,132 @@
+:root {
+    --lw-table-1-radius-size: 20px;
+    --lw-table-1-cell-width-1: 200px;
+    --lw-table-1-cell-width-2: 200px;
+    --lw-table-1-cell-width-3: 200px;
+    --lw-table-1-cell-width-4: 200px;
+    --lw-table-1-cell-width-5: 200px;
+    --lw-table-1-cell-width-1-sp: 160px;
+    --lw-table-1-cell-width-2-sp: 160px;
+    --lw-table-1-cell-width-3-sp: 160px;
+    --lw-table-1-cell-width-4-sp: 160px;
+    --lw-table-1-cell-width-5-sp: 160px;
+}
+.lw-pr-table-1 {
+    margin: 32px 0;
+    padding: 0 24px;
+    overflow-x: scroll;
+    font-size: 17px;
+    //スクロールバーを常に非表示
+    -ms-overflow-style: none; // IE、Edge
+    scrollbar-width: none; // Firefox
+    &::-webkit-scrollbar {
+        display: none; // Chrome、Safari、Opera
+    }
+    @media(max-width: 800px) {
+        font-size: 16px;
+    }
+    @media(max-width: 500px) {
+        padding: 0 24px 0 12px;
+    }
+    * {
+        box-sizing: border-box;
+    }
+
+    .wrap_table {
+        margin: 0 auto;
+        width: calc(var(--lw-table-1-cell-width-1) + var(--lw-table-1-cell-width-2) + var(--lw-table-1-cell-width-3) + var(--lw-table-1-cell-width-4)  + 12px);
+        padding: 3px;
+        @media (max-width: 800px) {
+            width: calc(var(--lw-table-1-cell-width-1-sp) + var(--lw-table-1-cell-width-2-sp) + var(--lw-table-1-cell-width-3-sp) + var(--lw-table-1-cell-width-4-sp)  + 12px);
+            
+        }
+        .cell {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            &:nth-child(1) {
+                width: var(--lw-table-1-cell-width-1);
+                @media (max-width: 800px) {
+                    width: var(--lw-table-1-cell-width-1-sp);
+                }
+            }
+            &:nth-child(2) {
+                width: var(--lw-table-1-cell-width-2);
+                @media (max-width: 800px) {
+                    width: var(--lw-table-1-cell-width-2-sp);
+                }
+            }
+            &:nth-child(3) {
+                width: var(--lw-table-1-cell-width-3);
+                @media (max-width: 800px) {
+                    width: var(--lw-table-1-cell-width-3-sp);
+                }
+            }
+            &:nth-child(4) {
+                width: var(--lw-table-1-cell-width-4);
+                @media (max-width: 800px) {
+                    width: var(--lw-table-1-cell-width-4-sp);
+                }
+            }
+            &:nth-child(5) {
+                width: var(--lw-table-1-cell-width-5);
+                @media (max-width: 800px) {
+                    width: var(--lw-table-1-cell-width-5-sp);
+                }
+            }
+        }
+        .lw_table_head {
+            display: flex;
+            gap: 3px;
+            .cell {
+                padding: 0.9em 0.7em;
+                background: #128b9e;
+                text-align: center;
+                color: #fff;
+                line-height: 1.5em;
+                &:nth-of-type(2) {
+                    border-radius: var(--lw-table-1-radius-size) 0 0 0;
+                }
+                &:last-of-type {
+                    border-radius: 0 var(--lw-table-1-radius-size) 0 0;
+                }
+                &.none {
+                    background: none;
+                }
+            }
+        }
+        .lw_table_row {
+            margin-top: 3px;
+            display: flex;
+            gap: 3px;
+            &.first {
+                .cell {
+                    &.row_head {
+                        border-radius: var(--lw-table-1-radius-size) 0 0 0;
+                    }
+                }
+            }
+            &.last {
+                .cell {
+                    &.row_head {
+                        border-radius: 0 0 0 var(--lw-table-1-radius-size);
+                    }
+                    &:last-of-type {
+                        border-radius: 0 0 var(--lw-table-1-radius-size) 0;
+                    }
+                }
+            }
+            .cell {
+                padding: 0.7em 0.7em;
+                text-align: center;
+                background: #ffffff;
+                box-shadow: 0 0 3px rgba(37, 37, 37, 0.3);
+                line-height: 1.6em;
+                &.row_head {
+                    background: #065a92;
+                    color: #fff;
+                }
+            }
+        }
+    }
+}

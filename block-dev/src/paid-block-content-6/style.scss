@@ -1,0 +1,107 @@
+.paid-block-content-6 {
+    margin: 64px 0 48px 0;
+    container-type: inline-size;
+    @container (max-width: 780px) {
+        margin: 56px 0 32px 0;
+    }
+    @container (max-width: 500px) {
+        margin: 48px 0 24px 0;
+    }
+    *{
+        box-sizing: border-box;
+    }
+    .this_wrap {
+        margin: 0 auto;
+        display: flex;
+        gap: 64px;
+        @container (max-width: 980px) {
+            gap: 40px;
+        }
+        @container (max-width: 700px) {
+            max-width: 480px;
+            flex-wrap: wrap;
+        }
+        &.right_img{
+            flex-direction: row-reverse;
+        }
+        .image {
+            width: 50%;
+            height: 100%;
+            @container (max-width: 700px) {
+                margin: 0 auto;
+                max-width: 560px;
+                flex: initial;
+                width: 100%;
+            }
+            figure {
+                position: relative;
+                width: 100%;
+                height: auto;
+                
+                &::before {
+                    padding-top: 100%;
+                    display: block;
+                    content: "";
+                }
+                img {
+                    position: absolute;
+                    top: 40px;
+                    left: 40px;
+                    z-index: 10;
+                    width: calc(100% - 40px);
+                    height: calc(100% - 40px);
+                    object-fit: cover;
+                    box-shadow: -40px -40px 0 #ddd;
+                    @container (max-width: 780px) {
+                        top: 24px;
+                        left: 72px;
+                        width: calc(100% - 72px);
+                        height: calc(100% - 72px);
+                        box-shadow: -72px -24px 0 #ddd;
+                    }
+                }
+            }
+        }
+        .cont {
+            width: 50%;
+            display: flex;
+            align-items: center;
+            align-content: center;
+            flex-wrap: wrap;
+            line-height: 2em;
+            @container (max-width: 700px) {
+                margin-top: -56px;
+                width: 100%;
+            }
+            @container (max-width: 500px) {
+                font-size: 15px;
+            }
+
+            p{
+                margin: 0;
+                width: 100%;
+                line-height: 2.2em;
+            }
+            a.btn,
+            .btn {
+                margin-top: 24px;
+                padding: 0.9em 1.6em;
+                min-width: 240px !important;
+                display: inline-block;
+                border: 1px solid #000;
+                line-height: 1.5em;
+                text-align: center;
+                text-decoration: none;
+                color: var(--color-black);
+                transition: opacity .3s;
+                @container (max-width: 700px) {
+                    padding: 1.2em 1.4em;
+                    width: 100%;
+                }
+                &:hover{
+                    opacity: 0.8;
+                }
+            }
+        }
+    }
+}

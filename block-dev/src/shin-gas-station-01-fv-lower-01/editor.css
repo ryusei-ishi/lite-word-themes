@@ -1,0 +1,11 @@
+.wp-block:has(.shin-gas-station-01-fv-lower-01) {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.wp-block:has(.shin-gas-station-01-fv-lower-01) * {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}

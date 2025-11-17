@@ -1,0 +1,46 @@
+
+.wp-block{
+    &:has(.fv-2){
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+.fv-2 {
+    position: relative;
+    min-height: 320px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-sizing: border-box;
+    .filter {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        margin: 0;
+        width: 100%;
+        height: 100%;
+        background: #000;
+        opacity: 0.5;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6  {
+        position: relative;
+        z-index: 10;
+        line-height: 1.2em;
+        font-size: 47.5px;
+        letter-spacing: 0.05em;
+        &:after {
+            height: 8px;
+            width: 100%;
+            content: '';
+            display: block;
+        }
+    }
+}
