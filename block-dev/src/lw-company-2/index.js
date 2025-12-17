@@ -21,10 +21,10 @@ import {
 	RangeControl,
 	ToggleControl,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* =========================================================
  * セレクトオプション
@@ -66,56 +66,7 @@ const createDefaultItems = () => ( [
 /* =========================================================
  * 2) ブロック登録
  * ======================================================= */
-registerBlockType( 'wdl/lw-company-2', {
-	/* ブロックメタ情報 */
-	apiVersion: 2,
-	title: '会社概要 02',
-	icon: 'building',
-	category: 'liteword-other',
-	supports: {
-		anchor: true, // id 属性を許可
-	},
-
-	/* ---------- Attributes ---------- */
-	attributes: {
-		// レイアウト
-		maxWidth: { type: 'number', default: 1080 },
-		fontSizeClass: { type: 'string', default: 'font_size_m' },
-		dtWidthClass: { type: 'string', default: 'dt_width_m' },
-		lineHeight: { type: 'number', default: 1.6 },
-		
-		// レスポンシブ
-		spFullDt: { type: 'boolean', default: false },
-		
-		// 項目名（dt）スタイル
-		dtBackgroundColor: { type: 'string', default: '#f0f0f0' },
-		dtTextColor: { type: 'string', default: '#000000' },
-		fontDt: { type: 'string', default: '' },
-		fontWeightDt: { type: 'string', default: '' },
-		
-		// 内容（dd）スタイル
-		ddTextColor: { type: 'string', default: '#000000' },
-		fontDd: { type: 'string', default: '' },
-		fontWeightDd: { type: 'string', default: '' },
-		
-		// デザイン
-		borderColor: { type: 'string', default: '#cccccc' },
-		
-		// コンテンツ（リピーター）
-		items: {
-			type: 'array',
-			source: 'query',
-			selector: '.company-profile-item',
-			query: {
-				dt: { type: 'string', source: 'html', selector: 'dt' },
-				dd: { type: 'string', source: 'html', selector: 'dd' },
-				dtPlaceholder: { type: 'string', default: '' },
-				ddPlaceholder: { type: 'string', default: '' },
-			},
-			default: createDefaultItems(),
-		},
-	},
-
+registerBlockType( metadata.name, {
 	/* =====================================================
 	 * 3) Edit – エディター側レンダリング
 	 * =================================================== */
@@ -176,7 +127,7 @@ registerBlockType( 'wdl/lw-company-2', {
 
 		/* --------- JSX --------- */
 		return (
-			<Fragment>
+			<>
 				{/* ---------- InspectorControls ---------- */}
 				<InspectorControls>
 					{/* ■ レイアウト設定 - 必ず最初に配置、デフォルトで開いた状態 */}
@@ -368,7 +319,7 @@ registerBlockType( 'wdl/lw-company-2', {
 						項目を追加する
 					</button>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 

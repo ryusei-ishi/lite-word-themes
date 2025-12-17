@@ -1,32 +1,12 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, MediaUpload, BlockControls } from '@wordpress/block-editor';
+import { RichText, InspectorControls, MediaUpload, BlockControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, TextControl, ColorPalette, RangeControl, SelectControl, ToolbarGroup, ToolbarButton, ToggleControl } from '@wordpress/components';
 import { minHeightPcClassOptionArr, minHeightTbClassOptionArr, minHeightSpClassOptionArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/fv-7', {
-    title: '固定ページタイトル 07(トップ用・動画背景)',
-    icon: 'cover-image',
-    category: 'liteword-firstview',
-    attributes: {
-        subTitle: { type: 'string', default: '初心者のためのWordPressテーマ' },
-        mainTitle: { type: 'string', default: 'LiteWord' },
-        description: { type: 'string', default: 'テキストテキストテキストテキストテキストテキスト' },
-        buttonText: { type: 'string', default: '詳細はこちら' },
-        buttonUrl: { type: 'string', default: '' },
-        showButton: { type: 'boolean', default: true },
-        videoType: { type: 'string', default: 'media' },
-        videoUrl: { type: 'string', default: 'https://cdn.pixabay.com/video/2023/11/19/189813-887078786_large.mp4' },
-        vimeoId: { type: 'string', default: '' },
-        filterColor: { type: 'string', default: '#000000' },
-        filterOpacity: { type: 'number', default: 0.5 },
-        videoSpeed: { type: 'number', default: 1.0 },
-        headingLevel: { type: 'number', default: 1 },
-        minHeightPc: { type: 'string', default: '' },
-        minHeightTb: { type: 'string', default: '' },
-        minHeightSp: { type: 'string', default: '' },
-    },
+registerBlockType(metadata.name, {
     edit: ({ attributes, setAttributes }) => {
         const { mainTitle, subTitle, description, buttonText, buttonUrl, showButton, videoType, videoUrl, vimeoId, filterColor, filterOpacity, videoSpeed, minHeightPc, minHeightTb, minHeightSp, headingLevel } = attributes;
 
@@ -38,6 +18,10 @@ registerBlockType('wdl/fv-7', {
         };
 
         const HeadingTag = `h${headingLevel}`;
+
+        const blockProps = useBlockProps({
+            className: `fv-7 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+        });
 
         return (
             <>
@@ -165,7 +149,7 @@ registerBlockType('wdl/fv-7', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <div className={`fv-7 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}>
+                <div {...blockProps}>
                     <div className="fv-7__inner">
                         <HeadingTag className="title">
                             <RichText
@@ -251,8 +235,12 @@ registerBlockType('wdl/fv-7', {
         // ボタンを表示する条件: showButtonがtrueかつbuttonTextが空でない
         const shouldShowButton = showButton && buttonText && buttonText.trim() !== '';
 
+        const blockProps = useBlockProps.save({
+            className: `fv-7 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+        });
+
         return (
-            <div className={`fv-7 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}>
+            <div {...blockProps}>
                 <div className="fv-7__inner">
                     <HeadingTag className="title">
                         <RichText.Content tagName="div" className="sub" value={subTitle} />

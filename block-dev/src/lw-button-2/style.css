@@ -6,7 +6,6 @@
   align-items: center;
   justify-content: center;
 }
-
 .lw-button-02 .a_inner {
   position: relative;
   z-index: 10;
@@ -17,7 +16,6 @@
   border-style: solid;
   box-sizing: border-box;
 }
-
 .lw-button-02 .a_inner a {
   padding: 1em 3em;
   min-width: 320px !important;
@@ -27,13 +25,11 @@
   line-height: 1.5em;
   color: #fff;
 }
-
 @media (max-width: 400px) {
   .lw-button-02 .a_inner a {
     min-width: initial !important;
   }
 }
-
 .lw-button-02 .a_inner .a_background {
   position: absolute;
   top: 0;
@@ -43,7 +39,6 @@
   height: 100%;
   transition: opacity 0.3s;
 }
-
 .lw-button-02 .a_inner .icon-svg {
   position: absolute;
   top: 0;
@@ -56,12 +51,10 @@
   align-items: center;
   fill: #fff;
 }
-
 .lw-button-02 .a_inner .icon-svg svg {
   height: 100%;
   width: 100%;
 }
-
 .lw-button-02 .a_inner:hover .a_background {
   opacity: 0.8;
-}
+}/*# sourceMappingURL=style.css.map */

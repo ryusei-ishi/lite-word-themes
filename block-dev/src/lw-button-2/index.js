@@ -1,9 +1,10 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, URLInput } from '@wordpress/block-editor';
-import { PanelBody, SelectControl, ColorPalette, RangeControl , ToggleControl } from '@wordpress/components'; // RangeControlを追加
+import { RichText, InspectorControls, URLInput, useBlockProps } from '@wordpress/block-editor';
+import { PanelBody, SelectControl, ColorPalette, RangeControl , ToggleControl } from '@wordpress/components';
 import { fontOptionsArr, fontWeightOptionsArr, ButtonBackgroundOptionsArr, rightButtonIconSvgArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
@@ -14,70 +15,21 @@ const bgOptions = ButtonBackgroundOptionsArr();
 // SVG アイコンオプションを定義
 const iconSvgOptions = rightButtonIconSvgArr();
 
-registerBlockType('wdl/lw-button-02', {
-    title: 'リンクボタン 02',
-    icon: 'button',
-    category: 'liteword-buttons',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        btnText: {
-            type: 'string',
-            default: '詳細はこちら'
-        },
-        bgGradient: {
-            type: 'string',
-            default: 'var(--color-main)'
-        },
-        textColor: {
-            type: 'string',
-            default: '#ffffff'
-        },
-        fontWeight: {
-            type: 'string',
-            default: '400'
-        },
-        btnUrl: {
-            type: 'string',
-            default: ''
-        },
-        openNewTab: {
-            type: 'boolean',
-            default: false
-        },
-        FontSet: {
-            type: 'string',
-            default: ''
-        },
-        selectedIcon: {  // アイコンの属性を追加（SVG文字列）
-            type: 'string',
-            default: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>'
-        },
-        iconColor: { // アイコンの色属性を追加
-            type: 'string',
-            default: '#ffffff'
-        },
-        borderWidth: { // ボーダーの幅属性を追加
-            type: 'number',
-            default: 0
-        },
-        borderColor: { // ボーダーの色属性を追加
-            type: 'string',
-            default: 'var(--color-main)'
-        }
-    },
-
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const { btnText, bgGradient, textColor, fontWeight, FontSet, btnUrl, selectedIcon, iconColor, borderWidth, borderColor } = attributes;
 
+        const blockProps = useBlockProps({
+            className: 'lw-button-02'
+        });
+
         return (
-            <div className='lw-button-02'>
+            <div {...blockProps}>
                 <InspectorControls>
 
                     {/* ── 1. 基本設定 ── */}
-                    <PanelBody title="📝 基本設定" initialOpen={true}>
+                    <PanelBody title="基本設定" initialOpen={true}>
                         <div style={{ marginBottom: '15px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px', fontSize: '13px' }}>
                                 🔗 リンク先URL
@@ -98,7 +50,7 @@ registerBlockType('wdl/lw-button-02', {
                     </PanelBody>
 
                     {/* ── 2. ボタンの見た目 ── */}
-                    <PanelBody title="🎨 ボタンの見た目" initialOpen={false}>
+                    <PanelBody title="ボタンの見た目" initialOpen={false}>
                         <div style={{ marginBottom: '20px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>
                                 🌈 背景デザイン
@@ -146,7 +98,7 @@ registerBlockType('wdl/lw-button-02', {
                     </PanelBody>
 
                     {/* ── 3. アイコン設定 ── */}
-                    <PanelBody title="✨ アイコン設定" initialOpen={false}>
+                    <PanelBody title="アイコン設定" initialOpen={false}>
                         <div style={{ marginBottom: '15px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>
                                 🎯 アイコンの種類
@@ -176,7 +128,7 @@ registerBlockType('wdl/lw-button-02', {
                     </PanelBody>
 
                     {/* ── 4. 枠線設定 ── */}
-                    <PanelBody title="🖍️ 枠線の設定" initialOpen={false}>
+                    <PanelBody title="枠線設定" initialOpen={false}>
                         <div style={{ marginBottom: borderWidth > 0 ? '15px' : '0px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>
                                 📏 枠線の太さ (px)
@@ -229,8 +181,12 @@ registerBlockType('wdl/lw-button-02', {
     save: function (props) {
         const { btnText, bgGradient, textColor, fontWeight, FontSet, btnUrl, selectedIcon, iconColor, borderWidth, borderColor } = props.attributes;
 
+        const blockProps = useBlockProps.save({
+            className: 'lw-button-02'
+        });
+
         return (
-            <div className='lw-button-02'>
+            <div {...blockProps}>
                 <div className='a_inner' style={{ borderWidth: `${borderWidth}px`, borderColor: borderColor, borderStyle: 'solid' }}>
                     <RichText.Content
                         tagName="a"

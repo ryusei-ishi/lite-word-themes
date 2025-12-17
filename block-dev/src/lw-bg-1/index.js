@@ -1,75 +1,14 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { InnerBlocks, InspectorControls, MediaUpload, useSettings } from '@wordpress/block-editor';
+import { InnerBlocks, InspectorControls, MediaUpload, useSettings, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, ColorPalette, RangeControl, SelectControl, GradientPicker, ToggleControl, FocalPointPicker } from '@wordpress/components';
 import { minHeightPcClassOptionArr, minHeightTbClassOptionArr, minHeightSpClassOptionArr } from '../utils.js';
 
-registerBlockType('wdl/lw-bg-1', {
-    title: 'コンテナブロック 01',
-    icon: 'layout',
-    category: 'liteword-firstview',
-    supports: {
-        className: true,
-    },
-    attributes: {
-        // 背景タイプ
-        backgroundType: { type: 'string', default: 'image' },
-        
-        // 画像設定
-        imagePc: { type: 'string', default: '' },
-        imageSp: { type: 'string', default: '' },
-        focalPointPc: { type: 'object', default: { x: 0.5, y: 0.5 } },
-        focalPointSp: { type: 'object', default: { x: 0.5, y: 0.5 } },
-        
-        // 動画設定
-        videoUrl: { type: 'string', default: '' },
-        videoSpeed: { type: 'number', default: 1.0 },
-        focalPointVideoPc: { type: 'object', default: { x: 0.5, y: 0.5 } },
-        focalPointVideoSp: { type: 'object', default: { x: 0.5, y: 0.5 } },
-        
-        isFullWidth: { type: 'boolean', default: false },
-        maxWidth: { type: 'number', default: 1120 },
-        
-        minHeightPc: { type: 'string', default: 'min-h-pc-500px' },
-        minHeightTb: { type: 'string', default: 'min-h-tb-480px' },
-        minHeightSp: { type: 'string', default: 'min-h-sp-440px' },
-        
-        // コンテンツの配置
-        contentAlignHorizontalPc: { type: 'string', default: 'center' },
-        contentAlignVerticalPc: { type: 'string', default: 'center' },
-        contentAlignHorizontalTb: { type: 'string', default: '' },
-        contentAlignVerticalTb: { type: 'string', default: '' },
-        contentAlignHorizontalSp: { type: 'string', default: '' },
-        contentAlignVerticalSp: { type: 'string', default: '' },
-        
-        innerPaddingTopPc: { type: 'number', default: 80 },
-        innerPaddingBottomPc: { type: 'number', default: 80 },
-        innerPaddingLeftPc: { type: 'number', default: 80 },
-        innerPaddingRightPc: { type: 'number', default: 80 },
-        innerPaddingTopTb: { type: 'number', default: 48 },
-        innerPaddingBottomTb: { type: 'number', default: 48 },
-        innerPaddingLeftTb: { type: 'number', default: 48 },
-        innerPaddingRightTb: { type: 'number', default: 48 },
-        innerPaddingTopSp: { type: 'number', default: 24 },
-        innerPaddingBottomSp: { type: 'number', default: 24 },
-        innerPaddingLeftSp: { type: 'number', default: 24 },
-        innerPaddingRightSp: { type: 'number', default: 24 },
-        
-        filterTypePc: { type: 'string', default: 'solid' },
-        filterColorPc: { type: 'string', default: 'var(--color-main)' },
-        filterGradientPc: { type: 'string', default: 'linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 100%)' },
-        opacityPc: { type: 'number', default: 0.5 },
-        
-        filterTypeTb: { type: 'string', default: 'solid' },
-        filterColorTb: { type: 'string', default: '' },
-        filterGradientTb: { type: 'string', default: '' },
-        opacityTb: { type: 'number', default: 'var(--lw-bg-opacity-pc, 0.5)' },
-        
-        filterTypeSp: { type: 'string', default: 'solid' },
-        filterColorSp: { type: 'string', default: '' },
-        filterGradientSp: { type: 'string', default: '' },
-        opacitySp: { type: 'number', default: 'var(--lw-bg-opacity-tb, var(--lw-bg-opacity-pc, 0.5))' },
-    },
-    edit: ({ attributes, setAttributes, className }) => {
+import './style.scss';
+import './editor.scss';
+import metadata from './block.json';
+
+registerBlockType(metadata.name, {
+    edit: ({ attributes, setAttributes }) => {
         const {
             backgroundType,
             imagePc,
@@ -171,8 +110,12 @@ registerBlockType('wdl/lw-bg-1', {
             '--lw-bg-wrap-align-sp': contentAlignVerticalSp || contentAlignVerticalTb || contentAlignVerticalPc,
         };
 
-        const safeClassName = typeof className === 'string' ? className : '';
         const fullWidthClass = isFullWidth ? 'bg_all' : '';
+
+        const blockProps = useBlockProps({
+            className: `lw-bg-1 ${minHeightPc} ${minHeightTb} ${minHeightSp} ${fullWidthClass}`.trim(),
+            style: { ...filterStyle, ...backgroundStyle, ...alignmentStyle },
+        });
 
         return (
             <>
@@ -194,7 +137,7 @@ registerBlockType('wdl/lw-bg-1', {
                             __next40pxDefaultSize={true}
                             __nextHasNoMarginBottom={true}
                         />
-                        
+
                     </PanelBody>
                     <PanelBody title="コンテンツの高さ" initialOpen={false}>
                         <SelectControl
@@ -373,8 +316,8 @@ registerBlockType('wdl/lw-bg-1', {
                                     )}
                                 />
                                 {imagePc && (
-                                    <Button 
-                                        onClick={() => setAttributes({ imagePc: '' })} 
+                                    <Button
+                                        onClick={() => setAttributes({ imagePc: '' })}
                                         variant="secondary"
                                         isDestructive
                                     >
@@ -393,9 +336,9 @@ registerBlockType('wdl/lw-bg-1', {
                                     />
                                 </>
                             )}
-                            
+
                             <hr style={{ margin: '24px 0', border: 'none', borderTop: '1px solid #ddd' }} />
-                            
+
                             <p style={{ marginBottom: '8px', fontWeight: 'bold' }}>スマホ用画像</p>
                             <div style={{ display: 'flex', gap: '8px', marginBottom: '10px' }}>
                                 <MediaUpload
@@ -409,8 +352,8 @@ registerBlockType('wdl/lw-bg-1', {
                                     )}
                                 />
                                 {imageSp && (
-                                    <Button 
-                                        onClick={() => setAttributes({ imageSp: '' })} 
+                                    <Button
+                                        onClick={() => setAttributes({ imageSp: '' })}
                                         variant="secondary"
                                         isDestructive
                                     >
@@ -446,8 +389,8 @@ registerBlockType('wdl/lw-bg-1', {
                                     )}
                                 />
                                 {videoUrl && (
-                                    <Button 
-                                        onClick={() => setAttributes({ videoUrl: '' })} 
+                                    <Button
+                                        onClick={() => setAttributes({ videoUrl: '' })}
                                         variant="secondary"
                                         isDestructive
                                     >
@@ -468,16 +411,16 @@ registerBlockType('wdl/lw-bg-1', {
                                 __next40pxDefaultSize={true}
                                 __nextHasNoMarginBottom={true}
                             />
-                            
+
                             <hr style={{ margin: '24px 0', border: 'none', borderTop: '1px solid #ddd' }} />
-                            
+
                             <h3 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: 'bold' }}>動画の表示位置（PC）</h3>
                             <div style={{ marginBottom: '20px' }}>
                                 <RangeControl
                                     label="横位置"
                                     value={focalPointVideoPc.x * 100}
-                                    onChange={(value) => setAttributes({ 
-                                        focalPointVideoPc: { ...focalPointVideoPc, x: value / 100 } 
+                                    onChange={(value) => setAttributes({
+                                        focalPointVideoPc: { ...focalPointVideoPc, x: value / 100 }
                                     })}
                                     min={0}
                                     max={100}
@@ -488,8 +431,8 @@ registerBlockType('wdl/lw-bg-1', {
                                 <RangeControl
                                     label="縦位置"
                                     value={focalPointVideoPc.y * 100}
-                                    onChange={(value) => setAttributes({ 
-                                        focalPointVideoPc: { ...focalPointVideoPc, y: value / 100 } 
+                                    onChange={(value) => setAttributes({
+                                        focalPointVideoPc: { ...focalPointVideoPc, y: value / 100 }
                                     })}
                                     min={0}
                                     max={100}
@@ -498,14 +441,14 @@ registerBlockType('wdl/lw-bg-1', {
                                     __nextHasNoMarginBottom={true}
                                 />
                             </div>
-                            
+
                             <h3 style={{ margin: '0 0 12px 0', fontSize: '14px', fontWeight: 'bold' }}>動画の表示位置（スマホ）</h3>
                             <div>
                                 <RangeControl
                                     label="横位置"
                                     value={focalPointVideoSp.x * 100}
-                                    onChange={(value) => setAttributes({ 
-                                        focalPointVideoSp: { ...focalPointVideoSp, x: value / 100 } 
+                                    onChange={(value) => setAttributes({
+                                        focalPointVideoSp: { ...focalPointVideoSp, x: value / 100 }
                                     })}
                                     min={0}
                                     max={100}
@@ -516,8 +459,8 @@ registerBlockType('wdl/lw-bg-1', {
                                 <RangeControl
                                     label="縦位置"
                                     value={focalPointVideoSp.y * 100}
-                                    onChange={(value) => setAttributes({ 
-                                        focalPointVideoSp: { ...focalPointVideoSp, y: value / 100 } 
+                                    onChange={(value) => setAttributes({
+                                        focalPointVideoSp: { ...focalPointVideoSp, y: value / 100 }
                                     })}
                                     min={0}
                                     max={100}
@@ -751,9 +694,9 @@ registerBlockType('wdl/lw-bg-1', {
                         />
                     </PanelBody>
 
-                    
+
                 </InspectorControls>
-                <div className={`lw-bg-1 ${minHeightPc} ${minHeightTb} ${minHeightSp} ${fullWidthClass} ${safeClassName}`.trim()} style={{ ...filterStyle, ...backgroundStyle, ...alignmentStyle }}>
+                <div {...blockProps}>
                     <div className="lw-bg-1-wrap" style={paddingStyle}>
                         <InnerBlocks />
                     </div>
@@ -776,7 +719,7 @@ registerBlockType('wdl/lw-bg-1', {
             </>
         );
     },
-    save: ({ attributes, className }) => {
+    save: ({ attributes }) => {
         const {
             backgroundType,
             imagePc,
@@ -875,11 +818,15 @@ registerBlockType('wdl/lw-bg-1', {
             '--lw-bg-wrap-align-sp': contentAlignVerticalSp || contentAlignVerticalTb || contentAlignVerticalPc,
         };
 
-        const safeClassName = typeof className === 'string' ? className : '';
         const fullWidthClass = isFullWidth ? 'bg_all' : '';
 
+        const blockProps = useBlockProps.save({
+            className: `lw-bg-1 ${minHeightPc} ${minHeightTb} ${minHeightSp} ${fullWidthClass}`.trim(),
+            style: { ...filterStyle, ...backgroundStyle, ...alignmentStyle },
+        });
+
         return (
-            <div className={`lw-bg-1 ${minHeightPc} ${minHeightTb} ${minHeightSp} ${fullWidthClass} ${safeClassName}`.trim()} style={{ ...filterStyle, ...backgroundStyle, ...alignmentStyle }}>
+            <div {...blockProps}>
                 <div className="lw-bg-1-wrap" style={paddingStyle}>
                     <InnerBlocks.Content />
                 </div>

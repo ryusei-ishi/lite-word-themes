@@ -4,39 +4,13 @@
    2025-04-25 追記 : ポイント表示 ON/OFF 機能を追加（showPoint）
 ---------------------------------------------------------- */
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, MediaUpload, InspectorControls } from '@wordpress/block-editor';
+import { RichText, MediaUpload, InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, ToggleControl } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/paid-block-fv-8', {
-	/* -------- メタ -------- */
-	title   : '固定ページタイトル 08（トップ用）',
-	icon    : 'cover-image',
-	category: 'liteword-firstview',
-	supports: { anchor: true },
-
-	/* -------- 属性 -------- */
-	attributes: {
-		backgroundImagePc : { type: 'string',  default: 'https://lite-word.com/sample_img/reception/man_1.webp' },
-		backgroundImageSp : { type: 'string',  default: '' },
-		mainTitle         : { type: 'string',  default: '水回りのトラブル\n安心・即解決' },
-		subTitle          : { type: 'string',  default: '出張・持込み買取可能！' },
-		leadText          : { type: 'string',  default: 'ただいま初回限定キャンペーン実施中！ \n見積もり無料・年中無休で安心サポート！' },
-		listItem_1        : { type: 'string',  default: '最短\n即日' },
-		listItem_2        : { type: 'string',  default: '年中\n無休' },
-		listItem_3        : { type: 'string',  default: '実績\n多数' },
-		PointText_1       : { type: 'string',  default: 'お客様満足度' },
-		PointText_2       : { type: 'string',  default: '98' },
-		PointText_3       : { type: 'string',  default: '点' },
-		bottomText        : { type: 'string',  default: '水回りの小さなお悩みから大掛かりな修理まですべてお任せください！' },
-		/* ▼ 既存追加項目 ▼ */
-		noLineBreakMain   : { type: 'boolean', default: false },
-		/* ▼ 新規追加（ポイント表示）▼ */
-		showPoint         : { type: 'boolean', default: true },
-	},
-
+registerBlockType(metadata.name, {
 	/* ====================================================== */
 	edit: ( props ) => {
 		const { attributes, setAttributes } = props;
@@ -48,12 +22,16 @@ registerBlockType('wdl/paid-block-fv-8', {
 			bottomText, noLineBreakMain, showPoint
 		} = attributes;
 
+		const blockProps = useBlockProps({
+			className: 'paid-block-fv-8'
+		});
+
 		/* ---------- ハンドラ ---------- */
 		const onChangeBackgroundImagePc = ( media ) => setAttributes({ backgroundImagePc: media.url });
 		const onChangeBackgroundImageSp = ( media ) => setAttributes({ backgroundImageSp: media.url });
 
 		return (
-			<Fragment>
+			<>
 				<InspectorControls>
 					{/* ========= マニュアル ========= */}
 					<PanelBody title="マニュアル">
@@ -116,7 +94,7 @@ registerBlockType('wdl/paid-block-fv-8', {
 				</InspectorControls>
 
 				{/* ================== ビジュアル ================== */}
-				<div className="paid-block-fv-8">
+				<div {...blockProps}>
 					<div className="paid-block-fv-8_inner" data-lw_font_set="Noto Sans JP">
 						<div className="text_in">
 							<h2 className="ttl">
@@ -195,15 +173,15 @@ registerBlockType('wdl/paid-block-fv-8', {
 							<li><RichText tagName="span" value={listItem_2.replace(/\n/g, '<br />')} onChange={(v) => setAttributes({ listItem_2: v.replace(/<br \/>/g, '\n') })} /></li>
 							<li><RichText tagName="span" value={listItem_3.replace(/\n/g, '<br />')} onChange={(v) => setAttributes({ listItem_3: v.replace(/<br \/>/g, '\n') })} /></li>
 						</ul>
-						<RichText 
-							tagName="p" 
-							value={bottomText} 
-							onChange={(v) => setAttributes({ bottomText: v })} 
-							placeholder="ボトムテキスト" 
+						<RichText
+							tagName="p"
+							value={bottomText}
+							onChange={(v) => setAttributes({ bottomText: v })}
+							placeholder="ボトムテキスト"
 						/>
 					</div>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -217,8 +195,12 @@ registerBlockType('wdl/paid-block-fv-8', {
 			bottomText, noLineBreakMain, showPoint
 		} = props.attributes;
 
+		const blockProps = useBlockProps.save({
+			className: 'paid-block-fv-8'
+		});
+
 		return (
-			<div className="paid-block-fv-8">
+			<div {...blockProps}>
 				<div className="paid-block-fv-8_inner" data-lw_font_set="Noto Sans JP">
 					<div className="text_in">
 						<h2 className="ttl">
@@ -246,8 +228,8 @@ registerBlockType('wdl/paid-block-fv-8', {
 								<img
 									src={backgroundImagePc}
 									alt="背景画像"
-									loading="eager"         
-									fetchpriority="high"    
+									loading="eager"
+									fetchpriority="high"
 								/>
 							)}
 						</picture>

@@ -1,0 +1,104 @@
+/* 
+# CSSコーディングガイドライン（LiteWord仕様）
+
+あなたは熟練したフロントエンドエンジニアです。以下のルールセットに従い、WordPress環境（LiteWordテーマ/プラグイン）で使用するCSSを作成してください。
+
+## 1. 命名規則と構造（Naming & Structure）
+* **親クラスの唯一性:** 最上位の親要素（ラッパー）には、必ず `lw_` から始まるユニークなクラス名を付与してください。
+    * 記法: スネークケース（例: `lw_meta_setting_support_header`）
+* **Native CSS Nesting:** プリプロセッサではなく、標準CSSのネスト構文を使用してください。
+* **子要素の指定:**
+    * **BEM禁止:** 親クラス名を子要素で繰り返す冗長な記述（例: `block__element`）は避けてください。
+    * **タグセレクタ推奨:** HTMLが汚れるのを防ぐため、不必要なクラス付与は避け、可能な限りタグセレクタ（`> h2`, `> p` 等）で指定してください。
+    * 必要な場合のみ、シンプルなクラス名（例: `.description`, `.submit-btn`）を使用してください。
+
+## 2. 単位とサイズ（Units & Sizing）
+* **禁止事項:** `rem` と `vw` は使用しないでください。
+* **推奨単位:**
+    * 基本サイズ: `px`
+    * 相対サイズ（子要素）: 親要素に対する倍率を指定したい場合は `em` を使用してください。
+* **レスポンシブ:** 画面幅による可変計算（calc/vw）は行わず、メディアクエリによるブレイクポイント切り替えで `px` 値を変更してください。
+
+## 3. CSS変数（Variables）
+* **定義場所:** 使用する変数は、親クラス（ラッパー）の直下、プロパティの先頭でまとめて定義してください。
+* **目的:** 色や共通のマージンなどを変数化し、メンテナンス性を高めてください。
+
+## 4. レスポンシブ記述（Media Queries）
+* **局所記述:** メディアクエリは一箇所にまとめず、**対象となる要素のプロパティ直下にネスト**して記述してください。
+
+## 5. プロパティ記述順序（Priority）
+以下の優先順位で記述してください。
+
+1.  **変数定義** (親要素の場合)
+2.  **Positioning:** `position`, `top`, `z-index`
+3.  **Layout/Box Model:** `margin`, `padding`（※サイズ関係の前に配置）, `display`, `flex`, `align-items`
+4.  **Size:** `width`, `max-width`, `height`
+5.  **Typography:** `font-size`, `font-weight`, `color`
+6.  **Visual/Misc:** `background`, `border`, `cursor`
+
+## 6. WordPress環境への配慮
+* WordPress管理画面等の既存スタイルに依存せず、このクラス内でスタイルが完結するように記述してください（リセットCSS的な意識）。
+
+
+
+## 出力コードサンプル 
+*/
+
+
+/* ルールに従った理想的な出力例 */
+.lw_sample_plugin_card {
+    /* 1. 変数定義（一番上） */
+    --main-text-color: #333333;
+    --sub-text-color: #888888;
+    --card-bg: #ffffff;
+    --gap-size: 20px;
+
+    /* 2. Positioning */
+    position: relative;
+    z-index: 1;
+
+    /* 3. Layout */
+    margin: 0 auto 40px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+
+    /* 4. Size */
+    width: 100%;
+    max-width: 800px;
+    box-sizing: border-box;
+
+    /* 6. Visual */
+    background-color: var(--card-bg);
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+
+    /* 子要素: 余計なクラスをつけずタグで指定、またはシンプルなクラス名 */
+    > h2 {
+        /* 5. Typography */
+        font-size: 24px;
+        color: var(--main-text-color);
+        line-height: 1.5;
+
+        /* 4. Responsive (Inside selector) */
+        @media (max-width: 700px) {
+            font-size: 20px;
+        }
+    }
+
+    > p {
+        margin-top: 15px;
+        font-size: 16px;
+        color: var(--sub-text-color);
+
+        @media (max-width: 700px) {
+            font-size: 14px;
+        }
+
+        > span.highlight {
+            font-weight: bold;
+            font-size: 1.1em; /* 親文字サイズに対する相対指定 */
+            color: #d32f2f;
+        }
+    }
+}

@@ -1,0 +1,70 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-before-after-1",
+	"version": "1.0.0",
+	"title": "ビフォーアフター 01",
+	"category": "lw-voice",
+	"icon": "format-image",
+	"editorScript": "file:./paid-block-before-after-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"beforeImageUrl": {
+			"type": "string",
+			"default": "https://lite-word.com/sample_img/before_after/1_1.webp"
+		},
+		"beforeImageAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"beforeText": {
+			"type": "string",
+			"default": "Before"
+		},
+		"afterImageUrl": {
+			"type": "string",
+			"default": "https://lite-word.com/sample_img/before_after/1_2.webp"
+		},
+		"afterImageAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"afterText": {
+			"type": "string",
+			"default": "After"
+		},
+		"beforeTextBgColor": {
+			"type": "string",
+			"default": "#e64343"
+		},
+		"afterTextBgColor": {
+			"type": "string",
+			"default": "#e64343"
+		},
+		"arrowBgColor": {
+			"type": "string",
+			"default": "#e64343"
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 800
+		},
+		"aspectRatioHeight": {
+			"type": "number",
+			"default": 800
+		},
+		"hasImageShadow": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"no": 1
+}

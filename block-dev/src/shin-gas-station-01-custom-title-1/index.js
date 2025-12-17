@@ -1,18 +1,20 @@
 /**
- * 見出しタイトル 1  ─ shin shop pattern 01
+ * 見出しタイトル 1 ─ shin shop pattern 01
  * -----------------------------------------------------------
  * 追加機能
  *   1. 下線（::after）の太さ(height) と 色(background) を
  *      サイドバーから変更
  *   2. 変更内容は <style> タグをブロック内にインライン出力
  *   3. 既存機能（見出しレベル切替・タイトル編集）はそのまま
+ * ★ apiVersion 3 対応（2025-12-07）
  */
 
 import { registerBlockType } from '@wordpress/blocks';
 import {
     RichText,
     InspectorControls,
-    BlockControls
+    BlockControls,
+    useBlockProps,
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -23,30 +25,10 @@ import {
     ColorPalette
 } from '@wordpress/components';
 import { useEffect } from '@wordpress/element';
-import './style.scss';
-import './editor.scss';
 
-registerBlockType('wdl/shin-gas-station-01-custom-title-1', {
-    title: '見出しタイトル 1 shin shop pattern 01',
-    icon: 'editor-textcolor',
-    category: 'liteword-title',
-    supports: { anchor: true },
+import metadata from './block.json';
 
-    /* --------------------------------------------------
-     * 属性
-     * -------------------------------------------------- */
-    attributes: {
-        mainTitle:        { type: 'string',  default: 'タイトル' },
-        headingLevel:     { type: 'number',  default: 2 },
-        /** ★ 下線の太さ（px） */
-        underlineHeight:  { type: 'number',  default: 1 },
-        /** ★ 下線の色 */
-        underlineColor:   { type: 'string',  default: '#C6C6C6' },
-        /** ★ インスタンス固有 ID（8 文字） */
-        uniqueId:         { type: 'string',  default: '' }
-    },
-
-
+registerBlockType(metadata.name, {
     /* --------------------------------------------------
      * 編集画面
      * -------------------------------------------------- */
@@ -87,6 +69,10 @@ registerBlockType('wdl/shin-gas-station-01-custom-title-1', {
           }
         `;
 
+        const blockProps = useBlockProps({
+            className: `shin-gas-station-01-custom-title-1 ${uniqueClass}`,
+        });
+
         return (
             <>
                 {/* --------------- ツールバー --------------- */}
@@ -124,7 +110,7 @@ registerBlockType('wdl/shin-gas-station-01-custom-title-1', {
                 </InspectorControls>
 
                 {/* --------------- プレビュー --------------- */}
-                <TagName className={`shin-gas-station-01-custom-title-1 ${uniqueClass}`}>
+                <TagName {...blockProps}>
                     <RichText
                         tagName="span"
                         className="main"
@@ -161,8 +147,12 @@ registerBlockType('wdl/shin-gas-station-01-custom-title-1', {
           }
         `;
 
+        const blockProps = useBlockProps.save({
+            className: `shin-gas-station-01-custom-title-1 ${uniqueClass}`,
+        });
+
         return (
-            <TagName className={`shin-gas-station-01-custom-title-1 ${uniqueClass}`}>
+            <TagName {...blockProps}>
                 <RichText.Content
                     tagName="span"
                     className="main"

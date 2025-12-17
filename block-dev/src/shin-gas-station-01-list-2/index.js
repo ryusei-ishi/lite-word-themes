@@ -2,8 +2,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import {
 	RichText,
 	InspectorControls,
-	MediaUpload
-} from '@wordpress/block-editor';
+	MediaUpload, useBlockProps } from '@wordpress/block-editor';
 import {
 	PanelBody,
 	Button,
@@ -11,136 +10,16 @@ import {
     ColorPicker
 } from '@wordpress/components';
 import './editor.scss';
+import metadata from './block.json';
 import './style.scss';
 
-registerBlockType('wdl/shin-gas-station-01-list-2', {
-	title: 'インフォリスト 2 shin shop pattern 01',
-	icon: 'images-alt2',
-	category: 'liteword-other',
-	supports: {
-		anchor: true,
-	},
-	attributes: {
-		// 背景画像は、.bg_image 内の img 要素から src 属性で取得
-		bgImage: {
-			type: 'string',
-			source: 'attribute',
-			selector: '.bg_image img',
-			attribute: 'src',
-			default: 'https://picsum.photos/1000/1000?random=4'
-		},
-        // フィルター色
-        filterColor: {
-            type: 'string',
-            default: 'rgba(0, 0, 0, 0.5)'
-        },
-		// タイトル部分はそれぞれ別要素から抽出
-		topTitleSub: {
-			type: 'string',
-			source: 'html',
-			selector: '.ttl .sub',
-			default: '私たちの会社について'
-		},
-		topTitleMain: {
-			type: 'string',
-			source: 'html',
-			selector: '.ttl .main',
-			default: 'Company'
-		},
-		// 各項目（li.item）を query で抽出する
-		items: {
-			type: 'array',
-			source: 'query',
-			selector: 'li.item',
-			default: [
-				{
-					itemImage: 'https://picsum.photos/1000/1000?random=1',
-					// no は自動計算のため初期値は設定しておきますが編集時は上書きされません
-					no: '01',
-					sub: 'Greeting',
-					main: '代表あいさつ',
-					description:
-						'私たちは地域に根ざしたサービスを提供し、お客様の暮らしをより豊かにすることを目指してまいりました。\n地域社会や環境への配慮を欠かさず、持続可能な未来の実現に向けた取り組みにも積極的に取り組んでおります。',
-					btnLabel: '代表あいさつ',
-					url: ''
-				},
-				{
-					itemImage: 'https://picsum.photos/1000/1000?random=2',
-					no: '02',
-					sub: 'Overview & History',
-					main: '会社概要・沿革',
-					description:
-						'DriveEaseは、小さなスタートから社会を支える企業へと進化し、移動の快適さと安心を提供しています。我々は地域社会と共に成長し、未来のカーライフを支える存在を目指します。',
-					btnLabel: '会社概要・沿革',
-					url: ''
-				},
-				{
-					itemImage: 'https://picsum.photos/1000/1000?random=3',
-					no: '03',
-					sub: 'Office Infomation',
-					main: '事業所案内',
-					description:
-						'東北地方を中心に皆さまのカーライフをより快適にお届けいただけるよう、各地域での店舗展開を行っております。\n是非、お近くの店舗へお立ち寄りください。',
-					btnLabel: '事業所案内',
-					url: ''
-				}
-			],
-			query: {
-				// 画像は .image 内の img 要素から抽出
-				itemImage: {
-					type: 'string',
-					source: 'attribute',
-					selector: '.image img',
-					attribute: 'src'
-				},
-				// 番号は .sub 内の .no 要素から抽出（※保存時は自動計算した値を出力します）
-				no: {
-					type: 'string',
-					source: 'text',
-					selector: '.sub .no'
-				},
-				// サブタイトルは .sub 内の .sub-text 要素から抽出
-				sub: {
-					type: 'string',
-					source: 'html',
-					selector: '.sub .sub-text',
-					default: 'Greeting'
-				},
-				// メインタイトルは .ttl 内の .main 要素から抽出
-				main: {
-					type: 'string',
-					source: 'html',
-					selector: '.ttl .main',
-					default: '代表あいさつ'
-				},
-				// 説明文は .text_in 内の p 要素から抽出
-				description: {
-					type: 'string',
-					source: 'html',
-					selector: '.text_in p',
-					default:
-						'私たちは地域に根ざしたサービスを提供し、お客様の暮らしをより豊かにすることを目指してまいりました。\n地域社会や環境への配慮を欠かさず、持続可能な未来の実現に向けた取り組みにも積極的に取り組んでおります。'
-				},
-				// ボタンラベルは .btn 内の .btn-label 要素から抽出
-				btnLabel: {
-					type: 'string',
-					source: 'html',
-					selector: '.btn .btn-label',
-					default: '代表あいさつ'
-				},
-				// リンクURLは .btn 要素の href 属性から抽出
-				url: {
-					type: 'string',
-					source: 'attribute',
-					selector: '.btn',
-					attribute: 'href',
-					default: ''
-				}
-			}
-		}
-	},
+registerBlockType(metadata.name, {
 	edit: (props) => {
 		const { attributes, setAttributes } = props;
+
+        const blockProps = useBlockProps({
+            className: 'shin-gas-station-01-list-2'
+        });
 		const { bgImage,filterColor, topTitleSub, topTitleMain, items } = attributes;
 
 		// items の追加（番号は自動計算）
@@ -213,7 +92,7 @@ registerBlockType('wdl/shin-gas-station-01-list-2', {
                         />
                     </PanelBody>
 				</InspectorControls>
-				<div className="shin-gas-station-01-list-2">
+				<div {...blockProps}>
 					<div className="bg_image">
 						{bgImage && <img src={bgImage} alt="" />}
 						<div className="filter" style={{ background: filterColor }} />
@@ -363,10 +242,14 @@ registerBlockType('wdl/shin-gas-station-01-list-2', {
 	},
 	save: (props) => {
 		const { attributes } = props;
+
+        const blockProps = useBlockProps.save({
+            className: 'shin-gas-station-01-list-2'
+        });
 		const { bgImage,filterColor  , topTitleSub, topTitleMain, items } = attributes;
  
 		return (
-			<div className="shin-gas-station-01-list-2">
+			<div {...blockProps}>
 				<div className="bg_image">
 					{bgImage && <img src={bgImage} alt="" />}
 					<div className="filter" style={{ background: filterColor }} />

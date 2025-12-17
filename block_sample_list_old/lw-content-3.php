@@ -1,0 +1,5 @@
+<!-- wp:wdl/paid-block-content-3 -->
+<div class="wp-block-wdl-paid-block-content-3 paid-block-content-3 left"><div class="paid-block-content-3__inner"><div class="paid-block-content-3__image"><img loading="lazy" src="https://lite-word.com/sample_img/shop/2.webp" alt="" style="aspect-ratio:160/120"/></div><div class="paid-block-content-3__text"><h3 class="ttl"><span class="sub" style="font-weight:;color:var(--color-main)" data-lw_font_set="">SUB TITLE</span><span class="main" style="font-weight:" data-lw_font_set="">タイトルテキスト</span><div class="bd" style="background-color:var(--color-main)"></div></h3><p class="lw_p" style="font-weight:;white-space:pre-wrap" data-lw_font_set="">テキストテキストテキストテキスト
+テキストテキストテキストテキストテキストテキスト
+テキストテキストテキストテキスト</p><a href="" class="paid-block-content-3__text_br_button" style="font-weight:;background-color:var(--color-main);color:#fff" data-lw_font_set="">MORE</a></div></div></div>
+<!-- /wp:wdl/paid-block-content-3 -->

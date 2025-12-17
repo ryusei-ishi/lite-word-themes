@@ -12,7 +12,6 @@
   justify-content: center;
   box-sizing: border-box;
 }
-
 .fv-2 .filter {
   position: absolute;
   top: 0;
@@ -24,7 +23,6 @@
   background: #000;
   opacity: 0.5;
 }
-
 .fv-2 h1,
 .fv-2 h2,
 .fv-2 h3,
@@ -37,7 +35,6 @@
   font-size: 47.5px;
   letter-spacing: 0.05em;
 }
-
 .fv-2 h1:after,
 .fv-2 h2:after,
 .fv-2 h3:after,
@@ -46,6 +43,6 @@
 .fv-2 h6:after {
   height: 8px;
   width: 100%;
-  content: '';
+  content: "";
   display: block;
-}
+}/*# sourceMappingURL=editor.css.map */

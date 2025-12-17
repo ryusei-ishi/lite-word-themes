@@ -11,6 +11,7 @@ import {
 	RichText,
 	MediaUpload,
 	InspectorControls,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -24,6 +25,7 @@ import {
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ---------------- フォント選択肢 ---------------- */
 const fontOptions = fontOptionsArr();
@@ -32,108 +34,7 @@ const fontWeightOptions = fontWeightOptionsArr();
 /* ==================================================
  * ブロック登録
  * ================================================= */
-registerBlockType( 'wdl/lw-content-2', {
-	title    : 'content 02',
-	icon     : 'lightbulb',
-	category : 'liteword-other',
-	supports : { anchor : true },
-
-	/* ---------- 属性 ---------- */
-	attributes : {
-		contents : {
-			type     : 'array',
-			source   : 'query',
-			selector : '.lw-content-2_content',
-			query    : {
-				title : {
-					type     : 'string',
-					source   : 'html',
-					selector : '.ttl',
-					default  : 'タイトル',
-				},
-				text : {
-					type     : 'string',
-					source   : 'html',
-					selector : '.lw-content-2_text p',
-				},
-				image : {
-					type     : 'string',
-					source   : 'attribute',
-					selector : 'figure img',
-					attribute: 'src',
-				},
-				buttonText : {
-					type     : 'string',
-					source   : 'html',
-					selector : '.lw-content-2_btn',
-					default  : '',
-				},
-				buttonUrl : {
-					type     : 'string',
-					source   : 'attribute',
-					selector : '.lw-content-2_btn',
-					attribute: 'href',
-					default  : '',
-				},
-				buttonBgColor : {
-					type     : 'string',
-					source   : 'attribute',
-					selector : '.lw-content-2_btn',
-					attribute: 'data-bgcolor',
-					default  : '',
-				},
-				buttonTextColor : {
-					type     : 'string',
-					source   : 'attribute',
-					selector : '.lw-content-2_btn',
-					attribute: 'data-textcolor',
-					default  : '#ffffff',
-				},
-			},
-			default : [
-				{
-					title          : 'タイトル',
-					text           : 'テキストテキストテキストテキストテキストテキストテキストテキストテキスト',
-					image          : '',
-					buttonText     : '',
-					buttonUrl      : '',
-					buttonBgColor  : 'var(--color-accent)',
-					buttonTextColor: '#ffffff',
-				},
-				{
-					title          : 'タイトル',
-					text           : 'テキストテキストテキストテキストテキストテキストテキストテキストテキスト',
-					image          : '',
-					buttonText     : '',
-					buttonUrl      : '',
-					buttonBgColor  : 'var(--color-accent)',
-					buttonTextColor: '#ffffff',
-				},
-				{
-					title          : 'タイトル',
-					text           : 'テキストテキストテキストテキストテキストテキストテキストテキストテキスト',
-					image          : '',
-					buttonText     : '',
-					buttonUrl      : '',
-					buttonBgColor  : 'var(--color-accent)',
-					buttonTextColor: '#ffffff',
-				},
-			],
-		},
-		fontSet        : { type:'string', default:'', source:'attribute', selector:'.lw-content-2', attribute:'data-lw_font_set' },
-		fontWeight     : { type:'string', default:'' },
-		columnClass    : { type:'string', default:'clm_3' },
-
-		showTitle      : { type:'boolean', default:false },
-		titleFontSet   : { type:'string',  default:'' },
-		titleFontWeight: { type:'string',  default:'' },
-		titleColor     : { type:'string',  default:'' },
-
-		textColor      : { type:'string',  default:'' },
-
-		imageHeight    : { type:'number',  default:1200 }, // 幅は 1600 固定
-	},
-
+registerBlockType(metadata.name, {
 	/* ==================================================
 	 * エディター
 	 * ================================================= */
@@ -169,12 +70,14 @@ registerBlockType( 'wdl/lw-content-2', {
 			setAttributes( { contents : arr } );
 		};
 
+		const blockProps = useBlockProps({
+			className: `lw-content-2 ${columnClass}`,
+			'data-lw_font_set': fontSet,
+			style: { '--lw-img-h': `${imageHeight}px` }
+		});
+
 		return (
-			<div
-				className={`lw-content-2 ${columnClass}`}
-				data-lw_font_set={fontSet}
-				style={{ '--lw-img-h': `${imageHeight}px` }}
-			>
+			<>
 				<InspectorControls>
                     {/* カラム */}
 					<PanelBody title="カラム数">
@@ -189,8 +92,8 @@ registerBlockType( 'wdl/lw-content-2', {
 							onChange={( v ) => setAttributes( { columnClass : v } )}
 						/>
 					</PanelBody>
-                    {/* タイトル */}
-					<PanelBody title="タイトル" initialOpen={false}>
+
+                <PanelBody title="タイトル" initialOpen={false}>
 						<ToggleControl
 							label="タイトルを表示"
 							checked={showTitle}
@@ -214,8 +117,8 @@ registerBlockType( 'wdl/lw-content-2', {
 							onChange={( c ) => setAttributes( { titleColor : c } )}
 						/>
 					</PanelBody>
-					{/* 本文フォント */}
-					<PanelBody title="本文フォント">
+
+                <PanelBody title="本文フォント">
 						<SelectControl
 							label="フォント種類"
 							value={fontSet}
@@ -235,10 +138,7 @@ registerBlockType( 'wdl/lw-content-2', {
 						/>
 					</PanelBody>
 
-
-
-					{/* 画像比率 */}
-					<PanelBody title="画像アスペクト比 (高さ px)" initialOpen={false}>
+                <PanelBody title="画像比率" initialOpen={false}>
 						<RangeControl
 							label="高さ(px) – 幅は1600固定"
 							min={400}
@@ -248,6 +148,21 @@ registerBlockType( 'wdl/lw-content-2', {
 							onChange={( v ) => setAttributes( { imageHeight : v } )}
 						/>
 					</PanelBody>
+
+                
+
+                
+
+                
+                    {/* タイトル */}
+					
+					{/* 本文フォント */}
+					
+
+
+
+					{/* 画像比率設定 */}
+					
 
 					{/* 各コンテンツ */}
 					{contents.map( ( c, i ) => (
@@ -294,8 +209,8 @@ registerBlockType( 'wdl/lw-content-2', {
 					</Button>
 				</InspectorControls>
 
-				{/* ----- 出力 ----- */}
-				<div className="lw-content-2_inner">
+				<div {...blockProps}>
+					<div className="lw-content-2_inner">
 					{contents.map( ( c, i ) => (
 						<div className="lw-content-2_content" key={i}>
 							{showTitle && (
@@ -343,8 +258,9 @@ registerBlockType( 'wdl/lw-content-2', {
 							</div>
 						</div>
 					) ) }
+					</div>
 				</div>
-			</div>
+			</>
 		);
 	},
 
@@ -358,8 +274,13 @@ registerBlockType( 'wdl/lw-content-2', {
 			textColor, imageHeight,
 		} = attributes;
 
+		const blockProps = useBlockProps.save({
+			className: `lw-content-2 ${columnClass}`,
+			'data-lw_font_set': fontSet
+		});
+
 		return (
-			<div className={`lw-content-2 ${columnClass}`} data-lw_font_set={fontSet}>
+			<div {...blockProps}>
 				<div className="lw-content-2_inner">
 					{contents.map( ( c, i ) => (
 						<div className="lw-content-2_content" key={i}>

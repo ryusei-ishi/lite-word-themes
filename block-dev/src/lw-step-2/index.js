@@ -1,79 +1,19 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, MediaUpload, InspectorControls, ColorPalette } from '@wordpress/block-editor';
+import { RichText, MediaUpload, InspectorControls, ColorPalette, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, RangeControl, Button } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
+
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
 // フォント太さオプションを変数に定義
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType('wdl/lw-step-2', {
+registerBlockType(metadata.name, {
     title: 'step 02',
-    icon: 'lightbulb',
-    category: 'liteword-other',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        bgGradient: {
-            type: 'string',
-            default: 'var(--color-main)'
-        },
-        ulMaxWidth: {
-            type: 'number',
-            default: 800
-        },
-        fontH3: {
-            type: 'string',
-            default: ''
-        },
-        fontWeightH3: {
-            type: 'string',
-            default: ''
-        },
-        fontP: {
-            type: 'string',
-            default: ''
-        },
-        fontWeightP: {
-            type: 'string',
-            default: ''
-        },
-        colorLiSvg: {
-            type: 'string',
-            default: 'var(--color-main)'
-        },
-        contents: {
-            type: 'array',
-            source: 'query',
-            selector: '.lw-step-2__li',
-            query: {
-                title: {
-                    type: 'string',
-                    source: 'html',
-                    selector: 'h3',
-                },
-                text: {
-                    type: 'string',
-                    source: 'html',
-                    selector: 'p',
-                },
-                // Remove 'borderColor' if it's not used
-            },
-            default: [
-                { title: '応募', text: '応募フォームより必要事項を入力し、送信してください。応募内容を確認し、追って担当者よりご連絡いたします。' },
-                { title: '書類選考', text: 'ご応募いただいた内容をもとに、書類選考を行います。結果は1週間以内にメールにてお知らせいたします。' },
-                { title: '面接', text: '書類選考に通過された方には、担当者による面接を実施します。面接日時はご相談の上、決定いたします。' },
-                { title: '最終選考', text: '面接後、最終選考を行い、採用の可否を決定します。結果はメールにてご連絡いたします。' },
-                { title: '内定', text: '最終選考を通過された方には、内定通知をお送りし、入社手続きを進めていただきます。' },
-            ],
-            
-        },
-    },
 
     edit: function (props) {
         const { attributes, setAttributes } = props;
@@ -101,8 +41,12 @@ registerBlockType('wdl/lw-step-2', {
             setAttributes({ contents: updatedContents });
         };
 
+        const blockProps = useBlockProps({
+            className: 'lw-step-2'
+        });
+
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
 
                     <PanelBody title="リスト部分の設定">
@@ -153,7 +97,7 @@ registerBlockType('wdl/lw-step-2', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className="lw-step-2">
+                <div {...blockProps}>
                     <ul className="lw-step-2__inner" style={{maxWidth:ulMaxWidth}}>
                         {contents.map((content, index) => (
                             <li className="lw-step-2__li" key={index} style={{borderColor:bgGradient}}>
@@ -183,7 +127,7 @@ registerBlockType('wdl/lw-step-2', {
                     </ul>
                     <button className="lw-step-2__add_btn" onClick={addContent}>リストを追加する</button>
                 </div>
-            </Fragment>
+            </>
         );
     },
 

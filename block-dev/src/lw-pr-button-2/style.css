@@ -5,64 +5,52 @@
   justify-content: center;
   font-size: 16px;
 }
-
 .lw-pr-button-2 * {
   box-sizing: border-box;
 }
-
 .lw-pr-button-2.left {
   justify-content: flex-start;
 }
-
 @media (max-width: 800px) {
   .lw-pr-button-2.left.sp_center {
     justify-content: center;
   }
 }
-
 @media (max-width: 800px) {
   .lw-pr-button-2.left.sp_right {
     justify-content: flex-end;
   }
 }
-
 .lw-pr-button-2.center {
   justify-content: center;
 }
-
 @media (max-width: 800px) {
   .lw-pr-button-2.center.sp_left {
     justify-content: flex-start;
   }
 }
-
 @media (max-width: 800px) {
   .lw-pr-button-2.center.sp_right {
     justify-content: flex-end;
   }
 }
-
 .lw-pr-button-2.right {
   justify-content: flex-end;
 }
-
 @media (max-width: 800px) {
   .lw-pr-button-2.right.sp_center {
     justify-content: center;
   }
 }
-
 @media (max-width: 800px) {
   .lw-pr-button-2.right.sp_left {
     justify-content: flex-start;
   }
 }
-
 .lw-pr-button-2 .wrap_btn {
   max-width: 340px;
   width: 100%;
 }
-
 .lw-pr-button-2 .wrap_btn .text_sub {
   margin-bottom: 6px;
   width: 100%;
@@ -73,7 +61,6 @@
   font-size: 16px;
   text-align: center;
 }
-
 .lw-pr-button-2 .wrap_btn .lw_btn_a {
   position: relative;
   padding: 1.2em 1em;
@@ -87,30 +74,24 @@
   transition: background var(--transition-duration, 0.3s) ease;
   text-decoration: none;
 }
-
 @media (max-width: 800px) {
   .lw-pr-button-2 .wrap_btn .lw_btn_a {
     max-width: var(--max-width-sp, 300px) !important;
     width: 100%;
   }
 }
-
 .lw-pr-button-2 .wrap_btn .lw_btn_a:hover {
   background: var(--hover-bg) !important;
 }
-
 .lw-pr-button-2 .wrap_btn .lw_btn_a.lw_btn_shake_light {
   animation: lw_btn_shake_light var(--shake-interval, 3s) ease-in-out infinite;
 }
-
 .lw-pr-button-2 .wrap_btn .lw_btn_a.lw_btn_shake_normal {
   animation: lw_btn_shake_normal var(--shake-interval, 3s) ease-in-out infinite;
 }
-
 .lw-pr-button-2 .wrap_btn .lw_btn_a.lw_btn_shake_strong {
   animation: lw_btn_shake_strong var(--shake-interval, 3s) ease-in-out infinite;
 }
-
 .lw-pr-button-2 .wrap_btn .lw_btn_a .text_main {
   font-size: 20px;
   font-weight: 500;
@@ -119,13 +100,11 @@
   color: #fff;
   text-align: center;
 }
-
 @media (max-width: 800px) {
   .lw-pr-button-2 .wrap_btn .lw_btn_a .text_main {
     font-size: var(--font-size-main-sp, 18px) !important;
   }
 }
-
 .lw-pr-button-2 .wrap_btn .lw_btn_a .icon {
   position: absolute;
   top: 0;
@@ -137,9 +116,8 @@
   display: flex;
   align-items: center;
 }
-
 .lw-pr-button-2 .wrap_btn .lw_btn_a .icon svg {
   height: auto;
   width: 100%;
   fill: var(--icon-color, #fff);
-}
+}/*# sourceMappingURL=style.css.map */

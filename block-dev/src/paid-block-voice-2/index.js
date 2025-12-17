@@ -2,7 +2,8 @@ import { registerBlockType } from '@wordpress/blocks';
 import {
     RichText,
     MediaUpload,
-    InspectorControls
+    InspectorControls,
+    useBlockProps,
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -11,154 +12,19 @@ import {
     RangeControl,
     SelectControl
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
+
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType('wdl/paid-block-voice-2', {
+registerBlockType(metadata.name, {
     title: 'お客様の声 2',
     icon: 'format-status',
-    category: 'liteword-other',
-
-    attributes: {
-        // --- 単体のタイトルや説明は「source: 'html' + selector」でOK ---
-        blockTitleMain: {
-            type: 'string',
-            source: 'html',
-            selector: '.ttl .main',
-            default: 'お客様の声'
-        },
-        blockTitleSub: {
-            type: 'string',
-            source: 'html',
-            selector: '.ttl .sub',
-            default: 'VOICE'
-        },
-        explanation: {
-            type: 'string',
-            source: 'html',
-            selector: '.explanation',
-            default: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト'
-        },
-
-        // --- フィルターの色・不透明度 ---
-        filterColor: {
-            type: 'string',
-            default: 'var(--color-main)'
-        },
-        filterOpacity: {
-            type: 'number',
-            default: 0.9
-        },
-
-        // --- フォント系 ---
-        voiceSubNameFont: {
-            type: 'string',
-            default: 'Noto Sans JP'
-        },
-        voiceSubNameFontWeight: {
-            type: 'string',
-            default: '400'
-        },
-        voiceSubNameFontColor: {
-            type: 'string',
-            default: 'var(--color-black)'
-        },
-        voiceMeinNameFont: {
-            type: 'string',
-            default: 'Noto Sans JP'
-        },
-        voiceMeinNameFontWeight: {
-            type: 'string',
-            default: '500'
-        },
-        voiceMeinNameFontColor: {
-            type: 'string',
-            default: 'var(--color-black)'
-        },
-        voiceCommentFont: {
-            type: 'string',
-            default: 'Noto Sans JP'
-        },
-        voiceCommentFontWeight: {
-            type: 'string',
-            default: '400'
-        },
-        voiceCommentFontColor: {
-            type: 'string',
-            default: 'var(--color-black)'
-        },
-        voiceThanksFont: {
-            type: 'string',
-            default: 'Dancing Script'
-        },
-        voiceThanksFontWeight: {
-            type: 'string',
-            default: '400'
-        },
-        voiceThanksFontColor: {
-            type: 'string',
-            default: 'var(--color-black)'
-        },
-
-        // --- voices 配列を query で定義: li 要素を繰り返し解析 ---
-        voices: {
-            type: 'array',
-            source: 'query',
-            selector: '.voice_list li',
-            default: [
-                {
-                    image: 'https://lite-word.com/sample_img/women/1.webp',
-                    thanks: 'thank you',
-                    sub: '東京都 経営者',
-                    nameBig: 'やまだ',
-                    nameSmall: 'さん',
-                    comment: 'テキストテキストテキストテキストテキストテキストテキストテキスト'
-                }
-            ],
-            // query で、各要素がどうHTMLを取得するか定義する
-            query: {
-                image: {
-                    // 画像URLは <img src="..." /> の src 属性から取得
-                    type: 'string',
-                    source: 'attribute',
-                    selector: 'img',
-                    attribute: 'src'
-                },
-                thanks: {
-                    // 「thank you」は <span class="thanks"> の内側HTML
-                    type: 'string',
-                    source: 'html',
-                    selector: '.thanks'
-                },
-                sub: {
-                    type: 'string',
-                    source: 'html',
-                    selector: '.sub'
-                },
-                nameBig: {
-                    type: 'string',
-                    source: 'html',
-                    selector: '.big'
-                },
-                nameSmall: {
-                    type: 'string',
-                    source: 'html',
-                    selector: '.small'
-                },
-                comment: {
-                    // コメント欄
-                    type: 'string',
-                    source: 'html',
-                    selector: '.comment'
-                }
-            }
-        }
-    },
+    category: 'lw-voice',
 
     edit: ({ attributes, setAttributes }) => {
         const {
@@ -213,8 +79,13 @@ registerBlockType('wdl/paid-block-voice-2', {
             });
         };
 
+        
+        const blockProps = useBlockProps({
+            className: 'paid-block-voice-2'
+        });
+
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
                     <PanelBody title="マニュアル">
                         <div>
@@ -347,7 +218,8 @@ registerBlockType('wdl/paid-block-voice-2', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className="paid-block-voice-2">
+                
+                <div {...blockProps}>
                     <div className="paid-block-voice-2__wrap">
 
                         {/* タイトル・説明 */}
@@ -486,7 +358,7 @@ registerBlockType('wdl/paid-block-voice-2', {
                         }}
                     />
                 </div>
-            </Fragment>
+            </>
         );
     },
 
@@ -512,8 +384,12 @@ registerBlockType('wdl/paid-block-voice-2', {
             voices
         } = attributes;
 
+        const blockProps = useBlockProps.save({
+            className: 'paid-block-voice-2',
+        });
+
         return (
-            <div className="paid-block-voice-2">
+            <div {...blockProps}>
                 <div className="paid-block-voice-2__wrap">
                     <h2 className="ttl">
                         <RichText.Content

@@ -1,0 +1,98 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/fv-1",
+	"version": "1.0.0",
+	"title": "固定ページタイトル 01（トップ用）",
+	"category": "lw-firstview",
+	"icon": "cover-image",
+	"editorScript": "file:./fv-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"backgroundImage": {
+			"type": "string",
+			"default": "https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704_1280.jpg"
+		},
+		"backgroundImageSp": {
+			"type": "string",
+			"default": ""
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "Lite Word"
+		},
+		"subTitle": {
+			"type": "string",
+			"default": "シンプルで簡単なWordPressテーマ"
+		},
+		"description": {
+			"type": "string",
+			"default": "誰でも簡単にきれいなブログサイトが作れます！"
+		},
+		"buttonText": {
+			"type": "string",
+			"default": "無料ダウンロード"
+		},
+		"buttonUrl": {
+			"type": "string",
+			"default": "#"
+		},
+		"openInNewTab": {
+			"type": "boolean",
+			"default": false
+		},
+		"buttonBackgroundColor": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"buttonTextColor": {
+			"type": "string",
+			"default": "#111"
+		},
+		"buttonBorderColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"buttonBackgroundColorOpacity": {
+			"type": "number",
+			"default": 100
+		},
+		"buttonBorderWidth": {
+			"type": "number",
+			"default": 0
+		},
+		"buttonBorderRadius": {
+			"type": "number",
+			"default": 200
+		},
+		"filterBackgroundColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 0.4
+		},
+		"minHeightPc": {
+			"type": "string",
+			"default": "min-h-pc-500px"
+		},
+		"minHeightTb": {
+			"type": "string",
+			"default": "min-h-tb-480px"
+		},
+		"minHeightSp": {
+			"type": "string",
+			"default": "min-h-sp-440px"
+		}
+	},
+	"no": 1
+}

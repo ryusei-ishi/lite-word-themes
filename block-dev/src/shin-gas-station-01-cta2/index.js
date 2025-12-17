@@ -1,5 +1,9 @@
+/**
+ * CTA 2 shin shop pattern 01
+ * ★ apiVersion 3 対応（2025-12-07）
+ */
 import { registerBlockType } from '@wordpress/blocks';
-import { InspectorControls, RichText } from '@wordpress/block-editor';
+import { InspectorControls, RichText, useBlockProps } from '@wordpress/block-editor';
 import {
 	PanelBody,
 	ToggleControl,
@@ -9,79 +13,12 @@ import {
 	SelectControl,
 } from '@wordpress/components';
 import { rightButtonIconSvgArr } from '../utils.js';
-import './style.scss';
-import './editor.scss';
+
+import metadata from './block.json';
 
 const iconSvgOptions = rightButtonIconSvgArr();
 
-registerBlockType('wdl/shin-gas-station-01-cta2', {
-	title: 'CTA 2 shin shop pattern 01',
-	icon: 'megaphone',
-	category: 'liteword-other',
-	supports: {
-		anchor: true,
-	},
-	attributes: {
-		title: {
-			type: 'string',
-			source: 'html',
-			selector: '.shin-gas-station-01-cta2__title .main',
-			default: 'お問い合わせ・ご相談',
-		},
-		text: {
-			type: 'string',
-			source: 'html',
-			selector: 'p',
-			default:
-				'フランチャイズ加盟に関するご相談や当運営店舗に関するご意見など<br>お気軽にお問い合わせくださいませ。',
-		},
-		// ★ selector を 'a span.text' に変更して、<a> 内の <span class="text"> をマッピング
-		buttonText: {
-			type: 'string',
-			source: 'html',
-			selector: 'a span.text',
-			default: 'お問い合わせ',
-		},
-		buttonUrl: {
-			type: 'string',
-			default: '#',
-		},
-		openInNewTab: {
-			type: 'boolean',
-			default: false,
-		},
-		filterColor: {
-			type: 'string',
-			default: '#054161',
-		},
-		filterOpacity: {
-			type: 'number',
-			default: 0.05,
-		},
-		buttonTextColor: {
-			type: 'string',
-			default: '#fff',
-		},
-		buttonBackgroundColor: {
-			type: 'string',
-			default: 'var(--color-main)',
-		},
-		buttonBorderColor: {
-			type: 'string',
-			default: 'var(--color-main)',
-		},
-		buttonBorderSize: {
-			type: 'number',
-			default: 1,
-		},
-		selectedIcon: {
-			type: 'string',
-			default:
-				'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z"/></svg>',
-		},
-	},
-
-
+registerBlockType(metadata.name, {
 	edit: (props) => {
 		const { attributes, setAttributes } = props;
 		const {
@@ -115,8 +52,13 @@ registerBlockType('wdl/shin-gas-station-01-cta2', {
 		const onChangeButtonBorderSize = (value) =>
 			setAttributes({ buttonBorderSize: value });
 
+		// useBlockProps で apiVersion 3 対応
+		const blockProps = useBlockProps({
+			className: 'shin-gas-station-01-cta2'
+		});
+
 		return (
-			<div className="shin-gas-station-01-cta2">
+			<div {...blockProps}>
 				<InspectorControls>
 					<PanelBody title="リンクの設定">
 						<TextControl
@@ -274,8 +216,13 @@ registerBlockType('wdl/shin-gas-station-01-cta2', {
 			selectedIcon,
 		} = attributes;
 
+		// useBlockProps.save() で apiVersion 3 対応
+		const blockProps = useBlockProps.save({
+			className: 'shin-gas-station-01-cta2'
+		});
+
 		return (
-			<div className="shin-gas-station-01-cta2">
+			<div {...blockProps}>
 				<div className="shin-gas-station-01-cta2__inner">
 					<div className="head">
 						<h2 className="shin-gas-station-01-cta2__title heading_style_reset">

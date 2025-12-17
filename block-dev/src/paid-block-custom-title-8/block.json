@@ -1,0 +1,71 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-custom-title-8",
+	"version": "1.0.0",
+	"title": "見出しタイトル 08",
+	"category": "lw-heading",
+	"icon": "editor-textcolor",
+	"description": "カスタムボーダー付き見出しブロック（スマホサイズ対応）",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"subTitle": {
+			"type": "string",
+			"default": "製品紹介"
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "PRODUCTS"
+		},
+		"headingLevel": {
+			"type": "number",
+			"default": 2
+		},
+		"mainTitleColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"borderLeftColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"borderRightColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"borderLeftOpacity": {
+			"type": "number",
+			"default": 100
+		},
+		"borderRightOpacity": {
+			"type": "number",
+			"default": 20
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 10
+		},
+		"sizeClass": {
+			"type": "string",
+			"default": "size_m"
+		},
+		"positionClass": {
+			"type": "string",
+			"default": "position_left"
+		},
+		"sizeSpClass": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./paid-block-custom-title-8.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 8
+}

@@ -1,81 +1,66 @@
 .paid-block-lw-step-4 {
   margin: 32px 0;
 }
-
 @container (max-width:800px) {
   .paid-block-lw-step-4 {
     margin: 24px 0;
   }
 }
-
 .paid-block-lw-step-4 * {
   box-sizing: border-box;
 }
-
 .paid-block-lw-step-4.font_size_l {
   font-size: 28px;
 }
-
 @container (max-width:800px) {
   .paid-block-lw-step-4.font_size_l {
     font-size: 24px;
   }
 }
-
 @container (max-width:550px) {
   .paid-block-lw-step-4.font_size_l {
     font-size: 20px;
   }
 }
-
 .paid-block-lw-step-4.font_size_m {
   font-size: 24px;
 }
-
 @container (max-width:800px) {
   .paid-block-lw-step-4.font_size_m {
     font-size: 22px;
   }
 }
-
 @container (max-width:550px) {
   .paid-block-lw-step-4.font_size_m {
     font-size: 18px;
   }
 }
-
 @container (max-width:550px) {
   .paid-block-lw-step-4.font_size_m ul.lw-step__inner li.lw-step__li .lw-step__li_in p.lw-step__li_text {
     font-size: 0.82em;
   }
 }
-
 .paid-block-lw-step-4.font_size_s {
   font-size: 20px;
 }
-
 @container (max-width:800px) {
   .paid-block-lw-step-4.font_size_s {
     font-size: 18px;
   }
 }
-
 @container (max-width:550px) {
   .paid-block-lw-step-4.font_size_s {
     font-size: 16px;
   }
 }
-
 .paid-block-lw-step-4.font_size_s ul.lw-step__inner li.lw-step__li .lw-step__li_in p.lw-step__li_text {
   font-size: 0.8em;
 }
-
 @container (max-width:550px) {
   .paid-block-lw-step-4.font_size_s ul.lw-step__inner li.lw-step__li .lw-step__li_in p.lw-step__li_text {
     font-size: 0.9em;
   }
 }
-
 .paid-block-lw-step-4 ul.lw-step__inner {
   position: relative;
   z-index: 10;
@@ -87,13 +72,11 @@
   gap: 8px;
   list-style: none;
 }
-
 @container (max-width:550px) {
   .paid-block-lw-step-4 ul.lw-step__inner {
     gap: 4px;
   }
 }
-
 .paid-block-lw-step-4 ul.lw-step__inner li.lw-step__li {
   position: relative;
   padding: 1.2em 0.85em;
@@ -105,24 +88,20 @@
   border-radius: 10px;
   overflow: hidden;
 }
-
 @container (max-width:550px) {
   .paid-block-lw-step-4 ul.lw-step__inner li.lw-step__li {
     border-radius: 6px;
   }
 }
-
 .paid-block-lw-step-4 ul.lw-step__inner li.lw-step__li .lw-step__li_no {
   margin: 0;
   line-height: 0.7em;
   font-size: 2.4em;
   letter-spacing: 0;
 }
-
 .paid-block-lw-step-4 ul.lw-step__inner li.lw-step__li .lw-step__li_in {
   padding-left: 0.6em;
 }
-
 .paid-block-lw-step-4 ul.lw-step__inner li.lw-step__li .lw-step__li_in p.ttl,
 .paid-block-lw-step-4 ul.lw-step__inner li.lw-step__li .lw-step__li_in h2.ttl,
 .paid-block-lw-step-4 ul.lw-step__inner li.lw-step__li .lw-step__li_in h3.ttl,
@@ -132,21 +111,18 @@
   font-size: 1em;
   line-height: 1.4em;
 }
-
 .paid-block-lw-step-4 ul.lw-step__inner li.lw-step__li .lw-step__li_in p.ttl + p.lw-step__li_text,
 .paid-block-lw-step-4 ul.lw-step__inner li.lw-step__li .lw-step__li_in h2.ttl + p.lw-step__li_text,
 .paid-block-lw-step-4 ul.lw-step__inner li.lw-step__li .lw-step__li_in h3.ttl + p.lw-step__li_text,
 .paid-block-lw-step-4 ul.lw-step__inner li.lw-step__li .lw-step__li_in h4.ttl + p.lw-step__li_text {
   margin-top: 1em;
 }
-
 .paid-block-lw-step-4 ul.lw-step__inner li.lw-step__li .lw-step__li_in p.lw-step__li_text {
   margin: 0;
   color: #333;
   white-space: pre-wrap;
   font-size: 0.71em;
 }
-
 .paid-block-lw-step-4 .lw-step__remove_btn {
   position: absolute;
   bottom: 0;
@@ -159,7 +135,6 @@
   border-radius: 2px;
   cursor: pointer;
 }
-
 .paid-block-lw-step-4 .lw-step__add_btn {
   position: relative;
   z-index: 10;
@@ -170,4 +145,4 @@
   width: 200px;
   font-size: 16px;
   cursor: pointer;
-}
+}/*# sourceMappingURL=style.css.map */

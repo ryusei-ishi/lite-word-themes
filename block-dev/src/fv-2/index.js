@@ -1,29 +1,12 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, MediaUpload, InspectorControls, BlockControls, ColorPalette } from '@wordpress/block-editor';
+import { RichText, MediaUpload, InspectorControls, BlockControls, ColorPalette, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, RangeControl, SelectControl, ToolbarGroup, ToolbarButton } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { minHeightPcClassOptionArr, minHeightTbClassOptionArr, minHeightSpClassOptionArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/fv-2', {
-    title: '固定ページタイトル 02（下層用）',
-    icon: 'cover-image',
-    category: 'liteword-firstview',
-    attributes: {
-        backgroundImage: { type: 'string', default: '' },
-        backgroundImageSp: { type: 'string', default: '' },
-        filterBackgroundColor: { type: 'string', default: 'var(--color-main)' },
-        filterOpacity: { type: 'number', default: 0.9 },
-        h1AfterColor: { type: 'string', default: '#ef5d68' },
-        textColor: { type: 'string', default: '#fff' },
-        title: { type: 'string', default: 'タイトル' },
-        minHeightPc: { type: 'string', default: 'min-h-pc-320px' },
-        minHeightTb: { type: 'string', default: 'min-h-tb-280px' },
-        minHeightSp: { type: 'string', default: 'min-h-sp-220px' },
-        headingLevel: { type: 'number', default: 1 },
-    },
-
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const { backgroundImage, backgroundImageSp, filterBackgroundColor, filterOpacity, h1AfterColor, textColor, title, minHeightPc, minHeightTb, minHeightSp, headingLevel } = attributes;
@@ -45,8 +28,12 @@ registerBlockType('wdl/fv-2', {
 
         const TagName = `h${headingLevel}`;
 
+        const blockProps = useBlockProps({
+            className: `fv-2 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+        });
+
         return (
-            <Fragment>
+            <>
                 {/* ▼ タイトルタグ切替ツールバー */}
                 <BlockControls>
                     <ToolbarGroup>
@@ -165,9 +152,7 @@ registerBlockType('wdl/fv-2', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <div
-                    className={`fv-2 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}
-                >
+                <div {...blockProps}>
                     <RichText
                         tagName={TagName}
                         value={title}
@@ -193,7 +178,7 @@ registerBlockType('wdl/fv-2', {
                         `}
                     </style>
                 </div>
-            </Fragment>
+            </>
         );
     },
     save: function (props) {
@@ -202,10 +187,12 @@ registerBlockType('wdl/fv-2', {
 
         const TagName = `h${headingLevel}`;
 
+        const blockProps = useBlockProps.save({
+            className: `fv-2 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+        });
+
         return (
-            <div
-                className={`fv-2 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}
-            >
+            <div {...blockProps}>
                 <RichText.Content
                     tagName={TagName}
                     value={title}

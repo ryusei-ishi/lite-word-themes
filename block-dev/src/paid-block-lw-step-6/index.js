@@ -13,6 +13,7 @@ import {
 	MediaUpload,
 	InspectorControls,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -22,11 +23,12 @@ import {
 	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
-import { Fragment, createElement } from '@wordpress/element';
+import {createElement } from '@wordpress/element';
 
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ──────────────────── 共通オプション ─────────────────── */
 const fontOptions       = fontOptionsArr();
@@ -42,83 +44,8 @@ const objectFitOptions = [
 ];
 
 /* ───────────────────── ブロック登録 ──────────────────── */
-registerBlockType('wdl/paid-block-lw-step-6', {
+registerBlockType(metadata.name, {
 	title   : 'step 06',
-	icon    : 'lightbulb',
-	category: 'liteword-other',
-	supports: { anchor: true },
-
-	/* ───────── 属性定義 ───────── */
-	attributes: {
-		/* タイトル */
-		fontLi        : { type: 'string', default: '' },
-		fontColorLi   : { type: 'string', default: '' },
-		fontWeightLi  : { type: 'string', default: '600' },
-		titleFontSizeClass: { type: 'string', default: 'font_size_m' },
-
-		/* 説明文 */
-		fontLiP          : { type: 'string', default: '' },
-		fontColorLiP     : { type: 'string', default: 'var(--color-black)' },
-		fontWeightLiP    : { type: 'string', default: '400' },
-		textFontSizeClass: { type: 'string', default: 'font_size_m' },
-
-		/* 画像枠線 */
-		borderColor      : { type: 'string', default: 'var(--color-main)' },
-		borderSize       : { type: 'number', default: 0 },
-		imageBorderRadius: { type: 'number', default: 0 },
-
-		/* 画像表示設定 */
-		imageObjectFit : { type: 'string', default: 'cover' },  // object-fit
-		imageAspectH   : { type: 'number', default: 300 },      // aspect-ratio 高さ（400 / H）
-
-		/* タイトル装飾 */
-		titleTag         : { type: 'string', default: 'h3' },
-		titleBorderColor : { type: 'string', default: 'var(--color-main)' },
-		titleBorderSize  : { type: 'number', default: 2 },
-
-		/* 番号 */
-		numberBgColor: { type: 'string', default: 'var(--color-main)' },
-		showNumber   : { type: 'boolean', default: true },
-
-		/* li 枠線 */
-		liBorderColor : { type: 'string', default: '#ccc' },
-		liBorderSize  : { type: 'number', default: 1 },
-		liBorderRadius: { type: 'number', default: 0 },
-
-		/* リスト本体 */
-		contents: {
-			type    : 'array',
-			source  : 'query',
-			selector: '.paid-block-lw-step-6__li',
-			query   : {
-				image : { type: 'string', source: 'attribute', selector: 'img',          attribute: 'src' },
-				ttl   : { type: 'string', source: 'html',      selector: '.ttl' },
-				text  : { type: 'string', source: 'html',      selector: '.paid-block-lw-step-6__text' },
-				url   : { type: 'string', source: 'attribute', selector: '.link',        attribute: 'href', default: '' },
-				number: { type: 'string', source: 'text',      selector: '.number > span' }, // ★ 修正
-			},
-			default: [
-				{
-					image : 'https://lite-word.com/sample_img/school/9.webp',
-					ttl   : '難関校合格実績',
-					text  : '〇〇中学、××高校など、難関校への高い合格実績が自慢です。経験豊富なプロ講師陣が、志望校合格まで徹底的にサポートします。',
-					number: '',
-				},
-				{
-					image : 'https://lite-word.com/sample_img/school/5.webp',
-					ttl   : '合格への最短ルート',
-					text  : '長年の指導ノウハウを結集したオリジナル教材とカリキュラムで、基礎から応用まで無駄なく効率的に学力を伸ばし、合格へと導きます。',
-					number: '',
-				},
-				{
-					image : 'https://lite-word.com/sample_img/school/3.webp',
-					ttl   : '自習室完備＆質問OK',
-					text  : '静かで集中できる自習室を完備しています。わからないことはいつでも講師に質問可能。学習相談や進路指導も充実、安心して学習に専念できます。',
-					number: '',
-				},
-			],
-		},
-	},
 
 	/* ───────────────────── エディター側 ───────────────────── */
 	edit({ attributes, setAttributes }) {
@@ -146,8 +73,12 @@ registerBlockType('wdl/paid-block-lw-step-6', {
 			setAttributes({ contents: arr });
 		};
 
+		const blockProps = useBlockProps({
+			className: 'paid-block-lw-step-6'
+		});
+
 		return (
-			<Fragment>
+			<>
 				{/* ──────────────── サイドバー UI ──────────────── */}
 				<InspectorControls>
 					<PanelBody title="スタイル設定">
@@ -222,7 +153,7 @@ registerBlockType('wdl/paid-block-lw-step-6', {
 				</InspectorControls>
 
 				{/* ──────────────── エディター表示 ──────────────── */}
-				<div className="paid-block-lw-step-6">
+				<div {...blockProps}>
 					<ul className="paid-block-lw-step-6__inner">
 						{contents.map((c, i) => {
 							const Tag   = c.url ? 'a' : 'div';
@@ -372,7 +303,7 @@ registerBlockType('wdl/paid-block-lw-step-6', {
 						リストを追加する
 					</Button>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 

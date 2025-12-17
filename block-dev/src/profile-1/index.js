@@ -4,11 +4,14 @@ import {
     InspectorControls,
     RichText,
     ColorPalette
+,
+    useBlockProps,
 } from '@wordpress/block-editor';
 import { PanelBody, Button } from '@wordpress/components';
-import { Fragment, useEffect } from '@wordpress/element';
+import { useEffect } from '@wordpress/element';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ===== ユーティリティ：<mark> → <span> 変換 ================= */
 const replaceMarkWithSpan = (html = '') =>
@@ -16,32 +19,14 @@ const replaceMarkWithSpan = (html = '') =>
         .replace(/<mark([\s\S]*?)>/gi, '<span$1>')
         .replace(/<\/mark>/gi, '</span>');
 
-registerBlockType('wdl/profile-1', {
+registerBlockType(metadata.name, {
     title: 'プロフィール 01',
     icon: 'id',
-    category: 'liteword-other',
+    category: 'lw-profile',
     supports: { anchor: true },
 
-    /* === 属性 ================================================= */
-    attributes: {
-        imageUrl:     { type: 'string', default: '' },
-        altText:      { type: 'string', default: 'プロフィール画像' },
-
-        profileTitle: { type: 'string', default: 'PROFILE' }, // 見出し
-        content: {
-            type: 'string',
-            default:
-                '名前：東京太郎\n生年月日：1990年1月1日\n出身地：東京都\n趣味：読書、映画鑑賞、旅行',
-        },
-
-        backgroundColor: { type: 'string', default: '#ebebeb' },
-        titleColor:      { type: 'string', default: '#000000' },
-        contentColor:    { type: 'string', default: '#000000' },
-    },
-
-
     /* === 編集画面 ============================================= */
-    edit({ attributes, setAttributes }) {
+    edit({ attributes, setAttributes}) {
         const {
             imageUrl,
             altText,
@@ -64,9 +49,13 @@ registerBlockType('wdl/profile-1', {
         const onImageSelect = (media) =>
             setAttributes({ imageUrl: media.url, altText: media.alt });
 
+        const blockProps = useBlockProps({
+            className: 'profile-1',
+            style: { backgroundColor }
+        });
+
         return (
-            <Fragment>
-                {/* === Inspector === */}
+            <>
                 <InspectorControls>
                     <PanelBody title="画像設定" initialOpen={true}>
                         <MediaUpload
@@ -119,8 +108,7 @@ registerBlockType('wdl/profile-1', {
                     </PanelBody>
                 </InspectorControls>
 
-                {/* === ブロック本体 === */}
-                <div className="profile-1" style={{ backgroundColor }}>
+                <div {...blockProps}>
                     <div className="profile_1_inner">
                         <div className="profile_1_image">
                             {imageUrl ? (
@@ -154,7 +142,7 @@ registerBlockType('wdl/profile-1', {
                         </div>
                     </div>
                 </div>
-            </Fragment>
+            </>
         );
     },
 
@@ -173,8 +161,13 @@ registerBlockType('wdl/profile-1', {
         /* 見出しの mark→span 変換を念押し */
         const safeTitle = replaceMarkWithSpan(profileTitle);
 
+        const blockProps = useBlockProps.save({
+            className: 'profile-1',
+            style: { backgroundColor }
+        });
+
         return (
-            <div className="profile-1" style={{ backgroundColor }}>
+            <div {...blockProps}>
                 <div className="profile_1_inner">
                     <div className="profile_1_image">
                         {imageUrl && <img loading="lazy" src={imageUrl} alt={altText} />}

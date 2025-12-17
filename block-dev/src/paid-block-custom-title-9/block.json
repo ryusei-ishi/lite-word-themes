@@ -1,0 +1,63 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-custom-title-9",
+	"version": "1.0.0",
+	"title": "見出しタイトル 09",
+	"category": "lw-heading",
+	"icon": "editor-textcolor",
+	"description": "上下ボーダー付き見出しブロック",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"subTitle": {
+			"type": "string",
+			"default": "製品紹介"
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "PRODUCTS"
+		},
+		"headingLevel": {
+			"type": "number",
+			"default": 2
+		},
+		"mainTitleColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"borderTopColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"borderBottomColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"borderTopOpacity": {
+			"type": "number",
+			"default": 100
+		},
+		"borderBottomOpacity": {
+			"type": "number",
+			"default": 20
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 10
+		},
+		"sizeClass": {
+			"type": "string",
+			"default": "size_m"
+		}
+	},
+	"editorScript": "file:./paid-block-custom-title-9.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 9
+}

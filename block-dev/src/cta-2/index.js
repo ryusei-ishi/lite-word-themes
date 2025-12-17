@@ -1,35 +1,18 @@
+/**
+ * CTA 02
+ * ★ apiVersion 3 対応（2025-12-07）
+ */
 import { registerBlockType } from '@wordpress/blocks';
-import { InspectorControls, RichText, MediaUpload } from '@wordpress/block-editor';
+import { InspectorControls, RichText, MediaUpload, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, ColorPicker, TextControl, SelectControl, RangeControl } from '@wordpress/components';
 import { leftButtonIconSvgArr } from '../utils.js';
-import './style.scss';
-import './editor.scss';
+
+import metadata from './block.json';
+
 // SVG アイコンオプションを定義
 const iconSvgOptions = leftButtonIconSvgArr();
-registerBlockType('wdl/cta-2', {
-    title: 'CTA 02',
-    icon: 'megaphone',
-    category: 'liteword-other',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        title: { type: 'string', source: 'html', selector: 'h2', default: 'お問合せはこちら' },
-        addressText: { type: 'string', source: 'html', selector: '.address',  default: '〒110-0000 東京都豊島区池袋0-0-0／TEL. 042-000-0000／FAX. 042-000-0001' },
-        phoneText: { type: 'string', source: 'html', selector: '.tel_text', default: '（受付時間／9:00～17:00 第2・第4土曜、日祝休業）' },
-        phoneNumber: { type: 'string', default: '042-000-0000' },
-        mailText: { type: 'string', source: 'html', selector: '.mail_text', default: 'メールでお問い合わせ' },
-        mailUrl: { type: 'string', default: 'mailto:info@example.com' },
-        backgroundImage: { type: 'string', default: 'https://cdn.pixabay.com/photo/2022/03/27/12/46/china-7094961_960_720.jpg' },
-        filterColor: { type: 'string', default: 'rgba(0, 0, 0, 0.5)' },
-        buttonBackgroundColor: { type: 'string', default: '#0073aa' },
-        buttonTextColor: { type: 'string', default: '#ffffff' },
-        selectedIcon: {  // アイコンの属性を追加（SVG文字列）
-            type: 'string',
-            default: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z"/></svg>'
-        },
-        maxWidth: { type: 'number', default: 0 }
-    },
+
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const {
@@ -44,11 +27,14 @@ registerBlockType('wdl/cta-2', {
         const onChangeMaxWidth = (value) => setAttributes({ maxWidth: value });
         const onResetMaxWidth = () => setAttributes({ maxWidth: 0 });
 
+        // useBlockProps で apiVersion 3 対応
+        const blockProps = useBlockProps({
+            className: `wp-block-wdl-cta-2 ${maxWidth > 0 ? 'max_w' : ''}`,
+            style: maxWidth > 0 ? { maxWidth: maxWidth + 'px' } : {}
+        });
+
         return (
-            <div 
-                className={`wp-block-wdl-cta-2 ${maxWidth > 0 ? 'max_w' : ''}`}
-                style={maxWidth > 0 ? { maxWidth: maxWidth + 'px' } : {}}
-            >
+            <div {...blockProps}>
                 <InspectorControls>
                     {/* 横幅の設定 */}
                     <PanelBody title="横幅の設定" initialOpen={false}>
@@ -198,11 +184,14 @@ registerBlockType('wdl/cta-2', {
             mailUrl, backgroundImage, filterColor, buttonBackgroundColor, buttonTextColor, selectedIcon, maxWidth
         } = attributes;
 
+        // useBlockProps.save() で apiVersion 3 対応
+        const blockProps = useBlockProps.save({
+            className: `wp-block-wdl-cta-2 ${maxWidth > 0 ? 'max_w' : ''}`,
+            style: maxWidth > 0 ? { maxWidth: maxWidth + 'px' } : {}
+        });
+
         return (
-            <div 
-                className={`wp-block-wdl-cta-2 ${maxWidth > 0 ? 'max_w' : ''}`}
-                style={maxWidth > 0 ? { maxWidth: maxWidth + 'px' } : {}}
-            >
+            <div {...blockProps}>
                 <div className="cta-2" style={{ backgroundImage: `url(${backgroundImage})` }}>
                     <div className="cta-2__wrap">
                         <RichText.Content

@@ -1,0 +1,123 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/shin-gas-station-01-list-2",
+	"version": "1.0.0",
+	"title": "インフォリスト 2 shin shop pattern 01",
+	"category": "lw-list",
+	"icon": "images-alt2",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"bgImage": {
+			"type": "string",
+			"source": "attribute",
+			"selector": ".bg_image img",
+			"attribute": "src",
+			"default": "https://picsum.photos/1000/1000?random=4"
+		},
+		"filterColor": {
+			"type": "string",
+			"default": "rgba(0, 0, 0, 0.5)"
+		},
+		"topTitleSub": {
+			"type": "string",
+			"source": "html",
+			"selector": ".ttl .sub",
+			"default": "私たちの会社について"
+		},
+		"topTitleMain": {
+			"type": "string",
+			"source": "html",
+			"selector": ".ttl .main",
+			"default": "Company"
+		},
+		"items": {
+			"type": "array",
+			"source": "query",
+			"selector": "li.item",
+			"default": [
+				{
+					"itemImage": "https://picsum.photos/1000/1000?random=1",
+					"no": "01",
+					"sub": "Greeting",
+					"main": "代表あいさつ",
+					"description": "私たちは地域に根ざしたサービスを提供し、お客様の暮らしをより豊かにすることを目指してまいりました。\n地域社会や環境への配慮を欠かさず、持続可能な未来の実現に向けた取り組みにも積極的に取り組んでおります。",
+					"btnLabel": "代表あいさつ",
+					"url": ""
+				},
+				{
+					"itemImage": "https://picsum.photos/1000/1000?random=2",
+					"no": "02",
+					"sub": "Overview & History",
+					"main": "会社概要・沿革",
+					"description": "DriveEaseは、小さなスタートから社会を支える企業へと進化し、移動の快適さと安心を提供しています。我々は地域社会と共に成長し、未来のカーライフを支える存在を目指します。",
+					"btnLabel": "会社概要・沿革",
+					"url": ""
+				},
+				{
+					"itemImage": "https://picsum.photos/1000/1000?random=3",
+					"no": "03",
+					"sub": "Office Infomation",
+					"main": "事業所案内",
+					"description": "東北地方を中心に皆さまのカーライフをより快適にお届けいただけるよう、各地域での店舗展開を行っております。\n是非、お近くの店舗へお立ち寄りください。",
+					"btnLabel": "事業所案内",
+					"url": ""
+				}
+			],
+			"query": {
+				"itemImage": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".image img",
+					"attribute": "src"
+				},
+				"no": {
+					"type": "string",
+					"source": "text",
+					"selector": ".sub .no"
+				},
+				"sub": {
+					"type": "string",
+					"source": "html",
+					"selector": ".sub .sub-text",
+					"default": "Greeting"
+				},
+				"main": {
+					"type": "string",
+					"source": "html",
+					"selector": ".ttl .main",
+					"default": "代表あいさつ"
+				},
+				"description": {
+					"type": "string",
+					"source": "html",
+					"selector": ".text_in p",
+					"default": "私たちは地域に根ざしたサービスを提供し、お客様の暮らしをより豊かにすることを目指してまいりました。\n地域社会や環境への配慮を欠かさず、持続可能な未来の実現に向けた取り組みにも積極的に取り組んでおります。"
+				},
+				"btnLabel": {
+					"type": "string",
+					"source": "html",
+					"selector": ".btn .btn-label",
+					"default": "代表あいさつ"
+				},
+				"url": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".btn",
+					"attribute": "href",
+					"default": ""
+				}
+			}
+		}
+	},
+	"editorScript": "file:./shin-gas-station-01-list-2.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 15
+}

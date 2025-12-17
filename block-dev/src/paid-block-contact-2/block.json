@@ -1,0 +1,78 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-contact-2",
+	"version": "1.0.0",
+	"title": "お問合わせフォーム 02",
+	"category": "lw-contact",
+	"icon": "email",
+	"supports": {
+		"anchor": true
+	},
+	"editorScript": "file:./paid-block-contact-2.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 2,
+	"attributes": {
+		"formId": {
+			"type": "number",
+			"default": 1
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "CONTACT"
+		},
+		"subTitle": {
+			"type": "string",
+			"default": "お問合わせフォーム"
+		},
+		"description": {
+			"type": "string",
+			"default": "ご不明な点やご相談がございましたら、下記のお問い合わせフォームよりお気軽にご連絡ください。"
+		},
+		"bgImageUrl": {
+			"type": "string",
+			"default": "https://lite-word.com/sample_img/background/6.webp"
+		},
+		"bgImageUrlSp": {
+			"type": "string",
+			"default": ""
+		},
+		"bgColor": {
+			"type": "string",
+			"default": "#03294C"
+		},
+		"bgOpacity": {
+			"type": "number",
+			"default": 0.5
+		},
+		"requiredBgColor": {
+			"type": "string",
+			"default": "#da3838"
+		},
+		"submitBgColor": {
+			"type": "string",
+			"default": "#EE3131"
+		},
+		"mainTitleLevel": {
+			"type": "string",
+			"default": "h1"
+		},
+		"maxWidth": {
+			"type": "string",
+			"default": "800px"
+		},
+		"descriptionAlignPC": {
+			"type": "string",
+			"default": "pc_center"
+		},
+		"descriptionAlignSP": {
+			"type": "string",
+			"default": "sp_center"
+		}
+	}
+}

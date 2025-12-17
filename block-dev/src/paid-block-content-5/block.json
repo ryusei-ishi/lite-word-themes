@@ -1,0 +1,82 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-content-5",
+	"version": "1.0.0",
+	"title": "Content 05",
+	"category": "lw-content",
+	"icon": "format-image",
+	"editorScript": "file:./paid-block-content-5.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"pcImage": {
+			"type": "string",
+			"default": "https://lite-word.com/sample_img/women/7.webp"
+		},
+		"spImage": {
+			"type": "string",
+			"default": ""
+		},
+		"imgAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"pcTitle": {
+			"type": "string",
+			"default": "PC用タイトルのサンプルテキスト"
+		},
+		"spTitle": {
+			"type": "string",
+			"default": ""
+		},
+		"pcBody": {
+			"type": "string",
+			"default": "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト入力できます。テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"
+		},
+		"textColumns": {
+			"type": "string",
+			"default": "2"
+		},
+		"headingLevel": {
+			"type": "number",
+			"default": 2
+		},
+		"verticalCenter": {
+			"type": "boolean",
+			"default": false
+		},
+		"aspectRatioHeight": {
+			"type": "number",
+			"default": 650
+		},
+		"contsMaxWidth": {
+			"type": "number",
+			"default": 1200
+		},
+		"spTitleFont": {
+			"type": "string",
+			"default": ""
+		},
+		"spTitleFontWeight": {
+			"type": "string",
+			"default": "500"
+		},
+		"pcTitleColor": {
+			"type": "string",
+			"default": ""
+		},
+		"spTitleColor": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"no": 5
+}

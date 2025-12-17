@@ -1,0 +1,78 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-comment-1",
+	"version": "1.0.0",
+	"title": "吹き出しコメント 1",
+	"category": "lw-comment",
+	"icon": "format-chat",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"name": {
+			"type": "string",
+			"default": "お名前"
+		},
+		"title": {
+			"type": "string",
+			"default": "こんにちは！コメントサンプルです。"
+		},
+		"imageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"imageColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"altText": {
+			"type": "string",
+			"default": "画像"
+		},
+		"commentAlignment": {
+			"type": "string",
+			"default": "left"
+		},
+		"commentBgColor": {
+			"type": "string",
+			"default": "#eeeeee"
+		},
+		"nameFontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"nameFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"nameTextColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"titleFontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"titleFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"titleTextColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 1200
+		}
+	},
+	"editorScript": "file:./lw-comment-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 1
+}

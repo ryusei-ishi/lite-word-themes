@@ -1,85 +1,21 @@
+/**
+ * バナー 04（2カラム2行）
+ * ★ apiVersion 3 対応（2025-12-07）
+ */
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, MediaUpload } from '@wordpress/block-editor';
+import { RichText, InspectorControls, MediaUpload, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, TextControl, SelectControl, ToggleControl, Button ,RangeControl,ColorPalette } from '@wordpress/components';
 import './style.scss';
 import './editor.scss';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 
+import metadata from './block.json';
+
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType('wdl/lw-banner-info-04', {
-    title: 'バナー 04（2カラム2行）',
-    icon: 'images-alt2',
-    category: 'liteword-banner',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        filterBackgroundColor: {
-            type: 'string',
-            default: '#000',
-        },
-        filterOpacity: {
-            type: 'number',
-            default: 0.45,
-        },
-        maxWidth: {
-            type: 'number',
-            default: 800,
-        },
-        titleFontFamily: {
-            type: 'string',
-            default: "Noto Sans JP",
-        },
-        titleFontWeight: {
-            type: 'string',
-            default: "800",
-        },
-        pFontFamily: {
-            type: 'string',
-            default: "Noto Sans JP",
-        },
-        pFontWeight: {
-            type: 'string',
-            default: "400",
-        },
-        items: {
-            type: 'array',
-            default: [
-                {
-                    title: 'タイトルタイトル',
-                    description: '説明テキスト説明テ',
-                    imgUrl: 'https://picsum.photos/1000/1000?random=1',
-                    linkUrl: '',
-                    openInNewTab: false,
-                },
-                {
-                    title: 'タイトルタイトル',
-                    description: '説明テキスト説明テ',
-                    imgUrl: 'https://picsum.photos/1000/1000?random=2',
-                    linkUrl: '',
-                    openInNewTab: false,
-                },
-                {
-                    title: 'タイトルタイトル',
-                    description: '説明テキスト説明テ',
-                    imgUrl: 'https://picsum.photos/1000/1000?random=3',
-                    linkUrl: '',
-                    openInNewTab: false,
-                },
-                {
-                    title: 'タイトルタイトル',
-                    description: '説明テキスト説明テ',
-                    imgUrl: 'https://picsum.photos/1000/1000?random=4',
-                    linkUrl: '',
-                    openInNewTab: false,
-                },
-            ],
-        },
-    },
-
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const { items, titleFontFamily, titleFontWeight, pFontFamily, pFontWeight,
@@ -92,8 +28,13 @@ registerBlockType('wdl/lw-banner-info-04', {
             setAttributes({ items: newItems });
         };
 
+        // useBlockProps で apiVersion 3 対応
+        const blockProps = useBlockProps({
+            className: 'lw-banner-info-04'
+        });
+
         return (
-            <>
+            <nav {...blockProps}>
                 <InspectorControls>
                     {items.map((item, index) => (
                         <PanelBody title={`項目 ${index + 1}`} key={index}>
@@ -185,8 +126,7 @@ registerBlockType('wdl/lw-banner-info-04', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <nav className="lw-banner-info-04">
-                    <ul className="lw-banner-info-04__wrap" style={{maxWidth:maxWidth}}>
+                <ul className="lw-banner-info-04__wrap" style={{maxWidth:maxWidth}}>
                         {items.map((item, index) => (
                             <li key={index}>
                                 <div className="a">
@@ -214,9 +154,8 @@ registerBlockType('wdl/lw-banner-info-04', {
                                 </div>
                             </li>
                         ))}
-                    </ul>
-                </nav>
-            </>
+                </ul>
+            </nav>
         );
     },
     save: function (props) {
@@ -225,8 +164,13 @@ registerBlockType('wdl/lw-banner-info-04', {
             filterBackgroundColor, filterOpacity, maxWidth
         } = attributes;
 
+        // useBlockProps.save() で apiVersion 3 対応
+        const blockProps = useBlockProps.save({
+            className: 'lw-banner-info-04'
+        });
+
         return (
-            <nav className="lw-banner-info-04">
+            <nav {...blockProps}>
                 <ul className="lw-banner-info-04__wrap" style={{maxWidth:maxWidth}}>
                     {items.map((item, index) => {
                         // リンクの有無をチェック

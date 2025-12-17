@@ -7,6 +7,7 @@ import {
 	InspectorControls,
 	URLInput,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -22,6 +23,7 @@ import {
 } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ─ オプション配列 ─ */
 const fontOptions       = fontOptionsArr();
@@ -53,23 +55,7 @@ const defaultBtn = () => ({
 	borderColor      : '#ffffff',
 });
 
-registerBlockType('wdl/paid-block-lw-button-5', {
-	title   : 'リンクボタン 05',
-	icon    : 'button',
-	category: 'liteword-buttons',
-	supports: { anchor: true },
-
-	attributes: {
-		blockId     : { type:'string' },
-		fontWeight  : { type:'string', default:'400' },
-		FontSet     : { type:'string', default:'' },
-		position    : { type:'string', default:'center' },
-		gapX        : { type:'number', default:12 },
-		gapY        : { type:'number', default:12 },
-		borderRadius: { type:'number', default:12 },   // 共通角丸
-		buttons     : { type:'array',  default:[ defaultBtn(), defaultBtn(), defaultBtn() ] },
-	},
-
+registerBlockType(metadata.name, {
 	/* ───────── edit ───────── */
 	// ★ 修正: useEffect を導入
 	edit( { attributes, setAttributes, clientId } ) {
@@ -96,11 +82,13 @@ registerBlockType('wdl/paid-block-lw-button-5', {
 
 		const posClass=`position_${position}`;
 
+		const blockProps = useBlockProps({
+			className: `paid-block-lw-button-5 ${posClass}`,
+			style: { columnGap:`${gapX}px`, rowGap:`${gapY}px` }
+		});
+
 		return (
-			<div
-				className={ `paid-block-lw-button-5 ${posClass}` }
-				style={{ columnGap:`${gapX}px`, rowGap:`${gapY}px` }}
-			>
+			<div {...blockProps}>
 				<InspectorControls>
 
 					{/* ── 1. 全体の設定 ── */}
@@ -404,11 +392,13 @@ registerBlockType('wdl/paid-block-lw-button-5', {
 		} = attributes;
 		const posClass=`position_${position}`;
 
+		const blockProps = useBlockProps.save({
+			className: `paid-block-lw-button-5 ${posClass}`,
+			style: { columnGap:`${gapX}px`, rowGap:`${gapY}px` }
+		});
+
 		return (
-			<div
-				className={ `paid-block-lw-button-5 ${posClass}` }
-				style={{ columnGap:`${gapX}px`, rowGap:`${gapY}px` }}
-			>
+			<div {...blockProps}>
 				{buttons.map((btn,i)=>{
 					if(!btn.enabled) return null;
 					const id=`${blockId}-${i+1}`;

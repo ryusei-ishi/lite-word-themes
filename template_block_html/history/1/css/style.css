@@ -1,11 +1,9 @@
 .paid-block-history-1 {
   border-left: 2px solid #ddd;
 }
-
 .paid-block-history-1 + .paid-block-history-1 .history__year dl.history__events .history__events_row:first-of-type {
   padding-top: 1.5em;
 }
-
 .paid-block-history-1 .history__year {
   position: relative;
   padding-left: 1.5em;
@@ -14,13 +12,11 @@
   align-items: start;
   grid-template-columns: 4.5em calc(100% - 4.5em);
 }
-
 @container (max-width:700px) {
   .paid-block-history-1 .history__year {
     display: block;
   }
 }
-
 .paid-block-history-1 .history__year .history__point {
   position: absolute;
   top: 0.35em;
@@ -31,7 +27,6 @@
   background: #fff;
   border: 2px solid #038e67;
 }
-
 .paid-block-history-1 .history__year h3.history__year-heading {
   margin: 0;
   padding: 0 0.5em;
@@ -44,17 +39,14 @@
   white-space: nowrap;
   text-align: center;
 }
-
 .paid-block-history-1 .history__year dl.history__events {
   padding-left: 1em;
 }
-
 @container (max-width:700px) {
   .paid-block-history-1 .history__year dl.history__events {
     padding-left: 0;
   }
 }
-
 .paid-block-history-1 .history__year dl.history__events .history__events_row {
   padding: 1.5em 0;
   display: grid;
@@ -62,34 +54,28 @@
   border-bottom: 1px dashed #ccc;
   line-height: 2em;
 }
-
 .paid-block-history-1 .history__year dl.history__events .history__events_row:first-of-type {
   padding-top: 0;
 }
-
 @container (max-width:700px) {
   .paid-block-history-1 .history__year dl.history__events .history__events_row:first-of-type {
     padding-top: 1.5em;
   }
 }
-
 @container (max-width:700px) {
   .paid-block-history-1 .history__year dl.history__events .history__events_row:last-of-type {
     border-bottom: none;
   }
 }
-
 .paid-block-history-1 .history__year dl.history__events .history__events_row dt.history__dt {
   margin: 0;
   text-align: right;
 }
-
 .paid-block-history-1 .history__year dl.history__events .history__events_row dd.history__dd {
   padding-left: 3em;
 }
-
 @container (max-width:800px) {
   .paid-block-history-1 .history__year dl.history__events .history__events_row dd.history__dd {
     padding-left: 1.5em;
   }
-}
+}/*# sourceMappingURL=style.css.map */

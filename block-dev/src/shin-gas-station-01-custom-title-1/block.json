@@ -1,0 +1,43 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/shin-gas-station-01-custom-title-1",
+	"version": "1.0.0",
+	"title": "見出しタイトル 1 shin shop pattern 01",
+	"category": "lw-heading",
+	"icon": "editor-textcolor",
+	"description": "下線カスタマイズ対応見出しブロック",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"mainTitle": {
+			"type": "string",
+			"default": "タイトル"
+		},
+		"headingLevel": {
+			"type": "number",
+			"default": 2
+		},
+		"underlineHeight": {
+			"type": "number",
+			"default": 1
+		},
+		"underlineColor": {
+			"type": "string",
+			"default": "#C6C6C6"
+		},
+		"uniqueId": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./shin-gas-station-01-custom-title-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 15
+}

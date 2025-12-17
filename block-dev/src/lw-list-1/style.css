@@ -39,6 +39,7 @@
 }
 
 .lw-list-1 .lw-list-1_inner .lw-list-1_content {
+  position: relative;
   min-height: 112px;
   display: grid;
   grid-template-columns: 112px calc(100% - 112px);
@@ -113,4 +114,11 @@
 .lw-list-1 .lw-list-1_inner .lw-list-1_content .lw-list-1_text p {
   padding: 0;
   margin: 0;
+}
+
+.lw-list-1 .lw-table-item-controls {
+  height: 30px;
+  top: calc(100% - 16px);
+  right: -8px;
+  margin: auto;
 }

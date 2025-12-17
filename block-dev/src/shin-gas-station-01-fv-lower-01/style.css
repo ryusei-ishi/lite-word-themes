@@ -2,24 +2,21 @@
   margin-left: calc((100% - 100vw) / 2);
   width: 100vw;
 }
-
 .lw_content_wrap.page:has(.first_content + .shin-gas-station-01-fv-lower-01) .first_content {
   display: none;
 }
-
 @media (max-width: 1080px) {
   .lw_content_wrap.page:has(.first_content + .shin-gas-station-01-fv-lower-01) {
     margin-top: 0 !important;
   }
 }
-
 @media (max-width: 600px) {
   .lw_content_wrap.page:has(.first_content + .shin-gas-station-01-fv-lower-01) {
     margin-top: 0 !important;
   }
 }
 
-[class*="header_ptn"] .inner::after {
+[class*=header_ptn] .inner::after {
   display: none !important;
 }
 
@@ -38,40 +35,34 @@
   border-radius: 0 0 160px 0;
   overflow: hidden;
 }
-
 @container (max-width:980px) {
   .wp-block .shin-gas-station-01-fv-lower-01,
   .shin-gas-station-01-fv-lower-01 {
     border-radius: 0 0 120px 0;
   }
 }
-
 @container (max-width:800px) {
   .wp-block .shin-gas-station-01-fv-lower-01,
   .shin-gas-station-01-fv-lower-01 {
     border-radius: 0 0 80px 0;
   }
 }
-
 @container (max-width:600px) {
   .wp-block .shin-gas-station-01-fv-lower-01,
   .shin-gas-station-01-fv-lower-01 {
     border-radius: 0 0 60px 0;
   }
 }
-
 @container (max-width:500px) {
   .wp-block .shin-gas-station-01-fv-lower-01,
   .shin-gas-station-01-fv-lower-01 {
     border-radius: 0 0 40px 0;
   }
 }
-
 .wp-block .shin-gas-station-01-fv-lower-01 + .post_style > .wp-block-columns.has-background,
 .shin-gas-station-01-fv-lower-01 + .post_style > .wp-block-columns.has-background {
   margin-top: 0;
 }
-
 .wp-block .shin-gas-station-01-fv-lower-01 .bg_image,
 .shin-gas-station-01-fv-lower-01 .bg_image {
   position: absolute;
@@ -84,14 +75,13 @@
   height: 100%;
   overflow: hidden;
 }
-
 .wp-block .shin-gas-station-01-fv-lower-01 .bg_image img,
 .shin-gas-station-01-fv-lower-01 .bg_image img {
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
   width: 100%;
   height: 100%;
 }
-
 .wp-block .shin-gas-station-01-fv-lower-01 + p,
 .wp-block .shin-gas-station-01-fv-lower-01 + h2,
 .wp-block .shin-gas-station-01-fv-lower-01 + h3,
@@ -106,7 +96,6 @@
 .shin-gas-station-01-fv-lower-01 + h6 {
   margin-top: 2.4em !important;
 }
-
 .wp-block .shin-gas-station-01-fv-lower-01 .filter,
 .shin-gas-station-01-fv-lower-01 .filter {
   position: absolute;
@@ -119,42 +108,36 @@
   height: 100%;
   mix-blend-mode: multiply;
 }
-
 .wp-block .shin-gas-station-01-fv-lower-01 .shin-gas-station-01-fv-lower-01_inner,
 .shin-gas-station-01-fv-lower-01 .shin-gas-station-01-fv-lower-01_inner {
   padding: 0 64px;
   margin: 0 auto;
   width: 100%;
 }
-
 @media (max-width: 1180px) {
   .wp-block .shin-gas-station-01-fv-lower-01 .shin-gas-station-01-fv-lower-01_inner,
   .shin-gas-station-01-fv-lower-01 .shin-gas-station-01-fv-lower-01_inner {
     padding: 0 44px;
   }
 }
-
 @media (max-width: 800px) {
   .wp-block .shin-gas-station-01-fv-lower-01 .shin-gas-station-01-fv-lower-01_inner,
   .shin-gas-station-01-fv-lower-01 .shin-gas-station-01-fv-lower-01_inner {
     padding: 0 32px;
   }
 }
-
 @media (max-width: 500px) {
   .wp-block .shin-gas-station-01-fv-lower-01 .shin-gas-station-01-fv-lower-01_inner,
   .shin-gas-station-01-fv-lower-01 .shin-gas-station-01-fv-lower-01_inner {
     padding: 0 20px;
   }
 }
-
 .wp-block .shin-gas-station-01-fv-lower-01 h1,
 .shin-gas-station-01-fv-lower-01 h1 {
   position: relative;
   z-index: 10;
   width: 100%;
 }
-
 .wp-block .shin-gas-station-01-fv-lower-01 h1 .main,
 .shin-gas-station-01-fv-lower-01 h1 .main {
   display: block;
@@ -164,40 +147,34 @@
   font-weight: 600;
   color: #101010;
 }
-
 @container (max-width:980px) {
   .wp-block .shin-gas-station-01-fv-lower-01 h1 .main,
   .shin-gas-station-01-fv-lower-01 h1 .main {
     font-size: 40px;
   }
 }
-
 @container (max-width:800px) {
   .wp-block .shin-gas-station-01-fv-lower-01 h1 .main,
   .shin-gas-station-01-fv-lower-01 h1 .main {
     font-size: 32px;
   }
 }
-
 @container (max-width:600px) {
   .wp-block .shin-gas-station-01-fv-lower-01 h1 .main,
   .shin-gas-station-01-fv-lower-01 h1 .main {
     font-size: 28px;
   }
 }
-
 @container (max-width:500px) {
   .wp-block .shin-gas-station-01-fv-lower-01 h1 .main,
   .shin-gas-station-01-fv-lower-01 h1 .main {
     font-size: 20px;
   }
 }
-
 .wp-block .shin-gas-station-01-fv-lower-01 h1 .main:empty,
 .shin-gas-station-01-fv-lower-01 h1 .main:empty {
   display: none;
 }
-
 .wp-block .shin-gas-station-01-fv-lower-01 h1 .sub,
 .shin-gas-station-01-fv-lower-01 h1 .sub {
   margin-top: 0.1em;
@@ -208,22 +185,19 @@
   font-weight: 500;
   color: var(--color-main);
 }
-
 @container (max-width:800px) {
   .wp-block .shin-gas-station-01-fv-lower-01 h1 .sub,
   .shin-gas-station-01-fv-lower-01 h1 .sub {
     font-size: 12px;
   }
 }
-
 @container (max-width:500px) {
   .wp-block .shin-gas-station-01-fv-lower-01 h1 .sub,
   .shin-gas-station-01-fv-lower-01 h1 .sub {
     font-size: 11px;
   }
 }
-
 .wp-block .shin-gas-station-01-fv-lower-01 h1 .sub:empty,
 .shin-gas-station-01-fv-lower-01 h1 .sub:empty {
   display: none;
-}
+}/*# sourceMappingURL=style.css.map */

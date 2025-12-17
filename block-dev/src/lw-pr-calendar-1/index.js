@@ -1,62 +1,16 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls } from '@wordpress/block-editor';
+import { RichText, InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, ColorPalette, SelectControl } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
+
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType('wdl/lw-pr-calendar-1', {
-    title: 'カレンダー 1（診療日）',
-    icon: 'grid-view',
-    category: 'liteword-price',
-    supports: {
-        anchor: true,
-    },
-    attributes: {
-        colorTableItemBd: {
-            type: 'string',
-            default: 'var(--color-main)'
-        },
-        colorTableHeadItemBg: {
-            type: 'string',
-            default: 'var(--color-main)' 
-        },
-        colorTableHeadItemText: {
-            type: 'string',
-            default: '#ffffff'
-        },
-        colorTableBodyItemText: {
-            type: 'string',
-            default: '#000000'
-        },
-        colorTableBodyItemFirstText: {
-            type: 'string',
-            default: '#000000'
-        },
-        fontSet: {
-            type: 'string',
-            default: ''
-        },
-        fontWeight: {
-            type: 'string',
-            default: ''
-        },
-        headItems: {
-            type: 'array',
-            default: ['営業時間', '月', '火', '水', '木', '金', '土', '日']
-        },
-        bodyRows: {
-            type: 'array',
-            default: [
-                ['10:00 - 14:00', '○', '○', '×', '○', '○', '○', '○'],
-                ['16:00 - 20:00', '○', '○', '×', '○', '○', '○', '×']
-            ]
-        }
-    },
+registerBlockType(metadata.name, {
     edit: function(props) {
         const {
             attributes: {
@@ -106,8 +60,19 @@ registerBlockType('wdl/lw-pr-calendar-1', {
             setAttributes({ bodyRows: reordered });
         };
 
+        const blockProps = useBlockProps({
+            className: 'lw-pr-calendar-1',
+            style: {
+                '--color-table-item-bd': colorTableItemBd,
+                '--color-table-head-item-bg': colorTableHeadItemBg,
+                '--color-table-head-item-text': colorTableHeadItemText,
+                '--color-table-body-item-text': colorTableBodyItemText,
+                '--color-table-body-item-first-text': colorTableBodyItemFirstText
+            }
+        });
+
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
                     <PanelBody title="色設定" initialOpen={true}>
                         <p>テーブルアイテムのボーダー色</p>
@@ -151,16 +116,7 @@ registerBlockType('wdl/lw-pr-calendar-1', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <div 
-                    className="lw-pr-calendar-1"
-                    style={{
-                        '--color-table-item-bd': colorTableItemBd,
-                        '--color-table-head-item-bg': colorTableHeadItemBg,
-                        '--color-table-head-item-text': colorTableHeadItemText,
-                        '--color-table-body-item-text': colorTableBodyItemText,
-                        '--color-table-body-item-first-text': colorTableBodyItemFirstText
-                    }}
-                >
+                <div {...blockProps}>
                     <div className="wrap_table">
                         <div className="table_head">
                             {headItems.map((item, index) => (
@@ -239,7 +195,7 @@ registerBlockType('wdl/lw-pr-calendar-1', {
                         リストを追加する
                     </button>
                 </div>
-            </Fragment>
+            </>
         );
     },
     save: function(props) {

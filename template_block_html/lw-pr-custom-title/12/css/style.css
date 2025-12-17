@@ -3,25 +3,21 @@
   margin: 1em 0;
   font-size: 16px;
 }
-
 @media (max-width: 800px) {
   .lw-pr-custom-title-12 {
     font-size: 14px;
   }
 }
-
 @media (max-width: 600px) {
   .lw-pr-custom-title-12 {
     font-size: 12px;
   }
 }
-
 @media (max-width: 400px) {
   .lw-pr-custom-title-12 {
     font-size: 10px;
   }
 }
-
 .lw-pr-custom-title-12 .ttl {
   position: relative;
   z-index: 10;
@@ -34,35 +30,29 @@
   outline: 1px solid rgba(255, 255, 255, 0.8);
   outline-offset: -6px;
 }
-
 @media (max-width: 600px) {
   .lw-pr-custom-title-12 .ttl {
     outline-offset: -4px;
   }
 }
-
 @media (max-width: 400px) {
   .lw-pr-custom-title-12 .ttl {
     outline-offset: -3px;
   }
 }
-
 .lw-pr-custom-title-12 .ttl .main {
   display: block;
   font-size: 2em;
   line-height: 1.4;
 }
-
 .lw-pr-custom-title-12 .ttl .main + .sub {
   margin-top: 0.2em;
 }
-
 .lw-pr-custom-title-12 .ttl .sub {
   display: block;
   font-size: 1em;
   line-height: 1.6;
 }
-
 .lw-pr-custom-title-12 .ttl::after, .lw-pr-custom-title-12 .ttl::before {
   position: absolute;
   top: 100%;
@@ -72,15 +62,12 @@
   height: 0;
   display: block;
   border-style: solid;
-  border-width: 1em 1em 0 0;
-  /* 上と右にボーダー */
+  border-width: 1em 1em 0 0; /* 上と右にボーダー */
   border-color: var(--lw-pr-custom-title-12-sub-color) transparent transparent transparent;
 }
-
 .lw-pr-custom-title-12 .ttl::before {
   right: auto;
   left: 0;
-  border-width: 1em 0 0 1em;
-  /* 上と左にボーダー */
+  border-width: 1em 0 0 1em; /* 上と左にボーダー */
   border-color: var(--lw-pr-custom-title-12-sub-color) transparent transparent transparent;
-}
+}/*# sourceMappingURL=style.css.map */

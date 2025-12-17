@@ -3,8 +3,7 @@ import {
     RichText,
     MediaUpload,
     InspectorControls,
-    ColorPalette
-} from '@wordpress/block-editor';
+    ColorPalette, useBlockProps } from '@wordpress/block-editor';
 import {
     PanelBody,
     SelectControl,
@@ -23,6 +22,7 @@ import {
 
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // フォント選択肢・フォントウェイト選択肢・アイコン選択肢
 const fontOptions = fontOptionsArr();
@@ -30,168 +30,13 @@ const fontWeightOptions = fontWeightOptionsArr();
 const iconSvgOptions = serviceInfoIconSvgArr();
 
 // カスタムブロックを定義
-registerBlockType('wdl/paid-block-link-2', {
-    title: 'リンクリスト 2',
-    icon: 'lightbulb',
-    category: 'liteword-other',
-    supports: {
-        anchor: true,
-    },
-    attributes: {
-        // ====== リッチテキストなど ======
-        mainTitle: {
-            type: 'string',
-            source: 'html',
-            selector: '.main_title_text',
-            default: 'INFORMATION'
-        },
-        titleBdColor: {
-            type: 'string',
-            default: '#da5959'
-        },
-        subTitle: {
-            type: 'string',
-            source: 'html',
-            selector: '.sub',
-            default: 'インフォメーション'
-        },
-        mainExplanation: {
-            type: 'string',
-            source: 'html',
-            selector: '.main_explanation',
-            default: 'テキストテキストテキストテキスト'
-        },
-
-        // ====== タイトル・説明のフォント等 ======
-        fontLi: {
-            type: 'string',
-            default: ''
-        },
-        fontColorLi: {
-            type: 'string',
-            default: '#fff'
-        },
-        fontWeightLi: {
-            type: 'string',
-            default: '500'
-        },
-        fontLiP: {
-            type: 'string',
-            default: ''
-        },
-        fontColorLiP: {
-            type: 'string',
-            default: '#fff'
-        },
-        fontWeightLiP: {
-            type: 'string',
-            default: '400'
-        },
-
-        // ====== 背景・枠線関連 ======
-        backgroundColor: {
-            type: 'string',
-            default: 'rgba(0, 0, 0, 0)'
-        },
-        backgroundOpacity: {
-            type: 'number',
-            default: 0.5
-        },
-        borderColor: {
-            type: 'string',
-            default: '#fff'
-        },
-        borderSize: {
-            type: 'number',
-            default: 2
-        },
-
-        // ====== フィルター用の色設定 ======
-        bgFilterColor: {
-            type: 'string',
-            default: '#000'
-        },
-        bgFilterOpacity: {
-            type: 'number',
-            default: 0.7
-        },
-
-        // ====== 背景画像 ======
-        bgImageUrl: {
-            type: 'string',
-            default: 'https://lite-word.com/sample_img/forest/1.webp'
-        },
-
-        // ====== 繰り返し要素(リンクリスト) ======
-        contents: {
-            type: 'array',
-            source: 'query',
-            selector: '.item',
-            query: {
-                ttl: {
-                    type: 'string',
-                    source: 'html',
-                    selector: 'h4.ttl'
-                },
-                text: {
-                    type: 'string',
-                    source: 'html',
-                    selector: 'p.desc'
-                },
-                url: {
-                    type: 'string',
-                    source: 'attribute',
-                    selector: '.link',
-                    attribute: 'href',
-                    default: ''
-                },
-                // ▼ icon は「data-icon 属性」として保存・読み込み
-                icon: {
-                    type: 'string',
-                    source: 'attribute',
-                    selector: '.selected_icon',
-                    attribute: 'data-icon',
-                    default: ''
-                },
-                // ▼ 新規追加: リストごとの画像URL（data-img 属性に保持）
-                imageUrl: {
-                    type: 'string',
-                    source: 'attribute',
-                    selector: 'img.selected_image', // もしくは .selected_image
-                    attribute: 'data-img',
-                    default: ''
-                },
-            },
-            default: [
-                {
-                    ttl: 'タイトルタイトル',
-                    text: 'テキストテキスト ',
-                    url: '',
-                    icon: '',
-                    imageUrl: ''
-                },
-                {
-                    ttl: 'タイトルタイトル',
-                    text: 'テキストテキスト ',
-                    url: '',
-                    icon: '',
-                    imageUrl: ''
-                },
-                {
-                    ttl: 'タイトルタイトル',
-                    text: 'テキストテキスト ',
-                    url: '',
-                    icon: '',
-                    imageUrl: ''
-                },
-            ],
-        },
-    },
-
-
-
+registerBlockType(metadata.name, {
     edit: (props) => {
         const { attributes, setAttributes } = props;
+
+        const blockProps = useBlockProps({
+            className: 'paid-block-link-2'
+        });
         const {
             mainTitle, subTitle, mainExplanation, titleBdColor,
             fontLi, fontColorLi, fontWeightLi,
@@ -229,7 +74,7 @@ registerBlockType('wdl/paid-block-link-2', {
         };
 
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
 
                     {/* ── 1. 使い方ガイド ── */}
@@ -432,7 +277,7 @@ registerBlockType('wdl/paid-block-link-2', {
                 </InspectorControls>
 
                 {/* ========== Edit画面でのプレビュー ========== */}
-                <div className="paid-block-link-2">
+                <div {...blockProps}>
                     <div className="this_wrap">
                         <h2 className="main_ttl">
                             <span className="main">
@@ -616,13 +461,17 @@ registerBlockType('wdl/paid-block-link-2', {
                         <img src={ bgImageUrl } alt="背景画像" />
                     </div>
                 </div>
-            </Fragment>
+            </>
         );
     },
 
     // ========== save() (投稿本文に保存されるHTML) ========== 
     save: (props) => {
         const { attributes } = props;
+
+        const blockProps = useBlockProps.save({
+            className: 'paid-block-link-2'
+        });
         const {
             mainTitle, subTitle, mainExplanation, titleBdColor,
             fontLi, fontColorLi, fontWeightLi,
@@ -635,7 +484,7 @@ registerBlockType('wdl/paid-block-link-2', {
         } = attributes;
 
         return (
-            <div className="paid-block-link-2">
+            <div {...blockProps}>
                 <div className="this_wrap">
                     <h2 className="main_ttl">
                         <span className="main">

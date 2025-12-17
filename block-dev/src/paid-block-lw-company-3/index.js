@@ -3,6 +3,7 @@ import {
 	RichText,
 	InspectorControls,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -11,10 +12,10 @@ import {
 	RadioControl,
 	ToggleControl,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ===== 共通オプション ===== */
 const fontOptions       = fontOptionsArr();
@@ -23,54 +24,7 @@ const fontWeightOptions = fontWeightOptionsArr();
 /* ----------------------------------------------------------
  * ブロック登録
  * -------------------------------------------------------- */
-registerBlockType('wdl/paid-block-lw-company-3', {
-	title   : '会社概要 03',
-	icon    : 'building',
-	category: 'liteword-other',
-	supports: { anchor: true },
-
-	attributes: {
-		// レイアウト
-		maxWidth: { type: 'number', default: 1080 },
-		fontSizeClass: { type: 'string', default: 'font_size_m' },
-		dtWidthClass: { type: 'string', default: 'dt_width_m' },
-		lineHeight: { type: 'number', default: 1.6 },
-		
-		// レスポンシブ
-		spFullDt: { type: 'boolean', default: false },
-		
-		// 項目名（dt）スタイル
-		dtBackgroundColor: { type: 'string', default: 'var(--color-main)' },
-		dtTextColor: { type: 'string', default: '' },
-		fontDt: { type: 'string', default: 'Murecho' },
-		fontWeightDt: { type: 'string', default: '600' },
-		
-		// 内容（dd）スタイル
-		ddTextColor: { type: 'string', default: '' },
-		fontDd: { type: 'string', default: '' },
-		fontWeightDd: { type: 'string', default: '' },
-		
-		// デザイン
-		borderColor: { type: 'string', default: 'var(--color-main)' },
-		
-		// コンテンツ（リピーター）
-		contents: {
-			type: 'array',
-			source: 'query',
-			selector: '.lw-company-3__row',
-			query: {
-				// ★ ここを 'html' に変更してHTMLタグとクラスを保持
-				term: { type:'string', source:'html', selector:'dt .lw-company-3__dt_text' },
-				desc: { type:'string', source:'html', selector:'dd' },
-			},
-			default: [
-				{ term:'会社名', desc:'サンプル株式会社' },
-				{ term:'所在地', desc:'東京都渋谷区1-2-3' },
-				{ term:'設立',   desc:'2020年1月' },
-			],
-		},
-	},
-
+registerBlockType(metadata.name, {
 	/* ======================================================
 	 * 1) エディタ
 	 * ==================================================== */
@@ -115,8 +69,12 @@ registerBlockType('wdl/paid-block-lw-company-3', {
 			setAttributes({ contents: reordered });
 		};
 
+		const blockProps = useBlockProps({
+			className: `paid-block-lw-company-3 ${fontSizeClass}`
+		});
+
 		return (
-			<Fragment>
+			<>
 				<InspectorControls>
 					{/* ■ レイアウト設定 - 必ず最初に配置、デフォルトで開いた状態 */}
 					<PanelBody title="レイアウト設定" initialOpen={true}>
@@ -342,7 +300,7 @@ registerBlockType('wdl/paid-block-lw-company-3', {
 						項目を追加する
 					</button>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -359,8 +317,12 @@ registerBlockType('wdl/paid-block-lw-company-3', {
 			contents,
 		} = attributes;
 
+		const blockProps = useBlockProps.save({
+			className: `paid-block-lw-company-3 ${fontSizeClass}`
+		});
+
 		return (
-			<div className={`paid-block-lw-company-3 ${fontSizeClass}`}>
+			<div {...blockProps}>
 				<dl className="lw-company-3__inner" style={{ 
 					maxWidth: maxWidth,
 					lineHeight: lineHeight

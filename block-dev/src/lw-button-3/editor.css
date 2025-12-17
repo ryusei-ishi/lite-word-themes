@@ -6,11 +6,9 @@
   align-items: center;
   justify-content: center;
 }
-
 .lw-button-03 * {
   box-sizing: border-box;
 }
-
 .lw-button-03 .a_inner {
   position: relative;
   z-index: 10;
@@ -18,14 +16,12 @@
   border-radius: 4px;
   transition: opacity 0.3s;
 }
-
 .lw-button-03 .a_inner a {
   padding: 12px 1em;
   display: block;
   color: #fff;
   text-decoration: none;
 }
-
 .lw-button-03 .a_inner a span.text_sub {
   padding: 4px 6px;
   width: 100%;
@@ -36,7 +32,6 @@
   line-height: 1.4em;
   border-radius: 3px;
 }
-
 .lw-button-03 .a_inner a .text_main_wrap {
   margin-top: 8px;
   display: flex;
@@ -46,21 +41,17 @@
   font-size: 20px;
   line-height: 1.3em;
 }
-
 .lw-button-03 .a_inner a .text_main_wrap .icon-svg {
   padding-top: 4px;
 }
-
 .lw-button-03 .a_inner a .text_main_wrap .icon-svg svg {
   height: 1em;
   width: auto;
 }
-
 .lw-button-03 .a_inner a .text_main_wrap span.text_main {
   display: block;
   text-align: center;
 }
-
 .lw-button-03 .a_inner .a_background {
   position: absolute;
   top: 0;
@@ -71,7 +62,6 @@
   background: var(--color-main);
   transition: opacity 0.3s;
 }
-
 .lw-button-03 .a_inner:hover .a_background {
   opacity: 0.8;
-}
+}/*# sourceMappingURL=editor.css.map */

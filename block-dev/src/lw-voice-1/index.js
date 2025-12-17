@@ -1,112 +1,17 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, PanelColorSettings } from '@wordpress/block-editor';
+import { RichText, InspectorControls, PanelColorSettings , useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, SelectControl } from '@wordpress/components';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
 // フォント太さオプションを変数に定義
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType('wdl/lw-voice-1', {
-    title: 'お客様の声 01',
-    icon: 'format-status',
-    category: 'liteword-other',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        testimonials: {
-            type: 'array',
-            source: 'query',
-            selector: '.lw-voice-1__li',
-            query: {
-                name: {
-                    type: 'string',
-                    source: 'text',
-                    selector: '.lw-voice-1__name',
-                },
-                title: {
-                    type: 'string',
-                    source: 'html',
-                    selector: '.lw-voice-1__text h3',
-                },
-                content: {
-                    type: 'string',
-                    source: 'html',
-                    selector: '.lw-voice-1__text p',
-                },
-            },
-            default: [
-                { name: '20代男性 Y.M様', title: 'とても親切で、丁寧な対応でした。', content: 'とても親切で、丁寧な対応でした。また、何かあればお願いしたいと思います。' },
-                { name: '30代女性 A.S様', title: '迅速な対応に感謝します。', content: '迅速な対応に感謝します。また利用したいと思います。' },
-                { name: '40代男性 K.T様', title: '期待以上のサービスでした。', content: '期待以上のサービスでした。友人にも勧めたいと思います。' },
-            ],
-        },
-        h2Title: {
-            type: 'string',
-            default: 'お客様の声',
-        },
-        h2FontSet: {
-            type: 'string',
-            default: 'Noto Sans JP',
-        },
-        h2FontWeight: {
-            type: 'string',
-            default: '600',
-        },
-        h2TextColor: {
-            type: 'string',
-            default: '#000000',
-        },
-        nameTextColor: {
-            type: 'string',
-            default: '#ffffff',
-        },
-        nameBackgroundColor: {
-            type: 'string',
-            default: 'var(--color-main)',
-        },
-        nameFontSet: {
-            type: 'string',
-            default: 'Noto Sans JP',
-        },
-        nameFontWeight: {
-            type: 'string',
-            default: '500',
-        },
-        h3TextColor: {
-            type: 'string',
-            default: '#000000',
-        },
-        h3FontSet: {
-            type: 'string',
-            default: 'Noto Sans JP',
-        },
-        h3FontWeight: {
-            type: 'string',
-            default: '500',
-        },
-        pTextColor: {
-            type: 'string',
-            default: '#000000',
-        },
-        pFontSet: {
-            type: 'string',
-            default: 'Noto Sans JP',
-        },
-        pFontWeight: {
-            type: 'string',
-            default: '500',
-        },
-        backgroundColor: {
-            type: 'string',
-            default: '#eeeeee',
-        },
-    },
-
+registerBlockType(metadata.name, {
     edit: (props) => {
         const { attributes, setAttributes } = props;
         const {
@@ -147,8 +52,13 @@ registerBlockType('wdl/lw-voice-1', {
             setAttributes({ testimonials: updatedTestimonials });
         };
 
+        const blockProps = useBlockProps({
+            className: 'lw-voice-1',
+            style: { backgroundColor: backgroundColor }
+        });
+
         return (
-            <div className="lw-voice-1" style={{ backgroundColor: backgroundColor }}>
+            <>
                 <InspectorControls>
                     <div
                         style={{
@@ -306,7 +216,8 @@ registerBlockType('wdl/lw-voice-1', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className="lw-voice-1_inner">
+                <div {...blockProps}>
+                    <div className="lw-voice-1_inner">
                     <RichText
                         tagName="h2"
                         className="lw-voice-1__title"
@@ -354,8 +265,9 @@ registerBlockType('wdl/lw-voice-1', {
                             </li>
                         ))}
                     </ul>
+                    </div>
                 </div>
-            </div>
+            </>
         );
     },
     save: (props) => {
@@ -379,8 +291,13 @@ registerBlockType('wdl/lw-voice-1', {
             backgroundColor,
         } = attributes;
 
+        const blockProps = useBlockProps.save({
+            className: 'lw-voice-1',
+            style: { backgroundColor: backgroundColor }
+        });
+
         return (
-            <div className="lw-voice-1" style={{ backgroundColor: backgroundColor }}>
+            <div {...blockProps}>
                 <RichText.Content
                     tagName="h2"
                     className="lw-voice-1__title"

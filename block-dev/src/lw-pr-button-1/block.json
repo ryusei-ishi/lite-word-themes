@@ -1,0 +1,172 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-button-1",
+	"version": "1.0.0",
+	"title": "PRボタン 01",
+	"category": "lw-button",
+	"icon": "button",
+	"description": "プレミアムリンクボタン（スタイル01）",
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"textSub": {
+			"type": "string",
+			"default": "＼ テキストテキストテキスト ／"
+		},
+		"textMain": {
+			"type": "string",
+			"default": "資料をダウンロード"
+		},
+		"btnUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"openNewTab": {
+			"type": "boolean",
+			"default": false
+		},
+		"btnAlign": {
+			"type": "string",
+			"default": "center"
+		},
+		"btnAlignSp": {
+			"type": "string",
+			"default": "default"
+		},
+		"bgColor": {
+			"type": "string",
+			"default": "#3e3a39"
+		},
+		"bgColorHover": {
+			"type": "string",
+			"default": "#483c39ff"
+		},
+		"bgColorSub": {
+			"type": "string",
+			"default": "#f9bb00"
+		},
+		"textColorMain": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"textColorSub": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 3
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 64
+		},
+		"iconMain": {
+			"type": "string",
+			"default": ""
+		},
+		"iconRight": {
+			"type": "string",
+			"default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 512\"><path d=\"M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z\"/></svg>"
+		},
+		"iconMainColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"iconRightColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"iconMainSize": {
+			"type": "number",
+			"default": 20
+		},
+		"iconRightSize": {
+			"type": "number",
+			"default": 12
+		},
+		"iconMainMarginRight": {
+			"type": "number",
+			"default": 8
+		},
+		"FontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeight": {
+			"type": "string",
+			"default": "700"
+		},
+		"fontWeightSub": {
+			"type": "string",
+			"default": "600"
+		},
+		"fontSizeMain": {
+			"type": "number",
+			"default": 20
+		},
+		"fontSizeMainSp": {
+			"type": "number",
+			"default": 18
+		},
+		"fontSizeSub": {
+			"type": "number",
+			"default": 12
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 340
+		},
+		"maxWidthSp": {
+			"type": "number",
+			"default": 300
+		},
+		"transitionDuration": {
+			"type": "number",
+			"default": 0.3
+		},
+		"shakeAnimation": {
+			"type": "boolean",
+			"default": false
+		},
+		"shakeInterval": {
+			"type": "number",
+			"default": 3
+		},
+		"shakeIntensity": {
+			"type": "string",
+			"default": "normal"
+		},
+		"shadowX": {
+			"type": "number",
+			"default": 0
+		},
+		"shadowY": {
+			"type": "number",
+			"default": 0
+		},
+		"shadowBlur": {
+			"type": "number",
+			"default": 6
+		},
+		"shadowOpacity": {
+			"type": "number",
+			"default": 0.2
+		}
+	},
+	"editorScript": "file:./lw-pr-button-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 1
+}

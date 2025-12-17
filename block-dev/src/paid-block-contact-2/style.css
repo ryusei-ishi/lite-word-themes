@@ -199,6 +199,10 @@
   }
 }
 
+.paid-block-contact-2 .lw_mail_form .form_group .form_in .supplement_text {
+  color: #fff;
+}
+
 .paid-block-contact-2 .lw_mail_form .form_group input[type="text"],
 .paid-block-contact-2 .lw_mail_form .form_group input[type="email"],
 .paid-block-contact-2 .lw_mail_form .form_group input[type="tel"],

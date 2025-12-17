@@ -1,56 +1,27 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, MediaUpload, InspectorControls, ColorPalette } from '@wordpress/block-editor';
+import { RichText, MediaUpload, InspectorControls, ColorPalette, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, RangeControl , SelectControl } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { minHeightPcClassOptionArr, minHeightTbClassOptionArr, minHeightSpClassOptionArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/shin-gas-station-01-fv-lower-01', {
-    title: 'FV（下層ページ用）shin shop pattern 01',
-    icon: 'cover-image',
-    category: 'liteword-firstview',
-    attributes: {
-        backgroundImage: {
-            type: 'string',
-            default: ``,
-        },
-        backgroundImageSp: { type: 'string', default: `` },
-        mainTitle: {
-            type: 'string',
-            default: 'ページタイトル',
-        },
-        subTitle: {
-            type: 'string',
-            default: 'Title Sub',
-        },
-        filterBackgroundColor: {
-            type: 'string',
-            default: 'var(--color-main)',
-        },
-        filterOpacity: {
-            type: 'number',
-            default: 0.05,
-        },
-        minHeightPc: { type: 'string', default: 'min-h-pc-380px' },
-        minHeightTb: { type: 'string', default: 'min-h-tb-300px' },
-        minHeightSp: { type: 'string', default: 'min-h-sp-220px' },
-        maxWidth: {
-            type: 'number',
-            default: "100%",
-        },
-    },
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const {
             backgroundImage,backgroundImageSp, mainTitle, subTitle, filterBackgroundColor, filterOpacity, minHeightPc, minHeightTb, minHeightSp,maxWidth
         } = attributes;
 
+        const blockProps = useBlockProps({
+            className: `shin-gas-station-01-fv-lower-01 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+        });
+
         const currentPostType = useSelect((select) => select('core/editor').getCurrentPostType());
 
         if (currentPostType !== 'page') {
-            return <p>このブロックは固定ページでのみ使用できます。</p>;
+            return <div {...blockProps}><p>このブロックは固定ページでのみ使用できます。</p></div>;
         }
 
         const onChangeBackgroundImage = (media) => {
@@ -61,7 +32,7 @@ registerBlockType('wdl/shin-gas-station-01-fv-lower-01', {
         }
 
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
                     <PanelBody title="背景画像設定">
                         <p>PCの時</p>
@@ -162,9 +133,7 @@ registerBlockType('wdl/shin-gas-station-01-fv-lower-01', {
                         />
                      </PanelBody>
                 </InspectorControls>
-                <div
-                    className={`shin-gas-station-01-fv-lower-01 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}
-                >
+                <div {...blockProps}>
                     <div className="shin-gas-station-01-fv-lower-01_inner" style={{maxWidth:maxWidth}}>
                         <h1>
                             <RichText
@@ -188,7 +157,7 @@ registerBlockType('wdl/shin-gas-station-01-fv-lower-01', {
                         {backgroundImage && <img src={backgroundImage} alt="背景画像"/>}
                     </div>
                 </div>
-            </Fragment>
+            </>
         );
     },
     save: function (props) {
@@ -197,10 +166,12 @@ registerBlockType('wdl/shin-gas-station-01-fv-lower-01', {
             backgroundImage,backgroundImageSp, mainTitle, subTitle, filterBackgroundColor, filterOpacity, minHeightPc, minHeightTb, minHeightSp,maxWidth
         } = attributes;
 
+        const blockProps = useBlockProps.save({
+            className: `shin-gas-station-01-fv-lower-01 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+        });
+
         return (
-            <div
-                className={`shin-gas-station-01-fv-lower-01 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}
-            >
+            <div {...blockProps}>
                 <div className="shin-gas-station-01-fv-lower-01_inner" style={{maxWidth:maxWidth}}>
                     <h1>
                         <RichText.Content

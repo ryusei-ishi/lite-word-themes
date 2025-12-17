@@ -2,29 +2,24 @@
   margin: 1em auto;
   font-size: 16px;
 }
-
 @media (max-width: 800px) {
   .lw-pr-custom-title-13 {
     font-size: 14px;
   }
 }
-
 @media (max-width: 600px) {
   .lw-pr-custom-title-13 {
     font-size: 12px;
   }
 }
-
 @media (max-width: 400px) {
   .lw-pr-custom-title-13 {
     font-size: 10px;
   }
 }
-
 .lw-pr-custom-title-13 * {
   box-sizing: border-box;
 }
-
 .lw-pr-custom-title-13 .ttl {
   position: relative;
   z-index: 10;
@@ -37,43 +32,36 @@
   text-align: center;
   font-size: 16px;
 }
-
 @media (max-width: 800px) {
   .lw-pr-custom-title-13 .ttl {
     font-size: 14px;
   }
 }
-
 @media (max-width: 600px) {
   .lw-pr-custom-title-13 .ttl {
     font-size: 12px;
   }
 }
-
 @media (max-width: 400px) {
   .lw-pr-custom-title-13 .ttl {
     font-size: 10px;
   }
 }
-
 .lw-pr-custom-title-13 .ttl .main {
   display: block;
   font-size: 2em;
   line-height: 1.4;
   color: var(--color-main-text);
 }
-
 .lw-pr-custom-title-13 .ttl .main + .sub {
   margin-top: 0.2em;
 }
-
 .lw-pr-custom-title-13 .ttl .sub {
   display: block;
   font-size: 1em;
   line-height: 1.6;
   color: var(--color-sub-text);
 }
-
 .lw-pr-custom-title-13 .ttl .left {
   position: absolute;
   top: 0;
@@ -81,7 +69,6 @@
   width: 2em;
   height: 100%;
 }
-
 .lw-pr-custom-title-13 .ttl .left::before, .lw-pr-custom-title-13 .ttl .left::after {
   position: absolute;
   width: 100%;
@@ -90,19 +77,18 @@
   display: block;
   background: var(--color-main);
 }
-
 .lw-pr-custom-title-13 .ttl .left::before {
   top: 0;
   content: "";
-  clip-path: polygon(100% 0, 0 0, 100% 100%);
+  -webkit-clip-path: polygon(100% 0, 0 0, 100% 100%);
+          clip-path: polygon(100% 0, 0 0, 100% 100%);
 }
-
 .lw-pr-custom-title-13 .ttl .left::after {
   bottom: 0;
   content: "";
-  clip-path: polygon(100% 100%, 100% 0, 0 100%);
+  -webkit-clip-path: polygon(100% 100%, 100% 0, 0 100%);
+          clip-path: polygon(100% 100%, 100% 0, 0 100%);
 }
-
 .lw-pr-custom-title-13 .ttl .right {
   position: absolute;
   top: 0;
@@ -110,7 +96,6 @@
   width: 2em;
   height: 100%;
 }
-
 .lw-pr-custom-title-13 .ttl .right::before, .lw-pr-custom-title-13 .ttl .right::after {
   position: absolute;
   width: 100%;
@@ -119,15 +104,15 @@
   display: block;
   background: var(--color-main);
 }
-
 .lw-pr-custom-title-13 .ttl .right::before {
   top: 0;
   content: "";
-  clip-path: polygon(0 0, 100% 0, 0 100%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 0 100%);
+          clip-path: polygon(0 0, 100% 0, 0 100%);
 }
-
 .lw-pr-custom-title-13 .ttl .right::after {
   bottom: 0;
   content: "";
-  clip-path: polygon(0 100%, 0 0, 100% 100%);
-}
+  -webkit-clip-path: polygon(0 100%, 0 0, 100% 100%);
+          clip-path: polygon(0 100%, 0 0, 100% 100%);
+}/*# sourceMappingURL=style.css.map */

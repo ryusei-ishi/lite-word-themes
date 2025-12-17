@@ -13,7 +13,8 @@ import {
     RichText,
     MediaUpload,
     InspectorControls,
-    ColorPalette
+    ColorPalette,
+    useBlockProps
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -22,7 +23,6 @@ import {
     SelectControl,
     TextareaControl
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import {
     minHeightPcClassOptionArr,
@@ -33,63 +33,13 @@ import {
 } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* フォント関連オプションを取得 */
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType('wdl/shin-gas-station-01-fv-top', {
-    title: 'FV（トップ用）shin shop pattern 01',
-    icon: 'cover-image',
-    category: 'liteword-firstview',
-
-    /* --------------------------------------------------
-     * 属性
-     * -------------------------------------------------- */
-    attributes: {
-        /* 背景画像 */
-        backgroundImage: {
-            type: 'string',
-            default:
-                'https://cdn.pixabay.com/photo/2013/10/14/10/37/froet-gas-195389_1280.jpg'
-        },
-        backgroundImageSp: { type: 'string', default: '' },
-
-        /* PC 共通タイトル */
-        subTitle: { type: 'string', default: 'Drive freely live comfortably.' },
-        mainTitle: { type: 'string', default: '自由に走り<br>快適に暮らす' },
-
-        /* ★ スマホ用テキスト */
-        subTitleSp: { type: 'string', default: '' },
-        mainTitleSp: { type: 'string', default: '' },
-        mainLineHeightSp: { type: 'string', default: '' },
-        mainMarginTopSp: { type: 'string', default: '' },
-        mainMarginBottomSp: { type: 'string', default: '' },
-        mainFontSetSp: { type: 'string', default: '' },      // ← フォント
-        mainFontWeightSp: { type: 'string', default: '' },   // ← 太さ
-
-        /* 説明文 */
-        description: {
-            type: 'string',
-            default:
-                '人々の車生活をより豊かにするためのソリューションをご提供'
-        },
-        descriptionSp: { type: 'string', default: '' },
-
-        /* 色・サイズ */
-        filterBackgroundColor: { type: 'string', default: '#000000' },
-        filterOpacity: { type: 'number', default: 0.1 },
-        textColor: { type: 'string', default: '#fff' },
-
-        /* 高さクラス */
-        minHeightPc: { type: 'string', default: 'min-h-pc-100vh-header-100' },
-        minHeightTb: { type: 'string', default: 'min-h-tb-600px' },
-        minHeightSp: { type: 'string', default: 'min-h-sp-480px' },
-
-        maxWidth: { type: 'number', default: 2000 }
-    },
-
-
+registerBlockType(metadata.name, {
     /* --------------------------------------------------
      * 編集画面
      * -------------------------------------------------- */
@@ -127,12 +77,16 @@ registerBlockType('wdl/shin-gas-station-01-fv-top', {
             maxWidth
         } = attributes;
 
+        const blockProps = useBlockProps({
+            className: `shin_gas_station_01_top ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+        });
+
         /* 固定ページのみ許可 */
         const currentPostType = useSelect((select) =>
             select('core/editor').getCurrentPostType()
         );
         if (currentPostType !== 'page') {
-            return <p>このブロックは固定ページでのみ使用できます。</p>;
+            return <div {...blockProps}><p>このブロックは固定ページでのみ使用できます。</p></div>;
         }
 
         /* 画像ハンドラ */
@@ -166,10 +120,7 @@ registerBlockType('wdl/shin-gas-station-01-fv-top', {
         ];
 
         return (
-            <Fragment>
-                {/* ----------------------------------------
-                 * サイドバー
-                 * -------------------------------------- */}
+            <>
                 <InspectorControls>
                     {/* 背景画像 */}
                     <PanelBody title="背景画像">
@@ -366,12 +317,7 @@ registerBlockType('wdl/shin-gas-station-01-fv-top', {
                     </PanelBody>
                 </InspectorControls>
 
-                {/* ----------------------------------------
-                 * プレビュー
-                 * -------------------------------------- */}
-                <div
-                    className={`shin_gas_station_01_top ${minHeightPc} ${minHeightTb} ${minHeightSp}`}
-                >
+                <div {...blockProps}>
                     <div
                         className="shin_gas_station_01_top_inner"
                         style={{ maxWidth }}
@@ -455,7 +401,7 @@ registerBlockType('wdl/shin-gas-station-01-fv-top', {
                         )}
                     </div>
                 </div>
-            </Fragment>
+            </>
         );
     },
 
@@ -498,10 +444,12 @@ registerBlockType('wdl/shin-gas-station-01-fv-top', {
             ...(mainFontWeightSp && { fontWeight: mainFontWeightSp })
         };
 
+        const blockProps = useBlockProps.save({
+            className: `shin_gas_station_01_top ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+        });
+
         return (
-            <div
-                className={`shin_gas_station_01_top ${minHeightPc} ${minHeightTb} ${minHeightSp}`}
-            >
+            <div {...blockProps}>
                 <div
                     className="shin_gas_station_01_top_inner"
                     style={{ maxWidth }}

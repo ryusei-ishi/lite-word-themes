@@ -1,0 +1,66 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/fv-6",
+	"version": "1.0.0",
+	"title": "固定ページタイトル 06（下層用）",
+	"category": "lw-firstview",
+	"icon": "cover-image",
+	"editorScript": "file:./fv-6.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"backgroundImage": {
+			"type": "string",
+			"default": "https://cdn.pixabay.com/photo/2016/11/19/15/39/architecture-1839930_1280.jpg"
+		},
+		"backgroundImageSp": {
+			"type": "string",
+			"default": ""
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "会社情報"
+		},
+		"subTitle": {
+			"type": "string",
+			"default": "COMPANY INFO"
+		},
+		"filterBackgroundColor": {
+			"type": "string",
+			"default": "#111"
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 0.3
+		},
+		"textColor": {
+			"type": "string",
+			"default": "#111"
+		},
+		"minHeightPc": {
+			"type": "string",
+			"default": "min-h-pc-400px"
+		},
+		"minHeightTb": {
+			"type": "string",
+			"default": "min-h-tb-360px"
+		},
+		"minHeightSp": {
+			"type": "string",
+			"default": "min-h-sp-280px"
+		},
+		"mainTitleTag": {
+			"type": "string",
+			"default": "h1"
+		}
+	},
+	"no": 6
+}

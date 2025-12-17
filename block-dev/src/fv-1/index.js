@@ -1,40 +1,13 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, MediaUpload, URLInput, InspectorControls, ColorPalette } from '@wordpress/block-editor';
+import { RichText, MediaUpload, URLInput, InspectorControls, ColorPalette, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, ToggleControl, RangeControl, SelectControl } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import { minHeightPcClassOptionArr, minHeightTbClassOptionArr, minHeightSpClassOptionArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/fv-1', {
-    title: '固定ページタイトル 01（トップ用）',
-    icon: 'cover-image',
-    category: 'liteword-firstview',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        backgroundImage: { type: 'string', default: `https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704_1280.jpg` },
-        backgroundImageSp: { type: 'string', default: `` },
-        mainTitle: { type: 'string', default: 'Lite Word' },
-        subTitle: { type: 'string', default: 'シンプルで簡単なWordPressテーマ' },
-        description: { type: 'string', default: '誰でも簡単にきれいなブログサイトが作れます！' },
-        buttonText: { type: 'string', default: '無料ダウンロード' },
-        buttonUrl: { type: 'string', default: '#' },
-        openInNewTab: { type: 'boolean', default: false },
-        buttonBackgroundColor: { type: 'string', default: '#fff' },
-        buttonTextColor: { type: 'string', default: '#111' },
-        buttonBorderColor: { type: 'string', default: '#000' },
-        buttonBackgroundColorOpacity: { type: 'number', default: 100 },
-        buttonBorderWidth: { type: 'number', default: 0 },
-        buttonBorderRadius: { type: 'number', default: 200 },
-        filterBackgroundColor: { type: 'string', default: 'var(--color-main)' },
-        filterOpacity: { type: 'number', default: 0.4 },
-        minHeightPc: { type: 'string', default: 'min-h-pc-500px' },
-        minHeightTb: { type: 'string', default: 'min-h-tb-480px' },
-        minHeightSp: { type: 'string', default: 'min-h-sp-440px' },
-    },
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const {
@@ -43,9 +16,15 @@ registerBlockType('wdl/fv-1', {
             filterBackgroundColor, filterOpacity, minHeightPc, minHeightTb, minHeightSp
         } = attributes;
 
+        // useBlockPropsは条件付きreturnの前に呼ぶ（Reactフックのルール）
+        // classNameをマージして余分なラッパーを避ける
+        const blockProps = useBlockProps({
+            className: `fv-1 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+        });
+
         const currentPostType = useSelect((select) => select('core/editor').getCurrentPostType());
         if (currentPostType !== 'page') {
-            return <p>このブロックは固定ページでのみ使用できます。</p>;
+            return <div {...blockProps}><p>このブロックは固定ページでのみ使用できます。</p></div>;
         }
 
         const onChangeBackgroundImage = (media) => {
@@ -56,7 +35,7 @@ registerBlockType('wdl/fv-1', {
         };
 
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
                     <PanelBody title="背景画像設定">
                         <p>PCの時</p>
@@ -196,7 +175,7 @@ registerBlockType('wdl/fv-1', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <div className={`fv-1 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}>
+                <div {...blockProps}>
                     <h1>
                         <RichText
                             tagName="span"
@@ -248,7 +227,7 @@ registerBlockType('wdl/fv-1', {
                         {backgroundImage && <img src={backgroundImage} alt="背景画像" loading="eager" fetchpriority="high"/>}
                     </div>
                 </div>
-            </Fragment>
+            </>
         );
     },
     save: function (props) {
@@ -258,9 +237,13 @@ registerBlockType('wdl/fv-1', {
             buttonBackgroundColor, buttonBackgroundColorOpacity, buttonTextColor, buttonBorderColor, buttonBorderWidth, buttonBorderRadius,
             filterBackgroundColor, filterOpacity, minHeightPc, minHeightTb, minHeightSp
         } = attributes;
-    
+
+        const blockProps = useBlockProps.save({
+            className: `fv-1 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+        });
+
         return (
-            <div className={`fv-1 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}>
+            <div {...blockProps}>
                 <h1 className="ttl">
                     <RichText.Content
                         tagName="span"

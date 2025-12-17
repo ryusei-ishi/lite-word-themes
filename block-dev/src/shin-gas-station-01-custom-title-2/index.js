@@ -1,23 +1,14 @@
+/**
+ * 見出しタイトル 2 ─ shin shop pattern 01
+ * ★ apiVersion 3 対応（2025-12-07）
+ */
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, BlockControls } from '@wordpress/block-editor';
+import { RichText, InspectorControls, BlockControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, RadioControl, ColorPalette, ToolbarGroup, ToolbarButton } from '@wordpress/components';
-import './style.scss';
-import './editor.scss';
 
-registerBlockType('wdl/shin-gas-station-01-custom-title-2', {
-    title: '見出しタイトル 2 shin shop pattern 01',
-    icon: 'editor-textcolor',
-    category: 'liteword-title',
-    supports: {
-        anchor: true,
-    },
-    attributes: {
-        mainTitle: { type: 'string', default: 'Heading Title' },
-        subTitle: { type: 'string', default: 'サブタイトル' },
-        headingLevel: { type: 'number', default: 2 }, // デフォルトの見出しレベルは h2
-        colorMain: { type: 'string', default: 'var(--color-main)' },
-        headingSize: { type: 'string', default: 'M' } // L / M / S の見出しサイズ
-    },
+import metadata from './block.json';
+
+registerBlockType(metadata.name, {
     edit: ( props ) => {
         const { attributes, setAttributes } = props;
         const { mainTitle, subTitle, headingLevel, colorMain, headingSize } = attributes;
@@ -34,6 +25,11 @@ registerBlockType('wdl/shin-gas-station-01-custom-title-2', {
 
         const TagName    = `h${ headingLevel }`;
         const sizeClass  = headingSize === 'S' ? ' size_s' : headingSize === 'L' ? ' size_l' : '';
+
+        
+        const blockProps = useBlockProps({
+            className: 'shin-gas-station-01-custom-title-2'
+        });
 
         return (
             <>
@@ -77,7 +73,7 @@ registerBlockType('wdl/shin-gas-station-01-custom-title-2', {
                 </InspectorControls>
 
                 {/* ---------- ブロック本体 ---------- */}
-                <TagName className="shin-gas-station-01-custom-title-2">
+                <TagName {...blockProps}>
                     <div className="border" style={ { background: colorMain } }></div>
                     <span className={ `in${ sizeClass }` }>
                         <RichText
@@ -106,8 +102,12 @@ registerBlockType('wdl/shin-gas-station-01-custom-title-2', {
         const TagName   = `h${ headingLevel }`;
         const sizeClass = headingSize === 'S' ? ' size_s' : headingSize === 'L' ? ' size_l' : '';
 
+        const blockProps = useBlockProps.save({
+            className: 'shin-gas-station-01-custom-title-2'
+        });
+
         return (
-            <TagName className="shin-gas-station-01-custom-title-2">
+            <TagName {...blockProps}>
                 <div className="border" style={ { background: colorMain } }></div>
                 <span className={ `in${ sizeClass }` }>
                     <RichText.Content

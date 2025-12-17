@@ -4,6 +4,7 @@ import {
 	RichText,
 	MediaUpload,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -13,57 +14,11 @@ import {
 	RangeControl,
 	SelectControl,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import './editor.scss';
+import metadata from './block.json';
 import './style.scss';
 
-registerBlockType('wdl/paid-block-content-4', {
-	title   : 'Content 04',
-	icon    : 'format-gallery',
-	category: 'liteword-other',
-
-	/* ────────────────────────────────────────────────
-	 * 属性
-	 * ──────────────────────────────────────────────── */
-	attributes: {
-		mainTitle : { type: 'string',  default: 'CONTENT' },
-		subTitle  : { type: 'string',  default: 'サブテキスト' },
-		bottomText: {
-			type   : 'string',
-			default: 'テキストテキストテキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキスト',
-		},
-		ctaText : { type: 'string', default: '詳細はこちら' },
-		ctaUrl  : { type: 'string', default: '#' },
-
-		mainTitleColor : { type: 'string', default: '#333' },
-		highlightColor : { type: 'string', default: '#0AA8C9' },
-		ctaBorderColor : { type: 'string', default: '#333' },
-		ctaTextColor   : { type: 'string', default: '#333' },
-
-		ctaBorderWidth : { type: 'number', default: 2 },
-		ctaBorderRadius: { type: 'number', default: 0 },
-		imageRadius    : { type: 'number', default: 0 },
-
-		/* レスポンシブボタン設定 */
-		pcButtonState    : { type: 'string', default: '' },
-		mobileButtonState: { type: 'string', default: '' },
-
-		/* ← ここを "オブジェクト配列" に戻す */
-		images: {
-			type: 'array',
-			default: [
-				{ url: 'https://lite-word.com/sample_img/shop/1.webp', alt: '' },
-				{ url: 'https://lite-word.com/sample_img/shop/2.webp', alt: '' },
-				{ url: 'https://lite-word.com/sample_img/shop/3.webp', alt: '' },
-				{ url: 'https://lite-word.com/sample_img/shop/4.webp', alt: '' },
-				{ url: 'https://lite-word.com/sample_img/shop/5.webp', alt: '' },
-				{ url: 'https://lite-word.com/sample_img/women/1.webp', alt: '' },
-				{ url: 'https://lite-word.com/sample_img/women/2.webp', alt: '' },
-				{ url: 'https://lite-word.com/sample_img/women/4.webp', alt: '' },
-			],
-		},
-	},
-
+registerBlockType(metadata.name, {
 	/* ────────────────────────────────────────────────
 	 * 編集画面
 	 * ──────────────────────────────────────────────── */
@@ -132,8 +87,13 @@ registerBlockType('wdl/paid-block-content-4', {
 			return classes.join(' ');
 		};
 
-		return (
-			<Fragment>
+		
+        const blockProps = useBlockProps({
+            className: 'paid-block-content-4'
+        });
+
+        return (
+			<>
 				<InspectorControls>
 					{/* マニュアル */}
 					<PanelBody title="📖 マニュアル" initialOpen={false}>
@@ -362,7 +322,7 @@ registerBlockType('wdl/paid-block-content-4', {
 				</InspectorControls>
 
 				{/* エディタープレビュー */}
-				<div className="paid-block-content-4">
+				<div {...blockProps}>
 					<section className="conts">
 						<div className="cont">
 							<h2 className="ttl">
@@ -374,9 +334,13 @@ registerBlockType('wdl/paid-block-content-4', {
 								</span>
 							</h2>
 
-							<p className="ttl_btm_p">
-								<RichText value={ bottomText } onChange={ onChange('bottomText') } placeholder="テキストを入力" />
-							</p>
+							<RichText
+								tagName="p"
+								className="ttl_btm_p"
+								value={ bottomText }
+								onChange={ onChange('bottomText') }
+								placeholder="テキストを入力"
+							/>
 
 							<div
 								className={ getButtonClasses() }
@@ -401,7 +365,7 @@ registerBlockType('wdl/paid-block-content-4', {
 						</div>
 					</section>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 

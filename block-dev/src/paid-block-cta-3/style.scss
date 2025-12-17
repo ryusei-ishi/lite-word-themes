@@ -95,7 +95,7 @@
                 font-weight: 700;
                 line-height: 1;
                 font-feature-settings: "palt";
-                white-space: nowrap;
+                white-space: nowrap !important;
                 @container (max-width: 780px) {
                     font-size: 64px;
                 }
@@ -110,6 +110,9 @@
                 }
                 @container (max-width: 400px) {
                     font-size: 40px;
+                }
+                >span{
+                     white-space: nowrap !important;
                 }
             }
         }

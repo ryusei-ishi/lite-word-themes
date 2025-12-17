@@ -1,33 +1,14 @@
+/**
+ * CTA 1 shin shop pattern 01
+ * ★ apiVersion 3 対応（2025-12-07）
+ */
 import { registerBlockType } from '@wordpress/blocks';
-import { InspectorControls, RichText, MediaUpload } from '@wordpress/block-editor';
+import { InspectorControls, RichText, MediaUpload, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, ToggleControl, ColorPicker, RangeControl, TextControl, SelectControl } from '@wordpress/components';
-import './style.scss';
-import './editor.scss';
 
-registerBlockType('wdl/shin-gas-station-01-cta', {
-    title: 'CTA 1 shin shop pattern 01',
-    icon: 'megaphone',
-    category: 'liteword-other',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        title: { type: 'string', source: 'html', selector: '.shin-gas-station-01-cta__title .main', default: '採用情報' },
-        titleSub: { type: 'string', source: 'html', selector: '.shin-gas-station-01-cta__title .sub', default: 'Recruit' },
-        text: { type: 'string', source: 'html', selector: 'p', default: '地域社会を支え、移動の快適さと安心を提供するDriveEaseでは、未来を共に創る仲間を募集しています。<br>私たちは、ガソリンスタンド事業や車両リース事業を通じて、人々の暮らしをより豊かにすることを目指しています。<br>新しい挑戦を続ける当社で、あなたの力を活かしてみませんか？'},
-        buttonText: { type: 'string', source: 'html', selector: 'a', default: '詳しく見る' },
-        buttonUrl: { type: 'string', default: '#' },
-        openInNewTab: { type: 'boolean', default: false },
-        imageUrl: { type: 'string', source: 'attribute', selector: 'img', attribute: 'src', default: '' },
-        filterColor: { type: 'string', default: '#054161' },
-        buttonBackgroundColor: { type: 'string', default: '#fff' },
-        buttonBorderColor: { type: 'string', default: 'var(--color-main)' },
-        buttonBorderSize: { type: 'number', default: 1 },
-        buttonMaxWidth: { type: 'number', default: 240 },
-        pcTextAlign: { type: 'string', default: 'center' },
-        mobileTextAlign: { type: 'string', default: 'left' }
-    },
-    
+import metadata from './block.json';
+
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const {
@@ -51,8 +32,13 @@ registerBlockType('wdl/shin-gas-station-01-cta', {
         const onChangePcTextAlign = (value) => setAttributes({ pcTextAlign: value });
         const onChangeMobileTextAlign = (value) => setAttributes({ mobileTextAlign: value });
 
+        // useBlockProps で apiVersion 3 対応
+        const blockProps = useBlockProps({
+            className: 'shin-gas-station-01-cta'
+        });
+
         return (
-            <div className="shin-gas-station-01-cta">
+            <div {...blockProps}>
                 <InspectorControls>
                     {/* リンクの設定 */}
                     <PanelBody title="リンクの設定">
@@ -141,8 +127,13 @@ registerBlockType('wdl/shin-gas-station-01-cta', {
              pcTextAlign, mobileTextAlign
         } = attributes;
 
+        // useBlockProps.save() で apiVersion 3 対応
+        const blockProps = useBlockProps.save({
+            className: 'shin-gas-station-01-cta'
+        });
+
         return (
-            <div className="shin-gas-station-01-cta">
+            <div {...blockProps}>
                 <div className="shin-gas-station-01-cta__inner">
                     <h2 className="shin-gas-station-01-cta__title heading_style_reset">
                         <RichText.Content

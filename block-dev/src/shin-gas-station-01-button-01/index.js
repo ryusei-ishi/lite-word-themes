@@ -1,9 +1,10 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, URLInput } from '@wordpress/block-editor';
-import { PanelBody, SelectControl, ColorPalette, RangeControl , ToggleControl } from '@wordpress/components'; // RangeControlを追加
+import { RichText, InspectorControls, URLInput, useBlockProps } from '@wordpress/block-editor';
+import { PanelBody, SelectControl, ColorPalette, RangeControl , ToggleControl } from '@wordpress/components';
 import { fontOptionsArr, fontWeightOptionsArr, ButtonBackgroundOptionsArr, rightButtonIconSvgArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
@@ -14,68 +15,7 @@ const bgOptions = ButtonBackgroundOptionsArr();
 // SVG アイコンオプションを定義
 const iconSvgOptions = rightButtonIconSvgArr();
 
-registerBlockType('wdl/shin-gas-station-01-button-01', {
-    title: 'リンクボタン 01 shin shop pattern 01',
-    icon: 'button',
-    category: 'liteword-buttons',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        btnText: {
-            type: 'string',
-            default: '詳細はこちら'
-        },
-        bgGradient: {
-            type: 'string',
-            default: 'var(--color-main)'
-        },
-        colorMode: { // 背景色設定モード（'select' または 'palette'）
-            type: 'string',
-            default: 'select'
-        },
-        customBgColor: { // カラーパレットで選択した背景色
-            type: 'string',
-            default: '#0073aa'
-        },
-        textColor: {
-            type: 'string',
-            default: '#ffffff'
-        },
-        fontWeight: {
-            type: 'string',
-            default: '400'
-        },
-        btnUrl: {
-            type: 'string',
-            default: ''
-        },
-        openNewTab: {
-            type: 'boolean',
-            default: false
-        },
-        FontSet: {
-            type: 'string',
-            default: ''
-        },
-        selectedIcon: {  // アイコンの属性を追加（SVG文字列）
-            type: 'string',
-            default: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>'
-        },
-        iconColor: { // アイコンの色属性を追加
-            type: 'string',
-            default: '#ffffff'
-        },
-        borderWidth: { // ボーダーの幅属性を追加
-            type: 'number',
-            default: 0
-        },
-        borderColor: { // ボーダーの色属性を追加
-            type: 'string',
-            default: 'var(--color-main)'
-        }
-    },
-
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const { btnText, bgGradient, colorMode, customBgColor, textColor, fontWeight, FontSet, btnUrl, selectedIcon, iconColor, borderWidth, borderColor } = attributes;
@@ -83,8 +23,12 @@ registerBlockType('wdl/shin-gas-station-01-button-01', {
         // 実際に使用する背景色を決定
         const actualBgColor = colorMode === 'palette' ? customBgColor : bgGradient;
 
+        const blockProps = useBlockProps({
+            className: 'shin-gas-station-01-button-01'
+        });
+
         return (
-            <div className='shin-gas-station-01-button-01'>
+            <div {...blockProps}>
                 <InspectorControls>
 
                     {/* ── 1. 基本設定 ── */}
@@ -273,8 +217,12 @@ registerBlockType('wdl/shin-gas-station-01-button-01', {
         // 実際に使用する背景色を決定
         const actualBgColor = colorMode === 'palette' ? customBgColor : bgGradient;
 
+        const blockProps = useBlockProps.save({
+            className: 'shin-gas-station-01-button-01'
+        });
+
         return (
-            <div className='shin-gas-station-01-button-01'>
+            <div {...blockProps}>
                 <div className='a_inner' style={{ borderWidth: `${borderWidth}px`, borderColor: borderColor, borderStyle: 'solid' }}>
                     <RichText.Content
                         tagName="a"

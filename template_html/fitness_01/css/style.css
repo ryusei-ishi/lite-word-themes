@@ -3,60 +3,50 @@
   height: 80px;
   background: #ffffff;
 }
-
 .header_ptn_4 .header_inner {
   width: 100%;
   height: 100%;
   display: flex;
   justify-content: space-between;
 }
-
 .header_ptn_4 .header_inner .logo {
   padding-left: 80px;
   height: 100%;
   display: flex;
   align-items: center;
 }
-
 @media (max-width: 1300px) {
   .header_ptn_4 .header_inner .logo {
     padding-left: 40px;
   }
 }
-
 @media (max-width: 1024px) {
   .header_ptn_4 .header_inner .logo {
     padding-left: 24px;
   }
 }
-
 .header_ptn_4 .header_inner .logo img {
   height: 58px;
   width: auto;
 }
-
 .header_ptn_4 .header_inner .header_nav {
   height: 100%;
   display: flex;
   justify-content: end;
 }
-
 @media (max-width: 1024px) {
   .header_ptn_4 .header_inner .header_nav {
     display: none;
   }
 }
-
 .header_ptn_4 .header_inner .header_nav > ul {
   height: 100%;
   display: flex;
   align-items: center;
 }
-
 .header_ptn_4 .header_inner .header_nav > ul > li {
   height: 100%;
 }
-
 .header_ptn_4 .header_inner .header_nav > ul > li > a {
   padding: 0 2em;
   height: 100%;
@@ -69,12 +59,10 @@
   color: #101010;
   transition: all 0.3s;
 }
-
 .header_ptn_4 .header_inner .header_nav > ul > li > a:hover {
   background: #ef2c00;
   color: #fff;
 }
-
 .header_ptn_4 .header_inner .header_nav .cta {
   padding: 0 1.2em;
   height: 100%;
@@ -89,12 +77,10 @@
   font-size: 16px;
   transition: 0.3s;
 }
-
 .header_ptn_4 .header_inner .header_nav .cta:hover {
   background: #fff;
   color: #ef2c00;
 }
-
 .header_ptn_4 .ham_btn {
   display: none;
 }
@@ -108,13 +94,11 @@
   width: 100vw;
   display: flex;
 }
-
 @media (max-width: 850px) {
   .shin_fitness_01_top_fv {
     flex-wrap: wrap-reverse;
   }
 }
-
 .shin_fitness_01_top_fv .inner {
   padding-left: 100px;
   width: 50%;
@@ -123,25 +107,21 @@
   align-items: center;
   align-content: center;
 }
-
 @media (max-width: 1300px) {
   .shin_fitness_01_top_fv .inner {
     padding-left: 64px;
   }
 }
-
 @media (max-width: 1080px) {
   .shin_fitness_01_top_fv .inner {
     padding-left: 40px;
   }
 }
-
 @media (max-width: 850px) {
   .shin_fitness_01_top_fv .inner {
     width: 60%;
   }
 }
-
 @media (max-width: 650px) {
   .shin_fitness_01_top_fv .inner {
     padding: 0 40px;
@@ -151,34 +131,28 @@
     text-align: center;
   }
 }
-
 @media (max-width: 450px) {
   .shin_fitness_01_top_fv .inner {
     text-align: left;
   }
 }
-
 .shin_fitness_01_top_fv .inner h1.title {
   width: 100%;
 }
-
 .shin_fitness_01_top_fv .inner h1.title .logo img {
   width: auto;
   height: 60px;
 }
-
 @media (max-width: 1080px) {
   .shin_fitness_01_top_fv .inner h1.title .logo img {
     height: 50px;
   }
 }
-
 @media (max-width: 650px) {
   .shin_fitness_01_top_fv .inner h1.title .logo img {
     height: 40px;
   }
 }
-
 .shin_fitness_01_top_fv .inner h1.title .catch {
   margin-top: 16px;
   font-family: "Noto Sans JP", sans-serif;
@@ -186,44 +160,37 @@
   font-size: 38px;
   line-height: 1.6em;
 }
-
 @media (max-width: 1300px) {
   .shin_fitness_01_top_fv .inner h1.title .catch {
     font-size: 32px;
   }
 }
-
 @media (max-width: 1080px) {
   .shin_fitness_01_top_fv .inner h1.title .catch {
     font-size: 28px;
   }
 }
-
 @media (max-width: 450px) {
   .shin_fitness_01_top_fv .inner h1.title .catch {
     font-size: 25px;
   }
 }
-
 .shin_fitness_01_top_fv .inner p.description {
   width: 100%;
   font-family: "Montserrat", sans-serif;
   color: #ef2c00;
   font-weight: 600;
 }
-
 @media (max-width: 1080px) {
   .shin_fitness_01_top_fv .inner p.description {
     font-size: 14px;
   }
 }
-
 @media (max-width: 450px) {
   .shin_fitness_01_top_fv .inner p.description {
     font-size: 12px;
   }
 }
-
 .shin_fitness_01_top_fv .inner .cta {
   margin-top: 32px;
   height: 60px;
@@ -236,49 +203,43 @@
   border: 2px solid #ef2c00;
   transition: 0.3s;
 }
-
 @media (max-width: 1080px) {
   .shin_fitness_01_top_fv .inner .cta {
     margin-top: 16px;
     min-width: 320px;
   }
 }
-
 @media (max-width: 450px) {
   .shin_fitness_01_top_fv .inner .cta {
     min-width: 100%;
     width: 100%;
   }
 }
-
 .shin_fitness_01_top_fv .inner .cta:hover {
   background: #fff;
   color: #ef2c00;
 }
-
 .shin_fitness_01_top_fv .image {
   width: 50%;
-  aspect-ratio: 720 / 666;
+  aspect-ratio: 720/666;
 }
-
 @media (max-width: 850px) {
   .shin_fitness_01_top_fv .image {
     width: 40%;
-    aspect-ratio: 720 / 1140;
+    aspect-ratio: 720/1140;
   }
 }
-
 @media (max-width: 650px) {
   .shin_fitness_01_top_fv .image {
     width: 100%;
-    aspect-ratio: 720 / 480;
+    aspect-ratio: 720/480;
   }
 }
-
 .shin_fitness_01_top_fv .image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
 
 .custom-title-shin_fitness_01 {
@@ -289,7 +250,6 @@
   flex-wrap: wrap;
   text-align: center;
 }
-
 .custom-title-shin_fitness_01 .main {
   position: relative;
   padding: 0.5em 2em;
@@ -299,7 +259,6 @@
   font-weight: 400;
   overflow: hidden;
 }
-
 .custom-title-shin_fitness_01 .main::before, .custom-title-shin_fitness_01 .main::after {
   position: absolute;
   width: 18px;
@@ -309,17 +268,14 @@
   background: #ef2c00;
   transform: rotate(45deg);
 }
-
 .custom-title-shin_fitness_01 .main::before {
   top: -9px;
   left: -9px;
 }
-
 .custom-title-shin_fitness_01 .main::after {
   bottom: -9px;
   right: -9px;
 }
-
 .custom-title-shin_fitness_01 .sub {
   margin-top: 1em;
   width: 100%;
@@ -335,25 +291,21 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
 }
-
 @container (max-width:1200px) {
   .shin_fitness_01_point {
     gap: 32px;
   }
 }
-
 @container (max-width:1040px) {
   .shin_fitness_01_point {
     grid-template-columns: repeat(2, 1fr);
   }
 }
-
 @container (max-width:650px) {
   .shin_fitness_01_point {
     grid-template-columns: repeat(1, 1fr);
   }
 }
-
 .shin_fitness_01_point .shin_fitness_01_point__item {
   position: relative;
   padding: 18px;
@@ -361,13 +313,11 @@
   border-top: 1px solid #ef2c00;
   overflow: hidden;
 }
-
 @container (max-width:900px) {
   .shin_fitness_01_point .shin_fitness_01_point__item {
     padding-right: 0;
   }
 }
-
 .shin_fitness_01_point .shin_fitness_01_point__item::before {
   position: absolute;
   top: -9px;
@@ -379,24 +329,20 @@
   background: #ef2c00;
   transform: rotate(45deg);
 }
-
 .shin_fitness_01_point .shin_fitness_01_point__item .no {
   color: #ef2c00;
   font-family: Montserrat;
   font-weight: 500;
 }
-
 .shin_fitness_01_point .shin_fitness_01_point__item h3.item_title {
   margin: 1em 0;
   font-size: 20px;
 }
-
 @media (max-width: 500px) {
   .shin_fitness_01_point .shin_fitness_01_point__item h3.item_title {
     font-size: 18px;
   }
 }
-
 .shin_fitness_01_point .shin_fitness_01_point__item p.description {
   line-height: 2.2em;
   font-weight: 400;
@@ -417,19 +363,16 @@ h2.custom-title-shin_fitness_02 {
   border: 1px solid #ef2c00;
   overflow: hidden;
 }
-
 @container (max-width:1040px) {
   h2.custom-title-shin_fitness_02 {
     min-height: 180px;
   }
 }
-
 @container (max-width:500px) {
   h2.custom-title-shin_fitness_02 {
     min-height: 160px;
   }
 }
-
 h2.custom-title-shin_fitness_02::before, h2.custom-title-shin_fitness_02::after {
   position: absolute;
   width: 40px;
@@ -439,41 +382,34 @@ h2.custom-title-shin_fitness_02::before, h2.custom-title-shin_fitness_02::after 
   background: #ef2c00;
   transform: rotate(45deg);
 }
-
 h2.custom-title-shin_fitness_02::before {
   top: -20px;
   left: -20px;
 }
-
 h2.custom-title-shin_fitness_02::after {
   bottom: -20px;
   right: -20px;
 }
-
 h2.custom-title-shin_fitness_02 .main {
   width: 100%;
   font-size: 24px;
   font-weight: 600;
 }
-
 @container (max-width:800px) {
   h2.custom-title-shin_fitness_02 .main {
     font-size: 22px;
   }
 }
-
 @container (max-width:600px) {
   h2.custom-title-shin_fitness_02 .main {
     font-size: 22px;
   }
 }
-
 @container (max-width:500px) {
   h2.custom-title-shin_fitness_02 .main {
     font-size: 20px;
   }
 }
-
 h2.custom-title-shin_fitness_02 .sub {
   margin-top: 1em;
   font-size: 16px;
@@ -481,7 +417,6 @@ h2.custom-title-shin_fitness_02 .sub {
   color: #ef2c00;
   font-weight: 500;
 }
-
 @container (max-width:500px) {
   h2.custom-title-shin_fitness_02 .sub {
     font-size: 14px;
@@ -495,58 +430,49 @@ h2.custom-title-shin_fitness_02 .sub {
   align-items: start;
   flex-wrap: wrap;
 }
-
 .shin_fitness_01_content_01.image_right {
   flex-direction: row-reverse;
 }
-
 .shin_fitness_01_content_01.image_right .text {
   padding-left: 0;
   padding-right: 5%;
 }
-
 .shin_fitness_01_content_01 .image {
   min-height: 480px;
   width: 58%;
 }
-
 @container (max-width:1300px) {
   .shin_fitness_01_content_01 .image {
     width: 50%;
   }
 }
-
 @container (max-width:850px) {
   .shin_fitness_01_content_01 .image {
     min-height: auto;
     width: 100%;
   }
 }
-
 .shin_fitness_01_content_01 .image img {
   height: 100%;
   width: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-
 .shin_fitness_01_content_01 .text {
   padding-top: 40px;
   padding-left: 5%;
   width: 40%;
 }
-
 @container (max-width:1300px) {
   .shin_fitness_01_content_01 .text {
     width: 50%;
   }
 }
-
 @container (max-width:980px) {
   .shin_fitness_01_content_01 .text {
     padding-top: 0;
   }
 }
-
 @container (max-width:850px) {
   .shin_fitness_01_content_01 .text {
     padding: 0;
@@ -554,7 +480,6 @@ h2.custom-title-shin_fitness_02 .sub {
     width: 100%;
   }
 }
-
 .shin_fitness_01_content_01 .text h3.title .sub {
   margin-bottom: 1.5em;
   font-size: 12px;
@@ -563,30 +488,25 @@ h2.custom-title-shin_fitness_02 .sub {
   font-weight: 500;
   line-height: 1.6em;
 }
-
 .shin_fitness_01_content_01 .text h3.title .main {
   font-size: 24px;
   line-height: 1.4em;
 }
-
 @container (max-width:1080px) {
   .shin_fitness_01_content_01 .text h3.title .main {
     font-size: 22px;
   }
 }
-
 @container (max-width:500px) {
   .shin_fitness_01_content_01 .text h3.title .main {
     font-size: 20px;
   }
 }
-
 .shin_fitness_01_content_01 .text p.description {
   font-size: 16px;
   line-height: 2.4em;
   font-weight: 400;
 }
-
 .shin_fitness_01_content_01 .text h3.title + p.description {
   margin-top: 1.8em;
 }
@@ -603,13 +523,11 @@ h2.custom-title-shin_fitness_02 .sub {
   width: 100vw;
   background: #eaeaea;
 }
-
 @media (max-width: 980px) {
   .shin_fitness_01_price {
     padding: 72px 0;
   }
 }
-
 .shin_fitness_01_price .filter {
   position: absolute;
   top: 0;
@@ -621,32 +539,30 @@ h2.custom-title-shin_fitness_02 .sub {
   height: 672px;
   background: #1f1f1f;
   /* ボトムを斜めにする */
-  clip-path: polygon(0 0, 100% 0, 100% calc(100% - 25%), 0 100%);
+  -webkit-clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
+          clip-path: polygon(0 0, 100% 0, 100% 75%, 0 100%);
 }
-
 @media (max-width: 1040px) {
   .shin_fitness_01_price .filter {
     height: 585px;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 15%), 0 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 85%, 0 100%);
   }
 }
-
 @media (max-width: 600px) {
   .shin_fitness_01_price .filter {
     height: 537px;
-    clip-path: polygon(0 0, 100% 0, 100% calc(100% - 10%), 0 100%);
+    -webkit-clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
+            clip-path: polygon(0 0, 100% 0, 100% 90%, 0 100%);
   }
 }
-
 .shin_fitness_01_price h2.title {
   text-align: center;
 }
-
 .shin_fitness_01_price h2.title .main {
   color: #fff;
   font-size: 24px;
 }
-
 .shin_fitness_01_price h2.title .sub {
   margin-top: 1.5em;
   color: #ef2c00;
@@ -654,7 +570,6 @@ h2.custom-title-shin_fitness_02 .sub {
   font-family: Montserrat;
   font-weight: 500;
 }
-
 .shin_fitness_01_price .item_wrap {
   margin: 0 auto;
   margin-top: 40px;
@@ -663,57 +578,49 @@ h2.custom-title-shin_fitness_02 .sub {
   grid-template-columns: repeat(3, 1fr);
   gap: 40px;
 }
-
 @media (max-width: 980px) {
   .shin_fitness_01_price .item_wrap {
     gap: 32px;
     overflow-x: scroll;
   }
 }
-
 @media (max-width: 980px) {
   .shin_fitness_01_price .item_wrap .price_item {
     margin: 8px 0;
     width: 320px;
   }
 }
-
 @media (max-width: 600px) {
   .shin_fitness_01_price .item_wrap .price_item {
     width: 280px;
   }
 }
-
 @media (max-width: 980px) {
   .shin_fitness_01_price .item_wrap .price_item:first-of-type {
     margin-left: 32px;
   }
 }
-
 @media (max-width: 500px) {
   .shin_fitness_01_price .item_wrap .price_item:first-of-type {
     margin-left: 16px;
   }
 }
-
 @media (max-width: 980px) {
   .shin_fitness_01_price .item_wrap .price_item:last-of-type {
     margin-right: 64px;
   }
 }
-
 .shin_fitness_01_price .item_wrap .price_item .image {
   position: relative;
   z-index: 10;
   aspect-ratio: 1/1.2;
 }
-
 .shin_fitness_01_price .item_wrap .price_item .image img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-
 .shin_fitness_01_price .item_wrap .price_item .image .catch {
   position: absolute;
   left: 0;
@@ -724,25 +631,21 @@ h2.custom-title-shin_fitness_02 .sub {
   font-weight: 700;
   color: #fff;
 }
-
 @container (max-width:1300px) {
   .shin_fitness_01_price .item_wrap .price_item .image .catch {
     font-size: 48px;
   }
 }
-
 @container (max-width:1080px) {
   .shin_fitness_01_price .item_wrap .price_item .image .catch {
     font-size: 40px;
   }
 }
-
 @media (max-width: 600px) {
   .shin_fitness_01_price .item_wrap .price_item .image .catch {
     font-size: 38px;
   }
 }
-
 .shin_fitness_01_price .item_wrap .price_item .image .bg_color {
   position: absolute;
   top: 8px;
@@ -752,52 +655,43 @@ h2.custom-title-shin_fitness_02 .sub {
   height: 100%;
   background: #ef2c00;
 }
-
 .shin_fitness_01_price .item_wrap .price_item .text {
   margin-top: 40px;
 }
-
 .shin_fitness_01_price .item_wrap .price_item .text .title {
   padding: 5px 6px 6px 6px;
   background: #ef2c00;
   color: #fff;
 }
-
 .shin_fitness_01_price .item_wrap .price_item .text .title .main {
   font-size: 24px;
   line-height: 1.6m;
 }
-
 @container (max-width:1300px) {
   .shin_fitness_01_price .item_wrap .price_item .text .title .main {
     font-size: 22px;
   }
 }
-
 @container (max-width:1080px) {
   .shin_fitness_01_price .item_wrap .price_item .text .title .main {
     font-size: 20px;
   }
 }
-
 .shin_fitness_01_price .item_wrap .price_item .text .title .sub {
   margin-top: 2px;
   font-size: 16px;
   line-height: 1.5em;
 }
-
 @container (max-width:1300px) {
   .shin_fitness_01_price .item_wrap .price_item .text .title .sub {
     font-size: 14px;
   }
 }
-
 @container (max-width:1080px) {
   .shin_fitness_01_price .item_wrap .price_item .text .title .sub {
     font-size: 12px;
   }
 }
-
 .shin_fitness_01_price .item_wrap .price_item .text p.description {
   margin: 0;
   margin-top: 1em;
@@ -805,7 +699,6 @@ h2.custom-title-shin_fitness_02 .sub {
   line-height: 2em;
   font-weight: 400;
 }
-
 .shin_fitness_01_price .item_wrap .price_item .price {
   margin-top: 24px;
   padding-top: 24px;
@@ -815,14 +708,12 @@ h2.custom-title-shin_fitness_02 .sub {
   color: #ef2c00;
   text-align: center;
 }
-
 .shin_fitness_01_price .cta_btn {
   margin-top: 64px;
   width: 100%;
   display: flex;
   justify-content: center;
 }
-
 .shin_fitness_01_price .cta_btn a {
   height: 60px;
   min-width: 340px;
@@ -833,7 +724,6 @@ h2.custom-title-shin_fitness_02 .sub {
   color: #fff;
   border-radius: 4px;
 }
-
 @media (max-width: 400px) {
   .shin_fitness_01_price .cta_btn a {
     min-width: 100%;
@@ -846,25 +736,21 @@ h2.custom-title-shin_fitness_02 .sub {
   justify-content: space-between;
   flex-wrap: wrap;
 }
-
 .shin_fitness_01_access_01 .text_in {
   width: 40%;
 }
-
 @container (max-width:1180px) {
   .shin_fitness_01_access_01 .text_in {
     padding-right: 40px;
     width: 50%;
   }
 }
-
 @container (max-width:850px) {
   .shin_fitness_01_access_01 .text_in {
     padding-right: 0;
     width: 100%;
   }
 }
-
 .shin_fitness_01_access_01 .text_in h3.title {
   position: relative;
   margin-bottom: 24px;
@@ -873,7 +759,6 @@ h2.custom-title-shin_fitness_02 .sub {
   font-size: 24px;
   overflow: hidden;
 }
-
 .shin_fitness_01_access_01 .text_in h3.title::before {
   position: absolute;
   top: -9px;
@@ -885,48 +770,40 @@ h2.custom-title-shin_fitness_02 .sub {
   background: #ef2c00;
   transform: rotate(45deg);
 }
-
 .shin_fitness_01_access_01 .text_in dl {
   padding-left: 24px;
   display: grid;
   grid-template-columns: 90px calc(100% - 90px);
   gap: 1.4em;
 }
-
 @container (max-width:850px) {
   .shin_fitness_01_access_01 .text_in dl {
     margin-bottom: 56px;
   }
 }
-
 .shin_fitness_01_access_01 .text_in dl dt .text {
   padding: 2px;
   text-align: center;
   background: #ef2c00;
   color: #fff;
 }
-
 .shin_fitness_01_access_01 .text_in dl dd {
   line-height: 1.8em;
 }
-
 .shin_fitness_01_access_01 .map_in {
   width: 50%;
 }
-
 @container (max-width:850px) {
   .shin_fitness_01_access_01 .map_in {
     width: 100%;
   }
 }
-
 .shin_fitness_01_access_01 .map_in iframe {
   width: 100%;
   height: 400px;
 }
-
 @container (max-width:850px) {
   .shin_fitness_01_access_01 .map_in iframe {
     height: 280px;
   }
-}
+}/*# sourceMappingURL=style.css.map */

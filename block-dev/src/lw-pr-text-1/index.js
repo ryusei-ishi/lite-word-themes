@@ -3,7 +3,7 @@
  * src/lw-pr-text-1/index.js
  */
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, BlockControls, InspectorControls } from '@wordpress/block-editor';
+import { RichText, BlockControls, InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import {
 	ToolbarGroup,
 	ToolbarButton,
@@ -13,11 +13,11 @@ import {
 	RangeControl,
 	Button,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
@@ -273,111 +273,7 @@ const textAlignOptions = [
 	{ label: '右揃え', value: 'right' },
 ];
 
-registerBlockType('wdl/lw-pr-text-1', {
-	/* ----------------------------------------------------------
-	 * 基本情報
-	 * -------------------------------------------------------- */
-	title: 'グラデーションテキスト 01',
-	icon: 'admin-customizer',
-	category: 'liteword-other',
-	supports: { anchor: true },
-
-	/* ----------------------------------------------------------
-	 * 属性
-	 * -------------------------------------------------------- */
-	attributes: {
-		text: {
-			type: 'string',
-			default: 'SLIDE ANIMATION',
-		},
-		tagName: {
-			type: 'string',
-			default: 'h2',
-		},
-		// テキスト配置設定
-		textAlignPc: {
-			type: 'string',
-			default: 'left',
-		},
-		textAlignSp: {
-			type: 'string',
-			default: '',
-		},
-		// フォント設定
-		fontSet: {
-			type: 'string',
-			default: '',
-		},
-		fontWeight: {
-			type: 'string',
-			default: '',
-		},
-		// フォントサイズ設定
-		fontSizePc: {
-			type: 'number',
-			default: 1,
-		},
-		fontSizeTab: {
-			type: 'number',
-			default: null,
-		},
-		fontSizeSp: {
-			type: 'number',
-			default: null,
-		},
-		// 行間設定
-		lineHeightPc: {
-			type: 'number',
-			default: 1.5,
-		},
-		lineHeightTab: {
-			type: 'number',
-			default: null,
-		},
-		lineHeightSp: {
-			type: 'number',
-			default: null,
-		},
-		// グラデーション設定
-		gradientPreset: {
-			type: 'string',
-			default: 'preset-blue',
-		},
-		// カスタムグラデーション色設定
-		gradientColor1: {
-			type: 'string',
-			default: '#3b82f6',
-		},
-		gradientColor2: {
-			type: 'string',
-			default: '#06b6d4',
-		},
-		gradientColor3: {
-			type: 'string',
-			default: '#3b82f6',
-		},
-		gradientAngle: {
-			type: 'string',
-			default: '270',
-		},
-		// アニメーション設定
-		animationPattern: {
-			type: 'string',
-			default: 'lw-pr-text-1-gradient-slide-anime-1',
-		},
-		animationTime: {
-			type: 'number',
-			default: 3,
-		},
-		animationEasing: {
-			type: 'string',
-			default: 'linear',
-		},
-	},
-
-	/* ----------------------------------------------------------
-	 * 編集画面
-	 * -------------------------------------------------------- */
+registerBlockType(metadata.name, {
 	edit: ({ attributes, setAttributes }) => {
 		const {
 			text,
@@ -461,10 +357,14 @@ registerBlockType('wdl/lw-pr-text-1', {
 			.join(' ');
 
 		const TagName = tagName;
+		const blockProps = useBlockProps({
+			className: className,
+			style: inlineStyle,
+			'data-lw_font_set': fontSet,
+		});
 
 		return (
-			<Fragment>
-				{/* ツールバー: タグ選択 */}
+			<>
 				<BlockControls>
 					<ToolbarGroup>
 						{['h1', 'h2', 'h3', 'h4', 'p', 'span'].map((tag) => (
@@ -695,12 +595,7 @@ registerBlockType('wdl/lw-pr-text-1', {
 					</PanelBody>
 				</InspectorControls>
 
-				{/* プレビュー */}
-				<TagName 
-					className={className} 
-					style={inlineStyle}
-					data-lw_font_set={fontSet}
-				>
+				<TagName {...blockProps}>
 					<RichText
 						tagName="span"
 						value={text}
@@ -708,7 +603,7 @@ registerBlockType('wdl/lw-pr-text-1', {
 						placeholder="テキストを入力"
 					/>
 				</TagName>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -779,12 +674,14 @@ registerBlockType('wdl/lw-pr-text-1', {
 
 		const TagName = tagName;
 
+		const blockProps = useBlockProps.save({
+			className: className,
+			style: inlineStyle,
+			'data-lw_font_set': fontSet,
+		});
+
 		return (
-			<TagName 
-				className={className} 
-				style={inlineStyle}
-				data-lw_font_set={fontSet}
-			>
+			<TagName {...blockProps}>
 				<RichText.Content tagName="span" value={text} />
 			</TagName>
 		);

@@ -5,6 +5,7 @@ import {
     RichText,
     BlockControls,
     ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -16,59 +17,19 @@ import {
     ToggleControl,
     RangeControl,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
-
 // フォントの選択肢など（環境に合わせて修正してください）
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 const fontOptions       = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
 import './editor.scss';
+import metadata from './block.json';
 import './style.scss';
 
 /* ================================================================ */
 /*  ▶ ブロック登録                                                   */
 /* ================================================================ */
-registerBlockType('wdl/paid-block-content-5', {
-    title   : 'Content 05',
-    icon    : 'format-image',
-    category: 'liteword-other',
-
-    /* -------------------------------------------------------------- */
-    /*  ▶ 属性                                                        */
-    /* -------------------------------------------------------------- */
-    attributes: {
-        /* 画像関連 */
-        pcImage : { type: 'string', default: 'https://lite-word.com/sample_img/women/7.webp' },
-        spImage : { type: 'string', default: '' },
-        imgAlt  : { type: 'string', default: '' },
-
-        /* タイトル関連 */
-        pcTitle: { type: 'string', default: 'PC用タイトルのサンプルテキスト' },
-        spTitle: { type: 'string', default: '' },
-
-        /* 本文（改行は <br> 扱い） */
-        pcBody: {
-            type   : 'string',
-            default: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト入力できます。テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト',
-        },
-
-        /* レイアウト */
-        textColumns     : { type: 'string',  default: '2' },
-        headingLevel    : { type: 'number',  default: 2 },
-        verticalCenter  : { type: 'boolean', default: false },
-        aspectRatioHeight: { type: 'number', default: 650 },
-        contsMaxWidth   : { type: 'number', default: 1200 }, // ★ 追加 - .conts の最大横幅
-
-        /* SPタイトル用フォント */
-        spTitleFont      : { type: 'string', default: '' },
-        spTitleFontWeight: { type: 'string', default: '500' },
-
-        /* タイトル文字色 */
-        pcTitleColor: { type: 'string', default: '' },
-        spTitleColor: { type: 'string', default: '' },
-    },
-
+registerBlockType(metadata.name, {
     /* -------------------------------------------------------------- */
     /*  ▶ 編集画面 (edit)                                             */
     /* -------------------------------------------------------------- */
@@ -98,8 +59,13 @@ registerBlockType('wdl/paid-block-content-5', {
             ? { alignItems: 'center', maxWidth: `${contsMaxWidth}px` } 
             : { maxWidth: `${contsMaxWidth}px` };
 
+        
+        const blockProps = useBlockProps({
+            className: 'paid-block-content-5'
+        });
+
         return (
-            <Fragment>
+            <>
                 {/* ==================== BlockControls ==================== */}
                 <BlockControls>
                     <ToolbarGroup>
@@ -256,7 +222,7 @@ registerBlockType('wdl/paid-block-content-5', {
                 </InspectorControls>
 
                 {/* ================= エディター プレビュー ================= */}
-                <div className="paid-block-content-5">
+                <div {...blockProps}>
                     <div className="conts" style={ contsStyle }>
                         {/* 画像部分 */}
                         <figure className="image">
@@ -301,7 +267,7 @@ registerBlockType('wdl/paid-block-content-5', {
                         </div>
                     </div>
                 </div>
-            </Fragment>
+            </>
         );
     },
 
@@ -328,8 +294,12 @@ registerBlockType('wdl/paid-block-content-5', {
             ? { alignItems:'center', maxWidth: `${contsMaxWidth}px` } 
             : { maxWidth: `${contsMaxWidth}px` };
 
+        const blockProps = useBlockProps.save({
+            className: 'paid-block-content-5',
+        });
+
         return (
-            <div className="paid-block-content-5">
+            <div {...blockProps}>
                 <div className="conts" style={ contsStyle }>
                     <figure className="image">
                         { pcImage && (

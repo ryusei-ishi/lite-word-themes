@@ -1,34 +1,14 @@
+/**
+ * CTA 01
+ * ★ apiVersion 3 対応（2025-12-07）
+ */
 import { registerBlockType } from '@wordpress/blocks';
-import { InspectorControls, RichText, MediaUpload, BlockControls } from '@wordpress/block-editor';
+import { InspectorControls, RichText, MediaUpload, BlockControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, ToggleControl, ColorPicker, RangeControl, TextControl, SelectControl, ToolbarGroup, ToolbarButton } from '@wordpress/components';
-import './style.scss';
-import './editor.scss';
 
-registerBlockType('wdl/cta-1', {
-    title: 'CTA 01',
-    icon: 'megaphone',
-    category: 'liteword-other',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        title: { type: 'string', source: 'html', selector: '.cta-1__title', default: '無料相談受付中' },
-        text: { type: 'string', source: 'html', selector: 'p', default: 'テキストテキストテキストテキストテキストテキス<br>トテキストテキストテキストテキストテキストテキスト' },
-        buttonText: { type: 'string', source: 'html', selector: 'a', default: 'お問い合わせ' },
-        buttonUrl: { type: 'string', default: '#' },
-        openInNewTab: { type: 'boolean', default: false },
-        imageUrl: { type: 'string', source: 'attribute', selector: 'img', attribute: 'src', default: '' },
-        imageAlt: { type: 'string', source: 'attribute', selector: 'img', attribute: 'alt', default: '背景画像' },
-        filterColor: { type: 'string', default: '#054161' },
-        buttonBackgroundColor: { type: 'string', default: 'var(--color-main)' },
-        buttonBorderColor: { type: 'string', default: '#fff' },
-        buttonBorderSize: { type: 'number', default: 1 },
-        buttonMaxWidth: { type: 'number', default: 240 },
-        pcTextAlign: { type: 'string', default: 'center' },
-        mobileTextAlign: { type: 'string', default: 'center' },
-        maxWidth: { type: 'number', default: 0 },
-        headingLevel: { type: 'number', default: 2 } // 見出しレベルの属性を追加
-    },
+import metadata from './block.json';
+
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const {
@@ -59,8 +39,14 @@ registerBlockType('wdl/cta-1', {
         // 見出しタグ名を動的に決定
         const TagName = `h${headingLevel}`;
 
+        // useBlockProps で apiVersion 3 対応
+        const blockProps = useBlockProps({
+            className: `wp-block-wdl-cta-1 ${maxWidth > 0 ? 'max_w' : ''}`,
+            style: maxWidth > 0 ? { maxWidth: maxWidth + 'px' } : {}
+        });
+
         return (
-            <>
+            <div {...blockProps}>
                 <BlockControls>
                     <ToolbarGroup>
                         {[1, 2, 3].map((level) => (
@@ -144,11 +130,7 @@ registerBlockType('wdl/cta-1', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div 
-                    className={`wp-block-wdl-cta-1 ${maxWidth > 0 ? 'max_w' : ''}`}
-                    style={maxWidth > 0 ? { maxWidth: maxWidth + 'px' } : {}}
-                >
-                    <div className="cta-1__inner">
+                <div className="cta-1__inner">
                         <RichText
                             tagName={TagName}
                             className="cta-1__title heading_style_reset"
@@ -175,12 +157,11 @@ registerBlockType('wdl/cta-1', {
                             style={{ backgroundColor: buttonBackgroundColor, borderColor: buttonBorderColor, borderWidth: buttonBorderSize + 'px', borderStyle: 'solid', maxWidth: buttonMaxWidth + 'px' }}
                         />
                     </div>
-                    <div className="cta-1__image">
-                        {imageUrl && <img src={imageUrl} alt={imageAlt} loading="lazy" />}
-                        <div style={{ backgroundColor: filterColor,  position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1 }}></div>
-                    </div>
+                <div className="cta-1__image">
+                    {imageUrl && <img src={imageUrl} alt={imageAlt} loading="lazy" />}
+                    <div style={{ backgroundColor: filterColor,  position: 'absolute', top: 0, left: 0, right: 0, bottom: 0, zIndex: 1 }}></div>
                 </div>
-            </>
+            </div>
         );
     },
     save: function (props) {
@@ -194,11 +175,14 @@ registerBlockType('wdl/cta-1', {
         // 見出しタグ名を動的に決定
         const TagName = `h${headingLevel}`;
 
+        // useBlockProps.save() で apiVersion 3 対応
+        const blockProps = useBlockProps.save({
+            className: `wp-block-wdl-cta-1 ${maxWidth > 0 ? 'max_w' : ''}`,
+            style: maxWidth > 0 ? { maxWidth: maxWidth + 'px' } : {}
+        });
+
         return (
-            <div 
-                className={`wp-block-wdl-cta-1 ${maxWidth > 0 ? 'max_w' : ''}`}
-                style={maxWidth > 0 ? { maxWidth: maxWidth + 'px' } : {}}
-            >
+            <div {...blockProps}>
                 <div className="cta-1__inner">
                     <RichText.Content
                         tagName={TagName}

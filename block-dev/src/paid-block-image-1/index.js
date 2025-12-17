@@ -11,6 +11,7 @@ import {
 	MediaUpload,
 	InspectorControls,
 	BlockControls,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -23,10 +24,11 @@ import {
 	ToolbarGroup,
 	ToolbarButton,
 } from '@wordpress/components';
-import { Fragment, createElement } from '@wordpress/element';
+import { createElement } from '@wordpress/element';
 
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* -------------------------------------------------- */
 const headingOptions  = ['h2', 'h3', 'h4', 'p'];
@@ -38,46 +40,7 @@ const fontSizeOptions = [
 ];
 
 /* ============================================================== */
-registerBlockType('wdl/paid-block-image-1', {
-	title   : '画像 01',
-	icon    : 'format-image',
-	category: 'liteword-other',
-	supports: { anchor: true },
-
-	attributes: {
-		/* コンテンツ */
-		image     : { type: 'string', default: 'https://placehold.jp/600x440.png' },
-		alt       : { type: 'string', default: '' },
-		subTitle  : { type: 'string', default: '主任' },
-		mainTitle : { type: 'string', default: '大阪 京子' },
-
-		/* レイアウト */
-		aspectRatioW : { type: 'number', default: 400 },
-		aspectRatioH : { type: 'number', default: 340 },
-		maxWidth     : { type: 'number', default: 480 },   // 数値(px)
-		centerBlock  : { type: 'boolean', default: false },
-		innerRadiusEm: { type: 'number', default: 0.9 },
-
-		/* 名前プレート */
-		showNamePlate       : { type: 'boolean', default: true },
-		namePlateColor      : { type: 'string',  default: 'var(--color-main)' },
-		namePlateRadiusEm   : { type: 'number', default: 0.2 },
-		namePlateBorderWidth: { type: 'number', default: 2 },
-
-		/* 矢印リンク */
-		showLinkNext      : { type: 'boolean', default: true },
-		linkNextBgColor   : { type: 'string',  default: 'var(--color-main)' },
-		linkNextIconColor : { type: 'string',  default: '#ffffff' },
-
-		/* 外部リンク */
-		linkUrl       : { type: 'string',  default: '' },
-		linkOpenNewTab: { type: 'boolean', default: false },
-
-		/* その他 */
-		headingLevel : { type: 'string',  default: 'h3' },
-		fontSizeClass: { type: 'string',  default: 'font_size_m' },
-	},
-
+registerBlockType(metadata.name, {
 	/* ============================ EDIT ============================ */
 	edit({ attributes, setAttributes }) {
 		const {
@@ -107,8 +70,13 @@ registerBlockType('wdl/paid-block-image-1', {
 		/* 画像削除  */
 		const removeImage = () => setAttributes({ image: '', alt: '' });
 
+		const blockProps = useBlockProps({
+			className: `paid-block-image-1 ${fontSizeClass}`,
+			style: outerStyle
+		});
+
 		return (
-			<Fragment>
+			<>
 				{/* ------- ツールバー (見出しレベル) ------- */}
 				<BlockControls group="block">
 					<ToolbarGroup>
@@ -277,7 +245,7 @@ registerBlockType('wdl/paid-block-image-1', {
 				</InspectorControls>
 
 				{/* ------- エディター表示 ------- */}
-				<div className={`paid-block-image-1 ${fontSizeClass}`} style={outerStyle}>
+				<div {...blockProps}>
 					<div className="paid-block-image-1__inner" style={innerStyle}>
 						{image && <img src={image} alt={alt} />}
 
@@ -328,7 +296,7 @@ registerBlockType('wdl/paid-block-image-1', {
 						)}
 					</div>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -368,15 +336,17 @@ registerBlockType('wdl/paid-block-image-1', {
 
 		const HeadingTag = headingLevel;
 
+		const blockProps = useBlockProps.save({
+			className: `paid-block-image-1 ${fontSizeClass}`,
+			style: {
+				maxWidth   : `${maxWidth}px`,
+				marginLeft : centerBlock ? 'auto' : undefined,
+				marginRight: centerBlock ? 'auto' : undefined,
+			}
+		});
+
 		return (
-			<div
-				className={`paid-block-image-1 ${fontSizeClass}`}
-				style={{
-					maxWidth   : `${maxWidth}px`,
-					marginLeft : centerBlock ? 'auto' : undefined,
-					marginRight: centerBlock ? 'auto' : undefined,
-				}}
-			>
+			<div {...blockProps}>
 				{createElement(
 					WrapperTag,
 					wrapperProps,

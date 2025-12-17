@@ -7,66 +7,19 @@
  *    デフォルト CSS が無い場合に備え border:"4px solid" を指定
  * ---------------------------------------------------------- */
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, MediaUpload, InspectorControls } from '@wordpress/block-editor';
+import { RichText, MediaUpload, InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, SelectControl, ColorPalette } from '@wordpress/components';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ==== オプション配列 ===================================== */
 const fontOptions       = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
 /* ==== ブロック登録 ======================================= */
-registerBlockType( 'wdl/solution-1', {
-	title   : 'solution 01',
-	icon    : 'lightbulb',
-	category: 'liteword-other',
-	supports: { anchor: true },
-	attributes: {
-		contents: {
-			type   : 'array',
-			source : 'query',
-			selector: '.solution-1_content',
-			query  : {
-				text: {
-					type    : 'string',
-					source  : 'html',
-					selector: '.solution-1_text p',
-				},
-				image: {
-					type    : 'string',
-					source  : 'attribute',
-					selector: 'figure img',
-					attribute: 'src',
-				},
-				borderColor: {
-					type    : 'string',
-					source  : 'attribute',
-					selector: 'figure',
-					attribute: 'data-border-color',
-				},
-			},
-			default: [
-				{ text: '何から始めたらいいか\nわからない', image: '', borderColor: 'var(--color-main)' },
-				{ text: '作りたいけど\n時間がない', image: '', borderColor: 'var(--color-main)' },
-				{ text: '自分で作ると\nダサくなる…', image: '', borderColor: 'var(--color-main)' },
-			],
-		},
-		fontSet: {
-			type    : 'string',
-			default : '',
-			source  : 'attribute',
-			selector: '.solution-1',
-			attribute: 'data-lw_font_set',
-		},
-		fontWeight: {
-			type   : 'string',
-			default: '',
-		},
-	},
-
-
+registerBlockType( metadata.name, {
 	/* ===== エディター側 ================================== */
 	edit: ( { attributes, setAttributes } ) => {
 		const { contents, fontSet, fontWeight } = attributes;
@@ -93,8 +46,13 @@ registerBlockType( 'wdl/solution-1', {
 			setAttributes( { contents: newContents } );
 		};
 
+		const blockProps = useBlockProps({
+			className: 'solution-1',
+			'data-lw_font_set': fontSet
+		});
+
 		return (
-			<div className="solution-1" data-lw_font_set={ fontSet }>
+			<div {...blockProps}>
 				{/* === サイドバー === */}
 				<InspectorControls>
 					<PanelBody title="全体のフォント設定">
@@ -206,8 +164,14 @@ registerBlockType( 'wdl/solution-1', {
 	/* ===== フロントエンド出力 ============================== */
 	save: ( { attributes } ) => {
 		const { contents, fontSet, fontWeight } = attributes;
+
+		const blockProps = useBlockProps.save({
+			className: 'solution-1',
+			'data-lw_font_set': fontSet
+		});
+
 		return (
-			<div className="solution-1" data-lw_font_set={ fontSet }>
+			<div {...blockProps}>
 				<div className="solution-1_inner">
 					{ contents.map( ( content, index ) => (
 						<div className="solution-1_content" key={ index }>

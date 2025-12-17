@@ -3,50 +3,20 @@
    2025‑04‑19 改訂2: ID 非依存でクリック開閉
 ---------------------------------------------------------- */
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, ColorPalette } from '@wordpress/block-editor';
+import { RichText, InspectorControls, ColorPalette, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl } from '@wordpress/components';
-import { Fragment, useEffect } from '@wordpress/element';
+import {useEffect } from '@wordpress/element';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ▼ フォントオプション ------------------------------------ */
 const fontOptions       = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
 /* ========================================================== */
-registerBlockType( 'wdl/lw-qa-1', {
-	/* -------- メタ -------- */
-	title   : 'よくある質問 01',
-	icon    : 'lightbulb',
-	category: 'liteword-other',
-	supports: { anchor:true },
-
-	/* -------- 属性 -------- */
-	attributes: {
-		blockId         : { type:'string' },
-		FontLabel       : { type:'string', default:'Roboto' },
-		fontWeightLabel : { type:'string', default:'' },
-		mainColor       : { type:'string', default:'var(--color-main)' },
-		fontP           : { type:'string', default:'' },
-		fontWeightDt    : { type:'string', default:'' },
-		fontWeightDd    : { type:'string', default:'' },
-		contents: {
-			type    :'array',
-			source  :'query',
-			selector:'.lw-qa-1__dl',
-			query   :{
-				text_q:{ type:'string', source:'html', selector:'.lw-qa-1__text_q p' },
-				text_a:{ type:'string', source:'html', selector:'.lw-qa-1__text_a p' }
-			},
-			default:[{
-				text_q:'質問テキスト質問テキスト質問テキスト',
-				text_a:'回答テキスト回答テキスト回答テキスト回答テキスト'
-			}]
-		}
-	},
-
-	/* -------- Edit -------- */
+registerBlockType( metadata.name, {
 	edit( { attributes, setAttributes } ) {
 
 		const {
@@ -68,9 +38,14 @@ registerBlockType( 'wdl/lw-qa-1', {
 			const c=[ ...contents ]; c[i][k]=v; setAttributes( { contents:c } );
 		};
 
+		const blockProps = useBlockProps({
+			className: 'lw-qa-1',
+			id: blockId
+		});
+
 		/* -------- JSX -------- */
 		return (
-			<Fragment>
+			<>
 				{/* サイドバー */}
 				<InspectorControls>
 					<PanelBody title="メインカラー">
@@ -88,7 +63,7 @@ registerBlockType( 'wdl/lw-qa-1', {
 				</InspectorControls>
 
 				{/* 本体 */}
-				<div className="lw-qa-1" id={ blockId }>
+				<div {...blockProps}>
 					{ contents.map( (c,i)=>(				/* -- QA リスト -- */
 						<dl className="lw-qa-1__dl active" key={ i }>
 							<dt>
@@ -113,7 +88,7 @@ registerBlockType( 'wdl/lw-qa-1', {
 					) ) }
 					<button className="lw-qa-1__add_btn" onClick={ addContent }>リストを追加する</button>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -123,6 +98,11 @@ registerBlockType( 'wdl/lw-qa-1', {
 			blockId, FontLabel, mainColor,
 			fontWeightLabel, fontP, fontWeightDt, fontWeightDd, contents
 		} = attributes;
+
+		const blockProps = useBlockProps.save({
+			className: 'lw-qa-1',
+			id: blockId
+		});
 
 		/* --- インライン JS (ID 非依存版) ------------------ */
 		const qaScript = `
@@ -151,7 +131,7 @@ registerBlockType( 'wdl/lw-qa-1', {
 
 		/* --- JSX 出力 ------------------------------------ */
 		return (
-			<div className="lw-qa-1" id={ blockId }>
+			<div {...blockProps}>
 				{ contents.map( (c,i)=>(				/* -- QA リスト -- */
 					<dl className="lw-qa-1__dl" key={ i }>
 						<dt>

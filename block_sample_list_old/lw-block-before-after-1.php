@@ -1,0 +1,3 @@
+<!-- wp:wdl/paid-block-before-after-1 -->
+<div class="wp-block-wdl-paid-block-before-after-1 paid-block-before-after-1"><div class="this_wrap" style="max-width:800px"><div class="image " style="aspect-ratio:800 / 800"><img src="https://lite-word.com/sample_img/before_after/1_1.webp" alt=""/><div class="text" style="background-color:#e64343" data-lw_font_set="Montserrat">Before</div></div><div class="arrow-right" style="border-left:20px solid #e64343"></div><div class="image " style="aspect-ratio:800 / 800"><img src="https://lite-word.com/sample_img/before_after/1_2.webp" alt=""/><div class="text" style="background-color:#e64343" data-lw_font_set="Montserrat">After</div></div></div></div>
+<!-- /wp:wdl/paid-block-before-after-1 -->

@@ -4,6 +4,7 @@
  * ✔ スマホ列数（BtnClmSp）対応
  * ✔ タイトル用／背景用トグルを「非表示 / 表示」に統一 ★今回修正
  * ✔ トグル ON（チェックあり）で要素が表示、OFF で非表示
+ * ✔ リンクボタンの順番入れ替え機能
  */
 import { registerBlockType } from '@wordpress/blocks';
 import {
@@ -11,6 +12,7 @@ import {
 	MediaUpload,
 	InspectorControls,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -19,7 +21,6 @@ import {
 	Button,
 	ToggleControl,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import {
 	fontOptionsArr,
 	fontWeightOptionsArr,
@@ -28,6 +29,7 @@ import {
 } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ─────────────────────────  定数  ───────────────────────── */
 const fontOptions       = fontOptionsArr();
@@ -36,53 +38,7 @@ const bgOptions         = ButtonBackgroundOptionsArr();
 const btnIconOptions    = leftButtonIconSvgArr();
 
 /* ───────────────────────  ブロック登録  ─────────────────────── */
-registerBlockType( 'wdl/lw-link-list-1', {
-	title   : 'link list 01',
-	icon    : 'lightbulb',
-	category: 'liteword-other',
-	supports: { anchor: true },
-
-	/* ───────── Attributes ───────── */
-	attributes: {
-		MaxWidth   : { type: 'number', default: 800 },
-		BtnGap     : { type: 'number', default: 12 },
-		BtnClm     : { type: 'number', default: 2 },
-		BtnClmSp   : { type: 'number', default: 1 },
-		backgroundSwitch  : { type: 'boolean', default: true },  // true=表示
-		backgroundImage   : { type: 'string',  default: '' },
-		bgGradient        : { type: 'string',  default: 'var(--color-main)' },
-		colorLiBgOpacity  : { type: 'number',  default: 100 },
-		filterOpacity     : { type: 'number',  default: 0.9 },
-		ListBorderRadius  : { type: 'number',  default: 2 },
-		hideTitle         : { type: 'boolean', default: false }, // true=非表示
-		titleText         : { type: 'string',  default: 'Information' },
-		titleBottomText   : { type: 'string',  default: '' },
-		fontLi            : { type: 'string',  default: '' },
-		fontWeightLi      : { type: 'string',  default: '' },
-		colorLiSvg        : { type: 'string',  default: '#ffffff' },
-		colorLiBg         : { type: 'string',  default: 'var(--color-main)' },
-		colorLiText       : { type: 'string',  default: '#ffffff' },
-		colorLiBorder     : { type: 'string',  default: '#ffffff' },
-		ListBorderSize    : { type: 'number',  default: 2 },
-		contents: {
-			type   : 'array',
-			source : 'query',
-			selector: '.lw-link-list-1__li',
-			query  : {
-				text : { type: 'string', source: 'html', selector: '.lw-link-list-1__text p' },
-				link : { type: 'string', source: 'attribute', selector: '.lw-link-list-1__link', attribute: 'href' },
-				icon : { type: 'string', source: 'attribute', selector: '.lw-link-list-1__icon', attribute: 'data-icon' },
-			},
-			default: [
-				{ text: 'ホームページ', link: '', icon: '' },
-				{ text: 'Instagram',   link: '', icon: '' },
-				{ text: 'YouTube',     link: '', icon: '' },
-				{ text: 'FaceBook',    link: '', icon: '' },
-			],
-		},
-	},
-
-
+registerBlockType( metadata.name, {
 	/* ───────── Edit ───────── */
 	edit: ( { attributes, setAttributes } ) => {
 		const {
@@ -95,6 +51,11 @@ registerBlockType( 'wdl/lw-link-list-1', {
 			backgroundSwitch, colorLiBgOpacity,
 		} = attributes;
 
+		const blockProps = useBlockProps({
+			className: `lw-link-list-1 ${ backgroundSwitch ? 'bg_visible' : 'bg_hidden' }`,
+			style: backgroundSwitch ? { backgroundImage: `url(${ backgroundImage })` } : {}
+		});
+
 		const onChangeBackgroundImage = ( media ) => setAttributes( { backgroundImage: media.url } );
 		const removeBackgroundImage   = () => setAttributes( { backgroundImage: '' } );
 
@@ -106,8 +67,20 @@ registerBlockType( 'wdl/lw-link-list-1', {
 			setAttributes( { contents: arr } );
 		};
 
+		/* 順番入れ替え関数 */
+		const moveItem = ( index, direction ) => {
+			const targetIndex = index + direction;
+			if ( targetIndex < 0 || targetIndex >= contents.length ) return;
+
+			const reordered = [ ...contents ];
+			const [ moved ] = reordered.splice( index, 1 );
+			reordered.splice( targetIndex, 0, moved );
+
+			setAttributes( { contents: reordered } );
+		};
+
 		return (
-			<Fragment>
+			<>
 				<InspectorControls>
 					{/* 背景 */}
 					<PanelBody title="背景">
@@ -261,10 +234,7 @@ registerBlockType( 'wdl/lw-link-list-1', {
 				</InspectorControls>
 
 				{/* ───────── エディター表示部 ───────── */}
-				<div
-					className={ `lw-link-list-1 ${ backgroundSwitch ? 'bg_visible' : 'bg_hidden' }` }
-					style={ backgroundSwitch ? { backgroundImage: `url(${ backgroundImage })` } : {} }
-				>
+				<div {...blockProps}>
 					{ !hideTitle && (
 						<>
 							<RichText
@@ -313,10 +283,37 @@ registerBlockType( 'wdl/lw-link-list-1', {
 											style={ { fontWeight: fontWeightLi, color: colorLiText } }
 										/>
 									</span>
-									<button className="lw-link-list-1__remove_btn" onClick={ () => removeContent( idx ) }>
+								</a>
+
+								{/* 並べ替え & 削除コントロール */}
+								<div className="lw-link-list-1__item-controls">
+									<button
+										type="button"
+										onClick={ () => moveItem( idx, -1 ) }
+										disabled={ idx === 0 }
+										className="move-up-button"
+										aria-label="上へ移動"
+									>
+										↑
+									</button>
+									<button
+										type="button"
+										onClick={ () => moveItem( idx, 1 ) }
+										disabled={ idx === contents.length - 1 }
+										className="move-down-button"
+										aria-label="下へ移動"
+									>
+										↓
+									</button>
+									<button
+										type="button"
+										className="remove-item-button"
+										onClick={ () => removeContent( idx ) }
+										aria-label="削除"
+									>
 										削除
 									</button>
-								</a>
+								</div>
 
 								<label>リンク</label>
 								<input
@@ -342,7 +339,7 @@ registerBlockType( 'wdl/lw-link-list-1', {
 
 					<div className="lw-link-list-1__filter" style={ { background: bgGradient, opacity: filterOpacity } }></div>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -356,11 +353,13 @@ registerBlockType( 'wdl/lw-link-list-1', {
 			BtnClmSp, backgroundSwitch, colorLiBgOpacity,
 		} = attributes;
 
+		const blockProps = useBlockProps.save({
+			className: `lw-link-list-1 ${ backgroundSwitch ? 'bg_visible' : 'bg_hidden' }`,
+			style: backgroundSwitch ? { backgroundImage: `url(${ backgroundImage })` } : {}
+		});
+
 		return (
-			<div
-				className={ `lw-link-list-1 ${ backgroundSwitch ? 'bg_visible' : 'bg_hidden' }` }
-				style={ backgroundSwitch ? { backgroundImage: `url(${ backgroundImage })` } : {} }
-			>
+			<div {...blockProps}>
 				{ !hideTitle && (
 					<>
 						<RichText.Content tagName="h2" className="lw-link-list-1__title" value={ titleText } />

@@ -1,8 +1,10 @@
 .custom-title-6 {
   margin: 1em 0;
   container-type: inline-size;
-  padding-bottom: 0 !important;
   border: none !important;
+  &:not([class*="lw_padding_bottom_"]) {
+    padding-bottom: 0 !important;
+  }
   .main {
     position: relative;
     padding: 0.2em 0;

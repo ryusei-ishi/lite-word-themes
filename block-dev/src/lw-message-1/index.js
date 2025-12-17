@@ -1,32 +1,18 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, MediaUpload } from '@wordpress/block-editor';
+import { RichText, InspectorControls, MediaUpload, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, TextControl, RangeControl, ColorPalette } from '@wordpress/components';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/lw-message-1', {
-    title: 'メッセージ 01',
-    icon: 'admin-comments',
-    category: 'liteword-other',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        subTitle: { type: 'string', default: 'message' },
-        mainTitle: { type: 'string', default: '代表あいさつ' },
-        leadText: { type: 'string', default: 'テキストテキストテキストテキスト。\nテキストテキストテキストテキストテキスト' },
-        bodyText: { type: 'string', default: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト' },
-        imgUrl: { type: 'string', default: 'https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?w=400&h=400&auto=format&fit=crop&q=80' },
-        imgAlt: { type: 'string', default: '代表の写真' },
-        captionSub: { type: 'string', default: '代表取締役' },
-        captionMain: { type: 'string', default: '山田太郎' },
-        colorMain: { type: 'string', default: 'var(--color-main)' },
-        filterOpacity: { type: 'number', default: 0.05 }, // bg_filterの透明度
-        maxWidth: { type: 'number', default: "" } // wrapの最大幅
-    },
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const { subTitle, mainTitle, leadText, bodyText, imgUrl, imgAlt, captionSub, captionMain, colorMain, filterOpacity, maxWidth } = attributes;
+
+        const blockProps = useBlockProps({
+            className: 'lw-message-1'
+        });
 
         return (
             <>
@@ -88,7 +74,7 @@ registerBlockType('wdl/lw-message-1', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <div className="lw-message-1">
+                <div {...blockProps}>
                     <div className="lw-message-1__wrap" style={{ maxWidth: `${maxWidth}px` }}>
                         <div className="text__in">
                             <h3 className="title">

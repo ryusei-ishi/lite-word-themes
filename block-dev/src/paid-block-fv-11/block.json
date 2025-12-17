@@ -1,0 +1,142 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-fv-11",
+	"version": "1.0.0",
+	"title": "FV 11 背景画像スライダー",
+	"category": "lw-firstview",
+	"icon": "images-alt2",
+	"editorScript": "file:./paid-block-fv-11.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"blockId": {
+			"type": "string"
+		},
+		"slides": {
+			"type": "array",
+			"default": [
+				{
+					"pcImgUrl": "https://lite-word.com/sample_img/shop/6.webp",
+					"spImgUrl": "",
+					"altText": "スライド1のalt",
+					"linkUrl": ""
+				},
+				{
+					"pcImgUrl": "https://lite-word.com/sample_img/shop/2.webp",
+					"spImgUrl": "",
+					"altText": "スライド2のalt",
+					"linkUrl": ""
+				}
+			]
+		},
+		"layoutType": {
+			"type": "string",
+			"default": "full"
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 1200
+		},
+		"autoplayDelay": {
+			"type": "number",
+			"default": 3000
+		},
+		"sliderEffect": {
+			"type": "string",
+			"default": "fade"
+		},
+		"crossFade": {
+			"type": "boolean",
+			"default": true
+		},
+		"loop": {
+			"type": "boolean",
+			"default": true
+		},
+		"disableOnInteraction": {
+			"type": "boolean",
+			"default": false
+		},
+		"showPagination": {
+			"type": "boolean",
+			"default": true
+		},
+		"paginationClickable": {
+			"type": "boolean",
+			"default": true
+		},
+		"showNavigation": {
+			"type": "boolean",
+			"default": true
+		},
+		"sliderSpeed": {
+			"type": "number",
+			"default": 1000
+		},
+		"paginationColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"nextButtonColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"minHeightPc": {
+			"type": "string",
+			"default": "min-h-pc-480px"
+		},
+		"minHeightTb": {
+			"type": "string",
+			"default": "min-h-tb-380px"
+		},
+		"minHeightSp": {
+			"type": "string",
+			"default": "min-h-sp-320px"
+		},
+		"subTitle": {
+			"type": "string",
+			"default": "サブタイトル"
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "メインタイトル"
+		},
+		"descriptionText": {
+			"type": "string",
+			"default": "サブテキストが入ります。ここは任意のテキストを入れてください。"
+		},
+		"buttonLabel": {
+			"type": "string",
+			"default": "ボタンテキスト"
+		},
+		"ctaLinkUrl": {
+			"type": "string",
+			"default": "#"
+		},
+		"ctaOpenNewTab": {
+			"type": "boolean",
+			"default": false
+		},
+		"showCtaButton": {
+			"type": "boolean",
+			"default": true
+		},
+		"filterColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 0.6
+		}
+	},
+	"no": 11
+}

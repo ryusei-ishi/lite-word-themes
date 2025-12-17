@@ -11,39 +11,16 @@
  *        <style> タグでインライン CSS を出力（多重設置可）
  * =========================================================== */
 import { registerBlockType } from '@wordpress/blocks';
-import { InspectorControls } from '@wordpress/block-editor';
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, RangeControl, ColorPalette } from '@wordpress/components';
 import { RawHTML, useEffect } from '@wordpress/element';
 
 /* 汎用スタイル（フォームの基本デザイン）は別途読み込む想定 */
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/lw-contact-3', {
-    title: 'お問合わせフォーム 03（ワンカラム・シンプル）',
-    icon: 'email',
-    category: 'liteword-buttons',
-    supports: { anchor: true },
-
-    attributes: {
-        formId: { type: 'number', default: 1 },
-        maxWidth: { type: 'number', default: 1080 }, // px
-        /* ラベル・入力欄 */
-        labelColor: { type: 'string', default: '#000000' },
-        inputBgColor: { type: 'string', default: '#f6f6f6' },
-        inputTextColor: { type: 'string', default: '#000000' },
-        /* ボタン */
-        buttonBgColor: { type: 'string', default: '#007cba' },
-        buttonTextColor: { type: 'string', default: '#ffffff' },
-        /* 必須／任意ラベル */
-        requiredBgColor: { type: 'string', default: '#da3838' },
-        requiredTextColor: { type: 'string', default: '#ffffff' },
-        optionalBgColor: { type: 'string', default: '#dddddd' },
-        optionalTextColor: { type: 'string', default: '#000000' },
-        /* ユニーククラス */
-        uniqueClass: { type: 'string', default: '' },
-    },
-
+registerBlockType(metadata.name, {
     /* ========== 編集画面 ========== */
     edit({ clientId, attributes, setAttributes }) {
         const {
@@ -68,7 +45,10 @@ registerBlockType('wdl/lw-contact-3', {
             }
         }, []);
 
-        const className = `lw-contact-3 ${uniqueClass || ''}`;
+        const blockProps = useBlockProps({
+            className: `lw-contact-3 ${uniqueClass || ''}`,
+            style: { maxWidth: `${maxWidth}px` }
+        });
 
         /* --- Inspector --- */
         return (
@@ -132,7 +112,7 @@ registerBlockType('wdl/lw-contact-3', {
                 </InspectorControls>
 
                 {/* プレビュー */}
-                <div className={className} style={{ maxWidth: `${maxWidth}px` }}>
+                <div {...blockProps}>
                     <RawHTML>{`[lw_mail_form_select id='${formId}']`}</RawHTML>
                     {/* インラインスタイル */}
                     <style>{`
@@ -187,10 +167,13 @@ registerBlockType('wdl/lw-contact-3', {
             uniqueClass,
         } = attributes;
 
-        const className = `lw-contact-3 ${uniqueClass}`;
+        const blockProps = useBlockProps.save({
+            className: `lw-contact-3 ${uniqueClass}`,
+            style: { maxWidth: `${maxWidth}px` }
+        });
 
         return (
-            <div className={className} style={{ maxWidth: `${maxWidth}px` }}>
+            <div {...blockProps}>
                 <RawHTML>{`[lw_mail_form_select id='${formId}']`}</RawHTML>
                 <style>{`
                     .${uniqueClass} .lw_mail_form .label_in label,.supplement_text { color: ${labelColor}; }

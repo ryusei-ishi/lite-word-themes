@@ -5,6 +5,7 @@ import {
 	ColorPalette,
 	MediaUpload,
 	MediaUploadCheck,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -12,10 +13,10 @@ import {
 	SelectControl,
 	Button,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ----------------------------------------------------------
  * 共通データ
@@ -43,64 +44,7 @@ const hexToRgba = (hex='#000', a=1)=>{
 /* ----------------------------------------------------------
  * ブロック登録
  * -------------------------------------------------------- */
-registerBlockType( 'wdl/lw-image-2', {
-	title   : '画像カード 02',
-	icon    : 'format-image',
-	category: 'liteword-other',
-	supports: { anchor:true },
-
-	attributes:{
-		/* ===== 共通設定 ===== */
-		borderRadiusEm : { type:'number', default:1.2 }, // 角丸 em
-		aspectHeight   : { type:'number', default:800 }, // 1000 / 高さ
-		fontP          : { type:'string', default:'' },
-		fontWeightP    : { type:'string', default:'' },
-		colorP         : { type:'string', default:'' },
-		maxWidthPx     : { type:'number', default:0 },   // 0 = 100%
-		alignClass     : { type:'string', default:'left' }, // left/center/right
-
-		/* ===== カード 3 件 ===== */
-		items:{
-			type   :'array',
-			source :'query',
-			selector:'.image__inner',
-			query  :{
-				imgSrc :{ type:'string', source:'attribute', selector:'img', attribute:'src' },
-				altText:{ type:'string', source:'attribute', selector:'img', attribute:'alt' },
-				text   :{ type:'string', source:'text',      selector:'p' },
-				fColor :{ type:'string', source:'attribute', selector:'.image_filter', attribute:'data-color' },
-				fOpac  :{ type:'number', source:'attribute', selector:'.image_filter', attribute:'data-opacity' },
-				fBlend :{ type:'string', source:'attribute', selector:'.image_filter', attribute:'data-blend' },
-			},
-			default:[
-				{
-					imgSrc :'https://cdn.pixabay.com/photo/2022/12/28/14/45/sunset-7683081_1280.jpg',
-					altText:'',
-					text   :'テキスト',
-					fColor :'#000000',
-					fOpac  :0.3,
-					fBlend :'normal',
-				},
-				{
-					imgSrc :'https://cdn.pixabay.com/photo/2022/12/28/14/45/sunset-7683081_1280.jpg',
-					altText:'',
-					text   :'テキスト',
-					fColor :'#000000',
-					fOpac  :0.3,
-					fBlend :'normal',
-				},
-				{
-					imgSrc :'https://cdn.pixabay.com/photo/2022/12/28/14/45/sunset-7683081_1280.jpg',
-					altText:'',
-					text   :'テキスト',
-					fColor :'#000000',
-					fOpac  :0.3,
-					fBlend :'normal',
-				},
-			],
-		},
-	},
-
+registerBlockType( metadata.name, {
 	/* ======================================================
 	 * エディタ
 	 * ==================================================== */
@@ -124,8 +68,13 @@ registerBlockType( 'wdl/lw-image-2', {
 
 		const numClass = i=>`no_${i+1}`;
 
+		const blockProps = useBlockProps({
+			className: `lw-image-2 ${alignClass}`,
+			style: { maxWidth: maxWidthPx ? `${maxWidthPx}px` : '100%' }
+		});
+
 		return (
-			<Fragment>
+			<>
 				{/* ===== サイドバー ===== */}
 				<InspectorControls>
 					<PanelBody title="共通スタイル" initialOpen={true}>
@@ -241,10 +190,7 @@ registerBlockType( 'wdl/lw-image-2', {
 				</InspectorControls>
 
 				{/* ===== ビジュアルエディタ ===== */}
-				<div
-					className={`lw-image-2 ${alignClass}`}
-					style={{ maxWidth: maxWidthPx ? `${maxWidthPx}px` : '100%' }}
-				>
+				<div {...blockProps}>
 					{items.map((itm,idx)=>(
 						<div
 							className={`image__inner ${numClass(idx)}`}
@@ -279,7 +225,7 @@ registerBlockType( 'wdl/lw-image-2', {
 						</div>
 					))}
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -296,11 +242,13 @@ registerBlockType( 'wdl/lw-image-2', {
 
 		const numClass = i=>`no_${i+1}`;
 
+		const blockProps = useBlockProps.save({
+			className: `lw-image-2 ${alignClass}`,
+			style: { maxWidth: maxWidthPx ? `${maxWidthPx}px` : '100%' }
+		});
+
 		return (
-			<div
-				className={`lw-image-2 ${alignClass}`}
-				style={{ maxWidth: maxWidthPx ? `${maxWidthPx}px` : '100%' }}
-			>
+			<div {...blockProps}>
 				{items.map((itm,idx)=>(
 					<div
 						className={`image__inner ${numClass(idx)}`}

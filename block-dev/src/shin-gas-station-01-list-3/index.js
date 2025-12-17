@@ -1,10 +1,11 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, MediaUpload, InspectorControls, ColorPalette } from '@wordpress/block-editor';
+import { RichText, MediaUpload, InspectorControls, ColorPalette , useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, RangeControl, Button } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
@@ -12,58 +13,13 @@ const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 // 背景色オプションを変数に定義
 
-registerBlockType('wdl/shin-gas-station-01-list-3', {
-    title: 'インフォリスト 3 shin shop pattern 01',
-    icon: 'lightbulb',
-    category: 'liteword-other',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        fontLi: {
-            type: 'string',
-            default: ''
-        },
-        fontColorLi: {
-            type: 'string',
-            default: 'var(--color-main)'
-        },
-        fontWeightLi: {
-            type: 'string',
-            default: '600'
-        },
-        backgroundColor: {
-            type: 'string',
-            default: '#FAFAFA'
-        },
-        borderColor: {
-            type: 'string',
-             default: 'var(--color-main)'
-        },
-        borderSize: {
-            type: 'number',
-            default: 0
-        },
-        contents: {
-            type: 'array',
-            source: 'query',
-            selector: '.shin-gas-station-01-list-3__li',
-            query: {
-                text: {
-                    type: 'string',
-                    source: 'html',
-                    selector: '.shin-gas-station-01-list-3__text p',
-                },
-            },
-            default: [
-                { text: 'リストテキストリストテキスト ' },
-                { text: 'リストテキストリストテキスト ' },
-                { text: 'リストテキストリストテキスト ' },
-            ],
-        },
-    },
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
+
+        const blockProps = useBlockProps({
+            className: 'shin-gas-station-01-list-3'
+        });
         const { fontLi, fontColorLi, fontWeightLi, contents ,backgroundColor ,borderColor,borderSize} = attributes;
 
         // コンテンツを追加
@@ -86,7 +42,7 @@ registerBlockType('wdl/shin-gas-station-01-list-3', {
         };
 
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
      
                     <PanelBody>
@@ -131,7 +87,7 @@ registerBlockType('wdl/shin-gas-station-01-list-3', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className="shin-gas-station-01-list-3">
+                <div {...blockProps}>
                     <ul className="shin-gas-station-01-list-3__inner">
                         {contents.map((content, index) => (
                             <li className="shin-gas-station-01-list-3__li" key={index} style={{borderColor:borderColor,backgroundColor:backgroundColor,borderWidth:borderSize}}>
@@ -151,17 +107,21 @@ registerBlockType('wdl/shin-gas-station-01-list-3', {
                     </ul>
                     <button className="shin-gas-station-01-list-3__add_btn" onClick={addContent}>リストを追加する</button>
                 </div>
-            </Fragment>
+            </>
         );
     },
     save: function (props) {
         const { attributes } = props;
+
+        const blockProps = useBlockProps.save({
+            className: 'shin-gas-station-01-list-3'
+        });
         const { fontLi,
                 fontColorLi,backgroundColor,borderSize,
             fontWeightLi, contents,borderColor } = attributes;
 
         return (
-            <div className="shin-gas-station-01-list-3">
+            <div {...blockProps}>
                 <ul className="shin-gas-station-01-list-3__inner">
                     {contents.map((content, index) => (
                         <li className="shin-gas-station-01-list-3__li" key={index}  style={{borderColor:borderColor,backgroundColor:backgroundColor,borderWidth:borderSize}}>

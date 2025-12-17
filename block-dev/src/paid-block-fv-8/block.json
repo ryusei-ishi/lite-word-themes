@@ -1,0 +1,78 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-fv-8",
+	"version": "1.0.0",
+	"title": "固定ページタイトル 08（トップ用）",
+	"category": "lw-firstview",
+	"icon": "cover-image",
+	"editorScript": "file:./paid-block-fv-8.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"backgroundImagePc": {
+			"type": "string",
+			"default": "https://lite-word.com/sample_img/reception/man_1.webp"
+		},
+		"backgroundImageSp": {
+			"type": "string",
+			"default": ""
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "水回りのトラブル\n安心・即解決"
+		},
+		"subTitle": {
+			"type": "string",
+			"default": "出張・持込み買取可能！"
+		},
+		"leadText": {
+			"type": "string",
+			"default": "ただいま初回限定キャンペーン実施中！ \n見積もり無料・年中無休で安心サポート！"
+		},
+		"listItem_1": {
+			"type": "string",
+			"default": "最短\n即日"
+		},
+		"listItem_2": {
+			"type": "string",
+			"default": "年中\n無休"
+		},
+		"listItem_3": {
+			"type": "string",
+			"default": "実績\n多数"
+		},
+		"PointText_1": {
+			"type": "string",
+			"default": "お客様満足度"
+		},
+		"PointText_2": {
+			"type": "string",
+			"default": "98"
+		},
+		"PointText_3": {
+			"type": "string",
+			"default": "点"
+		},
+		"bottomText": {
+			"type": "string",
+			"default": "水回りの小さなお悩みから大掛かりな修理まですべてお任せください！"
+		},
+		"noLineBreakMain": {
+			"type": "boolean",
+			"default": false
+		},
+		"showPoint": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"no": 8
+}

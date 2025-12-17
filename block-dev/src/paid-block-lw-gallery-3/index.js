@@ -1,5 +1,6 @@
 /*********************************************************************
  * LiteWord – Paid Block  Gallery 03（シンプル版・角丸 & 矢印色対応）
+ * ★ apiVersion 3 対応（2025-12-07）
  * - メイン ＋ サムネイル連動 Swiper
  * - Swiper の CDN 読み込みはテーマ側 JS で実施（lw:swiperReady）
  * 2025-05-24  改修：画像角丸・ボタン背景色・矢印色をサイドバー設定可能に
@@ -11,7 +12,8 @@ import { registerBlockType } from '@wordpress/blocks';
 import {
 	MediaUpload,
 	InspectorControls,
-	ColorPalette
+	ColorPalette,
+	useBlockProps
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -23,6 +25,8 @@ import { Fragment } from '@wordpress/element';
 
 import './style.scss';
 import './editor.scss';
+
+import metadata from './block.json';
 
 /* SVG アイコン（前後共通・左右反転で使用） */
 const ArrowSVG = ( color = '#fff' ) => (
@@ -42,56 +46,7 @@ const ArrowSVG = ( color = '#fff' ) => (
 /* ================================================================ */
 /*  ▶ ブロック登録                                                   */
 /* ================================================================ */
-registerBlockType( 'wdl/paid-block-lw-gallery-3', {
-	title   : 'Gallery 03 画像ギャラリー',
-	icon    : 'format-gallery',
-	category: 'liteword-banner',
-
-	/* -------------------------------------------------------------- */
-	/*  ▶ 属性                                                        */
-	/* -------------------------------------------------------------- */
-	attributes: {
-		images: {
-			type   : 'array',
-			default: [
-				{
-					url     : 'https://lite-word.com/sample_img/shop/1.webp',
-					alt     : 'ギャラリー画像1',
-					caption : ''
-				},
-				{
-					url     : 'https://lite-word.com/sample_img/shop/2.webp',
-					alt     : 'ギャラリー画像2',
-					caption : ''
-				},
-                {
-                    url     : 'https://lite-word.com/sample_img/shop/3.webp',
-                    alt     : 'ギャラリー画像3',
-                    caption : ''
-                },
-                {
-                    url     : 'https://lite-word.com/sample_img/shop/4.webp',
-                    alt     : 'ギャラリー画像4',
-                    caption : ''
-                },
-                {
-                    url     : 'https://lite-word.com/sample_img/shop/5.webp',
-                    alt     : 'ギャラリー画像5',
-                    caption : ''
-                }
-			]
-		},
-		borderRadiusEm  : { type:'number', default:0 },
-		btnBgColor      : { type:'string', default:'var(--color-main)' },
-		arrowColor      : { type:'string', default:'#ffffff' },
-		maxWidthPx      : { type:'number', default:0 },                     // 0 = 100%
-		captionBgColor  : { type:'string', default:'rgba(0,0,0,0.6)' },
-		aspectHeightPx  : { type:'number', default:700 }                    // ★ アスペクト比（高さ）
-	},
-
-	/* -------------------------------------------------------------- */
-	/*  ▶ Edit                                                        */
-	/* -------------------------------------------------------------- */
+registerBlockType( metadata.name, {
 	edit: ( { attributes, setAttributes } ) => {
 		const {
 			images,
@@ -110,8 +65,28 @@ registerBlockType( 'wdl/paid-block-lw-gallery-3', {
 		const addImage    = () => images.length < 20 && setAttributes( { images:[ ...images, { url:'',alt:'',caption:'' } ] } );
 		const removeImage = ( idx ) => images.length > 1 && setAttributes( { images: images.filter( ( _,i ) => i!==idx ) } );
 
+		const moveImageUp = ( idx ) => {
+			if ( idx === 0 ) return;
+			const newImages = [ ...images ];
+			[ newImages[ idx - 1 ], newImages[ idx ] ] = [ newImages[ idx ], newImages[ idx - 1 ] ];
+			setAttributes( { images: newImages } );
+		};
+
+		const moveImageDown = ( idx ) => {
+			if ( idx === images.length - 1 ) return;
+			const newImages = [ ...images ];
+			[ newImages[ idx ], newImages[ idx + 1 ] ] = [ newImages[ idx + 1 ], newImages[ idx ] ];
+			setAttributes( { images: newImages } );
+		};
+
+		// useBlockProps で apiVersion 3 対応
+		const blockProps = useBlockProps({
+			className: 'paid-block-lw-gallery-3 editor-preview',
+			style: { maxWidth: maxWidthPx ? `${maxWidthPx}px` : '100%' }
+		});
+
 		return (
-			<Fragment>
+			<div {...blockProps}>
 				<InspectorControls>
                     {/* デザイン設定 */}
 					<PanelBody title="レイアウト設定" initialOpen={ false }>
@@ -165,7 +140,27 @@ registerBlockType( 'wdl/paid-block-lw-gallery-3', {
 
 						{ images.map( ( img, idx ) => (
 							<div key={ idx } style={ { border:'1px solid #ddd',padding:'10px',marginTop:'10px' } }>
-								<p><strong>画像 { idx+1 }</strong></p>
+								<div style={ { display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'8px' } }>
+									<strong>画像 { idx+1 }</strong>
+									<div style={ { display:'flex', gap:'4px' } }>
+										<Button
+											variant="secondary"
+											onClick={ ()=>moveImageUp(idx) }
+											disabled={ idx === 0 }
+											style={ { width:'32px', height:'32px', padding:'0', display:'flex', alignItems:'center', justifyContent:'center' } }
+										>
+											↑
+										</Button>
+										<Button
+											variant="secondary"
+											onClick={ ()=>moveImageDown(idx) }
+											disabled={ idx === images.length - 1 }
+											style={ { width:'32px', height:'32px', padding:'0', display:'flex', alignItems:'center', justifyContent:'center' } }
+										>
+											↓
+										</Button>
+									</div>
+								</div>
 
 								<MediaUpload
 									onSelect={ m => updateImage( idx,'url',m.url ) }
@@ -215,13 +210,7 @@ registerBlockType( 'wdl/paid-block-lw-gallery-3', {
 				</InspectorControls>
 
 				{/* エディター内プレビュー */}
-                <div
-                    className="paid-block-lw-gallery-3 editor-preview"
-                    style={{
-                        maxWidth: maxWidthPx ? `${maxWidthPx}px` : '100%',
-                        
-                    }}
-                >
+                <div className="paid-block-lw-gallery-3__inner">
                     {/* ── メイン Swiper（先頭 1 枚のみ） ── */}
                     <div className="swiper lw-gallery_images_Swiper_main editor-preview"
                         style={{aspectRatio: `1080 / ${ aspectHeightPx }`}}
@@ -256,7 +245,7 @@ registerBlockType( 'wdl/paid-block-lw-gallery-3', {
                     </div>
                 </div>
 
-			</Fragment>
+			</div>
 		);
 	},
 
@@ -270,6 +259,12 @@ registerBlockType( 'wdl/paid-block-lw-gallery-3', {
 			maxWidthPx, captionBgColor, aspectHeightPx
 		} = attributes;
 		const slideCount = images.length;
+
+		// useBlockProps.save() で apiVersion 3 対応
+		const blockProps = useBlockProps.save({
+			className: 'paid-block-lw-gallery-3 init-hide',
+			style: { maxWidth: maxWidthPx ? `${maxWidthPx}px` : '100%' }
+		});
 
 		const swiperInit = `
 (function(){
@@ -338,10 +333,7 @@ registerBlockType( 'wdl/paid-block-lw-gallery-3', {
 })();`;
 
 		return (
-			<div
-				className="paid-block-lw-gallery-3 init-hide"
-				style={ { maxWidth: maxWidthPx ? `${maxWidthPx}px` : '100%' } }
-			>
+			<div {...blockProps}>
 				{/* メイン Swiper */}
 				<div
 					className="swiper lw-gallery_images_Swiper_main"

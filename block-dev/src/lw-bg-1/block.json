@@ -1,0 +1,211 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-bg-1",
+	"version": "1.0.0",
+	"title": "コンテナブロック 01",
+	"category": "lw-utility",
+	"icon": "layout",
+	"description": "背景画像や動画を設定できるコンテナブロック",
+	"supports": {
+		"className": true
+	},
+	"attributes": {
+		"backgroundType": {
+			"type": "string",
+			"default": "image"
+		},
+		"imagePc": {
+			"type": "string",
+			"default": ""
+		},
+		"imageSp": {
+			"type": "string",
+			"default": ""
+		},
+		"focalPointPc": {
+			"type": "object",
+			"default": {
+				"x": 0.5,
+				"y": 0.5
+			}
+		},
+		"focalPointSp": {
+			"type": "object",
+			"default": {
+				"x": 0.5,
+				"y": 0.5
+			}
+		},
+		"videoUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"videoSpeed": {
+			"type": "number",
+			"default": 1
+		},
+		"focalPointVideoPc": {
+			"type": "object",
+			"default": {
+				"x": 0.5,
+				"y": 0.5
+			}
+		},
+		"focalPointVideoSp": {
+			"type": "object",
+			"default": {
+				"x": 0.5,
+				"y": 0.5
+			}
+		},
+		"isFullWidth": {
+			"type": "boolean",
+			"default": false
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 1120
+		},
+		"minHeightPc": {
+			"type": "string",
+			"default": "min-h-pc-500px"
+		},
+		"minHeightTb": {
+			"type": "string",
+			"default": "min-h-tb-480px"
+		},
+		"minHeightSp": {
+			"type": "string",
+			"default": "min-h-sp-440px"
+		},
+		"contentAlignHorizontalPc": {
+			"type": "string",
+			"default": "center"
+		},
+		"contentAlignVerticalPc": {
+			"type": "string",
+			"default": "center"
+		},
+		"contentAlignHorizontalTb": {
+			"type": "string",
+			"default": ""
+		},
+		"contentAlignVerticalTb": {
+			"type": "string",
+			"default": ""
+		},
+		"contentAlignHorizontalSp": {
+			"type": "string",
+			"default": ""
+		},
+		"contentAlignVerticalSp": {
+			"type": "string",
+			"default": ""
+		},
+		"innerPaddingTopPc": {
+			"type": "number",
+			"default": 80
+		},
+		"innerPaddingBottomPc": {
+			"type": "number",
+			"default": 80
+		},
+		"innerPaddingLeftPc": {
+			"type": "number",
+			"default": 80
+		},
+		"innerPaddingRightPc": {
+			"type": "number",
+			"default": 80
+		},
+		"innerPaddingTopTb": {
+			"type": "number",
+			"default": 48
+		},
+		"innerPaddingBottomTb": {
+			"type": "number",
+			"default": 48
+		},
+		"innerPaddingLeftTb": {
+			"type": "number",
+			"default": 48
+		},
+		"innerPaddingRightTb": {
+			"type": "number",
+			"default": 48
+		},
+		"innerPaddingTopSp": {
+			"type": "number",
+			"default": 24
+		},
+		"innerPaddingBottomSp": {
+			"type": "number",
+			"default": 24
+		},
+		"innerPaddingLeftSp": {
+			"type": "number",
+			"default": 24
+		},
+		"innerPaddingRightSp": {
+			"type": "number",
+			"default": 24
+		},
+		"filterTypePc": {
+			"type": "string",
+			"default": "solid"
+		},
+		"filterColorPc": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"filterGradientPc": {
+			"type": "string",
+			"default": "linear-gradient(135deg, rgba(0,0,0,1) 0%, rgba(0,0,0,0.5) 100%)"
+		},
+		"opacityPc": {
+			"type": "number",
+			"default": 0.5
+		},
+		"filterTypeTb": {
+			"type": "string",
+			"default": "solid"
+		},
+		"filterColorTb": {
+			"type": "string",
+			"default": ""
+		},
+		"filterGradientTb": {
+			"type": "string",
+			"default": ""
+		},
+		"opacityTb": {
+			"type": "number",
+			"default": 0.5
+		},
+		"filterTypeSp": {
+			"type": "string",
+			"default": "solid"
+		},
+		"filterColorSp": {
+			"type": "string",
+			"default": ""
+		},
+		"filterGradientSp": {
+			"type": "string",
+			"default": ""
+		},
+		"opacitySp": {
+			"type": "number",
+			"default": 0.5
+		}
+	},
+	"editorScript": "file:./lw-bg-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 1
+}

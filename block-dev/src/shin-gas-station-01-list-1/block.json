@@ -1,0 +1,89 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/shin-gas-station-01-list-1",
+	"version": "1.0.0",
+	"title": "インフォリスト 1 shin shop pattern 01",
+	"category": "lw-list",
+	"icon": "editor-ul",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".shin-gas-station-01-list-1_item",
+			"query": {
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": ".text"
+				},
+				"textColor": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".text",
+					"attribute": "data-text-color"
+				},
+				"number": {
+					"type": "string",
+					"source": "text",
+					"selector": ".no"
+				},
+				"p_text": {
+					"type": "string",
+					"source": "html",
+					"selector": ".p_text"
+				},
+				"image": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "img",
+					"attribute": "src"
+				},
+				"url": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".link",
+					"attribute": "href",
+					"default": ""
+				}
+			},
+			"default": [
+				{
+					"text": "エネルギー事業",
+					"textColor": "#E58A68",
+					"number": "01",
+					"image": "",
+					"p_text": "ガソリンスタンドの運営を通じて、高品質な燃料とサービスを提供。",
+					"url": ""
+				},
+				{
+					"text": "コンビニエンスストア事業",
+					"textColor": "#03A0C6",
+					"number": "02",
+					"image": "",
+					"p_text": "お客様にとって、いつでも、どこでも、何を求めても手に入る場所を提供することを目指しています。",
+					"url": ""
+				},
+				{
+					"text": "カーディーラー事業",
+					"textColor": "#059D47",
+					"number": "03",
+					"image": "",
+					"p_text": "お客様のカーライフをトータルにサポートするため、新車・中古車の販売など、幅広いサービスを提供しています。",
+					"url": ""
+				}
+			]
+		}
+	},
+	"editorScript": "file:./shin-gas-station-01-list-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 15
+}

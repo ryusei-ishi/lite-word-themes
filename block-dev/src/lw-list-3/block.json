@@ -1,0 +1,64 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-list-3",
+	"version": "1.0.0",
+	"title": "list 03",
+	"category": "lw-list",
+	"icon": "lightbulb",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"fontLi": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightLi": {
+			"type": "string",
+			"default": ""
+		},
+		"colorLiSvg": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".lw-list-3__li",
+			"query": {
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": ".lw-list-3__text p"
+				}
+			},
+			"default": [
+				{
+					"text": "リストテキストリストテキスト "
+				},
+				{
+					"text": "リストテキストリストテキスト "
+				},
+				{
+					"text": "リストテキストリストテキスト "
+				},
+				{
+					"text": "リストテキストリストテキスト "
+				}
+			]
+		}
+	},
+	"editorScript": "file:./lw-list-3.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 3
+}

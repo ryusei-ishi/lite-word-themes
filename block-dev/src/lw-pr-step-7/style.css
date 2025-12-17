@@ -5,65 +5,53 @@
   /* グリッドコンテナ */
   /* 追加ボタン */
 }
-
 @container (max-width:800px) {
   .lw-pr-step-7 {
     margin: 24px 0;
   }
 }
-
 .lw-pr-step-7 * {
   box-sizing: border-box;
 }
-
 .lw-pr-step-7.font_size_l {
   font-size: 28px;
 }
-
 @container (max-width:800px) {
   .lw-pr-step-7.font_size_l {
     font-size: 24px;
   }
 }
-
 @container (max-width:550px) {
   .lw-pr-step-7.font_size_l {
     font-size: 20px;
   }
 }
-
 .lw-pr-step-7.font_size_m {
   font-size: 24px;
 }
-
 @container (max-width:800px) {
   .lw-pr-step-7.font_size_m {
     font-size: 22px;
   }
 }
-
 @container (max-width:550px) {
   .lw-pr-step-7.font_size_m {
     font-size: 18px;
   }
 }
-
 .lw-pr-step-7.font_size_s {
   font-size: 20px;
 }
-
 @container (max-width:800px) {
   .lw-pr-step-7.font_size_s {
     font-size: 18px;
   }
 }
-
 @container (max-width:550px) {
   .lw-pr-step-7.font_size_s {
     font-size: 15px;
   }
 }
-
 .lw-pr-step-7 ul.lw-pr-step-7__inner {
   position: relative;
   z-index: 10;
@@ -77,14 +65,12 @@
   grid-template-columns: repeat(var(--column-pc, 3), 1fr);
   /* カードアイテム */
 }
-
 @media (max-width: 600px) {
   .lw-pr-step-7 ul.lw-pr-step-7__inner {
     grid-template-columns: repeat(var(--column-sp, 2), 1fr);
     gap: 16px;
   }
 }
-
 .lw-pr-step-7 ul.lw-pr-step-7__inner li.lw-pr-step-7__li {
   position: relative;
   display: flex;
@@ -98,14 +84,12 @@
   /* STEP番号（円形） */
   /* コンテンツエリア */
 }
-
 @container (max-width:800px) {
   .lw-pr-step-7 ul.lw-pr-step-7__inner li.lw-pr-step-7__li {
     padding: 56px 20px 20px;
     min-height: 180px;
   }
 }
-
 @container (max-width:550px) {
   .lw-pr-step-7 ul.lw-pr-step-7__inner li.lw-pr-step-7__li {
     padding: 52px 16px 16px;
@@ -113,7 +97,6 @@
     border-radius: 8px;
   }
 }
-
 .lw-pr-step-7 ul.lw-pr-step-7__inner li.lw-pr-step-7__li .lw-pr-step-7__li_no {
   position: absolute;
   top: -20px;
@@ -129,7 +112,6 @@
   font-weight: 700;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
-
 @container (max-width:800px) {
   .lw-pr-step-7 ul.lw-pr-step-7__inner li.lw-pr-step-7__li .lw-pr-step-7__li_no {
     width: 56px;
@@ -139,7 +121,6 @@
     font-size: 22px;
   }
 }
-
 @container (max-width:550px) {
   .lw-pr-step-7 ul.lw-pr-step-7__inner li.lw-pr-step-7__li .lw-pr-step-7__li_no {
     width: 48px;
@@ -149,12 +130,10 @@
     font-size: 20px;
   }
 }
-
 .lw-pr-step-7 ul.lw-pr-step-7__inner li.lw-pr-step-7__li .lw-pr-step-7__li_in {
   width: 100%;
   /* タイトルなしの場合のテキストマージン調整 */
 }
-
 .lw-pr-step-7 ul.lw-pr-step-7__inner li.lw-pr-step-7__li .lw-pr-step-7__li_in p.ttl,
 .lw-pr-step-7 ul.lw-pr-step-7__inner li.lw-pr-step-7__li .lw-pr-step-7__li_in h2.ttl,
 .lw-pr-step-7 ul.lw-pr-step-7__inner li.lw-pr-step-7__li .lw-pr-step-7__li_in h3.ttl,
@@ -164,7 +143,6 @@
   line-height: 1.5;
   font-weight: 600;
 }
-
 @container (max-width:550px) {
   .lw-pr-step-7 ul.lw-pr-step-7__inner li.lw-pr-step-7__li .lw-pr-step-7__li_in p.ttl,
   .lw-pr-step-7 ul.lw-pr-step-7__inner li.lw-pr-step-7__li .lw-pr-step-7__li_in h2.ttl,
@@ -173,24 +151,20 @@
     margin-bottom: 8px;
   }
 }
-
 .lw-pr-step-7 ul.lw-pr-step-7__inner li.lw-pr-step-7__li .lw-pr-step-7__li_in p.lw-pr-step-7__li_text {
   margin: 0;
   white-space: pre-wrap;
   font-size: 0.75em;
   line-height: 1.7;
 }
-
 @container (max-width:550px) {
   .lw-pr-step-7 ul.lw-pr-step-7__inner li.lw-pr-step-7__li .lw-pr-step-7__li_in p.lw-pr-step-7__li_text {
     font-size: 0.72em;
   }
 }
-
 .lw-pr-step-7 ul.lw-pr-step-7__inner li.lw-pr-step-7__li .lw-pr-step-7__li_in p.lw-pr-step-7__li_text:first-child {
   margin-top: 0;
 }
-
 .lw-pr-step-7 .lw-pr-step-7__add_btn {
   position: relative;
   z-index: 10;
@@ -206,12 +180,10 @@
   border-radius: 6px;
   transition: all 0.3s ease;
 }
-
 .lw-pr-step-7 .lw-pr-step-7__add_btn:hover {
   background: #4a9d9c;
   color: #fff;
 }
-
 @container (max-width:550px) {
   .lw-pr-step-7 .lw-pr-step-7__add_btn {
     margin-top: 24px;
@@ -219,4 +191,4 @@
     width: 180px;
     font-size: 14px;
   }
-}
+}/*# sourceMappingURL=style.css.map */

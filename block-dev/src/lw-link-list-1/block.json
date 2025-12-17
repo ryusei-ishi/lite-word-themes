@@ -1,0 +1,148 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-link-list-1",
+	"version": "1.0.0",
+	"title": "link list 01",
+	"category": "lw-button",
+	"icon": "lightbulb",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"MaxWidth": {
+			"type": "number",
+			"default": 800
+		},
+		"BtnGap": {
+			"type": "number",
+			"default": 12
+		},
+		"BtnClm": {
+			"type": "number",
+			"default": 2
+		},
+		"BtnClmSp": {
+			"type": "number",
+			"default": 1
+		},
+		"backgroundSwitch": {
+			"type": "boolean",
+			"default": true
+		},
+		"backgroundImage": {
+			"type": "string",
+			"default": ""
+		},
+		"bgGradient": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"colorLiBgOpacity": {
+			"type": "number",
+			"default": 100
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 0.9
+		},
+		"ListBorderRadius": {
+			"type": "number",
+			"default": 2
+		},
+		"hideTitle": {
+			"type": "boolean",
+			"default": false
+		},
+		"titleText": {
+			"type": "string",
+			"default": "Information"
+		},
+		"titleBottomText": {
+			"type": "string",
+			"default": ""
+		},
+		"fontLi": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightLi": {
+			"type": "string",
+			"default": ""
+		},
+		"colorLiSvg": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"colorLiBg": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"colorLiText": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"colorLiBorder": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"ListBorderSize": {
+			"type": "number",
+			"default": 2
+		},
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".lw-link-list-1__li",
+			"query": {
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": ".lw-link-list-1__text p"
+				},
+				"link": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".lw-link-list-1__link",
+					"attribute": "href"
+				},
+				"icon": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".lw-link-list-1__icon",
+					"attribute": "data-icon"
+				}
+			},
+			"default": [
+				{
+					"text": "ホームページ",
+					"link": "",
+					"icon": ""
+				},
+				{
+					"text": "Instagram",
+					"link": "",
+					"icon": ""
+				},
+				{
+					"text": "YouTube",
+					"link": "",
+					"icon": ""
+				},
+				{
+					"text": "FaceBook",
+					"link": "",
+					"icon": ""
+				}
+			]
+		}
+	},
+	"editorScript": "file:./lw-link-list-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 1
+}

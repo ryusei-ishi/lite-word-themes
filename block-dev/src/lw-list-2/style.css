@@ -8,7 +8,6 @@
   margin-right: -40px;
   width: calc(100% + 80px);
 }
-
 @container (max-width: 800px) {
   .lw_content_wrap.single .lw-list-2 {
     margin-left: -32px;
@@ -16,7 +15,6 @@
     width: calc(100% + 64px);
   }
 }
-
 @container (max-width:600px) {
   .lw_content_wrap.single .lw-list-2 {
     margin-left: -24px;
@@ -24,7 +22,6 @@
     width: calc(100% + 48px);
   }
 }
-
 @container (max-width:500px) {
   .lw_content_wrap.single .lw-list-2 {
     margin-left: -20px;
@@ -40,19 +37,16 @@
   background-size: cover;
   background-position: 0 0;
 }
-
 @container (max-width:1050px) {
   .lw-list-2 {
     padding: 88px 32px 64px 32px;
   }
 }
-
 @container (max-width:450px) {
   .lw-list-2 {
     padding: 64px 24px 32px 24px;
   }
 }
-
 .lw-list-2__filter {
   position: absolute;
   top: 0;
@@ -63,7 +57,6 @@
   background: var(--color-main);
   opacity: 0.8;
 }
-
 .lw-list-2 h2.lw-list-2__title {
   position: relative;
   z-index: 10;
@@ -73,23 +66,19 @@
   line-height: 1.5em;
   color: #fff;
 }
-
 @container (max-width:1050px) {
   .lw-list-2 h2.lw-list-2__title {
     font-size: 32px;
   }
 }
-
 @container (max-width:450px) {
   .lw-list-2 h2.lw-list-2__title {
     font-size: 28px;
   }
 }
-
 .lw-list-2 h2.lw-list-2__title + ul.lw-list-2__inner {
   margin-top: 32px;
 }
-
 .lw-list-2 ul.lw-list-2__inner {
   position: relative;
   z-index: 10;
@@ -101,13 +90,11 @@
   gap: 12px;
   list-style: none;
 }
-
 @container (max-width:750px) {
   .lw-list-2 ul.lw-list-2__inner {
     grid-template-columns: repeat(1, 1fr);
   }
 }
-
 .lw-list-2 ul.lw-list-2__inner li.lw-list-2__li {
   position: relative;
   padding: 20px;
@@ -117,13 +104,11 @@
   border-radius: 12px;
   box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.05);
 }
-
 @container (max-width:750px) {
   .lw-list-2 ul.lw-list-2__inner li.lw-list-2__li {
     padding: 16px;
   }
 }
-
 .lw-list-2 ul.lw-list-2__inner li.lw-list-2__li .icon {
   width: 1.5em;
   height: 100%;
@@ -132,29 +117,24 @@
   justify-content: center;
   fill: var(--color-accent);
 }
-
 .lw-list-2 ul.lw-list-2__inner li.lw-list-2__li .icon svg {
   width: 1.5em;
   height: 1.5em;
 }
-
 .lw-list-2 ul.lw-list-2__inner li.lw-list-2__li .lw-list-2__text {
   padding-left: 12px;
   width: calc(100% - 1.5em);
 }
-
 .lw-list-2 ul.lw-list-2__inner li.lw-list-2__li .lw-list-2__text p {
   margin: 0;
   color: #333;
   white-space: pre-wrap;
 }
-
 @container (max-width:550px) {
   .lw-list-2 ul.lw-list-2__inner li.lw-list-2__li .lw-list-2__text p {
     font-size: 14px;
   }
 }
-
 .lw-list-2 .lw-list-2__remove_btn {
   position: absolute;
   bottom: 0;
@@ -167,7 +147,6 @@
   border-radius: 2px;
   cursor: pointer;
 }
-
 .lw-list-2 .lw-list-2__add_btn {
   position: relative;
   z-index: 10;
@@ -178,4 +157,4 @@
   width: 200px;
   font-size: 16px;
   cursor: pointer;
-}
+}/*# sourceMappingURL=style.css.map */

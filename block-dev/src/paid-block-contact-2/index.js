@@ -13,6 +13,7 @@ import {
 	MediaUploadCheck,
 	ColorPalette,
 	BlockControls,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -22,33 +23,9 @@ import {
 	ToolbarGroup,
 	ToolbarButton,
 } from '@wordpress/components';
+import metadata from './block.json';
 
-registerBlockType( 'wdl/paid-block-contact-2', {
-	/* ───────── 基本情報 ───────── */
-	title   : 'お問合わせフォーム 02',
-	icon    : 'email',
-	category: 'liteword-buttons',
-	supports: { anchor: true },
-
-	/* ───────── 属性 ───────── */
-	attributes: {
-		formId            : { type: 'number',  default: 1 },
-		mainTitle         : { type: 'string',  default: 'CONTACT' },
-		subTitle          : { type: 'string',  default: 'お問合わせフォーム' },
-		description       : { type: 'string',  default: 'ご不明な点やご相談がございましたら、下記のお問い合わせフォームよりお気軽にご連絡ください。' },
-		bgImageUrl        : { type: 'string',  default: 'https://lite-word.com/sample_img/background/6.webp' },
-		bgImageUrlSp      : { type: 'string',  default: '' },
-		bgColor           : { type: 'string',  default: '#03294C' },
-		bgOpacity         : { type: 'number',  default: 0.5 },
-		requiredBgColor   : { type: 'string',  default: '#da3838' },
-		submitBgColor     : { type: 'string',  default: '#EE3131' },
-		mainTitleLevel    : { type: 'string',  default: 'h1' },
-		/* ← maxWidth は常に "◯◯px" 形式で保持する！ */
-		maxWidth          : { type: 'string',  default: '800px' },
-		descriptionAlignPC: { type: 'string',  default: 'pc_center' },
-		descriptionAlignSP: { type: 'string',  default: 'sp_center' },
-	},
-
+registerBlockType( metadata.name, {
 	/* ==================================================
 	 * 編集画面
 	 * ================================================= */
@@ -76,6 +53,10 @@ registerBlockType( 'wdl/paid-block-contact-2', {
 
 		/* ─ RangeControl 用の数値化（未設定なら 0） ─ */
 		const widthNumber = parseInt( maxWidth, 10 ) || 0;
+
+		const blockProps = useBlockProps({
+			className: 'paid-block-contact-2'
+		});
 
 		return (
 			<>
@@ -291,7 +272,7 @@ registerBlockType( 'wdl/paid-block-contact-2', {
 				</InspectorControls>
 
 				{/* ========== 3. エディター上のプレビュー ========== */}
-				<div className="paid-block-contact-2">
+				<div {...blockProps}>
 					<div className="this_wrap" style={ { maxWidth } }>
 						{/* タイトル */}
 						<TagName className="title">
@@ -366,8 +347,12 @@ registerBlockType( 'wdl/paid-block-contact-2', {
 
 		const TagName = mainTitleLevel;
 
+		const blockProps = useBlockProps.save({
+			className: 'paid-block-contact-2'
+		});
+
 		return (
-			<div className="paid-block-contact-2">
+			<div {...blockProps}>
 				<div className="this_wrap" style={ { maxWidth } }>
 					{/* タイトル */}
 					<TagName className="title">

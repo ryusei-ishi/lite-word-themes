@@ -1,46 +1,12 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, MediaUpload, BlockControls } from '@wordpress/block-editor';
+import { RichText, InspectorControls, MediaUpload, BlockControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, ColorPalette, RangeControl, SelectControl, TextControl, ToolbarGroup, ToolbarButton, ToggleControl } from '@wordpress/components';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/lw-pr-fv-15', {
-    title: '固定ページタイトル 15(動画背景)',
-    icon: 'cover-image',
-    category: 'liteword-firstview',
-    attributes: {
-        mainTitle: { type: 'string', default: 'くらしを楽しく、美しく' },
-        description: { type: 'string', default: 'ここに説明文が入ります。' },
-        backgroundType: { type: 'string', default: 'image' },
-        videoUrl: { type: 'string', default: '' },
-        imageUrlPc: { type: 'string', default: 'https://images.unsplash.com/photo-1564078516393-cf04bd966897?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687' },
-        imageUrlSp: { type: 'string', default: '' },
-        imageAlt: { type: 'string', default: '' },
-        bgColor: { type: 'string', default: '#ffe1e1' },
-        filterColor: { type: 'string', default: '#121416' },
-        filterOpacity: { type: 'number', default: 0.2 },
-        videoSpeed: { type: 'number', default: 1.0 },
-        headingLevel: { type: 'number', default: 2 },
-        strokeWidth: { type: 'number', default: 0 },
-        strokeWidthSp: { type: 'number', default: 0 },
-        strokeColor: { type: 'string', default: '#ffffff' },
-        strokeOpacity: { type: 'number', default: 0.6 },
-        titleColor: { type: 'string', default: '#000000' },
-        titleFontWeight: { type: 'string', default: '700' },
-        titleFont: { type: 'string', default: '' },
-        descriptionColor: { type: 'string', default: '#000000' },
-        descriptionFontWeight: { type: 'string', default: '600' },
-        descriptionFont: { type: 'string', default: '' },
-        showButton: { type: 'boolean', default: true },
-        buttonText: { type: 'string', default: 'ご相談はこちら' },
-        buttonUrl: { type: 'string', default: '' },
-        ctaBgColor: { type: 'string', default: '#000000' },
-        ctaTextColor: { type: 'string', default: '#ffffff' },
-        ctaBorderRadius: { type: 'number', default: 100 },
-        ctaBorderWidth: { type: 'number', default: 1 },
-        ctaBorderColor: { type: 'string', default: '#000000' },
-    },
+registerBlockType(metadata.name, {
     edit: ({ attributes, setAttributes }) => {
         const { 
             mainTitle, 
@@ -98,6 +64,27 @@ registerBlockType('wdl/lw-pr-fv-15', {
         // フォントと太さのオプション
         const fontOptions = fontOptionsArr();
         const fontWeightOptions = fontWeightOptionsArr();
+
+        const blockProps = useBlockProps({
+            className: 'lw-pr-fv-15',
+            style: {
+                '--fv-color-bg-all': bgColor,
+                '--color-image-filter': filterColor,
+                '--fv-image-filter-opacity': filterOpacity,
+                '--lw-stroke-width': `${strokeWidth}px`,
+                '--lw-stroke-width-sp': `${strokeWidthSp}px`,
+                '--lw-stroke-color': strokeColorRgba,
+                '--color-fv-ttl-main': titleColor,
+                '--fv-ttl-main-font-weight': titleFontWeight,
+                '--color-fv-description-main': descriptionColor,
+                '--fv-description-main-font-weight': descriptionFontWeight,
+                '--color-cta-bg': ctaBgColor,
+                '--color-cta-text': ctaTextColor,
+                '--cta-border-radius': `${ctaBorderRadius}px`,
+                '--cta-bd-width': `${ctaBorderWidth}px`,
+                '--cta-bd-color': ctaBorderColor,
+            }
+        });
 
         return (
             <>
@@ -342,26 +329,7 @@ registerBlockType('wdl/lw-pr-fv-15', {
                         )}
                     </PanelBody>
                 </InspectorControls>
-                <div 
-                    className="lw-pr-fv-15"
-                    style={{
-                        '--fv-color-bg-all': bgColor,
-                        '--color-image-filter': filterColor,
-                        '--fv-image-filter-opacity': filterOpacity,
-                        '--lw-stroke-width': `${strokeWidth}px`,
-                        '--lw-stroke-width-sp': `${strokeWidthSp}px`,
-                        '--lw-stroke-color': strokeColorRgba,
-                        '--color-fv-ttl-main': titleColor,
-                        '--fv-ttl-main-font-weight': titleFontWeight,
-                        '--color-fv-description-main': descriptionColor,
-                        '--fv-description-main-font-weight': descriptionFontWeight,
-                        '--color-cta-bg': ctaBgColor,
-                        '--color-cta-text': ctaTextColor,
-                        '--cta-border-radius': `${ctaBorderRadius}px`,
-                        '--cta-bd-width': `${ctaBorderWidth}px`,
-                        '--cta-bd-color': ctaBorderColor,
-                    }}
-                >
+                <div {...blockProps}>
                     <div className="fv_inner">
                         <HeadingTag className="ttl" data-lw_font_set={titleFont}>
                             <RichText
@@ -453,27 +421,29 @@ registerBlockType('wdl/lw-pr-fv-15', {
 
         const HeadingTag = `h${headingLevel}`;
 
+        const blockProps = useBlockProps.save({
+            className: 'lw-pr-fv-15',
+            style: {
+                '--fv-color-bg-all': bgColor,
+                '--color-image-filter': filterColor,
+                '--fv-image-filter-opacity': filterOpacity,
+                '--lw-stroke-width': `${strokeWidth}px`,
+                '--lw-stroke-width-sp': `${strokeWidthSp}px`,
+                '--lw-stroke-color': strokeColorRgba,
+                '--color-fv-ttl-main': titleColor,
+                '--fv-ttl-main-font-weight': titleFontWeight,
+                '--color-fv-description-main': descriptionColor,
+                '--fv-description-main-font-weight': descriptionFontWeight,
+                '--color-cta-bg': ctaBgColor,
+                '--color-cta-text': ctaTextColor,
+                '--cta-border-radius': `${ctaBorderRadius}px`,
+                '--cta-bd-width': `${ctaBorderWidth}px`,
+                '--cta-bd-color': ctaBorderColor,
+            }
+        });
+
         return (
-            <div 
-                className="lw-pr-fv-15"
-                style={{
-                    '--fv-color-bg-all': bgColor,
-                    '--color-image-filter': filterColor,
-                    '--fv-image-filter-opacity': filterOpacity,
-                    '--lw-stroke-width': `${strokeWidth}px`,
-                    '--lw-stroke-width-sp': `${strokeWidthSp}px`,
-                    '--lw-stroke-color': strokeColorRgba,
-                    '--color-fv-ttl-main': titleColor,
-                    '--fv-ttl-main-font-weight': titleFontWeight,
-                    '--color-fv-description-main': descriptionColor,
-                    '--fv-description-main-font-weight': descriptionFontWeight,
-                    '--color-cta-bg': ctaBgColor,
-                    '--color-cta-text': ctaTextColor,
-                    '--cta-border-radius': `${ctaBorderRadius}px`,
-                    '--cta-bd-width': `${ctaBorderWidth}px`,
-                    '--cta-bd-color': ctaBorderColor,
-                }}
-            >
+            <div {...blockProps}>
                 <div className="fv_inner">
                     <HeadingTag className="ttl" data-lw_font_set={titleFont}>
                         <RichText.Content value={mainTitle} />

@@ -1,22 +1,12 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, BlockControls } from '@wordpress/block-editor';
+import { RichText, InspectorControls, BlockControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, RadioControl, ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import './style.scss';
 import './editor.scss';
 
-registerBlockType('wdl/custom-title-2', {
-    title: '見出しタイトル 02',
-    icon: 'editor-textcolor',
-    category: 'liteword-title',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        mainTitle: { type: 'string', default: 'CONTENT' },
-        subTitle: { type: 'string', default: 'SUB TITLE TEXT' },
-        textAlignment: { type: 'string', default: 'left' },
-        headingLevel: { type: 'number', default: 2 },
-    },
+import metadata from './block.json';
+
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const { mainTitle, subTitle, textAlignment, headingLevel } = attributes;
@@ -40,6 +30,10 @@ registerBlockType('wdl/custom-title-2', {
         const alignmentClass = textAlignment === 'right' ? 'right' : textAlignment === 'center' ? 'center' : 'left';
 
         const TagName = `h${headingLevel}`;
+
+        const blockProps = useBlockProps({
+            className: `custom-title-2 ${alignmentClass}`,
+        });
 
         return (
             <>
@@ -69,7 +63,7 @@ registerBlockType('wdl/custom-title-2', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <TagName className={`custom-title-2 ${alignmentClass}`}>
+                <TagName {...blockProps}>
                     <RichText
                         tagName="span"
                         className="main"
@@ -96,8 +90,12 @@ registerBlockType('wdl/custom-title-2', {
 
         const TagName = `h${headingLevel}`;
 
+        const blockProps = useBlockProps.save({
+            className: `custom-title-2 ${alignmentClass}`,
+        });
+
         return (
-            <TagName className={`custom-title-2 ${alignmentClass}`}>
+            <TagName {...blockProps}>
                 <RichText.Content
                     tagName="span"
                     className="main"

@@ -1,8 +1,11 @@
 .custom-title-3 {
   margin: 1em 0;
-  padding-bottom: 0 !important;
   border: none !important;
   font-size: 20px !important;
+}
+
+.custom-title-3:not([class*="lw_padding_bottom_"]) {
+  padding-bottom: 0 !important;
 }
 
 .custom-title-3.center {

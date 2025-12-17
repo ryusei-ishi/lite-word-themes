@@ -1,7 +1,6 @@
 .header_ptn_6 .inner {
   background: #fff8d4;
 }
-
 .header_ptn_6 .inner::after {
   opacity: 0;
 }
@@ -32,7 +31,6 @@
     transform: scaleX(-1);
   }
 }
-
 @keyframes carShakeY {
   0% {
     transform: translateY(0);
@@ -50,7 +48,6 @@
     transform: translateY(0);
   }
 }
-
 .fv_nijinoie {
   padding: 48px;
   padding-top: 0;
@@ -58,21 +55,18 @@
   width: 100vw;
   background: #fff8d4;
 }
-
 @media (max-width: 1250px) {
   .fv_nijinoie {
     padding: 32px 24px;
     padding-top: 0;
   }
 }
-
 @media (max-width: 1000px) {
   .fv_nijinoie {
     padding: 0;
     background: none;
   }
 }
-
 .fv_nijinoie .fv_inner {
   position: relative;
   margin: 0 auto;
@@ -82,51 +76,43 @@
   grid-template-columns: calc(100% - 400px - 32px) 400px;
   gap: 32px;
 }
-
 @media (max-width: 1250px) {
   .fv_nijinoie .fv_inner {
     grid-template-columns: calc(100% - 360px - 24px) 360px;
     gap: 24px;
   }
 }
-
 @media (max-width: 1000px) {
   .fv_nijinoie .fv_inner {
     grid-template-columns: 1fr;
     gap: 24px;
   }
 }
-
 .fv_nijinoie .fv_inner .fv_inner_in {
   position: relative;
   z-index: 10;
   height: 100%;
 }
-
 @media (max-width: 1000px) {
   .fv_nijinoie .fv_inner .fv_inner_in {
     padding: 0 20px;
   }
 }
-
 @media (max-width: 700px) {
   .fv_nijinoie .fv_inner .fv_inner_in {
     padding: 0 20px;
   }
 }
-
 @media (max-width: 600px) {
   .fv_nijinoie .fv_inner .fv_inner_in {
     padding: 0 16px;
   }
 }
-
 @media (max-width: 500px) {
   .fv_nijinoie .fv_inner .fv_inner_in {
     padding: 0 10px;
   }
 }
-
 .fv_nijinoie .fv_inner .fv_inner_in::after {
   position: absolute;
   top: 0;
@@ -138,30 +124,25 @@
   display: block;
   background: #fff8d4;
 }
-
 .fv_nijinoie .fv_inner .fv_inner_in .btm_image {
   position: relative;
   margin-top: 0.5em;
 }
-
 @media (max-width: 1000px) {
   .fv_nijinoie .fv_inner .fv_inner_in .btm_image {
     margin-top: 0.7em;
   }
 }
-
 .fv_nijinoie .fv_inner .fv_inner_in .btm_image .town img {
   width: 100%;
   height: auto;
   transform: translateX(3%);
 }
-
 @media (max-width: 1000px) {
   .fv_nijinoie .fv_inner .fv_inner_in .btm_image .town img {
     width: 80%;
   }
 }
-
 .fv_nijinoie .fv_inner .tree {
   position: absolute;
   bottom: -34%;
@@ -170,7 +151,6 @@
   width: 5%;
   height: auto;
 }
-
 @media (max-width: 1000px) {
   .fv_nijinoie .fv_inner .tree {
     bottom: -3%;
@@ -178,12 +158,10 @@
     width: 6%;
   }
 }
-
 .fv_nijinoie .fv_inner .tree img {
   width: 100%;
   height: auto;
 }
-
 .fv_nijinoie .fv_inner .car_image {
   position: absolute;
   bottom: -28%;
@@ -193,7 +171,6 @@
   height: auto;
   animation: car_image_anime 26s ease infinite;
 }
-
 @media (max-width: 1000px) {
   .fv_nijinoie .fv_inner .car_image {
     bottom: 2%;
@@ -201,14 +178,13 @@
     width: 16%;
   }
 }
-
 .fv_nijinoie .fv_inner .car_image img {
   width: 100%;
   height: 100%;
-  object-fit: contain;
+  -o-object-fit: contain;
+     object-fit: contain;
   animation: carShakeY 0.4s linear infinite;
 }
-
 .fv_nijinoie .fv_inner .main_visual {
   position: relative;
   z-index: 10;
@@ -219,78 +195,66 @@
   border-radius: 24px;
   overflow: hidden;
 }
-
 @media (max-width: 1100px) {
   .fv_nijinoie .fv_inner .main_visual {
     padding: 32px;
   }
 }
-
 @media (max-width: 1000px) {
   .fv_nijinoie .fv_inner .main_visual {
     padding: 48px;
     height: auto;
     width: 100%;
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 16/10;
   }
 }
-
 @media (max-width: 880px) {
   .fv_nijinoie .fv_inner .main_visual {
     padding: 32px;
   }
 }
-
 @media (max-width: 650px) {
   .fv_nijinoie .fv_inner .main_visual {
     height: 375px;
     aspect-ratio: initial;
   }
 }
-
 @media (max-width: 500px) {
   .fv_nijinoie .fv_inner .main_visual {
     padding: 20px;
     height: 296px;
   }
 }
-
 .fv_nijinoie .fv_inner .main_visual h1.ttl {
   font-size: 40px;
   color: #fff;
   line-height: 1.6em;
   font-weight: 600;
 }
-
 @media (max-width: 1250px) {
   .fv_nijinoie .fv_inner .main_visual h1.ttl {
     font-size: 32px;
   }
 }
-
 @media (max-width: 880px) {
   .fv_nijinoie .fv_inner .main_visual h1.ttl {
     font-size: 28px;
   }
 }
-
 @media (max-width: 600px) {
   .fv_nijinoie .fv_inner .main_visual h1.ttl {
     font-size: 24px;
   }
 }
-
 @media (max-width: 400px) {
   .fv_nijinoie .fv_inner .main_visual h1.ttl {
     font-size: 22px;
   }
 }
-
 .fv_nijinoie .fv_inner .main_visual h1.ttl .u-line {
   position: relative;
   z-index: 10;
 }
-
 .fv_nijinoie .fv_inner .main_visual h1.ttl .u-line::after {
   position: absolute;
   bottom: 0.05em;
@@ -302,7 +266,6 @@
   content: "";
   border-radius: 3em;
 }
-
 .fv_nijinoie .fv_inner .main_visual picture {
   position: absolute;
   top: 0;
@@ -311,13 +274,12 @@
   width: 100%;
   height: 100%;
 }
-
 .fv_nijinoie .fv_inner .main_visual picture img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-
 .fv_nijinoie .fv_inner .fv_cta {
   padding: 32px;
   padding-top: 40px;
@@ -325,14 +287,12 @@
   border-radius: 24px;
   box-shadow: 0 0 10px rgba(0, 0, 0, 0.03);
 }
-
 @media (max-width: 1100px) {
   .fv_nijinoie .fv_inner .fv_cta {
     padding: 24px;
     padding-top: 32px;
   }
 }
-
 @media (max-width: 1000px) {
   .fv_nijinoie .fv_inner .fv_cta {
     margin: 0 auto;
@@ -341,19 +301,16 @@
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
   }
 }
-
 @media (max-width: 880px) {
   .fv_nijinoie .fv_inner .fv_cta {
     width: 100%;
   }
 }
-
 @media (max-width: 500px) {
   .fv_nijinoie .fv_inner .fv_cta {
     max-width: calc(100% - 40px);
   }
 }
-
 .fv_nijinoie .fv_inner .fv_cta > p {
   margin-top: 0;
   margin-bottom: 1em;
@@ -362,48 +319,40 @@
   font-weight: 700;
   white-space: nowrap;
 }
-
 @media (max-width: 1250px) {
   .fv_nijinoie .fv_inner .fv_cta > p {
     font-size: 18px;
   }
 }
-
 @media (max-width: 880px) {
   .fv_nijinoie .fv_inner .fv_cta > p {
     font-size: 20px;
   }
 }
-
 @media (max-width: 410px) {
   .fv_nijinoie .fv_inner .fv_cta > p {
     font-size: 18px;
   }
 }
-
 @media (max-width: 360px) {
   .fv_nijinoie .fv_inner .fv_cta > p {
     font-size: 16px;
   }
 }
-
 .fv_nijinoie .fv_inner .fv_cta .btns {
   display: grid;
   gap: 12px;
 }
-
 @media (max-width: 1000px) {
   .fv_nijinoie .fv_inner .fv_cta .btns {
     grid-template-columns: repeat(3, 1fr);
   }
 }
-
 @media (max-width: 880px) {
   .fv_nijinoie .fv_inner .fv_cta .btns {
     grid-template-columns: repeat(1, 1fr);
   }
 }
-
 .fv_nijinoie .fv_inner .fv_cta .btns a.btn {
   position: relative;
   padding: 0.16666666em;
@@ -414,20 +363,17 @@
   font-size: 24px;
   transition: opacity 0.3s ease;
 }
-
 @media (max-width: 1250px) {
   .fv_nijinoie .fv_inner .fv_cta .btns a.btn {
     font-size: 20px;
   }
 }
-
 @media (max-width: 1000px) {
   .fv_nijinoie .fv_inner .fv_cta .btns a.btn {
     height: 5.5em;
     font-size: 18px;
   }
 }
-
 @media (max-width: 880px) {
   .fv_nijinoie .fv_inner .fv_cta .btns a.btn {
     margin: 0 auto;
@@ -437,18 +383,15 @@
     font-size: 24px;
   }
 }
-
 @media (max-width: 500px) {
   .fv_nijinoie .fv_inner .fv_cta .btns a.btn {
     max-width: 320px;
     font-size: 20px;
   }
 }
-
 .fv_nijinoie .fv_inner .fv_cta .btns a.btn.green {
   background: #159a4f;
 }
-
 .fv_nijinoie .fv_inner .fv_cta .btns a.btn::after {
   position: absolute;
   top: 0;
@@ -461,11 +404,9 @@
   background: #fff;
   opacity: 0.1;
 }
-
 .fv_nijinoie .fv_inner .fv_cta .btns a.btn span {
   display: block;
 }
-
 .fv_nijinoie .fv_inner .fv_cta .btns a.btn .in {
   position: relative;
   z-index: 10;
@@ -478,58 +419,48 @@
   border-radius: 10px;
   font-weight: 600;
 }
-
 .fv_nijinoie .fv_inner .fv_cta .btns a.btn .in .main {
   white-space: nowrap;
   line-height: 1.4em;
 }
-
 .fv_nijinoie .fv_inner .fv_cta .btns a.btn .in .sub {
   margin-top: 0.2em;
   white-space: nowrap;
   font-size: 0.6em;
   line-height: 1.8em;
 }
-
 @media (max-width: 1250px) {
   .fv_nijinoie .fv_inner .fv_cta .btns a.btn .in .sub {
     margin-top: 2px;
   }
 }
-
 .fv_nijinoie .fv_inner .fv_cta .btns a.btn .in .icon {
   width: 3.333333em;
   display: flex;
   align-items: center;
   justify-content: center;
 }
-
 .fv_nijinoie .fv_inner .fv_cta .btns a.btn .in .icon svg {
   fill: #fff;
   height: auto;
   width: 37%;
   transition: transform 0.3s ease;
 }
-
 .fv_nijinoie .fv_inner .fv_cta .btns a.btn.tel {
   border: 2px solid #ef8798;
   background: #fff;
   color: #111;
 }
-
 .fv_nijinoie .fv_inner .fv_cta .btns a.btn.tel .in .main {
   font-size: 1.15em;
 }
-
 .fv_nijinoie .fv_inner .fv_cta .btns a.btn.tel .in .icon svg {
   width: 43%;
   fill: #ef8798;
 }
-
 .fv_nijinoie .fv_inner .fv_cta .btns a.btn:hover {
   opacity: 0.9;
 }
-
 .fv_nijinoie .fv_inner .fv_cta .btns a.btn:hover .in .icon svg {
   transform: scale(1.1);
-}
+}/*# sourceMappingURL=style.css.map */

@@ -1,51 +1,27 @@
+/**
+ * ギャラリー 01
+ * ★ apiVersion 3 対応（2025-12-07）
+ */
 import { registerBlockType } from '@wordpress/blocks';
 import {
     MediaUpload,
     InspectorControls,
-    RichText
+    RichText,
+    useBlockProps
 } from '@wordpress/block-editor';
 import {
     PanelBody,
     Button,
     RangeControl,
     SelectControl,
-    ToggleControl       // ← 追加
+    ToggleControl
 } from '@wordpress/components';
 import './style.scss';
 import './editor.scss';
 
-registerBlockType('wdl/lw-gallery-01', {
-    title   : 'ギャラリー 01',
-    icon    : 'images-alt2',
-    category: 'liteword-banner',
-    supports: { anchor: true },
+import metadata from './block.json';
 
-    attributes: {
-        /* --- テキスト --- */
-        text_1      : { type: 'string',  default: 'テキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキストテキストテキスト' },
-        text_2      : { type: 'string',  default: 'テキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキストテキストテキスト' },
-        showText1   : { type: 'boolean', default: true  },   // ← boolean へ変更
-        showText2   : { type: 'boolean', default: true  },
-        text1AlignPc: { type: 'string',  default: 'center_pc' },
-        text1AlignSp: { type: 'string',  default: 'left_sp'   },
-        text2AlignPc: { type: 'string',  default: 'center_pc' },
-        text2AlignSp: { type: 'string',  default: 'left_sp'   },
-
-        /* --- 画像 --- */
-        items: {
-            type   : 'array',
-            default: [
-                { imgUrl: 'https://picsum.photos/1000/1000?random=1' },
-                { imgUrl: 'https://picsum.photos/1000/1000?random=2' },
-                { imgUrl: 'https://picsum.photos/1000/1000?random=3' },
-            ],
-        },
-
-        /* --- レイアウト --- */
-        maxWidthText: { type: 'number', default: 800 },
-        maxWidth    : { type: 'number', default: 800 },
-    },
-
+registerBlockType(metadata.name, {
     edit: ({ attributes, setAttributes }) => {
         const {
             items, maxWidthText, maxWidth,
@@ -68,8 +44,13 @@ registerBlockType('wdl/lw-gallery-01', {
             { label: '右寄せ',   value: 'right_sp'  },
         ];
 
+        // useBlockProps で apiVersion 3 対応
+        const blockProps = useBlockProps({
+            className: 'lw-gallery-01'
+        });
+
         return (
-            <>
+            <nav {...blockProps}>
                 <InspectorControls>
                     <PanelBody title="最大横幅">
                         <RangeControl
@@ -157,8 +138,7 @@ registerBlockType('wdl/lw-gallery-01', {
                     </PanelBody>
                 </InspectorControls>
 
-                <nav className="lw-gallery-01">
-                    {showText1 && (
+                {showText1 && (
                         <RichText
                             tagName="p"
                             className={`${text1AlignPc} ${text1AlignSp}`}
@@ -177,18 +157,17 @@ registerBlockType('wdl/lw-gallery-01', {
                         ))}
                     </ul>
 
-                    {showText2 && (
-                        <RichText
-                            tagName="p"
-                            className={`${text2AlignPc} ${text2AlignSp}`}
-                            value={text_2}
-                            onChange={(v) => update('text_2', v)}
-                            placeholder="テキストを入力"
-                            style={{ maxWidth: `${maxWidthText}px` }}
-                        />
-                    )}
-                </nav>
-            </>
+                {showText2 && (
+                    <RichText
+                        tagName="p"
+                        className={`${text2AlignPc} ${text2AlignSp}`}
+                        value={text_2}
+                        onChange={(v) => update('text_2', v)}
+                        placeholder="テキストを入力"
+                        style={{ maxWidth: `${maxWidthText}px` }}
+                    />
+                )}
+            </nav>
         );
     },
 
@@ -199,8 +178,13 @@ registerBlockType('wdl/lw-gallery-01', {
             text1AlignPc, text1AlignSp, text2AlignPc, text2AlignSp,
         } = attributes;
 
+        // useBlockProps.save() で apiVersion 3 対応
+        const blockProps = useBlockProps.save({
+            className: 'lw-gallery-01'
+        });
+
         return (
-            <nav className="lw-gallery-01">
+            <nav {...blockProps}>
                 {showText1 && text_1 && (
                     <RichText.Content
                         tagName="p"

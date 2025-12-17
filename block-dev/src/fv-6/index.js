@@ -9,6 +9,7 @@ import {
 	InspectorControls,
 	BlockControls,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -18,7 +19,6 @@ import {
 	ToolbarGroup,
 	ToolbarButton,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import {
 	minHeightPcClassOptionArr,
@@ -27,35 +27,9 @@ import {
 } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/fv-6', {
-	/* ----------------------------------------------------------
-	 * 基本情報
-	 * -------------------------------------------------------- */
-	title: '固定ページタイトル 06（下層用）',
-	icon: 'cover-image',
-	category: 'liteword-firstview',
-	supports: { anchor: true },
-
-	/* ----------------------------------------------------------
-	 * 属性
-	 * -------------------------------------------------------- */
-	attributes: {
-		backgroundImage   : { type: 'string', default: 'https://cdn.pixabay.com/photo/2016/11/19/15/39/architecture-1839930_1280.jpg' },
-		backgroundImageSp : { type: 'string', default: '' },
-		mainTitle         : { type: 'string', default: '会社情報' },
-		subTitle          : { type: 'string', default: 'COMPANY INFO' },
-		filterBackgroundColor: { type: 'string', default: '#111' },
-		filterOpacity     : { type: 'number', default: 0.3 },
-		textColor         : { type: 'string', default: '#111' },
-		minHeightPc       : { type: 'string', default: 'min-h-pc-400px' },
-		minHeightTb       : { type: 'string', default: 'min-h-tb-360px' },
-		minHeightSp       : { type: 'string', default: 'min-h-sp-280px' },
-		/* ▼ 追加：メイン＋サブを囲むタグ */
-		mainTitleTag      : { type: 'string', default: 'h1' },
-	},
-
-
+registerBlockType(metadata.name, {
 	/* ----------------------------------------------------------
 	 * 編集画面
 	 * -------------------------------------------------------- */
@@ -74,10 +48,15 @@ registerBlockType('wdl/fv-6', {
 			mainTitleTag,
 		} = attributes;
 
+		// useBlockPropsは条件付きreturnの前に呼ぶ（Reactフックのルール）
+		const blockProps = useBlockProps({
+			className: `fv-6 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+		});
+
 		/* 固定ページ以外では警告 */
 		const currentPostType = useSelect( select => select('core/editor').getCurrentPostType() );
 		if ( currentPostType !== 'page' ) {
-			return <p>このブロックは固定ページでのみ使用できます。</p>;
+			return <div {...blockProps}><p>このブロックは固定ページでのみ使用できます。</p></div>;
 		}
 
 		/* 画像選択ハンドラ */
@@ -87,7 +66,7 @@ registerBlockType('wdl/fv-6', {
 		const TagName = mainTitleTag || 'h1';
 
 		return (
-			<Fragment>
+			<>
 				{/* ▼ タイトルタグ切替ツールバー */}
 				<BlockControls>
 					<ToolbarGroup>
@@ -196,7 +175,7 @@ registerBlockType('wdl/fv-6', {
 				</InspectorControls>
 
 				{/* ▼ エディタプレビュー */}
-				<div className={ `fv-6 ${ minHeightPc } ${ minHeightTb } ${ minHeightSp }` }>
+				<div {...blockProps}>
 					<div className="fv-6_inner">
 						<TagName className="ttl" style={ { color: textColor } }>
 							<RichText
@@ -221,7 +200,7 @@ registerBlockType('wdl/fv-6', {
 					<div className="bg_image">{ backgroundImage && <img src={ backgroundImage } alt="" /> }</div>
 					<div className="filter" style={ { backgroundColor: filterBackgroundColor, opacity: filterOpacity } } />
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -245,8 +224,12 @@ registerBlockType('wdl/fv-6', {
 
 		const TagName = mainTitleTag || 'h1';
 
+		const blockProps = useBlockProps.save({
+			className: `fv-6 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+		});
+
 		return (
-			<div className={ `fv-6 ${ minHeightPc } ${ minHeightTb } ${ minHeightSp }` }>
+			<div {...blockProps}>
 				<div className="fv-6_inner">
 					<TagName className="ttl" style={ { color: textColor } }>
 						<RichText.Content tagName="span" className="main" value={ mainTitle } style={ { color: textColor } } />

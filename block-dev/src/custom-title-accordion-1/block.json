@@ -1,0 +1,55 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/custom-title-accordion-1",
+	"version": "1.0.0",
+	"title": "見出しアコーディオン 01",
+	"category": "lw-heading",
+	"icon": "editor-textcolor",
+	"description": "アコーディオン機能付き見出しブロック",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"subTitle": {
+			"type": "string",
+			"default": "STEP 1"
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "WordPressの初期設定"
+		},
+		"headingLevel": {
+			"type": "number",
+			"default": 2
+		},
+		"mainTitleColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 1
+		},
+		"backgroundColor": {
+			"type": "string",
+			"default": ""
+		},
+		"iconColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		}
+	},
+	"editorScript": "file:./custom-title-accordion-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 1
+}

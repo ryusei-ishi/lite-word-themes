@@ -9,12 +9,14 @@ import {
     RichText,
     InspectorControls,
     ColorPalette,
+    useBlockProps,
 } from '@wordpress/block-editor';
 import { PanelBody, SelectControl } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
+
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ===== 共通オプション ===== */
 const fontOptions       = fontOptionsArr();
@@ -23,52 +25,11 @@ const fontWeightOptions = fontWeightOptionsArr();
 /* ----------------------------------------------------------
  * ブロック登録
  * -------------------------------------------------------- */
-registerBlockType('wdl/paid-block-history-1', {
+registerBlockType(metadata.name, {
     title   : '沿革 01',
     icon    : 'schedule',
-    category: 'liteword-other',
+    category: 'lw-table',
     supports: { anchor: true },
-
-    attributes: {
-        /* --- 年見出し --- */
-        yearText      : { type:'string',  default:'2003年' },
-        yearTag       : { type:'string',  default:'h3'   },
-        fontYear      : { type:'string',  default:''     },
-        fontWeightYear: { type:'string',  default:''     },
-        colorYear     : { type:'string',  default:''     },
-        yearBgColor   : { type:'string',  default:''     }, // ★ 追加
-
-        /* --- タイムラインポイント --- */
-        pointColor       : { type:'string',  default:'#ffffff' },
-        pointBorderColor : { type:'string',  default:'var(--color-main)' },
-
-        /* --- 月 (dt) --- */
-        fontDt        : { type:'string',  default:'' },
-        fontWeightDt  : { type:'string',  default:'' },
-        colorDt       : { type:'string',  default:'' },
-
-        /* --- 説明 (dd) --- */
-        fontDd        : { type:'string',  default:'' },
-        fontWeightDd  : { type:'string',  default:'' },
-        colorDd       : { type:'string',  default:'' },
-
-        /* --- イベント配列 --- */
-        events: {
-            type   : 'array',
-            source : 'query',
-            selector: '.history__events_row',
-            query  : {
-                month: { type:'string', source:'text', selector:'time' },
-                desc : { type:'string', source:'html', selector:'dd'   },
-            },
-            default: [
-                { month:'4月',  desc:'地域の福祉ニーズを把握するための住民説明会を開催。施設構想を共有し、支援者を募集。' },
-                { month:'7月',  desc:'特定非営利活動法人として県の認証を取得し、地域福祉ネットワークづくりを本格始動。' },
-                { month:'8月',  desc:'賃貸契約を締結し、小規模多機能施設を開設。利用者受け入れ準備を開始。' },
-                { month:'12月', desc:'初めての利用者を受け入れ。地域ボランティアによるサポート体制が整い、運営を本格化。' },
-            ],
-        },
-    },
 
     /* ======================================================
      * 1) エディタ
@@ -81,6 +42,10 @@ registerBlockType('wdl/paid-block-history-1', {
             fontDd, fontWeightDd, colorDd,
             events,
         } = attributes;
+
+        const blockProps = useBlockProps({
+            className: 'paid-block-history-1'
+        });
 
         /* 深いコピー用ユーティリティ */
         const deepCloneEvents = (arr) => arr.map(e => ({ ...e }));
@@ -102,7 +67,7 @@ registerBlockType('wdl/paid-block-history-1', {
         };
 
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
                     {/* --- 年見出し書式 --- */}
                     <PanelBody title="年見出し" initialOpen={true}>
@@ -155,7 +120,7 @@ registerBlockType('wdl/paid-block-history-1', {
                 </InspectorControls>
 
                 {/* ---------- 編集画面 ---------- */}
-                <div className="paid-block-history-1">
+                <div {...blockProps}>
                     <div className="history__year">
                         <div
                             className="history__point"
@@ -204,7 +169,7 @@ registerBlockType('wdl/paid-block-history-1', {
                         <button type="button" className="history__add_btn" onClick={addEvent}>イベントを追加する</button>
                     </div>
                 </div>
-            </Fragment>
+            </>
         );
     },
 
@@ -220,12 +185,16 @@ registerBlockType('wdl/paid-block-history-1', {
             events,
         } = attributes;
 
+        const blockProps = useBlockProps.save({
+            className: 'paid-block-history-1'
+        });
+
         const filtered = events.filter(e =>
             String(e.month||'').trim() || String(e.desc||'').trim()
         );
 
         return (
-            <div className="paid-block-history-1">
+            <div {...blockProps}>
                 <div className="history__year" aria-labelledby={`y${String(yearText).replace(/[^0-9]/g,'')}`}>
                     <div
                         className="history__point"

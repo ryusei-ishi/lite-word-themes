@@ -1,0 +1,98 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-fv-10",
+	"version": "1.0.0",
+	"title": "固定ページタイトル 10（下層用）",
+	"category": "lw-firstview",
+	"icon": "cover-image",
+	"editorScript": "file:./paid-block-fv-10.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"backgroundImage": {
+			"type": "string",
+			"default": ""
+		},
+		"backgroundImageSp": {
+			"type": "string",
+			"default": ""
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "ページタイトル"
+		},
+		"filterBackgroundColor": {
+			"type": "string",
+			"default": "#FFF8D4"
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 1
+		},
+		"innerFilterBg": {
+			"type": "string",
+			"default": "#FC99AA"
+		},
+		"innerFilterBorderColor": {
+			"type": "string",
+			"default": "#FFFFFF"
+		},
+		"innerFilterBorderWidth": {
+			"type": "number",
+			"default": 4
+		},
+		"innerFilterBorderRadius": {
+			"type": "number",
+			"default": 12
+		},
+		"innerFilterShadowColor": {
+			"type": "string",
+			"default": "rgba(0,0,0,0.06)"
+		},
+		"innerFilterShadowOffsetX": {
+			"type": "number",
+			"default": 0
+		},
+		"innerFilterShadowOffsetY": {
+			"type": "number",
+			"default": 3
+		},
+		"innerFilterShadowBlur": {
+			"type": "number",
+			"default": 6
+		},
+		"innerFilterShadowSpread": {
+			"type": "number",
+			"default": 0
+		},
+		"textColor": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"minHeightPc": {
+			"type": "string",
+			"default": "min-h-pc-400px"
+		},
+		"minHeightTb": {
+			"type": "string",
+			"default": "min-h-tb-360px"
+		},
+		"minHeightSp": {
+			"type": "string",
+			"default": "min-h-sp-280px"
+		},
+		"titleFontSizeClass": {
+			"type": "string",
+			"default": "font_size_m"
+		}
+	},
+	"no": 10
+}

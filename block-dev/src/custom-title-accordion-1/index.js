@@ -2,6 +2,7 @@
    LiteWord – 見出しアコーディオン 01
    DOMContentLoaded → window.load 待機 + .last_content 判定付き（2025-05-19）
    ★ borderWidth 追加版（2025-05-20）
+   ★ apiVersion 3 対応（2025-12-07）
 ---------------------------------------------------------- */
 import { registerBlockType } from '@wordpress/blocks';
 import {
@@ -9,36 +10,21 @@ import {
 	InspectorControls,
 	BlockControls,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
 	ToolbarGroup,
 	ToolbarButton,
-	RangeControl,   // ★ 追加
+	RangeControl,
 } from '@wordpress/components';
 import './style.scss';
 import './editor.scss';
 
+import metadata from './block.json';
+
 /* ========================================================= */
-registerBlockType('wdl/custom-title-accordion-1', {
-	/* ----- 基本情報 ----- */
-	title: '見出しアコーディオン 01',
-	icon: 'editor-textcolor',
-	category: 'liteword-title',
-	supports: { anchor: true },
-
-	/* ----- 属性 ----- */
-	attributes: {
-		subTitle       : { type: 'string',  default: 'STEP 1' },
-		mainTitle      : { type: 'string',  default: 'WordPressの初期設定' },
-		headingLevel   : { type: 'number',  default: 2 },
-		mainTitleColor : { type: 'string',  default: 'var(--color-main)' },
-		borderColor    : { type: 'string',  default: 'var(--color-main)' },
-		borderWidth    : { type: 'number',  default: 1 },          // ★ 追加
-		backgroundColor: { type: 'string',  default: '' },
-		iconColor      : { type: 'string',  default: 'var(--color-main)' },
-	},
-
+registerBlockType(metadata.name, {
 	/* ----- エディター側 ----- */
 	edit({ attributes, setAttributes }) {
 		const {
@@ -49,6 +35,16 @@ registerBlockType('wdl/custom-title-accordion-1', {
 
 		const onChange = (k) => (v) => setAttributes({ [k]: v });
 		const TagName = `h${headingLevel}`;
+
+		const blockProps = useBlockProps({
+			className: 'custom-title-accordion-1',
+			style: {
+				borderColor,
+				borderWidth: `${borderWidth}px`,
+				borderStyle: 'solid',
+				backgroundColor,
+			},
+		});
 
 		return (
 			<>
@@ -95,15 +91,7 @@ registerBlockType('wdl/custom-title-accordion-1', {
 				</InspectorControls>
 
 				{/* プレビュー */}
-				<TagName
-					className="custom-title-accordion-1"
-					style={{
-						borderColor,
-						borderWidth: `${borderWidth}px`,
-						borderStyle: 'solid',
-						backgroundColor,
-					}}
-				>
+				<TagName {...blockProps}>
 					<RichText
 						tagName="span"
 						className="sub"
@@ -138,6 +126,16 @@ registerBlockType('wdl/custom-title-accordion-1', {
 		} = attributes;
 
 		const TagName = `h${headingLevel}`;
+
+		const blockProps = useBlockProps.save({
+			className: 'custom-title-accordion-1',
+			style: {
+				borderColor,
+				borderWidth: `${borderWidth}px`,
+				borderStyle: 'solid',
+				backgroundColor,
+			},
+		});
 
 		/* === インライン JS === */
 		const accordionScript = `
@@ -194,15 +192,7 @@ registerBlockType('wdl/custom-title-accordion-1', {
 		/* === JSX === */
 		return (
 			<>
-				<TagName
-					className="custom-title-accordion-1"
-					style={{
-						borderColor,
-						borderWidth: `${borderWidth}px`,
-						borderStyle: 'solid',
-						backgroundColor,
-					}}
-				>
+				<TagName {...blockProps}>
 					<RichText.Content
 						tagName="span"
 						className="sub"

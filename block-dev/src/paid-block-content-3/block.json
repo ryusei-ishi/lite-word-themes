@@ -1,0 +1,108 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-content-3",
+	"version": "1.0.0",
+	"title": "Content 03",
+	"category": "lw-content",
+	"icon": "format-image",
+	"editorScript": "file:./paid-block-content-3.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"imageUrl": {
+			"type": "string",
+			"default": "https://lite-word.com/sample_img/shop/2.webp"
+		},
+		"imageAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"aspectRatioHeight": {
+			"type": "number",
+			"default": 120
+		},
+		"titleSub": {
+			"type": "string",
+			"source": "html",
+			"selector": ".paid-block-content-3__text h3 span.sub",
+			"default": "SUB TITLE"
+		},
+		"title": {
+			"type": "string",
+			"source": "html",
+			"selector": ".paid-block-content-3__text h3 span.main",
+			"default": "タイトルテキスト"
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"content": {
+			"type": "string",
+			"source": "html",
+			"selector": ".paid-block-content-3__text p",
+			"default": "テキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキスト\nテキストテキストテキストテキスト"
+		},
+		"linkUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"linkText": {
+			"type": "string",
+			"default": "MORE"
+		},
+		"linkTarget": {
+			"type": "string",
+			"default": ""
+		},
+		"titleFontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"titleFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"contentFontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"contentFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"linkFontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"linkFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"imagePosition": {
+			"type": "string",
+			"default": "left"
+		},
+		"linkButtonBackgroundColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"linkButtonTextColor": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"showTitle": {
+			"type": "boolean",
+			"default": true
+		}
+	},
+	"no": 3
+}

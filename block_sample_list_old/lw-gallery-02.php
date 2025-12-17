@@ -1,0 +1,3 @@
+<!-- wp:wdl/lw-gallery-02 -->
+<div class="wp-block-wdl-lw-gallery-02"><div class="lw-gallery-02"><ul class="img_5"><li><img src="https://lite-word.com/sample_img/shop/1.webp" alt="ギャラリー画像 1"/></li><li><img src="https://lite-word.com/sample_img/shop/2.webp" alt="ギャラリー画像 2"/></li><li><img src="https://lite-word.com/sample_img/shop/3.webp" alt="ギャラリー画像 3"/></li><li><img src="https://lite-word.com/sample_img/shop/4.webp" alt="ギャラリー画像 4"/></li><li><img src="https://lite-word.com/sample_img/shop/5.webp" alt="ギャラリー画像 5"/></li></ul></div></div>
+<!-- /wp:wdl/lw-gallery-02 -->

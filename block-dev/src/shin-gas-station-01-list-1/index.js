@@ -3,8 +3,7 @@ import {
     RichText,
     InspectorControls,
     MediaUpload,
-    ColorPalette
-} from '@wordpress/block-editor';
+    ColorPalette, useBlockProps } from '@wordpress/block-editor';
 import {
     PanelBody,
     Button,
@@ -12,85 +11,15 @@ import {
 } from '@wordpress/components';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/shin-gas-station-01-list-1', {
-    title: 'インフォリスト 1 shin shop pattern 01',
-    icon: 'editor-ul',
-    category: 'liteword-other',
-    supports: {
-        anchor: true,
-    },
-    attributes: {
-        contents: {
-            type: 'array',
-            source: 'query',
-            selector: '.shin-gas-station-01-list-1_item',
-            query: {
-                text: {
-                    type: 'string',
-                    source: 'html',
-                    selector: '.text'
-                },
-                textColor: {
-                    type: 'string',
-                    source: 'attribute',
-                    selector: '.text',
-                    attribute: 'data-text-color'
-                },
-                number: {
-                    type: 'string',
-                    source: 'text',
-                    selector: '.no'
-                },
-                p_text: {
-                    type: 'string',
-                    source: 'html',
-                    selector: '.p_text'
-                },
-                image: {
-                    type: 'string',
-                    source: 'attribute',
-                    selector: 'img',
-                    attribute: 'src'
-                },
-                url: {
-                    type: 'string',
-                    source: 'attribute',
-                    selector: '.link',
-                    attribute: 'href',
-                    default: ''
-                }
-            },
-            default: [
-                {
-                    text: 'エネルギー事業',
-                    textColor: '#E58A68',
-                    number: '01',
-                    image: '',
-                    p_text: 'ガソリンスタンドの運営を通じて、高品質な燃料とサービスを提供。',
-                    url: ''
-                },
-                {
-                    text: 'コンビニエンスストア事業',
-                    textColor: '#03A0C6',
-                    number: '02',
-                    image: '',
-                    p_text: 'お客様にとって、いつでも、どこでも、何を求めても手に入る場所を提供することを目指しています。',
-                    url: ''
-                },
-                {
-                    text: 'カーディーラー事業',
-                    textColor: '#059D47',
-                    number: '03',
-                    image: '',
-                    p_text: 'お客様のカーライフをトータルにサポートするため、新車・中古車の販売など、幅広いサービスを提供しています。',
-                    url: ''
-                }
-            ],
-        }
-    },
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
+
+        const blockProps = useBlockProps({
+            className: 'shin-gas-station-01-list-1'
+        });
         const { contents } = attributes;
 
         // コンテンツ追加
@@ -122,7 +51,7 @@ registerBlockType('wdl/shin-gas-station-01-list-1', {
         };
 
         return (
-            <div className="shin-gas-station-01-list-1">
+            <div {...blockProps}>
                 <InspectorControls>
                     <PanelBody title="テキストカラー設定" initialOpen={true}>
                         {contents.map((content, index) => (
@@ -222,10 +151,14 @@ registerBlockType('wdl/shin-gas-station-01-list-1', {
     },
     save: function (props) {
         const { attributes } = props;
+
+        const blockProps = useBlockProps.save({
+            className: 'shin-gas-station-01-list-1'
+        });
         const { contents } = attributes;
 
         return (
-            <div className="shin-gas-station-01-list-1">
+            <div {...blockProps}>
                 <ul className="list">
                     {contents.map((content, index) => {
                         // URL が設定されていない場合は div.link、設定されている場合は a.link

@@ -6,6 +6,7 @@ import {
 	ColorPalette,
 	MediaUpload,
 	MediaUploadCheck,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -19,39 +20,9 @@ import {
 import './style.scss';
 import './editor.scss';
 
-registerBlockType( 'wdl/paid-block-custom-title-10', {
-	title   : '見出しタイトル 10',
-	icon    : 'editor-textcolor',
-	category: 'liteword-title',
-	supports: { anchor: true },
+import metadata from './block.json';
 
-	/* ───────── 属性 ───────── */
-	attributes: {
-		/* 既存 */
-		subTitle      : { type: 'string',  default: '製品紹介' },
-		mainTitle     : { type: 'string',  default: 'PRODUCTS' },
-		headingLevel  : { type: 'number',  default: 2 },
-		mainTitleColor: { type: 'string',  default: 'var(--color-main)' },
-		sizeClass     : { type: 'string',  default: 'size_m' },
-		leftImage     : { type: 'string',  default: 'https://lite-word.com/sample_img/icon/pc_1.png' },
-		rightImage    : { type: 'string',  default: '' },
-		leftHeightEm  : { type: 'number',  default: 1.5 },
-		rightHeightEm : { type: 'number',  default: 1.5 },
-		leftMarginEm  : { type: 'number',  default: 0.4 },
-		rightMarginEm : { type: 'number',  default: 0.4 },
-		positionClass : { type: 'string',  default: 'position_center' },
-		hideSubTitle  : { type: 'string',  default: 'off' }, // off / on
-		hideMainTitle : { type: 'string',  default: 'off' }, // off / on
-
-		/* 追加 – bd 用 */
-		bdThickness   : { type: 'number',  default: 2 },             // px
-		bdMarginTopEm : { type: 'number',  default: 0.1 },           // em
-		bdDisplay     : { type: 'string',  default: 'on' },          // on / off
-
-		/* 追加 – ttl 全幅 */
-		ttlFullWidth  : { type: 'string',  default: 'off' },         // off / on
-	},
-
+registerBlockType( metadata.name, {
 	/* ========================== edit ========================== */
 	edit( { attributes, setAttributes } ) {
 		const {
@@ -64,6 +35,11 @@ registerBlockType( 'wdl/paid-block-custom-title-10', {
 		} = attributes;
 
 		const Tag = `h${ headingLevel }`;
+
+		const blockProps = useBlockProps({
+			className: `paid-block-custom-title-10 ${ positionClass } ${ sizeClass }`
+		});
+
 		const onSelectImage = ( side ) => ( media ) => setAttributes( { [ side ]: media.url } );
 		const removeImage   = ( side ) => setAttributes( { [ side ]: '' } );
 
@@ -235,7 +211,7 @@ registerBlockType( 'wdl/paid-block-custom-title-10', {
 				</InspectorControls>
 
 				{/* ───── プレビュー ───── */}
-				<div className={ `paid-block-custom-title-10 ${ positionClass } ${ sizeClass }` }>
+				<div {...blockProps}>
 					<Tag className={ `ttl${ ttlFullWidth === 'on' ? ' w_100' : '' }` }>
 						{/* 左画像 */}
 						{ leftImage && (
@@ -314,6 +290,10 @@ registerBlockType( 'wdl/paid-block-custom-title-10', {
 			ttlFullWidth,
 		} = attributes;
 
+		const blockProps = useBlockProps.save({
+			className: `paid-block-custom-title-10 ${ positionClass } ${ sizeClass }`
+		});
+
 		const Tag = `h${ headingLevel }`;
 
 		const maybeImage = ( url, cls, styleObj ) =>
@@ -334,7 +314,7 @@ registerBlockType( 'wdl/paid-block-custom-title-10', {
 			);
 
 		return (
-			<div className={ `paid-block-custom-title-10 ${ positionClass } ${ sizeClass }` }>
+			<div {...blockProps}>
 				<Tag className={ `ttl${ ttlFullWidth === 'on' ? ' w_100' : '' }` }>
 					{/* 左画像 */}
 					{ maybeImage(

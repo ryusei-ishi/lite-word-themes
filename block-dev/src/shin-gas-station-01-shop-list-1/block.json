@@ -1,0 +1,47 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/shin-gas-station-01-shop-list-1",
+	"version": "1.0.0",
+	"title": "店舗一覧用 1 shin shop pattern 01",
+	"category": "lw-content",
+	"icon": "store",
+	"editorScript": "file:./shin-gas-station-01-shop-list-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"shopName": {
+			"type": "string",
+			"default": "ガソリンスタンドセルフ 〇〇店"
+		},
+		"details": {
+			"type": "array",
+			"default": [
+				{ "dt": "住所", "dd": "福島県〇〇市〇〇〇〇町1-2-345" },
+				{ "dt": "電話番号", "dd": "012-345-6789" },
+				{ "dt": "営業時間", "dd": "平日8:00~20:00 / 日祝9:00~20:00" },
+				{ "dt": "定休日", "dd": "水曜日" }
+			]
+		},
+		"tags": {
+			"type": "string",
+			"default": "セルフ, 軽油, 車検, 洗車, タイヤ交換・販売, マイカーリース, クレジットカードOK"
+		},
+		"imgUrl": {
+			"type": "string",
+			"default": "https://placehold.jp/420x320.png"
+		},
+		"imgAlt": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"no": 15
+}

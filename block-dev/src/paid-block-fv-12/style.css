@@ -236,24 +236,24 @@
   }
 }
 
-.paid-block-fv-12 .fv_inner h2 {
+.paid-block-fv-12 .fv_inner > h2 {
   margin: 0;
   width: 100%;
   text-align: center;
-  font-size: 40px;
+  font-size: 40px !important;
   line-height: 1.5;
   font-weight: 300;
 }
 
 @media (max-width: 1000px) {
-  .paid-block-fv-12 .fv_inner h2 {
-    font-size: 36px;
+  .paid-block-fv-12 .fv_inner > h2 {
+    font-size: 36px !important;
   }
 }
 
 @media (max-width: 700px) {
-  .paid-block-fv-12 .fv_inner h2 {
-    font-size: 32px;
+  .paid-block-fv-12 .fv_inner > h2 {
+    font-size: 32px !important;
   }
 }
 

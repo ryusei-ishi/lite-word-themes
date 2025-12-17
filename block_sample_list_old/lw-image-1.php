@@ -1,0 +1,3 @@
+<!-- wp:wdl/paid-block-image-1 {"namePlateColor":"#ff6e6e","fontSizeClass":"font_size_s"} -->
+<div class="wp-block-wdl-paid-block-image-1 paid-block-image-1 font_size_s" style="max-width:480px;margin-left:undefined;margin-right:undefined"><div class="paid-block-image-1__inner" style="aspect-ratio:400 / 340;border-radius:0.9em"><img src="https://placehold.jp/600x440.png" alt=""/><h3 class="name_plate" style="background-color:#ff6e6e;border-color:#ff6e6e;border-radius:0.2em;border-width:2px"><span class="sub">主任</span><span class="main">大阪 京子</span></h3></div></div>
+<!-- /wp:wdl/paid-block-image-1 -->

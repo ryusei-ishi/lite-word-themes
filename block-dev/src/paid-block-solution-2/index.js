@@ -3,6 +3,7 @@ import {
     RichText,
     MediaUpload,
     InspectorControls,
+    useBlockProps,
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -10,79 +11,12 @@ import {
     SelectControl,
     ColorPicker,
 } from '@wordpress/components';
-import { Fragment, useEffect } from '@wordpress/element';
+import { useEffect } from '@wordpress/element';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/paid-block-solution-2', {
-    title: 'ソリューション 02',
-    icon: 'lightbulb',
-    category: 'liteword-other',
-    supports: { anchor: true },
-
-    /* ========== 1) 属性定義 ========== */
-    attributes: {
-        /* ユニーククラス用 ID（8 桁）*/
-        blockId: {
-            type: 'string',
-        },
-        /* h2 タイトル */
-        title: {
-            type: 'string',
-            default: 'このな事が解決できます',
-            source: 'html',
-            selector: '.paid-block-solution-2_inner > .ttl',
-        },
-        /* メインカラー */
-        colorMain: {
-            type: 'string',
-            default: 'var(--color-main)',
-        },
-        /* 繰り返しリスト */
-        items: {
-            type: 'array',
-            source: 'query',
-            selector: '.paid-block-solution-2_inner .list li',
-            query: {
-                imgSrc: {
-                    type: 'string',
-                    source: 'attribute',
-                    selector: 'img',
-                    attribute: 'src',
-                },
-                text: {
-                    type: 'string',
-                    source: 'html',
-                    selector: 'p',
-                },
-                imageSize: {
-                    type: 'string',
-                    source: 'attribute',
-                    selector: '.img_wrap',
-                    attribute: 'data-imagesize',
-                },
-            },
-            default: [
-                {
-                    imgSrc: 'https://lite-word.com/sample_img/icon/people_1.svg',
-                    text: 'テキストテキストテキストテキストテキス',
-                    imageSize: 'icon',
-                },
-                {
-                    imgSrc: 'https://lite-word.com/sample_img/icon/en_5.svg',
-                    text: 'テキストテキストテキストテキストテキスト',
-                    imageSize: 'icon',
-                },
-                {
-                    imgSrc: 'https://lite-word.com/sample_img/icon/ambulance_1.svg',
-                    text: 'テキストテキストテキストテキストテキスト',
-                    imageSize: 'icon',
-                },
-            ],
-        },
-    },
-
-    /* ========== 2) 編集画面 ========== */
+registerBlockType(metadata.name, {
     edit: (props) => {
         const { attributes, setAttributes, clientId } = props;
         const { blockId, title, colorMain, items } = attributes;
@@ -95,6 +29,10 @@ registerBlockType('wdl/paid-block-solution-2', {
                 });
             }
         }, []);
+
+        const blockProps = useBlockProps({
+            className: `paid-block-solution-2 ${blockId || ''}`
+        });
 
         const updateItem = (index, field, value) => {
             const newItems = [...items];
@@ -109,9 +47,10 @@ registerBlockType('wdl/paid-block-solution-2', {
         /* blockId がまだ設定されていないタイミングは非表示 */
         if (!blockId) return null;
 
+
         /* ====================================================== */
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
                     <PanelBody title="マニュアル">
                         <Button
@@ -150,7 +89,7 @@ registerBlockType('wdl/paid-block-solution-2', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className={`paid-block-solution-2 ${blockId}`}>
+                <div {...blockProps}>
                     <div
                         className="paid-block-solution-2_inner"
                         style={colorMain ? { borderColor: colorMain } : null}
@@ -245,7 +184,7 @@ registerBlockType('wdl/paid-block-solution-2', {
                         `}</style>
                     )}
                 </div>
-            </Fragment>
+            </>
         );
     },
 
@@ -254,8 +193,12 @@ registerBlockType('wdl/paid-block-solution-2', {
         const { attributes } = props;
         const { blockId, title, colorMain, items } = attributes;
 
+        const blockProps = useBlockProps.save({
+            className: `paid-block-solution-2 ${blockId}`
+        });
+
         return (
-            <div className={`paid-block-solution-2 ${blockId}`}>
+            <div {...blockProps}>
                 <div
                     className="paid-block-solution-2_inner"
                     style={colorMain ? { borderColor: colorMain } : null}

@@ -4,7 +4,7 @@ import {
     MediaUpload,
     InspectorControls,
     ColorPalette
-} from '@wordpress/block-editor';
+, useBlockProps } from '@wordpress/block-editor';
 import {
     PanelBody,
     SelectControl,
@@ -19,52 +19,14 @@ import {
 } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // フォント／背景オプション
 const fontOptions      = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 const bgOptions        = ButtonBackgroundOptionsArr();
 
-registerBlockType('wdl/lw-list-2', {
-    title: 'list 02',
-    icon: 'lightbulb',
-    category: 'liteword-other',
-    supports: { anchor: true },
-
-    attributes: {
-        backgroundImage: { type: 'string', default: '' },
-        bgGradient:      { type: 'string', default: 'var(--color-main)' },
-        filterOpacity:   { type: 'number', default: 0.8 },
-        titleText:       { type: 'string', default: '機能紹介' },
-        fontLi:          { type: 'string', default: '' },
-        fontWeightLi:    { type: 'string', default: '' },
-        colorLiSvg:      { type: 'string', default: 'var(--color-accent)' },
-        contents: {
-            type: 'array',
-            source: 'query',
-            selector: '.lw-list-2__li',
-            query: {
-                text: {
-                    type: 'string',
-                    source: 'html',
-                    selector: '.lw-list-2__text p',
-                },
-                borderColor: {
-                    type: 'string',
-                    source: 'attribute',
-                    selector: 'figure',
-                    attribute: 'data-border-color',
-                },
-            },
-            default: [
-                { text: '何から始めたらいいか\nわからない', borderColor: 'var(--color-main)' },
-                { text: '作りたいけど\n時間がない',   borderColor: 'var(--color-main)' },
-                { text: '自分で作ると\nダサくなる…',  borderColor: 'var(--color-main)' },
-            ],
-        },
-    },
-
-
+registerBlockType(metadata.name, {
     edit: ( { attributes, setAttributes } ) => {
         const {
             backgroundImage,
@@ -76,6 +38,11 @@ registerBlockType('wdl/lw-list-2', {
             contents,
             colorLiSvg
         } = attributes;
+
+        const blockProps = useBlockProps({
+            className: 'lw-list-2',
+            style: { backgroundImage: `url(${ backgroundImage })` }
+        });
 
         // 背景画像変更
         const onChangeBackgroundImage = ( media ) =>
@@ -94,9 +61,21 @@ registerBlockType('wdl/lw-list-2', {
             setAttributes( { contents: updated } );
         };
 
+        // 順番入れ替え関数
+        const moveItem = ( index, direction ) => {
+            const targetIndex = index + direction;
+            if ( targetIndex < 0 || targetIndex >= contents.length ) return;
+
+            const reordered = [ ...contents ];
+            const [ moved ] = reordered.splice( index, 1 );
+            reordered.splice( targetIndex, 0, moved );
+
+            setAttributes( { contents: reordered } );
+        };
+
         /* ========== Edit ========== */
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
                     {/* 背景画像 */}
                     <PanelBody title="背景画像">
@@ -166,7 +145,7 @@ registerBlockType('wdl/lw-list-2', {
                 </InspectorControls>
 
                 {/* ブロック本体 */}
-                <div className="lw-list-2" style={ { backgroundImage: `url(${ backgroundImage })` } }>
+                <div {...blockProps}>
                     <RichText
                         tagName="h2"
                         className="lw-list-2__title"
@@ -192,9 +171,35 @@ registerBlockType('wdl/lw-list-2', {
                                         style={ { fontWeight: fontWeightLi } }
                                     />
                                 </span>
-                                <button className="lw-list-2__remove_btn" onClick={ () => removeContent( i ) }>
-                                    削除
-                                </button>
+                                {/* 並べ替え & 削除コントロール */}
+                                <div className="lw-list-2__item-controls">
+                                    <button
+                                        type="button"
+                                        onClick={ () => moveItem( i, -1 ) }
+                                        disabled={ i === 0 }
+                                        className="move-up-button"
+                                        aria-label="上へ移動"
+                                    >
+                                        ↑
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={ () => moveItem( i, 1 ) }
+                                        disabled={ i === contents.length - 1 }
+                                        className="move-down-button"
+                                        aria-label="下へ移動"
+                                    >
+                                        ↓
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="remove-item-button"
+                                        onClick={ () => removeContent( i ) }
+                                        aria-label="削除"
+                                    >
+                                        削除
+                                    </button>
+                                </div>
                             </li>
                         ) ) }
                     </ul>
@@ -206,7 +211,7 @@ registerBlockType('wdl/lw-list-2', {
                         style={ { background: bgGradient, opacity: filterOpacity } }
                     />
                 </div>
-            </Fragment>
+            </>
         );
     },
 
@@ -225,8 +230,13 @@ registerBlockType('wdl/lw-list-2', {
 
         const hasTitle = titleText && titleText.trim() !== '';
 
+        const blockProps = useBlockProps.save({
+            className: 'lw-list-2',
+            style: { backgroundImage: `url(${ backgroundImage })` }
+        });
+
         return (
-            <div className="lw-list-2" style={ { backgroundImage: `url(${ backgroundImage })` } }>
+            <div {...blockProps}>
                 {/* タイトルが入力されていない場合は出力しない */}
                 { hasTitle && (
                     <RichText.Content

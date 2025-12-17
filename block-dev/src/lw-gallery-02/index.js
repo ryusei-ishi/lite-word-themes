@@ -1,31 +1,16 @@
+/**
+ * ギャラリー 02
+ * ★ apiVersion 3 対応（2025-12-07）
+ */
 import { registerBlockType } from '@wordpress/blocks';
 import { useBlockProps, InspectorControls, MediaUpload, MediaUploadCheck } from '@wordpress/block-editor';
 import { PanelBody, Button } from '@wordpress/components';
 import './style.scss';
 import './editor.scss';
 
-registerBlockType('wdl/lw-gallery-02', {
-    title: 'ギャラリー 02',
-    icon: 'format-gallery',
-    category: 'liteword-other',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        images: {
-            type: 'array',
-            default: [
-                "https://lite-word.com/sample_img/shop/1.webp", 
-                "https://lite-word.com/sample_img/shop/2.webp", 
-                "https://lite-word.com/sample_img/shop/3.webp", 
-                "https://lite-word.com/sample_img/shop/4.webp", 
-                "https://lite-word.com/sample_img/shop/5.webp", 
-                "", 
-                "", 
-                "",
-        ] // 8つの枠を確保
-        }
-    },
+import metadata from './block.json';
+
+registerBlockType(metadata.name, {
     edit: ({ attributes, setAttributes }) => {
         const { images } = attributes;
         const blockProps = useBlockProps();

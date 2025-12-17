@@ -17,24 +17,18 @@ import {
 	Button,
 } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import { Fragment, RawHTML } from '@wordpress/element';
+import { RawHTML } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { external, seen, unseen } from '@wordpress/icons';
+import metadata from './block.json';
 
 /* -------------------------------------------------- *
  * ブロック登録
  * -------------------------------------------------- */
-registerBlockType( 'wdl/lw-my-parts-embed', {
-	apiVersion : 2,
-	title      : __( 'マイパーツ本文の呼び出し', 'liteword' ),
+registerBlockType(metadata.name, {
+	title      : __( 'マイパーツ', 'liteword' ),
 	icon       : 'media-document',
-	category   : 'liteword-other',
-
-	attributes : {
-		partsId     : { type : 'integer', default : 0 },   // 取得するパーツの投稿 ID
-		partsCat    : { type : 'integer', default : 0 },   // パーツカテゴリーのターム ID（0=未選択）
-		showPreview : { type : 'boolean', default : false }, // プレビュー表示状態
-	},
+	category   : 'lw-utility',
 
 	/* ==================================================
 	 * 編集画面
@@ -258,7 +252,7 @@ registerBlockType( 'wdl/lw-my-parts-embed', {
 					</div>
 
 					{ partsId ? (
-						<Fragment>
+						<>
 							{/* ヘッダー部分 */}
 							<div style={ {
 								marginBottom: showPreview ? '12px' : '0',
@@ -393,7 +387,7 @@ registerBlockType( 'wdl/lw-my-parts-embed', {
 									{ renderPreview() }
 								</div>
 ) }
-						</Fragment>
+						</>
 					) : (
 						<div style={ { 
 							color: '#999', 

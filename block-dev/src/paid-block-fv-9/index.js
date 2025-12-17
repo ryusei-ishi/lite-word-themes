@@ -5,7 +5,8 @@
 import { registerBlockType } from '@wordpress/blocks';
 import {
     InspectorControls,
-    MediaUpload
+    MediaUpload,
+    useBlockProps
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -16,10 +17,11 @@ import {
     Button,
     ColorPicker
 } from '@wordpress/components';
-import { Fragment, useEffect } from '@wordpress/element';
+import { useEffect } from '@wordpress/element';
 
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // ★ HTTPをHTTPSに変換するヘルパー関数を追加
 const ensureHttps = (url) => {
@@ -36,57 +38,7 @@ const ensureHttps = (url) => {
     return url;
 };
 
-registerBlockType('wdl/paid-block-fv-9', {
-    title: 'FV 09 画像スライダー用ブロック',
-    icon: 'images-alt2',
-    category: 'liteword-banner',
-
-    // ------------------------------------------------------------------
-    // ▶ Attributes
-    // ------------------------------------------------------------------
-    attributes: {
-        // ★唯一無二のID
-        blockId: { type: 'string' },
-
-        // スライドの配列（最大20枚）
-        slides: {
-            type: 'array',
-            default: [
-                {
-                    pcImgUrl: 'https://lite-word.com/sample_img/slide/1.webp',
-                    spImgUrl: '',
-                    altText: 'スライド1のalt',
-                    linkUrl: ''
-                },
-                {
-                    pcImgUrl: 'https://lite-word.com/sample_img/slide/2.webp',
-                    spImgUrl: '',
-                    altText: 'スライド2のalt',
-                    linkUrl: ''
-                }
-            ]
-        },
-
-        // レイアウト
-        layoutType: { type: 'string', default: 'full' }, // 'full' | 'fixed'
-        maxWidth:   { type: 'number', default: 1200 },
-
-        // Swiper 設定
-        autoplayDelay:        { type: 'number',  default: 3000 },
-        sliderEffect:         { type: 'string',  default: 'fade' }, // 'fade' | 'slide'
-        crossFade:            { type: 'boolean', default: true },
-        loop:                 { type: 'boolean', default: true },
-        disableOnInteraction: { type: 'boolean', default: false },
-        showPagination:       { type: 'boolean', default: true },
-        paginationClickable:  { type: 'boolean', default: true },
-        showNavigation:       { type: 'boolean', default: true },
-        sliderSpeed:          { type: 'number',  default: 1000 },
-
-        // カラー
-        paginationColor: { type: 'string', default: '#ffffff' },
-        nextButtonColor: { type: 'string', default: '#ffffff' }
-    },
-
+registerBlockType(metadata.name, {
     // ------------------------------------------------------------------
     // ▶ Edit
     // ------------------------------------------------------------------
@@ -142,11 +94,30 @@ registerBlockType('wdl/paid-block-fv-9', {
             }
         };
 
+        /* スライドの順番を入れ替える */
+        const moveSlide = ( index, direction ) => {
+            const newIndex = index + direction;
+            if ( newIndex < 0 || newIndex >= slides.length ) return;
+            const newSlides = [ ...slides ];
+            const temp = newSlides[ index ];
+            newSlides[ index ] = newSlides[ newIndex ];
+            newSlides[ newIndex ] = temp;
+            setAttributes( { slides: newSlides } );
+        };
+
+        const blockProps = useBlockProps({
+            id: blockId,
+            className: layoutType === 'full'
+                ? 'swiper paid-block-fv-9 max-w'
+                : 'swiper paid-block-fv-9',
+            style: layoutType === 'fixed' ? { maxWidth } : {}
+        });
+
         /* --------------------------------------------------------------*/
         /* Gutenberg サイドバー                                           */
         /* --------------------------------------------------------------*/
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
                     {/* --- マニュアル ------------------------------------ */}
                     <PanelBody title="マニュアル">
@@ -194,7 +165,25 @@ registerBlockType('wdl/paid-block-fv-9', {
 
                         { slides.map( ( slide, index ) => (
                             <div key={ index } style={ { border:'1px solid #ddd',padding:'10px',marginTop:'10px' } }>
-                                <p><strong>スライド { index + 1 }</strong></p>
+                                <div style={ { display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'8px' } }>
+                                    <p style={ { margin:0 } }><strong>スライド { index + 1 }</strong></p>
+                                    <div>
+                                        <Button
+                                            icon="arrow-up-alt"
+                                            onClick={ () => moveSlide( index, -1 ) }
+                                            disabled={ index === 0 }
+                                            label="上へ移動"
+                                            size="small"
+                                        />
+                                        <Button
+                                            icon="arrow-down-alt"
+                                            onClick={ () => moveSlide( index, 1 ) }
+                                            disabled={ index === slides.length - 1 }
+                                            label="下へ移動"
+                                            size="small"
+                                        />
+                                    </div>
+                                </div>
 
                                 {/* PC画像 */}
                                 <MediaUpload
@@ -353,25 +342,17 @@ registerBlockType('wdl/paid-block-fv-9', {
                 </InspectorControls>
 
                 {/* -------------------------------------------------- */}
-                {/* エディター内プレビュー                              */}
+                {/* エディター内プレビュー（1枚目のみ表示）              */}
                 {/* -------------------------------------------------- */}
-                <div
-                    id={ blockId }
-                    className={
-                        layoutType==='full'
-                            ? 'swiper paid-block-fv-9 max-w'
-                            : 'swiper paid-block-fv-9'
-                    }
-                    style={ layoutType==='fixed' ? { maxWidth } : {} }
-                >
+                <div {...blockProps}>
                     <div className="swiper-wrapper">
-                        { slides.map( ( slide, i ) => {
-                            // ★ HTTPS変換を適用
+                        { slides.length > 0 && (() => {
+                            const slide = slides[0];
                             const pcImg = ensureHttps(slide.pcImgUrl);
                             const spImg = ensureHttps(slide.spImgUrl || slide.pcImgUrl);
-                            
+
                             return (
-                                <div className="swiper-slide" key={ i } style={ { textAlign:'center' } }>
+                                <div className="swiper-slide" style={ { textAlign:'center' } }>
                                     <picture className="bg_img">
                                         <source srcSet={ spImg } media="(max-width:800px)" />
                                         <source srcSet={ pcImg } media="(min-width:801px)" />
@@ -379,7 +360,7 @@ registerBlockType('wdl/paid-block-fv-9', {
                                     </picture>
                                 </div>
                             );
-                        } ) }
+                        })() }
                     </div>
                     { showPagination && <div className="swiper-pagination"></div> }
                     { showNavigation && <div className="swiper-button-next"></div> }
@@ -393,7 +374,7 @@ registerBlockType('wdl/paid-block-fv-9', {
                         #${ blockId } .swiper-button-prev { color:${ nextButtonColor }; }
                     `}</style>
                 ) }
-            </Fragment>
+            </>
         );
     },
 
@@ -410,6 +391,14 @@ registerBlockType('wdl/paid-block-fv-9', {
             showNavigation, sliderSpeed,
             paginationColor, nextButtonColor
         } = attributes;
+
+        const blockProps = useBlockProps.save({
+            id: blockId,
+            className: layoutType === 'full'
+                ? 'swiper paid-block-fv-9 max-w init-hide'
+                : 'swiper paid-block-fv-9 init-hide',
+            style: layoutType === 'fixed' ? { maxWidth } : { maxWidth: '100vw' }
+        });
 
         /* ---------- Swiper 設定文字列（observer 追加） ---------------*/
         const swiperConfig = `
@@ -471,15 +460,7 @@ registerBlockType('wdl/paid-block-fv-9', {
 
         /* ---------- JSX 出力 -----------------------------------------*/
         return (
-            <div
-                id={ blockId }
-                className={
-                    layoutType==='full'
-                        ? 'swiper paid-block-fv-9 max-w init-hide'
-                        : 'swiper paid-block-fv-9 init-hide'
-                }
-                style={ layoutType==='fixed' ? { maxWidth } : { maxWidth:'100vw' } }
-            >
+            <div {...blockProps}>
                 <div className="swiper-wrapper">
                     { slides.map( ( slide, i ) => {
                         // ★ フロントエンドでもHTTPS変換を適用（念のため）

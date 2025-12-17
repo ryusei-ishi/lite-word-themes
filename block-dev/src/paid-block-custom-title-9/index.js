@@ -4,6 +4,7 @@ import {
     InspectorControls,
     BlockControls,
     ColorPalette,
+    useBlockProps,
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -16,27 +17,9 @@ import { useEffect, useRef } from '@wordpress/element';
 import './style.scss';
 import './editor.scss';
 
-registerBlockType('wdl/paid-block-custom-title-9', {
-    title   : '見出しタイトル 09',
-    icon    : 'editor-textcolor',
-    category: 'liteword-title',
-    supports: { anchor: true },
+import metadata from './block.json';
 
-    attributes: {
-        subTitle      : { type: 'string',  default: '製品紹介' },
-        mainTitle     : { type: 'string',  default: 'PRODUCTS' },
-        headingLevel  : { type: 'number',  default: 2 },
-        mainTitleColor: { type: 'string',  default: 'var(--color-main)' },
-
-        borderTopColor    : { type: 'string',  default: 'var(--color-main)' },
-        borderBottomColor : { type: 'string',  default: 'var(--color-main)' },
-        borderTopOpacity  : { type: 'number',  default: 100 },  // %
-        borderBottomOpacity: { type: 'number', default: 20 },   // %
-        borderRadius      : { type: 'number',  default: 10 },   // px
-
-        sizeClass     : { type: 'string', default: 'size_m' },
-    },
-
+registerBlockType(metadata.name, {
     /* ---------------------------------------------------------- */
     edit: ( { attributes, setAttributes } ) => {
         const {
@@ -53,6 +36,10 @@ registerBlockType('wdl/paid-block-custom-title-9', {
         } = attributes;
 
         const Tag = `h${ headingLevel }`;
+
+        const blockProps = useBlockProps({
+            className: `paid-block-custom-title-9 ${ sizeClass }`
+        });
 
         /* mainTitleColor 更新時に未カスタムの border 色を同期 */
         const prevMain = useRef( mainTitleColor );
@@ -142,7 +129,7 @@ registerBlockType('wdl/paid-block-custom-title-9', {
                 </InspectorControls>
 
                 {/* プレビュー */}
-                <div className={ `paid-block-custom-title-9 ${ sizeClass }` }>
+                <div {...blockProps}>
                     <Tag className="ttl">
                         <RichText
                             tagName="span"
@@ -204,10 +191,14 @@ registerBlockType('wdl/paid-block-custom-title-9', {
             sizeClass,
         } = attributes;
 
+        const blockProps = useBlockProps.save({
+            className: `paid-block-custom-title-9 ${ sizeClass }`
+        });
+
         const Tag = `h${ headingLevel }`;
 
         return (
-            <div className={ `paid-block-custom-title-9 ${ sizeClass }` }>
+            <div {...blockProps}>
                 <Tag className="ttl">
                     <RichText.Content
                         tagName="span"

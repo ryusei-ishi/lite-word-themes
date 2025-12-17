@@ -3,6 +3,7 @@ import {
 	RichText,
 	InspectorControls,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -12,11 +13,10 @@ import {
 	TextControl,
 	ToggleControl,
 } from '@wordpress/components';
-import { Fragment, createElement } from '@wordpress/element';
-
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* --------------------------------------------------
  * 共通オプション
@@ -41,124 +41,7 @@ const alignOptions = [
 /* --------------------------------------------------
  * ブロック登録
  * -------------------------------------------------- */
-registerBlockType( 'wdl/lw-content-8', {
-	title   : 'Content 08',
-	icon    : 'lightbulb',
-	category: 'liteword-other',
-	supports: { anchor: true },
-
-	/* ---------- 属性 ---------- */
-	attributes: {
-		/* タイトル共通 */
-		fontLi             : { type: 'string', default: '' },
-		fontColorLi        : { type: 'string', default: '' },
-		fontWeightLi       : { type: 'string', default: '600' },
-		titleFontSizeClass : { type: 'string', default: 'font_size_m' },
-
-		/* 説明文共通 */
-		fontLiP            : { type: 'string', default: '' },
-		fontColorLiP       : { type: 'string', default: 'var(--color-black)' },
-		fontWeightLiP      : { type: 'string', default: '400' },
-		textFontSizeClass  : { type: 'string', default: 'font_size_m' },
-
-		/* タイトル装飾 */
-		titleTag           : { type: 'string', default: 'h3' },
-		titleBorderColor   : { type: 'string', default: 'var(--color-main)' },
-		titleBorderSize    : { type: 'number', default: 2 },
-
-		/* li 枠線 */
-		liBorderColor      : { type: 'string', default: 'var(--color-main)' },
-		liBorderSize       : { type: 'number', default: 2 },
-
-		/* li 余白 & 角丸 */
-		liPaddingTop       : { type: 'number', default: 24 },
-		liPaddingBottom    : { type: 'number', default: 24 },
-		liPaddingLeft      : { type: 'number', default: 24 },
-		liPaddingRight     : { type: 'number', default: 24 },
-		liBorderRadius     : { type: 'number', default: 8 },
-
-		/* sub 枠線・色・表示可否 */
-		subBorderColor     : { type: 'string', default: 'var(--color-main)' },
-		subBorderSize      : { type: 'number', default: 1 },
-		subFontColor       : { type: 'string', default: 'var(--color-main)' },
-		subBgColor         : { type: 'string', default: '#ffffff' },
-		showSub            : { type: 'boolean', default: true },
-
-		/* sub / main フォント */
-		fontLiSub          : { type: 'string', default: '' },
-		fontWeightLiSub    : { type: 'string', default: '600' },
-		fontLiMain         : { type: 'string', default: '' },
-		fontWeightLiMain   : { type: 'string', default: '700' },
-
-		/* カラム数 */
-		columnClass        : { type: 'string', default: 'clm_3' },
-
-		/* メインタイトル位置 */
-		mainAlign          : { type: 'string', default: 'left' },
-
-		/* ul 最大幅 */
-		innerMaxWidth      : { type: 'number', default: 1200 },
-
-		/* ボタンスタイル */
-		btnMarginTop       : { type: 'number', default: 16 },
-		btnHeight          : { type: 'number', default: 56 },
-		btnBgColor         : { type: 'string', default: 'var(--color-main)' },
-		btnFontColor       : { type: 'string', default: '#ffffff' },
-		btnFontSize        : { type: 'number', default: 15 },
-		btnBorderRadius    : { type: 'number', default: 2 },
-		btnBorderColor     : { type: 'string', default: 'var(--color-main)' },
-		btnBorderSize      : { type: 'number', default: 0 },
-		showButton         : { type: 'boolean', default: true },
-
-		/* リスト */
-		contents: {
-			type    : 'array',
-			source  : 'query',
-			selector: '.lw-content-8__li',
-			query   : {
-				sub:  { type: 'string', source: 'html', selector: '.ttl .sub' },
-				main: { type: 'string', source: 'html', selector: '.ttl .main' },
-				text: { type: 'string', source: 'html', selector: '.lw-content-8__text' },
-				url:  {
-					type     : 'string',
-					source   : 'attribute',
-					selector : '.link',
-					attribute: 'href',
-					default  : '',
-				},
-				btnText: {
-					type    : 'string',
-					source  : 'html',
-					selector: '.btn',
-					default : '詳細はこちら',
-				},
-			},
-			default: [
-				{
-					sub    : 'サブタイトル',
-					main   : 'タイトルタイトル',
-					text   : '説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。',
-					url    : '#',
-					btnText: '詳細はこちら',
-				},
-				{
-					sub    : 'サブタイトル',
-					main   : 'タイトルタイトル',
-					text   : '説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。',
-					url    : '#',
-					btnText: '詳細はこちら',
-				},
-				{
-					sub    : 'サブタイトル',
-					main   : 'タイトルタイトル',
-					text   : '説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。',
-					url    : '#',
-					btnText: '詳細はこちら',
-				},
-			],
-		},
-	},
-
+registerBlockType(metadata.name, {
 	/* ---------- エディタ ---------- */
 	edit( { attributes, setAttributes } ) {
 		const {
@@ -188,8 +71,13 @@ registerBlockType( 'wdl/lw-content-8', {
 			setAttributes( { contents: list } );
 		};
 
-		return (
-			<Fragment>
+		
+        const blockProps = useBlockProps({
+            className: 'lw-content-8'
+        });
+
+        return (
+			<>
 				<InspectorControls>
 					{/* ▼ 基本スタイル */}
 					<PanelBody title="スタイルの調整" initialOpen={ true }>
@@ -445,7 +333,7 @@ registerBlockType( 'wdl/lw-content-8', {
 				</InspectorControls>
 
 				{/* ---------- プレビュー ---------- */}
-				<div className="lw-content-8">
+				<div {...blockProps}>
 					<ul
 						className={ `lw-content-8__inner ${ columnClass }` }
 						style={ { maxWidth: `${ innerMaxWidth }px`, margin: '0 auto' } }
@@ -584,7 +472,7 @@ registerBlockType( 'wdl/lw-content-8', {
 						リストを追加する
 					</Button>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 

@@ -9,6 +9,7 @@ import {
 	InspectorControls,
 	BlockControls,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -18,7 +19,6 @@ import {
 	ToolbarGroup,
 	ToolbarButton,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import {
 	minHeightPcClassOptionArr,
@@ -27,35 +27,9 @@ import {
 } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/fv-5', {
-	/* ----------------------------------------------------------
-	 * 基本情報
-	 * -------------------------------------------------------- */
-	title: '固定ページタイトル 05（下層用）',
-	icon: 'cover-image',
-	category: 'liteword-firstview',
-	supports: { anchor: true },
-
-	/* ----------------------------------------------------------
-	 * 属性
-	 * -------------------------------------------------------- */
-	attributes: {
-		backgroundImage   : { type: 'string', default: '' },
-		backgroundImageSp : { type: 'string', default: '' },
-		mainTitle         : { type: 'string', default: 'PORTFOLIO' },
-		description       : { type: 'string', default: 'テキストを入力してください。' },
-		filterBackgroundColor: { type: 'string', default: 'var(--color-main)' },
-		filterOpacity     : { type: 'number', default: 0.95 },
-		textColor         : { type: 'string', default: '#fff' },
-		minHeightPc       : { type: 'string', default: 'min-h-pc-280px' },
-		minHeightTb       : { type: 'string', default: 'min-h-tb-220px' },
-		minHeightSp       : { type: 'string', default: 'min-h-sp-180px' },
-		/* ▼ 追加：タイトル用タグ */
-		mainTitleTag      : { type: 'string', default: 'h1' },
-	},
-
-
+registerBlockType(metadata.name, {
 	/* ----------------------------------------------------------
 	 * 編集画面
 	 * -------------------------------------------------------- */
@@ -74,10 +48,15 @@ registerBlockType('wdl/fv-5', {
 			mainTitleTag,
 		} = attributes;
 
+		// useBlockPropsは条件付きreturnの前に呼ぶ（Reactフックのルール）
+		const blockProps = useBlockProps({
+			className: `fv-5 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+		});
+
 		/* ▼ 現在編集中の投稿タイプを取得し、固定ページ以外なら警告を表示 */
 		const currentPostType = useSelect( select => select('core/editor').getCurrentPostType() );
 		if ( currentPostType !== 'page' ) {
-			return <p>このブロックは固定ページでのみ使用できます。</p>;
+			return <div {...blockProps}><p>このブロックは固定ページでのみ使用できます。</p></div>;
 		}
 
 		/* ----- イベントハンドラ ----- */
@@ -86,7 +65,7 @@ registerBlockType('wdl/fv-5', {
 		const TagName = mainTitleTag || 'h1';
 
 		return (
-			<Fragment>
+			<>
 				{/* ▼ タイトルタグ切り替えツールバー */}
 				<BlockControls>
 					<ToolbarGroup>
@@ -215,7 +194,7 @@ registerBlockType('wdl/fv-5', {
 				</InspectorControls>
 
 				{/* ▼ エディタ上のプレビュー */}
-				<div className={ `fv-5 ${ minHeightPc } ${ minHeightTb } ${ minHeightSp }` }>
+				<div {...blockProps}>
 					<div className="fv-5_inner">
 						<TagName className="ttl" style={ { color: textColor } }>
 							<RichText
@@ -244,7 +223,7 @@ registerBlockType('wdl/fv-5', {
 						style={ { backgroundColor: filterBackgroundColor, opacity: filterOpacity } }
 					/>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -268,8 +247,12 @@ registerBlockType('wdl/fv-5', {
 
 		const TagName = mainTitleTag || 'h1';
 
+		const blockProps = useBlockProps.save({
+			className: `fv-5 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+		});
+
 		return (
-			<div className={ `fv-5 ${ minHeightPc } ${ minHeightTb } ${ minHeightSp }` }>
+			<div {...blockProps}>
 				<div className="fv-5_inner">
 					<TagName className="ttl" style={ { color: textColor } }>
 						<RichText.Content

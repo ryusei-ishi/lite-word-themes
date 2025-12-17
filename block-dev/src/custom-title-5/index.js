@@ -1,24 +1,12 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, BlockControls, ColorPalette } from '@wordpress/block-editor';
+import { RichText, InspectorControls, BlockControls, ColorPalette, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, ToolbarGroup, ToolbarButton, SelectControl } from '@wordpress/components';
 import './style.scss';
 import './editor.scss';
 
-registerBlockType('wdl/custom-title-5', {
-    title: '見出しタイトル 05',
-    icon: 'editor-textcolor',
-    category: 'liteword-title',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        subTitle: { type: 'string', default: '製品紹介' },
-        mainTitle: { type: 'string', default: 'PRODUCTS' },
-        headingLevel: { type: 'number', default: 2 },
-        mainTitleColor: { type: 'string', default: 'var(--color-main)' },
-        fontSize: { type: 'string', default: 'l' },
-    },
+import metadata from './block.json';
 
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const { mainTitle, subTitle, headingLevel, mainTitleColor, fontSize } = attributes;
@@ -44,10 +32,15 @@ registerBlockType('wdl/custom-title-5', {
         };
 
         const TagName = `h${headingLevel}`;
-        
+
         // フォントサイズに応じたクラス名を生成
         const fontSizeClass = fontSize === 'm' ? 'font_size_m' : fontSize === 's' ? 'font_size_s' : '';
         const className = fontSizeClass ? `custom-title-5 ${fontSizeClass}` : 'custom-title-5';
+
+        const blockProps = useBlockProps({
+            className: className,
+            style: { borderColor: mainTitleColor },
+        });
 
         return (
             <>
@@ -85,7 +78,7 @@ registerBlockType('wdl/custom-title-5', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <TagName className={className} style={{ borderColor: mainTitleColor }}>
+                <TagName {...blockProps}>
                     <RichText
                         tagName="span"
                         className="sub"
@@ -110,13 +103,18 @@ registerBlockType('wdl/custom-title-5', {
         const { mainTitle, subTitle, headingLevel, mainTitleColor, fontSize } = attributes;
 
         const TagName = `h${headingLevel}`;
-        
+
         // フォントサイズに応じたクラス名を生成
         const fontSizeClass = fontSize === 'm' ? 'font_size_m' : fontSize === 's' ? 'font_size_s' : '';
         const className = fontSizeClass ? `custom-title-5 ${fontSizeClass}` : 'custom-title-5';
 
+        const blockProps = useBlockProps.save({
+            className: className,
+            style: { borderColor: mainTitleColor },
+        });
+
         return (
-            <TagName className={className} style={{ borderColor: mainTitleColor }}>
+            <TagName {...blockProps}>
                 {subTitle && (
                     <RichText.Content
                         tagName="span"

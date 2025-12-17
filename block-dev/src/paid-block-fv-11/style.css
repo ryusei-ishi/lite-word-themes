@@ -9,11 +9,9 @@
   width: 100vw;
   max-width: 100vw;
 }
-
 .lw_content_wrap.page:has(.first_content + .paid-block-fv-11.max-w) .first_content {
   display: none;
 }
-
 .lw_content_wrap.page:has(.paid-block-fv-11.max-w + .last_content) .last_content {
   display: none;
 }
@@ -24,25 +22,20 @@
   width: 100%;
   container-type: inline-size;
 }
-
 .paid-block-fv-11 * {
   box-sizing: border-box;
 }
-
 .paid-block-fv-11 + .post_style > .wp-block-columns.has-background {
   margin-top: 0;
 }
-
 .paid-block-fv-11.init-hide {
   opacity: 0;
   transition: opacity 0.3s ease;
 }
-
 .paid-block-fv-11.max-w {
   max-width: 100%;
   width: 100%;
 }
-
 .paid-block-fv-11 .text_in {
   position: absolute;
   top: 0;
@@ -55,11 +48,9 @@
   align-items: center;
   justify-content: center;
 }
-
 .paid-block-fv-11 .text_in .in {
   color: #fff;
 }
-
 .paid-block-fv-11 .text_in .in h1.ttl .sub {
   font-size: 20px;
   line-height: 1.5em;
@@ -67,19 +58,16 @@
   text-align: center;
   font-weight: 600;
 }
-
 @container (max-width: 800px) {
   .paid-block-fv-11 .text_in .in h1.ttl .sub {
     font-size: 18px;
   }
 }
-
 @container (max-width: 500px) {
   .paid-block-fv-11 .text_in .in h1.ttl .sub {
     font-size: 14px;
   }
 }
-
 .paid-block-fv-11 .text_in .in h1.ttl .main {
   font-size: 48px;
   line-height: 1.3em;
@@ -87,19 +75,16 @@
   text-align: center;
   font-weight: 600;
 }
-
 @container (max-width: 800px) {
   .paid-block-fv-11 .text_in .in h1.ttl .main {
     font-size: 36px;
   }
 }
-
 @container (max-width: 500px) {
   .paid-block-fv-11 .text_in .in h1.ttl .main {
     font-size: 28px;
   }
 }
-
 .paid-block-fv-11 .text_in .in p.description {
   margin-top: 1em;
   font-size: 18px;
@@ -107,24 +92,20 @@
   text-align: center;
   color: #fff;
 }
-
 @container (max-width: 800px) {
   .paid-block-fv-11 .text_in .in p.description {
     font-size: 16px;
   }
 }
-
 @container (max-width: 500px) {
   .paid-block-fv-11 .text_in .in p.description {
     font-size: 14px;
   }
 }
-
 .paid-block-fv-11 .text_in .in .cta_btn {
   display: flex;
   justify-content: center;
 }
-
 .paid-block-fv-11 .text_in .in .cta_btn .btn_link {
   padding: 0.8em 2em;
   min-height: 40px;
@@ -136,13 +117,11 @@
   border: 1px solid #fff;
   color: #fff;
 }
-
 @container (max-width: 500px) {
   .paid-block-fv-11 .text_in .in .cta_btn .btn_link {
     font-size: 16px;
   }
 }
-
 .paid-block-fv-11 .swiper-wrapper {
   position: absolute;
   top: 0;
@@ -151,7 +130,6 @@
   height: 100%;
   width: 100%;
 }
-
 .paid-block-fv-11 .swiper-wrapper .image_filter {
   position: absolute;
   top: 0;
@@ -160,35 +138,30 @@
   width: 100%;
   height: 100%;
 }
-
 .paid-block-fv-11 .swiper-slide {
   height: 100%;
 }
-
 .paid-block-fv-11 .swiper-slide img {
   width: 100%;
   height: 100%;
   display: block;
-  object-fit: cover;
+  -o-object-fit: cover;
+     object-fit: cover;
 }
-
 .paid-block-fv-11 .bg_img {
   height: 100%;
 }
-
 .paid-block-fv-11 .swiper-button-prev,
 .paid-block-fv-11 .swiper-button-next {
   z-index: 40;
 }
-
 .paid-block-fv-11 .swiper-button-prev::after,
 .paid-block-fv-11 .swiper-button-next::after {
   font-size: 32px;
 }
-
 @container (max-width: 500px) {
   .paid-block-fv-11 .swiper-button-prev::after,
   .paid-block-fv-11 .swiper-button-next::after {
     font-size: 24px;
   }
-}
+}/*# sourceMappingURL=style.css.map */

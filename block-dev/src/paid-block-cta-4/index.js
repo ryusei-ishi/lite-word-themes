@@ -1,8 +1,13 @@
+/**
+ * CTA 04
+ * ★ apiVersion 3 対応（2025-12-07）
+ */
 import { registerBlockType } from '@wordpress/blocks';
 import {
     RichText,
     InspectorControls,
     MediaUpload,
+    useBlockProps,
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -13,58 +18,9 @@ import {
 } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 
-registerBlockType('wdl/paid-block-cta-4', {
-    title: 'CTA 04',
-    icon: 'megaphone',
-    category: 'liteword-other',
-    supports: {
-        anchor: true,
-    },
-    attributes: {
-        // --- CTA1 ---
-        linkUrl1: { type: 'string', default: '' },
-        mainTitle1: { type: 'string', default: 'Franchise' },
-        subTitle1: { type: 'string', default: '加盟店募集' },
-        desc1: {
-            type: 'string',
-            default: '独立を応援！フランチャイズ加盟しませんか？',
-        },
-        backgroundImage1: {
-            type: 'string',
-            default: 'https://lite-word.com/sample_img/shop/1.webp',
-        },
-        filterColor1: { type: 'string', default: 'rgba(38,129,147,1)' },
-        filterOpacity1: { type: 'number', default: 60 },
-        // 追加1：.btn のテキスト
-        btnText1: { type: 'string', default: '詳細はこちら' },
-        // 追加2：.bg_img の背景色 & 文字色
-        bgColor1: { type: 'string', default: '#d88d00' },
-        textColor1: { type: 'string', default: '#ffffff' },
+import metadata from './block.json';
 
-        // --- CTA2 ---
-        linkUrl2: { type: 'string', default: '' },
-        mainTitle2: { type: 'string', default: 'Recruit' },
-        subTitle2: { type: 'string', default: '求人情報' },
-        desc2: {
-            type: 'string',
-            default: '◯では、一緒に働くスタッフを全店で募集しております！',
-        },
-        backgroundImage2: {
-            type: 'string',
-            default: 'https://lite-word.com/sample_img/shop/5.webp',
-        },
-        filterColor2: { type: 'string', default: '#690707' },
-        filterOpacity2: { type: 'number', default: 60 },
-        // 追加1：.btn のテキスト
-        btnText2: { type: 'string', default: '詳細はこちら' },
-        // 追加2：.bg_img の背景色 & 文字色
-        bgColor2: { type: 'string', default: '#F02D2D' },
-        textColor2: { type: 'string', default: '#ffffff' },
-
-        // --- 最大横幅設定 ---
-        maxWidth: { type: 'number', default: 0 }
-    },
-
+registerBlockType(metadata.name, {
     /**
      * =========================================
      * エディター(編集)用の表示
@@ -114,6 +70,12 @@ registerBlockType('wdl/paid-block-cta-4', {
         const onChangeMaxWidth = (value) => setAttributes({ maxWidth: value });
         const onResetMaxWidth = () => setAttributes({ maxWidth: 0 });
 
+        // useBlockProps で apiVersion 3 対応
+        const blockProps = useBlockProps({
+            className: `paid-block-cta-4 ${maxWidth > 0 ? 'max_w' : ''}`,
+            style: maxWidth > 0 ? { maxWidth: maxWidth + 'px' } : {}
+        });
+
         // === カラー設定用サンプル ===
         const colors = [
             { name: '青', color: '#268193' },
@@ -124,7 +86,7 @@ registerBlockType('wdl/paid-block-cta-4', {
         ];
 
         return (
-            <Fragment>
+            <div {...blockProps}>
                 <InspectorControls>
                     {/* 横幅の設定 */}
                     <PanelBody title="横幅の設定" initialOpen={false}>
@@ -318,16 +280,13 @@ registerBlockType('wdl/paid-block-cta-4', {
                     </PanelBody>
                 </InspectorControls>
 
-                {/* 
+                {/*
                   =========================
                   エディター上の表示
                   （保存時と同じHTML構造）
                   =========================
                 */}
-                <div 
-                    className={`paid-block-cta-4 ${maxWidth > 0 ? 'max_w' : ''}`}
-                    style={maxWidth > 0 ? { maxWidth: maxWidth + 'px' } : {}}
-                >
+                <div className="paid-block-cta-4__inner">
                     <ul>
                         {/* ==== CTA1 ==== */}
                         <li>
@@ -484,7 +443,7 @@ registerBlockType('wdl/paid-block-cta-4', {
                         </li>
                     </ul>
                 </div>
-            </Fragment>
+            </div>
         );
     },
 
@@ -525,11 +484,14 @@ registerBlockType('wdl/paid-block-cta-4', {
             maxWidth,
         } = attributes;
 
+        // useBlockProps.save() で apiVersion 3 対応
+        const blockProps = useBlockProps.save({
+            className: `paid-block-cta-4 ${maxWidth > 0 ? 'max_w' : ''}`,
+            style: maxWidth > 0 ? { maxWidth: maxWidth + 'px' } : {}
+        });
+
         return (
-            <div 
-                className={`paid-block-cta-4 ${maxWidth > 0 ? 'max_w' : ''}`}
-                style={maxWidth > 0 ? { maxWidth: maxWidth + 'px' } : {}}
-            >
+            <div {...blockProps}>
                 <ul>
                     {/* ==== CTA1 ==== */}
                     <li>

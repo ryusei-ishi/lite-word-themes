@@ -1,8 +1,11 @@
 .custom-title-5 {
   margin: 1em 0;
-  padding-bottom: 0.4em !important;
   font-size: 20px !important;
   border-bottom: 2px solid var(--color-main);
+}
+
+.custom-title-5:not([class*="lw_padding_bottom_"]) {
+  padding-bottom: 0.4em !important;
 }
 
 .custom-title-5.font_size_m {

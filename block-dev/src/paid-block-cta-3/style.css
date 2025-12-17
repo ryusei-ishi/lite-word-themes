@@ -133,7 +133,7 @@
   font-weight: 700;
   line-height: 1;
   font-feature-settings: "palt";
-  white-space: nowrap;
+  white-space: nowrap !important;
 }
 
 @container (max-width: 780px) {
@@ -164,6 +164,10 @@
   .paid-block-cta-3 .this_wrap .text_in .tel {
     font-size: 40px;
   }
+}
+
+.paid-block-cta-3 .this_wrap .text_in .tel > span {
+  white-space: nowrap !important;
 }
 
 .paid-block-cta-3 .this_wrap .image {

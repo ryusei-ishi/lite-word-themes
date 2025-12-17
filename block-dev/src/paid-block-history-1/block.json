@@ -1,0 +1,113 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-history-1",
+	"version": "1.0.0",
+	"title": "沿革 01",
+	"category": "lw-table",
+	"icon": "schedule",
+	"editorScript": "file:./paid-block-history-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"no": 1,
+	"attributes": {
+		"yearText": {
+			"type": "string",
+			"default": "2003年"
+		},
+		"yearTag": {
+			"type": "string",
+			"default": "h3"
+		},
+		"fontYear": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightYear": {
+			"type": "string",
+			"default": ""
+		},
+		"colorYear": {
+			"type": "string",
+			"default": ""
+		},
+		"yearBgColor": {
+			"type": "string",
+			"default": ""
+		},
+		"pointColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"pointBorderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"fontDt": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightDt": {
+			"type": "string",
+			"default": ""
+		},
+		"colorDt": {
+			"type": "string",
+			"default": ""
+		},
+		"fontDd": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightDd": {
+			"type": "string",
+			"default": ""
+		},
+		"colorDd": {
+			"type": "string",
+			"default": ""
+		},
+		"events": {
+			"type": "array",
+			"source": "query",
+			"selector": ".history__events_row",
+			"query": {
+				"month": {
+					"type": "string",
+					"source": "text",
+					"selector": "time"
+				},
+				"desc": {
+					"type": "string",
+					"source": "html",
+					"selector": "dd"
+				}
+			},
+			"default": [
+				{
+					"month": "4月",
+					"desc": "地域の福祉ニーズを把握するための住民説明会を開催。施設構想を共有し、支援者を募集。"
+				},
+				{
+					"month": "7月",
+					"desc": "特定非営利活動法人として県の認証を取得し、地域福祉ネットワークづくりを本格始動。"
+				},
+				{
+					"month": "8月",
+					"desc": "賃貸契約を締結し、小規模多機能施設を開設。利用者受け入れ準備を開始。"
+				},
+				{
+					"month": "12月",
+					"desc": "初めての利用者を受け入れ。地域ボランティアによるサポート体制が整い、運営を本格化。"
+				}
+			]
+		}
+	}
+}

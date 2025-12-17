@@ -1,0 +1,137 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-company-1",
+	"version": "1.0.0",
+	"title": "会社概要 01",
+	"category": "lw-table",
+	"icon": "building",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"maxWidth": {
+			"type": "number",
+			"default": 1600
+		},
+		"fontSizeClass": {
+			"type": "string",
+			"default": "font_size_m"
+		},
+		"dtWidthClass": {
+			"type": "string",
+			"default": "dt_width_m"
+		},
+		"lineHeight": {
+			"type": "number",
+			"default": 1.6
+		},
+		"spFullDt": {
+			"type": "boolean",
+			"default": false
+		},
+		"dtBackgroundColor": {
+			"type": "string",
+			"default": ""
+		},
+		"dtTextColor": {
+			"type": "string",
+			"default": "#111"
+		},
+		"fontDt": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightDt": {
+			"type": "string",
+			"default": ""
+		},
+		"ddTextColor": {
+			"type": "string",
+			"default": "#111"
+		},
+		"fontDd": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightDd": {
+			"type": "string",
+			"default": ""
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "#ddd"
+		},
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".lw-company-1__dl",
+			"query": {
+				"title": {
+					"type": "string",
+					"source": "html",
+					"selector": "dt"
+				},
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": "dd"
+				}
+			},
+			"default": [
+				{
+					"title": "社名",
+					"text": "株式会社サンプル"
+				},
+				{
+					"title": "設立",
+					"text": "2000年4月1日"
+				},
+				{
+					"title": "所在地",
+					"text": "東京都新宿区西新宿1-1-1"
+				},
+				{
+					"title": "代表者",
+					"text": "代表取締役社長 山田太郎"
+				},
+				{
+					"title": "資本金",
+					"text": "1億円"
+				},
+				{
+					"title": "従業員数",
+					"text": "100名"
+				},
+				{
+					"title": "事業内容",
+					"text": "ウェブサイト制作、システム開発、マーケティング支援"
+				},
+				{
+					"title": "取引銀行",
+					"text": "みずほ銀行 新宿支店"
+				},
+				{
+					"title": "主要取引先",
+					"text": "株式会社○○、株式会社△△、株式会社□□"
+				},
+				{
+					"title": "連絡先",
+					"text": "TEL: 03-1234-5678 / FAX: 03-1234-5679"
+				},
+				{
+					"title": "URL",
+					"text": "https://www.sample.co.jp"
+				}
+			]
+		}
+	},
+	"editorScript": "file:./lw-company-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 1
+}

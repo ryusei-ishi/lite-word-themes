@@ -1,9 +1,10 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, URLInput } from '@wordpress/block-editor';
+import { RichText, InspectorControls, URLInput, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, ColorPalette , ToggleControl } from '@wordpress/components';
-import { fontOptionsArr, fontWeightOptionsArr, ButtonBackgroundOptionsArr, rightButtonIconSvgArr } from '../utils.js'; // iconSvgオプションもインポート
+import { fontOptionsArr, fontWeightOptionsArr, ButtonBackgroundOptionsArr, rightButtonIconSvgArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
@@ -14,66 +15,17 @@ const bgOptions = ButtonBackgroundOptionsArr();
 // SVG アイコンオプションを定義
 const iconSvgOptions = rightButtonIconSvgArr();
 
-registerBlockType('wdl/lw-button-03', {
-    title: 'リンクボタン 03',
-    icon: 'button',
-    category: 'liteword-buttons',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        btnTextSub: {
-            type: 'string',
-            default: 'お気軽にお問い合わせください'
-        },
-        btnTextMain: {
-            type: 'string',
-            default: '資料ダウンロードはこちら'
-        },
-        bgGradient: {
-            type: 'string',
-            default: ''
-        },
-        textSubColor: {
-            type: 'string',
-            default: 'var(--color-main)'
-        },
-        textMainColor: {
-            type: 'string',
-            default: '#ffffff'
-        },
-        fontWeight: {
-            type: 'string',
-            default: '500'
-        },
-        btnUrl: {
-            type: 'string',
-            default: ''
-        },
-        openNewTab: {
-            type: 'boolean',
-            default: false
-        },
-        FontSet: {
-            type: 'string',
-            default: ''
-        },
-        selectedIcon: {  // アイコンの属性を追加（SVG文字列）
-            type: 'string',
-            default: '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z"/></svg>'
-        },
-        iconColor: { // アイコンの色属性を追加
-            type: 'string',
-            default: '#ffffff'
-        }
-    },
-
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const { btnTextSub, btnTextMain , bgGradient, textSubColor, textMainColor , fontWeight, FontSet, btnUrl, selectedIcon, iconColor } = attributes;
 
+        const blockProps = useBlockProps({
+            className: 'lw-button-03'
+        });
+
         return (
-            <div className='lw-button-03'>
+            <div {...blockProps}>
                 <InspectorControls>
 
                     {/* ── 1. 基本設定 ── */}
@@ -245,8 +197,12 @@ registerBlockType('wdl/lw-button-03', {
     save: function (props) {
         const { btnTextSub, btnTextMain , bgGradient, textSubColor, textMainColor , fontWeight, FontSet, btnUrl, selectedIcon, iconColor } = props.attributes;
 
+        const blockProps = useBlockProps.save({
+            className: 'lw-button-03'
+        });
+
         return (
-            <div className='lw-button-03'>
+            <div {...blockProps}>
                 <div className='a_inner'>
                     <a href={btnUrl} target={props.attributes.openNewTab ? '_blank' : '_self'}>
                         <RichText.Content

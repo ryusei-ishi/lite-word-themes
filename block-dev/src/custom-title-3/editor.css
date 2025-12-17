@@ -2,15 +2,12 @@
   border-bottom: none !important;
   font-size: 20px;
 }
-
 .custom-title-3.center {
   text-align: center;
 }
-
 .custom-title-3.right {
   text-align: right;
 }
-
 .custom-title-3 .main > span {
   display: block;
   font-weight: 700;
@@ -20,17 +17,15 @@
   font-family: var(--font-family-gothic);
   font-feature-settings: "palt";
 }
-
 .custom-title-3 .accent {
   margin: 0.5em 0 1em 0;
   height: 0.4em;
   width: 4.7em;
   display: inline-block;
 }
-
 .custom-title-3 .span {
   display: block;
   font-size: 0.8em;
   line-height: 1.8em;
   letter-spacing: 0.1em;
-}
+}/*# sourceMappingURL=editor.css.map */

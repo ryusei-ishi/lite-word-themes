@@ -1,15 +1,12 @@
 .paid-block-history-1 {
   border-left: 2px solid #ddd;
 }
-
 .paid-block-history-1 + .paid-block-history-1 .history__year dl.history__events .history__events_row:first-of-type {
   padding-top: 1.5em;
 }
-
 .paid-block-history-1 * {
   box-sizing: border-box;
 }
-
 .paid-block-history-1 .history__year {
   position: relative;
   padding-left: 1.5em;
@@ -18,13 +15,11 @@
   align-items: start;
   grid-template-columns: 4.5em calc(100% - 4.5em);
 }
-
 @container (max-width:700px) {
   .paid-block-history-1 .history__year {
     display: block;
   }
 }
-
 .paid-block-history-1 .history__year .history__point {
   position: absolute;
   top: 0.35em;
@@ -35,7 +30,6 @@
   background: #fff;
   border: 2px solid #038e67;
 }
-
 .paid-block-history-1 .history__year h2.history__year-heading,
 .paid-block-history-1 .history__year h3.history__year-heading,
 .paid-block-history-1 .history__year h4.history__year-heading,
@@ -52,18 +46,15 @@
   white-space: nowrap;
   text-align: center;
 }
-
 .paid-block-history-1 .history__year dl.history__events {
   margin-inline-start: 0;
   padding-left: 1em;
 }
-
 @container (max-width:700px) {
   .paid-block-history-1 .history__year dl.history__events {
     padding-left: 0;
   }
 }
-
 .paid-block-history-1 .history__year dl.history__events .history__events_row {
   position: relative;
   padding: 1.5em 0;
@@ -72,40 +63,33 @@
   border-bottom: 1px dashed #ccc;
   line-height: 2em;
 }
-
 .paid-block-history-1 .history__year dl.history__events .history__events_row:first-of-type {
   padding-top: 0;
 }
-
 @container (max-width:700px) {
   .paid-block-history-1 .history__year dl.history__events .history__events_row:first-of-type {
     padding-top: 1.5em;
   }
 }
-
 @container (max-width:700px) {
   .paid-block-history-1 .history__year dl.history__events .history__events_row:last-of-type {
     border-bottom: none;
   }
 }
-
 .paid-block-history-1 .history__year dl.history__events .history__events_row dt.history__dt {
   margin-inline-start: 0;
   margin: 0;
   text-align: right;
 }
-
 .paid-block-history-1 .history__year dl.history__events .history__events_row dd.history__dd {
   margin-inline-start: 0;
   padding-left: 3em;
 }
-
 @container (max-width:800px) {
   .paid-block-history-1 .history__year dl.history__events .history__events_row dd.history__dd {
     padding-left: 1.5em;
   }
 }
-
 .paid-block-history-1 .history__remove_btn {
   position: absolute;
   bottom: 0;
@@ -118,7 +102,6 @@
   border-radius: 2px;
   cursor: pointer;
 }
-
 .paid-block-history-1 .history__add_btn {
   position: relative;
   z-index: 10;
@@ -129,4 +112,4 @@
   width: 200px;
   font-size: 16px;
   cursor: pointer;
-}
+}/*# sourceMappingURL=style.css.map */

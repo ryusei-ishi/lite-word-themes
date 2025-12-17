@@ -4,6 +4,7 @@ import {
     MediaUpload,
     InspectorControls,
     ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -13,11 +14,10 @@ import {
     TextControl,
     RadioControl,
 } from '@wordpress/components';
-import { Fragment, createElement } from '@wordpress/element';
-
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* -------------------------------------------------- */
 /* 共通オプション */
@@ -31,94 +31,7 @@ const sizeOptions = [
 
 /* -------------------------------------------------- */
 /* ブロック登録 */
-registerBlockType('wdl/paid-block-content-7', {
-    title   : 'Content 07',
-    icon    : 'lightbulb',
-    category: 'liteword-other',
-    supports: { anchor: true },
-
-    /* 属性 */
-    attributes: {
-        /* PCカラム設定 */
-        pcColumns: { type: 'string', default: '3' },
-
-        /* タイトル */
-        fontLi        : { type: 'string',  default: '' },
-        fontColorLi   : { type: 'string',  default: '' },
-        fontWeightLi  : { type: 'string',  default: '600' },
-
-        /* タイトル font-size クラス */
-        titleFontSizeClass: { type: 'string', default: 'font_size_m' },
-
-        /* 説明文 */
-        fontLiP          : { type: 'string',  default: '' },
-        fontColorLiP     : { type: 'string',  default: 'var(--color-black)' },
-        fontWeightLiP    : { type: 'string',  default: '400' },
-        textFontSizeClass: { type: 'string', default: 'font_size_m' },
-
-        /* 枠線（.image） */
-        borderColor   : { type: 'string',  default: 'var(--color-main)' },
-        borderSize    : { type: 'number',  default: 0 },
-
-        /* .image 角丸 */
-        imageBorderRadius : { type: 'number', default: 20 },
-
-        /* .ttl 装飾 */
-        titleTag         : { type: 'string',  default: 'h3' },
-        titleBorderRadius: { type: 'number', default: 8 },
-        titleBorderColor : { type: 'string', default: 'var(--color-main)' },
-        titleBorderSize  : { type: 'number', default: 8 },
-
-        /* リスト */
-        contents: {
-            type    : 'array',
-            source  : 'query',
-            selector: '.paid-block-content-7__li',
-            query   : {
-                image: {
-                    type     : 'string',
-                    source   : 'attribute',
-                    selector : 'img',
-                    attribute: 'src',
-                },
-                ttl: {
-                    type    : 'string',
-                    source  : 'html',
-                    selector: '.ttl',
-                },
-                text: {
-                    type    : 'string',
-                    source  : 'html',
-                    selector: '.paid-block-content-7__text',
-                },
-                url: {
-                    type     : 'string',
-                    source   : 'attribute',
-                    selector : '.link',
-                    attribute: 'href',
-                    default  : '',
-                },
-            },
-            default: [
-                {
-                    image: 'https://lite-word.com/sample_img/school/9.webp',
-                    ttl  : '難関校合格実績',
-                    text : '〇〇中学、××高校など、難関校への高い合格実績が自慢です。経験豊富なプロ講師陣が、志望校合格まで徹底的にサポートします。',
-                },
-                {
-                    image: 'https://lite-word.com/sample_img/school/5.webp',
-                    ttl  : '合格への最短ルート',
-                    text : '長年の指導ノウハウを結集したオリジナル教材とカリキュラムで、基礎から応用まで無駄なく効率的に学力を伸ばし、合格へと導きます。',
-                },
-                {
-                    image: 'https://lite-word.com/sample_img/school/3.webp',
-                    ttl  : '自習室完備＆質問OK',
-                    text : '静かで集中できる自習室を完備しています。わからないことはいつでも講師に質問可能。学習相談や進路指導も充実、安心して学習に専念できます。',
-                },
-            ],
-        },
-    },
-
+registerBlockType(metadata.name, {
     /* -------------------------------------------------- */
     /* エディタ */
     edit({ attributes, setAttributes }) {
@@ -149,8 +62,13 @@ registerBlockType('wdl/paid-block-content-7', {
         /* PCカラムクラスの設定 */
         const columnClass = pcColumns === '2' ? 'clm_2' : '';
 
+        
+        const blockProps = useBlockProps({
+            className: 'paid-block-content-7'
+        });
+
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
                     <PanelBody title="レイアウト設定" initialOpen={true}>
                         {/* PCカラム設定 */}
@@ -198,7 +116,7 @@ registerBlockType('wdl/paid-block-content-7', {
                 </InspectorControls>
 
                 {/* -------- エディター表示 -------- */}
-                <div className="paid-block-content-7">
+                <div {...blockProps}>
                     <ul className={`paid-block-content-7__inner ${columnClass}`}>
                         {contents.map((c, i) => (
                             <li key={i} className="paid-block-content-7__li">
@@ -277,7 +195,7 @@ registerBlockType('wdl/paid-block-content-7', {
 
                     <Button className="paid-block-content-7__add_btn" isSecondary onClick={addContent}>リストを追加する</Button>
                 </div>
-            </Fragment>
+            </>
         );
     },
 
@@ -297,8 +215,12 @@ registerBlockType('wdl/paid-block-content-7', {
         /* PCカラムクラスの設定 */
         const columnClass = pcColumns === '2' ? 'clm_2' : '';
 
+        const blockProps = useBlockProps.save({
+            className: 'paid-block-content-7'
+        });
+
         return (
-            <div className="paid-block-content-7">
+            <div {...blockProps}>
                 <ul className={`paid-block-content-7__inner ${columnClass}`.trim()}>
                     {contents.map((c, i) => {
                         const Tag   = c.url ? 'a' : 'div';

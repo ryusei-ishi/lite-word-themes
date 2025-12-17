@@ -1,12 +1,14 @@
 /**
  * LiteWord – 見出しタイトル 14
  * カスタムブロック
+ * ★ apiVersion 3 対応（2025-12-07）
  */
 import { registerBlockType } from '@wordpress/blocks';
 import {
     RichText,
     BlockControls,
     InspectorControls,
+    useBlockProps,
 } from '@wordpress/block-editor';
 import {
     ToolbarGroup,
@@ -18,31 +20,9 @@ import {
 } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 
-registerBlockType('wdl/lw-pr-custom-title-14', {
-    /* ----------------------------------------------------------
-     * 基本情報
-     * -------------------------------------------------------- */
-    title: '見出しタイトル 14',
-    icon: 'editor-textcolor',
-    category: 'liteword-title',
-    supports: { anchor: true },
+import metadata from './block.json';
 
-    /* ----------------------------------------------------------
-     * 属性
-     * -------------------------------------------------------- */
-    attributes: {
-        mainTitle: { type: 'string', default: 'カスタムタイトルカスタムタイトル' },
-        subTitle: { type: 'string', default: 'サブタイトルサブタイトル' },
-        headingLevel: { type: 'number', default: 2 },
-        colorMain: { type: 'string', default: '#0a71c0' },
-        colorMainText: { type: 'string', default: '' },
-        colorSubText: { type: 'string', default: '' },
-        maxWidth: { type: 'number', default: 0 },
-        borderRadius: { type: 'number', default: 6 },
-        alignmentPc: { type: 'string', default: '' },
-        alignmentSp: { type: 'string', default: '' },
-    },
-
+registerBlockType(metadata.name, {
     /* ----------------------------------------------------------
      * 編集画面
      * -------------------------------------------------------- */
@@ -95,6 +75,11 @@ registerBlockType('wdl/lw-pr-custom-title-14', {
         if (alignmentSp) {
             containerClassName += ` ${alignmentSp}_sp`;
         }
+
+        const blockProps = useBlockProps({
+            className: containerClassName,
+            style: inlineStyle,
+        });
 
         return (
             <Fragment>
@@ -183,7 +168,7 @@ registerBlockType('wdl/lw-pr-custom-title-14', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className={containerClassName} style={inlineStyle}>
+                <div {...blockProps}>
                     <TagName className="ttl">
                         <span className="sub">
                             <RichText
@@ -255,8 +240,13 @@ registerBlockType('wdl/lw-pr-custom-title-14', {
             containerClassName += ` ${alignmentSp}_sp`;
         }
 
+        const blockProps = useBlockProps.save({
+            className: containerClassName,
+            style: inlineStyle,
+        });
+
         return (
-            <div className={containerClassName} style={inlineStyle}>
+            <div {...blockProps}>
                 <TagName className="ttl">
                     {subTitle && (
                         <span className="sub">

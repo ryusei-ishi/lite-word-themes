@@ -1,21 +1,18 @@
 import { registerBlockType } from '@wordpress/blocks';
+import { useBlockProps } from '@wordpress/block-editor';
 import { SelectControl } from '@wordpress/components';
+import metadata from './block.json';
 
-registerBlockType('wdl/shin-gas-station-01-contact', {
-    title: 'お問合わせフォーム shin shop pattern 01',
-    icon: 'email',
-    category: 'liteword-buttons',
-    attributes: {
-        formId: {
-            type: 'number',
-            default: 1,
-        },
-    },
+registerBlockType(metadata.name, {
     edit: ({ attributes, setAttributes }) => {
         const { formId } = attributes;
 
+        const blockProps = useBlockProps({
+            className: 'lw_mail_form_block'
+        });
+
         return (
-            <div className="lw_mail_form_block">
+            <div {...blockProps}>
                 <p>※お問合わせフォームパターンを選択してください。</p>
                 <SelectControl
                     value={formId}
@@ -29,6 +26,9 @@ registerBlockType('wdl/shin-gas-station-01-contact', {
         );
     },
     save: ({ attributes }) => {
-        return <div className="shin-gas-station-01-contact">{`[lw_mail_form_select id='${attributes.formId}']`}</div>;
+        const blockProps = useBlockProps.save({
+            className: 'shin-gas-station-01-contact'
+        });
+        return <div {...blockProps}>{`[lw_mail_form_select id='${attributes.formId}']`}</div>;
     }
 });

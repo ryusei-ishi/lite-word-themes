@@ -1,25 +1,13 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, BlockControls } from '@wordpress/block-editor';
+import { RichText, InspectorControls, BlockControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, RangeControl, ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 import './style.scss';
 import './editor.scss';
 
-registerBlockType('wdl/custom-title-4', {
-    title: '見出しタイトル 04',
-    icon: 'editor-textcolor',
-    category: 'liteword-title',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        mainTitle: { type: 'string', default: 'タイトル' },
-        subTitle: { type: 'string', default: 'サブタイトル' },
-        headingLevel: { type: 'number', default: 2 },
-        subMarginBottomPc: { type: 'number', default: 0.6 },
-        subMarginBottomSp: { type: 'number', default: 0.6 },
-    },
+import metadata from './block.json';
 
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const { mainTitle, subTitle, headingLevel, subMarginBottomPc, subMarginBottomSp } = attributes;
@@ -46,11 +34,13 @@ registerBlockType('wdl/custom-title-4', {
 
         const TagName = `h${headingLevel}`;
 
-        // インラインスタイルでCSS変数を設定
-        const inlineStyle = {
-            '--custom-title-sub-margin-bottom-pc': `${subMarginBottomPc}em`,
-            '--custom-title-sub-margin-bottom-sp': `${subMarginBottomSp}em`,
-        };
+        const blockProps = useBlockProps({
+            className: 'custom-title-4',
+            style: {
+                '--custom-title-sub-margin-bottom-pc': `${subMarginBottomPc}em`,
+                '--custom-title-sub-margin-bottom-sp': `${subMarginBottomSp}em`,
+            },
+        });
 
         return (
             <Fragment>
@@ -89,7 +79,7 @@ registerBlockType('wdl/custom-title-4', {
                     </PanelBody>
                 </InspectorControls>
 
-                <TagName className="custom-title-4" style={inlineStyle}>
+                <TagName {...blockProps}>
                     <RichText
                         tagName="span"
                         className="sub"
@@ -115,14 +105,16 @@ registerBlockType('wdl/custom-title-4', {
 
         const TagName = `h${headingLevel}`;
 
-        // インラインスタイルでCSS変数を設定
-        const inlineStyle = {
-            '--custom-title-sub-margin-bottom-pc': `${subMarginBottomPc}em`,
-            '--custom-title-sub-margin-bottom-sp': `${subMarginBottomSp}em`,
-        };
+        const blockProps = useBlockProps.save({
+            className: 'custom-title-4',
+            style: {
+                '--custom-title-sub-margin-bottom-pc': `${subMarginBottomPc}em`,
+                '--custom-title-sub-margin-bottom-sp': `${subMarginBottomSp}em`,
+            },
+        });
 
         return (
-            <TagName className="custom-title-4" style={inlineStyle}>
+            <TagName {...blockProps}>
                 <RichText.Content
                     tagName="span"
                     className="sub"

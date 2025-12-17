@@ -1,0 +1,133 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-content-7",
+	"version": "1.0.0",
+	"title": "Content 07",
+	"category": "lw-content",
+	"icon": "lightbulb",
+	"editorScript": "file:./paid-block-content-7.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"pcColumns": {
+			"type": "string",
+			"default": "3"
+		},
+		"fontLi": {
+			"type": "string",
+			"default": ""
+		},
+		"fontColorLi": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightLi": {
+			"type": "string",
+			"default": "600"
+		},
+		"titleFontSizeClass": {
+			"type": "string",
+			"default": "font_size_m"
+		},
+		"fontLiP": {
+			"type": "string",
+			"default": ""
+		},
+		"fontColorLiP": {
+			"type": "string",
+			"default": "var(--color-black)"
+		},
+		"fontWeightLiP": {
+			"type": "string",
+			"default": "400"
+		},
+		"textFontSizeClass": {
+			"type": "string",
+			"default": "font_size_m"
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"borderSize": {
+			"type": "number",
+			"default": 0
+		},
+		"imageBorderRadius": {
+			"type": "number",
+			"default": 20
+		},
+		"titleTag": {
+			"type": "string",
+			"default": "h3"
+		},
+		"titleBorderRadius": {
+			"type": "number",
+			"default": 8
+		},
+		"titleBorderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"titleBorderSize": {
+			"type": "number",
+			"default": 8
+		},
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".paid-block-content-7__li",
+			"query": {
+				"image": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "img",
+					"attribute": "src"
+				},
+				"ttl": {
+					"type": "string",
+					"source": "html",
+					"selector": ".ttl"
+				},
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": ".paid-block-content-7__text"
+				},
+				"url": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".link",
+					"attribute": "href",
+					"default": ""
+				}
+			},
+			"default": [
+				{
+					"image": "https://lite-word.com/sample_img/school/9.webp",
+					"ttl": "難関校合格実績",
+					"text": "〇〇中学、××高校など、難関校への高い合格実績が自慢です。経験豊富なプロ講師陣が、志望校合格まで徹底的にサポートします。"
+				},
+				{
+					"image": "https://lite-word.com/sample_img/school/5.webp",
+					"ttl": "合格への最短ルート",
+					"text": "長年の指導ノウハウを結集したオリジナル教材とカリキュラムで、基礎から応用まで無駄なく効率的に学力を伸ばし、合格へと導きます。"
+				},
+				{
+					"image": "https://lite-word.com/sample_img/school/3.webp",
+					"ttl": "自習室完備＆質問OK",
+					"text": "静かで集中できる自習室を完備しています。わからないことはいつでも講師に質問可能。学習相談や進路指導も充実、安心して学習に専念できます。"
+				}
+			]
+		}
+	},
+	"no": 7
+}

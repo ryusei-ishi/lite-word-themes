@@ -12,158 +12,16 @@ import {
     ToggleControl,
     Button
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // 共通オプション
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType('wdl/lw-pr-table-1', {
-    title: '価格表 01',
-    icon: 'editor-table',
-    category: 'liteword-other',
-    supports: { 
-        anchor: true,
-        className: true 
-    },
-
-    attributes: {
-        // カラム数設定
-        columnCount: { 
-            type: 'number', 
-            default: 4 
-        },
-        hideTableHeader: { 
-            type: 'boolean', 
-            default: false 
-        },
-        // 各カラムの幅（PC）
-        cellWidth1: { type: 'number', default: 200 },
-        cellWidth2: { type: 'number', default: 200 },
-        cellWidth3: { type: 'number', default: 200 },
-        cellWidth4: { type: 'number', default: 200 },
-        cellWidth5: { type: 'number', default: 200 },
-        cellWidth6: { type: 'number', default: 200 },
-        cellWidth7: { type: 'number', default: 200 },
-        cellWidth8: { type: 'number', default: 200 },
-        
-        // 各カラムの幅（SP）
-        cellWidth1Sp: { type: 'number', default: 160 },
-        cellWidth2Sp: { type: 'number', default: 160 },
-        cellWidth3Sp: { type: 'number', default: 160 },
-        cellWidth4Sp: { type: 'number', default: 160 },
-        cellWidth5Sp: { type: 'number', default: 160 },
-        cellWidth6Sp: { type: 'number', default: 160 },
-        cellWidth7Sp: { type: 'number', default: 160 },
-        cellWidth8Sp: { type: 'number', default: 160 },
-        
-        // 角丸サイズ
-        radiusSize: { type: 'number', default: 12 },
-        
-        // 色設定 - ヘッダー共通
-        headerBgColor: { type: 'string', default: 'var(--color-main)' },
-        headerTextColor: { type: 'string', default: '#ffffff' },
-        
-        // 列ヘッダー個別背景色の使用フラグ
-        useIndividualHeaderBg: { type: 'boolean', default: false },
-        
-        // 色設定 - その他
-        cellBgColor: { type: 'string', default: '#ffffff' },
-        cellTextColor: { type: 'string', default: '#333333' },
-        shadowColor: { type: 'string', default: 'rgba(37, 37, 37, 0.3)' },
-        
-        // フォント設定 - 列ヘッダー
-        fontFamilyHeader: { type: 'string', default: '' },
-        fontWeightHeader: { type: 'string', default: '600' },
-        fontSizeHeader: { type: 'number', default: 17 },
-        fontSizeHeaderSp: { type: 'number', default: 16 },
-        lineHeightHeader: { type: 'number', default: 1.5 },
-        
-        // フォント設定 - 行ヘッダー
-        fontFamilyRowHeader: { type: 'string', default: '' },
-        fontWeightRowHeader: { type: 'string', default: '600' },
-        fontSizeRowHeader: { type: 'number', default: 17 },
-        fontSizeRowHeaderSp: { type: 'number', default: 16 },
-        lineHeightRowHeader: { type: 'number', default: 1.6 },
-        
-        // フォント設定 - 通常セル
-        fontFamilyCell: { type: 'string', default: '' },
-        fontWeightCell: { type: 'string', default: '400' },
-        fontSizeCell: { type: 'number', default: 17 },
-        fontSizeCellSp: { type: 'number', default: 16 },
-        lineHeightCell: { type: 'number', default: 1.6 },
-        
-        // ギャップサイズ
-        gapSize: { type: 'number', default: 3 },
-        
-        // コンテンツデータ - ヘッダーをオブジェクト配列に変更
-        headers: {
-            type: 'array',
-            default: [
-                { text: 'ベーシック', bgColor: '' },
-                { text: 'スタンダード', bgColor: '' },
-                { text: 'プレミアム', bgColor: '' }
-            ]
-        },
-        
-        rows: {
-            type: 'array',
-            source: 'query',
-            selector: '.lw_table_row',
-            query: {
-                header: { 
-                    type: 'string', 
-                    source: 'html', 
-                    selector: '.row_head .text' 
-                },
-                cells: {
-                    type: 'array',
-                    source: 'query',
-                    selector: '.cell:not(.row_head)',
-                    query: {
-                        content: { 
-                            type: 'string', 
-                            source: 'html', 
-                            selector: '.text' 
-                        }
-                    }
-                }
-            },
-            default: [
-                {
-                    header: '月額料金',
-                    cells: [
-                        { content: '¥3,000' },
-                        { content: '¥5,000' },
-                        { content: '¥10,000' }
-                    ]
-                },
-                {
-                    header: 'ストレージ容量',
-                    cells: [
-                        { content: '10GB' },
-                        { content: '50GB' },
-                        { content: '無制限' }
-                    ]
-                },
-                {
-                    header: 'メールサポート',
-                    cells: [
-                        { content: '〇' },
-                        { content: '〇' },
-                        { content: '〇' }
-                    ]
-                }
-            ]
-        }
-    },
-
-    /* ========================================
-     * エディタ
-     * ======================================== */
+registerBlockType(metadata.name, {
     edit({ attributes, setAttributes }) {
         const {
             columnCount,
@@ -336,7 +194,7 @@ registerBlockType('wdl/lw-pr-table-1', {
         };
 
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
                     {/* レイアウト設定 */}
                     <PanelBody title="📐 レイアウト設定" initialOpen={true}>
@@ -937,7 +795,7 @@ registerBlockType('wdl/lw-pr-table-1', {
                         </button>
                     </div>
                 </div>
-            </Fragment>
+            </>
         );
     },
 

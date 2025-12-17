@@ -18,10 +18,13 @@ blockDirs.forEach((dir) => {
 
 module.exports = {
   ...defaultConfig,
+  devtool: false, // ソースマップを生成しない（本番用）
   entry: entry,
   output: {
     path: path.join(__dirname, '../LiteWord/my-blocks/build'),
     filename: '[name]/[name].js', // 各ブロックのサブディレクトリ内に出力
+    // clean は使用しない（.webp ファイルが削除されるため）
+    // 代わりに clean-build.js で削除されたブロックのみクリーンアップ
   },
   module: {
     rules: [
@@ -50,10 +53,15 @@ module.exports = {
       filename: '[name]/[name].css', // 各ブロックのサブディレクトリ内に出力
     }),
     new CopyWebpackPlugin({
-      patterns: blockDirs.map((dir) => [
-        { from: `./src/${dir}/style.css`, to: `${dir}/style.css` },
-        { from: `./src/${dir}/editor.css`, to: `${dir}/editor.css` }
-      ]).flat(), // 各ブロックのスタイルファイルをサブディレクトリにコピー
+      patterns: blockDirs.map((dir) => {
+        const patterns = [
+          { from: `./src/${dir}/style.css`, to: `${dir}/style.css`, noErrorOnMissing: true },
+          { from: `./src/${dir}/editor.css`, to: `${dir}/editor.css`, noErrorOnMissing: true },
+          { from: `./src/${dir}/block.json`, to: `${dir}/block.json`, noErrorOnMissing: true },
+          { from: `./src/${dir}/*.webp`, to: `${dir}/[name][ext]`, noErrorOnMissing: true }
+        ];
+        return patterns;
+      }).flat(), // 各ブロックのスタイルファイルとblock.jsonとwebp画像をサブディレクトリにコピー
     }),
     new DependencyExtractionWebpackPlugin(),
   ],

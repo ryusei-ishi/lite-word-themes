@@ -9,82 +9,29 @@ import {
 	MediaUpload,
 	BlockControls,
 	useSettings,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody, Button, SelectControl, Spinner,
 	ToggleControl, RangeControl, TextControl, ColorPalette,
 	ColorPicker, Popover, GradientPicker, ToolbarGroup, ToolbarButton,
 } from '@wordpress/components';
-import { Fragment, useEffect, useState } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import { minHeightPcClassOptionArr, minHeightTbClassOptionArr, minHeightSpClassOptionArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ---------- 二重登録防止 ---------- */
-if ( wp.blocks.getBlockType( 'wdl/lw-pr-fv-14' ) ) {
-	console.warn( 'wdl/lw-pr-fv-14 already registered.' );
+if ( wp.blocks.getBlockType( metadata.name ) ) {
+	console.warn( `${metadata.name} already registered.` );
 } else {
 
 /* =============================================================== *
  *  Register
  * =============================================================== */
-registerBlockType( 'wdl/lw-pr-fv-14', {
-
-/* -------- メタ -------- */
-	title   : 'FV 14 ヘッダーまで回り込む全画背景',
-	icon: 'cover-image',
-	category: 'liteword-firstview',
-	supports: { anchor:true },
-
-/* -------- 属性 -------- */
-	attributes:{
-		logoText      :{ type:'string',  default:'LOGO' },
-		logoUrl       :{ type:'string',  default:'' },
-		logoImg       :{ type:'string',  default:'' },
-		logoImgHeight :{ type:'number',  default:70 },
-
-		cta1Text   :{ type:'string',  default:'ご相談はこちら' },
-		cta1Url    :{ type:'string',  default:'#' },
-		cta1Enable :{ type:'boolean', default:true },
-		cta1BgColor:{ type:'string',  default:'var(--color-main)' },
-		cta1TextColor:{ type:'string', default:'#ffffff' },
-		cta1BorderWidth:{ type:'number', default:1 },
-		cta1BorderColor:{ type:'string', default:'var(--color-main)' },
-		showCta1BgPicker:{ type:'boolean', default:false },
-		showCta1TextPicker:{ type:'boolean', default:false },
-		showCta1BorderPicker:{ type:'boolean', default:false },
-
-		cta2Text   :{ type:'string',  default:'資料ダウンロードはこちら' },
-		cta2Url    :{ type:'string',  default:'#' },
-		cta2Enable :{ type:'boolean', default:true },
-		cta2TextColor:{ type:'string', default:'#ffffff' },
-		showCta2TextPicker:{ type:'boolean', default:false },
-
-		leadText   :{ type:'string', default:'リードテキストリード' },
-		headline   :{ type:'string', default:'キャッチフレーズテキスト<br>キャッチフレーズテキスト' },
-		description:{ type:'string', default:'ここに説明文が入りますここに説明文が入りますここに説明文が入りますここに説明文が入りますここに説明文が入りますここに説明文が入りますここに説明文が入ります' },
-		headingLevel:{ type:'number', default:2 },
-
-		bgType    :{ type:'string',  default:'image' },
-		bgImgPc   :{ type:'string',  default:'https://plus.unsplash.com/premium_photo-1685868556097-641c237f3fa5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1328' },
-		bgImgSp   :{ type:'string',  default:'' },
-		bgImgAlt  :{ type:'string',  default:'' },
-		videoUrl  :{ type:'string',  default:'' },
-		videoSpeed:{ type:'number',  default:1 },
-		
-		bgFilterType     :{ type:'string',  default:'solid' },
-		bgFilterColor    :{ type:'string',  default:'#000000' },
-		bgFilterGradient :{ type:'string',  default:'' },
-		bgFilterOpacity  :{ type:'number',  default:30 },
-
-		navMenuId    :{ type:'number', default:0 },
-		navMenuItems :{ type:'array',  default:[] },
-		
-		minHeightPc :{ type:'string', default:'min-h-pc-100vh' },
-		minHeightTb :{ type:'string', default:'min-h-tb-100vh' },
-		minHeightSp :{ type:'string', default:'min-h-sp-100vh' },
-	},
+registerBlockType( metadata.name, {
 
 /* =============================================================== *
  *  Edit
@@ -178,9 +125,20 @@ registerBlockType( 'wdl/lw-pr-fv-14', {
 		/* --- 見出しタグ --- */
 		const HeadingTag = `h${headingLevel}`;
 
+		const blockProps = useBlockProps({
+			className: `lw-pr-fv-14 ${minHeightPc} ${minHeightTb} ${minHeightSp}`,
+			style: {
+				'--fv-btn-bg-color': cta1BgColor,
+				'--fv-btn-text-color': cta1TextColor,
+				'--fv-btn-bd-width': `${cta1BorderWidth}px`,
+				'--fv-btn-bd-width-color': cta1BorderColor,
+				'--fv-cta2-text-color': cta2TextColor,
+			}
+		});
+
 		/* --- JSX (editor) --- */
 		return(
-		<Fragment>
+		<>
 			<BlockControls>
 				<ToolbarGroup>
 					{[1, 2, 3, 4].map(level => (
@@ -501,16 +459,7 @@ registerBlockType( 'wdl/lw-pr-fv-14', {
 			</InspectorControls>
 
 			{/* -------- プレビュー -------- */}
-			<div 
-				className={`lw-pr-fv-14 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}
-				style={{
-					'--fv-btn-bg-color': cta1BgColor,
-					'--fv-btn-text-color': cta1TextColor,
-					'--fv-btn-bd-width': `${cta1BorderWidth}px`,
-					'--fv-btn-bd-width-color': cta1BorderColor,
-					'--fv-cta2-text-color': cta2TextColor,
-				}}
-			>
+			<div {...blockProps}>
 				<header className="fv_in_header">
 					<h1 className="logo"><a href={logoUrl || '#'}>
 						{logoImg
@@ -579,7 +528,7 @@ registerBlockType( 'wdl/lw-pr-fv-14', {
 					</video>
 				</div>}
 			</div>
-		</Fragment>);
+		</>);
 	},
 
 /* =============================================================== *
@@ -619,6 +568,17 @@ registerBlockType( 'wdl/lw-pr-fv-14', {
 
 		/* --- 見出しタグ --- */
 		const HeadingTag = `h${headingLevel}`;
+
+		const blockProps = useBlockProps.save({
+			className: `lw-pr-fv-14 ${minHeightPc || 'min-h-pc-100vh'} ${minHeightTb || 'min-h-tb-100vh'} ${minHeightSp || 'min-h-sp-100vh'}`,
+			style: {
+				'--fv-btn-bg-color': cta1BgColor,
+				'--fv-btn-text-color': cta1TextColor,
+				'--fv-btn-bd-width': `${cta1BorderWidth}px`,
+				'--fv-btn-bd-width-color': cta1BorderColor,
+				'--fv-cta2-text-color': cta2TextColor,
+			}
+		});
 
 		/* --- インライン JS --- */
 		const script = `
@@ -670,16 +630,7 @@ document.readyState==='loading'?document.addEventListener('DOMContentLoaded',rea
 })();`.trim();
 
 		return (
-		<div 
-			className={`lw-pr-fv-14 ${minHeightPc || 'min-h-pc-100vh'} ${minHeightTb || 'min-h-tb-100vh'} ${minHeightSp || 'min-h-sp-100vh'}`}
-			style={{
-				'--fv-btn-bg-color': cta1BgColor,
-				'--fv-btn-text-color': cta1TextColor,
-				'--fv-btn-bd-width': `${cta1BorderWidth}px`,
-				'--fv-btn-bd-width-color': cta1BorderColor,
-				'--fv-cta2-text-color': cta2TextColor,
-			}}
-		>
+		<div {...blockProps}>
 			<header className="fv_in_header">
 				<h1 className="logo"><a href={logoUrl || '#'} data-home-url="">
 					{logoImg ? <img src={logoImg} alt="" style={{height:logoImgHeight+'%',width:'auto'}}/> :

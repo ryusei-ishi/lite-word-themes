@@ -2,7 +2,8 @@ import { registerBlockType } from '@wordpress/blocks';
 import {
     InspectorControls,
     MediaUpload,
-    RichText
+    RichText,
+    useBlockProps,
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -11,54 +12,11 @@ import {
     ToggleControl,
     RangeControl
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
-
 import './editor.scss';
+import metadata from './block.json';
 import './style.scss';
 
-registerBlockType('wdl/paid-block-content-6', {
-    title: 'Content 06',
-    icon: 'format-image',
-    category: 'liteword-other',
-
-    attributes: {
-        // 画像左右切り替え（デフォルトは左）
-        alignRight: {
-            type: 'boolean',
-            default: false, // false => left, true => right
-        },
-        imageUrl: {
-            type: 'string',
-            default: 'https://lite-word.com/sample_img/women/7.webp',
-        },
-        imageAlt: {
-            type: 'string',
-            default: '',
-        },
-        textContent: {
-            type: 'string',
-            default:
-                'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト',
-        },
-        buttonText: {
-            type: 'string',
-            default: 'Learn More',
-        },
-        buttonUrl: {
-            type: 'string',
-            default: '#',
-        },
-        showButton: {
-            type: 'boolean',
-            default: true,
-        },
-        // ボタン角丸設定 (px)
-        buttonRadius: {
-            type: 'number',
-            default: 0, // 初期値を 0px
-        },
-    },
-
+registerBlockType(metadata.name, {
     edit: (props) => {
         const {
             attributes: {
@@ -137,8 +95,13 @@ registerBlockType('wdl/paid-block-content-6', {
             setAttributes({ buttonRadius: value });
         };
 
+        
+        const blockProps = useBlockProps({
+            className: 'paid-block-content-6'
+        });
+
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
                     <PanelBody title="マニュアル">
                         <div>
@@ -226,7 +189,7 @@ registerBlockType('wdl/paid-block-content-6', {
                 </InspectorControls>
 
                 {/* エディター上のプレビュー */}
-                <div className="paid-block-content-6">
+                <div {...blockProps}>
                     <div className={`this_wrap ${ alignRight ? 'right_img' : 'left_img' }`}>
                         <div className="image">
                             <figure>
@@ -261,7 +224,7 @@ registerBlockType('wdl/paid-block-content-6', {
                         </div>
                     </div>
                 </div>
-            </Fragment>
+            </>
         );
     },
 
@@ -279,8 +242,12 @@ registerBlockType('wdl/paid-block-content-6', {
             }
         } = props;
 
+        const blockProps = useBlockProps.save({
+            className: 'paid-block-content-6'
+        });
+
         return (
-            <div className="paid-block-content-6">
+            <div {...blockProps}>
                 <div className={`this_wrap ${ alignRight ? 'right_img' : 'left_img' }`}>
                     <div className="image">
                         <figure>

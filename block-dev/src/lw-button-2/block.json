@@ -1,0 +1,67 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-button-02",
+	"version": "1.0.0",
+	"title": "リンクボタン 02",
+	"category": "lw-button",
+	"icon": "button",
+	"description": "カスタマイズ可能なリンクボタン（スタイル02）",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"btnText": {
+			"type": "string",
+			"default": "詳細はこちら"
+		},
+		"bgGradient": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"textColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"fontWeight": {
+			"type": "string",
+			"default": "400"
+		},
+		"btnUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"openNewTab": {
+			"type": "boolean",
+			"default": false
+		},
+		"FontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"selectedIcon": {
+			"type": "string",
+			"default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 512\"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\"M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z\"/></svg>"
+		},
+		"iconColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 0
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		}
+	},
+	"editorScript": "file:./lw-button-2.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 2
+}

@@ -1,0 +1,66 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-message-1",
+	"version": "1.0.0",
+	"title": "メッセージ 01",
+	"category": "lw-content",
+	"icon": "admin-comments",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"subTitle": {
+			"type": "string",
+			"default": "message"
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "代表あいさつ"
+		},
+		"leadText": {
+			"type": "string",
+			"default": "テキストテキストテキストテキスト。\nテキストテキストテキストテキストテキスト"
+		},
+		"bodyText": {
+			"type": "string",
+			"default": "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"
+		},
+		"imgUrl": {
+			"type": "string",
+			"default": "https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?w=400&h=400&auto=format&fit=crop&q=80"
+		},
+		"imgAlt": {
+			"type": "string",
+			"default": "代表の写真"
+		},
+		"captionSub": {
+			"type": "string",
+			"default": "代表取締役"
+		},
+		"captionMain": {
+			"type": "string",
+			"default": "山田太郎"
+		},
+		"colorMain": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 0.05
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./lw-message-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 1
+}

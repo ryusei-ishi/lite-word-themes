@@ -1,13 +1,11 @@
 .lw-pr-button-4 * {
   box-sizing: border-box;
 }
-
 .lw-pr-button-4 .wrap_btn {
   display: flex;
   justify-content: center;
   font-size: 16px;
 }
-
 .lw-pr-button-4 .wrap_btn .lw_btn_a {
   position: relative;
   padding: 1.2em 1.5em;
@@ -23,17 +21,14 @@
   transition: background 0.3s ease;
   text-decoration: none;
 }
-
 @media (max-width: 800px) {
   .lw-pr-button-4 .wrap_btn .lw_btn_a {
     max-width: 480px;
   }
 }
-
 .lw-pr-button-4 .wrap_btn .lw_btn_a:hover {
   background: #063366;
 }
-
 .lw-pr-button-4 .wrap_btn .lw_btn_a .text_sub {
   width: 100%;
   display: block;
@@ -43,7 +38,6 @@
   font-size: 14px;
   text-align: center;
 }
-
 .lw-pr-button-4 .wrap_btn .lw_btn_a .text_main {
   font-size: 28px;
   font-weight: 500;
@@ -55,13 +49,11 @@
   text-align: center;
   letter-spacing: 0.05em;
 }
-
 @media (max-width: 800px) {
   .lw-pr-button-4 .wrap_btn .lw_btn_a .text_main {
     font-size: 18px;
   }
 }
-
 .lw-pr-button-4 .wrap_btn .lw_btn_a .text_main .icon {
   margin-left: -8px;
   margin-right: 8px;
@@ -70,9 +62,8 @@
   width: 32px;
   height: auto;
 }
-
 .lw-pr-button-4 .wrap_btn .lw_btn_a .text_main .icon svg {
   height: auto;
   width: 100%;
   fill: #fff;
-}
+}/*# sourceMappingURL=style.css.map */

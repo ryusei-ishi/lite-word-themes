@@ -3,9 +3,8 @@
   width: 100%;
   max-width: 100%;
 }
-
 .wp-block:has(.fv-7) * {
   padding: 0;
   margin: 0;
   box-sizing: border-box;
-}
+}/*# sourceMappingURL=editor.css.map */

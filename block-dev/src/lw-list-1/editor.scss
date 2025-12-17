@@ -20,6 +20,7 @@
       grid-template-columns: 112px calc(100% - 112px);
       border: 1px solid #000;
       box-sizing: border-box;
+      position: relative;
       .no{
         height: 100%;
         display: flex;
@@ -35,12 +36,70 @@
         align-items: center;
         font-size: 16px;
         line-height: 1.5em;
-        
+
         p{
           padding: 0;
           margin: 0;
         }
       }
+    }
+  }
+}
+
+/* サイドバー内のコントロール */
+.lw-list-1__panel-controls {
+  display: flex;
+  gap: 4px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+
+  .components-button {
+    flex: 1;
+    justify-content: center;
+    min-width: 60px;
+  }
+}
+
+/* 並べ替え & 削除コントロール */
+.lw-list-1__item-controls {
+  position: absolute;
+  top: -28px;
+  right: 0;
+  display: flex;
+  gap: 4px;
+
+  button {
+    padding: 4px 10px;
+    font-size: 12px;
+    border: 1px solid #ccc;
+    border-radius: 3px;
+    background: #fff;
+    cursor: pointer;
+    transition: all 0.2s ease;
+
+    &:hover:not(:disabled) {
+      background: #f0f0f0;
+    }
+
+    &:disabled {
+      opacity: 0.4;
+      cursor: not-allowed;
+    }
+  }
+
+  .move-up-button,
+  .move-down-button {
+    min-width: 32px;
+    font-weight: bold;
+  }
+
+  .remove-item-button {
+    color: #fff;
+    background: #d63638;
+    border-color: #d63638;
+
+    &:hover {
+      background: #b32d2e;
     }
   }
 }

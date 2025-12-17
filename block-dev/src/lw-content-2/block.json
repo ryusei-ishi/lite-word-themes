@@ -1,0 +1,141 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-content-2",
+	"version": "1.0.0",
+	"title": "content 02",
+	"category": "lw-content",
+	"icon": "lightbulb",
+	"editorScript": "file:./lw-content-2.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".lw-content-2_content",
+			"query": {
+				"title": {
+					"type": "string",
+					"source": "html",
+					"selector": ".ttl",
+					"default": "タイトル"
+				},
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": ".lw-content-2_text p"
+				},
+				"image": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "figure img",
+					"attribute": "src"
+				},
+				"buttonText": {
+					"type": "string",
+					"source": "html",
+					"selector": ".lw-content-2_btn",
+					"default": ""
+				},
+				"buttonUrl": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".lw-content-2_btn",
+					"attribute": "href",
+					"default": ""
+				},
+				"buttonBgColor": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".lw-content-2_btn",
+					"attribute": "data-bgcolor",
+					"default": ""
+				},
+				"buttonTextColor": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".lw-content-2_btn",
+					"attribute": "data-textcolor",
+					"default": "#ffffff"
+				}
+			},
+			"default": [
+				{
+					"title": "タイトル",
+					"text": "テキストテキストテキストテキストテキストテキストテキストテキストテキスト",
+					"image": "",
+					"buttonText": "",
+					"buttonUrl": "",
+					"buttonBgColor": "var(--color-accent)",
+					"buttonTextColor": "#ffffff"
+				},
+				{
+					"title": "タイトル",
+					"text": "テキストテキストテキストテキストテキストテキストテキストテキストテキスト",
+					"image": "",
+					"buttonText": "",
+					"buttonUrl": "",
+					"buttonBgColor": "var(--color-accent)",
+					"buttonTextColor": "#ffffff"
+				},
+				{
+					"title": "タイトル",
+					"text": "テキストテキストテキストテキストテキストテキストテキストテキストテキスト",
+					"image": "",
+					"buttonText": "",
+					"buttonUrl": "",
+					"buttonBgColor": "var(--color-accent)",
+					"buttonTextColor": "#ffffff"
+				}
+			]
+		},
+		"fontSet": {
+			"type": "string",
+			"default": "",
+			"source": "attribute",
+			"selector": ".lw-content-2",
+			"attribute": "data-lw_font_set"
+		},
+		"fontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"columnClass": {
+			"type": "string",
+			"default": "clm_3"
+		},
+		"showTitle": {
+			"type": "boolean",
+			"default": false
+		},
+		"titleFontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"titleFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"titleColor": {
+			"type": "string",
+			"default": ""
+		},
+		"textColor": {
+			"type": "string",
+			"default": ""
+		},
+		"imageHeight": {
+			"type": "number",
+			"default": 1200
+		}
+	},
+	"no": 2
+}

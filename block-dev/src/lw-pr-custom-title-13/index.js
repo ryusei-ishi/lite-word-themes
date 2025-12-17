@@ -1,12 +1,14 @@
 /**
  * LiteWord – 見出しタイトル 13
  * カスタムブロック
+ * ★ apiVersion 3 対応（2025-12-07）
  */
 import { registerBlockType } from '@wordpress/blocks';
 import {
     RichText,
     BlockControls,
     InspectorControls,
+    useBlockProps,
 } from '@wordpress/block-editor';
 import {
     ToolbarGroup,
@@ -18,29 +20,9 @@ import {
 } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 
-registerBlockType('wdl/lw-pr-custom-title-13', {
-    /* ----------------------------------------------------------
-     * 基本情報
-     * -------------------------------------------------------- */
-    title: '見出しタイトル 13',
-    icon: 'editor-textcolor',
-    category: 'liteword-title',
-    supports: { anchor: true },
+import metadata from './block.json';
 
-    /* ----------------------------------------------------------
-     * 属性
-     * -------------------------------------------------------- */
-    attributes: {
-        mainTitle: { type: 'string', default: 'カスタムタイトル' },
-        subTitle: { type: 'string', default: 'サブタイトル' },
-        headingLevel: { type: 'number', default: 2 },
-        colorMain: { type: 'string', default: '#0a71c0' },
-        colorMainText: { type: 'string', default: '' },
-        colorSubText: { type: 'string', default: '' },
-        orderReversed: { type: 'boolean', default: false },
-        maxWidth: { type: 'number', default: 0 },
-    },
-
+registerBlockType(metadata.name, {
     /* ----------------------------------------------------------
      * 編集画面
      * -------------------------------------------------------- */
@@ -74,6 +56,11 @@ registerBlockType('wdl/lw-pr-custom-title-13', {
         if (maxWidth > 0) {
             inlineStyle['maxWidth'] = `${maxWidth}px`;
         }
+
+        const blockProps = useBlockProps({
+            className: 'lw-pr-custom-title-13',
+            style: inlineStyle,
+        });
 
         return (
             <Fragment>
@@ -133,7 +120,7 @@ registerBlockType('wdl/lw-pr-custom-title-13', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className="lw-pr-custom-title-13" style={inlineStyle}>
+                <div {...blockProps}>
                     <TagName className="ttl">
                         {!orderReversed ? (
                             <Fragment>
@@ -207,8 +194,13 @@ registerBlockType('wdl/lw-pr-custom-title-13', {
             inlineStyle['maxWidth'] = `${maxWidth}px`;
         }
 
+        const blockProps = useBlockProps.save({
+            className: 'lw-pr-custom-title-13',
+            style: inlineStyle,
+        });
+
         return (
-            <div className="lw-pr-custom-title-13" style={inlineStyle}>
+            <div {...blockProps}>
                 <TagName className="ttl">
                     {!orderReversed ? (
                         <Fragment>

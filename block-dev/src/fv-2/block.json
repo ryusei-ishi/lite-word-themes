@@ -1,0 +1,66 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/fv-2",
+	"version": "1.0.0",
+	"title": "固定ページタイトル 02（下層用）",
+	"category": "lw-firstview",
+	"icon": "cover-image",
+	"editorScript": "file:./fv-2.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"backgroundImage": {
+			"type": "string",
+			"default": ""
+		},
+		"backgroundImageSp": {
+			"type": "string",
+			"default": ""
+		},
+		"filterBackgroundColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 0.9
+		},
+		"h1AfterColor": {
+			"type": "string",
+			"default": "#ef5d68"
+		},
+		"textColor": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"title": {
+			"type": "string",
+			"default": "タイトル"
+		},
+		"minHeightPc": {
+			"type": "string",
+			"default": "min-h-pc-320px"
+		},
+		"minHeightTb": {
+			"type": "string",
+			"default": "min-h-tb-280px"
+		},
+		"minHeightSp": {
+			"type": "string",
+			"default": "min-h-sp-220px"
+		},
+		"headingLevel": {
+			"type": "number",
+			"default": 1
+		}
+	},
+	"no": 2
+}

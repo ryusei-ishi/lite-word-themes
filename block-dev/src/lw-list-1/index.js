@@ -1,70 +1,24 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls } from '@wordpress/block-editor';
+import { RichText, InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, ColorPalette, Button, TextControl } from '@wordpress/components';
-import {fontOptionsArr,fontWeightOptionsArr} from '../utils.js';
+import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
 // フォント太さオプションを変数に定義
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType('wdl/lw-list-1', {
-    title: 'List 01',
-    icon: 'editor-ul',
-    category: 'liteword-other',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        contents: {
-            type: 'array',
-            source: 'query',
-            selector: '.lw-list-1_content',
-            query: {
-                text: {
-                    type: 'string',
-                    source: 'html',
-                    selector: '.lw-list-1_text p',
-                },
-                number: {
-                    type: 'string',
-                    source: 'text',
-                    selector: '.no',
-                },
-            },
-            default: [
-                { text: '初心者向けの動画マニュアルで、誰でも簡単、スムーズに制作！', number: '1' },
-                { text: 'ページテンプレートが用意されているので、ワンクリックで固定ページがほぼ完成！', number: '2' },
-                { text: '業種別デザイナーテンプレートを使うことで、プロ級のサイトが出来る！', number: '3' }
-            ],
-        },
-        noFontSet: {
-            type: 'string',
-            default: '',
-        },
-        noFontWeight: {
-            type: 'string',
-            default: '',
-        },
-        textFontSet: {
-            type: 'string',
-            default: '',
-        },
-        textFontWeight: {
-            type: 'string',
-            default: '',
-        },
-        borderColor: {
-            type: 'string',
-            default: 'var(--color-main)',
-        }
-    },
-
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const { contents, noFontSet, noFontWeight, textFontSet, textFontWeight, borderColor } = attributes;
+
+        const blockProps = useBlockProps({
+            className: 'lw-list-1'
+        });
 
         // コンテンツを追加
         const addContent = () => {
@@ -85,8 +39,20 @@ registerBlockType('wdl/lw-list-1', {
             setAttributes({ contents: updatedContents });
         };
 
+        // 順番入れ替え関数
+        const moveItem = (index, direction) => {
+            const targetIndex = index + direction;
+            if (targetIndex < 0 || targetIndex >= contents.length) return;
+
+            const reordered = [...contents];
+            const [moved] = reordered.splice(index, 1);
+            reordered.splice(targetIndex, 0, moved);
+
+            setAttributes({ contents: reordered });
+        };
+
         return (
-            <div className="lw-list-1">
+            <div {...blockProps}>
                 <InspectorControls>
                     <PanelBody title="番号部分のフォント設定">
                         <SelectControl
@@ -136,9 +102,25 @@ registerBlockType('wdl/lw-list-1', {
                                 onChange={(value) => updateContent(index, 'text', value)}
                                 placeholder="テキストを入力"
                             />
-                            <Button isDestructive onClick={() => removeContent(index)} style={{ marginTop: '10px' }}>
-                                このコンテンツを削除
-                            </Button>
+                            <div className="lw-list-1__panel-controls">
+                                <Button
+                                    isSecondary
+                                    onClick={() => moveItem(index, -1)}
+                                    disabled={index === 0}
+                                >
+                                    ↑ 上へ
+                                </Button>
+                                <Button
+                                    isSecondary
+                                    onClick={() => moveItem(index, 1)}
+                                    disabled={index === contents.length - 1}
+                                >
+                                    ↓ 下へ
+                                </Button>
+                                <Button isDestructive onClick={() => removeContent(index)}>
+                                    削除
+                                </Button>
+                            </div>
                         </PanelBody>
                     ))}
                     <Button isPrimary onClick={addContent} style={{ margin: '20px 0' }}>
@@ -167,6 +149,35 @@ registerBlockType('wdl/lw-list-1', {
                                     placeholder="テキストを入力"
                                 />
                             </div>
+                            {/* 並べ替え & 削除コントロール */}
+                            <div className="lw-list-1__item-controls lw-table-item-controls">
+                                <button
+                                    type="button"
+                                    onClick={() => moveItem(index, -1)}
+                                    disabled={index === 0}
+                                    className="move-up-button"
+                                    aria-label="上へ移動"
+                                >
+                                    ↑
+                                </button>
+                                <button
+                                    type="button"
+                                    onClick={() => moveItem(index, 1)}
+                                    disabled={index === contents.length - 1}
+                                    className="move-down-button"
+                                    aria-label="下へ移動"
+                                >
+                                    ↓
+                                </button>
+                                <button
+                                    type="button"
+                                    className="remove-item-button"
+                                    onClick={() => removeContent(index)}
+                                    aria-label="削除"
+                                >
+                                    削除
+                                </button>
+                            </div>
                         </div>
                     ))}
                 </div>
@@ -176,9 +187,13 @@ registerBlockType('wdl/lw-list-1', {
     save: function (props) {
         const { attributes } = props;
         const { contents, noFontSet, noFontWeight, textFontSet, textFontWeight, borderColor } = attributes;
-    
+
+        const blockProps = useBlockProps.save({
+            className: 'lw-list-1'
+        });
+
         return (
-            <div className="lw-list-1">
+            <div {...blockProps}>
                 <ul className="lw-list-1_inner">
                     {contents.map((content, index) => (
                         <li className="lw-list-1_content" key={index} style={{ borderColor: borderColor }}>
@@ -205,5 +220,5 @@ registerBlockType('wdl/lw-list-1', {
             </div>
         );
     }
-    
+
 });

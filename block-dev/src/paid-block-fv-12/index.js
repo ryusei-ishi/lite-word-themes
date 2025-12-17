@@ -8,91 +8,29 @@ import {
 	URLInput,
 	MediaUpload,
 	useSettings,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody, Button, SelectControl, Spinner,
 	ToggleControl, RangeControl, TextControl, ColorPalette,
 	ColorPicker, Popover, GradientPicker,
 } from '@wordpress/components';
-import { Fragment, useEffect, useState } from '@wordpress/element';
+import { useEffect, useState } from '@wordpress/element';
 import apiFetch from '@wordpress/api-fetch';
 import { minHeightPcClassOptionArr, minHeightTbClassOptionArr, minHeightSpClassOptionArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ---------- 二重登録防止 ---------- */
-if ( wp.blocks.getBlockType( 'wdl/paid-block-fv-12' ) ) {
-	console.warn( 'wdl/paid-block-fv-12 already registered.' );
+if ( wp.blocks.getBlockType( metadata.name ) ) {
+	console.warn( `${metadata.name} already registered.` );
 } else {
 
 /* =============================================================== *
  *  Register
  * =============================================================== */
-registerBlockType( 'wdl/paid-block-fv-12', {
-
-/* -------- メタ -------- */
-	title   : 'FV 12 ヘッダーまで回り込む全画背景',
-	icon: 'cover-image',
-	category: 'liteword-firstview',
-	supports: { anchor:true },
-
-/* -------- 属性 -------- */
-	attributes:{
-		logoText      :{ type:'string',  default:'LOGO' },
-		logoUrl       :{ type:'string',  default:'' },
-		logoImg       :{ type:'string',  default:'' },
-		logoImgHeight :{ type:'number',  default:70 },
-
-		cta1Text   :{ type:'string',  default:'ご相談はこちら' },
-		cta1Url    :{ type:'string',  default:'#' },
-		cta1Enable :{ type:'boolean', default:true },
-		cta1BgColor:{ type:'string',  default:'transparent' },
-		cta1TextColor:{ type:'string', default:'#ffffff' },
-		cta1BorderWidth:{ type:'number', default:1 },
-		cta1BorderColor:{ type:'string', default:'#ffffff' },
-		cta1BorderRadius:{ type:'number', default:100 },
-		showCta1BgPicker:{ type:'boolean', default:false },
-		showCta1TextPicker:{ type:'boolean', default:false },
-		showCta1BorderPicker:{ type:'boolean', default:false },
-
-		cta2Text   :{ type:'string',  default:'お問い合わせ' },
-		cta2Url    :{ type:'string',  default:'#' },
-		cta2Enable :{ type:'boolean', default:true },
-		cta2BgColor:{ type:'string',  default:'transparent' },
-		cta2TextColor:{ type:'string', default:'#ffffff' },
-		cta2BorderWidth:{ type:'number', default:1 },
-		cta2BorderColor:{ type:'string', default:'#ffffff' },
-		cta2BorderRadius:{ type:'number', default:100 },
-		showCta2BgPicker:{ type:'boolean', default:false },
-		showCta2TextPicker:{ type:'boolean', default:false },
-		showCta2BorderPicker:{ type:'boolean', default:false },
-
-		headline  :{ type:'string', default:'キャッチフレーズテキスト<br>キャッチフレーズテキスト' },
-		newsLabel :{ type:'string', default:'NEWS' },
-		newsListVisible:{ type:'boolean', default:true },
-
-		bgType    :{ type:'string',  default:'image' },
-		bgImg     :{ type:'string',  default:'https://lite-word.com/sample_img/cafe/1.webp' },
-		videoUrl  :{ type:'string',  default:'' },
-		videoSpeed:{ type:'number',  default:1 },
-		
-		bgFilterType     :{ type:'string',  default:'solid' },
-		bgFilterColor    :{ type:'string',  default:'#000000' },
-		bgFilterGradient :{ type:'string',  default:'' },
-		bgFilterOpacity  :{ type:'number',  default:30 },
-
-		navMenuId    :{ type:'number', default:0 },
-		navMenuItems :{ type:'array',  default:[] },
-
-		newsSourceType :{ type:'string', default:'latest' },
-		newsIds        :{ type:'string', default:'' },
-		newsPostsNumber:{ type:'number', default:4 },
-		
-		minHeightPc :{ type:'string', default:'min-h-pc-100vh' },
-		minHeightTb :{ type:'string', default:'min-h-tb-100vh' },
-		minHeightSp :{ type:'string', default:'min-h-sp-100vh' },
-	},
-
+registerBlockType( metadata.name, {
 /* =============================================================== *
  *  Edit
  * =============================================================== */
@@ -223,9 +161,13 @@ registerBlockType( 'wdl/paid-block-fv-12', {
 			? [{label:'--- メニューを選択 ---',value:'0'}, ...menus.map(m=>({label:m.name,value:String(m.id)}))]
 			: [{label:'読み込み中…',value:'0'}];
 
+		const blockProps = useBlockProps({
+			className: `paid-block-fv-12 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+		});
+
 		/* --- JSX (editor) --- */
 		return(
-		<Fragment>
+		<>
 			<InspectorControls>
 				{/* ロゴ */}
 				<PanelBody title="ロゴ設定" initialOpen={false}>
@@ -610,7 +552,7 @@ registerBlockType( 'wdl/paid-block-fv-12', {
 			</InspectorControls>
 
 			{/* -------- プレビュー -------- */}
-			<div className={`paid-block-fv-12 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}>
+			<div {...blockProps}>
 				<header className="fv_in_header">
 					<h1 className="logo"><a href={logoUrl || '#'}>
 						{logoImg
@@ -702,7 +644,7 @@ registerBlockType( 'wdl/paid-block-fv-12', {
 					</video>
 				</div>}
 			</div>
-		</Fragment>);
+		</>);
 	},
 
 /* =============================================================== *
@@ -725,6 +667,10 @@ registerBlockType( 'wdl/paid-block-fv-12', {
 		const show1 = cta1Enable&&cta1Text.trim();
 		const show2 = cta2Enable&&cta2Text.trim();
 		const showWrap = show1||show2;
+
+		const blockProps = useBlockProps.save({
+			className: `paid-block-fv-12 ${minHeightPc || 'min-h-pc-100vh'} ${minHeightTb || 'min-h-tb-100vh'} ${minHeightSp || 'min-h-sp-100vh'}`
+		});
 
 		/* --- 背景フィルタースタイル --- */
 		const getBgFilterStyle = () => {
@@ -904,7 +850,7 @@ document.readyState==='loading'?document.addEventListener('DOMContentLoaded',rea
 })();`.trim();
 
 		return (
-		<div className={`paid-block-fv-12 ${minHeightPc || 'min-h-pc-100vh'} ${minHeightTb || 'min-h-tb-100vh'} ${minHeightSp || 'min-h-sp-100vh'}`}>
+		<div {...blockProps}>
 			<header className="fv_in_header">
 				<h1 className="logo"><a href={logoUrl || '#'} data-home-url="">
 					{logoImg ? <img src={logoImg} alt="" style={{height:logoImgHeight+'%',width:'auto'}}/> :

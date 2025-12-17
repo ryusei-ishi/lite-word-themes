@@ -1,0 +1,90 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-content-1",
+	"version": "1.0.0",
+	"title": "Content 1",
+	"category": "lw-content",
+	"icon": "format-image",
+	"editorScript": "file:./lw-content-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"imageUrl": {
+			"type": "string",
+			"default": "https://picsum.photos/1000/1000?random=1"
+		},
+		"imageAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"title": {
+			"type": "string",
+			"source": "html",
+			"selector": ".lw-content-1__text h3",
+			"default": "タイトルテキスト"
+		},
+		"content": {
+			"type": "string",
+			"source": "html",
+			"selector": ".lw-content-1__text p",
+			"default": "テキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキスト"
+		},
+		"linkUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"linkText": {
+			"type": "string",
+			"default": "詳細はこちら"
+		},
+		"linkTarget": {
+			"type": "string",
+			"default": ""
+		},
+		"titleFontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"titleFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"contentFontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"contentFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"linkFontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"linkFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"imagePosition": {
+			"type": "string",
+			"default": "left"
+		},
+		"linkButtonBackgroundColor": {
+			"type": "string",
+			"default": "var(--color-accent)"
+		},
+		"linkButtonTextColor": {
+			"type": "string",
+			"default": "#fff"
+		}
+	},
+	"no": 1
+}

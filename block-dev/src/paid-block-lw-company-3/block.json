@@ -1,0 +1,105 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-lw-company-3",
+	"version": "1.0.0",
+	"title": "会社概要 03",
+	"category": "lw-table",
+	"icon": "building",
+	"supports": {
+		"anchor": true
+	},
+	"editorScript": "file:./paid-block-lw-company-3.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 3,
+	"attributes": {
+		"maxWidth": {
+			"type": "number",
+			"default": 1080
+		},
+		"fontSizeClass": {
+			"type": "string",
+			"default": "font_size_m"
+		},
+		"dtWidthClass": {
+			"type": "string",
+			"default": "dt_width_m"
+		},
+		"lineHeight": {
+			"type": "number",
+			"default": 1.6
+		},
+		"spFullDt": {
+			"type": "boolean",
+			"default": false
+		},
+		"dtBackgroundColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"dtTextColor": {
+			"type": "string",
+			"default": ""
+		},
+		"fontDt": {
+			"type": "string",
+			"default": "Murecho"
+		},
+		"fontWeightDt": {
+			"type": "string",
+			"default": "600"
+		},
+		"ddTextColor": {
+			"type": "string",
+			"default": ""
+		},
+		"fontDd": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightDd": {
+			"type": "string",
+			"default": ""
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".lw-company-3__row",
+			"query": {
+				"term": {
+					"type": "string",
+					"source": "html",
+					"selector": "dt .lw-company-3__dt_text"
+				},
+				"desc": {
+					"type": "string",
+					"source": "html",
+					"selector": "dd"
+				}
+			},
+			"default": [
+				{
+					"term": "会社名",
+					"desc": "サンプル株式会社"
+				},
+				{
+					"term": "所在地",
+					"desc": "東京都渋谷区1-2-3"
+				},
+				{
+					"term": "設立",
+					"desc": "2020年1月"
+				}
+			]
+		}
+	}
+}

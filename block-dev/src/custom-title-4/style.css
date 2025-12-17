@@ -1,9 +1,12 @@
 .custom-title-4 {
   margin: 1em 0;
-  padding-bottom: 0 !important;
   text-align: center;
   border: none !important;
   font-size: 20px !important;
+}
+
+.custom-title-4:not([class*="lw_padding_bottom_"]) {
+  padding-bottom: 0 !important;
 }
 
 .custom-title-4 .sub {

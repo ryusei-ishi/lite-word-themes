@@ -1,67 +1,11 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { InspectorControls, MediaUpload, RichText } from '@wordpress/block-editor';
+import { InspectorControls, MediaUpload, RichText, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, TextControl, ColorPalette, RangeControl, ToggleControl } from '@wordpress/components';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/paid-block-before-after-1', {
-    title: 'ビフォーアフター 01',
-    icon: 'format-image',
-    category: 'liteword-other',
-    supports: {
-        anchor: true,
-    },
-    attributes: {
-        beforeImageUrl: {
-            type: 'string',
-            default: 'https://lite-word.com/sample_img/before_after/1_1.webp',
-        },
-        beforeImageAlt: {
-            type: 'string',
-            default: '',
-        },
-        beforeText: {
-            type: 'string',
-            default: 'Before',
-        },
-        afterImageUrl: {
-            type: 'string',
-            default: 'https://lite-word.com/sample_img/before_after/1_2.webp',
-        },
-        afterImageAlt: {
-            type: 'string',
-            default: '',
-        },
-        afterText: {
-            type: 'string',
-            default: 'After',
-        },
-        beforeTextBgColor: {
-            type: 'string',
-            default: '#e64343',
-        },
-        afterTextBgColor: {
-            type: 'string',
-            default: '#e64343',
-        },
-        arrowBgColor: {
-            type: 'string',
-            default: '#e64343',
-        },
-        maxWidth: {
-            type: 'number',
-            default: 800,
-        },
-        aspectRatioHeight: {
-            type: 'number',
-            default: 800,
-        },
-        hasImageShadow: {
-            type: 'boolean',
-            default: false,
-        },
-    },
-
+registerBlockType(metadata.name, {
     edit: (props) => {
         const { attributes, setAttributes } = props;
         const {
@@ -78,6 +22,10 @@ registerBlockType('wdl/paid-block-before-after-1', {
             aspectRatioHeight,
             hasImageShadow,
         } = attributes;
+
+        const blockProps = useBlockProps({
+            className: 'paid-block-before-after-1'
+        });
 
         return (
             <>
@@ -190,7 +138,7 @@ registerBlockType('wdl/paid-block-before-after-1', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className="paid-block-before-after-1">
+                <div {...blockProps}>
                     <div className="this_wrap" style={{ maxWidth: maxWidth + 'px' }}>
                         <div className={`image ${hasImageShadow ? 'has-shadow' : ''}`} style={{ aspectRatio: `800 / ${aspectRatioHeight}` }}>
                             <img
@@ -244,8 +192,12 @@ registerBlockType('wdl/paid-block-before-after-1', {
             hasImageShadow,
         } = attributes;
 
+        const blockProps = useBlockProps.save({
+            className: 'paid-block-before-after-1'
+        });
+
         return (
-            <div className="paid-block-before-after-1">
+            <div {...blockProps}>
                 <div className="this_wrap" style={{ maxWidth: maxWidth + 'px' }}>
                     <div className={`image ${hasImageShadow ? 'has-shadow' : ''}`} style={{ aspectRatio: `800 / ${aspectRatioHeight}` }}>
                         <img

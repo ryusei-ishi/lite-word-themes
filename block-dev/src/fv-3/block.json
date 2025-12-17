@@ -1,0 +1,42 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/fv-3",
+	"version": "1.0.0",
+	"title": "固定ページタイトル 03(画像のみの場合)",
+	"category": "lw-firstview",
+	"icon": "format-image",
+	"editorScript": "file:./fv-3.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"imagePc": {
+			"type": "string",
+			"default": ""
+		},
+		"imageSp": {
+			"type": "string",
+			"default": ""
+		},
+		"altText": {
+			"type": "string",
+			"default": ""
+		},
+		"headingTag": {
+			"type": "string",
+			"default": "h1"
+		},
+		"widthSetting": {
+			"type": "string",
+			"default": "full"
+		}
+	},
+	"no": 3
+}

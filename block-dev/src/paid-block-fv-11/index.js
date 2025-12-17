@@ -9,6 +9,7 @@ import {
     InspectorControls,
     MediaUpload,
     RichText,
+    useBlockProps,
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -19,88 +20,19 @@ import {
     Button,
     ColorPicker,
 } from '@wordpress/components';
-import { Fragment, useEffect } from '@wordpress/element';
+import { useEffect } from '@wordpress/element';
 
-/* ★ 追加 ──────────────────────────────────────────────── */
 import {
     minHeightPcClassOptionArr,
     minHeightTbClassOptionArr,
     minHeightSpClassOptionArr,
 } from '../utils.js';
-/* ─────────────────────────────────────────────────────── */
 
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/paid-block-fv-11', {
-    title   : 'FV 11 背景画像スライダー',
-    icon    : 'images-alt2',
-    category: 'liteword-banner',
-
-    // ------------------------------------------------------------------
-    // ▶ Attributes
-    // ------------------------------------------------------------------
-    attributes: {
-        /* 基本 */
-        blockId: { type: 'string' },
-
-        slides: {
-            type   : 'array',
-            default: [
-                {
-                    pcImgUrl: 'https://lite-word.com/sample_img/shop/6.webp',
-                    spImgUrl: '',
-                    altText : 'スライド1のalt',
-                    linkUrl : ''
-                },
-                {
-                    pcImgUrl: 'https://lite-word.com/sample_img/shop/2.webp',
-                    spImgUrl: '',
-                    altText : 'スライド2のalt',
-                    linkUrl : ''
-                }
-            ]
-        },
-
-        /* レイアウト */
-        layoutType: { type: 'string', default: 'full' }, // 'full' | 'fixed'
-        maxWidth  : { type: 'number', default: 1200 },
-
-        /* Swiper */
-        autoplayDelay       : { type: 'number',  default: 3000 },
-        sliderEffect        : { type: 'string',  default: 'fade' }, // 'fade' | 'slide'
-        crossFade           : { type: 'boolean', default: true },
-        loop                : { type: 'boolean', default: true },
-        disableOnInteraction: { type: 'boolean', default: false },
-        showPagination      : { type: 'boolean', default: true },
-        paginationClickable : { type: 'boolean', default: true },
-        showNavigation      : { type: 'boolean', default: true },
-        sliderSpeed         : { type: 'number',  default: 1000 },
-
-        /* カラー */
-        paginationColor: { type: 'string', default: '#ffffff' },
-        nextButtonColor: { type: 'string', default: '#ffffff' },
-
-        /* ★ 追加：最小高さクラス */
-        minHeightPc: { type: 'string', default: 'min-h-pc-480px' },
-        minHeightTb: { type: 'string', default: 'min-h-tb-380px' },
-        minHeightSp: { type: 'string', default: 'min-h-sp-320px' },
-
-        /* ★ 追加：リッチテキスト & CTA 用 */
-        subTitle        : { type: 'string',  default: 'サブタイトル' },
-        mainTitle       : { type: 'string',  default: 'メインタイトル' },
-        descriptionText : { type: 'string',  default: 'サブテキストが入ります。ここは任意のテキストを入れてください。' },
-        buttonLabel     : { type: 'string',  default: 'ボタンテキスト' },
-        ctaLinkUrl      : { type: 'string',  default: '#' },
-        ctaOpenNewTab   : { type: 'boolean', default: false },
-        /* ★ 追加：CTAボタン表示／非表示 */
-        showCtaButton   : { type: 'boolean', default: true },
-
-        /* ★ 追加：image_filter の色・透明度 */
-        filterColor     : { type: 'string',  default: '#000000' }, // 単色
-        filterOpacity   : { type: 'number',  default: 0.6 },       // 0–1
-    },
-
+registerBlockType(metadata.name, {
     // ------------------------------------------------------------------
     // ▶ Edit
     // ------------------------------------------------------------------
@@ -157,11 +89,33 @@ registerBlockType('wdl/paid-block-fv-11', {
             }
         };
 
+        const moveSlideUp = ( index ) => {
+            if ( index === 0 ) return;
+            const newSlides = [ ...slides ];
+            [ newSlides[ index - 1 ], newSlides[ index ] ] = [ newSlides[ index ], newSlides[ index - 1 ] ];
+            setAttributes( { slides: newSlides } );
+        };
+
+        const moveSlideDown = ( index ) => {
+            if ( index === slides.length - 1 ) return;
+            const newSlides = [ ...slides ];
+            [ newSlides[ index ], newSlides[ index + 1 ] ] = [ newSlides[ index + 1 ], newSlides[ index ] ];
+            setAttributes( { slides: newSlides } );
+        };
+
+        const blockProps = useBlockProps({
+            id: blockId,
+            className: `${layoutType === 'full'
+                ? 'swiper paid-block-fv-11 max-w'
+                : 'swiper paid-block-fv-11'} ${minHeightPc} ${minHeightTb} ${minHeightSp}`,
+            style: layoutType === 'fixed' ? { maxWidth } : {}
+        });
+
         /* ----------------------------------------------------------*/
         /* Gutenberg サイドバー                                       */
         /* ----------------------------------------------------------*/
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
 
                     {/* --- レイアウト設定 -------------------------------- */}
@@ -258,7 +212,27 @@ registerBlockType('wdl/paid-block-fv-11', {
 
                         { slides.map( ( slide, index ) => (
                             <div key={ index } style={ { border:'1px solid #ddd',padding:'10px',marginTop:'10px' } }>
-                                <p><strong>スライド { index + 1 }</strong></p>
+                                <div style={ { display:'flex', justifyContent:'space-between', alignItems:'center', marginBottom:'8px' } }>
+                                    <strong>スライド { index + 1 }</strong>
+                                    <div style={ { display:'flex', gap:'4px' } }>
+                                        <Button
+                                            variant="secondary"
+                                            onClick={ ()=>moveSlideUp(index) }
+                                            disabled={ index === 0 }
+                                            style={ { width:'32px', height:'32px', padding:'0', display:'flex', alignItems:'center', justifyContent:'center' } }
+                                        >
+                                            ↑
+                                        </Button>
+                                        <Button
+                                            variant="secondary"
+                                            onClick={ ()=>moveSlideDown(index) }
+                                            disabled={ index === slides.length - 1 }
+                                            style={ { width:'32px', height:'32px', padding:'0', display:'flex', alignItems:'center', justifyContent:'center' } }
+                                        >
+                                            ↓
+                                        </Button>
+                                    </div>
+                                </div>
 
                                 {/* PC画像 */}
                                 <MediaUpload
@@ -413,16 +387,7 @@ registerBlockType('wdl/paid-block-fv-11', {
                 {/* -------------------------------------------------- */}
                 {/* エディター内プレビュー                            */}
                 {/* -------------------------------------------------- */}
-                <div
-                    id={ blockId }
-                    className={
-                        `${ layoutType==='full'
-                            ? 'swiper paid-block-fv-11 max-w'
-                            : 'swiper paid-block-fv-11' }
-                        ${ minHeightPc } ${ minHeightTb } ${ minHeightSp }`
-                    }
-                    style={ layoutType==='fixed' ? { maxWidth } : {} }
-                >
+                <div {...blockProps}>
                     <div className="text_in center">
                         <div className="in">
                             <h1 className="ttl">
@@ -468,19 +433,17 @@ registerBlockType('wdl/paid-block-fv-11', {
                             ) }
                         </div>
                     </div>
+                    {/* エディターでは1枚目のみ表示（JSが動かないため） */}
                     <div className="swiper-wrapper">
-                        { slides.map( ( slide, i ) => {
-                            const spImgSrc = slide.spImgUrl || slide.pcImgUrl;
-                            return (
-                                <div className="swiper-slide" key={ i } style={ { textAlign:'center' } }>
-                                    <picture className="bg_img">
-                                        <source srcSet={ spImgSrc } media="(max-width:800px)" />
-                                        <source srcSet={ slide.pcImgUrl } media="(min-width:801px)" />
-                                        <img src={ slide.pcImgUrl } alt={ slide.altText } />
-                                    </picture>
-                                </div>
-                            );
-                        } ) }
+                        { slides[0] && slides[0].pcImgUrl && (
+                            <div className="swiper-slide">
+                                <picture className="bg_img">
+                                    <source srcSet={ slides[0].spImgUrl || slides[0].pcImgUrl } media="(max-width:800px)" />
+                                    <source srcSet={ slides[0].pcImgUrl } media="(min-width:801px)" />
+                                    <img src={ slides[0].pcImgUrl } alt={ slides[0].altText } />
+                                </picture>
+                            </div>
+                        ) }
                         {/* ★ フィルター要素 */}
                         <div
                             className="image_filter"
@@ -505,7 +468,7 @@ registerBlockType('wdl/paid-block-fv-11', {
                         #${ blockId } .swiper-button-prev { color:${ nextButtonColor }; }
                     `}</style>
                 ) }
-            </Fragment>
+            </>
         );
     },
 
@@ -528,6 +491,14 @@ registerBlockType('wdl/paid-block-fv-11', {
             showCtaButton,
             filterColor, filterOpacity,
         } = attributes;
+
+        const blockProps = useBlockProps.save({
+            id: blockId,
+            className: `${layoutType === 'full'
+                ? 'swiper paid-block-fv-11 max-w init-hide'
+                : 'swiper paid-block-fv-11 init-hide'} ${minHeightPc} ${minHeightTb} ${minHeightSp}`,
+            style: layoutType === 'fixed' ? { maxWidth } : { maxWidth: '100vw' }
+        });
 
         /* ---------- Swiper 設定文字列（observer 追加） -------------*/
         const swiperConfig = `
@@ -589,20 +560,7 @@ registerBlockType('wdl/paid-block-fv-11', {
 
         /* ---------- JSX 出力 -------------------------------------*/
         return (
-            <div
-                id={ blockId }
-                className={
-                    `${ layoutType==='full'
-                        ? 'swiper paid-block-fv-11 max-w init-hide'
-                        : 'swiper paid-block-fv-11 init-hide' }
-                    ${ minHeightPc } ${ minHeightTb } ${ minHeightSp }`
-                }
-                style={
-                    layoutType==='fixed'
-                        ? { maxWidth }
-                        : { maxWidth:'100vw' }
-                }
-            >
+            <div {...blockProps}>
                 <div className="text_in center">
                     <div className="in">
                         <h1 className="ttl">

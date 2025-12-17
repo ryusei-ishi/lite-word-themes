@@ -5,14 +5,12 @@
   border-top: 2px solid #ebebeb;
   grid-template-columns: 240px calc(100% - 240px);
 }
-
 @container (max-width: 800px) {
   .shin-gas-station-01-contact .lw_mail_form .form_group {
     padding: 24px 8px 32px 8px;
     grid-template-columns: 100%;
   }
 }
-
 .shin-gas-station-01-contact .lw_mail_form .form_group::before, .shin-gas-station-01-contact .lw_mail_form .form_group::after {
   position: absolute;
   left: 0;
@@ -22,35 +20,28 @@
   display: block;
   background: var(--color-main);
 }
-
 .shin-gas-station-01-contact .lw_mail_form .form_group::before {
   top: -2px;
 }
-
 .shin-gas-station-01-contact .lw_mail_form .form_group::after {
   bottom: -2px;
   display: none;
 }
-
 .shin-gas-station-01-contact .lw_mail_form .form_group.last_form {
   border-bottom: 2px solid #ebebeb;
 }
-
 .shin-gas-station-01-contact .lw_mail_form .form_group.last_form::after {
   display: block;
 }
-
 .shin-gas-station-01-contact .lw_mail_form .form_group + .form_group {
   margin-top: 0;
 }
-
 .shin-gas-station-01-contact .lw_mail_form .form_group .label_in label {
   justify-content: start;
   align-items: center;
   align-content: center;
   gap: 12px;
 }
-
 .shin-gas-station-01-contact .lw_mail_form .form_group .label_in label .required {
   padding: 4px;
   font-size: 12px;
@@ -58,22 +49,19 @@
   line-height: 1;
   font-weight: 500;
 }
-
 .shin-gas-station-01-contact .lw_mail_form .form_group .form_in {
   padding-left: 40px;
 }
-
 @container (max-width: 800px) {
   .shin-gas-station-01-contact .lw_mail_form .form_group .form_in {
     padding-left: 0;
   }
 }
-
-.shin-gas-station-01-contact .lw_mail_form .form_group input[type="text"],
-.shin-gas-station-01-contact .lw_mail_form .form_group input[type="email"],
-.shin-gas-station-01-contact .lw_mail_form .form_group input[type="tel"],
-.shin-gas-station-01-contact .lw_mail_form .form_group input[type="url"],
-.shin-gas-station-01-contact .lw_mail_form .form_group input[type="password"],
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=text],
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=email],
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=tel],
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=url],
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=password],
 .shin-gas-station-01-contact .lw_mail_form .form_group textarea {
   padding: 0.8em 0.8em 0.6em 1.5em;
   line-height: 1.8em;
@@ -82,62 +70,56 @@
   border: none;
   max-width: 480px;
 }
-
 @container (max-width: 800px) {
-  .shin-gas-station-01-contact .lw_mail_form .form_group input[type="text"],
-  .shin-gas-station-01-contact .lw_mail_form .form_group input[type="email"],
-  .shin-gas-station-01-contact .lw_mail_form .form_group input[type="tel"],
-  .shin-gas-station-01-contact .lw_mail_form .form_group input[type="url"],
-  .shin-gas-station-01-contact .lw_mail_form .form_group input[type="password"],
+  .shin-gas-station-01-contact .lw_mail_form .form_group input[type=text],
+  .shin-gas-station-01-contact .lw_mail_form .form_group input[type=email],
+  .shin-gas-station-01-contact .lw_mail_form .form_group input[type=tel],
+  .shin-gas-station-01-contact .lw_mail_form .form_group input[type=url],
+  .shin-gas-station-01-contact .lw_mail_form .form_group input[type=password],
   .shin-gas-station-01-contact .lw_mail_form .form_group textarea {
     font-size: var(--font-size-post-df_tb);
   }
 }
-
 @container (max-width:600px) {
-  .shin-gas-station-01-contact .lw_mail_form .form_group input[type="text"],
-  .shin-gas-station-01-contact .lw_mail_form .form_group input[type="email"],
-  .shin-gas-station-01-contact .lw_mail_form .form_group input[type="tel"],
-  .shin-gas-station-01-contact .lw_mail_form .form_group input[type="url"],
-  .shin-gas-station-01-contact .lw_mail_form .form_group input[type="password"],
+  .shin-gas-station-01-contact .lw_mail_form .form_group input[type=text],
+  .shin-gas-station-01-contact .lw_mail_form .form_group input[type=email],
+  .shin-gas-station-01-contact .lw_mail_form .form_group input[type=tel],
+  .shin-gas-station-01-contact .lw_mail_form .form_group input[type=url],
+  .shin-gas-station-01-contact .lw_mail_form .form_group input[type=password],
   .shin-gas-station-01-contact .lw_mail_form .form_group textarea {
     font-size: var(--font-size-post-df_sp);
   }
 }
-
-.shin-gas-station-01-contact .lw_mail_form .form_group input[type="text"]:focus,
-.shin-gas-station-01-contact .lw_mail_form .form_group input[type="email"]:focus,
-.shin-gas-station-01-contact .lw_mail_form .form_group input[type="tel"]:focus,
-.shin-gas-station-01-contact .lw_mail_form .form_group input[type="url"]:focus,
-.shin-gas-station-01-contact .lw_mail_form .form_group input[type="password"]:focus,
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=text]:focus,
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=email]:focus,
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=tel]:focus,
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=url]:focus,
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=password]:focus,
 .shin-gas-station-01-contact .lw_mail_form .form_group textarea:focus {
   border-color: var(--color-main);
   outline-color: var(--color-main);
 }
-
-.shin-gas-station-01-contact .lw_mail_form .form_group input[type="text"]::placeholder,
-.shin-gas-station-01-contact .lw_mail_form .form_group input[type="email"]::placeholder,
-.shin-gas-station-01-contact .lw_mail_form .form_group input[type="tel"]::placeholder,
-.shin-gas-station-01-contact .lw_mail_form .form_group input[type="url"]::placeholder,
-.shin-gas-station-01-contact .lw_mail_form .form_group input[type="password"]::placeholder,
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=text]::-moz-placeholder, .shin-gas-station-01-contact .lw_mail_form .form_group input[type=email]::-moz-placeholder, .shin-gas-station-01-contact .lw_mail_form .form_group input[type=tel]::-moz-placeholder, .shin-gas-station-01-contact .lw_mail_form .form_group input[type=url]::-moz-placeholder, .shin-gas-station-01-contact .lw_mail_form .form_group input[type=password]::-moz-placeholder, .shin-gas-station-01-contact .lw_mail_form .form_group textarea::-moz-placeholder {
+  color: #C6C6C6;
+}
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=text]::placeholder,
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=email]::placeholder,
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=tel]::placeholder,
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=url]::placeholder,
+.shin-gas-station-01-contact .lw_mail_form .form_group input[type=password]::placeholder,
 .shin-gas-station-01-contact .lw_mail_form .form_group textarea::placeholder {
   color: #C6C6C6;
 }
-
 .shin-gas-station-01-contact .lw_mail_form .form_group select {
   padding: 1em 0.8em 0.8em 1.2em;
   max-width: 480px;
   background: #F6F6F6;
   border-radius: 8px;
   border: none;
-  -webkit-appearance: none;
-  /* Safari, Chrome */
-  -moz-appearance: none;
-  /* Firefox */
-  appearance: none;
-  /* 標準 */
+  -webkit-appearance: none; /* Safari, Chrome */
+  -moz-appearance: none; /* Firefox */
+  appearance: none; /* 標準 */
 }
-
 .shin-gas-station-01-contact .lw_mail_form .form_group .radio_in {
   display: flex;
   flex-wrap: wrap;
@@ -145,38 +127,31 @@
   align-content: center;
   gap: 20px;
 }
-
 .shin-gas-station-01-contact .lw_mail_form .form_group .radio_in label + label {
   margin-top: 0 !important;
 }
-
 .shin-gas-station-01-contact .lw_mail_form .form_group .radio_in label input {
   width: 16px;
   height: 16px;
   accent-color: var(--color-main);
 }
-
 .shin-gas-station-01-contact .consent_set .consent_text_wrap {
   border-radius: 12px;
   border: none !important;
 }
-
 .shin-gas-station-01-contact .submit_wrap {
   margin-top: 64px !important;
 }
-
 @media (max-width: 800px) {
   .shin-gas-station-01-contact .submit_wrap {
     margin-top: 48px !important;
   }
 }
-
 @media (max-width: 600px) {
   .shin-gas-station-01-contact .submit_wrap {
     margin-top: 32px !important;
   }
 }
-
 .shin-gas-station-01-contact .submit_wrap button {
   min-width: 300px !important;
   height: 80px !important;
@@ -184,7 +159,6 @@
   font-size: 24px !important;
   font-weight: 600;
 }
-
 @media (max-width: 800px) {
   .shin-gas-station-01-contact .submit_wrap button {
     min-width: 240px !important;
@@ -192,7 +166,6 @@
     font-size: 20px !important;
   }
 }
-
 @media (max-width: 600px) {
   .shin-gas-station-01-contact .submit_wrap button {
     min-width: 200px !important;
@@ -200,7 +173,6 @@
     font-size: 18px !important;
   }
 }
-
 .shin-gas-station-01-contact .submit_wrap button svg {
   display: none;
-}
+}/*# sourceMappingURL=style.css.map */

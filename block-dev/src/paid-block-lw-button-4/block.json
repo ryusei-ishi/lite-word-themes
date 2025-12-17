@@ -1,0 +1,94 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-lw-button-4",
+	"version": "1.0.0",
+	"title": "リンクボタン 04",
+	"category": "lw-button",
+	"icon": "button",
+	"description": "有料リンクボタン（スタイル04）",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"blockId": {
+			"type": "string"
+		},
+		"btnText": {
+			"type": "string",
+			"default": "詳細はこちら"
+		},
+		"bgColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"textColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"fontWeight": {
+			"type": "string",
+			"default": "400"
+		},
+		"FontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"fontSize": {
+			"type": "string",
+			"default": "m"
+		},
+		"position": {
+			"type": "string",
+			"default": "center"
+		},
+		"positionSp": {
+			"type": "string",
+			"default": ""
+		},
+		"btnUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"openNewTab": {
+			"type": "boolean",
+			"default": false
+		},
+		"selectedIcon": {
+			"type": "string",
+			"default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 512\"><path d=\"M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z\"/></svg>"
+		},
+		"iconVisible": {
+			"type": "boolean",
+			"default": true
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 1
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 200
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 320
+		},
+		"maxWidthSp": {
+			"type": "number",
+			"default": 320
+		}
+	},
+	"editorScript": "file:./paid-block-lw-button-4.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 4
+}

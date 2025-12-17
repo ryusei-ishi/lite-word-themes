@@ -3,6 +3,7 @@ import {
 	RichText,
 	InspectorControls,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -10,10 +11,11 @@ import {
 	RangeControl,
 	RadioControl,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
+
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ===== 共通オプション ===== */
 const fontOptions       = fontOptionsArr();
@@ -22,53 +24,8 @@ const fontWeightOptions = fontWeightOptionsArr();
 /* ----------------------------------------------------------
  * ブロック登録
  * -------------------------------------------------------- */
-registerBlockType('wdl/paid-block-lw-step-4', {
+registerBlockType(metadata.name, {
 	title   : 'step 04',
-	icon    : 'lightbulb',
-	category: 'liteword-other',
-	supports: { anchor: true },
-
-	attributes: {
-		bgGradient : { type: 'string',  default: 'var(--color-main)' },
-		ulMaxWidth : { type: 'number',  default: 1080 },
-
-		/* 全体フォントサイズクラス */
-		fontSizeClass: { type: 'string', default: 'font_size_m' },
-
-		/* STEP番号 */
-		fontNo       : { type: 'string', default: 'Murecho' },
-		fontWeightNo : { type: 'string', default: '600' },
-		colorNo      : { type: 'string', default: 'var(--color-main)' },
-
-		/* タイトル */
-		titleTag     : { type: 'string', default: 'h3' },
-		fontH3       : { type: 'string', default: '' },
-		fontWeightH3 : { type: 'string', default: '' },
-		colorH3      : { type: 'string', default: '' },
-
-		/* 段落 */
-		fontP        : { type: 'string', default: '' },
-		fontWeightP  : { type: 'string', default: '' },
-		colorP       : { type: 'string', default: '' },
-
-		/* コンテンツ */
-		contents: {
-			type   : 'array',
-			source : 'query',
-			selector: '.lw-step__li',
-			query  : {
-				no   : { type: 'string', source: 'html', selector: '.lw-step__li_no' },
-				// ★ selector 修正ここだけ！
-				title: { type: 'string', source: 'html', selector: '.lw-step__li_title' },
-				text : { type: 'string', source: 'html', selector: '.lw-step__li_text' },
-			},
-			default: [
-				{ no: '01', title: '応募',     text: '応募フォームより必要事項を入力し、送信してください。応募内容を確認し、追って担当者よりご連絡いたします。' },
-				{ no: '02', title: '書類選考', text: 'ご応募いただいた内容をもとに、書類選考を行います。結果は1週間以内にメールにてお知らせいたします。' },
-				{ no: '03', title: '面接',     text: '書類選考に通過された方には、担当者による面接を実施します。面接日時はご相談の上、決定いたします。' },
-			],
-		},
-	},
 
 	/* ======================================================
 	 * 1) エディタ
@@ -99,8 +56,13 @@ registerBlockType('wdl/paid-block-lw-step-4', {
 			setAttributes({ contents: updated });
 		};
 
-		return (
-			<Fragment>
+		
+        const blockProps = useBlockProps({
+            className: `paid-block-lw-step-4 ${fontSizeClass}`
+        });
+
+        return (
+			<>
 				<InspectorControls>
 					{/* --- 全体設定 --- */}
 					<PanelBody title="レイアウト全体" initialOpen={true}>
@@ -205,7 +167,7 @@ registerBlockType('wdl/paid-block-lw-step-4', {
 				</InspectorControls>
 
 				{/* ---------- エディタ表示 ---------- */}
-				<div className={`paid-block-lw-step-4 ${fontSizeClass}`}>
+				<div {...blockProps}>
 					<ul className="lw-step__inner" style={{ maxWidth: ulMaxWidth }}>
 						{contents.map((c, i) => (
 							<li
@@ -274,7 +236,7 @@ registerBlockType('wdl/paid-block-lw-step-4', {
 						リストを追加する
 					</button>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 

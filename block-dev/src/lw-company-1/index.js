@@ -15,6 +15,7 @@ import {
 	RichText,
 	InspectorControls,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -23,10 +24,10 @@ import {
 	RadioControl,
 	ToggleControl,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* -----------------------------------------------
    セレクトオプション
@@ -37,62 +38,7 @@ const fontWeightOptions = fontWeightOptionsArr();
 /* -----------------------------------------------
    ブロック登録
 ------------------------------------------------ */
-registerBlockType('wdl/lw-company-1', {
-	title   : '会社概要 01',
-	icon    : 'building',
-	category: 'liteword-other',
-	supports: { anchor: true },
-
-	/* ---------- 属性 ---------- */
-	attributes: {
-		// レイアウト
-		maxWidth: { type: 'number', default: 1600 },
-		fontSizeClass: { type: 'string', default: 'font_size_m' },
-		dtWidthClass: { type: 'string', default: 'dt_width_m' },
-		lineHeight: { type: 'number', default: 1.6 },
-		
-		// レスポンシブ
-		spFullDt: { type: 'boolean', default: false },
-		
-		// 項目名（dt）スタイル
-		dtBackgroundColor: { type: 'string', default: '' },
-		dtTextColor: { type: 'string', default: '#111' },
-		fontDt: { type: 'string', default: '' },
-		fontWeightDt: { type: 'string', default: '' },
-		
-		// 内容（dd）スタイル
-		ddTextColor: { type: 'string', default: '#111' },
-		fontDd: { type: 'string', default: '' },
-		fontWeightDd: { type: 'string', default: '' },
-		
-		// デザイン
-		borderColor: { type: 'string', default: '#ddd' },
-		
-		// コンテンツ（リピーター）
-		contents: {
-			type: 'array',
-			source: 'query',
-			selector: '.lw-company-1__dl',
-			query: {
-				title: { type: 'string', source: 'html', selector: 'dt' },
-				text: { type: 'string', source: 'html', selector: 'dd' },
-			},
-			default: [
-				{ title: '社名',       text: '株式会社サンプル' },
-				{ title: '設立',       text: '2000年4月1日' },
-				{ title: '所在地',     text: '東京都新宿区西新宿1-1-1' },
-				{ title: '代表者',     text: '代表取締役社長 山田太郎' },
-				{ title: '資本金',     text: '1億円' },
-				{ title: '従業員数',   text: '100名' },
-				{ title: '事業内容',   text: 'ウェブサイト制作、システム開発、マーケティング支援' },
-				{ title: '取引銀行',   text: 'みずほ銀行 新宿支店' },
-				{ title: '主要取引先', text: '株式会社○○、株式会社△△、株式会社□□' },
-				{ title: '連絡先',     text: 'TEL: 03-1234-5678 / FAX: 03-1234-5679' },
-				{ title: 'URL',       text: 'https://www.sample.co.jp' },
-			],
-		},
-	},
-
+registerBlockType(metadata.name, {
 	/* ---------- エディター ---------- */
 	edit({ attributes, setAttributes }) {
 		const {
@@ -133,9 +79,13 @@ registerBlockType('wdl/lw-company-1', {
 			setAttributes({ contents: reordered });
 		};
 
+		const blockProps = useBlockProps({
+			className: 'lw-company-1'
+		});
+
 		/* --- JSX --- */
 		return (
-			<Fragment>
+			<>
 				<InspectorControls>
 					{/* ■ レイアウト設定 - 必ず最初に配置、デフォルトで開いた状態 */}
 					<PanelBody title="レイアウト設定" initialOpen={true}>
@@ -246,7 +196,7 @@ registerBlockType('wdl/lw-company-1', {
 				</InspectorControls>
 
 				{/* ビジュアル */}
-				<div className="lw-company-1">
+				<div {...blockProps}>
 					<div
 						className="lw-company-1__inner"
 						style={{ maxWidth: maxWidth }}
@@ -326,7 +276,7 @@ registerBlockType('wdl/lw-company-1', {
 						リストを追加する
 					</button>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -341,8 +291,12 @@ registerBlockType('wdl/lw-company-1', {
 			contents,
 		} = attributes;
 
+		const blockProps = useBlockProps.save({
+			className: 'lw-company-1'
+		});
+
 		return (
-			<div className="lw-company-1">
+			<div {...blockProps}>
 				<div
 					className="lw-company-1__inner"
 					style={{ maxWidth: maxWidth }}

@@ -1,0 +1,33 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-space-1",
+	"version": "1.0.0",
+	"title": "Lw スペーサー（PC・TB・SP）",
+	"category": "lw-utility",
+	"icon": "align-wide",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"pcHeight": {
+			"type": "number",
+			"default": 80
+		},
+		"tbHeight": {
+			"type": "number",
+			"default": 64
+		},
+		"spHeight": {
+			"type": "number",
+			"default": 40
+		}
+	},
+	"editorScript": "file:./lw-space-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css"
+}

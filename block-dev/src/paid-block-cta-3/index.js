@@ -1,93 +1,32 @@
+/**
+ * CTA 03
+ * ★ apiVersion 3 対応（2025-12-07）
+ */
 import { registerBlockType } from '@wordpress/blocks';
 import {
 	RichText,
 	InspectorControls,
 	MediaUpload,
-    ColorPalette,
-
+	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
 	TextControl,
 	Button,
-    SelectControl
+	SelectControl
 } from '@wordpress/components';
 import { Fragment, useEffect } from '@wordpress/element';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
+
+import metadata from './block.json';
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
 // フォント太さオプションを変数に定義
 const fontWeightOptions = fontWeightOptionsArr();
 
-// カスタムブロックのIDは「paid-block-cta-3」
-registerBlockType('wdl/paid-block-cta-3', {
-	title: 'CTA 03',
-    icon: 'megaphone',
-    category: 'liteword-other',
-	supports: {
-		anchor: true
-	},
-	attributes: {
-		mainTitle: {
-			type: 'string',
-			default: '中古車・高価買取'
-		},
-		leadText: {
-			type: 'string',
-			default: '365日年中無休お電話受付中\n査定は完全無料です。'
-		},
-		listItem1: {
-			type: 'string',
-			default: '即日買取'
-		},
-		listItem2: {
-			type: 'string',
-			default: '出張買取'
-		},
-		listItem3: {
-			type: 'string',
-			default: '実績多数'
-		},
-		phoneNumber: {
-			type: 'string',
-			default: '0120-000-000'
-		},
-		imageUrl: {
-			type: 'string',
-			default: 'https://lite-word.com/sample_img/reception/women/6.webp'
-		},
-		// 画像の表示を切り替えるためのクラス用
-		objectFit: {
-			type: 'string',
-			default: 'object_fit_cover' // object_fit_cover or object_fit_contain
-		},
-		objectPosition: {
-			type: 'string',
-			default: 'object_position_center' // object_position_center, object_position_bottom, object_position_top
-		},
-        bgColor: {
-            type: 'string',
-            default: '#f8f4de'
-        },
-        bdColor: {
-            type: 'string',
-            default: '#f45353'
-        },
-		tapTelText: {
-			type: 'string',
-			default: 'タップしてお電話ください'
-		},
-		fontTel: {
-			type: 'string',
-			default: 'Montserrat'
-		},
-		fontWeightTel: {
-			type: 'string',
-			default: ''
-		}
-	},
-
+registerBlockType(metadata.name, {
 	edit: (props) => {
 		const { attributes, setAttributes } = props;
 		const {
@@ -123,8 +62,13 @@ registerBlockType('wdl/paid-block-cta-3', {
 			setAttributes({ imageUrl: media.url });
 		};
 
+		// useBlockProps で apiVersion 3 対応
+		const blockProps = useBlockProps({
+			className: 'paid-block-cta-3'
+		});
+
 		return (
-			<Fragment>
+			<div {...blockProps}>
 				<InspectorControls>
 					<PanelBody title="マニュアル">
                         <div>
@@ -229,7 +173,7 @@ registerBlockType('wdl/paid-block-cta-3', {
 
 				</InspectorControls>
 
-				<div className="paid-block-cta-3">
+				<div className="paid-block-cta-3__inner">
 					<div className="this_wrap" style={{ backgroundColor: bgColor , borderColor: bdColor }}>
 						<div className="text_in">
 							<RichText
@@ -302,7 +246,7 @@ registerBlockType('wdl/paid-block-cta-3', {
 						/>
 					</div>
 				</div>
-			</Fragment>
+			</div>
 		);
 	},
 
@@ -336,8 +280,13 @@ registerBlockType('wdl/paid-block-cta-3', {
 
 		const plainPhoneNumber = getPlainPhoneNumber(phoneNumber);
 
+		// useBlockProps.save() で apiVersion 3 対応
+		const blockProps = useBlockProps.save({
+			className: 'paid-block-cta-3'
+		});
+
 		return (
-			<div className="paid-block-cta-3">
+			<div {...blockProps}>
 				<a className="this_wrap" href={plainPhoneNumber ? `tel:${plainPhoneNumber}` : '#'} style={{ backgroundColor: bgColor , borderColor: bdColor }}>
 					<div className="text_in">
 						<RichText.Content

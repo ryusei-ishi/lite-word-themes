@@ -1,24 +1,12 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { MediaUpload, InspectorControls } from '@wordpress/block-editor';
+import { MediaUpload, InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, TextControl, SelectControl } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
-
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // ブロックの登録
-registerBlockType('wdl/fv-3', {
-    title: '固定ページタイトル 03(画像のみの場合)',
-    icon: 'format-image',
-    category: 'liteword-firstview',
-    attributes: {
-        imagePc: { type: 'string', default: '' },
-        imageSp: { type: 'string', default: '' },
-        altText: { type: 'string', default: '' },
-        headingTag: { type: 'string', default: 'h1' },
-        widthSetting: { type: 'string', default: 'full' },
-    },
-
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const { imagePc, imageSp, altText, headingTag, widthSetting } = attributes;
@@ -40,8 +28,12 @@ registerBlockType('wdl/fv-3', {
 
         const widthClass = getWidthClass();
 
+        const blockProps = useBlockProps({
+            className: `fv-3 ${widthClass}`.trim()
+        });
+
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
                     <PanelBody title="見出しタグ設定">
                         <SelectControl
@@ -118,7 +110,7 @@ registerBlockType('wdl/fv-3', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className={`fv-3 ${widthClass}`.trim()}>
+                <div {...blockProps}>
                     <HeadingTag className="ttl">
                         <picture className="image">
                             <source srcSet={imageSp} media="(max-width: 800px)" />
@@ -131,7 +123,7 @@ registerBlockType('wdl/fv-3', {
                         </picture>
                     </HeadingTag>
                 </div>
-            </Fragment>
+            </>
         );
     },
     save: function (props) {
@@ -149,8 +141,12 @@ registerBlockType('wdl/fv-3', {
 
         const widthClass = getWidthClass();
 
+        const blockProps = useBlockProps.save({
+            className: `fv-3 ${widthClass}`.trim()
+        });
+
         return (
-            <div className={`fv-3 ${widthClass}`.trim()}>
+            <div {...blockProps}>
                 <HeadingTag>
                     <picture className="image">
                         <source srcSet={imageSp} media="(max-width: 800px)" />

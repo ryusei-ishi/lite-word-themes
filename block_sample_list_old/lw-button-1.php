@@ -1,0 +1,3 @@
+<!-- wp:wdl/lw-button-01 -->
+<div class="wp-block-wdl-lw-button-01 wp-block-wdl-button-01 padding-M align-center align-sp-center" style="margin-top:10px;margin-bottom:10px"><a href="" style="max-width:240px;font-size:100%;background-color:#0073aa;color:#ffffff;padding:0.9em 1.4em;text-align:center;text-decoration:none;border-radius:0px;border-width:0px;border-style:none;border-color:#000000">詳細はこちら</a></div>
+<!-- /wp:wdl/lw-button-01 -->

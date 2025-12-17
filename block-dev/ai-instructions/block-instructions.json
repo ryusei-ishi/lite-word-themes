@@ -1,0 +1,1210 @@
+{
+  "version": "1.0",
+  "description": "AIページ生成用のブロック説明・注意事項",
+  "lastUpdated": "2025-12-02",
+  "categories": {
+    "lw-banner": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "lw-banner-info-01",
+          "name": "wdl/lw-banner-info-01",
+          "title": "バナー 01（3カラム）",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-banner-info-02",
+          "name": "wdl/lw-banner-info-02",
+          "title": "バナー 02（4カラム）",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-banner-info-03",
+          "name": "wdl/lw-banner-info-03",
+          "title": "バナー 03（3カラム）",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-banner-info-04",
+          "name": "wdl/lw-banner-info-04",
+          "title": "バナー 04（2カラム2行）",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-banner-info-05",
+          "name": "wdl/lw-banner-info-05",
+          "title": "バナー 05（2カラム2行）",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-gallery-01",
+          "name": "wdl/lw-gallery-01",
+          "title": "ギャラリー 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-gallery-02",
+          "name": "wdl/lw-gallery-02",
+          "title": "ギャラリー 02",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-lw-gallery-3",
+          "name": "wdl/paid-block-lw-gallery-3",
+          "title": "Gallery 03 画像ギャラリー",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-button": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "lw-button-1",
+          "name": "wdl/lw-button-01",
+          "title": "リンクボタン 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-button-2",
+          "name": "wdl/lw-button-02",
+          "title": "リンクボタン 02",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-button-3",
+          "name": "wdl/lw-button-03",
+          "title": "リンクボタン 03",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-pr-button-1",
+          "name": "wdl/lw-pr-button-1",
+          "title": "PRボタン 01",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-pr-button-2",
+          "name": "wdl/lw-pr-button-2",
+          "title": "PRボタン 02",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-pr-button-3",
+          "name": "wdl/lw-pr-button-3",
+          "title": "PRボタン 03",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-pr-button-4",
+          "name": "wdl/lw-pr-button-4",
+          "title": "PRボタン 04",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-pr-button-5",
+          "name": "wdl/lw-pr-button-5",
+          "title": "PRボタン 05",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-lw-button-4",
+          "name": "wdl/paid-block-lw-button-4",
+          "title": "リンクボタン 04",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-lw-button-5",
+          "name": "wdl/paid-block-lw-button-5",
+          "title": "リンクボタン 05",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-button-01",
+          "name": "wdl/shin-gas-station-01-button-01",
+          "title": "リンクボタン 01 shin shop pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-calendar": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "lw-pr-calendar-1",
+          "name": "wdl/lw-pr-calendar-1",
+          "title": "カレンダー 1（診療日）",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-comment": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "lw-comment-1",
+          "name": "wdl/lw-comment-1",
+          "title": "吹き出しコメント 1",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-company": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "lw-company-1",
+          "name": "wdl/lw-company-1",
+          "title": "会社概要 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-company-2",
+          "name": "wdl/lw-company-2",
+          "title": "会社概要 02",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-lw-company-3",
+          "name": "wdl/paid-block-lw-company-3",
+          "title": "会社概要 03",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-company-01",
+          "name": "wdl/shin-gas-station-01-company-01",
+          "title": "会社概要 1 shin shop pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-contact": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "lw-contact-3",
+          "name": "wdl/lw-contact-3",
+          "title": "お問合わせフォーム 03（ワンカラム・シンプル）",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-contact-2",
+          "name": "wdl/paid-block-contact-2",
+          "title": "お問合わせフォーム 02",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-contact",
+          "name": "wdl/shin-gas-station-01-contact",
+          "title": "お問合わせフォーム shin shop pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-content": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "lw-content-1",
+          "name": "wdl/lw-content-1",
+          "title": "Content 1",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-content-2",
+          "name": "wdl/lw-content-2",
+          "title": "content 02",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-content-8",
+          "name": "wdl/lw-content-8",
+          "title": "Content 08",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-message-1",
+          "name": "wdl/lw-message-1",
+          "title": "メッセージ 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-pr-text-1",
+          "name": "wdl/lw-pr-text-1",
+          "title": "グラデーションテキスト 01",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-content-3",
+          "name": "wdl/paid-block-content-3",
+          "title": "Content 03",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-content-4",
+          "name": "wdl/paid-block-content-4",
+          "title": "Content 04",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-content-5",
+          "name": "wdl/paid-block-content-5",
+          "title": "Content 05",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-content-6",
+          "name": "wdl/paid-block-content-6",
+          "title": "Content 06",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-content-7",
+          "name": "wdl/paid-block-content-7",
+          "title": "Content 07",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-message-01",
+          "name": "wdl/shin-gas-station-01-message-01",
+          "title": "メッセージ 1 shin shop pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-cta": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "cta-1",
+          "name": "wdl/cta-1",
+          "title": "CTA 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "cta-2",
+          "name": "wdl/cta-2",
+          "title": "CTA 02",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-cta-3",
+          "name": "wdl/paid-block-cta-3",
+          "title": "CTA 03",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-cta-4",
+          "name": "wdl/paid-block-cta-4",
+          "title": "CTA 04",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-cta",
+          "name": "wdl/shin-gas-station-01-cta",
+          "title": "CTA 1 shin shop pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-cta2",
+          "name": "wdl/shin-gas-station-01-cta2",
+          "title": "CTA 2 shin shop pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-faq": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "lw-qa-1",
+          "name": "wdl/lw-qa-1",
+          "title": "よくある質問 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-firstview": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "fv-1",
+          "name": "wdl/fv-1",
+          "title": "固定ページタイトル 01（トップ用）",
+          "blockType": "free",
+          "aiDescription": "ページ最上部に配置するメインビジュアルブロック",
+          "aiUsage": "トップページのファーストビュー用。1ページに1つだけ使用。",
+          "aiNotes": "背景画像は必須。mainTitleは<br>タグで改行可能。"
+        },
+        {
+          "slug": "fv-2",
+          "name": "wdl/fv-2",
+          "title": "固定ページタイトル 02（下層用）",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "fv-3",
+          "name": "wdl/fv-3",
+          "title": "固定ページタイトル 03(画像のみの場合)",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "fv-4",
+          "name": "wdl/fv-4",
+          "title": "固定ページタイトル 04（トップ用）",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "fv-5",
+          "name": "wdl/fv-5",
+          "title": "固定ページタイトル 05（下層用）",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "fv-6",
+          "name": "wdl/fv-6",
+          "title": "固定ページタイトル 06（下層用）",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "fv-7",
+          "name": "wdl/fv-7",
+          "title": "固定ページタイトル 07(トップ用・動画背景)",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-pr-fv-13",
+          "name": "wdl/lw-pr-fv-13",
+          "title": "固定ページタイトル 13(動画背景)",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-pr-fv-14",
+          "name": "wdl/lw-pr-fv-14",
+          "title": "FV 14 ヘッダーまで回り込む全画背景",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-pr-fv-15",
+          "name": "wdl/lw-pr-fv-15",
+          "title": "固定ページタイトル 15(動画背景)",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-pr-fv-16",
+          "name": "wdl/lw-pr-fv-16",
+          "title": "固定ページタイトル 16(動画背景)",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-fv-10",
+          "name": "wdl/paid-block-fv-10",
+          "title": "固定ページタイトル 10（下層用）",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-fv-11",
+          "name": "wdl/paid-block-fv-11",
+          "title": "FV 11 背景画像スライダー",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-fv-12",
+          "name": "wdl/paid-block-fv-12",
+          "title": "FV 12 ヘッダーまで回り込む全画背景",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-fv-8",
+          "name": "wdl/paid-block-fv-8",
+          "title": "固定ページタイトル 08（トップ用）",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-fv-9",
+          "name": "wdl/paid-block-fv-9",
+          "title": "FV 09 画像スライダー用ブロック",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-fv-lower-01",
+          "name": "wdl/shin-gas-station-01-fv-lower-01",
+          "title": "FV（下層ページ用）shin shop pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-fv-top",
+          "name": "wdl/shin-gas-station-01-fv-top",
+          "title": "FV（トップ用）shin shop pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-heading": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "custom-title-1",
+          "name": "wdl/custom-title-1",
+          "title": "見出しタイトル 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "custom-title-2",
+          "name": "wdl/custom-title-2",
+          "title": "見出しタイトル 02",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "custom-title-3",
+          "name": "wdl/custom-title-3",
+          "title": "見出しタイトル 03",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "custom-title-4",
+          "name": "wdl/custom-title-4",
+          "title": "見出しタイトル 04",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "custom-title-5",
+          "name": "wdl/custom-title-5",
+          "title": "見出しタイトル 05",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "custom-title-6",
+          "name": "wdl/custom-title-6",
+          "title": "見出しタイトル 06",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "custom-title-accordion-1",
+          "name": "wdl/custom-title-accordion-1",
+          "title": "見出しアコーディオン 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-pr-custom-title-11",
+          "name": "wdl/lw-pr-custom-title-11",
+          "title": "見出しタイトル 11",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-pr-custom-title-12",
+          "name": "wdl/lw-pr-custom-title-12",
+          "title": "見出しタイトル 12",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-pr-custom-title-13",
+          "name": "wdl/lw-pr-custom-title-13",
+          "title": "見出しタイトル 13",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-pr-custom-title-14",
+          "name": "wdl/lw-pr-custom-title-14",
+          "title": "見出しタイトル 14",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-custom-title-10",
+          "name": "wdl/paid-block-custom-title-10",
+          "title": "見出しタイトル 10",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-custom-title-7",
+          "name": "wdl/paid-block-custom-title-7",
+          "title": "見出しタイトル 07",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-custom-title-8",
+          "name": "wdl/paid-block-custom-title-8",
+          "title": "見出しタイトル 08",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-custom-title-9",
+          "name": "wdl/paid-block-custom-title-9",
+          "title": "見出しタイトル 09",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-custom-title-1",
+          "name": "wdl/shin-gas-station-01-custom-title-1",
+          "title": "見出しタイトル 1 shin shop pattern 01",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-custom-title-2",
+          "name": "wdl/shin-gas-station-01-custom-title-2",
+          "title": "見出しタイトル 2 shin shop pattern 01",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-list": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "lw-link-list-1",
+          "name": "wdl/lw-link-list-1",
+          "title": "link list 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-list-1",
+          "name": "wdl/lw-list-1",
+          "title": "List 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-list-2",
+          "name": "wdl/lw-list-2",
+          "title": "list 02",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-list-3",
+          "name": "wdl/lw-list-3",
+          "title": "list 03",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-list-4",
+          "name": "wdl/lw-list-4",
+          "title": "list 04",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-link-2",
+          "name": "wdl/paid-block-link-2",
+          "title": "リンクリスト 2",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-list-1",
+          "name": "wdl/shin-gas-station-01-list-1",
+          "title": "インフォリスト 1 shin shop pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-list-2",
+          "name": "wdl/shin-gas-station-01-list-2",
+          "title": "インフォリスト 2 shin shop pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-list-3",
+          "name": "wdl/shin-gas-station-01-list-3",
+          "title": "インフォリスト 3 shin shop pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-list-4",
+          "name": "wdl/shin-gas-station-01-list-4",
+          "title": "インフォリスト 4 shin info pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-media": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "lw-image-2",
+          "name": "wdl/lw-image-2",
+          "title": "画像カード 02",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-image-1",
+          "name": "wdl/paid-block-image-1",
+          "title": "画像 01",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-post": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "lw-news-list-1",
+          "name": "wdl/lw-news-list-1",
+          "title": "お知らせ一覧 1",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-page-list-1",
+          "name": "wdl/lw-page-list-1",
+          "title": "ページ一覧 1",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-post-list-1",
+          "name": "wdl/lw-post-list-1",
+          "title": "投稿一覧 1",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-post-list-2",
+          "name": "wdl/lw-post-list-2",
+          "title": "投稿一覧 2",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-post-list-3",
+          "name": "wdl/lw-post-list-3",
+          "title": "投稿一覧 3",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-news",
+          "name": "wdl/shin-gas-station-01-news",
+          "title": "お知らせ一覧 1 shin shop pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-post-list",
+          "name": "wdl/shin-gas-station-01-post-list",
+          "title": "投稿一覧 1 shin shop pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-profile": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "profile-1",
+          "name": "wdl/profile-1",
+          "title": "プロフィール 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-service": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "paid-block-solution-2",
+          "name": "wdl/paid-block-solution-2",
+          "title": "ソリューション 02",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "solution-1",
+          "name": "wdl/solution-1",
+          "title": "solution 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-shop": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "shin-gas-station-01-shop-list-1",
+          "name": "wdl/shin-gas-station-01-shop-list-1",
+          "title": "店舗一覧用 1 shin shop pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-step": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "lw-pr-step-7",
+          "name": "wdl/lw-pr-step-7",
+          "title": "step 07",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-step-1",
+          "name": "wdl/lw-step-1",
+          "title": "step 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": "見出しがh2固定で設置されていますので、このブロックの前にh2を設定しないでください。背景の色をselectしないと、エラーになるので必ず選択してください。"
+        },
+        {
+          "slug": "lw-step-2",
+          "name": "wdl/lw-step-2",
+          "title": "step 02",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-lw-step-3",
+          "name": "wdl/paid-block-lw-step-3",
+          "title": "step 03",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-lw-step-4",
+          "name": "wdl/paid-block-lw-step-4",
+          "title": "step 04",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-lw-step-5",
+          "name": "wdl/paid-block-lw-step-5",
+          "title": "step 05",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-lw-step-6",
+          "name": "wdl/paid-block-lw-step-6",
+          "title": "step 06",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "shin-gas-station-01-step-1",
+          "name": "wdl/shin-gas-station-01-step-1",
+          "title": "ステップ 1 shin shop pattern 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-table": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "lw-pr-table-1",
+          "name": "wdl/lw-pr-table-1",
+          "title": "価格表 01",
+          "blockType": "premium",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-history-1",
+          "name": "wdl/paid-block-history-1",
+          "title": "沿革 01",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-utility": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "lw-bg-1",
+          "name": "wdl/lw-bg-1",
+          "title": "コンテナブロック 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-my-parts-embed",
+          "name": "wdl/lw-my-parts-embed",
+          "title": "",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "lw-space-1",
+          "name": "wdl/lw-space-1",
+          "title": "Lw スペーサー（PC・TB・SP）",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    },
+    "lw-voice": {
+      "description": "",
+      "blocks": [
+        {
+          "slug": "lw-voice-1",
+          "name": "wdl/lw-voice-1",
+          "title": "お客様の声 01",
+          "blockType": "free",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": "見出しがh2固定で設置されていますので、このブロックの前にh2を設定しないでください。"
+        },
+        {
+          "slug": "paid-block-before-after-1",
+          "name": "wdl/paid-block-before-after-1",
+          "title": "ビフォーアフター 01",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-before-after-2",
+          "name": "wdl/paid-block-before-after-2",
+          "title": "ビフォーアフター 02",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-voice-2",
+          "name": "wdl/paid-block-voice-2",
+          "title": "お客様の声 2",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        },
+        {
+          "slug": "paid-block-voice-3",
+          "name": "wdl/paid-block-voice-3",
+          "title": "お客様の声 03 (スライダー・モーダル付き)",
+          "blockType": "paid",
+          "aiDescription": "",
+          "aiUsage": "",
+          "aiNotes": ""
+        }
+      ]
+    }
+  }
+}

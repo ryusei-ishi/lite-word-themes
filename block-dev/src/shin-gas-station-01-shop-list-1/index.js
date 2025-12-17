@@ -1,33 +1,11 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, MediaUpload } from '@wordpress/block-editor';
+import { RichText, InspectorControls, MediaUpload, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button } from '@wordpress/components';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/shin-gas-station-01-shop-list-1', {
-    title: '店舗一覧用 1 shin shop pattern 01',
-    icon: 'store',
-    category: 'liteword-other',
-    attributes: {
-        shopName: { type: 'string', default: 'ガソリンスタンドセルフ 〇〇店' },
-        details: {
-            type: 'array',
-            default: [
-                { dt: '住所', dd: '福島県〇〇市〇〇〇〇町1-2-345' },
-                { dt: '電話番号', dd: '012-345-6789' },
-                { dt: '営業時間', dd: '平日8:00~20:00 / 日祝9:00~20:00' },
-                { dt: '定休日', dd: '水曜日' }
-            ],
-        },
-        tags: {
-            type: 'string',
-            default: 'セルフ, 軽油, 車検, 洗車, タイヤ交換・販売, マイカーリース, クレジットカードOK'
-        },
-        imgUrl: { type: 'string', default: 'https://placehold.jp/420x320.png' },
-        imgAlt: { type: 'string', default: '' }
-    },
-
-    // ▼▼▼ edit 側 ▼▼▼
+registerBlockType(metadata.name, {
     edit: ({ attributes, setAttributes }) => {
         const { shopName, details, tags, imgUrl, imgAlt } = attributes;
 
@@ -42,6 +20,11 @@ registerBlockType('wdl/shin-gas-station-01-shop-list-1', {
             newDetails[index] = { ...newDetails[index], dd: value };
             setAttributes({ details: newDetails });
         };
+
+        
+        const blockProps = useBlockProps({
+            className: 'shin-gas-station-01-shop-list-1'
+        });
 
         return (
             <>
@@ -74,7 +57,8 @@ registerBlockType('wdl/shin-gas-station-01-shop-list-1', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className="shin-gas-station-01-shop-list-1">
+                
+                <div {...blockProps}>
                     <div className="shin-gas-station-01-shop-list-1_inner">
                         <div className="image">
                             <img src={imgUrl} alt={imgAlt} />
@@ -149,8 +133,12 @@ registerBlockType('wdl/shin-gas-station-01-shop-list-1', {
         const { shopName, details, tags, imgUrl, imgAlt } = attributes;
         const tagList = tags.split(/[,\s]+/).filter(Boolean);
 
+        const blockProps = useBlockProps.save({
+            className: 'shin-gas-station-01-shop-list-1',
+        });
+
         return (
-            <div className="shin-gas-station-01-shop-list-1">
+            <div {...blockProps}>
                 <div className="shin-gas-station-01-shop-list-1_inner">
                     <div className="image">
                         <img src={imgUrl} alt={imgAlt} />

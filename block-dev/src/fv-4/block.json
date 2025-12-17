@@ -1,0 +1,82 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/fv-4",
+	"version": "1.0.0",
+	"title": "固定ページタイトル 04（トップ用）",
+	"category": "lw-firstview",
+	"icon": "cover-image",
+	"editorScript": "file:./fv-4.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"backgroundImage": {
+			"type": "string",
+			"default": ""
+		},
+		"backgroundImageSp": {
+			"type": "string",
+			"default": ""
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "Lite Word"
+		},
+		"subTitle": {
+			"type": "string",
+			"default": "軽量で簡単なWordPressテーマ"
+		},
+		"description": {
+			"type": "string",
+			"default": "デザイナーとプログラマーが共同で開発した\nコーポレートサイトやオウンドメディアに最適なテーマ"
+		},
+		"filterBackgroundColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 1.0
+		},
+		"textColor": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"minHeightPc": {
+			"type": "string",
+			"default": "min-h-pc-480px"
+		},
+		"minHeightTb": {
+			"type": "string",
+			"default": "min-h-tb-400px"
+		},
+		"minHeightSp": {
+			"type": "string",
+			"default": "min-h-sp-360px"
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 1040
+		},
+		"textAlignPc": {
+			"type": "string",
+			"default": "pc_left"
+		},
+		"textAlignSp": {
+			"type": "string",
+			"default": "sp_left"
+		},
+		"headingLevel": {
+			"type": "number",
+			"default": 1
+		}
+	},
+	"no": 4
+}

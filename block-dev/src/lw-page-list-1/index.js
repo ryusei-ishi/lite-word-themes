@@ -23,6 +23,7 @@ import { useSelect }                  from '@wordpress/data';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* フォントオプション */
 const fontOptions       = fontOptionsArr();
@@ -38,32 +39,7 @@ const imagePatternOptions = [
 /* -------------------------------------------------- *
  * ブロック登録
  * -------------------------------------------------- */
-registerBlockType( 'wdl/lw-page-list-1', {
-
-	title    : 'ページ一覧 1',
-	icon     : 'editor-ul',
-	category : 'liteword-other',
-	supports : { anchor : true },
-
-	attributes : {
-		uid             : { type : 'string',  default : '' }, // ★ ユニーク ID
-		numberOfPages   : { type : 'number',  default : 6 },
-		parentPageId    : { type : 'number',  default : 0 },
-		orderOption     : { type : 'string',  default : 'date_desc' },
-		openInNewTab    : { type : 'boolean', default : false },
-		filterText      : { type : 'string',  default : '' },
-		imagePattern    : { type : 'string',  default : 'ptn_1' }, // ★ 追加
-		showDate        : { type : 'boolean', default : false  },  // ★ 追加
-		showExcerpt     : { type : 'boolean', default : true   },  // ★ 追加
-		dateFont        : { type : 'string',  default : 'Noto Sans JP' },
-		dateFontWeight  : { type : 'string',  default : '400' },
-		titleFont       : { type : 'string',  default : 'Noto Sans JP' },
-		titleFontWeight : { type : 'string',  default : '500' },
-		exFont          : { type : 'string',  default : 'Noto Sans JP' },
-		exFontWeight    : { type : 'string',  default : '400' },
-		catBgColor      : { type : 'string',  default : 'var(--color-main)' },
-	},
-
+registerBlockType(metadata.name, {
 	/* =================== edit =================== */
 	edit: ( { attributes, setAttributes, clientId } ) => {
 

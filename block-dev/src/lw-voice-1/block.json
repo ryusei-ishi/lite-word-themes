@@ -1,0 +1,109 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-voice-1",
+	"version": "1.0.0",
+	"title": "お客様の声 01",
+	"category": "lw-voice",
+	"icon": "format-status",
+	"editorScript": "file:./lw-voice-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"testimonials": {
+			"type": "array",
+			"source": "query",
+			"selector": ".lw-voice-1__li",
+			"query": {
+				"name": {
+					"type": "string",
+					"source": "text",
+					"selector": ".lw-voice-1__name"
+				},
+				"title": {
+					"type": "string",
+					"source": "html",
+					"selector": ".lw-voice-1__text h3"
+				},
+				"content": {
+					"type": "string",
+					"source": "html",
+					"selector": ".lw-voice-1__text p"
+				}
+			},
+			"default": [
+				{ "name": "20代男性 Y.M様", "title": "とても親切で、丁寧な対応でした。", "content": "とても親切で、丁寧な対応でした。また、何かあればお願いしたいと思います。" },
+				{ "name": "30代女性 A.S様", "title": "迅速な対応に感謝します。", "content": "迅速な対応に感謝します。また利用したいと思います。" },
+				{ "name": "40代男性 K.T様", "title": "期待以上のサービスでした。", "content": "期待以上のサービスでした。友人にも勧めたいと思います。" }
+			]
+		},
+		"h2Title": {
+			"type": "string",
+			"default": "お客様の声"
+		},
+		"h2FontSet": {
+			"type": "string",
+			"default": "Noto Sans JP"
+		},
+		"h2FontWeight": {
+			"type": "string",
+			"default": "600"
+		},
+		"h2TextColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"nameTextColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"nameBackgroundColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"nameFontSet": {
+			"type": "string",
+			"default": "Noto Sans JP"
+		},
+		"nameFontWeight": {
+			"type": "string",
+			"default": "500"
+		},
+		"h3TextColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"h3FontSet": {
+			"type": "string",
+			"default": "Noto Sans JP"
+		},
+		"h3FontWeight": {
+			"type": "string",
+			"default": "500"
+		},
+		"pTextColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"pFontSet": {
+			"type": "string",
+			"default": "Noto Sans JP"
+		},
+		"pFontWeight": {
+			"type": "string",
+			"default": "500"
+		},
+		"backgroundColor": {
+			"type": "string",
+			"default": "#eeeeee"
+		}
+	},
+	"no": 1
+}

@@ -1,3 +1,7 @@
+.paid-block-before-after-1 * {
+  box-sizing: border-box;
+}
+
 .paid-block-before-after-1 + .paid-block-before-after-1 {
   margin-top: 48px;
 }
@@ -49,6 +53,7 @@
 
 .paid-block-before-after-1 .this_wrap .image {
   position: relative;
+  width: 100%;
 }
 
 .paid-block-before-after-1 .this_wrap .image.has-shadow {

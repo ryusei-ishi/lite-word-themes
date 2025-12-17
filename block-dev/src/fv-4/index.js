@@ -5,6 +5,7 @@ import {
 	InspectorControls,
 	BlockControls,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -14,7 +15,6 @@ import {
 	ToolbarGroup,
 	ToolbarButton,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import {
 	minHeightPcClassOptionArr,
@@ -23,39 +23,9 @@ import {
 } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/fv-4', {
-	title: '固定ページタイトル 04（トップ用）',
-	icon: 'cover-image',
-	category: 'liteword-firstview',
-
-	/* --------------------------------------------------
-	 * 属性
-	 * -------------------------------------------------- */
-	attributes: {
-		backgroundImage: { type: 'string', default: '' },
-		backgroundImageSp: { type: 'string', default: '' },
-		mainTitle: { type: 'string', default: 'Lite Word' },
-		subTitle: { type: 'string', default: '軽量で簡単なWordPressテーマ' },
-		description: {
-			type: 'string',
-			default:
-				'デザイナーとプログラマーが共同で開発した\nコーポレートサイトやオウンドメディアに最適なテーマ',
-		},
-		filterBackgroundColor: { type: 'string', default: 'var(--color-main)' },
-		filterOpacity: { type: 'number', default: 1.0 },
-		textColor: { type: 'string', default: '#fff' },
-		minHeightPc: { type: 'string', default: 'min-h-pc-480px' },
-		minHeightTb: { type: 'string', default: 'min-h-tb-400px' },
-		minHeightSp: { type: 'string', default: 'min-h-sp-360px' },
-		maxWidth: { type: 'number', default: 1040 },
-		textAlignPc: { type: 'string', default: 'pc_left' },
-		textAlignSp: { type: 'string', default: 'sp_left' },
-		headingLevel: { type: 'number', default: 1 },
-	},
-
-
-
+registerBlockType(metadata.name, {
 	/* --------------------------------------------------
 	 * 編集画面
 	 * -------------------------------------------------- */
@@ -79,12 +49,17 @@ registerBlockType('wdl/fv-4', {
 			headingLevel,
 		} = attributes;
 
+		// useBlockPropsは条件付きreturnの前に呼ぶ（Reactフックのルール）
+		const blockProps = useBlockProps({
+			className: `fv-4 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+		});
+
 		/* 固定ページのみ許可 */
 		const currentPostType = useSelect((select) =>
 			select('core/editor').getCurrentPostType()
 		);
 		if (currentPostType !== 'page') {
-			return <p>このブロックは固定ページでのみ使用できます。</p>;
+			return <div {...blockProps}><p>このブロックは固定ページでのみ使用できます。</p></div>;
 		}
 
 		/* 画像選択ハンドラ */
@@ -100,7 +75,7 @@ registerBlockType('wdl/fv-4', {
 		const TagName = `h${headingLevel}`;
 
 		return (
-			<Fragment>
+			<>
 				{/* ▼ タイトルタグ切替ツールバー */}
 				<BlockControls>
 					<ToolbarGroup>
@@ -300,9 +275,7 @@ registerBlockType('wdl/fv-4', {
 				{/* --------------------------------------------------
 				 * プレビュー（編集画面）
 				 * -------------------------------------------------- */}
-				<div
-					className={`fv-4 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}
-				>
+				<div {...blockProps}>
 					<div
 						className={`fv-4_inner ${textAlignPc} ${textAlignSp}`}
 						style={{ maxWidth: maxWidth }}
@@ -359,7 +332,7 @@ registerBlockType('wdl/fv-4', {
 						)}
 					</div>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -388,10 +361,12 @@ registerBlockType('wdl/fv-4', {
 
 		const TagName = `h${headingLevel}`;
 
+		const blockProps = useBlockProps.save({
+			className: `fv-4 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+		});
+
 		return (
-			<div
-				className={`fv-4 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}
-			>
+			<div {...blockProps}>
 				<div
 					className={`fv-4_inner ${textAlignPc} ${textAlignSp}`}
 					style={{ maxWidth: maxWidth }}

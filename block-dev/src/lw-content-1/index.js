@@ -4,6 +4,7 @@ import {
     MediaUpload,
     InspectorControls,
     ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -12,10 +13,10 @@ import {
     TextControl,
     ToggleControl,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import {fontOptionsArr,fontWeightOptionsArr} from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
@@ -23,84 +24,7 @@ const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
 
-registerBlockType('wdl/lw-content-1', {
-    title: 'Content 1',
-    icon: 'format-image',
-    category: 'liteword-other',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        imageUrl: {
-            type: 'string',
-            default: 'https://picsum.photos/1000/1000?random=1',
-        },
-        imageAlt: {
-            type: 'string',
-            default: '',
-        },
-        title: {
-            type: 'string',
-            source: 'html',
-            selector: '.lw-content-1__text h3',
-            default: 'タイトルテキスト',
-        },
-        content: {
-            type: 'string',
-            source: 'html',
-            selector: '.lw-content-1__text p',
-            default: 'テキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキスト',
-        },
-        linkUrl: {
-            type: 'string',
-            default: '',
-        },
-        linkText: {
-            type: 'string',
-            default: '詳細はこちら',
-        },
-        linkTarget: {
-            type: 'string',
-            default: '',
-        },
-        titleFontSet: {
-            type: 'string',
-            default: '',
-        },
-        titleFontWeight: {
-            type: 'string',
-            default: '', // デフォルトの太さを設定
-        },
-        contentFontSet: {
-            type: 'string',
-            default: '',
-        },
-        contentFontWeight: {
-            type: 'string',
-            default: '',
-        },
-        linkFontSet: {
-            type: 'string',
-            default: '',
-        },
-        linkFontWeight: {
-            type: 'string',
-            default: '',
-        },
-        imagePosition: {
-            type: 'string',
-            default: 'left',
-        },
-        linkButtonBackgroundColor: {
-            type: 'string',
-            default: 'var(--color-accent)',
-        },
-        linkButtonTextColor: {
-            type: 'string',
-            default: '#fff',
-        },
-    },
-
+registerBlockType(metadata.name, {
     edit: (props) => {
         const { attributes, setAttributes } = props;
         const {
@@ -129,8 +53,12 @@ registerBlockType('wdl/lw-content-1', {
             });
         };
 
+        const blockProps = useBlockProps({
+            className: `lw-content-1 ${imagePosition === 'right' ? 'right' : 'left'}`
+        });
+
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
                     <PanelBody title="画像設定">
                         <MediaUpload
@@ -231,7 +159,7 @@ registerBlockType('wdl/lw-content-1', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className={`lw-content-1 ${imagePosition === 'right' ? 'right' : 'left'}`}>
+                <div {...blockProps}>
                     <div className="lw-content-1__inner">
                         <div className="lw-content-1__image">
                             <img src={imageUrl} alt={imageAlt} />
@@ -268,7 +196,7 @@ registerBlockType('wdl/lw-content-1', {
                         </div>
                     </div>
                 </div>
-            </Fragment>
+            </>
         );
     },
     save: (props) => {
@@ -292,8 +220,12 @@ registerBlockType('wdl/lw-content-1', {
             linkButtonTextColor,
         } = attributes;
 
+        const blockProps = useBlockProps.save({
+            className: `lw-content-1 ${imagePosition === 'right' ? 'right' : 'left'}`
+        });
+
         return (
-            <div className={`lw-content-1 ${imagePosition === 'right' ? 'right' : 'left'}`}>
+            <div {...blockProps}>
                 <div className="lw-content-1__inner">
                     <div className="lw-content-1__image">
                         <img loading="lazy" src={imageUrl} alt={imageAlt} />

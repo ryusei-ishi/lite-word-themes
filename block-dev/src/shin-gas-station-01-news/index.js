@@ -16,41 +16,25 @@ import {
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType('wdl/shin-gas-station-01-news', {
+registerBlockType(metadata.name, {
     title: 'お知らせ一覧 1 shin shop pattern 01',
     icon: 'editor-ul',
-    category: 'liteword-other',
+    category: 'lw-post',
     supports: {
         anchor: true,
     },
-    attributes: {
-        mainTitle: { type: 'string', default: 'お知らせ' },
-        subTitle: { type: 'string', default: 'News' },
-        buttonText: { type: 'string', default: '詳しく見る' },
-        // ★ デフォルト値を空文字へ変更
-        buttonUrl: { type: 'string', default: '' },
-        openInNewTab: { type: 'boolean', default: false },
-        numberOfPosts: { type: 'number', default: 4 },
-        categoryId: { type: 'string', default: '' },
-        postType: { type: 'string', default: 'post' },
-        dateFont: { type: 'string', default: 'Montserrat' },
-        dateFontWeight: { type: 'string', default: '400' },
-        catFont: { type: 'string', default: 'Montserrat' },
-        catFontWeight: { type: 'string', default: '600' },
-        catBgColor: { type: 'string', default: 'var(--color-main)' },
-        titleFont: { type: 'string', default: 'Noto Sans JP' },
-        titleFontWeight: { type: 'string', default: '400' },
-    },
-
     // =========================
     //         Edit
     // =========================
     edit: ({ attributes, setAttributes }) => {
-        const blockProps = useBlockProps();
+        const blockProps = useBlockProps({
+            className: 'shin-gas-station-01-news',
+        });
         const {
             mainTitle,
             subTitle,
@@ -167,28 +151,25 @@ registerBlockType('wdl/shin-gas-station-01-news', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className="shin-gas-station-01-news">
-                    <h2 className="ttl">
-                        <RichText
-                            tagName="span"
-                            className="main"
-                            value={mainTitle}
-                            onChange={(v) => setAttributes({ mainTitle: v })}
-                            placeholder="メインタイトルを入力"
-                        />
-                        <RichText
-                            tagName="span"
-                            className="sub"
-                            data-lw_font_set="Montserrat"
-                            value={subTitle}
-                            onChange={(v) => setAttributes({ subTitle: v })}
-                            placeholder="サブタイトルを入力"
-                        />
-                    </h2>
+                <h2 className="ttl">
+                    <RichText
+                        tagName="span"
+                        className="main"
+                        value={mainTitle}
+                        onChange={(v) => setAttributes({ mainTitle: v })}
+                        placeholder="メインタイトルを入力"
+                    />
+                    <RichText
+                        tagName="span"
+                        className="sub"
+                        data-lw_font_set="Montserrat"
+                        value={subTitle}
+                        onChange={(v) => setAttributes({ subTitle: v })}
+                        placeholder="サブタイトルを入力"
+                    />
+                </h2>
 
-                    <div className="filter"></div>
-
-                    <div className="shin-gas-station-01-news_in">
+                <div className="shin-gas-station-01-news_in">
                         <ul className="shin-gas-station-01-news__wrap">
                             {Array.from({ length: numberOfPosts }).map(
                                 (_, index) => (
@@ -234,48 +215,51 @@ registerBlockType('wdl/shin-gas-station-01-news', {
                                 )
                             )}
                         </ul>
-                    </div>
-
-                    {/* ▼▼▼ ここを条件付きレンダリングに修正 ▼▼▼ */}
-                    {buttonUrl && (
-                        <div className="btn">
-                            <RichText.Content
-                                tagName="div"
-                                className="text"
-                                value={buttonText}
-                            />
-                            <svg
-                                xmlns="http://www.w3.org/2000/svg"
-                                width="39.5"
-                                height="4.197"
-                                viewBox="0 0 39.5 4.197"
-                            >
-                                <g
-                                    id="グループ_16"
-                                    data-name="グループ 16"
-                                    transform="translate(-179.5 -2154.803)"
-                                >
-                                    <path
-                                        id="パス_28"
-                                        data-name="パス 28"
-                                        d="M0,0,8,4.2H0Z"
-                                        transform="translate(211 2154.803)"
-                                        fill={catBgColor}
-                                    />
-                                    <line
-                                        id="線_1"
-                                        data-name="線 1"
-                                        x2="32"
-                                        transform="translate(179.5 2158.5)"
-                                        fill="none"
-                                        stroke={catBgColor}
-                                        strokeWidth="1"
-                                    />
-                                </g>
-                            </svg>
-                        </div>
-                    )}
                 </div>
+
+                {/* ボタン */}
+                {buttonUrl && (
+                    <div className="btn">
+                        <RichText
+                            tagName="span"
+                            className="text"
+                            value={buttonText}
+                            onChange={(v) => setAttributes({ buttonText: v })}
+                            placeholder="ボタンテキスト"
+                        />
+                        <svg
+                            xmlns="http://www.w3.org/2000/svg"
+                            width="39.5"
+                            height="4.197"
+                            viewBox="0 0 39.5 4.197"
+                        >
+                            <g
+                                id="グループ_16"
+                                data-name="グループ 16"
+                                transform="translate(-179.5 -2154.803)"
+                            >
+                                <path
+                                    id="パス_28"
+                                    data-name="パス 28"
+                                    d="M0,0,8,4.2H0Z"
+                                    transform="translate(211 2154.803)"
+                                    fill={catBgColor}
+                                />
+                                <line
+                                    id="線_1"
+                                    data-name="線 1"
+                                    x2="32"
+                                    transform="translate(179.5 2158.5)"
+                                    fill="none"
+                                    stroke={catBgColor}
+                                    strokeWidth="1"
+                                />
+                            </g>
+                        </svg>
+                    </div>
+                )}
+
+                <div className="filter"></div>
             </div>
         );
     },
@@ -302,9 +286,12 @@ registerBlockType('wdl/shin-gas-station-01-news', {
             catBgColor,
         } = attributes;
 
+        const blockProps = useBlockProps.save({
+            className: 'shin-gas-station-01-news',
+        });
+
         return (
-            <div>
-                <div className="shin-gas-station-01-news">
+            <div {...blockProps}>
                     <h2 className="ttl">
                         <RichText.Content
                             tagName="span"
@@ -385,7 +372,6 @@ registerBlockType('wdl/shin-gas-station-01-news', {
                     )}
 
                     <div className="filter"></div>
-                </div>
 
                 {/* --- 動的取得の JS（そのまま） --- */}
                 <script

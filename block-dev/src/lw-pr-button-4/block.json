@@ -1,0 +1,172 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-button-4",
+	"version": "1.0.0",
+	"title": "PRボタン 04",
+	"category": "lw-button",
+	"icon": "phone",
+	"description": "電話番号用プレミアムボタン",
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"textMain": {
+			"type": "string",
+			"default": "0120-000-000"
+		},
+		"textSub": {
+			"type": "string",
+			"default": "受付時間 9:00〜18:00（土日祝除く）"
+		},
+		"btnUrl": {
+			"type": "string",
+			"default": "tel:0120000000"
+		},
+		"openNewTab": {
+			"type": "boolean",
+			"default": false
+		},
+		"btnAlign": {
+			"type": "string",
+			"default": "center"
+		},
+		"btnAlignSp": {
+			"type": "string",
+			"default": "default"
+		},
+		"bgColor": {
+			"type": "string",
+			"default": "#09488c"
+		},
+		"bgColorHover": {
+			"type": "string",
+			"default": "#063366"
+		},
+		"textColorMain": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"textColorSub": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 0
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 2
+		},
+		"iconMain": {
+			"type": "string",
+			"default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"><path d=\"M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z\"/></svg>"
+		},
+		"iconMainColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"iconMainSize": {
+			"type": "number",
+			"default": 32
+		},
+		"iconMainMarginRight": {
+			"type": "number",
+			"default": 8
+		},
+		"iconMainMarginLeft": {
+			"type": "number",
+			"default": -8
+		},
+		"FontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightMain": {
+			"type": "string",
+			"default": "500"
+		},
+		"fontWeightSub": {
+			"type": "string",
+			"default": "500"
+		},
+		"fontSizeMain": {
+			"type": "number",
+			"default": 28
+		},
+		"fontSizeMainSp": {
+			"type": "number",
+			"default": 18
+		},
+		"fontSizeSub": {
+			"type": "number",
+			"default": 14
+		},
+		"letterSpacing": {
+			"type": "number",
+			"default": 0.05
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 580
+		},
+		"maxWidthSp": {
+			"type": "number",
+			"default": 480
+		},
+		"paddingY": {
+			"type": "number",
+			"default": 1.2
+		},
+		"paddingX": {
+			"type": "number",
+			"default": 1.5
+		},
+		"transitionDuration": {
+			"type": "number",
+			"default": 0.3
+		},
+		"shakeAnimation": {
+			"type": "boolean",
+			"default": false
+		},
+		"shakeInterval": {
+			"type": "number",
+			"default": 3
+		},
+		"shakeIntensity": {
+			"type": "string",
+			"default": "normal"
+		},
+		"shadowX": {
+			"type": "number",
+			"default": 0
+		},
+		"shadowY": {
+			"type": "number",
+			"default": 0
+		},
+		"shadowBlur": {
+			"type": "number",
+			"default": 6
+		},
+		"shadowOpacity": {
+			"type": "number",
+			"default": 0.2
+		}
+	},
+	"editorScript": "file:./lw-pr-button-4.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 4
+}

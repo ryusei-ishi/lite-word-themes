@@ -1,50 +1,12 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, MediaUpload, BlockControls } from '@wordpress/block-editor';
+import { RichText, InspectorControls, MediaUpload, BlockControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, ColorPalette, RangeControl, SelectControl, TextControl, ToolbarGroup, ToolbarButton, ToggleControl } from '@wordpress/components';
 import { fontOptionsArr, fontWeightOptionsArr, minHeightPcClassOptionArr, minHeightTbClassOptionArr, minHeightSpClassOptionArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/lw-pr-fv-16', {
-    title: '固定ページタイトル 16(動画背景)',
-    icon: 'cover-image',
-    category: 'liteword-firstview',
-    attributes: {
-        mainTitle: { type: 'string', default: 'メインタイトル<br>メインタイトルタイトル' },
-        description: { type: 'string', default: 'ここに説明文が入ります説明文が入りますここに説明文が入ります<br>ここに説明文が入りますここに説明文が入ります。' },
-        backgroundType: { type: 'string', default: 'image' },
-        videoUrl: { type: 'string', default: '' },
-        imageUrlPc: { type: 'string', default: 'https://plus.unsplash.com/premium_photo-1670360414946-e33a828d1d52?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1171' },
-        imageUrlSp: { type: 'string', default: '' },
-        imageAlt: { type: 'string', default: '' },
-        filterColor: { type: 'string', default: '#121416' },
-        filterOpacity: { type: 'number', default: 0.2 },
-        videoSpeed: { type: 'number', default: 1.0 },
-        headingLevel: { type: 'number', default: 2 },
-        strokeWidth: { type: 'number', default: 0 },
-        strokeWidthSp: { type: 'number', default: 0 },
-        strokeColor: { type: 'string', default: '#ffffff' },
-        strokeOpacity: { type: 'number', default: 0.6 },
-        titleColor: { type: 'string', default: '#fff' },
-        titleFontWeight: { type: 'string', default: '600' },
-        titleFont: { type: 'string', default: '' },
-        descriptionColor: { type: 'string', default: '#fff' },
-        descriptionFontWeight: { type: 'string', default: '400' },
-        descriptionFont: { type: 'string', default: '' },
-        fvInnerBgColor: { type: 'string', default: '#000000' },
-        fvInnerBgOpacity: { type: 'number', default: 0.4 },
-        showButton: { type: 'boolean', default: true },
-        buttonText: { type: 'string', default: 'ご相談はこちら' },
-        buttonUrl: { type: 'string', default: '' },
-        ctaBgColor: { type: 'string', default: 'var(--color-main)' },
-        ctaTextColor: { type: 'string', default: '#ffffff' },
-        ctaBorderRadius: { type: 'number', default: 3 },
-        ctaBorderWidth: { type: 'number', default: 0 },
-        ctaBorderColor: { type: 'string', default: '#fff' },
-        minHeightPc: { type: 'string', default: 'min-h-pc-100vh-header-60' },
-        minHeightTb: { type: 'string', default: 'min-h-tb-100vh-header-80' },
-        minHeightSp: { type: 'string', default: 'min-h-sp-100vh-header' },
-    },
+registerBlockType(metadata.name, {
     edit: ({ attributes, setAttributes }) => {
         const { 
             mainTitle, 
@@ -106,6 +68,28 @@ registerBlockType('wdl/lw-pr-fv-16', {
         // フォントと太さのオプション
         const fontOptions = fontOptionsArr();
         const fontWeightOptions = fontWeightOptionsArr();
+
+        const blockProps = useBlockProps({
+            className: `lw-pr-fv-16 ${minHeightPc} ${minHeightTb} ${minHeightSp}`,
+            style: {
+                '--color-image-filter': filterColor,
+                '--fv-image-filter-opacity': filterOpacity,
+                '--color-fv-inner-bg-filter': fvInnerBgColor,
+                '--fv-inner-bg-filter-opacity': fvInnerBgOpacity,
+                '--lw-stroke-width': `${strokeWidth}px`,
+                '--lw-stroke-width-sp': `${strokeWidthSp}px`,
+                '--lw-stroke-color': strokeColorRgba,
+                '--color-fv-ttl-main': titleColor,
+                '--fv-ttl-main-font-weight': titleFontWeight,
+                '--color-fv-description-main': descriptionColor,
+                '--fv-description-main-font-weight': descriptionFontWeight,
+                '--color-cta-bg': ctaBgColor,
+                '--color-cta-text': ctaTextColor,
+                '--cta-border-radius': `${ctaBorderRadius}px`,
+                '--cta-bd-width': `${ctaBorderWidth}px`,
+                '--cta-bd-color': ctaBorderColor,
+            }
+        });
 
         return (
             <>
@@ -381,27 +365,7 @@ registerBlockType('wdl/lw-pr-fv-16', {
                         )}
                     </PanelBody>
                 </InspectorControls>
-                <div 
-                    className={`lw-pr-fv-16 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}
-                    style={{
-                        '--color-image-filter': filterColor,
-                        '--fv-image-filter-opacity': filterOpacity,
-                        '--color-fv-inner-bg-filter': fvInnerBgColor,
-                        '--fv-inner-bg-filter-opacity': fvInnerBgOpacity,
-                        '--lw-stroke-width': `${strokeWidth}px`,
-                        '--lw-stroke-width-sp': `${strokeWidthSp}px`,
-                        '--lw-stroke-color': strokeColorRgba,
-                        '--color-fv-ttl-main': titleColor,
-                        '--fv-ttl-main-font-weight': titleFontWeight,
-                        '--color-fv-description-main': descriptionColor,
-                        '--fv-description-main-font-weight': descriptionFontWeight,
-                        '--color-cta-bg': ctaBgColor,
-                        '--color-cta-text': ctaTextColor,
-                        '--cta-border-radius': `${ctaBorderRadius}px`,
-                        '--cta-bd-width': `${ctaBorderWidth}px`,
-                        '--cta-bd-color': ctaBorderColor,
-                    }}
-                >
+                <div {...blockProps}>
                     <div className="fv_inner">
                         <HeadingTag className="ttl" data-lw_font_set={titleFont}>
                             <RichText
@@ -497,28 +461,30 @@ registerBlockType('wdl/lw-pr-fv-16', {
 
         const HeadingTag = `h${headingLevel}`;
 
+        const blockProps = useBlockProps.save({
+            className: `lw-pr-fv-16 ${minHeightPc} ${minHeightTb} ${minHeightSp}`,
+            style: {
+                '--color-image-filter': filterColor,
+                '--fv-image-filter-opacity': filterOpacity,
+                '--color-fv-inner-bg-filter': fvInnerBgColor,
+                '--fv-inner-bg-filter-opacity': fvInnerBgOpacity,
+                '--lw-stroke-width': `${strokeWidth}px`,
+                '--lw-stroke-width-sp': `${strokeWidthSp}px`,
+                '--lw-stroke-color': strokeColorRgba,
+                '--color-fv-ttl-main': titleColor,
+                '--fv-ttl-main-font-weight': titleFontWeight,
+                '--color-fv-description-main': descriptionColor,
+                '--fv-description-main-font-weight': descriptionFontWeight,
+                '--color-cta-bg': ctaBgColor,
+                '--color-cta-text': ctaTextColor,
+                '--cta-border-radius': `${ctaBorderRadius}px`,
+                '--cta-bd-width': `${ctaBorderWidth}px`,
+                '--cta-bd-color': ctaBorderColor,
+            }
+        });
+
         return (
-            <div 
-                className={`lw-pr-fv-16 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}
-                style={{
-                    '--color-image-filter': filterColor,
-                    '--fv-image-filter-opacity': filterOpacity,
-                    '--color-fv-inner-bg-filter': fvInnerBgColor,
-                    '--fv-inner-bg-filter-opacity': fvInnerBgOpacity,
-                    '--lw-stroke-width': `${strokeWidth}px`,
-                    '--lw-stroke-width-sp': `${strokeWidthSp}px`,
-                    '--lw-stroke-color': strokeColorRgba,
-                    '--color-fv-ttl-main': titleColor,
-                    '--fv-ttl-main-font-weight': titleFontWeight,
-                    '--color-fv-description-main': descriptionColor,
-                    '--fv-description-main-font-weight': descriptionFontWeight,
-                    '--color-cta-bg': ctaBgColor,
-                    '--color-cta-text': ctaTextColor,
-                    '--cta-border-radius': `${ctaBorderRadius}px`,
-                    '--cta-bd-width': `${ctaBorderWidth}px`,
-                    '--cta-bd-color': ctaBorderColor,
-                }}
-            >
+            <div {...blockProps}>
                 <div className="fv_inner">
                     <HeadingTag className="ttl" data-lw_font_set={titleFont}>
                         <RichText.Content value={mainTitle} />

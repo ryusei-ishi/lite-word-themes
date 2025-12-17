@@ -1,0 +1,3 @@
+<!-- wp:wdl/lw-pr-button-2 -->
+<div class="wp-block-wdl-lw-pr-button-2 lw-pr-button-2 center"><div class="wrap_btn"><span class="text_sub" style="margin-bottom:6px;color:#000000;font-size:16px;font-weight:500" data-lw_font_set="">＼ テキストテキストテキスト ／</span><a href="#" class="lw_btn_a " style="padding:1.2em 1em;max-width:340px;background:linear-gradient(135deg, #224394 0%, #12346f 100%);border-radius:64px;box-shadow:0px 0px 6px rgba(0, 0, 0, 0.2);--hover-bg:linear-gradient(135deg, #1a3470 0%, #0e285a 100%);--transition-duration:0.3s;--shake-interval:3s;--max-width-sp:300px;--font-size-main-sp:18px"><span class="text_main" style="font-size:20px;font-weight:500;color:#ffffff" data-lw_font_set="">お問い合わせはこちら</span></a></div></div>
+<!-- /wp:wdl/lw-pr-button-2 -->

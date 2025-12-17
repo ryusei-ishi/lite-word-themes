@@ -1,90 +1,32 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, MediaUpload, InspectorControls } from '@wordpress/block-editor';
+import { RichText, MediaUpload, InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, RadioControl, SelectControl, ColorPalette, RangeControl } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType('wdl/lw-comment-1', {
-    title: '吹き出しコメント 1',
-    icon: 'format-chat',
-    category: 'liteword-comment',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        name: {
-            type: 'string',
-            default: 'お名前'
-        },
-        title: {
-            type: 'string',
-            default: 'こんにちは！コメントサンプルです。'
-        },
-        imageUrl: {
-            type: 'string',
-            default: ``,
-        },
-        imageColor: {
-            type: 'string',
-            default: 'var(--color-main)'
-        },
-        altText: {
-            type: 'string',
-            default: '画像'
-        },
-        commentAlignment: {
-            type: 'string',
-            default: 'left'
-        },
-        commentBgColor: {
-            type: 'string',
-            default: '#eeeeee'
-        },
-        nameFontSet: {
-            type: 'string',
-            default: ''
-        },
-        nameFontWeight: {
-            type: 'string',
-            default: ''
-        },
-        nameTextColor: {
-            type: 'string',
-            default: '#000000'
-        },
-        titleFontSet: {
-            type: 'string',
-            default: ''
-        },
-        titleFontWeight: {
-            type: 'string',
-            default: ''
-        },
-        titleTextColor: {
-            type: 'string',
-            default: '#000000'
-        },
-        maxWidth: { // 新しい属性
-            type: 'number',
-            default: 1200 // デフォルトの最大幅
-        }
-    },
+registerBlockType(metadata.name, {
     edit: function(props) {
         const {
             attributes: {
                 name, title, imageUrl, imageColor, altText, commentAlignment,
                 nameFontSet, nameFontWeight, nameTextColor,
                 titleFontSet, titleFontWeight, titleTextColor, commentBgColor,
-                maxWidth // 追加されたmaxWidth属性
+                maxWidth
             },
             setAttributes
         } = props;
+
+        const alignmentClass = commentAlignment === 'right' ? 'right' : 'left';
+
+        const blockProps = useBlockProps({
+            className: `lw-comment-1 ${alignmentClass}`
+        });
 
         const onImageSelect = (media) => {
             setAttributes({
@@ -97,10 +39,8 @@ registerBlockType('wdl/lw-comment-1', {
             setAttributes({ commentAlignment: newAlignment });
         };
 
-        const alignmentClass = commentAlignment === 'right' ? 'right' : 'left';
-
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
                     <PanelBody title="画像設定">
                         <MediaUpload
@@ -190,7 +130,7 @@ registerBlockType('wdl/lw-comment-1', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <div className={`lw-comment-1 ${alignmentClass}`}>
+                <div {...blockProps}>
                     <div className="lw-comment-1__wrap" style={{ maxWidth: `${maxWidth}px` }}>
                         <div className="lw-comment-1__image">
                             {imageUrl ? (
@@ -225,7 +165,7 @@ registerBlockType('wdl/lw-comment-1', {
                         </div>
                     </div>
                 </div>
-            </Fragment>
+            </>
         );
     },
     save: function(props) {
@@ -240,8 +180,12 @@ registerBlockType('wdl/lw-comment-1', {
 
         const alignmentClass = commentAlignment === 'right' ? 'right' : 'left';
 
+        const blockProps = useBlockProps.save({
+            className: `lw-comment-1 ${alignmentClass}`
+        });
+
         return (
-            <div className={`lw-comment-1 ${alignmentClass}`}>
+            <div {...blockProps}>
                 <div className="lw-comment-1__wrap" style={{ maxWidth: `${maxWidth}px` }}>
                     <div className="lw-comment-1__image">
                         {imageUrl ? (

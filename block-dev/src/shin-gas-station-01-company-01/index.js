@@ -1,84 +1,17 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, ColorPalette } from '@wordpress/block-editor';
+import { RichText, InspectorControls, ColorPalette, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, RangeControl } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
 // フォント太さオプションを変数に定義
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType('wdl/shin-gas-station-01-company-01', {
-    title: '会社概要 1 shin shop pattern 01',
-    icon: 'building',
-    category: 'liteword-other',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        colorOuter: {
-            type: 'string',
-            default: 'var(--color-main)'
-        },
-        colorDt: {
-            type: 'string',
-            default: '#7C7C7C'
-        },
-        fontDt: {
-            type: 'string',
-            default: ''
-        },
-        fontWeightDt: {
-            type: 'string',
-            default: '600'
-        },
-        colorDd: {
-            type: 'string',
-            default: '#111'
-        },
-        fontDd: {
-            type: 'string',
-            default: ''
-        },
-        fontWeightDd: {
-            type: 'string',
-            default: ''
-        },
-        contents: {
-            type: 'array',
-            source: 'query',
-            selector: '.shin-gas-station-01-company-01__dl',
-            query: {
-                title: {
-                    type: 'string',
-                    source: 'html',
-                    selector: 'dt',
-                },
-                text: {
-                    type: 'string',
-                    source: 'html',
-                    selector: 'dd',
-                },
-            },
-            default: [
-                { title: '社名', text: '株式会社サンプル' },
-                { title: '設立', text: '2000年4月1日' },
-                { title: '所在地', text: '東京都新宿区西新宿1-1-1' },
-                { title: '代表者', text: '代表取締役社長 山田太郎' },
-                { title: '資本金', text: '1億円' },
-                { title: '従業員数', text: '100名' },
-                { title: '事業内容', text: 'ウェブサイト制作、システム開発、マーケティング支援' },
-                { title: '取引銀行', text: 'みずほ銀行 新宿支店' },
-                { title: '主要取引先', text: '株式会社○○、株式会社△△、株式会社□□' },
-                { title: '連絡先', text: 'TEL: 03-1234-5678 / FAX: 03-1234-5679' },
-                { title: 'URL', text: 'https://www.sample.co.jp' }
-            ]
-        },
-    },
-
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const {
@@ -108,8 +41,12 @@ registerBlockType('wdl/shin-gas-station-01-company-01', {
             setAttributes({ contents: updatedContents });
         };
 
+        const blockProps = useBlockProps({
+            className: 'shin-gas-station-01-company-01'
+        });
+
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
                     <PanelBody title="外枠の色">
                         <ColorPalette
@@ -157,7 +94,7 @@ registerBlockType('wdl/shin-gas-station-01-company-01', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className="shin-gas-station-01-company-01">
+                <div {...blockProps}>
                     <div className="shin-gas-station-01-company-01__inner" style={{ borderColor: colorOuter }}>
                         {contents.map((content, index) => (
                             <dl className="shin-gas-station-01-company-01__dl" key={index}>
@@ -183,7 +120,7 @@ registerBlockType('wdl/shin-gas-station-01-company-01', {
                     </div>
                     <button className="shin-gas-station-01-company-01__add_btn" onClick={addContent}>リストを追加する</button>
                 </div>
-            </Fragment>
+            </>
         );
     },
 
@@ -191,8 +128,12 @@ registerBlockType('wdl/shin-gas-station-01-company-01', {
         const { attributes } = props;
         const { colorOuter , colorDt , fontDt, fontWeightDt, colorDd ,fontDd, fontWeightDd, contents } = attributes;
 
+        const blockProps = useBlockProps.save({
+            className: 'shin-gas-station-01-company-01'
+        });
+
         return (
-            <div className="shin-gas-station-01-company-01">
+            <div {...blockProps}>
                 <div className="shin-gas-station-01-company-01__inner" style={{ borderColor: colorOuter }}>
                     {contents.map((content, index) => (
                         <dl className="shin-gas-station-01-company-01__dl" key={index}>

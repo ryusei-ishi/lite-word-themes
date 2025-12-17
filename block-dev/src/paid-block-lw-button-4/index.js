@@ -4,6 +4,7 @@ import {
 	InspectorControls,
 	URLInput,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -18,6 +19,7 @@ import {
 } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ───────── オプション配列 ───────── */
 const fontOptions       = fontOptionsArr();
@@ -27,42 +29,7 @@ const iconSvgOptions    = rightButtonIconSvgArr();
 /* ╭──────────────────────────────────╮
    │          ブロック登録             │
    ╰──────────────────────────────────╯ */
-registerBlockType('wdl/paid-block-lw-button-4', {
-	title   : 'リンクボタン 04',
-	icon    : 'button',
-	category: 'liteword-buttons',
-	supports: { anchor: true },
-
-	/* ── 属性 ─────────────────────── */
-	attributes: {
-		blockId      : { type: 'string' },
-		btnText      : { type: 'string',  default: '詳細はこちら' },
-		bgColor      : { type: 'string',  default: 'var(--color-main)' },
-		textColor    : { type: 'string',  default: '#ffffff' },
-		fontWeight   : { type: 'string',  default: '400' },
-		FontSet      : { type: 'string',  default: '' },
-		fontSize     : { type: 'string',  default: 'm' },   // l / m / s
-
-		/* ★ PC／SP 配置 */
-		position     : { type: 'string',  default: 'center' }, // PC
-		positionSp   : { type: 'string',  default: '' },       // SP（''=未選択）
-
-		btnUrl       : { type: 'string',  default: '' },
-		openNewTab   : { type: 'boolean', default: false },
-
-		selectedIcon : { type: 'string',  default:
-			'<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>',
-		},
-		iconVisible  : { type: 'boolean', default: true },
-
-		borderWidth  : { type: 'number',  default: 1 },
-		borderColor  : { type: 'string',  default: '#ffffff' },
-		borderRadius : { type: 'number',  default: 200 },
-
-		maxWidth     : { type: 'number',  default: 320 },
-		maxWidthSp   : { type: 'number',  default: 320 },
-	},
-
+registerBlockType(metadata.name, {
 	/* ── 編集画面 ─────────────────── */
 	edit( props ) {
 		const { attributes, setAttributes, clientId } = props;
@@ -86,8 +53,12 @@ registerBlockType('wdl/paid-block-lw-button-4', {
 		const pcClass       = `position_${ position }`;
 		const spClass       = positionSp ? `position_${ positionSp }_sp` : '';
 
+		const blockProps = useBlockProps({
+			className: `paid-block-lw-button-4 ${ pcClass } ${ spClass }`
+		});
+
 		return (
-			<div className={ `paid-block-lw-button-4 ${ pcClass } ${ spClass }` }>
+			<div {...blockProps}>
 				<InspectorControls>
 
 					{/* ── 1. 基本設定 ── */}
@@ -295,8 +266,12 @@ registerBlockType('wdl/paid-block-lw-button-4', {
 		const pcStyle       = `#${ blockId }{max-width:${ maxWidth }px;}`;
 		const spStyle       = `@media (max-width:500px){#${ blockId }{max-width:${ maxWidthSp }px;}}`;
 
+		const blockProps = useBlockProps.save({
+			className: `paid-block-lw-button-4 ${ pcClass } ${ spClass }`
+		});
+
 		return (
-			<div className={ `paid-block-lw-button-4 ${ pcClass } ${ spClass }` }>
+			<div {...blockProps}>
 				<style>{ pcStyle + spStyle }</style>
 				<div
 					id={ blockId }

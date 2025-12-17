@@ -1,0 +1,76 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-solution-2",
+	"version": "1.0.0",
+	"title": "ソリューション 02",
+	"category": "lw-content",
+	"icon": "lightbulb",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"blockId": {
+			"type": "string"
+		},
+		"title": {
+			"type": "string",
+			"default": "このな事が解決できます",
+			"source": "html",
+			"selector": ".paid-block-solution-2_inner > .ttl"
+		},
+		"colorMain": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"items": {
+			"type": "array",
+			"source": "query",
+			"selector": ".paid-block-solution-2_inner .list li",
+			"query": {
+				"imgSrc": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "img",
+					"attribute": "src"
+				},
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": "p"
+				},
+				"imageSize": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".img_wrap",
+					"attribute": "data-imagesize"
+				}
+			},
+			"default": [
+				{
+					"imgSrc": "https://lite-word.com/sample_img/icon/people_1.svg",
+					"text": "テキストテキストテキストテキストテキス",
+					"imageSize": "icon"
+				},
+				{
+					"imgSrc": "https://lite-word.com/sample_img/icon/en_5.svg",
+					"text": "テキストテキストテキストテキストテキスト",
+					"imageSize": "icon"
+				},
+				{
+					"imgSrc": "https://lite-word.com/sample_img/icon/ambulance_1.svg",
+					"text": "テキストテキストテキストテキストテキスト",
+					"imageSize": "icon"
+				}
+			]
+		}
+	},
+	"editorScript": "file:./paid-block-solution-2.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 2
+}

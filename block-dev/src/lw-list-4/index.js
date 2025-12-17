@@ -4,6 +4,7 @@ import {
 	MediaUpload,
 	InspectorControls,
 	ColorPalette,
+	useBlockProps
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -19,6 +20,7 @@ import {
 } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ─────────────────────────  定数  ───────────────────────── */
 const fontOptions       = fontOptionsArr();
@@ -34,55 +36,7 @@ const colOptions = [
 ];
 
 /* ─────────────────────────  ブロック登録  ───────────────────────── */
-registerBlockType( 'wdl/lw-list-4', {
-	title   : 'list 04',
-	icon    : 'lightbulb',
-	category: 'liteword-other',
-	supports: { anchor: true },
-
-	attributes: {
-		/* 文字周り */
-		fontLi       : { type: 'string',  default: '' },
-		fontWeightLi : { type: 'string',  default: '' },
-		sizeLi       : { type: 'string',  default: 'size_m' },
-		textColor    : { type: 'string',  default: '' },
-
-		/* アイコン */
-		colorLiSvg   : { type: 'string',  default: 'var(--color-main)' },
-		iconUrl      : { type: 'string',  default: '' },
-		iconSize     : { type: 'number',  default: 1.2 },
-
-		/* 枠線・レイアウト */
-		borderColor  : { type: 'string',  default: 'var(--color-main)' },
-		borderWidth  : { type: 'number',  default: 2 },
-		borderStyle  : { type: 'string',  default: 'solid' },
-		borderRadius : { type: 'number',  default: 0.5 },
-		maxWidth     : { type: 'number',  default: 800 },
-		bgColor      : { type: 'string',  default: '#fff' },
-		colClass     : { type: 'string',  default: 'clm_1' },
-		noBorder     : { type: 'boolean', default: false },
-
-		/* コンテンツ */
-		contents: {
-			type: 'array',
-			source: 'query',
-			selector: '.lw-list-4__li',
-			query: {
-				text: {
-					type: 'string',
-					source: 'html',
-					selector: '.lw-list-4__text p',
-				},
-			},
-			default: [
-				{ text: 'リストテキストリストテキスト ' },
-				{ text: 'リストテキストリストテキスト ' },
-				{ text: 'リストテキストリストテキスト ' },
-				{ text: 'リストテキストリストテキスト ' },
-			],
-		},
-	},
-
+registerBlockType(metadata.name, {
 	/* ────────────────────  エディタ側  ──────────────────── */
 	edit( { attributes, setAttributes } ) {
 		const {
@@ -93,6 +47,10 @@ registerBlockType( 'wdl/lw-list-4', {
 			noBorder,
 			contents,
 		} = attributes;
+
+		const blockProps = useBlockProps({
+			className: 'lw-list-4'
+		});
 
 		/* 行操作 */
 		const addContent    = () => setAttributes( { contents: [ ...contents, { text: '新しいテキスト' } ] } );
@@ -143,7 +101,7 @@ registerBlockType( 'wdl/lw-list-4', {
 		);
 
 		return (
-			<Fragment>
+			<>
 				<InspectorControls>
 
 					{/* ─ アイコン設定 ─ */}
@@ -295,7 +253,7 @@ registerBlockType( 'wdl/lw-list-4', {
 				</InspectorControls>
 
 				{/* ─ プレビュー ─ */}
-				<div className="lw-list-4">
+				<div {...blockProps}>
 					<ul
 						className={ `lw-list-4__inner ${ colClass } ${ noBorder ? 'none_border' : '' }` }
 						style={ innerStyle }
@@ -354,7 +312,7 @@ registerBlockType( 'wdl/lw-list-4', {
 						リストを追加する
 					</button>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -368,6 +326,10 @@ registerBlockType( 'wdl/lw-list-4', {
 			noBorder,
 			contents,
 		} = attributes;
+
+		const blockProps = useBlockProps.save({
+			className: 'lw-list-4'
+		});
 
 		const innerStyle = {
 			borderColor,
@@ -395,7 +357,7 @@ registerBlockType( 'wdl/lw-list-4', {
 		);
 
 		return (
-			<div className="lw-list-4">
+			<div {...blockProps}>
 				<ul
 					className={ `lw-list-4__inner ${ colClass } ${ noBorder ? 'none_border' : '' }` }
 					style={ innerStyle }

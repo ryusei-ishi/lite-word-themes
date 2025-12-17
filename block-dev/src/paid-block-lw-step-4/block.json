@@ -1,0 +1,50 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-lw-step-4",
+	"version": "1.0.0",
+	"title": "step 04",
+	"category": "lw-step",
+	"icon": "lightbulb",
+	"supports": {
+		"anchor": true
+	},
+	"editorScript": "file:./paid-block-lw-step-4.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 4,
+	"attributes": {
+		"bgGradient": { "type": "string", "default": "var(--color-main)" },
+		"ulMaxWidth": { "type": "number", "default": 1080 },
+		"fontSizeClass": { "type": "string", "default": "font_size_m" },
+		"fontNo": { "type": "string", "default": "Murecho" },
+		"fontWeightNo": { "type": "string", "default": "600" },
+		"colorNo": { "type": "string", "default": "var(--color-main)" },
+		"titleTag": { "type": "string", "default": "h3" },
+		"fontH3": { "type": "string", "default": "" },
+		"fontWeightH3": { "type": "string", "default": "" },
+		"colorH3": { "type": "string", "default": "" },
+		"fontP": { "type": "string", "default": "" },
+		"fontWeightP": { "type": "string", "default": "" },
+		"colorP": { "type": "string", "default": "" },
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".lw-step__li",
+			"query": {
+				"no": { "type": "string", "source": "html", "selector": ".lw-step__li_no" },
+				"title": { "type": "string", "source": "html", "selector": ".lw-step__li_title" },
+				"text": { "type": "string", "source": "html", "selector": ".lw-step__li_text" }
+			},
+			"default": [
+				{ "no": "01", "title": "応募", "text": "応募フォームより必要事項を入力し、送信してください。応募内容を確認し、追って担当者よりご連絡いたします。" },
+				{ "no": "02", "title": "書類選考", "text": "ご応募いただいた内容をもとに、書類選考を行います。結果は1週間以内にメールにてお知らせいたします。" },
+				{ "no": "03", "title": "面接", "text": "書類選考に通過された方には、担当者による面接を実施します。面接日時はご相談の上、決定いたします。" }
+			]
+		}
+	}
+}

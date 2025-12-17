@@ -1,0 +1,107 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-cta-4",
+	"version": "1.0.0",
+	"title": "CTA 04",
+	"category": "lw-cta",
+	"icon": "megaphone",
+	"description": "2カラムCTAブロック（有料）",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"linkUrl1": {
+			"type": "string",
+			"default": ""
+		},
+		"mainTitle1": {
+			"type": "string",
+			"default": "Franchise"
+		},
+		"subTitle1": {
+			"type": "string",
+			"default": "加盟店募集"
+		},
+		"desc1": {
+			"type": "string",
+			"default": "独立を応援！フランチャイズ加盟しませんか？"
+		},
+		"backgroundImage1": {
+			"type": "string",
+			"default": "https://lite-word.com/sample_img/shop/1.webp"
+		},
+		"filterColor1": {
+			"type": "string",
+			"default": "rgba(38,129,147,1)"
+		},
+		"filterOpacity1": {
+			"type": "number",
+			"default": 60
+		},
+		"btnText1": {
+			"type": "string",
+			"default": "詳細はこちら"
+		},
+		"bgColor1": {
+			"type": "string",
+			"default": "#d88d00"
+		},
+		"textColor1": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"linkUrl2": {
+			"type": "string",
+			"default": ""
+		},
+		"mainTitle2": {
+			"type": "string",
+			"default": "Recruit"
+		},
+		"subTitle2": {
+			"type": "string",
+			"default": "求人情報"
+		},
+		"desc2": {
+			"type": "string",
+			"default": "◯では、一緒に働くスタッフを全店で募集しております！"
+		},
+		"backgroundImage2": {
+			"type": "string",
+			"default": "https://lite-word.com/sample_img/shop/5.webp"
+		},
+		"filterColor2": {
+			"type": "string",
+			"default": "#690707"
+		},
+		"filterOpacity2": {
+			"type": "number",
+			"default": 60
+		},
+		"btnText2": {
+			"type": "string",
+			"default": "詳細はこちら"
+		},
+		"bgColor2": {
+			"type": "string",
+			"default": "#F02D2D"
+		},
+		"textColor2": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 0
+		}
+	},
+	"editorScript": "file:./paid-block-cta-4.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 4
+}

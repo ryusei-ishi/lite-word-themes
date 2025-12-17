@@ -1,11 +1,12 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, MediaUpload, InspectorControls, ColorPalette } from '@wordpress/block-editor';
+import { RichText, MediaUpload, InspectorControls, ColorPalette , useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, RangeControl, Button ,TextControl} from '@wordpress/components';
 import { Fragment, createElement } from '@wordpress/element';
 
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
@@ -13,104 +14,13 @@ const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 // 背景色オプションを変数に定義
 
-registerBlockType('wdl/shin-gas-station-01-list-4', {
-    title: 'インフォリスト 4 shin info pattern 01',
-    icon: 'lightbulb',
-    category: 'liteword-other',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        fontLi: {
-            type: 'string',
-            default: ''
-        },
-        fontColorLi: {
-            type: 'string',
-            default: 'var(--color-main)'
-        },
-        fontWeightLi: {
-            type: 'string',
-            default: '600'
-        },
-        fontLiP: {
-            type: 'string',
-            default: ''
-        },
-        fontColorLiP: {
-            type: 'string',
-            default: 'var(--color-black)'
-        },
-        fontWeightLiP: {
-            type: 'string',
-            default: '400'
-        },
-        
-        stepFont :{
-            type: 'string',
-            default: ''
-        },
-        stepFontColor: {
-            type: 'string',
-            default: '#fff'
-        },
-        stepFontWeight: {
-            type: 'string',
-            default: '600'
-        },
-        backgroundColor: {
-            type: 'string',
-            default: '#FAFAFA'
-        },
-        borderColor: {
-            type: 'string',
-             default: 'var(--color-main)'
-        },
-        borderSize: {
-            type: 'number',
-            default: 0
-        },
-        contents: {
-            type: 'array',
-            source: 'query',
-            selector: '.shin-gas-station-01-list-4__li',
-            query: {
-                image: {
-                    type: 'string',
-                    source: 'attribute',
-                    selector: 'img',
-                    attribute: 'src'
-                },
-                ttl: {
-                  type: 'string',
-                  source: 'html',
-                  selector: '.shin-gas-station-01-list-4__text h4', // これが必須
-                },
-                text: {
-                  type: 'string',
-                  source: 'html',
-                  selector: '.shin-gas-station-01-list-4__text p',
-                },
-                url: {
-                    type: 'string',
-                    source: 'attribute',
-                    selector: '.link',
-                    attribute: 'href',
-                    default: ''
-                }
-              },
-              
-            default: [
-                { image:'https://cdn.pixabay.com/photo/2021/09/22/05/06/city-6645646_960_720.jpg' , ttl: 'タイトルタイトル', text: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト ' },
-                { image:'https://cdn.pixabay.com/photo/2021/09/22/05/06/city-6645646_960_720.jpg' , ttl: 'タイトルタイトル', text: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト ' },
-                { image:'https://cdn.pixabay.com/photo/2021/09/22/05/06/city-6645646_960_720.jpg' , ttl: 'タイトルタイトル', text: 'テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト ' },
-          
-            ],
-        },
-    },
-
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
+
+        const blockProps = useBlockProps({
+            className: 'shin-gas-station-01-list-4'
+        });
         const { fontLi, fontColorLi, fontWeightLi, 
                 fontLiP, fontColorLiP, fontWeightLiP,
                 stepFont, stepFontColor, stepFontWeight,
@@ -136,7 +46,7 @@ registerBlockType('wdl/shin-gas-station-01-list-4', {
         };
 
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
      
                     <PanelBody>
@@ -216,7 +126,7 @@ registerBlockType('wdl/shin-gas-station-01-list-4', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className="shin-gas-station-01-list-4">
+                <div {...blockProps}>
                     <ul className="shin-gas-station-01-list-4__inner">
                         {contents.map((content, index) => (
                             <li className="shin-gas-station-01-list-4__li" key={index} style={{borderColor:borderColor,backgroundColor:backgroundColor,borderWidth:borderSize}}>
@@ -278,11 +188,15 @@ registerBlockType('wdl/shin-gas-station-01-list-4', {
                     </ul>
                     <button className="shin-gas-station-01-list-4__add_btn" onClick={addContent}>リストを追加する</button>
                 </div>
-            </Fragment>
+            </>
         );
     },
     save: function (props) {
         const { attributes } = props;
+
+        const blockProps = useBlockProps.save({
+            className: 'shin-gas-station-01-list-4'
+        });
         const {
             fontLi, fontColorLi, backgroundColor, borderSize,
             fontLiP, fontColorLiP, fontWeightLiP,
@@ -291,7 +205,7 @@ registerBlockType('wdl/shin-gas-station-01-list-4', {
         } = attributes;
     
         return (
-            <div className="shin-gas-station-01-list-4">
+            <div {...blockProps}>
                 <ul className="shin-gas-station-01-list-4__inner">
                     {contents.map((content, index) => {
                         const TagName = content.url ? 'a' : 'div';

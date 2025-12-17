@@ -1,0 +1,70 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-contact-3",
+	"version": "1.0.0",
+	"title": "お問合わせフォーム 03（ワンカラム・シンプル）",
+	"category": "lw-contact",
+	"icon": "email",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"formId": {
+			"type": "number",
+			"default": 1
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 1080
+		},
+		"labelColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"inputBgColor": {
+			"type": "string",
+			"default": "#f6f6f6"
+		},
+		"inputTextColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"buttonBgColor": {
+			"type": "string",
+			"default": "#007cba"
+		},
+		"buttonTextColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"requiredBgColor": {
+			"type": "string",
+			"default": "#da3838"
+		},
+		"requiredTextColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"optionalBgColor": {
+			"type": "string",
+			"default": "#dddddd"
+		},
+		"optionalTextColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"uniqueClass": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./lw-contact-3.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 3
+}

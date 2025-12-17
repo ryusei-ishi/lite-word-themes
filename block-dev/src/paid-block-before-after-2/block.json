@@ -1,0 +1,53 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-before-after-2",
+	"version": "1.0.0",
+	"title": "ビフォーアフター 02",
+	"category": "lw-voice",
+	"icon": "images-alt2",
+	"editorScript": "file:./paid-block-before-after-2.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"no": 2,
+	"attributes": {
+		"beforeLabel": {
+			"type": "string",
+			"default": "before"
+		},
+		"afterLabel": {
+			"type": "string",
+			"default": "after"
+		},
+		"labelColorBefore": {
+			"type": "string",
+			"default": "rgba(209, 77, 77, 0.85)"
+		},
+		"labelColorAfter": {
+			"type": "string",
+			"default": "rgba(77, 209, 77, 0.85)"
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 1280
+		},
+		"aspectRatioH": {
+			"type": "number",
+			"default": 800
+		},
+		"items": {
+			"type": "array",
+			"default": [
+				{ "imgUrl": "https://lite-word.com/sample_img/women/6_2.webp" },
+				{ "imgUrl": "https://lite-word.com/sample_img/women/6.webp" }
+			]
+		}
+	}
+}

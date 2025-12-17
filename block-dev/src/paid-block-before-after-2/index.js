@@ -3,7 +3,8 @@ import {
     MediaUpload,
     InspectorControls,
     RichText,
-    ColorPalette
+    ColorPalette,
+    useBlockProps
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -13,6 +14,7 @@ import {
 
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /**
  * items のデフォルト値を返す関数
@@ -30,47 +32,12 @@ const getDefaultItems = () => ([
     },
 ]);
 
-registerBlockType('wdl/paid-block-before-after-2', {
+registerBlockType(metadata.name, {
     title: 'ビフォーアフター 02',
     icon: 'images-alt2',
-    category: 'liteword-other',
+    category: 'lw-voice',
     supports: {
         anchor: true,
-    },
-    attributes: {
-        // ラベル文言
-        beforeLabel: {
-            type: 'string',
-            default: 'before',
-        },
-        afterLabel: {
-            type: 'string',
-            default: 'after',
-        },
-        // ラベル色
-        labelColorBefore: {
-            type: 'string',
-            default: 'rgba(209, 77, 77, 0.85)', // 黒色に設定（必要に応じて変更）
-        },
-        labelColorAfter: {
-            type: 'string',
-            default: 'rgba(77, 209, 77, 0.85)', // 黒色に設定（必要に応じて変更）
-        },
-        // 最大横幅(px)
-        maxWidth: {
-            type: 'number',
-            default: "1280",
-        },
-        // 縦比 
-        aspectRatioH: {
-            type: 'number',
-            default: 800,
-        },
-        // 画像2枚 (Before/After)
-        items: {
-            type: 'array',
-            default: getDefaultItems,
-        },
     },
 
     edit: (props) => {
@@ -85,8 +52,8 @@ registerBlockType('wdl/paid-block-before-after-2', {
             items
         } = attributes;
 
-        // items が配列でなければ初期化
-        if (!Array.isArray(items)) {
+        // items が配列でない、または空配列なら初期化
+        if (!Array.isArray(items) || items.length === 0) {
             items = getDefaultItems();
             setAttributes({ items });
         }
@@ -121,8 +88,9 @@ registerBlockType('wdl/paid-block-before-after-2', {
             setAttributes({ aspectRatioH: value });
         };
         // ========== レンダリング ==========
+        const blockProps = useBlockProps();
         return (
-            <>
+            <div {...blockProps}>
                 <InspectorControls>
                     <PanelBody title="マニュアル">
                         <div>
@@ -290,7 +258,7 @@ registerBlockType('wdl/paid-block-before-after-2', {
                         </div>
                     </div>
                 </div>
-            </>
+            </div>
         );
     },
 
@@ -315,8 +283,12 @@ registerBlockType('wdl/paid-block-before-after-2', {
             maxWidth: maxWidth ? maxWidth + 'px' : undefined,
         };
 
+        const blockProps = useBlockProps.save({
+            className: 'paid-block-before-after-2'
+        });
+
         return (
-            <div className="paid-block-before-after-2">
+            <div {...blockProps}>
                 <div
                     className="this_wrap"
                     style={wrapStyle}

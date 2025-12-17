@@ -4,6 +4,7 @@ import {
 	MediaUpload,
 	InspectorControls,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -13,73 +14,17 @@ import {
 	ToggleControl,
 	RangeControl,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ───────────────── フォントオプション ───────────────── */
 const fontOptions      = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
 /* ───────────────── ブロック登録 ───────────────── */
-registerBlockType('wdl/paid-block-content-3', {
-	title   : 'Content 03',
-	icon    : 'format-image',
-	category: 'liteword-other',
-	supports: { anchor: true },
-
-	/* ───────── 属性 ───────── */
-	attributes: {
-		imageUrl : { type: 'string', default: 'https://lite-word.com/sample_img/shop/2.webp' },
-		imageAlt : { type: 'string', default: '' },
-		
-		/* 画像比率設定 */
-		aspectRatioHeight: { type: 'number', default: 120 },
-
-		titleSub : {
-			type    : 'string',
-			source  : 'html',
-			selector: '.paid-block-content-3__text h3 span.sub',
-			default : 'SUB TITLE',
-		},
-		title    : {
-			type    : 'string',
-			source  : 'html',
-			selector: '.paid-block-content-3__text h3 span.main',
-			default : 'タイトルテキスト',
-		},
-
-		borderColor: { type: 'string', default: 'var(--color-main)' },
-
-		content: {
-			type    : 'string',
-			source  : 'html',
-			selector: '.paid-block-content-3__text p',
-			default : 'テキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキスト\nテキストテキストテキストテキスト',
-		},
-
-		linkUrl   : { type: 'string', default: '' },
-		linkText  : { type: 'string', default: 'MORE' },
-		linkTarget: { type: 'string', default: '' },
-
-		titleFontSet     : { type: 'string', default: '' },
-		titleFontWeight  : { type: 'string', default: '' },
-		contentFontSet   : { type: 'string', default: '' },
-		contentFontWeight: { type: 'string', default: '' },
-		linkFontSet      : { type: 'string', default: '' },
-		linkFontWeight   : { type: 'string', default: '' },
-
-		imagePosition: { type: 'string', default: 'left' },
-
-		linkButtonBackgroundColor: { type: 'string', default: 'var(--color-main)' },
-		linkButtonTextColor      : { type: 'string', default: '#fff' },
-
-		/* タイトル表示 ON/OFF */
-		showTitle: { type: 'boolean', default: true },
-	},
-
-
+registerBlockType(metadata.name, {
 	/* ───────── エディター側 ───────── */
 	edit: ({ attributes, setAttributes }) => {
 		const {
@@ -96,8 +41,12 @@ registerBlockType('wdl/paid-block-content-3', {
 
 		const hasTitle = titleSub || title;
 
-		return (
-			<Fragment>
+		const blockProps = useBlockProps({
+            className: `paid-block-content-3 ${imagePosition === 'right' ? 'right' : 'left'}`
+        });
+
+        return (
+			<>
 				<InspectorControls>
 					{/* マニュアル */}
 					<PanelBody title="マニュアル">
@@ -249,19 +198,19 @@ registerBlockType('wdl/paid-block-content-3', {
 				</InspectorControls>
 
 				{/* 編集画面プレビュー */}
-				<div className={`paid-block-content-3 ${imagePosition === 'right' ? 'right' : 'left'}`}>
+				<div {...blockProps}>
 					<div className="paid-block-content-3__inner">
 						<div className="paid-block-content-3__image">
 							{imageUrl && (
-								<img 
-									src={imageUrl} 
+								<img
+									src={imageUrl}
 									alt={imageAlt}
 									style={{ aspectRatio: `160/${aspectRatioHeight}` }}
 								/>
 							)}
 						</div>
 						<div className="paid-block-content-3__text">
-							{showTitle  && (
+							{showTitle && (
 								<h3 className="ttl">
 									<RichText
 										tagName="span"
@@ -309,7 +258,7 @@ registerBlockType('wdl/paid-block-content-3', {
 						</div>
 					</div>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -329,8 +278,12 @@ registerBlockType('wdl/paid-block-content-3', {
 
 		const hasTitle = titleSub || title;
 
+		const blockProps = useBlockProps.save({
+            className: `paid-block-content-3 ${imagePosition === 'right' ? 'right' : 'left'}`,
+        });
+
 		return (
-			<div className={`paid-block-content-3 ${imagePosition === 'right' ? 'right' : 'left'}`}>
+			<div {...blockProps}>
 				<div className="paid-block-content-3__inner">
 					<div className="paid-block-content-3__image">
 						{imageUrl && (

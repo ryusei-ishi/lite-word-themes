@@ -1,0 +1,50 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/profile-1",
+	"version": "1.0.0",
+	"title": "プロフィール 01",
+	"category": "lw-content",
+	"icon": "id",
+	"editorScript": "file:./profile-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"no": 1,
+	"attributes": {
+		"imageUrl": {
+			"type": "string",
+			"default": "https://cdn.pixabay.com/photo/2020/06/30/10/05/photographer-5355840_1280.jpg"
+		},
+		"altText": {
+			"type": "string",
+			"default": "プロフィール画像"
+		},
+		"profileTitle": {
+			"type": "string",
+			"default": "PROFILE"
+		},
+		"content": {
+			"type": "string",
+			"default": "名前：東京太郎\n生年月日：1990年1月1日\n出身地：東京都\n趣味：読書、映画鑑賞、旅行"
+		},
+		"backgroundColor": {
+			"type": "string",
+			"default": "#ebebeb"
+		},
+		"titleColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"contentColor": {
+			"type": "string",
+			"default": "#000000"
+		}
+	}
+}

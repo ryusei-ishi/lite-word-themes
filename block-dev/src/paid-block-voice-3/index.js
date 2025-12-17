@@ -6,6 +6,7 @@ import { registerBlockType } from '@wordpress/blocks';
 import {
     InspectorControls,
     MediaUpload,
+    useBlockProps,
 } from '@wordpress/block-editor';
 import {
     PanelBody,
@@ -17,7 +18,7 @@ import {
     SelectControl,
     ColorPalette,
 } from '@wordpress/components';
-import { Fragment, useEffect } from '@wordpress/element';
+import { useEffect } from '@wordpress/element';
 import { 
     fontOptionsArr, 
     fontWeightOptionsArr 
@@ -25,93 +26,16 @@ import {
 
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // オプション配列を取得
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType('wdl/paid-block-voice-3', {
+registerBlockType(metadata.name, {
     title   : 'お客様の声 03 (スライダー・モーダル付き)',
     icon    : 'format-quote',
-    category: 'liteword-banner',
-
-    // ------------------------------------------------------------------
-    // ▶ Attributes
-    // ------------------------------------------------------------------
-    attributes: {
-        blockId: { type: 'string' },
-
-        // お客様の声データ
-        voices: {
-            type   : 'array',
-            default: [
-                {
-                    name   : '田中 美咲様',
-                    age    : '30代',
-                    job    : '会社員',
-                    photo  : 'https://picsum.photos/200/200?random=1',
-                    alt    : '田中様',
-                    excerpt: 'とても丁寧な対応で、安心してお任せすることができました。想像以上の仕上がりに大満足です...',
-                    text   : 'とても丁寧な対応で、安心してお任せすることができました。想像以上の仕上がりに大満足です。\n\n初めての利用で不安もありましたが、最初のヒアリングから丁寧に対応していただき、こちらの要望を細かく聞いてくださいました。途中経過も随時報告していただけたので、安心して任せることができました。\n\n仕上がりも想像以上で、細部まで気を配っていただいたことが伝わってきます。友人にも自信を持って勧められるサービスです。本当にありがとうございました。'
-                },
-                {
-                    name   : '佐藤 健太様',
-                    age    : '40代',
-                    job    : '自営業',
-                    photo  : 'https://picsum.photos/200/200?random=2',
-                    alt    : '佐藤様',
-                    excerpt: 'スピーディーな対応と、細かい要望にも応えていただき感謝しています。また利用したいです...',
-                    text   : 'スピーディーな対応と、細かい要望にも応えていただき感謝しています。また利用したいです。\n\n急な依頼にも関わらず、迅速に対応していただきました。こちらの細かい要望にも一つ一つ丁寧に答えていただき、期待以上の結果となりました。\n\nプロフェッショナルな仕事ぶりと柔軟な対応力に感動しました。次回もぜひお願いしたいと思います。長くお付き合いできるパートナーを見つけられて嬉しいです。'
-                },
-                {
-                    name   : '鈴木 明子様',
-                    age    : '50代',
-                    job    : '主婦',
-                    photo  : 'https://picsum.photos/200/200?random=3',
-                    alt    : '鈴木様',
-                    excerpt: '初めての利用で不安でしたが、親切に説明していただき安心できました。結果も期待以上でした...',
-                    text   : '初めての利用で不安でしたが、親切に説明していただき安心できました。結果も期待以上でした。\n\n専門的なことは全く分からない状態でしたが、一から丁寧に説明していただき、とても分かりやすかったです。質問にも快く答えていただき、安心して進めることができました。\n\n完成したものを見て、本当に驚きました。こんなに素晴らしい仕上がりになるとは思っていませんでした。感謝の気持ちでいっぱいです。'
-                }
-            ]
-        },
-
-        // Swiper設定
-        autoplayDelay       : { type: 'number',  default: 4000 },
-        loop                : { type: 'boolean', default: true },
-        disableOnInteraction: { type: 'boolean', default: false },
-        showPagination      : { type: 'boolean', default: true },
-        paginationClickable : { type: 'boolean', default: true },
-        showNavigation      : { type: 'boolean', default: true },
-        sliderSpeed         : { type: 'number',  default: 600 },
-
-        // ブレークポイント設定
-        slidesPerView600: { type: 'number', default: 2 },
-        slidesPerView900: { type: 'number', default: 3 },
-        spaceBetween600 : { type: 'number', default: 24 },
-        spaceBetween900 : { type: 'number', default: 30 },
-
-        // レイアウト設定
-        maxWidthContainer: { type: 'number', default: 1120 },
-
-        // デザイン設定
-        cardBgColor: { type: 'string', default: '#ffffff' },
-        cardShadowColor: { type: 'string', default: 'rgba(0, 0, 0, 0.08)' },
-        
-        // テキスト色設定
-        nameColor: { type: 'string', default: '#333333' },
-        excerptColor: { type: 'string', default: '#666666' },
-        metaColor: { type: 'string', default: '#999999' },
-        
-        // ボタンの色設定
-        btnBgColor: { type: 'string', default: '' },
-        btnTextColor: { type: 'string', default: '' },
-        
-        // フォント設定
-        nameFontSet: { type: 'string', default: '' },
-        nameFontWeight: { type: 'string', default: '600' },
-        excerptFontSet: { type: 'string', default: '' },
-        excerptFontWeight: { type: 'string', default: '400' },
-    },
+    category: 'lw-voice',
 
     // ------------------------------------------------------------------
     // ▶ Edit
@@ -196,8 +120,20 @@ registerBlockType('wdl/paid-block-voice-3', {
         /* ----------------------------------------------------------*/
         /* Gutenberg サイドバー                                       */
         /* ----------------------------------------------------------*/
+        
+        const blockProps = useBlockProps({
+            id: blockId,
+            className: 'paid-block-voice-3',
+            style: {
+                border: '2px dashed #ccc',
+                padding: '20px',
+                borderRadius: '8px',
+                background: '#f9f9f9'
+            }
+        });
+
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
 
                     {/* --- 1. お客様の声管理（常に開く） --------------- */}
@@ -551,16 +487,7 @@ registerBlockType('wdl/paid-block-voice-3', {
                 {/* ----------------------------------------------------------*/}
                 {/* エディター画面のプレビュー                                   */}
                 {/* ----------------------------------------------------------*/}
-                <div
-                    id={ blockId }
-                    className="paid-block-voice-3"
-                    style={{
-                        border: '2px dashed #ccc',
-                        padding: '20px',
-                        borderRadius: '8px',
-                        background: '#f9f9f9'
-                    }}
-                >
+                <div {...blockProps}>
                     <div style={{ textAlign: 'center', marginBottom: '16px' }}>
                         <h3 style={{ margin: '0 0 8px 0' }}>
                             📣 お客様の声スライダー
@@ -633,7 +560,7 @@ registerBlockType('wdl/paid-block-voice-3', {
                         ) ) }
                     </div>
                 </div>
-            </Fragment>
+            </>
         );
     },
 

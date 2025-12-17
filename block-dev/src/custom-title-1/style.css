@@ -1,9 +1,12 @@
 .custom-title-1 {
   margin: 1em 0;
   margin-bottom: 1.5em;
-  padding-bottom: 0 !important;
   text-align: center;
   font-size: 17px !important;
+}
+
+.custom-title-1:not([class*="lw_padding_bottom_"]) {
+  padding-bottom: 0 !important;
 }
 
 .custom-title-1 .main {

@@ -1,10 +1,11 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, MediaUpload, InspectorControls, ColorPalette } from '@wordpress/block-editor';
+import { RichText, MediaUpload, InspectorControls, ColorPalette , useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, SelectControl, RangeControl, Button } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 import { fontOptionsArr, fontWeightOptionsArr, ButtonBackgroundOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
@@ -13,53 +14,14 @@ const fontWeightOptions = fontWeightOptionsArr();
 // 背景色オプションを変数に定義
 const bgOptions = ButtonBackgroundOptionsArr();
 
-registerBlockType('wdl/lw-list-3', {
-    title: 'list 03',
-    icon: 'lightbulb',
-    category: 'liteword-other',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        fontLi: {
-            type: 'string',
-            default: ''
-        },
-        fontWeightLi: {
-            type: 'string',
-            default: ''
-        },
-        colorLiSvg: {
-            type: 'string',
-            default: 'var(--color-main)'
-        },
-        borderColor: {
-            type: 'string',
-             default: 'var(--color-main)'
-        },
-        contents: {
-            type: 'array',
-            source: 'query',
-            selector: '.lw-list-3__li',
-            query: {
-                text: {
-                    type: 'string',
-                    source: 'html',
-                    selector: '.lw-list-3__text p',
-                },
-            },
-            default: [
-                { text: 'リストテキストリストテキスト ' },
-                { text: 'リストテキストリストテキスト ' },
-                { text: 'リストテキストリストテキスト ' },
-                { text: 'リストテキストリストテキスト ' },
-            ],
-        },
-    },
-
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const { fontLi, fontWeightLi, contents, colorLiSvg ,borderColor} = attributes;
+
+        const blockProps = useBlockProps({
+            className: 'lw-list-3'
+        });
 
         // コンテンツを追加
         const addContent = () => {
@@ -80,10 +42,22 @@ registerBlockType('wdl/lw-list-3', {
             setAttributes({ contents: updatedContents });
         };
 
+        // 順番入れ替え関数
+        const moveItem = (index, direction) => {
+            const targetIndex = index + direction;
+            if (targetIndex < 0 || targetIndex >= contents.length) return;
+
+            const reordered = [...contents];
+            const [moved] = reordered.splice(index, 1);
+            reordered.splice(targetIndex, 0, moved);
+
+            setAttributes({ contents: reordered });
+        };
+
         return (
-            <Fragment>
+            <>
                 <InspectorControls>
-     
+
                     <PanelBody>
                         <p>アイコンの色</p>
                         <ColorPalette
@@ -113,7 +87,7 @@ registerBlockType('wdl/lw-list-3', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className="lw-list-3">
+                <div {...blockProps}>
                     <ul className="lw-list-3__inner">
                         {contents.map((content, index) => (
                             <li className="lw-list-3__li" key={index} style={{borderColor:borderColor}}>
@@ -132,13 +106,41 @@ registerBlockType('wdl/lw-list-3', {
                                         style={{ fontWeight: fontWeightLi }}
                                     />
                                 </span>
-                                <button className="lw-list-3__remove_btn" onClick={() => removeContent(index)}>削除</button>
+                                {/* 並べ替え & 削除コントロール */}
+                                <div className="lw-list-3__item-controls lw-table-item-controls">
+                                    <button
+                                        type="button"
+                                        onClick={() => moveItem(index, -1)}
+                                        disabled={index === 0}
+                                        className="move-up-button"
+                                        aria-label="上へ移動"
+                                    >
+                                        ↑
+                                    </button>
+                                    <button
+                                        type="button"
+                                        onClick={() => moveItem(index, 1)}
+                                        disabled={index === contents.length - 1}
+                                        className="move-down-button"
+                                        aria-label="下へ移動"
+                                    >
+                                        ↓
+                                    </button>
+                                    <button
+                                        type="button"
+                                        className="remove-item-button"
+                                        onClick={() => removeContent(index)}
+                                        aria-label="削除"
+                                    >
+                                        削除
+                                    </button>
+                                </div>
                             </li>
                         ))}
                     </ul>
                     <button className="lw-list-3__add_btn" onClick={addContent}>リストを追加する</button>
                 </div>
-            </Fragment>
+            </>
         );
     },
     save( { attributes } ) {
@@ -148,8 +150,12 @@ registerBlockType('wdl/lw-list-3', {
             colorLiSvg, borderColor,
         } = attributes;
 
+        const blockProps = useBlockProps.save({
+            className: 'lw-list-3'
+        });
+
         return (
-            <div className="lw-list-3">
+            <div {...blockProps}>
                 <ul className="lw-list-3__inner">
                     { contents.map( ( content, index ) => (
                         <li

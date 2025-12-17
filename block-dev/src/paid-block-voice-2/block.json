@@ -1,0 +1,144 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-voice-2",
+	"version": "1.0.0",
+	"title": "お客様の声 2",
+	"category": "lw-voice",
+	"icon": "format-status",
+	"editorScript": "file:./paid-block-voice-2.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"no": 2,
+	"attributes": {
+		"blockTitleMain": {
+			"type": "string",
+			"source": "html",
+			"selector": ".ttl .main",
+			"default": "お客様の声"
+		},
+		"blockTitleSub": {
+			"type": "string",
+			"source": "html",
+			"selector": ".ttl .sub",
+			"default": "VOICE"
+		},
+		"explanation": {
+			"type": "string",
+			"source": "html",
+			"selector": ".explanation",
+			"default": "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"
+		},
+		"filterColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 0.9
+		},
+		"voiceSubNameFont": {
+			"type": "string",
+			"default": "Noto Sans JP"
+		},
+		"voiceSubNameFontWeight": {
+			"type": "string",
+			"default": "400"
+		},
+		"voiceSubNameFontColor": {
+			"type": "string",
+			"default": "var(--color-black)"
+		},
+		"voiceMeinNameFont": {
+			"type": "string",
+			"default": "Noto Sans JP"
+		},
+		"voiceMeinNameFontWeight": {
+			"type": "string",
+			"default": "500"
+		},
+		"voiceMeinNameFontColor": {
+			"type": "string",
+			"default": "var(--color-black)"
+		},
+		"voiceCommentFont": {
+			"type": "string",
+			"default": "Noto Sans JP"
+		},
+		"voiceCommentFontWeight": {
+			"type": "string",
+			"default": "400"
+		},
+		"voiceCommentFontColor": {
+			"type": "string",
+			"default": "var(--color-black)"
+		},
+		"voiceThanksFont": {
+			"type": "string",
+			"default": "Dancing Script"
+		},
+		"voiceThanksFontWeight": {
+			"type": "string",
+			"default": "400"
+		},
+		"voiceThanksFontColor": {
+			"type": "string",
+			"default": "var(--color-black)"
+		},
+		"voices": {
+			"type": "array",
+			"source": "query",
+			"selector": ".voice_list li",
+			"default": [
+				{
+					"image": "https://lite-word.com/sample_img/women/1.webp",
+					"thanks": "thank you",
+					"sub": "東京都 経営者",
+					"nameBig": "やまだ",
+					"nameSmall": "さん",
+					"comment": "テキストテキストテキストテキストテキストテキストテキストテキスト"
+				}
+			],
+			"query": {
+				"image": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "img",
+					"attribute": "src"
+				},
+				"thanks": {
+					"type": "string",
+					"source": "html",
+					"selector": ".thanks"
+				},
+				"sub": {
+					"type": "string",
+					"source": "html",
+					"selector": ".sub"
+				},
+				"nameBig": {
+					"type": "string",
+					"source": "html",
+					"selector": ".big"
+				},
+				"nameSmall": {
+					"type": "string",
+					"source": "html",
+					"selector": ".small"
+				},
+				"comment": {
+					"type": "string",
+					"source": "html",
+					"selector": ".comment"
+				}
+			}
+		}
+	}
+}

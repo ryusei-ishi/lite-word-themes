@@ -1,0 +1,157 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-link-2",
+	"version": "1.0.0",
+	"title": "リンクリスト 2",
+	"category": "lw-list",
+	"icon": "lightbulb",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"mainTitle": {
+			"type": "string",
+			"source": "html",
+			"selector": ".main_title_text",
+			"default": "INFORMATION"
+		},
+		"titleBdColor": {
+			"type": "string",
+			"default": "#da5959"
+		},
+		"subTitle": {
+			"type": "string",
+			"source": "html",
+			"selector": ".sub",
+			"default": "インフォメーション"
+		},
+		"mainExplanation": {
+			"type": "string",
+			"source": "html",
+			"selector": ".main_explanation",
+			"default": "テキストテキストテキストテキスト"
+		},
+		"fontLi": {
+			"type": "string",
+			"default": ""
+		},
+		"fontColorLi": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"fontWeightLi": {
+			"type": "string",
+			"default": "500"
+		},
+		"fontLiP": {
+			"type": "string",
+			"default": ""
+		},
+		"fontColorLiP": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"fontWeightLiP": {
+			"type": "string",
+			"default": "400"
+		},
+		"backgroundColor": {
+			"type": "string",
+			"default": "rgba(0, 0, 0, 0)"
+		},
+		"backgroundOpacity": {
+			"type": "number",
+			"default": 0.5
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"borderSize": {
+			"type": "number",
+			"default": 2
+		},
+		"bgFilterColor": {
+			"type": "string",
+			"default": "#000"
+		},
+		"bgFilterOpacity": {
+			"type": "number",
+			"default": 0.7
+		},
+		"bgImageUrl": {
+			"type": "string",
+			"default": "https://lite-word.com/sample_img/forest/1.webp"
+		},
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".item",
+			"query": {
+				"ttl": {
+					"type": "string",
+					"source": "html",
+					"selector": "h4.ttl"
+				},
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": "p.desc"
+				},
+				"url": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".link",
+					"attribute": "href",
+					"default": ""
+				},
+				"icon": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".selected_icon",
+					"attribute": "data-icon",
+					"default": ""
+				},
+				"imageUrl": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "img.selected_image",
+					"attribute": "data-img",
+					"default": ""
+				}
+			},
+			"default": [
+				{
+					"ttl": "タイトルタイトル",
+					"text": "テキストテキスト ",
+					"url": "",
+					"icon": "",
+					"imageUrl": ""
+				},
+				{
+					"ttl": "タイトルタイトル",
+					"text": "テキストテキスト ",
+					"url": "",
+					"icon": "",
+					"imageUrl": ""
+				},
+				{
+					"ttl": "タイトルタイトル",
+					"text": "テキストテキスト ",
+					"url": "",
+					"icon": "",
+					"imageUrl": ""
+				}
+			]
+		}
+	},
+	"editorScript": "file:./paid-block-link-2.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 2
+}

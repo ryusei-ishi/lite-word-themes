@@ -1,17 +1,14 @@
 .lw-pr-button-5 {
   margin-top: 1em;
 }
-
 .lw-pr-button-5 * {
   box-sizing: border-box;
 }
-
 .lw-pr-button-5 .wrap_btn {
   display: flex;
   justify-content: center;
   font-size: 16px;
 }
-
 .lw-pr-button-5 .wrap_btn .lw_btn_a {
   position: relative;
   padding: 0.6em 1.2em;
@@ -25,11 +22,9 @@
   transition: background 0.3s ease;
   text-decoration: none;
 }
-
 .lw-pr-button-5 .wrap_btn .lw_btn_a:hover {
   background: #c4880b;
 }
-
 .lw-pr-button-5 .wrap_btn .lw_btn_a .text_main {
   font-size: 16px;
   font-weight: 500;
@@ -40,13 +35,11 @@
   color: #fff;
   text-align: center;
 }
-
 @media (max-width: 800px) {
   .lw-pr-button-5 .wrap_btn .lw_btn_a .text_main {
     font-size: 14px;
   }
 }
-
 .lw-pr-button-5 .wrap_btn .lw_btn_a .text_main .icon {
   margin-right: 4px;
   display: flex;
@@ -54,9 +47,8 @@
   width: 24px;
   height: auto;
 }
-
 .lw-pr-button-5 .wrap_btn .lw_btn_a .text_main .icon svg {
   height: auto;
   width: 100%;
   fill: #fff;
-}
+}/*# sourceMappingURL=style.css.map */

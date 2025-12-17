@@ -1,12 +1,14 @@
 .custom-title-5 {
   margin: 1em 0;
-  padding-bottom: 0.4em !important;
   font-size: 20px !important;
   border-bottom: 2px solid var(--color-main);
-  &.font_size_m{
+  &:not([class*="lw_padding_bottom_"]) {
+    padding-bottom: 0.4em !important;
+  }
+  &.font_size_m {
     font-size: 18px !important;
   }
-  &.font_size_s{
+  &.font_size_s {
     font-size: 16px !important;
   }
   .sub {
@@ -20,7 +22,7 @@
     @container (max-width:500px) {
       font-size: 0.7em;
     }
-    &:has(>[class*="fs-"]) {
+    &:has(> [class*="fs-"]) {
       line-height: 1.1em;
     }
   }
@@ -41,25 +43,24 @@
     @container (max-width:400px) {
       font-size: 1.4em;
     }
-    &:has(>[class*="fs-"]) {
+    &:has(> [class*="fs-"]) {
       margin-top: 0.2em;
       line-height: 1.1em;
     }
   }
 }
 
-.post_style{
+.post_style {
   .custom-title-5 {
     .main {
-      &:empty{
+      &:empty {
         display: none;
       }
     }
     .sub {
-      &:empty{
+      &:empty {
         display: none;
       }
     }
   }
-
-}  
+}

@@ -4,32 +4,17 @@ import { PanelBody, ToggleControl,ColorPalette, RangeControl, TextControl, Selec
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType('wdl/shin-gas-station-01-post-list', {
+registerBlockType(metadata.name, {
     title: '投稿一覧 1 shin shop pattern 01',
     icon: 'editor-ul',
-    category: 'liteword-other',
+    category: 'lw-post',
     supports: {
-        anchor: true, 
-    },
-    attributes: {
-        titleMain: { type: 'string', default: 'Driveブログ' },
-        linkText: { type: 'string', default: '詳しく見る' },
-        linkUrl: { type: 'string', default: '#' },
-        openInNewTab: { type: 'boolean', default: false },
-        numberOfPosts: { type: 'number', default: 6 },
-        categoryId: { type: 'string', default: '' },
-        postType: { type: 'string', default: 'post' },
-        dateFont: { type: 'string', default: 'Montserrat' },
-        dateFontWeight: { type: 'string', default: '400' },
-        catFont: { type: 'string', default: 'Montserrat' },
-        catFontWeight: { type: 'string', default: '400' },
-        catBgColor: { type: 'string', default: 'var(--color-main)' },
-        titleFont: { type: 'string', default: 'Noto Sans JP' },
-        titleFontWeight: { type: 'string', default: '600' },
+        anchor: true,
     },
     edit: ({ attributes, setAttributes }) => {
         const blockProps = useBlockProps();
@@ -198,12 +183,14 @@ registerBlockType('wdl/shin-gas-station-01-post-list', {
         const {
             titleMain, linkText, linkUrl, openInNewTab,
             numberOfPosts, categoryId, postType,
-            dateFont, dateFontWeight, catFont, catFontWeight, titleFont, titleFontWeight, 
+            dateFont, dateFontWeight, catFont, catFontWeight, titleFont, titleFontWeight,
             catBgColor,
         } = attributes;
 
+        const blockProps = useBlockProps.save();
+
         return (
-            <div>
+            <div {...blockProps}>
                 <div
                     className="shin-gas-station-01-post-list"
                     data-number={numberOfPosts}

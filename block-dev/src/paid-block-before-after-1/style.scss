@@ -1,4 +1,7 @@
 .paid-block-before-after-1 {
+    *{
+        box-sizing: border-box;
+    }
     +.paid-block-before-after-1 {
         margin-top: 48px;
         @media (max-width: 600px) {
@@ -33,6 +36,7 @@
         }
         .image {
             position: relative;
+            width: 100%;
             &.has-shadow {
                 box-shadow: 0 0 8px rgba(0, 0, 0, 0.2);
             }

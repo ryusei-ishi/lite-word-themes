@@ -1,12 +1,14 @@
 /**
  * LiteWord – 見出しタイトル 11
  * カスタムブロック
+ * ★ apiVersion 3 対応（2025-12-07）
  */
 import { registerBlockType } from '@wordpress/blocks';
 import {
     RichText,
     BlockControls,
     InspectorControls,
+    useBlockProps,
 } from '@wordpress/block-editor';
 import {
     ToolbarGroup,
@@ -18,33 +20,9 @@ import {
 } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
 
-registerBlockType('wdl/lw-pr-custom-title-11', {
-    /* ----------------------------------------------------------
-     * 基本情報
-     * -------------------------------------------------------- */
-    title: '見出しタイトル 11',
-    icon: 'editor-textcolor',
-    category: 'liteword-title',
-    supports: { anchor: true },
+import metadata from './block.json';
 
-    /* ----------------------------------------------------------
-     * 属性
-     * -------------------------------------------------------- */
-    attributes: {
-        mainTitle: { type: 'string', default: 'カスタムタイトル' },
-        subTitle: { type: 'string', default: 'サブタイトル' },
-        headingLevel: { type: 'number', default: 2 },
-        colorMain: { type: 'string', default: '#0a71c0' },
-        colorMainText: { type: 'string', default: '' },
-        colorSubText: { type: 'string', default: '' },
-        orderReversed: { type: 'boolean', default: false },
-        maxWidth: { type: 'number', default: 0 },
-        borderRadius: { type: 'number', default: 0 },
-        minHeightPc: { type: 'number', default: 0 },
-        minHeightTb: { type: 'number', default: 0 },
-        minHeightSp: { type: 'number', default: 0 },
-    },
-
+registerBlockType(metadata.name, {
     /* ----------------------------------------------------------
      * 編集画面
      * -------------------------------------------------------- */
@@ -119,6 +97,11 @@ registerBlockType('wdl/lw-pr-custom-title-11', {
         if (borderRadius > 0) {
             ttlStyle['borderRadius'] = `${borderRadius}px`;
         }
+
+        const blockProps = useBlockProps({
+            className: 'lw-pr-custom-title-11',
+            style: inlineStyle,
+        });
 
         return (
             <Fragment>
@@ -222,7 +205,7 @@ registerBlockType('wdl/lw-pr-custom-title-11', {
                     </PanelBody>
                 </InspectorControls>
 
-                <div className="lw-pr-custom-title-11" style={inlineStyle}>
+                <div {...blockProps}>
                     <TagName className="ttl" style={ttlStyle}>
                         {!orderReversed ? (
                             <Fragment>
@@ -331,8 +314,13 @@ registerBlockType('wdl/lw-pr-custom-title-11', {
             ttlStyle['borderRadius'] = `${borderRadius}px`;
         }
 
+        const blockProps = useBlockProps.save({
+            className: 'lw-pr-custom-title-11',
+            style: inlineStyle,
+        });
+
         return (
-            <div className="lw-pr-custom-title-11" style={inlineStyle}>
+            <div {...blockProps}>
                 <TagName className="ttl" style={ttlStyle}>
                     {!orderReversed ? (
                         <Fragment>

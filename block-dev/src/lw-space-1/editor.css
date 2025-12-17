@@ -4,11 +4,9 @@
   grid-template-columns: repeat(3, 1fr);
   gap: 4px;
 }
-
 .lw_space_1 * {
   box-sizing: border-box;
 }
-
 .lw_space_1 .pc, .lw_space_1 .tb, .lw_space_1 .sp {
   width: 100%;
   padding: 8px 12px;
@@ -19,24 +17,19 @@
   overflow: hidden;
   font-size: 10px;
 }
-
 .lw_space_1 .pc span, .lw_space_1 .tb span, .lw_space_1 .sp span {
   font-size: 12px;
   color: #666;
 }
-
 .lw_space_1 .pc span:first-child, .lw_space_1 .tb span:first-child, .lw_space_1 .sp span:first-child {
   font-weight: bold;
 }
-
 .lw_space_1 .pc {
   background: #d3f2ff;
 }
-
 .lw_space_1 .tb {
   background: #ffefd8;
 }
-
 .lw_space_1 .sp {
   background: #ffd3d6;
-}
+}/*# sourceMappingURL=editor.css.map */

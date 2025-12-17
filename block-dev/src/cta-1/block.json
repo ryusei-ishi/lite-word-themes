@@ -1,0 +1,101 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/cta-1",
+	"version": "1.0.0",
+	"title": "CTA 01",
+	"category": "lw-cta",
+	"icon": "megaphone",
+	"description": "背景画像付きのCTAブロック",
+	"aiDescription": "お問い合わせや資料請求などのアクションを促すセクション。背景画像とオーバーレイで視覚的にインパクトを与え、ボタンでユーザーを誘導する。ページの最後や重要なポイントに配置する。",
+	"aiNotes": "h2見出しは内部に含まれるため、直前にcustom-title系ブロックを配置しない。buttonUrlは必須。",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"title": {
+			"type": "string",
+			"source": "html",
+			"selector": ".cta-1__title",
+			"default": "無料相談受付中"
+		},
+		"text": {
+			"type": "string",
+			"source": "html",
+			"selector": "p",
+			"default": "テキストテキストテキストテキストテキストテキス<br>トテキストテキストテキストテキストテキストテキスト"
+		},
+		"buttonText": {
+			"type": "string",
+			"source": "html",
+			"selector": "a",
+			"default": "お問い合わせ"
+		},
+		"buttonUrl": {
+			"type": "string",
+			"default": "#"
+		},
+		"openInNewTab": {
+			"type": "boolean",
+			"default": false
+		},
+		"imageUrl": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "img",
+			"attribute": "src",
+			"default": ""
+		},
+		"imageAlt": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "img",
+			"attribute": "alt",
+			"default": "背景画像"
+		},
+		"filterColor": {
+			"type": "string",
+			"default": "#054161"
+		},
+		"buttonBackgroundColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"buttonBorderColor": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"buttonBorderSize": {
+			"type": "number",
+			"default": 1
+		},
+		"buttonMaxWidth": {
+			"type": "number",
+			"default": 240
+		},
+		"pcTextAlign": {
+			"type": "string",
+			"default": "center"
+		},
+		"mobileTextAlign": {
+			"type": "string",
+			"default": "center"
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 0
+		},
+		"headingLevel": {
+			"type": "number",
+			"default": 2
+		}
+	},
+	"editorScript": "file:./cta-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 1
+}

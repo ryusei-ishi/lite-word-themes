@@ -10,11 +10,9 @@
   max-width: 680px;
   margin: 0 auto;
 }
-
 .lw-pr-table-2 .wrap_table * {
   box-sizing: border-box;
 }
-
 .lw-pr-table-2 .wrap_table .table_head,
 .lw-pr-table-2 .wrap_table .table_body {
   width: 100%;
@@ -22,14 +20,12 @@
   grid-template-columns: var(--table-item-first-width) calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap)) calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap)) calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap)) calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap)) calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap)) calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap)) calc((100% - var(--table-item-first-width)) / 7 - var(--table-item-gap));
   gap: var(--table-item-gap);
 }
-
 @media (max-width: 700px) {
   .lw-pr-table-2 .wrap_table .table_head,
   .lw-pr-table-2 .wrap_table .table_body {
     --table-item-first-width: 140px;
   }
 }
-
 @media (max-width: 500px) {
   .lw-pr-table-2 .wrap_table .table_head,
   .lw-pr-table-2 .wrap_table .table_body {
@@ -37,7 +33,6 @@
     --table-item-gap: 1px;
   }
 }
-
 .lw-pr-table-2 .wrap_table .table_head .item,
 .lw-pr-table-2 .wrap_table .table_body .item {
   display: flex;
@@ -47,38 +42,32 @@
   aspect-ratio: 1;
   font-size: 18px;
 }
-
 .lw-pr-table-2 .wrap_table .table_head .item.first,
 .lw-pr-table-2 .wrap_table .table_body .item.first {
   aspect-ratio: initial;
 }
-
 @media (max-width: 700px) {
   .lw-pr-table-2 .wrap_table .table_head .item,
   .lw-pr-table-2 .wrap_table .table_body .item {
     font-size: 16px;
   }
 }
-
 @media (max-width: 500px) {
   .lw-pr-table-2 .wrap_table .table_head .item,
   .lw-pr-table-2 .wrap_table .table_body .item {
     font-size: 14px;
   }
 }
-
 @media (max-width: 450px) {
   .lw-pr-table-2 .wrap_table .table_head .item,
   .lw-pr-table-2 .wrap_table .table_body .item {
-    aspect-ratio: 1 / 1.2;
+    aspect-ratio: 1/1.2;
   }
 }
-
 .lw-pr-table-2 .wrap_table .table_head .item {
   color: var(--color-table-head-item-text);
   background: var(--color-table-head-item-bg);
 }
-
 .lw-pr-table-2 .wrap_table .table_body {
   margin-top: var(--table-item-gap);
-}
+}/*# sourceMappingURL=style.css.map */

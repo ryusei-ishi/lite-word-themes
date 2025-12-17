@@ -1,23 +1,17 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { InspectorControls } from '@wordpress/block-editor';
+import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, RangeControl, ResizableBox } from '@wordpress/components';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/lw-space-1', {
-    title: 'Lw スペーサー（PC・TB・SP）',
-    icon: 'align-wide',
-    category: 'layout',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        pcHeight: { type: 'number', default: 80 },
-        tbHeight: { type: 'number', default: 64 },
-        spHeight: { type: 'number', default: 40 },
-    },
+registerBlockType(metadata.name, {
     edit: ({ attributes, setAttributes, toggleSelection }) => {
         const { pcHeight, tbHeight, spHeight } = attributes;
+
+        const blockProps = useBlockProps({
+            className: 'lw_space_1'
+        });
 
         return (
             <>
@@ -46,7 +40,7 @@ registerBlockType('wdl/lw-space-1', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <div className="lw_space_1">
+                <div {...blockProps}>
                     <ResizableBox
                         size={{
                             height: pcHeight,
@@ -152,8 +146,12 @@ registerBlockType('wdl/lw-space-1', {
     save: ({ attributes }) => {
         const { pcHeight, tbHeight, spHeight } = attributes;
 
+        const blockProps = useBlockProps.save({
+            className: 'lw_space_1'
+        });
+
         return (
-            <div className="lw_space_1">
+            <div {...blockProps}>
                 <div className="pc" style={{ height: `${pcHeight}px` }}></div>
                 <div className="tb" style={{ height: `${tbHeight}px` }}></div>
                 <div className="sp" style={{ height: `${spHeight}px` }}></div>

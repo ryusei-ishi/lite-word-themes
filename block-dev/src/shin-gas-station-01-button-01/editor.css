@@ -6,7 +6,6 @@
   align-items: center;
   justify-content: center;
 }
-
 .shin-gas-station-01-button-01 .a_inner {
   position: relative;
   z-index: 10;
@@ -16,14 +15,12 @@
   transition: opacity 0.3s;
   border-style: solid;
 }
-
 @media (max-width: 400px) {
   .shin-gas-station-01-button-01 .a_inner {
     min-width: initial;
     width: calc(100% - 32px);
   }
 }
-
 .shin-gas-station-01-button-01 .a_inner a {
   padding: 1em 2em;
   min-width: 320px !important;
@@ -33,17 +30,14 @@
   line-height: 1.5em;
   color: #fff;
 }
-
 @media (max-width: 400px) {
   .shin-gas-station-01-button-01 .a_inner a {
     min-width: initial;
   }
 }
-
 .shin-gas-station-01-button-01 .a_inner a:hover {
   opacity: 0.8;
 }
-
 .shin-gas-station-01-button-01 .a_inner .a_background {
   position: absolute;
   top: 0;
@@ -52,4 +46,4 @@
   width: 100%;
   height: 100%;
   background: var(--color-main);
-}
+}/*# sourceMappingURL=editor.css.map */

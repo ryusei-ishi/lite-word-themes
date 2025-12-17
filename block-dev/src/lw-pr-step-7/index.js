@@ -3,6 +3,7 @@ import {
 	RichText,
 	InspectorControls,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
@@ -11,10 +12,11 @@ import {
 	RadioControl,
 	ToggleControl,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
+
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 /* ===== 共通オプション ===== */
 const fontOptions       = fontOptionsArr();
@@ -23,57 +25,8 @@ const fontWeightOptions = fontWeightOptionsArr();
 /* ----------------------------------------------------------
  * ブロック登録
  * -------------------------------------------------------- */
-registerBlockType('wdl/lw-pr-step-7', {
+registerBlockType(metadata.name, {
 	title   : 'step 07',
-	icon    : 'list-view',
-	category: 'liteword-other',
-	supports: { anchor: true },
-
-	attributes: {
-		circleBgColor : { type: 'string',  default: '#4a9d9c' },
-		cardBgColor   : { type: 'string',  default: '#ffffff' },
-		borderColor   : { type: 'string',  default: '#e0e0e0' },
-		ulMaxWidth    : { type: 'number',  default: 1200 },
-		columnCountPc : { type: 'number',  default: 3 },
-		columnCountSp : { type: 'number',  default: 2 },
-		// 旧属性（互換性のため残す）
-		columnCount   : { type: 'number' },
-
-		/* 全体フォントサイズクラス */
-		fontSizeClass: { type: 'string', default: 'font_size_m' },
-
-		/* STEP番号 */
-		fontNo       : { type: 'string', default: 'Murecho' },
-		fontWeightNo : { type: 'string', default: '700' },
-		colorNo      : { type: 'string', default: '#ffffff' },
-
-		/* タイトル */
-		titleTag     : { type: 'string', default: 'h3' },
-		fontH3       : { type: 'string', default: '' },
-		fontWeightH3 : { type: 'string', default: '600' },
-		colorH3      : { type: 'string', default: '#333333' },
-
-		/* 段落 */
-		fontP        : { type: 'string', default: '' },
-		fontWeightP  : { type: 'string', default: '400' },
-		colorP       : { type: 'string', default: '#666666' },
-
-		/* コンテンツ */
-		contents: {
-			type   : 'array',
-			source : 'query',
-			selector: '.lw-pr-step-7__li',
-			query  : {
-				title: { type: 'string', source: 'html', selector: '.lw-pr-step-7__li_title' },
-				text : { type: 'string', source: 'html', selector: '.lw-pr-step-7__li_text' },
-			},
-			default: [
-				{ title: '', text: '説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テ' },
-				{ title: '', text: '説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テ' },
-				{ title: '', text: '説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テ' },
-			],
-		},
-	},
 
 	/* ======================================================
 	 * 1) エディタ
@@ -124,12 +77,16 @@ registerBlockType('wdl/lw-pr-step-7', {
 			const reordered = [...contents];
 			const [moved] = reordered.splice(index, 1);
 			reordered.splice(targetIndex, 0, moved);
-
 			setAttributes({ contents: reordered });
 		};
 
-		return (
-			<Fragment>
+		
+        const blockProps = useBlockProps({
+            className: `lw-pr-step-7 ${fontSizeClass}`
+        });
+
+        return (
+			<>
 				<InspectorControls>
 					{/* --- 全体設定 --- */}
 					<PanelBody title="レイアウト全体" initialOpen={true}>
@@ -260,7 +217,7 @@ registerBlockType('wdl/lw-pr-step-7', {
 				</InspectorControls>
 
 				{/* ---------- エディタ表示 ---------- */}
-				<div className={`lw-pr-step-7 ${fontSizeClass}`}>
+				<div {...blockProps}>
 					<ul
 						className="lw-pr-step-7__inner"
 						style={{
@@ -361,7 +318,7 @@ registerBlockType('wdl/lw-pr-step-7', {
 						リストを追加する
 					</button>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 

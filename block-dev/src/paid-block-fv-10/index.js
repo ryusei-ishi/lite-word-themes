@@ -4,15 +4,15 @@ import {
 	MediaUpload,
 	InspectorControls,
 	ColorPalette,
+	useBlockProps,
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
 	Button,
 	RangeControl,
 	SelectControl,
-	RadioControl,        // ★ 追加
+	RadioControl,
 } from '@wordpress/components';
-import { Fragment } from '@wordpress/element';
 import { useSelect } from '@wordpress/data';
 import {
 	minHeightPcClassOptionArr,
@@ -21,43 +21,9 @@ import {
 } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
-registerBlockType('wdl/paid-block-fv-10', {
-	title: '固定ページタイトル 10（下層用）',
-	icon: 'cover-image',
-	category: 'liteword-firstview',
-	supports: { anchor: true },
-
-	attributes: {
-		backgroundImage         : { type: 'string', default: '' },
-		backgroundImageSp       : { type: 'string', default: '' },
-		mainTitle               : { type: 'string', default: 'ページタイトル' },
-
-		filterBackgroundColor   : { type: 'string', default: '#FFF8D4' },
-		filterOpacity           : { type: 'number',  default: 1 },
-
-		/* --- inner_filter 用装飾 --- */
-		innerFilterBg           : { type: 'string', default: '#FC99AA' },
-		innerFilterBorderColor  : { type: 'string', default: '#FFFFFF' },
-		innerFilterBorderWidth  : { type: 'number', default: 4 },
-		innerFilterBorderRadius : { type: 'number', default: 12 },
-
-		/* --- 影パラメータ --- */
-		innerFilterShadowColor  : { type: 'string', default: 'rgba(0,0,0,0.06)' },
-		innerFilterShadowOffsetX: { type: 'number', default: 0 },
-		innerFilterShadowOffsetY: { type: 'number', default: 3 },
-		innerFilterShadowBlur   : { type: 'number', default: 6 },
-		innerFilterShadowSpread : { type: 'number', default: 0 },
-
-		textColor               : { type: 'string', default: '#fff' },
-		minHeightPc             : { type: 'string', default: 'min-h-pc-400px' },
-		minHeightTb             : { type: 'string', default: 'min-h-tb-360px' },
-		minHeightSp             : { type: 'string', default: 'min-h-sp-280px' },
-
-		/* ★ 追加：タイトルのフォントサイズクラス */
-		titleFontSizeClass      : { type: 'string', default: 'font_size_m' },
-	},
-
+registerBlockType(metadata.name, {
 	/* ====================================================== */
 	edit({ attributes, setAttributes }) {
 		const {
@@ -87,11 +53,15 @@ registerBlockType('wdl/paid-block-fv-10', {
 			titleFontSizeClass,
 		} = attributes;
 
+		const blockProps = useBlockProps({
+			className: `paid-block-fv-10 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+		});
+
 		const currentPostType = useSelect((select) =>
 			select('core/editor').getCurrentPostType(),
 		);
 		if (currentPostType !== 'page') {
-			return <p>このブロックは固定ページでのみ使用できます。</p>;
+			return <div {...blockProps}><p>このブロックは固定ページでのみ使用できます。</p></div>;
 		}
 
 		const onChangeBg   = (media) => setAttributes({ backgroundImage: media.url });
@@ -101,7 +71,7 @@ registerBlockType('wdl/paid-block-fv-10', {
 		const boxShadow = `${innerFilterShadowOffsetX}px ${innerFilterShadowOffsetY}px ${innerFilterShadowBlur}px ${innerFilterShadowSpread}px ${innerFilterShadowColor}`;
 
 		return (
-			<Fragment>
+			<>
 				<InspectorControls>
 
 					{/* ★ フォントサイズ設定パネル（RadioControlへ変更） */}
@@ -242,7 +212,7 @@ registerBlockType('wdl/paid-block-fv-10', {
 				</InspectorControls>
 
 				{/* ---------- プレビュー ---------- */}
-				<div className={`paid-block-fv-10 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}>
+				<div {...blockProps}>
 					<div className="fv-10_inner">
 						<h1 className={`ttl ${titleFontSizeClass}`} style={{ color: textColor }}>
 							<RichText
@@ -277,7 +247,7 @@ registerBlockType('wdl/paid-block-fv-10', {
 						{backgroundImage && <img src={backgroundImage} alt="" />}
 					</div>
 				</div>
-			</Fragment>
+			</>
 		);
 	},
 
@@ -310,10 +280,14 @@ registerBlockType('wdl/paid-block-fv-10', {
 			titleFontSizeClass,
 		} = attributes;
 
+		const blockProps = useBlockProps.save({
+			className: `paid-block-fv-10 ${minHeightPc} ${minHeightTb} ${minHeightSp}`
+		});
+
 		const boxShadow = `${innerFilterShadowOffsetX}px ${innerFilterShadowOffsetY}px ${innerFilterShadowBlur}px ${innerFilterShadowSpread}px ${innerFilterShadowColor}`;
 
 		return (
-			<div className={`paid-block-fv-10 ${minHeightPc} ${minHeightTb} ${minHeightSp}`}>
+			<div {...blockProps}>
 				<div className="fv-10_inner">
 					<h1 className={`ttl ${titleFontSizeClass}`} style={{ color: textColor }}>
 						<RichText.Content

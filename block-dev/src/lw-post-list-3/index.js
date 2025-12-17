@@ -4,29 +4,12 @@ import { PanelBody, ColorPalette, RangeControl, TextControl, SelectControl } fro
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
+import metadata from './block.json';
 
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType('wdl/lw-post-list-3', {
-    title: '投稿一覧 3',
-    icon: 'editor-ul',
-    category: 'liteword-other',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        numberOfPosts: { type: 'number', default: 6 },
-        categoryId: { type: 'string', default: '' },
-        postType: { type: 'string', default: 'post' },
-        dateFont: { type: 'string', default: 'Noto Sans JP' },
-        dateFontWeight: { type: 'string', default: '400' },
-        catFont: { type: 'string', default: 'Noto Sans JP' },
-        catFontWeight: { type: 'string', default: '400' },
-        catBgColor: { type: 'string', default: 'var(--color-main)' },
-        titleFont: { type: 'string', default: 'Noto Sans JP' },
-        titleFontWeight: { type: 'string', default: '400' },
-    },
+registerBlockType(metadata.name, {
     edit: ({ attributes, setAttributes }) => {
         const blockProps = useBlockProps();
         const {
@@ -148,14 +131,15 @@ registerBlockType('wdl/lw-post-list-3', {
         );
     },
     save: ({ attributes }) => {
+        const blockProps = useBlockProps.save();
         const {
             numberOfPosts, categoryId, postType,
-            dateFont, dateFontWeight, catFont, catFontWeight, titleFont, titleFontWeight, 
+            dateFont, dateFontWeight, catFont, catFontWeight, titleFont, titleFontWeight,
             catBgColor,
         } = attributes;
 
         return (
-            <div>
+            <div {...blockProps}>
                 <div className="filter" style={{background:catBgColor}}></div>
                 <div
                     className="lw_post-list-3"

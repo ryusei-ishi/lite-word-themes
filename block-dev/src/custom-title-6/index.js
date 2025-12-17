@@ -1,24 +1,15 @@
 import { registerBlockType } from '@wordpress/blocks';
-import { RichText, InspectorControls, BlockControls, ColorPalette } from '@wordpress/block-editor';
-import { PanelBody, RadioControl, ToolbarGroup, ToolbarButton } from '@wordpress/components';
+import { RichText, InspectorControls, BlockControls, ColorPalette, useBlockProps } from '@wordpress/block-editor';
+import { PanelBody, ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import './style.scss';
 import './editor.scss';
 
-registerBlockType('wdl/custom-title-6', {
-    title: '見出しタイトル 06',
-    icon: 'editor-textcolor',
-    category: 'liteword-title',
-    supports: {
-        anchor: true, 
-    },
-    attributes: {
-        mainTitle: { type: 'string', default: 'CONTENT' },
-        accentColor: { type: 'string', default: 'var(--color-main)' },
-        headingLevel: { type: 'number', default: 2 },
-    },
+import metadata from './block.json';
+
+registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
-        const { mainTitle,  accentColor, headingLevel } = attributes;
+        const { mainTitle, accentColor, headingLevel } = attributes;
 
         const onChangeMainTitle = (value) => {
             setAttributes({ mainTitle: value });
@@ -33,6 +24,10 @@ registerBlockType('wdl/custom-title-6', {
         };
 
         const TagName = `h${headingLevel}`;
+
+        const blockProps = useBlockProps({
+            className: 'custom-title-6',
+        });
 
         return (
             <>
@@ -57,30 +52,32 @@ registerBlockType('wdl/custom-title-6', {
                         />
                     </PanelBody>
                 </InspectorControls>
-                <TagName className={`custom-title-6`}>
+                <TagName {...blockProps}>
                     <div className="main">
                         <RichText
                             tagName="span"
                             value={mainTitle}
                             onChange={onChangeMainTitle}
                             placeholder="メインタイトルを入力"
-                     
                         />
                         <div className="accent" style={{ backgroundColor: accentColor }}></div>
                     </div>
-             
                 </TagName>
             </>
         );
     },
     save: function (props) {
         const { attributes } = props;
-        const { mainTitle,  accentColor, headingLevel } = attributes;
+        const { mainTitle, accentColor, headingLevel } = attributes;
 
         const TagName = `h${headingLevel}`;
 
+        const blockProps = useBlockProps.save({
+            className: 'custom-title-6',
+        });
+
         return (
-            <TagName className={`custom-title-6`}>
+            <TagName {...blockProps}>
                 <div className="main">
                     <RichText.Content
                         tagName="span"
@@ -88,7 +85,6 @@ registerBlockType('wdl/custom-title-6', {
                     />
                     <div className="accent" style={{ backgroundColor: accentColor }}></div>
                 </div>
-       
             </TagName>
         );
     }

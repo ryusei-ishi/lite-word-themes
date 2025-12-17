@@ -1,0 +1,86 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-page-list-1",
+	"version": "1.0.0",
+	"title": "固定ページ一覧 1",
+	"category": "lw-post",
+	"icon": "editor-ul",
+	"editorScript": "file:./lw-page-list-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"uid": {
+			"type": "string",
+			"default": ""
+		},
+		"numberOfPages": {
+			"type": "number",
+			"default": 6
+		},
+		"parentPageId": {
+			"type": "number",
+			"default": 0
+		},
+		"orderOption": {
+			"type": "string",
+			"default": "date_desc"
+		},
+		"openInNewTab": {
+			"type": "boolean",
+			"default": false
+		},
+		"filterText": {
+			"type": "string",
+			"default": ""
+		},
+		"imagePattern": {
+			"type": "string",
+			"default": "ptn_1"
+		},
+		"showDate": {
+			"type": "boolean",
+			"default": false
+		},
+		"showExcerpt": {
+			"type": "boolean",
+			"default": true
+		},
+		"dateFont": {
+			"type": "string",
+			"default": "Noto Sans JP"
+		},
+		"dateFontWeight": {
+			"type": "string",
+			"default": "400"
+		},
+		"titleFont": {
+			"type": "string",
+			"default": "Noto Sans JP"
+		},
+		"titleFontWeight": {
+			"type": "string",
+			"default": "500"
+		},
+		"exFont": {
+			"type": "string",
+			"default": "Noto Sans JP"
+		},
+		"exFontWeight": {
+			"type": "string",
+			"default": "400"
+		},
+		"catBgColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		}
+	},
+	"no": 5
+}

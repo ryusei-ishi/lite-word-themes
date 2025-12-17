@@ -1,0 +1,95 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-custom-title-10",
+	"version": "1.0.0",
+	"title": "見出しタイトル 10",
+	"category": "lw-heading",
+	"icon": "editor-textcolor",
+	"description": "画像付き見出しブロック",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"subTitle": {
+			"type": "string",
+			"default": "製品紹介"
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "PRODUCTS"
+		},
+		"headingLevel": {
+			"type": "number",
+			"default": 2
+		},
+		"mainTitleColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"sizeClass": {
+			"type": "string",
+			"default": "size_m"
+		},
+		"leftImage": {
+			"type": "string",
+			"default": "https://lite-word.com/sample_img/icon/pc_1.png"
+		},
+		"rightImage": {
+			"type": "string",
+			"default": ""
+		},
+		"leftHeightEm": {
+			"type": "number",
+			"default": 1.5
+		},
+		"rightHeightEm": {
+			"type": "number",
+			"default": 1.5
+		},
+		"leftMarginEm": {
+			"type": "number",
+			"default": 0.4
+		},
+		"rightMarginEm": {
+			"type": "number",
+			"default": 0.4
+		},
+		"positionClass": {
+			"type": "string",
+			"default": "position_center"
+		},
+		"hideSubTitle": {
+			"type": "string",
+			"default": "off"
+		},
+		"hideMainTitle": {
+			"type": "string",
+			"default": "off"
+		},
+		"bdThickness": {
+			"type": "number",
+			"default": 2
+		},
+		"bdMarginTopEm": {
+			"type": "number",
+			"default": 0.1
+		},
+		"bdDisplay": {
+			"type": "string",
+			"default": "on"
+		},
+		"ttlFullWidth": {
+			"type": "string",
+			"default": "off"
+		}
+	},
+	"editorScript": "file:./paid-block-custom-title-10.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 10
+}
