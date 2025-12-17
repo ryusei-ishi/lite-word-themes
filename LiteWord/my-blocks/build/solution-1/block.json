@@ -1,0 +1,74 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/solution-1",
+	"version": "1.0.0",
+	"title": "solution 01",
+	"category": "lw-content",
+	"icon": "lightbulb",
+	"supports": {
+		"anchor": true
+	},
+	"editorScript": "file:./solution-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 1,
+	"attributes": {
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".solution-1_content",
+			"query": {
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": ".solution-1_text p"
+				},
+				"image": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "figure img",
+					"attribute": "src"
+				},
+				"borderColor": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "figure",
+					"attribute": "data-border-color"
+				}
+			},
+			"default": [
+				{
+					"text": "何から始めたらいいか\nわからない",
+					"image": "",
+					"borderColor": "var(--color-main)"
+				},
+				{
+					"text": "作りたいけど\n時間がない",
+					"image": "",
+					"borderColor": "var(--color-main)"
+				},
+				{
+					"text": "自分で作ると\nダサくなる…",
+					"image": "",
+					"borderColor": "var(--color-main)"
+				}
+			]
+		},
+		"fontSet": {
+			"type": "string",
+			"default": "",
+			"source": "attribute",
+			"selector": ".solution-1",
+			"attribute": "data-lw_font_set"
+		},
+		"fontWeight": {
+			"type": "string",
+			"default": ""
+		}
+	}
+}

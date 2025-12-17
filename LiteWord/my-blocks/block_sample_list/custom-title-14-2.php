@@ -1,0 +1,3 @@
+<!-- wp:wdl/lw-pr-custom-title-14 {"mainTitle":"カスタムタイトルカスタム","colorMain":"#d7900e","alignmentPc":"right"} -->
+<div class="wp-block-wdl-lw-pr-custom-title-14 lw-pr-custom-title-14 right_pc" style="--color-main:#d7900e;width:100%;--custom-title-14-border-radius:6px"><h2 class="ttl"><span class="sub"><span class="text">サブタイトルサブタイトル</span></span><span class="main">カスタムタイトルカスタム</span></h2></div>
+<!-- /wp:wdl/lw-pr-custom-title-14 -->

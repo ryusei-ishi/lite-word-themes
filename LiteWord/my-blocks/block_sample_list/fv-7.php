@@ -1,0 +1,3 @@
+<!-- wp:wdl/fv-7 {"videoType":"vimeo","vimeoId":"1128577220","className":"undefined"} -->
+<div class="wp-block-wdl-fv-7 fv-7  undefined"><div class="fv-7__inner"><h1 class="title"><div class="sub">初心者のためのWordPressテーマ</div><div class="main">LiteWord</div></h1><p class="description">テキストテキストテキストテキストテキストテキスト</p><div class="btn"><a href="" class="btn-text">詳細はこちら</a></div></div><div class="bg_image"><div class="vimeo-wrapper"><iframe src="https://player.vimeo.com/video/1128577220?background=1&amp;autoplay=1&amp;loop=1&amp;muted=1" frameborder="0" allow="autoplay; fullscreen" class="vimeo-video"></iframe></div><div class="filter" style="background-color:#000000;opacity:0.5"></div></div></div>
+<!-- /wp:wdl/fv-7 -->

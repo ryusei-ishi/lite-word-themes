@@ -1,0 +1,106 @@
+.shin-gas-station-01-custom-title-2 {
+  position: relative;
+  margin: 80px 0 1em 0;
+  padding-bottom: 0 !important;
+  border: none !important;
+}
+@container (max-width:600px) {
+  .shin-gas-station-01-custom-title-2 {
+    margin-top: 64px;
+  }
+}
+@container (max-width:500px) {
+  .shin-gas-station-01-custom-title-2 {
+    margin-top: 32px;
+  }
+}
+.shin-gas-station-01-custom-title-2::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 100%;
+  height: 1px;
+  display: block;
+  content: "";
+  background: #EBEBEB;
+}
+.shin-gas-station-01-custom-title-2 .border {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 0;
+  width: 200px;
+  height: 6px;
+  background: var(--color-main);
+}
+@container (max-width:600px) {
+  .shin-gas-station-01-custom-title-2 .border {
+    height: 4px;
+  }
+}
+.shin-gas-station-01-custom-title-2 .in {
+  padding-top: 0.8em;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  font-size: 2.3529em;
+}
+@container (max-width:800px) {
+  .shin-gas-station-01-custom-title-2 .in {
+    font-size: 2.1em;
+  }
+}
+@container (max-width:600px) {
+  .shin-gas-station-01-custom-title-2 .in {
+    font-size: 1.8em;
+  }
+}
+@container (max-width:500px) {
+  .shin-gas-station-01-custom-title-2 .in {
+    font-size: 1.6em;
+  }
+}
+@container (max-width:400px) {
+  .shin-gas-station-01-custom-title-2 .in {
+    font-size: 1.5em;
+  }
+}
+.shin-gas-station-01-custom-title-2 .in.size_l .main {
+  font-size: 1.2em;
+}
+.shin-gas-station-01-custom-title-2 .in.size_l .sub {
+  font-size: 0.5em;
+}
+.shin-gas-station-01-custom-title-2 .in.size_s .main {
+  font-size: 0.8em;
+}
+.shin-gas-station-01-custom-title-2 .in.size_s .sub {
+  font-size: 0.35em;
+}
+.shin-gas-station-01-custom-title-2 .main {
+  position: relative;
+  display: block;
+  letter-spacing: 0.06em;
+  line-height: 1.4em;
+  font-weight: 500;
+  color: var(--color-main);
+}
+.shin-gas-station-01-custom-title-2 .main span {
+  display: inline-block;
+}
+.shin-gas-station-01-custom-title-2 .sub {
+  padding-top: 0.5em;
+  font-size: 0.4em;
+  letter-spacing: 0.05em;
+  line-height: 2em;
+  font-weight: 400;
+}
+
+.post_style .shin-gas-station-01-custom-title-2 .main:empty {
+  display: none;
+}
+.post_style .shin-gas-station-01-custom-title-2 .sub:empty {
+  display: none;
+}/*# sourceMappingURL=style.css.map */

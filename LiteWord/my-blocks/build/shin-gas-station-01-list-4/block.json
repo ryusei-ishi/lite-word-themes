@@ -1,0 +1,117 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/shin-gas-station-01-list-4",
+	"version": "1.0.0",
+	"title": "インフォリスト 4 shin info pattern 01",
+	"category": "lw-list",
+	"icon": "lightbulb",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"fontLi": {
+			"type": "string",
+			"default": ""
+		},
+		"fontColorLi": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"fontWeightLi": {
+			"type": "string",
+			"default": "600"
+		},
+		"fontLiP": {
+			"type": "string",
+			"default": ""
+		},
+		"fontColorLiP": {
+			"type": "string",
+			"default": "var(--color-black)"
+		},
+		"fontWeightLiP": {
+			"type": "string",
+			"default": "400"
+		},
+		"stepFont": {
+			"type": "string",
+			"default": ""
+		},
+		"stepFontColor": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"stepFontWeight": {
+			"type": "string",
+			"default": "600"
+		},
+		"backgroundColor": {
+			"type": "string",
+			"default": "#FAFAFA"
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"borderSize": {
+			"type": "number",
+			"default": 0
+		},
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".shin-gas-station-01-list-4__li",
+			"query": {
+				"image": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "img",
+					"attribute": "src"
+				},
+				"ttl": {
+					"type": "string",
+					"source": "html",
+					"selector": ".shin-gas-station-01-list-4__text h4"
+				},
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": ".shin-gas-station-01-list-4__text p"
+				},
+				"url": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".link",
+					"attribute": "href",
+					"default": ""
+				}
+			},
+			"default": [
+				{
+					"image": "https://cdn.pixabay.com/photo/2021/09/22/05/06/city-6645646_960_720.jpg",
+					"ttl": "タイトルタイトル",
+					"text": "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト "
+				},
+				{
+					"image": "https://cdn.pixabay.com/photo/2021/09/22/05/06/city-6645646_960_720.jpg",
+					"ttl": "タイトルタイトル",
+					"text": "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト "
+				},
+				{
+					"image": "https://cdn.pixabay.com/photo/2021/09/22/05/06/city-6645646_960_720.jpg",
+					"ttl": "タイトルタイトル",
+					"text": "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト "
+				}
+			]
+		}
+	},
+	"editorScript": "file:./shin-gas-station-01-list-4.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 15
+}

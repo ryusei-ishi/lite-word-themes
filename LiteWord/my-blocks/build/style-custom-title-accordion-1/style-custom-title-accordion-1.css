@@ -1,0 +1,76 @@
+/*!**********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/custom-title-accordion-1/style.scss ***!
+  \**********************************************************************************************************************************/
+.custom-title-accordion-1 {
+  position: relative;
+  margin: 1em 0 0.5em 0;
+  padding: 0.6em 2em 0.55em 0.8em !important;
+  border: 1px solid var(--color-main);
+  border-radius: 0.3em;
+  cursor: pointer;
+  transition: opacity 0.3s ease-in-out;
+}
+.custom-title-accordion-1 .sub {
+  margin-bottom: -0.2em;
+  display: block;
+  font-size: 0.6em;
+  line-height: 1.6em;
+}
+.custom-title-accordion-1 .sub:has(> [class*=fs-]) {
+  line-height: 1.1em;
+}
+.custom-title-accordion-1 .main {
+  display: block;
+  font-size: 1em;
+  letter-spacing: 0.05em;
+  line-height: 1.3em;
+}
+.custom-title-accordion-1 .main:has(> [class*=fs-]) {
+  margin-top: 0.2em;
+  line-height: 1.1em;
+}
+.custom-title-accordion-1 .accordion-icon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0.5em;
+  margin: auto;
+  aspect-ratio: 1;
+  height: 1.3em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 50%;
+}
+.custom-title-accordion-1 .accordion-icon svg {
+  width: 0.7em;
+  height: 0.7em;
+  transition: transform 0.3s ease-in-out;
+  fill: #fff;
+}
+.custom-title-accordion-1.open .accordion-icon svg {
+  transform: rotate(90deg);
+}
+.custom-title-accordion-1:hover {
+  opacity: 0.8;
+}
+
+.post_style h2.custom-title-accordion-1 {
+  font-size: 1.3em;
+  font-weight: 600;
+}
+.post_style h3.custom-title-accordion-1 {
+  font-size: 1.15em;
+}
+.post_style h4.custom-title-accordion-1 {
+  font-size: 1em;
+}
+.post_style .custom-title-accordion-1 .main:empty {
+  display: none;
+}
+.post_style .custom-title-accordion-1 .sub:empty {
+  display: none;
+}
+.post_style .custom-title-accordion-1__content_wrap + .custom-title-accordion-1 {
+  margin-top: 0em;
+}

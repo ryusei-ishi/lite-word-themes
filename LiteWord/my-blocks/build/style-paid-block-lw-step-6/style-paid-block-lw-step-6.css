@@ -1,0 +1,217 @@
+/*!******************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/paid-block-lw-step-6/style.scss ***!
+  \******************************************************************************************************************************/
+.paid-block-lw-step-6 {
+  margin: 48px 0;
+  container-type: inline-size;
+}
+@container (max-width:600px) {
+  .paid-block-lw-step-6 {
+    margin: 32px 0;
+  }
+}
+@container (max-width:500px) {
+  .paid-block-lw-step-6 {
+    margin: 24px 0;
+  }
+}
+.paid-block-lw-step-6 * {
+  box-sizing: border-box;
+}
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner {
+  position: relative;
+  z-index: 10;
+  margin: 0 auto;
+  padding: 0;
+  padding-top: 2em;
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+  list-style: none;
+}
+@container (max-width:1000px) {
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner {
+    gap: 24px;
+  }
+}
+@container (max-width:800px) {
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@container (max-width:550px) {
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li {
+  position: relative;
+  padding: 1.5em;
+  border: 1px solid #ddd;
+  background: #fff;
+}
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li a {
+  color: var(--color-black);
+  text-decoration: none;
+}
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li .number {
+  position: relative;
+  z-index: 20;
+  margin: auto;
+  margin-top: -2.4em;
+  margin-bottom: 0.5em;
+  height: 2.5em;
+  width: 2.5em;
+  aspect-ratio: 1/1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.4em;
+  border-radius: 50%;
+}
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li .image {
+  position: relative;
+  z-index: 10;
+  margin-bottom: 24px;
+  padding: 16px;
+  width: 100%;
+  display: flex;
+  align-items: end;
+  align-content: end;
+  aspect-ratio: 400/300;
+  overflow: hidden;
+}
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li .image img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li .image + button {
+  margin-top: 12px;
+}
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h3.ttl,
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h4.ttl,
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.ttl {
+  margin: 0;
+  width: 100%;
+  padding: 0.4em 0.2em;
+  padding-top: 0;
+  line-height: 1.5em;
+  text-align: center;
+  background: #fff;
+  border-bottom: 2px solid var(--color-main);
+  letter-spacing: 0;
+}
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h3.ttl.font_size_l,
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h4.ttl.font_size_l,
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.ttl.font_size_l {
+  font-size: 26px;
+}
+@container (max-width:800px) {
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h3.ttl.font_size_l,
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h4.ttl.font_size_l,
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.ttl.font_size_l {
+    font-size: 24px;
+  }
+}
+@container (max-width:550px) {
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h3.ttl.font_size_l,
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h4.ttl.font_size_l,
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.ttl.font_size_l {
+    font-size: 24px;
+  }
+}
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h3.ttl.font_size_m,
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h4.ttl.font_size_m,
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.ttl.font_size_m {
+  font-size: 24px;
+}
+@container (max-width:800px) {
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h3.ttl.font_size_m,
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h4.ttl.font_size_m,
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.ttl.font_size_m {
+    font-size: 22px;
+  }
+}
+@container (max-width:550px) {
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h3.ttl.font_size_m,
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h4.ttl.font_size_m,
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.ttl.font_size_m {
+    font-size: 22px;
+  }
+}
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h3.ttl.font_size_s,
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h4.ttl.font_size_s,
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.ttl.font_size_s {
+  font-size: 22px;
+}
+@container (max-width:800px) {
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h3.ttl.font_size_s,
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h4.ttl.font_size_s,
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.ttl.font_size_s {
+    font-size: 20px;
+  }
+}
+@container (max-width:550px) {
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h3.ttl.font_size_s,
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li h4.ttl.font_size_s,
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.ttl.font_size_s {
+    font-size: 20px;
+  }
+}
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.paid-block-lw-step-6__text {
+  margin: 0;
+  margin-top: 0.8em;
+  line-height: 2em;
+}
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.paid-block-lw-step-6__text.font_size_l {
+  font-size: 20px;
+}
+@container (max-width:800px) {
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.paid-block-lw-step-6__text.font_size_l {
+    font-size: 18px;
+  }
+}
+@container (max-width:550px) {
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.paid-block-lw-step-6__text.font_size_l {
+    font-size: 16px;
+  }
+}
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.paid-block-lw-step-6__text.font_size_m {
+  font-size: 17px;
+}
+@container (max-width:550px) {
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.paid-block-lw-step-6__text.font_size_m {
+    font-size: 15px;
+  }
+}
+.paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.paid-block-lw-step-6__text.font_size_s {
+  font-size: 15px;
+}
+@container (max-width:550px) {
+  .paid-block-lw-step-6 ul.paid-block-lw-step-6__inner li.paid-block-lw-step-6__li p.paid-block-lw-step-6__text.font_size_s {
+    font-size: 12px;
+  }
+}
+.paid-block-lw-step-6 .paid-block-lw-step-6__remove_btn {
+  font-size: 12px;
+  color: #fff !important;
+  background: var(--color-accent);
+  border: none;
+  border-radius: 2px;
+}
+.paid-block-lw-step-6 .paid-block-lw-step-6__add_btn {
+  position: relative;
+  z-index: 10;
+  margin: 0 auto;
+  margin-top: 32px;
+  padding: 12px 24px;
+  padding: 12px 24px;
+  width: 200px;
+  font-size: 16px;
+}

@@ -1,0 +1,96 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-button-01",
+	"version": "1.0.0",
+	"title": "リンクボタン 01",
+	"category": "lw-button",
+	"icon": "button",
+	"description": "カスタマイズ可能なリンクボタン",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"buttonText": {
+			"type": "string",
+			"source": "html",
+			"selector": "a",
+			"default": "詳細はこちら"
+		},
+		"url": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "a",
+			"attribute": "href",
+			"default": ""
+		},
+		"openInNewTab": {
+			"type": "boolean",
+			"default": false
+		},
+		"fontSize": {
+			"type": "number",
+			"default": 100
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 240
+		},
+		"maxWidthSp": {
+			"type": "number",
+			"default": null
+		},
+		"backgroundColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"textColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"paddingSize": {
+			"type": "string",
+			"default": "M"
+		},
+		"innerPaddingSize": {
+			"type": "string",
+			"default": "M"
+		},
+		"marginTop": {
+			"type": "number",
+			"default": 10
+		},
+		"marginBottom": {
+			"type": "number",
+			"default": 10
+		},
+		"alignment": {
+			"type": "string",
+			"default": "center"
+		},
+		"alignmentSp": {
+			"type": "string",
+			"default": "center"
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 0
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 0
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "#000000"
+		}
+	},
+	"editorScript": "file:./lw-button-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 1
+}

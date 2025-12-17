@@ -1,0 +1,82 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-list-2",
+	"version": "1.0.0",
+	"title": "list 02",
+	"category": "lw-list",
+	"icon": "lightbulb",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"backgroundImage": {
+			"type": "string",
+			"default": ""
+		},
+		"bgGradient": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 0.8
+		},
+		"titleText": {
+			"type": "string",
+			"default": "機能紹介"
+		},
+		"fontLi": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightLi": {
+			"type": "string",
+			"default": ""
+		},
+		"colorLiSvg": {
+			"type": "string",
+			"default": "var(--color-accent)"
+		},
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".lw-list-2__li",
+			"query": {
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": ".lw-list-2__text p"
+				},
+				"borderColor": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "figure",
+					"attribute": "data-border-color"
+				}
+			},
+			"default": [
+				{
+					"text": "何から始めたらいいか\nわからない",
+					"borderColor": "var(--color-main)"
+				},
+				{
+					"text": "作りたいけど\n時間がない",
+					"borderColor": "var(--color-main)"
+				},
+				{
+					"text": "自分で作ると\nダサくなる…",
+					"borderColor": "var(--color-main)"
+				}
+			]
+		}
+	},
+	"editorScript": "file:./lw-list-2.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 2
+}

@@ -1,0 +1,7 @@
+<!-- wp:wdl/lw-banner-info-03 -->
+<nav class="wp-block-wdl-lw-banner-info-03 lw-banner-info-03"><ul class="lw-banner-info-03__wrap" style="max-width:800px"><li><div class="a"><img src="https://picsum.photos/1000/1000?random=1" alt=""/><h3 class="title" style="font-weight:600" data-lw_font_set="Noto Sans JP"><span>タイトルタイトル</span></h3><p class="description" style="font-weight:400" data-lw_font_set="Noto Sans JP"><span>説明テキスト説明テ</span></p><div class="filter" style="background-color:#000;opacity:0.45"></div></div></li><li><div class="a"><img src="https://picsum.photos/1000/1000?random=2" alt=""/><h3 class="title" style="font-weight:600" data-lw_font_set="Noto Sans JP"><span>タイトルタイトル</span></h3><p class="description" style="font-weight:400" data-lw_font_set="Noto Sans JP"><span>説明テキスト説明テ</span></p><div class="filter" style="background-color:#000;opacity:0.45"></div></div></li><li><div class="a"><img src="https://picsum.photos/1000/1000?random=3" alt=""/><h3 class="title" style="font-weight:600" data-lw_font_set="Noto Sans JP"><span>タイトルタイトル</span></h3><p class="description" style="font-weight:400" data-lw_font_set="Noto Sans JP"><span>説明テキスト説明テ</span></p><div class="filter" style="background-color:#000;opacity:0.45"></div></div></li></ul></nav>
+<!-- /wp:wdl/lw-banner-info-03 -->
+
+<!-- wp:paragraph -->
+<p class=""></p>
+<!-- /wp:paragraph -->

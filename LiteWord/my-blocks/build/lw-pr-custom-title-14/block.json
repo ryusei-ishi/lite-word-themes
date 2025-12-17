@@ -1,0 +1,63 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-custom-title-14",
+	"version": "1.0.0",
+	"title": "見出しタイトル 14",
+	"category": "lw-heading",
+	"icon": "editor-textcolor",
+	"description": "位置調整対応見出しブロック",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"mainTitle": {
+			"type": "string",
+			"default": "カスタムタイトルカスタムタイトル"
+		},
+		"subTitle": {
+			"type": "string",
+			"default": "サブタイトルサブタイトル"
+		},
+		"headingLevel": {
+			"type": "number",
+			"default": 2
+		},
+		"colorMain": {
+			"type": "string",
+			"default": "#0a71c0"
+		},
+		"colorMainText": {
+			"type": "string",
+			"default": ""
+		},
+		"colorSubText": {
+			"type": "string",
+			"default": ""
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 0
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 6
+		},
+		"alignmentPc": {
+			"type": "string",
+			"default": ""
+		},
+		"alignmentSp": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./lw-pr-custom-title-14.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 14
+}

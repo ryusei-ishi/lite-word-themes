@@ -1,0 +1,181 @@
+.header_ptn_3 {
+    .inner{
+        position: relative;
+        z-index: 40;
+        padding: 0 40px;
+        height: 72px;
+        background: var(--color-main);
+        display: flex;
+        justify-content: space-between;
+        @media (max-width: 1180px) {
+            padding: 0 32px;
+        }
+        @media (max-width: 800px) {
+            height: 64px;
+            padding: 0 24px;
+        }
+        @media (max-width: 500px) {
+            height: 56px;
+            padding: 0 16px;
+        }
+        @media (max-width: 400px) {
+            padding: 0 12px;
+        }
+        &:after {
+            position: absolute;
+            bottom: -1px;
+            left: 0;
+            width: 100%;
+            height: 1px;
+            content: "";
+            display: block;
+            background: #000;
+            opacity: 0.1;
+        }
+        .logo {
+            position: relative;
+            z-index: 10;
+            height: 100%;
+            a {
+                height: 100%;
+                display: flex;
+                align-items: center;
+                font-size: 24px;
+                img {
+                    width: auto;
+                    object-fit: contain;
+                }
+            }
+        }
+        .header_nav {
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+            @media (max-width: 1080px) {
+                display: none;
+            }
+            >div{
+                height: 100%;
+            }
+        }
+    }
+    .header_menu_pc,
+    .header_nav > .menu > ul {
+        position: absolute;
+        top: 0;
+        left: 0;
+        height: 100%;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        font-size: calc(var(--font-size-post-df_pc) - 1px);
+        @media (max-width: 1180px) {
+            font-size: calc(var(--font-size-post-df_pc) - 2px);
+        }
+        > li {
+            position: relative;
+            height: 100%;
+            > a {
+                padding: 0 2em;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                color: #fff;
+                transition: 0.4s;
+                white-space: nowrap;
+                @media (max-width: 1180px) {
+                    padding: 0 1.4em;
+                }
+            }
+        }
+    }
+    .cta_btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 10;
+        padding: 0 1.6em;
+        min-width: 192px;
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        font-size: 0.95em;
+        font-weight: 500;
+        overflow: hidden;
+        &::after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            content: "";
+            display: block;
+            transition: 0.3s;
+        }
+        &:hover {
+            &::after {
+                opacity: 0.8;
+            }
+        }
+    }
+
+    .ham_btn {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 100;
+        margin: auto;
+        height: 100%;
+        aspect-ratio: 1;
+        display: none;
+        background: var(--color-accent);
+        cursor: pointer;
+        @media (max-width: 1080px) {
+            display: block;
+        }
+        &.active {
+            div {
+                &:nth-of-type(1) {
+                    transform: translateY(0) rotate(45deg);
+                }
+                &:nth-of-type(2) {
+                    right: -16px;
+                    opacity: 0;
+                }
+                &:nth-of-type(3) {
+                    transform: translateY(0) rotate(-45deg);
+                }
+            }
+        }
+        div {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            height: 2px;
+            width: 50%;
+            background: #fff;
+            transition: all 0.6s;
+            &:nth-of-type(1) {
+                transform: translateY(-10px);
+                @media (max-width: 500px) {
+                    transform: translateY(-8px);
+                }
+            }
+            &:nth-of-type(2) {
+                transform: translateY(0);
+            }
+            &:nth-of-type(3) {
+                transform: translateY(10px);
+                @media (max-width: 500px) {
+                    transform: translateY(8px);
+                }
+            }
+        }
+    }
+}

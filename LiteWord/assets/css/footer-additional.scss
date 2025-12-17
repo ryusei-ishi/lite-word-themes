@@ -1,0 +1,89 @@
+.widget_area_footer {
+    .widget {
+        + .widget {
+            margin-top: 28px;
+        }
+    }
+    .widget-title,
+    .wp-block-heading {
+        margin-bottom: 16px;
+        font-size: 18px;
+        color: var(--color-main);
+        line-height: 1.5em;
+        font-weight: 700;
+        @media (max-width: 500px) {
+            font-size: 16px;
+        }
+    }
+    //最近の投稿
+    //アーカイブ
+    //コメント
+    // ナビゲーションメニュー
+    .widget_recent_entries li,
+    .widget_archive li,
+    .widget_recent_comments li,
+    li.menu-item,
+    .wp-block-group li {
+        + li.menu-item {
+            margin-top: 12px;
+        }
+        a {
+            display: block;
+            line-height: 1.6em;
+            font-size: 14px;
+            color: var(--color-black);
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+        ul {
+            display: none;
+        }
+    }
+    .widget_recent_comments ul li a{
+        color: rgb(27, 27, 241);
+        text-decoration: underline;
+    }
+    //タグ
+    .tagcloud{
+        display: flex;
+        gap:8px;
+        flex-wrap: wrap;
+        a{
+            padding: 6px;
+            display: block;
+            color: var(--color-main);
+            border: 1px solid  var(--color-main);
+            white-space: nowrap;
+        }
+    }
+    // カテゴリー
+    li.cat-item {
+        font-size: 14px;
+        display: flex;
+        align-items: center;
+        + li.cat-item {
+            margin-top: 12px;
+        }
+        a {
+            display: block;
+            line-height: 1.6em;
+            font-size: 14px;
+            color: var(--color-black);
+            &:hover {
+                opacity: 0.7;
+            }
+        }
+        ul {
+            display: none;
+        }
+    }
+    // 画像
+    .widget_media_image {
+        width: 100%;
+        img {
+            width: 100%;
+            height: auto;
+        }
+    }
+}

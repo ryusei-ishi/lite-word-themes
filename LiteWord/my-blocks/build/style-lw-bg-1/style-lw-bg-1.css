@@ -1,0 +1,147 @@
+/*!*****************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/lw-bg-1/style.scss ***!
+  \*****************************************************************************************************************/
+.lw_content_wrap.page .lw-bg-1.bg_all {
+  margin-left: calc((100% - 100vw) / 2);
+  width: 100vw;
+}
+.lw_content_wrap.page:has(.first_content + .lw-bg-1) .first_content {
+  display: none;
+}
+
+.lw_content_wrap.single .lw-bg-1.bg_all {
+  margin-left: -40px;
+  margin-right: -40px;
+  width: calc(100% + 80px);
+}
+@container (max-width: 800px) {
+  .lw_content_wrap.single .lw-bg-1.bg_all {
+    margin-left: -32px;
+    margin-right: -32px;
+    width: calc(100% + 64px);
+  }
+}
+@container (max-width:600px) {
+  .lw_content_wrap.single .lw-bg-1.bg_all {
+    margin-left: -24px;
+    margin-right: -24px;
+    width: calc(100% + 48px);
+  }
+}
+@container (max-width:500px) {
+  .lw_content_wrap.single .lw-bg-1.bg_all {
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
+  }
+}
+
+.wp-block:has(.lw-bg-1) {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.lw-bg-1 {
+  position: relative;
+  z-index: 2;
+  margin: 0;
+  overflow: hidden;
+  display: flex;
+  justify-content: var(--lw-bg-wrap-centering-pc, center);
+  align-items: var(--lw-bg-wrap-align-pc, center);
+  font-size: 17px;
+}
+@media (max-width: 900px) {
+  .lw-bg-1 {
+    justify-content: var(--lw-bg-wrap-centering-tb, var(--lw-bg-wrap-centering-pc, center));
+    align-items: var(--lw-bg-wrap-align-tb, var(--lw-bg-wrap-align-pc, center));
+  }
+}
+@media (max-width: 600px) {
+  .lw-bg-1 {
+    justify-content: var(--lw-bg-wrap-centering-sp, var(--lw-bg-wrap-centering-tb, var(--lw-bg-wrap-centering-pc, center)));
+    align-items: var(--lw-bg-wrap-align-sp, var(--lw-bg-wrap-align-tb, var(--lw-bg-wrap-align-pc, center)));
+    font-size: 15px;
+  }
+}
+.lw-bg-1 + .last_content {
+  display: none;
+}
+.lw-bg-1 h1.wp-block-heading,
+.lw-bg-1 h2.wp-block-heading,
+.lw-bg-1 h3.wp-block-heading,
+.lw-bg-1 h4.wp-block-heading,
+.lw-bg-1 h5.wp-block-heading,
+.lw-bg-1 h6.wp-block-heading {
+  margin-top: 0;
+}
+.lw-bg-1 > .lw-bg-1-wrap {
+  max-width: var(--lw-bg-max-width, var(--max-width-clm-1, 1120px));
+  width: 100%;
+  padding: 80px;
+  padding-top: var(--lw-bg-padding-top-pc, 80px);
+  padding-bottom: var(--lw-bg-padding-bottom-pc, 80px);
+  padding-left: var(--lw-bg-padding-left-pc, 80px);
+  padding-right: var(--lw-bg-padding-right-pc, 80px);
+}
+@media (max-width: 900px) {
+  .lw-bg-1 > .lw-bg-1-wrap {
+    padding-top: var(--lw-bg-padding-top-tb, 48px);
+    padding-bottom: var(--lw-bg-padding-bottom-tb, 48px);
+    padding-left: var(--lw-bg-padding-left-tb, 48px);
+    padding-right: var(--lw-bg-padding-right-tb, 48px);
+  }
+}
+@media (max-width: 600px) {
+  .lw-bg-1 > .lw-bg-1-wrap {
+    padding-top: var(--lw-bg-padding-top-sp, 24px);
+    padding-bottom: var(--lw-bg-padding-bottom-sp, 24px);
+    padding-left: var(--lw-bg-padding-left-sp, 24px);
+    padding-right: var(--lw-bg-padding-right-sp, 24px);
+  }
+}
+.lw-bg-1::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background: var(--lw-bg-color-filter-pc, var(--color-main));
+  opacity: var(--lw-bg-opacity-pc, 0.5);
+}
+@media (max-width: 900px) {
+  .lw-bg-1::after {
+    background: var(--lw-bg-color-filter-tb, var(--lw-bg-color-filter-pc, var(--color-main)));
+    opacity: var(--lw-bg-opacity-tb, var(--lw-bg-opacity-pc, 0.5));
+  }
+}
+@media (max-width: 600px) {
+  .lw-bg-1::after {
+    background: var(--lw-bg-color-filter-sp, var(--lw-bg-color-filter-tb, var(--lw-bg-color-filter-pc, var(--color-main))));
+    opacity: var(--lw-bg-opacity-sp, var(--lw-bg-opacity-tb, var(--lw-bg-opacity-pc, 0.5)));
+  }
+}
+.lw-bg-1 > .bg_img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: -2;
+}
+.lw-bg-1 > .bg_img img,
+.lw-bg-1 > .bg_img video.video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: var(--lw-bg-position-pc, center);
+}
+@media (max-width: 800px) {
+  .lw-bg-1 > .bg_img img,
+  .lw-bg-1 > .bg_img video.video {
+    object-position: var(--lw-bg-position-sp, center);
+  }
+}

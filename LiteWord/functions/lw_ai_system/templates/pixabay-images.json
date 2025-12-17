@@ -1,0 +1,180 @@
+{
+    "business": {
+        "label": "ビジネス・企業",
+        "images": [
+            "https://cdn.pixabay.com/photo/2015/01/09/11/08/startup-594090_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/01/08/18/29/entrepreneur-593358_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/07/31/11/21/people-2557396_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/11/19/14/00/code-1839406_1280.jpg"
+        ]
+    },
+    "medical": {
+        "label": "医療・クリニック",
+        "images": [
+            "https://cdn.pixabay.com/photo/2014/12/10/20/48/medical-563427_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/07/10/20/54/stethoscope-840125_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/11/08/05/26/woman-1807533_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/10/04/09/56/laboratory-2815641_1280.jpg"
+        ]
+    },
+    "massage": {
+        "label": "整体・マッサージ",
+        "images": [
+            "https://cdn.pixabay.com/photo/2018/01/18/17/48/purchase-3091277_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/08/07/14/15/massage-therapy-2604913_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/11/29/12/41/woman-1869158_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/07/31/22/59/wellness-2561745_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/07/30/17/24/stones-866891_1280.jpg"
+        ]
+    },
+    "beauty": {
+        "label": "美容・サロン",
+        "images": [
+            "https://cdn.pixabay.com/photo/2018/04/03/23/04/woman-3288365_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/07/31/22/59/wellness-2561745_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/11/29/04/17/girl-1867618_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/09/20/19/38/spa-949024_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/08/04/10/50/young-woman-2579347_1280.jpg"
+        ]
+    },
+    "restaurant": {
+        "label": "飲食店・レストラン",
+        "images": [
+            "https://cdn.pixabay.com/photo/2016/11/18/14/05/brick-wall-1834784_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/09/14/11/43/restaurant-939435_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/11/18/22/21/restaurant-1837150_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/01/26/02/06/platter-2009590_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/05/31/13/59/pizza-791358_1280.jpg"
+        ]
+    },
+    "cafe": {
+        "label": "カフェ・喫茶",
+        "images": [
+            "https://cdn.pixabay.com/photo/2016/11/29/12/54/cafe-1869656_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/05/12/08/29/coffee-2306471_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/07/12/14/26/coffee-842020_1280.jpg",
+            "https://cdn.pixabay.com/photo/2014/09/28/20/12/beans-464960_1280.jpg"
+        ]
+    },
+    "fitness": {
+        "label": "フィットネス・ジム",
+        "images": [
+            "https://cdn.pixabay.com/photo/2017/08/07/14/02/man-2604149_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/03/27/07/08/man-1282232_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/01/09/11/30/dumbbell-1966247_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/11/19/12/40/barbell-1839087_1280.jpg"
+        ]
+    },
+    "yoga": {
+        "label": "ヨガ・ピラティス",
+        "images": [
+            "https://cdn.pixabay.com/photo/2017/03/26/21/54/yoga-2176668_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/11/14/03/05/yoga-1822476_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/08/07/17/39/people-2604850_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/01/09/11/30/yoga-1966352_1280.jpg"
+        ]
+    },
+    "education": {
+        "label": "教育・スクール",
+        "images": [
+            "https://cdn.pixabay.com/photo/2015/07/17/22/43/student-849825_1280.jpg",
+            "https://cdn.pixabay.com/photo/2014/09/05/18/32/old-books-436498_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/11/19/21/10/glasses-1052010_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/09/05/21/51/reading-925589_1280.jpg"
+        ]
+    },
+    "realestate": {
+        "label": "不動産",
+        "images": [
+            "https://cdn.pixabay.com/photo/2016/11/18/17/46/house-1836070_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/03/22/17/39/kitchen-2165756_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/06/24/10/47/house-1477041_1280.jpg",
+            "https://cdn.pixabay.com/photo/2014/07/10/17/18/living-room-389922_1280.jpg"
+        ]
+    },
+    "legal": {
+        "label": "法律・士業",
+        "images": [
+            "https://cdn.pixabay.com/photo/2017/08/30/07/52/money-2696219_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/01/09/11/11/office-594132_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/03/09/09/22/workplace-1245776_1280.jpg"
+        ]
+    },
+    "construction": {
+        "label": "建設・リフォーム",
+        "images": [
+            "https://cdn.pixabay.com/photo/2016/11/24/20/30/architecture-1857175_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/05/15/14/50/conference-room-768441_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/04/18/22/05/seashells-1337565_1280.jpg"
+        ]
+    },
+    "technology": {
+        "label": "IT・テクノロジー",
+        "images": [
+            "https://cdn.pixabay.com/photo/2016/11/19/14/00/code-1839406_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/01/08/18/26/man-593333_1280.jpg",
+            "https://cdn.pixabay.com/photo/2014/05/02/21/49/laptop-336373_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/11/29/06/15/plans-1867745_1280.jpg"
+        ]
+    },
+    "nature": {
+        "label": "自然・アウトドア",
+        "images": [
+            "https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/05/05/02/37/sunset-1373171_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/02/01/22/02/mountain-landscape-2031539_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/12/01/20/28/forest-1072828_1280.jpg"
+        ]
+    },
+    "travel": {
+        "label": "旅行・観光",
+        "images": [
+            "https://cdn.pixabay.com/photo/2016/11/29/09/32/adventure-1868817_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/01/09/18/27/camera-1130731_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/07/30/00/03/winding-road-1556177_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/12/16/22/22/bora-bora-3023437_1280.jpg"
+        ]
+    },
+    "wedding": {
+        "label": "ウェディング・ブライダル",
+        "images": [
+            "https://cdn.pixabay.com/photo/2017/08/07/19/07/wedding-2607007_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/06/25/13/34/bride-1478084_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/06/27/16/34/sunset-823637_1280.jpg"
+        ]
+    },
+    "pet": {
+        "label": "ペット・動物",
+        "images": [
+            "https://cdn.pixabay.com/photo/2016/12/13/05/15/puppy-1903313_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/09/25/13/12/dog-2785074_1280.jpg",
+            "https://cdn.pixabay.com/photo/2014/11/30/14/11/cat-551554_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/02/10/16/37/cat-1192026_1280.jpg"
+        ]
+    },
+    "music": {
+        "label": "音楽・エンタメ",
+        "images": [
+            "https://cdn.pixabay.com/photo/2015/05/07/11/02/guitar-756326_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/11/22/19/15/audience-1850022_1280.jpg",
+            "https://cdn.pixabay.com/photo/2017/11/07/00/18/piano-2925289_1280.jpg"
+        ]
+    },
+    "fashion": {
+        "label": "ファッション・アパレル",
+        "images": [
+            "https://cdn.pixabay.com/photo/2015/01/15/12/46/model-600238_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/11/29/01/34/man-1866574_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/03/27/19/43/samsung-1283938_1280.jpg"
+        ]
+    },
+    "childcare": {
+        "label": "保育・子育て",
+        "images": [
+            "https://cdn.pixabay.com/photo/2016/01/19/18/00/girl-1150102_1280.jpg",
+            "https://cdn.pixabay.com/photo/2015/09/02/13/24/girl-919048_1280.jpg",
+            "https://cdn.pixabay.com/photo/2016/11/29/20/22/child-1871104_1280.jpg"
+        ]
+    }
+}

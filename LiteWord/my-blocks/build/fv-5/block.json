@@ -1,0 +1,66 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/fv-5",
+	"version": "1.0.0",
+	"title": "固定ページタイトル 05（下層用）",
+	"category": "lw-firstview",
+	"icon": "cover-image",
+	"editorScript": "file:./fv-5.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"backgroundImage": {
+			"type": "string",
+			"default": ""
+		},
+		"backgroundImageSp": {
+			"type": "string",
+			"default": ""
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "PORTFOLIO"
+		},
+		"description": {
+			"type": "string",
+			"default": "テキストを入力してください。"
+		},
+		"filterBackgroundColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 0.95
+		},
+		"textColor": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"minHeightPc": {
+			"type": "string",
+			"default": "min-h-pc-280px"
+		},
+		"minHeightTb": {
+			"type": "string",
+			"default": "min-h-tb-220px"
+		},
+		"minHeightSp": {
+			"type": "string",
+			"default": "min-h-sp-180px"
+		},
+		"mainTitleTag": {
+			"type": "string",
+			"default": "h1"
+		}
+	},
+	"no": 5
+}

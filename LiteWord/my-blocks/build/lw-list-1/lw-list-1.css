@@ -1,0 +1,105 @@
+/*!********************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/lw-list-1/editor.scss ***!
+  \********************************************************************************************************************/
+@charset "UTF-8";
+.lw-list-1 {
+  margin: 40px 0;
+}
+@container (max-width:850px) {
+  .lw-list-1 {
+    margin: 32px 0;
+  }
+}
+@container (max-width:550px) {
+  .lw-list-1 {
+    margin: 24px 0;
+  }
+}
+.lw-list-1 * {
+  box-sizing: border-box;
+}
+.lw-list-1 .lw-list-1_inner {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.lw-list-1 .lw-list-1_inner .lw-list-1_content {
+  min-height: 112px;
+  display: grid;
+  grid-template-columns: 112px calc(100% - 112px);
+  border: 1px solid #000;
+  box-sizing: border-box;
+  position: relative;
+}
+.lw-list-1 .lw-list-1_inner .lw-list-1_content .no {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 28px;
+}
+.lw-list-1 .lw-list-1_inner .lw-list-1_content .lw-list-1_text {
+  padding: 0 24px 16px 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  line-height: 1.5em;
+}
+.lw-list-1 .lw-list-1_inner .lw-list-1_content .lw-list-1_text p {
+  padding: 0;
+  margin: 0;
+}
+
+/* サイドバー内のコントロール */
+.lw-list-1__panel-controls {
+  display: flex;
+  gap: 4px;
+  margin-top: 10px;
+  flex-wrap: wrap;
+}
+.lw-list-1__panel-controls .components-button {
+  flex: 1;
+  justify-content: center;
+  min-width: 60px;
+}
+
+/* 並べ替え & 削除コントロール */
+.lw-list-1__item-controls {
+  position: absolute;
+  top: -28px;
+  right: 0;
+  display: flex;
+  gap: 4px;
+}
+.lw-list-1__item-controls button {
+  padding: 4px 10px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.lw-list-1__item-controls button:hover:not(:disabled) {
+  background: #f0f0f0;
+}
+.lw-list-1__item-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.lw-list-1__item-controls .move-up-button,
+.lw-list-1__item-controls .move-down-button {
+  min-width: 32px;
+  font-weight: bold;
+}
+.lw-list-1__item-controls .remove-item-button {
+  color: #fff;
+  background: #d63638;
+  border-color: #d63638;
+}
+.lw-list-1__item-controls .remove-item-button:hover {
+  background: #b32d2e;
+}

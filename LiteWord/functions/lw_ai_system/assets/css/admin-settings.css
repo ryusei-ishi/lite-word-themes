@@ -1,0 +1,1164 @@
+/**
+ * LiteWord AI Generator - API設定ページスタイル
+ * 青系カラースキーム
+ */
+
+/* 基本変数 */
+:root {
+    --lw-primary: #1976d2;
+    --lw-primary-dark: #1565c0;
+    --lw-primary-light: #42a5f5;
+    --lw-primary-bg: #e3f2fd;
+    --lw-secondary: #0288d1;
+    --lw-success: #2e7d32;
+    --lw-success-bg: #e8f5e9;
+    --lw-warning: #f57c00;
+    --lw-warning-bg: #fff3e0;
+    --lw-error: #d32f2f;
+    --lw-error-bg: #ffebee;
+    --lw-text: #263238;
+    --lw-text-secondary: #546e7a;
+    --lw-border: #b0bec5;
+    --lw-bg: #fafafa;
+    --lw-white: #ffffff;
+    --lw-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    --lw-shadow-hover: 0 4px 16px rgba(0,0,0,0.15);
+    --lw-radius: 8px;
+    --lw-radius-lg: 12px;
+}
+
+/* メインラッパー */
+.lw-ai-settings-wrap {
+    max-width: 900px;
+    margin: 20px 20px 20px 0;
+    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+}
+
+/* ヘッダー */
+.lw-ai-settings-header {
+    background: linear-gradient(135deg, var(--lw-primary) 0%, var(--lw-secondary) 100%);
+    color: var(--lw-white);
+    padding: 30px;
+    border-radius: var(--lw-radius-lg);
+    margin-bottom: 24px;
+    box-shadow: var(--lw-shadow);
+}
+
+.lw-ai-header-top {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    flex-wrap: wrap;
+}
+
+.lw-ai-settings-header h1 {
+    margin: 0 0 10px 0;
+    font-size: 28px;
+    font-weight: 600;
+    color: var(--lw-white);
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.lw-ai-settings-header h1 .dashicons {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+.lw-ai-settings-header p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 15px;
+}
+
+/* 音声ガイドボタン（ヘッダー内） */
+.lw-ai-settings-header .lw-voice-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 18px;
+    background: rgba(255, 255, 255, 0.2);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    border-radius: 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    backdrop-filter: blur(4px);
+}
+
+.lw-ai-settings-header .lw-voice-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+    border-color: #fff;
+    transform: translateY(-2px);
+}
+
+.lw-ai-settings-header .lw-voice-btn:active {
+    transform: translateY(0);
+}
+
+.lw-ai-settings-header .lw-voice-btn.playing {
+    background: linear-gradient(135deg, #dc2626 0%, #ef4444 100%);
+    border-color: #dc2626;
+    animation: lw-voice-pulse 1.5s ease-in-out infinite;
+}
+
+.lw-voice-icon {
+    font-size: 18px;
+    line-height: 1;
+}
+
+.lw-voice-label {
+    line-height: 1;
+}
+
+@keyframes lw-voice-pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.7; }
+}
+
+/* セクションカード */
+.lw-ai-card {
+    background: var(--lw-white);
+    border-radius: var(--lw-radius);
+    box-shadow: var(--lw-shadow);
+    margin-bottom: 24px;
+    overflow: hidden;
+}
+
+.lw-ai-card-header {
+    background: var(--lw-primary-bg);
+    padding: 16px 24px;
+    border-bottom: 1px solid var(--lw-border);
+}
+
+.lw-ai-card-header h2 {
+    margin: 0;
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--lw-primary-dark);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lw-ai-card-header h2 .dashicons {
+    color: var(--lw-primary);
+}
+
+.lw-ai-card-body {
+    padding: 24px;
+}
+
+/* ステップガイド */
+.lw-ai-steps {
+    counter-reset: step-counter;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+.lw-ai-step {
+    display: flex;
+    gap: 16px;
+    margin-bottom: 20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #eceff1;
+}
+
+.lw-ai-step:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.lw-ai-step-number {
+    counter-increment: step-counter;
+    width: 36px;
+    height: 36px;
+    background: var(--lw-primary);
+    color: var(--lw-white);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: 16px;
+    flex-shrink: 0;
+}
+
+.lw-ai-step-content {
+    flex: 1;
+}
+
+.lw-ai-step-title {
+    font-weight: 600;
+    color: var(--lw-text);
+    margin-bottom: 6px;
+    font-size: 15px;
+}
+
+.lw-ai-step-desc {
+    color: var(--lw-text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.lw-ai-step-desc a {
+    color: var(--lw-primary);
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.lw-ai-step-desc a:hover {
+    text-decoration: underline;
+}
+
+.lw-ai-step-desc code {
+    background: #eceff1;
+    padding: 2px 6px;
+    border-radius: 4px;
+    font-size: 13px;
+    color: var(--lw-primary-dark);
+}
+
+/* 外部リンクボタン */
+.lw-ai-external-link {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: var(--lw-primary);
+    color: var(--lw-white) !important;
+    padding: 10px 20px;
+    border-radius: var(--lw-radius);
+    text-decoration: none !important;
+    font-weight: 500;
+    transition: all 0.2s ease;
+    margin-top: 12px;
+}
+
+.lw-ai-external-link:hover {
+    background: var(--lw-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: var(--lw-shadow);
+}
+
+.lw-ai-external-link .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+/* APIキー入力フォーム */
+.lw-ai-api-form {
+    background: var(--lw-bg);
+    padding: 24px;
+    border-radius: var(--lw-radius);
+    border: 2px solid var(--lw-border);
+}
+
+.lw-ai-api-form.has-key {
+    border-color: var(--lw-success);
+    background: var(--lw-success-bg);
+}
+
+.lw-ai-form-label {
+    display: block;
+    font-weight: 600;
+    color: var(--lw-text);
+    margin-bottom: 8px;
+    font-size: 14px;
+}
+
+.lw-ai-form-input {
+    width: 100%;
+    padding: 12px 16px;
+    font-size: 15px;
+    border: 2px solid var(--lw-border);
+    border-radius: var(--lw-radius);
+    background: var(--lw-white);
+    transition: all 0.2s ease;
+    box-sizing: border-box;
+}
+
+.lw-ai-form-input:focus {
+    outline: none;
+    border-color: var(--lw-primary);
+    box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+}
+
+.lw-ai-form-input::placeholder {
+    color: #90a4ae;
+}
+
+.lw-ai-form-help {
+    margin-top: 10px;
+    font-size: 13px;
+    color: var(--lw-text-secondary);
+}
+
+/* ステータス表示 */
+.lw-ai-status {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+    border-radius: var(--lw-radius);
+    margin-bottom: 16px;
+    font-size: 14px;
+}
+
+.lw-ai-status-success {
+    background: var(--lw-success-bg);
+    color: var(--lw-success);
+    border: 1px solid var(--lw-success);
+}
+
+.lw-ai-status-error {
+    background: var(--lw-error-bg);
+    color: var(--lw-error);
+    border: 1px solid var(--lw-error);
+}
+
+.lw-ai-status .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+/* セキュリティバッジ */
+.lw-ai-security-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    background: var(--lw-primary-bg);
+    color: var(--lw-primary-dark);
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 500;
+    margin-top: 12px;
+}
+
+.lw-ai-security-badge .dashicons {
+    font-size: 14px;
+    width: 14px;
+    height: 14px;
+}
+
+/* トラブルシューティング */
+.lw-ai-troubleshoot {
+    margin-top: 0;
+}
+
+.lw-ai-troubleshoot-item {
+    background: var(--lw-white);
+    border: 1px solid var(--lw-border);
+    border-radius: var(--lw-radius);
+    margin-bottom: 12px;
+    overflow: hidden;
+}
+
+.lw-ai-troubleshoot-item:last-child {
+    margin-bottom: 0;
+}
+
+.lw-ai-troubleshoot-q {
+    padding: 14px 16px;
+    background: #eceff1;
+    font-weight: 600;
+    color: var(--lw-text);
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    font-size: 14px;
+}
+
+.lw-ai-troubleshoot-q .dashicons {
+    color: var(--lw-warning);
+    flex-shrink: 0;
+    margin-top: 2px;
+}
+
+.lw-ai-troubleshoot-a {
+    padding: 14px 16px;
+    color: var(--lw-text-secondary);
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.lw-ai-troubleshoot-a strong {
+    color: var(--lw-text);
+}
+
+/* 注意事項 */
+.lw-ai-notice {
+    display: flex;
+    gap: 12px;
+    padding: 16px;
+    border-radius: var(--lw-radius);
+    margin-bottom: 20px;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+.lw-ai-notice-info {
+    background: var(--lw-primary-bg);
+    border-left: 4px solid var(--lw-primary);
+}
+
+.lw-ai-notice-warning {
+    background: var(--lw-warning-bg);
+    border-left: 4px solid var(--lw-warning);
+}
+
+.lw-ai-notice .dashicons {
+    flex-shrink: 0;
+    color: var(--lw-primary);
+}
+
+.lw-ai-notice-warning .dashicons {
+    color: var(--lw-warning);
+}
+
+/* 送信ボタン */
+.lw-ai-submit-btn {
+    background: linear-gradient(135deg, var(--lw-primary) 0%, var(--lw-secondary) 100%);
+    color: var(--lw-white) !important;
+    border: none !important;
+    padding: 14px 32px !important;
+    font-size: 15px !important;
+    font-weight: 600 !important;
+    border-radius: var(--lw-radius) !important;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--lw-shadow);
+}
+
+.lw-ai-submit-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: var(--lw-shadow-hover);
+}
+
+.lw-ai-submit-btn:active {
+    transform: translateY(0);
+}
+
+/* リンクカード */
+.lw-ai-link-card {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    padding: 16px;
+    background: var(--lw-bg);
+    border: 1px solid var(--lw-border);
+    border-radius: var(--lw-radius);
+    text-decoration: none;
+    color: var(--lw-text);
+    transition: all 0.2s ease;
+}
+
+.lw-ai-link-card:hover {
+    border-color: var(--lw-primary);
+    box-shadow: var(--lw-shadow);
+    transform: translateY(-2px);
+}
+
+.lw-ai-link-card-icon {
+    width: 48px;
+    height: 48px;
+    background: var(--lw-primary-bg);
+    border-radius: var(--lw-radius);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--lw-primary);
+}
+
+.lw-ai-link-card-icon .dashicons {
+    font-size: 24px;
+    width: 24px;
+    height: 24px;
+}
+
+.lw-ai-link-card-content h3 {
+    margin: 0 0 4px 0;
+    font-size: 15px;
+    color: var(--lw-text);
+}
+
+.lw-ai-link-card-content p {
+    margin: 0;
+    font-size: 13px;
+    color: var(--lw-text-secondary);
+}
+
+/* マスク表示入力 */
+.lw-ai-masked-input {
+    position: relative;
+}
+
+.lw-ai-masked-input input {
+    padding-right: 48px;
+    background: #eceff1;
+    color: var(--lw-text-secondary);
+    font-family: monospace;
+    letter-spacing: 1px;
+}
+
+.lw-ai-masked-input input:disabled {
+    cursor: not-allowed;
+    opacity: 0.8;
+}
+
+.lw-ai-lock-icon {
+    position: absolute;
+    right: 12px;
+    top: 50%;
+    transform: translateY(-50%);
+    color: var(--lw-success);
+}
+
+/* ボタングループ */
+.lw-ai-button-group {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+    flex-wrap: wrap;
+}
+
+/* 汎用ボタン */
+.lw-ai-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 20px;
+    font-size: 14px;
+    font-weight: 500;
+    border-radius: var(--lw-radius);
+    border: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.lw-ai-btn .dashicons {
+    font-size: 18px;
+    width: 18px;
+    height: 18px;
+}
+
+/* セカンダリボタン */
+.lw-ai-btn-secondary {
+    background: var(--lw-white);
+    color: var(--lw-primary);
+    border: 2px solid var(--lw-primary);
+}
+
+.lw-ai-btn-secondary:hover {
+    background: var(--lw-primary-bg);
+}
+
+/* 危険ボタン */
+.lw-ai-btn-danger {
+    background: var(--lw-white);
+    color: var(--lw-error);
+    border: 2px solid var(--lw-error);
+}
+
+.lw-ai-btn-danger:hover {
+    background: var(--lw-error-bg);
+}
+
+/* 警告ステータス */
+.lw-ai-status-warning {
+    background: var(--lw-warning-bg);
+    color: #e65100;
+    border: 1px solid var(--lw-warning);
+}
+
+/* スピナー */
+.lw-ai-spinner {
+    display: inline-block;
+    width: 16px;
+    height: 16px;
+    border: 2px solid rgba(255,255,255,0.3);
+    border-radius: 50%;
+    border-top-color: #fff;
+    animation: lw-ai-spin 0.8s linear infinite;
+    margin-right: 6px;
+}
+
+.lw-ai-spin {
+    animation: lw-ai-spin 0.8s linear infinite;
+}
+
+@keyframes lw-ai-spin {
+    to { transform: rotate(360deg); }
+}
+
+/* ボタンローディング状態 */
+.lw-ai-btn-loading {
+    display: inline-flex;
+    align-items: center;
+}
+
+.lw-ai-submit-btn:disabled {
+    cursor: not-allowed;
+    opacity: 0.7;
+}
+
+/* メッセージ */
+#lw-ai-message {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border-radius: var(--lw-radius);
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+}
+
+#lw-ai-message .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+    flex-shrink: 0;
+}
+
+.lw-ai-msg-success {
+    background: var(--lw-success-bg);
+    color: var(--lw-success);
+    border: 1px solid var(--lw-success);
+}
+
+.lw-ai-msg-error {
+    background: var(--lw-error-bg);
+    color: var(--lw-error);
+    border: 1px solid var(--lw-error);
+}
+
+.lw-ai-msg-warning {
+    background: var(--lw-warning-bg);
+    color: #e65100;
+    border: 1px solid var(--lw-warning);
+}
+
+.lw-ai-msg-info {
+    background: var(--lw-primary-bg);
+    color: var(--lw-primary-dark);
+    border: 1px solid var(--lw-primary);
+}
+
+/* レスポンシブ */
+@media (max-width: 782px) {
+    .lw-ai-settings-wrap {
+        margin: 10px;
+    }
+
+    .lw-ai-settings-header {
+        padding: 20px;
+    }
+
+    .lw-ai-settings-header h1 {
+        font-size: 22px;
+    }
+
+    .lw-ai-card-body {
+        padding: 16px;
+    }
+
+    .lw-ai-step {
+        flex-direction: column;
+        gap: 12px;
+    }
+
+    .lw-ai-button-group {
+        flex-direction: column;
+    }
+
+    .lw-ai-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ========================================
+   利用規約同意モーダル
+   ======================================== */
+.lw-ai-terms-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(38, 50, 56, 0.9);
+    z-index: 100000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+    backdrop-filter: blur(4px);
+}
+
+.lw-ai-terms-modal {
+    background: var(--lw-white);
+    border-radius: var(--lw-radius-lg);
+    max-width: 680px;
+    width: 100%;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+    animation: lw-ai-modal-in 0.3s ease-out;
+}
+
+@keyframes lw-ai-modal-in {
+    from {
+        opacity: 0;
+        transform: translateY(-20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.lw-ai-terms-header {
+    background: linear-gradient(135deg, var(--lw-primary) 0%, var(--lw-secondary) 100%);
+    color: var(--lw-white);
+    padding: 32px;
+    text-align: center;
+}
+
+.lw-ai-terms-icon {
+    width: 64px;
+    height: 64px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto 16px;
+}
+
+.lw-ai-terms-icon .dashicons {
+    font-size: 32px;
+    width: 32px;
+    height: 32px;
+}
+
+.lw-ai-terms-header h2 {
+    margin: 0 0 8px;
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.lw-ai-terms-header p {
+    margin: 0;
+    opacity: 0.9;
+    font-size: 14px;
+}
+
+.lw-ai-terms-content {
+    padding: 24px 32px;
+}
+
+.lw-ai-terms-section {
+    margin-bottom: 24px;
+    padding-bottom: 24px;
+    border-bottom: 1px solid #eceff1;
+}
+
+.lw-ai-terms-section:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.lw-ai-terms-section h3 {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin: 0 0 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--lw-text);
+}
+
+.lw-ai-terms-section h3 .dashicons {
+    color: var(--lw-primary);
+}
+
+.lw-ai-terms-section h3 .dashicons-warning {
+    color: var(--lw-warning);
+}
+
+.lw-ai-terms-section h3 .dashicons-shield {
+    color: var(--lw-error);
+}
+
+.lw-ai-terms-section p {
+    margin: 0;
+    font-size: 14px;
+    line-height: 1.7;
+    color: var(--lw-text-secondary);
+}
+
+.lw-ai-terms-section p strong {
+    color: var(--lw-text);
+}
+
+.lw-ai-terms-section p a {
+    color: var(--lw-primary);
+}
+
+.lw-ai-terms-agreement {
+    background: var(--lw-bg);
+    padding: 24px 32px;
+    border-top: 1px solid #eceff1;
+    border-bottom: 1px solid #eceff1;
+}
+
+.lw-ai-terms-agreement h4 {
+    margin: 0 0 16px;
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--lw-text);
+}
+
+.lw-ai-terms-checkbox {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 12px 16px;
+    background: var(--lw-white);
+    border: 2px solid var(--lw-border);
+    border-radius: var(--lw-radius);
+    margin-bottom: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.lw-ai-terms-checkbox:last-of-type {
+    margin-bottom: 0;
+}
+
+.lw-ai-terms-checkbox:hover {
+    border-color: var(--lw-primary-light);
+}
+
+.lw-ai-terms-checkbox input {
+    display: none;
+}
+
+.lw-ai-checkbox-custom {
+    width: 22px;
+    height: 22px;
+    border: 2px solid var(--lw-border);
+    border-radius: 4px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    transition: all 0.2s ease;
+    margin-top: 1px;
+}
+
+.lw-ai-terms-checkbox input:checked + .lw-ai-checkbox-custom {
+    background: var(--lw-primary);
+    border-color: var(--lw-primary);
+}
+
+.lw-ai-terms-checkbox input:checked + .lw-ai-checkbox-custom::after {
+    content: '';
+    width: 6px;
+    height: 10px;
+    border: solid white;
+    border-width: 0 2px 2px 0;
+    transform: rotate(45deg);
+    margin-bottom: 2px;
+}
+
+.lw-ai-terms-checkbox input:checked ~ .lw-ai-checkbox-text {
+    color: var(--lw-text);
+}
+
+.lw-ai-checkbox-text {
+    font-size: 14px;
+    line-height: 1.5;
+    color: var(--lw-text-secondary);
+}
+
+.lw-ai-checkbox-text strong {
+    color: var(--lw-primary-dark);
+}
+
+.lw-ai-terms-footer {
+    padding: 24px 32px;
+    text-align: center;
+}
+
+.lw-ai-terms-btn {
+    background: linear-gradient(135deg, var(--lw-primary) 0%, var(--lw-secondary) 100%);
+    color: var(--lw-white);
+    border: none;
+    padding: 16px 48px;
+    font-size: 16px;
+    font-weight: 600;
+    border-radius: var(--lw-radius);
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: var(--lw-shadow);
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lw-ai-terms-btn:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: var(--lw-shadow-hover);
+}
+
+.lw-ai-terms-btn:disabled {
+    background: #b0bec5;
+    cursor: not-allowed;
+    transform: none;
+    box-shadow: none;
+}
+
+.lw-ai-terms-note {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    margin: 16px 0 0;
+    font-size: 13px;
+    color: var(--lw-text-secondary);
+}
+
+.lw-ai-terms-note .dashicons {
+    font-size: 16px;
+    width: 16px;
+    height: 16px;
+    color: var(--lw-primary);
+}
+
+/* モーダルレスポンシブ */
+@media (max-width: 600px) {
+    .lw-ai-terms-modal {
+        max-height: 100vh;
+        border-radius: 0;
+    }
+
+    .lw-ai-terms-header,
+    .lw-ai-terms-content,
+    .lw-ai-terms-agreement,
+    .lw-ai-terms-footer {
+        padding: 20px;
+    }
+
+    .lw-ai-terms-header h2 {
+        font-size: 20px;
+    }
+
+    .lw-ai-terms-btn {
+        width: 100%;
+        justify-content: center;
+    }
+}
+
+/* ==========================================================================
+   プレミアムロック画面
+   ========================================================================== */
+
+.lw-ai-premium-lock-screen {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    min-height: 70vh;
+    padding: 40px 20px;
+}
+
+.lw-ai-premium-lock-content {
+    max-width: 600px;
+    width: 100%;
+    background: linear-gradient(145deg, #ffffff 0%, #f8fafc 100%);
+    border-radius: 20px;
+    padding: 60px 40px;
+    text-align: center;
+    box-shadow:
+        0 10px 40px rgba(0, 0, 0, 0.1),
+        0 0 0 1px rgba(0, 0, 0, 0.05);
+}
+
+.lw-ai-premium-lock-icon {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 100px;
+    height: 100px;
+    background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+    border-radius: 50%;
+    margin-bottom: 30px;
+    box-shadow: 0 10px 30px rgba(139, 92, 246, 0.3);
+}
+
+.lw-ai-premium-lock-icon .dashicons {
+    font-size: 50px;
+    width: 50px;
+    height: 50px;
+    color: white;
+}
+
+.lw-ai-premium-lock-content h1 {
+    font-size: 32px;
+    font-weight: 700;
+    color: #1f2937;
+    margin: 0 0 16px 0;
+    line-height: 1.4;
+    background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+}
+
+.lw-ai-premium-lock-message {
+    font-size: 16px;
+    color: #6b7280;
+    line-height: 1.6;
+    margin: 0 0 40px 0;
+}
+
+.lw-ai-premium-lock-message strong {
+    color: #374151;
+}
+
+.lw-ai-premium-lock-features {
+    background: white;
+    border-radius: 12px;
+    padding: 30px;
+    margin-bottom: 40px;
+    text-align: left;
+    border: 1px solid #e5e7eb;
+}
+
+.lw-ai-premium-lock-features h3 {
+    font-size: 18px;
+    font-weight: 600;
+    color: #374151;
+    margin: 0 0 20px 0;
+    text-align: center;
+}
+
+.lw-ai-premium-lock-features ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.lw-ai-premium-lock-features li {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 0;
+    font-size: 15px;
+    color: #4b5563;
+    border-bottom: 1px solid #f3f4f6;
+}
+
+.lw-ai-premium-lock-features li:last-child {
+    border-bottom: none;
+}
+
+.lw-ai-premium-lock-features .dashicons {
+    flex-shrink: 0;
+    width: 24px;
+    height: 24px;
+    font-size: 24px;
+    color: #10b981;
+}
+
+.lw-ai-premium-lock-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.lw-ai-premium-upgrade-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 16px 32px;
+    background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+    color: white;
+    text-decoration: none;
+    border-radius: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 14px rgba(99, 102, 241, 0.4);
+}
+
+.lw-ai-premium-upgrade-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 8px 25px rgba(99, 102, 241, 0.5);
+    color: white;
+}
+
+.lw-ai-premium-upgrade-btn .dashicons {
+    font-size: 20px;
+    width: 20px;
+    height: 20px;
+}
+
+.lw-ai-premium-back-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    background: white;
+    color: #6b7280;
+    text-decoration: none;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 500;
+    transition: all 0.2s ease;
+}
+
+.lw-ai-premium-back-btn:hover {
+    background: #f9fafb;
+    border-color: #d1d5db;
+    color: #374151;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+    .lw-ai-premium-lock-content {
+        padding: 40px 24px;
+    }
+
+    .lw-ai-premium-lock-icon {
+        width: 80px;
+        height: 80px;
+    }
+
+    .lw-ai-premium-lock-icon .dashicons {
+        font-size: 40px;
+        width: 40px;
+        height: 40px;
+    }
+
+    .lw-ai-premium-lock-content h1 {
+        font-size: 24px;
+    }
+
+    .lw-ai-premium-lock-features {
+        padding: 20px;
+    }
+}

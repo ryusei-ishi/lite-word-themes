@@ -1,0 +1,4 @@
+<!-- wp:wdl/lw-content-1 -->
+<div class="wp-block-wdl-lw-content-1 lw-content-1 left"><div class="lw-content-1__inner"><div class="lw-content-1__image"><img loading="lazy" src="https://picsum.photos/1000/1000?random=1" alt=""/></div><div class="lw-content-1__text"><h3 class="lw_title" style="font-weight:" data-lw_font_set="">タイトルテキスト</h3><p class="lw_p" style="font-weight:;white-space:pre-wrap" data-lw_font_set="">テキストテキストテキストテキスト
+テキストテキストテキストテキストテキストテキスト</p><a href="" class="lw-content-1__text_br_button" style="font-weight:;background-color:var(--color-accent);color:#fff" data-lw_font_set="">詳細はこちら</a></div></div></div>
+<!-- /wp:wdl/lw-content-1 -->

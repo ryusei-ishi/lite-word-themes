@@ -1,0 +1,102 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-image-1",
+	"version": "1.0.0",
+	"title": "画像 01",
+	"category": "lw-media",
+	"icon": "format-image",
+	"supports": {
+		"anchor": true
+	},
+	"editorScript": "file:./paid-block-image-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 1,
+	"attributes": {
+		"image": {
+			"type": "string",
+			"default": "https://placehold.jp/600x440.png"
+		},
+		"alt": {
+			"type": "string",
+			"default": ""
+		},
+		"subTitle": {
+			"type": "string",
+			"default": "主任"
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "大阪 京子"
+		},
+		"aspectRatioW": {
+			"type": "number",
+			"default": 400
+		},
+		"aspectRatioH": {
+			"type": "number",
+			"default": 340
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 480
+		},
+		"centerBlock": {
+			"type": "boolean",
+			"default": false
+		},
+		"innerRadiusEm": {
+			"type": "number",
+			"default": 0.9
+		},
+		"showNamePlate": {
+			"type": "boolean",
+			"default": true
+		},
+		"namePlateColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"namePlateRadiusEm": {
+			"type": "number",
+			"default": 0.2
+		},
+		"namePlateBorderWidth": {
+			"type": "number",
+			"default": 2
+		},
+		"showLinkNext": {
+			"type": "boolean",
+			"default": true
+		},
+		"linkNextBgColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"linkNextIconColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"linkUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"linkOpenNewTab": {
+			"type": "boolean",
+			"default": false
+		},
+		"headingLevel": {
+			"type": "string",
+			"default": "h3"
+		},
+		"fontSizeClass": {
+			"type": "string",
+			"default": "font_size_m"
+		}
+	}
+}

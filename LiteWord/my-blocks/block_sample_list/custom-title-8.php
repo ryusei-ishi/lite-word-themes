@@ -1,0 +1,3 @@
+<!-- wp:wdl/paid-block-custom-title-8 -->
+<div class="wp-block-wdl-paid-block-custom-title-8 paid-block-custom-title-8 size_m position_left"><h2 class="ttl"><span class="sub" style="color:var(--color-main)">製品紹介</span><span class="main">PRODUCTS</span><span class="border_wrap"><span class="border_inner" style="border-radius:10px"><span class="border left" style="background-color:var(--color-main);opacity:1"></span><span class="border right" style="background-color:var(--color-main);opacity:0.2"></span></span></span></h2></div>
+<!-- /wp:wdl/paid-block-custom-title-8 -->

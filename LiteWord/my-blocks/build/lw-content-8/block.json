@@ -1,0 +1,236 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-content-8",
+	"version": "1.0.0",
+	"title": "Content 08",
+	"category": "lw-content",
+	"icon": "lightbulb",
+	"editorScript": "file:./lw-content-8.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"fontLi": {
+			"type": "string",
+			"default": ""
+		},
+		"fontColorLi": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightLi": {
+			"type": "string",
+			"default": "600"
+		},
+		"titleFontSizeClass": {
+			"type": "string",
+			"default": "font_size_m"
+		},
+		"fontLiP": {
+			"type": "string",
+			"default": ""
+		},
+		"fontColorLiP": {
+			"type": "string",
+			"default": "var(--color-black)"
+		},
+		"fontWeightLiP": {
+			"type": "string",
+			"default": "400"
+		},
+		"textFontSizeClass": {
+			"type": "string",
+			"default": "font_size_m"
+		},
+		"titleTag": {
+			"type": "string",
+			"default": "h3"
+		},
+		"titleBorderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"titleBorderSize": {
+			"type": "number",
+			"default": 2
+		},
+		"liBorderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"liBorderSize": {
+			"type": "number",
+			"default": 2
+		},
+		"liPaddingTop": {
+			"type": "number",
+			"default": 24
+		},
+		"liPaddingBottom": {
+			"type": "number",
+			"default": 24
+		},
+		"liPaddingLeft": {
+			"type": "number",
+			"default": 24
+		},
+		"liPaddingRight": {
+			"type": "number",
+			"default": 24
+		},
+		"liBorderRadius": {
+			"type": "number",
+			"default": 8
+		},
+		"subBorderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"subBorderSize": {
+			"type": "number",
+			"default": 1
+		},
+		"subFontColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"subBgColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"showSub": {
+			"type": "boolean",
+			"default": true
+		},
+		"fontLiSub": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightLiSub": {
+			"type": "string",
+			"default": "600"
+		},
+		"fontLiMain": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightLiMain": {
+			"type": "string",
+			"default": "700"
+		},
+		"columnClass": {
+			"type": "string",
+			"default": "clm_3"
+		},
+		"mainAlign": {
+			"type": "string",
+			"default": "left"
+		},
+		"innerMaxWidth": {
+			"type": "number",
+			"default": 1200
+		},
+		"btnMarginTop": {
+			"type": "number",
+			"default": 16
+		},
+		"btnHeight": {
+			"type": "number",
+			"default": 56
+		},
+		"btnBgColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"btnFontColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"btnFontSize": {
+			"type": "number",
+			"default": 15
+		},
+		"btnBorderRadius": {
+			"type": "number",
+			"default": 2
+		},
+		"btnBorderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"btnBorderSize": {
+			"type": "number",
+			"default": 0
+		},
+		"showButton": {
+			"type": "boolean",
+			"default": true
+		},
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".lw-content-8__li",
+			"query": {
+				"sub": {
+					"type": "string",
+					"source": "html",
+					"selector": ".ttl .sub"
+				},
+				"main": {
+					"type": "string",
+					"source": "html",
+					"selector": ".ttl .main"
+				},
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": ".lw-content-8__text"
+				},
+				"url": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".link",
+					"attribute": "href",
+					"default": ""
+				},
+				"btnText": {
+					"type": "string",
+					"source": "html",
+					"selector": ".btn",
+					"default": "詳細はこちら"
+				}
+			},
+			"default": [
+				{
+					"sub": "サブタイトル",
+					"main": "タイトルタイトル",
+					"text": "説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。",
+					"url": "#",
+					"btnText": "詳細はこちら"
+				},
+				{
+					"sub": "サブタイトル",
+					"main": "タイトルタイトル",
+					"text": "説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。",
+					"url": "#",
+					"btnText": "詳細はこちら"
+				},
+				{
+					"sub": "サブタイトル",
+					"main": "タイトルタイトル",
+					"text": "説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。",
+					"url": "#",
+					"btnText": "詳細はこちら"
+				}
+			]
+		}
+	},
+	"no": 8
+}

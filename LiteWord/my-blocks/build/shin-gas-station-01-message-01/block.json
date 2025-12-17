@@ -1,0 +1,54 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/shin-gas-station-01-message-01",
+	"version": "1.0.0",
+	"title": "メッセージ 1 shin shop pattern 01",
+	"category": "lw-content",
+	"icon": "admin-comments",
+	"editorScript": "file:./shin-gas-station-01-message-01.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"no": 15,
+	"attributes": {
+		"subTitle": {
+			"type": "string",
+			"default": "代表挨拶"
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "Message"
+		},
+		"bodyText": {
+			"type": "string",
+			"default": "私たちは「Drive freely, live comfortably.（自由に走り、快適に暮らす）」を掲げ、地域に根ざしたサービスを提供し、お客様のカーライフをより豊かにすることを目指してまいりました。エネルギー事業では、高品質な燃料と細やかな接客で安全・快適な走行を支え、リース事業では多様なニーズに応える柔軟なプランで移動の自由を広げています。さらに、地域イベントの協賛や公共インフラ整備への協力を通じて、地域社会の活性化にも尽力しています。私たちは、地域社会や環境への配慮を欠かさず、常に新しい挑戦を続けながら、持続可能な未来の実現に向けて歩んでまいります。これからもお客様と地域の笑顔のために、心を込めたサービスを提供し続けます。"
+		},
+		"imgUrl": {
+			"type": "string",
+			"default": "https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?w=400&h=400&auto=format&fit=crop&q=80"
+		},
+		"imgAlt": {
+			"type": "string",
+			"default": "代表の写真"
+		},
+		"captionSub": {
+			"type": "string",
+			"default": "代表取締役"
+		},
+		"captionMain": {
+			"type": "string",
+			"default": "山田太郎"
+		},
+		"colorMain": {
+			"type": "string",
+			"default": "var(--color-main)"
+		}
+	}
+}

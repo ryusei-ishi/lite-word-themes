@@ -1,0 +1,86 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/fv-7",
+	"version": "1.0.0",
+	"title": "固定ページタイトル 07(トップ用・動画背景)",
+	"category": "lw-firstview",
+	"icon": "cover-image",
+	"editorScript": "file:./fv-7.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"subTitle": {
+			"type": "string",
+			"default": "初心者のためのWordPressテーマ"
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "LiteWord"
+		},
+		"description": {
+			"type": "string",
+			"default": "テキストテキストテキストテキストテキストテキスト"
+		},
+		"buttonText": {
+			"type": "string",
+			"default": "詳細はこちら"
+		},
+		"buttonUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"showButton": {
+			"type": "boolean",
+			"default": true
+		},
+		"videoType": {
+			"type": "string",
+			"default": "media"
+		},
+		"videoUrl": {
+			"type": "string",
+			"default": "https://cdn.pixabay.com/video/2023/11/19/189813-887078786_large.mp4"
+		},
+		"vimeoId": {
+			"type": "string",
+			"default": ""
+		},
+		"filterColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 0.5
+		},
+		"videoSpeed": {
+			"type": "number",
+			"default": 1.0
+		},
+		"headingLevel": {
+			"type": "number",
+			"default": 1
+		},
+		"minHeightPc": {
+			"type": "string",
+			"default": ""
+		},
+		"minHeightTb": {
+			"type": "string",
+			"default": ""
+		},
+		"minHeightSp": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"no": 7
+}

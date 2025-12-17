@@ -1,0 +1,124 @@
+.lw-list-1 {
+  margin: 40px 0;
+}
+
+@container (max-width:850px) {
+  .lw-list-1 {
+    margin: 32px 0;
+  }
+}
+
+@container (max-width:550px) {
+  .lw-list-1 {
+    margin: 24px 0;
+  }
+}
+
+.lw-list-1 * {
+  box-sizing: border-box;
+}
+
+.lw-list-1 .lw-list-1_inner {
+  width: 100%;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+
+@container (max-width:850px) {
+  .lw-list-1 .lw-list-1_inner {
+    grid-template-columns: repeat(1, 1fr);
+    gap: 12px;
+  }
+}
+
+@container (max-width:550px) {
+  .lw-list-1 .lw-list-1_inner {
+    gap: 8px;
+  }
+}
+
+.lw-list-1 .lw-list-1_inner .lw-list-1_content {
+  position: relative;
+  min-height: 112px;
+  display: grid;
+  grid-template-columns: 112px calc(100% - 112px);
+  border: 1px solid #000;
+  box-sizing: border-box;
+}
+
+@container (max-width:850px) {
+  .lw-list-1 .lw-list-1_inner .lw-list-1_content {
+    min-height: 104px;
+    grid-template-columns: 104px calc(100% - 104px);
+  }
+}
+
+@container (max-width:550px) {
+  .lw-list-1 .lw-list-1_inner .lw-list-1_content {
+    min-height: 96px;
+    grid-template-columns: 96px calc(100% - 96px);
+  }
+}
+
+@container (max-width:450px) {
+  .lw-list-1 .lw-list-1_inner .lw-list-1_content {
+    min-height: 64px;
+    grid-template-columns: 48px calc(100% - 56px);
+  }
+}
+
+.lw-list-1 .lw-list-1_inner .lw-list-1_content .no {
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: #fff;
+  font-size: 24px;
+}
+
+@container (max-width:550px) {
+  .lw-list-1 .lw-list-1_inner .lw-list-1_content .no {
+    font-size: 22px;
+  }
+}
+
+@container (max-width:450px) {
+  .lw-list-1 .lw-list-1_inner .lw-list-1_content .no {
+    font-size: 18px;
+  }
+}
+
+.lw-list-1 .lw-list-1_inner .lw-list-1_content .lw-list-1_text {
+  padding: 20px 24px 16px 24px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  font-size: 16px;
+  line-height: 1.5em;
+}
+
+@container (max-width:850px) {
+  .lw-list-1 .lw-list-1_inner .lw-list-1_content .lw-list-1_text {
+    padding: 16px 16px 14px 24px;
+  }
+}
+
+@container (max-width:550px) {
+  .lw-list-1 .lw-list-1_inner .lw-list-1_content .lw-list-1_text {
+    padding: 14px 8px 12px 20px;
+    font-size: 15px;
+  }
+}
+
+.lw-list-1 .lw-list-1_inner .lw-list-1_content .lw-list-1_text p {
+  padding: 0;
+  margin: 0;
+}
+
+.lw-list-1 .lw-table-item-controls {
+  height: 30px;
+  top: calc(100% - 16px);
+  right: -8px;
+  margin: auto;
+}

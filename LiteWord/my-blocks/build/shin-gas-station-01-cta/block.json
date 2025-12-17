@@ -1,0 +1,90 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/shin-gas-station-01-cta",
+	"version": "1.0.0",
+	"title": "CTA 1 shin shop pattern 01",
+	"category": "lw-cta",
+	"icon": "megaphone",
+	"description": "テンプレート専用CTAブロック",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"title": {
+			"type": "string",
+			"source": "html",
+			"selector": ".shin-gas-station-01-cta__title .main",
+			"default": "採用情報"
+		},
+		"titleSub": {
+			"type": "string",
+			"source": "html",
+			"selector": ".shin-gas-station-01-cta__title .sub",
+			"default": "Recruit"
+		},
+		"text": {
+			"type": "string",
+			"source": "html",
+			"selector": "p",
+			"default": "地域社会を支え、移動の快適さと安心を提供するDriveEaseでは、未来を共に創る仲間を募集しています。<br>私たちは、ガソリンスタンド事業や車両リース事業を通じて、人々の暮らしをより豊かにすることを目指しています。<br>新しい挑戦を続ける当社で、あなたの力を活かしてみませんか？"
+		},
+		"buttonText": {
+			"type": "string",
+			"source": "html",
+			"selector": "a",
+			"default": "詳しく見る"
+		},
+		"buttonUrl": {
+			"type": "string",
+			"default": "#"
+		},
+		"openInNewTab": {
+			"type": "boolean",
+			"default": false
+		},
+		"imageUrl": {
+			"type": "string",
+			"source": "attribute",
+			"selector": "img",
+			"attribute": "src",
+			"default": ""
+		},
+		"filterColor": {
+			"type": "string",
+			"default": "#054161"
+		},
+		"buttonBackgroundColor": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"buttonBorderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"buttonBorderSize": {
+			"type": "number",
+			"default": 1
+		},
+		"buttonMaxWidth": {
+			"type": "number",
+			"default": 240
+		},
+		"pcTextAlign": {
+			"type": "string",
+			"default": "center"
+		},
+		"mobileTextAlign": {
+			"type": "string",
+			"default": "left"
+		}
+	},
+	"editorScript": "file:./shin-gas-station-01-cta.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 15
+}

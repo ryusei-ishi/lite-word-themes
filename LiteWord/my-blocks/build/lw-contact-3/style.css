@@ -1,0 +1,168 @@
+@charset "UTF-8";
+.block-editor-page .lw-contact-3 {
+  padding: 8px;
+  border: 1px solid #5c6165;
+}
+.block-editor-page .lw-contact-3 .this_wrap {
+  padding: 0;
+}
+
+.lw-contact-3 {
+  position: relative;
+  z-index: 10;
+  margin: 0 auto;
+  padding: 0;
+  container-type: inline-size;
+}
+.lw-contact-3 .this_wrap {
+  max-width: 1080px;
+  margin: 0 auto;
+}
+.lw-contact-3 .lw_mail_form {
+  margin: 0;
+}
+.lw-contact-3 .lw_mail_form .form_group {
+  position: relative;
+  padding: 16px 0;
+  grid-template-columns: 1fr;
+}
+@container (max-width: 800px) {
+  .lw-contact-3 .lw_mail_form .form_group {
+    padding: 16px 0;
+    grid-template-columns: 100%;
+  }
+}
+.lw-contact-3 .lw_mail_form .form_group + .form_group {
+  margin-top: 0;
+}
+.lw-contact-3 .lw_mail_form .form_group .label_in {
+  padding-right: 0;
+}
+.lw-contact-3 .lw_mail_form .form_group .label_in label {
+  padding-top: 0;
+  display: flex;
+  justify-content: start;
+  gap: 20px;
+}
+.lw-contact-3 .lw_mail_form .form_group .label_in label .required {
+  margin-top: 6px;
+  padding: 6px;
+  font-size: 12px;
+  border-radius: 0;
+  line-height: 1;
+  font-weight: 500;
+}
+@container (max-width: 800px) {
+  .lw-contact-3 .lw_mail_form .form_group .label_in label br {
+    display: none;
+  }
+}
+.lw-contact-3 .lw_mail_form .form_group .form_in {
+  padding-left: 0;
+}
+.lw-contact-3 .lw_mail_form .form_group input[type=text],
+.lw-contact-3 .lw_mail_form .form_group input[type=email],
+.lw-contact-3 .lw_mail_form .form_group input[type=tel],
+.lw-contact-3 .lw_mail_form .form_group input[type=url],
+.lw-contact-3 .lw_mail_form .form_group input[type=password],
+.lw-contact-3 .lw_mail_form .form_group textarea {
+  padding: 0.8em 0.8em 0.6em 0.8em;
+  line-height: 1.8em;
+  width: 100%;
+  border-radius: 0;
+  border: none;
+}
+@container (max-width: 800px) {
+  .lw-contact-3 .lw_mail_form .form_group input[type=text],
+  .lw-contact-3 .lw_mail_form .form_group input[type=email],
+  .lw-contact-3 .lw_mail_form .form_group input[type=tel],
+  .lw-contact-3 .lw_mail_form .form_group input[type=url],
+  .lw-contact-3 .lw_mail_form .form_group input[type=password],
+  .lw-contact-3 .lw_mail_form .form_group textarea {
+    font-size: var(--font-size-post-df_tb);
+  }
+}
+@container (max-width:600px) {
+  .lw-contact-3 .lw_mail_form .form_group input[type=text],
+  .lw-contact-3 .lw_mail_form .form_group input[type=email],
+  .lw-contact-3 .lw_mail_form .form_group input[type=tel],
+  .lw-contact-3 .lw_mail_form .form_group input[type=url],
+  .lw-contact-3 .lw_mail_form .form_group input[type=password],
+  .lw-contact-3 .lw_mail_form .form_group textarea {
+    font-size: var(--font-size-post-df_sp);
+  }
+}
+.lw-contact-3 .lw_mail_form .form_group input[type=text]:focus,
+.lw-contact-3 .lw_mail_form .form_group input[type=email]:focus,
+.lw-contact-3 .lw_mail_form .form_group input[type=tel]:focus,
+.lw-contact-3 .lw_mail_form .form_group input[type=url]:focus,
+.lw-contact-3 .lw_mail_form .form_group input[type=password]:focus,
+.lw-contact-3 .lw_mail_form .form_group textarea:focus {
+  border-color: var(--color-main);
+  outline-color: var(--color-main);
+}
+.lw-contact-3 .lw_mail_form .form_group input[type=text]::-moz-placeholder, .lw-contact-3 .lw_mail_form .form_group input[type=email]::-moz-placeholder, .lw-contact-3 .lw_mail_form .form_group input[type=tel]::-moz-placeholder, .lw-contact-3 .lw_mail_form .form_group input[type=url]::-moz-placeholder, .lw-contact-3 .lw_mail_form .form_group input[type=password]::-moz-placeholder, .lw-contact-3 .lw_mail_form .form_group textarea::-moz-placeholder {
+  color: #c6c6c6;
+}
+.lw-contact-3 .lw_mail_form .form_group input[type=text]::placeholder,
+.lw-contact-3 .lw_mail_form .form_group input[type=email]::placeholder,
+.lw-contact-3 .lw_mail_form .form_group input[type=tel]::placeholder,
+.lw-contact-3 .lw_mail_form .form_group input[type=url]::placeholder,
+.lw-contact-3 .lw_mail_form .form_group input[type=password]::placeholder,
+.lw-contact-3 .lw_mail_form .form_group textarea::placeholder {
+  color: #c6c6c6;
+}
+.lw-contact-3 .lw_mail_form .form_group select {
+  padding: 1em 0.8em 0.8em 0.8em;
+  border-radius: 0;
+  border: none;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath d='M182.6 470.6c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8l256 0c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128z' fill='%234e4e4e'/%3E%3C/svg%3E");
+  background-repeat: no-repeat;
+  background-position: right 8px top 40%;
+  background-size: 16px 20px;
+}
+@container (max-width: 800px) {
+  .lw-contact-3 .lw_mail_form .form_group select {
+    background-position: right 8px top 34%;
+  }
+}
+.lw-contact-3 .lw_mail_form .checkbox_in label,
+.lw-contact-3 .lw_mail_form .consent_check_wrap label {
+  cursor: pointer;
+}
+.lw-contact-3 .lw_mail_form .checkbox_in input[type=checkbox],
+.lw-contact-3 .lw_mail_form .consent_check_wrap input[type=checkbox] {
+  margin-top: -2px;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 18px;
+  height: 18px;
+  background-color: #f0f0f0; /* 未選択時の背景 */
+  cursor: pointer;
+  position: relative;
+  outline: none;
+  border: none; /* ← ボーダーを完全に消す */
+}
+.lw-contact-3 .lw_mail_form .checkbox_in input[type=checkbox]:checked::after,
+.lw-contact-3 .lw_mail_form .consent_check_wrap input[type=checkbox]:checked::after {
+  content: "";
+  position: absolute;
+  top: 3px;
+  left: 3px;
+  width: 12px;
+  height: 12px;
+  background-color: #007cba; /* チェック色 */
+}
+.lw-contact-3 .lw_mail_form .consent_set {
+  margin-top: 0;
+}
+.lw-contact-3 .lw_mail_form .consent_set + .submit_wrap {
+  margin-top: 56px;
+}
+.lw-contact-3 .lw_mail_form .submit_wrap button {
+  width: 100%;
+}/*# sourceMappingURL=style.css.map */

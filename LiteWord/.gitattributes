@@ -1,0 +1,12 @@
+# Auto detect text files and perform LF normalization
+* text=auto
+
+
+# export-ignore: git archive で除外するファイル
+.git export-ignore
+.github export-ignore
+.gitignore export-ignore
+.gitattributes export-ignore
+block_validation_checkpoint.json export-ignore
+php_compatibility_check export-ignore
+README.md export-ignore

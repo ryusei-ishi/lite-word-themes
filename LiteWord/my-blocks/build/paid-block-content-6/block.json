@@ -1,0 +1,54 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/paid-block-content-6",
+	"version": "1.0.0",
+	"title": "Content 06",
+	"category": "lw-content",
+	"icon": "format-image",
+	"editorScript": "file:./paid-block-content-6.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"alignRight": {
+			"type": "boolean",
+			"default": false
+		},
+		"imageUrl": {
+			"type": "string",
+			"default": "https://lite-word.com/sample_img/women/7.webp"
+		},
+		"imageAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"textContent": {
+			"type": "string",
+			"default": "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"
+		},
+		"buttonText": {
+			"type": "string",
+			"default": "Learn More"
+		},
+		"buttonUrl": {
+			"type": "string",
+			"default": "#"
+		},
+		"showButton": {
+			"type": "boolean",
+			"default": true
+		},
+		"buttonRadius": {
+			"type": "number",
+			"default": 0
+		}
+	},
+	"no": 6
+}

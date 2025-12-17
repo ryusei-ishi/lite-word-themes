@@ -1,0 +1,345 @@
+@import url("https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap");
+body.woocommerce-page {
+    font-family: "Inter", "Hiragino Kaku Gothic ProN", "游ゴシック", "Yu Gothic", "メイリオ", "Meiryo", "ＭＳ ゴシック",
+        "MS Gothic", sans-serif;
+    font-style: normal;
+    #sidebar {
+        display: none;
+    }
+    //パンくず
+    .woocommerce-breadcrumb {
+        margin-bottom: 24px;
+        line-height: 1.4em;
+        color: #222;
+        @media (max-width: 600px) {
+            font-size: 12px;
+        }
+        a {
+            color: var(--color-main);
+            &:hover {
+                text-decoration: underline;
+            }
+        }
+    }
+    //woocommerce-notices-wrapper
+    .woocommerce-notices-wrapper {
+        .woocommerce-message {
+            outline: none;
+            border-color: var(--color-main);
+            &::before {
+                color: var(--color-main);
+            }
+        }
+    }
+    .content-area {
+        margin: 32px auto;
+        padding: 0 24px;
+        width: 100%;
+        max-width: var(--max-width-clm-1);
+        container-type: inline-size;
+        @media (max-width: 450px) {
+            padding: 0 16px;
+        }
+        //商品詳細ページ
+        .product {
+            //メイン右側のタイトルやボタンなどの部分
+            .entry-summary {
+                * {
+                    box-sizing: border-box;
+                }
+                .product_title {
+                    font-size: 24px;
+                    margin-bottom: 24px;
+                    @media (max-width: 980px) {
+                        font-size: 22px;
+                    }
+                    @media (max-width: 500px) {
+                        font-size: 20px;
+                    }
+                }
+                .woocommerce-product-rating {
+                    color: var(--color-accent);
+                }
+                .woocommerce-product-details__short-description {
+                    font-size: 16px;
+                    @media (max-width: 980px) {
+                        font-size: 15px;
+                    }
+                }
+                .price {
+                    font-size: 24px;
+                    font-weight: 500;
+                    margin-bottom: 16px;
+                    color: #333;
+                    @media (max-width: 980px) {
+                        font-size: 20px;
+                    }
+                }
+                form.cart {
+                    margin-top: 16px;
+                    .quantity {
+                        input {
+                            height: 40px;
+                            &:focus {
+                                outline: none;
+                            }
+                        }
+                    }
+                    button {
+                        padding: 0 1em;
+                        padding-top: 2px;
+                        height: 40px;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        background: var(--color-main);
+                        font-weight: 400;
+                        transition: 0.3s;
+                        &:hover {
+                            opacity: 0.8;
+                        }
+                    }
+                }
+                a {
+                    color: var(--color-main);
+                    &:hover {
+                        text-decoration: underline;
+                    }
+                }
+            }
+            //下のタブ切り替え
+            .woocommerce-tabs {
+                ///説明部分
+                .woocommerce-Tabs-panel--description {
+                }
+                //review部分
+                #reviews {
+                    padding: 40px;
+                    background-color: #f9f9f9;
+                    border: 1px solid #e0e0e0;
+                    border-radius: 8px;
+                    font-size: var(--font-size-post-df_pc);
+                    @media (max-width: 980px) {
+                        font-size: var(--font-size-post-df_tb);
+                    }
+                    @media (max-width: 600px) {
+                        padding: 24px;
+                        font-size: var(--font-size-post-df_sp);
+                    }
+                    @media (max-width: 500px) {
+                        padding: 16px;
+                    }
+                    .woocommerce-Reviews-title {
+                        font-size: 1.4em; // h2サイズを28pxに設定
+                        color: #333;
+                        margin-bottom: 32px;
+                        text-align: center;
+                        line-height: 1.5em;
+                        @media (max-width: 980px) {
+                            font-size: 1.4em;
+                        }
+                        @media (max-width: 600px) {
+                            font-size: 1.2em;
+                        }
+                    }
+
+                    .woocommerce-noreviews {
+                        color: #666;
+                        text-align: center;
+                    }
+
+                    #comments {
+                        margin-bottom: 20px;
+                        .commentlist {
+                            li {
+                                .comment_container {
+                                    .comment-text {
+                                        .star-rating {
+                                            color: var(--color-accent);
+                                        }
+                                        .meta {
+                                            line-height: 1.3em;
+                                            @media (max-width: 500px) {
+                                                font-size: 0.8em;
+                                            }
+                                        }
+                                        .description {
+                                            line-height: 1.5em;
+                                        }
+                                    }
+                                }
+                            }
+                        }
+                    }
+
+                    #review_form_wrapper {
+                        margin-top: 20px;
+
+                        #review_form {
+                            background-color: #fff;
+                            padding: 20px;
+                            border: 1px solid #ddd;
+                            border-radius: 8px;
+
+                            #respond {
+                                .comment-reply-title {
+                                    font-size: 1.3em;
+                                    color: #333;
+                                    margin-bottom: 20px;
+                                    display: block;
+                                    @media (max-width: 600px) {
+                                        font-size: 1em;
+                                    }
+                                }
+                            }
+
+                            .comment-form {
+                                margin-bottom: 15px;
+
+                                label {
+                                    margin: 12px 0;
+                                    color: #333;
+                                    font-weight: bold;
+                                    display: block;
+                                    @media (max-width: 600px) {
+                                        font-size: 0.9em;
+                                    }
+                                }
+                                .stars {
+                                    margin-bottom: 16px;
+                                }
+                                textarea {
+                                    width: 100%;
+                                    height: 100px;
+                                    padding: 10px;
+                                    border: 1px solid #ddd;
+                                    border-radius: 4px;
+                                    font-size: 17px; // テキストエリア内の文字サイズも17pxに
+                                    resize: vertical;
+                                }
+                            }
+
+                            .form-submit {
+                                display: flex;
+                                justify-content: flex-end;
+
+                                input[type="submit"] {
+                                    padding: 0 22px;
+                                    padding-top: 2px;
+                                    height: 44px;
+                                    display: flex;
+                                    align-items: center;
+                                    justify-content: center;
+                                    font-size: 17px; // ボタンテキストサイズを17pxに
+                                    background-color: var(--color-main);
+                                    color: #fff;
+                                    border: none;
+                                    border-radius: 4px;
+                                    cursor: pointer;
+                                    transition: 0.3s;
+                                    font-weight: 400;
+                                    &:hover {
+                                        opacity: 0.8;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        // アーカイブページ
+        .woocommerce-products-header {
+            margin: 40px 0 0 0;
+            .woocommerce-products-header__title {
+                font-size: 24px;
+                margin-bottom: 24px;
+                @media (max-width: 980px) {
+                    font-size: 22px;
+                }
+                @media (max-width: 500px) {
+                    font-size: 20px;
+                }
+            }
+        }
+        .woocommerce-result-count {
+            margin-right: 16px;
+            font-size: 0.9em;
+            @media (max-width: 500px) {
+                font-size: 0.75em;
+            }
+        }
+        .woocommerce-ordering {
+            display: flex;
+            align-items: center;
+            background-color: #f9f9f9;
+            max-width: 400px;
+            margin: 0 auto;
+            .orderby {
+                width: 100%;
+                padding: 0.9em 1em;
+                font-size: 0.9em;
+                color: #333;
+                background-color: #fff;
+                border: 1px solid #ddd;
+                appearance: none; // ブラウザデフォルトの矢印を削除
+                cursor: pointer;
+                @media (max-width: 500px) {
+                    font-size: 0.75em;
+                }
+                &:hover {
+                    border-color: #aaa;
+                }
+
+                &:focus {
+                    outline: none;
+                    border-color: #0073aa;
+                    box-shadow: 0 0 5px rgba(0, 115, 170, 0.3);
+                }
+            }
+        }
+        ul.products {
+            margin-top: 96px;
+            li.product {
+                container-type: inline-size;
+                .woocommerce-loop-product__title {
+                    margin-top: 8px;
+                    color: #000;
+                    font-size: 16px;
+                    line-height: 1.5em;
+                    @container (max-width:200px) {
+                        font-size: 15px;
+                    }
+                    @container (max-width:180px) {
+                        font-size: 14px;
+                    }
+                }
+                .star-rating {
+                    margin-bottom: 12px;
+                    color: var(--color-accent);
+                }
+                .button {
+                    padding: 0.85em 1.2em 0.7em 1.2em;
+                    min-height: 36px;
+                    display: inline-flex;
+                    align-items: center;
+                    justify-content: center;
+                    border-radius: 1px;
+                    @container (max-width:200px) {
+                        font-size: 14px;
+                    }
+                    @container (max-width:180px) {
+                        width: 100%;
+                        font-size: 13px;
+                    }
+                    transition: 0.3s;
+                    &:hover {
+                        opacity: 0.8;
+                        background-color: var(--color-main);
+                        color: #fff;
+                    }
+                }
+            }
+        }
+    }
+}

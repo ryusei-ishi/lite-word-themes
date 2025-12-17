@@ -1,0 +1,686 @@
+#wpcontent,
+#wpfooter {
+    margin-left: 140px;
+    @media (max-width: 960px) {
+        margin-left: 16px !important;
+    }
+    @media (max-width: 782px) {
+        margin-left: 0 !important;
+        padding-left: 0 !important;
+    }
+}
+#wpfooter {
+    display: none;
+}
+#wpbody-content {
+    padding-bottom: 0 !important;
+}
+body {
+    background: #e9f2f6;
+}
+.lw_mail_form_wrap {
+    padding: 32px;
+    padding-bottom: 200px;
+    display: grid;
+    grid-template-columns: 240px calc(100% - 240px - 32px);
+    gap: 0 32px;
+    .lw_mail_set_header {
+        grid-column: span 2;
+    }
+}
+.lw_mail_set_header {
+    position: relative;
+    margin-bottom: 32px !important;
+    color: #1861a5;
+    > h1 {
+        margin-bottom: 12px;
+        font-size: 24px;
+        line-height: 1.8em;
+        padding-bottom: 20px !important;
+        border-bottom: 2px solid #1861a5 !important;
+        @media (max-width: 1100px) {
+            font-size: 20px;
+        }
+    }
+    p{
+        color: #000;
+    }
+    input {
+        padding: 8px;
+        width: 100%;
+        border: none;
+    }
+    .save_btn_wrap {
+        position: absolute;
+        top: -4px;
+        right: 0;
+        > button,
+        .link_btn {
+            margin-top: 0;
+            min-width: 160px;
+            background: #cd5252;
+            color: #fff;
+            border: none;
+            padding: 16px;
+            display: flex;
+            justify-content: center;
+            font-size: 14px;
+            border-radius: 2px;
+            transition: 0.3s;
+            @media (max-width: 1100px) {
+                padding: 14px;
+                font-size: 12px;
+            }
+            &:hover {
+                opacity: 0.8;
+            }
+            &.link_btn {
+                background: #1259a5;
+            }
+        }
+    }
+}
+.lw_mail_set_nav_menu {
+    ul {
+        margin-bottom: 24px;
+        display: grid;
+        gap: 1px;
+        li {
+            a {
+                position: relative;
+                padding: 0 20px;
+                height: 56px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+                color: #fff;
+                background: #1861a5;
+                font-weight: 500;
+                font-size: 14px;
+                transition: 0.3s;
+                &.current {
+                    background: #d65050;
+                    color: #fff;
+                    pointer-events: none;
+                }
+                svg {
+                    position: absolute;
+                    top: 0;
+                    right: 12px;
+                    bottom: 0;
+                    margin: auto;
+                    height: 12px;
+                    width: auto;
+                    fill: #fff;
+                }
+                &:hover {
+                    background: #0c477e;
+                }
+            }
+        }
+    }
+}
+.lw_mail_form_set_wrap {
+    position: relative;
+    z-index: 10;
+    padding: 32px;
+    .lw_mail_form_list {
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 8px;
+        li {
+            position: relative;
+            padding: 20px;
+            min-height: 72px;
+            width: 100%;
+            display: flex;
+            align-items: center;
+            flex-wrap: wrap;
+            background: #fff;
+            border-radius: 3px;
+            transition: opacity 0.3s;
+            font-size: 16px;
+            line-height: 1.6em;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+            border-left: 8px solid #296cb4;
+            @media (max-width: 1080px) {
+                font-size: 14px;
+            }
+            * {
+                box-sizing: border-box;
+            }
+            .text {
+                margin-right: 16px;
+            }
+            a {
+                margin-left: 8px;
+                padding: 8px 16px;
+                display: block;
+                background: #e84040;
+                color: #fff;
+                font-size: 15px;
+                border-radius: 3px;
+                &:hover {
+                    opacity: 0.8;
+                }
+                + a {
+                    background: #296cb4;
+                }
+            }
+            .memo {
+                position: relative;
+                padding-left: 8px;
+                height: 100%;
+                width: calc(100% - 750px);
+                @media (max-width: 1280px) {
+                    height: inherit;
+                }
+                @media (max-width: 1280px) {
+                    margin-top: 8px;
+                    padding-left: 0;
+                    width: 100%;
+                }
+                form {
+                    min-height: 100%;
+                    width: 100%;
+                }
+                textarea {
+                    min-height: 100%;
+                    padding: 6px;
+                    width: 100%;
+                    display: block;
+                    box-sizing: border-box;
+                }
+                .button {
+                    position: absolute;
+                    bottom: 4px;
+                    right: 10px;
+                    padding: 0 12px;
+                    font-size: 12px;
+                    background: #e64848;
+                    color: #ffffff;
+                    border-radius: 40px;
+                    &:hover {
+                        opacity: 0.8;
+                        background: #a80000;
+                    }
+                }
+            }
+            .short_code {
+                padding: 8px 16px;
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                right: 20px;
+                margin: auto;
+                height: 40px;
+                width: 260px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                background: #e1edf8;
+                cursor: pointer;
+                font-size: 14px;
+                letter-spacing: 0.1em;
+                border-radius: 4px;
+                @media (max-width: 1280px) {
+                    top: 20px;
+                    bottom: initial;
+                }
+            }
+        }
+    }
+    /* mail_form_set */
+    .mail_form_set {
+        max-width: 640px;
+        .form_item {
+            position: relative;
+            border-radius: 3px;
+            overflow: hidden;
+            background: #fff;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.3);
+            + .form_item {
+                margin-top: 12px;
+            }
+            h3 {
+                padding: 24px;
+                background: var(--color-main);
+                color: #fff;
+                font-size: 14px;
+            }
+            .in {
+                padding: 24px;
+                display: grid;
+                grid-template-columns: 140px calc(100% - 140px);
+                gap: 8px 0;
+                .ctrl_btns_wrap {
+                    display: flex;
+                    justify-content: end;
+                    grid-column: span 2;
+                    .move_btn_wrap {
+                        position: absolute;
+                        top: 0;
+                        left: 0;
+                        z-index: 10;
+                        width: 48px;
+                        height: 50px;
+                        background: #228cb7;
+                        .move_btn {
+                            position: relative;
+                            width: 100%;
+                            height: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            cursor: pointer;
+                            svg {
+                                position: relative;
+                                z-index: -1;
+                                height: 80%;
+                                width: auto;
+                                path{
+                                    fill: #fff;
+
+                                }
+                            }
+                            &.move_down {
+                                background: rgba(0, 0, 0, 0.15);
+                                svg{
+                                    transform: rotate(180deg);
+                                }
+                            }
+                            &:hover {
+                                opacity: 0.8;
+                                background: #437cb1;
+                            }
+                        }
+                    }
+                    .delete_btn {
+                        padding: 8px;
+                        width: 120px;
+                        background: #dc6969;
+                        color: #fff;
+                        text-align: center;
+                        cursor: pointer;
+                        font-size: 12px;
+                        transition: opacity 0.3s;
+                        border-radius: 2px;
+                        &:hover {
+                            opacity: 0.8;
+                        }
+                    }
+                }
+                dt,
+                dd {
+                    line-height: 1.8em;
+                    font-size: 14px;
+                }
+                dt {
+                    padding-top: 8px;
+                    font-weight: 500;
+                }
+                input[type="text"],
+                input[type="email"],
+                input[type="tel"],
+                input[type="number"],
+                textarea,
+                select {
+                    position: relative;
+                    padding: 8px 12px;
+                    width: 100%;
+                    max-width: 100%;
+                    border: none;
+                    background: #e5f2f9;
+                }
+                input[type="checkbox"] {
+                    margin: 12px 0;
+                }
+            }
+        }
+        .add_item_btn {
+            margin-top: 12px;
+            padding: 16px;
+            color: #fff;
+            background: #e4c515;
+            text-align: center;
+            font-size: 16px;
+            border-radius: 4px;
+            cursor: pointer;
+            transition: opacity 0.3s;
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+}
+.Lw_mail_setting_form_submit {
+    margin-top: 16px;
+    width: 100%;
+    padding: 20px 16px;
+    color: #fff;
+    background: var(--color-red);
+    text-align: center;
+    font-size: 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: opacity 0.3s;
+    border-radius: 3px !important;
+    &:hover {
+        opacity: 0.8;
+    }
+}
+.lw_mail_send_set {
+    position: relative;
+    padding: 40px !important;
+    padding-bottom: 140px !important;
+    max-width: 840px;
+    display: block;
+    box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+    background: #fff;
+    .Lw_mail_setting_form_submit {
+        position: absolute;
+        bottom: 40px;
+        left: 40px;
+        width: calc(100% - 80px);
+    }
+    &.hide {
+        display: none;
+        &.on {
+            display: block;
+        }
+    }
+    > p {
+        margin-bottom: 1.5em;
+        font-size: 15px;
+        line-height: 1.8em;
+        a {
+            text-decoration: underline;
+        }
+        + form {
+            dt,
+            dd {
+                padding-top: 24px !important;
+                border-bottom: 1px solid #ddd !important;
+            }
+        }
+    }
+    dl {
+        display: grid;
+        grid-template-columns: 180px calc(100% - 180px);
+        dt,
+        dd {
+            padding: 24px 0;
+            font-size: 14px;
+            line-height: 1.8em;
+            border-bottom: 1px solid #ddd;
+            &:first-of-type {
+                padding-top: 0;
+                border-top: none;
+            }
+            &:last-of-type {
+                border-bottom: 1px solid #ddd;
+            }
+            &:has(.wp-editor-wrap) {
+                padding-bottom: 0;
+                border: none;
+            }
+        }
+        dd {
+            > p {
+                margin-top: 8px;
+                font-size: 13px;
+                line-height: 1.8em;
+            }
+        }
+        input[type="text"],
+        input[type="email"],
+        input[type="tel"],
+        input[type="number"],
+        textarea,
+        select {
+            position: relative;
+            padding: 8px 12px;
+            width: 100%;
+            max-width: 100%;
+            border: none;
+            background: #e5f2f9;
+            border-radius: 2px;
+        }
+        input[type="checkbox"] {
+            margin: 12px 0;
+        }
+        .wp-editor-wrap {
+            .wp-editor-container {
+                border: 1px solid #ddd;
+            }
+        }
+    }
+}
+.lw_mail_send_thanks_wrap {
+    .thanks_set_list {
+        max-width: 840px;
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 4px;
+        li {
+            padding-top: 2px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: #979797;
+            border-radius: 5px 5px 0 0;
+            font-weight: 600;
+            color: #fff;
+            cursor: pointer;
+            &.on {
+                background: #d65050;
+                pointer-events: none;
+            }
+            &.active_thanks {
+                position: relative;
+                padding-bottom: 2px;
+                &::after {
+                    position: absolute;
+                    bottom: 0;
+                    left: 0;
+                    content: "";
+                    display: block;
+                    width: 100%;
+                    height: 4px;
+                    background: #47cf60;
+                }
+            }
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+    }
+}
+.mail_history_wrap {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    overflow-x: scroll;
+
+    .lw_mail_history_list {
+        margin-top: 12px;
+        border-left: 1px solid #ccc;
+
+        .lw_mail_history_item {
+            min-width: 5000px;
+            display: flex;
+
+            &:first-of-type {
+                .td {
+                    border-top: 1px solid #ccc;
+                }
+            }
+
+            .td {
+                /* --- ここを変更 / 追加 --- */
+                max-width: 600px;
+                min-width: 200px;
+                /* または可変を優先するなら ↓ */
+                background: #fff;
+
+                padding: 12px;
+                border-bottom: 1px solid #ccc;
+                border-right: 1px solid #ccc;
+
+                /* ←↓↓ 追加分 ↓↓→ */
+                resize: both;
+                overflow: auto;
+                min-height: 48px;
+                /* ↑↑ ここまで ↑↑ */
+                &.small {
+                    min-width: 0;
+                }
+                &:has(.button) {
+                    padding-top: 18px;
+                    width: 74px;
+                    resize: initial;
+                    overflow: initial;
+                }
+
+                .label {
+                    margin-bottom: 4px;
+                    padding-bottom: 3px;
+                    display: block;
+                    border-bottom: 1px solid #ccc;
+                    font-size: 11px;
+                    line-height: 1.4em;
+                    font-weight: 700;
+                    color: #333;
+                }
+                .text {
+                    line-height: 1.6em;
+                }
+            }
+        }
+    }
+}
+/* トグルボタンのラッパー */
+.lw-form-toggle-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    
+    /* 保存中の状態 */
+    &.saving {
+        .lw-form-toggle-slider {
+            opacity: 0.6;
+            cursor: wait;
+        }
+        
+        &::after {
+            content: "保存中...";
+            position: absolute;
+            margin-left: 120px;
+            color: #666;
+            font-size: 12px;
+            animation: pulse 1.5s infinite;
+        }
+    }
+}
+
+/* トグルボタン本体 */
+.lw-form-toggle {
+    position: relative;
+    display: inline-block;
+    width: 50px;
+    height: 26px;
+    
+    /* ホバー効果 */
+    &:hover {
+        .lw-form-toggle-slider {
+            box-shadow: 0 0 1px #2271b1;
+        }
+    }
+}
+
+/* チェックボックス */
+.lw-form-toggle-checkbox {
+    opacity: 0;
+    width: 0;
+    height: 0;
+    
+    /* チェック時 */
+    &:checked {
+        + .lw-form-toggle-slider {
+            background-color: #2271b1; /* WordPressブルー */
+            
+            &:before {
+                transform: translateX(24px);
+            }
+        }
+    }
+    
+    /* フォーカス時 */
+    &:focus {
+        + .lw-form-toggle-slider {
+            box-shadow: 0 0 0 2px rgba(34, 113, 177, 0.25);
+        }
+    }
+}
+
+/* スライダー部分 */
+.lw-form-toggle-slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: .3s;
+    border-radius: 26px;
+    
+    /* スライダーのつまみ */
+    &:before {
+        position: absolute;
+        content: "";
+        height: 20px;
+        width: 20px;
+        left: 3px;
+        bottom: 3px;
+        background-color: white;
+        transition: .3s;
+        border-radius: 50%;
+        box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+    }
+}
+
+/* ステータステキスト */
+.lw-form-toggle-status {
+    padding: 3px 8px !important;
+    display: block;
+    font-size: 13px;
+    font-weight: 500;
+    border-radius: 3px;
+    background-color: #f0f0f0;
+    color: #646970;
+    
+    /* 有効状態 */
+    &.on {
+        background-color: #e6f4ea;
+        color: #0f9d58;
+    }
+    
+    /* 無効状態 */
+    &.off {
+        background-color: #fce8e6;
+        color: #d93025;
+    }
+}
+
+/* アニメーション */
+@keyframes pulse {
+    0%, 100% { 
+        opacity: 1; 
+    }
+    50% { 
+        opacity: 0.5; 
+    }
+}

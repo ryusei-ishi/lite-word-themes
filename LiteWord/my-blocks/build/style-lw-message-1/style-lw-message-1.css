@@ -1,0 +1,181 @@
+/*!**********************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/lw-message-1/style.scss ***!
+  \**********************************************************************************************************************/
+.wp-block:has(.lw-message-1) {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.lw_content_wrap.page .lw-message-1 {
+  margin-left: calc((100% - 100vw) / 2);
+  width: 100vw;
+}
+.lw_content_wrap .single .lw-message-1 {
+  margin-left: -40px;
+  margin-right: -40px;
+  width: calc(100% + 80px);
+}
+@container (max-width: 800px) {
+  .lw_content_wrap .single .lw-message-1 {
+    margin-left: -32px;
+    margin-right: -32px;
+    width: calc(100% + 64px);
+  }
+}
+@container (max-width:600px) {
+  .lw_content_wrap .single .lw-message-1 {
+    margin-left: -24px;
+    margin-right: -24px;
+    width: calc(100% + 48px);
+  }
+}
+@container (max-width:500px) {
+  .lw_content_wrap .single .lw-message-1 {
+    margin-left: -20px;
+    margin-right: -20px;
+    width: calc(100% + 40px);
+  }
+}
+
+.lw-message-1 {
+  position: relative;
+  z-index: 10;
+  padding: 80px 32px;
+}
+@container (max-width:500px) {
+  .lw-message-1 {
+    padding: 48px 20px;
+  }
+}
+.lw-message-1 .bg_filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  background: var(--color-main);
+  opacity: 0.05;
+}
+.lw-message-1 .lw-message-1__wrap {
+  margin: 0 auto;
+  max-width: var(--max-width-clm-1);
+  display: grid;
+  grid-template-columns: 65% 35%;
+}
+@container (max-width:650px) {
+  .lw-message-1 .lw-message-1__wrap {
+    grid-template-columns: 1fr;
+    gap: 32px;
+  }
+}
+.lw-message-1 .lw-message-1__wrap .text__in {
+  padding-right: 64px;
+}
+@container (max-width:900px) {
+  .lw-message-1 .lw-message-1__wrap .text__in {
+    padding-right: 32px;
+  }
+}
+@container (max-width:650px) {
+  .lw-message-1 .lw-message-1__wrap .text__in {
+    padding-right: 0;
+  }
+}
+.lw-message-1 .lw-message-1__wrap .text__in h3.title {
+  margin: 0;
+}
+.lw-message-1 .lw-message-1__wrap .text__in h3.title .sub {
+  margin-bottom: 4px;
+  flex-wrap: 500;
+  font-size: 18px;
+  line-height: 1.6em;
+  color: var(--color-main);
+  font-weight: 400;
+}
+@container (max-width:650px) {
+  .lw-message-1 .lw-message-1__wrap .text__in h3.title .sub {
+    font-size: 14px;
+  }
+}
+.lw-message-1 .lw-message-1__wrap .text__in h3.title .sub:empty {
+  display: none;
+}
+.lw-message-1 .lw-message-1__wrap .text__in h3.title .main {
+  font-weight: 600;
+  font-size: 32px;
+  line-height: 1.5em;
+}
+@container (max-width:1000px) {
+  .lw-message-1 .lw-message-1__wrap .text__in h3.title .main {
+    font-size: 28px;
+  }
+}
+@container (max-width:650px) {
+  .lw-message-1 .lw-message-1__wrap .text__in h3.title .main {
+    font-size: 22px;
+  }
+}
+.lw-message-1 .lw-message-1__wrap .text__in p.lead {
+  margin: 1em 0;
+  font-size: 26px;
+  color: var(--color-main);
+  line-height: 1.8em;
+  font-weight: 600;
+  white-space: pre-line;
+}
+@container (max-width:1000px) {
+  .lw-message-1 .lw-message-1__wrap .text__in p.lead {
+    font-size: 22px;
+  }
+}
+@container (max-width:650px) {
+  .lw-message-1 .lw-message-1__wrap .text__in p.lead {
+    font-size: 18px;
+  }
+}
+.lw-message-1 .lw-message-1__wrap .text__in p.lead:empty {
+  display: none;
+}
+.lw-message-1 .lw-message-1__wrap .text__in p.description {
+  margin: 0;
+  margin-top: 1.5em;
+  line-height: 2.4em;
+  font-size: 16px;
+  font-weight: 400;
+  white-space: pre-line;
+}
+@container (max-width:650px) {
+  .lw-message-1 .lw-message-1__wrap .text__in p.description {
+    line-height: 2.2em;
+    font-size: 15px;
+  }
+}
+.lw-message-1 .lw-message-1__wrap .text__in p.description:empty {
+  display: none;
+}
+.lw-message-1 .lw-message-1__wrap .image figure.img {
+  aspect-ratio: 1/1.4;
+}
+.lw-message-1 .lw-message-1__wrap .image figure.img img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.lw-message-1 .lw-message-1__wrap .image figcaption.img_caption {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: end;
+}
+.lw-message-1 .lw-message-1__wrap .image figcaption.img_caption .sub {
+  font-size: 14px;
+  line-height: 1;
+}
+.lw-message-1 .lw-message-1__wrap .image figcaption.img_caption .main {
+  margin-left: 16px;
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1;
+}

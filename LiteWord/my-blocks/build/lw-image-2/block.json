@@ -1,0 +1,118 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-image-2",
+	"version": "1.0.0",
+	"title": "画像カード 02",
+	"category": "lw-media",
+	"icon": "format-image",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"borderRadiusEm": {
+			"type": "number",
+			"default": 1.2
+		},
+		"aspectHeight": {
+			"type": "number",
+			"default": 800
+		},
+		"fontP": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightP": {
+			"type": "string",
+			"default": ""
+		},
+		"colorP": {
+			"type": "string",
+			"default": ""
+		},
+		"maxWidthPx": {
+			"type": "number",
+			"default": 0
+		},
+		"alignClass": {
+			"type": "string",
+			"default": "left"
+		},
+		"items": {
+			"type": "array",
+			"source": "query",
+			"selector": ".image__inner",
+			"query": {
+				"imgSrc": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "img",
+					"attribute": "src"
+				},
+				"altText": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "img",
+					"attribute": "alt"
+				},
+				"text": {
+					"type": "string",
+					"source": "text",
+					"selector": "p"
+				},
+				"fColor": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".image_filter",
+					"attribute": "data-color"
+				},
+				"fOpac": {
+					"type": "number",
+					"source": "attribute",
+					"selector": ".image_filter",
+					"attribute": "data-opacity"
+				},
+				"fBlend": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".image_filter",
+					"attribute": "data-blend"
+				}
+			},
+			"default": [
+				{
+					"imgSrc": "https://cdn.pixabay.com/photo/2022/12/28/14/45/sunset-7683081_1280.jpg",
+					"altText": "",
+					"text": "テキスト",
+					"fColor": "#000000",
+					"fOpac": 0.3,
+					"fBlend": "normal"
+				},
+				{
+					"imgSrc": "https://cdn.pixabay.com/photo/2022/12/28/14/45/sunset-7683081_1280.jpg",
+					"altText": "",
+					"text": "テキスト",
+					"fColor": "#000000",
+					"fOpac": 0.3,
+					"fBlend": "normal"
+				},
+				{
+					"imgSrc": "https://cdn.pixabay.com/photo/2022/12/28/14/45/sunset-7683081_1280.jpg",
+					"altText": "",
+					"text": "テキスト",
+					"fColor": "#000000",
+					"fOpac": 0.3,
+					"fBlend": "normal"
+				}
+			]
+		}
+	},
+	"editorScript": "file:./lw-image-2.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 2
+}

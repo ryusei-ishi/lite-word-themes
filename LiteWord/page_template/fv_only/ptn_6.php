@@ -1,0 +1,3 @@
+<!-- wp:wdl/fv-6 -->
+<div class="wp-block-wdl-fv-6 fv-6 min-h-pc-400px min-h-tb-360px min-h-sp-280px"><div class="fv-6_inner"><h1 class="ttl" style="color:#111"><span class="main" style="color:#111">会社情報</span><span class="sub" style="color:#111">COMPANY INFO</span></h1><div class="inner_filter"></div></div><div class="filter" style="background-color:#111;opacity:0.3"></div><picture class="bg_image"><source srcset="" media="(max-width: 800px)"/><source srcset="https://cdn.pixabay.com/photo/2016/11/19/15/39/architecture-1839930_1280.jpg" media="(min-width: 801px)"/><img src="https://cdn.pixabay.com/photo/2016/11/19/15/39/architecture-1839930_1280.jpg" alt="" loading="eager" fetchpriority="high"/></picture></div>
+<!-- /wp:wdl/fv-6 -->

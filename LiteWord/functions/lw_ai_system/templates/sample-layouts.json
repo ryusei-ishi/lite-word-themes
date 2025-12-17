@@ -1,0 +1,300 @@
+[
+    {
+        "version": "1.0",
+        "layoutName": "シンプルLP",
+        "description": "シンプルなランディングページ",
+        "blocks": [
+            {
+                "blockName": "wdl/fv-1",
+                "attributes": {
+                    "backgroundImage": "https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704_1280.jpg",
+                    "mainTitle": "Lite Word",
+                    "subTitle": "シンプルで美しいWordPressテーマ",
+                    "description": "誰でも簡単にきれいなサイトが作れます！",
+                    "buttonText": "お問い合わせ",
+                    "buttonUrl": "#contact",
+                    "buttonBackgroundColor": "#ffffff",
+                    "buttonTextColor": "#333333",
+                    "buttonBorderRadius": 200,
+                    "filterBackgroundColor": "#000000",
+                    "filterOpacity": 0.4,
+                    "minHeightPc": "min-h-pc-600px",
+                    "minHeightTb": "min-h-tb-500px",
+                    "minHeightSp": "min-h-sp-400px"
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "ABOUT",
+                    "subTitle": "私たちについて",
+                    "headingLevel": 2
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "SERVICE",
+                    "subTitle": "サービス紹介",
+                    "headingLevel": 2
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "CONTACT",
+                    "subTitle": "お問い合わせ",
+                    "headingLevel": 2
+                }
+            }
+        ]
+    },
+    {
+        "version": "1.0",
+        "layoutName": "コーポレートサイト",
+        "description": "企業向けランディングページ",
+        "blocks": [
+            {
+                "blockName": "wdl/fv-1",
+                "attributes": {
+                    "backgroundImage": "https://cdn.pixabay.com/photo/2015/01/09/11/08/startup-594090_1280.jpg",
+                    "mainTitle": "COMPANY NAME",
+                    "subTitle": "ビジネスを加速させる",
+                    "description": "革新的なソリューションで、お客様のビジネス成長を支援します。",
+                    "buttonText": "詳しく見る",
+                    "buttonUrl": "#about",
+                    "buttonBackgroundColor": "#0073aa",
+                    "buttonTextColor": "#ffffff",
+                    "buttonBorderWidth": 0,
+                    "buttonBorderRadius": 4,
+                    "filterBackgroundColor": "#1a365d",
+                    "filterOpacity": 0.6,
+                    "minHeightPc": "min-h-pc-700px",
+                    "minHeightTb": "min-h-tb-550px",
+                    "minHeightSp": "min-h-sp-450px"
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "PHILOSOPHY",
+                    "subTitle": "企業理念",
+                    "headingLevel": 2
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "BUSINESS",
+                    "subTitle": "事業内容",
+                    "headingLevel": 2
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "COMPANY",
+                    "subTitle": "会社概要",
+                    "headingLevel": 2
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "RECRUIT",
+                    "subTitle": "採用情報",
+                    "headingLevel": 2
+                }
+            }
+        ]
+    },
+    {
+        "version": "1.0",
+        "layoutName": "飲食店LP",
+        "description": "飲食店向けランディングページ",
+        "blocks": [
+            {
+                "blockName": "wdl/fv-1",
+                "attributes": {
+                    "backgroundImage": "https://cdn.pixabay.com/photo/2016/11/18/14/05/brick-wall-1834784_1280.jpg",
+                    "mainTitle": "RESTAURANT",
+                    "subTitle": "本格イタリアンをカジュアルに",
+                    "description": "新鮮な素材を使った本格料理をお楽しみください",
+                    "buttonText": "ご予約はこちら",
+                    "buttonUrl": "#reservation",
+                    "buttonBackgroundColor": "#c8a96a",
+                    "buttonTextColor": "#ffffff",
+                    "buttonBorderWidth": 0,
+                    "buttonBorderRadius": 0,
+                    "filterBackgroundColor": "#2d2d2d",
+                    "filterOpacity": 0.5,
+                    "minHeightPc": "min-h-pc-650px",
+                    "minHeightTb": "min-h-tb-500px",
+                    "minHeightSp": "min-h-sp-420px"
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "CONCEPT",
+                    "subTitle": "コンセプト",
+                    "headingLevel": 2
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "MENU",
+                    "subTitle": "メニュー",
+                    "headingLevel": 2
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "ACCESS",
+                    "subTitle": "アクセス",
+                    "headingLevel": 2
+                }
+            }
+        ]
+    },
+    {
+        "version": "1.0",
+        "layoutName": "美容サロンLP",
+        "description": "美容サロン向けランディングページ",
+        "blocks": [
+            {
+                "blockName": "wdl/fv-1",
+                "attributes": {
+                    "backgroundImage": "https://cdn.pixabay.com/photo/2018/04/03/23/04/woman-3288365_1280.jpg",
+                    "mainTitle": "BEAUTY SALON",
+                    "subTitle": "あなたの美しさを引き出す",
+                    "description": "経験豊富なスタイリストが、あなただけのスタイルをご提案します。",
+                    "buttonText": "ご予約",
+                    "buttonUrl": "#booking",
+                    "buttonBackgroundColor": "#e8b4b8",
+                    "buttonTextColor": "#ffffff",
+                    "buttonBorderWidth": 0,
+                    "buttonBorderRadius": 30,
+                    "filterBackgroundColor": "#f5e6e8",
+                    "filterOpacity": 0.3,
+                    "minHeightPc": "min-h-pc-600px",
+                    "minHeightTb": "min-h-tb-500px",
+                    "minHeightSp": "min-h-sp-400px"
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "ABOUT",
+                    "subTitle": "サロンについて",
+                    "headingLevel": 2
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "MENU",
+                    "subTitle": "メニュー・料金",
+                    "headingLevel": 2
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "STAFF",
+                    "subTitle": "スタッフ紹介",
+                    "headingLevel": 2
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "ACCESS",
+                    "subTitle": "アクセス・店舗情報",
+                    "headingLevel": 2
+                }
+            }
+        ]
+    },
+    {
+        "version": "1.0",
+        "layoutName": "整体院・治療院LP",
+        "description": "整体院・接骨院向けページ",
+        "blocks": [
+            {
+                "blockName": "wdl/fv-1",
+                "attributes": {
+                    "backgroundImage": "https://cdn.pixabay.com/photo/2018/01/18/17/48/purchase-3091277_1280.jpg",
+                    "backgroundImageSp": "",
+                    "mainTitle": "からだの痛みに<br>寄り添う治療院",
+                    "subTitle": "YOUR HEALTH PARTNER",
+                    "description": "肩こり・腰痛・頭痛でお悩みの方へ。根本改善を目指した施術で、あなたの健康をサポートします。",
+                    "buttonText": "今すぐ予約する",
+                    "buttonUrl": "#reservation",
+                    "openInNewTab": false,
+                    "buttonBackgroundColor": "#e74c3c",
+                    "buttonTextColor": "#ffffff",
+                    "buttonBorderColor": "#e74c3c",
+                    "buttonBackgroundColorOpacity": 100,
+                    "buttonBorderWidth": 0,
+                    "buttonBorderRadius": 50,
+                    "filterBackgroundColor": "#2c3e50",
+                    "filterOpacity": 0.55,
+                    "minHeightPc": "min-h-pc-650px",
+                    "minHeightTb": "min-h-tb-500px",
+                    "minHeightSp": "min-h-sp-450px"
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "TROUBLE",
+                    "subTitle": "こんなお悩みありませんか？",
+                    "headingLevel": 2
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "TREATMENT",
+                    "subTitle": "施術内容",
+                    "headingLevel": 2
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "FLOW",
+                    "subTitle": "施術の流れ",
+                    "headingLevel": 2
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "PRICE",
+                    "subTitle": "料金案内",
+                    "headingLevel": 2
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "VOICE",
+                    "subTitle": "患者様の声",
+                    "headingLevel": 2
+                }
+            },
+            {
+                "blockName": "wdl/custom-title-1",
+                "attributes": {
+                    "mainTitle": "ACCESS",
+                    "subTitle": "アクセス・院情報",
+                    "headingLevel": 2
+                }
+            }
+        ]
+    }
+]

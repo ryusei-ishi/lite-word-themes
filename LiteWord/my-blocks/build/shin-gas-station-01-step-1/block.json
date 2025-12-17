@@ -1,0 +1,93 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/shin-gas-station-01-step-1",
+	"version": "1.0.0",
+	"title": "ステップ 1 shin shop pattern 01",
+	"category": "lw-step",
+	"icon": "lightbulb",
+	"supports": {
+		"anchor": true
+	},
+	"editorScript": "file:./shin-gas-station-01-step-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 15,
+	"attributes": {
+		"fontLi": {
+			"type": "string",
+			"default": ""
+		},
+		"fontColorLi": {
+			"type": "string",
+			"default": "var(--color-black)"
+		},
+		"fontWeightLi": {
+			"type": "string",
+			"default": "600"
+		},
+		"fontLiP": {
+			"type": "string",
+			"default": ""
+		},
+		"fontColorLiP": {
+			"type": "string",
+			"default": "var(--color-black)"
+		},
+		"fontWeightLiP": {
+			"type": "string",
+			"default": "400"
+		},
+		"stepFont": {
+			"type": "string",
+			"default": ""
+		},
+		"stepFontColor": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"stepFontWeight": {
+			"type": "string",
+			"default": "600"
+		},
+		"backgroundColor": {
+			"type": "string",
+			"default": "#FAFAFA"
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"borderSize": {
+			"type": "number",
+			"default": 0
+		},
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".shin-gas-station-01-step-1__li",
+			"query": {
+				"ttl": {
+					"type": "string",
+					"source": "html",
+					"selector": ".shin-gas-station-01-step-1__text h4"
+				},
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": ".shin-gas-station-01-step-1__text p"
+				}
+			},
+			"default": [
+				{ "ttl": "タイトル", "text": "リストテキストリストテキスト " },
+				{ "ttl": "タイトル", "text": "リストテキストリストテキスト " },
+				{ "ttl": "タイトル", "text": "リストテキストリストテキスト " },
+				{ "ttl": "タイトル", "text": "リストテキストリストテキスト " }
+			]
+		}
+	}
+}

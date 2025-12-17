@@ -1,0 +1,3 @@
+<!-- wp:wdl/cta-1 -->
+<div class="wp-block-wdl-cta-1"><div class="cta-1__inner"><h2 class="cta-1__title heading_style_reset">無料相談受付中</h2><p class="cta-1__text  ">テキストテキストテキストテキスト<br>テキストテキストテキスト</p><a class="cta-1__button" href="#" style="background-color:var(--color-main);border-color:#fff;border-width:1px;border-style:solid;max-width:240px">お問い合わせ</a></div><div class="cta-1__image"><img src="http://localhost/SUPPORT_LOUNGE/LiteWord/wp-content/themes/LiteWord/assets/image/bg/1.webp" alt="" loading="lazy"/><div style="background-color:#054161;position:absolute;top:0;left:0;right:0;bottom:0;z-index:1"></div></div></div>
+<!-- /wp:wdl/cta-1 -->

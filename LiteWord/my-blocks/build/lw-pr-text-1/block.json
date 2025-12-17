@@ -1,0 +1,102 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-text-1",
+	"version": "1.0.0",
+	"title": "グラデーションテキスト 01",
+	"category": "lw-heading",
+	"icon": "admin-customizer",
+	"editorScript": "file:./lw-pr-text-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"text": {
+			"type": "string",
+			"default": "SLIDE ANIMATION"
+		},
+		"tagName": {
+			"type": "string",
+			"default": "h2"
+		},
+		"textAlignPc": {
+			"type": "string",
+			"default": "left"
+		},
+		"textAlignSp": {
+			"type": "string",
+			"default": ""
+		},
+		"fontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"fontSizePc": {
+			"type": "number",
+			"default": 1
+		},
+		"fontSizeTab": {
+			"type": "number",
+			"default": null
+		},
+		"fontSizeSp": {
+			"type": "number",
+			"default": null
+		},
+		"lineHeightPc": {
+			"type": "number",
+			"default": 1.5
+		},
+		"lineHeightTab": {
+			"type": "number",
+			"default": null
+		},
+		"lineHeightSp": {
+			"type": "number",
+			"default": null
+		},
+		"gradientPreset": {
+			"type": "string",
+			"default": "preset-blue"
+		},
+		"gradientColor1": {
+			"type": "string",
+			"default": "#3b82f6"
+		},
+		"gradientColor2": {
+			"type": "string",
+			"default": "#06b6d4"
+		},
+		"gradientColor3": {
+			"type": "string",
+			"default": "#3b82f6"
+		},
+		"gradientAngle": {
+			"type": "string",
+			"default": "270"
+		},
+		"animationPattern": {
+			"type": "string",
+			"default": "lw-pr-text-1-gradient-slide-anime-1"
+		},
+		"animationTime": {
+			"type": "number",
+			"default": 3
+		},
+		"animationEasing": {
+			"type": "string",
+			"default": "linear"
+		}
+	},
+	"no": 1
+}

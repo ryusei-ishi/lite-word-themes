@@ -1,0 +1,123 @@
+.lw-pr-button-2 {
+  margin-top: 1em;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  font-size: 16px;
+}
+.lw-pr-button-2 * {
+  box-sizing: border-box;
+}
+.lw-pr-button-2.left {
+  justify-content: flex-start;
+}
+@media (max-width: 800px) {
+  .lw-pr-button-2.left.sp_center {
+    justify-content: center;
+  }
+}
+@media (max-width: 800px) {
+  .lw-pr-button-2.left.sp_right {
+    justify-content: flex-end;
+  }
+}
+.lw-pr-button-2.center {
+  justify-content: center;
+}
+@media (max-width: 800px) {
+  .lw-pr-button-2.center.sp_left {
+    justify-content: flex-start;
+  }
+}
+@media (max-width: 800px) {
+  .lw-pr-button-2.center.sp_right {
+    justify-content: flex-end;
+  }
+}
+.lw-pr-button-2.right {
+  justify-content: flex-end;
+}
+@media (max-width: 800px) {
+  .lw-pr-button-2.right.sp_center {
+    justify-content: center;
+  }
+}
+@media (max-width: 800px) {
+  .lw-pr-button-2.right.sp_left {
+    justify-content: flex-start;
+  }
+}
+.lw-pr-button-2 .wrap_btn {
+  max-width: 340px;
+  width: 100%;
+}
+.lw-pr-button-2 .wrap_btn .text_sub {
+  margin-bottom: 6px;
+  width: 100%;
+  display: block;
+  line-height: 1.6;
+  font-weight: 500;
+  color: #000;
+  font-size: 16px;
+  text-align: center;
+}
+.lw-pr-button-2 .wrap_btn .lw_btn_a {
+  position: relative;
+  padding: 1.2em 1em;
+  margin: 0 auto;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background: linear-gradient(135deg, #224394 0%, #12346f 100%);
+  border-radius: 4em;
+  box-shadow: 0 0 6px rgba(0, 0, 0, 0.2);
+  transition: background var(--transition-duration, 0.3s) ease;
+  text-decoration: none;
+}
+@media (max-width: 800px) {
+  .lw-pr-button-2 .wrap_btn .lw_btn_a {
+    max-width: var(--max-width-sp, 300px) !important;
+    width: 100%;
+  }
+}
+.lw-pr-button-2 .wrap_btn .lw_btn_a:hover {
+  background: var(--hover-bg) !important;
+}
+.lw-pr-button-2 .wrap_btn .lw_btn_a.lw_btn_shake_light {
+  animation: lw_btn_shake_light var(--shake-interval, 3s) ease-in-out infinite;
+}
+.lw-pr-button-2 .wrap_btn .lw_btn_a.lw_btn_shake_normal {
+  animation: lw_btn_shake_normal var(--shake-interval, 3s) ease-in-out infinite;
+}
+.lw-pr-button-2 .wrap_btn .lw_btn_a.lw_btn_shake_strong {
+  animation: lw_btn_shake_strong var(--shake-interval, 3s) ease-in-out infinite;
+}
+.lw-pr-button-2 .wrap_btn .lw_btn_a .text_main {
+  font-size: 20px;
+  font-weight: 500;
+  line-height: 1.5;
+  display: block;
+  color: #fff;
+  text-align: center;
+}
+@media (max-width: 800px) {
+  .lw-pr-button-2 .wrap_btn .lw_btn_a .text_main {
+    font-size: var(--font-size-main-sp, 18px) !important;
+  }
+}
+.lw-pr-button-2 .wrap_btn .lw_btn_a .icon {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 20px;
+  margin: auto;
+  height: 100%;
+  width: 20px;
+  display: flex;
+  align-items: center;
+}
+.lw-pr-button-2 .wrap_btn .lw_btn_a .icon svg {
+  height: auto;
+  width: 100%;
+  fill: var(--icon-color, #fff);
+}/*# sourceMappingURL=style.css.map */

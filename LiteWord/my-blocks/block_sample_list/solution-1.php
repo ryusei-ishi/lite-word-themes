@@ -1,0 +1,6 @@
+<!-- wp:wdl/solution-1 -->
+<div class="wp-block-wdl-solution-1 solution-1" data-lw_font_set=""><div class="solution-1_inner"><div class="solution-1_content"><figure data-border-color="var(--color-main)" style="border:2px solid;border-color:var(--color-main)"><img loading="lazy" src="https://placehold.jp/cccccc/ffffff/400x400.png?text=IMAGE" alt=""/></figure><div class="solution-1_text"><p style="white-space:pre-wrap;font-weight:">何から始めたらいいか
+わからない</p></div></div><div class="solution-1_content"><figure data-border-color="var(--color-main)" style="border:2px solid;border-color:var(--color-main)"><img loading="lazy" src="https://placehold.jp/cccccc/ffffff/400x400.png?text=IMAGE" alt=""/></figure><div class="solution-1_text"><p style="white-space:pre-wrap;font-weight:">作りたいけど
+時間がない</p></div></div><div class="solution-1_content"><figure data-border-color="var(--color-main)" style="border:2px solid;border-color:var(--color-main)"><img loading="lazy" src="https://placehold.jp/cccccc/ffffff/400x400.png?text=IMAGE" alt=""/></figure><div class="solution-1_text"><p style="white-space:pre-wrap;font-weight:">自分で作ると
+ダサくなる…</p></div></div></div></div>
+<!-- /wp:wdl/solution-1 -->

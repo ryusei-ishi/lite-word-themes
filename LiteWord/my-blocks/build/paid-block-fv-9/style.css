@@ -1,0 +1,57 @@
+.wp-block:has(.paid-block-fv-9) {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+.lw_content_wrap.page .paid-block-fv-9.max-w {
+  margin-left: calc((100% - 100vw) / 2);
+  width: 100vw;
+  max-width: 100vw;
+}
+.lw_content_wrap.page:has(.first_content + .paid-block-fv-9.max-w) .first_content {
+  display: none;
+}
+.lw_content_wrap.page:has(.paid-block-fv-9.max-w + .last_content) .last_content {
+  display: none;
+}
+
+.paid-block-fv-9 {
+  margin: 0 auto;
+  width: 100%;
+  container-type: inline-size;
+}
+.paid-block-fv-9 * {
+  box-sizing: border-box;
+}
+.paid-block-fv-9 + .post_style > .wp-block-columns.has-background {
+  margin-top: 0;
+}
+.paid-block-fv-9.init-hide {
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+.paid-block-fv-9.max-w {
+  max-width: 100%;
+  width: 100%;
+}
+.paid-block-fv-9 .swiper-wrapper {
+  height: auto;
+}
+.paid-block-fv-9 .swiper-slide img {
+  width: 100%;
+  height: auto;
+  display: block;
+  -o-object-fit: cover;
+     object-fit: cover;
+}
+.paid-block-fv-9 .swiper-button-prev::after,
+.paid-block-fv-9 .swiper-button-next::after {
+  font-size: 32px;
+}
+@container (max-width: 500px) {
+  .paid-block-fv-9 .swiper-button-prev::after,
+  .paid-block-fv-9 .swiper-button-next::after {
+    font-size: 24px;
+  }
+}/*# sourceMappingURL=style.css.map */

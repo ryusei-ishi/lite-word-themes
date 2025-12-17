@@ -1,0 +1,3 @@
+<!-- wp:wdl/paid-block-custom-title-10 {"sizeClass":"size_l"} -->
+<div class="wp-block-wdl-paid-block-custom-title-10 paid-block-custom-title-10 position_center size_l"><h2 class="ttl"><span class="image_left" style="height:1.5em;margin-right:0.4em"><img src="https://lite-word.com/sample_img/icon/pc_1.png" alt=""/></span><span class="text_wrap"><span class="sub" style="color:var(--color-main)">製品紹介</span><span class="main">PRODUCTS</span></span><span class="bd" style="background-color:var(--color-main);height:2px;margin-top:0.1em"></span></h2></div>
+<!-- /wp:wdl/paid-block-custom-title-10 -->

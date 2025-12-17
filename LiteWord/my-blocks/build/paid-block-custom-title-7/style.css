@@ -1,0 +1,121 @@
+.paid-block-custom-title-7 {
+  margin: 0;
+  container-type: inline-size;
+  display: flex;
+  flex-wrap: wrap;
+}
+.paid-block-custom-title-7 > h2.ttl, .paid-block-custom-title-7 > h3.ttl, .paid-block-custom-title-7 > h4.ttl, .paid-block-custom-title-7 > h5.ttl, .paid-block-custom-title-7 > h6.ttl {
+  margin-left: 0;
+  margin-right: 0;
+}
+.paid-block-custom-title-7.size_l h2, .paid-block-custom-title-7.size_l h3, .paid-block-custom-title-7.size_l h4, .paid-block-custom-title-7.size_l h5, .paid-block-custom-title-7.size_l h6 {
+  font-size: 40px;
+}
+@container (max-width:800px) {
+  .paid-block-custom-title-7.size_l h2, .paid-block-custom-title-7.size_l h3, .paid-block-custom-title-7.size_l h4, .paid-block-custom-title-7.size_l h5, .paid-block-custom-title-7.size_l h6 {
+    font-size: 32px;
+  }
+}
+@container (max-width:500px) {
+  .paid-block-custom-title-7.size_l h2, .paid-block-custom-title-7.size_l h3, .paid-block-custom-title-7.size_l h4, .paid-block-custom-title-7.size_l h5, .paid-block-custom-title-7.size_l h6 {
+    font-size: 26px;
+  }
+}
+.paid-block-custom-title-7.size_m h2, .paid-block-custom-title-7.size_m h3, .paid-block-custom-title-7.size_m h4, .paid-block-custom-title-7.size_m h5, .paid-block-custom-title-7.size_m h6 {
+  font-size: 32px;
+}
+@container (max-width:800px) {
+  .paid-block-custom-title-7.size_m h2, .paid-block-custom-title-7.size_m h3, .paid-block-custom-title-7.size_m h4, .paid-block-custom-title-7.size_m h5, .paid-block-custom-title-7.size_m h6 {
+    font-size: 26px;
+  }
+}
+@container (max-width:500px) {
+  .paid-block-custom-title-7.size_m h2, .paid-block-custom-title-7.size_m h3, .paid-block-custom-title-7.size_m h4, .paid-block-custom-title-7.size_m h5, .paid-block-custom-title-7.size_m h6 {
+    font-size: 22px;
+  }
+}
+.paid-block-custom-title-7.size_s h2, .paid-block-custom-title-7.size_s h3, .paid-block-custom-title-7.size_s h4, .paid-block-custom-title-7.size_s h5, .paid-block-custom-title-7.size_s h6 {
+  font-size: 28px;
+}
+@container (max-width:800px) {
+  .paid-block-custom-title-7.size_s h2, .paid-block-custom-title-7.size_s h3, .paid-block-custom-title-7.size_s h4, .paid-block-custom-title-7.size_s h5, .paid-block-custom-title-7.size_s h6 {
+    font-size: 22px;
+  }
+}
+@container (max-width:500px) {
+  .paid-block-custom-title-7.size_s h2, .paid-block-custom-title-7.size_s h3, .paid-block-custom-title-7.size_s h4, .paid-block-custom-title-7.size_s h5, .paid-block-custom-title-7.size_s h6 {
+    font-size: 20px;
+  }
+}
+.paid-block-custom-title-7.position_left {
+  justify-content: start;
+  text-align: left;
+}
+.paid-block-custom-title-7.position_left .border_wrap {
+  justify-content: start;
+}
+.paid-block-custom-title-7.position_center {
+  justify-content: center;
+  text-align: center;
+}
+.paid-block-custom-title-7.position_center .border_wrap {
+  justify-content: center;
+}
+.paid-block-custom-title-7.position_right {
+  justify-content: end;
+  text-align: right;
+}
+.paid-block-custom-title-7.position_right .border_wrap {
+  justify-content: end;
+}
+.paid-block-custom-title-7 .sub {
+  margin-bottom: 0.1em;
+  width: 100%;
+  display: block;
+  font-size: 0.4em;
+  line-height: 1.6em;
+  font-feature-settings: "palt";
+}
+.paid-block-custom-title-7 .main {
+  width: 100%;
+  display: block;
+  font-size: 1em;
+  letter-spacing: 0.05em;
+  line-height: 1.35em;
+  font-feature-settings: "palt";
+  font-weight: 600;
+}
+.paid-block-custom-title-7 .border_wrap {
+  margin-top: 0.4em;
+  height: 0.3em;
+  display: flex;
+  justify-content: center;
+}
+@container (max-width:800px) {
+  .paid-block-custom-title-7 .border_wrap {
+    margin-top: 0.45em;
+  }
+}
+@container (max-width:500px) {
+  .paid-block-custom-title-7 .border_wrap {
+    margin-top: 0.5em;
+  }
+}
+.paid-block-custom-title-7 .border_wrap .border_inner {
+  height: 100%;
+  width: 5.4em;
+  display: flex;
+  box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.05);
+  overflow: hidden;
+}
+.paid-block-custom-title-7 .border_wrap .border_inner .border {
+  flex: 1;
+  display: block;
+}
+
+.post_style .paid-block-custom-title-7 .main:empty {
+  display: none;
+}
+.post_style .paid-block-custom-title-7 .sub:empty {
+  display: none;
+}/*# sourceMappingURL=style.css.map */

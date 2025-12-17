@@ -1,0 +1,106 @@
+.lw-step-2 {
+  margin: 32px 0;
+}
+@container (max-width:800px) {
+  .lw-step-2 {
+    margin: 24px 0;
+  }
+}
+.lw-step-2 ul.lw-step-2__inner {
+  position: relative;
+  z-index: 10;
+  margin-inline-start: 0;
+  margin: 0 auto;
+  max-width: 800px;
+  width: 100%;
+  display: grid;
+  gap: 12px;
+  list-style: none;
+}
+.lw-step-2 ul.lw-step-2__inner li.lw-step-2__li {
+  position: relative;
+  background: #fff;
+  border-width: 1px;
+  border-style: solid;
+}
+.lw-step-2 ul.lw-step-2__inner li.lw-step-2__li + li {
+  margin-top: 32px;
+}
+.lw-step-2 ul.lw-step-2__inner li.lw-step-2__li + li .icon {
+  display: block;
+}
+.lw-step-2 ul.lw-step-2__inner li.lw-step-2__li .icon {
+  position: absolute;
+  top: -40px;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 1.5em;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  display: none;
+}
+.lw-step-2 ul.lw-step-2__inner li.lw-step-2__li .icon svg {
+  width: 1.5em;
+  height: 1.5em;
+}
+.lw-step-2 ul.lw-step-2__inner li.lw-step-2__li h3 {
+  margin: 0;
+  padding: 12px;
+  font-size: 20px;
+  background: var(--color-main);
+  color: #fff;
+  text-align: center;
+}
+@container (max-width:550px) {
+  .lw-step-2 ul.lw-step-2__inner li.lw-step-2__li h3 {
+    font-size: 18px;
+  }
+}
+@media (max-width: 370px) {
+  .lw-step-2 ul.lw-step-2__inner li.lw-step-2__li h3 {
+    font-size: 16px;
+  }
+}
+.lw-step-2 ul.lw-step-2__inner li.lw-step-2__li p {
+  margin: 0;
+  padding: 24px;
+  color: #333;
+  white-space: pre-wrap;
+  font-size: 16px;
+}
+@container (max-width:550px) {
+  .lw-step-2 ul.lw-step-2__inner li.lw-step-2__li p {
+    font-size: 14px;
+  }
+}
+@media (max-width: 370px) {
+  .lw-step-2 ul.lw-step-2__inner li.lw-step-2__li p {
+    padding: 16px;
+  }
+}
+.lw-step-2 .lw-step-2__remove_btn {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  z-index: 10;
+  font-size: 12px;
+  color: #fff;
+  background: var(--color-accent);
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.lw-step-2 .lw-step-2__add_btn {
+  position: relative;
+  z-index: 10;
+  margin: 0 auto;
+  margin-top: 32px;
+  padding: 12px 24px;
+  padding: 12px 24px;
+  width: 200px;
+  font-size: 16px;
+  cursor: pointer;
+}/*# sourceMappingURL=style.css.map */

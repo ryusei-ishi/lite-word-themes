@@ -1,0 +1,102 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/shin-gas-station-01-fv-top",
+	"version": "1.0.0",
+	"title": "FV（トップ用）shin shop pattern 01",
+	"category": "lw-firstview",
+	"icon": "cover-image",
+	"editorScript": "file:./shin-gas-station-01-fv-top.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"no": 15,
+	"attributes": {
+		"backgroundImage": {
+			"type": "string",
+			"default": "https://cdn.pixabay.com/photo/2013/10/14/10/37/froet-gas-195389_1280.jpg"
+		},
+		"backgroundImageSp": {
+			"type": "string",
+			"default": ""
+		},
+		"subTitle": {
+			"type": "string",
+			"default": "Drive freely live comfortably."
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "自由に走り<br>快適に暮らす"
+		},
+		"subTitleSp": {
+			"type": "string",
+			"default": ""
+		},
+		"mainTitleSp": {
+			"type": "string",
+			"default": ""
+		},
+		"mainLineHeightSp": {
+			"type": "string",
+			"default": ""
+		},
+		"mainMarginTopSp": {
+			"type": "string",
+			"default": ""
+		},
+		"mainMarginBottomSp": {
+			"type": "string",
+			"default": ""
+		},
+		"mainFontSetSp": {
+			"type": "string",
+			"default": ""
+		},
+		"mainFontWeightSp": {
+			"type": "string",
+			"default": ""
+		},
+		"description": {
+			"type": "string",
+			"default": "人々の車生活をより豊かにするためのソリューションをご提供"
+		},
+		"descriptionSp": {
+			"type": "string",
+			"default": ""
+		},
+		"filterBackgroundColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 0.1
+		},
+		"textColor": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"minHeightPc": {
+			"type": "string",
+			"default": "min-h-pc-100vh-header-100"
+		},
+		"minHeightTb": {
+			"type": "string",
+			"default": "min-h-tb-600px"
+		},
+		"minHeightSp": {
+			"type": "string",
+			"default": "min-h-sp-480px"
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 2000
+		}
+	}
+}

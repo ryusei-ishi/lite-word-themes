@@ -1,0 +1,108 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-list-4",
+	"version": "1.0.0",
+	"title": "list 04",
+	"category": "lw-list",
+	"icon": "lightbulb",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"fontLi": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightLi": {
+			"type": "string",
+			"default": ""
+		},
+		"sizeLi": {
+			"type": "string",
+			"default": "size_m"
+		},
+		"textColor": {
+			"type": "string",
+			"default": ""
+		},
+		"colorLiSvg": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"iconUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"iconSize": {
+			"type": "number",
+			"default": 1.2
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 2
+		},
+		"borderStyle": {
+			"type": "string",
+			"default": "solid"
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 0.5
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 800
+		},
+		"bgColor": {
+			"type": "string",
+			"default": "#fff"
+		},
+		"colClass": {
+			"type": "string",
+			"default": "clm_1"
+		},
+		"noBorder": {
+			"type": "boolean",
+			"default": false
+		},
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".lw-list-4__li",
+			"query": {
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": ".lw-list-4__text p"
+				}
+			},
+			"default": [
+				{
+					"text": "リストテキストリストテキスト "
+				},
+				{
+					"text": "リストテキストリストテキスト "
+				},
+				{
+					"text": "リストテキストリストテキスト "
+				},
+				{
+					"text": "リストテキストリストテキスト "
+				}
+			]
+		}
+	},
+	"editorScript": "file:./lw-list-4.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 4
+}

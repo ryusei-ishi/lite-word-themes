@@ -1,0 +1,74 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-step-2",
+	"version": "1.0.0",
+	"title": "step 02",
+	"category": "lw-step",
+	"icon": "lightbulb",
+	"supports": {
+		"anchor": true
+	},
+	"editorScript": "file:./lw-step-2.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 2,
+	"attributes": {
+		"bgGradient": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"ulMaxWidth": {
+			"type": "number",
+			"default": 800
+		},
+		"fontH3": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightH3": {
+			"type": "string",
+			"default": ""
+		},
+		"fontP": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightP": {
+			"type": "string",
+			"default": ""
+		},
+		"colorLiSvg": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".lw-step-2__li",
+			"query": {
+				"title": {
+					"type": "string",
+					"source": "html",
+					"selector": "h3"
+				},
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": "p"
+				}
+			},
+			"default": [
+				{ "title": "応募", "text": "応募フォームより必要事項を入力し、送信してください。応募内容を確認し、追って担当者よりご連絡いたします。" },
+				{ "title": "書類選考", "text": "ご応募いただいた内容をもとに、書類選考を行います。結果は1週間以内にメールにてお知らせいたします。" },
+				{ "title": "面接", "text": "書類選考に通過された方には、担当者による面接を実施します。面接日時はご相談の上、決定いたします。" },
+				{ "title": "最終選考", "text": "面接後、最終選考を行い、採用の可否を決定します。結果はメールにてご連絡いたします。" },
+				{ "title": "内定", "text": "最終選考を通過された方には、内定通知をお送りし、入社手続きを進めていただきます。" }
+			]
+		}
+	}
+}

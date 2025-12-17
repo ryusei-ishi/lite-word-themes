@@ -1,0 +1,18 @@
+.custom-title-4 {
+  text-align: center;
+  border-bottom: none !important;
+  font-size: 20px;
+}
+.custom-title-4 .main {
+  display: block;
+  text-align: center;
+  font-size: 2em;
+  line-height: 1.4em;
+  letter-spacing: 0.05em;
+}
+.custom-title-4 .span {
+  margin-top: 1.2em;
+  display: block;
+  font-size: 0.9em;
+  line-height: 1.6em;
+}/*# sourceMappingURL=editor.css.map */

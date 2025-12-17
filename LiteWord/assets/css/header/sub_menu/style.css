@@ -1,0 +1,99 @@
+@charset "UTF-8";
+.header_menu_pc > li,
+.header_nav > .menu > ul > li {
+  position: relative;
+}
+
+.header_menu_pc > li:hover > ul,
+.header_nav > .menu > ul > li:hover > ul {
+  display: block;
+}
+
+.header_menu_pc > li:nth-last-of-type(2) > ul ul, .header_menu_pc > li:nth-last-of-type(3) > ul ul,
+.header_nav > .menu > ul > li:nth-last-of-type(2) > ul ul,
+.header_nav > .menu > ul > li:nth-last-of-type(3) > ul ul {
+  padding: 0;
+  left: initial;
+  right: 100%;
+}
+
+.header_menu_pc > li ul,
+.header_nav > .menu > ul > li ul {
+  background: var(--color-main);
+}
+
+.header_menu_pc > li ul a,
+.header_nav > .menu > ul > li ul a {
+  color: #fff;
+}
+
+.header_menu_pc > li ul a:hover,
+.header_nav > .menu > ul > li ul a:hover {
+  color: #fff;
+  background-color: var(--color-accent);
+}
+
+.header_menu_pc > li > ul,
+.header_nav > .menu > ul > li > ul {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  z-index: 10;
+  margin: auto;
+  min-width: 16.75em;
+  font-size: 0.94em;
+  display: none;
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.9);
+}
+
+.header_menu_pc > li > ul li,
+.header_nav > .menu > ul > li > ul li {
+  position: relative;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.2);
+}
+
+.header_menu_pc > li > ul li:last-of-type,
+.header_nav > .menu > ul > li > ul li:last-of-type {
+  border: none;
+}
+
+.header_menu_pc > li > ul li a,
+.header_nav > .menu > ul > li > ul li a {
+  padding: 1.2em 1.5em;
+  display: flex;
+  font-weight: 400;
+  line-height: 1.4em;
+  overflow: hidden;
+  /* 内容が突き抜けないように隠す */
+  text-overflow: ellipsis;
+  /* 内容が長すぎる場合に「…」を表示 */
+}
+
+.header_menu_pc > li > ul li:hover > ul,
+.header_nav > .menu > ul > li > ul li:hover > ul {
+  display: block;
+}
+
+.header_menu_pc > li > ul li > ul,
+.header_nav > .menu > ul > li > ul li > ul {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  z-index: 10;
+  display: none;
+  min-width: 15.75em;
+  box-shadow: 0 0 1px rgba(255, 255, 255, 0.9);
+}
+
+.header_menu_pc > li > ul li > ul::after,
+.header_nav > .menu > ul > li > ul li > ul::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  display: block;
+  content: "";
+}

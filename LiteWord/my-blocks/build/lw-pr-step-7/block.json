@@ -1,0 +1,54 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-step-7",
+	"version": "1.0.0",
+	"title": "step 07",
+	"category": "lw-step",
+	"icon": "list-view",
+	"supports": {
+		"anchor": true
+	},
+	"editorScript": "file:./lw-pr-step-7.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 7,
+	"attributes": {
+		"circleBgColor": { "type": "string", "default": "#4a9d9c" },
+		"cardBgColor": { "type": "string", "default": "#ffffff" },
+		"borderColor": { "type": "string", "default": "#e0e0e0" },
+		"ulMaxWidth": { "type": "number", "default": 1200 },
+		"columnCountPc": { "type": "number", "default": 3 },
+		"columnCountSp": { "type": "number", "default": 2 },
+		"columnCount": { "type": "number" },
+		"fontSizeClass": { "type": "string", "default": "font_size_m" },
+		"fontNo": { "type": "string", "default": "Murecho" },
+		"fontWeightNo": { "type": "string", "default": "700" },
+		"colorNo": { "type": "string", "default": "#ffffff" },
+		"titleTag": { "type": "string", "default": "h3" },
+		"fontH3": { "type": "string", "default": "" },
+		"fontWeightH3": { "type": "string", "default": "600" },
+		"colorH3": { "type": "string", "default": "#333333" },
+		"fontP": { "type": "string", "default": "" },
+		"fontWeightP": { "type": "string", "default": "400" },
+		"colorP": { "type": "string", "default": "#666666" },
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".lw-pr-step-7__li",
+			"query": {
+				"title": { "type": "string", "source": "html", "selector": ".lw-pr-step-7__li_title" },
+				"text": { "type": "string", "source": "html", "selector": ".lw-pr-step-7__li_text" }
+			},
+			"default": [
+				{ "title": "", "text": "説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テ" },
+				{ "title": "", "text": "説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テ" },
+				{ "title": "", "text": "説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テキスト説明テ" }
+			]
+		}
+	}
+}

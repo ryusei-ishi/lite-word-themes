@@ -1,0 +1,126 @@
+{
+    "wdl/fv-1": {
+        "title": "固定ページタイトル 01（トップ用）",
+        "category": "lw-firstview",
+        "description": "ファーストビュー用のメインビジュアルブロック。背景画像、タイトル、説明文、CTAボタンを配置できる。",
+        "attributes": {
+            "backgroundImage": {
+                "type": "string",
+                "default": "https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704_1280.jpg",
+                "description": "PC用背景画像URL"
+            },
+            "backgroundImageSp": {
+                "type": "string",
+                "default": "",
+                "description": "スマホ用背景画像URL（省略可）"
+            },
+            "mainTitle": {
+                "type": "string",
+                "default": "Lite Word",
+                "description": "メインタイトル（HTMLタグ可、例: <br>で改行）"
+            },
+            "subTitle": {
+                "type": "string",
+                "default": "シンプルで簡単なWordPressテーマ",
+                "description": "サブタイトル"
+            },
+            "description": {
+                "type": "string",
+                "default": "誰でも簡単にきれいなブログサイトが作れます！",
+                "description": "説明文"
+            },
+            "buttonText": {
+                "type": "string",
+                "default": "無料ダウンロード",
+                "description": "ボタンのテキスト"
+            },
+            "buttonUrl": {
+                "type": "string",
+                "default": "#",
+                "description": "ボタンのリンク先URL"
+            },
+            "openInNewTab": {
+                "type": "boolean",
+                "default": false,
+                "description": "新規タブで開くか"
+            },
+            "buttonBackgroundColor": {
+                "type": "string",
+                "default": "#fff",
+                "description": "ボタン背景色（16進数カラーコード）"
+            },
+            "buttonTextColor": {
+                "type": "string",
+                "default": "#111",
+                "description": "ボタン文字色"
+            },
+            "buttonBorderColor": {
+                "type": "string",
+                "default": "#000",
+                "description": "ボタンボーダー色"
+            },
+            "buttonBackgroundColorOpacity": {
+                "type": "number",
+                "default": 100,
+                "description": "ボタン背景の透明度（0-100）"
+            },
+            "buttonBorderWidth": {
+                "type": "number",
+                "default": 0,
+                "description": "ボタンボーダー幅（px）"
+            },
+            "buttonBorderRadius": {
+                "type": "number",
+                "default": 200,
+                "description": "ボタン角丸（px、200で丸いボタン、0で四角）"
+            },
+            "filterBackgroundColor": {
+                "type": "string",
+                "default": "var(--color-main)",
+                "description": "画像上のフィルター色"
+            },
+            "filterOpacity": {
+                "type": "number",
+                "default": 0.4,
+                "description": "フィルターの透明度（0-1）"
+            },
+            "minHeightPc": {
+                "type": "string",
+                "default": "min-h-pc-500px",
+                "description": "PC用高さクラス（min-h-pc-400px〜min-h-pc-800px）"
+            },
+            "minHeightTb": {
+                "type": "string",
+                "default": "min-h-tb-480px",
+                "description": "タブレット用高さクラス（min-h-tb-300px〜min-h-tb-700px）"
+            },
+            "minHeightSp": {
+                "type": "string",
+                "default": "min-h-sp-440px",
+                "description": "スマホ用高さクラス（min-h-sp-300px〜min-h-sp-600px）"
+            }
+        }
+    },
+    "wdl/custom-title-1": {
+        "title": "見出しタイトル 01",
+        "category": "liteword-title",
+        "description": "セクションタイトル用の見出しブロック。英語の大きなタイトルと日本語のサブタイトルを表示。",
+        "attributes": {
+            "mainTitle": {
+                "type": "string",
+                "default": "TITLE",
+                "description": "メインタイトル（通常は英語の大文字）"
+            },
+            "subTitle": {
+                "type": "string",
+                "default": "サブタイトル",
+                "description": "サブタイトル（日本語）"
+            },
+            "headingLevel": {
+                "type": "number",
+                "default": 2,
+                "description": "見出しレベル（1-6）"
+            }
+        }
+    }
+}

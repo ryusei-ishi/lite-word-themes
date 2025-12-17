@@ -1,0 +1,236 @@
+.footer_ptn_4 {
+  position: relative;
+  z-index: 10;
+  padding: 0 64px;
+  border-top: 1px solid #ebebeb;
+  @media (max-width: 1200px) {
+    padding: 0 48px;
+  }
+  @media (max-width: 900px) {
+    padding: 0 64px;
+  }
+  @media (max-width: 600px) {
+    padding: 0 40px;
+  }
+  @media (max-width: 500px) {
+    padding: 0 24px;
+  }
+  .widget_area_footer {
+    margin: 0 auto;
+    padding: 64px 0;
+    max-width: 1200px;
+    width: calc(100% - 64px);
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 24px 16px;
+    @media (max-width: 800px) {
+      padding: 48px 0;
+      grid-template-columns: repeat(1, 1fr);
+    }
+  }
+  .inner {
+    padding: 72px 0;
+    @media (max-width: 900px) {
+      display: grid;
+    }
+    @media (max-width: 500px) {
+      padding: 56px 0;
+    }
+    .left {
+      .logo {
+        display: flex;
+        a {
+          color: #000;
+          font-size: 48px;
+          font-weight: 700;
+          text-align: center;
+          img {
+            width: auto;
+          }
+          &:has(img) {
+            font-size: initial;
+          }
+        }
+      }
+      .text_in {
+        margin-top: 1.5em;
+        font-size: 14px;
+        color: #000;
+        line-height: 2;
+        @media (max-width: 500px) {
+          font-size: 13px;
+        }
+        //safariの時に電話番号などにリンクがつかないようにする
+        a {
+          color: #000;
+          text-decoration: none;
+        }
+        a:hover {
+          color: var(--color-main);
+          text-decoration: underline;
+        }
+      }
+    }
+    .right {
+      margin-top: 3em;
+      .footer_nav {
+        > ul {
+          display: grid;
+          grid-template-columns: repeat(5, 1fr);
+          justify-content: start;
+          align-items: start;
+          flex-wrap: wrap;
+          gap: 40px 48px;
+          @media (max-width: 1300px) {
+            grid-template-columns: repeat(4, 1fr);
+          }
+          @media (max-width: 1100px) {
+            grid-template-columns: repeat(3, 1fr);
+          }
+          @media (max-width: 900px) {
+            grid-template-columns: repeat(2, 1fr);
+          }
+          @media (max-width: 600px) {
+            grid-template-columns: repeat(1, 1fr);
+          }
+          + ul {
+            margin-top: 40px;
+          }
+          a {
+            &:hover {
+              color: #ec4f4f;
+            }
+          }
+          > li {
+            > a {
+              position: relative;
+              z-index: 10;
+              padding-bottom: 1em;
+              width: 100%;
+              display: block;
+              color: #000;
+              font-size: 18px;
+              line-height: 1.5em;
+              @media (max-width: 780px) {
+                font-size: 16px;
+              }
+              &::before,
+              &::after {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                z-index: 1;
+                content: "";
+                display: block;
+                width: 50%;
+                height: 0.5em;
+                border-radius: 0 2em 2em 0;
+                background: var(--color-main);
+              }
+              &::before {
+                width: 100%;
+                z-index: -1;
+                opacity: 0.2;
+                border-radius: 2em;
+                box-shadow: 0 0 4px rgba(0, 0, 0, 0.06);
+              }
+              &:hover {
+                opacity: 0.9;
+              }
+            }
+            > ul {
+              margin-top: 1.2em;
+              > li {
+                a {
+                  position: relative;
+                  display: block;
+                  &:hover {
+                    text-decoration: underline;
+                    &::before {
+                      background: #ee7777;
+                    }
+                  }
+                }
+                > a {
+                  padding: 0.6em 0;
+                  padding-left: 1.6em;
+                  font-size: 16px;
+                  @media (max-width: 780px) {
+                    font-size: 15px;
+                  }
+                  &::before {
+                    position: absolute;
+                    top: 0.68em;
+                    left: 0;
+                    width: 16px;
+                    aspect-ratio: 1;
+                    border-radius: 50%;
+                    content: "";
+                    display: block;
+                    background: var(--color-main);
+                  }
+                }
+                ul {
+                  padding-left: 1.5em;
+                  li {
+                    &:last-of-type {
+                      margin-bottom: 0.6em;
+                    }
+                    a {
+                      padding: 0.4em 0;
+                      padding-left: 1.3em;
+                      font-size: 14px;
+                      &::before {
+                        position: absolute;
+                        top: 0.8em;
+                        left: 0;
+                        width: 0.6em;
+                        height: 3px;
+                        border-radius: 5em;
+                        content: "";
+                        display: block;
+                        background: var(--color-main);
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+        & + .copyright {
+          margin-top: 3.5em;
+        }
+      }
+    }
+  }
+  .copyright {
+    padding: 16px 64px;
+    margin-left: calc((100% - 100vw) / 2);
+    width: 100vw;
+    text-align: right;
+    font-size: 12px;
+    color: #000;
+    line-height: 1.6em;
+    @media (max-width: 1200px) {
+      padding: 16px 48px;
+    }
+    @media (max-width: 900px) {
+      padding: 16px 64px;
+    }
+    @media (max-width: 800px) {
+      font-size: 11px;
+      text-align: left;
+    }
+    @media (max-width: 600px) {
+      padding: 16px 40px;
+    }
+    @media (max-width: 500px) {
+      padding: 16px 24px;
+    }
+    span {
+      margin-right: 2px;
+      font-family: var(--font-family-gothic_Arial);
+    }
+  }
+}

@@ -1,0 +1,16 @@
+/* =============================================
+   カスタムブロック専用リセットCSS
+   wdl/* ブロック内のリストスタイルのみリセット
+   ============================================= */
+
+[class*="wp-block-wdl-"] ul,
+[class*="wp-block-wdl-"] ol {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+[class*="wp-block-wdl-"] li {
+    margin: 0;
+    padding: 0;
+}

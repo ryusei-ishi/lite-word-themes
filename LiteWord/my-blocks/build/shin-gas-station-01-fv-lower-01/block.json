@@ -1,0 +1,62 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/shin-gas-station-01-fv-lower-01",
+	"version": "1.0.0",
+	"title": "FV（下層ページ用）shin shop pattern 01",
+	"category": "lw-firstview",
+	"icon": "cover-image",
+	"editorScript": "file:./shin-gas-station-01-fv-lower-01.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"no": 15,
+	"attributes": {
+		"backgroundImage": {
+			"type": "string",
+			"default": ""
+		},
+		"backgroundImageSp": {
+			"type": "string",
+			"default": ""
+		},
+		"mainTitle": {
+			"type": "string",
+			"default": "ページタイトル"
+		},
+		"subTitle": {
+			"type": "string",
+			"default": "Title Sub"
+		},
+		"filterBackgroundColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 0.05
+		},
+		"minHeightPc": {
+			"type": "string",
+			"default": "min-h-pc-380px"
+		},
+		"minHeightTb": {
+			"type": "string",
+			"default": "min-h-tb-300px"
+		},
+		"minHeightSp": {
+			"type": "string",
+			"default": "min-h-sp-220px"
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 1200
+		}
+	}
+}

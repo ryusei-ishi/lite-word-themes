@@ -1,0 +1,151 @@
+.post_content {
+	.lw_share_buttons.ptn_1 {
+		padding: 4px;
+		padding-bottom: 0;
+	}
+}
+.lw_share_buttons.ptn_1 {
+	padding: 8px 0;
+	padding-bottom: 0;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 4px;
+	@container (max-width:600px) {
+		gap:2px;
+	}
+	@media (max-width: 500px) {
+		padding: 4px;
+		padding-bottom: 0;
+		
+	}
+	.lw_share {
+		padding: 8px;
+		padding-bottom: 6px;
+		flex: 1;
+		display: flex;
+		justify-content: center;
+		align-items: center;
+		align-content: center;
+		flex-wrap: wrap;
+		text-align: center;
+		border: none;
+		border-radius: 6px;
+		cursor: pointer;
+		transition: opacity 0.2s ease-in-out;
+		@container (max-width:600px) {
+			padding: 6px;
+			padding-bottom: 4px;
+			border-radius: 4px;
+		}
+		&:hover {
+			opacity: 0.8;
+		}
+		.icon {
+			height: 20px;
+			width: 20px;
+			display: block;
+			@container (max-width:700px) {
+				height: 16px;
+				width: 16px;
+			}
+			svg {
+				width: 100%;
+				height: 100%;
+				fill: #fff;
+			}
+		}
+		.text {
+			margin-top: 4px;
+			width: 100%;
+			display: block;
+			font-size: 12px;
+			color: #fff;
+			@container (max-width:700px) {
+				margin-top: 2px;
+				font-size: 11px;
+			}
+			@container (max-width:500px) {
+				font-size: 10px;
+			}
+		}
+	}
+	.lw_share_copy_feedback {
+		position: fixed;
+		top: 0;
+		bottom: 0;
+		right: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		z-index: 99999999999999999999999999;
+		justify-content: center;
+		align-items: center;
+		background: rgba(0, 0, 0, 0.3);
+		> div {
+			background: rgba(43, 222, 8, 0.9);
+			color: #fff;
+			padding: 20px;
+			border-radius: 6px;
+			font-size: 16px;
+			text-align: center;
+		}
+	}
+}
+/* ─────────── シェアボタン色設定 ─────────── */
+.lw_share.x,        /* X (旧 Twitter) */
+.lw_share.twitter {
+	background: #000000;
+} /* 互換クラスも一応残す */
+
+.lw_share.facebook {
+	background: #1877f2;
+}
+
+.lw_share.line {
+	background: #06c755;
+}
+
+.lw_share.linkedin {
+	background: #0a66c2;
+}
+
+.lw_share.hatena {
+	background: #00a4de;
+}
+
+.lw_share.pocket {
+	background: #ef3f56;
+}
+
+.lw_share.reddit {
+	background: #ff4500;
+}
+
+.lw_share.pinterest {
+	background: #e60023;
+}
+
+.lw_share.tumblr {
+	background: #001935;
+}
+
+.lw_share.telegram {
+	background: #0088cc;
+}
+
+.lw_share.whatsapp {
+	background: #25d366;
+}
+
+.lw_share.mastodon {
+	background: #6364ff;
+}
+
+.lw_share.mail {
+	background: #7a7a7a;
+}
+
+.lw_share.copyurl,
+.lw_share.copy {
+	background: #666666;
+} /* copyurl 旧クラス互換 */

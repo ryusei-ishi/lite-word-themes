@@ -1,0 +1,80 @@
+/*!**************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/fv-3/style.scss ***!
+  \**************************************************************************************************************/
+.lw_content_wrap.page .wp-block-wdl-fv-3 {
+  margin-left: calc((100% - 100vw) / 2);
+  width: 100vw;
+}
+.lw_content_wrap.page .wp-block-wdl-fv-3.w_100_inner_fit {
+  margin: 0 auto;
+  width: 100%;
+  max-width: 100%;
+}
+.lw_content_wrap.page .wp-block-wdl-fv-3.w_100_outer_fit {
+  margin-left: -40px;
+  margin-right: -40px;
+  max-width: calc(100% + 80px);
+  width: calc(100% + 80px);
+}
+@media (max-width: 848px) {
+  .lw_content_wrap.page .wp-block-wdl-fv-3.w_100_outer_fit {
+    margin-left: -32px;
+    margin-right: 32px;
+    max-width: calc(100% + 64px);
+    width: calc(100% + 64px);
+  }
+}
+@media (max-width: 632px) {
+  .lw_content_wrap.page .wp-block-wdl-fv-3.w_100_outer_fit {
+    margin-left: -24px;
+    margin-right: 24px;
+    max-width: calc(100% + 48px);
+    width: calc(100% + 48px);
+  }
+}
+@media (max-width: 532px) {
+  .lw_content_wrap.page .wp-block-wdl-fv-3.w_100_outer_fit {
+    margin-left: -20px;
+    margin-right: 20px;
+    max-width: calc(100% + 40px);
+    width: calc(100% + 40px);
+  }
+}
+@media (max-width: 500px) {
+  .lw_content_wrap.page .wp-block-wdl-fv-3.w_100_outer_fit {
+    margin-left: -20px;
+    margin-right: 20px;
+    max-width: calc(100% + 40px);
+    width: calc(100% + 40px);
+  }
+}
+.lw_content_wrap.page:has(.first_content + .wp-block-wdl-fv-3) .first_content {
+  display: none;
+}
+
+.fv-3 {
+  min-height: 100px;
+}
+.fv-3 + .post_style > .wp-block-columns.has-background {
+  margin-top: 0;
+}
+.fv-3 h1 {
+  margin: 0 !important;
+  width: 100%;
+}
+.fv-3 .image {
+  width: 100%;
+}
+.fv-3 .image img {
+  width: 100%;
+  height: auto;
+}
+.fv-3 .image .no_image {
+  background: #ddd;
+  height: 400px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 40px;
+  color: #bbb;
+}

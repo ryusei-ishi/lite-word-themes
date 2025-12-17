@@ -1,0 +1,279 @@
+/**
+ * API使用量ウィジェット スタイル
+ */
+
+/* 固定ボタン */
+#lw-ai-usage-button {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99999;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    border: none;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+    cursor: pointer;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+    transition: all 0.3s ease;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+}
+
+#lw-ai-usage-button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(102, 126, 234, 0.5);
+}
+
+#lw-ai-usage-button:active {
+    transform: translateY(0);
+}
+
+#lw-ai-usage-button svg {
+    width: 20px;
+    height: 20px;
+}
+
+#lw-ai-usage-button .lw-ai-usage-label {
+    font-size: 8px;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* ポップアップ */
+#lw-ai-usage-popup {
+    position: fixed;
+    bottom: 80px;
+    right: 20px;
+    z-index: 99998;
+    width: 320px;
+    max-height: 80vh;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.3s ease;
+    overflow: hidden;
+}
+
+#lw-ai-usage-popup.open {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* ヘッダー */
+.lw-ai-popup-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 15px 18px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #fff;
+}
+
+.lw-ai-popup-header h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #fff;
+}
+
+.lw-ai-popup-close {
+    background: none;
+    border: none;
+    color: #fff;
+    font-size: 24px;
+    line-height: 1;
+    cursor: pointer;
+    opacity: 0.8;
+    transition: opacity 0.2s;
+    padding: 0;
+    width: 24px;
+    height: 24px;
+}
+
+.lw-ai-popup-close:hover {
+    opacity: 1;
+}
+
+/* コンテンツ */
+.lw-ai-popup-content {
+    padding: 15px 18px;
+    max-height: 400px;
+    overflow-y: auto;
+}
+
+.lw-ai-loading {
+    text-align: center;
+    padding: 30px;
+    color: #666;
+}
+
+.lw-ai-error {
+    text-align: center;
+    padding: 20px;
+    color: #d63638;
+}
+
+/* 統計セクション */
+.lw-ai-stats-section {
+    margin-bottom: 20px;
+    padding-bottom: 15px;
+    border-bottom: 1px solid #eee;
+}
+
+.lw-ai-stats-section:last-of-type {
+    margin-bottom: 10px;
+    border-bottom: none;
+}
+
+.lw-ai-stats-section h4 {
+    margin: 0 0 12px 0;
+    font-size: 13px;
+    font-weight: 600;
+    color: #1d2327;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+/* 統計グリッド */
+.lw-ai-stats-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    margin-bottom: 12px;
+}
+
+.lw-ai-stat {
+    background: #f6f7f7;
+    padding: 10px 12px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.lw-ai-stat-value {
+    display: block;
+    font-size: 18px;
+    font-weight: 700;
+    color: #1d2327;
+    line-height: 1.2;
+}
+
+.lw-ai-stat-label {
+    display: block;
+    font-size: 11px;
+    color: #666;
+    margin-top: 4px;
+}
+
+/* コスト表示 */
+.lw-ai-cost {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 8px 12px;
+    background: #f0f6fc;
+    border-radius: 6px;
+    font-size: 13px;
+}
+
+.lw-ai-cost-total {
+    background: linear-gradient(135deg, rgba(102, 126, 234, 0.1) 0%, rgba(118, 75, 162, 0.1) 100%);
+}
+
+.lw-ai-cost-label {
+    color: #666;
+}
+
+.lw-ai-cost-value {
+    font-weight: 600;
+    color: #1d2327;
+}
+
+/* 注意書き */
+.lw-ai-stats-notice {
+    margin-top: 15px;
+    padding: 10px 12px;
+    background: #fff8e5;
+    border-radius: 6px;
+    border-left: 3px solid #f0b849;
+}
+
+.lw-ai-stats-notice p {
+    margin: 0;
+    font-size: 11px;
+    color: #6d5c1a;
+    line-height: 1.5;
+}
+
+.lw-ai-stats-notice a {
+    color: #0073aa;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.lw-ai-stats-notice a:hover {
+    text-decoration: underline;
+}
+
+/* フッター */
+.lw-ai-stats-footer {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
+}
+
+.lw-ai-stats-footer small {
+    color: #999;
+    font-size: 11px;
+}
+
+.lw-ai-refresh-btn {
+    background: none;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px 8px;
+    cursor: pointer;
+    color: #666;
+    transition: all 0.2s;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lw-ai-refresh-btn:hover {
+    background: #f6f7f7;
+    border-color: #999;
+    color: #1d2327;
+}
+
+.lw-ai-refresh-btn svg {
+    width: 14px;
+    height: 14px;
+}
+
+/* レスポンシブ */
+@media (max-width: 400px) {
+    #lw-ai-usage-popup {
+        right: 10px;
+        left: 10px;
+        width: auto;
+    }
+
+    #lw-ai-usage-button {
+        right: 10px;
+        bottom: 10px;
+        width: 45px;
+        height: 45px;
+    }
+}

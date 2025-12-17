@@ -1,0 +1,8 @@
+.wp-block:has(.lw-voice-1) {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+.wp-block h2.lw-voice-1__title {
+  margin: 0;
+}/*# sourceMappingURL=editor.css.map */

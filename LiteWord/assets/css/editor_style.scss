@@ -1,0 +1,306 @@
+html :where(.wp-block) {
+    max-width: var(--max-width-clm-1);
+}
+.editor-styles-wrapper {
+    background: var(--color-content-bg-pc);
+}
+//引用
+.wp-block-quote {
+    position: relative;
+    padding: 1em;
+    padding-left: 3em;
+    box-sizing: border-box;
+    font-style: italic;
+    background: #efefef;
+    color: #555;
+    &::before {
+        display: inline-block;
+        position: absolute;
+        top: 10px;
+        left: 0.05em;
+        content: "“";
+        font-family: sans-serif;
+        color: #cfcfcf;
+        font-size: 4em;
+        line-height: 1;
+    }
+    P {
+        padding: 0;
+        margin: 1em 0;
+        line-height: 1.7;
+    }
+    cite {
+        display: block;
+        text-align: right;
+        color: #888888;
+        font-size: 0.9em;
+    }
+}
+//iframe
+.wp-block-html {
+    iframe {
+        max-width: 100%;
+        width: 100%;
+    }
+}
+//line-heightの補足
+span:has(> [class*="lh-"]),
+div:has(> [class*="lh-"]),
+p:has(> [class*="lh-"]),
+h2:has(> [class*="lh-"]),
+h3:has(> [class*="lh-"]),
+h4:has(> [class*="lh-"]),
+h5:has(> [class*="lh-"]),
+h6:has(> [class*="lh-"]) {
+    line-height: 1rem !important;
+}
+//PC,SPの切り替え
+.block-editor-block-list__block.lw_pc_only,
+.block-editor-block-list__block.lw_sp_only {
+    position: relative;
+    z-index: 10;
+    outline: 2px dashed var(--color-main);
+    &::before {
+        position: absolute;
+        top: -35px;
+        left: -2px;
+        z-index: 10;
+        padding: 0.5em;
+        font-weight: 600;
+        content: "PCの時のみ表示";
+        background: var(--color-main);
+        color: #fff;
+        font-size: 12px;
+        display: block;
+    }
+}
+.block-editor-block-list__block.lw_sp_only {
+    outline: 2px dashed var(--color-accent);
+    &::before {
+        content: "SPの時のみ表示";
+        background: var(--color-accent);
+    }
+}
+h2.wp-block,
+h3.wp-block,
+h4.wp-block,
+h5.wp-block,
+h6.wp-block {
+    &:not([class*="lh-"]) {
+        line-height: 1.4em;
+    }
+    box-sizing: border-box;
+}
+
+.wp-block-image {
+    max-width: 100%;
+    img {
+        border-radius: var(--lw-img-radius-pc, 0);
+        @media (max-width: 700px) {
+            border-radius: var(--lw-img-radius-sp, var(--lw-img-radius-pc, 0));
+        }
+    }
+}
+.wp-block-post-content {
+    /* リスト */
+    > ul:not([class]),
+    > ul.wp-block-list:not([class*="is-style-li_"]),
+    .wp-block-columns ul.wp-block-list:not([class*="is-style-li_"]),
+    [class^="custom-title-accordion-"] > ul:not([class*="is-style-li_"]),
+    [class^="custom-title-accordion-"] > ul.wp-block-list:not([class*="is-style-li_"]) {
+        padding-inline-start: 0;
+        margin: 1.6em auto;
+        line-height: 1.6em;
+        > li {
+            margin: 0.5em 0;
+            margin-left: 1.4em;
+            list-style-type: square;
+            ul,
+            ol {
+                li {
+                    margin: 0.5em 0;
+                    margin-left: 1.4em;
+                    list-style-type: circle;
+                }
+            }
+            ol {
+                li {
+                    list-style-type: decimal;
+                }
+            }
+        }
+    }
+    > ol:not([class]),
+    > ol.wp-block-list:not([class*="is-style-li_"]),
+    .wp-block-columns ol.wp-block-list:not([class*="is-style-li_"]),
+    [class^="custom-title-accordion-"] > ol:not([class*="is-style-li_"]),
+    [class^="custom-title-accordion-"] > ol.wp-block-list:not([class*="is-style-li_"]) {
+        padding-inline-start: 0;
+        margin: 1.6em auto;
+        line-height: 1.6em;
+        > li {
+            margin: 0.5em 0;
+            margin-left: 1.4em;
+            list-style-type: decimal;
+            ul,
+            ol {
+                li {
+                    margin: 0.5em 0;
+                    margin-left: 1.4em;
+                    list-style-type: circle;
+                }
+            }
+            ol {
+                li {
+                    list-style-type: decimal;
+                }
+            }
+        }
+    }
+    .wp-block-columns ul:not([class*="is-style-li_"]),
+    .wp-block-columns ol:not([class*="is-style-li_"]) {
+        padding-left: 0.3em;
+    }
+    .wp-block-list.has-background {
+        padding: 24px 28px;
+        @container (max-width: 500px) {
+            padding: 24px;
+            padding-bottom: 20px;
+        }
+    }
+}
+
+.components-panel__body {
+    position: relative;
+    &::after {
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: #e0e0e0;
+        content: "";
+        display: block;
+    }
+}
+//lw_common_side_edit 共通サイドバー項目
+.lw_common_side_edit {
+    position: relative;
+    margin-top: 100px !important;
+    &::before {
+        position: absolute;
+        top: -42px;
+        left: 0;
+        z-index: 10;
+        width: 100%;
+        padding: 1em 0.5em;
+        font-weight: 600;
+        content: "すべてのブロック 共通項目";
+        background: var(--color-main);
+        color: #fff;
+        font-size: 12px;
+        display: block;
+        text-align: center;
+    }
+    + .lw_common_side_edit {
+        margin-top: -1px !important;
+        &::before {
+            content: "";
+            display: none;
+        }
+    }
+
+    .components-base-control__label {
+        h3 {
+            margin: 16px 0;
+            padding-bottom: 0.4em;
+            border-bottom: 1px solid var(--color-main);
+            font-size: 13px;
+            color: var(--color-main);
+            font-weight: 600;
+        }
+    }
+    .components-base-control__help {
+        text-align: right;
+    }
+}
+
+//カラムをhoverしたときに、形が分かるようにする
+.wp-block-columns-is-layout-flex {
+    position: relative;
+    &:hover {
+        border: 1px solid var(--color-main);
+        &::before {
+            display: flex;
+        }
+    }
+    &::before {
+        position: absolute;
+        bottom: 100%;
+        right: -1px;
+        z-index: 10;
+        padding: 0.5em 0.8em;
+        display: none;
+        content: "Column Wrap";
+        background: var(--color-main);
+        color: #fff;
+        font-size: 11px;
+        box-sizing: border-box;
+        cursor: pointer;
+        border-radius: 4px 4px 0 0;
+    }
+}
+/* ===================================================================
+カスタムブロックの  
+震えるアニメーション定義
+   =================================================================== */
+@keyframes lw_btn_shake_light {
+    0%,
+    90%,
+    100% {
+        transform: translateX(0);
+    }
+    92%,
+    96% {
+        // 回数を減らす
+        transform: translateX(-5px);
+    }
+    94%,
+    98% {
+        transform: translateX(5px);
+    }
+}
+
+@keyframes lw_btn_shake_normal {
+    0%,
+    85%,
+    100% {
+        transform: translateX(0);
+    }
+    88%,
+    94% {
+        // 回数を減らす
+        transform: translateX(-8px);
+    }
+    91%,
+    97% {
+        transform: translateX(8px);
+    }
+}
+
+@keyframes lw_btn_shake_strong {
+    0%,
+    80%,
+    100% {
+        transform: translateX(0);
+    }
+    84%,
+    92% {
+        // 回数を減らす
+        transform: translateX(-12px);
+    }
+    88%,
+    96% {
+        transform: translateX(12px);
+    }
+}

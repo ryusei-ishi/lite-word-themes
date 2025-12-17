@@ -1,0 +1,61 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-calendar-1",
+	"version": "1.0.0",
+	"title": "カレンダー 1（診療日）",
+	"category": "lw-calendar",
+	"icon": "grid-view",
+	"editorScript": "file:./lw-pr-calendar-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"colorTableItemBd": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"colorTableHeadItemBg": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"colorTableHeadItemText": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"colorTableBodyItemText": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"colorTableBodyItemFirstText": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"fontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"headItems": {
+			"type": "array",
+			"default": ["営業時間", "月", "火", "水", "木", "金", "土", "日"]
+		},
+		"bodyRows": {
+			"type": "array",
+			"default": [
+				["10:00 - 14:00", "○", "○", "×", "○", "○", "○", "○"],
+				["16:00 - 20:00", "○", "○", "×", "○", "○", "○", "×"]
+			]
+		}
+	},
+	"no": 1
+}

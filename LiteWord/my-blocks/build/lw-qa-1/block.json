@@ -1,0 +1,88 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-qa-1",
+	"version": "1.0.0",
+	"title": "よくある質問 01",
+	"category": "lw-faq",
+	"icon": "lightbulb",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"blockId": {
+			"type": "string"
+		},
+		"FontLabel": {
+			"type": "string",
+			"default": "Roboto"
+		},
+		"fontWeightLabel": {
+			"type": "string",
+			"default": ""
+		},
+		"mainColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"fontP": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightDt": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightDd": {
+			"type": "string",
+			"default": ""
+		},
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".lw-qa-1__dl",
+			"query": {
+				"text_q": {
+					"type": "string",
+					"source": "html",
+					"selector": ".lw-qa-1__text_q p"
+				},
+				"text_a": {
+					"type": "string",
+					"source": "html",
+					"selector": ".lw-qa-1__text_a p"
+				}
+			},
+			"default": [
+				{
+					"text_q": "質問テキスト質問テキスト質問テキスト",
+					"text_a": "回答テキスト回答テキスト回答テキスト回答テキスト"
+				},
+				{
+					"text_q": "質問テキスト質問テキスト質問テキスト",
+					"text_a": "回答テキスト回答テキスト回答テキスト回答テキスト"
+				},
+				{
+					"text_q": "質問テキスト質問テキスト質問テキスト",
+					"text_a": "回答テキスト回答テキスト回答テキスト回答テキスト"
+				},
+				{
+					"text_q": "質問テキスト質問テキスト質問テキスト",
+					"text_a": "回答テキスト回答テキスト回答テキスト回答テキスト"
+				},
+				{
+					"text_q": "質問テキスト質問テキスト質問テキスト",
+					"text_a": "回答テキスト回答テキスト回答テキスト回答テキスト"
+				}
+			]
+		}
+	},
+	"editorScript": "file:./lw-qa-1.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 1
+}

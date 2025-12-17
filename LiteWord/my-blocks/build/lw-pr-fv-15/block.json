@@ -1,0 +1,142 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-fv-15",
+	"version": "1.0.0",
+	"title": "固定ページタイトル 15(動画背景)",
+	"category": "lw-firstview",
+	"icon": "cover-image",
+	"editorScript": "file:./lw-pr-fv-15.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"mainTitle": {
+			"type": "string",
+			"default": "くらしを楽しく、美しく"
+		},
+		"description": {
+			"type": "string",
+			"default": "ここに説明文が入ります。ここに説明文が入ります。"
+		},
+		"backgroundType": {
+			"type": "string",
+			"default": "image"
+		},
+		"videoUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"imageUrlPc": {
+			"type": "string",
+			"default": "https://images.unsplash.com/photo-1564078516393-cf04bd966897?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
+		},
+		"imageUrlSp": {
+			"type": "string",
+			"default": ""
+		},
+		"imageAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"bgColor": {
+			"type": "string",
+			"default": "#082137"
+		},
+		"filterColor": {
+			"type": "string",
+			"default": "#121416"
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 0.2
+		},
+		"videoSpeed": {
+			"type": "number",
+			"default": 1.0
+		},
+		"headingLevel": {
+			"type": "number",
+			"default": 2
+		},
+		"strokeWidth": {
+			"type": "number",
+			"default": 0
+		},
+		"strokeWidthSp": {
+			"type": "number",
+			"default": 0
+		},
+		"strokeColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"strokeOpacity": {
+			"type": "number",
+			"default": 0.6
+		},
+		"titleColor": {
+			"type": "string",
+			"default": "#FFFFFF"
+		},
+		"titleFontWeight": {
+			"type": "string",
+			"default": "700"
+		},
+		"titleFont": {
+			"type": "string",
+			"default": ""
+		},
+		"descriptionColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"descriptionFontWeight": {
+			"type": "string",
+			"default": "600"
+		},
+		"descriptionFont": {
+			"type": "string",
+			"default": ""
+		},
+		"showButton": {
+			"type": "boolean",
+			"default": true
+		},
+		"buttonText": {
+			"type": "string",
+			"default": "ご相談はこちら"
+		},
+		"buttonUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"ctaBgColor": {
+			"type": "string",
+			"default": "#E95555"
+		},
+		"ctaTextColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"ctaBorderRadius": {
+			"type": "number",
+			"default": 3
+		},
+		"ctaBorderWidth": {
+			"type": "number",
+			"default": 0
+		},
+		"ctaBorderColor": {
+			"type": "string",
+			"default": "#ffffff"
+		}
+	},
+	"no": 15
+}

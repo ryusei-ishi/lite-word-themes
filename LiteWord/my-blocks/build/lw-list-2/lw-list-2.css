@@ -1,0 +1,46 @@
+/*!********************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/lw-list-2/editor.scss ***!
+  \********************************************************************************************************************/
+@charset "UTF-8";
+.wp-block:has(.lw-list-2) {
+  margin: 0;
+  width: 100%;
+  max-width: 100%;
+}
+
+/* 並べ替え & 削除コントロール */
+.lw-list-2__item-controls {
+  display: flex;
+  gap: 4px;
+  margin-top: 8px;
+  justify-content: flex-end;
+}
+.lw-list-2__item-controls button {
+  padding: 4px 10px;
+  font-size: 12px;
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  background: #fff;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.lw-list-2__item-controls button:hover:not(:disabled) {
+  background: #f0f0f0;
+}
+.lw-list-2__item-controls button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.lw-list-2__item-controls .move-up-button,
+.lw-list-2__item-controls .move-down-button {
+  min-width: 32px;
+  font-weight: bold;
+}
+.lw-list-2__item-controls .remove-item-button {
+  color: #fff;
+  background: #d63638;
+  border-color: #d63638;
+}
+.lw-list-2__item-controls .remove-item-button:hover {
+  background: #b32d2e;
+}

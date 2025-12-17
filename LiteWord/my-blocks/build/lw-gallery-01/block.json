@@ -1,0 +1,76 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-gallery-01",
+	"version": "1.0.0",
+	"title": "ギャラリー 01",
+	"category": "lw-banner",
+	"icon": "images-alt2",
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"text_1": {
+			"type": "string",
+			"default": "テキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキストテキストテキスト"
+		},
+		"text_2": {
+			"type": "string",
+			"default": "テキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキストテキストテキスト"
+		},
+		"showText1": {
+			"type": "boolean",
+			"default": true
+		},
+		"showText2": {
+			"type": "boolean",
+			"default": true
+		},
+		"text1AlignPc": {
+			"type": "string",
+			"default": "center_pc"
+		},
+		"text1AlignSp": {
+			"type": "string",
+			"default": "left_sp"
+		},
+		"text2AlignPc": {
+			"type": "string",
+			"default": "center_pc"
+		},
+		"text2AlignSp": {
+			"type": "string",
+			"default": "left_sp"
+		},
+		"items": {
+			"type": "array",
+			"default": [
+				{
+					"imgUrl": "https://picsum.photos/1000/1000?random=1"
+				},
+				{
+					"imgUrl": "https://picsum.photos/1000/1000?random=2"
+				},
+				{
+					"imgUrl": "https://picsum.photos/1000/1000?random=3"
+				}
+			]
+		},
+		"maxWidthText": {
+			"type": "number",
+			"default": 800
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 800
+		}
+	},
+	"editorScript": "file:./lw-gallery-01.js",
+	"editorStyle": [
+		"file:./editor.css",
+		"file:../../../assets/css/font_style.min.css",
+		"file:../../../assets/css/editor_block_side.min.css"
+	],
+	"style": "file:./style.css",
+	"no": 1
+}

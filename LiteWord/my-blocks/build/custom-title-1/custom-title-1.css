@@ -1,0 +1,21 @@
+/*!*************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/custom-title-1/editor.scss ***!
+  \*************************************************************************************************************************/
+.custom-title-1 {
+  text-align: center;
+  border-bottom: none !important;
+  font-size: 17px;
+}
+.custom-title-1 .main {
+  display: block;
+  text-align: center;
+  font-size: 2em;
+  line-height: 1.4em;
+  letter-spacing: 0.1em;
+}
+.custom-title-1 .span {
+  margin-top: 1.2em;
+  display: block;
+  font-size: 0.9em;
+  line-height: 1.6em;
+}
