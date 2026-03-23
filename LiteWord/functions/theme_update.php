@@ -2,53 +2,111 @@
 /**
  * LiteWord ─ テーマ自動アップデート処理
  * ---------------------------------------
- * 1) pre_set_site_transient_update_themes で独自の更新情報を流し込む
+ * 1) pre_set_site_transient_update_themes + site_transient_update_themes で更新情報を流し込む
  * 2) admin_notices で更新通知＋2種類のボタンを表示
+ *
+ * マルチサイト対応: checked が空でも動作、読み取り時フィルターにもフック
+ * キャッシュ: site_transient で6時間キャッシュ（外部リクエスト頻度を削減）
  */
 if ( ! defined( 'ABSPATH' ) ) {
-	exit; // 直接アクセス禁止
+	exit;
+}
+
+/* ─ テーマスラッグ（ディレクトリ名）─ */
+define( 'LW_THEME_SLUG', 'LiteWord' );
+
+/*====================================
+ * 0) 更新情報JSONの取得（キャッシュ付き共通関数）
+ *===================================*/
+
+/**
+ * lite-word.com から更新情報JSONを取得する。
+ * site_transient でキャッシュし、6時間に1回だけ外部リクエストを飛ばす。
+ *
+ * @return object|false 成功時: JSONオブジェクト、失敗時: false
+ */
+function lw_get_remote_update_data() {
+
+	$cache_key = 'lw_theme_update_data';
+
+	$cached = get_site_transient( $cache_key );
+	if ( false !== $cached ) {
+		// 'none' は「更新なし」または「取得失敗」のキャッシュ
+		return $cached === 'none' ? false : $cached;
+	}
+
+	$update_url = 'https://lite-word.com/theme-files/theme-update.json';
+	$response   = wp_remote_get( $update_url, array( 'timeout' => 10 ) );
+
+	if ( is_wp_error( $response ) || 200 !== wp_remote_retrieve_response_code( $response ) ) {
+		set_site_transient( $cache_key, 'none', 30 * MINUTE_IN_SECONDS );
+		return false;
+	}
+
+	$data = json_decode( wp_remote_retrieve_body( $response ) );
+	if ( ! is_object( $data ) || ! isset( $data->version, $data->download_url ) ) {
+		set_site_transient( $cache_key, 'none', 30 * MINUTE_IN_SECONDS );
+		return false;
+	}
+
+	set_site_transient( $cache_key, $data, 6 * HOUR_IN_SECONDS );
+	return $data;
 }
 
 /*====================================
- * 1) 更新情報を流し込む
+ * 1) 更新情報を流し込む（マルチサイト対応版）
  *===================================*/
+
+// 書き込み時: トランジェント保存前に更新情報を注入
 add_filter( 'pre_set_site_transient_update_themes', 'lw_check_for_theme_update' );
+// 読み取り時: 子サイトが transient を読むだけの場合にも更新情報を補完
+add_filter( 'site_transient_update_themes', 'lw_check_for_theme_update' );
+
 function lw_check_for_theme_update( $transient ) {
 
 	if ( ! is_object( $transient ) ) {
 		$transient = new stdClass();
 	}
-	if ( empty( $transient->checked ) ) {
-		return $transient; // テーマ一覧をまだ取得していない
+
+	$theme_slug = LW_THEME_SLUG;
+
+	// LiteWordテーマの情報を直接取得（checked に依存しない）
+	$theme = wp_get_theme( $theme_slug );
+	if ( ! $theme->exists() ) {
+		return $transient;
+	}
+	$current_version = $theme->get( 'Version' );
+
+	// checked が空の場合は自前で埋める（マルチサイト対策の核心）
+	if ( ! isset( $transient->checked ) || ! is_array( $transient->checked ) ) {
+		$transient->checked = array();
+	}
+	if ( ! isset( $transient->checked[ $theme_slug ] ) ) {
+		$transient->checked[ $theme_slug ] = $current_version;
 	}
 
-	// ─ 現在のテーマ情報（子テーマなら親に切り替え）
-	$current_theme = wp_get_theme();
-	if ( is_child_theme() ) {
-		$current_theme = $current_theme->parent();
-	}
-	$current_version = $current_theme->get( 'Version' );
-	$theme_slug      = $current_theme->get_stylesheet(); // = ディレクトリ名
-
-	// ─ 更新情報（JSON）を取得
-	$update_url = 'https://lite-word.com/theme-files/theme-update.json';
-	$response   = wp_remote_get( $update_url );
-	if ( is_wp_error( $response ) ) {
-		return $transient; // 失敗したら何もしない
-	}
-	$update_data = json_decode( wp_remote_retrieve_body( $response ) );
-	if ( ! is_object( $update_data ) || ! isset( $update_data->version, $update_data->download_url ) ) {
-		return $transient; // 想定外のフォーマット
+	// response に既にセット済みならスキップ（重複防止）
+	if ( isset( $transient->response[ $theme_slug ] ) ) {
+		return $transient;
 	}
 
-	// ─ バージョン比較
+	// 更新情報をキャッシュ付きで取得
+	$update_data = lw_get_remote_update_data();
+	if ( false === $update_data ) {
+		return $transient;
+	}
+
+	// バージョン比較
 	if ( version_compare( $current_version, $update_data->version, '<' ) ) {
 		$transient->response[ $theme_slug ] = array(
 			'theme'       => $theme_slug,
 			'new_version' => $update_data->version,
-			'url'         => 'https://lite-word.com',  // 任意の詳細ページ
+			'url'         => 'https://lite-word.com',
 			'package'     => $update_data->download_url,
 		);
+	} else {
+		// 最新版の場合は response から除去
+		unset( $transient->response[ $theme_slug ] );
 	}
 
 	return $transient;
@@ -66,44 +124,33 @@ function lw_theme_update_notice() {
 		return;
 	}
 
-	// ─ 権限チェック（編集者以下には出さない）
+	// 権限チェック
 	if ( ! current_user_can( 'update_themes' ) ) {
 		return;
 	}
 
-	// ─ 親テーマ情報
-	$current_theme = wp_get_theme();
-	if ( is_child_theme() ) {
-		$current_theme = $current_theme->parent();
-	}
-	if ( ! $current_theme || ! $current_theme->exists() ) {
+	// テーマ情報
+	$theme = wp_get_theme( LW_THEME_SLUG );
+	if ( ! $theme->exists() ) {
 		return;
 	}
-	$current_version = $current_theme->get( 'Version' );
-	$theme_slug      = $current_theme->get_stylesheet();
+	$current_version = $theme->get( 'Version' );
+	$theme_slug      = LW_THEME_SLUG;
 
-	// ─ 最新バージョン取得
-	$update_url = 'https://lite-word.com/theme-files/theme-update.json';
-	$response   = wp_remote_get( $update_url );
-	if ( is_wp_error( $response ) ) {
-		return;
-	}
-	$update_data = json_decode( wp_remote_retrieve_body( $response ) );
-	if ( ! is_object( $update_data ) || ! isset( $update_data->version, $update_data->changelog ) ) {
+	// 更新情報をキャッシュ付きで取得
+	$update_data = lw_get_remote_update_data();
+	if ( false === $update_data || ! isset( $update_data->changelog ) ) {
 		return;
 	}
 
-	// ─ 旧 → 新 なら通知
+	// 旧 → 新 なら通知
 	if ( version_compare( $current_version, $update_data->version, '<' ) ) {
 
-		/* ---------- ワンクリック更新リンク ---------- */
 		$upgrade_url = wp_nonce_url(
 			self_admin_url( 'update.php?action=upgrade-theme&theme=' . $theme_slug ),
 			'upgrade-theme_' . $theme_slug
 		);
-
-		/* ---------- 更新ページ（update-core.php）へのリンク ---------- */
-		$update_core_url = admin_url( 'update-core.php#themes' );
+		$update_core_url = self_admin_url( 'update-core.php#themes' );
 
 		?>
 		<div class="lw-update-notice">
@@ -321,41 +368,33 @@ function lw_theme_update_notice() {
  *===================================*/
 function lw_get_theme_update_notice_html() {
 
-	// ─ 権限チェック
+	// 権限チェック
 	if ( ! current_user_can( 'update_themes' ) ) {
 		return '';
 	}
 
-	// ─ 親テーマ情報
-	$current_theme = wp_get_theme();
-	if ( is_child_theme() ) {
-		$current_theme = $current_theme->parent();
-	}
-	if ( ! $current_theme || ! $current_theme->exists() ) {
+	// テーマ情報
+	$theme = wp_get_theme( LW_THEME_SLUG );
+	if ( ! $theme->exists() ) {
 		return '';
 	}
-	$current_version = $current_theme->get( 'Version' );
-	$theme_slug      = $current_theme->get_stylesheet();
+	$current_version = $theme->get( 'Version' );
+	$theme_slug      = LW_THEME_SLUG;
 
-	// ─ 最新バージョン取得
-	$update_url = 'https://lite-word.com/theme-files/theme-update.json';
-	$response   = wp_remote_get( $update_url );
-	if ( is_wp_error( $response ) ) {
-		return '';
-	}
-	$update_data = json_decode( wp_remote_retrieve_body( $response ) );
-	if ( ! is_object( $update_data ) || ! isset( $update_data->version, $update_data->changelog ) ) {
+	// 更新情報をキャッシュ付きで取得
+	$update_data = lw_get_remote_update_data();
+	if ( false === $update_data || ! isset( $update_data->changelog ) ) {
 		return '';
 	}
 
-	// ─ 旧 → 新 なら通知HTML生成
+	// 旧 → 新 なら通知HTML生成
 	if ( version_compare( $current_version, $update_data->version, '<' ) ) {
 
 		$upgrade_url = wp_nonce_url(
 			self_admin_url( 'update.php?action=upgrade-theme&theme=' . $theme_slug ),
 			'upgrade-theme_' . $theme_slug
 		);
-		$update_core_url = admin_url( 'update-core.php#themes' );
+		$update_core_url = self_admin_url( 'update-core.php#themes' );
 
 		ob_start();
 		?>
