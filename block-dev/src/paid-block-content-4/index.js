@@ -96,14 +96,14 @@ registerBlockType(metadata.name, {
 			<>
 				<InspectorControls>
 					{/* マニュアル */}
-					<PanelBody title="📖 マニュアル" initialOpen={false}>
+					<PanelBody title="マニュアル" initialOpen={false}>
 						<Button variant="secondary" href="https://www.youtube.com/watch?v=V5vRfbzV8_8" target="_blank">
 							このブロックの使い方はこちら
 						</Button>
 					</PanelBody>
 
 					{/* テキスト・色設定 */}
-					<PanelBody title="🎨 テキスト・色設定" initialOpen={true}>
+					<PanelBody title="色設定" initialOpen={true}>
 						<div style={{ 
 							border: '1px solid #e0e0e0', 
 							borderRadius: '4px', 
@@ -132,7 +132,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* CTA ボタン基本設定 */}
-					<PanelBody title="🔘 CTAボタン - 基本設定" initialOpen={false}>
+					<PanelBody title="ボタン設定" initialOpen={false}>
 						<div style={{ 
 							border: '1px solid #e0e0e0', 
 							borderRadius: '4px', 
@@ -204,7 +204,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* CTA ボタンレスポンシブ設定 */}
-					<PanelBody title="📱 CTAボタン - レスポンシブ設定" initialOpen={false}>
+					<PanelBody title="レスポンシブ設定" initialOpen={false}>
 						<div style={{ 
 							border: '1px solid #e0e0e0', 
 							borderRadius: '4px', 
@@ -251,7 +251,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* ギャラリー */}
-					<PanelBody title="🖼️ ギャラリー画像" initialOpen={false}>
+					<PanelBody title="画像設定" initialOpen={false}>
 						<div style={{ 
 							border: '1px solid #e0e0e0', 
 							borderRadius: '4px', 

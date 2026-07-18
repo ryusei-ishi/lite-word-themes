@@ -7,6 +7,16 @@
 	"category": "lw-utility",
 	"icon": "layout",
 	"description": "背景画像や動画を設定できるコンテナブロック",
+	"aiHint": {
+		"description": "コンテナブロック。背景画像/色+InnerBlocks。他ブロックを包むラッパー",
+		"excludeFromAutoSelect": true,
+		"contentAttributes": [],
+		"imageAttributes": [
+			"imagePc",
+			"imageSp"
+		],
+		"excludeReason": "InnerBlocksを使用するためAI直接生成非推奨"
+	},
 	"supports": {
 		"className": true
 	},
@@ -201,11 +211,5 @@
 		}
 	},
 	"editorScript": "file:./lw-bg-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 1
 }

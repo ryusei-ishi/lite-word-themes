@@ -37,7 +37,7 @@ registerBlockType(metadata.name, {
             <div {...blockProps}>
                 <InspectorControls>
                     {/* 横幅の設定 */}
-                    <PanelBody title="横幅の設定" initialOpen={false}>
+                    <PanelBody title="レイアウト設定" initialOpen={false}>
                         <div style={{ 
                             border: '1px solid #e0e0e0', 
                             borderRadius: '4px', 
@@ -83,7 +83,7 @@ registerBlockType(metadata.name, {
                         />
                     </PanelBody>
                     {/* 背景画像の設定 */}
-                    <PanelBody title="背景画像の設定">
+                    <PanelBody title="背景設定">
                         <MediaUpload
                             onSelect={onSelectBackgroundImage}
                             allowedTypes="image"
@@ -98,7 +98,7 @@ registerBlockType(metadata.name, {
                         />
                     </PanelBody>
                     {/* 背景画像のフィルター色の設定 */}
-                    <PanelBody title="フィルター色設定">
+                    <PanelBody title="フィルター設定">
                         <ColorPicker
                             color={filterColor}
                             onChangeComplete={onChangeFilterColor}
@@ -108,7 +108,7 @@ registerBlockType(metadata.name, {
                     
 
                     {/* ボタン色の設定 */}
-                    <PanelBody title="ボタン色設定">
+                    <PanelBody title="色設定">
                         <p>ボタン背景色</p>
                         <ColorPicker
                             color={buttonBackgroundColor}

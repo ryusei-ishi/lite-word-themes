@@ -9,23 +9,17 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "チェックマーク付きリスト。ボーダー付き。特徴・メリット箇条書きに。見出しなし",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"attributes": {
-		"fontLi": {
-			"type": "string",
-			"default": ""
-		},
-		"fontWeightLi": {
-			"type": "string",
-			"default": ""
-		},
-		"colorLiSvg": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"borderColor": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
+		"fontLi": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"fontWeightLi": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"colorLiSvg": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"borderColor": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
 		"contents": {
 			"type": "array",
 			"source": "query",
@@ -38,27 +32,14 @@
 				}
 			},
 			"default": [
-				{
-					"text": "リストテキストリストテキスト "
-				},
-				{
-					"text": "リストテキストリストテキスト "
-				},
-				{
-					"text": "リストテキストリストテキスト "
-				},
-				{
-					"text": "リストテキストリストテキスト "
-				}
-			]
+				{ "text": "リストテキストリストテキスト " },
+				{ "text": "リストテキストリストテキスト " },
+				{ "text": "リストテキストリストテキスト " },
+				{ "text": "リストテキストリストテキスト " }
+			],
+			"aiHint": { "role": "list", "contentGuide": "チェックリスト項目。3〜8個。各text 10〜30文字", "example": [{"text": "完全予約制で待ち時間なし"}] }
 		}
 	},
 	"editorScript": "file:./lw-list-3.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 3
 }

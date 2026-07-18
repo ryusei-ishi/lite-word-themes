@@ -35,7 +35,7 @@ registerBlockType( metadata.name, {
 		const addContent    = () => setAttributes( { contents:[ ...contents, { text_q:'新しい質問', text_a:'新しい回答' } ] } );
 		const removeContent = (i)=> setAttributes( { contents:contents.filter( (_,idx )=>idx!==i ) } );
 		const updateContent = (i,k,v)=>{
-			const c=[ ...contents ]; c[i][k]=v; setAttributes( { contents:c } );
+			const c=contents.map( (item,idx)=> idx===i ? { ...item, [k]:v } : item ); setAttributes( { contents:c } );
 		};
 
 		const blockProps = useBlockProps({
@@ -48,14 +48,14 @@ registerBlockType( metadata.name, {
 			<>
 				{/* サイドバー */}
 				<InspectorControls>
-					<PanelBody title="メインカラー">
+					<PanelBody title="色設定">
 						<ColorPalette value={ mainColor } onChange={ (v)=>setAttributes({mainColor:v}) } />
 					</PanelBody>
-					<PanelBody title="ラベルのフォント">
+					<PanelBody title="フォント設定（ラベル）">
 						<SelectControl label="フォント" value={ FontLabel } options={ fontOptions } onChange={ (v)=>setAttributes({FontLabel:v}) } />
 						<SelectControl label="太さ"   value={ fontWeightLabel } options={ fontWeightOptions } onChange={ (v)=>setAttributes({fontWeightLabel:v}) } />
 					</PanelBody>
-					<PanelBody title="QA テキストのフォント">
+					<PanelBody title="フォント設定（テキスト）">
 						<SelectControl label="フォント" value={ fontP } options={ fontOptions } onChange={ (v)=>setAttributes({fontP:v}) } />
 						<SelectControl label="質問の太さ" value={ fontWeightDt } options={ fontWeightOptions } onChange={ (v)=>setAttributes({fontWeightDt:v}) } />
 						<SelectControl label="回答の太さ" value={ fontWeightDd } options={ fontWeightOptions } onChange={ (v)=>setAttributes({fontWeightDd:v}) } />

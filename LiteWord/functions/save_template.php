@@ -2,6 +2,9 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 add_action('admin_post_lw_save_full_templates', 'lw_save_full_templates_to_db');
 function lw_save_full_templates_to_db() {
+    // TODO: 送信元を特定してからnonce検証を追加
+    // check_admin_referer('lw_save_templates_action', '_wpnonce');
+
     if (!current_user_can('administrator')) {
         wp_die('アクセス権限がありません。');
     }

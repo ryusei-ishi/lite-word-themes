@@ -6,6 +6,17 @@
 	"title": "吹き出しコメント 1",
 	"category": "lw-comment",
 	"icon": "format-chat",
+	"aiHint": {
+		"description": "吹き出しコメント。名前+タイトル+アバター画像。レビュー・感想表示に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"name",
+			"title"
+		],
+		"imageAttributes": [
+			"imageUrl"
+		]
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -68,11 +79,5 @@
 		}
 	},
 	"editorScript": "file:./lw-comment-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 1
 }

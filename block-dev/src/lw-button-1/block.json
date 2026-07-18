@@ -10,87 +10,44 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "基本リンクボタン。テキスト+URL。サイズ・色・角丸を細かくカスタマイズ可能",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["buttonText", "url"],
+		"imageAttributes": []
+	},
 	"attributes": {
 		"buttonText": {
 			"type": "string",
 			"source": "html",
 			"selector": "a",
-			"default": "詳細はこちら"
+			"default": "詳細はこちら",
+			"aiHint": { "role": "button", "contentGuide": "動詞形。4〜10文字", "example": "詳細を見る" }
 		},
 		"url": {
 			"type": "string",
 			"source": "attribute",
 			"selector": "a",
 			"attribute": "href",
-			"default": ""
+			"default": "",
+			"aiHint": { "role": "url", "contentGuide": "遷移先URL。#contact や /about/ 等" }
 		},
-		"openInNewTab": {
-			"type": "boolean",
-			"default": false
-		},
-		"fontSize": {
-			"type": "number",
-			"default": 100
-		},
-		"maxWidth": {
-			"type": "number",
-			"default": 240
-		},
-		"maxWidthSp": {
-			"type": "number",
-			"default": null
-		},
-		"backgroundColor": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"textColor": {
-			"type": "string",
-			"default": "#ffffff"
-		},
-		"paddingSize": {
-			"type": "string",
-			"default": "M"
-		},
-		"innerPaddingSize": {
-			"type": "string",
-			"default": "M"
-		},
-		"marginTop": {
-			"type": "number",
-			"default": 10
-		},
-		"marginBottom": {
-			"type": "number",
-			"default": 10
-		},
-		"alignment": {
-			"type": "string",
-			"default": "center"
-		},
-		"alignmentSp": {
-			"type": "string",
-			"default": "center"
-		},
-		"borderRadius": {
-			"type": "number",
-			"default": 0
-		},
-		"borderWidth": {
-			"type": "number",
-			"default": 0
-		},
-		"borderColor": {
-			"type": "string",
-			"default": "#000000"
-		}
+		"openInNewTab": { "type": "boolean", "default": false, "aiHint": { "skip": true } },
+		"fontSize": { "type": "number", "default": 100, "aiHint": { "skip": true } },
+		"maxWidth": { "type": "number", "default": 240, "aiHint": { "skip": true } },
+		"maxWidthSp": { "type": "number", "default": null, "aiHint": { "skip": true } },
+		"backgroundColor": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"textColor": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
+		"paddingSize": { "type": "string", "default": "M", "aiHint": { "skip": true } },
+		"innerPaddingSize": { "type": "string", "default": "M", "aiHint": { "skip": true } },
+		"marginTop": { "type": "number", "default": 10, "aiHint": { "skip": true } },
+		"marginBottom": { "type": "number", "default": 10, "aiHint": { "skip": true } },
+		"alignment": { "type": "string", "default": "center", "aiHint": { "skip": true } },
+		"alignmentSp": { "type": "string", "default": "center", "aiHint": { "skip": true } },
+		"borderRadius": { "type": "number", "default": 0, "aiHint": { "skip": true } },
+		"borderWidth": { "type": "number", "default": 0, "aiHint": { "skip": true } },
+		"borderColor": { "type": "string", "default": "#000000", "aiHint": { "skip": true } }
 	},
 	"editorScript": "file:./lw-button-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 1
 }

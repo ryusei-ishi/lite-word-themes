@@ -77,6 +77,7 @@ var ArrowSVG = function ArrowSVG() {
       arrowColor = attributes.arrowColor,
       maxWidthPx = attributes.maxWidthPx,
       captionBgColor = attributes.captionBgColor,
+      captionColor = attributes.captionColor,
       aspectHeightPx = attributes.aspectHeightPx;
 
     /* 画像操作 */
@@ -203,6 +204,18 @@ var ArrowSVG = function ArrowSVG() {
       onChange: function onChange(c) {
         return setAttributes({
           captionBgColor: c
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: '1em',
+        marginBottom: '0.5em'
+      }
+    }, "\u30AD\u30E3\u30D7\u30B7\u30E7\u30F3\u6587\u5B57\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+      value: captionColor,
+      onChange: function onChange(c) {
+        return setAttributes({
+          captionColor: c
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
@@ -356,6 +369,7 @@ var ArrowSVG = function ArrowSVG() {
       arrowColor = attributes.arrowColor,
       maxWidthPx = attributes.maxWidthPx,
       captionBgColor = attributes.captionBgColor,
+      captionColor = attributes.captionColor,
       aspectHeightPx = attributes.aspectHeightPx;
     var slideCount = images.length;
 
@@ -388,7 +402,8 @@ var ArrowSVG = function ArrowSVG() {
         alt: img.alt
       }), img.caption && /*#__PURE__*/React.createElement("figcaption", {
         style: {
-          backgroundColor: captionBgColor
+          backgroundColor: captionBgColor,
+          color: captionColor
         }
       }, img.caption));
     })), slideCount > 1 && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("div", {
@@ -499,7 +514,7 @@ module.exports = window["wp"]["element"];
   \************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-lw-gallery-3","version":"1.0.0","title":"Gallery 03 画像ギャラリー","category":"lw-banner","icon":"format-gallery","supports":{"anchor":true},"attributes":{"images":{"type":"array","default":[{"url":"https://lite-word.com/sample_img/shop/1.webp","alt":"ギャラリー画像1","caption":""},{"url":"https://lite-word.com/sample_img/shop/2.webp","alt":"ギャラリー画像2","caption":""},{"url":"https://lite-word.com/sample_img/shop/3.webp","alt":"ギャラリー画像3","caption":""},{"url":"https://lite-word.com/sample_img/shop/4.webp","alt":"ギャラリー画像4","caption":""},{"url":"https://lite-word.com/sample_img/shop/5.webp","alt":"ギャラリー画像5","caption":""}]},"borderRadiusEm":{"type":"number","default":0},"btnBgColor":{"type":"string","default":"var(--color-main)"},"arrowColor":{"type":"string","default":"#ffffff"},"maxWidthPx":{"type":"number","default":0},"captionBgColor":{"type":"string","default":"rgba(0,0,0,0.6)"},"aspectHeightPx":{"type":"number","default":700}},"editorScript":"file:./paid-block-lw-gallery-3.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":3}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-lw-gallery-3","version":"1.0.0","title":"Gallery 03 画像ギャラリー","category":"lw-banner","icon":"format-gallery","aiHint":{"description":"ギャラリー（キャプション付き）。画像+キャプションのグリッド","excludeFromAutoSelect":false,"contentAttributes":["images"],"imageAttributes":[]},"supports":{"anchor":true},"attributes":{"images":{"type":"array","default":[{"url":"https://lite-word.com/sample_img/shop/1.webp","alt":"ギャラリー画像1","caption":""},{"url":"https://lite-word.com/sample_img/shop/2.webp","alt":"ギャラリー画像2","caption":""},{"url":"https://lite-word.com/sample_img/shop/3.webp","alt":"ギャラリー画像3","caption":""},{"url":"https://lite-word.com/sample_img/shop/4.webp","alt":"ギャラリー画像4","caption":""},{"url":"https://lite-word.com/sample_img/shop/5.webp","alt":"ギャラリー画像5","caption":""}]},"borderRadiusEm":{"type":"number","default":0},"btnBgColor":{"type":"string","default":"var(--color-main)"},"arrowColor":{"type":"string","default":"#ffffff"},"maxWidthPx":{"type":"number","default":0},"captionBgColor":{"type":"string","default":"rgba(0,0,0,0.6)"},"aspectHeightPx":{"type":"number","default":700}},"editorScript":"file:./paid-block-lw-gallery-3.js","no":3}');
 
 /***/ })
 

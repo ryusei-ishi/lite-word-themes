@@ -275,7 +275,8 @@ registerBlockType(metadata.name, {
 			if (!richText) return '';
 			// HTMLタグを全て除去
 			const plainText = richText.replace(/<[^>]*>/g, '');
-			return plainText;
+			// 電話番号として有効な文字（数字・ハイフン・プラス）のみ残す
+			return plainText.replace(/[^\d\-\+]/g, '');
 		};
 
 		const plainPhoneNumber = getPlainPhoneNumber(phoneNumber);

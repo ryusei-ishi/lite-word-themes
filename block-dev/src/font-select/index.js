@@ -241,6 +241,7 @@ const underlineOptions = [
 	{ label:'下線 1 / Orange', value:'u-line-1-orange' },
 	{ label:'下線 1 / Main', value:'u-line-1-main' },
 	{ label:'下線 1 / Accent', value:'u-line-1-accent' },
+	{ label:'下線 1 / black', value:'u-line-1-black' },
 	{ label:'下線 1 / color_1', value:'u-line-1-color_1' },
 	{ label:'下線 1 / color_2', value:'u-line-1-color_2' },
 	{ label:'下線 1 / color_3', value:'u-line-1-color_3' },
@@ -268,6 +269,44 @@ const underlineOptions = [
 	{ label:'背景 3 / color_1', value:'u-line-3-color_1' },
 	{ label:'背景 3 / color_2', value:'u-line-3-color_2' },
 	{ label:'背景 3 / color_3', value:'u-line-3-color_3' },
+];
+
+/* 7-b) 下線の太さ ---------------------------------------------------- */
+const uLineWidthOptions = [
+	{ label:'未選択（0.4em）', value:'' },
+	{ label:'0.05em', value:'ulw-005' },
+	{ label:'0.1em',  value:'ulw-01' },
+	{ label:'0.15em', value:'ulw-015' },
+	{ label:'0.2em',  value:'ulw-02' },
+	{ label:'0.25em', value:'ulw-025' },
+	{ label:'0.3em',  value:'ulw-03' },
+	{ label:'0.35em', value:'ulw-035' },
+	{ label:'0.4em（デフォルト）', value:'ulw-04' },
+	{ label:'0.5em',  value:'ulw-05' },
+	{ label:'0.6em',  value:'ulw-06' },
+	{ label:'0.7em',  value:'ulw-07' },
+	{ label:'0.8em',  value:'ulw-08' },
+	{ label:'0.9em',  value:'ulw-09' },
+	{ label:'1em',    value:'ulw-1' },
+];
+
+/* 7-c) 下線の位置 ---------------------------------------------------- */
+const uLineOffsetOptions = [
+	{ label:'未選択', value:'' },
+	{ label:'-0.4em', value:'ulo--04' },
+	{ label:'-0.3em', value:'ulo--03' },
+	{ label:'-0.2em', value:'ulo--02' },
+	{ label:'-0.15em', value:'ulo--015' },
+	{ label:'-0.1em', value:'ulo--01' },
+	{ label:'-0.05em', value:'ulo--005' },
+	{ label:'0',       value:'ulo-0' },
+	{ label:'0.05em',  value:'ulo-005' },
+	{ label:'0.1em',   value:'ulo-01' },
+	{ label:'0.15em',  value:'ulo-015' },
+	{ label:'0.2em',   value:'ulo-02' },
+	{ label:'0.3em',   value:'ulo-03' },
+	{ label:'0.4em',   value:'ulo-04' },
+	{ label:'0.5em',   value:'ulo-05' },
 ];
 
 /* 8-a) 縁取り PC ----------------------------------------------------- */
@@ -384,6 +423,10 @@ registerFormatType( 'custom/font-combo', {
 		const curCenterPc  = getClassFromList(['text-center','text-left','text-right','text-justify']);
 		const curCenterSp  = getClassFromList(['text-center-sp','text-left-sp','text-right-sp','text-justify-sp']);
 
+		/* 下線の太さ・位置クラスを取得 */
+		const curULineWidth  = findClass('ulw-');
+		const curULineOffset = findClass('ulo-');
+
 		/* --- 更新ハンドラ -------------------------------------- */
 		const apply = (
 			fFamily   = currentFont,
@@ -404,6 +447,8 @@ registerFormatType( 'custom/font-combo', {
 			oColor    = curOutCol,
 			cPc       = curCenterPc,
 			cSp       = curCenterSp,
+			uLineWidth  = curULineWidth,
+			uLineOffset = curULineOffset,
 		) => {
 			let nv = wp.richText.removeFormat( value, 'custom/font-combo' );
 
@@ -425,6 +470,8 @@ registerFormatType( 'custom/font-combo', {
 					!c.startsWith('ml-')   &&
 					!c.startsWith('mr-')   &&
 					!c.startsWith('u-line-') &&
+					!c.startsWith('ulw-') &&
+					!c.startsWith('ulo-') &&
 					!c.startsWith('lw-outline-') &&
 					!c.startsWith('lw-outline-color-') &&
 					!alignmentClasses.includes(c)
@@ -448,6 +495,8 @@ registerFormatType( 'custom/font-combo', {
 			if (oColor)    set.add(oColor);
 			if (cPc)       set.add(cPc);
 			if (cSp)       set.add(cSp);
+			if (uLineWidth)  set.add(uLineWidth);
+			if (uLineOffset) set.add(uLineOffset);
 
 			nv = wp.richText.applyFormat(nv, {
 				type: 'custom/font-combo',
@@ -675,6 +724,22 @@ registerFormatType( 'custom/font-combo', {
 													options={underlineOptions}
 													onChange={v => apply(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, v)}
 												/>
+												{curUnderline && (
+													<div style={{ marginTop: '8px' }}>
+														<SelectControl
+															label="下線の太さ"
+															value={curULineWidth}
+															options={uLineWidthOptions}
+															onChange={v => apply(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, v)}
+														/>
+														<SelectControl
+															label="下線の位置"
+															value={curULineOffset}
+															options={uLineOffsetOptions}
+															onChange={v => apply(undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, undefined, v)}
+														/>
+													</div>
+												)}
 											</div>
 
 											{/* 縁取り */}

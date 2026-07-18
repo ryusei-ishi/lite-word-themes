@@ -92,7 +92,7 @@ registerBlockType(metadata.name, {
 				<InspectorControls>
 
 					{/* ── 1. 全体の設定 ── */}
-					<PanelBody title="📐 全体の設定" initialOpen={true}>
+					<PanelBody title="基本設定" initialOpen={true}>
 						<RadioControl 
 							label="📍 リンクボタンの配置" 
 							selected={position} 
@@ -121,7 +121,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* ── 2. ボタンサイズと間隔 ── */}
-					<PanelBody title="📏 リンクボタンサイズと間隔" initialOpen={false}>
+					<PanelBody title="レイアウト設定" initialOpen={false}>
 						<RangeControl 
 							label="🎪 角の丸み (px)" 
 							value={borderRadius}

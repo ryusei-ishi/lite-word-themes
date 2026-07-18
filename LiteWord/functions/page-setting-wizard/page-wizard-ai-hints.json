@@ -1,0 +1,76 @@
+{
+	"_meta": {
+		"description": "LiteWordページ設定ウィザードのAI向けメタ情報。固定ページ・投稿のタイトルとスラッグを設定するポップアップ機能の仕組みをAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21"
+	},
+	"feature": {
+		"title": "ページ設定ウィザード（タイトル・スラッグ入力ポップアップ）",
+		"aiDescription": "固定ページまたは投稿の編集画面を開いた際、タイトルが空（新規作成時やauto-draft）の場合にフルスクリーンのポップアップを表示し、タイトルとスラッグ（URLスラッグ）の入力を促す機能。管理画面のpost.phpとpost-new.phpで動作する。",
+		"userGuide": "新しいページを作成する際に、最初にタイトルとURLスラッグを決めるワークフローを強制する。スラッグを後から変更するとSEOに悪影響があるため、最初に適切なスラッグを設定させることが目的。"
+	},
+	"triggerConditions": {
+		"aiDescription": "ポップアップが表示される条件",
+		"conditions": [
+			"post-new.php（新規作成画面）にアクセスした場合",
+			"タイトルが空でコンテンツも空でステータスがauto-draftの場合",
+			"固定ページ（page）または投稿（post）の編集画面のみ"
+		],
+		"notShown": [
+			"タイトルが既に設定されている場合",
+			"コンテンツが既に入力されている場合",
+			"公開済み（publish/private）のページの場合"
+		]
+	},
+	"uiDesign": {
+		"aiDescription": "グラデーション背景のオーバーレイ上にカード型のポップアップを表示する。LiteWordのブランドカラー（紺〜水色系グラデーション）を使用。アニメーション付きのフェードイン演出。",
+		"components": {
+			"overlay": "全画面のグラデーション背景（z-index: 999999）。15秒サイクルのアニメーション付き。",
+			"backButton": "左上の「戻る」ボタン。固定ページ一覧に戻る。",
+			"popup": "中央のカード。タイトル入力欄、スラッグ入力欄、保存ボタン。max-width: 480px。",
+			"titleInput": "タイトル入力欄。必須。文字数カウンター付き。",
+			"slugInput": "スラッグ入力欄。必須。英数字・ハイフンのみ。",
+			"saveButton": "保存ボタン。グラデーション背景。バリデーション通過時のみ有効。"
+		},
+		"userGuide": "ポップアップはエディタの上にオーバーレイ表示されるため、タイトルとスラッグを入力しないとエディタにアクセスできない設計。ただし「戻る」ボタンで一覧に戻ることは可能。"
+	},
+	"ajaxEndpoints": {
+		"lw_save_page_title": {
+			"aiDescription": "タイトルとスラッグを保存するAJAXエンドポイント。新規作成の場合はwp_insert_postで下書きとして作成し、既存の場合はwp_update_postで更新する。公開済みのページはステータスを維持したまま更新する。",
+			"method": "POST",
+			"permission": "edit_pages",
+			"params": {
+				"post_id": "投稿ID（0の場合は新規作成）",
+				"title": "ページタイトル（必須、sanitize_text_field適用）",
+				"slug": "URLスラッグ（必須、sanitize_title適用）",
+				"is_published": "公開済みかどうか（true/false文字列）",
+				"nonce": "セキュリティトークン（lw_page_title_wizard_nonce）"
+			},
+			"behavior": {
+				"newPage": "post_idが0の場合、固定ページとして下書き作成。作成後のpost_idを返す。",
+				"existingDraft": "下書き・保留中の場合、タイトルとスラッグを更新し、ステータスはdraftに設定。",
+				"existingPublished": "公開済み（publish/private）の場合、タイトルとスラッグのみ更新し、ステータスは変更しない。"
+			}
+		}
+	},
+	"jsData": {
+		"aiDescription": "PHPからJSに渡されるデータ（wp_localize_script経由、変数名: lwPageTitleWizard）",
+		"fields": {
+			"postId": "現在の投稿ID",
+			"currentTitle": "現在のタイトル",
+			"currentSlug": "現在のスラッグ",
+			"hasSlug": "スラッグが設定済みか（自動生成でない本当のスラッグがあるか）",
+			"postStatus": "投稿ステータス（draft/publish/auto-draft等）",
+			"isPublished": "公開済みか（publish/private）",
+			"isNewPage": "完全な新規ページか",
+			"isPage": "固定ページか投稿か",
+			"ajaxUrl": "AJAX URL",
+			"nonce": "セキュリティトークン"
+		}
+	},
+	"jsFile": {
+		"path": "assets/js/page-title-wizard.js",
+		"dependencies": ["wp-data", "wp-dom-ready"],
+		"aiDescription": "ポップアップの表示制御、バリデーション、AJAX送信を行うJavaScriptファイル。Gutenbergのwp-dataストアと連携してブロックエディタにタイトル・スラッグを反映する。"
+	}
+}

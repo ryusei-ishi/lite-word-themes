@@ -9,6 +9,12 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "番号+タイトル+説明文+画像のカード型リスト。事業紹介・サービス一覧に。ショップテンプレート用",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"attributes": {
 		"contents": {
 			"type": "array",
@@ -79,11 +85,5 @@
 		}
 	},
 	"editorScript": "file:./shin-gas-station-01-list-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 15
 }

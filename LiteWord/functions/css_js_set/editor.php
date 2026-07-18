@@ -35,6 +35,7 @@ function add_admin_style() {
 }
 add_action( 'admin_enqueue_scripts', 'add_admin_style' );
 
+
 /* =================================================
  * Gutenberg エディタ専用の CSS / JS
  * ================================================= */
@@ -60,6 +61,18 @@ function enqueue_block_editor_assets() {
         get_template_directory_uri() . '/assets/js/font_set.js',
         ['wp-dom-ready'],
         css_version()
+    );
+    /* WP7.0 以降、enqueue_block_editor_assets 経由の font_style.min.css は
+       エディタ iframe にコピーされない（フォント変更が反映されない原因）。
+       font_set.js が iframe に直接注入できるよう URL を渡す。
+       ※ [data-lw_font_set] への font-family 定義のみ。Google Fonts の実体(@font-face)は
+         font.js/font_set.js の CDN 注入が別途担当する。 */
+    wp_localize_script(
+        'font_set_js',
+        'LW_FONT_ASSETS',
+        array(
+            'fontStyleCss' => get_template_directory_uri() . '/assets/css/font_style.min.css' . css_version(),
+        )
     );
     wp_enqueue_script(
         'disable-spacer-block',
@@ -293,6 +306,13 @@ function add_gutenberg_editor_scripts( $hook ) {
     wp_enqueue_script(
         'block-padding-controls',
         get_template_directory_uri() . '/assets/js/block-padding-controls.js',
+        [ 'wp-blocks', 'wp-editor', 'wp-components', 'wp-hooks', 'wp-element' ],
+        css_version(),
+        true
+    );
+     wp_enqueue_script(
+        'block-position-controls',
+        get_template_directory_uri() . '/assets/js/block-position-controls.js',
         [ 'wp-blocks', 'wp-editor', 'wp-components', 'wp-hooks', 'wp-element' ],
         css_version(),
         true

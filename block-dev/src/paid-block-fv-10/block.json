@@ -7,12 +7,12 @@
 	"category": "lw-firstview",
 	"icon": "cover-image",
 	"editorScript": "file:./paid-block-fv-10.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "下層ページ用シンプルFV。中央タイトル+背景画像+フィルター装飾。プレミアムデザイン",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle"],
+		"imageAttributes": ["backgroundImage", "backgroundImageSp"]
+	},
 	"supports": {
 		"anchor": true
 	},

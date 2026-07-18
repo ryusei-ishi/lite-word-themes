@@ -1,0 +1,305 @@
+{
+	"_meta": {
+		"description": "LiteWordダッシュボードトップ画面とカスタムブロック挿入UIのAI向けメタ情報。管理画面で最初に目にする画面の構成・機能・コンポーネントをAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21"
+	},
+	"feature": {
+		"title": "ダッシュボードトップ・カスタムブロック挿入UI",
+		"aiDescription": "WordPress管理画面のダッシュボード（index.php）をLiteWord専用にカスタマイズする機能。WordPress標準ウィジェットを削除し、サイト制作ウィザード、サイト構造ツリー、お知らせ、SEOセルフチェック、タスク管理、ブロック挿入UIを統合した独自のダッシュボードを表示する。サイドバー＋メインコンテンツの2カラム構成。",
+		"userGuide": "LiteWordテーマをインストールすると、WordPressのダッシュボードが専用画面に置き換わる。初めてのユーザーはサイト制作ウィザードに沿って設定を進めることで、SEOに強いサイトを構築できる。"
+	},
+	"layout": {
+		"aiDescription": "ダッシュボードは左側のサイドバーと右側のメインコンテンツエリアで構成される。サイドバー幅400px（折りたたみ時258px）。モバイルではサイドバーが上部に表示される。",
+		"sidebar": {
+			"id": "lw-dashboard-sidebar",
+			"aiDescription": "左側のサイドバー。各機能へのアクセスボタンを縦に配置。",
+			"buttons": [
+				{
+					"id": "lw-page-tree-trigger",
+					"label": "サイト構造",
+					"icon": "dashicons-networking",
+					"aiDescription": "固定ページのツリー構造をマインドマップ風に表示するモーダルを開く。"
+				},
+				{
+					"label": "旧）操作マニュアル",
+					"icon": "dashicons-book-alt",
+					"aiDescription": "テーマ内蔵の操作マニュアルビューアーへのリンク。",
+					"link": "admin.php?page=lw-manual-viewer"
+				},
+				{
+					"id": "lw-tasklist-trigger",
+					"label": "タスク管理",
+					"icon": "dashicons-clipboard",
+					"aiDescription": "固定ページごとの指示・コメント管理機能。プレミアムプラン限定。未完了件数のバッジ表示あり。",
+					"premiumOnly": true
+				},
+				{
+					"label": "サイトヘルス",
+					"icon": "dashicons-heart",
+					"aiDescription": "WordPress標準のサイトヘルス画面へのリンク。",
+					"link": "site-health.php"
+				},
+				{
+					"id": "lw-seo-check-trigger",
+					"label": "SEOセルフチェック",
+					"icon": "dashicons-yes-alt",
+					"aiDescription": "SEO対策の実施状況をチェックリスト形式で自己評価する機能。進捗率をバッジで表示。"
+				},
+				{
+					"id": "lw-trial-start-trigger",
+					"label": "無料トライアル",
+					"aiDescription": "14日間の無料トライアルを開始するボタン。サブスク契約者以外かつトライアル未経験（または60日経過後）の場合のみ表示。",
+					"conditionalDisplay": "非サブスク契約者 かつ トライアル未経験/60日経過後"
+				},
+				{
+					"id": "lw-premium-plan-trigger",
+					"label": "プレミアムプラン",
+					"aiDescription": "プレミアムプランの契約案内ボタン。サブスク契約者以外に表示。",
+					"conditionalDisplay": "非サブスク契約者のみ"
+				}
+			]
+		},
+		"mainContent": {
+			"id": "lw-dashboard-content",
+			"aiDescription": "右側のメインコンテンツエリア。テーマ更新通知、AIチャットボタン、サイト制作ウィザードを表示。"
+		}
+	},
+	"components": {
+		"wizard": {
+			"title": "サイト制作ウィザード",
+			"aiDescription": "18ステップのチェックリスト形式でサイト制作の進捗を管理する。各ステップに完了トグル、コメント欄、関連画面へのリンクがある。プログレスバーで全体の進捗率を表示。",
+			"totalSteps": 18,
+			"steps": {
+				"step_1": {
+					"title": "アクティベート設定",
+					"aiDescription": "LiteWordのデータ反映処理・テンプレート管理。LW_HAS_SUBSCRIPTION定数でサイト全体のアクティベート状態を判定。誰か1人がアクティベートすればサイト全体がプレミアムになる。",
+					"autoComplete": "アクティベート済みなら自動的に完了扱い",
+					"link": "admin.php?page=lw_template_management"
+				},
+				"step_2": {
+					"title": "サイト基本情報",
+					"aiDescription": "サイト名・キャッチフレーズ・ロゴの設定。モーダルで編集可能。"
+				},
+				"step_3": {
+					"title": "パーマリンク設定",
+					"aiDescription": "URLの形式を設定。permalink_structureが空（基本形式）の場合は警告バッジを表示。SEOに重要。"
+				}
+			},
+			"dataStorage": "wp_options テーブルの lw_wizard_status キーに各ステップの完了状態（ok）とコメント（comment）を保存。",
+			"userGuide": "サイト制作の順番がわからない初心者向けのガイド機能。ステップ順に進めることで、必要な設定を漏れなく行える。"
+		},
+		"pageTree": {
+			"title": "固定ページツリー（サイト構造）",
+			"file": "components/page-tree/page-tree.php",
+			"aiDescription": "固定ページの親子関係をマインドマップ風に放射状に表示するモーダル。トップページを中心に配置し、直線で接続する。ドラッグ&ドロップで親子関係を変更可能。固定ページ・投稿・下書きのフィルタリング、ズーム操作（Ctrl+ホイール対応）、トップページ未設定時の警告表示と設定UI。",
+			"features": [
+				"放射状マインドマップ表示",
+				"ドラッグ&ドロップで親子関係変更",
+				"固定ページ/投稿/下書きフィルター",
+				"ズームイン・アウト・リセット（Ctrl+ホイール対応）",
+				"トップページ未設定警告と設定UI"
+			],
+			"dependencies": ["jquery", "jquery-ui-draggable", "jquery-ui-droppable", "jquery-ui-sortable"],
+			"ajaxAction": "lw_get_pages_data",
+			"userGuide": "サイト全体の構造を視覚的に確認できる。ページの階層が深すぎないか、孤立したページがないかをチェックするのに有用。"
+		},
+		"newsWidget": {
+			"title": "お知らせウィジェット",
+			"file": "components/news-widget/news-widget.php",
+			"aiDescription": "LiteWordからのお知らせを表示するウィジェット。公式サイト・お問い合わせ・マニュアルへのリンクボタン付き。お知らせデータは lw_dashboard_news_items フィルターでカスタマイズ可能。",
+			"links": {
+				"officialSite": "https://lite-word.com/",
+				"contact": "https://lite-word.com/contact/",
+				"manual": "admin.php?page=lw-manual-viewer"
+			}
+		},
+		"instructions": {
+			"title": "タスク管理（指示・コメント機能）",
+			"file": "components/instructions/instructions.php",
+			"aiDescription": "固定ページごとに指示（タスク）を追加・管理できるプレミアム限定機能。専用テーブル wp_lw_instructions を使用。ステータス管理（未着手/チェック依頼/完了）、担当者割り当て、画像添付、返信スレッド、並び替え（ドラッグ&ドロップ）、ページに紐づかない汎用タスクの作成が可能。",
+			"premiumOnly": true,
+			"database": {
+				"tableName": "wp_lw_instructions",
+				"version": "1.3",
+				"columns": {
+					"id": "自動採番ID",
+					"page_id": "固定ページID（0の場合はページに紐づかない汎用タスク）",
+					"parent_id": "親指示ID（返信スレッド用、NULLなら親指示）",
+					"content": "指示・コメント内容",
+					"image_path": "添付画像ファイル名（wp-content/uploads/lw-instructions/に保存）",
+					"status": "ステータス（not-started/check-requested/completed）",
+					"assigned_to": "担当者のユーザーID",
+					"custom_title": "汎用タスクのタイトル（page_id=0の場合に使用）",
+					"link_url": "関連URL",
+					"sort_order": "並び順",
+					"created_by": "作成者のユーザーID",
+					"created_at": "作成日時",
+					"updated_at": "更新日時"
+				}
+			},
+			"statuses": {
+				"not-started": "未着手（作業が必要）",
+				"check-requested": "チェック依頼（担当者にレビューを依頼）",
+				"completed": "完了"
+			},
+			"ajaxEndpoints": {
+				"lw_get_instructions": "指定ページの指示一覧取得（返信スレッド含む）",
+				"lw_add_instruction": "指示の追加（画像アップロード対応）",
+				"lw_update_instruction_status": "ステータス更新（担当者割り当て含む）",
+				"lw_update_instruction": "指示内容の編集（画像差し替え対応）",
+				"lw_update_instruction_order": "並び順の更新",
+				"lw_delete_instruction": "指示の削除（画像・返信も連動削除）",
+				"lw_get_instruction_counts": "ページごとの未完了件数取得",
+				"lw_get_all_pending_instructions": "全ページの未完了指示一覧取得",
+				"lw_get_post_list": "固定ページ・投稿の一覧取得（タスク対象選択用）",
+				"lw_get_editors": "編集者以上のユーザー一覧取得（担当者割り当て用）"
+			},
+			"imageUpload": {
+				"aiDescription": "指示に画像を添付可能。JPEG/PNG/GIF/WebP対応、最大5MB。wp-content/uploads/lw-instructions/ に保存。.htaccessで直接アクセスを制限。",
+				"allowedTypes": ["image/jpeg", "image/png", "image/gif", "image/webp"],
+				"maxSize": "5MB",
+				"storagePath": "wp-content/uploads/lw-instructions/"
+			},
+			"userGuide": "Web制作会社やチームでの共同制作に便利。クライアントからの修正指示をページごとに管理し、ステータスで進捗を追跡できる。チェック依頼機能で担当者間のレビューフローも実現。"
+		},
+		"seoCheck": {
+			"title": "SEOセルフチェック",
+			"file": "components/seo-check/seo-check.php",
+			"aiDescription": "SEO対策の実施状況をチェックリスト形式で自己評価する機能。カテゴリ別（ドメイン・サーバー関連、WordPress初期設定、技術的SEO等）にチェック項目を定義し、ユーザーメタデータに保存する。進捗率をサイドバーのバッジに表示。",
+			"categories": {
+				"domain_server": {
+					"title": "ドメイン・サーバー関連",
+					"aiDescription": "SEOの土台となる基盤設定。SSL化、サーバー応答速度、稼働率、ドメイン信頼性。",
+					"itemCount": 5
+				},
+				"wp_initial": {
+					"title": "WordPress初期設定",
+					"aiDescription": "パーマリンク、サイトタイトル、検索エンジン表示設定、タイムゾーン、www統一。",
+					"itemCount": 5
+				},
+				"technical_seo": {
+					"title": "技術的SEO",
+					"aiDescription": "robots.txt、XMLサイトマップ、Search Console登録等。",
+					"itemCount": "複数"
+				}
+			},
+			"dataStorage": "ユーザーメタデータ lw_seo_check_data にカテゴリ・項目ごとのチェック状態を保存。",
+			"userGuide": "SEOの知識がなくても、チェックリストに沿って対策状況を確認できる。各項目に説明文があり、何をすべきかがわかる。"
+		}
+	},
+	"customBlockInsertSystem": {
+		"title": "カスタムブロック挿入UI",
+		"file": "custom_bloc_insert_system/index.php",
+		"class": "LW_Custom_Block_Insert_System",
+		"aiDescription": "ブロックエディタのサイドバーに表示されるLiteWordカスタムブロックの挿入パネル。block.jsonから動的にブロック一覧を生成し、カテゴリ別に表示する。ブロックのライブプレビュー、セクションテンプレートの挿入にも対応。プレミアム/無料/単品購入のブロック種別を判定し、未購入ブロックには購入案内を表示。",
+		"blockCategories": {
+			"aiDescription": "カスタムブロックは以下のカテゴリに分類される。カテゴリ設定はblock_category_set.phpで定義。",
+			"order": [
+				{ "slug": "lw-heading", "name": "見出し", "sortOrder": 1 },
+				{ "slug": "lw-list", "name": "リスト", "sortOrder": 2 },
+				{ "slug": "lw-box", "name": "ボックス", "sortOrder": 3 },
+				{ "slug": "lw-button", "name": "ボタン", "sortOrder": 4 },
+				{ "slug": "lw-banner", "name": "バナー", "sortOrder": 5 },
+				{ "slug": "lw-cta", "name": "CTA", "sortOrder": 6 },
+				{ "slug": "lw-faq", "name": "FAQ", "sortOrder": 7 },
+				{ "slug": "lw-table", "name": "テーブル", "sortOrder": 8 },
+				{ "slug": "lw-step", "name": "ステップ", "sortOrder": 9 },
+				{ "slug": "lw-profile", "name": "プロフィール", "sortOrder": 10 },
+				{ "slug": "lw-firstview", "name": "ファーストビュー", "sortOrder": 11 },
+				{ "slug": "lw-parts", "name": "パーツ", "sortOrder": 12 }
+			]
+		},
+		"blockTypes": {
+			"free": {
+				"aiDescription": "無料で使えるブロック。スラッグにpaid-block-やshin-gas-station-/lw-pr-を含まないブロック。"
+			},
+			"paid": {
+				"aiDescription": "単品購入ブロック。スラッグがpaid-block-で始まるブロック。LiteWord SHOPで個別購入。",
+				"slugPrefix": "paid-block-"
+			},
+			"premium": {
+				"aiDescription": "プレミアムプラン限定ブロック。スラッグがshin-gas-station-またはlw-pr-で始まるブロック。サブスクリプション契約またはトライアル中に使用可能。",
+				"slugPrefixes": ["shin-gas-station-", "lw-pr-"]
+			}
+		},
+		"restApiEndpoints": {
+			"templates": {
+				"route": "lw-template-put-test/v1/templates",
+				"method": "GET",
+				"aiDescription": "block.jsonファイルから動的にブロック一覧を生成して返す。各ブロックの名前、スラッグ、タイトル、カテゴリ、プレビュー画像パス、ブロックタイプ（free/paid/premium）、並び順（no）を含む。"
+			},
+			"preview": {
+				"route": "lw-template-put-test/v1/preview",
+				"method": "POST",
+				"aiDescription": "指定されたブロックをdo_blocksでレンダリングし、HTML+CSSを返す。エディタ内でのライブプレビューに使用。"
+			},
+			"sectionTemplates": {
+				"route": "lw-template-put-test/v1/section-templates",
+				"method": "GET",
+				"aiDescription": "セクションテンプレート（複数ブロックの組み合わせ）の一覧を返す。JSONファイルベースで管理。pr_で始まるファイル名はプレミアム専用。"
+			},
+			"sectionTemplateDetail": {
+				"route": "lw-template-put-test/v1/section-templates/{filename}",
+				"method": "GET",
+				"aiDescription": "指定されたセクションテンプレートのJSONデータ（ブロック構造）を返す。"
+			},
+			"sectionTemplatePreview": {
+				"route": "lw-template-put-test/v1/section-templates/{filename}/preview",
+				"method": "GET",
+				"aiDescription": "セクションテンプレートをレンダリングしてHTML+CSS一覧を返す。"
+			}
+		},
+		"previewImages": {
+			"aiDescription": "ブロックのプレビュー画像はmy-blocks/build/{blockSlug}/配下に配置。優先順位: sample.webp > preview.webp > preview.png。スマホ用はsample-sp.webp。"
+		},
+		"premiumStatus": {
+			"aiDescription": "ブロック挿入UI表示時にプレミアム状態を判定する。サブスクリプション、トライアル、単品購入のいずれかで利用可能か判定し、未購入ブロックには購入案内リンクを表示。",
+			"checks": {
+				"isSubscriptionActive": "lw_template_is_active()でサブスク契約を判定",
+				"isTrialActive": "lw_is_trial_active()でトライアル中を判定",
+				"purchasedBlocks": "LwTemplateSettingクラスで単品購入済みブロックを取得",
+				"excludedBlocks": "block_Outright_purchase_only()でサブスク対象外ブロックを取得"
+			}
+		},
+		"cssVariables": {
+			"aiDescription": "エディタ内プレビューで使用するCSS変数。テーマカスタマイザーの設定値（メインカラー、アクセントカラー等）とページ固有のメタデータから取得。ページ固有の値が優先される。",
+			"variables": {
+				"colorMain": "メインカラー（デフォルト: #1a72ad）",
+				"colorAccent": "アクセントカラー（デフォルト: #d34a4a）",
+				"colorText": "文字色（デフォルト: #060606）",
+				"colorPageBgPc": "PC版ページ背景色",
+				"colorPageBgSp": "スマホ版ページ背景色",
+				"colorContentBgPc": "PC版コンテンツ背景色",
+				"colorContentBgSp": "スマホ版コンテンツ背景色",
+				"colorLinkCommon": "リンク色（デフォルト: #0066cc）",
+				"maxWidthClm1": "1カラム時の最大横幅（デフォルト: 1120px）"
+			}
+		},
+		"editorAssets": {
+			"js": "custom_bloc_insert_system/assets/js/editor.js",
+			"css": "custom_bloc_insert_system/assets/css/editor.css",
+			"dependencies": ["wp-plugins", "wp-edit-post", "wp-editor", "wp-element", "wp-components", "wp-data", "wp-blocks", "wp-dom-ready"],
+			"aiDescription": "ブロックエディタに読み込まれるJSとCSS。JSはReactコンポーネントとしてサイドバーパネルを構築する。"
+		},
+		"userGuide": "ブロックエディタの右サイドバーにLiteWord専用のブロック挿入パネルが表示される。WordPress標準のブロック挿入UIとは別に、プレビュー画像付きでブロックを選択できる。セクションテンプレートを使えば、複数ブロックの組み合わせを一度に挿入可能。"
+	},
+	"removedDefaultWidgets": {
+		"aiDescription": "LiteWordダッシュボードでは以下のWordPress標準ウィジェットが削除される。",
+		"removed": [
+			"dashboard_primary（WordPressイベントとニュース）",
+			"dashboard_right_now（概要）",
+			"dashboard_activity（アクティビティ）",
+			"dashboard_quick_press（クイックドラフト）",
+			"dashboard_site_health（サイトヘルス）"
+		]
+	},
+	"premiumFeatureGating": {
+		"aiDescription": "プレミアム機能の判定はLW_HAS_SUBSCRIPTION定数で行う。サイト全体で判定され、いずれか1ユーザーがアクティベートすればサイト全体がプレミアムになる。トライアルはlw_is_trial_active()で判定。14日間の無料トライアルあり。トライアル終了後60日経過で再トライアル可能。",
+		"premiumOnlyFeatures": [
+			"タスク管理（指示・コメント機能）",
+			"プレミアムブロックの使用",
+			"一部のセクションテンプレート（pr_プレフィックス）"
+		]
+	}
+}

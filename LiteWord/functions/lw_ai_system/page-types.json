@@ -1,0 +1,159 @@
+{
+  "pageTypes": {
+    "lp": {
+      "label": "LP（ランディングページ）",
+      "description": "商品やサービスの訴求に特化したページ",
+      "questions": [
+        {
+          "id": "business_name",
+          "label": "サービス名・商品名",
+          "placeholder": "例：〇〇整体院、△△オンラインスクール",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "target",
+          "label": "ターゲット顧客",
+          "placeholder": "例：30代〜40代の働く女性、肩こり・腰痛に悩む方",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "problem",
+          "label": "顧客が抱える悩み・課題",
+          "placeholder": "例：慢性的な肩こりや腰痛がひどく、仕事に集中できない",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "solution",
+          "label": "提供する解決策・メリット",
+          "placeholder": "例：独自の施術法で根本から改善、初回から効果を実感",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "features",
+          "label": "特徴・強み（3つ程度）",
+          "placeholder": "例：①国家資格保有のスタッフ ②完全個室でリラックス ③駅徒歩3分の好立地",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "cta",
+          "label": "ユーザーに取ってほしい行動",
+          "placeholder": "例：無料相談の申し込み、初回体験の予約",
+          "type": "text",
+          "required": true
+        }
+      ],
+      "defaultSections": ["firstview", "solution", "features", "voice", "step", "faq", "cta"],
+      "industrySections": {
+        "医療・クリニック": ["firstview", "solution", "features", "staff", "step", "voice", "faq", "access", "cta"],
+        "整体・接骨院": ["firstview", "solution", "features", "step", "voice", "price", "faq", "access", "cta"],
+        "美容・サロン": ["firstview", "solution", "features", "service", "voice", "price", "step", "gallery", "faq", "cta"],
+        "飲食店": ["firstview", "introduction", "service", "gallery", "voice", "access", "cta"],
+        "教育・スクール": ["firstview", "solution", "features", "step", "voice", "price", "faq", "cta"],
+        "IT・Web": ["firstview", "solution", "features", "service", "step", "voice", "price", "faq", "cta"],
+        "士業・コンサル": ["firstview", "introduction", "features", "service", "staff", "step", "voice", "faq", "cta"],
+        "不動産": ["firstview", "features", "service", "gallery", "step", "voice", "company", "faq", "cta"],
+        "ECサイト": ["firstview", "solution", "features", "service", "voice", "price", "step", "faq", "cta"]
+      }
+    },
+    "top": {
+      "label": "トップページ",
+      "description": "サイトの顔となるメインページ",
+      "questions": [
+        {
+          "id": "business_name",
+          "label": "会社名・サービス名",
+          "placeholder": "例：株式会社〇〇、〇〇クリニック",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "business_type",
+          "label": "業種・事業内容",
+          "placeholder": "例：Web制作会社、整骨院、飲食店",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "target",
+          "label": "主なターゲット",
+          "placeholder": "例：中小企業の経営者、地域の住民",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "services",
+          "label": "主なサービス・商品",
+          "placeholder": "例：Webサイト制作、コンサルティング、各種治療",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "appeal",
+          "label": "アピールしたいポイント",
+          "placeholder": "例：創業50年の実績、最新の設備、丁寧なサポート",
+          "type": "textarea",
+          "required": true
+        }
+      ],
+      "defaultSections": ["firstview", "introduction", "service", "features", "news", "cta"],
+      "industrySections": {
+        "医療・クリニック": ["firstview", "introduction", "service", "features", "staff", "voice", "access", "news", "cta"],
+        "整体・接骨院": ["firstview", "introduction", "features", "service", "voice", "step", "access", "news", "cta"],
+        "美容・サロン": ["firstview", "introduction", "service", "gallery", "staff", "voice", "access", "news", "cta"],
+        "飲食店": ["firstview", "introduction", "service", "gallery", "access", "news", "cta"],
+        "企業・コーポレート": ["firstview", "introduction", "service", "features", "company", "staff", "news", "cta"],
+        "IT・Web": ["firstview", "introduction", "service", "features", "step", "voice", "news", "cta"],
+        "士業・コンサル": ["firstview", "introduction", "service", "features", "staff", "company", "voice", "news", "cta"],
+        "不動産": ["firstview", "introduction", "service", "features", "gallery", "company", "access", "news", "cta"],
+        "ECサイト": ["firstview", "introduction", "service", "features", "voice", "news", "cta"]
+      }
+    },
+    "other": {
+      "label": "その他",
+      "description": "上記以外のページ（サービス紹介、採用ページなど）",
+      "questions": [
+        {
+          "id": "page_purpose",
+          "label": "ページの目的",
+          "placeholder": "例：サービス詳細の紹介、採用情報の掲載、キャンペーン告知",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "business_name",
+          "label": "会社名・サービス名",
+          "placeholder": "例：株式会社〇〇、〇〇サービス",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "target",
+          "label": "ターゲット",
+          "placeholder": "例：新規顧客、既存顧客、求職者",
+          "type": "text",
+          "required": true
+        },
+        {
+          "id": "content",
+          "label": "掲載したい主な内容",
+          "placeholder": "例：サービスの特徴、料金プラン、採用条件、キャンペーン詳細",
+          "type": "textarea",
+          "required": true
+        },
+        {
+          "id": "cta",
+          "label": "ユーザーに取ってほしい行動",
+          "placeholder": "例：問い合わせ、資料請求、応募、購入",
+          "type": "text",
+          "required": true
+        }
+      ],
+      "defaultSections": ["firstview", "introduction", "features", "cta"]
+    }
+  }
+}

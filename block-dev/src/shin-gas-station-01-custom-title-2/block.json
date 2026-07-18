@@ -10,34 +10,27 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "ボーダー付き見出し（サイズ調整）。メイン+サブタイトル。ショップテンプレート用",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "subTitle"],
+		"imageAttributes": []
+	},
 	"attributes": {
 		"mainTitle": {
 			"type": "string",
-			"default": "Heading Title"
+			"default": "Heading Title",
+			"aiHint": { "role": "heading", "contentGuide": "英語のメインタイトル", "example": "INFORMATION" }
 		},
 		"subTitle": {
 			"type": "string",
-			"default": "サブタイトル"
+			"default": "サブタイトル",
+			"aiHint": { "role": "subheading", "contentGuide": "日本語の補足タイトル。3〜10文字", "example": "お知らせ" }
 		},
-		"headingLevel": {
-			"type": "number",
-			"default": 2
-		},
-		"colorMain": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"headingSize": {
-			"type": "string",
-			"default": "M"
-		}
+		"headingLevel": { "type": "number", "default": 2, "aiHint": { "skip": true } },
+		"colorMain": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"headingSize": { "type": "string", "default": "M", "aiHint": { "skip": true } }
 	},
 	"editorScript": "file:./shin-gas-station-01-custom-title-2.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 15
 }

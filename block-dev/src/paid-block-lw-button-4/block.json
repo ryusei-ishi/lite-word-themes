@@ -7,88 +7,46 @@
 	"category": "lw-button",
 	"icon": "button",
 	"description": "有料リンクボタン（スタイル04）",
+	"aiHint": {
+		"description": "アイコン付き丸角ボタン。テキスト+矢印アイコン+URL。シンプルで上品なデザイン",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["btnText", "btnUrl"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
 	"attributes": {
 		"blockId": {
-			"type": "string"
+			"type": "string",
+			"aiHint": { "skip": true }
 		},
 		"btnText": {
 			"type": "string",
-			"default": "詳細はこちら"
+			"default": "詳細はこちら",
+			"aiHint": { "role": "button", "contentGuide": "動詞形。4〜10文字", "example": "詳細を見る" }
 		},
-		"bgColor": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"textColor": {
-			"type": "string",
-			"default": "#ffffff"
-		},
-		"fontWeight": {
-			"type": "string",
-			"default": "400"
-		},
-		"FontSet": {
-			"type": "string",
-			"default": ""
-		},
-		"fontSize": {
-			"type": "string",
-			"default": "m"
-		},
-		"position": {
-			"type": "string",
-			"default": "center"
-		},
-		"positionSp": {
-			"type": "string",
-			"default": ""
-		},
+		"bgColor": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"textColor": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
+		"fontWeight": { "type": "string", "default": "400", "aiHint": { "skip": true } },
+		"FontSet": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"fontSize": { "type": "string", "default": "m", "aiHint": { "skip": true } },
+		"position": { "type": "string", "default": "center", "aiHint": { "skip": true } },
+		"positionSp": { "type": "string", "default": "", "aiHint": { "skip": true } },
 		"btnUrl": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "role": "url", "contentGuide": "遷移先URL" }
 		},
-		"openNewTab": {
-			"type": "boolean",
-			"default": false
-		},
-		"selectedIcon": {
-			"type": "string",
-			"default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 512\"><path d=\"M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z\"/></svg>"
-		},
-		"iconVisible": {
-			"type": "boolean",
-			"default": true
-		},
-		"borderWidth": {
-			"type": "number",
-			"default": 1
-		},
-		"borderColor": {
-			"type": "string",
-			"default": "#ffffff"
-		},
-		"borderRadius": {
-			"type": "number",
-			"default": 200
-		},
-		"maxWidth": {
-			"type": "number",
-			"default": 320
-		},
-		"maxWidthSp": {
-			"type": "number",
-			"default": 320
-		}
+		"openNewTab": { "type": "boolean", "default": false, "aiHint": { "skip": true } },
+		"selectedIcon": { "type": "string", "default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 512\"><path d=\"M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z\"/></svg>", "aiHint": { "skip": true } },
+		"iconVisible": { "type": "boolean", "default": true, "aiHint": { "skip": true } },
+		"borderWidth": { "type": "number", "default": 1, "aiHint": { "skip": true } },
+		"borderColor": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
+		"borderRadius": { "type": "number", "default": 200, "aiHint": { "skip": true } },
+		"maxWidth": { "type": "number", "default": 320, "aiHint": { "skip": true } },
+		"maxWidthSp": { "type": "number", "default": 320, "aiHint": { "skip": true } }
 	},
 	"editorScript": "file:./paid-block-lw-button-4.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 4
 }

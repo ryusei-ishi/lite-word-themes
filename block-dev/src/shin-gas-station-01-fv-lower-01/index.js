@@ -34,7 +34,7 @@ registerBlockType(metadata.name, {
         return (
             <>
                 <InspectorControls>
-                    <PanelBody title="背景画像設定">
+                    <PanelBody title="背景設定">
                         <p>PCの時</p>
                         <MediaUpload
                             onSelect={onChangeBackgroundImage}
@@ -102,7 +102,7 @@ registerBlockType(metadata.name, {
                         />
                     </PanelBody>
         
-                    <PanelBody title="高さ設定">
+                    <PanelBody title="レイアウト設定">
                         <p>PC用高さ</p>
                         <SelectControl
                             value={minHeightPc}
@@ -122,7 +122,7 @@ registerBlockType(metadata.name, {
                             onChange={(value) => setAttributes({ minHeightSp: value })}
                         />
                     </PanelBody>
-                    <PanelBody title="内側の最大横幅">
+                    <PanelBody title="コンテンツ幅設定">
                         <RangeControl
                             label="最大幅 (px)"
                             value={maxWidth}

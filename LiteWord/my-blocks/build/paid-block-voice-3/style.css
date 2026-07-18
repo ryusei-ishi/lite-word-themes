@@ -8,6 +8,7 @@
   margin-right: -40px;
   width: calc(100% + 80px);
 }
+
 @container (max-width: 800px) {
   .lw_content_wrap.single .paid-block-voice-3 {
     margin-left: -32px;
@@ -15,6 +16,7 @@
     width: calc(100% + 64px);
   }
 }
+
 @container (max-width:600px) {
   .lw_content_wrap.single .paid-block-voice-3 {
     margin-left: -24px;
@@ -22,6 +24,7 @@
     width: calc(100% + 48px);
   }
 }
+
 @container (max-width:500px) {
   .lw_content_wrap.single .paid-block-voice-3 {
     margin-left: -20px;
@@ -40,6 +43,7 @@ html:has(.voice-modal.active),
 body:has(.voice-modal.active) {
   overflow: hidden;
 }
+
 html:has(.voice-modal.active) .lw_header_main,
 html:has(.voice-modal.active) .lw_footer_main,
 html:has(.voice-modal.active) .follow_bottom_cta,
@@ -51,37 +55,47 @@ body:has(.voice-modal.active) .follow_bottom_cta {
 }
 
 .paid-block-voice-3 {
+  position: relative;
   padding: 0 24px;
 }
+
 @container (max-width: 800px) {
   .paid-block-voice-3 {
     padding: 0;
   }
 }
+
 .paid-block-voice-3 > .inner {
+  position: relative;
   max-width: var(--paid-block-voice-3-max-width, var(--max-width-clm-1, 1120px));
   margin: 0 auto;
 }
+
 .paid-block-voice-3 > .inner:has(.swiper-pagination-lock) .voice-swiper {
   padding-bottom: 8px !important;
 }
+
 .paid-block-voice-3 > .inner .voice-swiper {
   padding: 8px 8px 60px 8px;
   position: relative;
 }
+
 @container (max-width: 800px) {
   .paid-block-voice-3 > .inner .voice-swiper {
     padding: 8px 40px 50px;
   }
 }
+
 @container (max-width: 600px) {
   .paid-block-voice-3 > .inner .voice-swiper {
     padding: 0 30px 50px;
   }
 }
+
 .paid-block-voice-3 > .inner .voice-swiper:has(.swiper-pagination) {
   padding-bottom: 60px;
 }
+
 .paid-block-voice-3 > .inner .voice-card {
   background: #fff;
   border-radius: 8px;
@@ -96,18 +110,22 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   font-size: 17px;
   background: var(--lw-voice-card-bg);
 }
+
 @container (max-width: 600px) {
   .paid-block-voice-3 > .inner .voice-card {
     font-size: 15px;
   }
 }
+
 .paid-block-voice-3 > .inner .voice-card:hover {
   transform: translateY(-4px);
   box-shadow: 0 6px 20px rgba(0, 0, 0, 0.12);
 }
+
 .paid-block-voice-3 > .inner .voice-card:hover .more-btn {
   opacity: 0.85;
 }
+
 .paid-block-voice-3 > .inner .voice-card .photo {
   width: 100px;
   height: 100px;
@@ -116,28 +134,32 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   overflow: hidden;
   border: 3px solid #f0f0f0;
 }
+
 .paid-block-voice-3 > .inner .voice-card .photo img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   background: #eee;
 }
+
 .paid-block-voice-3 > .inner .voice-card .name {
   margin: 0;
   font-size: 1.1em;
   font-weight: 600;
   color: var(--lw-voice-name-color, #333);
 }
+
 .paid-block-voice-3 > .inner .voice-card .meta {
   margin: 0;
   margin-top: 0.5em;
   font-size: 0.8em;
   color: var(--lw-voice-meta-color, #666);
 }
+
 .paid-block-voice-3 > .inner .voice-card .meta:empty {
   display: none;
 }
+
 .paid-block-voice-3 > .inner .voice-card .excerpt {
   font-size: 0.9em;
   line-height: 1.7em;
@@ -149,6 +171,7 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
 .paid-block-voice-3 > .inner .voice-card .more-btn {
   display: inline-block;
   padding: 8px 24px;
@@ -158,9 +181,11 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   border-radius: 20px;
   transition: opacity 0.3s ease;
 }
+
 .paid-block-voice-3 > .inner .swiper-pagination {
   bottom: 20px;
 }
+
 .paid-block-voice-3 > .inner .swiper-pagination-bullet {
   width: 10px;
   height: 10px;
@@ -168,11 +193,13 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   opacity: 1;
   transition: all 0.3s ease;
 }
+
 .paid-block-voice-3 > .inner .swiper-pagination-bullet-active {
   background: var(--color-pagination, var(--color-main, #333));
   width: 24px;
   border-radius: 5px;
 }
+
 .paid-block-voice-3 > .swiper-button-prev,
 .paid-block-voice-3 > .swiper-button-next {
   width: 44px;
@@ -181,22 +208,26 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   border-radius: 50%;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
   transition: all 0.3s ease;
-  margin-top: calc(0px - var(--swiper-navigation-size) / 0.8);
+  margin-top: calc(0px - (var(--swiper-navigation-size) / 0.8));
 }
+
 .paid-block-voice-3 > .swiper-button-prev:after,
 .paid-block-voice-3 > .swiper-button-next:after {
   font-size: 18px;
   font-weight: 700;
   color: var(--color-next-prev, var(--color-main, #333));
 }
+
 .paid-block-voice-3 > .swiper-button-prev:hover,
 .paid-block-voice-3 > .swiper-button-next:hover {
   background: var(--color-next-prev, var(--color-main, #333));
 }
+
 .paid-block-voice-3 > .swiper-button-prev:hover:after,
 .paid-block-voice-3 > .swiper-button-next:hover:after {
   color: #fff;
 }
+
 @container (max-width: 600px) {
   .paid-block-voice-3 > .swiper-button-prev,
   .paid-block-voice-3 > .swiper-button-next {
@@ -208,11 +239,13 @@ body:has(.voice-modal.active) .follow_bottom_cta {
     font-size: 14px;
   }
 }
-.paid-block-voice-3 .voice-modal {
+
+.paid-block-voice-3 .voice-modal,
+.paid-block-voice-3-modal {
   position: fixed;
   top: 0;
   left: 0;
-  z-index: 1000000000000000000000000000000;
+  z-index: 999999999999999999999999999999;
   width: 100%;
   height: 100%;
   z-index: 99999;
@@ -223,14 +256,20 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   visibility: hidden;
   transition: all 0.3s ease;
 }
-.paid-block-voice-3 .voice-modal.active {
+
+.paid-block-voice-3 .voice-modal.active,
+.paid-block-voice-3-modal.active {
   opacity: 1;
   visibility: visible;
 }
-.paid-block-voice-3 .voice-modal.active .modal-content {
+
+.paid-block-voice-3 .voice-modal.active .modal-content,
+.paid-block-voice-3-modal.active .modal-content {
   transform: scale(1);
 }
-.paid-block-voice-3 .voice-modal .modal-overlay {
+
+.paid-block-voice-3 .voice-modal .modal-overlay,
+.paid-block-voice-3-modal .modal-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -239,7 +278,9 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   background: rgba(0, 0, 0, 0.7);
   cursor: pointer;
 }
-.paid-block-voice-3 .voice-modal .modal-content {
+
+.paid-block-voice-3 .voice-modal .modal-content,
+.paid-block-voice-3-modal .modal-content {
   position: relative;
   z-index: 1;
   background: #fff;
@@ -249,21 +290,31 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   transform: scale(0.9);
   transition: transform 0.3s ease;
 }
-.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar {
+
+.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar,
+.paid-block-voice-3-modal .modal-content::-webkit-scrollbar {
   width: 8px;
 }
-.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar-track {
+
+.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar-track,
+.paid-block-voice-3-modal .modal-content::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 10px;
 }
-.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar-thumb {
+
+.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar-thumb,
+.paid-block-voice-3-modal .modal-content::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 10px;
 }
-.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar-thumb:hover {
+
+.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar-thumb:hover,
+.paid-block-voice-3-modal .modal-content::-webkit-scrollbar-thumb:hover {
   background: #aaa;
 }
-.paid-block-voice-3 .voice-modal .modal-close {
+
+.paid-block-voice-3 .voice-modal .modal-close,
+.paid-block-voice-3-modal .modal-close {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -280,27 +331,37 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   z-index: 2;
   transition: all 0.3s ease;
 }
-.paid-block-voice-3 .voice-modal .modal-close:hover {
+
+.paid-block-voice-3 .voice-modal .modal-close:hover,
+.paid-block-voice-3-modal .modal-close:hover {
   background: rgba(0, 0, 0, 0.1);
 }
-.paid-block-voice-3 .voice-modal .modal-close svg {
+
+.paid-block-voice-3 .voice-modal .modal-close svg,
+.paid-block-voice-3-modal .modal-close svg {
   width: 20px;
   height: 20px;
   color: #666;
 }
-.paid-block-voice-3 .voice-modal .modal-body {
+
+.paid-block-voice-3 .voice-modal .modal-body,
+.paid-block-voice-3-modal .modal-body {
   position: relative;
   padding: 50px 48px 40px;
   max-height: 70vh;
   text-align: center;
   overflow-y: auto;
 }
+
 @container (max-width: 600px) {
-  .paid-block-voice-3 .voice-modal .modal-body {
+  .paid-block-voice-3 .voice-modal .modal-body,
+  .paid-block-voice-3-modal .modal-body {
     padding: 50px 24px 32px;
   }
 }
-.paid-block-voice-3 .voice-modal .modal-photo {
+
+.paid-block-voice-3 .voice-modal .modal-photo,
+.paid-block-voice-3-modal .modal-photo {
   width: 120px;
   height: 120px;
   margin: 0 auto 24px;
@@ -308,23 +369,30 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   overflow: hidden;
   border: 4px solid #f0f0f0;
 }
-.paid-block-voice-3 .voice-modal .modal-photo img {
+
+.paid-block-voice-3 .voice-modal .modal-photo img,
+.paid-block-voice-3-modal .modal-photo img {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
-.paid-block-voice-3 .voice-modal .modal-name {
+
+.paid-block-voice-3 .voice-modal .modal-name,
+.paid-block-voice-3-modal .modal-name {
   font-size: 1.4em;
   font-weight: 600;
   margin: 0 0 8px 0;
   color: #333;
 }
-.paid-block-voice-3 .voice-modal .modal-meta {
+
+.paid-block-voice-3 .voice-modal .modal-meta,
+.paid-block-voice-3-modal .modal-meta {
   font-size: 0.9em;
   color: #999;
 }
-.paid-block-voice-3 .voice-modal .modal-text {
+
+.paid-block-voice-3 .voice-modal .modal-text,
+.paid-block-voice-3-modal .modal-text {
   margin-top: 1.5em;
   padding-bottom: 32px;
   font-size: 0.95em;
@@ -332,4 +400,4 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   color: #555;
   text-align: left;
   white-space: pre-line;
-}/*# sourceMappingURL=style.css.map */
+}

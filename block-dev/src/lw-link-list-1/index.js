@@ -62,8 +62,7 @@ registerBlockType( metadata.name, {
 		const addContent    = () => setAttributes( { contents: [ ...contents, { text: '新しいテキスト', link: '', icon: '' } ] } );
 		const removeContent = ( i ) => setAttributes( { contents: contents.filter( ( _, idx ) => idx !== i ) } );
 		const updateContent = ( i, key, val ) => {
-			const arr = [ ...contents ];
-			arr[ i ][ key ] = val;
+			const arr = contents.map( ( item, idx ) => idx === i ? { ...item, [ key ]: val } : item );
 			setAttributes( { contents: arr } );
 		};
 
@@ -83,7 +82,7 @@ registerBlockType( metadata.name, {
 			<>
 				<InspectorControls>
 					{/* 背景 */}
-					<PanelBody title="背景">
+					<PanelBody title="背景設定">
 						<ToggleControl
 							label="非表示 / 表示"                        /* ★ ラベル統一 */
 							checked={ backgroundSwitch }               /* ON で表示 */
@@ -127,7 +126,7 @@ registerBlockType( metadata.name, {
 					</PanelBody>
 
 					{/* レイアウト */}
-					<PanelBody title="レイアウト">
+					<PanelBody title="レイアウト設定">
 						<RangeControl
 							label="最大幅"
 							value={ MaxWidth }
@@ -163,7 +162,7 @@ registerBlockType( metadata.name, {
 					</PanelBody>
 
 					{/* タイトル設定 */}
-					<PanelBody title="タイトル設定">
+					<PanelBody title="基本設定">
 						<ToggleControl
 							label="非表示 / 表示"                        /* ★ ラベル統一 */
 							checked={ !hideTitle }                      /* ON で表示 */
@@ -172,7 +171,7 @@ registerBlockType( metadata.name, {
 					</PanelBody>
 
 					{/* デザイン共通設定 */}
-					<PanelBody title="リンクボタンの共通デザイン設定">
+					<PanelBody title="色設定">
 						<p>背景色</p>
 						<ColorPalette
 							value={ colorLiBg || 'transparent' }

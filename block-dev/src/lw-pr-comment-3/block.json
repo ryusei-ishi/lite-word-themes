@@ -1,0 +1,95 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-comment-3",
+	"version": "1.0.0",
+	"title": "吹き出しコメント 03（画像・InnerBlocks）",
+	"category": "lw-comment",
+	"icon": "format-chat",
+	"description": "吹き出しスタイルのコメントブロック。画像とInnerBlocksテキストを配置。",
+	"aiHint": {
+		"description": "吹き出しコメント（InnerBlocks）。アバター+自由コンテンツ",
+		"excludeFromAutoSelect": true,
+		"contentAttributes": [],
+		"imageAttributes": [
+			"comment3ImageUrl"
+		],
+		"excludeReason": "InnerBlocks使用のためAI直接生成非推奨"
+	},
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"comment3ImageWidthPc": {
+			"type": "number",
+			"default": 240
+		},
+		"comment3ImageWidthSp": {
+			"type": "number",
+			"default": 120
+		},
+		"comment3TextBdColorPc": {
+			"type": "string",
+			"default": "#3C7FC3"
+		},
+		"comment3TextInnerBg": {
+			"type": "string",
+			"default": "#e9f5ff"
+		},
+		"comment3ImageUrl": {
+			"type": "string",
+			"default": "https://placehold.co/240x240/e8e8e8/999999?text=Image"
+		},
+		"comment3ImageId": {
+			"type": "number",
+			"default": 0
+		},
+		"comment3ImageAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"comment3TextDfPc": {
+			"type": "number",
+			"default": 16
+		},
+		"comment3TextDfSp": {
+			"type": "number",
+			"default": 14
+		},
+		"comment3SpClm": {
+			"type": "boolean",
+			"default": true
+		},
+		"comment3BdOutside": {
+			"type": "boolean",
+			"default": false
+		},
+		"comment3BdColor": {
+			"type": "string",
+			"default": "#3C7FC3"
+		},
+		"comment3Bg": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"comment3AlignItems": {
+			"type": "string",
+			"default": "end"
+		},
+		"comment3MaxWidth": {
+			"type": "number",
+			"default": 980
+		},
+		"comment3TextInnerGapPc": {
+			"type": "number",
+			"default": 8
+		},
+		"comment3TextInnerGapSp": {
+			"type": "number",
+			"default": 8
+		}
+	},
+	"editorScript": "file:./lw-pr-comment-3.js",
+	"no": 3
+}

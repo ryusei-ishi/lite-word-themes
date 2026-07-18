@@ -10,50 +10,59 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "2色カスタムカラー見出し。メイン+サブタイトル。2色グラデーション装飾",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "subTitle"],
+		"imageAttributes": []
+	},
 	"attributes": {
 		"mainTitle": {
 			"type": "string",
-			"default": "カスタムタイトル"
+			"default": "カスタムタイトル",
+			"aiHint": { "role": "heading", "contentGuide": "セクション見出し。3〜15文字", "example": "お客様の声" }
 		},
 		"subTitle": {
 			"type": "string",
-			"default": "サブタイトル"
+			"default": "サブタイトル",
+			"aiHint": { "role": "subheading", "contentGuide": "英語表記 or 補足テキスト", "example": "VOICE" }
 		},
 		"headingLevel": {
 			"type": "number",
-			"default": 2
+			"default": 2,
+			"aiHint": { "skip": true }
 		},
 		"colorMain": {
 			"type": "string",
-			"default": "#0a71c0"
+			"default": "#0a71c0",
+			"aiHint": { "skip": true }
 		},
 		"colorSub": {
 			"type": "string",
-			"default": "#13214c"
+			"default": "#13214c",
+			"aiHint": { "skip": true }
 		},
 		"colorMainText": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "skip": true }
 		},
 		"colorSubText": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "skip": true }
 		},
 		"orderReversed": {
 			"type": "boolean",
-			"default": false
+			"default": false,
+			"aiHint": { "skip": true }
 		},
 		"maxWidth": {
 			"type": "number",
-			"default": 0
+			"default": 0,
+			"aiHint": { "skip": true }
 		}
 	},
 	"editorScript": "file:./lw-pr-custom-title-12.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 12
 }

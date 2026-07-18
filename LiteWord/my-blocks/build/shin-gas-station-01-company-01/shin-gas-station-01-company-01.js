@@ -19,6 +19,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/shin-gas-station-01-company-01/style.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/shin-gas-station-01-company-01/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/shin-gas-station-01-company-01/block.json");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -73,8 +79,9 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
 
     // コンテンツを更新
     var updateContent = function updateContent(index, key, value) {
-      var updatedContents = _toConsumableArray(contents);
-      updatedContents[index][key] = value;
+      var updatedContents = contents.map(function (content, i) {
+        return i === index ? _objectSpread(_objectSpread({}, content), {}, _defineProperty({}, key, value)) : content;
+      });
       setAttributes({
         contents: updatedContents
       });
@@ -83,7 +90,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       className: 'shin-gas-station-01-company-01'
     });
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u5916\u67A0\u306E\u8272"
+      title: "\u67A0\u7DDA\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: colorOuter,
       onChange: function onChange(newColorOuter) {
@@ -92,7 +99,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30BF\u30A4\u30C8\u30EB\u306E\u90E8\u5206\u306E\u8A2D\u5B9A"
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A\uFF08\u9805\u76EE\u540D\uFF09"
     }, /*#__PURE__*/React.createElement("p", null, "\u6587\u5B57\u306E\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: colorDt,
       onChange: function onChange(newColorDt) {
@@ -119,7 +126,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30C6\u30AD\u30B9\u30C8\u306E\u90E8\u5206\u306E\u8A2D\u5B9A"
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A\uFF08\u5185\u5BB9\uFF09"
     }, /*#__PURE__*/React.createElement("p", null, "\u6587\u5B57\u306E\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: colorDd,
       onChange: function onChange(newColorDd) {
@@ -931,7 +938,7 @@ module.exports = window["wp"]["components"];
   \*******************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-company-01","version":"1.0.0","title":"会社概要 1 shin shop pattern 01","category":"lw-table","icon":"building","supports":{"anchor":true},"editorScript":"file:./shin-gas-station-01-company-01.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":15,"attributes":{"colorOuter":{"type":"string","default":"var(--color-main)"},"colorDt":{"type":"string","default":"#7C7C7C"},"fontDt":{"type":"string","default":""},"fontWeightDt":{"type":"string","default":"600"},"colorDd":{"type":"string","default":"#111"},"fontDd":{"type":"string","default":""},"fontWeightDd":{"type":"string","default":""},"contents":{"type":"array","source":"query","selector":".shin-gas-station-01-company-01__dl","query":{"title":{"type":"string","source":"html","selector":"dt"},"text":{"type":"string","source":"html","selector":"dd"}},"default":[{"title":"社名","text":"株式会社サンプル"},{"title":"設立","text":"2000年4月1日"},{"title":"所在地","text":"東京都新宿区西新宿1-1-1"},{"title":"代表者","text":"代表取締役社長 山田太郎"},{"title":"資本金","text":"1億円"},{"title":"従業員数","text":"100名"},{"title":"事業内容","text":"ウェブサイト制作、システム開発、マーケティング支援"},{"title":"取引銀行","text":"みずほ銀行 新宿支店"},{"title":"主要取引先","text":"株式会社○○、株式会社△△、株式会社□□"},{"title":"連絡先","text":"TEL: 03-1234-5678 / FAX: 03-1234-5679"},{"title":"URL","text":"https://www.sample.co.jp"}]}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-company-01","version":"1.0.0","title":"会社概要 1 shin shop pattern 01","category":"lw-table","icon":"building","aiHint":{"description":"会社概要テーブル。左ボーダー付き定義リスト。ショップテンプレート用","excludeFromAutoSelect":false,"contentAttributes":["contents"],"imageAttributes":[]},"supports":{"anchor":true},"editorScript":"file:./shin-gas-station-01-company-01.js","no":15,"attributes":{"colorOuter":{"type":"string","default":"var(--color-main)"},"colorDt":{"type":"string","default":"#7C7C7C"},"fontDt":{"type":"string","default":""},"fontWeightDt":{"type":"string","default":"600"},"colorDd":{"type":"string","default":"#111"},"fontDd":{"type":"string","default":""},"fontWeightDd":{"type":"string","default":""},"contents":{"type":"array","source":"query","selector":".shin-gas-station-01-company-01__dl","query":{"title":{"type":"string","source":"html","selector":"dt"},"text":{"type":"string","source":"html","selector":"dd"}},"default":[{"title":"社名","text":"株式会社サンプル"},{"title":"設立","text":"2000年4月1日"},{"title":"所在地","text":"東京都新宿区西新宿1-1-1"},{"title":"代表者","text":"代表取締役社長 山田太郎"},{"title":"資本金","text":"1億円"},{"title":"従業員数","text":"100名"},{"title":"事業内容","text":"ウェブサイト制作、システム開発、マーケティング支援"},{"title":"取引銀行","text":"みずほ銀行 新宿支店"},{"title":"主要取引先","text":"株式会社○○、株式会社△△、株式会社□□"},{"title":"連絡先","text":"TEL: 03-1234-5678 / FAX: 03-1234-5679"},{"title":"URL","text":"https://www.sample.co.jp"}]}}}');
 
 /***/ })
 

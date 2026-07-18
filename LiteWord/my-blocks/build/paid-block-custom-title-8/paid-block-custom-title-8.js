@@ -75,7 +75,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, "H".concat(lvl));
     }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30B5\u30A4\u30BA\u8A2D\u5B9A",
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RadioControl, {
       label: "PC\u30B5\u30A4\u30BA",
@@ -96,7 +96,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30B9\u30DE\u30DB\u30B5\u30A4\u30BA\u8A2D\u5B9A",
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A\uFF08SP\uFF09",
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RadioControl, {
       label: "SP\u30B5\u30A4\u30BA",
@@ -120,7 +120,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u4F4D\u7F6E\u8A2D\u5B9A",
+      title: "\u914D\u7F6E\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RadioControl, {
       label: "\u914D\u7F6E",
@@ -138,7 +138,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30AB\u30E9\u30FC\u8A2D\u5B9A",
+      title: "\u8272\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement("p", null, "\u30E1\u30A4\u30F3\u30BF\u30A4\u30C8\u30EB\u30AB\u30E9\u30FC"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: mainTitleColor,
@@ -166,7 +166,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30C7\u30B6\u30A4\u30F3\u8A73\u7D30",
+      title: "\u305D\u306E\u4ED6\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u5DE6\u30DC\u30FC\u30C0\u30FC\u900F\u660E\u5EA6\uFF08%\uFF09",
@@ -374,7 +374,7 @@ module.exports = window["wp"]["element"];
   \**************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-custom-title-8","version":"1.0.0","title":"見出しタイトル 08","category":"lw-heading","icon":"editor-textcolor","description":"カスタムボーダー付き見出しブロック（スマホサイズ対応）","supports":{"anchor":true},"attributes":{"subTitle":{"type":"string","default":"製品紹介"},"mainTitle":{"type":"string","default":"PRODUCTS"},"headingLevel":{"type":"number","default":2},"mainTitleColor":{"type":"string","default":"var(--color-main)"},"borderLeftColor":{"type":"string","default":"var(--color-main)"},"borderRightColor":{"type":"string","default":"var(--color-main)"},"borderLeftOpacity":{"type":"number","default":100},"borderRightOpacity":{"type":"number","default":20},"borderRadius":{"type":"number","default":10},"sizeClass":{"type":"string","default":"size_m"},"positionClass":{"type":"string","default":"position_left"},"sizeSpClass":{"type":"string","default":""}},"editorScript":"file:./paid-block-custom-title-8.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":8}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-custom-title-8","version":"1.0.0","title":"見出しタイトル 08","category":"lw-heading","icon":"editor-textcolor","description":"カスタムボーダー付き見出しブロック（スマホサイズ対応）","supports":{"anchor":true},"aiHint":{"description":"ボーダー付き見出し（スマホサイズ対応）。左寄せデフォルト。PC/SP別サイズ設定","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":[]},"attributes":{"subTitle":{"type":"string","default":"製品紹介","aiHint":{"role":"subheading","contentGuide":"日本語の補足タイトル。3〜10文字","example":"アクセス"}},"mainTitle":{"type":"string","default":"PRODUCTS","aiHint":{"role":"heading","contentGuide":"英語のメインタイトル。大文字推奨","example":"ACCESS"}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}},"mainTitleColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"borderLeftColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"borderRightColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"borderLeftOpacity":{"type":"number","default":100,"aiHint":{"skip":true}},"borderRightOpacity":{"type":"number","default":20,"aiHint":{"skip":true}},"borderRadius":{"type":"number","default":10,"aiHint":{"skip":true}},"sizeClass":{"type":"string","default":"size_m","aiHint":{"skip":true}},"positionClass":{"type":"string","default":"position_left","aiHint":{"skip":true}},"sizeSpClass":{"type":"string","default":"","aiHint":{"skip":true}}},"editorScript":"file:./paid-block-custom-title-8.js","no":8}');
 
 /***/ })
 

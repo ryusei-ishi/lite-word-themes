@@ -11,7 +11,7 @@
     const { addFilter } = wp.hooks;
     const { createElement, Fragment } = wp.element;
     const { InspectorControls } = wp.blockEditor || wp.editor;
-    const { PanelBody, RangeControl } = wp.components;
+    const { PanelBody, RangeControl, ToggleControl } = wp.components;
     const { createHigherOrderComponent } = wp.compose;
 
     /**
@@ -38,6 +38,10 @@
                     type: 'boolean',
                     default: false,
                 },
+                lwImagePopup: {
+                    type: 'boolean',
+                    default: false,
+                },
             },
         };
     }
@@ -58,7 +62,7 @@
             }
 
             const { attributes, setAttributes } = props;
-            const { lwImageRadiusPc, lwImageRadiusSp, lwImageRadiusSpManuallySet } = attributes;
+            const { lwImageRadiusPc, lwImageRadiusSp, lwImageRadiusSpManuallySet, lwImagePopup } = attributes;
 
             return createElement(
                 Fragment,
@@ -97,7 +101,7 @@
                             value: lwImageRadiusSp || 0,
                             onChange: (value) => {
                                 // SPを手動で変更したら、連動フラグをtrueに
-                                setAttributes({ 
+                                setAttributes({
                                     lwImageRadiusSp: value,
                                     lwImageRadiusSpManuallySet: true
                                 });
@@ -106,6 +110,14 @@
                             max: 400,
                             step: 1,
                             help: 'スマホ表示時の画像の角丸を設定します(px)。',
+                        }),
+                        createElement(ToggleControl, {
+                            label: 'クリックで拡大表示',
+                            checked: !!lwImagePopup,
+                            onChange: (value) => {
+                                setAttributes({ lwImagePopup: value });
+                            },
+                            help: 'ONにすると、画像クリックでポップアップ表示します。',
                         })
                     )
                 )
@@ -166,22 +178,23 @@
             return props;
         }
 
-        const { lwImageRadiusPc, lwImageRadiusSp } = attributes;
+        const { lwImageRadiusPc, lwImageRadiusSp, lwImagePopup } = attributes;
+        let newProps = { ...props };
 
         if ((lwImageRadiusPc && lwImageRadiusPc > 0) || (lwImageRadiusSp && lwImageRadiusSp > 0)) {
-            const style = props.style || {};
-            
-            return {
-                ...props,
-                style: {
-                    ...style,
-                    '--lw-img-radius-pc': `${lwImageRadiusPc || 0}px`,
-                    '--lw-img-radius-sp': `${lwImageRadiusSp || 0}px`,
-                },
+            const style = newProps.style || {};
+            newProps.style = {
+                ...style,
+                '--lw-img-radius-pc': `${lwImageRadiusPc || 0}px`,
+                '--lw-img-radius-sp': `${lwImageRadiusSp || 0}px`,
             };
         }
 
-        return props;
+        if (lwImagePopup) {
+            newProps['data-lw-popup'] = 'true';
+        }
+
+        return newProps;
     }
 
     addFilter(

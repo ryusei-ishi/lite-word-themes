@@ -1,0 +1,225 @@
+{
+	"_meta": {
+		"description": "LiteWord AIチャットボットのAI向けメタ情報。機能・設定・制限事項をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21"
+	},
+	"overview": {
+		"aiDescription": "LiteWordテーマに統合されたAIチャットボット。ユーザーがWordPress管理画面からLiteWordの使い方を質問でき、マニュアルに基づいた回答を自動で返す。猫ロボットキャラクターが応対する。Gemini APIを使用。",
+		"userGuide": "管理画面のダッシュボードに表示される「AIに相談する」ボタン、またはその他の管理画面ページの右下FABボタンからチャットを開ける。"
+	},
+	"display": {
+		"aiDescription": "チャットUIの表示場所と起動方法。",
+		"locations": {
+			"dashboard": {
+				"aiDescription": "ダッシュボード（index.php）に「AIに相談する」大型ボタンを表示。猫アバター付き。",
+				"userGuide": "ダッシュボードを開くと中央付近にボタンが表示される。クリックするとフルスクリーンのチャット画面が開く。"
+			},
+			"fab": {
+				"aiDescription": "ダッシュボード以外の全管理画面ページに右下フローティングボタン（FAB）を表示。猫アバターのアイコン。",
+				"userGuide": "どの管理画面からでもAIチャットを呼び出せる。"
+			},
+			"welcomeScreen": {
+				"aiDescription": "管理画面を開いた時に1日1回表示されるウェルカムポップアップ。ユーザー名で挨拶し、お知らせ（lite-word.com/api/announcement.json）を表示する。",
+				"userGuide": "「OK！」ボタンで閉じる。お知らせはlite-word.comの静的JSONから6時間キャッシュで取得される。"
+			}
+		},
+		"chatUI": {
+			"aiDescription": "フルスクリーンオーバーレイのチャット画面。左カラムにチャット、右カラムにキャラクター画像とステータス表示。下部に入力バー。",
+			"features": {
+				"consent": "初回利用時に同意画面を表示。「質問内容をlite-word.comに送信する」ことへの同意が必要。",
+				"chatMessages": "チャット履歴を表示。ユーザーのメッセージとAIの回答が交互に並ぶ。",
+				"inputBar": "テキスト入力欄、音声入力ボタン、送信ボタンを含む。",
+				"historyButton": "右カラムに「履歴を見る」ボタン。過去の会話を閲覧可能。",
+				"modeSwitch": "プレミアムユーザーには省エネモード/パワーモードの切替バーを表示。"
+			}
+		}
+	},
+	"userFeatures": {
+		"aiDescription": "ユーザーから見たチャットボットの機能一覧。",
+		"questionCategories": {
+			"aiDescription": "質問はカテゴリ別に分かれており、カテゴリごとに専門のプロンプトとマニュアルデータが使われる。",
+			"categories": {
+				"design": {
+					"label": "デザイン・見た目",
+					"aiDescription": "ヘッダー、フッター、カラー、フォント、レスポンシブ等のデザイン関連の質問。専用のマニュアルスラッグ群をAIに提供。"
+				},
+				"blocks": {
+					"label": "ブロック・ページ作成",
+					"aiDescription": "ブロックの使い方、ページ構築、FV・ボタン・リスト等のブロック操作に関する質問。"
+				},
+				"settings": {
+					"label": "設定・機能",
+					"aiDescription": "SEO、メールフォーム、拡張機能、リダイレクト等のサイト設定に関する質問。"
+				},
+				"start": {
+					"label": "はじめて・基本",
+					"aiDescription": "セットアップ、プラン比較、アクティベート、アップデート等の初心者向け質問。"
+				},
+				"general": {
+					"label": "その他・WordPress全般",
+					"aiDescription": "LiteWordマニュアル外のWordPress全般、Web制作、SEO、マーケティング等の質問。マニュアルデータなしで回答。"
+				}
+			}
+		},
+		"voiceInput": {
+			"aiDescription": "Web Speech APIを使ったブラウザ内蔵の音声入力機能。マイクボタンをクリックして音声で質問できる。",
+			"userGuide": "入力欄右のマイクアイコンをクリックすると音声入力が開始される。ブラウザのマイク許可が必要。"
+		},
+		"chatHistory": {
+			"aiDescription": "チャット履歴はユーザーごとにローカルDB（wp_lw_ai_chat_history）に保存される。最新50件を保持。REST APIでGET取得可能。",
+			"userGuide": "右カラムの「履歴を見る」ボタンから過去の会話を確認できる。"
+		},
+		"siteSettingsContext": {
+			"aiDescription": "プライベートAIモード時、ユーザーのサイト設定（カラー、フォント、ヘッダーパターン等）を自動取得してプロンプトに注入。「現在のメインカラーは#333です」のように具体的な回答が可能。カスタマイザー直リンクも提供。",
+			"userGuide": "パワーモードでは、AIがサイトの現在の設定を把握して具体的なアドバイスをくれる。"
+		},
+		"siteSettingsChange": {
+			"aiDescription": "プライベートAIモード（Phase 2）では、AIチャットからサイト設定を直接変更できる。ホワイトリスト制（約40設定キー）で安全に変更。変更ログはDB保存されロールバック可能。",
+			"allowedSettings": "カラー7種、フォント12種、ヘッダー/フッターパターン、投稿ページ設定、拡張機能ON/OFF、CTA/ローディングパターン、Analytics ID等",
+			"userGuide": "「メインカラーを赤に変えて」のようにAIに指示すると設定が変更される。パワーモード限定。"
+		},
+		"pageGeneration": {
+			"aiDescription": "チャットから「○○のLP作って」と発言すると、AIページ自動生成（lw_ai_systemと連携）が起動する。業種を自動検出し、セッションベースでセクションごとにブロックを生成。進捗確認も可能。",
+			"userGuide": "「接骨院のLP作って」「美容室のトップページ作って」のように指示するとAIがページを自動生成する。"
+		},
+		"manualLinks": {
+			"aiDescription": "AIの回答には必ず関連するマニュアルページへのリンクが付与される。形式: 📖 **マニュアル**: [ページタイトル](URL)。カスタマイザー直リンク（⚙️ **設定ページ**）も付与される場合がある。",
+			"userGuide": "回答の末尾にマニュアルへのリンクが表示されるので、詳細を確認できる。"
+		}
+	},
+	"modes": {
+		"aiDescription": "2つの動作モード。ユーザーごとに切り替え可能。",
+		"serverMode": {
+			"aiDescription": "省エネモード（デフォルト）。質問をlite-word.comのext-chat APIに中継し、サーバー側のGemini APIで回答を生成。無料で使えるが回数制限あり。",
+			"dailyLimit": "フリープラン: 3回/日、プレミアムプラン: 15回/日",
+			"userGuide": "無料で使えるモード。回数制限があるが、基本的な質問には十分。"
+		},
+		"ownKeyMode": {
+			"aiDescription": "パワーモード（プレミアム限定）。ユーザー自身のGoogle AI Studio APIキーを使ってローカルで直接Gemini APIを呼び出す。回数無制限、プライベート（質問がlite-word.comに送信されない）。サイト設定の読み取り・変更も可能。",
+			"requirements": "プレミアムプラン + Google AI StudioのAPIキー設定済み",
+			"models": {
+				"flash": "gemini-2.5-flash（デフォルト、高速、タイムアウト30秒）",
+				"pro": "gemini-2.5-pro-preview-05-06（高精度、タイムアウト60秒）"
+			},
+			"userGuide": "自分のAPIキーを使うため無制限に質問できる。モデルをFlash/Proで切り替え可能。サイト設定の確認・変更もAIに指示できる。"
+		}
+	},
+	"adminSettings": {
+		"aiDescription": "管理者向けの設定項目。",
+		"apiKeySettings": {
+			"aiDescription": "Google AI StudioのAPIキーを設定する場所。設定 > LW AI Generator。APIキーはAES-256-CBCで暗号化してDBに保存される。",
+			"location": "WordPress管理画面 > 設定 > LW AI Generator",
+			"userGuide": "プレミアムプランの場合のみメニューに表示される。APIキーはGoogle AI Studioの無料枠で取得可能。"
+		},
+		"chatLogViewing": {
+			"aiDescription": "チャット履歴はwp_lw_ai_chat_historyテーブルに保存される。ユーザーごとに最新50件保持。REST API（GET /liteword/v1/ai-chat-history）で取得可能。",
+			"userGuide": "管理者はREST APIまたはDBから全ユーザーの質問ログを確認できる。"
+		},
+		"announcementSystem": {
+			"aiDescription": "lite-word.com/api/announcement.jsonを編集するだけで、全LiteWordユーザーの管理画面にお知らせを表示できる仕組み。Cloudflareキャッシュ付き、6時間間隔で取得。",
+			"jsonFormat": {
+				"id": "ユニークID（変更すると新しいお知らせとして表示）",
+				"message": "お知らせ本文（HTML可）",
+				"link": "リンクURL（任意）",
+				"link_text": "リンク文言（任意、デフォルト「詳しく見る →」）"
+			}
+		}
+	},
+	"spamProtection": {
+		"aiDescription": "スパム対策として複数の防御層を実装。",
+		"measures": {
+			"honeypot": "非表示のwebsiteフィールド。ボットが入力すると検出される。",
+			"dailyLimit": "ユーザーあたりの1日の質問回数制限（フリー3回、プレミアム15回）。管理者は無制限。",
+			"consentRequired": "初回利用時に同意が必要。同意していないユーザーはAPI呼び出し不可（403）。",
+			"authRequired": "REST APIはedit_posts権限必須。ログインしていないユーザーはアクセス不可。"
+		}
+	},
+	"restApi": {
+		"aiDescription": "チャット機能のREST APIエンドポイント一覧。名前空間: liteword/v1",
+		"endpoints": {
+			"POST /ai-chat": {
+				"aiDescription": "チャット送信（メイン処理）。質問をGemini APIまたはlite-word.comに中継して回答を取得。ページ生成意図・進捗確認意図の検出も行う。",
+				"permission": "edit_posts",
+				"params": {
+					"question": "質問テキスト（必須）",
+					"history": "会話履歴の配列（直近5件を使用）",
+					"website": "ハニーポットフィールド",
+					"site_settings": "サイト設定データ（パワーモード時）",
+					"category": "質問カテゴリ（design/blocks/settings/start/general）"
+				}
+			},
+			"GET /ai-chat-history": {
+				"aiDescription": "ユーザーのチャット履歴を取得。最大50件。",
+				"permission": "edit_posts",
+				"params": {
+					"limit": "取得件数（デフォルト10、最大50）"
+				}
+			},
+			"POST /ai-chat-consent": {
+				"aiDescription": "利用規約への同意状態を保存。",
+				"permission": "is_user_logged_in",
+				"params": {
+					"agreed": "true/false"
+				}
+			},
+			"GET /site-settings": {
+				"aiDescription": "サイト設定を取得（カラー、フォント、ヘッダー、フッター、拡張機能、カスタマイザー直リンク等）。",
+				"permission": "manage_options"
+			},
+			"POST /site-settings": {
+				"aiDescription": "サイト設定を変更（Phase 2）。ホワイトリスト制。変更ログをDBに保存。プライベートAIモード限定。",
+				"permission": "manage_options",
+				"params": {
+					"changes": "変更の配列 [{ key, value }]"
+				}
+			},
+			"POST /ai-chat-model": {
+				"aiDescription": "AIモデルをflash/proに切り替え。ユーザーごとに保存。",
+				"permission": "manage_options"
+			},
+			"POST /ai-chat-mode": {
+				"aiDescription": "APIモードをserver（省エネ）/own（パワー）に切り替え。ユーザーごとに保存。",
+				"permission": "manage_options"
+			}
+		}
+	},
+	"technicalDetails": {
+		"aiDescription": "技術的な実装詳細。",
+		"geminiApi": {
+			"aiDescription": "Google Gemini APIを使用。パワーモードではユーザーのAPIキーで直接呼び出し、省エネモードではlite-word.comのext-chat APIに中継。",
+			"models": {
+				"flash": "gemini-2.5-flash（デフォルト）",
+				"pro": "gemini-2.5-pro-preview-05-06"
+			},
+			"generationConfig": {
+				"temperature": 0.15,
+				"maxOutputTokens": "Flash: 2048, Pro: 4096"
+			}
+		},
+		"manualDataSource": {
+			"aiDescription": "回答の根拠となるマニュアルデータはlite-word.comのREST API（/wp-json/lw-manual/v1/manual-content）から取得。カテゴリ別にスラッグ指定で取得可能。1時間のtransientキャッシュ。"
+		},
+		"database": {
+			"tables": {
+				"wp_lw_ai_chat_history": "チャット履歴（user_id, question, answer, created_at）。ユーザーあたり最新50件保持。",
+				"wp_lw_ai_chat_change_log": "サイト設定変更ログ（user_id, setting_key, old_value, new_value, created_at）。ロールバック用。"
+			}
+		},
+		"character": {
+			"aiDescription": "猫ロボットキャラクター。語尾の最後の1文だけ「にゃ」で締める。全文をにゃにゃ言わない。アバター画像はneko-bot.svg。"
+		},
+		"version": "3.0.1",
+		"fileStructure": {
+			"index.php": "エントリポイント（定数定義・ファイル読み込み）",
+			"includes/helpers.php": "ヘルパー関数（プレミアム判定、APIキー判定、モデル名取得等）",
+			"includes/rest-api.php": "REST APIルート登録",
+			"includes/proxy.php": "チャットプロキシ（メイン処理、ページ生成意図検出、進捗確認）",
+			"includes/gemini.php": "Gemini API呼び出し、プロンプト構築、カテゴリ別設定、マニュアル取得",
+			"includes/site-settings.php": "サイト設定の読み取り・変更（Phase 1+2）、変更ログ保存",
+			"includes/callbacks.php": "同意保存、モード切替、モデル切替コールバック",
+			"includes/history.php": "チャット履歴DB操作（保存・取得・テーブル作成）",
+			"includes/render.php": "HTML出力（ダッシュボードボタン、フルスクリーンポップアップ、FAB、ウェルカム画面）"
+		}
+	}
+}

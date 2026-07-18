@@ -1,0 +1,41 @@
+.lw-pr-table-2 {
+    .table-2__dl {
+        border-color: #000;
+        border-top-width: 1px;
+        border-left-width: 1px;
+        border-right-width: 1px;
+        border-bottom-width: 1px;
+        border-top-color: #000;
+        border-left-color: #000;
+        border-right-color: #000;
+        border-bottom-color: #000;
+        .table-2__row {
+            display: grid;
+            grid-template-columns: var(--table-2-clm-1-fr-pc) var(--table-2-clm-2-fr-pc);
+            border-bottom: 1px solid #000;
+            @media (max-width: 700) {
+                grid-template-columns: var(--table-2-clm-1-fr-sp) var(--table-2-clm-2-fr-sp);
+            }
+            &:last-of-type{
+                border-bottom: none;
+            }
+            &.pc_clm_1 {
+                @media (min-width: 701px) {
+                    grid-template-columns: 1fr;
+                }
+            }
+            &.sp_clm_1 {
+                @media (max-width: 700) {
+                    grid-template-columns: 1fr;
+                }
+            }
+            .table-2__dt,
+            .table-2__dd{
+                padding: 16px;
+            }
+            .table-2__dt{
+                border-right: 1px solid #000;
+            }
+        }
+    }
+}

@@ -38,8 +38,7 @@ registerBlockType(metadata.name, {
 
         // コンテンツを更新
         const updateContent = (index, key, value) => {
-            const updatedContents = [...contents];
-            updatedContents[index][key] = value;
+            const updatedContents = contents.map((content, i) => i === index ? { ...content, [key]: value } : content);
             setAttributes({ contents: updatedContents });
         };
 
@@ -52,7 +51,7 @@ registerBlockType(metadata.name, {
                 <InspectorControls>
 
                     {/* 背景色設定 */}
-                    <PanelBody title="背景">
+                    <PanelBody title="背景設定">
                         <SelectControl
                             label="フィルターの色"
                             value={bgGradient}
@@ -69,7 +68,7 @@ registerBlockType(metadata.name, {
                         />
                     </PanelBody>
 
-                    <PanelBody title="リスト部分の設定">
+                    <PanelBody title="色設定">
                         <RangeControl
                             label='最大横幅'
                             value={ulMaxWidth}

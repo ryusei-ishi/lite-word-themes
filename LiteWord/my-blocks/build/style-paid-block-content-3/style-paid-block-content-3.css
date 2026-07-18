@@ -3,29 +3,30 @@
   \******************************************************************************************************************************/
 .lw_content_wrap.page .paid-block-content-3 {
   margin-left: calc((100% - 100vw) / 2);
-  width: 100vw;
+  max-width: var(--content-3-max-w, 100vw);
+}
+.lw_content_wrap.page .paid-block-content-3.max-width-on {
+  margin-left: auto;
+  margin-right: auto;
 }
 
 .wp-block:has(.paid-block-content-3) {
-  margin: 0;
+  margin: auto;
   width: 100%;
-  max-width: 100%;
+  max-width: var(--content-3-max-w, 100vw);
 }
 
 .paid-block-content-3 {
+  position: relative;
+  z-index: 10;
   container-type: inline-size;
-  margin: 40px 0;
+  margin: 40px auto;
+  max-width: var(--content-3-max-w, 100vw);
   padding: 0;
-}
-@container (max-width:800px) {
-  .paid-block-content-3 {
-    padding: 0 32px;
-  }
 }
 @container (max-width:550px) {
   .paid-block-content-3 {
     margin: 32px 0;
-    padding: 0 24px;
   }
 }
 .paid-block-content-3 + .paid-block-content-3 {
@@ -48,7 +49,7 @@
     padding-left: 40px;
   }
 }
-@container (max-width:800px) {
+@container (max-width:799px) {
   .paid-block-content-3.right .paid-block-content-3__inner .paid-block-content-3__text {
     padding-left: 0;
   }
@@ -70,7 +71,7 @@
     gap: 40px;
   }
 }
-@container (max-width:800px) {
+@container (max-width:799px) {
   .paid-block-content-3__inner {
     gap: 32px;
   }
@@ -78,7 +79,7 @@
 .paid-block-content-3__image {
   flex: 7;
 }
-@container (max-width:800px) {
+@container (max-width:799px) {
   .paid-block-content-3__image {
     width: 100%;
     flex: initial;
@@ -106,13 +107,16 @@
     padding-right: 24px;
   }
 }
-@container (max-width:800px) {
+@container (max-width:799px) {
   .paid-block-content-3__text {
     padding-top: 0;
     padding-right: 0;
     width: 100%;
     flex: initial;
   }
+}
+.paid-block-content-3__text.padding-top-none {
+  padding-top: 0 !important;
 }
 .paid-block-content-3__text h3.ttl {
   position: relative;
@@ -121,7 +125,7 @@
   padding-bottom: 16px;
   font-feature-settings: "palt";
 }
-@container (max-width:800px) {
+@container (max-width:799px) {
   .paid-block-content-3__text h3.ttl {
     margin-bottom: 24px;
     padding-bottom: 8px;
@@ -147,7 +151,7 @@
     font-size: 12px;
   }
 }
-@container (max-width:800px) {
+@container (max-width:799px) {
   .paid-block-content-3__text h3.ttl .sub {
     margin-bottom: 12px;
   }
@@ -179,7 +183,7 @@
     font-size: 24px;
   }
 }
-@container (max-width:800px) {
+@container (max-width:799px) {
   .paid-block-content-3__text h3.ttl .main {
     margin-bottom: 16px;
   }
@@ -199,13 +203,13 @@
   padding: 0;
   margin: 0;
   line-height: 1.8em;
-  font-size: 20px;
+  font-size: 17px;
   font-feature-settings: "palt";
   letter-spacing: 0.1em;
 }
 @container (max-width:1080px) {
   .paid-block-content-3__text p.lw_p {
-    font-size: 18px;
+    font-size: 16px;
   }
 }
 @container (max-width:980px) {

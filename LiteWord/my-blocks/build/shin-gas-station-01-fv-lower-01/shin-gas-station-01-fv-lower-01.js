@@ -63,7 +63,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     };
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u753B\u50CF\u8A2D\u5B9A"
+      title: "\u80CC\u666F\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "PC\u306E\u6642"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
       onSelect: onChangeBackgroundImage,
       allowedTypes: ['image'],
@@ -146,7 +146,7 @@ __webpack_require__.r(__webpack_exports__);
       max: 1,
       step: 0.01
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u9AD8\u3055\u8A2D\u5B9A"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "PC\u7528\u9AD8\u3055"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       value: minHeightPc,
       options: (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.minHeightPcClassOptionArr)(),
@@ -172,7 +172,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u5185\u5074\u306E\u6700\u5927\u6A2A\u5E45"
+      title: "\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u6700\u5927\u5E45 (px)",
       value: maxWidth,
@@ -980,7 +980,7 @@ module.exports = window["wp"]["data"];
   \********************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-fv-lower-01","version":"1.0.0","title":"FV（下層ページ用）shin shop pattern 01","category":"lw-firstview","icon":"cover-image","editorScript":"file:./shin-gas-station-01-fv-lower-01.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"no":15,"attributes":{"backgroundImage":{"type":"string","default":""},"backgroundImageSp":{"type":"string","default":""},"mainTitle":{"type":"string","default":"ページタイトル"},"subTitle":{"type":"string","default":"Title Sub"},"filterBackgroundColor":{"type":"string","default":"var(--color-main)"},"filterOpacity":{"type":"number","default":0.05},"minHeightPc":{"type":"string","default":"min-h-pc-380px"},"minHeightTb":{"type":"string","default":"min-h-tb-300px"},"minHeightSp":{"type":"string","default":"min-h-sp-220px"},"maxWidth":{"type":"number","default":1200}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-fv-lower-01","version":"1.0.0","title":"FV（下層ページ用）shin shop pattern 01","category":"lw-firstview","icon":"cover-image","editorScript":"file:./shin-gas-station-01-fv-lower-01.js","aiHint":{"description":"下層ページ用FV。メイン+サブタイトル+背景画像。シンプル。ショップテンプレート用","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":["backgroundImage","backgroundImageSp"]},"supports":{"anchor":true},"no":15,"attributes":{"backgroundImage":{"type":"string","default":""},"backgroundImageSp":{"type":"string","default":""},"mainTitle":{"type":"string","default":"ページタイトル"},"subTitle":{"type":"string","default":"Title Sub"},"filterBackgroundColor":{"type":"string","default":"var(--color-main)"},"filterOpacity":{"type":"number","default":0.05},"minHeightPc":{"type":"string","default":"min-h-pc-380px"},"minHeightTb":{"type":"string","default":"min-h-tb-300px"},"minHeightSp":{"type":"string","default":"min-h-sp-220px"},"maxWidth":{"type":"number","default":1200}}}');
 
 /***/ })
 

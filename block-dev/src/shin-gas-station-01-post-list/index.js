@@ -9,7 +9,7 @@ import metadata from './block.json';
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType(metadata.name, {
+registerBlockType(metadata.name, {
     title: '投稿一覧 1 shin shop pattern 01',
     icon: 'editor-ul',
     category: 'lw-post',
@@ -28,7 +28,7 @@ registerBlockType(metadata.name, {
         return (
             <div {...blockProps}>
                 <InspectorControls>
-                    <PanelBody title="設定" initialOpen={true}>
+                    <PanelBody title="基本設定" initialOpen={true}>
                         <p>リンク先URL</p>
                         <URLInput
                             value={linkUrl}

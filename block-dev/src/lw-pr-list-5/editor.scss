@@ -1,0 +1,62 @@
+.lw-pr-list-5 {
+    container-type: inline-size;
+
+    .list-item-edit {
+        display: flex;
+        align-items: center;
+        gap: 4px;
+
+        span {
+            flex: 1;
+            min-width: 0;
+        }
+    }
+
+    .list-item-remove {
+        flex-shrink: 0;
+        width: 16px;
+        height: 16px;
+        padding: 0;
+        border: none;
+        border-radius: 50%;
+        background: #cc0000;
+        color: #fff;
+        font-size: 10px;
+        line-height: 1;
+        cursor: pointer;
+        opacity: 0.6;
+        transition: opacity 0.2s;
+
+        &:hover {
+            opacity: 1;
+        }
+    }
+
+    .list-item-add {
+        padding-left: 0 !important;
+
+        &::before {
+            display: none !important;
+        }
+
+        button {
+            width: 20px;
+            height: 20px;
+            padding: 0;
+            border: 1px dashed #999;
+            border-radius: 4px;
+            background: transparent;
+            color: #666;
+            font-size: 12px;
+            line-height: 1;
+            cursor: pointer;
+            transition: all 0.2s;
+
+            &:hover {
+                background: #f0f0f0;
+                border-color: #666;
+                color: #333;
+            }
+        }
+    }
+}

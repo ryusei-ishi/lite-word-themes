@@ -58,7 +58,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
       className: 'shin-gas-station-01-button-01'
     });
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCDD \u57FA\u672C\u8A2D\u5B9A",
+      title: "\u57FA\u672C\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -88,7 +88,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
       },
       help: "\u30EA\u30F3\u30AF\u5148\u3092\u65B0\u3057\u3044\u30BF\u30D6\u3067\u958B\u304D\u305F\u3044\u5834\u5408\u306F\u30AA\u30F3\u306B\u3057\u3066\u304F\u3060\u3055\u3044"
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83C\uDFA8 \u30DC\u30BF\u30F3\u306E\u898B\u305F\u76EE",
+      title: "\u8272\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -186,7 +186,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
         });
       }
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u2728 \u30A2\u30A4\u30B3\u30F3\u8A2D\u5B9A",
+      title: "\u30A2\u30A4\u30B3\u30F3\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -225,7 +225,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
         marginTop: '5px'
       }
     }, "\u30A2\u30A4\u30B3\u30F3\u304C\u9078\u629E\u3055\u308C\u3066\u3044\u308B\u5834\u5408\u306E\u307F\u8272\u3092\u5909\u66F4\u3067\u304D\u307E\u3059"))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDD8D\uFE0F \u67A0\u7DDA\u306E\u8A2D\u5B9A",
+      title: "\u67A0\u7DDA\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -1053,7 +1053,7 @@ module.exports = window["wp"]["components"];
   \******************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-button-01","version":"1.0.0","title":"リンクボタン 01 shin shop pattern 01","category":"lw-button","icon":"button","description":"テンプレート専用リンクボタン","supports":{"anchor":true},"attributes":{"btnText":{"type":"string","default":"詳細はこちら"},"bgGradient":{"type":"string","default":"var(--color-main)"},"colorMode":{"type":"string","default":"select"},"customBgColor":{"type":"string","default":"#0073aa"},"textColor":{"type":"string","default":"#ffffff"},"fontWeight":{"type":"string","default":"400"},"btnUrl":{"type":"string","default":""},"openNewTab":{"type":"boolean","default":false},"FontSet":{"type":"string","default":""},"selectedIcon":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 320 512\\"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\\"M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z\\"/></svg>"},"iconColor":{"type":"string","default":"#ffffff"},"borderWidth":{"type":"number","default":0},"borderColor":{"type":"string","default":"var(--color-main)"}},"editorScript":"file:./shin-gas-station-01-button-01.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":15}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-button-01","version":"1.0.0","title":"リンクボタン 01 shin shop pattern 01","category":"lw-button","icon":"button","description":"テンプレート専用リンクボタン","aiHint":{"description":"テンプレート専用ボタン。アイコン付きリンクボタン。ショップテンプレート用","excludeFromAutoSelect":false,"contentAttributes":["btnText","btnUrl"],"imageAttributes":[]},"supports":{"anchor":true},"attributes":{"btnText":{"type":"string","default":"詳細はこちら","aiHint":{"role":"button","contentGuide":"動詞形。4〜10文字","example":"詳細を見る"}},"bgGradient":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"colorMode":{"type":"string","default":"select","aiHint":{"skip":true}},"customBgColor":{"type":"string","default":"#0073aa","aiHint":{"skip":true}},"textColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"fontWeight":{"type":"string","default":"400","aiHint":{"skip":true}},"btnUrl":{"type":"string","default":"","aiHint":{"role":"url","contentGuide":"遷移先URL"}},"openNewTab":{"type":"boolean","default":false,"aiHint":{"skip":true}},"FontSet":{"type":"string","default":"","aiHint":{"skip":true}},"selectedIcon":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 320 512\\"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\\"M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z\\"/></svg>","aiHint":{"skip":true}},"iconColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"borderWidth":{"type":"number","default":0,"aiHint":{"skip":true}},"borderColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}}},"editorScript":"file:./shin-gas-station-01-button-01.js","no":15}');
 
 /***/ })
 

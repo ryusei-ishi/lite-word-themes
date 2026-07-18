@@ -61,8 +61,7 @@ registerBlockType( metadata.name, {
 
 		/* 個別カード更新 */
 		const updateItem = (idx,k,v)=>{
-			const newItems=[...items];
-			newItems[idx][k]=v;
+			const newItems=items.map((itm,i)=>i===idx ? { ...itm, [k]:v } : itm);
 			setAttributes({ items:newItems });
 		};
 
@@ -77,7 +76,7 @@ registerBlockType( metadata.name, {
 			<>
 				{/* ===== サイドバー ===== */}
 				<InspectorControls>
-					<PanelBody title="共通スタイル" initialOpen={true}>
+					<PanelBody title="レイアウト設定" initialOpen={true}>
 						<RangeControl
 							label="角丸 (em)"
 							value={borderRadiusEm}

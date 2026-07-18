@@ -1,0 +1,143 @@
+{
+	"_meta": {
+		"description": "LiteWordマイパーツ機能のAI向けメタ情報。マイパーツの作成・編集・ショートコード呼び出し・コードエディタの仕組みをAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21"
+	},
+	"overview": {
+		"aiDescription": "マイパーツは、再利用可能なカスタムコードパーツを作成・管理する機能。カスタム投稿タイプ（lw_my_parts）として登録され、ショートコードで任意のページに挿入できる。ヘッダー・フッター・CTA・バナーなど、複数ページで共通して使うパーツの一元管理に最適。",
+		"adminLocation": "WordPress管理画面 > サイドメニュー > Lwマイパーツ",
+		"menuIcon": "dashicons-layout",
+		"postType": "lw_my_parts",
+		"taxonomy": "lw_parts_cat",
+		"userGuide": "サイト共通のCTAバナーやお問い合わせセクションなど、複数ページで使い回すパーツを作成する機能。1回編集すれば、挿入先すべてに反映される。"
+	},
+	"adminScreens": {
+		"list": {
+			"title": "マイパーツ一覧",
+			"aiDescription": "作成済みのマイパーツを一覧表示。パーツカテゴリーでの絞り込みが可能。無料プランでは使用状況（現在数/上限5個）のバーが表示される。",
+			"location": "Lwマイパーツ > マイパーツ一覧"
+		},
+		"addNew": {
+			"title": "新規マイパーツ制作",
+			"aiDescription": "新しいマイパーツを作成する画面。編集モード（通常/コード）を選択してパーツを作成する。",
+			"location": "Lwマイパーツ > 新規追加"
+		},
+		"partsCategory": {
+			"title": "パーツカテゴリー",
+			"aiDescription": "マイパーツを分類するためのカテゴリー管理。階層構造（親カテゴリー）に対応。管理画面専用で、フロントには非公開。",
+			"location": "Lwマイパーツ > パーツカテゴリー"
+		},
+		"apiCacheManager": {
+			"title": "APIキャッシュ管理",
+			"aiDescription": "マイパーツとテンプレートのREST APIレスポンスキャッシュを管理する画面。キャッシュ数の確認と一括クリアが可能。",
+			"location": "Lwマイパーツ > APIキャッシュ",
+			"cacheSettings": {
+				"myParts": "12時間キャッシュ",
+				"template": "24時間キャッシュ",
+				"autoClear": "マイパーツを更新すると自動的にキャッシュがクリアされる"
+			}
+		}
+	},
+	"editorModes": {
+		"normal": {
+			"aiDescription": "通常エディタモード。WordPressのGutenbergブロックエディタを使ってパーツを作成する。LiteWordのカスタムブロックも使用可能。",
+			"userGuide": "ブロックエディタに慣れているユーザー向け。ドラッグ＆ドロップで視覚的にパーツを構築できる。"
+		},
+		"code": {
+			"aiDescription": "コードエディタモード。HTML・CSS・JavaScriptを直接記述してパーツを作成する。CodeMirrorベースのシンタックスハイライト付きエディタを使用。",
+			"userGuide": "コーディングに慣れたユーザー向け。完全なカスタムデザインやインタラクティブなパーツを作成できる。",
+			"metaKeys": {
+				"_lw_editor_mode": "編集モードの識別（normal/code）",
+				"_lw_custom_html": "カスタムHTML本文",
+				"_lw_custom_css": "カスタムCSS（<head>内に出力される）",
+				"_lw_custom_js": "カスタムJavaScript（</body>直前に出力される）"
+			}
+		},
+		"fullscreenCode": {
+			"aiDescription": "コーディング特化モード。コードエディタモード選択時にサイドバーに表示される「コーディング特化モード」ボタンから起動。別ウィンドウで開き、CodeMirror（material-darkerテーマ）によるフルスクリーンエディタ環境を提供。リアルタイムプレビュー機能付き。",
+			"userGuide": "HTML/CSS/JSの3ペインを並べて編集でき、リアルタイムでプレビューを確認しながら作業できる。縦並び・横並びのレイアウト切替にも対応。",
+			"features": [
+				"CodeMirrorエディタ（シンタックスハイライト・自動閉じタグ・括弧マッチ）",
+				"リアルタイムプレビュー（postMessage API経由）",
+				"レイアウト切替（横並び/縦並び）",
+				"Swiper等のテーマJavaScript再初期化対応",
+				"テーマCSS（reset.css/common.css/page.css等）を読み込んだ状態でプレビュー"
+			]
+		}
+	},
+	"settings": {
+		"fullWidth": {
+			"aiDescription": "全幅表示のON/OFF切替。ONにするとコンテナ幅を無視して画面いっぱいに表示される。出力時にdiv.lw_width_full_onで囲まれる。",
+			"metaKey": "_lw_full_width",
+			"values": {
+				"on": "全幅表示ON（div.lw_width_full_onで囲まれる）",
+				"off_or_empty": "通常表示（コンテナ幅に従う、divで囲まない）"
+			},
+			"userGuide": "背景画像や装飾を画面いっぱいに広げたい場合にONにする。ヘッダーバナーやCTAセクションなどで有効。"
+		}
+	},
+	"shortcode": {
+		"name": "my_parts_content",
+		"aiDescription": "マイパーツの内容を任意のページに挿入するショートコード。固定ページ・投稿・ウィジェットなどどこでも使用可能。",
+		"usage": "[my_parts_content id=\"123\"]",
+		"attributes": {
+			"id": {
+				"aiDescription": "表示するマイパーツの投稿ID（必須）",
+				"type": "integer",
+				"required": true
+			},
+			"show_draft": {
+				"aiDescription": "下書き状態のパーツも表示するかどうか",
+				"type": "string",
+				"default": "true",
+				"options": {
+					"true": "下書きも表示する",
+					"false": "公開済みのみ表示する"
+				}
+			}
+		},
+		"rendering": {
+			"codeMode": "CSSは<head>内に、JavaScriptは</body>直前に出力される。HTMLはショートコードの位置にインライン出力。ページ読み込み前にショートコードをスキャンして事前にアセットを取得する最適化あり。",
+			"normalMode": "Gutenbergブロックのthe_contentフィルターを通してレンダリングされる。"
+		},
+		"userGuide": "固定ページの編集画面でショートコードブロックに [my_parts_content id=\"パーツID\"] を入力する。パーツIDはマイパーツ一覧画面で確認できる。"
+	},
+	"premiumRestrictions": {
+		"freeLimit": {
+			"aiDescription": "無料プランではマイパーツの作成数が5個までに制限される。publish/draft/pending/privateの合計でカウント。",
+			"maxCount": 5,
+			"countTarget": "publish + draft + pending + private の合計",
+			"bypass": [
+				"LW_HAS_SUBSCRIPTION定数がtrueの場合（有料プラン）",
+				"lw_is_trial_active()がtrueの場合（トライアル中）"
+			]
+		},
+		"limitBehavior": {
+			"listScreen": "一覧画面に使用状況バー表示。上限到達時は「新規追加」ボタンがグレーアウトし、クリックするとプレミアムプラン案内ポップアップが表示される。",
+			"directAccess": "URLで直接post-new.phpにアクセスしてもwp_dieでブロックされる。",
+			"dbLevel": "wp_insert_postフックで新規作成時にチェックし、制限超過の場合は投稿を削除してエラーページを表示。"
+		},
+		"aiGeneration": {
+			"aiDescription": "AIパーツ生成機能（Beta版）。参考画像からAIがHTML/CSSコードを自動生成する機能。プレミアムプラン限定。",
+			"premium": true,
+			"userGuide": "コードエディタモードの上部に表示されるAIパーツ生成セクションから利用。参考画像をアップロードすると、AIが分析してコードを生成する。"
+		}
+	},
+	"technicalDetails": {
+		"accessControl": "マイパーツの単一ページは管理者のみアクセス可能。それ以外のユーザーには404を返す。プレビューは編集権限があれば可能。",
+		"sitemapExclusion": "WordPressコアXMLサイトマップとYoast SEOサイトマップの両方から除外される。",
+		"restApi": {
+			"route": "/wp/v2/lw_my_parts",
+			"registeredFields": [
+				"editor_mode（エディタモード）",
+				"custom_html（カスタムHTML）",
+				"custom_css（カスタムCSS）",
+				"full_width（全幅設定）",
+				"preview_html（プレビュー用レンダリング済みHTML・editコンテキストのみ）"
+			]
+		},
+		"cssOutput": "コードモードのCSS は wp_head（優先度999）で<style>タグとして出力。ページ読み込み前にショートコードをスキャンし事前取得する最適化あり。",
+		"jsOutput": "コードモードのJS は wp_footer（優先度999）で<script>タグとして出力。CSSと同様に事前スキャン・取得の最適化あり。"
+	}
+}

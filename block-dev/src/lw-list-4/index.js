@@ -41,7 +41,7 @@ registerBlockType(metadata.name, {
 	edit( { attributes, setAttributes } ) {
 		const {
 			fontLi, fontWeightLi, sizeLi, textColor,
-			colorLiSvg, iconUrl, iconSize,
+			colorLiSvg, iconUrl, iconSize, iconPositionTop,
 			borderColor, borderWidth, borderStyle,
 			borderRadius, maxWidth, bgColor, colClass,
 			noBorder,
@@ -56,8 +56,9 @@ registerBlockType(metadata.name, {
 		const addContent    = () => setAttributes( { contents: [ ...contents, { text: '新しいテキスト' } ] } );
 		const removeContent = ( i ) => setAttributes( { contents: contents.filter( ( _, idx ) => idx !== i ) } );
 		const updateContent = ( i, key, val ) => {
-			const updated      = [ ...contents ];
-			updated[ i ][ key] = val;
+			const updated = contents.map( ( item, idx ) =>
+				idx === i ? { ...item, [ key ]: val } : item
+			);
 			setAttributes( { contents: updated } );
 		};
 
@@ -142,6 +143,12 @@ registerBlockType(metadata.name, {
 							step={ 0.1 }
 						/>
 
+						<ToggleControl
+							label="アイコンを上寄せにする"
+							checked={ iconPositionTop }
+							onChange={ ( v ) => setAttributes( { iconPositionTop: v } ) }
+						/>
+
 						{/* SVG 用カラーは画像未選択時のみ表示 */}
 						{ !iconUrl && (
 							<ColorPalette
@@ -151,7 +158,7 @@ registerBlockType(metadata.name, {
 							/>
 						) }
 					</PanelBody>
-                    <PanelBody title="テキスト" initialOpen={ true }>
+                    <PanelBody title="フォント設定" initialOpen={ true }>
                         <SelectControl
 							label="文字サイズ"
 							value={ sizeLi }
@@ -260,7 +267,7 @@ registerBlockType(metadata.name, {
 					>
 						{ contents.map( ( content, index ) => (
 							<li className={ `lw-list-4__li ${ sizeLi }` } key={ index } style={ { position: 'relative' } }>
-								<span className="icon" style={ iconSpanStyle }>
+								<span className={ `icon${ iconPositionTop ? ' position_top' : '' }` } style={ iconSpanStyle }>
 									{ iconUrl ? <img src={ iconUrl } /> : SvgIcon }
 								</span>
 
@@ -320,7 +327,7 @@ registerBlockType(metadata.name, {
 	save( { attributes } ) {
 		const {
 			fontLi, fontWeightLi, sizeLi, textColor,
-			colorLiSvg, iconUrl, iconSize,
+			colorLiSvg, iconUrl, iconSize, iconPositionTop,
 			borderColor, borderWidth, borderStyle,
 			borderRadius, maxWidth, bgColor, colClass,
 			noBorder,
@@ -364,7 +371,7 @@ registerBlockType(metadata.name, {
 				>
 					{ contents.map( ( content, index ) => (
 						<li className={ `lw-list-4__li ${ sizeLi }` } key={ index }>
-							<span className="icon" style={ iconSpanStyle }>
+							<span className={ `icon${ iconPositionTop ? ' position_top' : '' }` } style={ iconSpanStyle }>
 								{ iconUrl ? <img src={ iconUrl } /> : SvgIconSave }
 							</span>
 

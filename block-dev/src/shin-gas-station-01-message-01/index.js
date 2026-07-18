@@ -5,7 +5,7 @@ import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
 
-registerBlockType(metadata.name, {
+registerBlockType(metadata.name, {
     title: 'メッセージ 1 shin shop pattern 01',
     icon: 'admin-comments',
     category: 'lw-content',
@@ -55,7 +55,7 @@ registerBlockType(metadata.name, {
                         </div>
                     </PanelBody>
 
-                    <PanelBody title="カラー設定">
+                    <PanelBody title="色設定">
                         <p>リードテキストの色</p>
                         <ColorPalette
                             value={colorMain}

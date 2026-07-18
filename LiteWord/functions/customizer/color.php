@@ -18,10 +18,11 @@ function color_custom( $wp_customize ) {
             // ['color', 'sub', '', 'サブカラー'],
             ['color', 'accent', '', 'アクセントカラー'],
             ['color', 'text', '', '通常の文字の色'],
-            ['color', 'link_common', '', 'リンクテキストの色'],
             ['color', '1', '', 'カラー１'],
             ['color', '2', '', 'カラー２'],
             ['color', '3', '', 'カラー３'],
+            ['color', 'link_common', '文中のリンクテキストに関して', 'リンクテキストの色'],
+            ['select', 'link_icon_switch', '', '新規タブの場合にアイコンの表示',ctm_switch_array_2()],
         ]
     ];
     

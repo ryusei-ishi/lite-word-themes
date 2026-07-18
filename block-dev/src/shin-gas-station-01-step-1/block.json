@@ -10,12 +10,12 @@
 		"anchor": true
 	},
 	"editorScript": "file:./shin-gas-station-01-step-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "番号バッジ付きステップ。タイトル+説明のカード配列。ショップテンプレート用",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"no": 15,
 	"attributes": {
 		"fontLi": {

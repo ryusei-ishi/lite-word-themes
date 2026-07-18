@@ -6,6 +6,12 @@
 	"title": "会社概要 01",
 	"category": "lw-table",
 	"icon": "building",
+	"aiHint": {
+		"description": "会社概要テーブル。項目名+内容の定義リスト。会社情報・店舗情報の一覧表示に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -127,11 +133,5 @@
 		}
 	},
 	"editorScript": "file:./lw-company-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 1
 }

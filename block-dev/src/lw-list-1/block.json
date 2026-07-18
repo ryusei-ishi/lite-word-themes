@@ -9,6 +9,12 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "番号付きリスト。番号+テキストの繰り返し。特徴・メリット一覧に。見出しなし",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"attributes": {
 		"contents": {
 			"type": "array",
@@ -39,35 +45,15 @@
 					"text": "業種別デザイナーテンプレートを使うことで、プロ級のサイトが出来る！",
 					"number": "3"
 				}
-			]
+			],
+			"aiHint": { "role": "list", "contentGuide": "リスト項目。3〜8個。各text 15〜40文字。体言止めか「〜できる」形で統一", "example": [{"text": "初回カウンセリング無料で安心", "number": "1"}] }
 		},
-		"noFontSet": {
-			"type": "string",
-			"default": ""
-		},
-		"noFontWeight": {
-			"type": "string",
-			"default": ""
-		},
-		"textFontSet": {
-			"type": "string",
-			"default": ""
-		},
-		"textFontWeight": {
-			"type": "string",
-			"default": ""
-		},
-		"borderColor": {
-			"type": "string",
-			"default": "var(--color-main)"
-		}
+		"noFontSet": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"noFontWeight": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"textFontSet": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"textFontWeight": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"borderColor": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } }
 	},
 	"editorScript": "file:./lw-list-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 1
 }

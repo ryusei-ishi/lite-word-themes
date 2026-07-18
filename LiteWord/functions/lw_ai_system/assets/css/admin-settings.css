@@ -202,6 +202,65 @@
     font-size: 15px;
 }
 
+/* 猫ロボット音声ボタン */
+.lw-ai-neko-voice-btn {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 4px;
+    padding: 6px;
+    background: transparent;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: border-color 0.2s, transform 0.15s, box-shadow 0.2s;
+    position: relative;
+}
+
+.lw-ai-neko-voice-btn:hover {
+    border-color: #6366f1;
+    transform: scale(1.08);
+    box-shadow: 0 3px 12px rgba(99, 102, 241, 0.15);
+}
+
+.lw-ai-neko-voice-btn:active {
+    transform: scale(1);
+}
+
+.lw-ai-neko-voice-btn.playing {
+    border-color: #6366f1;
+    background: #eef2ff;
+    animation: lw-neko-talking 0.6s ease-in-out infinite alternate;
+}
+
+@keyframes lw-neko-talking {
+    from { transform: translateY(0); }
+    to { transform: translateY(-3px); }
+}
+
+.lw-ai-neko-avatar {
+    width: 44px;
+    height: 44px;
+}
+
+.lw-ai-neko-speak {
+    font-size: 14px;
+    line-height: 1;
+}
+
+@media (max-width: 600px) {
+    .lw-ai-neko-voice-btn {
+        position: absolute;
+        right: 0;
+        top: 0;
+    }
+    .lw-ai-step {
+        position: relative;
+        padding-right: 60px;
+    }
+}
+
 .lw-ai-step-desc {
     color: var(--lw-text-secondary);
     font-size: 14px;

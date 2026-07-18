@@ -1,6 +1,5 @@
-<?php 
+<?php
 if ( !defined( 'ABSPATH' ) ) exit;
-get_template_part('./functions/breadcrumb'); //関数
 $ptn = "ptn_2";
 //投稿ページの場合
 if(is_single()){

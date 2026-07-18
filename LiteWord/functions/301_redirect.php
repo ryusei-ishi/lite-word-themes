@@ -7,6 +7,13 @@ if ( ! defined( 'ABSPATH' ) ) { exit; }
  *   └─ カテゴリー　　　: termmeta → category_redirect_from_url
  *      ※ meta_value は「,」区切りで複数 URL を登録可能
  * ================================================================= */
+
+/* WordPress 標準の「404 → 似た slug への推測リダイレクト」を無効化。
+ *   例: /overnotes/post-2 でアクセス → post-25 が近いslugとして推測され
+ *       /overnotes/post-25/ へ勝手にリダイレクトされる問題を防ぐ。
+ *   末尾スラッシュ・https・www の正規化リダイレクトは維持される（WP 5.9+）。 */
+add_filter( 'do_redirect_guess_404_permalink', '__return_false' );
+
 add_action( 'template_redirect', 'lw_reverse_lookup_301_redirect', 0 );
 function lw_reverse_lookup_301_redirect() {
 

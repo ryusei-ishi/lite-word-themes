@@ -25,6 +25,13 @@ function add_files() {
             wp_enqueue_script('animation-front', get_template_directory_uri() . '/assets/js/animation-front.js', array(), css_version(), true); 
             wp_enqueue_style('style_anime', get_template_directory_uri() . '/assets/css/anime.min.css', array(), css_version(), 'all');
         }
+        // 外部リンクアイコン
+        $link_icon_switch = Lw_theme_mod_set("color_link_icon_switch", "off");
+        if($link_icon_switch === "on"){
+            wp_enqueue_script('link_icon_js', get_template_directory_uri() . '/assets/js/link_icon.js', array(), css_version(), true);
+        }
+        // 画像ポップアップ
+        wp_enqueue_script('lw_image_popup_js', get_template_directory_uri() . '/assets/js/image-popup.js', array(), css_version(), true);
         // WooCommerce用CSSの条件付き読み込み（WooCommerceが有効な場合のみ）
         if (class_exists('WooCommerce')) {
             wp_enqueue_style('style_woocommerce_common', get_template_directory_uri() . '/assets/css/woocommerce/common.min.css', array(), css_version(), 'all');

@@ -39,6 +39,10 @@ function lw_resolve_title_key( $key ) {
 			if ( is_year()  ) return get_the_date( 'Y年'      );
 			return '';
 
+		case 'page_for_posts_title':
+			$pfp = get_option( 'page_for_posts' );
+			return $pfp ? get_the_title( $pfp ) : '';
+
 		case 'archive_title'     : return wp_strip_all_tags( get_the_archive_title() );
 
 		case 'cpt_archive_title' : return post_type_archive_title( '', false );
@@ -139,6 +143,17 @@ function lw_filter_document_title( $title ) {
 		$sep  = get_option( 'lw_front_title_sep' , '-'            );
 		$sub  = get_option( 'lw_front_title_sub' , 'catchphrase'  );
 	}
+	elseif  ( is_home() ) {
+		/* 投稿ページに固定ページが設定されている場合、そのタイトルを使用 */
+		$page_id = get_option( 'page_for_posts' );
+		if ( $page_id ) {
+			$main = 'page_for_posts_title';
+		} else {
+			$main = get_option( 'lw_other_archive_title_main', 'archive_title' );
+		}
+		$sep  = get_option( 'lw_post_title_sep', '-' );
+		$sub  = get_option( 'lw_post_title_sub', 'site_title' );
+	}
 	elseif  ( is_singular( 'post' ) ) {
 		$main = get_option( 'lw_post_title_main' , 'post_title'   );
 		$sep  = get_option( 'lw_post_title_sep'  , '-'            );
@@ -218,7 +233,33 @@ add_filter( 'pre_get_document_title', 'lw_filter_document_title', 20 );
 /* --------------------------------------------------------------
  * 共通ヘルパー：X（旧Twitter）／Facebook メタタグ
  * ------------------------------------------------------------ */
-function lw_output_sns_common_tags() {
+function lw_output_sns_common_tags( $description = '', $canonical_url = '' ) {
+
+	/* === og:title / og:description / og:url ================ */
+	echo '<meta property="og:title" content="' . esc_attr( wp_get_document_title() ) . '">' . "\n";
+
+	// og:description フォールバック
+	if ( $description === '' ) {
+		$description = get_option( 'lw_front_meta_description', '' );
+	}
+	if ( $description === '' ) {
+		$description = get_bloginfo( 'description' );
+	}
+	if ( $description !== '' )
+		echo '<meta property="og:description" content="' . esc_attr( $description ) . '">' . "\n";
+
+	if ( $canonical_url === '' ) {
+		// フォールバック: 現在のURL
+		if ( is_front_page() ) $canonical_url = home_url( '/' );
+		elseif ( is_singular() ) $canonical_url = get_permalink();
+		elseif ( is_category() ) $canonical_url = get_term_link( get_queried_object() );
+		elseif ( is_home() ) {
+			$pfp = get_option( 'page_for_posts' );
+			$canonical_url = $pfp ? get_permalink( $pfp ) : home_url( '/' );
+		}
+		else $canonical_url = home_url( $_SERVER['REQUEST_URI'] ?? '/' );
+	}
+	echo '<meta property="og:url" content="' . esc_url( $canonical_url ) . '">' . "\n";
 
 	/* === X（旧Twitter） ===================================== */
 	$tw_card     = get_option( 'lw_twitter_card', 'summary_large_image' );
@@ -241,6 +282,9 @@ function lw_output_sns_common_tags() {
  * E) メタディスクリプション／noindex／OGP画像（改訂版）
  * ---------------------------------------------------------------- */
 function lw_output_seo_meta_tags() {
+
+	// プラグイン（lw-manual-publisher）が既にメタタグを出力している場合はスキップ
+	if ( ! empty( $GLOBALS['lwmp_is_manual_page'] ) ) return;
 
 	$default_og_type  = get_option( 'lw_og_default_type', 'website' );
 	$default_og_image = get_option( 'lw_og_default_image', '' ); // 共通フォールバック
@@ -270,7 +314,7 @@ function lw_output_seo_meta_tags() {
 			echo '<meta property="og:image" content="' . esc_url( $og_image ) . '">' . "\n";
 
 		/* -- 共通 SNS タグ -- */
-		lw_output_sns_common_tags();
+		lw_output_sns_common_tags( $front_desc, home_url( '/' ) );
 
 	/* ===== 投稿・固定ページ ===== */
 	} elseif ( is_singular() ) {
@@ -317,7 +361,7 @@ function lw_output_seo_meta_tags() {
 		if ( $og_image !== '' )
 			echo '<meta property="og:image" content="' . esc_url( $og_image ) . '">' . "\n";
 
-		lw_output_sns_common_tags();
+		lw_output_sns_common_tags( $seo_description, get_permalink() );
 
 	/* ===== カテゴリアーカイブ ===== */
 	} elseif ( is_category() ) {
@@ -353,7 +397,46 @@ function lw_output_seo_meta_tags() {
 		if ( $og_image !== '' )
 			echo '<meta property="og:image" content="' . esc_url( $og_image ) . '">' . "\n";
 
-		lw_output_sns_common_tags();
+		lw_output_sns_common_tags( $seo_description, get_term_link( $term ) );
+
+	/* ===== 投稿ページ（is_home: /blog/ 等） ===== */
+	} elseif ( is_home() ) {
+
+		$page_id = get_option( 'page_for_posts' );
+
+		/* description */
+		$seo_description = '';
+		if ( $page_id ) {
+			$seo_description = get_post_meta( $page_id, 'seo_description', true );
+		}
+		if ( $seo_description !== '' )
+			echo '<meta name="description" content="' . esc_attr( $seo_description ) . '">' . "\n";
+
+		/* canonical */
+		$canonical = $page_id ? get_permalink( $page_id ) : home_url( '/' );
+		echo '<link rel="canonical" href="' . esc_url( $canonical ) . '">' . "\n";
+
+		/* og:type */
+		echo '<meta property="og:type" content="' . esc_attr( $default_og_type ) . '">' . "\n";
+
+		/* og:image */
+		$og_image = '';
+		if ( $page_id ) {
+			$og_image = get_post_meta( $page_id, 'seo_og_image', true );
+			if ( $og_image === '' && has_post_thumbnail( $page_id ) )
+				$og_image = get_the_post_thumbnail_url( $page_id, 'full' );
+		}
+		if ( $og_image === '' ) $og_image = $default_og_image;
+		if ( $og_image === '' ) {
+			$logo_id = (int) get_theme_mod( 'custom_logo' );
+			if ( $logo_id ) $og_image = wp_get_attachment_image_url( $logo_id, 'full' );
+		}
+		if ( $og_image === '' ) $og_image = get_site_icon_url( 512 );
+
+		if ( $og_image !== '' )
+			echo '<meta property="og:image" content="' . esc_url( $og_image ) . '">' . "\n";
+
+		lw_output_sns_common_tags( $seo_description, $canonical );
 	}
 }
 add_action( 'wp_head', 'lw_output_seo_meta_tags', 90 );

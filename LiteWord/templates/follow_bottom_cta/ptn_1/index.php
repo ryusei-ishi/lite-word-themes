@@ -3,8 +3,12 @@ if ( !defined( 'ABSPATH' ) ) exit;
 // css, jsの読み込み
 wp_enqueue_style('follow_bottom_cta_01_style', get_template_directory_uri() . '/templates/follow_bottom_cta/ptn_1/style.min.css', array(), css_version(), 'all');
 $switch = Lw_theme_mod_set("follow_bottom_cta_ptn_1_set_1_switch","none");
+$responsive = Lw_theme_mod_set("follow_bottom_cta_ptn_1_set_responsive_switch","sp_pc");
+$responsive_class = '';
+if ($responsive === 'sp_only') $responsive_class = ' lw_follow_cta_sp_only';
+if ($responsive === 'pc_only') $responsive_class = ' lw_follow_cta_pc_only';
 ?>
-<div class="follow_bottom_cta_01 follow_bottom_cta">
+<div class="follow_bottom_cta_01 follow_bottom_cta<?= $responsive_class ?>">
     <ul>
         <?php 
             $font_family = Lw_theme_mod_set("follow_bottom_cta_ptn_1_set_font_family","");
@@ -41,5 +45,12 @@ $switch = Lw_theme_mod_set("follow_bottom_cta_ptn_1_set_1_switch","none");
     }
     .follow_bottom_cta_01>ul li:nth-of-type(2) a svg{
         fill: <?=Lw_theme_mod_set("follow_bottom_cta_ptn_1_set_2_color_text","")?> !important;
+    }
+    /* レスポンシブ表示切替 */
+    @media (min-width: 1081px) {
+        .lw_follow_cta_sp_only { display: none !important; }
+    }
+    @media (max-width: 1080px) {
+        .lw_follow_cta_pc_only { display: none !important; }
     }
 </style>

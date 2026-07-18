@@ -75,7 +75,7 @@ registerBlockType(metadata.name, {
 				<InspectorControls>
 
 					{/* ★ フォントサイズ設定パネル（RadioControlへ変更） */}
-					<PanelBody title="タイトルのフォントサイズ" initialOpen={true}>
+					<PanelBody title="フォント設定" initialOpen={true}>
 						<RadioControl
 							selected={ titleFontSizeClass }
 							options={[
@@ -88,7 +88,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* 背景画像パネル */}
-					<PanelBody title="背景画像設定">
+					<PanelBody title="背景設定">
 						{/* …PC / SP 画像アップロードの既存コード… */}
 					</PanelBody>
 
@@ -181,7 +181,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* 文字色 */}
-					<PanelBody title="全体の文字の色">
+					<PanelBody title="色設定">
 						<ColorPalette
 							value={textColor}
 							onChange={(c) => setAttributes({ textColor: c })}
@@ -189,7 +189,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* 高さ設定 */}
-					<PanelBody title="高さ設定">
+					<PanelBody title="レイアウト設定">
 						<p>PC用高さ</p>
 						<SelectControl
 							value={minHeightPc}

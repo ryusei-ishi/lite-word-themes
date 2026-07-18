@@ -13,24 +13,106 @@
     text-align: center;
   }
 }
+
 @media (max-width: 768px) {
   p.is-style-p_sp_right {
     text-align: right;
   }
 }
+
+.is-style-p_label_01 {
+  margin-bottom: 8px !important;
+  padding: 0.35em 0.5em;
+  display: inline-block;
+  border: 1px solid var(--color-main);
+  color: var(--color-main);
+  font-size: 0.8em;
+}
+
+@media (max-width: 768px) {
+  .is-style-p_label_01 {
+    font-size: 0.7em;
+  }
+}
+
+.is-style-p_label_01 + * {
+  margin-top: 0 !important;
+}
+
+.is-style-p_label_01_2 {
+  margin-bottom: 8px !important;
+  padding: 0.35em 0.5em;
+  display: inline-block;
+  border: 1px solid var(--color-accent);
+  color: var(--color-accent);
+  font-size: 0.8em;
+}
+
+@media (max-width: 768px) {
+  .is-style-p_label_01_2 {
+    font-size: 0.7em;
+  }
+}
+
+.is-style-p_label_01_2 + * {
+  margin-top: 0 !important;
+}
+
+.is-style-p_label_02 {
+  margin-bottom: 8px !important;
+  padding: 0.35em 1.5em;
+  display: inline-block;
+  border: 1px solid var(--color-main);
+  background: var(--color-main);
+  color: #fff;
+  font-size: 0.8em;
+  border-radius: 4em;
+}
+
+@media (max-width: 768px) {
+  .is-style-p_label_02 {
+    font-size: 0.7em;
+  }
+}
+
+.is-style-p_label_02 + * {
+  margin-top: 0 !important;
+}
+
+.is-style-p_label_02_2 {
+  margin-bottom: 8px !important;
+  padding: 0.35em 1.5em;
+  display: inline-block;
+  border: 1px solid var(--color-accent);
+  background: var(--color-accent);
+  color: #fff;
+  font-size: 0.8em;
+  border-radius: 4em;
+}
+
+@media (max-width: 768px) {
+  .is-style-p_label_02_2 {
+    font-size: 0.7em;
+  }
+}
+
+.is-style-p_label_02_2 + * {
+  margin-top: 0 !important;
+}
+
 .is-style-p_01 {
   margin: 30px 0;
   padding: 2em;
-  background: rgb(255, 241, 237);
-  border: 4px solid rgb(252, 228, 222);
+  background: #fff1ed;
+  border: 4px solid #fce4de;
   overflow: hidden;
 }
 
 .is-style-p_02 {
   margin: 30px 0;
   padding: 2em;
-  background: rgb(237, 251, 255);
-  border: 3px solid rgb(222, 240, 252);
+  background: #edfbff;
+  border: 3px solid #def0fc;
   overflow: hidden;
 }
 
@@ -58,6 +140,7 @@ p.is-style-p_02_3 {
   overflow: hidden;
   font-feature-settings: "palt";
 }
+
 @media (max-width: 600px) {
   .is-style-p_04 {
     padding: 1.5em;
@@ -73,6 +156,7 @@ p.is-style-p_02_3 {
   overflow: hidden;
   font-feature-settings: "palt";
 }
+
 @media (max-width: 600px) {
   .is-style-p_05 {
     padding: 1.5em;
@@ -155,4 +239,4 @@ h3.is-style-h_mt_0.wp-block-heading,
 h4.is-style-h_mt_0.wp-block-heading,
 h5.is-style-h_mt_0.wp-block-heading {
   margin-top: 0 !important;
-}/*# sourceMappingURL=register_block.css.map */
+}

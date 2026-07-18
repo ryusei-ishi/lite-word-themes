@@ -45,15 +45,16 @@ registerBlockType(metadata.name, {
 
         // コンテンツ更新
         const updateContent = (index, key, value) => {
-            const updatedContents = [...contents];
-            updatedContents[index][key] = value;
+            const updatedContents = contents.map((content, i) =>
+                i === index ? { ...content, [key]: value } : content
+            );
             setAttributes({ contents: updatedContents });
         };
 
         return (
             <div {...blockProps}>
                 <InspectorControls>
-                    <PanelBody title="テキストカラー設定" initialOpen={true}>
+                    <PanelBody title="色設定" initialOpen={true}>
                         {contents.map((content, index) => (
                             <div key={index} style={{ marginBottom: '16px' }}>
                                 <p>Item {index + 1} のテキストカラー</p>

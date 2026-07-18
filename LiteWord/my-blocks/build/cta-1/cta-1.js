@@ -38,7 +38,7 @@ module.exports = window["wp"]["components"];
   \******************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/cta-1","version":"1.0.0","title":"CTA 01","category":"lw-cta","icon":"megaphone","description":"背景画像付きのCTAブロック","aiDescription":"お問い合わせや資料請求などのアクションを促すセクション。背景画像とオーバーレイで視覚的にインパクトを与え、ボタンでユーザーを誘導する。ページの最後や重要なポイントに配置する。","aiNotes":"h2見出しは内部に含まれるため、直前にcustom-title系ブロックを配置しない。buttonUrlは必須。","supports":{"anchor":true},"attributes":{"title":{"type":"string","source":"html","selector":".cta-1__title","default":"無料相談受付中"},"text":{"type":"string","source":"html","selector":"p","default":"テキストテキストテキストテキストテキストテキス<br>トテキストテキストテキストテキストテキストテキスト"},"buttonText":{"type":"string","source":"html","selector":"a","default":"お問い合わせ"},"buttonUrl":{"type":"string","default":"#"},"openInNewTab":{"type":"boolean","default":false},"imageUrl":{"type":"string","source":"attribute","selector":"img","attribute":"src","default":""},"imageAlt":{"type":"string","source":"attribute","selector":"img","attribute":"alt","default":"背景画像"},"filterColor":{"type":"string","default":"#054161"},"buttonBackgroundColor":{"type":"string","default":"var(--color-main)"},"buttonBorderColor":{"type":"string","default":"#fff"},"buttonBorderSize":{"type":"number","default":1},"buttonMaxWidth":{"type":"number","default":240},"pcTextAlign":{"type":"string","default":"center"},"mobileTextAlign":{"type":"string","default":"center"},"maxWidth":{"type":"number","default":0},"headingLevel":{"type":"number","default":2}},"editorScript":"file:./cta-1.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/cta-1","version":"1.0.0","title":"CTA 01","category":"lw-cta","icon":"megaphone","description":"背景画像付きのCTAブロック","aiDescription":"お問い合わせや資料請求などのアクションを促すセクション。背景画像とオーバーレイで視覚的にインパクトを与え、ボタンでユーザーを誘導する。ページの最後や重要なポイントに配置する。","aiNotes":"h2見出しは内部に含まれるため、直前にcustom-title系ブロックを配置しない。buttonUrlは必須。","aiHint":{"description":"汎用CTA。背景画像+フィルター+h2見出し+説明文+ボタン1つ。問い合わせ・予約誘導に最適","excludeFromAutoSelect":false,"contentAttributes":["title","text","buttonText","buttonUrl"],"imageAttributes":["imageUrl"],"notes":"h2見出し内包のため直前にcustom-title系を配置しない。buttonUrlは必須"},"supports":{"anchor":true},"attributes":{"title":{"type":"string","source":"html","selector":".cta-1__title","default":"無料相談受付中","aiHint":{"role":"heading","contentGuide":"行動を促すh2見出し。5〜15文字","example":"まずは無料相談から"}},"text":{"type":"string","source":"html","selector":"p","default":"テキストテキストテキストテキストテキストテキス<br>トテキストテキストテキストテキストテキストテキスト","aiHint":{"role":"body","contentGuide":"なぜ今行動すべきかの理由。30〜80文字","example":"お気軽にご相談ください。専門スタッフが丁寧にご対応いたします。"}},"buttonText":{"type":"string","source":"html","selector":"a","default":"お問い合わせ","aiHint":{"role":"button","contentGuide":"動詞形。4〜10文字","example":"今すぐ予約する"}},"buttonUrl":{"type":"string","default":"#","aiHint":{"role":"url","contentGuide":"#contact 推奨"}},"openInNewTab":{"type":"boolean","default":false,"aiHint":{"skip":true}},"imageUrl":{"type":"string","source":"attribute","selector":"img","attribute":"src","default":"","aiHint":{"role":"image","note":"背景画像URL。画像生成時に設定"}},"imageAlt":{"type":"string","source":"attribute","selector":"img","attribute":"alt","default":"背景画像","aiHint":{"role":"alt","contentGuide":"画像の説明。業種名+雰囲気","example":"美容サロンの施術風景"}},"filterColor":{"type":"string","default":"#054161","aiHint":{"skip":true}},"buttonBackgroundColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"buttonBorderColor":{"type":"string","default":"#fff","aiHint":{"skip":true}},"buttonBorderSize":{"type":"number","default":1,"aiHint":{"skip":true}},"buttonMaxWidth":{"type":"number","default":240,"aiHint":{"skip":true}},"pcTextAlign":{"type":"string","default":"center","aiHint":{"skip":true}},"mobileTextAlign":{"type":"string","default":"center","aiHint":{"skip":true}},"maxWidth":{"type":"number","default":0,"aiHint":{"skip":true}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}}},"editorScript":"file:./cta-1.js","no":1}');
 
 /***/ })
 
@@ -258,7 +258,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, "H".concat(level));
     }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u6A2A\u5E45\u306E\u8A2D\u5B9A",
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -288,7 +288,7 @@ __webpack_require__.r(__webpack_exports__);
         marginTop: '10px'
       }
     }, "\uD83D\uDD04 \u30EA\u30BB\u30C3\u30C8"))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30EA\u30F3\u30AF\u306E\u8A2D\u5B9A"
+      title: "\u57FA\u672C\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
       label: "\u30EA\u30F3\u30AF\u5148URL",
       value: buttonUrl,
@@ -298,7 +298,7 @@ __webpack_require__.r(__webpack_exports__);
       checked: openInNewTab,
       onChange: onToggleOpenInNewTab
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u753B\u50CF\u306E\u8A2D\u5B9A"
+      title: "\u753B\u50CF\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
       onSelect: onSelectImage,
       allowedTypes: "image",
@@ -330,7 +330,7 @@ __webpack_require__.r(__webpack_exports__);
         return onChangeFilterColor(value.hex);
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30EA\u30F3\u30AF\u30DC\u30BF\u30F3\u306E\u8272\u8A2D\u5B9A"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
       color: buttonBackgroundColor,
       onChangeComplete: function onChangeComplete(value) {
@@ -354,7 +354,7 @@ __webpack_require__.r(__webpack_exports__);
       min: 50,
       max: 500
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30C6\u30AD\u30B9\u30C8\u306E\u914D\u7F6E\u8A2D\u5B9A"
+      title: "\u914D\u7F6E\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "PC\u3067\u306E\u30C6\u30AD\u30B9\u30C8\u914D\u7F6E",
       value: pcTextAlign,

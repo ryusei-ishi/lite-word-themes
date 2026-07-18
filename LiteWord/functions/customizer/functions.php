@@ -187,6 +187,7 @@ function header_ptn_arr() {
 
     $header_ptn['ptn_5'] = 'ヘッダーパターン5';
     $header_ptn['ptn_6'] = 'ヘッダーパターン6';
+    $header_ptn['ptn_short_code'] = 'ショートコード';
     $header_ptn['none']  = '非表示';
 
     return $header_ptn;
@@ -209,6 +210,7 @@ function footer_ptn_arr() {
         $footer_ptn['ptn_3']  = 'フッターパターン3';
     }
     $footer_ptn['ptn_4']  = 'フッターパターン4';
+    $footer_ptn['ptn_short_code'] = 'ショートコード';
     $footer_ptn['none']   = '非表示';
 
     return $footer_ptn;
@@ -226,8 +228,10 @@ function ctm_heading_arr(){
     $heading_arr = [
         '' => '未指定',
         'normal' => '通常',
+        'color_main' => 'メインカラー',
         'bold' => '太字',
         'underline' => '下線',
+        'underline_short' => '短い下線',
         'underline_dotted' => '下線（点線）',
         'underline_dashed' => '下線（破線）',
         'underline_double' => '下線（二重線）',
@@ -244,6 +248,7 @@ function ctm_heading_arr(){
         'top_bottom_line_dashed' => '上下線（破線）',
         'top_bottom_line_double' => '上下線（二重線）',
         'bg_color' => '背景色',
+        'bg_color_mini' => '背景色（小）',
         'bg_color_transparency' => '背景色（透過）',
         'bg_color_transparency_left_line_thick' => '背景色（透過）+ 左線（太い）',
         'left_square_s' => '左角四角（小）',

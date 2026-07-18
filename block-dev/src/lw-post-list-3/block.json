@@ -7,12 +7,13 @@
 	"category": "lw-post",
 	"icon": "editor-ul",
 	"editorScript": "file:./lw-post-list-3.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "投稿一覧テキストのみ。日付+カテゴリ+タイトルの行表示。お知らせ・更新履歴に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["numberOfPosts", "categoryId"],
+		"imageAttributes": [],
+		"notes": "動的ブロック。画像なしのテキストリスト形式"
+	},
 	"supports": {
 		"anchor": true
 	},

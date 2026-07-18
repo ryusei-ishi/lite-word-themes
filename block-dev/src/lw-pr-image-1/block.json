@@ -1,0 +1,106 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-image-1",
+	"version": "1.0.0",
+	"title": "PR画像グリッド 01",
+	"category": "lw-media",
+	"icon": "grid-view",
+	"description": "CSS変数で制御する画像グリッドブロック",
+	"aiHint": {
+		"description": "画像グリッド。複数画像をグリッド配置。ギャラリー・施設写真に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [],
+		"imageAttributes": [
+			"images"
+		]
+	},
+	"supports": {
+		"anchor": true
+	},
+	"editorScript": "file:./lw-pr-image-1.js",
+	"viewScript": "file:./view.js",
+	"attributes": {
+		"blockId": {
+			"type": "string"
+		},
+		"images": {
+			"type": "array",
+			"default": [
+				{
+					"imgUrl": "",
+					"altText": "",
+					"linkUrl": ""
+				},
+				{
+					"imgUrl": "",
+					"altText": "",
+					"linkUrl": ""
+				},
+				{
+					"imgUrl": "",
+					"altText": "",
+					"linkUrl": ""
+				},
+				{
+					"imgUrl": "",
+					"altText": "",
+					"linkUrl": ""
+				},
+				{
+					"imgUrl": "",
+					"altText": "",
+					"linkUrl": ""
+				}
+			]
+		},
+		"gapPc": {
+			"type": "number",
+			"default": 16
+		},
+		"gapSp": {
+			"type": "number",
+			"default": 8
+		},
+		"columnsPc": {
+			"type": "number",
+			"default": 5
+		},
+		"columnsSp": {
+			"type": "number",
+			"default": 2
+		},
+		"aspectRatioW": {
+			"type": "number",
+			"default": 160
+		},
+		"aspectRatioH": {
+			"type": "number",
+			"default": 108
+		},
+		"imgBorderRadius": {
+			"type": "number",
+			"default": 0
+		},
+		"mtPc": {
+			"type": "number",
+			"default": 16
+		},
+		"mbPc": {
+			"type": "number",
+			"default": 16
+		},
+		"mtSp": {
+			"type": "number",
+			"default": 16
+		},
+		"mbSp": {
+			"type": "number",
+			"default": 16
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 0
+		}
+	}
+}

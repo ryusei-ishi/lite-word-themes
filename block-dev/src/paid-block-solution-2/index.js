@@ -35,8 +35,9 @@ registerBlockType(metadata.name, {
         });
 
         const updateItem = (index, field, value) => {
-            const newItems = [...items];
-            newItems[index][field] = value;
+            const newItems = items.map((item, i) =>
+                i === index ? { ...item, [field]: value } : item
+            );
             setAttributes({ items: newItems });
         };
 
@@ -62,7 +63,7 @@ registerBlockType(metadata.name, {
                         </Button>
                     </PanelBody>
 
-                    <PanelBody title="画像サイズの設定" initialOpen={true}>
+                    <PanelBody title="レイアウト設定" initialOpen={true}>
                         {items.map((item, idx) => (
                             <div key={idx} style={{ marginBottom: '1em' }}>
                                 <p>リスト {idx + 1} の画像サイズ</p>
@@ -81,7 +82,7 @@ registerBlockType(metadata.name, {
                         ))}
                     </PanelBody>
 
-                    <PanelBody title="メインカラー" initialOpen={true}>
+                    <PanelBody title="色設定" initialOpen={true}>
                         <ColorPicker
                             color={colorMain}
                             onChange={(val) => setAttributes({ colorMain: val })}

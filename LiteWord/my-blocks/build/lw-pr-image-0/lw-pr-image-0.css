@@ -1,0 +1,82 @@
+/*!************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/lw-pr-image-0/editor.scss ***!
+  \************************************************************************************************************************/
+@charset "UTF-8";
+/**
+ * LW Image Block - Editor Styles
+ */
+.lw-pr-image-0 {
+  position: relative;
+  box-sizing: border-box;
+  width: 100%;
+  max-width: 100%;
+  overflow: hidden;
+  /* オーバーレイ（編集時のボタン表示） */
+  /* プレースホルダー（画像未選択時） */
+}
+.lw-pr-image-0 * {
+  box-sizing: border-box;
+}
+.lw-pr-image-0 .lw-pr-image-0__inner {
+  position: relative;
+  width: var(--lw-image-width-pc, 100%);
+  max-width: 100%;
+  height: var(--lw-image-height-pc, auto);
+  aspect-ratio: var(--lw-image-aspect-ratio-pc, auto);
+  border-radius: var(--lw-image-border-radius-pc, 0);
+  overflow: hidden;
+}
+.lw-pr-image-0 .lw-pr-image-0__img {
+  display: block;
+  width: 100%;
+  height: auto;
+  max-width: 100%;
+  object-fit: var(--lw-image-object-fit, cover);
+  border-radius: var(--lw-image-border-radius-pc, 0);
+}
+.lw-pr-image-0 .lw-pr-image-0__overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  background: rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  transition: opacity 0.2s ease;
+}
+.lw-pr-image-0:hover .lw-pr-image-0__overlay {
+  opacity: 1;
+}
+.lw-pr-image-0 .lw-pr-image-0__btn {
+  padding: 8px 16px !important;
+  font-size: 13px !important;
+}
+.lw-pr-image-0 .lw-pr-image-0__placeholder {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 200px;
+  padding: 40px;
+  background: #f0f0f0;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+.lw-pr-image-0 .lw-pr-image-0__placeholder:hover {
+  background: #e8e8e8;
+  border-color: #007cba;
+}
+.lw-pr-image-0 .lw-pr-image-0__placeholder-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+.lw-pr-image-0 .lw-pr-image-0__placeholder-text {
+  font-size: 14px;
+  color: #666;
+}

@@ -36,8 +36,7 @@ registerBlockType(metadata.name, {
 
         // コンテンツを更新
         const updateContent = (index, key, value) => {
-            const updatedContents = [...contents];
-            updatedContents[index][key] = value;
+            const updatedContents = contents.map((content, i) => i === index ? { ...content, [key]: value } : content);
             setAttributes({ contents: updatedContents });
         };
 
@@ -48,13 +47,13 @@ registerBlockType(metadata.name, {
         return (
             <>
                 <InspectorControls>
-                    <PanelBody title="外枠の色">
+                    <PanelBody title="枠線設定">
                         <ColorPalette
                             value={colorOuter}
                             onChange={(newColorOuter) => setAttributes({ colorOuter: newColorOuter })}
                         />
                     </PanelBody>
-                    <PanelBody title="タイトルの部分の設定">
+                    <PanelBody title="フォント設定（項目名）">
                         <p>文字の色</p>
                         <ColorPalette
                             value={colorDt}
@@ -73,7 +72,7 @@ registerBlockType(metadata.name, {
                             onChange={(newFontWeightDt) => setAttributes({ fontWeightDt: newFontWeightDt })}
                         />
                     </PanelBody>
-                    <PanelBody title="テキストの部分の設定">
+                    <PanelBody title="フォント設定（内容）">
                         <p>文字の色</p>
                         <ColorPalette
                             value={colorDd}

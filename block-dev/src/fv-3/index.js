@@ -35,7 +35,7 @@ registerBlockType(metadata.name, {
         return (
             <>
                 <InspectorControls>
-                    <PanelBody title="見出しタグ設定">
+                    <PanelBody title="基本設定">
                         <SelectControl
                             label="見出しタグ"
                             value={headingTag}
@@ -49,7 +49,7 @@ registerBlockType(metadata.name, {
                         />
                     </PanelBody>
 
-                    <PanelBody title="横幅設定">
+                    <PanelBody title="レイアウト設定">
                         <SelectControl
                             label="横幅"
                             value={widthSetting}
@@ -62,7 +62,7 @@ registerBlockType(metadata.name, {
                         />
                     </PanelBody>
 
-                    <PanelBody title="PC用画像設定">
+                    <PanelBody title="画像設定（PC）">
                         {imagePc && <img src={imagePc} alt="PC用画像" style={{ width: '100%', height: 'auto' }} />}
                         <MediaUpload
                             onSelect={onChangeImagePc}
@@ -81,7 +81,7 @@ registerBlockType(metadata.name, {
                         )}
                     </PanelBody>
 
-                    <PanelBody title="スマホ用画像設定">
+                    <PanelBody title="画像設定（スマホ）">
                         {imageSp && <img src={imageSp} alt="スマホ用画像" style={{ width: '100%', height: 'auto' }} />}
                         <MediaUpload
                             onSelect={onChangeImageSp}
@@ -100,7 +100,7 @@ registerBlockType(metadata.name, {
                         )}
                     </PanelBody>
 
-                    <PanelBody title="画像のAltテキスト">
+                    <PanelBody title="画像のAlt設定">
                         <TextControl
                             label="Altテキスト"
                             value={altText}

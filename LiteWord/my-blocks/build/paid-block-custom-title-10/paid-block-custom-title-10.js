@@ -50,7 +50,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       bdMarginTopEm = attributes.bdMarginTopEm,
       bdDisplay = attributes.bdDisplay,
       ttlFullWidth = attributes.ttlFullWidth;
-    var Tag = "h".concat(headingLevel);
+    var Tag = ['p', 'div'].includes(headingLevel) ? headingLevel : "h".concat(headingLevel);
     var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
       className: "paid-block-custom-title-10 ".concat(positionClass, " ").concat(sizeClass)
     });
@@ -62,7 +62,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     var removeImage = function removeImage(side) {
       return setAttributes(_defineProperty({}, side, ''));
     };
-    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, [2, 3, 4].map(function (lvl) {
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, ['2', '3', '4'].map(function (lvl) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
         key: lvl,
         isPressed: headingLevel === lvl,
@@ -72,8 +72,22 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
           });
         }
       }, "H".concat(lvl));
-    }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30B5\u30A4\u30BA\u8A2D\u5B9A",
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
+      isPressed: headingLevel === 'p',
+      onClick: function onClick() {
+        return setAttributes({
+          headingLevel: 'p'
+        });
+      }
+    }, "P"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
+      isPressed: headingLevel === 'div',
+      onClick: function onClick() {
+        return setAttributes({
+          headingLevel: 'div'
+        });
+      }
+    }, "DIV"))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RadioControl, {
       label: "\u30B5\u30A4\u30BA",
@@ -123,7 +137,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30E1\u30A4\u30F3\u30AB\u30E9\u30FC",
+      title: "\u8272\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement("p", null, "\u30E1\u30A4\u30F3\u30AB\u30E9\u30FC"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: mainTitleColor,
@@ -356,7 +370,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
       className: "paid-block-custom-title-10 ".concat(positionClass, " ").concat(sizeClass)
     });
-    var Tag = "h".concat(headingLevel);
+    var Tag = ['p', 'div'].includes(headingLevel) ? headingLevel : "h".concat(headingLevel);
     var maybeImage = function maybeImage(url, cls, styleObj) {
       return url && /*#__PURE__*/React.createElement("span", {
         className: cls,
@@ -459,7 +473,7 @@ module.exports = window["wp"]["components"];
   \***************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-custom-title-10","version":"1.0.0","title":"見出しタイトル 10","category":"lw-heading","icon":"editor-textcolor","description":"画像付き見出しブロック","supports":{"anchor":true},"attributes":{"subTitle":{"type":"string","default":"製品紹介"},"mainTitle":{"type":"string","default":"PRODUCTS"},"headingLevel":{"type":"number","default":2},"mainTitleColor":{"type":"string","default":"var(--color-main)"},"sizeClass":{"type":"string","default":"size_m"},"leftImage":{"type":"string","default":"https://lite-word.com/sample_img/icon/pc_1.png"},"rightImage":{"type":"string","default":""},"leftHeightEm":{"type":"number","default":1.5},"rightHeightEm":{"type":"number","default":1.5},"leftMarginEm":{"type":"number","default":0.4},"rightMarginEm":{"type":"number","default":0.4},"positionClass":{"type":"string","default":"position_center"},"hideSubTitle":{"type":"string","default":"off"},"hideMainTitle":{"type":"string","default":"off"},"bdThickness":{"type":"number","default":2},"bdMarginTopEm":{"type":"number","default":0.1},"bdDisplay":{"type":"string","default":"on"},"ttlFullWidth":{"type":"string","default":"off"}},"editorScript":"file:./paid-block-custom-title-10.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":10}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-custom-title-10","version":"1.0.0","title":"見出しタイトル 10","category":"lw-heading","icon":"editor-textcolor","description":"画像付き見出しブロック","supports":{"anchor":true},"aiHint":{"description":"画像付き見出し。左右にアイコン画像を配置可能。メイン+サブタイトル+下線装飾","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":["leftImage","rightImage"]},"attributes":{"subTitle":{"type":"string","default":"製品紹介","aiHint":{"role":"subheading","contentGuide":"日本語の補足タイトル。3〜10文字","example":"ギャラリー"}},"mainTitle":{"type":"string","default":"PRODUCTS","aiHint":{"role":"heading","contentGuide":"英語のメインタイトル。大文字推奨","example":"GALLERY"}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}},"mainTitleColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"sizeClass":{"type":"string","default":"size_m","aiHint":{"skip":true}},"leftImage":{"type":"string","default":"https://lite-word.com/sample_img/icon/pc_1.png","aiHint":{"role":"image","note":"左側アイコン画像URL"}},"rightImage":{"type":"string","default":"","aiHint":{"role":"image","note":"右側アイコン画像URL。省略可"}},"leftHeightEm":{"type":"number","default":1.5,"aiHint":{"skip":true}},"rightHeightEm":{"type":"number","default":1.5,"aiHint":{"skip":true}},"leftMarginEm":{"type":"number","default":0.4,"aiHint":{"skip":true}},"rightMarginEm":{"type":"number","default":0.4,"aiHint":{"skip":true}},"positionClass":{"type":"string","default":"position_center","aiHint":{"skip":true}},"hideSubTitle":{"type":"string","default":"off","aiHint":{"skip":true}},"hideMainTitle":{"type":"string","default":"off","aiHint":{"skip":true}},"bdThickness":{"type":"number","default":2,"aiHint":{"skip":true}},"bdMarginTopEm":{"type":"number","default":0.1,"aiHint":{"skip":true}},"bdDisplay":{"type":"string","default":"on","aiHint":{"skip":true}},"ttlFullWidth":{"type":"string","default":"off","aiHint":{"skip":true}}},"editorScript":"file:./paid-block-custom-title-10.js","no":10}');
 
 /***/ })
 

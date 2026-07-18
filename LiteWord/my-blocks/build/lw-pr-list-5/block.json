@@ -1,0 +1,78 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "wdl/lw-pr-list-5",
+    "version":  "1.0.0",
+    "title":  "List 05",
+    "category":  "lw-list",
+    "icon":  "editor-ul",
+    "description":  "リスト+画像ブロック（1列/2列選択可）",
+    "aiDescription":  "リストと画像を組み合わせたレイアウト。1列または2列のリスト表示を選択可能。サービス内容や特徴を箇条書きで説明する際に最適。",
+    "aiNotes":  "このブロックはリスト+画像構成。listColumnsで1列/2列を切替。leftItemsとrightItems（2列時のみ）でリスト項目を管理。背景色とテキスト色をカスタマイズ可能。",
+    "aiHint": {
+        "description": "リスト+画像。1列/2列のチェックリスト+下部に画像。サービス内容・特徴一覧に",
+        "excludeFromAutoSelect": false,
+        "contentAttributes": ["leftItems", "rightItems"],
+        "imageAttributes": ["imageUrl"]
+    },
+    "supports":  {
+                     "anchor":  true
+                 },
+    "attributes":  {
+                       "leftItems":  {
+                                         "type":  "array",
+                                         "default":  [
+                                                         "テキストテキ",
+                                                         "テキストテキ",
+                                                         "テキストテキ"
+                                                     ],
+                                         "ai_description":  "左列のリスト項目。3～5項目推奨"
+                                     },
+                       "rightItems":  {
+                                          "type":  "array",
+                                          "default":  [
+                                                          "テキストテキ",
+                                                          "テキストテキ",
+                                                          "テキストテキ"
+                                                      ],
+                                          "ai_description":  "右列のリスト項目。3～5項目推奨"
+                                      },
+                       "imageUrl":  {
+                                        "type":  "string",
+                                        "default":  "https://placehold.co/800x320",
+                                        "ai_description":  "画像URL"
+                                    },
+                       "imageAlt":  {
+                                        "type":  "string",
+                                        "default":  "",
+                                        "ai_description":  "画像のalt属性"
+                                    },
+                       "bgColor":  {
+                                       "type":  "string",
+                                       "default":  "#f7f7f7",
+                                       "ai_description":  "リスト部分の背景色"
+                                   },
+                       "textColor":  {
+                                         "type":  "string",
+                                         "default":  "var(--color-main)",
+                                         "ai_description":  "リストテキストの色"
+                                     },
+                       "listFontSet":  {
+                                           "type":  "string",
+                                           "default":  "",
+                                           "ai_description":  "リストのフォント"
+                                       },
+                       "listFontWeight":  {
+                                              "type":  "string",
+                                              "default":  "",
+                                              "ai_description":  "リストのフォントウェイト"
+                                          },
+                       "listColumns":  {
+                                           "type":  "number",
+                                           "default":  2,
+                                           "ai_description":  "リストの列数（1または2）"
+                                       }
+                   },
+    "editorScript":  "file:./lw-pr-list-5.js",
+    "no":  5
+}

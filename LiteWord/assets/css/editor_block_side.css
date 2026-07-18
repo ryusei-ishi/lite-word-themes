@@ -1,9 +1,12 @@
+@charset "UTF-8";
 .lw-table-item-controls {
   position: absolute;
   top: 2px;
   right: 2px;
   height: calc(100% - 4px);
+  min-height: 30px;
 }
+
 .lw-table-item-controls .move-up-button,
 .lw-table-item-controls .move-down-button {
   position: absolute;
@@ -22,13 +25,16 @@
   border-radius: 2px;
   cursor: pointer;
 }
+
 .lw-table-item-controls .move-up-button:hover,
 .lw-table-item-controls .move-down-button:hover {
   opacity: 0.8;
 }
+
 .lw-table-item-controls .move-up-button {
   right: 22px;
 }
+
 .lw-table-item-controls .remove-item-button {
   position: absolute;
   bottom: 2px;
@@ -44,4 +50,66 @@
   white-space: nowrap;
   border-radius: 2px;
   cursor: pointer;
-}/*# sourceMappingURL=editor_block_side.css.map */
+}
+
+/* テーブル01（lw-pr-table-1）専用 ---------------------------------------------
+   行コントロールに「配置」select が加わり、旧3ボタン前提の絶対配置と重なって
+   崩れていたため、絶対配置を解除し行の右側に1列で整然と並べ直す。
+   .lw-pr-table-1 にスコープしているのでカレンダー等 他ブロックには影響しない。 */
+.lw-pr-table-1 .lw-table-item-controls {
+  position: absolute;
+  top: 0;
+  left: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding-left: 8px;
+  white-space: nowrap;
+}
+
+.lw-pr-table-1 .lw-table-item-controls select {
+  font-size: 11px;
+  padding: 2px 4px;
+  border: 1px solid #ccc;
+  border-radius: 2px;
+  background: #fff;
+  cursor: pointer;
+}
+
+.lw-pr-table-1 .lw-table-item-controls .move-up-button,
+.lw-pr-table-1 .lw-table-item-controls .move-down-button,
+.lw-pr-table-1 .lw-table-item-controls .remove-item-button {
+  position: static;
+  top: auto;
+  right: auto;
+  bottom: auto;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 24px;
+  font-size: 12px;
+  line-height: 1;
+  color: #fff !important;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+}
+
+.lw-pr-table-1 .lw-table-item-controls .move-up-button:hover,
+.lw-pr-table-1 .lw-table-item-controls .move-down-button:hover,
+.lw-pr-table-1 .lw-table-item-controls .remove-item-button:hover {
+  opacity: 0.8;
+}
+
+.lw-pr-table-1 .lw-table-item-controls .move-up-button,
+.lw-pr-table-1 .lw-table-item-controls .move-down-button {
+  width: 24px;
+  background: #4e4e4e;
+}
+
+.lw-pr-table-1 .lw-table-item-controls .remove-item-button {
+  width: auto;
+  padding: 0 8px;
+  background: var(--color-accent);
+}

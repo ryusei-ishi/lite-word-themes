@@ -7,12 +7,12 @@
 	"category": "lw-firstview",
 	"icon": "cover-image",
 	"editorScript": "file:./paid-block-fv-8.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "テキスト重視FV。メインタイトル+サブ+リード+ポイント3つ+ボトムテキスト。背景画像付き。情報量多い業種に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "subTitle", "leadText", "listItem_1", "listItem_2", "listItem_3", "bottomText"],
+		"imageAttributes": ["backgroundImagePc", "backgroundImageSp"]
+	},
 	"supports": {
 		"anchor": true
 	},

@@ -6,16 +6,24 @@
 	"title": "お問合わせフォーム 02",
 	"category": "lw-contact",
 	"icon": "email",
+	"aiHint": {
+		"description": "お問い合わせ（背景画像付き）。見出し+説明+フォーム表示",
+		"excludeFromAutoSelect": true,
+		"contentAttributes": [
+			"mainTitle",
+			"subTitle",
+			"description"
+		],
+		"imageAttributes": [
+			"bgImageUrl",
+			"bgImageUrlSp"
+		],
+		"excludeReason": "フォームブロック。コンテンツ生成は見出し部分のみ"
+	},
 	"supports": {
 		"anchor": true
 	},
 	"editorScript": "file:./paid-block-contact-2.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 2,
 	"attributes": {
 		"formId": {

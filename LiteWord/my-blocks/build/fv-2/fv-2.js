@@ -74,7 +74,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, "H".concat(level));
     }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u753B\u50CF\u8A2D\u5B9A"
+      title: "\u80CC\u666F\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "PC\u306E\u6642"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
       onSelect: onChangeBackgroundImage,
       allowedTypes: ['image'],
@@ -138,7 +138,7 @@ __webpack_require__.r(__webpack_exports__);
         }, "\u753B\u50CF\u3092\u9078\u629E"));
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u753B\u50CF\u306E\u4E0A\u306E\u30D5\u30A3\u30EB\u30BF\u30FC\u306E\u8272\u3068\u900F\u660E\u5EA6"
+      title: "\u30D5\u30A3\u30EB\u30BF\u30FC\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: filterBackgroundColor,
       onChange: function onChange(color) {
@@ -157,7 +157,7 @@ __webpack_require__.r(__webpack_exports__);
       max: 1,
       step: 0.01
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "h1:after\u306E\u8272\u8A2D\u5B9A"
+      title: "\u30A2\u30AF\u30BB\u30F3\u30C8\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u80CC\u666F\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: h1AfterColor,
       onChange: function onChange(color) {
@@ -166,7 +166,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30C6\u30AD\u30B9\u30C8\u306E\u8272"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u6587\u5B57\u306E\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: textColor,
       onChange: function onChange(color) {
@@ -175,7 +175,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u9AD8\u3055\u8A2D\u5B9A"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "PC\u7528\u9AD8\u3055"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       value: minHeightPc,
       options: (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.minHeightPcClassOptionArr)(),
@@ -969,7 +969,7 @@ module.exports = window["wp"]["components"];
   \*****************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/fv-2","version":"1.0.0","title":"固定ページタイトル 02（下層用）","category":"lw-firstview","icon":"cover-image","editorScript":"file:./fv-2.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"backgroundImage":{"type":"string","default":""},"backgroundImageSp":{"type":"string","default":""},"filterBackgroundColor":{"type":"string","default":"var(--color-main)"},"filterOpacity":{"type":"number","default":0.9},"h1AfterColor":{"type":"string","default":"#ef5d68"},"textColor":{"type":"string","default":"#fff"},"title":{"type":"string","default":"タイトル"},"minHeightPc":{"type":"string","default":"min-h-pc-320px"},"minHeightTb":{"type":"string","default":"min-h-tb-280px"},"minHeightSp":{"type":"string","default":"min-h-sp-220px"},"headingLevel":{"type":"number","default":1}},"no":2}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/fv-2","version":"1.0.0","title":"固定ページタイトル 02（下層用）","category":"lw-firstview","icon":"cover-image","editorScript":"file:./fv-2.js","supports":{"anchor":true},"aiHint":{"description":"下層ページ用FV。中央にタイトルのみ。シンプルで軽量。色ベタ塗り背景","excludeFromAutoSelect":false,"contentAttributes":["title"],"imageAttributes":[]},"attributes":{"backgroundImage":{"type":"string","default":"","aiHint":{"skip":true}},"backgroundImageSp":{"type":"string","default":"","aiHint":{"skip":true}},"filterBackgroundColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"filterOpacity":{"type":"number","default":0.9,"aiHint":{"skip":true}},"h1AfterColor":{"type":"string","default":"#ef5d68","aiHint":{"skip":true}},"textColor":{"type":"string","default":"#fff","aiHint":{"skip":true}},"title":{"type":"string","default":"タイトル","aiHint":{"role":"heading","contentGuide":"ページタイトル。3〜15文字","example":"サービス紹介"}},"minHeightPc":{"type":"string","default":"min-h-pc-320px","aiHint":{"skip":true}},"minHeightTb":{"type":"string","default":"min-h-tb-280px","aiHint":{"skip":true}},"minHeightSp":{"type":"string","default":"min-h-sp-220px","aiHint":{"skip":true}},"headingLevel":{"type":"number","default":1,"aiHint":{"skip":true}}},"no":2}');
 
 /***/ })
 

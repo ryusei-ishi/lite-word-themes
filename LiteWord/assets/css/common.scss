@@ -205,6 +205,18 @@ body {
     }
   }
 }
+//lw_link_icon
+.lw_link_icon{
+  margin-left: 0.1em;
+  display: inline-block;
+  height: 1.35em;
+  >svg{
+    height: 100%;
+    width: auto;
+    fill: var(--color-link-common);
+    transform: translateY(0.25em);
+  }
+}
 // breadcrumbs_wrap ----------------
 .breadcrumbs_wrap {
   position: relative;
@@ -494,3 +506,6 @@ body {
     }
   }
 }
+
+
+

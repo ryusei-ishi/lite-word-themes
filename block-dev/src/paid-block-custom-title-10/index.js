@@ -34,7 +34,7 @@ registerBlockType( metadata.name, {
 			ttlFullWidth,
 		} = attributes;
 
-		const Tag = `h${ headingLevel }`;
+		const Tag = [ 'p', 'div' ].includes( headingLevel ) ? headingLevel : `h${ headingLevel }`;
 
 		const blockProps = useBlockProps({
 			className: `paid-block-custom-title-10 ${ positionClass } ${ sizeClass }`
@@ -45,10 +45,10 @@ registerBlockType( metadata.name, {
 
 		return (
 			<>
-				{/* ───── ツールバー：見出しレベル ───── */}
+				{/* ───── ツールバー：タグ切替 ───── */}
 				<BlockControls>
 					<ToolbarGroup>
-						{ [ 2, 3, 4 ].map( lvl => (
+						{ [ '2', '3', '4' ].map( lvl => (
 							<ToolbarButton
 								key={ lvl }
 								isPressed={ headingLevel === lvl }
@@ -57,13 +57,25 @@ registerBlockType( metadata.name, {
 								{ `H${ lvl }` }
 							</ToolbarButton>
 						) ) }
+						<ToolbarButton
+							isPressed={ headingLevel === 'p' }
+							onClick={ () => setAttributes( { headingLevel: 'p' } ) }
+						>
+							P
+						</ToolbarButton>
+						<ToolbarButton
+							isPressed={ headingLevel === 'div' }
+							onClick={ () => setAttributes( { headingLevel: 'div' } ) }
+						>
+							DIV
+						</ToolbarButton>
 					</ToolbarGroup>
 				</BlockControls>
 
 				{/* ───── サイドバー ───── */}
 				<InspectorControls>
 					{/* サイズ */}
-					<PanelBody title="サイズ設定" initialOpen>
+					<PanelBody title="レイアウト設定" initialOpen>
 						<RadioControl
 							label="サイズ"
 							selected={ sizeClass }
@@ -96,7 +108,7 @@ registerBlockType( metadata.name, {
 					</PanelBody>
 
 					{/* メインカラー */}
-					<PanelBody title="メインカラー" initialOpen>
+					<PanelBody title="色設定" initialOpen>
 						<p>メインカラー</p>
 						<ColorPalette
 							value={ mainTitleColor }
@@ -294,7 +306,7 @@ registerBlockType( metadata.name, {
 			className: `paid-block-custom-title-10 ${ positionClass } ${ sizeClass }`
 		});
 
-		const Tag = `h${ headingLevel }`;
+		const Tag = [ 'p', 'div' ].includes( headingLevel ) ? headingLevel : `h${ headingLevel }`;
 
 		const maybeImage = ( url, cls, styleObj ) =>
 			url && (

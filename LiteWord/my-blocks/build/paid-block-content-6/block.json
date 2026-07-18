@@ -7,12 +7,12 @@
 	"category": "lw-content",
 	"icon": "format-image",
 	"editorScript": "file:./paid-block-content-6.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "画像+テキスト+ボタン2カラム。シンプルな左右配置。反転可能。サービス概要説明に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["textContent", "buttonText", "buttonUrl"],
+		"imageAttributes": ["imageUrl"]
+	},
 	"supports": {
 		"anchor": true
 	},

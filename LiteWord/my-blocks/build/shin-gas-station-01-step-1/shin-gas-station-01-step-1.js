@@ -19,6 +19,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/shin-gas-station-01-step-1/style.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/shin-gas-station-01-step-1/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/shin-gas-station-01-step-1/block.json");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -80,8 +86,9 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
 
     // コンテンツを更新
     var updateContent = function updateContent(index, key, value) {
-      var updatedContents = _toConsumableArray(contents);
-      updatedContents[index][key] = value;
+      var updatedContents = contents.map(function (content, i) {
+        return i === index ? _objectSpread(_objectSpread({}, content), {}, _defineProperty({}, key, value)) : content;
+      });
       setAttributes({
         contents: updatedContents
       });
@@ -1010,7 +1017,7 @@ module.exports = window["wp"]["components"];
   \***************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-step-1","version":"1.0.0","title":"ステップ 1 shin shop pattern 01","category":"lw-step","icon":"lightbulb","supports":{"anchor":true},"editorScript":"file:./shin-gas-station-01-step-1.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":15,"attributes":{"fontLi":{"type":"string","default":""},"fontColorLi":{"type":"string","default":"var(--color-black)"},"fontWeightLi":{"type":"string","default":"600"},"fontLiP":{"type":"string","default":""},"fontColorLiP":{"type":"string","default":"var(--color-black)"},"fontWeightLiP":{"type":"string","default":"400"},"stepFont":{"type":"string","default":""},"stepFontColor":{"type":"string","default":"#fff"},"stepFontWeight":{"type":"string","default":"600"},"backgroundColor":{"type":"string","default":"#FAFAFA"},"borderColor":{"type":"string","default":"var(--color-main)"},"borderSize":{"type":"number","default":0},"contents":{"type":"array","source":"query","selector":".shin-gas-station-01-step-1__li","query":{"ttl":{"type":"string","source":"html","selector":".shin-gas-station-01-step-1__text h4"},"text":{"type":"string","source":"html","selector":".shin-gas-station-01-step-1__text p"}},"default":[{"ttl":"タイトル","text":"リストテキストリストテキスト "},{"ttl":"タイトル","text":"リストテキストリストテキスト "},{"ttl":"タイトル","text":"リストテキストリストテキスト "},{"ttl":"タイトル","text":"リストテキストリストテキスト "}]}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-step-1","version":"1.0.0","title":"ステップ 1 shin shop pattern 01","category":"lw-step","icon":"lightbulb","supports":{"anchor":true},"editorScript":"file:./shin-gas-station-01-step-1.js","aiHint":{"description":"番号バッジ付きステップ。タイトル+説明のカード配列。ショップテンプレート用","excludeFromAutoSelect":false,"contentAttributes":["contents"],"imageAttributes":[]},"no":15,"attributes":{"fontLi":{"type":"string","default":""},"fontColorLi":{"type":"string","default":"var(--color-black)"},"fontWeightLi":{"type":"string","default":"600"},"fontLiP":{"type":"string","default":""},"fontColorLiP":{"type":"string","default":"var(--color-black)"},"fontWeightLiP":{"type":"string","default":"400"},"stepFont":{"type":"string","default":""},"stepFontColor":{"type":"string","default":"#fff"},"stepFontWeight":{"type":"string","default":"600"},"backgroundColor":{"type":"string","default":"#FAFAFA"},"borderColor":{"type":"string","default":"var(--color-main)"},"borderSize":{"type":"number","default":0},"contents":{"type":"array","source":"query","selector":".shin-gas-station-01-step-1__li","query":{"ttl":{"type":"string","source":"html","selector":".shin-gas-station-01-step-1__text h4"},"text":{"type":"string","source":"html","selector":".shin-gas-station-01-step-1__text p"}},"default":[{"ttl":"タイトル","text":"リストテキストリストテキスト "},{"ttl":"タイトル","text":"リストテキストリストテキスト "},{"ttl":"タイトル","text":"リストテキストリストテキスト "},{"ttl":"タイトル","text":"リストテキストリストテキスト "}]}}}');
 
 /***/ })
 

@@ -51,7 +51,7 @@ registerBlockType( metadata.name, {
 		const {
 			images,
 			borderRadiusEm, btnBgColor, arrowColor,
-			maxWidthPx, captionBgColor, aspectHeightPx
+			maxWidthPx, captionBgColor, captionColor, aspectHeightPx
 		} = attributes;
 
 		/* 画像操作 */
@@ -130,6 +130,12 @@ registerBlockType( metadata.name, {
 						<ColorPalette
 							value={ captionBgColor }
 							onChange={ c => setAttributes( { captionBgColor:c } ) }
+						/>
+
+						<p style={ { marginTop:'1em',marginBottom:'0.5em' } }>キャプション文字色</p>
+						<ColorPalette
+							value={ captionColor }
+							onChange={ c => setAttributes( { captionColor:c } ) }
 						/>
 					</PanelBody>
 					{/* 画像管理 */}
@@ -256,7 +262,7 @@ registerBlockType( metadata.name, {
 		const {
 			images,
 			borderRadiusEm, btnBgColor, arrowColor,
-			maxWidthPx, captionBgColor, aspectHeightPx
+			maxWidthPx, captionBgColor, captionColor, aspectHeightPx
 		} = attributes;
 		const slideCount = images.length;
 
@@ -353,7 +359,7 @@ registerBlockType( metadata.name, {
 									alt={ img.alt }
 								/>
 								{ img.caption && (
-									<figcaption style={ { backgroundColor:captionBgColor } }>
+									<figcaption style={ { backgroundColor:captionBgColor, color:captionColor } }>
 										{ img.caption }
 									</figcaption>
 								) }

@@ -123,7 +123,7 @@ registerBlockType(metadata.name, {
             <>
                 <InspectorControls>
                     {/* 背景画像 */}
-                    <PanelBody title="背景画像">
+                    <PanelBody title="背景設定">
                         <p>PC 用</p>
                         <MediaUpload
                             onSelect={onChangeBackgroundImage}
@@ -191,7 +191,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* フィルター */}
-                    <PanelBody title="フィルター">
+                    <PanelBody title="フィルター設定">
                         <p>色</p>
                         <ColorPalette
                             value={filterBackgroundColor}
@@ -210,7 +210,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* 文字色 */}
-                    <PanelBody title="文字色">
+                    <PanelBody title="色設定">
                         <ColorPalette
                             value={textColor}
                             onChange={(c) => setAttributes({ textColor: c })}
@@ -218,7 +218,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* 高さ */}
-                    <PanelBody title="FV ブロック高さ">
+                    <PanelBody title="レイアウト設定">
                         <p>PC</p>
                         <SelectControl
                             value={minHeightPc}
@@ -240,7 +240,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* 最大幅 */}
-                    <PanelBody title="コンテンツ幅">
+                    <PanelBody title="コンテンツ幅設定">
                         <RangeControl
                             label="最大幅 (px)"
                             value={maxWidth}
@@ -252,7 +252,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ★ スマホテキスト */}
-                    <PanelBody title="スマホ版テキスト">
+                    <PanelBody title="テキスト設定（SP）">
                         <TextareaControl
                             label="■ サブタイトル ---------------"
                             value={subTitleSp}

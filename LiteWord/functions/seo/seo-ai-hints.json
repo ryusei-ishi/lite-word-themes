@@ -1,0 +1,665 @@
+{
+	"_meta": {
+		"description": "LiteWord SEO機能のAI向けメタ情報。各設定項目の意味・用途・推奨値をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21"
+	},
+	"adminMenuLocation": {
+		"parentMenu": "Lw SEO設定",
+		"subMenuPages": [
+			{
+				"slug": "lw_seo_settings_menu_page_base_set",
+				"title": "Lw SEO基本設定",
+				"file": "base_setting.php",
+				"aiDescription": "サイト全体のタイトルタグ構成を設定する。フロントページ・投稿・固定ページ・アーカイブ・特殊ページそれぞれのtitleタグ構成（メイン＋区切り文字＋サブ）を選択できる。"
+			},
+			{
+				"slug": "lw_seo_settings_menu_page_individual_set",
+				"title": "SEO一括編集",
+				"file": "page_index.php",
+				"aiDescription": "全投稿・固定ページのSEOタイトル・メタディスクリプション・スラッグ・noindex・OGP画像・カテゴリーを一覧形式で一括編集できる画面。カテゴリーツリーでフィルタ可能。"
+			},
+			{
+				"slug": "lw_seo_settings_menu_page_ogp_set",
+				"title": "OGP基本設定",
+				"file": "ogp_setting.php",
+				"aiDescription": "OGP（Open Graph Protocol）とSNS連携の全体設定。デフォルトOGP画像・フロントページ専用OGP画像・og:type・Twitter Card・Facebook App/Page IDを設定する。"
+			},
+			{
+				"slug": "lw_seo_settings_menu_page_analysis_set",
+				"title": "アクセス解析",
+				"file": "analysis_setting.php",
+				"aiDescription": "Google Analytics（GA4）とGoogle Tag Manager（GTM）のID設定、管理者・編集者のアクセス除外設定を行う。"
+			},
+			{
+				"slug": "lw_seo_settings_menu_page_sitemap_set",
+				"title": "サイトマップ管理",
+				"file": "sitemap_control_setting.php",
+				"aiDescription": "サイトマップの詳細管理。更新頻度・優先度・除外設定・画像サイトマップ・Ping通知・キャッシュ・llms.txt生成を設定する。プレミアム限定機能。",
+				"premiumOnly": true
+			}
+		]
+	},
+	"titleTagSettings": {
+		"aiDescription": "各ページ種別のtitleタグを「メイン＋区切り文字＋サブ」の3セレクトボックスで構成する。メインとサブにはサイトタイトル・キャッチフレーズ・ページ固有のタイトル等を選択可能。",
+		"userGuide": "SEO基本設定（base_setting.php）で設定する。タイトルタグはブラウザのタブと検索結果に表示されるため、SEOに最も重要な要素の一つ。",
+		"sourceFile": "base_setting.php",
+		"outputFile": "head_put.php",
+		"filterHook": "pre_get_document_title（優先度20）",
+		"sections": {
+			"frontPage": {
+				"aiDescription": "フロントページ（トップページ）のtitleタグ設定。",
+				"optionKeys": {
+					"lw_front_title_main": {
+						"aiDescription": "メイン部分（デフォルト: サイトタイトル）",
+						"type": "select",
+						"options": ["none", "site_title", "catchphrase"]
+					},
+					"lw_front_title_sep": {
+						"aiDescription": "区切り文字（デフォルト: -）",
+						"type": "select",
+						"options": ["|", "・", "｜", "／", "-"]
+					},
+					"lw_front_title_sub": {
+						"aiDescription": "サブ部分（デフォルト: キャッチフレーズ）",
+						"type": "select",
+						"options": ["none", "site_title", "catchphrase"]
+					}
+				},
+				"userGuide": "通常は「サイトタイトル - キャッチフレーズ」の形式がおすすめ。"
+			},
+			"postPage": {
+				"aiDescription": "投稿ページのtitleタグ設定。",
+				"optionKeys": {
+					"lw_post_title_main": {
+						"aiDescription": "メイン部分（デフォルト: 投稿タイトル）",
+						"options": ["post_title", "none", "site_title", "catchphrase"]
+					},
+					"lw_post_title_sep": { "aiDescription": "区切り文字（デフォルト: -）" },
+					"lw_post_title_sub": {
+						"aiDescription": "サブ部分（デフォルト: サイトタイトル）",
+						"options": ["none", "site_title", "catchphrase", "post_title"]
+					}
+				},
+				"userGuide": "通常は「投稿タイトル - サイトタイトル」が一般的。"
+			},
+			"staticPage": {
+				"aiDescription": "固定ページのtitleタグ設定。",
+				"optionKeys": {
+					"lw_page_title_main": { "aiDescription": "メイン部分（デフォルト: 固定ページタイトル）" },
+					"lw_page_title_sep": { "aiDescription": "区切り文字（デフォルト: |）" },
+					"lw_page_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+				},
+				"premiumFeature": {
+					"page_title_display": {
+						"aiDescription": "固定ページ個別のサイトタイトル表示/非表示設定。プレミアム限定。LW_HAS_SUBSCRIPTION定数がtrueの場合のみ有効。",
+						"metaKey": "page_title_display",
+						"options": {
+							"on": "サイトタイトルを強制表示",
+							"off": "サイトタイトルを強制非表示",
+							"（空）": "サイト全体の設定に従う"
+						}
+					}
+				}
+			},
+			"categoryArchive": {
+				"aiDescription": "カテゴリーアーカイブページのtitleタグ設定。",
+				"optionKeys": {
+					"lw_cat_archive_title_main": { "aiDescription": "メイン部分（デフォルト: カテゴリ名）" },
+					"lw_cat_archive_title_sep": { "aiDescription": "区切り文字" },
+					"lw_cat_archive_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+				}
+			},
+			"tagArchive": {
+				"aiDescription": "タグアーカイブページのtitleタグ設定。",
+				"optionKeys": {
+					"lw_tag_archive_title_main": { "aiDescription": "メイン部分（デフォルト: タグ名）" },
+					"lw_tag_archive_title_sep": { "aiDescription": "区切り文字" },
+					"lw_tag_archive_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+				}
+			},
+			"otherArchive": {
+				"aiDescription": "その他のアーカイブページ（一般的なアーカイブ）のtitleタグ設定。",
+				"optionKeys": {
+					"lw_other_archive_title_main": { "aiDescription": "メイン部分（デフォルト: アーカイブタイトル）" },
+					"lw_other_archive_title_sep": { "aiDescription": "区切り文字" },
+					"lw_other_archive_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+				}
+			},
+			"authorArchive": {
+				"aiDescription": "著者アーカイブページのtitleタグ設定。",
+				"optionKeys": {
+					"lw_author_archive_title_main": { "aiDescription": "メイン部分（デフォルト: 著者名）" },
+					"lw_author_archive_title_sep": { "aiDescription": "区切り文字" },
+					"lw_author_archive_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+				}
+			},
+			"dateArchive": {
+				"aiDescription": "日付アーカイブページのtitleタグ設定。",
+				"optionKeys": {
+					"lw_date_archive_title_main": { "aiDescription": "メイン部分（デフォルト: 日付アーカイブ）" },
+					"lw_date_archive_title_sep": { "aiDescription": "区切り文字" },
+					"lw_date_archive_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+				}
+			},
+			"cptArchive": {
+				"aiDescription": "カスタム投稿タイプアーカイブページのtitleタグ設定。",
+				"optionKeys": {
+					"lw_cpt_archive_title_main": { "aiDescription": "メイン部分（デフォルト: カスタム投稿タイプ名）" },
+					"lw_cpt_archive_title_sep": { "aiDescription": "区切り文字" },
+					"lw_cpt_archive_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+				}
+			},
+			"searchPage": {
+				"aiDescription": "サイト内検索結果ページのtitleタグ設定。",
+				"optionKeys": {
+					"lw_search_title_main": { "aiDescription": "メイン部分（デフォルト: 検索結果ページ用テキスト）" },
+					"lw_search_title_sep": { "aiDescription": "区切り文字" },
+					"lw_search_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+				}
+			},
+			"notFoundPage": {
+				"aiDescription": "404エラーページのtitleタグ設定。",
+				"optionKeys": {
+					"lw_404_title_main": { "aiDescription": "メイン部分（デフォルト: 404: ページが見つかりませんでした）" },
+					"lw_404_title_sep": { "aiDescription": "区切り文字" },
+					"lw_404_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+				}
+			}
+		}
+	},
+	"perPageSeoSettings": {
+		"aiDescription": "投稿・固定ページ・カテゴリーごとに個別設定できるSEOフィールド。SEO一括編集画面（page_index.php）で一覧編集可能。",
+		"userGuide": "各ページの編集画面でも個別に設定できるが、一括編集画面（SEO一括編集）で全ページをまとめて確認・編集するのが効率的。",
+		"postMetaFields": {
+			"seo_title": {
+				"aiDescription": "検索結果に表示されるSEOタイトル。設定時はtitleタグの「メイン」部分がこの値で上書きされ、サイトタイトルが自動で後置される。",
+				"userGuide": "30文字以内がおすすめ。ページの内容を具体的に表現するキーワードを含める。例: 「初期費用無料・月額3,980円からのシンプルな料金プラン」",
+				"type": "text"
+			},
+			"seo_description": {
+				"aiDescription": "検索結果でタイトルの下に表示されるメタディスクリプション。空欄の場合、検索エンジンが自動生成する。",
+				"userGuide": "80〜120文字程度。スマホでは70文字程度しか表示されないため、重要な情報は前半に入れる。",
+				"type": "textarea"
+			},
+			"seo_noindex": {
+				"aiDescription": "noindex設定。値が'noindex'の場合、検索エンジンにインデックスされない。robots metaタグに'noindex,follow'が出力される。",
+				"userGuide": "サンクスページ、会員限定ページ、テストページなど検索結果に出したくないページに設定する。",
+				"type": "select",
+				"options": {
+					"（空）": "インデックスする（デフォルト）",
+					"noindex": "インデックスしない"
+				}
+			},
+			"seo_canonical": {
+				"aiDescription": "canonical URL。重複コンテンツがある場合、正規のURLを指定する。空欄の場合、現在のページURLが使われる。",
+				"userGuide": "同じ内容のページが複数のURLで存在する場合に、正規のURLを指定してSEO評価の分散を防ぐ。",
+				"type": "url"
+			},
+			"seo_og_image": {
+				"aiDescription": "ページ個別のOGP画像URL。SNSでシェアされた時に表示される画像。空欄の場合、アイキャッチ画像→デフォルトOGP画像→ロゴ→サイトアイコンの順にフォールバックする。",
+				"userGuide": "推奨サイズ: 1200x630px。個別に設定しなくてもアイキャッチ画像が自動使用される。",
+				"type": "image_url"
+			},
+			"seo_301_redirect_url": {
+				"aiDescription": "この投稿・固定ページへの301リダイレクト元URL。カンマ区切りで複数指定可能。指定したURLへのアクセスが、このページに301リダイレクトされる。",
+				"userGuide": "サイトリニューアルなどでURLが変わった場合、旧URLを指定すると自動的に新URLへリダイレクトされる。SEO評価も引き継がれる。",
+				"type": "text"
+			},
+			"page_title_display": {
+				"aiDescription": "固定ページ個別のサイトタイトル表示制御。プレミアム限定。on=強制表示、off=強制非表示、空=サイト全体設定に従う。",
+				"premiumOnly": true,
+				"type": "select"
+			},
+			"lw_custom_json_ld": {
+				"aiDescription": "カスタムJSON-LD構造化データ。有効なJSON形式で入力すると、ページのheadにscript type='application/ld+json'として出力される。",
+				"userGuide": "FAQページ、商品ページ、イベントページなど、自動生成されない構造化データを手動で追加したい場合に使用する。",
+				"type": "json"
+			}
+		},
+		"categoryMetaFields": {
+			"category_seo_title": {
+				"aiDescription": "カテゴリーアーカイブページのSEOタイトル。設定時はtitleタグのメイン部分がこの値で上書きされる。",
+				"type": "text"
+			},
+			"category_meta_description": {
+				"aiDescription": "カテゴリーアーカイブページのメタディスクリプション。",
+				"type": "textarea"
+			},
+			"category_noindex": {
+				"aiDescription": "カテゴリーのnoindex設定。値が'noindex'の場合、そのカテゴリーアーカイブが検索結果から除外される。さらに、そのカテゴリーに属する投稿もサイトマップから除外される。",
+				"type": "select",
+				"options": {
+					"（空）": "インデックスする（デフォルト）",
+					"noindex": "インデックスしない"
+				}
+			},
+			"category_canonical": {
+				"aiDescription": "カテゴリーのcanonical URL。",
+				"type": "url"
+			},
+			"category_og_image": {
+				"aiDescription": "カテゴリーアーカイブページのOGP画像URL。",
+				"type": "image_url"
+			},
+			"category_redirect_from_url": {
+				"aiDescription": "このカテゴリーへの301リダイレクト元URL。カンマ区切りで複数指定可能。",
+				"type": "text"
+			}
+		},
+		"userMetaFields": {
+			"user_noindex": {
+				"aiDescription": "著者アーカイブページのnoindex設定。デフォルトはnoindex（全ユーザー）。値が'follow'の場合のみインデックスされる。",
+				"userGuide": "セキュリティ上、デフォルトではすべての著者アーカイブがnoindexになっている。サイトマップからも除外される。表示したい場合は明示的に'follow'を設定する。",
+				"type": "select",
+				"options": {
+					"（空/未設定）": "noindex（デフォルト、インデックスしない）",
+					"follow": "インデックスする"
+				}
+			}
+		}
+	},
+	"ogpSettings": {
+		"aiDescription": "OGP（Open Graph Protocol）のサイト全体共通設定。SNSでシェアされた時の表示を制御する。",
+		"userGuide": "OGP基本設定ページ（ogp_setting.php）で設定する。投稿ごとの個別OGP画像はアイキャッチ画像またはseo_og_imageで設定。",
+		"sourceFile": "ogp_setting.php",
+		"outputFile": "head_put.php",
+		"settings": {
+			"lw_og_default_image": {
+				"aiDescription": "サイト全体のデフォルトOGP画像URL。投稿・カテゴリ・フロントで個別設定がない場合のフォールバック画像。",
+				"userGuide": "推奨サイズ: 1200x630px（アスペクト比1.91:1）。この比率ならFacebook・X・LINEで綺麗に表示される。",
+				"type": "image_url"
+			},
+			"lw_front_og_image": {
+				"aiDescription": "フロントページ専用のOGP画像URL。トップページがシェアされた時だけこの画像が使われる。空欄の場合はデフォルトOGP画像が使われる。",
+				"type": "image_url"
+			},
+			"lw_og_default_type": {
+				"aiDescription": "og:typeの既定値。フロントページとカテゴリーアーカイブに適用される。投稿・固定ページは自動的にarticleになる。",
+				"type": "select",
+				"options": {
+					"website": "website（サイト全体、トップページ向け）",
+					"article": "article（ブログ記事向け）",
+					"product": "product（ECサイト商品ページ向け）",
+					"profile": "profile（プロフィールページ向け）"
+				},
+				"userGuide": "迷ったら'website'のままでOK。"
+			},
+			"lw_twitter_card": {
+				"aiDescription": "X（旧Twitter）のカードタイプ。SNSでシェアされた時の表示形式。",
+				"type": "select",
+				"options": {
+					"summary_large_image": "大きな画像付きカード（推奨）",
+					"summary": "小さな画像付きカード",
+					"app": "アプリ紹介カード",
+					"player": "動画/音声プレイヤーカード"
+				},
+				"userGuide": "summary_large_imageが最もクリック率が高いためおすすめ。"
+			},
+			"lw_twitter_site": {
+				"aiDescription": "X（旧Twitter）のサイト公式アカウント（@付き）。twitter:siteメタタグとして出力される。",
+				"type": "text",
+				"placeholder": "@LiteWord"
+			},
+			"lw_twitter_creator": {
+				"aiDescription": "X（旧Twitter）の記事著者アカウント（@付き）。twitter:creatorメタタグとして出力される。",
+				"type": "text"
+			},
+			"lw_fb_app_id": {
+				"aiDescription": "Facebook App ID。Facebookインサイトを利用する場合に設定。fb:app_idメタタグとして出力される。",
+				"userGuide": "Facebookページを持っていない場合は空欄でOK。",
+				"type": "text"
+			},
+			"lw_fb_page_id": {
+				"aiDescription": "Facebook Page ID。fb:page_idメタタグとして出力される。",
+				"userGuide": "Facebookページを持っていない場合は空欄でOK。",
+				"type": "text"
+			}
+		},
+		"ogpImageFallbackOrder": {
+			"aiDescription": "OGP画像のフォールバック順序（投稿・固定ページの場合）",
+			"order": [
+				"1. seo_og_image（ページ個別のOGP画像）",
+				"2. アイキャッチ画像（has_post_thumbnail）",
+				"3. lw_og_default_image（デフォルトOGP画像）",
+				"4. カスタムロゴ（custom_logo）",
+				"5. サイトアイコン（512px）"
+			]
+		}
+	},
+	"frontPageMetaDescription": {
+		"aiDescription": "フロントページのメタディスクリプション。SEO基本設定のフロントページセクションで設定する。",
+		"optionKey": "lw_front_meta_description",
+		"type": "textarea",
+		"userGuide": "80〜120文字程度で、サイトの内容を簡潔に説明する。業種・地域・強み・価格などを含めると効果的。例: 「東京都渋谷区のホームページ制作会社です。集客に強いウェブサイトを、初期費用0円、月額9,800円から制作いたします。」"
+	},
+	"analyticsSettings": {
+		"aiDescription": "Google AnalyticsとGoogle Tag Managerの設定。アクセス解析ページ（analysis_setting.php）で設定する。",
+		"userGuide": "アナリティクスとタグマネージャーの両方でタグを設定すると二重計測になるため、どちらか一方だけ設定すること。",
+		"sourceFile": "analysis_setting.php",
+		"outputFile": "google.php",
+		"settings": {
+			"seo_set_google_analytics_id": {
+				"aiDescription": "Google Analytics（GA4）の測定ID。wp_headフックでgtag.jsが読み込まれる。",
+				"type": "text",
+				"format": "G-XXXXXXXXX",
+				"storageMethod": "theme_mod（カスタマイザー）",
+				"userGuide": "Googleアナリティクスの管理画面 > プロパティ > データストリーム > 測定IDで確認できる。初心者はまずこれだけ設定すればOK。"
+			},
+			"seo_set_gtm_id": {
+				"aiDescription": "Google Tag ManagerのコンテナID。wp_headフックとwp_body_openフックでGTMスニペットが出力される。noscriptフォールバックも含む。",
+				"type": "text",
+				"format": "GTM-XXXXXXX",
+				"storageMethod": "theme_mod（カスタマイザー）",
+				"userGuide": "GTMを使う場合、アナリティクスのタグもGTM経由で管理するのが一般的。その場合はGA4 IDは空にしておく。"
+			},
+			"seo_set_admin_switch": {
+				"aiDescription": "管理者・編集者のアクセス解析除外設定。'off'にすると管理者・編集者がログイン中のアクセスを計測しない。lw_should_track()関数で判定される。",
+				"type": "select",
+				"options": {
+					"on": "有効にする（管理者も計測する）",
+					"off": "無効にする（管理者のアクセスを除外、推奨）"
+				},
+				"storageMethod": "theme_mod（カスタマイザー）",
+				"userGuide": "正確なアクセスデータのために「無効にする」を推奨。自分のアクセスが含まれると実際の訪問者数が不正確になる。"
+			}
+		}
+	},
+	"sitemapSettings": {
+		"aiDescription": "WordPressのコアサイトマップ（wp-sitemap.xml）を拡張制御する機能。noindex設定されたページの自動除外、更新頻度・優先度のカスタマイズ、Ping通知、キャッシュ管理を行う。",
+		"userGuide": "サイトマップ管理ページ（sitemap_control_setting.php）で設定する。プレミアム限定機能。",
+		"premiumOnly": true,
+		"sourceFiles": [
+			"sitemap_control_setting.php（管理画面UI）",
+			"sitemap_settings_class.php（LW_Sitemap_Settingsクラス）",
+			"sitemap_control_functions.php（LW_SEO_Sitemap_Controlクラス）",
+			"sitemap_ajax_hooks.php（Ajax処理・自動Ping）"
+		],
+		"optionKey": "lw_sitemap_settings",
+		"settings": {
+			"changefreq": {
+				"aiDescription": "ページ種別ごとのサイトマップ更新頻度ヒント。検索エンジンへの参考情報。",
+				"defaults": {
+					"homepage": "daily",
+					"post": "weekly",
+					"page": "monthly",
+					"category": "weekly",
+					"post_tag": "monthly",
+					"author": "yearly"
+				}
+			},
+			"priority": {
+				"aiDescription": "ページ種別ごとのサイトマップ優先度（0.0〜1.0）。検索エンジンへの参考情報。",
+				"defaults": {
+					"homepage": "1.0",
+					"post": "0.8",
+					"page": "0.6",
+					"category": "0.5",
+					"post_tag": "0.3",
+					"author": "0.3"
+				}
+			},
+			"exclude": {
+				"aiDescription": "サイトマップからの除外設定。",
+				"settings": {
+					"post_formats": { "aiDescription": "除外する投稿フォーマット" },
+					"post_types": { "aiDescription": "除外する投稿タイプ" },
+					"exclude_media": { "aiDescription": "メディア（添付ファイル）を除外するか（デフォルト: true）" },
+					"exclude_password": { "aiDescription": "パスワード保護ページを除外するか（デフォルト: true）" }
+				}
+			},
+			"images": {
+				"aiDescription": "画像サイトマップの設定。",
+				"settings": {
+					"include_images": { "aiDescription": "画像をサイトマップに含めるか（デフォルト: true）" },
+					"include_featured": { "aiDescription": "アイキャッチ画像を含めるか（デフォルト: true）" },
+					"include_captions": { "aiDescription": "画像キャプションを含めるか（デフォルト: true）" }
+				}
+			},
+			"ping": {
+				"aiDescription": "検索エンジンへのPing通知設定。",
+				"settings": {
+					"google_ping": { "aiDescription": "Googleへのping送信（デフォルト: true）" },
+					"bing_ping": { "aiDescription": "Bingへのping送信（デフォルト: true）" },
+					"auto_ping": { "aiDescription": "自動Ping送信（デフォルト: true）" },
+					"ping_on_publish": { "aiDescription": "投稿公開時の自動Ping送信（デフォルト: true）" }
+				}
+			},
+			"cache": {
+				"aiDescription": "サイトマップキャッシュの設定。",
+				"settings": {
+					"enable_cache": { "aiDescription": "キャッシュを有効にするか（デフォルト: true）" },
+					"cache_lifetime": { "aiDescription": "キャッシュ有効期間（秒、デフォルト: 86400=24時間）" },
+					"auto_regenerate": { "aiDescription": "投稿公開時にキャッシュを自動再生成するか（デフォルト: true）" }
+				}
+			},
+			"advanced": {
+				"aiDescription": "サイトマップの高度な設定。",
+				"settings": {
+					"add_to_robots": { "aiDescription": "robots.txtにサイトマップURLを追加するか（デフォルト: true）" },
+					"enable_xsl": { "aiDescription": "XSLスタイルシートを有効にするか（デフォルト: true）。人間が見やすい形式で表示。" },
+					"include_lastmod": { "aiDescription": "最終更新日をサイトマップに含めるか（デフォルト: true）" }
+				}
+			}
+		},
+		"noindexSitemapExclusion": {
+			"aiDescription": "noindex設定されたページを自動的にサイトマップから除外する仕組み。LW_SEO_Sitemap_Controlクラスが担当。キャッシュベースで高速化。",
+			"cacheKey": "lw_noindex_cache",
+			"excludeTargets": [
+				"seo_noindex='noindex'の投稿・固定ページ",
+				"category_noindex='noindex'のカテゴリー",
+				"noindexカテゴリーに属する投稿（自動連動除外）",
+				"user_noindex!='follow'のユーザー（デフォルトで全ユーザーnoindex）"
+			],
+			"cacheRebuildTriggers": [
+				"ログイン時（wp_login）",
+				"投稿保存時（save_post）",
+				"カテゴリー編集時（edited_category）",
+				"Ajax経由のnoindex切替時",
+				"手動再構築ボタン"
+			]
+		}
+	},
+	"llmsTxtSettings": {
+		"aiDescription": "llms.txt（AI/LLMクローラー向けガイドラインファイル）の生成機能。サイトマップ管理画面に統合されている。",
+		"premiumOnly": true,
+		"sourceFile": "sitemap_settings_class.php",
+		"outputFile": "llms.txt（ルートディレクトリ）",
+		"settings": {
+			"enable_llms_txt": {
+				"aiDescription": "llms.txt機能の有効/無効（デフォルト: true）",
+				"type": "boolean"
+			},
+			"allow_ai_crawling": {
+				"aiDescription": "AIクローリングの全体許可/拒否（デフォルト: true）。falseの場合、全AIクローラーを拒否する。",
+				"type": "boolean"
+			},
+			"allowed_agents": {
+				"aiDescription": "AIエージェントごとの許可/拒否設定。",
+				"defaults": {
+					"GPTBot": true,
+					"ChatGPT-User": true,
+					"CCBot": true,
+					"anthropic-ai": true,
+					"Claude-Web": true
+				}
+			},
+			"disallowed_paths": {
+				"aiDescription": "AIクローラーに対する除外パス。",
+				"defaults": ["/wp-admin/", "/wp-includes/", "/wp-content/uploads/"]
+			},
+			"crawl_delay": {
+				"aiDescription": "クロール遅延（秒、デフォルト: 1）",
+				"type": "integer"
+			},
+			"custom_rules": {
+				"aiDescription": "カスタムルール（自由記述、llms.txt末尾に追加）",
+				"type": "textarea"
+			},
+			"sitemap_reference": {
+				"aiDescription": "サイトマップ参照の追加（デフォルト: true）。llms.txtにSitemap行を出力する。",
+				"type": "boolean"
+			}
+		},
+		"autoRegeneration": {
+			"aiDescription": "投稿公開時にllms.txtを自動再生成する（cache.auto_regenerateがtrueの場合）。publish_postフックで実行。"
+		}
+	},
+	"redirectSettings": {
+		"aiDescription": "301リダイレクト機能。旧URLから新URLへの恒久的なリダイレクトを設定する。テーマ組み込みのため、プラグイン不要。",
+		"userGuide": "SEO一括編集画面で各投稿・カテゴリーの「301リダイレクト元URL」フィールドに旧URLを入力する。カンマ区切りで複数URL指定可能。",
+		"sourceFile": "301_redirect.php",
+		"hookAction": "template_redirect（優先度0）",
+		"mechanism": {
+			"aiDescription": "逆引き方式でリダイレクトを実行。アクセスされたURLをDBから検索し、一致するmeta_valueが見つかったら、そのpost/termのパーマリンクに301リダイレクトする。",
+			"steps": [
+				"1. アクセスURLを正規化（スキーム除去・末尾スラッシュ除去・小文字化）",
+				"2. wp_postmeta（meta_key='seo_301_redirect_url'）をLIKE検索",
+				"3. カンマ区切りの各URLと完全一致チェック",
+				"4. 一致すれば該当投稿のパーマリンクに301リダイレクト",
+				"5. 投稿でヒットしなければ、wp_termmeta（meta_key='category_redirect_from_url'）も同様に検索",
+				"6. 無限ループ防止チェック付き"
+			]
+		},
+		"supportedTargets": {
+			"postAndPage": {
+				"metaKey": "seo_301_redirect_url",
+				"aiDescription": "投稿・固定ページへのリダイレクト。postmetaに旧URLを登録。"
+			},
+			"category": {
+				"metaKey": "category_redirect_from_url",
+				"aiDescription": "カテゴリーへのリダイレクト。termmetaに旧URLを登録。"
+			}
+		},
+		"excludedContexts": ["管理画面", "Ajax", "Cron", "プレビュー"]
+	},
+	"jsonLdSettings": {
+		"aiDescription": "JSON-LD構造化データの自動生成機能。ページ種別に応じたschema.orgの構造化データをwp_headで出力する。noindexページ・管理画面・404ページでは出力されない。",
+		"userGuide": "自動で出力されるため、通常は設定不要。カスタム構造化データが必要な場合は、各ページのlw_custom_json_ldフィールドに有効なJSONを入力する。",
+		"sourceFile": "json-ld/index.php",
+		"hookAction": "wp_head",
+		"autoGeneratedTypes": {
+			"frontPage": {
+				"aiDescription": "トップページに2つのJSON-LDを自動出力。",
+				"schemas": [
+					{
+						"@type": "WebSite",
+						"aiDescription": "サイト情報とSearchAction（サイト内検索のリッチリザルト用）。",
+						"includedFields": ["name", "url", "potentialAction（SearchAction）"]
+					},
+					{
+						"@type": "Organization",
+						"aiDescription": "組織情報。サイト名とURLを出力。",
+						"includedFields": ["name", "url"]
+					}
+				]
+			},
+			"singlePost": {
+				"@type": "Article",
+				"aiDescription": "投稿記事のArticle構造化データ。SEOカスタムフィールドの値を優先的に使用する。",
+				"includedFields": [
+					"headline（seo_titleまたは投稿タイトル）",
+					"image（seo_og_imageまたはアイキャッチ画像）",
+					"datePublished（カスタマイザーで非表示設定でなければ）",
+					"dateModified（カスタマイザーで非表示設定でなければ）",
+					"author（Person型、表示名がログイン名と異なる場合のみ出力。noindex著者はURL省略）",
+					"publisher（Organization型）",
+					"description（seo_descriptionまたは抜粋）",
+					"mainEntityOfPage（WebPage型）"
+				],
+				"securityNote": "著者のログイン名は絶対に出力しない。表示名とログイン名が同一の場合はauthor自体を省略する。noindex著者のURLも省略する。"
+			},
+			"staticPage": {
+				"@type": "WebPage",
+				"aiDescription": "固定ページのWebPage構造化データ。パンくずリスト（BreadcrumbList）付き。",
+				"includedFields": [
+					"name（seo_titleまたはページタイトル）",
+					"description（seo_descriptionまたは抜粋）",
+					"url（seo_canonicalまたはパーマリンク）",
+					"image（seo_og_imageがある場合）",
+					"publisher（Organization型）",
+					"breadcrumb（BreadcrumbList: ホーム→当該ページ）"
+				]
+			},
+			"categoryArchive": {
+				"@type": "CollectionPage",
+				"aiDescription": "カテゴリーアーカイブのCollectionPage構造化データ。パンくずリスト付き。",
+				"includedFields": ["name", "description（カテゴリー説明文）", "url", "breadcrumb"]
+			},
+			"tagArchive": {
+				"@type": "CollectionPage",
+				"aiDescription": "タグアーカイブのCollectionPage構造化データ。パンくずリスト付き。",
+				"includedFields": ["name", "description（タグ説明文）", "url", "breadcrumb"]
+			},
+			"authorArchive": {
+				"@type": "ProfilePage",
+				"aiDescription": "著者アーカイブのProfilePage構造化データ。表示名がログイン名と異なる場合のみ出力される。",
+				"includedFields": ["name", "description", "url", "mainEntity（Person型）"],
+				"securityNote": "ログイン名と同一の表示名の場合は出力しない。"
+			},
+			"searchResults": {
+				"@type": "SearchResultsPage",
+				"aiDescription": "サイト内検索結果ページの構造化データ。",
+				"includedFields": ["name（検索結果: {クエリ}）", "url"]
+			}
+		},
+		"customJsonLd": {
+			"aiDescription": "各投稿・固定ページに手動でJSON-LD構造化データを追加できる機能。lw_custom_json_ldカスタムフィールドに有効なJSONを入力すると、自動生成分に加えて追加出力される。",
+			"metaKey": "lw_custom_json_ld",
+			"validation": "json_decode()でバリデーション。無効なJSONは出力されない。",
+			"userGuide": "FAQページのFAQPage構造化データ、商品ページのProduct構造化データなど、自動生成されないスキーマを手動追加する場合に使用する。"
+		}
+	},
+	"voiceGuideSystem": {
+		"aiDescription": "SEO管理画面の各セクションに音声読み上げガイド機能が組み込まれている。Web Speech APIを使い、日本語で設定項目の説明を音声再生する。初心者向けのヘルプ機能。",
+		"sourceFile": "functions.php",
+		"jsFile": "js/lw-voice-guide.js",
+		"features": [
+			"?マークアイコンで各セクションの説明を読み上げ",
+			"再生速度調整（0.5x〜2.0x）",
+			"テキストはパイプ区切りで分割し、1フレーズずつ順番に読み上げ",
+			"各フレーズは50文字程度に制限（Web Speech APIの制約）"
+		]
+	},
+	"siteSettingsPopup": {
+		"aiDescription": "SEO基本設定画面にサイトタイトルとキャッチフレーズを変更するポップアップ機能が組み込まれている。WordPress一般設定（options-general.php）への外部リンクとして実装。",
+		"sourceFile": "functions.php",
+		"ajaxAction": "lw_save_site_settings"
+	},
+	"premiumFeaturesSummary": {
+		"aiDescription": "SEO機能のうちプレミアム限定のもの一覧。",
+		"premiumOnlyFeatures": [
+			{
+				"feature": "サイトマップ詳細管理",
+				"description": "更新頻度・優先度・除外設定・Ping通知・キャッシュ管理",
+				"file": "sitemap_control_setting.php"
+			},
+			{
+				"feature": "llms.txt生成",
+				"description": "AIクローラー向けガイドラインファイルの自動生成・管理",
+				"file": "sitemap_settings_class.php"
+			},
+			{
+				"feature": "固定ページ個別のサイトタイトル表示制御",
+				"description": "固定ページごとにtitleタグのサブ部分（サイトタイトル）を表示/非表示に切替",
+				"metaKey": "page_title_display",
+				"condition": "LW_HAS_SUBSCRIPTION === true"
+			}
+		],
+		"freeFeatures": [
+			"タイトルタグ構成設定（全ページ種別）",
+			"メタディスクリプション設定",
+			"noindex設定（投稿・固定ページ・カテゴリー・著者）",
+			"canonical URL設定",
+			"OGP画像・SNS連携設定",
+			"Google Analytics / GTM連携",
+			"管理者アクセス除外",
+			"301リダイレクト",
+			"JSON-LD構造化データ自動生成",
+			"カスタムJSON-LD",
+			"SEO一括編集",
+			"noindexページのサイトマップ自動除外",
+			"音声読み上げガイド"
+		]
+	}
+}

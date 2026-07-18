@@ -10,12 +10,12 @@
 		"anchor": true
 	},
 	"editorScript": "file:./lw-step-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "縦型ステップ。タイトル付き背景色+番号+見出し+説明の繰り返し。採用フロー・利用手順に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["titleText", "contents"],
+		"imageAttributes": []
+	},
 	"no": 1,
 	"attributes": {
 		"bgGradient": {

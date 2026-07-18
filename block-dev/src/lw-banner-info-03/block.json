@@ -6,6 +6,12 @@
 	"title": "バナー 03（3カラム）",
 	"category": "lw-banner",
 	"icon": "images-alt2",
+	"aiHint": {
+		"description": "画像バナー3カラム（最大幅制限）。コンパクトな3枚バナー。サービス概要・カテゴリ案内に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["items"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -66,11 +72,5 @@
 		}
 	},
 	"editorScript": "file:./lw-banner-info-03.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 3
 }

@@ -19,6 +19,7 @@
 .paid-block-fv-12 {
     position: relative;
     z-index: 10;
+     max-width: 100vw;
     display: flex;
     flex-wrap: wrap;
     align-content: space-between;

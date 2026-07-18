@@ -85,14 +85,14 @@ registerBlockType(metadata.name, {
                         />
                     </PanelBody>
 
-                    <PanelBody title="背景色" initialOpen={false}>
+                    <PanelBody title="背景設定" initialOpen={false}>
                         <ColorPalette
                             value={backgroundColor}
                             onChange={(c) => setAttributes({ backgroundColor: c })}
                         />
                     </PanelBody>
 
-                    <PanelBody title="テキスト色" initialOpen={false}>
+                    <PanelBody title="色設定" initialOpen={false}>
                         <p><strong>タイトルの色 (h2)</strong></p>
                         <ColorPalette
                             value={titleColor}

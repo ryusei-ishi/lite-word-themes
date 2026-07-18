@@ -277,6 +277,19 @@ body.admin-bar .lw_header_main.fixed_on {
   }
 }
 
+.lw_link_icon {
+  margin-left: 0.1em;
+  display: inline-block;
+  height: 1.35em;
+}
+
+.lw_link_icon > svg {
+  height: 100%;
+  width: auto;
+  fill: var(--color-link-common);
+  transform: translateY(0.25em);
+}
+
 .breadcrumbs_wrap {
   position: relative;
   z-index: 10;

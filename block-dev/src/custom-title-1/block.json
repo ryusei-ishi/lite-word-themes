@@ -11,33 +11,38 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "基本見出し。メインタイトル+サブタイトル。中央配置。セクション区切りの汎用見出し",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "subTitle"],
+		"imageAttributes": []
+	},
 	"attributes": {
 		"mainTitle": {
 			"type": "string",
-			"default": "タイトル"
+			"default": "タイトル",
+			"aiHint": { "role": "heading", "contentGuide": "セクション見出し。3〜15文字", "example": "私たちの強み" }
 		},
 		"subTitle": {
 			"type": "string",
-			"default": "サブタイトル"
+			"default": "サブタイトル",
+			"aiHint": { "role": "subheading", "contentGuide": "英語表記 or 補足テキスト", "example": "OUR STRENGTHS" }
 		},
 		"headingLevel": {
 			"type": "number",
-			"default": 2
+			"default": 2,
+			"aiHint": { "skip": true }
 		},
 		"subMarginTopPc": {
 			"type": "number",
-			"default": 0.2
+			"default": 0.2,
+			"aiHint": { "skip": true }
 		},
 		"subMarginTopSp": {
 			"type": "number",
-			"default": 0.2
+			"default": 0.2,
+			"aiHint": { "skip": true }
 		}
 	},
-	"editorScript": "file:./custom-title-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css"
+	"editorScript": "file:./custom-title-1.js"
 }

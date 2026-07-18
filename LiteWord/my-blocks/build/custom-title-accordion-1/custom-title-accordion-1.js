@@ -74,7 +74,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         }
       }, "H".concat(lvl));
     }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30BF\u30A4\u30C8\u30EB\u6587\u5B57\u8272",
+      title: "\u8272\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: mainTitleColor,
@@ -93,13 +93,13 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       value: borderWidth,
       onChange: onChange('borderWidth')
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u8272",
+      title: "\u80CC\u666F\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: backgroundColor,
       onChange: onChange('backgroundColor')
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30A2\u30A4\u30B3\u30F3\u30AB\u30E9\u30FC",
+      title: "\u30A2\u30A4\u30B3\u30F3\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: iconColor,
@@ -248,7 +248,7 @@ module.exports = window["wp"]["components"];
   \*************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-accordion-1","version":"1.0.0","title":"見出しアコーディオン 01","category":"lw-heading","icon":"editor-textcolor","description":"アコーディオン機能付き見出しブロック","supports":{"anchor":true},"attributes":{"subTitle":{"type":"string","default":"STEP 1"},"mainTitle":{"type":"string","default":"WordPressの初期設定"},"headingLevel":{"type":"number","default":2},"mainTitleColor":{"type":"string","default":"var(--color-main)"},"borderColor":{"type":"string","default":"var(--color-main)"},"borderWidth":{"type":"number","default":1},"backgroundColor":{"type":"string","default":""},"iconColor":{"type":"string","default":"var(--color-main)"}},"editorScript":"file:./custom-title-accordion-1.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-accordion-1","version":"1.0.0","title":"見出しアコーディオン 01","category":"lw-heading","icon":"editor-textcolor","description":"アコーディオン機能付き見出しブロック","supports":{"anchor":true},"aiHint":{"description":"アコーディオン見出し。クリックで開閉。ステップ説明やFAQの大分類に。サブタイトル+メインタイトル","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":[]},"attributes":{"subTitle":{"type":"string","default":"STEP 1","aiHint":{"role":"subheading","contentGuide":"ステップ番号やカテゴリ名。3〜10文字","example":"STEP 1"}},"mainTitle":{"type":"string","default":"WordPressの初期設定","aiHint":{"role":"heading","contentGuide":"セクション見出し。5〜20文字","example":"WordPressの初期設定"}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}},"mainTitleColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"borderColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"borderWidth":{"type":"number","default":1,"aiHint":{"skip":true}},"backgroundColor":{"type":"string","default":"","aiHint":{"skip":true}},"iconColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}}},"editorScript":"file:./custom-title-accordion-1.js","no":1}');
 
 /***/ })
 

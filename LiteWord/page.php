@@ -14,7 +14,6 @@ get_template_part( "templates/loading_anime/index" );
 get_template_part( 'templates/header/index' );
 get_template_part('templates/drawer/index');
 ?>
-
 <main>
     <div class="lw_content_wrap page">
         <div class="main_content">

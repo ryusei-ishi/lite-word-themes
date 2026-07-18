@@ -98,7 +98,7 @@ registerBlockType(metadata.name, {
                 </BlockControls>
 
                 <InspectorControls>
-                    <PanelBody title="位置設定">
+                    <PanelBody title="配置設定">
                         <p><strong>PC表示</strong></p>
                         <RadioControl
                             selected={alignmentPc}
@@ -123,7 +123,7 @@ registerBlockType(metadata.name, {
                             onChange={onChangeAlignmentSp}
                         />
                     </PanelBody>
-                    <PanelBody title="幅設定">
+                    <PanelBody title="レイアウト設定">
                         <RangeControl
                             label="最大幅 (px)"
                             value={maxWidth || undefined}
@@ -135,7 +135,7 @@ registerBlockType(metadata.name, {
                             help={maxWidth > 0 ? `${maxWidth}px` : '未設定（デフォルト幅）'}
                         />
                     </PanelBody>
-                    <PanelBody title="カラー設定">
+                    <PanelBody title="色設定">
                         <p><strong>メインカラー</strong></p>
                         <ColorPalette
                             value={colorMain}
@@ -154,7 +154,7 @@ registerBlockType(metadata.name, {
                             onChange={onChangeColorSubText}
                         />
                     </PanelBody>
-                    <PanelBody title="角丸設定">
+                    <PanelBody title="枠線設定">
                         <RangeControl
                             label="角丸 (px)"
                             value={borderRadius || undefined}

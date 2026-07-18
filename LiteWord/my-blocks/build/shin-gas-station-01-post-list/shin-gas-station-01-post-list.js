@@ -54,7 +54,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       titleFontWeight = attributes.titleFontWeight,
       catBgColor = attributes.catBgColor;
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u8A2D\u5B9A",
+      title: "\u57FA\u672C\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement("p", null, "\u30EA\u30F3\u30AF\u5148URL"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.URLInput, {
       value: linkUrl,
@@ -1036,7 +1036,7 @@ module.exports = window["wp"]["components"];
   \******************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-post-list","version":"1.0.0","title":"投稿一覧 1 shin shop pattern 01","category":"lw-post","icon":"editor-ul","editorScript":"file:./shin-gas-station-01-post-list.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"no":15,"attributes":{"titleMain":{"type":"string","default":"Driveブログ"},"linkText":{"type":"string","default":"詳しく見る"},"linkUrl":{"type":"string","default":"#"},"openInNewTab":{"type":"boolean","default":false},"numberOfPosts":{"type":"number","default":6},"categoryId":{"type":"string","default":""},"postType":{"type":"string","default":"post"},"dateFont":{"type":"string","default":"Montserrat"},"dateFontWeight":{"type":"string","default":"400"},"catFont":{"type":"string","default":"Montserrat"},"catFontWeight":{"type":"string","default":"400"},"catBgColor":{"type":"string","default":"var(--color-main)"},"titleFont":{"type":"string","default":"Noto Sans JP"},"titleFontWeight":{"type":"string","default":"600"}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-post-list","version":"1.0.0","title":"投稿一覧 1 shin shop pattern 01","category":"lw-post","icon":"editor-ul","editorScript":"file:./shin-gas-station-01-post-list.js","aiHint":{"description":"投稿一覧+見出し+リンク付き。タイトル+投稿カード+もっと見るリンク。ブログセクションに。ショップテンプレート用","excludeFromAutoSelect":false,"contentAttributes":["titleMain","linkText","linkUrl","numberOfPosts"],"imageAttributes":[],"notes":"動的ブロック。見出し付きでセクション完結型"},"supports":{"anchor":true},"no":15,"attributes":{"titleMain":{"type":"string","default":"Driveブログ"},"linkText":{"type":"string","default":"詳しく見る"},"linkUrl":{"type":"string","default":"#"},"openInNewTab":{"type":"boolean","default":false},"numberOfPosts":{"type":"number","default":6},"categoryId":{"type":"string","default":""},"postType":{"type":"string","default":"post"},"dateFont":{"type":"string","default":"Montserrat"},"dateFontWeight":{"type":"string","default":"400"},"catFont":{"type":"string","default":"Montserrat"},"catFontWeight":{"type":"string","default":"400"},"catBgColor":{"type":"string","default":"var(--color-main)"},"titleFont":{"type":"string","default":"Noto Sans JP"},"titleFontWeight":{"type":"string","default":"600"}}}');
 
 /***/ })
 

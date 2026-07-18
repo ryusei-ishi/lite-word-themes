@@ -75,8 +75,9 @@ registerBlockType(metadata.name, {
 
         // 画像更新 (0=Before, 1=After)
         const updateItem = (index, url) => {
-            const newItems = [...items];
-            newItems[index].imgUrl = url;
+            const newItems = items.map((item, i) =>
+                i === index ? { ...item, imgUrl: url } : item
+            );
             setAttributes({ items: newItems });
         };
 

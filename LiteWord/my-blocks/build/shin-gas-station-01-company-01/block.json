@@ -6,16 +6,16 @@
 	"title": "会社概要 1 shin shop pattern 01",
 	"category": "lw-table",
 	"icon": "building",
+	"aiHint": {
+		"description": "会社概要テーブル。左ボーダー付き定義リスト。ショップテンプレート用",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
 	"editorScript": "file:./shin-gas-station-01-company-01.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 15,
 	"attributes": {
 		"colorOuter": {

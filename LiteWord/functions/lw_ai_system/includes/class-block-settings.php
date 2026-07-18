@@ -32,6 +32,9 @@ class LW_AI_Generator_Block_Settings {
      * メニューページを追加
      */
     public static function add_menu_page() {
+        // 現在未使用のため無効化（2026-01-05）
+        return;
+
         // プレミアムプランでない場合はメニューを表示しない
         if ( ! ( defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true ) ) {
             return;

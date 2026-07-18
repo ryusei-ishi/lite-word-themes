@@ -73,7 +73,7 @@ __webpack_require__.r(__webpack_exports__);
       className: "fv-3 ".concat(widthClass).trim()
     });
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u898B\u51FA\u3057\u30BF\u30B0\u8A2D\u5B9A"
+      title: "\u57FA\u672C\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\u898B\u51FA\u3057\u30BF\u30B0",
       value: headingTag,
@@ -96,7 +96,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u6A2A\u5E45\u8A2D\u5B9A"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\u6A2A\u5E45",
       value: widthSetting,
@@ -116,7 +116,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "PC\u7528\u753B\u50CF\u8A2D\u5B9A"
+      title: "\u753B\u50CF\u8A2D\u5B9A\uFF08PC\uFF09"
     }, imagePc && /*#__PURE__*/React.createElement("img", {
       src: imagePc,
       alt: "PC\u7528\u753B\u50CF",
@@ -142,7 +142,7 @@ __webpack_require__.r(__webpack_exports__);
         marginTop: '10px'
       }
     }, "\u753B\u50CF\u3092\u524A\u9664")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30B9\u30DE\u30DB\u7528\u753B\u50CF\u8A2D\u5B9A"
+      title: "\u753B\u50CF\u8A2D\u5B9A\uFF08\u30B9\u30DE\u30DB\uFF09"
     }, imageSp && /*#__PURE__*/React.createElement("img", {
       src: imageSp,
       alt: "\u30B9\u30DE\u30DB\u7528\u753B\u50CF",
@@ -168,7 +168,7 @@ __webpack_require__.r(__webpack_exports__);
         marginTop: '10px'
       }
     }, "\u753B\u50CF\u3092\u524A\u9664")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u753B\u50CF\u306EAlt\u30C6\u30AD\u30B9\u30C8"
+      title: "\u753B\u50CF\u306EAlt\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
       label: "Alt\u30C6\u30AD\u30B9\u30C8",
       value: altText,
@@ -291,7 +291,7 @@ module.exports = window["wp"]["components"];
   \*****************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/fv-3","version":"1.0.0","title":"固定ページタイトル 03(画像のみの場合)","category":"lw-firstview","icon":"format-image","editorScript":"file:./fv-3.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"imagePc":{"type":"string","default":""},"imageSp":{"type":"string","default":""},"altText":{"type":"string","default":""},"headingTag":{"type":"string","default":"h1"},"widthSetting":{"type":"string","default":"full"}},"no":3}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/fv-3","version":"1.0.0","title":"固定ページタイトル 03(画像のみの場合)","category":"lw-firstview","icon":"format-image","editorScript":"file:./fv-3.js","supports":{"anchor":true},"aiHint":{"description":"画像のみのFV。テキスト属性なし。デザイナーが作った画像をそのまま表示する用途","excludeFromAutoSelect":true,"excludeReason":"テキスト属性がないためAIがコンテンツを生成できない","contentAttributes":[],"imageAttributes":["imagePc","imageSp"]},"attributes":{"imagePc":{"type":"string","default":"","aiHint":{"role":"image","note":"PC用FV画像URL"}},"imageSp":{"type":"string","default":"","aiHint":{"role":"image","note":"SP用FV画像URL"}},"altText":{"type":"string","default":"","aiHint":{"role":"alt","contentGuide":"画像の説明。業種名+内容","example":"美容サロンのメインビジュアル"}},"headingTag":{"type":"string","default":"h1","aiHint":{"skip":true}},"widthSetting":{"type":"string","default":"full","aiHint":{"skip":true}}},"no":3}');
 
 /***/ })
 

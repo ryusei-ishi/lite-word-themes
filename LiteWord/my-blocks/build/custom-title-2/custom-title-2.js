@@ -66,7 +66,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, "H".concat(level));
     }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u6587\u5B57\u4F4D\u7F6E\u8A2D\u5B9A"
+      title: "\u914D\u7F6E\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RadioControl, {
       selected: textAlignment,
       options: [{
@@ -179,7 +179,7 @@ module.exports = window["wp"]["components"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-2","version":"1.0.0","title":"見出しタイトル 02","category":"lw-heading","icon":"editor-textcolor","description":"メインタイトルとサブタイトルを表示する見出しブロック（位置調整可能）","supports":{"anchor":true},"attributes":{"mainTitle":{"type":"string","default":"CONTENT"},"subTitle":{"type":"string","default":"SUB TITLE TEXT"},"textAlignment":{"type":"string","default":"left"},"headingLevel":{"type":"number","default":2}},"editorScript":"file:./custom-title-2.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":2}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-2","version":"1.0.0","title":"見出しタイトル 02","category":"lw-heading","icon":"editor-textcolor","description":"メインタイトルとサブタイトルを表示する見出しブロック（位置調整可能）","supports":{"anchor":true},"aiHint":{"description":"位置調整可能な見出し。メインタイトル+サブタイトル。左寄せ/中央/右寄せ対応","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":[]},"attributes":{"mainTitle":{"type":"string","default":"CONTENT","aiHint":{"role":"heading","contentGuide":"セクション見出し（英語 or 日本語）。3〜15文字","example":"SERVICE"}},"subTitle":{"type":"string","default":"SUB TITLE TEXT","aiHint":{"role":"subheading","contentGuide":"補足テキスト or 英語サブタイトル","example":"サービス紹介"}},"textAlignment":{"type":"string","default":"left","aiHint":{"skip":true}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}}},"editorScript":"file:./custom-title-2.js","no":2}');
 
 /***/ })
 

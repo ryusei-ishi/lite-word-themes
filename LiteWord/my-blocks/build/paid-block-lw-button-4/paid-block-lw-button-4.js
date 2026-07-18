@@ -72,7 +72,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
       className: "paid-block-lw-button-4 ".concat(pcClass, " ").concat(spClass)
     });
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCDD \u57FA\u672C\u8A2D\u5B9A",
+      title: "\u57FA\u672C\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.URLInput, {
       label: "\uD83D\uDD17 \u30EA\u30F3\u30AF\u5148URL",
@@ -93,7 +93,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
       },
       help: "\u30EA\u30F3\u30AF\u5148\u3092\u65B0\u3057\u3044\u30BF\u30D6\u3067\u958B\u304D\u305F\u3044\u5834\u5408\u306F\u30AA\u30F3\u306B\u3057\u3066\u304F\u3060\u3055\u3044"
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCCF \u30DC\u30BF\u30F3\u306E\u30B5\u30A4\u30BA\u3068\u5F62",
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\uD83D\uDDA5\uFE0F \u30D1\u30BD\u30B3\u30F3\u3067\u306E\u6A2A\u5E45 (px)",
@@ -129,7 +129,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
       max: 100,
       help: "\u6570\u5024\u304C\u5927\u304D\u3044\u307B\u3069\u89D2\u304C\u4E38\u304F\u306A\u308A\u307E\u3059\u30020\u3067\u56DB\u89D2\u300150\u4EE5\u4E0A\u3067\u4E38\u3044\u30DC\u30BF\u30F3\u306B\u306A\u308A\u307E\u3059"
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83C\uDFA8 \u8272\u3068\u30D5\u30A9\u30F3\u30C8\u306E\u8A2D\u5B9A",
+      title: "\u8272\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -201,7 +201,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u2728 \u30A2\u30A4\u30B3\u30F3\u8A2D\u5B9A",
+      title: "\u30A2\u30A4\u30B3\u30F3\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
       label: "\u30A2\u30A4\u30B3\u30F3\u3092\u8868\u793A\u3059\u308B",
@@ -222,7 +222,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCCD \u30DC\u30BF\u30F3\u306E\u914D\u7F6E",
+      title: "\u914D\u7F6E\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\uD83D\uDDA5\uFE0F \u30D1\u30BD\u30B3\u30F3\u3067\u306E\u4F4D\u7F6E",
@@ -266,7 +266,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
       },
       help: "\u30B9\u30DE\u30DB\u3067\u898B\u305F\u6642\u306E\u4F4D\u7F6E\u3092\u500B\u5225\u306B\u8A2D\u5B9A\u3057\u305F\u3044\u5834\u5408\u306F\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDD8D\uFE0F \u67A0\u7DDA\u306E\u8A2D\u5B9A",
+      title: "\u67A0\u7DDA\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u67A0\u7DDA\u306E\u592A\u3055 (px)",
@@ -1108,7 +1108,7 @@ module.exports = window["wp"]["components"];
   \***********************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-lw-button-4","version":"1.0.0","title":"リンクボタン 04","category":"lw-button","icon":"button","description":"有料リンクボタン（スタイル04）","supports":{"anchor":true},"attributes":{"blockId":{"type":"string"},"btnText":{"type":"string","default":"詳細はこちら"},"bgColor":{"type":"string","default":"var(--color-main)"},"textColor":{"type":"string","default":"#ffffff"},"fontWeight":{"type":"string","default":"400"},"FontSet":{"type":"string","default":""},"fontSize":{"type":"string","default":"m"},"position":{"type":"string","default":"center"},"positionSp":{"type":"string","default":""},"btnUrl":{"type":"string","default":""},"openNewTab":{"type":"boolean","default":false},"selectedIcon":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 320 512\\"><path d=\\"M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z\\"/></svg>"},"iconVisible":{"type":"boolean","default":true},"borderWidth":{"type":"number","default":1},"borderColor":{"type":"string","default":"#ffffff"},"borderRadius":{"type":"number","default":200},"maxWidth":{"type":"number","default":320},"maxWidthSp":{"type":"number","default":320}},"editorScript":"file:./paid-block-lw-button-4.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":4}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-lw-button-4","version":"1.0.0","title":"リンクボタン 04","category":"lw-button","icon":"button","description":"有料リンクボタン（スタイル04）","aiHint":{"description":"アイコン付き丸角ボタン。テキスト+矢印アイコン+URL。シンプルで上品なデザイン","excludeFromAutoSelect":false,"contentAttributes":["btnText","btnUrl"],"imageAttributes":[]},"supports":{"anchor":true},"attributes":{"blockId":{"type":"string","aiHint":{"skip":true}},"btnText":{"type":"string","default":"詳細はこちら","aiHint":{"role":"button","contentGuide":"動詞形。4〜10文字","example":"詳細を見る"}},"bgColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"textColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"fontWeight":{"type":"string","default":"400","aiHint":{"skip":true}},"FontSet":{"type":"string","default":"","aiHint":{"skip":true}},"fontSize":{"type":"string","default":"m","aiHint":{"skip":true}},"position":{"type":"string","default":"center","aiHint":{"skip":true}},"positionSp":{"type":"string","default":"","aiHint":{"skip":true}},"btnUrl":{"type":"string","default":"","aiHint":{"role":"url","contentGuide":"遷移先URL"}},"openNewTab":{"type":"boolean","default":false,"aiHint":{"skip":true}},"selectedIcon":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 320 512\\"><path d=\\"M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z\\"/></svg>","aiHint":{"skip":true}},"iconVisible":{"type":"boolean","default":true,"aiHint":{"skip":true}},"borderWidth":{"type":"number","default":1,"aiHint":{"skip":true}},"borderColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"borderRadius":{"type":"number","default":200,"aiHint":{"skip":true}},"maxWidth":{"type":"number","default":320,"aiHint":{"skip":true}},"maxWidthSp":{"type":"number","default":320,"aiHint":{"skip":true}}},"editorScript":"file:./paid-block-lw-button-4.js","no":4}');
 
 /***/ })
 

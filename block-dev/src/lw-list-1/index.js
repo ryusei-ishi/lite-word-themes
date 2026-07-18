@@ -34,8 +34,9 @@ registerBlockType(metadata.name, {
 
         // コンテンツを更新
         const updateContent = (index, key, value) => {
-            const updatedContents = [...contents];
-            updatedContents[index][key] = value;
+            const updatedContents = contents.map((content, i) =>
+                i === index ? { ...content, [key]: value } : content
+            );
             setAttributes({ contents: updatedContents });
         };
 
@@ -54,7 +55,7 @@ registerBlockType(metadata.name, {
         return (
             <div {...blockProps}>
                 <InspectorControls>
-                    <PanelBody title="番号部分のフォント設定">
+                    <PanelBody title="フォント設定（番号）">
                         <SelectControl
                             label="フォントの種類"
                             value={noFontSet}
@@ -68,7 +69,7 @@ registerBlockType(metadata.name, {
                             onChange={(value) => setAttributes({ noFontWeight: value })}
                         />
                     </PanelBody>
-                    <PanelBody title="テキスト部分のフォント設定">
+                    <PanelBody title="フォント設定（テキスト）">
                         <SelectControl
                             label="フォントの種類"
                             value={textFontSet}
@@ -82,7 +83,7 @@ registerBlockType(metadata.name, {
                             onChange={(value) => setAttributes({ textFontWeight: value })}
                         />
                     </PanelBody>
-                    <PanelBody title="全体の色設定">
+                    <PanelBody title="色設定">
                         <p>ボーダーの色</p>
                         <ColorPalette
                             value={borderColor}

@@ -383,7 +383,7 @@
 /* ===== ダッシュボードサイドバー ===== */
 .lw-dashboard-sidebar {
     position: fixed;
-    top: 36px;
+    top: 32px;
     left: 184px;
     width: 200px;
     z-index: 100;
@@ -447,6 +447,20 @@
     padding: 20px;
     padding-left: 40px;
     padding-bottom: 200px;
+    /* 強制表示対策 - GPUコンポジティング */
+    display: block !important;
+    visibility: visible !important;
+    opacity: 1 !important;
+    height: auto !important;
+    overflow: visible !important;
+    position: relative !important;
+    z-index: 1 !important;
+    /* GPU layer promotion - 初期レンダリング問題対策 */
+    transform: translateZ(0);
+    will-change: transform, contents;
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    contain: layout style;
 }
 
 .folded .lw-dashboard-content {
@@ -561,6 +575,10 @@
     flex-direction: column;
     gap: 12px;
     max-width: 680px;
+    /* GPU layer promotion - 初期レンダリング問題対策 */
+    transform: translateZ(0);
+    will-change: contents;
+    backface-visibility: hidden;
 }
 
 .lw-wizard-step-wrapper {
@@ -733,6 +751,14 @@
     font-size: 20px;
     color: var(--lw-text-light);
     flex-shrink: 0;
+    /* dashiconsフォント読み込み前のレイアウトシフト防止 */
+    width: 20px;
+    height: 20px;
+    min-width: 20px;
+    min-height: 20px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
 }
 
 .lw-wizard-step.completed .lw-step-status {
@@ -2006,6 +2032,25 @@
         flex: 1;
         min-width: 120px;
         justify-content: center;
+    }
+
+    /* コンテンツエリアをサイドバーの下に配置 */
+    .lw-dashboard-content {
+        margin-left: 0 !important;
+        padding: 15px !important;
+    }
+
+    .folded .lw-dashboard-content {
+        margin-left: 0 !important;
+    }
+
+    /* ステップの隙間を調整 */
+    .lw-wizard-step-wrapper {
+        min-height: auto !important;
+    }
+
+    .lw-wizard-steps {
+        gap: 10px;
     }
 }
 

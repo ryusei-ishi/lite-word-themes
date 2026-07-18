@@ -84,6 +84,7 @@ if (wp.blocks.getBlockType(_block_json__WEBPACK_IMPORTED_MODULE_8__.name)) {
         bgImgSp = attributes.bgImgSp,
         bgImgAlt = attributes.bgImgAlt,
         videoUrl = attributes.videoUrl,
+        videoUrlSp = attributes.videoUrlSp,
         videoSpeed = attributes.videoSpeed,
         bgFilterType = attributes.bgFilterType,
         bgFilterColor = attributes.bgFilterColor,
@@ -93,7 +94,8 @@ if (wp.blocks.getBlockType(_block_json__WEBPACK_IMPORTED_MODULE_8__.name)) {
         navMenuItems = attributes.navMenuItems,
         minHeightPc = attributes.minHeightPc,
         minHeightTb = attributes.minHeightTb,
-        minHeightSp = attributes.minHeightSp;
+        minHeightSp = attributes.minHeightSp,
+        showHeader = attributes.showHeader;
 
       /* --- WordPress標準設定を取得 --- */
       var _useSettings = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useSettings)('color.gradients', 'color.palette'),
@@ -171,6 +173,18 @@ if (wp.blocks.getBlockType(_block_json__WEBPACK_IMPORTED_MODULE_8__.name)) {
           videoUrl: m.url
         });
       };
+      var onSelectVidSp = function onSelectVidSp(m) {
+        return setAttributes({
+          videoUrlSp: m.url
+        });
+      };
+      var getFileName = function getFileName(url) {
+        try {
+          return decodeURIComponent(url.split('/').pop().split('?')[0]);
+        } catch (e) {
+          return url.split('/').pop();
+        }
+      };
       var onChangeHeadingLevel = function onChangeHeadingLevel(newLevel) {
         setAttributes({
           headingLevel: newLevel
@@ -234,6 +248,18 @@ if (wp.blocks.getBlockType(_block_json__WEBPACK_IMPORTED_MODULE_8__.name)) {
           }
         }, "H".concat(level));
       }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+        title: "\u30D8\u30C3\u30C0\u30FC\u8A2D\u5B9A",
+        initialOpen: true
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+        label: "\u30D8\u30C3\u30C0\u30FC\u3092\u8868\u793A",
+        checked: showHeader,
+        onChange: function onChange(v) {
+          return setAttributes({
+            showHeader: v
+          });
+        },
+        help: showHeader ? 'ロゴ・ナビ・ハンバーガーが表示されます' : 'ヘッダー部分が非表示になります'
+      })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
         title: "\u30ED\u30B4\u8A2D\u5B9A",
         initialOpen: false
       }, /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
@@ -642,22 +668,77 @@ if (wp.blocks.getBlockType(_block_json__WEBPACK_IMPORTED_MODULE_8__.name)) {
           });
         },
         placeholder: "\u753B\u50CF\u306E\u8AAC\u660E\u3092\u5165\u529B"
-      })), bgType === 'video' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
+      })), bgType === 'video' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
+        style: {
+          fontWeight: 'bold',
+          marginBottom: '8px'
+        }
+      }, "PC\u7528\u52D5\u753B"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
         allowedTypes: ['video'],
         value: videoUrl,
         onSelect: onSelectVid,
         render: function render(_ref5) {
           var open = _ref5.open;
-          return /*#__PURE__*/React.createElement(React.Fragment, null, videoUrl && /*#__PURE__*/React.createElement("p", {
+          return /*#__PURE__*/React.createElement(React.Fragment, null, videoUrl && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
             style: {
-              marginBottom: 8
+              marginBottom: 8,
+              fontSize: '13px',
+              wordBreak: 'break-all'
             }
-          }, "\u73FE\u5728: ", videoUrl.split('/').pop()), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          }, getFileName(videoUrl)), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            variant: "secondary",
+            style: {
+              marginRight: 8
+            },
+            onClick: function onClick() {
+              return setAttributes({
+                videoUrl: ''
+              });
+            }
+          }, "\u524A\u9664")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
             variant: "secondary",
             onClick: open
           }, videoUrl ? '変更' : '動画を選択'));
         }
-      }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("p", {
+        style: {
+          fontWeight: 'bold',
+          marginBottom: '8px'
+        }
+      }, "\u30B9\u30DE\u30DB\u7528\u52D5\u753B"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
+        allowedTypes: ['video'],
+        value: videoUrlSp,
+        onSelect: onSelectVidSp,
+        render: function render(_ref6) {
+          var open = _ref6.open;
+          return /*#__PURE__*/React.createElement(React.Fragment, null, videoUrlSp && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
+            style: {
+              marginBottom: 8,
+              fontSize: '13px',
+              wordBreak: 'break-all'
+            }
+          }, getFileName(videoUrlSp)), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            variant: "secondary",
+            style: {
+              marginRight: 8
+            },
+            onClick: function onClick() {
+              return setAttributes({
+                videoUrlSp: ''
+              });
+            }
+          }, "\u524A\u9664")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+            variant: "secondary",
+            onClick: open
+          }, videoUrlSp ? '変更' : '動画を選択'));
+        }
+      }), /*#__PURE__*/React.createElement("p", {
+        style: {
+          marginTop: 8,
+          fontSize: '12px',
+          color: '#666'
+        }
+      }, "\u203B\u672A\u8A2D\u5B9A\u306E\u5834\u5408\u306FPC\u7528\u52D5\u753B\u304C\u4F7F\u308F\u308C\u307E\u3059"), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
         label: "\u518D\u751F\u901F\u5EA6",
         value: videoSpeed,
         onChange: function onChange(v) {
@@ -795,7 +876,7 @@ if (wp.blocks.getBlockType(_block_json__WEBPACK_IMPORTED_MODULE_8__.name)) {
             minHeightSp: value
           });
         }
-      }))), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("header", {
+      }))), /*#__PURE__*/React.createElement("div", blockProps, showHeader && /*#__PURE__*/React.createElement("header", {
         className: "fv_in_header"
       }, /*#__PURE__*/React.createElement("h1", {
         className: "logo"
@@ -847,6 +928,7 @@ if (wp.blocks.getBlockType(_block_json__WEBPACK_IMPORTED_MODULE_8__.name)) {
         placeholder: "\u30EA\u30FC\u30C9\u30C6\u30AD\u30B9\u30C8\u3092\u5165\u529B"
       }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
         tagName: HeadingTag,
+        className: "custom_title",
         value: headline,
         onChange: function onChange(v) {
           return setAttributes({
@@ -866,8 +948,8 @@ if (wp.blocks.getBlockType(_block_json__WEBPACK_IMPORTED_MODULE_8__.name)) {
         placeholder: "\u8AAC\u660E\u6587\u3092\u5165\u529B"
       }), showCTAWrap && /*#__PURE__*/React.createElement("div", {
         className: "cta_wrap"
-      }, showCTA1 && /*#__PURE__*/React.createElement("a", {
-        href: cta1Url
+      }, showCTA1 && /*#__PURE__*/React.createElement("div", {
+        className: "a"
       }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
         tagName: "span",
         value: cta1Text,
@@ -881,8 +963,8 @@ if (wp.blocks.getBlockType(_block_json__WEBPACK_IMPORTED_MODULE_8__.name)) {
           opacity: 0.5,
           fontStyle: 'italic'
         } : {}
-      })), showCTA2 && /*#__PURE__*/React.createElement("a", {
-        href: cta2Url
+      })), showCTA2 && /*#__PURE__*/React.createElement("div", {
+        className: "a"
       }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
         tagName: "span",
         value: cta2Text,
@@ -923,8 +1005,8 @@ if (wp.blocks.getBlockType(_block_json__WEBPACK_IMPORTED_MODULE_8__.name)) {
     /* =============================================================== *
      *  Save
      * =============================================================== */
-    save: function save(_ref6) {
-      var attributes = _ref6.attributes;
+    save: function save(_ref7) {
+      var attributes = _ref7.attributes;
       var logoText = attributes.logoText,
         logoUrl = attributes.logoUrl,
         logoImg = attributes.logoImg,
@@ -949,6 +1031,7 @@ if (wp.blocks.getBlockType(_block_json__WEBPACK_IMPORTED_MODULE_8__.name)) {
         bgImgSp = attributes.bgImgSp,
         bgImgAlt = attributes.bgImgAlt,
         videoUrl = attributes.videoUrl,
+        videoUrlSp = attributes.videoUrlSp,
         videoSpeed = attributes.videoSpeed,
         bgFilterType = attributes.bgFilterType,
         bgFilterColor = attributes.bgFilterColor,
@@ -957,7 +1040,8 @@ if (wp.blocks.getBlockType(_block_json__WEBPACK_IMPORTED_MODULE_8__.name)) {
         navMenuItems = attributes.navMenuItems,
         minHeightPc = attributes.minHeightPc,
         minHeightTb = attributes.minHeightTb,
-        minHeightSp = attributes.minHeightSp;
+        minHeightSp = attributes.minHeightSp,
+        showHeader = attributes.showHeader;
       var show1 = cta1Enable && cta1Text.trim();
       var show2 = cta2Enable && cta2Text.trim();
       var showWrap = show1 || show2;
@@ -991,8 +1075,10 @@ if (wp.blocks.getBlockType(_block_json__WEBPACK_IMPORTED_MODULE_8__.name)) {
       });
 
       /* --- インライン JS --- */
-      var script = "\n(() => {\n'use strict';\nconst ready = () => {\n\n  /* ---- \u30ED\u30B4\u30EA\u30F3\u30AF\u306E\u8A2D\u5B9A ---- */\n  document.querySelectorAll('.logo a[data-home-url]').forEach(link => {\n    if(!link.href || link.href === '' || link.href === window.location.href + '#') {\n      if(window.MyThemeSettings && window.MyThemeSettings.home_Url) {\n        link.href = window.MyThemeSettings.home_Url;\n      } else {\n        link.href = window.location.origin;\n      }\n    }\n  });\n\n  /* ---- video ---- */\n  document.querySelectorAll('.lazy-video').forEach(v=>{\n    v.style.display='block';\n    \n    const playbackRate = parseFloat(v.getAttribute('data-playback-rate')) || ".concat(videoSpeed, ";\n    v.playbackRate = playbackRate;\n    \n    const playVideo = () => {\n      v.play().catch(err => {\n        console.log('Video autoplay failed:', err);\n      });\n    };\n    \n    if(v.readyState >= 1) {\n      playVideo();\n    } else {\n      v.addEventListener('loadedmetadata', () => {\n        v.playbackRate = playbackRate;\n        playVideo();\n      });\n    }\n    \n    document.addEventListener('click', () => {\n      if(v.paused) {\n        playVideo();\n      }\n    }, { once: true });\n  });\n};\ndocument.readyState==='loading'?document.addEventListener('DOMContentLoaded',ready):ready();\n})();").trim();
-      return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("header", {
+      /* NOTE: WordPress the_content フィルターが && を &#038;&#038; に変換するため、
+         インラインスクリプト内では && を使用禁止。nested if で代替する。 */
+      var script = "\n(() => {\n'use strict';\nconst ready = () => {\n  document.querySelectorAll('.logo a[data-home-url]').forEach(link => {\n    if(!link.href || link.href === '' || link.href === window.location.href + '#') {\n      var mts = window.MyThemeSettings;\n      if(mts) { if(mts.home_Url) { link.href = mts.home_Url; return; } }\n      link.href = window.location.origin;\n    }\n  });\n  var vidPcUrl = '".concat(videoUrl, "';\n  var vidSpUrl = '").concat(videoUrlSp || '', "';\n  var vidSpeed = ").concat(videoSpeed, ";\n  var getVidType = function(url) {\n    if(url.endsWith('.webm')) return 'video/webm';\n    if(url.endsWith('.mov')) return 'video/quicktime';\n    return 'video/mp4';\n  };\n  document.querySelectorAll('.lazy-video').forEach(function(v) {\n    v.style.display = 'block';\n    var playbackRate = parseFloat(v.getAttribute('data-playback-rate')) || vidSpeed;\n    var switchVideo = function() {\n      if(!vidSpUrl) return;\n      var isSp = window.innerWidth <= 800;\n      var newSrc = isSp ? vidSpUrl : vidPcUrl;\n      var source = v.querySelector('source');\n      if(!source) return;\n      if(source.getAttribute('src') === newSrc) return;\n      source.setAttribute('src', newSrc);\n      source.setAttribute('type', getVidType(newSrc));\n      v.load();\n      v.playbackRate = playbackRate;\n      v.play().catch(function(){});\n    };\n    if(vidSpUrl) {\n      switchVideo();\n      var resizeTimer;\n      window.addEventListener('resize', function() {\n        clearTimeout(resizeTimer);\n        resizeTimer = setTimeout(switchVideo, 200);\n      });\n    }\n    v.playbackRate = playbackRate;\n    var playVideo = function() { v.play().catch(function(){}); };\n    if(v.readyState >= 1) {\n      playVideo();\n    } else {\n      v.addEventListener('loadedmetadata', function() {\n        v.playbackRate = playbackRate;\n        playVideo();\n      });\n    }\n    document.addEventListener('click', function() {\n      if(v.paused) { playVideo(); }\n    }, { once: true });\n  });\n};\nif(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ready)}else{ready()}\n})();").trim();
+      return /*#__PURE__*/React.createElement("div", blockProps, showHeader && /*#__PURE__*/React.createElement("header", {
         className: "fv_in_header"
       }, /*#__PURE__*/React.createElement("h1", {
         className: "logo"
@@ -1041,6 +1127,7 @@ if (wp.blocks.getBlockType(_block_json__WEBPACK_IMPORTED_MODULE_8__.name)) {
         value: leadText
       }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
         tagName: HeadingTag,
+        className: "custom_title",
         value: headline
       }), description && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
         tagName: "p",
@@ -1815,7 +1902,7 @@ module.exports = window["wp"]["element"];
   \************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-fv-14","version":"1.0.0","title":"FV 14 ヘッダーまで回り込む全画背景","category":"lw-firstview","icon":"cover-image","editorScript":"file:./lw-pr-fv-14.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"logoText":{"type":"string","default":"LOGO"},"logoUrl":{"type":"string","default":""},"logoImg":{"type":"string","default":""},"logoImgHeight":{"type":"number","default":70},"cta1Text":{"type":"string","default":"ご相談はこちら"},"cta1Url":{"type":"string","default":"#"},"cta1Enable":{"type":"boolean","default":true},"cta1BgColor":{"type":"string","default":"var(--color-main)"},"cta1TextColor":{"type":"string","default":"#ffffff"},"cta1BorderWidth":{"type":"number","default":1},"cta1BorderColor":{"type":"string","default":"var(--color-main)"},"showCta1BgPicker":{"type":"boolean","default":false},"showCta1TextPicker":{"type":"boolean","default":false},"showCta1BorderPicker":{"type":"boolean","default":false},"cta2Text":{"type":"string","default":"資料ダウンロードはこちら"},"cta2Url":{"type":"string","default":"#"},"cta2Enable":{"type":"boolean","default":true},"cta2TextColor":{"type":"string","default":"#ffffff"},"showCta2TextPicker":{"type":"boolean","default":false},"leadText":{"type":"string","default":"リードテキストリード"},"headline":{"type":"string","default":"キャッチフレーズテキスト<br>キャッチフレーズテキスト"},"description":{"type":"string","default":"ここに説明文が入りますここに説明文が入りますここに説明文が入りますここに説明文が入りますここに説明文が入りますここに説明文が入りますここに説明文が入ります"},"headingLevel":{"type":"number","default":2},"bgType":{"type":"string","default":"image"},"bgImgPc":{"type":"string","default":"https://plus.unsplash.com/premium_photo-1685868556097-641c237f3fa5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1328"},"bgImgSp":{"type":"string","default":""},"bgImgAlt":{"type":"string","default":""},"videoUrl":{"type":"string","default":""},"videoSpeed":{"type":"number","default":1},"bgFilterType":{"type":"string","default":"solid"},"bgFilterColor":{"type":"string","default":"#000000"},"bgFilterGradient":{"type":"string","default":""},"bgFilterOpacity":{"type":"number","default":30},"navMenuId":{"type":"number","default":0},"navMenuItems":{"type":"array","default":[]},"minHeightPc":{"type":"string","default":"min-h-pc-100vh"},"minHeightTb":{"type":"string","default":"min-h-tb-100vh"},"minHeightSp":{"type":"string","default":"min-h-sp-100vh"}},"no":14}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-fv-14","version":"1.0.0","title":"FV 14 ヘッダーまで回り込む全画背景","category":"lw-firstview","icon":"cover-image","editorScript":"file:./lw-pr-fv-14.js","aiHint":{"description":"全画面FV（ヘッダー回り込み）。ロゴ+ナビ+見出し+説明+2CTAボタン。動画対応。ブランドサイトに","excludeFromAutoSelect":false,"contentAttributes":["logoText","headline","description","leadText","cta1Text","cta2Text"],"imageAttributes":["logoImg","bgImgPc","bgImgSp"],"notes":"ナビメニュー配列あり。ヘッダーを隠して独自ナビを表示する特殊FV"},"supports":{"anchor":true},"attributes":{"logoText":{"type":"string","default":"LOGO"},"logoUrl":{"type":"string","default":""},"logoImg":{"type":"string","default":""},"logoImgHeight":{"type":"number","default":70},"cta1Text":{"type":"string","default":"ご相談はこちら"},"cta1Url":{"type":"string","default":"#"},"cta1Enable":{"type":"boolean","default":true},"cta1BgColor":{"type":"string","default":"var(--color-main)"},"cta1TextColor":{"type":"string","default":"#ffffff"},"cta1BorderWidth":{"type":"number","default":1},"cta1BorderColor":{"type":"string","default":"var(--color-main)"},"showCta1BgPicker":{"type":"boolean","default":false},"showCta1TextPicker":{"type":"boolean","default":false},"showCta1BorderPicker":{"type":"boolean","default":false},"cta2Text":{"type":"string","default":"資料ダウンロードはこちら"},"cta2Url":{"type":"string","default":"#"},"cta2Enable":{"type":"boolean","default":true},"cta2TextColor":{"type":"string","default":"#ffffff"},"showCta2TextPicker":{"type":"boolean","default":false},"leadText":{"type":"string","default":"リードテキストリード"},"headline":{"type":"string","default":"キャッチフレーズテキスト<br>キャッチフレーズテキスト"},"description":{"type":"string","default":"ここに説明文が入りますここに説明文が入りますここに説明文が入りますここに説明文が入りますここに説明文が入りますここに説明文が入りますここに説明文が入ります"},"headingLevel":{"type":"number","default":2},"bgType":{"type":"string","default":"image"},"bgImgPc":{"type":"string","default":"https://plus.unsplash.com/premium_photo-1685868556097-641c237f3fa5?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1328"},"bgImgSp":{"type":"string","default":""},"bgImgAlt":{"type":"string","default":""},"videoUrl":{"type":"string","default":""},"videoUrlSp":{"type":"string","default":""},"videoSpeed":{"type":"number","default":1},"bgFilterType":{"type":"string","default":"solid"},"bgFilterColor":{"type":"string","default":"#000000"},"bgFilterGradient":{"type":"string","default":""},"bgFilterOpacity":{"type":"number","default":30},"navMenuId":{"type":"number","default":0},"navMenuItems":{"type":"array","default":[]},"minHeightPc":{"type":"string","default":"min-h-pc-100vh"},"minHeightTb":{"type":"string","default":"min-h-tb-100vh"},"minHeightSp":{"type":"string","default":"min-h-sp-100vh"},"showHeader":{"type":"boolean","default":true}},"no":14}');
 
 /***/ })
 

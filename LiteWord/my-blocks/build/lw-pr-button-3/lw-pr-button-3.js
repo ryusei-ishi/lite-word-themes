@@ -83,7 +83,7 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
       wrapBtnClassName += " sp_".concat(btnAlignSp);
     }
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCDD \u57FA\u672C\u8A2D\u5B9A",
+      title: "\u57FA\u672C\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -113,7 +113,7 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
       },
       help: "\u30EA\u30F3\u30AF\u5148\u3092\u65B0\u3057\u3044\u30BF\u30D6\u3067\u958B\u304D\u305F\u3044\u5834\u5408\u306F\u30AA\u30F3\u306B\u3057\u3066\u304F\u3060\u3055\u3044"
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCCD \u30DC\u30BF\u30F3\u306E\u914D\u7F6E",
+      title: "\u914D\u7F6E\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\uD83D\uDCBB PC\u8868\u793A\u6642\u306E\u914D\u7F6E",
@@ -157,7 +157,7 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
       },
       help: "\u30B9\u30DE\u30DB\u8868\u793A\u6642\u306E\u30DC\u30BF\u30F3\u306E\u914D\u7F6E\u3092\u9078\u629E"
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCDD \u30C6\u30AD\u30B9\u30C8\u8A2D\u5B9A",
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\uD83D\uDCDA \u30D5\u30A9\u30F3\u30C8\u306E\u7A2E\u985E",
@@ -275,7 +275,7 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
         });
       }
     })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83C\uDFA8 \u80CC\u666F\u8272\u306E\u8A2D\u5B9A",
+      title: "\u8272\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -342,7 +342,7 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
         });
       }
     })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u2728 \u30A2\u30A4\u30B3\u30F3\u8A2D\u5B9A",
+      title: "\u30A2\u30A4\u30B3\u30F3\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\uD83C\uDFAF \u30A2\u30A4\u30B3\u30F3\u306E\u7A2E\u985E",
@@ -404,7 +404,7 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
         });
       }
     })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCCF \u30DC\u30BF\u30F3\u306E\u5F62\u72B6",
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\uD83D\uDCD0 \u6700\u5927\u6A2A\u5E45 PC (px)",
@@ -464,7 +464,7 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
       max: 100,
       help: "\u6570\u5024\u304C\u5927\u304D\u3044\u307B\u3069\u89D2\u304C\u4E38\u304F\u306A\u308A\u307E\u3059"
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDD8D\uFE0F \u67A0\u7DDA\u306E\u8A2D\u5B9A",
+      title: "\u67A0\u7DDA\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\uD83D\uDCCF \u67A0\u7DDA\u306E\u592A\u3055 (px)",
@@ -494,7 +494,7 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
         });
       }
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u2728 \u30A8\u30D5\u30A7\u30AF\u30C8\u8A2D\u5B9A",
+      title: "\u30A8\u30D5\u30A7\u30AF\u30C8\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u23F1\uFE0F \u30A2\u30CB\u30E1\u30FC\u30B7\u30E7\u30F3\u901F\u5EA6 (\u79D2)",
@@ -560,7 +560,7 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
       step: 0.5,
       help: "\u4F55\u79D2\u3054\u3068\u306B\u9707\u3048\u308B\u304B"
     })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83C\uDF11 \u5F71\u306E\u8A2D\u5B9A",
+      title: "\u5F71\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u27A1\uFE0F \u5F71\u306E\u6A2A\u65B9\u5411 (px)",
@@ -1476,7 +1476,7 @@ module.exports = window["wp"]["components"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-button-3","version":"1.0.0","title":"PRボタン 03","category":"lw-button","icon":"button","description":"プレミアムリンクボタン（スタイル03）","supports":{"anchor":true,"className":true},"attributes":{"textSub":{"type":"string","default":"＼ テキストテキストテキスト ／"},"textMain":{"type":"string","default":"資料ダウンロードはこちら"},"btnUrl":{"type":"string","default":""},"openNewTab":{"type":"boolean","default":false},"btnAlign":{"type":"string","default":"center"},"btnAlignSp":{"type":"string","default":"default"},"bgColor":{"type":"string","default":"#e1a20e"},"bgColorHover":{"type":"string","default":"#c4880b"},"textColorMain":{"type":"string","default":"#ffffff"},"textColorSub":{"type":"string","default":"#ffffff"},"borderWidth":{"type":"number","default":0},"borderColor":{"type":"string","default":"#000000"},"borderRadius":{"type":"number","default":2},"iconMain":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z\\"/></svg>"},"iconMainColor":{"type":"string","default":"#ffffff"},"iconMainSize":{"type":"number","default":32},"iconMainMarginRight":{"type":"number","default":10},"iconMainMarginLeft":{"type":"number","default":-8},"FontSet":{"type":"string","default":""},"fontWeightMain":{"type":"string","default":"500"},"fontWeightSub":{"type":"string","default":"500"},"fontSizeMain":{"type":"number","default":22},"fontSizeMainSp":{"type":"number","default":18},"fontSizeSub":{"type":"number","default":14},"maxWidth":{"type":"number","default":580},"maxWidthSp":{"type":"number","default":480},"paddingY":{"type":"number","default":1.2},"paddingX":{"type":"number","default":1.5},"transitionDuration":{"type":"number","default":0.3},"shakeAnimation":{"type":"boolean","default":false},"shakeInterval":{"type":"number","default":3},"shakeIntensity":{"type":"string","default":"normal"},"shadowX":{"type":"number","default":0},"shadowY":{"type":"number","default":0},"shadowBlur":{"type":"number","default":6},"shadowOpacity":{"type":"number","default":0.2}},"editorScript":"file:./lw-pr-button-3.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":3}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-button-3","version":"1.0.0","title":"PRボタン 03","category":"lw-button","icon":"button","description":"プレミアムリンクボタン（スタイル03）","aiHint":{"description":"ダウンロードアイコン付き2段テキストボタン。資料請求やダウンロード誘導に最適","excludeFromAutoSelect":false,"contentAttributes":["textMain","textSub","btnUrl"],"imageAttributes":[]},"supports":{"anchor":true,"className":true},"attributes":{"textSub":{"type":"string","default":"＼ テキストテキストテキスト ／","aiHint":{"role":"subheading","contentGuide":"補足テキスト。＼ ／で囲む","example":"＼ 無料でダウンロード ／"}},"textMain":{"type":"string","default":"資料ダウンロードはこちら","aiHint":{"role":"button","contentGuide":"メインボタンテキスト。5〜15文字","example":"サービス資料をダウンロード"}},"btnUrl":{"type":"string","default":"","aiHint":{"role":"url","contentGuide":"ダウンロードURL or ページURL"}},"openNewTab":{"type":"boolean","default":false,"aiHint":{"skip":true}},"btnAlign":{"type":"string","default":"center","aiHint":{"skip":true}},"btnAlignSp":{"type":"string","default":"default","aiHint":{"skip":true}},"bgColor":{"type":"string","default":"#e1a20e","aiHint":{"skip":true}},"bgColorHover":{"type":"string","default":"#c4880b","aiHint":{"skip":true}},"textColorMain":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"textColorSub":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"borderWidth":{"type":"number","default":0,"aiHint":{"skip":true}},"borderColor":{"type":"string","default":"#000000","aiHint":{"skip":true}},"borderRadius":{"type":"number","default":2,"aiHint":{"skip":true}},"iconMain":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z\\"/></svg>","aiHint":{"skip":true}},"iconMainColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"iconMainSize":{"type":"number","default":32,"aiHint":{"skip":true}},"iconMainMarginRight":{"type":"number","default":10,"aiHint":{"skip":true}},"iconMainMarginLeft":{"type":"number","default":-8,"aiHint":{"skip":true}},"FontSet":{"type":"string","default":"","aiHint":{"skip":true}},"fontWeightMain":{"type":"string","default":"500","aiHint":{"skip":true}},"fontWeightSub":{"type":"string","default":"500","aiHint":{"skip":true}},"fontSizeMain":{"type":"number","default":22,"aiHint":{"skip":true}},"fontSizeMainSp":{"type":"number","default":18,"aiHint":{"skip":true}},"fontSizeSub":{"type":"number","default":14,"aiHint":{"skip":true}},"maxWidth":{"type":"number","default":580,"aiHint":{"skip":true}},"maxWidthSp":{"type":"number","default":480,"aiHint":{"skip":true}},"paddingY":{"type":"number","default":1.2,"aiHint":{"skip":true}},"paddingX":{"type":"number","default":1.5,"aiHint":{"skip":true}},"transitionDuration":{"type":"number","default":0.3,"aiHint":{"skip":true}},"shakeAnimation":{"type":"boolean","default":false,"aiHint":{"skip":true}},"shakeInterval":{"type":"number","default":3,"aiHint":{"skip":true}},"shakeIntensity":{"type":"string","default":"normal","aiHint":{"skip":true}},"shadowX":{"type":"number","default":0,"aiHint":{"skip":true}},"shadowY":{"type":"number","default":0,"aiHint":{"skip":true}},"shadowBlur":{"type":"number","default":6,"aiHint":{"skip":true}},"shadowOpacity":{"type":"number","default":0.2,"aiHint":{"skip":true}}},"editorScript":"file:./lw-pr-button-3.js","no":3}');
 
 /***/ })
 

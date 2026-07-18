@@ -37,7 +37,7 @@ registerBlockType(metadata.name, {
         return (
             <>
                 <InspectorControls>
-                    <PanelBody title="背景画像設定">
+                    <PanelBody title="背景設定">
                         <p>PCの時</p>
                         <MediaUpload
                             onSelect={onChangeBackgroundImage}
@@ -89,7 +89,7 @@ registerBlockType(metadata.name, {
                             )}
                         />
                     </PanelBody>
-                    <PanelBody title="画像の上のフィルター">
+                    <PanelBody title="フィルター設定">
                         <p>色</p>
                         <ColorPalette
                             value={filterBackgroundColor}
@@ -104,7 +104,7 @@ registerBlockType(metadata.name, {
                             step={0.01}
                         />
                     </PanelBody>
-                    <PanelBody title="リンクボタンの設定">
+                    <PanelBody title="ボタン設定">
                         <p>リンク先URL</p>
                         <URLInput
                             value={buttonUrl}
@@ -154,7 +154,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     
-                    <PanelBody title="高さ設定">
+                    <PanelBody title="レイアウト設定">
                         <p>PC用高さ</p>
                         <SelectControl
                             value={minHeightPc}

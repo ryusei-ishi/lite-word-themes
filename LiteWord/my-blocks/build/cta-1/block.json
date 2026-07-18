@@ -9,6 +9,13 @@
 	"description": "背景画像付きのCTAブロック",
 	"aiDescription": "お問い合わせや資料請求などのアクションを促すセクション。背景画像とオーバーレイで視覚的にインパクトを与え、ボタンでユーザーを誘導する。ページの最後や重要なポイントに配置する。",
 	"aiNotes": "h2見出しは内部に含まれるため、直前にcustom-title系ブロックを配置しない。buttonUrlは必須。",
+	"aiHint": {
+		"description": "汎用CTA。背景画像+フィルター+h2見出し+説明文+ボタン1つ。問い合わせ・予約誘導に最適",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["title", "text", "buttonText", "buttonUrl"],
+		"imageAttributes": ["imageUrl"],
+		"notes": "h2見出し内包のため直前にcustom-title系を配置しない。buttonUrlは必須"
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -17,85 +24,95 @@
 			"type": "string",
 			"source": "html",
 			"selector": ".cta-1__title",
-			"default": "無料相談受付中"
+			"default": "無料相談受付中",
+			"aiHint": { "role": "heading", "contentGuide": "行動を促すh2見出し。5〜15文字", "example": "まずは無料相談から" }
 		},
 		"text": {
 			"type": "string",
 			"source": "html",
 			"selector": "p",
-			"default": "テキストテキストテキストテキストテキストテキス<br>トテキストテキストテキストテキストテキストテキスト"
+			"default": "テキストテキストテキストテキストテキストテキス<br>トテキストテキストテキストテキストテキストテキスト",
+			"aiHint": { "role": "body", "contentGuide": "なぜ今行動すべきかの理由。30〜80文字", "example": "お気軽にご相談ください。専門スタッフが丁寧にご対応いたします。" }
 		},
 		"buttonText": {
 			"type": "string",
 			"source": "html",
 			"selector": "a",
-			"default": "お問い合わせ"
+			"default": "お問い合わせ",
+			"aiHint": { "role": "button", "contentGuide": "動詞形。4〜10文字", "example": "今すぐ予約する" }
 		},
 		"buttonUrl": {
 			"type": "string",
-			"default": "#"
+			"default": "#",
+			"aiHint": { "role": "url", "contentGuide": "#contact 推奨" }
 		},
 		"openInNewTab": {
 			"type": "boolean",
-			"default": false
+			"default": false,
+			"aiHint": { "skip": true }
 		},
 		"imageUrl": {
 			"type": "string",
 			"source": "attribute",
 			"selector": "img",
 			"attribute": "src",
-			"default": ""
+			"default": "",
+			"aiHint": { "role": "image", "note": "背景画像URL。画像生成時に設定" }
 		},
 		"imageAlt": {
 			"type": "string",
 			"source": "attribute",
 			"selector": "img",
 			"attribute": "alt",
-			"default": "背景画像"
+			"default": "背景画像",
+			"aiHint": { "role": "alt", "contentGuide": "画像の説明。業種名+雰囲気", "example": "美容サロンの施術風景" }
 		},
 		"filterColor": {
 			"type": "string",
-			"default": "#054161"
+			"default": "#054161",
+			"aiHint": { "skip": true }
 		},
 		"buttonBackgroundColor": {
 			"type": "string",
-			"default": "var(--color-main)"
+			"default": "var(--color-main)",
+			"aiHint": { "skip": true }
 		},
 		"buttonBorderColor": {
 			"type": "string",
-			"default": "#fff"
+			"default": "#fff",
+			"aiHint": { "skip": true }
 		},
 		"buttonBorderSize": {
 			"type": "number",
-			"default": 1
+			"default": 1,
+			"aiHint": { "skip": true }
 		},
 		"buttonMaxWidth": {
 			"type": "number",
-			"default": 240
+			"default": 240,
+			"aiHint": { "skip": true }
 		},
 		"pcTextAlign": {
 			"type": "string",
-			"default": "center"
+			"default": "center",
+			"aiHint": { "skip": true }
 		},
 		"mobileTextAlign": {
 			"type": "string",
-			"default": "center"
+			"default": "center",
+			"aiHint": { "skip": true }
 		},
 		"maxWidth": {
 			"type": "number",
-			"default": 0
+			"default": 0,
+			"aiHint": { "skip": true }
 		},
 		"headingLevel": {
 			"type": "number",
-			"default": 2
+			"default": 2,
+			"aiHint": { "skip": true }
 		}
 	},
 	"editorScript": "file:./cta-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 1
 }

@@ -21,10 +21,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./style.scss */ "./src/lw-list-2/style.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-list-2/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./block.json */ "./src/lw-list-2/block.json");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -92,8 +98,9 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.ButtonBackgroundOption
       });
     };
     var updateContent = function updateContent(i, key, value) {
-      var updated = _toConsumableArray(contents);
-      updated[i][key] = value;
+      var updated = contents.map(function (item, index) {
+        return index === i ? _objectSpread(_objectSpread({}, item), {}, _defineProperty({}, key, value)) : item;
+      });
       setAttributes({
         contents: updated
       });
@@ -115,7 +122,7 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.ButtonBackgroundOption
 
     /* ========== Edit ========== */
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u753B\u50CF"
+      title: "\u80CC\u666F\u753B\u50CF\u8A2D\u5B9A"
     }, backgroundImage && /*#__PURE__*/React.createElement("img", {
       src: backgroundImage,
       alt: "\u80CC\u666F\u753B\u50CF",
@@ -147,7 +154,7 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.ButtonBackgroundOption
         marginBottom: '10px'
       }
     }, "\u80CC\u666F\u753B\u50CF\u3092\u524A\u9664")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F"
+      title: "\u30D5\u30A3\u30EB\u30BF\u30FC\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\u30D5\u30A3\u30EB\u30BF\u30FC\u306E\u8272",
       value: bgGradient,
@@ -169,7 +176,7 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.ButtonBackgroundOption
       max: 1,
       step: 0.01
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30EA\u30B9\u30C8\u90E8\u5206\u306E\u8A2D\u5B9A"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       label: "\u30A2\u30A4\u30B3\u30F3\u306E\u8272",
       value: colorLiSvg,
@@ -1039,7 +1046,7 @@ module.exports = window["wp"]["element"];
   \**********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-list-2","version":"1.0.0","title":"list 02","category":"lw-list","icon":"lightbulb","supports":{"anchor":true},"attributes":{"backgroundImage":{"type":"string","default":""},"bgGradient":{"type":"string","default":"var(--color-main)"},"filterOpacity":{"type":"number","default":0.8},"titleText":{"type":"string","default":"機能紹介"},"fontLi":{"type":"string","default":""},"fontWeightLi":{"type":"string","default":""},"colorLiSvg":{"type":"string","default":"var(--color-accent)"},"contents":{"type":"array","source":"query","selector":".lw-list-2__li","query":{"text":{"type":"string","source":"html","selector":".lw-list-2__text p"},"borderColor":{"type":"string","source":"attribute","selector":"figure","attribute":"data-border-color"}},"default":[{"text":"何から始めたらいいか\\nわからない","borderColor":"var(--color-main)"},{"text":"作りたいけど\\n時間がない","borderColor":"var(--color-main)"},{"text":"自分で作ると\\nダサくなる…","borderColor":"var(--color-main)"}]}},"editorScript":"file:./lw-list-2.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":2}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-list-2","version":"1.0.0","title":"list 02","category":"lw-list","icon":"lightbulb","supports":{"anchor":true},"aiHint":{"description":"背景色付きリスト。タイトル+チェックマーク付き項目一覧。悩み・課題・こんな方におすすめに","excludeFromAutoSelect":false,"contentAttributes":["titleText","contents"],"imageAttributes":["backgroundImage"]},"attributes":{"backgroundImage":{"type":"string","default":"","aiHint":{"role":"image","note":"背景画像URL。省略可"}},"bgGradient":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"filterOpacity":{"type":"number","default":0.8,"aiHint":{"skip":true}},"titleText":{"type":"string","default":"機能紹介","aiHint":{"role":"heading","contentGuide":"リストのタイトル。3〜15文字","example":"こんなお悩みありませんか？"}},"fontLi":{"type":"string","default":"","aiHint":{"skip":true}},"fontWeightLi":{"type":"string","default":"","aiHint":{"skip":true}},"colorLiSvg":{"type":"string","default":"var(--color-accent)","aiHint":{"skip":true}},"contents":{"type":"array","source":"query","selector":".lw-list-2__li","query":{"text":{"type":"string","source":"html","selector":".lw-list-2__text p"},"borderColor":{"type":"string","source":"attribute","selector":"figure","attribute":"data-border-color"}},"default":[{"text":"何から始めたらいいか\\nわからない","borderColor":"var(--color-main)"},{"text":"作りたいけど\\n時間がない","borderColor":"var(--color-main)"},{"text":"自分で作ると\\nダサくなる…","borderColor":"var(--color-main)"}],"aiHint":{"role":"list","contentGuide":"悩み・課題項目。3〜6個。各text 10〜30文字。改行可","example":[{"text":"何から始めたらいいか\\nわからない"}]}}},"editorScript":"file:./lw-list-2.js","no":2}');
 
 /***/ })
 

@@ -1,0 +1,241 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-table-3",
+	"version": "1.0.0",
+	"title": "テーブル 03（セルの統合が出来るパターン）",
+	"category": "lw-table",
+	"icon": "editor-table",
+	"description": "Grid方式テーブル。セル統合対応。",
+	"editorScript": "file:./lw-pr-table-3.js",
+	"viewScript": "file:./view.js",
+	"aiHint": {
+		"description": "料金テーブル（別デザイン）。ヘッダー+行の表形式",
+		"excludeFromAutoSelect": true,
+		"contentAttributes": [],
+		"imageAttributes": [],
+		"excludeReason": "複雑なネスト構造のテーブル。AI直接生成非推奨"
+	},
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"columnCount": {
+			"type": "number",
+			"default": 4
+		},
+		"colWidthPc": {
+			"type": "array",
+			"default": [
+				200,
+				200,
+				200,
+				200
+			]
+		},
+		"colWidthSp": {
+			"type": "array",
+			"default": [
+				120,
+				120,
+				120,
+				120
+			]
+		},
+		"gapSize": {
+			"type": "number",
+			"default": 2
+		},
+		"hideMainHead": {
+			"type": "boolean",
+			"default": false
+		},
+		"hideRowHead": {
+			"type": "boolean",
+			"default": false
+		},
+		"headers": {
+			"type": "array",
+			"default": [
+				"",
+				"プラン1",
+				"プラン2",
+				"プラン3"
+			]
+		},
+		"headerBgColors": {
+			"type": "array",
+			"default": [
+				"",
+				"",
+				"",
+				""
+			]
+		},
+		"headerOutlineColors": {
+			"type": "array",
+			"default": [
+				"",
+				"",
+				"",
+				""
+			]
+		},
+		"headerOutlineWidths": {
+			"type": "array",
+			"default": [
+				0,
+				0,
+				0,
+				0
+			]
+		},
+		"rows": {
+			"type": "array",
+			"default": [
+				{
+					"header": "月額料金",
+					"cells": [
+						"¥3,000",
+						"¥5,000",
+						"¥10,000"
+					]
+				},
+				{
+					"header": "容量",
+					"cells": [
+						"10GB",
+						"50GB",
+						"無制限"
+					]
+				}
+			]
+		},
+		"fontFamilyMainHead": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightMainHead": {
+			"type": "string",
+			"default": "600"
+		},
+		"fontSizeMainHead": {
+			"type": "number",
+			"default": 16
+		},
+		"fontSizeMainHeadSp": {
+			"type": "number",
+			"default": 14
+		},
+		"lineHeightMainHead": {
+			"type": "number",
+			"default": 1.6
+		},
+		"mainHeadBgColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"mainHeadTextColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"fontFamilyRowHead": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightRowHead": {
+			"type": "string",
+			"default": "600"
+		},
+		"fontSizeRowHead": {
+			"type": "number",
+			"default": 16
+		},
+		"fontSizeRowHeadSp": {
+			"type": "number",
+			"default": 14
+		},
+		"lineHeightRowHead": {
+			"type": "number",
+			"default": 1.6
+		},
+		"rowHeadBgColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"rowHeadTextColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"fontFamilyCell": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightCell": {
+			"type": "string",
+			"default": "400"
+		},
+		"fontSizeCell": {
+			"type": "number",
+			"default": 16
+		},
+		"fontSizeCellSp": {
+			"type": "number",
+			"default": 14
+		},
+		"lineHeightCell": {
+			"type": "number",
+			"default": 1.6
+		},
+		"cellBgColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"cellTextColor": {
+			"type": "string",
+			"default": "#333333"
+		},
+		"cellPaddingY": {
+			"type": "number",
+			"default": 16
+		},
+		"mainHeadPaddingY": {
+			"type": "number",
+			"default": 16
+		},
+		"rowHeadPaddingY": {
+			"type": "number",
+			"default": 16
+		},
+		"designPattern": {
+			"type": "string",
+			"default": ""
+		},
+		"textAlignMainHead": {
+			"type": "string",
+			"default": "center"
+		},
+		"textAlignRowHead": {
+			"type": "string",
+			"default": "center"
+		},
+		"textAlignCell": {
+			"type": "string",
+			"default": "center"
+		},
+		"verticalAlignMainHead": {
+			"type": "string",
+			"default": "center"
+		},
+		"verticalAlignRowHead": {
+			"type": "string",
+			"default": "center"
+		},
+		"verticalAlignCell": {
+			"type": "string",
+			"default": "center"
+		}
+	},
+	"no": 1
+}

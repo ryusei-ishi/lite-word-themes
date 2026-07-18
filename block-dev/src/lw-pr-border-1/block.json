@@ -1,0 +1,107 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-border-1",
+	"version": "1.0.0",
+	"title": "Border 01",
+	"category": "lw-utility",
+	"icon": "minus",
+	"description": "装飾用ボーダー（線）ブロック。幅・スタイル・色・配置をPC/SPで個別設定可能。",
+	"aiDescription": "装飾用の水平線ブロック。ボーダーの太さ、スタイル、色、最大幅、配置（左寄せ・中央・右寄せ）をPC/SPで個別に設定可能。",
+	"aiNotes": "CSS変数でスタイルを制御。SPの値が未設定の場合はPCの値を継承。配置はmargin-left/rightのauto/0の組み合わせで実現。",
+	"aiHint": {
+		"description": "装飾ボーダー線。セクション区切りの装飾。テキスト属性なし",
+		"excludeFromAutoSelect": true,
+		"contentAttributes": [],
+		"imageAttributes": [],
+		"excludeReason": "装飾線のみ。テキスト生成不要"
+	},
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"mtPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "上マージンPC（px）"
+		},
+		"mbPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "下マージンPC（px）"
+		},
+		"mtSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "上マージンSP（px）。-1でPCを継承"
+		},
+		"mbSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "下マージンSP（px）。-1でPCを継承"
+		},
+		"maxWidthUnitPc": {
+			"type": "string",
+			"default": "%",
+			"ai_description": "幅の単位PC。%またはpx"
+		},
+		"maxWidthPc": {
+			"type": "number",
+			"default": 100,
+			"ai_description": "幅PC。単位はmaxWidthUnitPcに依存"
+		},
+		"maxWidthUnitSp": {
+			"type": "string",
+			"default": "",
+			"ai_description": "幅の単位SP。空でPCを継承。%またはpx"
+		},
+		"maxWidthSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "幅SP。-1でPCを継承。単位はmaxWidthUnitSpに依存"
+		},
+		"borderWidthPc": {
+			"type": "number",
+			"default": 1,
+			"ai_description": "ボーダー幅PC（px）"
+		},
+		"borderWidthSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "ボーダー幅SP（px）。-1でPCを継承"
+		},
+		"borderStylePc": {
+			"type": "string",
+			"default": "solid",
+			"ai_description": "ボーダースタイルPC。solid/dashed/dotted/none"
+		},
+		"borderStyleSp": {
+			"type": "string",
+			"default": "",
+			"ai_description": "ボーダースタイルSP。空でPCを継承"
+		},
+		"borderColorPc": {
+			"type": "string",
+			"default": "var(--color-main)",
+			"ai_description": "ボーダー色PC"
+		},
+		"borderColorSp": {
+			"type": "string",
+			"default": "",
+			"ai_description": "ボーダー色SP。空でPCを継承"
+		},
+		"alignPc": {
+			"type": "string",
+			"default": "center",
+			"ai_description": "配置PC。center（中央）/left（左寄せ）/right（右寄せ）"
+		},
+		"alignSp": {
+			"type": "string",
+			"default": "",
+			"ai_description": "配置SP。空でPCを継承。center/left/right"
+		}
+	},
+	"editorScript": "file:./lw-pr-border-1.js",
+	"no": 1
+}

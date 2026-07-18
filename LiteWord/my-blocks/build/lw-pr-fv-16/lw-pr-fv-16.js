@@ -118,7 +118,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, "H".concat(level));
     }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u30BF\u30A4\u30D7",
+      title: "\u80CC\u666F\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\u80CC\u666F\u30BF\u30A4\u30D7\u3092\u9078\u629E",
@@ -292,7 +292,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u30D5\u30A3\u30EB\u30BF\u30FC",
+      title: "\u30D5\u30A3\u30EB\u30BF\u30FC\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("p", {
       style: {
@@ -346,7 +346,7 @@ __webpack_require__.r(__webpack_exports__);
       max: 1,
       step: 0.1
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30BF\u30A4\u30C8\u30EB\u30B9\u30BF\u30A4\u30EB",
+      title: "\u30BF\u30A4\u30C8\u30EB\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("p", {
       style: {
@@ -435,7 +435,7 @@ __webpack_require__.r(__webpack_exports__);
       max: 1,
       step: 0.1
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u8AAC\u660E\u6587\u30B9\u30BF\u30A4\u30EB",
+      title: "\u30C6\u30AD\u30B9\u30C8\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("p", {
       style: {
@@ -1448,7 +1448,7 @@ module.exports = window["wp"]["components"];
   \************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-fv-16","version":"1.0.0","title":"固定ページタイトル 16(動画背景)","category":"lw-firstview","icon":"cover-image","editorScript":"file:./lw-pr-fv-16.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"mainTitle":{"type":"string","default":"メインタイトル<br>メインタイトルタイトル"},"description":{"type":"string","default":"ここに説明文が入ります説明文が入りますここに説明文が入ります<br>ここに説明文が入りますここに説明文が入ります。"},"backgroundType":{"type":"string","default":"image"},"videoUrl":{"type":"string","default":""},"imageUrlPc":{"type":"string","default":"https://plus.unsplash.com/premium_photo-1670360414946-e33a828d1d52?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1171"},"imageUrlSp":{"type":"string","default":""},"imageAlt":{"type":"string","default":""},"filterColor":{"type":"string","default":"#121416"},"filterOpacity":{"type":"number","default":0.2},"videoSpeed":{"type":"number","default":1},"headingLevel":{"type":"number","default":2},"strokeWidth":{"type":"number","default":0},"strokeWidthSp":{"type":"number","default":0},"strokeColor":{"type":"string","default":"#ffffff"},"strokeOpacity":{"type":"number","default":0.6},"titleColor":{"type":"string","default":"#fff"},"titleFontWeight":{"type":"string","default":"600"},"titleFont":{"type":"string","default":""},"descriptionColor":{"type":"string","default":"#fff"},"descriptionFontWeight":{"type":"string","default":"400"},"descriptionFont":{"type":"string","default":""},"fvInnerBgColor":{"type":"string","default":"#000000"},"fvInnerBgOpacity":{"type":"number","default":0.4},"showButton":{"type":"boolean","default":true},"buttonText":{"type":"string","default":"ご相談はこちら"},"buttonUrl":{"type":"string","default":""},"ctaBgColor":{"type":"string","default":"var(--color-main)"},"ctaTextColor":{"type":"string","default":"#ffffff"},"ctaBorderRadius":{"type":"number","default":3},"ctaBorderWidth":{"type":"number","default":0},"ctaBorderColor":{"type":"string","default":"#fff"},"minHeightPc":{"type":"string","default":"min-h-pc-100vh-header-60"},"minHeightTb":{"type":"string","default":"min-h-tb-100vh-header-80"},"minHeightSp":{"type":"string","default":"min-h-sp-100vh-header"}},"no":16}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-fv-16","version":"1.0.0","title":"固定ページタイトル 16(動画背景)","category":"lw-firstview","icon":"cover-image","editorScript":"file:./lw-pr-fv-16.js","aiHint":{"description":"中央テキスト+背景画像FV。大きな見出し+説明+CTAボタン。飲食・美容・ECのビジュアル訴求に最適","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","description","buttonText"],"imageAttributes":["imageUrlPc","imageUrlSp"]},"supports":{"anchor":true},"attributes":{"mainTitle":{"type":"string","default":"メインタイトル<br>メインタイトルタイトル"},"description":{"type":"string","default":"ここに説明文が入ります説明文が入りますここに説明文が入ります<br>ここに説明文が入りますここに説明文が入ります。"},"backgroundType":{"type":"string","default":"image"},"videoUrl":{"type":"string","default":""},"imageUrlPc":{"type":"string","default":"https://plus.unsplash.com/premium_photo-1670360414946-e33a828d1d52?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1171"},"imageUrlSp":{"type":"string","default":""},"imageAlt":{"type":"string","default":""},"filterColor":{"type":"string","default":"#121416"},"filterOpacity":{"type":"number","default":0.2},"videoSpeed":{"type":"number","default":1},"headingLevel":{"type":"number","default":2},"strokeWidth":{"type":"number","default":0},"strokeWidthSp":{"type":"number","default":0},"strokeColor":{"type":"string","default":"#ffffff"},"strokeOpacity":{"type":"number","default":0.6},"titleColor":{"type":"string","default":"#fff"},"titleFontWeight":{"type":"string","default":"600"},"titleFont":{"type":"string","default":""},"descriptionColor":{"type":"string","default":"#fff"},"descriptionFontWeight":{"type":"string","default":"400"},"descriptionFont":{"type":"string","default":""},"fvInnerBgColor":{"type":"string","default":"#000000"},"fvInnerBgOpacity":{"type":"number","default":0.4},"showButton":{"type":"boolean","default":true},"buttonText":{"type":"string","default":"ご相談はこちら"},"buttonUrl":{"type":"string","default":""},"ctaBgColor":{"type":"string","default":"var(--color-main)"},"ctaTextColor":{"type":"string","default":"#ffffff"},"ctaBorderRadius":{"type":"number","default":3},"ctaBorderWidth":{"type":"number","default":0},"ctaBorderColor":{"type":"string","default":"#fff"},"minHeightPc":{"type":"string","default":"min-h-pc-100vh-header-60"},"minHeightTb":{"type":"string","default":"min-h-tb-100vh-header-80"},"minHeightSp":{"type":"string","default":"min-h-sp-100vh-header"}},"no":16}');
 
 /***/ })
 

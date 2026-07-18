@@ -276,7 +276,7 @@ registerBlockType(metadata.name, {
                     ) ) }
 
                     {/* --- 3. レイアウト設定 ------------------------- */}
-                    <PanelBody title="📐 レイアウト設定" initialOpen={ false }>
+                    <PanelBody title="レイアウト設定" initialOpen={ false }>
                         <RangeControl
                             label="コンテナの最大横幅（px）"
                             value={ maxWidthContainer }
@@ -289,7 +289,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* --- 4. デザイン設定 --------------------------- */}
-                    <PanelBody title="🎨 デザイン設定" initialOpen={ false }>
+                    <PanelBody title="色設定" initialOpen={ false }>
                         <p style={{ fontWeight: 'bold', marginBottom: '12px' }}>
                             カードの背景色
                         </p>
@@ -356,7 +356,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* --- 5. フォント設定 --------------------------- */}
-                    <PanelBody title="✍️ フォント設定" initialOpen={ false }>
+                    <PanelBody title="フォント設定" initialOpen={ false }>
                         <p style={{ fontWeight: 'bold', marginBottom: '12px' }}>
                             お名前のフォント
                         </p>
@@ -697,8 +697,18 @@ registerBlockType(metadata.name, {
 
     // ========== モーダル処理 ==========
     function initModal() {
-        const modal = section.querySelector('.paid-block-voice-3-modal');
-        if (!modal) return;
+        // ★ 既にbody直下に移動済みかチェック（複数ブロック対応）
+        let modal = document.querySelector('.paid-block-voice-3-modal[data-for-block="${blockId}"]');
+
+        if (!modal) {
+            // まだ移動していない場合、セクション内から取得
+            modal = section.querySelector('.paid-block-voice-3-modal');
+            if (!modal) return;
+
+            // ★ モーダルをbody直下に移動（他ブロックのz-index影響を回避）
+            document.body.appendChild(modal);
+            modal.setAttribute('data-for-block', '${blockId}');
+        }
 
         const closeBtn = modal.querySelector('.modal-close');
         const overlay = modal.querySelector('.modal-overlay');

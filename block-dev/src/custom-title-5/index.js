@@ -58,14 +58,14 @@ registerBlockType(metadata.name, {
                     </ToolbarGroup>
                 </BlockControls>
                 <InspectorControls>
-                    <PanelBody title="カラー設定">
+                    <PanelBody title="色設定">
                         <p>メインタイトルカラー</p>
                         <ColorPalette
                             value={mainTitleColor}
                             onChange={onChangeMainTitleColor}
                         />
                     </PanelBody>
-                    <PanelBody title="フォントサイズ設定">
+                    <PanelBody title="フォント設定">
                         <SelectControl
                             label="フォントサイズ"
                             value={fontSize}

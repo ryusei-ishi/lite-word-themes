@@ -21,6 +21,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./style.scss */ "./src/paid-block-link-2/style.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/paid-block-link-2/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./block.json */ "./src/paid-block-link-2/block.json");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -96,14 +102,15 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.serviceInfoIconSv
 
     // リスト更新
     var updateContent = function updateContent(index, key, value) {
-      var newContents = _toConsumableArray(contents);
-      newContents[index][key] = value;
+      var newContents = contents.map(function (item, i) {
+        return i === index ? _objectSpread(_objectSpread({}, item), {}, _defineProperty({}, key, value)) : item;
+      });
       setAttributes({
         contents: newContents
       });
     };
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCDA \u4F7F\u3044\u65B9\u30AC\u30A4\u30C9",
+      title: "\u30DE\u30CB\u30E5\u30A2\u30EB",
       initialOpen: true
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -124,7 +131,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.serviceInfoIconSv
         lineHeight: '1.4'
       }
     }, "\u80CC\u666F\u753B\u50CF\u306E\u4E0A\u306B\u30EA\u30F3\u30AF\u30EA\u30B9\u30C8\u3092\u8868\u793A\u3067\u304D\u308B\u30D6\u30ED\u30C3\u30AF\u3067\u3059\u3002\u5404\u9805\u76EE\u306B\u30A2\u30A4\u30B3\u30F3\u3084\u753B\u50CF\u3092\u8A2D\u5B9A\u3067\u304D\u307E\u3059\u3002")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDDBC\uFE0F \u80CC\u666F\u306E\u8A2D\u5B9A",
+      title: "\u80CC\u666F\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -209,7 +216,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.serviceInfoIconSv
       allowReset: true,
       resetFallbackValue: 0.7
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCDD \u30BF\u30A4\u30C8\u30EB\u30BB\u30AF\u30B7\u30E7\u30F3",
+      title: "\u30BF\u30A4\u30C8\u30EB\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -234,7 +241,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.serviceInfoIconSv
         marginTop: '5px'
       }
     }, "\u30E1\u30A4\u30F3\u30BF\u30A4\u30C8\u30EB\u306E\u4E0B\u306B\u8868\u793A\u3055\u308C\u308B\u7DDA\u306E\u8272\u3067\u3059"))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83C\uDFA8 \u30EA\u30B9\u30C8\u9805\u76EE\u306E\u898B\u305F\u76EE",
+      title: "\u8272\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -294,7 +301,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.serviceInfoIconSv
       max: 10,
       help: "0\u306B\u3059\u308B\u3068\u67A0\u7DDA\u304C\u8868\u793A\u3055\u308C\u307E\u305B\u3093"
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u270D\uFE0F \u6587\u5B57\u30B9\u30BF\u30A4\u30EB\u8A2D\u5B9A",
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -1409,7 +1416,7 @@ module.exports = window["wp"]["element"];
   \******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-link-2","version":"1.0.0","title":"リンクリスト 2","category":"lw-list","icon":"lightbulb","supports":{"anchor":true},"attributes":{"mainTitle":{"type":"string","source":"html","selector":".main_title_text","default":"INFORMATION"},"titleBdColor":{"type":"string","default":"#da5959"},"subTitle":{"type":"string","source":"html","selector":".sub","default":"インフォメーション"},"mainExplanation":{"type":"string","source":"html","selector":".main_explanation","default":"テキストテキストテキストテキスト"},"fontLi":{"type":"string","default":""},"fontColorLi":{"type":"string","default":"#fff"},"fontWeightLi":{"type":"string","default":"500"},"fontLiP":{"type":"string","default":""},"fontColorLiP":{"type":"string","default":"#fff"},"fontWeightLiP":{"type":"string","default":"400"},"backgroundColor":{"type":"string","default":"rgba(0, 0, 0, 0)"},"backgroundOpacity":{"type":"number","default":0.5},"borderColor":{"type":"string","default":"#fff"},"borderSize":{"type":"number","default":2},"bgFilterColor":{"type":"string","default":"#000"},"bgFilterOpacity":{"type":"number","default":0.7},"bgImageUrl":{"type":"string","default":"https://lite-word.com/sample_img/forest/1.webp"},"contents":{"type":"array","source":"query","selector":".item","query":{"ttl":{"type":"string","source":"html","selector":"h4.ttl"},"text":{"type":"string","source":"html","selector":"p.desc"},"url":{"type":"string","source":"attribute","selector":".link","attribute":"href","default":""},"icon":{"type":"string","source":"attribute","selector":".selected_icon","attribute":"data-icon","default":""},"imageUrl":{"type":"string","source":"attribute","selector":"img.selected_image","attribute":"data-img","default":""}},"default":[{"ttl":"タイトルタイトル","text":"テキストテキスト ","url":"","icon":"","imageUrl":""},{"ttl":"タイトルタイトル","text":"テキストテキスト ","url":"","icon":"","imageUrl":""},{"ttl":"タイトルタイトル","text":"テキストテキスト ","url":"","icon":"","imageUrl":""}]}},"editorScript":"file:./paid-block-link-2.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":2}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-link-2","version":"1.0.0","title":"リンクリスト 2","category":"lw-list","icon":"lightbulb","aiHint":{"description":"リンクカード。見出し+説明+リンク配列+背景画像。サービスナビに","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle","mainExplanation","contents"],"imageAttributes":["bgImageUrl"]},"supports":{"anchor":true},"attributes":{"mainTitle":{"type":"string","source":"html","selector":".main_title_text","default":"INFORMATION"},"titleBdColor":{"type":"string","default":"#da5959"},"subTitle":{"type":"string","source":"html","selector":".sub","default":"インフォメーション"},"mainExplanation":{"type":"string","source":"html","selector":".main_explanation","default":"テキストテキストテキストテキスト"},"fontLi":{"type":"string","default":""},"fontColorLi":{"type":"string","default":"#fff"},"fontWeightLi":{"type":"string","default":"500"},"fontLiP":{"type":"string","default":""},"fontColorLiP":{"type":"string","default":"#fff"},"fontWeightLiP":{"type":"string","default":"400"},"backgroundColor":{"type":"string","default":"rgba(0, 0, 0, 0)"},"backgroundOpacity":{"type":"number","default":0.5},"borderColor":{"type":"string","default":"#fff"},"borderSize":{"type":"number","default":2},"bgFilterColor":{"type":"string","default":"#000"},"bgFilterOpacity":{"type":"number","default":0.7},"bgImageUrl":{"type":"string","default":"https://lite-word.com/sample_img/forest/1.webp"},"contents":{"type":"array","source":"query","selector":".item","query":{"ttl":{"type":"string","source":"html","selector":"h4.ttl"},"text":{"type":"string","source":"html","selector":"p.desc"},"url":{"type":"string","source":"attribute","selector":".link","attribute":"href","default":""},"icon":{"type":"string","source":"attribute","selector":".selected_icon","attribute":"data-icon","default":""},"imageUrl":{"type":"string","source":"attribute","selector":"img.selected_image","attribute":"data-img","default":""}},"default":[{"ttl":"タイトルタイトル","text":"テキストテキスト ","url":"","icon":"","imageUrl":""},{"ttl":"タイトルタイトル","text":"テキストテキスト ","url":"","icon":"","imageUrl":""},{"ttl":"タイトルタイトル","text":"テキストテキスト ","url":"","icon":"","imageUrl":""}]}},"editorScript":"file:./paid-block-link-2.js","no":2}');
 
 /***/ })
 

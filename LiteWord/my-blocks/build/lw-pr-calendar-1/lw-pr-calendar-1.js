@@ -59,8 +59,11 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       });
     };
     var updateBodyCell = function updateBodyCell(rowIndex, cellIndex, value) {
-      var newBodyRows = _toConsumableArray(bodyRows);
-      newBodyRows[rowIndex][cellIndex] = value;
+      var newBodyRows = bodyRows.map(function (row, r) {
+        return r === rowIndex ? row.map(function (cell, c) {
+          return c === cellIndex ? value : cell;
+        }) : row;
+      });
       setAttributes({
         bodyRows: newBodyRows
       });
@@ -996,7 +999,7 @@ module.exports = window["wp"]["components"];
   \*****************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-calendar-1","version":"1.0.0","title":"カレンダー 1（診療日）","category":"lw-calendar","icon":"grid-view","editorScript":"file:./lw-pr-calendar-1.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"colorTableItemBd":{"type":"string","default":"var(--color-main)"},"colorTableHeadItemBg":{"type":"string","default":"var(--color-main)"},"colorTableHeadItemText":{"type":"string","default":"#ffffff"},"colorTableBodyItemText":{"type":"string","default":"#000000"},"colorTableBodyItemFirstText":{"type":"string","default":"#000000"},"fontSet":{"type":"string","default":""},"fontWeight":{"type":"string","default":""},"headItems":{"type":"array","default":["営業時間","月","火","水","木","金","土","日"]},"bodyRows":{"type":"array","default":[["10:00 - 14:00","○","○","×","○","○","○","○"],["16:00 - 20:00","○","○","×","○","○","○","×"]]}},"no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-calendar-1","version":"1.0.0","title":"カレンダー 1（診療日）","category":"lw-calendar","icon":"grid-view","editorScript":"file:./lw-pr-calendar-1.js","aiHint":{"description":"カレンダー。ヘッダー+行データのテーブル形式。営業日カレンダー表示","excludeFromAutoSelect":true,"contentAttributes":[],"imageAttributes":[],"excludeReason":"カレンダー専用形式。AI生成に不向き"},"supports":{"anchor":true},"attributes":{"colorTableItemBd":{"type":"string","default":"var(--color-main)"},"colorTableHeadItemBg":{"type":"string","default":"var(--color-main)"},"colorTableHeadItemText":{"type":"string","default":"#ffffff"},"colorTableBodyItemText":{"type":"string","default":"#000000"},"colorTableBodyItemFirstText":{"type":"string","default":"#000000"},"fontSet":{"type":"string","default":""},"fontWeight":{"type":"string","default":""},"headItems":{"type":"array","default":["営業時間","月","火","水","木","金","土","日"]},"bodyRows":{"type":"array","default":[["10:00 - 14:00","○","○","×","○","○","○","○"],["16:00 - 20:00","○","○","×","○","○","○","×"]]}},"no":1}');
 
 /***/ })
 

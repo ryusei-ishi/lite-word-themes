@@ -7,12 +7,12 @@
 	"category": "lw-content",
 	"icon": "lightbulb",
 	"editorScript": "file:./paid-block-content-7.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "画像+タイトル+説明文のカード配列。3カラム。学習塾・スクール・サービス紹介に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},

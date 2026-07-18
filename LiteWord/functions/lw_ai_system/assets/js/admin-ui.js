@@ -22,6 +22,42 @@
     var modalComponentLoaded = false;
     var AiGeneratorModal = null;
 
+    // 遅延読み込みスクリプトの状態管理
+    var lazyScriptsLoaded = {
+        blockSidebar: false,
+        textSelection: false
+    };
+
+    // AI機能の有効/無効状態をlocalStorageから取得
+    var AI_ENABLED_KEY = 'lw_ai_features_enabled';
+
+    // グローバル変数でAI機能の有効/無効を管理（他のスクリプトから参照可能）
+    window.lwAiFeaturesEnabled = false;
+
+    function getAiEnabledState() {
+        try {
+            var enabled = localStorage.getItem(AI_ENABLED_KEY) === 'true';
+            window.lwAiFeaturesEnabled = enabled;
+            return enabled;
+        } catch (e) {
+            window.lwAiFeaturesEnabled = false;
+            return false;
+        }
+    }
+    function setAiEnabledState(enabled) {
+        try {
+            localStorage.setItem(AI_ENABLED_KEY, enabled ? 'true' : 'false');
+            window.lwAiFeaturesEnabled = enabled;
+            // カスタムイベントを発火して、他のコンポーネントに通知
+            window.dispatchEvent(new CustomEvent('lwAiFeaturesToggle', { detail: { enabled: enabled } }));
+        } catch (e) {
+            // localStorage使用不可の場合は無視
+        }
+    }
+
+    // 初期状態を設定
+    getAiEnabledState();
+
     /**
      * AIアイコンSVG（軽量版）
      */
@@ -89,6 +125,101 @@
             console.error('[LW AI Generator] Failed to load modal script');
         };
         document.head.appendChild(script);
+    }
+
+    /**
+     * 遅延読み込みスクリプトを動的に読み込む
+     * AI機能を使用する際に初めて読み込まれる（パフォーマンス改善）
+     * requestIdleCallbackを使用してメインスレッドのブロッキングを軽減
+     */
+    function loadLazyScripts(callback) {
+        var lazyScripts = lwAiGeneratorData.lazyScripts;
+        if (!lazyScripts) {
+            if (callback) callback();
+            return;
+        }
+
+        var scriptsToLoad = [];
+        var version = lwAiGeneratorData.version || Date.now();
+
+        // block-ai-sidebar.js
+        if (lazyScripts.blockSidebar && !lazyScriptsLoaded.blockSidebar) {
+            scriptsToLoad.push({
+                key: 'blockSidebar',
+                url: lazyScripts.blockSidebar + '?ver=' + version
+            });
+        }
+
+        // text-selection-ai.js
+        if (lazyScripts.textSelection && !lazyScriptsLoaded.textSelection) {
+            scriptsToLoad.push({
+                key: 'textSelection',
+                url: lazyScripts.textSelection + '?ver=' + version
+            });
+        }
+
+        if (scriptsToLoad.length === 0) {
+            if (callback) callback();
+            return;
+        }
+
+        var loadedCount = 0;
+        var totalCount = scriptsToLoad.length;
+
+        // requestIdleCallbackのポリフィル
+        var scheduleTask = window.requestIdleCallback || function(cb) { return setTimeout(cb, 1); };
+
+        scriptsToLoad.forEach(function(scriptInfo, index) {
+            // 順番に少し遅延させて読み込み、メインスレッドの負荷を分散
+            scheduleTask(function() {
+                var script = document.createElement('script');
+                script.src = scriptInfo.url;
+                script.async = true;
+                script.onload = function() {
+                    lazyScriptsLoaded[scriptInfo.key] = true;
+                    loadedCount++;
+                    console.log('[LW AI Generator] Lazy script loaded: ' + scriptInfo.key);
+                    if (loadedCount === totalCount && callback) {
+                        // コールバックも次のアイドル時に実行
+                        scheduleTask(callback);
+                    }
+                };
+                script.onerror = function() {
+                    console.error('[LW AI Generator] Failed to load lazy script: ' + scriptInfo.key);
+                    loadedCount++;
+                    if (loadedCount === totalCount && callback) {
+                        scheduleTask(callback);
+                    }
+                };
+                document.head.appendChild(script);
+            });
+        });
+    }
+
+    /**
+     * AI機能ON/OFFトグルスイッチ
+     */
+    function AiToggleSwitch({ enabled, onChange, disabled, isLoading }) {
+        return createElement('label', {
+            className: 'lw-ai-toggle-switch' + (disabled ? ' is-disabled' : '') + (isLoading ? ' is-loading' : ''),
+            title: enabled ? 'AI機能をOFFにする' : 'AI機能をONにする'
+        }, [
+            createElement('input', {
+                key: 'input',
+                type: 'checkbox',
+                checked: enabled,
+                onChange: function(e) { onChange(e.target.checked); },
+                disabled: disabled || isLoading
+            }),
+            createElement('span', {
+                key: 'slider',
+                className: 'lw-ai-toggle-slider'
+            }, isLoading ? createElement('span', { className: 'lw-ai-toggle-spinner' }) : null),
+            createElement('span', {
+                key: 'label',
+                className: 'lw-ai-toggle-label'
+            }, enabled ? 'AI ON' : 'AI OFF')
+        ]);
     }
 
     /**
@@ -178,12 +309,60 @@
         var showPremiumModal = _showPremiumModal[0];
         var setShowPremiumModal = _showPremiumModal[1];
 
+        // AI機能ON/OFF状態
+        var _aiEnabled = useState(getAiEnabledState());
+        var aiEnabled = _aiEnabled[0];
+        var setAiEnabled = _aiEnabled[1];
+
+        var _isToggleLoading = useState(false);
+        var isToggleLoading = _isToggleLoading[0];
+        var setIsToggleLoading = _isToggleLoading[1];
+
         var isPremium = lwAiGeneratorData.isPremium;
+
+        // AI機能のON/OFF切り替え
+        function handleToggleChange(enabled) {
+            if (!isPremium) {
+                setShowPremiumModal(true);
+                return;
+            }
+
+            if (enabled) {
+                // ONにする場合：遅延スクリプトを読み込む
+                setIsToggleLoading(true);
+                loadLazyScripts(function() {
+                    setAiEnabled(true);
+                    setAiEnabledState(true);
+                    setIsToggleLoading(false);
+                    console.log('[LW AI Generator] AI features enabled');
+                });
+            } else {
+                // OFFにする場合：状態を保存（スクリプトは読み込み済みでも機能は無効化）
+                setAiEnabled(false);
+                setAiEnabledState(false);
+                console.log('[LW AI Generator] AI features disabled');
+            }
+        }
 
         function handleClick() {
             // プレミアムプランでない場合はプレミアムモーダルを表示
             if (!isPremium) {
                 setShowPremiumModal(true);
+                return;
+            }
+
+            // AI機能がOFFの場合は先にONにする
+            if (!aiEnabled) {
+                setIsLoading(true);
+                loadLazyScripts(function() {
+                    setAiEnabled(true);
+                    setAiEnabledState(true);
+                    loadModalScript(function(Modal) {
+                        setModalComponent(function() { return Modal; });
+                        setIsLoading(false);
+                        setIsModalOpen(true);
+                    });
+                });
                 return;
             }
 
@@ -193,7 +372,7 @@
                 return;
             }
 
-            // モーダルスクリプトを動的読み込み
+            // モーダルスクリプトを読み込み
             setIsLoading(true);
             loadModalScript(function(Modal) {
                 setModalComponent(function() { return Modal; });
@@ -211,25 +390,41 @@
         }
 
         return createElement(Fragment, null, [
-            createElement('button', {
-                key: 'ai-button',
-                className: 'lw-ai-header-button' +
-                    (isLoading ? ' is-loading' : '') +
-                    (!isPremium ? ' lw-ai-premium-disabled' : ''),
-                onClick: handleClick,
-                title: isPremium ? 'AIでページを生成' : 'AIでページを生成（プレミアムプラン限定）',
-                disabled: isLoading
+            // AI ON/OFFトグル（プレミアムユーザーのみ表示）
+            createElement('div', {
+                key: 'ai-controls',
+                className: 'lw-ai-header-controls'
             }, [
-                isLoading ?
-                    createElement('span', { key: 'loading', className: 'lw-ai-loading-spinner' }) :
-                    createElement(AiIcon, { key: 'icon', size: 20 }),
-                createElement('span', { key: 'text', className: 'lw-ai-header-button-text' },
-                    isLoading ? '読込中...' : 'AI生成'
-                ),
-                !isPremium && createElement('span', {
-                    key: 'premium-label',
-                    className: 'lw-ai-premium-label'
-                }, 'Premium')
+                createElement(AiToggleSwitch, {
+                    key: 'toggle',
+                    enabled: aiEnabled,
+                    onChange: handleToggleChange,
+                    disabled: !isPremium,
+                    isLoading: isToggleLoading
+                }),
+                // AI生成ボタン（AI ONの場合のみアクティブ）
+                createElement('button', {
+                    key: 'ai-button',
+                    className: 'lw-ai-header-button' +
+                        (isLoading ? ' is-loading' : '') +
+                        (!isPremium ? ' lw-ai-premium-disabled' : '') +
+                        (!aiEnabled ? ' is-inactive' : ''),
+                    onClick: handleClick,
+                    title: !isPremium ? 'AIでページを生成（プレミアムプラン限定）' :
+                           !aiEnabled ? 'AI機能をONにしてください' : 'AIでページを生成',
+                    disabled: isLoading
+                }, [
+                    isLoading ?
+                        createElement('span', { key: 'loading', className: 'lw-ai-loading-spinner' }) :
+                        createElement(AiIcon, { key: 'icon', size: 20 }),
+                    createElement('span', { key: 'text', className: 'lw-ai-header-button-text' },
+                        isLoading ? '読込中...' : 'AI生成'
+                    ),
+                    !isPremium && createElement('span', {
+                        key: 'premium-label',
+                        className: 'lw-ai-premium-label'
+                    }, 'Premium')
+                ])
             ]),
             // プレミアムモーダル
             createElement(PremiumModal, {

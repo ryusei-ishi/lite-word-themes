@@ -11,7 +11,10 @@
 .paid-block-custom-title-10 > h3.ttl,
 .paid-block-custom-title-10 > h4.ttl,
 .paid-block-custom-title-10 > h5.ttl,
-.paid-block-custom-title-10 > h6.ttl {
+.paid-block-custom-title-10 > h6.ttl,
+.paid-block-custom-title-10 > p.ttl,
+.paid-block-custom-title-10 > div.ttl {
+  margin: 0 !important;
   position: relative;
   padding-bottom: 6px;
   display: flex;
@@ -23,45 +26,47 @@
 .paid-block-custom-title-10 > h3.ttl.w_100,
 .paid-block-custom-title-10 > h4.ttl.w_100,
 .paid-block-custom-title-10 > h5.ttl.w_100,
-.paid-block-custom-title-10 > h6.ttl.w_100 {
+.paid-block-custom-title-10 > h6.ttl.w_100,
+.paid-block-custom-title-10 > p.ttl.w_100,
+.paid-block-custom-title-10 > div.ttl.w_100 {
   width: 100%;
 }
-.paid-block-custom-title-10.size_l h2, .paid-block-custom-title-10.size_l h3, .paid-block-custom-title-10.size_l h4, .paid-block-custom-title-10.size_l h5, .paid-block-custom-title-10.size_l h6 {
+.paid-block-custom-title-10.size_l h2, .paid-block-custom-title-10.size_l h3, .paid-block-custom-title-10.size_l h4, .paid-block-custom-title-10.size_l h5, .paid-block-custom-title-10.size_l h6, .paid-block-custom-title-10.size_l p, .paid-block-custom-title-10.size_l div.ttl {
   font-size: 40px;
 }
 @container (max-width:800px) {
-  .paid-block-custom-title-10.size_l h2, .paid-block-custom-title-10.size_l h3, .paid-block-custom-title-10.size_l h4, .paid-block-custom-title-10.size_l h5, .paid-block-custom-title-10.size_l h6 {
+  .paid-block-custom-title-10.size_l h2, .paid-block-custom-title-10.size_l h3, .paid-block-custom-title-10.size_l h4, .paid-block-custom-title-10.size_l h5, .paid-block-custom-title-10.size_l h6, .paid-block-custom-title-10.size_l p, .paid-block-custom-title-10.size_l div.ttl {
     font-size: 32px;
   }
 }
 @container (max-width:500px) {
-  .paid-block-custom-title-10.size_l h2, .paid-block-custom-title-10.size_l h3, .paid-block-custom-title-10.size_l h4, .paid-block-custom-title-10.size_l h5, .paid-block-custom-title-10.size_l h6 {
+  .paid-block-custom-title-10.size_l h2, .paid-block-custom-title-10.size_l h3, .paid-block-custom-title-10.size_l h4, .paid-block-custom-title-10.size_l h5, .paid-block-custom-title-10.size_l h6, .paid-block-custom-title-10.size_l p, .paid-block-custom-title-10.size_l div.ttl {
     font-size: 26px;
   }
 }
-.paid-block-custom-title-10.size_m h2, .paid-block-custom-title-10.size_m h3, .paid-block-custom-title-10.size_m h4, .paid-block-custom-title-10.size_m h5, .paid-block-custom-title-10.size_m h6 {
+.paid-block-custom-title-10.size_m h2, .paid-block-custom-title-10.size_m h3, .paid-block-custom-title-10.size_m h4, .paid-block-custom-title-10.size_m h5, .paid-block-custom-title-10.size_m h6, .paid-block-custom-title-10.size_m p, .paid-block-custom-title-10.size_m div.ttl {
   font-size: 32px;
 }
 @container (max-width:800px) {
-  .paid-block-custom-title-10.size_m h2, .paid-block-custom-title-10.size_m h3, .paid-block-custom-title-10.size_m h4, .paid-block-custom-title-10.size_m h5, .paid-block-custom-title-10.size_m h6 {
+  .paid-block-custom-title-10.size_m h2, .paid-block-custom-title-10.size_m h3, .paid-block-custom-title-10.size_m h4, .paid-block-custom-title-10.size_m h5, .paid-block-custom-title-10.size_m h6, .paid-block-custom-title-10.size_m p, .paid-block-custom-title-10.size_m div.ttl {
     font-size: 26px;
   }
 }
 @container (max-width:500px) {
-  .paid-block-custom-title-10.size_m h2, .paid-block-custom-title-10.size_m h3, .paid-block-custom-title-10.size_m h4, .paid-block-custom-title-10.size_m h5, .paid-block-custom-title-10.size_m h6 {
+  .paid-block-custom-title-10.size_m h2, .paid-block-custom-title-10.size_m h3, .paid-block-custom-title-10.size_m h4, .paid-block-custom-title-10.size_m h5, .paid-block-custom-title-10.size_m h6, .paid-block-custom-title-10.size_m p, .paid-block-custom-title-10.size_m div.ttl {
     font-size: 22px;
   }
 }
-.paid-block-custom-title-10.size_s h2, .paid-block-custom-title-10.size_s h3, .paid-block-custom-title-10.size_s h4, .paid-block-custom-title-10.size_s h5, .paid-block-custom-title-10.size_s h6 {
+.paid-block-custom-title-10.size_s h2, .paid-block-custom-title-10.size_s h3, .paid-block-custom-title-10.size_s h4, .paid-block-custom-title-10.size_s h5, .paid-block-custom-title-10.size_s h6, .paid-block-custom-title-10.size_s p, .paid-block-custom-title-10.size_s div.ttl {
   font-size: 28px;
 }
 @container (max-width:800px) {
-  .paid-block-custom-title-10.size_s h2, .paid-block-custom-title-10.size_s h3, .paid-block-custom-title-10.size_s h4, .paid-block-custom-title-10.size_s h5, .paid-block-custom-title-10.size_s h6 {
+  .paid-block-custom-title-10.size_s h2, .paid-block-custom-title-10.size_s h3, .paid-block-custom-title-10.size_s h4, .paid-block-custom-title-10.size_s h5, .paid-block-custom-title-10.size_s h6, .paid-block-custom-title-10.size_s p, .paid-block-custom-title-10.size_s div.ttl {
     font-size: 22px;
   }
 }
 @container (max-width:500px) {
-  .paid-block-custom-title-10.size_s h2, .paid-block-custom-title-10.size_s h3, .paid-block-custom-title-10.size_s h4, .paid-block-custom-title-10.size_s h5, .paid-block-custom-title-10.size_s h6 {
+  .paid-block-custom-title-10.size_s h2, .paid-block-custom-title-10.size_s h3, .paid-block-custom-title-10.size_s h4, .paid-block-custom-title-10.size_s h5, .paid-block-custom-title-10.size_s h6, .paid-block-custom-title-10.size_s p, .paid-block-custom-title-10.size_s div.ttl {
     font-size: 20px;
   }
 }
@@ -77,7 +82,9 @@
 .paid-block-custom-title-10.position_center > h3.ttl,
 .paid-block-custom-title-10.position_center > h4.ttl,
 .paid-block-custom-title-10.position_center > h5.ttl,
-.paid-block-custom-title-10.position_center > h6.ttl {
+.paid-block-custom-title-10.position_center > h6.ttl,
+.paid-block-custom-title-10.position_center > p.ttl,
+.paid-block-custom-title-10.position_center > div.ttl {
   justify-content: center;
   text-align: center;
 }
@@ -89,7 +96,9 @@
 .paid-block-custom-title-10.position_right > h3.ttl,
 .paid-block-custom-title-10.position_right > h4.ttl,
 .paid-block-custom-title-10.position_right > h5.ttl,
-.paid-block-custom-title-10.position_right > h6.ttl {
+.paid-block-custom-title-10.position_right > h6.ttl,
+.paid-block-custom-title-10.position_right > p.ttl,
+.paid-block-custom-title-10.position_right > div.ttl {
   justify-content: end;
   text-align: right;
 }

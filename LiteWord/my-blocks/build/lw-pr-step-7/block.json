@@ -10,12 +10,12 @@
 		"anchor": true
 	},
 	"editorScript": "file:./lw-pr-step-7.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "円形番号付きカードステップ。3カラムグリッド。サービスフロー・手順紹介に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"no": 7,
 	"attributes": {
 		"circleBgColor": { "type": "string", "default": "#4a9d9c" },

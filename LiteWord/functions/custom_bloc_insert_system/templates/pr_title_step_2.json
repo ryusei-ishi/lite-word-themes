@@ -1,0 +1,334 @@
+[
+  {
+    "name": "wdl/paid-block-custom-title-7",
+    "attributes": {
+      "mainTitle": "見出しタイトル",
+      "headingLevel": 2,
+      "mainTitleColor": "var(--color-main)",
+      "borderLeftColor": "var(--color-main)",
+      "borderRightColor": "var(--color-main)",
+      "borderLeftOpacity": 20,
+      "borderRightOpacity": 100,
+      "borderRadius": 10,
+      "sizeClass": "size_l",
+      "positionClass": "position_center",
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": []
+  },
+  {
+    "name": "core/paragraph",
+    "attributes": {
+      "align": "center",
+      "content": "テキストテキストテキストテキストテキストテキスト<br>テキストテキストテキストテキストテキストテキストテキストテキスト",
+      "dropCap": false,
+      "maxWidthUnit": "px",
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": []
+  },
+  {
+    "name": "wdl/lw-pr-step-8",
+    "attributes": {
+      "bgGradient": "var(--color-main)",
+      "ulMaxWidth": 1080,
+      "fontNo": "Murecho",
+      "fontWeightNo": "600",
+      "colorNo": "var(--color-main)",
+      "stepNo": "01",
+      "liInPtPc": 0.6,
+      "liInPtSp": 0.6,
+      "stepBdrPc": 10,
+      "stepBdrSp": 10,
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": [
+      {
+        "name": "core/heading",
+        "attributes": {
+          "content": "見出しタイトル",
+          "level": 3,
+          "maxWidthUnit": "px",
+          "lw_bgEnabled": false,
+          "lw_bgColor": "var(--color-main)",
+          "lw_bgOpacity": 0.1,
+          "lw_bgFullWidth": true,
+          "maxWidthPx": 1200,
+          "borderEnabledTop": false,
+          "borderEnabledRight": false,
+          "borderEnabledBottom": false,
+          "borderEnabledLeft": false,
+          "enableScroll": false,
+          "minWidthTb": 1000,
+          "minWidthSp": 600
+        },
+        "innerBlocks": []
+      },
+      {
+        "name": "core/paragraph",
+        "attributes": {
+          "content": "段落テキスト段落テキスト段落テキスト段落テキスト段落テキスト段落テキスト段落テキスト段落テキスト",
+          "dropCap": false,
+          "maxWidthUnit": "px",
+          "lw_bgEnabled": false,
+          "lw_bgColor": "var(--color-main)",
+          "lw_bgOpacity": 0.1,
+          "lw_bgFullWidth": true,
+          "maxWidthPx": 1200,
+          "borderEnabledTop": false,
+          "borderEnabledRight": false,
+          "borderEnabledBottom": false,
+          "borderEnabledLeft": false,
+          "enableScroll": false,
+          "minWidthTb": 1000,
+          "minWidthSp": 600
+        },
+        "innerBlocks": []
+      },
+      {
+        "name": "wdl/lw-button-01",
+        "attributes": {
+          "buttonText": "詳細はこちら",
+          "openInNewTab": false,
+          "fontSize": 90,
+          "maxWidth": 240,
+          "maxWidthSp": 200,
+          "backgroundColor": "var(--color-main)",
+          "textColor": "#ffffff",
+          "paddingSize": "M",
+          "innerPaddingSize": "S",
+          "marginTop": 10,
+          "marginBottom": 10,
+          "alignment": "flex-start",
+          "alignmentSp": "flex-start",
+          "borderRadius": 96,
+          "borderWidth": 0,
+          "borderColor": "#000000",
+          "lw_bgEnabled": false,
+          "lw_bgColor": "var(--color-main)",
+          "lw_bgOpacity": 0.1,
+          "lw_bgFullWidth": true,
+          "maxWidthPx": 1200,
+          "borderEnabledTop": false,
+          "borderEnabledRight": false,
+          "borderEnabledBottom": false,
+          "borderEnabledLeft": false,
+          "enableScroll": false,
+          "minWidthTb": 1000,
+          "minWidthSp": 600
+        },
+        "innerBlocks": []
+      }
+    ]
+  },
+  {
+    "name": "wdl/lw-pr-step-8",
+    "attributes": {
+      "bgGradient": "var(--color-main)",
+      "ulMaxWidth": 1080,
+      "fontNo": "Murecho",
+      "fontWeightNo": "600",
+      "colorNo": "var(--color-main)",
+      "stepNo": "02",
+      "liInPtPc": 0.6,
+      "liInPtSp": 0.6,
+      "stepBdrPc": 10,
+      "stepBdrSp": 10,
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": [
+      {
+        "name": "core/heading",
+        "attributes": {
+          "content": "見出しタイトル",
+          "level": 3,
+          "maxWidthUnit": "px",
+          "lw_bgEnabled": false,
+          "lw_bgColor": "var(--color-main)",
+          "lw_bgOpacity": 0.1,
+          "lw_bgFullWidth": true,
+          "maxWidthPx": 1200,
+          "borderEnabledTop": false,
+          "borderEnabledRight": false,
+          "borderEnabledBottom": false,
+          "borderEnabledLeft": false,
+          "enableScroll": false,
+          "minWidthTb": 1000,
+          "minWidthSp": 600
+        },
+        "innerBlocks": []
+      },
+      {
+        "name": "core/paragraph",
+        "attributes": {
+          "content": "段落テキスト段落テキスト段落テキスト段落テキスト段落テキスト段落テキスト段落テキスト段落テキスト",
+          "dropCap": false,
+          "maxWidthUnit": "px",
+          "lw_bgEnabled": false,
+          "lw_bgColor": "var(--color-main)",
+          "lw_bgOpacity": 0.1,
+          "lw_bgFullWidth": true,
+          "maxWidthPx": 1200,
+          "borderEnabledTop": false,
+          "borderEnabledRight": false,
+          "borderEnabledBottom": false,
+          "borderEnabledLeft": false,
+          "enableScroll": false,
+          "minWidthTb": 1000,
+          "minWidthSp": 600
+        },
+        "innerBlocks": []
+      },
+      {
+        "name": "core/columns",
+        "attributes": {
+          "isStackedOnMobile": true,
+          "lw_bgEnabled": false,
+          "lw_bgColor": "var(--color-main)",
+          "lw_bgOpacity": 0.1,
+          "lw_bgFullWidth": true,
+          "maxWidthPx": 1200,
+          "borderEnabledTop": false,
+          "borderEnabledRight": false,
+          "borderEnabledBottom": false,
+          "borderEnabledLeft": false,
+          "enableScroll": false,
+          "minWidthTb": 1000,
+          "minWidthSp": 600
+        },
+        "innerBlocks": [
+          {
+            "name": "core/column",
+            "attributes": {
+              "lw_bgEnabled": false,
+              "lw_bgColor": "var(--color-main)",
+              "lw_bgOpacity": 0.1,
+              "lw_bgFullWidth": true,
+              "maxWidthPx": 1200,
+              "borderEnabledTop": false,
+              "borderEnabledRight": false,
+              "borderEnabledBottom": false,
+              "borderEnabledLeft": false,
+              "enableScroll": false,
+              "minWidthTb": 1000,
+              "minWidthSp": 600
+            },
+            "innerBlocks": [
+              {
+                "name": "core/image",
+                "attributes": {
+                  "url": "https://placehold.jp/600x440.png",
+                  "caption": "",
+                  "sizeSlug": "large",
+                  "lwImageRadiusPc": 0,
+                  "lwImageRadiusSp": 0,
+                  "lwImageRadiusSpManuallySet": false,
+                  "lw_bgEnabled": false,
+                  "lw_bgColor": "var(--color-main)",
+                  "lw_bgOpacity": 0.1,
+                  "lw_bgFullWidth": true,
+                  "maxWidthPx": 1200,
+                  "borderEnabledTop": false,
+                  "borderEnabledRight": false,
+                  "borderEnabledBottom": false,
+                  "borderEnabledLeft": false,
+                  "enableScroll": false,
+                  "minWidthTb": 1000,
+                  "minWidthSp": 600
+                },
+                "innerBlocks": []
+              }
+            ]
+          },
+          {
+            "name": "core/column",
+            "attributes": {
+              "lw_bgEnabled": false,
+              "lw_bgColor": "var(--color-main)",
+              "lw_bgOpacity": 0.1,
+              "lw_bgFullWidth": true,
+              "maxWidthPx": 1200,
+              "borderEnabledTop": false,
+              "borderEnabledRight": false,
+              "borderEnabledBottom": false,
+              "borderEnabledLeft": false,
+              "enableScroll": false,
+              "minWidthTb": 1000,
+              "minWidthSp": 600
+            },
+            "innerBlocks": [
+              {
+                "name": "core/image",
+                "attributes": {
+                  "url": "https://placehold.jp/600x440.png",
+                  "caption": "",
+                  "sizeSlug": "large",
+                  "lwImageRadiusPc": 0,
+                  "lwImageRadiusSp": 0,
+                  "lwImageRadiusSpManuallySet": false,
+                  "lw_bgEnabled": false,
+                  "lw_bgColor": "var(--color-main)",
+                  "lw_bgOpacity": 0.1,
+                  "lw_bgFullWidth": true,
+                  "maxWidthPx": 1200,
+                  "borderEnabledTop": false,
+                  "borderEnabledRight": false,
+                  "borderEnabledBottom": false,
+                  "borderEnabledLeft": false,
+                  "enableScroll": false,
+                  "minWidthTb": 1000,
+                  "minWidthSp": 600
+                },
+                "innerBlocks": []
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+]

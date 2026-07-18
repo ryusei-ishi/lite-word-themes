@@ -47,8 +47,9 @@ registerBlockType(metadata.name, {
 
         // testimonial更新
         const updateTestimonial = (index, key, value) => {
-            const updatedTestimonials = [...testimonials];
-            updatedTestimonials[index][key] = value;
+            const updatedTestimonials = testimonials.map((testimonial, i) =>
+                i === index ? { ...testimonial, [key]: value } : testimonial
+            );
             setAttributes({ testimonials: updatedTestimonials });
         };
 
@@ -101,7 +102,7 @@ registerBlockType(metadata.name, {
                             },
                         ]}
                     />
-                    <PanelBody title="■メインタイトルの設定">
+                    <PanelBody title="タイトル設定">
                         <div style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '5px', marginBottom: '10px' }}>
                             <RichText
                                 label="メインタイトル"
@@ -132,7 +133,7 @@ registerBlockType(metadata.name, {
                             />
                         </div>
                     </PanelBody>
-                    <PanelBody title="■コメント内：名前部分の設定">
+                    <PanelBody title="フォント設定（名前）">
                         <div style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '5px', marginBottom: '10px' }}>
                             <SelectControl
                                 label="フォントの種類"
@@ -163,7 +164,7 @@ registerBlockType(metadata.name, {
                         </div>
                     </PanelBody>
 
-                    <PanelBody title="■コメント内：タイトルの設定">
+                    <PanelBody title="フォント設定（タイトル）">
                         <div style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '5px', marginBottom: '10px' }}>
                             <SelectControl
                                 label="フォントの種類"
@@ -189,7 +190,7 @@ registerBlockType(metadata.name, {
                         </div>
                     </PanelBody>
 
-                    <PanelBody title="■コメント内：本文の設定">
+                    <PanelBody title="フォント設定（本文）">
                         <div style={{ padding: '10px', border: '1px solid #ddd', borderRadius: '5px', marginBottom: '10px' }}>
                             <SelectControl
                                 label="フォントの種類"

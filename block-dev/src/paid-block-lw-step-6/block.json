@@ -10,12 +10,12 @@
 		"anchor": true
 	},
 	"editorScript": "file:./paid-block-lw-step-6.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "画像+番号付きステップ。画像+タイトル+説明のカード配列。ビジュアル重視の手順紹介に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"no": 6,
 	"attributes": {
 		"fontLi": { "type": "string", "default": "" },

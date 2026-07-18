@@ -10,58 +10,37 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "アイコン付きリンクボタン。テキスト+矢印アイコン+URL。グラデーション背景対応",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["btnText", "btnUrl"],
+		"imageAttributes": []
+	},
 	"attributes": {
 		"btnText": {
 			"type": "string",
-			"default": "詳細はこちら"
+			"default": "詳細はこちら",
+			"aiHint": { "role": "button", "contentGuide": "動詞形。4〜10文字", "example": "お問い合わせ" }
 		},
-		"bgGradient": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"textColor": {
-			"type": "string",
-			"default": "#ffffff"
-		},
-		"fontWeight": {
-			"type": "string",
-			"default": "400"
-		},
+		"bgGradient": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"textColor": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
+		"fontWeight": { "type": "string", "default": "400", "aiHint": { "skip": true } },
 		"btnUrl": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "role": "url", "contentGuide": "遷移先URL" }
 		},
-		"openNewTab": {
-			"type": "boolean",
-			"default": false
-		},
-		"FontSet": {
-			"type": "string",
-			"default": ""
-		},
+		"openNewTab": { "type": "boolean", "default": false, "aiHint": { "skip": true } },
+		"FontSet": { "type": "string", "default": "", "aiHint": { "skip": true } },
 		"selectedIcon": {
 			"type": "string",
-			"default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 512\"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\"M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z\"/></svg>"
+			"default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 512\"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\"M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z\"/></svg>",
+			"aiHint": { "skip": true }
 		},
-		"iconColor": {
-			"type": "string",
-			"default": "#ffffff"
-		},
-		"borderWidth": {
-			"type": "number",
-			"default": 0
-		},
-		"borderColor": {
-			"type": "string",
-			"default": "var(--color-main)"
-		}
+		"iconColor": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
+		"borderWidth": { "type": "number", "default": 0, "aiHint": { "skip": true } },
+		"borderColor": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } }
 	},
 	"editorScript": "file:./lw-button-2.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 2
 }

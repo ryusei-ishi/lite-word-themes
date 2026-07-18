@@ -1,0 +1,67 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- 猫ロボット 笑顔（キラキラ）— セットアップ完了・ガイド -->
+
+  <!-- キラキラエフェクト -->
+  <g opacity="0.7">
+    <path d="M15 30 L17 25 L19 30 L24 32 L19 34 L17 39 L15 34 L10 32 Z" fill="#fbbf24">
+      <animate attributeName="opacity" values="1;0.3;1" dur="1.5s" repeatCount="indefinite"/>
+    </path>
+    <path d="M95 20 L96.5 16 L98 20 L102 21.5 L98 23 L96.5 27 L95 23 L91 21.5 Z" fill="#fbbf24">
+      <animate attributeName="opacity" values="0.3;1;0.3" dur="1.8s" repeatCount="indefinite"/>
+    </path>
+    <path d="M105 50 L106 47 L107 50 L110 51 L107 52 L106 55 L105 52 L102 51 Z" fill="#a78bfa">
+      <animate attributeName="opacity" values="0.5;1;0.5" dur="2s" repeatCount="indefinite"/>
+    </path>
+  </g>
+
+  <!-- 耳（左） -->
+  <path d="M28 45 L20 15 L45 35 Z" fill="#818cf8" stroke="#6366f1" stroke-width="2"/>
+  <path d="M30 42 L24 20 L43 36 Z" fill="#c7d2fe"/>
+
+  <!-- 耳（右） -->
+  <path d="M92 45 L100 15 L75 35 Z" fill="#818cf8" stroke="#6366f1" stroke-width="2"/>
+  <path d="M90 42 L96 20 L77 36 Z" fill="#c7d2fe"/>
+
+  <!-- 頭（丸） -->
+  <circle cx="60" cy="62" r="35" fill="#818cf8" stroke="#6366f1" stroke-width="2"/>
+
+  <!-- 顔の白い部分 -->
+  <ellipse cx="60" cy="67" rx="28" ry="25" fill="#f0f0ff"/>
+
+  <!-- 目（笑顔＝アーチ型） -->
+  <path d="M40 56 Q47 48 54 56" fill="none" stroke="#1e1b4b" stroke-width="3" stroke-linecap="round"/>
+  <path d="M66 56 Q73 48 80 56" fill="none" stroke="#1e1b4b" stroke-width="3" stroke-linecap="round"/>
+
+  <!-- 鼻 -->
+  <ellipse cx="60" cy="64" rx="3.5" ry="2.5" fill="#f9a8d4"/>
+
+  <!-- 口（大きな笑顔） -->
+  <path d="M46 70 Q53 82 60 78 Q67 82 74 70" fill="#fca5a5" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M48 70 Q53 78 60 75 Q67 78 72 70" fill="#fff"/>
+  <line x1="60" y1="64" x2="60" y2="70" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- ひげ（左）— 上向き（嬉しい） -->
+  <line x1="22" y1="64" x2="42" y2="66" stroke="#6366f1" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="20" y1="70" x2="41" y2="69" stroke="#6366f1" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="23" y1="76" x2="42" y2="73" stroke="#6366f1" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- ひげ（右）— 上向き -->
+  <line x1="98" y1="64" x2="78" y2="66" stroke="#6366f1" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="100" y1="70" x2="79" y2="69" stroke="#6366f1" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="97" y1="76" x2="78" y2="73" stroke="#6366f1" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- ロボットアンテナ -->
+  <line x1="60" y1="27" x2="60" y2="16" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="60" cy="13" r="4" fill="#fbbf24" stroke="#6366f1" stroke-width="1.5"/>
+  <circle cx="60" cy="13" r="2" fill="#fef3c7">
+    <animate attributeName="opacity" values="1;0.3;1" dur="1s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ほっぺ（濃いめ＝嬉しい） -->
+  <ellipse cx="38" cy="72" rx="7" ry="5" fill="#fca5a5" opacity="0.5"/>
+  <ellipse cx="82" cy="72" rx="7" ry="5" fill="#fca5a5" opacity="0.5"/>
+
+  <!-- ロボットマーク（おでこ） -->
+  <rect x="54" y="42" width="12" height="6" rx="2" fill="#a5b4fc" stroke="#6366f1" stroke-width="1"/>
+  <line x1="57" y1="45" x2="63" y2="45" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

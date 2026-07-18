@@ -66,8 +66,7 @@ registerBlockType(metadata.name, {
 		const removeContent = ( index ) =>
 			setAttributes( { contents: contents.filter( ( _, i ) => i !== index ) } );
 		const updateContent = ( index, key, value ) => {
-			const list = [ ...contents ];
-			list[ index ][ key ] = value;
+			const list = contents.map( ( item, i ) => i === index ? { ...item, [ key ]: value } : item );
 			setAttributes( { contents: list } );
 		};
 
@@ -80,7 +79,7 @@ registerBlockType(metadata.name, {
 			<>
 				<InspectorControls>
 					{/* ▼ 基本スタイル */}
-					<PanelBody title="スタイルの調整" initialOpen={ true }>
+					<PanelBody title="レイアウト設定" initialOpen={ true }>
 						<SelectControl
 							label="カラム数"
 							value={ columnClass }
@@ -143,7 +142,7 @@ registerBlockType(metadata.name, {
 							max={ 100 }
 						/>
                     </PanelBody>
-                    <PanelBody title="メインタイトル部分" initialOpen={ false }>
+                    <PanelBody title="タイトル設定" initialOpen={ false }>
 						<SelectControl
 							label="タイトルタグ"
 							value={ titleTag }
@@ -202,7 +201,7 @@ registerBlockType(metadata.name, {
 
 	
 					{/* ▼ サブタイトル設定 */}
-					<PanelBody title="サブタイトル部分" initialOpen={ false }>
+					<PanelBody title="サブタイトル設定" initialOpen={ false }>
 						<ToggleControl
 							label="サブタイトルを表示"
 							checked={ showSub }
@@ -245,7 +244,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* ▼ 説明部分 */}
-					<PanelBody title="説明部分" initialOpen={ false }>
+					<PanelBody title="テキスト設定" initialOpen={ false }>
 
 						<p>説明文文字色</p>
 						<ColorPalette

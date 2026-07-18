@@ -1,0 +1,330 @@
+{
+	"_meta": {
+		"description": "LiteWord AI画像・ページ生成システムのAI向けメタ情報。機能・設定・制限事項をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21"
+	},
+	"overview": {
+		"aiDescription": "LiteWordテーマに統合されたAI生成システム。ブロックエディタ内でAIによるレイアウト自動生成、AI画像検索、ブロック単位のAIアシスタント、テキスト選択AIなどを提供。Gemini APIとImagen APIを使用。プレミアムプラン限定機能。",
+		"userGuide": "ブロックエディタ（固定ページ・投稿の編集画面）内でAIボタンが表示される。AIページ自動生成はチャットボットからも起動可能。"
+	},
+	"userFeatures": {
+		"aiDescription": "ユーザーから見た機能一覧。",
+		"aiPageGeneration": {
+			"aiDescription": "AIが業種・用途に合わせてページ全体を自動生成する機能。ヒアリング→構成案→セクション単位のブロック生成の3ステップ。セッションベースでDB永続化されるため、中断しても復帰可能。",
+			"isPremium": true,
+			"workflow": {
+				"step1_interview": {
+					"aiDescription": "業種名を入力すると、AIがヒアリング質問を自動生成。サンプル回答の自動生成も可能。",
+					"endpoint": "POST /lw-ai-generator/v1/generate-interview"
+				},
+				"step2_outline": {
+					"aiDescription": "ヒアリング回答をもとに、AIがコンテンツ構成案（セクション構成）を生成。LP/トップページ等のページタイプを指定可能。構成案の保存・読み込みも可能。",
+					"endpoint": "POST /lw-ai-generator/v1/generate-outline"
+				},
+				"step3_sectionGeneration": {
+					"aiDescription": "構成案の各セクションを1つずつ順番にブロック生成。前のセクションの内容サマリーを次のセクション生成時のプロンプトに注入し、重複を防止。",
+					"endpoint": "POST /lw-ai-generator/v1/sessions/{id}/sections/{index}/generate"
+				}
+			},
+			"sessionSystem": {
+				"aiDescription": "セッションベースのページ生成管理。セッション作成→セクション順次生成→完了の流れ。各セクション結果はDBに即保存され、中断しても復帰可能。",
+				"tables": {
+					"wp_lw_ai_sessions": "セッション情報（post_id, user_id, status, page_type, business_type, outline_json, total_sections, completed_sections等）",
+					"wp_lw_ai_session_sections": "セクション情報（session_id, section_index, section_type, section_title, generated_blocks, content_summary, status等）"
+				},
+				"statuses": {
+					"draft": "下書き（作成直後）",
+					"generating": "生成中",
+					"completed": "全セクション生成完了",
+					"failed": "生成失敗"
+				}
+			},
+			"pageTypes": {
+				"aiDescription": "生成可能なページタイプ。page-types.jsonで定義。プレミアムユーザーのみ読み込まれる。",
+				"types": {
+					"lp": "LP（ランディングページ）",
+					"top": "トップページ"
+				}
+			},
+			"industryDetection": {
+				"aiDescription": "ユーザーの入力から業種を自動検出。接骨院、クリニック、美容、飲食、教育、IT、士業、不動産、EC等のカテゴリにマッピング。",
+				"userGuide": "「接骨院のLP作って」のように業種名を含めて指示する。"
+			},
+			"rateLimit": {
+				"aiDescription": "ページ生成の1日あたりの回数制限。",
+				"limits": {
+					"free": "3回/日",
+					"premium": "15回/日",
+					"admin": "無制限"
+				}
+			},
+			"userGuide": "チャットボットに「○○のLP作って」と指示するか、ブロックエディタのAIボタンから起動する。業種名を伝えるだけでAIが自動でページ構成を考えてブロックを生成する。"
+		},
+		"blockAISidebar": {
+			"aiDescription": "ブロックエディタのサイドバーにAIアシスタントを表示。選択中のブロックに対してAIで属性を変更・最適化できる。遅延読み込み（block-ai-sidebar.js）。",
+			"isPremium": true,
+			"features": {
+				"blockInstruction": {
+					"aiDescription": "自然言語でブロックに指示を出す機能。「背景色を青にして」「タイトルを変更して」等。現在のブロック属性を読み取り、AIが属性値を変更して返す。",
+					"endpoint": "POST /lw-ai-generator/v1/block-instruction"
+				},
+				"blockOptimize": {
+					"aiDescription": "ブロックのスクリーンショットをAIに送り、見た目を分析して属性を最適化する機能。",
+					"endpoint": "POST /lw-ai-generator/v1/optimize-block"
+				}
+			},
+			"userGuide": "ブロックを選択すると右サイドバーにAIタブが表示される。テキスト入力欄に指示を入力するとAIがブロックを編集する。"
+		},
+		"textSelectionAI": {
+			"aiDescription": "ブロック内のテキストを選択するとAIメニューが表示される機能。選択テキストに対してリライト・要約・トーン変更等を実行。遅延読み込み（text-selection-ai.js）。",
+			"isPremium": true,
+			"features": {
+				"generateText": {
+					"aiDescription": "テキスト生成・リライト・要約。トーン指定やWeb検索連携（useWebSearch）も可能。カスタムプロンプトの保存・読み込みにも対応。",
+					"endpoint": "POST /lw-ai-generator/v1/generate-text"
+				},
+				"autoHighlight": {
+					"aiDescription": "テキスト内の重要な部分を自動検出してマーカーや太字等のスタイルを適用。単一スタイルと複数スタイルの2パターン。",
+					"endpoints": {
+						"single": "POST /lw-ai-generator/v1/auto-highlight",
+						"multi": "POST /lw-ai-generator/v1/auto-highlight-multi"
+					}
+				},
+				"typoCheck": {
+					"aiDescription": "ページ全体の誤字脱字チェック。ブロック配列を送信し、修正候補を返す。",
+					"endpoint": "POST /lw-ai-generator/v1/check-typo"
+				}
+			},
+			"userGuide": "テキストを選択するとAIメニューがポップアップ表示される。リライト・トーン変更・要約・ハイライト等が使える。"
+		},
+		"myPartsAIGeneration": {
+			"aiDescription": "マイパーツ（再利用可能なブロックパターン）をAIで自動生成する機能。プロンプトと参照画像からHTML/CSSコードを生成。画像生成（Imagen API）との連携も可能。",
+			"isPremium": true,
+			"endpoint": "POST /lw-ai-generator/v1/myparts-generate",
+			"features": {
+				"referenceImage": "参照画像をアップロードしてデザインを分析・再現",
+				"previewMode": "画像分析のみ実行して確認用データを返すプレビューモード",
+				"imageGeneration": "Imagen APIによるAI画像生成（generateImages=true）"
+			},
+			"userGuide": "マイパーツ画面で「AIで作成」ボタンからプロンプトを入力。参照画像がある場合はアップロードすると、それに近いデザインを生成する。"
+		},
+		"customPrompts": {
+			"aiDescription": "よく使うAI指示をプロンプトとして保存・管理する機能。名前・絵文字・プロンプト本文を設定。ユーザーごとに保存。",
+			"isPremium": true,
+			"endpoints": {
+				"list": "GET /lw-ai-generator/v1/custom-prompts",
+				"create": "POST /lw-ai-generator/v1/custom-prompts",
+				"update": "PUT /lw-ai-generator/v1/custom-prompts/{id}",
+				"delete": "DELETE /lw-ai-generator/v1/custom-prompts/{id}"
+			},
+			"userGuide": "テキスト選択AIのメニューから保存したプロンプトを呼び出せる。"
+		},
+		"outlineManagement": {
+			"aiDescription": "AIが生成した構成案（outline）を保存・読み込みする機能。次回のページ生成時にテンプレートとして再利用可能。",
+			"isPremium": true,
+			"endpoints": {
+				"list": "GET /lw-ai-generator/v1/saved-outlines",
+				"save": "POST /lw-ai-generator/v1/saved-outlines",
+				"update": "PUT /lw-ai-generator/v1/saved-outlines/{id}",
+				"delete": "DELETE /lw-ai-generator/v1/saved-outlines/{id}"
+			},
+			"userGuide": "構成案画面で「保存」ボタンから名前をつけて保存。次回は「読み込み」から呼び出せる。"
+		},
+		"partsSelection": {
+			"aiDescription": "構成案の各セクションに最適なブロック（パーツ）を自動選択する機能。AIがセクションタイプと業種に基づいてblock.jsonのaiHint/aiDescriptionを参照して選択。手動で別パーツに切り替えも可能。",
+			"isPremium": true,
+			"endpoints": {
+				"autoSelect": "POST /lw-ai-generator/v1/select-parts",
+				"switch": "POST /lw-ai-generator/v1/switch-part"
+			}
+		},
+		"contentReview": {
+			"aiDescription": "生成されたコンテンツの最終レビュー・修正。ブロック配列を送信し、テキストの改善提案を返す。",
+			"isPremium": true,
+			"endpoint": "POST /lw-ai-generator/v1/review-content"
+		}
+	},
+	"adminSettings": {
+		"aiDescription": "管理者向けの設定画面と設定項目。",
+		"settingsPage": {
+			"aiDescription": "Google AI StudioのAPIキーを設定するページ。プレミアムプランの場合のみメニューに表示される。",
+			"location": "WordPress管理画面 > 設定 > LW AI Generator",
+			"menuSlug": "lw-ai-generator-settings",
+			"isPremium": true,
+			"features": {
+				"apiKeyManagement": {
+					"aiDescription": "APIキーの設定・検証・リセット。キーはAES-256-CBCで暗号化（AUTH_KEYベース）してDBに保存。平文保存からの自動マイグレーションあり。",
+					"encryption": "AES-256-CBC（AUTH_KEY or ABSPATH+DB_NAMEをキーに使用）",
+					"optionName": "lw_ai_generator_gemini_api_key_encrypted"
+				},
+				"termsAgreement": {
+					"aiDescription": "AIシステム利用前に3つの利用規約への同意が必要。billing（費用自己負担）、accuracy（精度の限界）、responsibility（自己責任）。",
+					"optionName": "lw_ai_generator_terms_agreed"
+				},
+				"setupWizard": {
+					"aiDescription": "セットアップウィザード（/lw-ai-setup/）。テーマCSS/JSなしの白紙ページで、ステップバイステップでAPIキーを設定できる。",
+					"url": "/lw-ai-setup/",
+					"permission": "edit_posts"
+				}
+			},
+			"userGuide": "APIキーはGoogle AI Studio（https://aistudio.google.com/apikey）で無料で取得可能。設定ページでキーを入力すると検証が行われ、有効であれば暗号化して保存される。"
+		},
+		"blockSettings": {
+			"aiDescription": "AIが使用するブロックの選択・設定ページ。現在は無効化されている（2026-01-05時点）。最大20個のブロックを選択し、各ブロックにプロンプト指示を設定可能。",
+			"location": "WordPress管理画面 > 設定 > AI生成ブロック",
+			"menuSlug": "lw-ai-block-settings",
+			"isPremium": true,
+			"status": "無効化中",
+			"userGuide": "AIがページ生成時に使用するブロックを制限・指定できる。ブロック数を絞ると精度が向上する。"
+		}
+	},
+	"usageTracking": {
+		"aiDescription": "API使用量のトラッキングシステム。リクエストごとにトークン数・画像数・推定コストをDBに記録。",
+		"table": "wp_lw_ai_usage_logs",
+		"trackedData": {
+			"request_type": "リクエストタイプ（layout, block_instruction, image, text等）",
+			"model": "使用モデル名",
+			"input_tokens": "入力トークン数",
+			"output_tokens": "出力トークン数",
+			"image_count": "画像生成数",
+			"estimated_cost_usd": "推定コスト（USD）"
+		},
+		"pricing": {
+			"gemini-2.5-flash": {
+				"input": "$0.075 / 1M tokens",
+				"output": "$0.30 / 1M tokens"
+			},
+			"imagen-4.0": {
+				"per_image": "$0.03 / image"
+			}
+		},
+		"stats": {
+			"today": "本日の使用状況（リクエスト数、トークン数、画像数、コスト）",
+			"month": "今月の使用状況",
+			"byType": "リクエストタイプ別の統計",
+			"daily": "過去30日間の日別統計"
+		},
+		"endpoint": "GET /lw-ai-generator/v1/usage-stats",
+		"userGuide": "AIチャットのパワーモード画面で使用量が表示される。管理者はREST APIで詳細な統計を取得可能。推定コストは円換算（1USD=150JPY）でも表示される。"
+	},
+	"restApi": {
+		"aiDescription": "AI生成システムのREST APIエンドポイント一覧。名前空間: lw-ai-generator/v1。全エンドポイントがedit_posts権限必須。",
+		"endpoints": {
+			"generation": {
+				"POST /generate": "構成案からブロック生成（旧API）",
+				"POST /generate-interview": "ヒアリング質問を自動生成",
+				"POST /generate-outline": "コンテンツ構成案を生成",
+				"POST /generate-section": "セクション単位でブロック生成（旧API）",
+				"POST /generate-sample-answers": "ヒアリング質問のサンプル回答を自動生成",
+				"POST /generate-text": "テキスト生成・リライト・要約"
+			},
+			"blockAI": {
+				"POST /block-instruction": "ブロックに自然言語で指示",
+				"POST /optimize-block": "スクリーンショットからブロック最適化",
+				"POST /auto-highlight": "テキスト自動ハイライト（単一スタイル）",
+				"POST /auto-highlight-multi": "テキスト自動ハイライト（複数スタイル）",
+				"POST /check-typo": "誤字脱字チェック"
+			},
+			"sessions": {
+				"POST /sessions": "セッション作成（構成案からセクション分割してDB保存）",
+				"GET /sessions": "セッション一覧取得（直近5件）",
+				"GET /sessions/{id}": "セッション詳細取得（全セクション状態付き）",
+				"DELETE /sessions/{id}": "セッション削除",
+				"POST /sessions/{id}/sections/{index}/generate": "セクション単体生成（前後文脈付き）"
+			},
+			"outlines": {
+				"GET /saved-outlines": "保存済み構成案一覧取得",
+				"POST /saved-outlines": "構成案保存",
+				"PUT /saved-outlines/{id}": "構成案更新",
+				"DELETE /saved-outlines/{id}": "構成案削除"
+			},
+			"sections": {
+				"GET /saved-sections": "保存済みセクション一覧",
+				"POST /saved-sections": "セクション保存",
+				"DELETE /saved-sections/{id}": "セクション削除"
+			},
+			"parts": {
+				"POST /select-parts": "構成案からパーツ自動選択",
+				"POST /switch-part": "パーツ切り替え"
+			},
+			"myparts": {
+				"POST /myparts-generate": "マイパーツAI生成（HTML/CSS生成、画像分析、AI画像生成）"
+			},
+			"customPrompts": {
+				"GET /custom-prompts": "カスタムプロンプト一覧",
+				"POST /custom-prompts": "カスタムプロンプト保存",
+				"PUT /custom-prompts/{id}": "カスタムプロンプト更新",
+				"DELETE /custom-prompts/{id}": "カスタムプロンプト削除"
+			},
+			"review": {
+				"POST /review-content": "生成コンテンツの最終レビュー・修正"
+			},
+			"stats": {
+				"GET /usage-stats": "API使用量統計取得"
+			}
+		}
+	},
+	"technicalDetails": {
+		"aiDescription": "技術的な実装詳細。",
+		"geminiApi": {
+			"aiDescription": "Google Gemini APIを使用。テキスト生成はgemini-2.5-flash、画像生成はImagen 4.0。APIキーはLW_AI_Generator_Admin_Settings::get_api_key()で取得（復号化済み）。共通のcall_gemini_text_api() + parse_json_response()パターンを使用。",
+			"models": {
+				"text": "gemini-2.5-flash",
+				"image": "imagen-4.0"
+			},
+			"securityMeasures": {
+				"sanitize_prompt_input": "ユーザー入力をプロンプトに埋め込む前に長さ制限+区切り文字エスケープでプロンプトインジェクション対策"
+			}
+		},
+		"blockSchema": {
+			"aiDescription": "blocks-schema.jsonにLiteWordの全ブロック定義（名前、属性、カテゴリ）が記載されている。AIがブロック生成時に参照する。各block.jsonにはaiHint/aiDescriptionフィールドが追加されている。",
+			"location": "functions/lw_ai_system/blocks-schema.json"
+		},
+		"marketingKnowledge": {
+			"aiDescription": "LP・トップページ生成時に使用するマーケティング知識。marketing_materials/lp_default.phpとtop_default.phpに記載。業種別のコピーライティング知識をプロンプトに注入。",
+			"files": {
+				"lp_default.php": "LP生成用のマーケティング知識・構成テンプレート",
+				"top_default.php": "トップページ生成用のマーケティング知識・構成テンプレート"
+			}
+		},
+		"lazyLoading": {
+			"aiDescription": "パフォーマンス最適化のため、block-ai-sidebar.jsとtext-selection-ai.jsは遅延読み込み。AIボタンクリック時にadmin-ui.jsが動的にスクリプトを読み込む。blocks-schema.jsonもキャッシュ付きで遅延読み込み。",
+			"scripts": {
+				"block-inserter.js": "コア機能（即座に読み込み）",
+				"admin-ui.js": "軽量ローダー・AIボタン（即座に読み込み）",
+				"admin-ui-modal.js": "モーダルUI（遅延読み込み）",
+				"block-ai-sidebar.js": "ブロックAIサイドバー（遅延読み込み）",
+				"text-selection-ai.js": "テキスト選択AI（遅延読み込み）"
+			}
+		},
+		"sessionManager": {
+			"aiDescription": "セッションベースのページ生成管理。コンテキスト構築（前セクションのサマリー→現セクション→後セクションのタイトル一覧）でセクション間の重複を防止。自動サマリー生成機能付き。30日経過したセッションは自動クリーンアップ。"
+		},
+		"version": "1.0.75",
+		"fileStructure": {
+			"index.php": "エントリポイント（定数定義、クラス読み込み、ブロックエディタアセット登録）",
+			"includes/class-admin-settings.php": "管理画面設定（APIキー暗号化/復号化、設定ページ、セットアップウィザード）",
+			"includes/class-gemini-api.php": "Gemini API呼び出し、プロンプト構築、レイアウト/セクション/ブロック指示の生成ロジック",
+			"includes/class-block-generator.php": "ブロック生成処理（サポートブロック定義）",
+			"includes/class-block-settings.php": "ブロック設定ページ（AIが使用するブロックの選択・管理）",
+			"includes/class-usage-tracker.php": "API使用量トラッキング（トークン数・コスト計算・統計取得）",
+			"includes/class-session-manager.php": "セッション管理（作成・取得・セクションコンテキスト構築・結果保存・レート制限）",
+			"includes/class-json-parser.php": "JSONパース・検証・サニタイズ",
+			"includes/rest-api.php": "REST APIエンドポイント登録（生成・セッション・パーツ選択・プロンプト・統計等）",
+			"blocks-schema.json": "全ブロック定義スキーマ（AIが参照）",
+			"page-types.json": "ページタイプ定義（LP/トップページ等）",
+			"marketing_materials/lp_default.php": "LP生成用マーケティング知識",
+			"marketing_materials/top_default.php": "トップページ生成用マーケティング知識",
+			"templates/setup-wizard.php": "セットアップウィザードのHTMLテンプレート",
+			"assets/js/block-inserter.js": "ブロック挿入コア機能",
+			"assets/js/admin-ui.js": "管理画面UI（軽量ローダー）",
+			"assets/js/admin-ui-modal.js": "モーダルUI（遅延読み込み）",
+			"assets/js/block-ai-sidebar.js": "ブロックAIサイドバー（遅延読み込み）",
+			"assets/js/text-selection-ai.js": "テキスト選択AI（遅延読み込み）",
+			"assets/css/admin.css": "管理画面スタイル",
+			"assets/css/admin-settings.css": "設定ページスタイル",
+			"assets/css/block-settings.css": "ブロック設定ページスタイル"
+		}
+	}
+}

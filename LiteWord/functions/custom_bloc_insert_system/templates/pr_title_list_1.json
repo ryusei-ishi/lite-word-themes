@@ -1,0 +1,59 @@
+[
+  {
+    "name": "wdl/custom-title-4",
+    "attributes": {
+      "mainTitle": "タイトル",
+      "subTitle": "サブタイトル",
+      "headingLevel": 2,
+      "subMarginBottomPc": 0.6,
+      "subMarginBottomSp": 0.6,
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": []
+  },
+  {
+    "name": "wdl/lw-list-3",
+    "attributes": {
+      "colorLiSvg": "var(--color-main)",
+      "borderColor": "var(--color-main)",
+      "contents": [
+        {
+          "text": "リストテキストリストテキスト "
+        },
+        {
+          "text": "リストテキストリストテキスト "
+        },
+        {
+          "text": "リストテキストリストテキスト "
+        },
+        {
+          "text": "リストテキストリストテキスト "
+        }
+      ],
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": []
+  }
+]

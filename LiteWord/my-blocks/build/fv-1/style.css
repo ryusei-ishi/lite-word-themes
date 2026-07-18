@@ -3,7 +3,7 @@
   width: 100vw;
 }
 
-.lw_content_wrap.page:has(.first_content + .wp-block-wdl-fv-1) .first_content {
+.lw_content_wrap.page:has(.first_content + .fv-1) .first_content {
   display: none;
 }
 
@@ -19,6 +19,7 @@
   z-index: 10;
   margin: 0;
   padding: 64px 20px;
+  max-width: 100vw;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

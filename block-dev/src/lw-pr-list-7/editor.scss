@@ -1,0 +1,103 @@
+.lw-pr-list-7 {
+  /* グループコントロール */
+  .lw-pr-list-7__group-controls {
+    display: flex;
+    gap: 8px;
+    justify-content: center;
+    margin-top: 16px;
+  }
+
+  /* リストを追加ボタン */
+  .lw-pr-list-7__add_btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #1e1e1e;
+    background: #fff;
+    border: 1px solid #949494;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: #f0f0f0;
+      border-color: #1e1e1e;
+    }
+
+    &::before {
+      content: "+";
+      font-size: 16px;
+      font-weight: 600;
+    }
+  }
+
+  /* グループ削除ボタン */
+  .lw-pr-list-7__remove_group_btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px 16px;
+    font-size: 13px;
+    font-weight: 500;
+    color: #cc1818;
+    background: #fff;
+    border: 1px solid #cc1818;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: #cc1818;
+      color: #fff;
+    }
+  }
+
+  /* グループを追加するボタン */
+  .lw-pr-list-7__add_group_btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    margin-top: 24px;
+    padding: 12px 24px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #fff;
+    background: #007cba;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: all 0.15s ease;
+
+    &:hover {
+      background: #006ba1;
+    }
+
+    &::before {
+      content: "+";
+      font-size: 18px;
+      font-weight: 600;
+    }
+  }
+
+  /* グループ区切り */
+  .lw-pr-list-7__group {
+    padding: 16px;
+    background: #f9f9f9;
+    border: 1px dashed #ccc;
+    border-radius: 4px;
+  }
+
+  /* 順番・削除コントロール（そのまま） */
+  .lw-table-item-controls {
+    .move-down-button,
+    .move-up-button {
+      top: -14px;
+    }
+  }
+}

@@ -1,0 +1,73 @@
+.lw-pr-content-9 {
+    margin-left: calc((100% - 100vw) / 2);
+    width: 100vw;
+    .lw-pr-content-9__wrap {
+        margin: 0 auto;
+        max-width: 1440px;
+
+        .lw-pr-content-9-swiper {
+            overflow: visible;
+            margin-left: -80px;
+            margin-right: -80px;
+            @media (max-width: 991px) {
+                margin: 0;
+                padding: 0 20px;
+            }
+            @media (max-width: 575px) {
+                margin: 0;
+                padding: 0 24px;
+            }
+
+            .swiper-slide {
+                height: auto;
+            }
+
+            .item {
+                .image {
+                    width: 100%;
+                    aspect-ratio: 16 / 9;
+                    overflow: hidden;
+                    img {
+                        object-fit: cover;
+                        height: 100%;
+                        width: 100%;
+                        transition: transform .3s;
+                    }
+                }
+                h3{
+                    margin: 1.1em 0 0.6em 0;
+                    font-size: 16px;
+                    text-align: center;
+                    line-height: 1.6;
+                    color: var(--color-main);
+                    transition: color .3s;
+                }
+                p{
+                    margin: 0;
+                    line-height: 1.8;
+                    font-size: 16px;
+                }
+            }
+            a {
+                color: var(--color-black);
+                transition: color .3s;
+                &:hover {
+                    color: #ef6f6f;
+                    h3{
+                        color: #ef6f6f;
+                    }
+                    img {
+                        transform: scale(1.1);
+                    }
+                }
+            }
+            .swiper-pagination {
+                position: relative;
+                margin-top: 32px;
+            }
+            .swiper-pagination-bullet-active {
+                background: #333;
+            }
+        }
+    }
+}

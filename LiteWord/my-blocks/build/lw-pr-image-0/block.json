@@ -1,0 +1,156 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-image-0",
+	"version": "1.0.0",
+	"title": "画像 00",
+	"category": "lw-media",
+	"icon": "format-image",
+	"description": "シンプルな画像ブロック",
+	"aiHint": {
+		"description": "単一画像ブロック。画像1枚をカスタマイズ表示",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [],
+		"imageAttributes": [
+			"image"
+		]
+	},
+	"supports": {
+		"anchor": true
+	},
+	"editorScript": "file:./lw-pr-image-0.js",
+	"attributes": {
+		"image": {
+			"type": "string",
+			"default": "https://placehold.jp/600x400.png"
+		},
+		"alt": {
+			"type": "string",
+			"default": ""
+		},
+		"maxWidthPc": {
+			"type": "number",
+			"default": 0
+		},
+		"maxWidthTb": {
+			"type": "number",
+			"default": 0
+		},
+		"maxWidthSp": {
+			"type": "number",
+			"default": 0
+		},
+		"aspectRatioW": {
+			"type": "number",
+			"default": 600
+		},
+		"aspectRatioH": {
+			"type": "number",
+			"default": 400
+		},
+		"imgBorderRadiusPc": {
+			"type": "number",
+			"default": 0
+		},
+		"imgBorderRadiusTb": {
+			"type": "number",
+			"default": 0
+		},
+		"imgBorderRadiusSp": {
+			"type": "number",
+			"default": 0
+		},
+		"rotatePc": {
+			"type": "number",
+			"default": 0
+		},
+		"rotateTb": {
+			"type": "number",
+			"default": 0
+		},
+		"rotateSp": {
+			"type": "number",
+			"default": 0
+		},
+		"rotateInheritTb": {
+			"type": "boolean",
+			"default": true
+		},
+		"rotateInheritSp": {
+			"type": "boolean",
+			"default": true
+		},
+		"imageEffect": {
+			"type": "string",
+			"default": "none"
+		},
+		"effectGrayscale": {
+			"type": "number",
+			"default": 100
+		},
+		"effectSepia": {
+			"type": "number",
+			"default": 100
+		},
+		"effectBlur": {
+			"type": "number",
+			"default": 3
+		},
+		"effectBrightness": {
+			"type": "number",
+			"default": 130
+		},
+		"effectContrast": {
+			"type": "number",
+			"default": 150
+		},
+		"effectSaturate": {
+			"type": "number",
+			"default": 200
+		},
+		"effectInvert": {
+			"type": "number",
+			"default": 100
+		},
+		"effectHueRotate": {
+			"type": "number",
+			"default": 180
+		},
+		"effectOpacity": {
+			"type": "number",
+			"default": 50
+		},
+		"linkUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"linkOpenNewTab": {
+			"type": "boolean",
+			"default": false
+		},
+		"alignPc": {
+			"type": "string",
+			"default": "center"
+		},
+		"alignTb": {
+			"type": "string",
+			"default": "inherit"
+		},
+		"alignSp": {
+			"type": "string",
+			"default": "inherit"
+		},
+		"objectFitPc": {
+			"type": "string",
+			"default": "cover"
+		},
+		"objectFitTb": {
+			"type": "string",
+			"default": "inherit"
+		},
+		"objectFitSp": {
+			"type": "string",
+			"default": "inherit"
+		}
+	}
+}

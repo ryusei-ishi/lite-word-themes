@@ -1,0 +1,225 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-waku-1",
+	"version": "1.0.0",
+	"title": "枠 01",
+	"category": "lw-utility",
+	"icon": "feedback",
+	"description": "枠ブロック。背景色・背景画像・ボーダーを設定可能。",
+	"aiHint": {
+		"description": "枠コンテナ。背景画像/色+InnerBlocksの枠囲み",
+		"excludeFromAutoSelect": true,
+		"contentAttributes": [],
+		"imageAttributes": [
+			"waku1BgImagePc",
+			"waku1BgImageSp"
+		],
+		"excludeReason": "InnerBlocksコンテナ。AI直接生成非推奨"
+	},
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"waku1JustifyContentPc": {
+			"type": "string",
+			"default": "center"
+		},
+		"waku1JustifyContentSp": {
+			"type": "string",
+			"default": ""
+		},
+		"waku1MaxWidthPc": {
+			"type": "number",
+			"default": 1300
+		},
+		"waku1MaxWidthSp": {
+			"type": "number",
+			"default": -1
+		},
+		"waku1PaddingTopPc": {
+			"type": "number",
+			"default": 24
+		},
+		"waku1PaddingRightPc": {
+			"type": "number",
+			"default": 24
+		},
+		"waku1PaddingBottomPc": {
+			"type": "number",
+			"default": 24
+		},
+		"waku1PaddingLeftPc": {
+			"type": "number",
+			"default": 24
+		},
+		"waku1PaddingTopSp": {
+			"type": "number",
+			"default": -1
+		},
+		"waku1PaddingRightSp": {
+			"type": "number",
+			"default": -1
+		},
+		"waku1PaddingBottomSp": {
+			"type": "number",
+			"default": -1
+		},
+		"waku1PaddingLeftSp": {
+			"type": "number",
+			"default": -1
+		},
+		"waku1BorderWidthPc": {
+			"type": "number",
+			"default": 2
+		},
+		"waku1BorderWidthSp": {
+			"type": "number",
+			"default": -1
+		},
+		"waku1BorderStylePc": {
+			"type": "string",
+			"default": "solid"
+		},
+		"waku1BorderStyleSp": {
+			"type": "string",
+			"default": ""
+		},
+		"waku1BorderColorPc": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"waku1BorderColorSp": {
+			"type": "string",
+			"default": ""
+		},
+		"waku1BorderRadiusPc": {
+			"type": "array",
+			"default": [
+				8,
+				8,
+				8,
+				8
+			]
+		},
+		"waku1BorderRadiusSp": {
+			"type": "array",
+			"default": []
+		},
+		"waku1BgTypePc": {
+			"type": "string",
+			"default": "color"
+		},
+		"waku1BgTypeSp": {
+			"type": "string",
+			"default": ""
+		},
+		"waku1BgColorPc": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"waku1BgColorSp": {
+			"type": "string",
+			"default": ""
+		},
+		"waku1BgGradientPc": {
+			"type": "string",
+			"default": "linear-gradient(135deg, #667eea 0%, #764ba2 100%)"
+		},
+		"waku1BgGradientSp": {
+			"type": "string",
+			"default": ""
+		},
+		"waku1BgOpacityPc": {
+			"type": "number",
+			"default": 100
+		},
+		"waku1BgOpacitySp": {
+			"type": "number",
+			"default": -1
+		},
+		"waku1BgBlendModePc": {
+			"type": "string",
+			"default": "normal"
+		},
+		"waku1BgBlendModeSp": {
+			"type": "string",
+			"default": ""
+		},
+		"waku1BgImagePc": {
+			"type": "string",
+			"default": ""
+		},
+		"waku1BgImageSp": {
+			"type": "string",
+			"default": ""
+		},
+		"waku1ImageEffect": {
+			"type": "string",
+			"default": "none"
+		},
+		"waku1EffectGrayscale": {
+			"type": "number",
+			"default": 100
+		},
+		"waku1EffectSepia": {
+			"type": "number",
+			"default": 100
+		},
+		"waku1EffectBlur": {
+			"type": "number",
+			"default": 3
+		},
+		"waku1EffectBrightness": {
+			"type": "number",
+			"default": 130
+		},
+		"waku1EffectContrast": {
+			"type": "number",
+			"default": 150
+		},
+		"waku1EffectSaturate": {
+			"type": "number",
+			"default": 200
+		},
+		"waku1EffectInvert": {
+			"type": "number",
+			"default": 100
+		},
+		"waku1EffectHueRotate": {
+			"type": "number",
+			"default": 180
+		},
+		"waku1EffectOpacity": {
+			"type": "number",
+			"default": 50
+		},
+		"waku1MinHeightPc": {
+			"type": "number",
+			"default": -1
+		},
+		"waku1MinHeightSp": {
+			"type": "number",
+			"default": -1
+		},
+		"waku1AspectRatioPc": {
+			"type": "number",
+			"default": 0
+		},
+		"waku1AspectRatioSp": {
+			"type": "number",
+			"default": -1
+		},
+		"waku1LinkUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"waku1LinkNewTab": {
+			"type": "boolean",
+			"default": false
+		}
+	},
+	"editorScript": "file:./lw-pr-waku-1.js",
+	"no": 1
+}

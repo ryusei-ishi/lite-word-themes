@@ -93,6 +93,11 @@ function output_json_dl() {
     if ( is_admin() || is_404() || is_noindex_page_simple() ) {
         return;
     }
+
+    // プラグイン（lw-manual-publisher）管理ページは除外（プラグイン側で出力）
+    if ( ! empty( $GLOBALS['lwmp_is_manual_page'] ) ) {
+        return;
+    }
     
     if ( is_front_page() ) {
         lw_json_dl_homepage();
@@ -191,43 +196,70 @@ function lw_json_dl_page(){
 function lw_json_dl_single(){
     global $post;
     $author_id = $post->post_author;
-    
+
     // SEOカスタムフィールドから取得
     $title = lw_get_seo_meta( 'seo_title', get_the_title() );
     $description = lw_get_seo_meta( 'seo_description', get_the_excerpt() );
     $canonical = lw_get_seo_meta( 'seo_canonical', get_permalink() );
     $og_image = lw_get_seo_meta( 'seo_og_image' );
-    
+
     // OGP画像が設定されていない場合はアイキャッチ画像を使用
     if ( empty( $og_image ) ) {
         $og_image = get_the_post_thumbnail_url( $post->ID, 'full' );
     }
-    
-    // 投稿者情報を取得（セキュリティ対策済み）
-    $author_json = get_author_json_ld( $author_id );
-    
-    ?>
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "Article",
-        "headline": "<?php echo esc_attr( $title ); ?>"<?php if( $og_image ): ?>,
-        "image": "<?php echo esc_url( $og_image ); ?>"<?php endif; ?>,
-        "datePublished": "<?php echo esc_attr( get_the_date('c') ); ?>",
-        "dateModified": "<?php echo esc_attr( get_the_modified_date('c') ); ?>",
-        <?php echo $author_json; ?>
-        "publisher": {
-            "@type": "Organization",
-            "name": "<?php echo esc_attr( get_bloginfo('name') ); ?>"
-        },
-        "description": "<?php echo esc_attr( $description ); ?>",
-        "mainEntityOfPage": {
-            "@type": "WebPage",
-            "@id": "<?php echo esc_url( $canonical ); ?>"
-        }
+
+    // カスタマイザー設定を取得
+    $fv_date        = Lw_theme_mod_set( 'single_post_layout_fv_date', 'active' );
+    $fv_date_update = Lw_theme_mod_set( 'single_post_layout_fv_date_update', 'active' );
+
+    // JSON-LDデータを構築
+    $data = [
+        '@context' => 'https://schema.org',
+        '@type'    => 'Article',
+        'headline' => $title,
+    ];
+
+    if ( $og_image ) {
+        $data['image'] = $og_image;
     }
-    </script>
-    <?php
+
+    // none_all の場合は検索結果にも報告しない
+    if ( $fv_date !== 'none_all' ) {
+        $data['datePublished'] = get_the_date( 'c' );
+    }
+    if ( $fv_date_update !== 'none_all' ) {
+        $data['dateModified'] = get_the_modified_date( 'c' );
+    }
+
+    // 投稿者情報（セキュリティ対策済み）
+    $display_name = get_the_author_meta( 'display_name', $author_id );
+    $login        = get_the_author_meta( 'user_login', $author_id );
+    if ( ! empty( $display_name ) && $display_name !== $login ) {
+        $author_data = [
+            '@type' => 'Person',
+            'name'  => $display_name,
+        ];
+        if ( ! is_author_noindex( $author_id ) ) {
+            $author_data['url'] = get_author_posts_url( $author_id );
+        }
+        $data['author'] = $author_data;
+    }
+
+    $data['publisher'] = [
+        '@type' => 'Organization',
+        'name'  => get_bloginfo( 'name' ),
+    ];
+
+    $data['description'] = $description;
+
+    $data['mainEntityOfPage'] = [
+        '@type' => 'WebPage',
+        '@id'   => $canonical,
+    ];
+
+    echo '<script type="application/ld+json">' . "\n";
+    echo wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "\n";
+    echo '</script>' . "\n";
 }
 
 // カテゴリーアーカイブ

@@ -47,8 +47,9 @@ registerBlockType(metadata.name, {
 
 		// 各項目の値更新（番号は自動計算のため対象外）
 		const updateItem = (index, key, value) => {
-			const newItems = [...items];
-			newItems[index][key] = value;
+			const newItems = items.map((item, i) =>
+				i === index ? { ...item, [key]: value } : item
+			);
 			setAttributes({ items: newItems });
 		};
 
@@ -56,7 +57,7 @@ registerBlockType(metadata.name, {
 			<>
 				{/* 背景画像はサイドバーで設定（サムネイルも表示） */}
 				<InspectorControls>
-					<PanelBody title="背景画像の設定" initialOpen={true}>
+					<PanelBody title="背景設定" initialOpen={true}>
 						<MediaUpload
 							onSelect={(media) => setAttributes({ bgImage: media.url })}
 							allowedTypes={['image']}
@@ -84,7 +85,7 @@ registerBlockType(metadata.name, {
 						)}
 					</PanelBody>
                     {/* 背景画像のフィルター色の設定 */}
-                    <PanelBody title="画像の上のフィルター色">
+                    <PanelBody title="フィルター設定">
                         <ColorPicker
                             color={filterColor}
                             onChangeComplete={onChangeFilterColor}

@@ -27,6 +27,7 @@
 .shin-gas-station-01-fv-lower-01 {
   position: relative;
   z-index: 10;
+  max-width: 100vw;
   display: flex;
   flex-wrap: wrap;
   align-items: center;

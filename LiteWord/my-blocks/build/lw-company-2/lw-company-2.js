@@ -238,7 +238,7 @@ var createDefaultItems = function createDefaultItems() {
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u9805\u76EE\u540D\u306E\u30D5\u30A9\u30F3\u30C8\u30FB\u8272\u306A\u3069",
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A\uFF08\u9805\u76EE\u540D\uFF09",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("p", null, "\u80CC\u666F\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: dtBackgroundColor,
@@ -273,7 +273,7 @@ var createDefaultItems = function createDefaultItems() {
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u5185\u5BB9\u306E\u30D5\u30A9\u30F3\u30C8\u30FB\u8272\u306A\u3069",
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A\uFF08\u5185\u5BB9\uFF09",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("p", null, "\u6587\u5B57\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: ddTextColor,
@@ -1137,7 +1137,7 @@ module.exports = window["wp"]["components"];
   \*************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-company-2","version":"1.0.0","title":"会社概要 02","category":"lw-table","icon":"building","supports":{"anchor":true},"attributes":{"maxWidth":{"type":"number","default":1080},"fontSizeClass":{"type":"string","default":"font_size_m"},"dtWidthClass":{"type":"string","default":"dt_width_m"},"lineHeight":{"type":"number","default":1.6},"spFullDt":{"type":"boolean","default":false},"dtBackgroundColor":{"type":"string","default":"#f0f0f0"},"dtTextColor":{"type":"string","default":"#000000"},"fontDt":{"type":"string","default":""},"fontWeightDt":{"type":"string","default":""},"ddTextColor":{"type":"string","default":"#000000"},"fontDd":{"type":"string","default":""},"fontWeightDd":{"type":"string","default":""},"borderColor":{"type":"string","default":"#cccccc"},"items":{"type":"array","source":"query","selector":".company-profile-item","query":{"dt":{"type":"string","source":"html","selector":"dt"},"dd":{"type":"string","source":"html","selector":"dd"},"dtPlaceholder":{"type":"string","default":""},"ddPlaceholder":{"type":"string","default":""}},"default":[{"dt":"会社名","dtPlaceholder":"会社名","dd":"株式会社〇〇不動産","ddPlaceholder":"内容"},{"dt":"所在地","dtPlaceholder":"所在地","dd":"東京都〇〇区〇〇町1-1-1","ddPlaceholder":"内容"},{"dt":"電話番号","dtPlaceholder":"電話番号","dd":"03-1234-5678","ddPlaceholder":"内容"},{"dt":"設立","dtPlaceholder":"設立","dd":"2020年1月1日","ddPlaceholder":"内容"}]}},"editorScript":"file:./lw-company-2.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":2}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-company-2","version":"1.0.0","title":"会社概要 02","category":"lw-table","icon":"building","aiHint":{"description":"会社概要テーブル（背景色付きdt）。項目名+内容の定義リスト。不動産・士業の会社情報に","excludeFromAutoSelect":false,"contentAttributes":["items"],"imageAttributes":[]},"supports":{"anchor":true},"attributes":{"maxWidth":{"type":"number","default":1080},"fontSizeClass":{"type":"string","default":"font_size_m"},"dtWidthClass":{"type":"string","default":"dt_width_m"},"lineHeight":{"type":"number","default":1.6},"spFullDt":{"type":"boolean","default":false},"dtBackgroundColor":{"type":"string","default":"#f0f0f0"},"dtTextColor":{"type":"string","default":"#000000"},"fontDt":{"type":"string","default":""},"fontWeightDt":{"type":"string","default":""},"ddTextColor":{"type":"string","default":"#000000"},"fontDd":{"type":"string","default":""},"fontWeightDd":{"type":"string","default":""},"borderColor":{"type":"string","default":"#cccccc"},"items":{"type":"array","source":"query","selector":".company-profile-item","query":{"dt":{"type":"string","source":"html","selector":"dt"},"dd":{"type":"string","source":"html","selector":"dd"},"dtPlaceholder":{"type":"string","default":""},"ddPlaceholder":{"type":"string","default":""}},"default":[{"dt":"会社名","dtPlaceholder":"会社名","dd":"株式会社〇〇不動産","ddPlaceholder":"内容"},{"dt":"所在地","dtPlaceholder":"所在地","dd":"東京都〇〇区〇〇町1-1-1","ddPlaceholder":"内容"},{"dt":"電話番号","dtPlaceholder":"電話番号","dd":"03-1234-5678","ddPlaceholder":"内容"},{"dt":"設立","dtPlaceholder":"設立","dd":"2020年1月1日","ddPlaceholder":"内容"}]}},"editorScript":"file:./lw-company-2.js","no":2}');
 
 /***/ })
 

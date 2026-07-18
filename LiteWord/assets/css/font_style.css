@@ -1494,9 +1494,13 @@
 
 [class*="u-line-1-"] {
   text-decoration-line: underline;
-  text-decoration-thickness: 0.5em;
-  text-underline-offset: -0.15em;
+  text-decoration-thickness: var(--u-line-width, 0.5em);
+  text-underline-offset: var(--u-line-offset, -0.15em);
   text-decoration-skip-ink: none;
+}
+
+.u-line-1-black {
+  text-decoration-color: var(--color-black);
 }
 
 .u-line-1-red {
@@ -1557,13 +1561,13 @@
 [class*="u-line-2-"]:after,
 [class*="u-line-3-"]:after {
   position: absolute;
-  bottom: -0.1em;
+  bottom: var(--u-line-offset, -0.1em);
   left: 0;
   z-index: -1;
   content: "";
   display: block;
   width: 100%;
-  height: 0.4em;
+  height: var(--u-line-width, 0.4em);
   border-radius: 10em;
 }
 
@@ -1641,6 +1645,120 @@
 .u-line-2-color_3:after,
 .u-line-3-color_3:after {
   background-color: var(--color-3);
+}
+
+/* 下線の太さ（u-line-2用） */
+.ulw-005 {
+  --u-line-width: 0.05em;
+}
+
+.ulw-01 {
+  --u-line-width: 0.1em;
+}
+
+.ulw-015 {
+  --u-line-width: 0.15em;
+}
+
+.ulw-02 {
+  --u-line-width: 0.2em;
+}
+
+.ulw-025 {
+  --u-line-width: 0.25em;
+}
+
+.ulw-03 {
+  --u-line-width: 0.3em;
+}
+
+.ulw-035 {
+  --u-line-width: 0.35em;
+}
+
+.ulw-04 {
+  --u-line-width: 0.4em;
+}
+
+.ulw-05 {
+  --u-line-width: 0.5em;
+}
+
+.ulw-06 {
+  --u-line-width: 0.6em;
+}
+
+.ulw-07 {
+  --u-line-width: 0.7em;
+}
+
+.ulw-08 {
+  --u-line-width: 0.8em;
+}
+
+.ulw-09 {
+  --u-line-width: 0.9em;
+}
+
+.ulw-1 {
+  --u-line-width: 1em;
+}
+
+/* 下線の位置（u-line全般用） */
+.ulo--04 {
+  --u-line-offset: -0.4em;
+}
+
+.ulo--03 {
+  --u-line-offset: -0.3em;
+}
+
+.ulo--02 {
+  --u-line-offset: -0.2em;
+}
+
+.ulo--015 {
+  --u-line-offset: -0.15em;
+}
+
+.ulo--01 {
+  --u-line-offset: -0.1em;
+}
+
+.ulo--005 {
+  --u-line-offset: -0.05em;
+}
+
+.ulo-0 {
+  --u-line-offset: 0em;
+}
+
+.ulo-005 {
+  --u-line-offset: 0.05em;
+}
+
+.ulo-01 {
+  --u-line-offset: 0.1em;
+}
+
+.ulo-015 {
+  --u-line-offset: 0.15em;
+}
+
+.ulo-02 {
+  --u-line-offset: 0.2em;
+}
+
+.ulo-03 {
+  --u-line-offset: 0.3em;
+}
+
+.ulo-04 {
+  --u-line-offset: 0.4em;
+}
+
+.ulo-05 {
+  --u-line-offset: 0.5em;
 }
 
 .lw_max_width_100vw:not(.block-editor-block-list__block) {
@@ -4546,4 +4664,117 @@
     max-width: var(--lw-block-min-width-sp, 600px);
     width: var(--lw-block-min-width-sp, 600px);
   }
+}
+
+/* ======================================
+  position
+   ====================================== */
+.block-editor-block-list__layout:has([style*="--lw-block-position-pc"]) {
+  position: static !important;
+}
+
+[style*="--lw-block-position-pc"] {
+  position: var(--lw-block-position-pc) !important;
+}
+
+@media (max-width: 1000px) {
+  [style*="--lw-block-position-tb"] {
+    position: var(--lw-block-position-tb) !important;
+  }
+}
+
+@media (max-width: 700px) {
+  [style*="--lw-block-position-sp"] {
+    position: var(--lw-block-position-sp) !important;
+  }
+}
+
+/* ────────── top ────────── */
+[style*="--lw-block-top-pc"] {
+  top: var(--lw-block-top-pc);
+}
+
+@media (max-width: 1000px) {
+  [style*="--lw-block-top-tb"] {
+    top: var(--lw-block-top-tb);
+  }
+}
+
+@media (max-width: 700px) {
+  [style*="--lw-block-top-sp"] {
+    top: var(--lw-block-top-sp);
+  }
+}
+
+/* ────────── bottom ────────── */
+[style*="--lw-block-bottom-pc"] {
+  bottom: var(--lw-block-bottom-pc);
+}
+
+@media (max-width: 1000px) {
+  [style*="--lw-block-bottom-tb"] {
+    bottom: var(--lw-block-bottom-tb);
+  }
+}
+
+@media (max-width: 700px) {
+  [style*="--lw-block-bottom-sp"] {
+    bottom: var(--lw-block-bottom-sp);
+  }
+}
+
+/* ────────── left ────────── */
+[style*="--lw-block-left-pc"] {
+  left: var(--lw-block-left-pc);
+}
+
+@media (max-width: 1000px) {
+  [style*="--lw-block-left-tb"] {
+    left: var(--lw-block-left-tb);
+  }
+}
+
+@media (max-width: 700px) {
+  [style*="--lw-block-left-sp"] {
+    left: var(--lw-block-left-sp);
+  }
+}
+
+/* ────────── right ────────── */
+[style*="--lw-block-right-pc"] {
+  right: var(--lw-block-right-pc);
+}
+
+@media (max-width: 1000px) {
+  [style*="--lw-block-right-tb"] {
+    right: var(--lw-block-right-tb);
+  }
+}
+
+@media (max-width: 700px) {
+  [style*="--lw-block-right-sp"] {
+    right: var(--lw-block-right-sp);
+  }
+}
+
+/* ────────── z-index ────────── */
+[style*="--lw-block-zindex-pc"] {
+  z-index: var(--lw-block-zindex-pc);
+}
+
+@media (max-width: 1000px) {
+  [style*="--lw-block-zindex-tb"] {
+    z-index: var(--lw-block-zindex-tb);
+  }
+}
+
+@media (max-width: 700px) {
+  [style*="--lw-block-zindex-sp"] {
+    z-index: var(--lw-block-zindex-sp);
+  }
+}
+
+/* ────────── overflow無効化 ────────── */
+[style*="overflow: initial"] {
+  overflow: initial !important;
 }

@@ -19,6 +19,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/lw-step-1/style.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-step-1/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/lw-step-1/block.json");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -78,8 +84,9 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
 
     // コンテンツを更新
     var updateContent = function updateContent(index, key, value) {
-      var updatedContents = _toConsumableArray(contents);
-      updatedContents[index][key] = value;
+      var updatedContents = contents.map(function (content, i) {
+        return i === index ? _objectSpread(_objectSpread({}, content), {}, _defineProperty({}, key, value)) : content;
+      });
       setAttributes({
         contents: updatedContents
       });
@@ -88,7 +95,7 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
       className: 'lw-step-1'
     });
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F"
+      title: "\u80CC\u666F\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\u30D5\u30A3\u30EB\u30BF\u30FC\u306E\u8272",
       value: bgGradient,
@@ -110,7 +117,7 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
       max: 1,
       step: 0.01
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30EA\u30B9\u30C8\u90E8\u5206\u306E\u8A2D\u5B9A"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u6700\u5927\u6A2A\u5E45",
       value: ulMaxWidth,
@@ -997,7 +1004,7 @@ module.exports = window["wp"]["components"];
   \**********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-step-1","version":"1.0.0","title":"step 01","category":"lw-step","icon":"lightbulb","supports":{"anchor":true},"editorScript":"file:./lw-step-1.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":1,"attributes":{"bgGradient":{"type":"string","default":"var(--color-main)"},"filterOpacity":{"type":"number","default":0.15},"titleText":{"type":"string","default":"採用までの流れ"},"ulMaxWidth":{"type":"number","default":800},"fontH3":{"type":"string","default":""},"fontWeightH3":{"type":"string","default":""},"fontP":{"type":"string","default":""},"fontWeightP":{"type":"string","default":""},"colorLiSvg":{"type":"string","default":"var(--color-main)"},"contents":{"type":"array","source":"query","selector":".lw-step-1__li","query":{"title":{"type":"string","source":"html","selector":"h3"},"text":{"type":"string","source":"html","selector":"p"}},"default":[{"title":"応募","text":"応募フォームより必要事項を入力し、送信してください。応募内容を確認し、追って担当者よりご連絡いたします。"},{"title":"書類選考","text":"ご応募いただいた内容をもとに、書類選考を行います。結果は1週間以内にメールにてお知らせいたします。"},{"title":"面接","text":"書類選考に通過された方には、担当者による面接を実施します。面接日時はご相談の上、決定いたします。"},{"title":"最終選考","text":"面接後、最終選考を行い、採用の可否を決定します。結果はメールにてご連絡いたします。"},{"title":"内定","text":"最終選考を通過された方には、内定通知をお送りし、入社手続きを進めていただきます。"}]}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-step-1","version":"1.0.0","title":"step 01","category":"lw-step","icon":"lightbulb","supports":{"anchor":true},"editorScript":"file:./lw-step-1.js","aiHint":{"description":"縦型ステップ。タイトル付き背景色+番号+見出し+説明の繰り返し。採用フロー・利用手順に","excludeFromAutoSelect":false,"contentAttributes":["titleText","contents"],"imageAttributes":[]},"no":1,"attributes":{"bgGradient":{"type":"string","default":"var(--color-main)"},"filterOpacity":{"type":"number","default":0.15},"titleText":{"type":"string","default":"採用までの流れ"},"ulMaxWidth":{"type":"number","default":800},"fontH3":{"type":"string","default":""},"fontWeightH3":{"type":"string","default":""},"fontP":{"type":"string","default":""},"fontWeightP":{"type":"string","default":""},"colorLiSvg":{"type":"string","default":"var(--color-main)"},"contents":{"type":"array","source":"query","selector":".lw-step-1__li","query":{"title":{"type":"string","source":"html","selector":"h3"},"text":{"type":"string","source":"html","selector":"p"}},"default":[{"title":"応募","text":"応募フォームより必要事項を入力し、送信してください。応募内容を確認し、追って担当者よりご連絡いたします。"},{"title":"書類選考","text":"ご応募いただいた内容をもとに、書類選考を行います。結果は1週間以内にメールにてお知らせいたします。"},{"title":"面接","text":"書類選考に通過された方には、担当者による面接を実施します。面接日時はご相談の上、決定いたします。"},{"title":"最終選考","text":"面接後、最終選考を行い、採用の可否を決定します。結果はメールにてご連絡いたします。"},{"title":"内定","text":"最終選考を通過された方には、内定通知をお送りし、入社手続きを進めていただきます。"}]}}}');
 
 /***/ })
 

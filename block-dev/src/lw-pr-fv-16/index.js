@@ -107,7 +107,7 @@ registerBlockType(metadata.name, {
                     </ToolbarGroup>
                 </BlockControls>
                 <InspectorControls>
-                    <PanelBody title="背景タイプ" initialOpen={true}>
+                    <PanelBody title="背景設定" initialOpen={true}>
                         <SelectControl
                             label="背景タイプを選択"
                             value={backgroundType}
@@ -205,7 +205,7 @@ registerBlockType(metadata.name, {
                         />
                     </PanelBody>
 
-                    <PanelBody title="背景フィルター" initialOpen={false}>
+                    <PanelBody title="フィルター設定" initialOpen={false}>
                         <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>画像フィルターの色</p>
                         <ColorPalette
                             value={filterColor}
@@ -235,7 +235,7 @@ registerBlockType(metadata.name, {
                         />
                     </PanelBody>
 
-                    <PanelBody title="タイトルスタイル" initialOpen={false}>
+                    <PanelBody title="タイトル設定" initialOpen={false}>
                         <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>文字色</p>
                         <ColorPalette
                             value={titleColor}
@@ -286,7 +286,7 @@ registerBlockType(metadata.name, {
                         />
                     </PanelBody>
 
-                    <PanelBody title="説明文スタイル" initialOpen={false}>
+                    <PanelBody title="テキスト設定" initialOpen={false}>
                         <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>文字色</p>
                         <ColorPalette
                             value={descriptionColor}

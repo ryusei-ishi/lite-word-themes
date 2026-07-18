@@ -1,0 +1,42 @@
+.lw-pr-table-3 .lw-pr-table-3__cell {
+  position: relative;
+  cursor: pointer;
+}
+
+.lw-pr-table-3 .lw-pr-table-3__cell.is-selected {
+  outline: 2px solid #007cba;
+  outline-offset: -2px;
+  z-index: 1;
+}
+
+.lw-pr-table-3 .lw-pr-table-3__merge-toolbar {
+  position: absolute;
+  bottom: -30px;
+  left: 0;
+  display: flex;
+  gap: 2px;
+  background: #1e1e1e;
+  border-radius: 4px;
+  padding: 2px;
+  z-index: 10;
+  white-space: nowrap;
+}
+
+.lw-pr-table-3 .lw-pr-table-3__merge-toolbar button {
+  background: transparent;
+  color: #fff;
+  border: none;
+  padding: 2px 8px;
+  font-size: 12px;
+  cursor: pointer;
+  border-radius: 3px;
+  line-height: 1.6;
+}
+
+.lw-pr-table-3 .lw-pr-table-3__merge-toolbar button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.lw-pr-table-3 .lw-pr-table-3__merge-toolbar button.unmerge {
+  color: #f0b849;
+}

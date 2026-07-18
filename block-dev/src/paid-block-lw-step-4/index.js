@@ -51,8 +51,9 @@ registerBlockType(metadata.name, {
 		const removeContent = (idx) =>
 			setAttributes({ contents: contents.filter((_, i) => i !== idx) });
 		const updateContent = (idx, key, value) => {
-			const updated = [...contents];
-			updated[idx][key] = value;
+			const updated = contents.map((item, i) =>
+				i === idx ? { ...item, [key]: value } : item
+			);
 			setAttributes({ contents: updated });
 		};
 

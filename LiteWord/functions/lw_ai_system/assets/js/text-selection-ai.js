@@ -15,6 +15,10 @@
     const { createHigherOrderComponent } = wp.compose;
     const { addFilter } = wp.hooks;
 
+    // デバッグモード（本番環境ではfalse）
+    const LW_AI_TEXT_DEBUG = false;
+    const log = LW_AI_TEXT_DEBUG ? console.log.bind(console) : function() {};
+
     // グローバル状態
     let currentSelectionData = null;
 
@@ -23,6 +27,10 @@
      */
     const withAIToolbarButton = createHigherOrderComponent((BlockEdit) => {
         return (props) => {
+            // AI機能の有効/無効状態を監視
+            const [aiEnabled, setAiEnabled] = useState(window.lwAiFeaturesEnabled || false);
+
+            // ※ Reactのルール: すべてのHooksは条件分岐やreturnの前に宣言する必要がある
             const [showModal, setShowModal] = useState(false);
             const [instruction, setInstruction] = useState('');
             const [isLoading, setIsLoading] = useState(false);
@@ -47,8 +55,22 @@
             const inputRef = useRef(null);
             const floatingButtonRef = useRef(null);
 
-            // カスタムプロンプト読み込み
+            // AI機能のON/OFFイベントを監視
             useEffect(() => {
+                const handleToggle = (e) => {
+                    setAiEnabled(e.detail.enabled);
+                };
+                window.addEventListener('lwAiFeaturesToggle', handleToggle);
+                // 初期状態を同期
+                setAiEnabled(window.lwAiFeaturesEnabled || false);
+                return () => {
+                    window.removeEventListener('lwAiFeaturesToggle', handleToggle);
+                };
+            }, []);
+
+            // カスタムプロンプト読み込み（AI有効時のみ実行）
+            useEffect(() => {
+                if (!aiEnabled) return;
                 const loadCustomPrompts = async () => {
                     try {
                         const response = await fetch(lwAiTextSelectionData.restUrl + 'custom-prompts', {
@@ -71,7 +93,132 @@
                     }
                 };
                 loadCustomPrompts();
-            }, []);
+            }, [aiEnabled]);
+
+            // モーダル表示時にフォーカス
+            useEffect(() => {
+                if (aiEnabled && showModal && inputRef.current) {
+                    setTimeout(() => inputRef.current.focus(), 100);
+                }
+            }, [showModal, aiEnabled]);
+
+            // フローティングボタンを表示するブロックタイプ
+            const floatingButtonBlockTypes = ['core/paragraph', 'core/heading'];
+
+            // フローティングボタンを表示するかどうかを判定
+            const shouldShowFloatingButton = (blockName) => {
+                // core/paragraph, core/heading は表示
+                if (floatingButtonBlockTypes.includes(blockName)) {
+                    return true;
+                }
+                // wdl/custom-title-* (見出しブロック) は表示
+                if (blockName && blockName.startsWith('wdl/custom-title-')) {
+                    return true;
+                }
+                // wdl/lw-pr-custom-title-* (プレミアム見出しブロック) は表示
+                if (blockName && blockName.startsWith('wdl/lw-pr-custom-title-')) {
+                    return true;
+                }
+                // wdl/paid-block-custom-title-* (有料見出しブロック) は表示
+                if (blockName && blockName.startsWith('wdl/paid-block-custom-title-')) {
+                    return true;
+                }
+                return false;
+            };
+
+            // iframe内のドキュメントを取得するヘルパー
+            const getEditorDocument = () => {
+                const iframe = document.querySelector('iframe[name="editor-canvas"]');
+                if (iframe && iframe.contentDocument) {
+                    return iframe.contentDocument;
+                }
+                return document;
+            };
+
+            // フローティングボタンの位置を更新（fixed position用）
+            useEffect(() => {
+                // AI無効時または対象ブロック以外は表示しない
+                if (!aiEnabled || !props.isSelected || !shouldShowFloatingButton(props.name)) {
+                    setFloatingButtonPos(null);
+                    return;
+                }
+
+                const updatePosition = () => {
+                    // iframe内とメインドキュメントの両方を検索
+                    const editorDoc = getEditorDocument();
+                    let blockElement = editorDoc.querySelector(`[data-block="${props.clientId}"]`);
+
+                    // iframe内で見つからない場合はメインドキュメントも検索
+                    if (!blockElement) {
+                        blockElement = document.querySelector(`[data-block="${props.clientId}"]`);
+                    }
+
+                    if (blockElement) {
+                        const rect = blockElement.getBoundingClientRect();
+
+                        // iframeの場合はiframeのオフセットを考慮
+                        const iframe = document.querySelector('iframe[name="editor-canvas"]');
+                        let offsetTop = 0;
+                        let offsetLeft = 0;
+                        if (iframe) {
+                            const iframeRect = iframe.getBoundingClientRect();
+                            offsetTop = iframeRect.top;
+                            offsetLeft = iframeRect.left;
+                        }
+
+                        // ブロックの右上に配置（ビューポート座標）
+                        setFloatingButtonPos({
+                            top: rect.top + offsetTop - 10, // ブロックの少し上
+                            left: rect.right + offsetLeft + 10 // ブロックの右側
+                        });
+                    } else {
+                        setFloatingButtonPos(null);
+                    }
+                };
+
+                updatePosition();
+
+                // スクロールやリサイズ時に位置を更新（passiveオプションでパフォーマンス改善）
+                const scrollableContainer = document.querySelector('.interface-interface-skeleton__content');
+                if (scrollableContainer) {
+                    scrollableContainer.addEventListener('scroll', updatePosition, { passive: true });
+                }
+
+                // iframe内のスクロールも監視
+                const iframe = document.querySelector('iframe[name="editor-canvas"]');
+                if (iframe && iframe.contentWindow) {
+                    iframe.contentWindow.addEventListener('scroll', updatePosition, { passive: true });
+                }
+
+                window.addEventListener('scroll', updatePosition, { capture: true, passive: true });
+                window.addEventListener('resize', updatePosition, { passive: true });
+
+                // MutationObserverでブロックの変更を監視
+                const observer = new MutationObserver(updatePosition);
+                const editorDoc = getEditorDocument();
+                const editorArea = editorDoc.querySelector('.block-editor-block-list__layout') ||
+                                   document.querySelector('.block-editor-block-list__layout');
+                if (editorArea) {
+                    observer.observe(editorArea, { childList: true, subtree: true, attributes: true });
+                }
+
+                return () => {
+                    if (scrollableContainer) {
+                        scrollableContainer.removeEventListener('scroll', updatePosition);
+                    }
+                    if (iframe && iframe.contentWindow) {
+                        iframe.contentWindow.removeEventListener('scroll', updatePosition);
+                    }
+                    window.removeEventListener('scroll', updatePosition, { capture: true });
+                    window.removeEventListener('resize', updatePosition);
+                    observer.disconnect();
+                };
+            }, [aiEnabled, props.isSelected, props.clientId, props.name]);
+
+            // AI機能がOFFの場合は元のBlockEditのみを返す
+            if (!aiEnabled) {
+                return createElement(BlockEdit, props);
+            }
 
             // カスタムプロンプト保存（新規・更新共通）
             const handleSaveCustomPrompt = async () => {
@@ -194,7 +341,7 @@
             // ブロックからテキスト属性を取得するヘルパー
             const getBlockTextContent = (block) => {
                 if (!block || !block.attributes) {
-                    console.log('[LW AI Text] getBlockTextContent: no block or attributes');
+                    log('[LW AI Text] getBlockTextContent: no block or attributes');
                     return null;
                 }
 
@@ -218,7 +365,7 @@
                         if (typeof value === 'object' && value !== null) {
                             // textプロパティがある場合
                             if (value.text && typeof value.text === 'string' && value.text.trim()) {
-                                console.log('[LW AI Text] Found text from object.text:', value.text);
+                                log('[LW AI Text] Found text from object.text:', value.text);
                                 return { text: value.text, attrName };
                             }
                             // toStringで取得してチェック
@@ -226,7 +373,7 @@
                                 const stringValue = value.toString();
                                 // [object Object]でなく、かつ空でない場合
                                 if (stringValue && stringValue !== '[object Object]' && stringValue.trim()) {
-                                    console.log('[LW AI Text] Found text from object.toString():', stringValue);
+                                    log('[LW AI Text] Found text from object.toString():', stringValue);
                                     return { text: stringValue, attrName };
                                 }
                             }
@@ -235,12 +382,12 @@
 
                         // 文字列の場合
                         if (typeof value === 'string' && value.trim()) {
-                            console.log('[LW AI Text] Found text from string:', value);
+                            log('[LW AI Text] Found text from string:', value);
                             return { text: value, attrName };
                         }
                     }
                 }
-                console.log('[LW AI Text] getBlockTextContent: no text found, returning null');
+                log('[LW AI Text] getBlockTextContent: no text found, returning null');
                 return null;
             };
 
@@ -264,7 +411,7 @@
                         try {
                             sel = iframe.contentWindow.getSelection();
                         } catch (e) {
-                            console.log('[LW AI Text] Could not get selection from iframe for attribute detection');
+                            log('[LW AI Text] Could not get selection from iframe for attribute detection');
                         }
                     }
                 }
@@ -305,7 +452,7 @@
                         if (richTextElement.matches(mapping.selector)) {
                             for (const attrName of mapping.attrs) {
                                 if (block.attributes.hasOwnProperty(attrName)) {
-                                    console.log('[LW AI Text] Found target attribute from RichText element:', attrName);
+                                    log('[LW AI Text] Found target attribute from RichText element:', attrName);
                                     return attrName;
                                 }
                             }
@@ -315,7 +462,7 @@
                         if (ancestor) {
                             for (const attrName of mapping.attrs) {
                                 if (block.attributes.hasOwnProperty(attrName)) {
-                                    console.log('[LW AI Text] Found target attribute from ancestor:', attrName);
+                                    log('[LW AI Text] Found target attribute from ancestor:', attrName);
                                     return attrName;
                                 }
                             }
@@ -338,7 +485,7 @@
                         if (block.attributes.hasOwnProperty('heading')) return 'heading';
                     }
 
-                    console.log('[LW AI Text] Could not determine target attribute from DOM');
+                    log('[LW AI Text] Could not determine target attribute from DOM');
                     return null;
                 } catch (err) {
                     console.error('[LW AI Text] Error determining target attribute:', err);
@@ -366,9 +513,9 @@
                         try {
                             selection = iframe.contentWindow.getSelection();
                             rawText = selection ? selection.toString() : '';
-                            console.log('[LW AI Text] Got selection from iframe:', rawText ? `"${rawText}"` : '(empty)');
+                            log('[LW AI Text] Got selection from iframe:', rawText ? `"${rawText}"` : '(empty)');
                         } catch (e) {
-                            console.log('[LW AI Text] Could not get selection from iframe:', e);
+                            log('[LW AI Text] Could not get selection from iframe:', e);
                         }
                     }
                 }
@@ -379,8 +526,8 @@
                 const multiSelectedIds = select('core/block-editor').getMultiSelectedBlockClientIds();
                 const isMultiSelect = multiSelectedIds && multiSelectedIds.length > 1;
 
-                console.log('[LW AI Text] ===== handleButtonClick START =====');
-                console.log('[LW AI Text] Multi-selected blocks:', multiSelectedIds?.length || 0);
+                log('[LW AI Text] ===== handleButtonClick START =====');
+                log('[LW AI Text] Multi-selected blocks:', multiSelectedIds?.length || 0);
 
                 let finalText = text;
                 let source = 'selection';
@@ -388,7 +535,7 @@
 
                 // 複数ブロック選択の場合
                 if (isMultiSelect) {
-                    console.log('[LW AI Text] Multiple blocks selected:', multiSelectedIds.length);
+                    log('[LW AI Text] Multiple blocks selected:', multiSelectedIds.length);
                     const blocks = multiSelectedIds.map(id => select('core/block-editor').getBlock(id));
 
                     // 各ブロックのテキストを結合
@@ -404,55 +551,55 @@
                             clientIds: multiSelectedIds,
                             blocks: blocks
                         };
-                        console.log('[LW AI Text] Using MULTI-BLOCK mode, combined text:', finalText.substring(0, 100) + '...');
+                        log('[LW AI Text] Using MULTI-BLOCK mode, combined text:', finalText.substring(0, 100) + '...');
                     }
                 } else {
                     // 単一ブロック選択
                     const selectedBlock = select('core/block-editor').getSelectedBlock();
-                    console.log('[LW AI Text] Selected text from window.getSelection():', text ? `"${text}"` : '(empty)');
-                    console.log('[LW AI Text] Selected block:', selectedBlock);
+                    log('[LW AI Text] Selected text from window.getSelection():', text ? `"${text}"` : '(empty)');
+                    log('[LW AI Text] Selected block:', selectedBlock);
 
                     // テキスト未選択の場合、ブロック全体のテキストを取得
                     if (!text) {
-                        console.log('[LW AI Text] No text selected, checking block content...');
+                        log('[LW AI Text] No text selected, checking block content...');
                         const blockText = getBlockTextContent(selectedBlock);
-                        console.log('[LW AI Text] getBlockTextContent result:', blockText);
+                        log('[LW AI Text] getBlockTextContent result:', blockText);
 
                         if (blockText && blockText.text) {
                             // HTMLからプレーンテキストを抽出して実際にテキストがあるかチェック
                             const plainText = extractPlainText(blockText.text);
-                            console.log('[LW AI Text] Extracted plain text:', plainText ? `"${plainText}"` : '(empty)');
+                            log('[LW AI Text] Extracted plain text:', plainText ? `"${plainText}"` : '(empty)');
 
                             if (plainText) {
                                 finalText = blockText.text;
                                 source = 'block';
-                                console.log('[LW AI Text] Using BLOCK text mode, text:', finalText.substring(0, 50) + '...');
+                                log('[LW AI Text] Using BLOCK text mode, text:', finalText.substring(0, 50) + '...');
                             } else {
                                 // HTMLはあるが実際のテキストが空の場合は新規生成モード
                                 finalText = '';
                                 source = 'new';
-                                console.log('[LW AI Text] Block has HTML but no actual text, using NEW generation mode');
+                                log('[LW AI Text] Block has HTML but no actual text, using NEW generation mode');
                             }
                         } else {
                             // ブロックにテキストがない場合は新規生成モード
                             finalText = '';
                             source = 'new';
-                            console.log('[LW AI Text] Using NEW generation mode (no block text found)');
+                            log('[LW AI Text] Using NEW generation mode (no block text found)');
                         }
                     } else {
-                        console.log('[LW AI Text] Using SELECTION mode, text:', text.substring(0, 50) + '...');
+                        log('[LW AI Text] Using SELECTION mode, text:', text.substring(0, 50) + '...');
                     }
                 }
 
-                console.log('[LW AI Text] Final source:', source);
-                console.log('[LW AI Text] Final text:', finalText ? finalText.substring(0, 50) + '...' : '(empty)');
+                log('[LW AI Text] Final source:', source);
+                log('[LW AI Text] Final text:', finalText ? finalText.substring(0, 50) + '...' : '(empty)');
 
                 // 選択中のブロック情報を取得（単一選択の場合）
                 const selectedBlock = select('core/block-editor').getSelectedBlock();
 
                 // 選択範囲から対応する属性名を特定
                 const targetAttribute = getTargetAttributeFromSelection(selection, selectedBlock);
-                console.log('[LW AI Text] Target attribute from selection:', targetAttribute);
+                log('[LW AI Text] Target attribute from selection:', targetAttribute);
 
                 // 選択範囲とブロック情報を保存
                 currentSelectionData = {
@@ -465,8 +612,8 @@
                     multiBlocks: multiBlocks,
                     targetAttribute: targetAttribute
                 };
-                console.log('[LW AI Text] Saved selection data, textSource:', currentSelectionData.textSource, 'targetAttribute:', targetAttribute);
-                console.log('[LW AI Text] ===== handleButtonClick END =====');
+                log('[LW AI Text] Saved selection data, textSource:', currentSelectionData.textSource, 'targetAttribute:', targetAttribute);
+                log('[LW AI Text] ===== handleButtonClick END =====');
 
                 setTextSource(source);
                 setSelectedText(finalText);
@@ -521,7 +668,7 @@
                     });
 
                     const data = await response.json();
-                    console.log('[LW AI Text] Response:', data);
+                    log('[LW AI Text] Response:', data);
 
                     if (data.success && data.decoration) {
                         const decorationType = data.decoration.type || 'style';
@@ -586,7 +733,7 @@
                                     const originalPlainText = stripHtmlTags(currentSelectionData.selectedText);
                                     if (plainText === originalPlainText || plainText.includes(originalPlainText)) {
                                         textToHighlight = attrString;
-                                        console.log('[LW AI Text] Using current HTML content:', textToHighlight);
+                                        log('[LW AI Text] Using current HTML content:', textToHighlight);
                                         break;
                                     }
                                 }
@@ -595,7 +742,7 @@
                     }
 
                     // 複数スタイルを一度に適用（AIは1回だけ呼び出し）
-                    console.log('[LW AI Text] Applying styles:', selectedStyles);
+                    log('[LW AI Text] Applying styles:', selectedStyles);
                     const response = await fetch(lwAiTextSelectionData.restUrl + 'auto-highlight-multi', {
                         method: 'POST',
                         headers: {
@@ -609,7 +756,7 @@
                     });
 
                     const data = await response.json();
-                    console.log('[LW AI Text] Auto highlight multi response:', data);
+                    log('[LW AI Text] Auto highlight multi response:', data);
 
                     if (data.success && data.highlightedHtml) {
                         // 最終結果を適用
@@ -650,13 +797,13 @@
                     });
 
                     const data = await response.json();
-                    console.log('[LW AI Text] Generate text response:', data);
+                    log('[LW AI Text] Generate text response:', data);
 
                     if (data.success && data.generatedText) {
                         setGeneratedText(data.generatedText);
                         setSearchSources(data.sources || []);
                         setShowConfirmation(true);
-                        console.log('[LW AI Text] Search sources:', data.sources);
+                        log('[LW AI Text] Search sources:', data.sources);
                     } else {
                         alert('テキスト生成に失敗しました: ' + (data.message || '不明なエラー'));
                     }
@@ -677,7 +824,7 @@
                 // 複数ブロック選択モードの場合
                 if (currentSelectionData.textSource === 'multi' && currentSelectionData.multiBlocks) {
                     const { clientIds } = currentSelectionData.multiBlocks;
-                    console.log('[LW AI Text] Multi-block mode: replacing', clientIds.length, 'blocks');
+                    log('[LW AI Text] Multi-block mode: replacing', clientIds.length, 'blocks');
 
                     // 空行で段落を分割
                     const paragraphs = generatedText.split(/\n\s*\n/).filter(p => p.trim());
@@ -695,7 +842,7 @@
                     );
 
                     dispatch('core/block-editor').insertBlocks(newBlocks, firstBlockIndex, rootClientId);
-                    console.log('[LW AI Text] Multi-block: replaced with', paragraphs.length, 'new paragraph blocks');
+                    log('[LW AI Text] Multi-block: replaced with', paragraphs.length, 'new paragraph blocks');
                 }
                 // 新規生成モードの場合
                 else if (currentSelectionData.textSource === 'new') {
@@ -722,16 +869,16 @@
                                     rootClientId
                                 );
                             }
-                            console.log('[LW AI Text] New generation: created', paragraphs.length, 'paragraph blocks');
+                            log('[LW AI Text] New generation: created', paragraphs.length, 'paragraph blocks');
                         } else {
                             // 単一段落の場合はそのまま設定
                             dispatch('core/block-editor').updateBlockAttributes(savedClientId, { content: generatedText.trim() });
-                            console.log('[LW AI Text] New generation: single paragraph');
+                            log('[LW AI Text] New generation: single paragraph');
                         }
                     } else {
                         // 段落以外のブロックはそのまま設定
                         dispatch('core/block-editor').updateBlockAttributes(savedClientId, { content: generatedText });
-                        console.log('[LW AI Text] New generation: directly set content attribute');
+                        log('[LW AI Text] New generation: directly set content attribute');
                     }
                 } else {
                     applyHighlightedHtml(generatedText, savedClientId);
@@ -791,7 +938,7 @@ ${generatedText}`;
                     });
 
                     const data = await response.json();
-                    console.log('[LW AI Text] Refinement response:', data);
+                    log('[LW AI Text] Refinement response:', data);
 
                     if (data.success && data.generatedText) {
                         setGeneratedText(data.generatedText);
@@ -852,7 +999,7 @@ ${generatedText}`;
                     });
 
                     const data = await response.json();
-                    console.log('[LW AI Text] Tone change response:', data);
+                    log('[LW AI Text] Tone change response:', data);
 
                     if (data.success && data.generatedText) {
                         setGeneratedText(data.generatedText);
@@ -867,125 +1014,6 @@ ${generatedText}`;
                     setIsLoading(false);
                 }
             };
-
-            useEffect(() => {
-                if (showModal && inputRef.current) {
-                    setTimeout(() => inputRef.current.focus(), 100);
-                }
-            }, [showModal]);
-
-            // フローティングボタンを表示するブロックタイプ
-            const floatingButtonBlockTypes = ['core/paragraph', 'core/heading'];
-
-            // フローティングボタンを表示するかどうかを判定
-            const shouldShowFloatingButton = (blockName) => {
-                // core/paragraph, core/heading は表示
-                if (floatingButtonBlockTypes.includes(blockName)) {
-                    return true;
-                }
-                // wdl/custom-title-* (見出しブロック) は表示
-                if (blockName && blockName.startsWith('wdl/custom-title-')) {
-                    return true;
-                }
-                // wdl/lw-pr-custom-title-* (プレミアム見出しブロック) は表示
-                if (blockName && blockName.startsWith('wdl/lw-pr-custom-title-')) {
-                    return true;
-                }
-                // wdl/paid-block-custom-title-* (有料見出しブロック) は表示
-                if (blockName && blockName.startsWith('wdl/paid-block-custom-title-')) {
-                    return true;
-                }
-                return false;
-            };
-
-            // iframe内のドキュメントを取得するヘルパー
-            const getEditorDocument = () => {
-                const iframe = document.querySelector('iframe[name="editor-canvas"]');
-                if (iframe && iframe.contentDocument) {
-                    return iframe.contentDocument;
-                }
-                return document;
-            };
-
-            // フローティングボタンの位置を更新（fixed position用）
-            useEffect(() => {
-                // 対象ブロック以外は表示しない
-                if (!props.isSelected || !shouldShowFloatingButton(props.name)) {
-                    setFloatingButtonPos(null);
-                    return;
-                }
-
-                const updatePosition = () => {
-                    // iframe内とメインドキュメントの両方を検索
-                    const editorDoc = getEditorDocument();
-                    let blockElement = editorDoc.querySelector(`[data-block="${props.clientId}"]`);
-
-                    // iframe内で見つからない場合はメインドキュメントも検索
-                    if (!blockElement) {
-                        blockElement = document.querySelector(`[data-block="${props.clientId}"]`);
-                    }
-
-                    if (blockElement) {
-                        const rect = blockElement.getBoundingClientRect();
-
-                        // iframeの場合はiframeのオフセットを考慮
-                        const iframe = document.querySelector('iframe[name="editor-canvas"]');
-                        let offsetTop = 0;
-                        let offsetLeft = 0;
-                        if (iframe) {
-                            const iframeRect = iframe.getBoundingClientRect();
-                            offsetTop = iframeRect.top;
-                            offsetLeft = iframeRect.left;
-                        }
-
-                        // ブロックの右上に配置（ビューポート座標）
-                        setFloatingButtonPos({
-                            top: rect.top + offsetTop - 10, // ブロックの少し上
-                            left: rect.right + offsetLeft + 10 // ブロックの右側
-                        });
-                    } else {
-                        setFloatingButtonPos(null);
-                    }
-                };
-
-                updatePosition();
-
-                // スクロールやリサイズ時に位置を更新
-                const scrollableContainer = document.querySelector('.interface-interface-skeleton__content');
-                if (scrollableContainer) {
-                    scrollableContainer.addEventListener('scroll', updatePosition);
-                }
-
-                // iframe内のスクロールも監視
-                const iframe = document.querySelector('iframe[name="editor-canvas"]');
-                if (iframe && iframe.contentWindow) {
-                    iframe.contentWindow.addEventListener('scroll', updatePosition);
-                }
-
-                window.addEventListener('scroll', updatePosition, true);
-                window.addEventListener('resize', updatePosition);
-
-                // MutationObserverでブロックの変更を監視
-                const observer = new MutationObserver(updatePosition);
-                const editorDoc = getEditorDocument();
-                const editorArea = editorDoc.querySelector('.block-editor-block-list__layout') ||
-                                   document.querySelector('.block-editor-block-list__layout');
-                if (editorArea) {
-                    observer.observe(editorArea, { childList: true, subtree: true, attributes: true });
-                }
-
-                return () => {
-                    if (scrollableContainer) {
-                        scrollableContainer.removeEventListener('scroll', updatePosition);
-                    }
-                    if (iframe && iframe.contentWindow) {
-                        iframe.contentWindow.removeEventListener('scroll', updatePosition);
-                    }
-                    window.removeEventListener('scroll', updatePosition, true);
-                    window.removeEventListener('resize', updatePosition);
-                    observer.disconnect();
-                };
-            }, [props.isSelected, props.clientId, props.name]);
 
             // SVGアイコン - 紫色のAIアイコン（大きめ）
             const aiIcon = createElement('svg', {
@@ -2492,7 +2520,7 @@ ${generatedText}`;
     function applyStyleChange(decoration, clientId) {
         const { className, style, dataAttributes } = decoration;
 
-        console.log('[LW AI Text] Applying style:', decoration);
+        log('[LW AI Text] Applying style:', decoration);
 
         if (!currentSelectionData || !currentSelectionData.range) {
             console.error('[LW AI Text] No selection data');
@@ -2514,11 +2542,11 @@ ${generatedText}`;
         }
 
         const spanHtml = buildSpanHtml(spanClass, style, dataAttributes, savedText);
-        console.log('[LW AI Text] Built span HTML:', spanHtml);
+        log('[LW AI Text] Built span HTML:', spanHtml);
 
         // 現在のブロック状態を取得（最新の状態が必要）
         const currentBlock = select('core/block-editor').getBlock(savedClientId);
-        console.log('[LW AI Text] Current block for style:', currentBlock);
+        log('[LW AI Text] Current block for style:', currentBlock);
 
         if (currentBlock) {
             const attributes = currentBlock.attributes;
@@ -2538,7 +2566,7 @@ ${generatedText}`;
                         // HTMLタグ内のテキストも正しく置換するための処理
                         const newValue = replaceTextPreservingTags(attrString, savedText, spanHtml);
                         dispatch('core/block-editor').updateBlockAttributes(savedClientId, { [attrName]: newValue });
-                        console.log('[LW AI Text] Style applied via attribute:', attrName);
+                        log('[LW AI Text] Style applied via attribute:', attrName);
                         return;
                     }
                 }
@@ -2550,14 +2578,14 @@ ${generatedText}`;
                 if (attrString && attrString.includes(savedText)) {
                     const newValue = replaceTextPreservingTags(attrString, savedText, spanHtml);
                     dispatch('core/block-editor').updateBlockAttributes(savedClientId, { [attrName]: newValue });
-                    console.log('[LW AI Text] Style applied via attribute:', attrName);
+                    log('[LW AI Text] Style applied via attribute:', attrName);
                     return;
                 }
             }
         }
 
         // フォールバック: DOM操作 + Gutenberg同期
-        console.log('[LW AI Text] Using DOM fallback for style');
+        log('[LW AI Text] Using DOM fallback for style');
         try {
             const span = document.createElement('span');
             span.className = spanClass;
@@ -2572,7 +2600,7 @@ ${generatedText}`;
             savedRange.deleteContents();
             savedRange.insertNode(span);
 
-            console.log('[LW AI Text] Style applied via DOM, syncing...');
+            log('[LW AI Text] Style applied via DOM, syncing...');
 
             // Gutenbergと同期
             setTimeout(() => {
@@ -2616,8 +2644,8 @@ ${generatedText}`;
      * テキスト変更を適用
      */
     function applyTextChange(newText, clientId) {
-        console.log('[LW AI Text] Applying text change:', newText);
-        console.log('[LW AI Text] clientId:', clientId);
+        log('[LW AI Text] Applying text change:', newText);
+        log('[LW AI Text] clientId:', clientId);
 
         if (!currentSelectionData) {
             console.error('[LW AI Text] No selection data');
@@ -2627,12 +2655,12 @@ ${generatedText}`;
         const originalText = currentSelectionData.selectedText;
         const savedClientId = currentSelectionData.clientId || clientId;
 
-        console.log('[LW AI Text] Original text:', originalText);
-        console.log('[LW AI Text] Saved clientId:', savedClientId);
+        log('[LW AI Text] Original text:', originalText);
+        log('[LW AI Text] Saved clientId:', savedClientId);
 
         // 現在のブロック状態を取得（最新の状態が必要）
         const currentBlock = select('core/block-editor').getBlock(savedClientId);
-        console.log('[LW AI Text] Current block:', currentBlock);
+        log('[LW AI Text] Current block:', currentBlock);
 
         if (!currentBlock) {
             console.error('[LW AI Text] Block not found');
@@ -2657,7 +2685,7 @@ ${generatedText}`;
                     newValue = newText;
                 }
                 dispatch('core/block-editor').updateBlockAttributes(savedClientId, { [targetAttribute]: newValue });
-                console.log('[LW AI Text] Text changed via target attribute:', targetAttribute);
+                log('[LW AI Text] Text changed via target attribute:', targetAttribute);
                 return;
             }
         }
@@ -2677,7 +2705,7 @@ ${generatedText}`;
                 if (attrString && attrString.includes(originalText)) {
                     const newValue = attrString.replace(originalText, newText);
                     dispatch('core/block-editor').updateBlockAttributes(savedClientId, { [attrName]: newValue });
-                    console.log('[LW AI Text] Text changed via attribute:', attrName);
+                    log('[LW AI Text] Text changed via attribute:', attrName);
                     return;
                 }
             }
@@ -2689,12 +2717,12 @@ ${generatedText}`;
             if (attrString && attrString.includes(originalText)) {
                 const newValue = attrString.replace(originalText, newText);
                 dispatch('core/block-editor').updateBlockAttributes(savedClientId, { [attrName]: newValue });
-                console.log('[LW AI Text] Text changed via attribute:', attrName);
+                log('[LW AI Text] Text changed via attribute:', attrName);
                 return;
             }
         }
 
-        console.log('[LW AI Text] Attribute search failed, trying DOM fallback with sync');
+        log('[LW AI Text] Attribute search failed, trying DOM fallback with sync');
         applyTextChangeDOMWithSync(originalText, newText, savedClientId);
     }
 
@@ -2702,7 +2730,7 @@ ${generatedText}`;
      * DOM操作でテキスト変更を適用し、Gutenbergと同期
      */
     function applyTextChangeDOMWithSync(originalText, newText, clientId) {
-        console.log('[LW AI Text] Attempting DOM text change with sync');
+        log('[LW AI Text] Attempting DOM text change with sync');
 
         if (!currentSelectionData || !currentSelectionData.range) {
             console.error('[LW AI Text] No selection range for DOM fallback');
@@ -2722,7 +2750,7 @@ ${generatedText}`;
                 syncBlockContent(clientId);
             }, 50);
 
-            console.log('[LW AI Text] Text changed via DOM');
+            log('[LW AI Text] Text changed via DOM');
         } catch (err) {
             console.error('[LW AI Text] DOM text change error:', err);
             alert('テキストの更新に失敗しました');
@@ -2736,7 +2764,7 @@ ${generatedText}`;
         try {
             const blockElement = document.querySelector(`[data-block="${clientId}"]`);
             if (!blockElement) {
-                console.log('[LW AI Text] Block element not found for sync');
+                log('[LW AI Text] Block element not found for sync');
                 return;
             }
 
@@ -2744,11 +2772,11 @@ ${generatedText}`;
             const richTextElement = blockElement.querySelector('.block-editor-rich-text__editable');
             if (richTextElement) {
                 const newContent = richTextElement.innerHTML;
-                console.log('[LW AI Text] Syncing content:', newContent);
+                log('[LW AI Text] Syncing content:', newContent);
 
                 // content属性を更新
                 dispatch('core/block-editor').updateBlockAttributes(clientId, { content: newContent });
-                console.log('[LW AI Text] Block content synced');
+                log('[LW AI Text] Block content synced');
             }
         } catch (err) {
             console.error('[LW AI Text] Sync error:', err);
@@ -2773,7 +2801,7 @@ ${generatedText}`;
      * 自動マーカー付きHTMLを適用
      */
     function applyHighlightedHtml(highlightedHtml, clientId) {
-        console.log('[LW AI Text] Applying highlighted HTML:', highlightedHtml);
+        log('[LW AI Text] Applying highlighted HTML:', highlightedHtml);
 
         if (!currentSelectionData) {
             console.error('[LW AI Text] No selection data for highlight');
@@ -2797,7 +2825,7 @@ ${generatedText}`;
         const targetAttribute = currentSelectionData.targetAttribute;
         if (targetAttribute && attributes[targetAttribute]) {
             dispatch('core/block-editor').updateBlockAttributes(savedClientId, { [targetAttribute]: highlightedHtml });
-            console.log('[LW AI Text] Highlighted HTML applied via target attribute:', targetAttribute);
+            log('[LW AI Text] Highlighted HTML applied via target attribute:', targetAttribute);
             return;
         }
 
@@ -2816,9 +2844,9 @@ ${generatedText}`;
                     // HTMLタグを除去したテキストで比較
                     const plainText = stripHtmlTags(attrString);
                     const originalPlainText = stripHtmlTags(originalText);
-                    console.log('[LW AI Text] Comparing plain text:', plainText.substring(0, 50) + '...');
-                    console.log('[LW AI Text] With original:', originalText.substring(0, 50) + '...');
-                    console.log('[LW AI Text] Original plain text:', originalPlainText.substring(0, 50) + '...');
+                    log('[LW AI Text] Comparing plain text:', plainText.substring(0, 50) + '...');
+                    log('[LW AI Text] With original:', originalText.substring(0, 50) + '...');
+                    log('[LW AI Text] Original plain text:', originalPlainText.substring(0, 50) + '...');
 
                     // 比較方法：
                     // 1. プレーンテキスト同士が一致
@@ -2830,7 +2858,7 @@ ${generatedText}`;
                         // 元のテキストが完全一致する場合、またはHTMLタグ除去後に一致する場合
                         // 既存のHTMLを完全に置換
                         dispatch('core/block-editor').updateBlockAttributes(savedClientId, { [attrName]: highlightedHtml });
-                        console.log('[LW AI Text] Highlighted HTML applied via attribute:', attrName);
+                        log('[LW AI Text] Highlighted HTML applied via attribute:', attrName);
                         return;
                     }
                 }
@@ -2847,7 +2875,7 @@ ${generatedText}`;
                     attrString.includes(originalText) ||
                     plainText.includes(originalPlainText)) {
                     dispatch('core/block-editor').updateBlockAttributes(savedClientId, { [attrName]: highlightedHtml });
-                    console.log('[LW AI Text] Highlighted HTML applied via attribute:', attrName);
+                    log('[LW AI Text] Highlighted HTML applied via attribute:', attrName);
                     return;
                 }
             }
@@ -2930,6 +2958,6 @@ ${generatedText}`;
         return html.replace(searchText, replacement);
     }
 
-    console.log('[LW AI Text] Toolbar button registered');
+    log('[LW AI Text] Toolbar button registered');
 
 })();

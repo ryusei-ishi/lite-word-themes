@@ -60,7 +60,7 @@ registerBlockType(metadata.name, {
             <>
                 <InspectorControls>
                     {/* ── 1. 基本設定 ── */}
-                    <PanelBody title="📝 基本設定" initialOpen={true}>
+                    <PanelBody title="基本設定" initialOpen={true}>
                         <div style={{ marginBottom: '15px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px', fontSize: '13px' }}>
                                 🔗 リンク先URL
@@ -81,7 +81,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 2. ボタンの配置 ── */}
-                    <PanelBody title="📍 ボタンの配置" initialOpen={false}>
+                    <PanelBody title="配置設定" initialOpen={false}>
                         <SelectControl
                             label="💻 PC表示時の配置"
                             value={btnAlign}
@@ -109,7 +109,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 3. テキスト設定 ── */}
-                    <PanelBody title="📝 テキスト設定" initialOpen={false}>
+                    <PanelBody title="フォント設定" initialOpen={false}>
                         <SelectControl
                             label="📚 フォントの種類"
                             value={FontSet}
@@ -199,7 +199,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 4. 背景設定 ── */}
-                    <PanelBody title="🎨 背景設定" initialOpen={false}>
+                    <PanelBody title="色設定" initialOpen={false}>
                         <div style={{ marginBottom: '20px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>
                                 🌈 ボタンの背景
@@ -248,7 +248,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 5. アイコン設定 ── */}
-                    <PanelBody title="✨ アイコン設定" initialOpen={false}>
+                    <PanelBody title="アイコン設定" initialOpen={false}>
                         <SelectControl
                             label="➡️ 右側アイコンの種類"
                             value={iconRight}
@@ -289,7 +289,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 6. サイズ・形状設定 ── */}
-                    <PanelBody title="📏 サイズ・形状設定" initialOpen={false}>
+                    <PanelBody title="レイアウト設定" initialOpen={false}>
                         <RangeControl
                             label="📐 最大横幅 PC (px)"
                             value={maxWidth}
@@ -335,7 +335,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 7. エフェクト設定 ── */}
-                    <PanelBody title="✨ エフェクト設定" initialOpen={false}>
+                    <PanelBody title="エフェクト設定" initialOpen={false}>
                         <RangeControl
                             label="⏱️ アニメーション速度 (秒)"
                             value={transitionDuration}

@@ -75,7 +75,7 @@ __webpack_require__.r(__webpack_exports__);
       });
     };
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u753B\u50CF\u8A2D\u5B9A"
+      title: "\u80CC\u666F\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "PC\u306E\u6642"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
       onSelect: onChangeBackgroundImage,
       allowedTypes: ['image'],
@@ -139,7 +139,7 @@ __webpack_require__.r(__webpack_exports__);
         }, "\u753B\u50CF\u3092\u9078\u629E"));
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u753B\u50CF\u306E\u4E0A\u306E\u30D5\u30A3\u30EB\u30BF\u30FC"
+      title: "\u30D5\u30A3\u30EB\u30BF\u30FC\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: filterBackgroundColor,
       onChange: function onChange(color) {
@@ -158,7 +158,7 @@ __webpack_require__.r(__webpack_exports__);
       max: 1,
       step: 0.01
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30EA\u30F3\u30AF\u30DC\u30BF\u30F3\u306E\u8A2D\u5B9A"
+      title: "\u30DC\u30BF\u30F3\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u30EA\u30F3\u30AF\u5148URL"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.URLInput, {
       value: buttonUrl,
       onChange: function onChange(url) {
@@ -226,7 +226,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u9AD8\u3055\u8A2D\u5B9A"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "PC\u7528\u9AD8\u3055"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       value: minHeightPc,
       options: (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.minHeightPcClassOptionArr)(),
@@ -1109,7 +1109,7 @@ module.exports = window["wp"]["data"];
   \*****************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/fv-1","version":"1.0.0","title":"固定ページタイトル 01（トップ用）","category":"lw-firstview","icon":"cover-image","editorScript":"file:./fv-1.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"backgroundImage":{"type":"string","default":"https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704_1280.jpg"},"backgroundImageSp":{"type":"string","default":""},"mainTitle":{"type":"string","default":"Lite Word"},"subTitle":{"type":"string","default":"シンプルで簡単なWordPressテーマ"},"description":{"type":"string","default":"誰でも簡単にきれいなブログサイトが作れます！"},"buttonText":{"type":"string","default":"無料ダウンロード"},"buttonUrl":{"type":"string","default":"#"},"openInNewTab":{"type":"boolean","default":false},"buttonBackgroundColor":{"type":"string","default":"#fff"},"buttonTextColor":{"type":"string","default":"#111"},"buttonBorderColor":{"type":"string","default":"#000"},"buttonBackgroundColorOpacity":{"type":"number","default":100},"buttonBorderWidth":{"type":"number","default":0},"buttonBorderRadius":{"type":"number","default":200},"filterBackgroundColor":{"type":"string","default":"var(--color-main)"},"filterOpacity":{"type":"number","default":0.4},"minHeightPc":{"type":"string","default":"min-h-pc-500px"},"minHeightTb":{"type":"string","default":"min-h-tb-480px"},"minHeightSp":{"type":"string","default":"min-h-sp-440px"}},"no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/fv-1","version":"1.0.0","title":"固定ページタイトル 01（トップ用）","category":"lw-firstview","icon":"cover-image","editorScript":"file:./fv-1.js","supports":{"anchor":true},"aiHint":{"description":"LP全般向けFV。中央テキスト+背景画像+CTAボタン。信頼感重視の業種に最適","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle","description","buttonText","buttonUrl"],"imageAttributes":["backgroundImage"]},"attributes":{"backgroundImage":{"type":"string","default":"https://cdn.pixabay.com/photo/2017/01/20/00/30/maldives-1993704_1280.jpg","aiHint":{"role":"image","note":"業種に合った背景画像URL"}},"backgroundImageSp":{"type":"string","default":"","aiHint":{"skip":true}},"mainTitle":{"type":"string","default":"Lite Word","aiHint":{"role":"heading","contentGuide":"キャッチコピー。5〜15文字。改行不可","example":"美しさを、あなたに"}},"subTitle":{"type":"string","default":"シンプルで簡単なWordPressテーマ","aiHint":{"role":"subheading","contentGuide":"英語表記 or サブキャッチ。省略可","example":"BEAUTY SALON"}},"description":{"type":"string","default":"誰でも簡単にきれいなブログサイトが作れます！","aiHint":{"role":"body","contentGuide":"サービスの価値を1〜2文で。20〜50文字","example":"プロの施術で、あなたの悩みを根本から解決します"}},"buttonText":{"type":"string","default":"無料ダウンロード","aiHint":{"role":"button","contentGuide":"動詞形。4〜10文字","example":"無料で相談する"}},"buttonUrl":{"type":"string","default":"#","aiHint":{"role":"url","contentGuide":"#contact 等のページ内リンク推奨"}},"openInNewTab":{"type":"boolean","default":false,"aiHint":{"skip":true}},"buttonBackgroundColor":{"type":"string","default":"#fff","aiHint":{"skip":true}},"buttonTextColor":{"type":"string","default":"#111","aiHint":{"skip":true}},"buttonBorderColor":{"type":"string","default":"#000","aiHint":{"skip":true}},"buttonBackgroundColorOpacity":{"type":"number","default":100,"aiHint":{"skip":true}},"buttonBorderWidth":{"type":"number","default":0,"aiHint":{"skip":true}},"buttonBorderRadius":{"type":"number","default":200,"aiHint":{"skip":true}},"filterBackgroundColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"filterOpacity":{"type":"number","default":0.4,"aiHint":{"skip":true}},"minHeightPc":{"type":"string","default":"min-h-pc-500px","aiHint":{"skip":true}},"minHeightTb":{"type":"string","default":"min-h-tb-480px","aiHint":{"skip":true}},"minHeightSp":{"type":"string","default":"min-h-sp-440px","aiHint":{"skip":true}}},"no":1}');
 
 /***/ })
 

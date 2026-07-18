@@ -9,6 +9,12 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "背景画像+タイトル付きカード型リスト。番号+画像+タイトル+説明+ボタン。会社概要・事業紹介に。ショップテンプレート用",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["topTitleSub", "topTitleMain", "items"],
+		"imageAttributes": ["bgImage"]
+	},
 	"attributes": {
 		"bgImage": {
 			"type": "string",
@@ -113,11 +119,5 @@
 		}
 	},
 	"editorScript": "file:./shin-gas-station-01-list-2.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 15
 }

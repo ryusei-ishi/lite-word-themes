@@ -3,6 +3,7 @@
   border-bottom: none !important;
   font-size: 17px;
 }
+
 .custom-title-1 .main {
   display: block;
   text-align: center;
@@ -10,9 +11,10 @@
   line-height: 1.4em;
   letter-spacing: 0.1em;
 }
+
 .custom-title-1 .span {
   margin-top: 1.2em;
   display: block;
   font-size: 0.9em;
   line-height: 1.6em;
-}/*# sourceMappingURL=editor.css.map */
+}

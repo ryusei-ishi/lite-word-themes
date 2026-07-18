@@ -104,14 +104,14 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       className: 'paid-block-content-4'
     });
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCD6 \u30DE\u30CB\u30E5\u30A2\u30EB",
+      title: "\u30DE\u30CB\u30E5\u30A2\u30EB",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
       variant: "secondary",
       href: "https://www.youtube.com/watch?v=V5vRfbzV8_8",
       target: "_blank"
     }, "\u3053\u306E\u30D6\u30ED\u30C3\u30AF\u306E\u4F7F\u3044\u65B9\u306F\u3053\u3061\u3089")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83C\uDFA8 \u30C6\u30AD\u30B9\u30C8\u30FB\u8272\u8A2D\u5B9A",
+      title: "\u8272\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -148,7 +148,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       value: highlightColor,
       onChange: onChange('highlightColor')
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDD18 CTA\u30DC\u30BF\u30F3 - \u57FA\u672C\u8A2D\u5B9A",
+      title: "\u30DC\u30BF\u30F3\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -230,7 +230,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       max: 100,
       help: "\u30DC\u30BF\u30F3\u306E\u89D2\u306E\u4E38\u307F\u3092\u8A2D\u5B9A\u3057\u307E\u3059"
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCF1 CTA\u30DC\u30BF\u30F3 - \u30EC\u30B9\u30DD\u30F3\u30B7\u30D6\u8A2D\u5B9A",
+      title: "\u30EC\u30B9\u30DD\u30F3\u30B7\u30D6\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -289,7 +289,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       onChange: onChange('mobileButtonState'),
       help: "\u30B9\u30DE\u30FC\u30C8\u30D5\u30A9\u30F3\u753B\u9762\u3067\u306E\u30DC\u30BF\u30F3\u306E\u8868\u793A\u65B9\u6CD5\u3092\u9078\u629E\u3057\u3066\u304F\u3060\u3055\u3044"
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDDBC\uFE0F \u30AE\u30E3\u30E9\u30EA\u30FC\u753B\u50CF",
+      title: "\u753B\u50CF\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -605,7 +605,7 @@ module.exports = window["wp"]["components"];
   \*********************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-content-4","version":"1.0.0","title":"Content 04","category":"lw-content","icon":"format-gallery","editorScript":"file:./paid-block-content-4.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"mainTitle":{"type":"string","default":"CONTENT"},"subTitle":{"type":"string","default":"サブテキスト"},"bottomText":{"type":"string","default":"テキストテキストテキストテキストテキストテキスト\\nテキストテキストテキストテキストテキストテキスト"},"ctaText":{"type":"string","default":"詳細はこちら"},"ctaUrl":{"type":"string","default":"#"},"mainTitleColor":{"type":"string","default":"#333"},"highlightColor":{"type":"string","default":"#0AA8C9"},"ctaBorderColor":{"type":"string","default":"#333"},"ctaTextColor":{"type":"string","default":"#333"},"ctaBorderWidth":{"type":"number","default":2},"ctaBorderRadius":{"type":"number","default":0},"imageRadius":{"type":"number","default":0},"pcButtonState":{"type":"string","default":""},"mobileButtonState":{"type":"string","default":""},"images":{"type":"array","default":[{"url":"https://lite-word.com/sample_img/shop/1.webp","alt":""},{"url":"https://lite-word.com/sample_img/shop/2.webp","alt":""},{"url":"https://lite-word.com/sample_img/shop/3.webp","alt":""},{"url":"https://lite-word.com/sample_img/shop/4.webp","alt":""},{"url":"https://lite-word.com/sample_img/shop/5.webp","alt":""},{"url":"https://lite-word.com/sample_img/women/1.webp","alt":""},{"url":"https://lite-word.com/sample_img/women/2.webp","alt":""},{"url":"https://lite-word.com/sample_img/women/4.webp","alt":""}]}},"no":4}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-content-4","version":"1.0.0","title":"Content 04","category":"lw-content","icon":"format-gallery","editorScript":"file:./paid-block-content-4.js","aiHint":{"description":"画像グリッド+テキスト。メインタイトル+サブ+説明+CTAボタン+画像8枚グリッド。ギャラリー型コンテンツに","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle","bottomText","ctaText","ctaUrl"],"imageAttributes":["images"]},"supports":{"anchor":true},"attributes":{"mainTitle":{"type":"string","default":"CONTENT"},"subTitle":{"type":"string","default":"サブテキスト"},"bottomText":{"type":"string","default":"テキストテキストテキストテキストテキストテキスト\\nテキストテキストテキストテキストテキストテキスト"},"ctaText":{"type":"string","default":"詳細はこちら"},"ctaUrl":{"type":"string","default":"#"},"mainTitleColor":{"type":"string","default":"#333"},"highlightColor":{"type":"string","default":"#0AA8C9"},"ctaBorderColor":{"type":"string","default":"#333"},"ctaTextColor":{"type":"string","default":"#333"},"ctaBorderWidth":{"type":"number","default":2},"ctaBorderRadius":{"type":"number","default":0},"imageRadius":{"type":"number","default":0},"pcButtonState":{"type":"string","default":""},"mobileButtonState":{"type":"string","default":""},"images":{"type":"array","default":[{"url":"https://lite-word.com/sample_img/shop/1.webp","alt":""},{"url":"https://lite-word.com/sample_img/shop/2.webp","alt":""},{"url":"https://lite-word.com/sample_img/shop/3.webp","alt":""},{"url":"https://lite-word.com/sample_img/shop/4.webp","alt":""},{"url":"https://lite-word.com/sample_img/shop/5.webp","alt":""},{"url":"https://lite-word.com/sample_img/women/1.webp","alt":""},{"url":"https://lite-word.com/sample_img/women/2.webp","alt":""},{"url":"https://lite-word.com/sample_img/women/4.webp","alt":""}]}},"no":4}');
 
 /***/ })
 

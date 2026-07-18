@@ -75,7 +75,7 @@ __webpack_require__.r(__webpack_exports__);
     /* --- 影の box-shadow 文字列生成 --- */
     var boxShadow = "".concat(innerFilterShadowOffsetX, "px ").concat(innerFilterShadowOffsetY, "px ").concat(innerFilterShadowBlur, "px ").concat(innerFilterShadowSpread, "px ").concat(innerFilterShadowColor);
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30BF\u30A4\u30C8\u30EB\u306E\u30D5\u30A9\u30F3\u30C8\u30B5\u30A4\u30BA",
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RadioControl, {
       selected: titleFontSizeClass,
@@ -95,7 +95,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u753B\u50CF\u8A2D\u5B9A"
+      title: "\u80CC\u666F\u8A2D\u5B9A"
     }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: "\u30D5\u30A3\u30EB\u30BF\u30FC\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u30D5\u30A3\u30EB\u30BF\u30FC\u306E\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
@@ -209,7 +209,7 @@ __webpack_require__.r(__webpack_exports__);
       max: 50,
       step: 1
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u5168\u4F53\u306E\u6587\u5B57\u306E\u8272"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: textColor,
       onChange: function onChange(c) {
@@ -218,7 +218,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u9AD8\u3055\u8A2D\u5B9A"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "PC\u7528\u9AD8\u3055"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       value: minHeightPc,
       options: (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.minHeightPcClassOptionArr)(),
@@ -1067,7 +1067,7 @@ module.exports = window["wp"]["data"];
   \*****************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-fv-10","version":"1.0.0","title":"固定ページタイトル 10（下層用）","category":"lw-firstview","icon":"cover-image","editorScript":"file:./paid-block-fv-10.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"backgroundImage":{"type":"string","default":""},"backgroundImageSp":{"type":"string","default":""},"mainTitle":{"type":"string","default":"ページタイトル"},"filterBackgroundColor":{"type":"string","default":"#FFF8D4"},"filterOpacity":{"type":"number","default":1},"innerFilterBg":{"type":"string","default":"#FC99AA"},"innerFilterBorderColor":{"type":"string","default":"#FFFFFF"},"innerFilterBorderWidth":{"type":"number","default":4},"innerFilterBorderRadius":{"type":"number","default":12},"innerFilterShadowColor":{"type":"string","default":"rgba(0,0,0,0.06)"},"innerFilterShadowOffsetX":{"type":"number","default":0},"innerFilterShadowOffsetY":{"type":"number","default":3},"innerFilterShadowBlur":{"type":"number","default":6},"innerFilterShadowSpread":{"type":"number","default":0},"textColor":{"type":"string","default":"#fff"},"minHeightPc":{"type":"string","default":"min-h-pc-400px"},"minHeightTb":{"type":"string","default":"min-h-tb-360px"},"minHeightSp":{"type":"string","default":"min-h-sp-280px"},"titleFontSizeClass":{"type":"string","default":"font_size_m"}},"no":10}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-fv-10","version":"1.0.0","title":"固定ページタイトル 10（下層用）","category":"lw-firstview","icon":"cover-image","editorScript":"file:./paid-block-fv-10.js","aiHint":{"description":"下層ページ用シンプルFV。中央タイトル+背景画像+フィルター装飾。プレミアムデザイン","excludeFromAutoSelect":false,"contentAttributes":["mainTitle"],"imageAttributes":["backgroundImage","backgroundImageSp"]},"supports":{"anchor":true},"attributes":{"backgroundImage":{"type":"string","default":""},"backgroundImageSp":{"type":"string","default":""},"mainTitle":{"type":"string","default":"ページタイトル"},"filterBackgroundColor":{"type":"string","default":"#FFF8D4"},"filterOpacity":{"type":"number","default":1},"innerFilterBg":{"type":"string","default":"#FC99AA"},"innerFilterBorderColor":{"type":"string","default":"#FFFFFF"},"innerFilterBorderWidth":{"type":"number","default":4},"innerFilterBorderRadius":{"type":"number","default":12},"innerFilterShadowColor":{"type":"string","default":"rgba(0,0,0,0.06)"},"innerFilterShadowOffsetX":{"type":"number","default":0},"innerFilterShadowOffsetY":{"type":"number","default":3},"innerFilterShadowBlur":{"type":"number","default":6},"innerFilterShadowSpread":{"type":"number","default":0},"textColor":{"type":"string","default":"#fff"},"minHeightPc":{"type":"string","default":"min-h-pc-400px"},"minHeightTb":{"type":"string","default":"min-h-tb-360px"},"minHeightSp":{"type":"string","default":"min-h-sp-280px"},"titleFontSizeClass":{"type":"string","default":"font_size_m"}},"no":10}');
 
 /***/ })
 

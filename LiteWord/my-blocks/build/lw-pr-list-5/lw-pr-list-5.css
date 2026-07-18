@@ -1,0 +1,57 @@
+/*!***********************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/lw-pr-list-5/editor.scss ***!
+  \***********************************************************************************************************************/
+.lw-pr-list-5 {
+  container-type: inline-size;
+}
+.lw-pr-list-5 .list-item-edit {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+.lw-pr-list-5 .list-item-edit span {
+  flex: 1;
+  min-width: 0;
+}
+.lw-pr-list-5 .list-item-remove {
+  flex-shrink: 0;
+  width: 16px;
+  height: 16px;
+  padding: 0;
+  border: none;
+  border-radius: 50%;
+  background: #cc0000;
+  color: #fff;
+  font-size: 10px;
+  line-height: 1;
+  cursor: pointer;
+  opacity: 0.6;
+  transition: opacity 0.2s;
+}
+.lw-pr-list-5 .list-item-remove:hover {
+  opacity: 1;
+}
+.lw-pr-list-5 .list-item-add {
+  padding-left: 0 !important;
+}
+.lw-pr-list-5 .list-item-add::before {
+  display: none !important;
+}
+.lw-pr-list-5 .list-item-add button {
+  width: 20px;
+  height: 20px;
+  padding: 0;
+  border: 1px dashed #999;
+  border-radius: 4px;
+  background: transparent;
+  color: #666;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.lw-pr-list-5 .list-item-add button:hover {
+  background: #f0f0f0;
+  border-color: #666;
+  color: #333;
+}

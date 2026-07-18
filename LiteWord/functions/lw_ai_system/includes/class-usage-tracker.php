@@ -23,11 +23,11 @@ class LW_AI_Generator_Usage_Tracker {
      * Gemini API 料金（1M トークンあたり USD）
      */
     const PRICING = array(
-        'gemini-2.0-flash' => array(
+        'gemini-2.5-flash' => array(
             'input'  => 0.075,  // $0.075 per 1M input tokens
             'output' => 0.30,   // $0.30 per 1M output tokens
         ),
-        'imagen-3.0' => array(
+        'imagen-4.0' => array(
             'per_image' => 0.03,  // 約$0.03 per image
         ),
     );
@@ -63,7 +63,7 @@ class LW_AI_Generator_Usage_Tracker {
         $sql = "CREATE TABLE {$table_name} (
             id bigint(20) unsigned NOT NULL AUTO_INCREMENT,
             request_type varchar(50) NOT NULL DEFAULT 'text',
-            model varchar(100) NOT NULL DEFAULT 'gemini-2.0-flash',
+            model varchar(100) NOT NULL DEFAULT 'gemini-2.5-flash',
             input_tokens int(11) NOT NULL DEFAULT 0,
             output_tokens int(11) NOT NULL DEFAULT 0,
             image_count int(11) NOT NULL DEFAULT 0,
@@ -145,14 +145,14 @@ class LW_AI_Generator_Usage_Tracker {
 
         // テキスト生成コスト
         if ( strpos( $model, 'gemini' ) !== false ) {
-            $pricing = self::PRICING['gemini-2.0-flash'];
+            $pricing = self::PRICING['gemini-2.5-flash'];
             $cost += ( $input_tokens / 1000000 ) * $pricing['input'];
             $cost += ( $output_tokens / 1000000 ) * $pricing['output'];
         }
 
         // 画像生成コスト
         if ( $image_count > 0 ) {
-            $cost += $image_count * self::PRICING['imagen-3.0']['per_image'];
+            $cost += $image_count * self::PRICING['imagen-4.0']['per_image'];
         }
 
         return $cost;

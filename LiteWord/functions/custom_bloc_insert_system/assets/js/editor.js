@@ -32,6 +32,28 @@
     var getBlockType = wp.blocks.getBlockType;
     var getSaveContent = wp.blocks.getSaveContent;
 
+    /**
+     * JSONデータをWordPressブロックに変換
+     */
+    function jsonToBlocks(blocksData) {
+        if (!blocksData || !Array.isArray(blocksData)) {
+            return [];
+        }
+
+        return blocksData.map(function(blockData) {
+            var innerBlocks = [];
+            if (blockData.innerBlocks && blockData.innerBlocks.length > 0) {
+                innerBlocks = jsonToBlocks(blockData.innerBlocks);
+            }
+
+            return createBlock(
+                blockData.name,
+                blockData.attributes || {},
+                innerBlocks
+            );
+        });
+    }
+
     // プレビューモード定数
     var PREVIEW_MODE_PC = 'pc';
     var PREVIEW_MODE_SP = 'sp';
@@ -2004,10 +2026,6 @@
      * エディタ内のロック対象ブロックを監視して操作をロック
      */
     var lockedBlocks = window.wdlLockedBlocks || [];
-
-    // デバッグ用：ロック対象ブロックをコンソールに出力
-    console.log('[LW Lock] wdlLockedBlocks:', lockedBlocks);
-    console.log('[LW Lock] shin-gas-station-01-custom-title-2 in locked:', lockedBlocks.indexOf('wdl/shin-gas-station-01-custom-title-2') !== -1);
 
     if (lockedBlocks.length > 0) {
         var subscribe = wp.data.subscribe;

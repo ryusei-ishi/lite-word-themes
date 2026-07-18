@@ -20,6 +20,13 @@ function follow_bottom_cta_ptn_1_set_custom( $wp_customize ) {
         ];
     }
     $items[] =  [
+        ["radio" , "responsive_switch","",'<h2 class="ctm_ttl_ptn_1">レスポンシブ設定</h2>表示デバイス',[
+            'sp_pc' => 'スマホとPCの両方で表示',
+            'sp_only' => 'スマホの時のみ表示',
+            'pc_only' => 'PCの時のみ表示',
+        ]],
+    ];
+    $items[] =  [
         ["select" , "font_family","",'<h2 class="ctm_ttl_ptn_1">デザイン共通設定</h2><br>フォントの種類',ctm_font_family_arr()],
         ["select", "font_weight","","フォントの太さ",ctm_font_weight_arr()],
         ['color', "bg_color", "", '背景の色'],

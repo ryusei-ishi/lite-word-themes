@@ -7,12 +7,12 @@
 	"category": "lw-firstview",
 	"icon": "cover-image",
 	"editorScript": "file:./shin-gas-station-01-fv-top.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "トップ用FV。PC/SP別テキスト完全分離。サブ+メイン+説明+背景画像。ショップテンプレート用",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["subTitle", "mainTitle", "description"],
+		"imageAttributes": ["backgroundImage", "backgroundImageSp"]
+	},
 	"supports": {
 		"anchor": true
 	},

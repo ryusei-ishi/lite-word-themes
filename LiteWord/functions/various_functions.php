@@ -31,22 +31,27 @@ if(is_admin()){
         // 2) 更新された時の処理
         // ────────────────────────
         if ( isset( $_POST[ $opt_name ] ) ) {
-            $opt_val = $_POST[ $opt_name ];
+            $opt_val = sanitize_text_field( $_POST[ $opt_name ] );
             update_option( $opt_name, $opt_val );
         }
 
         // ────────────────────────
-        // 3) フィールド出力（元コードそのまま）
+        // 3) フィールド出力（エスケープ済み）
         // ────────────────────────
+        $esc_val  = esc_attr( $opt_val );
+        $esc_name = esc_attr( $opt_name );
+        $esc_ph   = esc_attr( $placeholder );
+        $esc_cls  = esc_attr( $class );
+
         switch ( $input_type ) {
             case 'text':
-                echo "<input type='text' name='$opt_name' value='$opt_val' placeholder='$placeholder' class='$class'>";
+                echo "<input type='text' name='{$esc_name}' value='{$esc_val}' placeholder='{$esc_ph}' class='{$esc_cls}'>";
                 break;
             case 'textarea':
-                echo "<textarea name='$opt_name' cols='30' rows='$rows' placeholder='$placeholder' class='$class'>$opt_val</textarea>";
+                echo "<textarea name='{$esc_name}' cols='30' rows='{$rows}' placeholder='{$esc_ph}' class='{$esc_cls}'>" . esc_textarea( $opt_val ) . "</textarea>";
                 break;
             case 'color':
-                echo "<input type='color' name='$opt_name' value='$opt_val' class='$class'>";
+                echo "<input type='color' name='{$esc_name}' value='{$esc_val}' class='{$esc_cls}'>";
                 break;
             case 'number':
                 echo "<input type='number' name='$opt_name' value='$opt_val' placeholder='$placeholder' class='$class'>";

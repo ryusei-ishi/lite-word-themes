@@ -10,12 +10,12 @@
 		"anchor": true
 	},
 	"editorScript": "file:./paid-block-lw-step-5.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "影付きカード型ステップ。番号は月表記も可。ボーダー+シャドウ。タイムライン表示に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"no": 5,
 	"attributes": {
 		"bgGradient": { "type": "string", "default": "var(--color-main)" },

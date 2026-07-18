@@ -6,6 +6,19 @@
 	"title": "メッセージ 01",
 	"category": "lw-content",
 	"icon": "admin-comments",
+	"aiHint": {
+		"description": "メッセージブロック。サブタイトル+見出し+リード+本文+画像。代表挨拶・想いに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"subTitle",
+			"mainTitle",
+			"leadText",
+			"bodyText"
+		],
+		"imageAttributes": [
+			"imgUrl"
+		]
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -56,11 +69,5 @@
 		}
 	},
 	"editorScript": "file:./lw-message-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 1
 }

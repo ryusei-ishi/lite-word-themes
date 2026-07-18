@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120" width="120" height="120">
+  <!-- 猫ロボット LiteWord AIサポートキャラ -->
+
+  <!-- 耳（左） -->
+  <path d="M28 45 L20 15 L45 35 Z" fill="#818cf8" stroke="#6366f1" stroke-width="2"/>
+  <path d="M30 42 L24 20 L43 36 Z" fill="#c7d2fe"/>
+
+  <!-- 耳（右） -->
+  <path d="M92 45 L100 15 L75 35 Z" fill="#818cf8" stroke="#6366f1" stroke-width="2"/>
+  <path d="M90 42 L96 20 L77 36 Z" fill="#c7d2fe"/>
+
+  <!-- 頭（丸） -->
+  <circle cx="60" cy="62" r="35" fill="#818cf8" stroke="#6366f1" stroke-width="2"/>
+
+  <!-- 顔の白い部分 -->
+  <ellipse cx="60" cy="67" rx="28" ry="25" fill="#f0f0ff"/>
+
+  <!-- 目（左） -->
+  <ellipse cx="47" cy="58" rx="7" ry="8" fill="#1e1b4b"/>
+  <ellipse cx="49" cy="55" rx="3" ry="3.5" fill="#fff"/>
+  <ellipse cx="45" cy="60" rx="1.5" ry="1.5" fill="#fff" opacity="0.6"/>
+
+  <!-- 目（右） -->
+  <ellipse cx="73" cy="58" rx="7" ry="8" fill="#1e1b4b"/>
+  <ellipse cx="75" cy="55" rx="3" ry="3.5" fill="#fff"/>
+  <ellipse cx="71" cy="60" rx="1.5" ry="1.5" fill="#fff" opacity="0.6"/>
+
+  <!-- 鼻 -->
+  <ellipse cx="60" cy="70" rx="3.5" ry="2.5" fill="#f9a8d4"/>
+
+  <!-- 口 -->
+  <path d="M52 74 Q56 80 60 74" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+  <path d="M60 74 Q64 80 68 74" fill="none" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+  <line x1="60" y1="70" x2="60" y2="74" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+
+  <!-- ひげ（左） -->
+  <line x1="22" y1="62" x2="42" y2="66" stroke="#6366f1" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="20" y1="70" x2="41" y2="71" stroke="#6366f1" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="22" y1="78" x2="42" y2="76" stroke="#6366f1" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- ひげ（右） -->
+  <line x1="98" y1="62" x2="78" y2="66" stroke="#6366f1" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="100" y1="70" x2="79" y2="71" stroke="#6366f1" stroke-width="1.2" stroke-linecap="round"/>
+  <line x1="98" y1="78" x2="78" y2="76" stroke="#6366f1" stroke-width="1.2" stroke-linecap="round"/>
+
+  <!-- ロボットアンテナ -->
+  <line x1="60" y1="27" x2="60" y2="16" stroke="#6366f1" stroke-width="2.5" stroke-linecap="round"/>
+  <circle cx="60" cy="13" r="4" fill="#a5b4fc" stroke="#6366f1" stroke-width="1.5"/>
+  <circle cx="60" cy="13" r="2" fill="#e0e7ff">
+    <animate attributeName="opacity" values="1;0.3;1" dur="2s" repeatCount="indefinite"/>
+  </circle>
+
+  <!-- ほっぺ -->
+  <ellipse cx="38" cy="74" rx="6" ry="4" fill="#fca5a5" opacity="0.4"/>
+  <ellipse cx="82" cy="74" rx="6" ry="4" fill="#fca5a5" opacity="0.4"/>
+
+  <!-- ロボットマーク（おでこ） -->
+  <rect x="54" y="42" width="12" height="6" rx="2" fill="#a5b4fc" stroke="#6366f1" stroke-width="1"/>
+  <line x1="57" y1="45" x2="63" y2="45" stroke="#6366f1" stroke-width="1.5" stroke-linecap="round"/>
+</svg>

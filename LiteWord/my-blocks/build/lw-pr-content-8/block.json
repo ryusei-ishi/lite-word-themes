@@ -1,0 +1,71 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "wdl/lw-pr-content-8",
+    "version":  "1.0.0",
+    "title":  "Content 08",
+    "category":  "lw-content",
+    "icon":  "align-pull-left",
+    "description":  "画像+コンテンツエリアブロック",
+    "aiDescription":  "左側に画像、右側にコンテンツエリアを配置した2カラムレイアウト。コンテンツエリアには任意のブロックを配置可能。",
+    "aiNotes":  "InnerBlocksでコンテンツエリアを自由に編集可能。背景色、最大幅、角丸をカスタマイズ可能。",
+    "aiHint": {
+        "description": "画像+InnerBlocksの2カラム。左に画像、右に自由コンテンツエリア。InnerBlocks使用のためAI直接生成非推奨",
+        "excludeFromAutoSelect": true,
+        "excludeReason": "InnerBlocksを使用するためAIが直接コンテンツを生成できない",
+        "contentAttributes": [],
+        "imageAttributes": ["imageUrl"]
+    },
+    "supports":  {
+                     "anchor":  true
+                 },
+    "attributes":  {
+                       "imageUrl":  {
+                                        "type":  "string",
+                                        "default":  "https://placehold.co/400x400",
+                                        "ai_description":  "左側の画像URL"
+                                    },
+                       "imageAlt":  {
+                                        "type":  "string",
+                                        "default":  "",
+                                        "ai_description":  "画像のalt属性"
+                                    },
+                       "maxWidth":  {
+                                        "type":  "number",
+                                        "default":  1040,
+                                        "ai_description":  "最大幅（px）"
+                                    },
+                       "bgColor":  {
+                                       "type":  "string",
+                                       "default":  "#f5f5f5",
+                                       "ai_description":  "背景色"
+                                   },
+                       "bdrPc":  {
+                                     "type":  "number",
+                                     "default":  10,
+                                     "ai_description":  "角丸PC（px）"
+                                 },
+                       "bdrSp":  {
+                                     "type":  "number",
+                                     "default":  10,
+                                     "ai_description":  "角丸SP（px）"
+                                 },
+                       "minHeight":  {
+                                         "type":  "number",
+                                         "default":  378,
+                                         "ai_description":  "最小の高さ（px）"
+                                     },
+                       "borderWidth": {
+                                         "type": "number",
+                                         "default": 2,
+                                         "ai_description": "枠線の太さ（px）"
+                                     },
+                       "borderColor": {
+                                         "type": "string",
+                                         "default": "var(--color-main)",
+                                         "ai_description": "枠線の色"
+                                     }
+                   },
+    "editorScript":  "file:./lw-pr-content-8.js",
+    "no":  8
+}

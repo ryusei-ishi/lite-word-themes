@@ -1,0 +1,137 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "wdl/lw-pr-fv-17",
+    "version":  "1.0.0",
+    "title":  "固定ページタイトル 17（下層用）",
+    "category":  "lw-firstview",
+    "icon":  "cover-image",
+    "description":  "下層ページ用のコンパクトなファーストビュー",
+    "aiDescription":  "下層ページ用のコンパクトなファーストビュー。英語のメインタイトルと短い説明文のみのシンプル構成。ポートフォリオ、実績一覧、ギャラリーなどビジュアル重視のページに最適。",
+    "aiNotes":  "このブロックはh1タグを使用。タイトルは英語表記が基本（例：PORTFOLIO、WORKS）。説明文は短めに設定。背景色のみのシンプルデザイン。",
+    "aiHint": {
+        "description": "下層ページ用コンパクトFV。左右背景画像+中央テキスト。ポートフォリオ・実績ページ向け",
+        "excludeFromAutoSelect": false,
+        "contentAttributes": ["mainTitle", "description"],
+        "imageAttributes": ["backgroundImage", "bgImageLeftPc", "bgImageRightPc"]
+    },
+    "render":  "file:./render.php",
+    "editorScript":  "file:./lw-pr-fv-17.js",
+    "style":  "file:./style.css",
+    "supports":  {
+                     "anchor":  true
+                 },
+    "attributes":  {
+                       "backgroundImage":  {
+                                               "type":  "string",
+                                               "default":  "",
+                                               "ai_description":  "PC用背景画像の生成プロンプト（英語）。空の場合はfilterBackgroundColorのみ表示。通常は空のままでOK"
+                                           },
+                       "backgroundImageSp":  {
+                                                 "type":  "string",
+                                                 "default":  "",
+                                                 "ai_description":  "スマホ用背景画像。通常は空のままでOK"
+                                             },
+                       "mainTitle":  {
+                                         "type":  "string",
+                                         "default":  "PORTFOLIO",
+                                         "ai_description":  "メインタイトル（英語推奨）。5～15文字の英語。例：「PORTFOLIO」「WORKS」「GALLERY」「CASE STUDY」"
+                                     },
+                       "description":  {
+                                           "type":  "string",
+                                           "default":  "テキストを入力してください。",
+                                           "ai_description":  "説明文。15～40文字程度で簡潔に。例：「これまでの実績をご紹介します」「制作事例をご覧ください」"
+                                       },
+                       "filterBackgroundColor":  {
+                                                     "type":  "string",
+                                                     "default":  "var(--color-main)",
+                                                     "ai_description":  "画像よりz-indexが下にある、背景の色です。var(--color-main)を使用してサイトカラーと統一"
+                                                 },
+                       "filterOpacity":  {
+                                             "type":  "number",
+                                             "default":  0.95,
+                                             "ai_description":  "オーバーレイの不透明度（0-1）。0.95でほぼ背景色のみ表示"
+                                         },
+                       "textColor":  {
+                                         "type":  "string",
+                                         "default":  "#fff",
+                                         "ai_description":  "テキストの文字色。背景が濃い場合は#fff（白）を維持"
+                                     },
+                       "minHeightPc":  {
+                                           "type":  "string",
+                                           "default":  "min-h-pc-280px",
+                                           "ai_description":  "PC表示時の最小高さ。コンパクトなデザインのため低めに設定"
+                                       },
+                       "minHeightTb":  {
+                                           "type":  "string",
+                                           "default":  "min-h-tb-220px",
+                                           "ai_description":  "タブレット表示時の最小高さ。通常はデフォルト値を維持"
+                                       },
+                       "minHeightSp":  {
+                                           "type":  "string",
+                                           "default":  "min-h-sp-180px",
+                                           "ai_description":  "スマホ表示時の最小高さ。通常はデフォルト値を維持"
+                                       },
+                       "mainTitleTag":  {
+                                            "type":  "string",
+                                            "default":  "h1",
+                                            "ai_description":  "タイトルのHTMLタグ。下層ページのメインタイトルなので通常は\u0027h1\u0027を維持"
+                                        },
+                       "bgImageLeftPc":  {
+                                             "type":  "string",
+                                             "default":  "",
+                                             "ai_description":  "左側背景画像（PC用）。装飾的な背景画像を配置"
+                                         },
+                       "bgImageLeftSp":  {
+                                             "type":  "string",
+                                             "default":  "",
+                                             "ai_description":  "左側背景画像（スマホ用）。レスポンシブ対応用"
+                                         },
+                       "bgImageRightPc":  {
+                                              "type":  "string",
+                                              "default":  "",
+                                              "ai_description":  "右側背景画像（PC用）。装飾的な背景画像を配置"
+                                          },
+                       "bgImageRightSp":  {
+                                              "type":  "string",
+                                              "default":  "",
+                                              "ai_description":  "右側背景画像（スマホ用）。レスポンシブ対応用"
+                                          },
+                       "bgImageOpacityPc":  {
+                                                "type":  "number",
+                                                "default":  1,
+                                                "ai_description":  "メイン背景画像の透明度（PC用）。0〜1"
+                                            },
+                       "bgImageOpacitySp":  {
+                                                "type":  "number",
+                                                "default":  1,
+                                                "ai_description":  "メイン背景画像の透明度（スマホ用）。0〜1"
+                                            },
+                       "bgImageLeftOpacityPc":  {
+                                                    "type":  "number",
+                                                    "default":  1,
+                                                    "ai_description":  "左側背景画像の透明度（PC用）。0〜1"
+                                                },
+                       "bgImageLeftOpacitySp":  {
+                                                    "type":  "number",
+                                                    "default":  1,
+                                                    "ai_description":  "左側背景画像の透明度（スマホ用）。0〜1"
+                                                },
+                       "bgImageRightOpacityPc":  {
+                                                     "type":  "number",
+                                                     "default":  1,
+                                                     "ai_description":  "右側背景画像の透明度（PC用）。0〜1"
+                                                 },
+                       "bgImageRightOpacitySp":  {
+                                                     "type":  "number",
+                                                     "default":  1,
+                                                     "ai_description":  "右側背景画像の透明度（スマホ用）。0〜1"
+                                                 },
+                       "marginBottomZero":  {
+                                                "type":  "boolean",
+                                                "default":  false,
+                                                "ai_description":  "margin-bottomを0にする。パンくずリストによる自動マージン調整を無効化"
+                                            }
+                   },
+    "no":  5
+}

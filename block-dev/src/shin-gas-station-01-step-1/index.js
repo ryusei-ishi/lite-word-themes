@@ -13,7 +13,7 @@ const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 // 背景色オプションを変数に定義
 
-registerBlockType(metadata.name, {
+registerBlockType(metadata.name, {
     title: 'ステップ 1 shin shop pattern 01',
 
     edit: function (props) {
@@ -37,8 +37,7 @@ registerBlockType(metadata.name, {
 
         // コンテンツを更新
         const updateContent = (index, key, value) => {
-            const updatedContents = [...contents];
-            updatedContents[index][key] = value;
+            const updatedContents = contents.map((content, i) => i === index ? { ...content, [key]: value } : content);
             setAttributes({ contents: updatedContents });
         };
 

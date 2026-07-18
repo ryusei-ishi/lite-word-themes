@@ -3,8 +3,8 @@ import { InnerBlocks, InspectorControls, MediaUpload, useSettings, useBlockProps
 import { PanelBody, Button, ColorPalette, RangeControl, SelectControl, GradientPicker, ToggleControl, FocalPointPicker } from '@wordpress/components';
 import { minHeightPcClassOptionArr, minHeightTbClassOptionArr, minHeightSpClassOptionArr } from '../utils.js';
 
-import './style.scss';
-import './editor.scss';
+// import './style.scss';  // block.json の style で読み込み済みのため無効化
+// import './editor.scss';  // block.json の editorStyle で読み込み済みのため無効化
 import metadata from './block.json';
 
 registerBlockType(metadata.name, {
@@ -58,6 +58,17 @@ registerBlockType(metadata.name, {
 
         const [gradients, colors] = useSettings('color.gradients', 'color.palette');
 
+        // 継承チェーン: PC → TB → SP
+        // 実効値を計算（継承を解決）
+        const effectiveFilterTypeTb = filterTypeTb || filterTypePc;
+        const effectiveFilterTypeSp = filterTypeSp || effectiveFilterTypeTb;
+        const effectiveFilterColorTb = filterColorTb || filterColorPc;
+        const effectiveFilterColorSp = filterColorSp || effectiveFilterColorTb;
+        const effectiveFilterGradientTb = filterGradientTb || filterGradientPc;
+        const effectiveFilterGradientSp = filterGradientSp || effectiveFilterGradientTb;
+        const effectiveOpacityTb = opacityTb >= 0 ? opacityTb : opacityPc;
+        const effectiveOpacitySp = opacitySp >= 0 ? opacitySp : effectiveOpacityTb;
+
         // フィルターの色と透明度を分離して返す
         const getFilterStyle = (filterType, filterColor, filterGradient) => {
             if (filterType === 'gradient' && filterGradient) {
@@ -71,10 +82,10 @@ registerBlockType(metadata.name, {
         const filterStyle = {
             '--lw-bg-color-filter-pc': getFilterStyle(filterTypePc, filterColorPc, filterGradientPc),
             '--lw-bg-opacity-pc': opacityPc,
-            '--lw-bg-color-filter-tb': getFilterStyle(filterTypeTb, filterColorTb, filterGradientTb) || getFilterStyle(filterTypePc, filterColorPc, filterGradientPc),
-            '--lw-bg-opacity-tb': opacityTb,
-            '--lw-bg-color-filter-sp': getFilterStyle(filterTypeSp, filterColorSp, filterGradientSp) || getFilterStyle(filterTypeTb, filterColorTb, filterGradientTb) || getFilterStyle(filterTypePc, filterColorPc, filterGradientPc),
-            '--lw-bg-opacity-sp': opacitySp,
+            '--lw-bg-color-filter-tb': getFilterStyle(effectiveFilterTypeTb, effectiveFilterColorTb, effectiveFilterGradientTb),
+            '--lw-bg-opacity-tb': effectiveOpacityTb,
+            '--lw-bg-color-filter-sp': getFilterStyle(effectiveFilterTypeSp, effectiveFilterColorSp, effectiveFilterGradientSp),
+            '--lw-bg-opacity-sp': effectiveOpacitySp,
         };
 
         const paddingStyle = {
@@ -212,6 +223,7 @@ registerBlockType(metadata.name, {
                             label="タイプ"
                             value={filterTypeTb}
                             options={[
+                                { label: 'PCを継承', value: '' },
                                 { label: '単色', value: 'solid' },
                                 { label: 'グラデーション', value: 'gradient' },
                             ]}
@@ -219,29 +231,37 @@ registerBlockType(metadata.name, {
                             __next40pxDefaultSize={true}
                             __nextHasNoMarginBottom={true}
                         />
-                        {filterTypeTb === 'solid' ? (
+                        {filterTypeTb && (
                             <>
-                                <p style={{ marginBottom: '8px' }}>フィルター色（空欄でPC設定を継承）</p>
-                                <ColorPalette
-                                    value={filterColorTb}
-                                    onChange={(color) => setAttributes({ filterColorTb: color })}
-                                    colors={colors}
-                                />
+                                {effectiveFilterTypeTb === 'solid' ? (
+                                    <>
+                                        <p style={{ marginBottom: '8px' }}>フィルター色（空欄でPC継承）</p>
+                                        <ColorPalette
+                                            value={filterColorTb}
+                                            onChange={(color) => setAttributes({ filterColorTb: color })}
+                                            colors={colors}
+                                        />
+                                    </>
+                                ) : (
+                                    <>
+                                        <p style={{ marginBottom: '8px' }}>グラデーション（空欄でPC継承）</p>
+                                        <GradientPicker
+                                            value={filterGradientTb}
+                                            onChange={(gradient) => setAttributes({ filterGradientTb: gradient })}
+                                            gradients={gradients}
+                                        />
+                                    </>
+                                )}
                             </>
-                        ) : (
-                            <GradientPicker
-                                value={filterGradientTb || filterGradientPc}
-                                onChange={(gradient) => setAttributes({ filterGradientTb: gradient })}
-                                gradients={gradients}
-                            />
                         )}
                         <RangeControl
-                            label="透明度"
-                            value={opacityTb}
+                            label={`透明度${opacityTb < 0 ? '（PC継承中）' : ''}`}
+                            value={opacityTb >= 0 ? opacityTb : effectiveOpacityTb}
                             onChange={(value) => setAttributes({ opacityTb: value })}
-                            min={0}
+                            min={-1}
                             max={1}
                             step={0.1}
+                            help={opacityTb < 0 ? 'PC設定を継承中。変更すると個別設定になります' : '-1でPC継承'}
                             __next40pxDefaultSize={true}
                             __nextHasNoMarginBottom={true}
                         />
@@ -253,6 +273,7 @@ registerBlockType(metadata.name, {
                             label="タイプ"
                             value={filterTypeSp}
                             options={[
+                                { label: 'タブレットを継承', value: '' },
                                 { label: '単色', value: 'solid' },
                                 { label: 'グラデーション', value: 'gradient' },
                             ]}
@@ -260,29 +281,37 @@ registerBlockType(metadata.name, {
                             __next40pxDefaultSize={true}
                             __nextHasNoMarginBottom={true}
                         />
-                        {filterTypeSp === 'solid' ? (
+                        {filterTypeSp && (
                             <>
-                                <p style={{ marginBottom: '8px' }}>フィルター色（空欄でタブレット設定を継承）</p>
-                                <ColorPalette
-                                    value={filterColorSp}
-                                    onChange={(color) => setAttributes({ filterColorSp: color })}
-                                    colors={colors}
-                                />
+                                {effectiveFilterTypeSp === 'solid' ? (
+                                    <>
+                                        <p style={{ marginBottom: '8px' }}>フィルター色（空欄でTB継承）</p>
+                                        <ColorPalette
+                                            value={filterColorSp}
+                                            onChange={(color) => setAttributes({ filterColorSp: color })}
+                                            colors={colors}
+                                        />
+                                    </>
+                                ) : (
+                                    <>
+                                        <p style={{ marginBottom: '8px' }}>グラデーション（空欄でTB継承）</p>
+                                        <GradientPicker
+                                            value={filterGradientSp}
+                                            onChange={(gradient) => setAttributes({ filterGradientSp: gradient })}
+                                            gradients={gradients}
+                                        />
+                                    </>
+                                )}
                             </>
-                        ) : (
-                            <GradientPicker
-                                value={filterGradientSp || filterGradientTb || filterGradientPc}
-                                onChange={(gradient) => setAttributes({ filterGradientSp: gradient })}
-                                gradients={gradients}
-                            />
                         )}
                         <RangeControl
-                            label="透明度"
-                            value={opacitySp}
+                            label={`透明度${opacitySp < 0 ? '（TB継承中）' : ''}`}
+                            value={opacitySp >= 0 ? opacitySp : effectiveOpacitySp}
                             onChange={(value) => setAttributes({ opacitySp: value })}
-                            min={0}
+                            min={-1}
                             max={1}
                             step={0.1}
+                            help={opacitySp < 0 ? 'タブレット設定を継承中。変更すると個別設定になります' : '-1でTB継承'}
                             __next40pxDefaultSize={true}
                             __nextHasNoMarginBottom={true}
                         />
@@ -767,6 +796,17 @@ registerBlockType(metadata.name, {
             opacitySp,
         } = attributes;
 
+        // 継承チェーン: PC → TB → SP
+        // 実効値を計算（継承を解決）
+        const effectiveFilterTypeTb = filterTypeTb || filterTypePc;
+        const effectiveFilterTypeSp = filterTypeSp || effectiveFilterTypeTb;
+        const effectiveFilterColorTb = filterColorTb || filterColorPc;
+        const effectiveFilterColorSp = filterColorSp || effectiveFilterColorTb;
+        const effectiveFilterGradientTb = filterGradientTb || filterGradientPc;
+        const effectiveFilterGradientSp = filterGradientSp || effectiveFilterGradientTb;
+        const effectiveOpacityTb = opacityTb >= 0 ? opacityTb : opacityPc;
+        const effectiveOpacitySp = opacitySp >= 0 ? opacitySp : effectiveOpacityTb;
+
         const getFilterStyle = (filterType, filterColor, filterGradient) => {
             if (filterType === 'gradient' && filterGradient) {
                 return filterGradient;
@@ -779,10 +819,10 @@ registerBlockType(metadata.name, {
         const filterStyle = {
             '--lw-bg-color-filter-pc': getFilterStyle(filterTypePc, filterColorPc, filterGradientPc),
             '--lw-bg-opacity-pc': opacityPc,
-            '--lw-bg-color-filter-tb': getFilterStyle(filterTypeTb, filterColorTb, filterGradientTb) || getFilterStyle(filterTypePc, filterColorPc, filterGradientPc),
-            '--lw-bg-opacity-tb': opacityTb,
-            '--lw-bg-color-filter-sp': getFilterStyle(filterTypeSp, filterColorSp, filterGradientSp) || getFilterStyle(filterTypeTb, filterColorTb, filterGradientTb) || getFilterStyle(filterTypePc, filterColorPc, filterGradientPc),
-            '--lw-bg-opacity-sp': opacitySp,
+            '--lw-bg-color-filter-tb': getFilterStyle(effectiveFilterTypeTb, effectiveFilterColorTb, effectiveFilterGradientTb),
+            '--lw-bg-opacity-tb': effectiveOpacityTb,
+            '--lw-bg-color-filter-sp': getFilterStyle(effectiveFilterTypeSp, effectiveFilterColorSp, effectiveFilterGradientSp),
+            '--lw-bg-opacity-sp': effectiveOpacitySp,
         };
 
         const paddingStyle = {

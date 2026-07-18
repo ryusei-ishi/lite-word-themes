@@ -1,0 +1,120 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "wdl/lw-pr-custom-title-15",
+    "version":  "1.0.0",
+    "title":  "見出しタイトル 15",
+    "no":  1,
+    "category":  "lw-heading",
+    "icon":  "editor-textcolor",
+    "description":  "メインタイトルとサブタイトルを表示する見出しブロック",
+    "aiDescription":  "セクションの見出し。日本語メインタイトルとサブタイトルの2段構成。サブタイトルの上マージンを調整可能。シンプルで汎用的な見出しブロック。各セクションの冒頭に配置。",
+    "aiNotes":  "このブロックはセクションタイトルとして使用。h2が基本。FVブロックの直後など、セクション区切りに配置。サブタイトルは任意で設定。",
+    "aiHint": {
+        "description": "高機能見出し。メイン+サブタイトル+下線装飾。フォントサイズ・太さ・配置を細かく調整可能",
+        "excludeFromAutoSelect": false,
+        "contentAttributes": ["mainTitle", "subTitle"],
+        "imageAttributes": []
+    },
+    "supports":  {
+                     "anchor":  true
+                 },
+    "attributes":  {
+                       "mainTitle":  {
+                                         "type":  "string",
+                                         "default":  "タイトル",
+                                         "ai_description":  "メインタイトル（日本語）。3～15文字でセクション内容を表現。例：「サービス紹介」「会社概要」「お問い合わせ」"
+                                     },
+                       "subTitle":  {
+                                        "type":  "string",
+                                        "default":  "サブタイトル",
+                                        "ai_description":  "サブタイトル。5～20文字で補足説明や英語表記。例：「Services」「About Us」「Contact」。不要なら空文字"
+                                    },
+                       "headingLevel":  {
+                                            "type":  "number",
+                                            "default":  2,
+                                            "ai_description":  "見出しレベル（1-6）。セクションタイトルなので通常は2（h2）を維持"
+                                        },
+                       "subMarginTopPc":  {
+                                              "type":  "number",
+                                              "default":  0.2,
+                                              "ai_description":  "サブタイトルの上マージン（em、PC）。通常はデフォルト値を維持"
+                                          },
+                       "subMarginTopSp":  {
+                                              "type":  "number",
+                                              "default":  0.2,
+                                              "ai_description":  "サブタイトルの上マージン（em、スマホ）。通常はデフォルト値を維持"
+                                          },
+                       "showSubTitle":  {
+                                            "type":  "boolean",
+                                            "default":  true,
+                                            "ai_description":  "サブタイトルを表示するかどうか。不要な場合はfalseに設定"
+                                        },
+                       "afterColor":  {
+                                          "type":  "string",
+                                          "default":  "var(--color-main)",
+                                          "ai_description":  "タイトル下の線の色。var(--color-main)でサイトカラーと統一"
+                                      },
+                       "afterMarginTopPc":  {
+                                                "type":  "number",
+                                                "default":  1,
+                                                "ai_description":  "タイトル下の線の上マージン（em、PC）"
+                                            },
+                       "afterMarginTopSp":  {
+                                                "type":  "number",
+                                                "default":  0.8,
+                                                "ai_description":  "タイトル下の線の上マージン（em、スマホ）"
+                                            },
+                       "afterHeightPc":  {
+                                             "type":  "number",
+                                             "default":  4,
+                                             "ai_description":  "タイトル下の線の高さ（px、PC）"
+                                         },
+                       "afterHeightSp":  {
+                                             "type":  "number",
+                                             "default":  4,
+                                             "ai_description":  "タイトル下の線の高さ（px、スマホ）"
+                                         },
+                       "afterWidthPc":  {
+                                            "type":  "number",
+                                            "default":  50,
+                                            "ai_description":  "タイトル下の線の幅（px、PC）"
+                                        },
+                       "afterWidthSp":  {
+                                            "type":  "number",
+                                            "default":  50,
+                                            "ai_description":  "タイトル下の線の幅（px、スマホ）"
+                                        },
+                       "fontSizePc":  {
+                                          "type":  "number",
+                                          "default":  16,
+                                          "ai_description":  "ベースフォントサイズ（px、PC）"
+                                      },
+                       "fontSizeSp":  {
+                                          "type":  "number",
+                                          "default":  16,
+                                          "ai_description":  "ベースフォントサイズ（px、スマホ）"
+                                      },
+                       "mainFontWeight":  {
+                                              "type":  "string",
+                                              "default":  "",
+                                              "ai_description":  "メインタイトルのフォントの太さ"
+                                          },
+                       "subFontWeight":  {
+                                             "type":  "string",
+                                             "default":  "",
+                                             "ai_description":  "サブタイトルのフォントの太さ"
+                                         },
+                       "positionPc":  {
+                                          "type":  "string",
+                                          "default":  "",
+                                          "ai_description":  "PC版のテキスト配置（空=中央、position_left_pc=左、position_right_pc=右）"
+                                      },
+                       "positionSp":  {
+                                          "type":  "string",
+                                          "default":  "",
+                                          "ai_description":  "スマホ版のテキスト配置（空=中央、position_left_sp=左、position_right_sp=右）"
+                                      }
+                   },
+    "editorScript":  "file:./lw-pr-custom-title-15.js"
+}

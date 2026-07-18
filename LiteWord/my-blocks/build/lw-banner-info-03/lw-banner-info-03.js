@@ -110,7 +110,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_5__.fontWeightOpti
         }
       }));
     }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u753B\u50CF\u90E8\u5206\u306E\u6700\u5927\u6A2A\u5E45"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u6700\u5927\u5E45 (px)",
       value: maxWidth,
@@ -994,7 +994,7 @@ module.exports = window["wp"]["components"];
   \******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-banner-info-03","version":"1.0.0","title":"バナー 03（3カラム）","category":"lw-banner","icon":"images-alt2","supports":{"anchor":true},"attributes":{"filterBackgroundColor":{"type":"string","default":"#000"},"filterOpacity":{"type":"number","default":0.45},"maxWidth":{"type":"number","default":800},"titleFontFamily":{"type":"string","default":"Noto Sans JP"},"titleFontWeight":{"type":"string","default":"600"},"pFontFamily":{"type":"string","default":"Noto Sans JP"},"pFontWeight":{"type":"string","default":"400"},"items":{"type":"array","default":[{"title":"タイトルタイトル","description":"説明テキスト説明テ","imgUrl":"https://picsum.photos/1000/1000?random=1","linkUrl":"","openInNewTab":false},{"title":"タイトルタイトル","description":"説明テキスト説明テ","imgUrl":"https://picsum.photos/1000/1000?random=2","linkUrl":"","openInNewTab":false},{"title":"タイトルタイトル","description":"説明テキスト説明テ","imgUrl":"https://picsum.photos/1000/1000?random=3","linkUrl":"","openInNewTab":false}]}},"editorScript":"file:./lw-banner-info-03.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":3}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-banner-info-03","version":"1.0.0","title":"バナー 03（3カラム）","category":"lw-banner","icon":"images-alt2","aiHint":{"description":"画像バナー3カラム（最大幅制限）。コンパクトな3枚バナー。サービス概要・カテゴリ案内に","excludeFromAutoSelect":false,"contentAttributes":["items"],"imageAttributes":[]},"supports":{"anchor":true},"attributes":{"filterBackgroundColor":{"type":"string","default":"#000"},"filterOpacity":{"type":"number","default":0.45},"maxWidth":{"type":"number","default":800},"titleFontFamily":{"type":"string","default":"Noto Sans JP"},"titleFontWeight":{"type":"string","default":"600"},"pFontFamily":{"type":"string","default":"Noto Sans JP"},"pFontWeight":{"type":"string","default":"400"},"items":{"type":"array","default":[{"title":"タイトルタイトル","description":"説明テキスト説明テ","imgUrl":"https://picsum.photos/1000/1000?random=1","linkUrl":"","openInNewTab":false},{"title":"タイトルタイトル","description":"説明テキスト説明テ","imgUrl":"https://picsum.photos/1000/1000?random=2","linkUrl":"","openInNewTab":false},{"title":"タイトルタイトル","description":"説明テキスト説明テ","imgUrl":"https://picsum.photos/1000/1000?random=3","linkUrl":"","openInNewTab":false}]}},"editorScript":"file:./lw-banner-info-03.js","no":3}');
 
 /***/ })
 

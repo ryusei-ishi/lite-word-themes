@@ -161,7 +161,7 @@ function deadline_setting_custom( $wp_customize ) {
 // カスタマイザー画面でのみ読み込まれるJavaScript（純粋JavaScript版）
 function deadline_setting_customize_scripts() {
     ?>
-    <script type="text/javascript">
+    <script>
     (function() {
         'use strict';
         

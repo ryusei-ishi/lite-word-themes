@@ -1,0 +1,124 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-comment-2",
+	"version": "1.0.0",
+	"title": "吹き出しコメント 02（全幅・名前無し）",
+	"category": "lw-comment",
+	"icon": "format-chat",
+	"description": "吹き出しスタイルのコメントブロック。画像とテキストを配置。",
+	"aiHint": {
+		"description": "吹き出しコメント（プレミアム）。テキスト+アバター画像。レビュー表示に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"comment2Text"
+		],
+		"imageAttributes": [
+			"comment2ImageUrl"
+		]
+	},
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"comment2MaxWidth": {
+			"type": "number",
+			"default": 800
+		},
+		"comment2ImagePosition": {
+			"type": "string",
+			"default": "left"
+		},
+		"comment2ImageUrl": {
+			"type": "string",
+			"default": "https://placehold.co/200x200/e8e8e8/999999?text=Image"
+		},
+		"comment2ImageId": {
+			"type": "number",
+			"default": 0
+		},
+		"comment2ImageAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"comment2ImageWidthPc": {
+			"type": "number",
+			"default": 160
+		},
+		"comment2ImageWidthSp": {
+			"type": "number",
+			"default": 80
+		},
+		"comment2ImageBdWidthPc": {
+			"type": "number",
+			"default": 2
+		},
+		"comment2ImageBdWidthSp": {
+			"type": "number",
+			"default": -1
+		},
+		"comment2ImageBdColorPc": {
+			"type": "string",
+			"default": "#3C7FC3"
+		},
+		"comment2ImageBdColorSp": {
+			"type": "string",
+			"default": ""
+		},
+		"comment2ImageBg": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"comment2Text": {
+			"type": "string",
+			"default": "ここにコメントを入力"
+		},
+		"comment2TextColor": {
+			"type": "string",
+			"default": "#3C7FC3"
+		},
+		"comment2TextBg": {
+			"type": "string",
+			"default": "#F0FCFF"
+		},
+		"comment2TextMtPc": {
+			"type": "number",
+			"default": 24
+		},
+		"comment2TextMtSp": {
+			"type": "number",
+			"default": 8
+		},
+		"comment2TextFontsizePc": {
+			"type": "number",
+			"default": 17
+		},
+		"comment2TextFontsizeSp": {
+			"type": "number",
+			"default": 16
+		},
+		"comment2TextBdrPc": {
+			"type": "number",
+			"default": 12
+		},
+		"comment2TextBdrSp": {
+			"type": "number",
+			"default": 8
+		},
+		"comment2TriangleTop": {
+			"type": "number",
+			"default": 20
+		},
+		"comment2FontSet": {
+			"type": "string",
+			"default": ""
+		},
+		"comment2FontWeight": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./lw-pr-comment-2.js",
+	"no": 2
+}

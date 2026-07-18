@@ -46,6 +46,41 @@ class LW_AI_Generator_Admin_Settings {
         add_action( 'wp_ajax_lw_ai_validate_api_key', array( __CLASS__, 'ajax_validate_api_key' ) );
         add_action( 'wp_ajax_lw_ai_save_api_key', array( __CLASS__, 'ajax_save_api_key' ) );
         add_action( 'wp_ajax_lw_ai_agree_terms', array( __CLASS__, 'ajax_agree_terms' ) );
+
+        // ★ セットアップウィザード（フロントエンド白紙ページ）
+        add_action( 'init', array( __CLASS__, 'register_setup_wizard_route' ) );
+        add_filter( 'query_vars', array( __CLASS__, 'setup_wizard_query_vars' ) );
+        add_action( 'template_redirect', array( __CLASS__, 'setup_wizard_redirect' ) );
+    }
+
+    /**
+     * セットアップウィザードのリライトルール登録
+     */
+    public static function register_setup_wizard_route() {
+        add_rewrite_rule( '^lw-ai-setup/?$', 'index.php?lw_ai_setup=1', 'top' );
+        // ルールが未登録なら1回だけflush
+        $rules = get_option( 'rewrite_rules' );
+        if ( ! isset( $rules['^lw-ai-setup/?$'] ) ) {
+            flush_rewrite_rules( false );
+        }
+    }
+
+    public static function setup_wizard_query_vars( $vars ) {
+        $vars[] = 'lw_ai_setup';
+        return $vars;
+    }
+
+    public static function setup_wizard_redirect() {
+        if ( get_query_var( 'lw_ai_setup' ) !== '1' ) {
+            return;
+        }
+        if ( ! current_user_can( 'edit_posts' ) ) {
+            wp_redirect( wp_login_url( home_url( '/lw-ai-setup/' ) ) );
+            exit;
+        }
+        // テーマCSS/JSなしの白紙ページ
+        include LW_AI_SYSTEM_DIR . 'templates/setup-wizard.php';
+        exit;
     }
 
     /**
@@ -291,7 +326,7 @@ class LW_AI_Generator_Admin_Settings {
      * APIキーをテスト
      */
     public static function test_api_key( $api_key ) {
-        $endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' . $api_key;
+        $endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' . $api_key;
 
         $response = wp_remote_post( $endpoint, array(
             'timeout' => 15,
@@ -460,8 +495,12 @@ class LW_AI_Generator_Admin_Settings {
             return;
         }
 
-        // プレミアムプランチェック
+        // ★ 未設定 or 未同意 → セットアップウィザードにリダイレクト
         $is_premium = defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true;
+        if ( $is_premium && ( ! self::has_agreed_terms() || empty( self::get_api_key() ) ) ) {
+            echo '<script>window.location.href="' . esc_url( home_url( '/lw-ai-setup/' ) ) . '";</script>';
+            return;
+        }
         $premium_url = function_exists('lw_premium_info_link') ? lw_premium_info_link() : 'https://shop.lite-word.com/purchase-premium';
 
         // プレミアムプランでない場合はロック画面を表示
@@ -521,100 +560,6 @@ class LW_AI_Generator_Admin_Settings {
         $validation_status = self::get_validation_status();
         ?>
         <div class="lw-ai-settings-wrap">
-            <!-- 利用規約同意画面 -->
-            <?php if ( ! $has_agreed ) : ?>
-            <div class="lw-ai-terms-overlay" id="lw-ai-terms-overlay">
-                <div class="lw-ai-terms-modal">
-                    <div class="lw-ai-terms-header">
-                        <div class="lw-ai-terms-icon">
-                            <span class="dashicons dashicons-info-outline"></span>
-                        </div>
-                        <h2>AI機能のご利用にあたって</h2>
-                        <p>LiteWord AI Generatorをご利用いただく前に、以下の内容をご確認・ご同意ください。</p>
-                    </div>
-
-                    <div class="lw-ai-terms-content">
-                        <div class="lw-ai-terms-section">
-                            <h3>
-                                <span class="dashicons dashicons-money-alt"></span>
-                                料金について
-                            </h3>
-                            <p>
-                                本機能はGoogle Gemini APIを使用しています。Gemini APIは<strong>従量課金制</strong>のサービスです。
-                                無料枠（1日1,500リクエストまで）を超えた場合、Google Cloud Platformのアカウントに課金が発生します。
-                                料金の詳細は<a href="https://ai.google.dev/pricing" target="_blank" rel="noopener">Google AI 料金ページ</a>をご確認ください。
-                            </p>
-                        </div>
-
-                        <div class="lw-ai-terms-section">
-                            <h3>
-                                <span class="dashicons dashicons-warning"></span>
-                                AIの特性について
-                            </h3>
-                            <p>
-                                AIが生成するコンテンツは、<strong>必ずしも正確ではありません</strong>。
-                                事実と異なる情報、不適切な表現、誤った内容が含まれる可能性があります。
-                                生成されたコンテンツは必ず人間の目で確認・編集してからご使用ください。
-                            </p>
-                        </div>
-
-                        <div class="lw-ai-terms-section">
-                            <h3>
-                                <span class="dashicons dashicons-shield"></span>
-                                免責事項
-                            </h3>
-                            <p>
-                                AI機能の使用により生じた<strong>いかなる損害・トラブルについても、開発者は責任を負いかねます</strong>。
-                                生成されたコンテンツの著作権侵害、誤情報の掲載、SEOへの悪影響、その他あらゆる問題について、
-                                ご利用者様ご自身の責任においてご使用ください。
-                            </p>
-                        </div>
-                    </div>
-
-                    <div class="lw-ai-terms-agreement">
-                        <h4>以下の項目に同意してください</h4>
-
-                        <label class="lw-ai-terms-checkbox">
-                            <input type="checkbox" name="terms_billing" value="billing" />
-                            <span class="lw-ai-checkbox-custom"></span>
-                            <span class="lw-ai-checkbox-text">
-                                Google Gemini APIが<strong>従量課金制</strong>であることを理解しました
-                            </span>
-                        </label>
-
-                        <label class="lw-ai-terms-checkbox">
-                            <input type="checkbox" name="terms_accuracy" value="accuracy" />
-                            <span class="lw-ai-checkbox-custom"></span>
-                            <span class="lw-ai-checkbox-text">
-                                AIの生成内容は<strong>正確ではない可能性がある</strong>ことを理解しました
-                            </span>
-                        </label>
-
-                        <label class="lw-ai-terms-checkbox">
-                            <input type="checkbox" name="terms_responsibility" value="responsibility" />
-                            <span class="lw-ai-checkbox-custom"></span>
-                            <span class="lw-ai-checkbox-text">
-                                AI機能の使用により生じたトラブルは<strong>自己責任</strong>であることを理解しました
-                            </span>
-                        </label>
-                    </div>
-
-                    <div class="lw-ai-terms-footer">
-                        <button type="button" class="lw-ai-terms-btn" id="lw-ai-agree-btn" disabled>
-                            <span class="lw-ai-btn-text">同意して利用を開始する</span>
-                            <span class="lw-ai-btn-loading" style="display:none;">
-                                <span class="lw-ai-spinner"></span>
-                                処理中...
-                            </span>
-                        </button>
-                        <p class="lw-ai-terms-note">
-                            <span class="dashicons dashicons-info"></span>
-                            すべての項目にチェックを入れると「同意」ボタンが有効になります
-                        </p>
-                    </div>
-                </div>
-            </div>
-            <?php endif; ?>
 
             <!-- ヘッダー -->
             <div class="lw-ai-settings-header">
@@ -623,97 +568,18 @@ class LW_AI_Generator_Admin_Settings {
                         <span class="dashicons dashicons-superhero-alt"></span>
                         LiteWord AI Generator 設定
                     </h1>
-                    <button type="button" class="lw-voice-btn" data-voice-text="<?php echo esc_attr( self::get_voice_guide_text() ); ?>">
-                        <span class="lw-voice-icon">🔊</span>
-                        <span class="lw-voice-label">説明を聞く</span>
-                    </button>
                 </div>
-                <p>AIによる自動ページ生成機能を利用するための設定を行います</p>
+                <p>AIによる自動ページ生成機能の設定・管理</p>
             </div>
 
-            <!-- ブロック設定へのリンク -->
-            <a href="<?php echo esc_url( admin_url( 'options-general.php?page=lw-ai-block-settings' ) ); ?>" class="lw-ai-link-card">
-                <div class="lw-ai-link-card-icon">
-                    <span class="dashicons dashicons-screenoptions"></span>
-                </div>
-                <div class="lw-ai-link-card-content">
-                    <h3>AI生成ブロック設定</h3>
-                    <p>AIがページ生成時に使用するブロックを選択・設定できます</p>
-                </div>
-            </a>
-
-            <!-- APIキー取得手順 -->
-            <div class="lw-ai-card" id="lw-ai-guide-card" <?php echo $has_key ? 'style="display:none;"' : ''; ?>>
-                <div class="lw-ai-card-header">
-                    <h2>
-                        <span class="dashicons dashicons-book"></span>
-                        Gemini APIキーの取得手順
-                    </h2>
-                </div>
-                <div class="lw-ai-card-body">
-                    <div class="lw-ai-notice lw-ai-notice-info">
-                        <span class="dashicons dashicons-info"></span>
-                        <div>
-                            <strong>Gemini APIとは？</strong><br>
-                            GoogleのAI「Gemini」を利用するためのAPIです。このプラグインではGemini 2.0 Flashモデルを使用して、高速かつ高品質なコンテンツを生成します。
-                        </div>
-                    </div>
-
-                    <ol class="lw-ai-steps">
-                        <li class="lw-ai-step">
-                            <div class="lw-ai-step-number">1</div>
-                            <div class="lw-ai-step-content">
-                                <div class="lw-ai-step-title">Google AI Studioにアクセス</div>
-                                <div class="lw-ai-step-desc">
-                                    下のボタンをクリックして、Google AI Studioの公式サイトにアクセスしてください。
-                                    <a href="https://aistudio.google.com/app/apikey" target="_blank" rel="noopener" class="lw-ai-external-link">
-                                        <span class="dashicons dashicons-external"></span>
-                                        Google AI Studio を開く
-                                    </a>
-                                </div>
-                            </div>
-                        </li>
-                        <li class="lw-ai-step">
-                            <div class="lw-ai-step-number">2</div>
-                            <div class="lw-ai-step-content">
-                                <div class="lw-ai-step-title">Googleアカウントでログイン</div>
-                                <div class="lw-ai-step-desc">
-                                    お持ちのGoogleアカウントでログインしてください。<br>
-                                    <strong>重要：</strong>企業アカウント（Google Workspace）では制限がある場合があります。個人のGmailアカウントの使用を推奨します。
-                                </div>
-                            </div>
-                        </li>
-                        <li class="lw-ai-step">
-                            <div class="lw-ai-step-number">3</div>
-                            <div class="lw-ai-step-content">
-                                <div class="lw-ai-step-title">「APIキーを作成」をクリック</div>
-                                <div class="lw-ai-step-desc">
-                                    ページ上部にある「<strong>Create API Key</strong>」または「<strong>APIキーを作成</strong>」ボタンをクリックします。<br>
-                                    新しいプロジェクトを作成するか、既存のプロジェクトを選択できます。
-                                </div>
-                            </div>
-                        </li>
-                        <li class="lw-ai-step">
-                            <div class="lw-ai-step-number">4</div>
-                            <div class="lw-ai-step-content">
-                                <div class="lw-ai-step-title">APIキーをコピー</div>
-                                <div class="lw-ai-step-desc">
-                                    生成されたAPIキーが表示されます。<code>AIza</code>で始まる文字列です。<br>
-                                    「コピー」ボタンをクリックしてキーをコピーしてください。<br>
-                                    <strong>注意：</strong>このキーは一度しか表示されません。必ずコピーしてください。
-                                </div>
-                            </div>
-                        </li>
-                        <li class="lw-ai-step">
-                            <div class="lw-ai-step-number">5</div>
-                            <div class="lw-ai-step-content">
-                                <div class="lw-ai-step-title">下のフォームに貼り付けて保存</div>
-                                <div class="lw-ai-step-desc">
-                                    コピーしたAPIキーを下のフォームに貼り付けて、「設定を保存」ボタンをクリックしてください。
-                                </div>
-                            </div>
-                        </li>
-                    </ol>
+            <!-- セットアップウィザードへの導線 -->
+            <div class="lw-ai-card">
+                <div class="lw-ai-card-body" style="text-align:center; padding: 20px;">
+                    <p style="margin-bottom: 12px;">APIキーの設定・変更はセットアップウィザードから行えます。</p>
+                    <a href="<?php echo esc_url( home_url( '/lw-ai-setup/' ) ); ?>" class="button button-primary" style="font-size: 14px; padding: 8px 24px;">
+                        <span class="dashicons dashicons-admin-tools" style="margin-top: 4px;"></span>
+                        セットアップウィザードを開く
+                    </a>
                 </div>
             </div>
 
@@ -948,6 +814,60 @@ class LW_AI_Generator_Admin_Settings {
                 </div>
             </div>
         </div>
+
+        <script>
+        (function() {
+            var synth = window.speechSynthesis;
+            if (!synth) return;
+
+            var currentBtn = null;
+
+            document.querySelectorAll('.lw-ai-neko-voice-btn').forEach(function(btn) {
+                btn.addEventListener('click', function() {
+                    // 再生中なら停止
+                    if (currentBtn === btn) {
+                        synth.cancel();
+                        btn.classList.remove('playing');
+                        currentBtn = null;
+                        return;
+                    }
+
+                    // 他のボタンが再生中なら停止
+                    if (currentBtn) {
+                        synth.cancel();
+                        currentBtn.classList.remove('playing');
+                    }
+
+                    var text = btn.getAttribute('data-voice-text') || '';
+                    if (!text) return;
+
+                    btn.classList.add('playing');
+                    currentBtn = btn;
+
+                    var parts = text.split('|');
+                    var index = 0;
+
+                    function speakNext() {
+                        if (index >= parts.length) {
+                            btn.classList.remove('playing');
+                            currentBtn = null;
+                            return;
+                        }
+                        var utter = new SpeechSynthesisUtterance(parts[index].trim());
+                        utter.lang = 'ja-JP';
+                        utter.rate = 1.15;
+                        utter.pitch = 1.2;
+                        var voices = synth.getVoices();
+                        var jaVoice = voices.find(function(v) { return v.lang.startsWith('ja'); });
+                        if (jaVoice) utter.voice = jaVoice;
+                        utter.onend = function() { index++; speakNext(); };
+                        synth.speak(utter);
+                    }
+                    speakNext();
+                });
+            });
+        })();
+        </script>
         <?php
     }
 }

@@ -19,10 +19,16 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/lw-link-list-1/style.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-link-list-1/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/lw-link-list-1/block.json");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
 function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -111,8 +117,9 @@ var btnIconOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.leftButtonIconSvg
       });
     };
     var updateContent = function updateContent(i, key, val) {
-      var arr = _toConsumableArray(contents);
-      arr[i][key] = val;
+      var arr = contents.map(function (item, idx) {
+        return idx === i ? _objectSpread(_objectSpread({}, item), {}, _defineProperty({}, key, val)) : item;
+      });
       setAttributes({
         contents: arr
       });
@@ -132,7 +139,7 @@ var btnIconOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.leftButtonIconSvg
       });
     };
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F"
+      title: "\u80CC\u666F\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
       label: "\u975E\u8868\u793A / \u8868\u793A" /* ★ ラベル統一 */,
       checked: backgroundSwitch /* ON で表示 */,
@@ -195,7 +202,7 @@ var btnIconOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.leftButtonIconSvg
       max: 1,
       step: 0.01
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30EC\u30A4\u30A2\u30A6\u30C8"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u6700\u5927\u5E45",
       value: MaxWidth,
@@ -241,7 +248,7 @@ var btnIconOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.leftButtonIconSvg
       max: 3,
       step: 1
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30BF\u30A4\u30C8\u30EB\u8A2D\u5B9A"
+      title: "\u57FA\u672C\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
       label: "\u975E\u8868\u793A / \u8868\u793A" /* ★ ラベル統一 */,
       checked: !hideTitle /* ON で表示 */,
@@ -251,7 +258,7 @@ var btnIconOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.leftButtonIconSvg
         });
       } /* 内部値を反転保存 */
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30EA\u30F3\u30AF\u30DC\u30BF\u30F3\u306E\u5171\u901A\u30C7\u30B6\u30A4\u30F3\u8A2D\u5B9A"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u80CC\u666F\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: colorLiBg || 'transparent',
       onChange: function onChange(c) {
@@ -1239,7 +1246,7 @@ module.exports = window["wp"]["components"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-link-list-1","version":"1.0.0","title":"link list 01","category":"lw-button","icon":"lightbulb","supports":{"anchor":true},"attributes":{"MaxWidth":{"type":"number","default":800},"BtnGap":{"type":"number","default":12},"BtnClm":{"type":"number","default":2},"BtnClmSp":{"type":"number","default":1},"backgroundSwitch":{"type":"boolean","default":true},"backgroundImage":{"type":"string","default":""},"bgGradient":{"type":"string","default":"var(--color-main)"},"colorLiBgOpacity":{"type":"number","default":100},"filterOpacity":{"type":"number","default":0.9},"ListBorderRadius":{"type":"number","default":2},"hideTitle":{"type":"boolean","default":false},"titleText":{"type":"string","default":"Information"},"titleBottomText":{"type":"string","default":""},"fontLi":{"type":"string","default":""},"fontWeightLi":{"type":"string","default":""},"colorLiSvg":{"type":"string","default":"#ffffff"},"colorLiBg":{"type":"string","default":"var(--color-main)"},"colorLiText":{"type":"string","default":"#ffffff"},"colorLiBorder":{"type":"string","default":"#ffffff"},"ListBorderSize":{"type":"number","default":2},"contents":{"type":"array","source":"query","selector":".lw-link-list-1__li","query":{"text":{"type":"string","source":"html","selector":".lw-link-list-1__text p"},"link":{"type":"string","source":"attribute","selector":".lw-link-list-1__link","attribute":"href"},"icon":{"type":"string","source":"attribute","selector":".lw-link-list-1__icon","attribute":"data-icon"}},"default":[{"text":"ホームページ","link":"","icon":""},{"text":"Instagram","link":"","icon":""},{"text":"YouTube","link":"","icon":""},{"text":"FaceBook","link":"","icon":""}]}},"editorScript":"file:./lw-link-list-1.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-link-list-1","version":"1.0.0","title":"link list 01","category":"lw-button","icon":"lightbulb","supports":{"anchor":true},"aiHint":{"description":"リンクリスト。タイトル+ボタン型リンク一覧。SNSリンクやナビゲーション向け。2カラムグリッド","excludeFromAutoSelect":false,"contentAttributes":["titleText","titleBottomText","contents"],"imageAttributes":["backgroundImage"]},"attributes":{"MaxWidth":{"type":"number","default":800,"aiHint":{"skip":true}},"BtnGap":{"type":"number","default":12,"aiHint":{"skip":true}},"BtnClm":{"type":"number","default":2,"aiHint":{"skip":true}},"BtnClmSp":{"type":"number","default":1,"aiHint":{"skip":true}},"backgroundSwitch":{"type":"boolean","default":true,"aiHint":{"skip":true}},"backgroundImage":{"type":"string","default":"","aiHint":{"role":"image","note":"背景画像URL。省略可"}},"bgGradient":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"colorLiBgOpacity":{"type":"number","default":100,"aiHint":{"skip":true}},"filterOpacity":{"type":"number","default":0.9,"aiHint":{"skip":true}},"ListBorderRadius":{"type":"number","default":2,"aiHint":{"skip":true}},"hideTitle":{"type":"boolean","default":false,"aiHint":{"skip":true}},"titleText":{"type":"string","default":"Information","aiHint":{"role":"heading","contentGuide":"リストのタイトル。英語推奨。3〜15文字","example":"SNS"}},"titleBottomText":{"type":"string","default":"","aiHint":{"role":"subheading","contentGuide":"タイトル下の補足テキスト。省略可","example":"フォローしてね"}},"fontLi":{"type":"string","default":"","aiHint":{"skip":true}},"fontWeightLi":{"type":"string","default":"","aiHint":{"skip":true}},"colorLiSvg":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"colorLiBg":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"colorLiText":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"colorLiBorder":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"ListBorderSize":{"type":"number","default":2,"aiHint":{"skip":true}},"contents":{"type":"array","source":"query","selector":".lw-link-list-1__li","query":{"text":{"type":"string","source":"html","selector":".lw-link-list-1__text p"},"link":{"type":"string","source":"attribute","selector":".lw-link-list-1__link","attribute":"href"},"icon":{"type":"string","source":"attribute","selector":".lw-link-list-1__icon","attribute":"data-icon"}},"default":[{"text":"ホームページ","link":"","icon":""},{"text":"Instagram","link":"","icon":""},{"text":"YouTube","link":"","icon":""},{"text":"FaceBook","link":"","icon":""}],"aiHint":{"role":"list","contentGuide":"リンク項目。2〜6個。各要素にtext(リンク名)とlink(URL)を設定","example":[{"text":"Instagram","link":"https://instagram.com/xxx"}]}}},"editorScript":"file:./lw-link-list-1.js","no":1}');
 
 /***/ })
 

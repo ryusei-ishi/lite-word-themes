@@ -53,7 +53,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
       className: 'lw-button-03'
     });
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCDD \u57FA\u672C\u8A2D\u5B9A",
+      title: "\u57FA\u672C\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -83,7 +83,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
       },
       help: "\u30EA\u30F3\u30AF\u5148\u3092\u65B0\u3057\u3044\u30BF\u30D6\u3067\u958B\u304D\u305F\u3044\u5834\u5408\u306F\u30AA\u30F3\u306B\u3057\u3066\u304F\u3060\u3055\u3044"
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83C\uDFA8 \u30DC\u30BF\u30F3\u306E\u898B\u305F\u76EE",
+      title: "\u8272\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -135,7 +135,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
         });
       }
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCDD \u30C6\u30AD\u30B9\u30C8\u306E\u8272\u8A2D\u5B9A",
+      title: "\u30C6\u30AD\u30B9\u30C8\u8272\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -191,7 +191,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
         marginTop: '5px'
       }
     }, "\u300C\u8CC7\u6599\u30C0\u30A6\u30F3\u30ED\u30FC\u30C9\u306F\u3053\u3061\u3089\u300D\u306A\u3069\u306E\u30E1\u30A4\u30F3\u30C6\u30AD\u30B9\u30C8\u306E\u8272"))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u2728 \u30A2\u30A4\u30B3\u30F3\u8A2D\u5B9A",
+      title: "\u30A2\u30A4\u30B3\u30F3\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -1040,7 +1040,7 @@ module.exports = window["wp"]["components"];
   \************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-button-03","version":"1.0.0","title":"リンクボタン 03","category":"lw-button","icon":"button","description":"カスタマイズ可能なリンクボタン（スタイル03）","supports":{"anchor":true},"attributes":{"btnTextSub":{"type":"string","default":"お気軽にお問い合わせください"},"btnTextMain":{"type":"string","default":"資料ダウンロードはこちら"},"bgGradient":{"type":"string","default":""},"textSubColor":{"type":"string","default":"var(--color-main)"},"textMainColor":{"type":"string","default":"#ffffff"},"fontWeight":{"type":"string","default":"500"},"btnUrl":{"type":"string","default":""},"openNewTab":{"type":"boolean","default":false},"FontSet":{"type":"string","default":""},"selectedIcon":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\\"M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z\\"/></svg>"},"iconColor":{"type":"string","default":"#ffffff"}},"editorScript":"file:./lw-button-3.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":3}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-button-03","version":"1.0.0","title":"リンクボタン 03","category":"lw-button","icon":"button","description":"カスタマイズ可能なリンクボタン（スタイル03）","supports":{"anchor":true},"aiHint":{"description":"2段テキストボタン。上に小さい補足テキスト+下に大きいメインテキスト+アイコン。メール問い合わせ等に","excludeFromAutoSelect":false,"contentAttributes":["btnTextMain","btnTextSub","btnUrl"],"imageAttributes":[]},"attributes":{"btnTextSub":{"type":"string","default":"お気軽にお問い合わせください","aiHint":{"role":"subheading","contentGuide":"補足テキスト（小さい文字）。10〜20文字","example":"まずはお気軽にご相談ください"}},"btnTextMain":{"type":"string","default":"資料ダウンロードはこちら","aiHint":{"role":"button","contentGuide":"メインボタンテキスト。5〜15文字","example":"無料資料ダウンロード"}},"bgGradient":{"type":"string","default":"","aiHint":{"skip":true}},"textSubColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"textMainColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"fontWeight":{"type":"string","default":"500","aiHint":{"skip":true}},"btnUrl":{"type":"string","default":"","aiHint":{"role":"url","contentGuide":"遷移先URL"}},"openNewTab":{"type":"boolean","default":false,"aiHint":{"skip":true}},"FontSet":{"type":"string","default":"","aiHint":{"skip":true}},"selectedIcon":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\\"M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z\\"/></svg>","aiHint":{"skip":true}},"iconColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}}},"editorScript":"file:./lw-button-3.js","no":3}');
 
 /***/ })
 

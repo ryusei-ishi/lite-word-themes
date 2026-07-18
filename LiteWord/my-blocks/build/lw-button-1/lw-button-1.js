@@ -86,7 +86,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30DC\u30BF\u30F3\u306E\u30B5\u30A4\u30BA\u3068\u5F62",
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -189,7 +189,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, size === 'S' ? '小さめ' : size === 'M' ? '標準' : '大きめ');
     })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u8272\u306E\u8A2D\u5B9A",
+      title: "\u8272\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -240,7 +240,7 @@ __webpack_require__.r(__webpack_exports__);
         border: '1px solid #ddd'
       }
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30DC\u30BF\u30F3\u306E\u914D\u7F6E",
+      title: "\u914D\u7F6E\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -297,7 +297,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, opt.label);
     })))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u4F59\u767D\u306E\u8A2D\u5B9A",
+      title: "\u4F59\u767D\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -338,7 +338,7 @@ __webpack_require__.r(__webpack_exports__);
       __next40pxDefaultSize: true,
       __nextHasNoMarginBottom: true
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u67A0\u7DDA\u306E\u8A2D\u5B9A",
+      title: "\u67A0\u7DDA\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -523,7 +523,7 @@ module.exports = window["wp"]["components"];
   \************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-button-01","version":"1.0.0","title":"リンクボタン 01","category":"lw-button","icon":"button","description":"カスタマイズ可能なリンクボタン","supports":{"anchor":true},"attributes":{"buttonText":{"type":"string","source":"html","selector":"a","default":"詳細はこちら"},"url":{"type":"string","source":"attribute","selector":"a","attribute":"href","default":""},"openInNewTab":{"type":"boolean","default":false},"fontSize":{"type":"number","default":100},"maxWidth":{"type":"number","default":240},"maxWidthSp":{"type":"number","default":null},"backgroundColor":{"type":"string","default":"var(--color-main)"},"textColor":{"type":"string","default":"#ffffff"},"paddingSize":{"type":"string","default":"M"},"innerPaddingSize":{"type":"string","default":"M"},"marginTop":{"type":"number","default":10},"marginBottom":{"type":"number","default":10},"alignment":{"type":"string","default":"center"},"alignmentSp":{"type":"string","default":"center"},"borderRadius":{"type":"number","default":0},"borderWidth":{"type":"number","default":0},"borderColor":{"type":"string","default":"#000000"}},"editorScript":"file:./lw-button-1.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-button-01","version":"1.0.0","title":"リンクボタン 01","category":"lw-button","icon":"button","description":"カスタマイズ可能なリンクボタン","supports":{"anchor":true},"aiHint":{"description":"基本リンクボタン。テキスト+URL。サイズ・色・角丸を細かくカスタマイズ可能","excludeFromAutoSelect":false,"contentAttributes":["buttonText","url"],"imageAttributes":[]},"attributes":{"buttonText":{"type":"string","source":"html","selector":"a","default":"詳細はこちら","aiHint":{"role":"button","contentGuide":"動詞形。4〜10文字","example":"詳細を見る"}},"url":{"type":"string","source":"attribute","selector":"a","attribute":"href","default":"","aiHint":{"role":"url","contentGuide":"遷移先URL。#contact や /about/ 等"}},"openInNewTab":{"type":"boolean","default":false,"aiHint":{"skip":true}},"fontSize":{"type":"number","default":100,"aiHint":{"skip":true}},"maxWidth":{"type":"number","default":240,"aiHint":{"skip":true}},"maxWidthSp":{"type":"number","default":null,"aiHint":{"skip":true}},"backgroundColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"textColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"paddingSize":{"type":"string","default":"M","aiHint":{"skip":true}},"innerPaddingSize":{"type":"string","default":"M","aiHint":{"skip":true}},"marginTop":{"type":"number","default":10,"aiHint":{"skip":true}},"marginBottom":{"type":"number","default":10,"aiHint":{"skip":true}},"alignment":{"type":"string","default":"center","aiHint":{"skip":true}},"alignmentSp":{"type":"string","default":"center","aiHint":{"skip":true}},"borderRadius":{"type":"number","default":0,"aiHint":{"skip":true}},"borderWidth":{"type":"number","default":0,"aiHint":{"skip":true}},"borderColor":{"type":"string","default":"#000000","aiHint":{"skip":true}}},"editorScript":"file:./lw-button-1.js","no":1}');
 
 /***/ })
 

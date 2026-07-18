@@ -38,7 +38,7 @@ module.exports = window["wp"]["components"];
   \************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-cta","version":"1.0.0","title":"CTA 1 shin shop pattern 01","category":"lw-cta","icon":"megaphone","description":"テンプレート専用CTAブロック","supports":{"anchor":true},"attributes":{"title":{"type":"string","source":"html","selector":".shin-gas-station-01-cta__title .main","default":"採用情報"},"titleSub":{"type":"string","source":"html","selector":".shin-gas-station-01-cta__title .sub","default":"Recruit"},"text":{"type":"string","source":"html","selector":"p","default":"地域社会を支え、移動の快適さと安心を提供するDriveEaseでは、未来を共に創る仲間を募集しています。<br>私たちは、ガソリンスタンド事業や車両リース事業を通じて、人々の暮らしをより豊かにすることを目指しています。<br>新しい挑戦を続ける当社で、あなたの力を活かしてみませんか？"},"buttonText":{"type":"string","source":"html","selector":"a","default":"詳しく見る"},"buttonUrl":{"type":"string","default":"#"},"openInNewTab":{"type":"boolean","default":false},"imageUrl":{"type":"string","source":"attribute","selector":"img","attribute":"src","default":""},"filterColor":{"type":"string","default":"#054161"},"buttonBackgroundColor":{"type":"string","default":"#fff"},"buttonBorderColor":{"type":"string","default":"var(--color-main)"},"buttonBorderSize":{"type":"number","default":1},"buttonMaxWidth":{"type":"number","default":240},"pcTextAlign":{"type":"string","default":"center"},"mobileTextAlign":{"type":"string","default":"left"}},"editorScript":"file:./shin-gas-station-01-cta.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":15}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-cta","version":"1.0.0","title":"CTA 1 shin shop pattern 01","category":"lw-cta","icon":"megaphone","description":"テンプレート専用CTAブロック","aiHint":{"description":"CTA。タイトル+サブ+説明+ボタン+背景画像。ショップテンプレート用","excludeFromAutoSelect":false,"contentAttributes":["title","titleSub","text","buttonText"],"imageAttributes":["imageUrl"]},"supports":{"anchor":true},"attributes":{"title":{"type":"string","source":"html","selector":".shin-gas-station-01-cta__title .main","default":"採用情報"},"titleSub":{"type":"string","source":"html","selector":".shin-gas-station-01-cta__title .sub","default":"Recruit"},"text":{"type":"string","source":"html","selector":"p","default":"地域社会を支え、移動の快適さと安心を提供するDriveEaseでは、未来を共に創る仲間を募集しています。<br>私たちは、ガソリンスタンド事業や車両リース事業を通じて、人々の暮らしをより豊かにすることを目指しています。<br>新しい挑戦を続ける当社で、あなたの力を活かしてみませんか？"},"buttonText":{"type":"string","source":"html","selector":"a","default":"詳しく見る"},"buttonUrl":{"type":"string","default":"#"},"openInNewTab":{"type":"boolean","default":false},"imageUrl":{"type":"string","source":"attribute","selector":"img","attribute":"src","default":""},"filterColor":{"type":"string","default":"#054161"},"buttonBackgroundColor":{"type":"string","default":"#fff"},"buttonBorderColor":{"type":"string","default":"var(--color-main)"},"buttonBorderSize":{"type":"number","default":1},"buttonMaxWidth":{"type":"number","default":240},"pcTextAlign":{"type":"string","default":"center"},"mobileTextAlign":{"type":"string","default":"left"}},"editorScript":"file:./shin-gas-station-01-cta.js","no":15}');
 
 /***/ })
 
@@ -225,7 +225,7 @@ __webpack_require__.r(__webpack_exports__);
       className: 'shin-gas-station-01-cta'
     });
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30EA\u30F3\u30AF\u306E\u8A2D\u5B9A"
+      title: "\u57FA\u672C\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
       label: "\u30EA\u30F3\u30AF\u5148URL",
       value: buttonUrl,
@@ -235,7 +235,7 @@ __webpack_require__.r(__webpack_exports__);
       checked: openInNewTab,
       onChange: onToggleOpenInNewTab
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u753B\u50CF\u306E\u8A2D\u5B9A"
+      title: "\u80CC\u666F\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
       onSelect: onSelectImage,
       allowedTypes: "image",
@@ -262,7 +262,7 @@ __webpack_require__.r(__webpack_exports__);
         return onChangeFilterColor(value.hex);
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30C6\u30AD\u30B9\u30C8\u306E\u914D\u7F6E\u8A2D\u5B9A"
+      title: "\u914D\u7F6E\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "PC\u3067\u306E\u30C6\u30AD\u30B9\u30C8\u914D\u7F6E",
       value: pcTextAlign,
@@ -286,7 +286,7 @@ __webpack_require__.r(__webpack_exports__);
       }],
       onChange: onChangeMobileTextAlign
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30EA\u30F3\u30AF\u30DC\u30BF\u30F3\u306E\u8A2D\u5B9A"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u30DC\u30BF\u30F3\u306E\u80CC\u666F\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
       color: buttonBackgroundColor,
       onChangeComplete: function onChangeComplete(value) {

@@ -88,7 +88,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, tag.toUpperCase());
     }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u753B\u50CF\u8A2D\u5B9A"
+      title: "\u80CC\u666F\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "PC \u7528\u753B\u50CF"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
       onSelect: onChangeBackgroundImage,
       allowedTypes: ['image'],
@@ -169,7 +169,7 @@ __webpack_require__.r(__webpack_exports__);
       max: 1,
       step: 0.01
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u5168\u4F53\u306E\u6587\u5B57\u306E\u8272"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: textColor,
       onChange: function onChange(color) {
@@ -178,7 +178,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u9AD8\u3055\u8A2D\u5B9A"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "PC \u9AD8\u3055"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       value: minHeightPc,
       options: (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.minHeightPcClassOptionArr)(),
@@ -1026,7 +1026,7 @@ module.exports = window["wp"]["data"];
   \*****************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/fv-6","version":"1.0.0","title":"固定ページタイトル 06（下層用）","category":"lw-firstview","icon":"cover-image","editorScript":"file:./fv-6.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"backgroundImage":{"type":"string","default":"https://cdn.pixabay.com/photo/2016/11/19/15/39/architecture-1839930_1280.jpg"},"backgroundImageSp":{"type":"string","default":""},"mainTitle":{"type":"string","default":"会社情報"},"subTitle":{"type":"string","default":"COMPANY INFO"},"filterBackgroundColor":{"type":"string","default":"#111"},"filterOpacity":{"type":"number","default":0.3},"textColor":{"type":"string","default":"#111"},"minHeightPc":{"type":"string","default":"min-h-pc-400px"},"minHeightTb":{"type":"string","default":"min-h-tb-360px"},"minHeightSp":{"type":"string","default":"min-h-sp-280px"},"mainTitleTag":{"type":"string","default":"h1"}},"no":6}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/fv-6","version":"1.0.0","title":"固定ページタイトル 06（下層用）","category":"lw-firstview","icon":"cover-image","editorScript":"file:./fv-6.js","supports":{"anchor":true},"aiHint":{"description":"下層ページ用FV。中央にタイトル+サブタイトル+背景画像。会社情報・採用ページ向け","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":["backgroundImage"]},"attributes":{"backgroundImage":{"type":"string","default":"https://cdn.pixabay.com/photo/2016/11/19/15/39/architecture-1839930_1280.jpg","aiHint":{"role":"image","note":"業種に合った背景画像URL"}},"backgroundImageSp":{"type":"string","default":"","aiHint":{"skip":true}},"mainTitle":{"type":"string","default":"会社情報","aiHint":{"role":"heading","contentGuide":"ページタイトル（日本語）。3〜10文字","example":"会社概要"}},"subTitle":{"type":"string","default":"COMPANY INFO","aiHint":{"role":"subheading","contentGuide":"英語表記。ページタイトルの英訳","example":"ABOUT US"}},"filterBackgroundColor":{"type":"string","default":"#111","aiHint":{"skip":true}},"filterOpacity":{"type":"number","default":0.3,"aiHint":{"skip":true}},"textColor":{"type":"string","default":"#111","aiHint":{"skip":true}},"minHeightPc":{"type":"string","default":"min-h-pc-400px","aiHint":{"skip":true}},"minHeightTb":{"type":"string","default":"min-h-tb-360px","aiHint":{"skip":true}},"minHeightSp":{"type":"string","default":"min-h-sp-280px","aiHint":{"skip":true}},"mainTitleTag":{"type":"string","default":"h1","aiHint":{"skip":true}}},"no":6}');
 
 /***/ })
 

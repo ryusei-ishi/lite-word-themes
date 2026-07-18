@@ -6,16 +6,21 @@
 	"title": "画像 01",
 	"category": "lw-media",
 	"icon": "format-image",
+	"aiHint": {
+		"description": "画像+見出し。サブタイトル+メインタイトル+画像。セクション区切りの装飾画像に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"subTitle",
+			"mainTitle"
+		],
+		"imageAttributes": [
+			"image"
+		]
+	},
 	"supports": {
 		"anchor": true
 	},
 	"editorScript": "file:./paid-block-image-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 1,
 	"attributes": {
 		"image": {

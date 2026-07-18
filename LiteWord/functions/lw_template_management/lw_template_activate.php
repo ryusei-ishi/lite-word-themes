@@ -74,6 +74,7 @@ $show_success_popup = false;
 if ( $_SERVER['REQUEST_METHOD'] === 'POST'
 	 && isset( $_POST['user_token'], $_POST['activate_token'] ) ) {
 
+	if ( ! wp_verify_nonce( $_POST['_wpnonce'] ?? '', 'lw_activate_token_action' ) ) wp_die( '不正なリクエストです。' );
 	if ( ! current_user_can( 'administrator' ) ) wp_die( 'アクセス権限がありません。' );
 
 	$token = sanitize_text_field( $_POST['user_token'] );
@@ -176,6 +177,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST'
 				<div class="lw-step-body">
 					<p class="lw-step-desc">取得したアクセストークンを入力して、アクティベートボタンを押してください。</p>
 					<form method="post" class="lw-token-form" autocomplete="off">
+						<?php wp_nonce_field('lw_activate_token_action'); ?>
 						<input type="hidden" name="activate_token" value="1">
 						<div class="lw-input-group">
 							<label for="user_token" class="lw-input-label">

@@ -1,0 +1,376 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-column-1",
+	"version": "1.0.0",
+	"title": "Column 01",
+	"category": "lw-utility",
+	"icon": "grid-view",
+	"description": "カラムレイアウトブロック。アイテムを自由に追加可能。",
+	"aiDescription": "グリッドベースのカラムレイアウト。PC/SPでカラム数やギャップを個別設定可能。各アイテム内にはInnerBlocksで任意のコンテンツを配置可能。",
+	"aiNotes": "親ブロックとしてlw-pr-column-1-itemのみ許可。カラム比率、ギャップ、背景色、余白などをサイドバーで設定可能。",
+	"aiHint": {
+		"description": "カラムコンテナ。InnerBlocksで自由レイアウト。テキスト属性なし",
+		"excludeFromAutoSelect": true,
+		"contentAttributes": [],
+		"imageAttributes": [],
+		"excludeReason": "InnerBlocksコンテナ。AI直接生成非推奨"
+	},
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"wrapPaddingTopPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "ラップ（外枠）の上余白PC（px）"
+		},
+		"wrapPaddingRightPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "ラップ（外枠）の右余白PC（px）"
+		},
+		"wrapPaddingBottomPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "ラップ（外枠）の下余白PC（px）"
+		},
+		"wrapPaddingLeftPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "ラップ（外枠）の左余白PC（px）"
+		},
+		"wrapPaddingTopSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "ラップ（外枠）の上余白SP（px）。-1でPCを継承"
+		},
+		"wrapPaddingRightSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "ラップ（外枠）の右余白SP（px）。-1でPCを継承"
+		},
+		"wrapPaddingBottomSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "ラップ（外枠）の下余白SP（px）。-1でPCを継承"
+		},
+		"wrapPaddingLeftSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "ラップ（外枠）の左余白SP（px）。-1でPCを継承"
+		},
+		"borderColorPc": {
+			"type": "string",
+			"default": "rgb(131, 131, 131)",
+			"ai_description": "ラップ（外枠）のボーダー色PC"
+		},
+		"borderWidthPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "ラップ（外枠）のボーダー幅PC（px）"
+		},
+		"borderStylePc": {
+			"type": "string",
+			"default": "solid",
+			"ai_description": "ラップ（外枠）のボーダースタイルPC。solid/dashed/dotted/none"
+		},
+		"borderColorSp": {
+			"type": "string",
+			"default": "",
+			"ai_description": "ラップ（外枠）のボーダー色SP。空でPCを継承"
+		},
+		"borderWidthSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "ラップ（外枠）のボーダー幅SP（px）。-1でPCを継承"
+		},
+		"borderStyleSp": {
+			"type": "string",
+			"default": "",
+			"ai_description": "ラップ（外枠）のボーダースタイルSP。空でPCを継承"
+		},
+		"columnsPc": {
+			"type": "number",
+			"default": 3,
+			"ai_description": "グリッドのカラム（列）数PC。1〜6の範囲"
+		},
+		"columnWidthsPc": {
+			"type": "array",
+			"default": [
+				1,
+				1,
+				1
+			],
+			"ai_description": "各カラムの幅比率PC（fr単位の配列）。例: [1,2,1]で1:2:1の比率"
+		},
+		"columnsSp": {
+			"type": "number",
+			"default": 2,
+			"ai_description": "グリッドのカラム（列）数SP。1〜4の範囲"
+		},
+		"columnWidthsSp": {
+			"type": "array",
+			"default": [],
+			"ai_description": "各カラムの幅比率SP（fr単位の配列）。空配列でPCを継承"
+		},
+		"rowGapPc": {
+			"type": "number",
+			"default": 8,
+			"ai_description": "グリッドの行間（縦方向の間隔）PC（px）"
+		},
+		"rowGapSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "グリッドの行間（縦方向の間隔）SP（px）。-1でPCを継承"
+		},
+		"columnGapPc": {
+			"type": "number",
+			"default": 8,
+			"ai_description": "グリッドの列間（横方向の間隔）PC（px）"
+		},
+		"columnGapSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "グリッドの列間（横方向の間隔）SP（px）。-1でPCを継承"
+		},
+		"itemBgNone": {
+			"type": "boolean",
+			"default": true,
+			"ai_description": "アイテム（各カラム）の背景を無しにするかどうか。trueで透明"
+		},
+		"itemBgColor": {
+			"type": "string",
+			"default": "#ffffff",
+			"ai_description": "アイテム（各カラム）の背景色。全アイテム共通（旧属性、互換性用）"
+		},
+		"itemBgTypePc": {
+			"type": "string",
+			"default": "solid",
+			"ai_description": "アイテム背景タイプPC。solid（単色）またはgradient（グラデーション）"
+		},
+		"itemBgColorPc": {
+			"type": "string",
+			"default": "",
+			"ai_description": "アイテム背景色PC。itemBgTypePcがsolidの時に使用"
+		},
+		"itemBgGradientPc": {
+			"type": "string",
+			"default": "",
+			"ai_description": "アイテムグラデーションPC。itemBgTypePcがgradientの時に使用"
+		},
+		"itemBgTypeSp": {
+			"type": "string",
+			"default": "solid",
+			"ai_description": "アイテム背景タイプSP。solid（単色）またはgradient（グラデーション）"
+		},
+		"itemBgColorSp": {
+			"type": "string",
+			"default": "",
+			"ai_description": "アイテム背景色SP。空でPCを継承"
+		},
+		"itemBgGradientSp": {
+			"type": "string",
+			"default": "",
+			"ai_description": "アイテムグラデーションSP。空でPCを継承"
+		},
+		"itemMinHeightPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "アイテム（各カラム）の最小高さPC（px）。0で自動"
+		},
+		"itemMinHeightSp": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "アイテム（各カラム）の最小高さSP（px）。0で自動。PCとは独立"
+		},
+		"itemPaddingTopPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "アイテム（各カラム）の上余白PC（px）"
+		},
+		"itemPaddingRightPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "アイテム（各カラム）の右余白PC（px）"
+		},
+		"itemPaddingBottomPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "アイテム（各カラム）の下余白PC（px）"
+		},
+		"itemPaddingLeftPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "アイテム（各カラム）の左余白PC（px）"
+		},
+		"itemPaddingTopSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "アイテム（各カラム）の上余白SP（px）。-1でPCを継承"
+		},
+		"itemPaddingRightSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "アイテム（各カラム）の右余白SP（px）。-1でPCを継承"
+		},
+		"itemPaddingBottomSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "アイテム（各カラム）の下余白SP（px）。-1でPCを継承"
+		},
+		"itemPaddingLeftSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "アイテム（各カラム）の左余白SP（px）。-1でPCを継承"
+		},
+		"itemBorderRadiusTopLeftPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "アイテム（各カラム）の左上角丸PC（px）"
+		},
+		"itemBorderRadiusTopRightPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "アイテム（各カラム）の右上角丸PC（px）"
+		},
+		"itemBorderRadiusBottomRightPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "アイテム（各カラム）の右下角丸PC（px）"
+		},
+		"itemBorderRadiusBottomLeftPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "アイテム（各カラム）の左下角丸PC（px）"
+		},
+		"itemBorderRadiusTopLeftSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "アイテム（各カラム）の左上角丸SP（px）。-1でPCを継承"
+		},
+		"itemBorderRadiusTopRightSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "アイテム（各カラム）の右上角丸SP（px）。-1でPCを継承"
+		},
+		"itemBorderRadiusBottomRightSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "アイテム（各カラム）の右下角丸SP（px）。-1でPCを継承"
+		},
+		"itemBorderRadiusBottomLeftSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "アイテム（各カラム）の左下角丸SP（px）。-1でPCを継承"
+		},
+		"itemBorderColorPc": {
+			"type": "string",
+			"default": "rgb(131, 131, 131)",
+			"ai_description": "アイテム（各カラム）のボーダー色PC"
+		},
+		"itemBorderWidthPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "アイテム（各カラム）のボーダー幅PC（px）"
+		},
+		"itemBorderStylePc": {
+			"type": "string",
+			"default": "solid",
+			"ai_description": "アイテム（各カラム）のボーダースタイルPC。solid/dashed/dotted/none"
+		},
+		"itemBorderColorSp": {
+			"type": "string",
+			"default": "",
+			"ai_description": "アイテム（各カラム）のボーダー色SP。空でPCを継承"
+		},
+		"itemBorderWidthSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "アイテム（各カラム）のボーダー幅SP（px）。-1でPCを継承"
+		},
+		"itemBorderStyleSp": {
+			"type": "string",
+			"default": "",
+			"ai_description": "アイテム（各カラム）のボーダースタイルSP。空でPCを継承"
+		},
+		"borderRadiusTopLeftPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "ラップ（外枠）の左上角丸PC（px）"
+		},
+		"borderRadiusTopRightPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "ラップ（外枠）の右上角丸PC（px）"
+		},
+		"borderRadiusBottomRightPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "ラップ（外枠）の右下角丸PC（px）"
+		},
+		"borderRadiusBottomLeftPc": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "ラップ（外枠）の左下角丸PC（px）"
+		},
+		"borderRadiusTopLeftSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "ラップ（外枠）の左上角丸SP（px）。-1でPCを継承"
+		},
+		"borderRadiusTopRightSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "ラップ（外枠）の右上角丸SP（px）。-1でPCを継承"
+		},
+		"borderRadiusBottomRightSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "ラップ（外枠）の右下角丸SP（px）。-1でPCを継承"
+		},
+		"borderRadiusBottomLeftSp": {
+			"type": "number",
+			"default": -1,
+			"ai_description": "ラップ（外枠）の左下角丸SP（px）。-1でPCを継承"
+		},
+		"wrapBgTypePc": {
+			"type": "string",
+			"default": "solid",
+			"ai_description": "ラップ（外枠）の背景タイプPC。solid（単色）またはgradient（グラデーション）"
+		},
+		"wrapBgColorPc": {
+			"type": "string",
+			"default": "",
+			"ai_description": "ラップ（外枠）の背景色PC。wrapBgTypePcがsolidの時に使用"
+		},
+		"wrapBgGradientPc": {
+			"type": "string",
+			"default": "",
+			"ai_description": "ラップ（外枠）のグラデーションPC。wrapBgTypePcがgradientの時に使用"
+		},
+		"wrapBgTypeSp": {
+			"type": "string",
+			"default": "solid",
+			"ai_description": "ラップ（外枠）の背景タイプSP。solid（単色）またはgradient（グラデーション）"
+		},
+		"wrapBgColorSp": {
+			"type": "string",
+			"default": "",
+			"ai_description": "ラップ（外枠）の背景色SP。空でPCを継承"
+		},
+		"wrapBgGradientSp": {
+			"type": "string",
+			"default": "",
+			"ai_description": "ラップ（外枠）のグラデーションSP。空でPCを継承"
+		},
+		"spBreakpoint": {
+			"type": "string",
+			"default": "",
+			"ai_description": "SPブレークポイントの値。空でデフォルト(700px)、600/500/400から選択可能"
+		}
+	},
+	"editorScript": "file:./lw-pr-column-1.js",
+	"no": 1
+}

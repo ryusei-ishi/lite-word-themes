@@ -51,7 +51,7 @@ registerBlockType(metadata.name, {
                     </ToolbarGroup>
                 </BlockControls>
                 <InspectorControls>
-                    <PanelBody title="文字位置設定">
+                    <PanelBody title="配置設定">
                         <RadioControl
                             selected={textAlignment}
                             options={[

@@ -675,7 +675,7 @@ module.exports = window["wp"]["components"];
   \******************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/cta-2","version":"1.0.0","title":"CTA 02","category":"lw-cta","icon":"megaphone","description":"電話番号・メールボタン付きCTAブロック","supports":{"anchor":true},"attributes":{"title":{"type":"string","source":"html","selector":"h2","default":"お問合せはこちら"},"addressText":{"type":"string","source":"html","selector":".address","default":"〒110-0000 東京都豊島区池袋0-0-0／TEL. 042-000-0000／FAX. 042-000-0001"},"phoneText":{"type":"string","source":"html","selector":".tel_text","default":"（受付時間／9:00～17:00 第2・第4土曜、日祝休業）"},"phoneNumber":{"type":"string","default":"042-000-0000"},"mailText":{"type":"string","source":"html","selector":".mail_text","default":"メールでお問い合わせ"},"mailUrl":{"type":"string","default":"mailto:info@example.com"},"backgroundImage":{"type":"string","default":"https://cdn.pixabay.com/photo/2022/03/27/12/46/china-7094961_960_720.jpg"},"filterColor":{"type":"string","default":"rgba(0, 0, 0, 0.5)"},"buttonBackgroundColor":{"type":"string","default":"#0073aa"},"buttonTextColor":{"type":"string","default":"#ffffff"},"selectedIcon":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z\\"/></svg>"},"maxWidth":{"type":"number","default":0}},"editorScript":"file:./cta-2.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":2}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/cta-2","version":"1.0.0","title":"CTA 02","category":"lw-cta","icon":"megaphone","description":"電話番号・メールボタン付きCTAブロック","aiHint":{"description":"電話+メールCTA。背景画像+h2見出し+住所+電話番号+メールボタン。店舗系業種に最適","excludeFromAutoSelect":false,"contentAttributes":["title","addressText","phoneText","phoneNumber","mailText","mailUrl"],"imageAttributes":["backgroundImage"],"notes":"電話番号が必要な業種（飲食、美容、クリニック等）向け。IT・EC系にはcta-1を使う"},"supports":{"anchor":true},"attributes":{"title":{"type":"string","source":"html","selector":"h2","default":"お問合せはこちら","aiHint":{"role":"heading","contentGuide":"お問い合わせ誘導のh2見出し。5〜15文字","example":"お気軽にご連絡ください"}},"addressText":{"type":"string","source":"html","selector":".address","default":"〒110-0000 東京都豊島区池袋0-0-0／TEL. 042-000-0000／FAX. 042-000-0001","aiHint":{"role":"body","contentGuide":"住所+電話+FAX。実際の情報を入力してもらう想定","example":"〒000-0000 東京都渋谷区○○1-2-3／TEL. 03-0000-0000"}},"phoneText":{"type":"string","source":"html","selector":".tel_text","default":"（受付時間／9:00～17:00 第2・第4土曜、日祝休業）","aiHint":{"role":"body","contentGuide":"受付時間・休業日。業種に合わせる","example":"（受付時間／10:00～19:00 水曜定休）"}},"phoneNumber":{"type":"string","default":"042-000-0000","aiHint":{"role":"phone","contentGuide":"電話番号。ハイフン付き","example":"03-0000-0000"}},"mailText":{"type":"string","source":"html","selector":".mail_text","default":"メールでお問い合わせ","aiHint":{"role":"button","contentGuide":"メールボタンラベル。5〜15文字","example":"メールで予約する"}},"mailUrl":{"type":"string","default":"mailto:info@example.com","aiHint":{"role":"url","contentGuide":"mailto:形式 or お問い合わせページURL"}},"backgroundImage":{"type":"string","default":"https://cdn.pixabay.com/photo/2022/03/27/12/46/china-7094961_960_720.jpg","aiHint":{"role":"image","note":"背景画像URL。画像生成時に設定"}},"filterColor":{"type":"string","default":"rgba(0, 0, 0, 0.5)","aiHint":{"skip":true}},"buttonBackgroundColor":{"type":"string","default":"#0073aa","aiHint":{"skip":true}},"buttonTextColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"selectedIcon":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z\\"/></svg>","aiHint":{"skip":true}},"maxWidth":{"type":"number","default":0,"aiHint":{"skip":true}}},"editorScript":"file:./cta-2.js","no":2}');
 
 /***/ })
 
@@ -827,7 +827,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.leftButtonIconSvg
       } : {}
     });
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u6A2A\u5E45\u306E\u8A2D\u5B9A",
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -886,7 +886,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.leftButtonIconSvg
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u753B\u50CF\u306E\u8A2D\u5B9A"
+      title: "\u80CC\u666F\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
       onSelect: onSelectBackgroundImage,
       allowedTypes: "image",
@@ -906,13 +906,13 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.leftButtonIconSvg
         }, "\u753B\u50CF\u3092\u9078\u629E"));
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30D5\u30A3\u30EB\u30BF\u30FC\u8272\u8A2D\u5B9A"
+      title: "\u30D5\u30A3\u30EB\u30BF\u30FC\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
       color: filterColor,
       onChangeComplete: onChangeFilterColor,
       label: "\u30D5\u30A3\u30EB\u30BF\u30FC\u306E\u8272"
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30DC\u30BF\u30F3\u8272\u8A2D\u5B9A"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u30DC\u30BF\u30F3\u80CC\u666F\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
       color: buttonBackgroundColor,
       onChangeComplete: onChangeButtonBackgroundColor,

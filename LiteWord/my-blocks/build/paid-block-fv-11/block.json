@@ -7,12 +7,12 @@
 	"category": "lw-firstview",
 	"icon": "images-alt2",
 	"editorScript": "file:./paid-block-fv-11.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "背景画像スライダーFV。複数背景画像切替+サブタイトル+見出し+説明+CTAボタン。リッチなトップページに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["subTitle", "mainTitle", "descriptionText", "buttonLabel"],
+		"imageAttributes": ["slides"]
+	},
 	"supports": {
 		"anchor": true
 	},

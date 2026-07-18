@@ -66,9 +66,25 @@ function single_post_custom( $wp_customize ) {
     $items = [
         [
             ['radio', 'fv_ptn', '', 'FVパターンの選択', [''=>'パターン１', 'fv_ptn_2' => 'パターン２']],
-            ['radio', 'fv_date', '', '投稿日時', [''=>'表示', 'none' => '非表示']],
-            ['radio', 'fv_date_update', '', '更新日時', [''=>'表示', 'none' => '非表示']],
             ['radio', 'fv_category', '', 'カテゴリー', [''=>'表示', 'none' => '非表示']],
+        ]
+    ];
+    customize_set($items, $set, $sec, $wp_customize);   
+
+     // -----------------------
+    // 投稿日時・更新日時
+    // -----------------------
+    $set_ttl = '投稿日時・更新日時'; // セクションタイトル
+    $sec = 'single_post_layout_date_sec'; // セクションID
+    $set = 'single_post_layout'; // 入力ID
+    $wp_customize->add_section($sec, ['title' => $set_ttl, 'panel' => $panel]);
+
+    // コントロール
+    $items = [
+        [
+            ['radio', 'fv_date', '', '投稿日時', [''=>'表示する', 'none' => '非表示（見た目のみ）' , 'none_all' => '見た目も検索にも表示しない']],
+            ['radio', 'fv_date_update', '', '更新日時', [''=>'表示する', 'none' => '非表示（見た目のみ）' , 'none_all' => '見た目も検索にも表示しない']],
+            
         ]
     ];
     customize_set($items, $set, $sec, $wp_customize);   
@@ -101,7 +117,20 @@ function single_post_custom( $wp_customize ) {
     // コントロール
     $items = [
         [
-            ['radio', 'toc_switch', '', '', ctm_switch_array_2()],
+            ['radio', 'toc_switch', '表示設定', '', ctm_switch_array_2()],
+            ['radio', 'toc_ptn', 'パターンの選択', '', [
+                "ptn_1" => "パターン１",
+                "ptn_2" => "パターン２",
+            ]],
+            ['radio', 'toc_conditions', '出現条件', '', [
+                "heading_2" => "「見出し2」が2つ以上の時",
+                "heading_3" => "「見出し2」が3つ以上の時",
+                "heading_4" => "「見出し2」が4つ以上の時",
+                "heading_5" => "「見出し2」が5つ以上の時",
+                "heading_6" => "「見出し2」が6つ以上の時",
+            ]],
+            ['radio', 'toc_ttl_switch', '目次タイトル', '', ctm_switch_array_2()],
+            ['text', 'toc_ttl_text', '', ''],
           
         ]
     ];

@@ -7,12 +7,13 @@
 	"category": "lw-firstview",
 	"icon": "cover-image",
 	"editorScript": "file:./lw-pr-fv-14.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "全画面FV（ヘッダー回り込み）。ロゴ+ナビ+見出し+説明+2CTAボタン。動画対応。ブランドサイトに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["logoText", "headline", "description", "leadText", "cta1Text", "cta2Text"],
+		"imageAttributes": ["logoImg", "bgImgPc", "bgImgSp"],
+		"notes": "ナビメニュー配列あり。ヘッダーを隠して独自ナビを表示する特殊FV"
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -45,6 +46,7 @@
 		"bgImgSp": { "type": "string", "default": "" },
 		"bgImgAlt": { "type": "string", "default": "" },
 		"videoUrl": { "type": "string", "default": "" },
+		"videoUrlSp": { "type": "string", "default": "" },
 		"videoSpeed": { "type": "number", "default": 1 },
 		"bgFilterType": { "type": "string", "default": "solid" },
 		"bgFilterColor": { "type": "string", "default": "#000000" },
@@ -54,7 +56,8 @@
 		"navMenuItems": { "type": "array", "default": [] },
 		"minHeightPc": { "type": "string", "default": "min-h-pc-100vh" },
 		"minHeightTb": { "type": "string", "default": "min-h-tb-100vh" },
-		"minHeightSp": { "type": "string", "default": "min-h-sp-100vh" }
+		"minHeightSp": { "type": "string", "default": "min-h-sp-100vh" },
+		"showHeader": { "type": "boolean", "default": true }
 	},
 	"no": 14
 }

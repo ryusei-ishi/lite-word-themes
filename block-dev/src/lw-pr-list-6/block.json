@@ -1,0 +1,172 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "wdl/lw-pr-list-6",
+    "version":  "1.0.0",
+    "title":  "PRリスト 06",
+    "category":  "lw-list",
+    "icon":  "list-view",
+    "description":  "画像付きリストブロック",
+    "aiHint": {
+        "description": "画像カードリスト。画像+タイトル+説明文+ラベルのカード。4カラムグリッド。サービス・メニュー紹介に",
+        "excludeFromAutoSelect": false,
+        "contentAttributes": ["items"],
+        "imageAttributes": []
+    },
+    "supports":  {
+                     "anchor":  true
+                 },
+    "editorScript":  "file:./lw-pr-list-6.js",
+    "no":  6,
+    "attributes":  {
+                       "columnsPC":  {
+                                         "type":  "number",
+                                         "default":  4
+                                     },
+                       "columnsSP":  {
+                                         "type":  "number",
+                                         "default":  2
+                                     },
+                       "rowGapPc":  {
+                                        "type":  "number",
+                                        "default":  32
+                                    },
+                       "rowGapSp":  {
+                                        "type":  "number",
+                                        "default":  -1
+                                    },
+                       "columnGapPc":  {
+                                           "type":  "number",
+                                           "default":  8
+                                       },
+                       "columnGapSp":  {
+                                           "type":  "number",
+                                           "default":  -1
+                                       },
+                       "imageAspectRatio":  {
+                                                "type":  "string",
+                                                "default":  "9/6"
+                                            },
+                       "fontTitle":  {
+                                         "type":  "string",
+                                         "default":  ""
+                                     },
+                       "fontWeightTitle":  {
+                                               "type":  "string",
+                                               "default":  ""
+                                           },
+                       "colorTitle":  {
+                                          "type":  "string",
+                                          "default":  ""
+                                      },
+                       "fontSizeTtlPc":  {
+                                             "type":  "number",
+                                             "default":  18
+                                         },
+                       "fontSizeTtlTb":  {
+                                             "type":  "number",
+                                             "default":  -1
+                                         },
+                       "fontSizeTtlSp":  {
+                                             "type":  "number",
+                                             "default":  -1
+                                         },
+                       "alignTtlPc":  {
+                                          "type":  "string",
+                                          "default":  "center"
+                                      },
+                       "alignTtlSp":  {
+                                          "type":  "string",
+                                          "default":  ""
+                                      },
+                       "marginTopTtlPc":  {
+                                              "type":  "number",
+                                              "default":  12
+                                          },
+                       "marginTopTtlSp":  {
+                                              "type":  "number",
+                                              "default":  -1
+                                          },
+                       "fontDescription":  {
+                                               "type":  "string",
+                                               "default":  ""
+                                           },
+                       "fontWeightDescription":  {
+                                                     "type":  "string",
+                                                     "default":  ""
+                                                 },
+                       "colorDescription":  {
+                                                "type":  "string",
+                                                "default":  ""
+                                            },
+                       "fontSizePPc":  {
+                                           "type":  "number",
+                                           "default":  14
+                                       },
+                       "fontSizePTb":  {
+                                           "type":  "number",
+                                           "default":  -1
+                                       },
+                       "fontSizePSp":  {
+                                           "type":  "number",
+                                           "default":  -1
+                                       },
+                       "alignPPc":  {
+                                        "type":  "string",
+                                        "default":  "left"
+                                    },
+                       "alignPSp":  {
+                                        "type":  "string",
+                                        "default":  ""
+                                    },
+                       "showLabel":  {
+                                         "type":  "boolean",
+                                         "default":  true
+                                     },
+                       "labelBgColor":  {
+                                            "type":  "string",
+                                            "default":  "var(--color-accent)"
+                                        },
+                       "labelTextColor":  {
+                                              "type":  "string",
+                                              "default":  "#fff"
+                                          },
+                       "labelFontSizePc":  {
+                                               "type":  "number",
+                                               "default":  17
+                                           },
+                       "labelFontSizeSp":  {
+                                               "type":  "number",
+                                               "default":  -1
+                                           },
+                       "items":  {
+                                     "type":  "array",
+                                     "default":  [
+                                                     {
+                                                         "imageUrl":  "",
+                                                         "label":  "",
+                                                         "title":  "タイトル1",
+                                                         "description":  "説明文を入力してください。"
+                                                     },
+                                                     {
+                                                         "imageUrl":  "",
+                                                         "label":  "",
+                                                         "title":  "タイトル2",
+                                                         "description":  "説明文を入力してください。"
+                                                     },
+                                                     {
+                                                         "imageUrl":  "",
+                                                         "label":  "",
+                                                         "title":  "タイトル3",
+                                                         "description":  "説明文を入力してください。"
+                                                     },
+                                                     {
+                                                         "imageUrl":  "",
+                                                         "label":  "",
+                                                         "title":  "タイトル4",
+                                                         "description":  "説明文を入力してください。"
+                                                     }
+                                                 ]
+                                 }
+                   }
+}

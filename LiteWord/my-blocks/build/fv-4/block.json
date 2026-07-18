@@ -7,75 +7,90 @@
 	"category": "lw-firstview",
 	"icon": "cover-image",
 	"editorScript": "file:./fv-4.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"supports": {
 		"anchor": true
+	},
+	"aiHint": {
+		"description": "コーポレート・士業向けFV。左寄せテキスト+背景色or画像。情報量が多い業種に最適",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "subTitle", "description"],
+		"imageAttributes": ["backgroundImage"]
 	},
 	"attributes": {
 		"backgroundImage": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "role": "image", "note": "背景画像URL。色ベタ塗りにする場合は空でOK" }
 		},
 		"backgroundImageSp": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "skip": true }
 		},
 		"mainTitle": {
 			"type": "string",
-			"default": "Lite Word"
+			"default": "Lite Word",
+			"aiHint": { "role": "heading", "contentGuide": "サービス名 or キャッチコピー。5〜20文字", "example": "ビジネスを加速する" }
 		},
 		"subTitle": {
 			"type": "string",
-			"default": "軽量で簡単なWordPressテーマ"
+			"default": "軽量で簡単なWordPressテーマ",
+			"aiHint": { "role": "subheading", "contentGuide": "英語表記 or サブキャッチ", "example": "CONSULTING SERVICE" }
 		},
 		"description": {
 			"type": "string",
-			"default": "デザイナーとプログラマーが共同で開発した\nコーポレートサイトやオウンドメディアに最適なテーマ"
+			"default": "デザイナーとプログラマーが共同で開発した\nコーポレートサイトやオウンドメディアに最適なテーマ",
+			"aiHint": { "role": "body", "contentGuide": "サービス概要を1〜3文で。30〜80文字。改行可", "example": "20年の実績で、お客様のビジネス課題を\n戦略立案から実行まで一貫してサポートします" }
 		},
 		"filterBackgroundColor": {
 			"type": "string",
-			"default": "var(--color-main)"
+			"default": "var(--color-main)",
+			"aiHint": { "skip": true }
 		},
 		"filterOpacity": {
 			"type": "number",
-			"default": 1.0
+			"default": 1.0,
+			"aiHint": { "skip": true }
 		},
 		"textColor": {
 			"type": "string",
-			"default": "#fff"
+			"default": "#fff",
+			"aiHint": { "skip": true }
 		},
 		"minHeightPc": {
 			"type": "string",
-			"default": "min-h-pc-480px"
+			"default": "min-h-pc-480px",
+			"aiHint": { "skip": true }
 		},
 		"minHeightTb": {
 			"type": "string",
-			"default": "min-h-tb-400px"
+			"default": "min-h-tb-400px",
+			"aiHint": { "skip": true }
 		},
 		"minHeightSp": {
 			"type": "string",
-			"default": "min-h-sp-360px"
+			"default": "min-h-sp-360px",
+			"aiHint": { "skip": true }
 		},
 		"maxWidth": {
 			"type": "number",
-			"default": 1040
+			"default": 1040,
+			"aiHint": { "skip": true }
 		},
 		"textAlignPc": {
 			"type": "string",
-			"default": "pc_left"
+			"default": "pc_left",
+			"aiHint": { "skip": true }
 		},
 		"textAlignSp": {
 			"type": "string",
-			"default": "sp_left"
+			"default": "sp_left",
+			"aiHint": { "skip": true }
 		},
 		"headingLevel": {
 			"type": "number",
-			"default": 1
+			"default": 1,
+			"aiHint": { "skip": true }
 		}
 	},
 	"no": 4

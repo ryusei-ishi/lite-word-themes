@@ -63,7 +63,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* 2. ボタンのサイズと形 */}
-					<PanelBody title="ボタンのサイズと形" initialOpen={false}>
+					<PanelBody title="レイアウト設定" initialOpen={false}>
 						<div style={{ marginBottom: '20px' }}>
 							<label style={{ fontWeight: 'bold', display: 'block', marginBottom: '8px' }}>
 								ボタンの横幅 (px)
@@ -135,7 +135,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* 3. 色の設定 */}
-					<PanelBody title="色の設定" initialOpen={false}>
+					<PanelBody title="色設定" initialOpen={false}>
 						<div style={{ marginBottom: '20px' }}>
 							<label style={{ fontWeight: 'bold', display: 'block', marginBottom: '8px' }}>
 								ボタンの背景色
@@ -161,7 +161,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* 4. ボタンの配置 */}
-					<PanelBody title="ボタンの配置" initialOpen={false}>
+					<PanelBody title="配置設定" initialOpen={false}>
 						<div style={{ marginBottom: '20px' }}>
 							<label style={{ fontWeight: 'bold', display: 'block', marginBottom: '12px' }}>
 								パソコン・タブレットでの位置
@@ -205,7 +205,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* 5. 余白の設定 */}
-					<PanelBody title="余白の設定" initialOpen={false}>
+					<PanelBody title="余白設定" initialOpen={false}>
 						<div style={{ marginBottom: '15px' }}>
 							<label style={{ fontWeight: 'bold', display: 'block', marginBottom: '8px' }}>
 								ボタンの上の余白 (px)
@@ -235,7 +235,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* 6. 枠線の設定 */}
-					<PanelBody title="枠線の設定" initialOpen={false}>
+					<PanelBody title="枠線設定" initialOpen={false}>
 						<div style={{ marginBottom: borderWidth > 0 ? '15px' : '0px' }}>
 							<label style={{ fontWeight: 'bold', display: 'block', marginBottom: '8px' }}>
 								枠線の太さ (px)

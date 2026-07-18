@@ -6,6 +6,12 @@
 	"title": "よくある質問 01",
 	"category": "lw-faq",
 	"icon": "lightbulb",
+	"aiHint": {
+		"description": "よくある質問アコーディオン。Q+Aの繰り返し。クリックで回答開閉。FAQセクションに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -78,11 +84,5 @@
 		}
 	},
 	"editorScript": "file:./lw-qa-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 1
 }

@@ -10,34 +10,39 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "マージン調整可能な見出し。メインタイトル+サブタイトル。下のコンテンツとの余白を細かく調整",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "subTitle"],
+		"imageAttributes": []
+	},
 	"attributes": {
 		"mainTitle": {
 			"type": "string",
-			"default": "タイトル"
+			"default": "タイトル",
+			"aiHint": { "role": "heading", "contentGuide": "セクション見出し。3〜15文字", "example": "ご利用の流れ" }
 		},
 		"subTitle": {
 			"type": "string",
-			"default": "サブタイトル"
+			"default": "サブタイトル",
+			"aiHint": { "role": "subheading", "contentGuide": "英語表記 or 補足テキスト", "example": "FLOW" }
 		},
 		"headingLevel": {
 			"type": "number",
-			"default": 2
+			"default": 2,
+			"aiHint": { "skip": true }
 		},
 		"subMarginBottomPc": {
 			"type": "number",
-			"default": 0.6
+			"default": 0.6,
+			"aiHint": { "skip": true }
 		},
 		"subMarginBottomSp": {
 			"type": "number",
-			"default": 0.6
+			"default": 0.6,
+			"aiHint": { "skip": true }
 		}
 	},
 	"editorScript": "file:./custom-title-4.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 4
 }

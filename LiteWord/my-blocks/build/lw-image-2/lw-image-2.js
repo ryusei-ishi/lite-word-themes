@@ -20,12 +20,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-image-2/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/lw-image-2/block.json");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
-function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
-function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
-function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
-function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
-function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
-function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
 function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
 function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
@@ -103,8 +99,9 @@ var hexToRgba = function hexToRgba() {
 
     /* 個別カード更新 */
     var updateItem = function updateItem(idx, k, v) {
-      var newItems = _toConsumableArray(items);
-      newItems[idx][k] = v;
+      var newItems = items.map(function (itm, i) {
+        return i === idx ? _objectSpread(_objectSpread({}, itm), {}, _defineProperty({}, k, v)) : itm;
+      });
       setAttributes({
         items: newItems
       });
@@ -119,7 +116,7 @@ var hexToRgba = function hexToRgba() {
       }
     });
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u5171\u901A\u30B9\u30BF\u30A4\u30EB",
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u89D2\u4E38 (em)",
@@ -1031,7 +1028,7 @@ module.exports = window["wp"]["components"];
   \***********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-image-2","version":"1.0.0","title":"画像カード 02","category":"lw-media","icon":"format-image","supports":{"anchor":true},"attributes":{"borderRadiusEm":{"type":"number","default":1.2},"aspectHeight":{"type":"number","default":800},"fontP":{"type":"string","default":""},"fontWeightP":{"type":"string","default":""},"colorP":{"type":"string","default":""},"maxWidthPx":{"type":"number","default":0},"alignClass":{"type":"string","default":"left"},"items":{"type":"array","source":"query","selector":".image__inner","query":{"imgSrc":{"type":"string","source":"attribute","selector":"img","attribute":"src"},"altText":{"type":"string","source":"attribute","selector":"img","attribute":"alt"},"text":{"type":"string","source":"text","selector":"p"},"fColor":{"type":"string","source":"attribute","selector":".image_filter","attribute":"data-color"},"fOpac":{"type":"number","source":"attribute","selector":".image_filter","attribute":"data-opacity"},"fBlend":{"type":"string","source":"attribute","selector":".image_filter","attribute":"data-blend"}},"default":[{"imgSrc":"https://cdn.pixabay.com/photo/2022/12/28/14/45/sunset-7683081_1280.jpg","altText":"","text":"テキスト","fColor":"#000000","fOpac":0.3,"fBlend":"normal"},{"imgSrc":"https://cdn.pixabay.com/photo/2022/12/28/14/45/sunset-7683081_1280.jpg","altText":"","text":"テキスト","fColor":"#000000","fOpac":0.3,"fBlend":"normal"},{"imgSrc":"https://cdn.pixabay.com/photo/2022/12/28/14/45/sunset-7683081_1280.jpg","altText":"","text":"テキスト","fColor":"#000000","fOpac":0.3,"fBlend":"normal"}]}},"editorScript":"file:./lw-image-2.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":2}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-image-2","version":"1.0.0","title":"画像カード 02","category":"lw-media","icon":"format-image","aiHint":{"description":"画像カード。画像+テキストのカード配列。サービス紹介・メニュー表示に","excludeFromAutoSelect":false,"contentAttributes":["items"],"imageAttributes":[]},"supports":{"anchor":true},"attributes":{"borderRadiusEm":{"type":"number","default":1.2},"aspectHeight":{"type":"number","default":800},"fontP":{"type":"string","default":""},"fontWeightP":{"type":"string","default":""},"colorP":{"type":"string","default":""},"maxWidthPx":{"type":"number","default":0},"alignClass":{"type":"string","default":"left"},"items":{"type":"array","source":"query","selector":".image__inner","query":{"imgSrc":{"type":"string","source":"attribute","selector":"img","attribute":"src"},"altText":{"type":"string","source":"attribute","selector":"img","attribute":"alt"},"text":{"type":"string","source":"text","selector":"p"},"fColor":{"type":"string","source":"attribute","selector":".image_filter","attribute":"data-color"},"fOpac":{"type":"number","source":"attribute","selector":".image_filter","attribute":"data-opacity"},"fBlend":{"type":"string","source":"attribute","selector":".image_filter","attribute":"data-blend"}},"default":[{"imgSrc":"https://cdn.pixabay.com/photo/2022/12/28/14/45/sunset-7683081_1280.jpg","altText":"","text":"テキスト","fColor":"#000000","fOpac":0.3,"fBlend":"normal"},{"imgSrc":"https://cdn.pixabay.com/photo/2022/12/28/14/45/sunset-7683081_1280.jpg","altText":"","text":"テキスト","fColor":"#000000","fOpac":0.3,"fBlend":"normal"},{"imgSrc":"https://cdn.pixabay.com/photo/2022/12/28/14/45/sunset-7683081_1280.jpg","altText":"","text":"テキスト","fColor":"#000000","fOpac":0.3,"fBlend":"normal"}]}},"editorScript":"file:./lw-image-2.js","no":2}');
 
 /***/ })
 

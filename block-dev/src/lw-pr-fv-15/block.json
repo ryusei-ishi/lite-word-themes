@@ -7,12 +7,12 @@
 	"category": "lw-firstview",
 	"icon": "cover-image",
 	"editorScript": "file:./lw-pr-fv-15.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "左テキスト+右画像FV。CTAボタン付き。動画背景対応。IT・Web・教育系に最適",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "description", "buttonText"],
+		"imageAttributes": ["imageUrlPc", "imageUrlSp"]
+	},
 	"supports": {
 		"anchor": true
 	},

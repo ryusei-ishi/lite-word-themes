@@ -59,7 +59,7 @@ registerBlockType(metadata.name, {
                 </BlockControls>
 
                 <InspectorControls>
-                    <PanelBody title="サブタイトルのマージン設定">
+                    <PanelBody title="余白設定">
                         <RangeControl
                             label="PC版 下マージン (em)"
                             value={subMarginBottomPc}

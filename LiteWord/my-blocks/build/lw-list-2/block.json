@@ -9,35 +9,24 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "背景色付きリスト。タイトル+チェックマーク付き項目一覧。悩み・課題・こんな方におすすめに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["titleText", "contents"],
+		"imageAttributes": ["backgroundImage"]
+	},
 	"attributes": {
-		"backgroundImage": {
-			"type": "string",
-			"default": ""
-		},
-		"bgGradient": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"filterOpacity": {
-			"type": "number",
-			"default": 0.8
-		},
+		"backgroundImage": { "type": "string", "default": "", "aiHint": { "role": "image", "note": "背景画像URL。省略可" } },
+		"bgGradient": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"filterOpacity": { "type": "number", "default": 0.8, "aiHint": { "skip": true } },
 		"titleText": {
 			"type": "string",
-			"default": "機能紹介"
+			"default": "機能紹介",
+			"aiHint": { "role": "heading", "contentGuide": "リストのタイトル。3〜15文字", "example": "こんなお悩みありませんか？" }
 		},
-		"fontLi": {
-			"type": "string",
-			"default": ""
-		},
-		"fontWeightLi": {
-			"type": "string",
-			"default": ""
-		},
-		"colorLiSvg": {
-			"type": "string",
-			"default": "var(--color-accent)"
-		},
+		"fontLi": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"fontWeightLi": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"colorLiSvg": { "type": "string", "default": "var(--color-accent)", "aiHint": { "skip": true } },
 		"contents": {
 			"type": "array",
 			"source": "query",
@@ -68,15 +57,10 @@
 					"text": "自分で作ると\nダサくなる…",
 					"borderColor": "var(--color-main)"
 				}
-			]
+			],
+			"aiHint": { "role": "list", "contentGuide": "悩み・課題項目。3〜6個。各text 10〜30文字。改行可", "example": [{"text": "何から始めたらいいか\nわからない"}] }
 		}
 	},
 	"editorScript": "file:./lw-list-2.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 2
 }

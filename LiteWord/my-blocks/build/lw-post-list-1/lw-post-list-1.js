@@ -46,7 +46,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       pFontWeight = attributes.pFontWeight,
       catBgColor = attributes.catBgColor;
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u8A2D\u5B9A",
+      title: "\u57FA\u672C\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u51FA\u529B\u6570",
@@ -944,7 +944,7 @@ module.exports = window["wp"]["components"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-post-list-1","version":"1.0.0","title":"投稿一覧 1","category":"lw-post","icon":"editor-ul","editorScript":"file:./lw-post-list-1.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"numberOfPosts":{"type":"number","default":6},"categoryId":{"type":"string","default":""},"postType":{"type":"string","default":"post"},"dateFont":{"type":"string","default":"Noto Sans JP"},"dateFontWeight":{"type":"string","default":"400"},"catFont":{"type":"string","default":"Noto Sans JP"},"catFontWeight":{"type":"string","default":"400"},"catBgColor":{"type":"string","default":"var(--color-main)"},"titleFont":{"type":"string","default":"Noto Sans JP"},"titleFontWeight":{"type":"string","default":"500"},"pFont":{"type":"string","default":"Noto Sans JP"},"pFontWeight":{"type":"string","default":"400"}},"no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-post-list-1","version":"1.0.0","title":"投稿一覧 1","category":"lw-post","icon":"editor-ul","editorScript":"file:./lw-post-list-1.js","aiHint":{"description":"投稿一覧カード。サムネイル+日付+カテゴリ+タイトル+抜粋。ブログ・お知らせセクションに","excludeFromAutoSelect":false,"contentAttributes":["numberOfPosts","categoryId"],"imageAttributes":[],"notes":"動的ブロック。DBから投稿を取得して表示。テキストコンテンツの生成は不要"},"supports":{"anchor":true},"attributes":{"numberOfPosts":{"type":"number","default":6},"categoryId":{"type":"string","default":""},"postType":{"type":"string","default":"post"},"dateFont":{"type":"string","default":"Noto Sans JP"},"dateFontWeight":{"type":"string","default":"400"},"catFont":{"type":"string","default":"Noto Sans JP"},"catFontWeight":{"type":"string","default":"400"},"catBgColor":{"type":"string","default":"var(--color-main)"},"titleFont":{"type":"string","default":"Noto Sans JP"},"titleFontWeight":{"type":"string","default":"500"},"pFont":{"type":"string","default":"Noto Sans JP"},"pFontWeight":{"type":"string","default":"400"}},"no":1}');
 
 /***/ })
 

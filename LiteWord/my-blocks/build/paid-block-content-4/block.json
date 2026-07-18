@@ -7,12 +7,12 @@
 	"category": "lw-content",
 	"icon": "format-gallery",
 	"editorScript": "file:./paid-block-content-4.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "画像グリッド+テキスト。メインタイトル+サブ+説明+CTAボタン+画像8枚グリッド。ギャラリー型コンテンツに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "subTitle", "bottomText", "ctaText", "ctaUrl"],
+		"imageAttributes": ["images"]
+	},
 	"supports": {
 		"anchor": true
 	},

@@ -1,0 +1,241 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-table-2",
+	"version": "1.0.0",
+	"title": "Table 02",
+	"category": "lw-table",
+	"icon": "editor-table",
+	"description": "dl/dt/dd形式のテーブルブロック。各セルにブロックを追加可能。",
+	"aiHint": {
+		"description": "テーブル（InnerBlocks）。各セルにInnerBlocksで自由コンテンツ",
+		"excludeFromAutoSelect": true,
+		"contentAttributes": [],
+		"imageAttributes": [],
+		"excludeReason": "InnerBlocks使用のテーブル。AI直接生成非推奨"
+	},
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"dtFixedPc": {
+			"type": "boolean",
+			"default": false
+		},
+		"dtWidthPc": {
+			"type": "number",
+			"default": 200
+		},
+		"ddFixedPc": {
+			"type": "boolean",
+			"default": false
+		},
+		"ddWidthPc": {
+			"type": "number",
+			"default": 200
+		},
+		"clm1FrPc": {
+			"type": "number",
+			"default": 1
+		},
+		"clm2FrPc": {
+			"type": "number",
+			"default": 1
+		},
+		"dtFixedSp": {
+			"type": "boolean",
+			"default": false
+		},
+		"dtWidthSp": {
+			"type": "number",
+			"default": 150
+		},
+		"ddFixedSp": {
+			"type": "boolean",
+			"default": false
+		},
+		"ddWidthSp": {
+			"type": "number",
+			"default": 150
+		},
+		"clm1FrSp": {
+			"type": "number",
+			"default": 1
+		},
+		"clm2FrSp": {
+			"type": "number",
+			"default": 1
+		},
+		"dlBorderColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"dlBorderStyle": {
+			"type": "string",
+			"default": "solid"
+		},
+		"dlBorderWidth": {
+			"type": "number",
+			"default": 1
+		},
+		"dlBorderIndividual": {
+			"type": "boolean",
+			"default": false
+		},
+		"dlBorderTopColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"dlBorderTopStyle": {
+			"type": "string",
+			"default": "solid"
+		},
+		"dlBorderTopWidth": {
+			"type": "number",
+			"default": 1
+		},
+		"dlBorderBottomColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"dlBorderBottomStyle": {
+			"type": "string",
+			"default": "solid"
+		},
+		"dlBorderBottomWidth": {
+			"type": "number",
+			"default": 1
+		},
+		"dlBorderLeftColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"dlBorderLeftStyle": {
+			"type": "string",
+			"default": "solid"
+		},
+		"dlBorderLeftWidth": {
+			"type": "number",
+			"default": 1
+		},
+		"dlBorderRightColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"dlBorderRightStyle": {
+			"type": "string",
+			"default": "solid"
+		},
+		"dlBorderRightWidth": {
+			"type": "number",
+			"default": 1
+		},
+		"rowBorderColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"rowBorderStyle": {
+			"type": "string",
+			"default": "solid"
+		},
+		"rowBorderWidth": {
+			"type": "number",
+			"default": 1
+		},
+		"dtBorderColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"dtBorderStyle": {
+			"type": "string",
+			"default": "solid"
+		},
+		"dtBorderWidth": {
+			"type": "number",
+			"default": 1
+		},
+		"dtBgColor": {
+			"type": "string",
+			"default": ""
+		},
+		"cellPaddingPc": {
+			"type": "number",
+			"default": 16
+		},
+		"cellPaddingSp": {
+			"type": "number",
+			"default": -1
+		},
+		"fontSizePc": {
+			"type": "number",
+			"default": 17
+		},
+		"fontSizeSp": {
+			"type": "number",
+			"default": 16
+		},
+		"dtFont": {
+			"type": "string",
+			"default": ""
+		},
+		"dtFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"ddFont": {
+			"type": "string",
+			"default": ""
+		},
+		"ddFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"dtAlignPc": {
+			"type": "string",
+			"default": ""
+		},
+		"dtAlignSp": {
+			"type": "string",
+			"default": ""
+		},
+		"ddAlignPc": {
+			"type": "string",
+			"default": ""
+		},
+		"ddAlignSp": {
+			"type": "string",
+			"default": ""
+		},
+		"dtTextColor": {
+			"type": "string",
+			"default": ""
+		},
+		"ddTextColor": {
+			"type": "string",
+			"default": ""
+		},
+		"defaultPcClm1": {
+			"type": "boolean",
+			"default": false
+		},
+		"defaultSpClm1": {
+			"type": "boolean",
+			"default": false
+		},
+		"rows": {
+			"type": "array",
+			"default": [
+				{
+					"dtText": "項目名",
+					"ddText": "内容テキスト",
+					"pcClm1": null,
+					"spClm1": null,
+					"bgColor": "",
+					"textColor": ""
+				}
+			]
+		}
+	},
+	"editorScript": "file:./lw-pr-table-2.js"
+}

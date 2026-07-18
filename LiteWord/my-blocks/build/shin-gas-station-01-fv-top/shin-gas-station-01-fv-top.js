@@ -143,7 +143,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOpti
       value: '1em'
     }];
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u753B\u50CF"
+      title: "\u80CC\u666F\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "PC \u7528"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
       onSelect: onChangeBackgroundImage,
       allowedTypes: ['image'],
@@ -205,7 +205,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOpti
         }, "\u753B\u50CF\u3092\u9078\u629E"));
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30D5\u30A3\u30EB\u30BF\u30FC"
+      title: "\u30D5\u30A3\u30EB\u30BF\u30FC\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: filterBackgroundColor,
       onChange: function onChange(c) {
@@ -224,7 +224,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOpti
       max: 1,
       step: 0.01
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u6587\u5B57\u8272"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: textColor,
       onChange: function onChange(c) {
@@ -233,7 +233,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOpti
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "FV \u30D6\u30ED\u30C3\u30AF\u9AD8\u3055"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "PC"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       value: minHeightPc,
       options: (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.minHeightPcClassOptionArr)(),
@@ -259,7 +259,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOpti
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45"
+      title: "\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u6700\u5927\u5E45 (px)",
       value: maxWidth,
@@ -272,7 +272,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOpti
       max: 2000,
       step: 8
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30B9\u30DE\u30DB\u7248\u30C6\u30AD\u30B9\u30C8"
+      title: "\u30C6\u30AD\u30B9\u30C8\u8A2D\u5B9A\uFF08SP\uFF09"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextareaControl, {
       label: "\u25A0 \u30B5\u30D6\u30BF\u30A4\u30C8\u30EB ---------------",
       value: subTitleSp,
@@ -1289,7 +1289,7 @@ module.exports = window["wp"]["data"];
   \***************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-fv-top","version":"1.0.0","title":"FV（トップ用）shin shop pattern 01","category":"lw-firstview","icon":"cover-image","editorScript":"file:./shin-gas-station-01-fv-top.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"no":15,"attributes":{"backgroundImage":{"type":"string","default":"https://cdn.pixabay.com/photo/2013/10/14/10/37/froet-gas-195389_1280.jpg"},"backgroundImageSp":{"type":"string","default":""},"subTitle":{"type":"string","default":"Drive freely live comfortably."},"mainTitle":{"type":"string","default":"自由に走り<br>快適に暮らす"},"subTitleSp":{"type":"string","default":""},"mainTitleSp":{"type":"string","default":""},"mainLineHeightSp":{"type":"string","default":""},"mainMarginTopSp":{"type":"string","default":""},"mainMarginBottomSp":{"type":"string","default":""},"mainFontSetSp":{"type":"string","default":""},"mainFontWeightSp":{"type":"string","default":""},"description":{"type":"string","default":"人々の車生活をより豊かにするためのソリューションをご提供"},"descriptionSp":{"type":"string","default":""},"filterBackgroundColor":{"type":"string","default":"#000000"},"filterOpacity":{"type":"number","default":0.1},"textColor":{"type":"string","default":"#fff"},"minHeightPc":{"type":"string","default":"min-h-pc-100vh-header-100"},"minHeightTb":{"type":"string","default":"min-h-tb-600px"},"minHeightSp":{"type":"string","default":"min-h-sp-480px"},"maxWidth":{"type":"number","default":2000}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-fv-top","version":"1.0.0","title":"FV（トップ用）shin shop pattern 01","category":"lw-firstview","icon":"cover-image","editorScript":"file:./shin-gas-station-01-fv-top.js","aiHint":{"description":"トップ用FV。PC/SP別テキスト完全分離。サブ+メイン+説明+背景画像。ショップテンプレート用","excludeFromAutoSelect":false,"contentAttributes":["subTitle","mainTitle","description"],"imageAttributes":["backgroundImage","backgroundImageSp"]},"supports":{"anchor":true},"no":15,"attributes":{"backgroundImage":{"type":"string","default":"https://cdn.pixabay.com/photo/2013/10/14/10/37/froet-gas-195389_1280.jpg"},"backgroundImageSp":{"type":"string","default":""},"subTitle":{"type":"string","default":"Drive freely live comfortably."},"mainTitle":{"type":"string","default":"自由に走り<br>快適に暮らす"},"subTitleSp":{"type":"string","default":""},"mainTitleSp":{"type":"string","default":""},"mainLineHeightSp":{"type":"string","default":""},"mainMarginTopSp":{"type":"string","default":""},"mainMarginBottomSp":{"type":"string","default":""},"mainFontSetSp":{"type":"string","default":""},"mainFontWeightSp":{"type":"string","default":""},"description":{"type":"string","default":"人々の車生活をより豊かにするためのソリューションをご提供"},"descriptionSp":{"type":"string","default":""},"filterBackgroundColor":{"type":"string","default":"#000000"},"filterOpacity":{"type":"number","default":0.1},"textColor":{"type":"string","default":"#fff"},"minHeightPc":{"type":"string","default":"min-h-pc-100vh-header-100"},"minHeightTb":{"type":"string","default":"min-h-tb-600px"},"minHeightSp":{"type":"string","default":"min-h-sp-480px"},"maxWidth":{"type":"number","default":2000}}}');
 
 /***/ })
 

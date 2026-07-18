@@ -7,12 +7,13 @@
 	"category": "lw-utility",
 	"icon": "media-document",
 	"editorScript": "file:./lw-my-parts-embed.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "マイパーツ埋め込み。登録済みマイパーツをIDで参照表示。テキスト生成不要",
+		"excludeFromAutoSelect": true,
+		"contentAttributes": [],
+		"imageAttributes": [],
+		"excludeReason": "マイパーツID参照のみ。コンテンツ生成不要"
+	},
 	"supports": {
 		"anchor": true
 	},

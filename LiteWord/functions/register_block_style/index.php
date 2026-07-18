@@ -30,6 +30,40 @@ register_block_style(
         'inline_style' => '',
     )
 );
+// p_label_01
+register_block_style(
+    'core/paragraph',
+    array(
+        'name'         => 'p_label_01',
+        'label'        => 'ラベル 01',
+        'inline_style' => '',
+    )
+);
+register_block_style(
+    'core/paragraph',
+    array(
+        'name'         => 'p_label_01_2',
+        'label'        => 'ラベル 01-2',
+        'inline_style' => '',
+    )
+);
+// p_label_02
+register_block_style(
+    'core/paragraph',
+    array(
+        'name'         => 'p_label_02',
+        'label'        => 'ラベル 02',
+        'inline_style' => '',
+    )
+);
+register_block_style(
+    'core/paragraph',
+    array(
+        'name'         => 'p_label_02_2',
+        'label'        => 'ラベル 02-2',
+        'inline_style' => '',
+    )
+);
 // p_001
 register_block_style(
     'core/paragraph',
@@ -287,6 +321,29 @@ register_block_style(
                 width: 100% !important;
                 height: auto;
                 max-width: 100%;
+            }
+          
+        ',
+    )
+);
+register_block_style(
+    // カラムの時に、左右の高さを揃えたいとき
+    'core/image',
+    array(
+        'name'         => 'image_h_100',
+        'label'        => '縦幅100%',
+        'inline_style' => '
+            .is-style-image_h_100{
+                height: 100%;
+                box-sizing: border-box;
+            }
+            .block-editor-block-list__block .is-style-image_h_100{
+                height: calc(100% - 56px);
+            }
+            .is-style-image_h_100 img{
+                height: 100%;
+                object-fit: cover;
+                box-sizing: border-box;
             }
           
         ',

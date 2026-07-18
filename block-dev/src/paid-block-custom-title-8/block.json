@@ -10,62 +10,34 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "ボーダー付き見出し（スマホサイズ対応）。左寄せデフォルト。PC/SP別サイズ設定",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "subTitle"],
+		"imageAttributes": []
+	},
 	"attributes": {
 		"subTitle": {
 			"type": "string",
-			"default": "製品紹介"
+			"default": "製品紹介",
+			"aiHint": { "role": "subheading", "contentGuide": "日本語の補足タイトル。3〜10文字", "example": "アクセス" }
 		},
 		"mainTitle": {
 			"type": "string",
-			"default": "PRODUCTS"
+			"default": "PRODUCTS",
+			"aiHint": { "role": "heading", "contentGuide": "英語のメインタイトル。大文字推奨", "example": "ACCESS" }
 		},
-		"headingLevel": {
-			"type": "number",
-			"default": 2
-		},
-		"mainTitleColor": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"borderLeftColor": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"borderRightColor": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"borderLeftOpacity": {
-			"type": "number",
-			"default": 100
-		},
-		"borderRightOpacity": {
-			"type": "number",
-			"default": 20
-		},
-		"borderRadius": {
-			"type": "number",
-			"default": 10
-		},
-		"sizeClass": {
-			"type": "string",
-			"default": "size_m"
-		},
-		"positionClass": {
-			"type": "string",
-			"default": "position_left"
-		},
-		"sizeSpClass": {
-			"type": "string",
-			"default": ""
-		}
+		"headingLevel": { "type": "number", "default": 2, "aiHint": { "skip": true } },
+		"mainTitleColor": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"borderLeftColor": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"borderRightColor": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"borderLeftOpacity": { "type": "number", "default": 100, "aiHint": { "skip": true } },
+		"borderRightOpacity": { "type": "number", "default": 20, "aiHint": { "skip": true } },
+		"borderRadius": { "type": "number", "default": 10, "aiHint": { "skip": true } },
+		"sizeClass": { "type": "string", "default": "size_m", "aiHint": { "skip": true } },
+		"positionClass": { "type": "string", "default": "position_left", "aiHint": { "skip": true } },
+		"sizeSpClass": { "type": "string", "default": "", "aiHint": { "skip": true } }
 	},
 	"editorScript": "file:./paid-block-custom-title-8.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 8
 }

@@ -60,7 +60,7 @@ registerBlockType(metadata.name, {
 		return (
 			<div {...blockProps}>
 				<InspectorControls>
-					<PanelBody title="リンクの設定">
+					<PanelBody title="基本設定">
 						<TextControl
 							label="リンク先URL"
 							value={buttonUrl}
@@ -73,7 +73,7 @@ registerBlockType(metadata.name, {
 						/>
 					</PanelBody>
 
-					<PanelBody title="リンクボタンの色設定">
+					<PanelBody title="色設定">
 						<p>ボタン文字色</p>
 						<ColorPicker
 							color={buttonTextColor}
@@ -114,7 +114,7 @@ registerBlockType(metadata.name, {
 							}
 						/>
 					</PanelBody>
-					<PanelBody title="背景の色設定">
+					<PanelBody title="背景設定">
 						<p>色</p>
 						<ColorPicker
 							color={filterColor}
@@ -123,7 +123,7 @@ registerBlockType(metadata.name, {
 							}
 						/>
 					</PanelBody>
-					<PanelBody title="背景の不透明度設定">
+					<PanelBody title="フィルター設定">
 						<RangeControl
 							label="不透明度"
 							value={filterOpacity}

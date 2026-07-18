@@ -243,6 +243,12 @@ function lw_render_code_editor_metabox( $post ) {
 		$has_api_key = class_exists( 'LW_AI_Generator_Admin_Settings' ) && ! empty( LW_AI_Generator_Admin_Settings::get_api_key() );
 		$is_premium = defined( 'LW_HAS_SUBSCRIPTION' ) && LW_HAS_SUBSCRIPTION === true;
 		?>
+		<!-- DEBUG: has_api_key=<?php echo $has_api_key ? 'true' : 'false'; ?>, is_premium=<?php echo $is_premium ? 'true' : 'false'; ?>, LW_HAS_SUBSCRIPTION=<?php echo defined( 'LW_HAS_SUBSCRIPTION' ) ? ( LW_HAS_SUBSCRIPTION ? 'true' : 'false' ) : 'undefined'; ?> -->
+		<script>
+		console.log('[LW Premium Debug] has_api_key: <?php echo $has_api_key ? 'true' : 'false'; ?>');
+		console.log('[LW Premium Debug] is_premium: <?php echo $is_premium ? 'true' : 'false'; ?>');
+		console.log('[LW Premium Debug] LW_HAS_SUBSCRIPTION: <?php echo defined( 'LW_HAS_SUBSCRIPTION' ) ? ( LW_HAS_SUBSCRIPTION ? 'true' : 'false' ) : 'undefined'; ?>');
+		</script>
 		<div id="lw-ai-generate-section" style="margin-bottom: 20px; padding: 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 8px; color: #fff;">
 			<div style="display: flex; align-items: center; gap: 10px; margin-bottom: 15px;">
 				<svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -295,20 +301,104 @@ function lw_render_code_editor_metabox( $post ) {
 				</div>
 			</div>
 
-			<?php if ( ! $has_api_key ) : ?>
-			<div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 6px;">
-				<p style="margin: 0 0 10px 0;">AI機能を使用するにはAPIキーの設定が必要です。</p>
-				<a href="<?php echo admin_url( 'options-general.php?page=lw-ai-generator-settings' ); ?>" class="button" style="background: #fff; color: #667eea; border: none;">
-					設定画面へ
-				</a>
-			</div>
-			<?php elseif ( ! $is_premium ) : ?>
+			<?php if ( ! $is_premium ) : ?>
 			<div style="background: rgba(255,255,255,0.1); padding: 15px; border-radius: 6px;">
 				<p style="margin: 0 0 10px 0;">AIパーツ生成はプレミアムプラン限定機能です。</p>
-				<a href="<?php echo admin_url( 'index.php?show_premium_popup=1' ); ?>" target="_blank" class="button" style="background: #fff; color: #667eea; border: none;">
+				<button type="button" id="lw-ai-premium-popup-trigger" class="button" style="background: #fff; color: #667eea; border: none; cursor: pointer;">
 					プレミアムプランを見る
-				</a>
+				</button>
 			</div>
+
+			<!-- プレミアムプラン案内ポップアップ -->
+			<div id="lw-ai-premium-modal" style="display: none; position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.6); z-index: 100001; overflow-y: auto;">
+				<div style="max-width: 480px; margin: 80px auto; background: #fff; border-radius: 12px; box-shadow: 0 20px 60px rgba(0,0,0,0.3);">
+					<div style="padding: 20px 25px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border-radius: 12px 12px 0 0; color: #fff; display: flex; justify-content: space-between; align-items: center;">
+						<h3 style="color:#fff; margin: 0; font-size: 18px; display: flex; align-items: center; gap: 10px;">
+							<span class="dashicons dashicons-star-filled" style="font-size: 20px;"></span>
+							プレミアム機能
+						</h3>
+						<button type="button" id="lw-ai-premium-modal-close" style="background: transparent; border: none; color: #fff; font-size: 24px; cursor: pointer; line-height: 1; padding: 0;">&times;</button>
+					</div>
+					<div style="padding: 25px; color: #333;">
+						<p style="margin: 0 0 12px 0; font-size: 15px;">
+							この機能は<strong>LiteWordプレミアムプラン</strong>限定です。
+						</p>
+						<p style="margin: 0 0 15px 0; font-size: 14px; color: #666;">
+							プレミアムプランでは、AIパーツ生成機能をご利用いただけます。
+						</p>
+						<p style="margin: 0 0 20px 0; font-size: 12px; color: #888;">
+							※ AI機能のご利用にはAPIキーの設定が必要です。別途API利用料（1生成あたり約1円程度）がかかります。
+						</p>
+						<div style="display: flex; flex-direction: column; gap: 10px;">
+							<a href="#" class="button button-primary" style="text-align: center; padding: 12px 20px; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none; font-weight: bold;" data-lw-shop-action="login" data-redirect="/purchase-premium/" data-lw-shop-text="プレミアムプランへの変更はLiteWord Studioへのログインが必要です">
+								今すぐプレミアムにする
+							</a>
+							<div style="display: flex; gap: 10px;">
+								<a href="<?php echo esc_url( function_exists( 'lw_premium_info_link' ) ? lw_premium_info_link() : 'https://shop.lite-word.com/purchase-premium' ); ?>" target="_blank" class="button" style="flex: 1; text-align: center; padding: 10px 15px;">
+									プレミアムプランの詳細
+								</a>
+								<button type="button" class="button lw-ai-premium-modal-close-btn" style="flex: 1; padding: 10px 15px;">
+									閉じる
+								</button>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<script>
+			(function() {
+				console.log('[LW Premium Modal] スクリプト実行開始');
+
+				var trigger = document.getElementById('lw-ai-premium-popup-trigger');
+				var modal = document.getElementById('lw-ai-premium-modal');
+				var closeBtn = document.getElementById('lw-ai-premium-modal-close');
+				var closeBtnBottom = document.querySelector('.lw-ai-premium-modal-close-btn');
+
+				console.log('[LW Premium Modal] trigger:', trigger);
+				console.log('[LW Premium Modal] modal:', modal);
+				console.log('[LW Premium Modal] closeBtn:', closeBtn);
+				console.log('[LW Premium Modal] closeBtnBottom:', closeBtnBottom);
+
+				if (trigger && modal) {
+					console.log('[LW Premium Modal] イベントリスナー登録');
+					trigger.addEventListener('click', function(e) {
+						console.log('[LW Premium Modal] ボタンクリック');
+						e.preventDefault();
+						modal.style.display = 'block';
+						console.log('[LW Premium Modal] モーダル表示');
+					});
+
+					// 閉じるボタン（×）
+					if (closeBtn) {
+						closeBtn.addEventListener('click', function() {
+							modal.style.display = 'none';
+						});
+					}
+
+					// 閉じるボタン（下部）
+					if (closeBtnBottom) {
+						closeBtnBottom.addEventListener('click', function() {
+							modal.style.display = 'none';
+						});
+					}
+
+					// オーバーレイクリックで閉じる
+					modal.addEventListener('click', function(e) {
+						if (e.target === modal) {
+							modal.style.display = 'none';
+						}
+					});
+
+					// ESCキーで閉じる
+					document.addEventListener('keydown', function(e) {
+						if (e.key === 'Escape' && modal.style.display === 'block') {
+							modal.style.display = 'none';
+						}
+					});
+				}
+			})();
+			</script>
 			<?php else : ?>
 			<div style="display: flex; flex-direction: column; gap: 12px;">
 				<div style="display: flex; gap: 10px; flex-wrap: wrap;">
@@ -337,7 +427,6 @@ function lw_render_code_editor_metabox( $post ) {
 						<select id="lw-ai-model" style="width: 100%; padding: 8px 12px; border: none; border-radius: 4px; font-size: 14px;">
 							<option value="gemini-2.5-flash">Gemini 2.5 Flash（推奨）</option>
 							<option value="gemini-2.5-pro">Gemini 2.5 Pro（高品質）</option>
-							<option value="gemini-2.0-flash">Gemini 2.0 Flash（高速）</option>
 						</select>
 					</div>
 				</div>

@@ -5,6 +5,7 @@ html :where(.wp-block) {
 
 .editor-styles-wrapper {
   background: var(--color-content-bg-pc);
+  font-family: var(--font-family-gothic);
 }
 
 .wp-block-quote {

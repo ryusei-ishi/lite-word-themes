@@ -1,0 +1,64 @@
+[
+  {
+    "name": "wdl/custom-title-4",
+    "attributes": {
+      "mainTitle": "【見出しを設定】",
+      "subTitle": "",
+      "headingLevel": 2,
+      "subMarginBottomPc": 0.6,
+      "subMarginBottomSp": 0.6,
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": []
+  },
+  {
+    "name": "wdl/lw-step-2",
+    "attributes": {
+      "bgGradient": "var(--color-main)",
+      "ulMaxWidth": 800,
+      "colorLiSvg": "var(--color-main)",
+      "contents": [
+        {
+          "title": "【ステップ1】",
+          "text": "【ステップ1の説明を入力】"
+        },
+        {
+          "title": "【ステップ2】",
+          "text": "【ステップ2の説明を入力】"
+        },
+        {
+          "title": "【ステップ3】",
+          "text": "【ステップ3の説明を入力】"
+        },
+        {
+          "title": "【ステップ4】",
+          "text": "【ステップ4の説明を入力】"
+        }
+      ],
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": []
+  }
+]

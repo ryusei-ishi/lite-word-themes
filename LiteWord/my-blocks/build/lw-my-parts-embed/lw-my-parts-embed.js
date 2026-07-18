@@ -181,7 +181,7 @@ module.exports = window["wp"]["primitives"];
   \******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-my-parts-embed","version":"1.0.0","title":"マイパーツ","category":"lw-utility","icon":"media-document","editorScript":"file:./lw-my-parts-embed.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"partsId":{"type":"integer","default":0},"partsCat":{"type":"integer","default":0},"showPreview":{"type":"boolean","default":false}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-my-parts-embed","version":"1.0.0","title":"マイパーツ","category":"lw-utility","icon":"media-document","editorScript":"file:./lw-my-parts-embed.js","aiHint":{"description":"マイパーツ埋め込み。登録済みマイパーツをIDで参照表示。テキスト生成不要","excludeFromAutoSelect":true,"contentAttributes":[],"imageAttributes":[],"excludeReason":"マイパーツID参照のみ。コンテンツ生成不要"},"supports":{"anchor":true},"attributes":{"partsId":{"type":"integer","default":0},"partsCat":{"type":"integer","default":0},"showPreview":{"type":"boolean","default":false}}}');
 
 /***/ })
 
@@ -385,35 +385,96 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       });
     };
 
+    /* --- プレビュー表示時にカスタムブロックのCSSを動的読み込み --- */
+    (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_4__.useEffect)(function () {
+      var _selectedPart$content;
+      if (!showPreview || !selectedPart) return;
+      var editorMode = selectedPart.editor_mode || 'normal';
+      if (editorMode === 'code') return;
+      var rawContent = ((_selectedPart$content = selectedPart.content) === null || _selectedPart$content === void 0 ? void 0 : _selectedPart$content.raw) || '';
+      var blockRegex = /<!-- wp:(wdl\/[a-z0-9-]+)/g;
+      var match;
+      var _loop = function _loop() {
+        var slug = match[1].replace('wdl/', '');
+        var baseUrl = "".concat(MyThemeSettings.themeUrl, "/my-blocks/build/").concat(slug);
+        ['style', 'editor'].forEach(function (type) {
+          var id = "wdl-preview-".concat(slug, "-").concat(type);
+          if (document.getElementById(id)) return;
+          var link = document.createElement('link');
+          link.id = id;
+          link.rel = 'stylesheet';
+          link.href = "".concat(baseUrl, "/").concat(type, ".css");
+          document.head.appendChild(link);
+
+          // iframe エディタにも注入
+          document.querySelectorAll('iframe[name="editor-canvas"]').forEach(function (iframe) {
+            try {
+              var doc = iframe.contentDocument;
+              if (doc && doc.head && !doc.getElementById(id)) {
+                var iLink = link.cloneNode();
+                doc.head.appendChild(iLink);
+              }
+            } catch (e) {
+              console.warn('[lw-my-parts-embed] CSS injection failed:', slug, e.message);
+            }
+          });
+        });
+      };
+      while ((match = blockRegex.exec(rawContent)) !== null) {
+        _loop();
+      }
+    }, [showPreview, selectedPart]);
+
     /* --- プレビュー用のコンテンツを生成 ---------------- */
     var renderPreview = function renderPreview() {
-      var _selectedPart$content;
+      var _selectedPart$content2;
       if (!selectedPart) {
         return null;
       }
       var editorMode = selectedPart.editor_mode || 'normal';
       var customHtml = selectedPart.custom_html || '';
       var customCss = selectedPart.custom_css || '';
-      var postContent = ((_selectedPart$content = selectedPart.content) === null || _selectedPart$content === void 0 ? void 0 : _selectedPart$content.rendered) || '';
+      var postContent = ((_selectedPart$content2 = selectedPart.content) === null || _selectedPart$content2 === void 0 ? void 0 : _selectedPart$content2.rendered) || '';
+      var previewHtml = selectedPart.preview_html || '';
       var fullWidth = selectedPart.full_width === 'on';
 
       // コードエディタモード
       if (editorMode === 'code') {
+        var htmlContent = customHtml || previewHtml;
+        if (!htmlContent) {
+          return /*#__PURE__*/React.createElement("p", {
+            style: {
+              color: '#94a3b8',
+              padding: '16px',
+              textAlign: 'center'
+            }
+          }, "\u30B3\u30F3\u30C6\u30F3\u30C4\u304C\u7A7A\u3067\u3059");
+        }
         return /*#__PURE__*/React.createElement("div", {
           className: fullWidth ? 'lw_width_full_on' : ''
         }, customCss && /*#__PURE__*/React.createElement("style", null, customCss), /*#__PURE__*/React.createElement("div", {
           dangerouslySetInnerHTML: {
-            __html: customHtml
+            __html: htmlContent
           }
         }));
       }
 
-      // 通常モード
+      // 通常モード: content.rendered が空ならpreview_htmlをフォールバック
+      var displayContent = postContent || previewHtml;
+      if (!displayContent) {
+        return /*#__PURE__*/React.createElement("p", {
+          style: {
+            color: '#94a3b8',
+            padding: '16px',
+            textAlign: 'center'
+          }
+        }, "\u30B3\u30F3\u30C6\u30F3\u30C4\u304C\u7A7A\u3067\u3059");
+      }
       return /*#__PURE__*/React.createElement("div", {
         className: fullWidth ? 'lw_width_full_on' : ''
       }, /*#__PURE__*/React.createElement("div", {
         dangerouslySetInnerHTML: {
-          __html: postContent
+          __html: displayContent
         }
       }));
     };

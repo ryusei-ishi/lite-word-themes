@@ -1,0 +1,95 @@
+.lw-pr-waku-1 {
+    container-type: inline-size;
+    display: flex;
+    justify-content: var(--waku-1-justify-content-pc, center);
+    @media (max-width: 700px) {
+        justify-content: var(--waku-1-justify-content-sp, center);
+    }
+
+    > a.lw-pr-waku-1__custom_wrap {
+        color: var(--color-black);
+        text-decoration: none;
+    }
+
+    > .lw-pr-waku-1__custom_wrap {
+        position: relative;
+        z-index: 10;
+        max-width: var(--waku-1-max-width-pc, 100%);
+        width: 100%;
+        padding: var(--waku-1-padding-pc, 24px);
+        display: block;
+        border-width: var(--waku-1-bd-width-pc, 2px);
+        border-style: var(--waku-1-bd-style-pc, solid);
+        border-color: var(--waku-1-bd-color-pc, var(--color-main));
+        border-radius: var(--waku-1-bdr-pc, 8px);
+        min-height: var(--waku-1-min-height-pc, auto);
+        aspect-ratio: var(--waku-1-aspect-ratio-pc, auto);
+
+        @media (max-width: 700px) {
+            max-width: var(--waku-1-max-width-sp, 100%);
+            padding: var(--waku-1-padding-sp, 16px);
+            border-width: var(--waku-1-bd-width-sp, 2px);
+            border-style: var(--waku-1-bd-style-sp, solid);
+            border-color: var(--waku-1-bd-color-sp, var(--color-main));
+            border-radius: var(--waku-1-bdr-sp, 8px);
+            min-height: var(--waku-1-min-height-sp, auto);
+            aspect-ratio: var(--waku-1-aspect-ratio-sp, auto);
+        }
+
+        // 背景色/グラデーションレイヤー（::before）
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            display: block;
+            content: "";
+            background: var(--waku-1-bg-pc, #fff);
+            border-radius: var(--waku-1-bdr-pc, 8px);
+            opacity: var(--waku-1-bg-opacity-pc, 1);
+            mix-blend-mode: var(--waku-1-blend-mode-pc, normal);
+            @media (max-width: 700px) {
+                background: var(--waku-1-bg-sp, var(--waku-1-bg-pc, #fff));
+                border-radius: var(--waku-1-bdr-sp, 8px);
+                opacity: var(--waku-1-bg-opacity-sp, 1);
+                mix-blend-mode: var(--waku-1-blend-mode-sp, normal);
+            }
+        }
+
+        // 背景画像レイヤー（::after）
+        &::after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -2;
+            width: 100%;
+            height: 100%;
+            display: block;
+            content: "";
+            background-image: var(--waku-1-bg-img-pc, none);
+            background-repeat: no-repeat;
+            background-size: cover;
+            background-position: center;
+            border-radius: var(--waku-1-bdr-pc, 8px);
+            filter: var(--waku-1-img-filter-pc, none);
+
+            @media (max-width: 700px) {
+                background-image: var(--waku-1-bg-img-sp, none);
+                border-radius: var(--waku-1-bdr-sp, 8px);
+                filter: var(--waku-1-img-filter-sp, none);
+            }
+        }
+
+        >* {
+            width: 100%;
+            &:first-child {
+                margin-top: 0;
+            }
+            &:last-child {
+                margin-bottom: 0;
+            }
+        }
+    }
+}

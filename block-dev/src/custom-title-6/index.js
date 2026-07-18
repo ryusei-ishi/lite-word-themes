@@ -45,7 +45,7 @@ registerBlockType(metadata.name, {
                     </ToolbarGroup>
                 </BlockControls>
                 <InspectorControls>
-                    <PanelBody title="アクセントカラー設定">
+                    <PanelBody title="色設定">
                         <ColorPalette
                             value={accentColor}
                             onChange={onChangeAccentColor}

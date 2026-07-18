@@ -111,9 +111,7 @@ function lw_deadline_block_editor_scripts() {
         
         // 期限設定データ
         const lwDeadlineData = " . json_encode( $deadline_data, JSON_UNESCAPED_UNICODE ) . ";
-        
-        console.log('[LW_DEADLINE] Initialized with data:', lwDeadlineData);
-        
+
         // 処理済みの要素を記録
         const processedElements = new WeakSet();
         
@@ -136,7 +134,6 @@ function lw_deadline_block_editor_scripts() {
                         const toRemove = nextSibling;
                         nextSibling = nextSibling.nextElementSibling;
                         toRemove.remove();
-                        console.log('[LW_DEADLINE] Removed adjacent duplicate element:', setClass);
                     }
                 });
             });
@@ -307,8 +304,6 @@ function lw_deadline_block_editor_scripts() {
                             for ( let i = 1; i < expectedText.length; i++ ) {
                                 const suffix = expectedText.substring( i );
                                 if ( text.startsWith( suffix ) ) {
-                                    console.log('[LW_DEADLINE] Found text fragment:', text.substring( 0, suffix.length ));
-                                    
                                     // 断片部分のみを削除
                                     const remainingText = text.substring( suffix.length );
                                     if ( remainingText ) {

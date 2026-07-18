@@ -62,8 +62,7 @@ registerBlockType(metadata.name, {
 		};
 
 		const updateContent = (idx, key, val) => {
-			const list = [...contents];
-			list[idx][key] = val;
+			const list = contents.map((item, i) => i === idx ? { ...item, [key]: val } : item);
 			setAttributes({ contents: list });
 		};
 
@@ -143,7 +142,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* ■ 項目名（dt）設定 - 閉じた状態 */}
-					<PanelBody title="項目名のフォント・色など" initialOpen={false}>
+					<PanelBody title="フォント設定（項目名）" initialOpen={false}>
 						<p>背景色</p>
 						<ColorPalette
 							value={dtBackgroundColor}
@@ -172,7 +171,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* ■ 内容（dd）設定 - 閉じた状態 */}
-					<PanelBody title="内容のフォント・色など" initialOpen={false}>
+					<PanelBody title="フォント設定（内容）" initialOpen={false}>
 						<p>文字色</p>
 						<ColorPalette
 							value={ddTextColor}

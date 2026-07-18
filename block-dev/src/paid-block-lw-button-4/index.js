@@ -62,7 +62,7 @@ registerBlockType(metadata.name, {
 				<InspectorControls>
 
 					{/* ── 1. 基本設定 ── */}
-					<PanelBody title="📝 基本設定" initialOpen={true}>
+					<PanelBody title="基本設定" initialOpen={true}>
 						<URLInput
 							label="🔗 リンク先URL"
 							value={ btnUrl }
@@ -78,7 +78,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* ── 2. ボタンサイズ・形状 ── */}
-					<PanelBody title="📏 ボタンのサイズと形" initialOpen={false}>
+					<PanelBody title="レイアウト設定" initialOpen={false}>
 						<RangeControl
 							label="🖥️ パソコンでの横幅 (px)"
 							value={ maxWidth }
@@ -105,7 +105,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* ── 3. 色・フォント設定 ── */}
-					<PanelBody title="🎨 色とフォントの設定" initialOpen={false}>
+					<PanelBody title="色設定" initialOpen={false}>
 						<div style={{ marginBottom: '20px' }}>
 							<p style={{ fontWeight: 'bold', marginBottom: '8px' }}>🌈 ボタンの背景色</p>
 							<ColorPalette 
@@ -150,7 +150,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* ── 4. アイコン設定 ── */}
-					<PanelBody title="✨ アイコン設定" initialOpen={false}>
+					<PanelBody title="アイコン設定" initialOpen={false}>
 						<ToggleControl
 							label="アイコンを表示する"
 							checked={ iconVisible }
@@ -169,7 +169,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* ── 5. 配置設定 ── */}
-					<PanelBody title="📍 ボタンの配置" initialOpen={false}>
+					<PanelBody title="配置設定" initialOpen={false}>
 						<SelectControl
 							label="🖥️ パソコンでの位置"
 							value={ position }
@@ -197,7 +197,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* ── 6. 枠線設定 ── */}
-					<PanelBody title="🖍️ 枠線の設定" initialOpen={false}>
+					<PanelBody title="枠線設定" initialOpen={false}>
 						<RangeControl
 							label="枠線の太さ (px)"
 							value={ borderWidth }

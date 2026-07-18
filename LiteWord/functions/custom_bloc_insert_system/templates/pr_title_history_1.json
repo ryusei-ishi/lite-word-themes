@@ -1,0 +1,156 @@
+[
+  {
+    "name": "wdl/paid-block-custom-title-8",
+    "attributes": {
+      "subTitle": "histry",
+      "mainTitle": "沿革",
+      "headingLevel": 2,
+      "mainTitleColor": "var(--color-main)",
+      "borderLeftColor": "var(--color-main)",
+      "borderRightColor": "var(--color-main)",
+      "borderLeftOpacity": 100,
+      "borderRightOpacity": 20,
+      "borderRadius": 10,
+      "sizeClass": "size_m",
+      "positionClass": "position_left",
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": []
+  },
+  {
+    "name": "wdl/lw-space-1",
+    "attributes": {
+      "pcHeight": 24,
+      "tbHeight": 20,
+      "spHeight": 8,
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": []
+  },
+  {
+    "name": "wdl/paid-block-history-1",
+    "attributes": {
+      "yearText": "2003年",
+      "yearTag": "h3",
+      "pointColor": "#ffffff",
+      "pointBorderColor": "var(--color-main)",
+      "events": [
+        {
+          "month": "4月",
+          "desc": "地域の福祉ニーズを把握するための住民説明会を開催。施設構想を共有し、支援者を募集。"
+        },
+        {
+          "month": "7月",
+          "desc": "特定非営利活動法人として県の認証を取得し、地域福祉ネットワークづくりを本格始動。"
+        }
+      ],
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": []
+  },
+  {
+    "name": "wdl/paid-block-history-1",
+    "attributes": {
+      "yearText": "2003年",
+      "yearTag": "h3",
+      "pointColor": "#ffffff",
+      "pointBorderColor": "var(--color-main)",
+      "events": [
+        {
+          "month": "4月",
+          "desc": "地域の福祉ニーズを把握するための住民説明会を開催。施設構想を共有し、支援者を募集。"
+        },
+        {
+          "month": "7月",
+          "desc": "特定非営利活動法人として県の認証を取得し、地域福祉ネットワークづくりを本格始動。"
+        }
+      ],
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": []
+  },
+  {
+    "name": "wdl/paid-block-history-1",
+    "attributes": {
+      "yearText": "2003年",
+      "yearTag": "h3",
+      "pointColor": "#ffffff",
+      "pointBorderColor": "var(--color-main)",
+      "events": [
+        {
+          "month": "4月",
+          "desc": "地域の福祉ニーズを把握するための住民説明会を開催。施設構想を共有し、支援者を募集。"
+        },
+        {
+          "month": "7月",
+          "desc": "特定非営利活動法人として県の認証を取得し、地域福祉ネットワークづくりを本格始動。"
+        },
+        {
+          "month": "8月",
+          "desc": "賃貸契約を締結し、小規模多機能施設を開設。利用者受け入れ準備を開始。"
+        },
+        {
+          "month": "12月",
+          "desc": "初めての利用者を受け入れ。地域ボランティアによるサポート体制が整い、運営を本格化。"
+        }
+      ],
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": []
+  }
+]

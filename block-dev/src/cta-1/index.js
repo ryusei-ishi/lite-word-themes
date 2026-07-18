@@ -63,7 +63,7 @@ registerBlockType(metadata.name, {
                 
                 <InspectorControls>
                     {/* 横幅の設定 */}
-                    <PanelBody title="横幅の設定" initialOpen={false}>
+                    <PanelBody title="レイアウト設定" initialOpen={false}>
                         <div style={{ 
                             border: '1px solid #e0e0e0', 
                             borderRadius: '4px', 
@@ -95,13 +95,13 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* リンクの設定 */}
-                    <PanelBody title="リンクの設定">
+                    <PanelBody title="基本設定">
                         <TextControl label="リンク先URL" value={buttonUrl} onChange={onChangeButtonUrl} />
                         <ToggleControl label="リンクを新規タブで開く" checked={openInNewTab} onChange={onToggleOpenInNewTab} />
                     </PanelBody>
 
                     {/* 画像の設定 */}
-                    <PanelBody title="画像の設定">
+                    <PanelBody title="画像設定">
                         <MediaUpload onSelect={onSelectImage} allowedTypes="image" value={imageUrl}
                             render={({ open }) => (
                                 <>
@@ -116,7 +116,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ボタンの色の設定 */}
-                    <PanelBody title="リンクボタンの色設定">
+                    <PanelBody title="色設定">
                         <ColorPicker color={buttonBackgroundColor} onChangeComplete={(value) => onChangeButtonBackgroundColor(value.hex)} />
                         <ColorPicker color={buttonBorderColor} onChangeComplete={(value) => onChangeButtonBorderColor(value.hex)} />
                         <RangeControl label="ボーダーのサイズ (px)" value={buttonBorderSize} onChange={onChangeButtonBorderSize} min={0} max={10} />
@@ -124,7 +124,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* テキストの配置設定 */}
-                    <PanelBody title="テキストの配置設定">
+                    <PanelBody title="配置設定">
                         <SelectControl label="PCでのテキスト配置" value={pcTextAlign} options={[{ label: '中央寄せ', value: 'center' }, { label: '左寄せ', value: 'left' }]} onChange={onChangePcTextAlign} />
                         <SelectControl label="スマホでのテキスト配置" value={mobileTextAlign} options={[{ label: '中央寄せ', value: 'center' }, { label: '左寄せ', value: 'left' }]} onChange={onChangeMobileTextAlign} />
                     </PanelBody>

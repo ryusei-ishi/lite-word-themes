@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // 定数定義
-define( 'LW_AI_SYSTEM_VERSION', '1.0.3' );
+define( 'LW_AI_SYSTEM_VERSION', '1.0.75' );
 define( 'LW_AI_SYSTEM_DIR', get_template_directory() . '/functions/lw_ai_system/' );
 define( 'LW_AI_SYSTEM_URL', get_template_directory_uri() . '/functions/lw_ai_system/' );
 
@@ -24,44 +24,22 @@ require_once LW_AI_SYSTEM_DIR . 'includes/class-gemini-api.php';
 require_once LW_AI_SYSTEM_DIR . 'includes/class-admin-settings.php';
 require_once LW_AI_SYSTEM_DIR . 'includes/class-block-settings.php';
 require_once LW_AI_SYSTEM_DIR . 'includes/class-usage-tracker.php';
+require_once LW_AI_SYSTEM_DIR . 'includes/class-session-manager.php';
+
+// マーケティング知識ファイル読み込み
+require_once LW_AI_SYSTEM_DIR . 'marketing_materials/lp_default.php';
+require_once LW_AI_SYSTEM_DIR . 'marketing_materials/top_default.php';
 
 // 設定画面の初期化
 LW_AI_Generator_Admin_Settings::init();
 LW_AI_Generator_Block_Settings::init();
 LW_AI_Generator_Usage_Tracker::init();
 
-/**
- * 管理画面全体（使用量ウィジェット）
- */
-function lw_ai_system_enqueue_admin_assets() {
-    // 使用量ウィジェットCSS
-    wp_enqueue_style(
-        'lw-ai-usage-widget',
-        LW_AI_SYSTEM_URL . 'assets/css/usage-widget.css',
-        array(),
-        LW_AI_SYSTEM_VERSION
-    );
+// セッションテーブル作成（初回のみ実行）
+add_action( 'admin_init', array( 'LW_AI_Session_Manager', 'create_tables' ) );
 
-    // 使用量ウィジェットJS
-    wp_enqueue_script(
-        'lw-ai-usage-widget',
-        LW_AI_SYSTEM_URL . 'assets/js/usage-widget.js',
-        array(),
-        LW_AI_SYSTEM_VERSION,
-        true
-    );
-
-    wp_localize_script(
-        'lw-ai-usage-widget',
-        'lwAiUsageWidgetData',
-        array(
-            'restUrl'   => rest_url( 'lw-ai-generator/v1/' ),
-            'restNonce' => wp_create_nonce( 'wp_rest' ),
-            'isPremium' => defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true,
-        )
-    );
-}
-add_action( 'admin_enqueue_scripts', 'lw_ai_system_enqueue_admin_assets' );
+// AI使用量ウィジェット（lw-ai-usage-button）は廃止
+// 代わりに lw_ai_chat のAIサポートボタンが全管理画面に表示される
 
 /**
  * ブロックエディタ（メインAI機能）
@@ -87,8 +65,18 @@ function lw_ai_system_enqueue_block_editor_assets() {
 
     // APIキー設定状態チェック
     $has_gemini_key = ! empty( LW_AI_Generator_Admin_Settings::get_api_key() );
+    $is_premium = defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true;
+
+    // ページタイプ設定を読み込み（プレミアムユーザーのみ）
+    $page_types = array();
+    if ( $is_premium ) {
+        $page_types_json = file_get_contents( LW_AI_SYSTEM_DIR . 'page-types.json' );
+        $page_types_data = json_decode( $page_types_json, true );
+        $page_types = isset( $page_types_data['pageTypes'] ) ? $page_types_data['pageTypes'] : array();
+    }
 
     // モーダルスクリプトのURLを含む設定データ
+    // ※ block-ai-sidebar.js と text-selection-ai.js は遅延読み込み（パフォーマンス改善）
     wp_localize_script(
         'lw-ai-generator-block-inserter',
         'lwAiGeneratorData',
@@ -101,8 +89,14 @@ function lw_ai_system_enqueue_block_editor_assets() {
             'settingsUrl' => admin_url( 'options-general.php?page=lw-ai-generator-settings' ),
             'version'     => LW_AI_SYSTEM_VERSION,
             'modalUrl'    => LW_AI_SYSTEM_URL . 'assets/js/admin-ui-modal.js',
-            'isPremium'   => defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true,
+            'isPremium'   => $is_premium,
             'premiumUrl'  => function_exists('lw_premium_info_link') ? lw_premium_info_link() : 'https://shop.lite-word.com/purchase-premium',
+            'pageTypes'   => $page_types,
+            // 遅延読み込み用スクリプトURL
+            'lazyScripts' => array(
+                'blockSidebar'    => LW_AI_SYSTEM_URL . 'assets/js/block-ai-sidebar.js',
+                'textSelection'   => LW_AI_SYSTEM_URL . 'assets/js/text-selection-ai.js',
+            ),
         )
     );
 
@@ -114,44 +108,29 @@ function lw_ai_system_enqueue_block_editor_assets() {
         LW_AI_SYSTEM_VERSION
     );
 
-    // block-ai-sidebar.js（遅延読み込み）
-    wp_enqueue_script(
-        'lw-ai-block-sidebar',
-        LW_AI_SYSTEM_URL . 'assets/js/block-ai-sidebar.js',
-        array( 'wp-element', 'wp-components', 'wp-block-editor', 'wp-compose', 'wp-hooks', 'wp-data' ),
-        LW_AI_SYSTEM_VERSION,
-        array( 'in_footer' => true, 'strategy' => 'defer' )
-    );
+    // ============================================================
+    // block-ai-sidebar.js と text-selection-ai.js は遅延読み込み
+    // AIボタンクリック時に動的に読み込まれます（パフォーマンス改善）
+    // 読み込みロジックは admin-ui.js 内で実装
+    // ============================================================
 
-    wp_localize_script(
-        'lw-ai-block-sidebar',
-        'lwAiBlockSidebarData',
-        array(
+    // 遅延読み込みスクリプト用のグローバルデータを設定
+    // （スクリプト読み込み時に必要な設定値）
+    wp_add_inline_script(
+        'lw-ai-generator-block-inserter',
+        'window.lwAiBlockSidebarData = ' . json_encode( array(
             'restUrl'    => rest_url( 'lw-ai-generator/v1/' ),
             'restNonce'  => wp_create_nonce( 'wp_rest' ),
-            'isPremium'  => defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true,
+            'isPremium'  => $is_premium,
             'premiumUrl' => function_exists('lw_premium_info_link') ? lw_premium_info_link() : 'https://shop.lite-word.com/purchase-premium',
-        )
-    );
-
-    // text-selection-ai.js（遅延読み込み）
-    wp_enqueue_script(
-        'lw-ai-text-selection',
-        LW_AI_SYSTEM_URL . 'assets/js/text-selection-ai.js',
-        array( 'wp-element', 'wp-components', 'wp-data', 'wp-rich-text', 'wp-block-editor' ),
-        LW_AI_SYSTEM_VERSION,
-        array( 'in_footer' => true, 'strategy' => 'defer' )
-    );
-
-    wp_localize_script(
-        'lw-ai-text-selection',
-        'lwAiTextSelectionData',
-        array(
+        ) ) . ';' .
+        'window.lwAiTextSelectionData = ' . json_encode( array(
             'restUrl'    => rest_url( 'lw-ai-generator/v1/' ),
             'restNonce'  => wp_create_nonce( 'wp_rest' ),
-            'isPremium'  => defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true,
+            'isPremium'  => $is_premium,
             'premiumUrl' => function_exists('lw_premium_info_link') ? lw_premium_info_link() : 'https://shop.lite-word.com/purchase-premium',
-        )
+        ) ) . ';',
+        'before'
     );
 }
 add_action( 'enqueue_block_editor_assets', 'lw_ai_system_enqueue_block_editor_assets' );

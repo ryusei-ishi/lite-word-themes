@@ -85,7 +85,7 @@ __webpack_require__.r(__webpack_exports__);
       },
       placeholder: "\u753B\u50CF\u306E\u8AAC\u660E\u3092\u5165\u529B"
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30AB\u30E9\u30FC\u8A2D\u5B9A"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u30EA\u30FC\u30C9\u30C6\u30AD\u30B9\u30C8\u306E\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
       value: colorMain,
       onChange: function onChange(newColor) {
@@ -94,7 +94,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30B9\u30BF\u30A4\u30EB\u8A2D\u5B9A"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u80CC\u666F\u30D5\u30A3\u30EB\u30BF\u30FC\u306E\u900F\u660E\u5EA6",
       value: filterOpacity,
@@ -346,7 +346,7 @@ module.exports = window["wp"]["components"];
   \*************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-message-1","version":"1.0.0","title":"メッセージ 01","category":"lw-content","icon":"admin-comments","supports":{"anchor":true},"attributes":{"subTitle":{"type":"string","default":"message"},"mainTitle":{"type":"string","default":"代表あいさつ"},"leadText":{"type":"string","default":"テキストテキストテキストテキスト。\\nテキストテキストテキストテキストテキスト"},"bodyText":{"type":"string","default":"テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト\\nテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"},"imgUrl":{"type":"string","default":"https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?w=400&h=400&auto=format&fit=crop&q=80"},"imgAlt":{"type":"string","default":"代表の写真"},"captionSub":{"type":"string","default":"代表取締役"},"captionMain":{"type":"string","default":"山田太郎"},"colorMain":{"type":"string","default":"var(--color-main)"},"filterOpacity":{"type":"number","default":0.05},"maxWidth":{"type":"number","default":""}},"editorScript":"file:./lw-message-1.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-message-1","version":"1.0.0","title":"メッセージ 01","category":"lw-content","icon":"admin-comments","aiHint":{"description":"メッセージブロック。サブタイトル+見出し+リード+本文+画像。代表挨拶・想いに","excludeFromAutoSelect":false,"contentAttributes":["subTitle","mainTitle","leadText","bodyText"],"imageAttributes":["imgUrl"]},"supports":{"anchor":true},"attributes":{"subTitle":{"type":"string","default":"message"},"mainTitle":{"type":"string","default":"代表あいさつ"},"leadText":{"type":"string","default":"テキストテキストテキストテキスト。\\nテキストテキストテキストテキストテキスト"},"bodyText":{"type":"string","default":"テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト\\nテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"},"imgUrl":{"type":"string","default":"https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?w=400&h=400&auto=format&fit=crop&q=80"},"imgAlt":{"type":"string","default":"代表の写真"},"captionSub":{"type":"string","default":"代表取締役"},"captionMain":{"type":"string","default":"山田太郎"},"colorMain":{"type":"string","default":"var(--color-main)"},"filterOpacity":{"type":"number","default":0.05},"maxWidth":{"type":"number","default":""}},"editorScript":"file:./lw-message-1.js","no":1}');
 
 /***/ })
 

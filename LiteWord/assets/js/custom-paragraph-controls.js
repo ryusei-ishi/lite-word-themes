@@ -2,7 +2,7 @@
     const { hooks, components, blockEditor, element } = wp;
     const { addFilter } = hooks;
     const { InspectorControls } = blockEditor;
-    const { PanelBody, SelectControl, TextControl, RangeControl, ButtonGroup, Button } = components;
+    const { PanelBody, SelectControl, TextControl, RangeControl, __experimentalToggleGroupControl: ToggleGroupControl, __experimentalToggleGroupControlOption: ToggleGroupControlOption } = components;
     const { useState } = element;
 
     // 対象ブロック名を配列で定義
@@ -387,15 +387,15 @@
                             element.createElement(
                                 'div',
                                 { style: { marginBottom: '12px' } },
-                                element.createElement(ButtonGroup, null,
-                                    element.createElement(Button, {
-                                        isPressed: maxWidthUnit === 'px',
-                                        onClick: () => setAttributes({ maxWidthUnit: 'px' })
-                                    }, 'px'),
-                                    element.createElement(Button, {
-                                        isPressed: maxWidthUnit === '%',
-                                        onClick: () => setAttributes({ maxWidthUnit: '%' })
-                                    }, '%')
+                                element.createElement(ToggleGroupControl, {
+                                    value: maxWidthUnit,
+                                    onChange: (value) => setAttributes({ maxWidthUnit: value }),
+                                    isBlock: true,
+                                    __next40pxDefaultSize: true,
+                                    __nextHasNoMarginBottom: true
+                                },
+                                    element.createElement(ToggleGroupControlOption, { value: 'px', label: 'px' }),
+                                    element.createElement(ToggleGroupControlOption, { value: '%', label: '%' })
                                 )
                             ),
                             element.createElement(RangeControl, {
@@ -405,14 +405,18 @@
                                 min: 0,
                                 max: maxWidthUnit === 'px' ? 2000 : 100,
                                 step: maxWidthUnit === 'px' ? 10 : 5,
-                                help: maxWidthWithUnit || '未設定'
+                                help: maxWidthWithUnit || '未設定',
+                                __next40pxDefaultSize: true,
+                                __nextHasNoMarginBottom: true
                             }),
                             element.createElement(TextControl, {
                                 label: '直接入力',
                                 value: maxWidth,
                                 onChange: (value) => setAttributes({ maxWidth: value }),
                                 placeholder: `例: 600`,
-                                type: 'number'
+                                type: 'number',
+                                __next40pxDefaultSize: true,
+                                __nextHasNoMarginBottom: true
                             })
                         ),
 
@@ -425,6 +429,8 @@
                                 value: fontWeightClass,
                                 onChange: (value) => setAttributes({ fontWeightClass: value }),
                                 options: fontWeightOptions,
+                                __next40pxDefaultSize: true,
+                                __nextHasNoMarginBottom: true
                             })
                         ),
                         // フォントサイズセクション

@@ -1,0 +1,162 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "wdl/lw-pr-list-7",
+    "version":  "1.0.0",
+    "title":  "PR list 07",
+    "category":  "lw-list",
+    "icon":  "lightbulb",
+    "description":  "カスタマイズ可能なリストブロック",
+    "aiDescription":  "高機能なチェックリスト。枠線、背景、カラム数、アイコンなど細かくカスタマイズ可能。特徴一覧や対応サービスの列挙に最適。",
+    "aiNotes":  "このブロックは最も柔軟なリスト。colClassで1列/2列切替、iconUrlでカスタムアイコン設定可能。noBorderで枠線なしに。",
+    "aiHint": {
+        "description": "高機能チェックリスト。カラム分割+グループ化対応。カスタムアイコン可。特徴一覧・対応サービス列挙に",
+        "excludeFromAutoSelect": false,
+        "contentAttributes": ["listGroups"],
+        "imageAttributes": ["iconUrl"]
+    },
+    "supports":  {
+                     "anchor":  true
+                 },
+    "attributes":  {
+                       "fontLi":  {
+                                      "type":  "string",
+                                      "default":  "",
+                                      "ai_description":  "リストテキストのフォント"
+                                  },
+                       "fontWeightLi":  {
+                                            "type":  "string",
+                                            "default":  "",
+                                            "ai_description":  "リストテキストのフォントウェイト"
+                                        },
+                       "fontSizePc":  {
+                                          "type":  "number",
+                                          "default":  16,
+                                          "ai_description":  "テキストサイズPC（px）"
+                                      },
+                       "fontSizeSp":  {
+                                          "type":  "number",
+                                          "default":  -1,
+                                          "ai_description":  "テキストサイズSP（px）。-1でPCを継承"
+                                      },
+                       "textColor":  {
+                                         "type":  "string",
+                                         "default":  "",
+                                         "ai_description":  "テキスト色"
+                                     },
+                       "colorLiSvg":  {
+                                          "type":  "string",
+                                          "default":  "var(--color-main)",
+                                          "ai_description":  "チェックマーク色。var(--color-main)推奨"
+                                      },
+                       "iconUrl":  {
+                                       "type":  "string",
+                                       "default":  "",
+                                       "ai_description":  "カスタムアイコン画像URL。空でデフォルトチェックマーク"
+                                   },
+                       "iconSize":  {
+                                        "type":  "number",
+                                        "default":  1.2,
+                                        "ai_description":  "アイコンサイズ（em）。0.8～2.0"
+                                    },
+                       "bgColor":  {
+                                       "type":  "string",
+                                       "default":  "#fff",
+                                       "ai_description":  "背景色"
+                                   },
+                       "colClass":  {
+                                        "type":  "string",
+                                        "default":  "clm_1",
+                                        "ai_description":  "カラム数クラス。\u0027clm_1\u0027（1列）/\u0027clm_2\u0027（2列）"
+                                    },
+                       "columnWidths":  {
+                                            "type":  "array",
+                                            "default":  [
+                                                            1,
+                                                            2
+                                                        ],
+                                            "ai_description":  "各カラムの幅比率（fr単位の配列）。例: [1,2]で1:2の比率"
+                                        },
+                       "columnWidthsSp":  {
+                                              "type":  "array",
+                                              "default":  [
+
+                                                          ],
+                                              "ai_description":  "SP時の各カラムの幅比率。空でPCを継承"
+                                          },
+                       "innerRowGapPc":  {
+                                             "type":  "number",
+                                             "default":  20,
+                                             "ai_description":  "カラム間の行間隔PC（px）"
+                                         },
+                       "innerColumnGapPc":  {
+                                                "type":  "number",
+                                                "default":  20,
+                                                "ai_description":  "カラム間の列間隔PC（px）"
+                                            },
+                       "innerRowGapSp":  {
+                                             "type":  "number",
+                                             "default":  -1,
+                                             "ai_description":  "カラム間の行間隔SP（px）。-1でPCを継承"
+                                         },
+                       "innerColumnGapSp":  {
+                                                "type":  "number",
+                                                "default":  -1,
+                                                "ai_description":  "カラム間の列間隔SP（px）。-1でPCを継承"
+                                            },
+                       "rowGapPc":  {
+                                        "type":  "number",
+                                        "default":  20,
+                                        "ai_description":  "リスト内の行間隔PC（px）"
+                                    },
+                       "columnGapPc":  {
+                                           "type":  "number",
+                                           "default":  20,
+                                           "ai_description":  "リスト内の列間隔PC（px）"
+                                       },
+                       "rowGapSp":  {
+                                        "type":  "number",
+                                        "default":  -1,
+                                        "ai_description":  "リスト内の行間隔SP（px）。-1でPCを継承"
+                                    },
+                       "columnGapSp":  {
+                                           "type":  "number",
+                                           "default":  -1,
+                                           "ai_description":  "リスト内の列間隔SP（px）。-1でPCを継承"
+                                       },
+                       "listGroups":  {
+                                          "type":  "array",
+                                          "default":  [
+                                                          {
+                                                              "contents":  [
+                                                                               {
+                                                                                   "text":  "リストテキスト1"
+                                                                               },
+                                                                               {
+                                                                                   "text":  "リストテキスト2"
+                                                                               },
+                                                                               {
+                                                                                   "text":  "リストテキスト3"
+                                                                               }
+                                                                           ]
+                                                          },
+                                                          {
+                                                              "contents":  [
+                                                                               {
+                                                                                   "text":  "リストテキスト1"
+                                                                               },
+                                                                               {
+                                                                                   "text":  "リストテキスト2"
+                                                                               },
+                                                                               {
+                                                                                   "text":  "リストテキスト3"
+                                                                               }
+                                                                           ]
+                                                          }
+                                                      ],
+                                          "ai_description":  "リストグループ配列。各グループがcontents配列を持つ"
+                                      }
+                   },
+    "editorScript":  "file:./lw-pr-list-7.js",
+    "no":  7
+}

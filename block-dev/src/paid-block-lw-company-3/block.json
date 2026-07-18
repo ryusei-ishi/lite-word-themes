@@ -6,16 +6,16 @@
 	"title": "会社概要 03",
 	"category": "lw-table",
 	"icon": "building",
+	"aiHint": {
+		"description": "会社概要テーブル（カラー装飾dt）。メインカラー背景の項目名+内容。モダンなデザイン",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
 	"editorScript": "file:./paid-block-lw-company-3.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 3,
 	"attributes": {
 		"maxWidth": {

@@ -50,8 +50,9 @@ registerBlockType(metadata.name, {
 
         // voices 配列の要素を更新
         const updateVoice = (index, key, value) => {
-            const updated = [...voices];
-            updated[index][key] = value;
+            const updated = voices.map((item, i) =>
+                i === index ? { ...item, [key]: value } : item
+            );
             setAttributes({ voices: updated });
         };
 

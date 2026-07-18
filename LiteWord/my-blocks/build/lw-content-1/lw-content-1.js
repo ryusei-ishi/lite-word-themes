@@ -107,7 +107,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         });
       }
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30EA\u30F3\u30AF\u8A2D\u5B9A"
+      title: "\u57FA\u672C\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
       label: "\u65B0\u898F\u30BF\u30D6\u3067\u958B\u304F",
       checked: linkTarget === '_blank',
@@ -173,7 +173,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30EA\u30F3\u30AF\u30DC\u30BF\u30F3\u306E\u8272\u8A2D\u5B9A"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u80CC\u666F\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: linkButtonBackgroundColor,
       onChange: function onChange(color) {
@@ -1007,7 +1007,7 @@ module.exports = window["wp"]["components"];
   \*************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-content-1","version":"1.0.0","title":"Content 1","category":"lw-content","icon":"format-image","editorScript":"file:./lw-content-1.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"imageUrl":{"type":"string","default":"https://picsum.photos/1000/1000?random=1"},"imageAlt":{"type":"string","default":""},"title":{"type":"string","source":"html","selector":".lw-content-1__text h3","default":"タイトルテキスト"},"content":{"type":"string","source":"html","selector":".lw-content-1__text p","default":"テキストテキストテキストテキスト\\nテキストテキストテキストテキストテキストテキスト"},"linkUrl":{"type":"string","default":""},"linkText":{"type":"string","default":"詳細はこちら"},"linkTarget":{"type":"string","default":""},"titleFontSet":{"type":"string","default":""},"titleFontWeight":{"type":"string","default":""},"contentFontSet":{"type":"string","default":""},"contentFontWeight":{"type":"string","default":""},"linkFontSet":{"type":"string","default":""},"linkFontWeight":{"type":"string","default":""},"imagePosition":{"type":"string","default":"left"},"linkButtonBackgroundColor":{"type":"string","default":"var(--color-accent)"},"linkButtonTextColor":{"type":"string","default":"#fff"}},"no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-content-1","version":"1.0.0","title":"Content 1","category":"lw-content","icon":"format-image","editorScript":"file:./lw-content-1.js","aiHint":{"description":"画像+テキスト2カラム。左右に画像とテキスト（h3+説明+リンクボタン）。サービス紹介・強みの説明に","excludeFromAutoSelect":false,"contentAttributes":["title","content","linkText","linkUrl"],"imageAttributes":["imageUrl"]},"supports":{"anchor":true},"attributes":{"imageUrl":{"type":"string","default":"https://picsum.photos/1000/1000?random=1","aiHint":{"role":"image","note":"サービス・業種に合った画像URL"}},"imageAlt":{"type":"string","default":"","aiHint":{"role":"alt","contentGuide":"画像の説明","example":"施術の様子"}},"title":{"type":"string","source":"html","selector":".lw-content-1__text h3","default":"タイトルテキスト","aiHint":{"role":"heading","contentGuide":"h3見出し。5〜20文字","example":"経験豊富なスタッフが対応"}},"content":{"type":"string","source":"html","selector":".lw-content-1__text p","default":"テキストテキストテキストテキスト\\nテキストテキストテキストテキストテキストテキスト","aiHint":{"role":"body","contentGuide":"説明文。30〜100文字。改行可","example":"10年以上の経験を持つプロが\\nあなたの悩みに寄り添います"}},"linkUrl":{"type":"string","default":"","aiHint":{"role":"url","contentGuide":"詳細ページURL。省略可"}},"linkText":{"type":"string","default":"詳細はこちら","aiHint":{"role":"button","contentGuide":"リンクテキスト。4〜10文字","example":"詳しく見る"}},"linkTarget":{"type":"string","default":"","aiHint":{"skip":true}},"titleFontSet":{"type":"string","default":"","aiHint":{"skip":true}},"titleFontWeight":{"type":"string","default":"","aiHint":{"skip":true}},"contentFontSet":{"type":"string","default":"","aiHint":{"skip":true}},"contentFontWeight":{"type":"string","default":"","aiHint":{"skip":true}},"linkFontSet":{"type":"string","default":"","aiHint":{"skip":true}},"linkFontWeight":{"type":"string","default":"","aiHint":{"skip":true}},"imagePosition":{"type":"string","default":"left","aiHint":{"skip":true}},"linkButtonBackgroundColor":{"type":"string","default":"var(--color-accent)","aiHint":{"skip":true}},"linkButtonTextColor":{"type":"string","default":"#fff","aiHint":{"skip":true}}},"no":1}');
 
 /***/ })
 

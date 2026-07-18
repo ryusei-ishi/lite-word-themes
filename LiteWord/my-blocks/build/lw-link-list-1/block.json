@@ -9,87 +9,41 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "リンクリスト。タイトル+ボタン型リンク一覧。SNSリンクやナビゲーション向け。2カラムグリッド",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["titleText", "titleBottomText", "contents"],
+		"imageAttributes": ["backgroundImage"]
+	},
 	"attributes": {
-		"MaxWidth": {
-			"type": "number",
-			"default": 800
-		},
-		"BtnGap": {
-			"type": "number",
-			"default": 12
-		},
-		"BtnClm": {
-			"type": "number",
-			"default": 2
-		},
-		"BtnClmSp": {
-			"type": "number",
-			"default": 1
-		},
-		"backgroundSwitch": {
-			"type": "boolean",
-			"default": true
-		},
-		"backgroundImage": {
-			"type": "string",
-			"default": ""
-		},
-		"bgGradient": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"colorLiBgOpacity": {
-			"type": "number",
-			"default": 100
-		},
-		"filterOpacity": {
-			"type": "number",
-			"default": 0.9
-		},
-		"ListBorderRadius": {
-			"type": "number",
-			"default": 2
-		},
-		"hideTitle": {
-			"type": "boolean",
-			"default": false
-		},
+		"MaxWidth": { "type": "number", "default": 800, "aiHint": { "skip": true } },
+		"BtnGap": { "type": "number", "default": 12, "aiHint": { "skip": true } },
+		"BtnClm": { "type": "number", "default": 2, "aiHint": { "skip": true } },
+		"BtnClmSp": { "type": "number", "default": 1, "aiHint": { "skip": true } },
+		"backgroundSwitch": { "type": "boolean", "default": true, "aiHint": { "skip": true } },
+		"backgroundImage": { "type": "string", "default": "", "aiHint": { "role": "image", "note": "背景画像URL。省略可" } },
+		"bgGradient": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"colorLiBgOpacity": { "type": "number", "default": 100, "aiHint": { "skip": true } },
+		"filterOpacity": { "type": "number", "default": 0.9, "aiHint": { "skip": true } },
+		"ListBorderRadius": { "type": "number", "default": 2, "aiHint": { "skip": true } },
+		"hideTitle": { "type": "boolean", "default": false, "aiHint": { "skip": true } },
 		"titleText": {
 			"type": "string",
-			"default": "Information"
+			"default": "Information",
+			"aiHint": { "role": "heading", "contentGuide": "リストのタイトル。英語推奨。3〜15文字", "example": "SNS" }
 		},
 		"titleBottomText": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "role": "subheading", "contentGuide": "タイトル下の補足テキスト。省略可", "example": "フォローしてね" }
 		},
-		"fontLi": {
-			"type": "string",
-			"default": ""
-		},
-		"fontWeightLi": {
-			"type": "string",
-			"default": ""
-		},
-		"colorLiSvg": {
-			"type": "string",
-			"default": "#ffffff"
-		},
-		"colorLiBg": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"colorLiText": {
-			"type": "string",
-			"default": "#ffffff"
-		},
-		"colorLiBorder": {
-			"type": "string",
-			"default": "#ffffff"
-		},
-		"ListBorderSize": {
-			"type": "number",
-			"default": 2
-		},
+		"fontLi": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"fontWeightLi": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"colorLiSvg": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
+		"colorLiBg": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"colorLiText": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
+		"colorLiBorder": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
+		"ListBorderSize": { "type": "number", "default": 2, "aiHint": { "skip": true } },
 		"contents": {
 			"type": "array",
 			"source": "query",
@@ -114,35 +68,14 @@
 				}
 			},
 			"default": [
-				{
-					"text": "ホームページ",
-					"link": "",
-					"icon": ""
-				},
-				{
-					"text": "Instagram",
-					"link": "",
-					"icon": ""
-				},
-				{
-					"text": "YouTube",
-					"link": "",
-					"icon": ""
-				},
-				{
-					"text": "FaceBook",
-					"link": "",
-					"icon": ""
-				}
-			]
+				{ "text": "ホームページ", "link": "", "icon": "" },
+				{ "text": "Instagram", "link": "", "icon": "" },
+				{ "text": "YouTube", "link": "", "icon": "" },
+				{ "text": "FaceBook", "link": "", "icon": "" }
+			],
+			"aiHint": { "role": "list", "contentGuide": "リンク項目。2〜6個。各要素にtext(リンク名)とlink(URL)を設定", "example": [{"text": "Instagram", "link": "https://instagram.com/xxx"}] }
 		}
 	},
 	"editorScript": "file:./lw-link-list-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 1
 }

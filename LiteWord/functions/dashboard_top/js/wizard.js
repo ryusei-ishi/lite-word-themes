@@ -1339,7 +1339,7 @@
             });
         },
 
-        // 子ページにする（1つ上のページの子に）
+        // 子ページにする（適切な親の子に）
         indentPage: function($item) {
             const $prev = $item.prev('.lw-page-item');
             if ($prev.length === 0) {
@@ -1352,10 +1352,20 @@
                 return;
             }
 
-            const prevId = $prev.data('id');
-            const newDepth = currentDepth + 1;
+            const prevDepth = parseInt($prev.attr('data-depth')) || 0;
+            let newParent, newDepth;
 
-            $item.attr('data-parent', prevId);
+            if (prevDepth <= currentDepth) {
+                // 直前のアイテムが同じか浅い → そのアイテムを親にする
+                newParent = $prev.data('id');
+                newDepth = prevDepth + 1;
+            } else {
+                // 直前のアイテムが深い → そのアイテムと同じ親を持つ（兄弟になる）
+                newParent = parseInt($prev.attr('data-parent')) || 0;
+                newDepth = prevDepth;
+            }
+
+            $item.attr('data-parent', newParent);
             $item.attr('data-depth', newDepth);
             PagesModal.updateItemDisplay($item, newDepth);
             PagesModal.saveAllPages();
@@ -2299,26 +2309,170 @@
         }
     };
 
+    // デバッグ用：タイムスタンプ付きログ
+    var lwDebugStart = performance.now();
+    function lwDebug(message, data) {
+        var elapsed = (performance.now() - lwDebugStart).toFixed(2);
+        var logMsg = '[LW Wizard ' + elapsed + 'ms] ' + message;
+        if (data !== undefined) {
+            console.log(logMsg, data);
+        } else {
+            console.log(logMsg);
+        }
+    }
+
+    lwDebug('wizard.js 読み込み開始');
+
+    // ウィザードステップの強制再描画（ネット環境が悪い場合の表示問題対策）
+    function forceWizardRepaint() {
+        lwDebug('forceWizardRepaint() 実行');
+
+        var $steps = $('.lw-wizard-steps');
+        var $content = $('.lw-dashboard-content');
+        var $wrappers = $('.lw-wizard-step-wrapper');
+
+        lwDebug('要素検出', {
+            steps: $steps.length,
+            content: $content.length,
+            wrappers: $wrappers.length
+        });
+
+        if ($steps.length === 0) {
+            lwDebug('警告: .lw-wizard-steps が見つかりません');
+            return;
+        }
+
+        // 方法1: offsetHeightを読み取って再描画を強制
+        $steps[0].offsetHeight;
+
+        // 方法2: スタイルを一時的に変更して再描画を強制
+        $steps.css('opacity', '0.99');
+        setTimeout(function() {
+            $steps.css('opacity', '1');
+        }, 10);
+
+        // 方法3: 各ステップ要素も強制再描画
+        $wrappers.each(function() {
+            this.offsetHeight;
+        });
+
+        // 方法4: transformを使った強制再描画
+        $content.css('transform', 'translateZ(0)');
+        setTimeout(function() {
+            $content.css('transform', '');
+        }, 50);
+
+        // 方法5: displayを一時的に変更（最も強力）
+        $wrappers.css('display', 'none');
+        setTimeout(function() {
+            $wrappers.css('display', '');
+            // 再度offsetHeight
+            if ($steps.length) $steps[0].offsetHeight;
+        }, 1);
+
+        // 方法6: 強制的にサイズを再計算
+        $wrappers.each(function() {
+            var $el = $(this);
+            var h = $el.height();
+            $el.css('min-height', h + 'px');
+        });
+
+        lwDebug('forceWizardRepaint() 完了');
+    }
+
     // DOM Ready
     $(function() {
+        lwDebug('=== DOM Ready 開始 ===');
+
+        lwDebug('Modal.init() 開始');
         Modal.init();
+        lwDebug('Modal.init() 完了');
+
+        lwDebug('SiteInfoModal.init() 開始');
         SiteInfoModal.init();
+        lwDebug('SiteInfoModal.init() 完了');
+
+        lwDebug('ColorFontModal.init() 開始');
         ColorFontModal.init();
+        lwDebug('ColorFontModal.init() 完了');
+
+        lwDebug('HeaderModal.init() 開始');
         HeaderModal.init();
+        lwDebug('HeaderModal.init() 完了');
+
+        lwDebug('FooterModal.init() 開始');
         FooterModal.init();
+        lwDebug('FooterModal.init() 完了');
+
+        lwDebug('PublishModal.init() 開始');
         PublishModal.init();
+        lwDebug('PublishModal.init() 完了');
+
+        lwDebug('ExtensionCheck.init() 開始');
         ExtensionCheck.init();
+        lwDebug('ExtensionCheck.init() 完了');
+
+        lwDebug('PagesModal.init() 開始');
         PagesModal.init();
+        lwDebug('PagesModal.init() 完了');
+
+        lwDebug('StepStatus.init() 開始');
         StepStatus.init();
+        lwDebug('StepStatus.init() 完了');
+
+        lwDebug('SecurityPluginModal.init() 開始');
         SecurityPluginModal.init();
+        lwDebug('SecurityPluginModal.init() 完了');
+
+        lwDebug('PermalinkModal.init() 開始');
         PermalinkModal.init();
+        lwDebug('PermalinkModal.init() 完了');
+
+        lwDebug('FaviconModal.init() 開始');
         FaviconModal.init();
+        lwDebug('FaviconModal.init() 完了');
+
+        lwDebug('PrivacyModal.init() 開始');
         PrivacyModal.init();
+        lwDebug('PrivacyModal.init() 完了');
+
         // 指示・コメント機能はプレミアム限定
         if (lwWizard.isPremium) {
+            lwDebug('InstructionsModal.init() 開始 (Premium)');
             InstructionsModal.init();
+            lwDebug('InstructionsModal.init() 完了');
+
+            lwDebug('TaskList.init() 開始 (Premium)');
             TaskList.init();
+            lwDebug('TaskList.init() 完了');
         }
+
+        lwDebug('=== 全init完了、再描画処理開始 ===');
+
+        // ウィザードステップの強制再描画（複数回実行で確実に）
+        forceWizardRepaint();
+        setTimeout(function() { lwDebug('100ms後 再描画'); forceWizardRepaint(); }, 100);
+        setTimeout(function() { lwDebug('300ms後 再描画'); forceWizardRepaint(); }, 300);
+        setTimeout(function() { lwDebug('500ms後 再描画'); forceWizardRepaint(); }, 500);
+        setTimeout(function() { lwDebug('1000ms後 再描画'); forceWizardRepaint(); }, 1000);
+
+        // フォント読み込み完了後にも再描画
+        if (document.fonts && document.fonts.ready) {
+            document.fonts.ready.then(function() {
+                lwDebug('フォント読み込み完了、再描画');
+                forceWizardRepaint();
+                setTimeout(forceWizardRepaint, 100);
+            });
+        }
+
+        // windowのloadイベントでも再描画
+        $(window).on('load', function() {
+            lwDebug('window.load イベント発火、再描画');
+            forceWizardRepaint();
+            setTimeout(forceWizardRepaint, 200);
+        });
+
+        lwDebug('=== DOM Ready 処理完了 ===');
 
         // プレミアムプラン紹介ポップアップ
         $('#lw-premium-plan-trigger').on('click', function() {

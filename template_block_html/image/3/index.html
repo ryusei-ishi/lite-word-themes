@@ -32,40 +32,24 @@
                 <div class="post_style page">
                     <div class="first_content"></div>
                         <!-- paid-block-fv-8 に Glide.js の構造を適用 -->
-                        <div class="paid-block-lw-gallery-03">
-                          <!-- ===== メイン用 Swiper ===== -->
-                          <div class="swiper lw-gallery_images_Swiper_main" data-slide-count="<?php echo esc_attr( $slide_count ); ?>">
-                              <div class="swiper-wrapper">
-                                  <?php foreach ( $images as $img ) : ?>
-                                      <div class="swiper-slide">
-                                          <img src="<?php echo esc_url( $img['full'] ); ?>" alt="">
-                                          <?php if ( ! empty( $img['figcaption'] ) ) : ?>
-                                              <figcaption><?php echo esc_html( $img['figcaption'] ); ?></figcaption>
-                                          <?php endif; ?>
-                                      </div>
-                                  <?php endforeach; ?>
-                              </div>
-
-                              <?php if ( $slide_count > 1 ) : // ← 1 枚以下ならナビボタンも不要 ?>
-                                  <div class="swiper-button-next"></div>
-                                  <div class="swiper-button-prev"></div>
-                              <?php endif; ?>
-                          </div><!-- /.case_images_Swiper2 -->
-
-                          <?php if ( $slide_count > 1 ) : ?>
-                              <!-- ===== サムネイル用 Swiper ===== -->
-                              <div class="swiper lw-gallery_images_Swiper_sub image_count_<?=$image_count?>" data-slide-count="<?php echo esc_attr( $slide_count ); ?>">
-                                  <div class="swiper-wrapper">
-                                      <?php foreach ( $images as $img ) : ?>
-                                          <?php if ( $img['thumb'] ) : ?>
-                                              <div class="swiper-slide">
-                                                  <img src="<?php echo esc_url( $img['thumb'] ); ?>" alt="">
-                                              </div>
-                                          <?php endif; ?>
-                                      <?php endforeach; ?>
-                                  </div>
-                              </div><!-- /.case_images_Swiper -->
-                          <?php endif; ?>
+                        <div class="lw-pr-image-1">
+                            <div class="lw-pr-image-1__wrap">
+                                <div class="lw-pr-image-1__item">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="lw-pr-image-1__item">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="lw-pr-image-1__item">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="lw-pr-image-1__item">
+                                    <img src="" alt="">
+                                </div>
+                                <div class="lw-pr-image-1__item">
+                                    <img src="" alt="">
+                                </div>
+                            </div>
                         </div>
                     <div class="last_content"></div>
                 </div>
@@ -124,3 +108,10 @@
 
 
 </script>
+
+
+
+
+<div class="lw-pr-waku-1">
+    <div class="custom_wrap"></div>
+</div>

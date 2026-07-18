@@ -92,7 +92,7 @@ registerBlockType(metadata.name, {
 
                 {/* --------------- サイドバー --------------- */}
                 <InspectorControls>
-                    <PanelBody title="下線の設定">
+                    <PanelBody title="枠線設定">
                         <RangeControl
                             label="線の太さ(px)"
                             value={underlineHeight}

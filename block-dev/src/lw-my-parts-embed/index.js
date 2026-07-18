@@ -17,7 +17,7 @@ import {
 	Button,
 } from '@wordpress/components';
 import { useSelect } from '@wordpress/data';
-import { RawHTML } from '@wordpress/element';
+import { RawHTML, useEffect } from '@wordpress/element';
 import { __ } from '@wordpress/i18n';
 import { external, seen, unseen } from '@wordpress/icons';
 import metadata from './block.json';
@@ -109,6 +109,47 @@ registerBlockType(metadata.name, {
 		const clearSelection = () =>
 			setAttributes( { partsId : 0, partsCat : 0 } );
 
+		/* --- プレビュー表示時にカスタムブロックのCSSを動的読み込み --- */
+		useEffect( () => {
+			if ( ! showPreview || ! selectedPart ) return;
+
+			const editorMode = selectedPart.editor_mode || 'normal';
+			if ( editorMode === 'code' ) return;
+
+			const rawContent = selectedPart.content?.raw || '';
+			const blockRegex = /<!-- wp:(wdl\/[a-z0-9-]+)/g;
+			let match;
+
+			while ( ( match = blockRegex.exec( rawContent ) ) !== null ) {
+				const slug = match[ 1 ].replace( 'wdl/', '' );
+				const baseUrl = `${ MyThemeSettings.themeUrl }/my-blocks/build/${ slug }`;
+
+				[ 'style', 'editor' ].forEach( ( type ) => {
+					const id = `wdl-preview-${ slug }-${ type }`;
+					if ( document.getElementById( id ) ) return;
+
+					const link = document.createElement( 'link' );
+					link.id = id;
+					link.rel = 'stylesheet';
+					link.href = `${ baseUrl }/${ type }.css`;
+					document.head.appendChild( link );
+
+					// iframe エディタにも注入
+					document.querySelectorAll( 'iframe[name="editor-canvas"]' ).forEach( ( iframe ) => {
+						try {
+							const doc = iframe.contentDocument;
+							if ( doc && doc.head && ! doc.getElementById( id ) ) {
+								const iLink = link.cloneNode();
+								doc.head.appendChild( iLink );
+							}
+						} catch ( e ) {
+							console.warn( '[lw-my-parts-embed] CSS injection failed:', slug, e.message );
+						}
+					} );
+				} );
+			}
+		}, [ showPreview, selectedPart ] );
+
 		/* --- プレビュー用のコンテンツを生成 ---------------- */
 		const renderPreview = () => {
 			if ( ! selectedPart ) {
@@ -119,24 +160,33 @@ registerBlockType(metadata.name, {
 			const customHtml = selectedPart.custom_html || '';
 			const customCss = selectedPart.custom_css || '';
 			const postContent = selectedPart.content?.rendered || '';
+			const previewHtml = selectedPart.preview_html || '';
 			const fullWidth = selectedPart.full_width === 'on';
 
 			// コードエディタモード
 			if ( editorMode === 'code' ) {
+				const htmlContent = customHtml || previewHtml;
+				if ( ! htmlContent ) {
+					return <p style={{ color: '#94a3b8', padding: '16px', textAlign: 'center' }}>コンテンツが空です</p>;
+				}
 				return (
 					<div className={ fullWidth ? 'lw_width_full_on' : '' }>
 						{ customCss && (
 							<style>{ customCss }</style>
 						) }
-						<div dangerouslySetInnerHTML={ { __html: customHtml } } />
+						<div dangerouslySetInnerHTML={ { __html: htmlContent } } />
 					</div>
 				);
 			}
 
-			// 通常モード
+			// 通常モード: content.rendered が空ならpreview_htmlをフォールバック
+			const displayContent = postContent || previewHtml;
+			if ( ! displayContent ) {
+				return <p style={{ color: '#94a3b8', padding: '16px', textAlign: 'center' }}>コンテンツが空です</p>;
+			}
 			return (
 				<div className={ fullWidth ? 'lw_width_full_on' : '' }>
-					<div dangerouslySetInnerHTML={ { __html: postContent } } />
+					<div dangerouslySetInnerHTML={ { __html: displayContent } } />
 				</div>
 			);
 		};

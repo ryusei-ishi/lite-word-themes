@@ -10,8 +10,8 @@
     const { dispatch, select } = wp.data;
     const { createBlock } = wp.blocks;
 
-    // デバッグモード
-    const LW_AI_GENERATOR_DEBUG = true;
+    // デバッグモード（本番環境ではfalse）
+    const LW_AI_GENERATOR_DEBUG = false;
 
     /**
      * デバッグログ出力
@@ -117,10 +117,19 @@
             // エディタにブロックを挿入
             dispatch('core/block-editor').insertBlocks(blocks);
 
+            // 挿入されたブロックのclientIdを取得
+            const insertedClientIds = blocks.map(block => block.clientId);
+
             const result = {
                 success: true,
                 message: `${blocks.length}個のブロックを挿入しました`,
-                insertedCount: blocks.length
+                insertedCount: blocks.length,
+                clientIds: insertedClientIds,
+                blocks: blocks.map(block => ({
+                    clientId: block.clientId,
+                    name: block.name,
+                    attributes: block.attributes
+                }))
             };
 
             lw_ai_generator_log('Insertion complete:', result);
@@ -132,13 +141,31 @@
             const result = {
                 success: false,
                 message: 'ブロックの生成に失敗しました: ' + error.message,
-                insertedCount: 0
+                insertedCount: 0,
+                clientIds: [],
+                blocks: []
             };
 
             lw_ai_generator_log('Insertion failed:', error);
             lw_ai_generator_showNotice('error', result.message);
 
             return result;
+        }
+    }
+
+    /**
+     * ブロックの属性を更新
+     * @param {string} clientId - ブロックのclientId
+     * @param {Object} attributes - 更新する属性
+     */
+    function lw_ai_generator_updateBlockAttributes(clientId, attributes) {
+        try {
+            dispatch('core/block-editor').updateBlockAttributes(clientId, attributes);
+            lw_ai_generator_log('Block attributes updated:', { clientId, attributes });
+            return true;
+        } catch (error) {
+            lw_ai_generator_log('Failed to update block attributes:', error);
+            return false;
         }
     }
 
@@ -178,6 +205,7 @@
         isBlockRegistered: lw_ai_generator_isBlockRegistered,
         validateAttributes: lw_ai_generator_validateAttributes,
         getRegisteredBlocks: lw_ai_generator_getRegisteredBlocks,
+        updateBlockAttributes: lw_ai_generator_updateBlockAttributes,
         showNotice: lw_ai_generator_showNotice,
         log: lw_ai_generator_log
     };

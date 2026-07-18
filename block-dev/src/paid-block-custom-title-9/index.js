@@ -73,7 +73,7 @@ registerBlockType(metadata.name, {
                 {/* サイドバー */}
                 <InspectorControls>
                     {/* サイズ選択を最上部に配置 */}
-                    <PanelBody title="サイズ設定" initialOpen>
+                    <PanelBody title="レイアウト設定" initialOpen>
                         <RadioControl
                             label="サイズ"
                             selected={ sizeClass }
@@ -86,7 +86,7 @@ registerBlockType(metadata.name, {
                         />
                     </PanelBody>
 
-                    <PanelBody title="カラー設定" initialOpen>
+                    <PanelBody title="色設定" initialOpen>
                         <p>メインタイトルカラー</p>
                         <ColorPalette
                             value={ mainTitleColor }
@@ -106,7 +106,7 @@ registerBlockType(metadata.name, {
                         />
                     </PanelBody>
 
-                    <PanelBody title="デザイン詳細" initialOpen>
+                    <PanelBody title="その他設定" initialOpen>
                         <RangeControl
                             label="上ボーダー透明度（%）"
                             min={ 0 } max={ 100 } step={ 0.1 }

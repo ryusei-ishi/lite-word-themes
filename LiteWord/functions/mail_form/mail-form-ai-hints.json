@@ -1,0 +1,561 @@
+{
+	"_meta": {
+		"description": "LiteWordメールフォーム機能のAI向けメタ情報。管理画面の設定項目・フォームの仕組み・ショートコード・送信処理をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21"
+	},
+
+	"overview": {
+		"aiDescription": "LiteWordテーマに内蔵されたお問い合わせフォーム機能。プラグイン不要で、管理画面「Lwお問い合わせ」から複数のフォームを作成・管理できる。フォームはショートコードで任意のページに設置する。送信はAjax（非同期）で行われ、ページ遷移なしで完了通知を表示する。reCAPTCHA v3対応、画像アップロード対応、受信履歴のDB保存・CSV出力にも対応。",
+		"adminMenuLocation": "WordPress管理画面の左メニュー「Lwお問い合わせ」（dashicons-email アイコン、メニュー位置22番）",
+		"requiredCapability": "manage_options（管理者権限）",
+		"entryPoint": "functions/mail_form/index.php（functions.phpから読み込まれる）",
+		"shortcode": "[lw_mail_form_select id=\"1\"]",
+		"maxForms": {
+			"free": 10,
+			"premium": 40
+		}
+	},
+
+	"adminPages": {
+		"formList": {
+			"title": "フォーム一覧",
+			"file": "form_list.php",
+			"url": "admin.php?page=lw_mail_form_set",
+			"aiDescription": "作成可能な全フォーム（無料版10個/プレミアム版40個）を一覧表示する画面。各フォームに対して有効/無効の切り替え（トグルスイッチ）、設定画面へのリンク、受信履歴へのリンク（プレミアム版のみ）、ショートコードのコピー機能を提供する。",
+			"features": {
+				"toggleSwitch": {
+					"aiDescription": "各フォームの有効/無効をAjaxで即座に切り替えられるトグルスイッチ。無効にしたフォームはフロントエンドで「現在ご利用いただけません」と表示され、送信ボタンもdisabledになる。",
+					"optionKey": "lw_mail_form_status_{フォーム番号}",
+					"defaultValue": "on"
+				},
+				"memo": {
+					"aiDescription": "各フォームにメモを残せるテキストエリア。フォームの用途や設置場所を管理者が記録するために使う。",
+					"premiumOnly": true,
+					"optionKey": "lw_mail_form_memo_{フォーム番号}"
+				},
+				"shortcodeCopy": {
+					"aiDescription": "ショートコードをクリックでコピーできる機能。コピー後にalertで通知する。",
+					"format": "[lw_mail_form_select id=\"{フォーム番号}\"]"
+				}
+			},
+			"userGuide": "フォームを使うには、まず一覧画面からフォーム番号を選んで設定し、表示されるショートコードをコピーして固定ページや投稿に貼り付ける。フォームは最大10個（プレミアムは40個）作成できる。"
+		},
+
+		"formSet": {
+			"title": "フォームの項目設定",
+			"file": "form_set.php",
+			"url": "admin.php?page=lw_mail_form_set&form_set={フォーム番号}",
+			"aiDescription": "フォームの入力項目（フィールド）を追加・編集・削除・並び替えする画面。項目はJSON形式でwp_optionsに保存される。ドラッグ&ドロップでの並び替え、全て開く/閉じるの一括操作に対応。",
+			"optionKey": "lw_mail_form_set_{フォーム番号}",
+			"storageFormat": "JSON文字列（配列）",
+			"defaultFields": [
+				{
+					"select_pattern": "name",
+					"required": true,
+					"label_text": "お名前",
+					"supplement_text": "例）山田太郎",
+					"shortcode": "your_name"
+				},
+				{
+					"select_pattern": "email",
+					"required": true,
+					"label_text": "メールアドレス",
+					"supplement_text": "例）sample@gmail.com",
+					"shortcode": "your_mail"
+				},
+				{
+					"select_pattern": "textarea",
+					"required": false,
+					"label_text": "お問合せ内容",
+					"shortcode": "your_message"
+				}
+			],
+			"fieldTypes": {
+				"name": {
+					"label": "お名前",
+					"aiDescription": "名前入力用のテキストフィールド。HTMLではinput[type=text]として出力される。",
+					"htmlOutput": "<input type=\"text\">"
+				},
+				"phone": {
+					"label": "電話番号",
+					"aiDescription": "電話番号入力用のテキストフィールド。HTMLではinput[type=text]として出力される。",
+					"htmlOutput": "<input type=\"text\">"
+				},
+				"email": {
+					"label": "メールアドレス",
+					"aiDescription": "メールアドレス入力用のテキストフィールド。HTMLではinput[type=text]として出力される。サンクスメールの送信先として [your_mail] ショートコードで参照される。",
+					"htmlOutput": "<input type=\"text\">"
+				},
+				"text": {
+					"label": "１行テキスト",
+					"aiDescription": "汎用的な1行テキスト入力フィールド。",
+					"htmlOutput": "<input type=\"text\">"
+				},
+				"textarea": {
+					"label": "テキストエリア",
+					"aiDescription": "複数行のテキスト入力フィールド。お問い合わせ内容や備考欄に使う。",
+					"htmlOutput": "<textarea>"
+				},
+				"radio": {
+					"label": "ラジオボタン",
+					"aiDescription": "単一選択のラジオボタン。選択肢は「選択肢」フィールドに改行区切りで入力する。",
+					"htmlOutput": "<input type=\"radio\">",
+					"requiresOptions": true
+				},
+				"checkbox": {
+					"label": "チェックボックス",
+					"aiDescription": "複数選択のチェックボックス。選択肢は改行区切りで入力。必須設定時は最低1つの選択が必要（JavaScriptで制御）。送信時はname属性に[]が付加される。",
+					"htmlOutput": "<input type=\"checkbox\">",
+					"requiresOptions": true
+				},
+				"select": {
+					"label": "セレクトボックス",
+					"aiDescription": "ドロップダウン形式の単一選択。選択肢は改行区切りで入力する。",
+					"htmlOutput": "<select>",
+					"requiresOptions": true
+				},
+				"image": {
+					"label": "画像アップロード",
+					"aiDescription": "画像ファイルのアップロードフィールド。JPEG/PNG/GIF対応。選択後に即座にプレビューが表示される。送信時はwp_handle_upload()でWordPressのuploadsディレクトリに保存され、URLが値として記録される。",
+					"htmlOutput": "<input type=\"file\" accept=\".jpg,.jpeg,.png,.gif,image/*\">",
+					"maxPreviewWidth": "480px"
+				},
+				"date": {
+					"label": "日付",
+					"aiDescription": "日付入力フィールド。ブラウザのネイティブ日付ピッカーを使用する。",
+					"htmlOutput": "<input type=\"date\">"
+				},
+				"time": {
+					"label": "時間",
+					"aiDescription": "時刻入力フィールド。ブラウザのネイティブ時刻ピッカーを使用する。",
+					"htmlOutput": "<input type=\"time\">"
+				}
+			},
+			"fieldSettings": {
+				"select_pattern": {
+					"aiDescription": "フィールドの種類を選択する。上記fieldTypesの中から選ぶ。",
+					"userGuide": "フォームに追加したい入力欄の種類を選ぶ。お問い合わせフォームなら「お名前」「メールアドレス」「テキストエリア」が基本セット。"
+				},
+				"label_text": {
+					"aiDescription": "フォームに表示されるフィールドのラベル（項目タイトル）。HTMLの<label>タグ内に出力される。改行可能（brSt関数で<br>に変換）。",
+					"userGuide": "ユーザーに表示される項目名。分かりやすい日本語で入力する。"
+				},
+				"required": {
+					"aiDescription": "必須項目かどうかのチェックボックス。ONにするとHTML5のrequired属性が付与され、「必須」バッジが表示される。OFFなら「任意」バッジが表示される。",
+					"userGuide": "チェックを入れると必須入力になり、未入力で送信しようとするとブラウザが警告を出す。"
+				},
+				"option": {
+					"aiDescription": "ラジオボタン・チェックボックス・セレクトボックスの選択肢。改行区切りで入力する。これらのタイプ選択時のみ表示される。",
+					"userGuide": "1行に1つの選択肢を入力する。例：「プランA（改行）プランB（改行）プランC」"
+				},
+				"supplement_text": {
+					"aiDescription": "フィールドの下に表示される補足テキスト。入力例や注意事項を記載するのに使う。改行可能。",
+					"userGuide": "入力例を表示したい時に使う。例：「例）山田太郎」"
+				},
+				"placeholder": {
+					"aiDescription": "入力欄内に薄いグレーで表示されるヒントテキスト（HTMLのplaceholder属性）。text/textarea/name/email/phoneタイプで有効。",
+					"userGuide": "入力欄に薄く表示されるヒント文。入力を開始すると消える。"
+				},
+				"shortcode": {
+					"aiDescription": "この項目の入力値をサンクスメールや受信メールで参照するためのショートコード名。[ショートコード名]の形式でメールテンプレート内で使う。自動生成されるが手動で変更も可能（例：your_name, your_mail, your_message）。",
+					"userGuide": "サンクスメールの本文で [your_name] のように使うと、ユーザーが入力した値に置き換わる。メールアドレスの項目は [your_mail] に設定しておくとサンクスメールの送信先として使える。"
+				}
+			},
+			"userGuide": "フォームの入力項目を自由に追加・削除・並び替えできる。項目を追加したら、タイプ・ラベル・必須/任意・ショートコード名を設定する。ショートコードはサンクスメールで入力値を参照するために使う。ドラッグ&ドロップで順番を入れ替え可能。"
+		},
+
+		"formSendButton": {
+			"title": "送信ボタン設定",
+			"file": "form_send_button.php",
+			"url": "admin.php?page=lw_mail_form_set&form_send_button={フォーム番号}",
+			"aiDescription": "送信ボタンに表示されるテキストをカスタマイズする画面。",
+			"settings": {
+				"subject_button": {
+					"aiDescription": "送信ボタンに表示されるテキスト。",
+					"optionKey": "form_send_set_{フォーム番号}_subject_button",
+					"defaultValue": "送信する",
+					"userGuide": "ボタンのテキストを変更できる。例：「無料相談を申し込む」「資料請求する」など、用途に合わせて変更するとCVRが上がりやすい。"
+				}
+			}
+		},
+
+		"formSendSet": {
+			"title": "受信メール設定",
+			"file": "form_send_set.php",
+			"url": "admin.php?page=lw_mail_form_set&form_send_set={フォーム番号}",
+			"aiDescription": "フォーム送信時にサイト管理者に届く通知メールの設定画面。件名・送信先・送信元の名前とメールアドレスを設定する。メール本文はシステムが自動生成する（HTML形式でフィールド名と入力値をラベル付きで表示）。",
+			"settings": {
+				"subject": {
+					"aiDescription": "管理者に届くメールの件名。",
+					"optionKey": "form_send_set_{フォーム番号}_subject",
+					"defaultValue": "{サイト名}のホームページからお問い合わせがありました。",
+					"userGuide": "受信したとき一目で分かる件名にする。例：「ホームページからお問い合わせがありました！」"
+				},
+				"to_mail": {
+					"aiDescription": "メールの送信先アドレス。カンマ区切りで複数指定可能。",
+					"optionKey": "form_send_set_{フォーム番号}_to_mail",
+					"defaultValue": "WordPressの管理者メールアドレス",
+					"userGuide": "フォームの送信内容を受け取るメールアドレスを入力する。複数人で受け取る場合はカンマで区切る。例：info@example.com,sales@example.com"
+				},
+				"from_name": {
+					"aiDescription": "メールの送信者名。受信者のメーラーに表示される。",
+					"optionKey": "form_send_set_{フォーム番号}_from_name",
+					"defaultValue": "{サイト名}",
+					"userGuide": "メールの差出人名として表示される。会社名やサイト名を入力する。"
+				},
+				"from_mail": {
+					"aiDescription": "メールの送信元アドレス。受信者が返信する際の宛先になる。自サイトのドメインと一致させないと迷惑メール扱いされる可能性がある。",
+					"optionKey": "form_send_set_{フォーム番号}_from_mail",
+					"defaultValue": "wordpress@{サイトドメイン}",
+					"userGuide": "送信元のメールアドレスを入力する。自サイトのドメインと一致するアドレス（info@自サイトドメイン等）を使うと迷惑メールになりにくい。"
+				}
+			},
+			"userGuide": "ここで設定するのは「管理者が受け取る通知メール」の設定。お客様への自動返信メール（サンクスメール）は別のタブで設定する。"
+		},
+
+		"formConsentSet": {
+			"title": "同意・規約などの設定",
+			"file": "form_consent_set.php",
+			"url": "admin.php?page=lw_mail_form_set&form_consent_set={フォーム番号}",
+			"aiDescription": "送信ボタンの上にプライバシーポリシーや利用規約への同意チェックを表示する設定画面。2つのタイプ（URLリンク型/テキスト表示型）から選べる。",
+			"settings": {
+				"switch": {
+					"aiDescription": "同意チェック欄の表示/非表示を切り替える。",
+					"optionKey": "form_consent_set_{フォーム番号}_switch",
+					"options": { "on": "表示", "off": "非表示" },
+					"userGuide": "プライバシーポリシーへの同意が必要な場合は「表示」にする。個人情報を取得するフォームでは必須。"
+				},
+				"type": {
+					"aiDescription": "同意表示のタイプを選択する。URLリンク型は規約ページへのリンクを表示し、テキスト型はフォーム内に規約の全文を埋め込む。",
+					"optionKey": "form_consent_set_{フォーム番号}_type",
+					"options": {
+						"type_url": "URLで規約ページのリンク先を指定",
+						"type_text": "送信ボタンの上に文章の表示"
+					},
+					"userGuide": "シンプルにしたい場合は「URLリンク型」でプラポページへのリンクを貼る。規約全文を表示したい場合は「テキスト型」を選ぶ。"
+				},
+				"url": {
+					"aiDescription": "URLリンク型の場合のリンク先URL。空欄の場合はデフォルトで /privacy-policy が使われる。",
+					"optionKey": "form_consent_set_{フォーム番号}_url",
+					"defaultValue": "{サイトURL}/privacy-policy",
+					"userGuide": "プライバシーポリシーページのURLを入力する。"
+				},
+				"label": {
+					"aiDescription": "チェックボックスのラベルテキスト。「{ラベル}に同意する」の形式で表示される。",
+					"optionKey": "form_consent_set_{フォーム番号}_label",
+					"defaultValue": "プライバシーポリシー",
+					"userGuide": "例：「利用規約」「プライバシーポリシー」など。チェックボックスには「○○に同意する」と表示される。"
+				},
+				"p": {
+					"aiDescription": "テキスト型の場合にフォーム内に表示される規約の本文。WordPressのリッチエディタ（TinyMCE）で編集可能。H2/H3/H4/Pタグが使える。",
+					"optionKey": "form_consent_set_{フォーム番号}_p",
+					"userGuide": "規約全文を直接入力する。見出し（H2〜H4）や段落を使って読みやすく整形できる。"
+				}
+			}
+		},
+
+		"formThanksPageSet": {
+			"title": "サンクスページ設定",
+			"file": "form_thanks_page_set.php",
+			"url": "admin.php?page=lw_mail_form_set&form_thanks_page_set={フォーム番号}",
+			"aiDescription": "フォーム送信完了後にリダイレクトするページのURLを設定する画面。設定すると、送信完了ポップアップ表示後2秒でサンクスページにリダイレクトされる。未設定の場合はポップアップのみ表示し、トップページへのリンクが表示される。",
+			"settings": {
+				"thanks_page_url": {
+					"aiDescription": "送信完了後のリダイレクト先URL。空欄の場合はリダイレクトしない（ポップアップのみ）。",
+					"optionKey": "form_thanks_page_set_{フォーム番号}_thanks_page_url",
+					"defaultValue": "（空欄＝リダイレクトなし）",
+					"userGuide": "サンクスページを作成している場合はそのURLを入力する。コンバージョン計測（Google広告等）のためにサンクスページを用意するのが一般的。例：{サイトURL}/thanks"
+				}
+			},
+			"userGuide": "GTM/GA4でコンバージョンを計測する場合、サンクスページURLを設定しておくと計測しやすい。send.jsではdataLayer.pushによるイベント発火（litewordFormSubmit）にも対応しているため、サンクスページなしでもGTMで計測は可能。"
+		},
+
+		"formThanksMailSet": {
+			"title": "サンクスメール設定",
+			"file": "form_thanks_mail_set.php",
+			"url": "admin.php?page=lw_mail_form_set&form_thanks_mail_set={フォーム番号}",
+			"aiDescription": "フォーム送信者（お客様）に自動返信メールを送る設定画面。1つのフォームに対して最大5パターンのサンクスメールを設定可能（タブ切り替えUI）。各パターンごとにON/OFFを切り替えられる。メール本文内でショートコード（[your_name]等）や[form_data]（全入力内容の展開）が使える。",
+			"premiumOnly": false,
+			"premiumNote": "サンクスメール機能自体はカスタマイザーの「拡張機能」セクション（lw_extensions_mail_form_thanks_mail_switch）でON/OFFを切り替える。OFFの場合はこの設定画面にアクセスするとエラーメッセージが表示される。",
+			"maxPatterns": 5,
+			"settings": {
+				"switch": {
+					"aiDescription": "このサンクスメールパターンのON/OFF。ONにすると送信時にこのパターンのメールが送られる。",
+					"optionKey": "form_send_thanks_{パターン番号}_{フォーム番号}_switch",
+					"options": { "on": "ON", "off": "OFF" },
+					"defaultValue": "off"
+				},
+				"subject": {
+					"aiDescription": "サンクスメールの件名。ショートコード（[your_name]等）が使える。",
+					"optionKey": "form_send_thanks_{パターン番号}_{フォーム番号}_subject",
+					"defaultValue": "[your_name]様 お問合わせありがとうございます。",
+					"userGuide": "件名にお客様の名前を入れたい場合は [your_name] を使う。"
+				},
+				"to_mail": {
+					"aiDescription": "サンクスメールの送信先。通常は [your_mail] を指定して、フォームに入力されたメールアドレスに送る。固定アドレスの直接指定も可能。",
+					"optionKey": "form_send_thanks_{パターン番号}_{フォーム番号}_to_mail",
+					"defaultValue": "[your_mail]",
+					"userGuide": "[your_mail] と入力すると、お客様がフォームに入力したメールアドレスに送られる。"
+				},
+				"from_name": {
+					"aiDescription": "サンクスメールの差出人名。",
+					"optionKey": "form_send_thanks_{パターン番号}_{フォーム番号}_from_name",
+					"defaultValue": "{サイト名} 担当者",
+					"userGuide": "会社名や担当者名を入力する。"
+				},
+				"from_mail": {
+					"aiDescription": "サンクスメールの送信元アドレス。サイトのドメインと一致しないと迷惑メールになる可能性がある。",
+					"optionKey": "form_send_thanks_{パターン番号}_{フォーム番号}_from_mail",
+					"defaultValue": "info@{サイトドメイン}",
+					"userGuide": "自サイトドメインのメールアドレスを入力する。Gmailなど外部メールを指定すると迷惑メールになりやすい。"
+				},
+				"body": {
+					"aiDescription": "サンクスメールの本文。ショートコード（[your_name]、[your_mail]等のフォーム項目ショートコード）と[form_data]（全入力内容を「ラベル: 値」形式で展開）が使える。テキスト形式で入力し、送信時にHTML（nl2br）に変換される。",
+					"optionKey": "form_send_thanks_{パターン番号}_{フォーム番号}_body",
+					"defaultValue": "[your_name] 様\n{サイト名}にお問い合わせいただきありがとうございます。\n担当より通常 2〜3 営業日以内にご返信いたします。\n\n※ 本メールは自動送信です。\n内容に心当たりがない場合は破棄していただければ幸いです。",
+					"availableShortcodes": {
+						"[your_name]": "お名前フィールドの入力値（shortcodeが'your_name'の項目）",
+						"[your_mail]": "メールアドレスフィールドの入力値（shortcodeが'your_mail'の項目）",
+						"[your_message]": "お問い合わせ内容フィールドの入力値（shortcodeが'your_message'の項目）",
+						"[form_data]": "全フォーム入力内容を「ラベル: 値」形式で一括展開する特殊ショートコード",
+						"[カスタムショートコード]": "フォーム項目設定で任意に付けたショートコード名"
+					},
+					"userGuide": "お客様への自動返信メールの本文。[your_name]でお客様の名前を表示し、[form_data]で入力内容を全て含めるのが一般的。"
+				}
+			},
+			"userGuide": "お客様がフォームを送信した直後に自動返信メールを送る機能。最大5パターン設定でき、例えば「お客様への確認メール」と「社内の別部署への通知」を別パターンで設定する、といった使い方ができる。"
+		},
+
+		"formRecaptchaSet": {
+			"title": "reCAPTCHA設定",
+			"file": "form_recaptcha_set.php",
+			"url": "admin.php?page=lw_mail_form_set&form_page=recaptcha",
+			"aiDescription": "Google reCAPTCHA v3の設定画面。全フォーム共通の設定で、スパムボットによる不正送信を防ぐ。v3のみ対応（v2は使用不可）。LINEブラウザではreCAPTCHAが動作しないため、自動的に無効化される。",
+			"settings": {
+				"switch": {
+					"aiDescription": "reCAPTCHAの有効/無効を切り替える。",
+					"optionKey": "lw_recaptcha_switch",
+					"options": { "on": "有効" },
+					"defaultValue": "無効",
+					"userGuide": "スパム送信が多い場合に有効にする。サイトキーとシークレットキーの取得が必要。"
+				},
+				"site_key": {
+					"aiDescription": "Google reCAPTCHA v3のサイトキー。フロントエンドのJavaScriptで使用する。",
+					"optionKey": "lw_form_recaptcha_site_key",
+					"userGuide": "Google reCAPTCHA管理ページ（https://www.google.com/recaptcha/admin）で取得する。v3を選択して作成すること。"
+				},
+				"secret_key": {
+					"aiDescription": "Google reCAPTCHA v3のシークレットキー。サーバーサイドの検証で使用する。",
+					"optionKey": "lw_form_recaptcha_secret_key",
+					"userGuide": "サイトキーと一緒にGoogle reCAPTCHA管理ページで取得する。外部に公開しないこと。"
+				},
+				"display": {
+					"aiDescription": "reCAPTCHAバッジ（画面右下に表示されるGoogleのロゴ）の表示/非表示。",
+					"optionKey": "lw_recaptcha_display",
+					"options": { "on": "表示", "off": "非表示" },
+					"userGuide": "非表示にする場合は、Googleの利用規約に従いページ内にreCAPTCHA使用の旨を別途記載する必要がある。"
+				}
+			},
+			"technicalNotes": {
+				"lineDetection": "LINEブラウザではreCAPTCHAが正常に動作しないため、User-Agentに'Line'が含まれる場合は自動的にreCAPTCHAを無効化する（is_line_browser()関数）。",
+				"scoreThreshold": "reCAPTCHAスコアが0.5未満の場合はスパムと判定して送信を拒否する。",
+				"tokenFlow": "フロント側でgrecaptcha.execute()でトークンを取得→送信時にFormDataに付加→サーバー側でGoogle APIに検証リクエスト→スコア判定"
+			}
+		},
+
+		"formReceptionHistoryList": {
+			"title": "受信履歴",
+			"file": "form_reception_history_list.php",
+			"url": "admin.php?page=lw_mail_form_set&form_reception_history_list={フォーム番号}",
+			"aiDescription": "フォームから受信したお問い合わせの履歴を一覧表示する画面。ページネーション（1ページ20件）、テキスト検索、CSVダウンロード、データコピー（表示中のデータをTSV/HTML形式でクリップボードにコピー）、個別削除、全削除に対応。",
+			"premiumOnly": true,
+			"premiumNote": "受信履歴機能はLW_EXPANSION_BASE（プレミアム版）のみ使用可能。さらにカスタマイザーの拡張機能設定（lw_extensions_mail_form_reception_history_switch）でONにする必要がある。",
+			"features": {
+				"search": {
+					"aiDescription": "受信履歴のテキスト検索。送信データ（body）と送信元ページタイトル（post_title）を対象にLIKE検索する。",
+					"userGuide": "お客様の名前やメールアドレスで検索できる。"
+				},
+				"csvDownload": {
+					"aiDescription": "受信履歴をCSVファイルとしてダウンロードする。検索結果に絞り込んだ状態でもダウンロード可能。BOM付きUTF-8でExcelの文字化けを防止。",
+					"file": "mail_download_csv.php",
+					"userGuide": "CSVダウンロードでExcelやGoogleスプレッドシートで分析できる。検索で絞り込んだ結果のみをダウンロードすることも可能。"
+				},
+				"copyData": {
+					"aiDescription": "表示中のデータをTSV形式（テキスト）とHTML table形式の両方でクリップボードにコピーする。スプレッドシートに貼り付けると表形式で表示される。",
+					"userGuide": "「データをコピー」ボタンで表示中のデータをコピーし、ExcelやGoogleスプレッドシートにそのまま貼り付けられる。"
+				},
+				"deleteRow": {
+					"aiDescription": "受信履歴を1件削除する。確認ダイアログあり。CSRF対策（nonce検証）済み。",
+					"action": "lw_mail_del_row"
+				},
+				"deleteAll": {
+					"aiDescription": "そのフォームの受信履歴を全件削除する。確認ダイアログあり。CSRF対策（nonce検証）済み。",
+					"action": "lw_mail_del_all"
+				},
+				"pagination": {
+					"aiDescription": "1ページ20件のページネーション。現在ページの前後2ページ分のリンクを表示し、それ以外は「...」で省略する。",
+					"perPage": 20
+				}
+			},
+			"dbTable": {
+				"tableName": "wp_lw_mail_reception_history",
+				"columns": {
+					"id": "BIGINT 主キー（AUTO_INCREMENT）",
+					"created_at": "DATETIME 受信日時（DEFAULT CURRENT_TIMESTAMP）",
+					"subject": "TEXT メールの件名",
+					"body": "LONGTEXT フォーム入力データ（JSON形式、{ラベル: 値}）",
+					"is_logged_in": "TINYINT 1=ログインユーザー / 0=ゲスト",
+					"user_id": "BIGINT WordPressユーザーID",
+					"form_set_no": "SMALLINT フォームセット番号",
+					"post_id": "BIGINT 送信元の投稿/固定ページID",
+					"post_title": "TEXT 送信元のページタイトル",
+					"post_author": "BIGINT 送信元ページの投稿者ID",
+					"sender_ip": "VARCHAR(45) 送信者のIPアドレス",
+					"user_agent": "TEXT 送信者のユーザーエージェント"
+				},
+				"indexes": ["created_at", "form_set_no", "post_id", "user_id"]
+			}
+		}
+	},
+
+	"tabNavigation": {
+		"aiDescription": "各フォームの設定画面はタブ形式のナビゲーションで切り替える。現在のタブはURL比較で自動ハイライトされる。",
+		"tabs": [
+			{ "label": "フォームの項目設定", "param": "form_set" },
+			{ "label": "送信ボタン設定", "param": "form_send_button" },
+			{ "label": "受信メール設定", "param": "form_send_set" },
+			{ "label": "同意・規約などの設定", "param": "form_consent_set" },
+			{ "label": "サンクスページ設定", "param": "form_thanks_page_set" },
+			{ "label": "サンクスメール設定", "param": "form_thanks_mail_set", "premiumOnly": true },
+			{ "label": "reCAPTCHA設定", "param": "form_page=recaptcha", "global": true },
+			{ "label": "受信履歴", "param": "form_reception_history_list", "premiumOnly": true }
+		]
+	},
+
+	"shortcode": {
+		"name": "lw_mail_form_select",
+		"aiDescription": "フォームをフロントエンドに表示するためのWordPressショートコード。固定ページや投稿の本文に記述する。",
+		"syntax": "[lw_mail_form_select id=\"{フォーム番号}\"]",
+		"attributes": {
+			"id": {
+				"aiDescription": "表示するフォームの番号（1〜10、プレミアムは1〜40）。管理画面の「Lwお問い合わせ」一覧に表示される番号と対応する。",
+				"required": true,
+				"type": "integer"
+			}
+		},
+		"userGuide": "固定ページの本文（ブロックエディタの場合はショートコードブロック、クラシックエディタの場合はそのまま記述）に [lw_mail_form_select id=\"1\"] を入力するとフォームが表示される。idの番号は管理画面の一覧で確認できる。"
+	},
+
+	"submissionFlow": {
+		"aiDescription": "フォーム送信の処理フロー。フロントエンドのsend.jsがAjaxでサーバーに送信し、mail-ajax.phpが処理する。",
+		"steps": [
+			"1. ユーザーがフォームに入力して送信ボタンをクリック",
+			"2. send.jsがsubmitイベントを捕捉し、デフォルトの送信を防止",
+			"3. FormDataオブジェクトを構築（画像ファイルを含むmultipart/form-data）",
+			"4. reCAPTCHAが有効な場合、grecaptcha.execute()でトークンを取得してFormDataに追加",
+			"5. fetch()でadmin-ajax.phpにPOST送信（action=lw_mail_form_submit）",
+			"6. サーバー側でCSRFチェック（nonce検証）",
+			"7. フォームの有効状態チェック（無効ならエラー）",
+			"8. reCAPTCHA検証（有効時のみ、スコア0.5未満で拒否）",
+			"9. フォームデータのサニタイズ",
+			"10. 画像ファイルがあればwp_handle_upload()で保存",
+			"11. ショートコードマップ（sc_map）の構築",
+			"12. 管理者宛てメールの送信（HTML形式）",
+			"13. サンクスメールの送信（最大5パターン、ショートコード置換あり）",
+			"14. 受信履歴のDB保存（プレミアム版で機能ON時のみ）",
+			"15. JSON成功レスポンスを返す（送信完了ポップアップHTML含む）",
+			"16. フロントでポップアップを表示し、フォームをリセット",
+			"17. GTM/GA4用カスタムイベント（litewordFormSubmit）をdataLayerにpush",
+			"18. サンクスページURLが設定されている場合、2秒後にリダイレクト"
+		],
+		"ajaxAction": "lw_mail_form_submit",
+		"ajaxHooks": ["wp_ajax_lw_mail_form_submit", "wp_ajax_nopriv_lw_mail_form_submit"],
+		"nonceAction": "lw_mail_form_nonce",
+		"jsFile": "send.js",
+		"phpFile": "mail-ajax.php"
+	},
+
+	"gtmIntegration": {
+		"aiDescription": "フォーム送信成功時にGTM/GA4のコンバージョン計測用イベントが自動発火する。サンクスページを用意しなくてもイベントベースで計測可能。",
+		"eventName": "litewordFormSubmit",
+		"dataLayerVariables": {
+			"event": "litewordFormSubmit",
+			"formSetNo": "送信されたフォームの番号",
+			"postId": "フォームが設置されたページのID"
+		},
+		"customEvent": {
+			"type": "CustomEvent",
+			"name": "litewordFormSubmit",
+			"detail": ["formSetNo", "postId", "form"]
+		},
+		"userGuide": "GTMでコンバージョンを計測する手順：(1) GTMでカスタムイベントトリガーを作成（イベント名：litewordFormSubmit）、(2) GA4のイベントタグを作成してトリガーに紐付け、(3) GA4でそのイベントをコンバージョンとしてマーク。フォーム番号別に計測したい場合はdataLayer変数formSetNoを使う。"
+	},
+
+	"premiumFeatures": {
+		"aiDescription": "プレミアム版（LW_HAS_SUBSCRIPTION / LW_EXPANSION_BASE）で追加される機能の一覧。",
+		"features": [
+			{
+				"name": "フォーム数の拡張",
+				"description": "無料版10個→プレミアム版40個に拡張",
+				"constant": "LW_HAS_SUBSCRIPTION"
+			},
+			{
+				"name": "フォームメモ機能",
+				"description": "各フォームにメモ（用途・設置場所の記録）を残せる",
+				"constant": "LW_HAS_SUBSCRIPTION"
+			},
+			{
+				"name": "サンクスメール",
+				"description": "フォーム送信者に自動返信メールを送る機能。カスタマイザーでON/OFF切替（lw_extensions_mail_form_thanks_mail_switch）",
+				"constant": "LW_EXPANSION_BASE"
+			},
+			{
+				"name": "受信履歴",
+				"description": "フォーム送信データをDBに保存し、管理画面で閲覧・検索・CSVダウンロード・コピーできる機能。カスタマイザーでON/OFF切替（lw_extensions_mail_form_reception_history_switch）",
+				"constant": "LW_EXPANSION_BASE"
+			}
+		]
+	},
+
+	"fileStructure": {
+		"aiDescription": "mail_formディレクトリ内の全ファイルとその役割の一覧。",
+		"files": {
+			"index.php": "エントリポイント。管理メニュー登録、各ファイルの読み込み、URLパラメータに応じた画面ルーティング。",
+			"functions.php": "共通関数（reCAPTCHA判定、LINEブラウザ判定、管理画面ヘッダー、タブナビゲーション、フォーム有効/無効のトグル、履歴削除処理）。フロントエンド用JSの登録・ローカライズもここで行う。",
+			"form_list.php": "フォーム一覧画面（トグルスイッチ、ショートコードコピー、メモ機能）。",
+			"form_set.php": "フォーム入力項目の設定画面（フィールドの追加・編集・削除・並び替え）。",
+			"form_send_button.php": "送信ボタンテキストの設定画面。",
+			"form_send_set.php": "管理者向け受信メールの設定画面（件名・送信先・送信元）。",
+			"form_consent_set.php": "同意チェック・規約表示の設定画面。",
+			"form_thanks_page_set.php": "サンクスページURL設定画面。",
+			"form_thanks_mail_set.php": "サンクスメール設定画面（5パターン、タブ切り替え）。",
+			"form_recaptcha_set.php": "reCAPTCHA v3の設定画面（サイトキー・シークレットキー）。",
+			"form_put.php": "フロントエンド用のフォームHTML生成（ショートコード処理、各フィールドタイプの出力、同意欄、送信ボタン、reCAPTCHAスクリプト登録、サンクスページリダイレクト）。",
+			"mail-ajax.php": "Ajax送信処理（CSRF検証、reCAPTCHA検証、画像アップロード、管理者メール送信、サンクスメール送信、受信履歴保存）。",
+			"reception_history.php": "受信履歴のDBテーブル作成（dbDelta）とデータ保存関数。",
+			"form_reception_history_list.php": "受信履歴一覧画面（ページネーション、検索、CSVダウンロード、データコピー、削除）。",
+			"mail_download_csv.php": "受信履歴のCSVダウンロード処理。BOM付きUTF-8。",
+			"send.js": "フロントエンドのAjax送信処理（FormData構築、reCAPTCHAトークン取得、画像プレビュー、GTM/GA4イベント発火）。",
+			"style.scss": "管理画面用のSCSSソースファイル。",
+			"style.css": "管理画面用のCSSファイル。",
+			"style.min.css": "管理画面用の圧縮CSSファイル（実際に読み込まれる）。",
+			"style.css.map": "SCSSのソースマップ。",
+			"put_style/ptn_1.css": "フロントエンド用のフォームデザインCSS（パターン1）。"
+		}
+	},
+
+	"securityMeasures": {
+		"aiDescription": "メールフォーム機能に実装されているセキュリティ対策の一覧。",
+		"measures": [
+			"CSRF対策: wp_nonce_field() / check_ajax_referer() による全送信のnonce検証",
+			"権限チェック: 管理画面操作はcurrent_user_can('manage_options')で管理者権限を確認",
+			"入力サニタイズ: sanitize_text_field() / sanitize_textarea_field() / sanitize_email() による入力値のサニタイズ",
+			"出力エスケープ: esc_html() / esc_attr() / esc_url() / esc_js() による出力時のエスケープ",
+			"reCAPTCHA v3: Google reCAPTCHAによるボット判定（スコア0.5未満で拒否）",
+			"ファイルアップロード: wp_handle_upload()による安全なファイル処理",
+			"直接アクセス防止: 全PHPファイルの先頭でif(!defined('ABSPATH')) exit;",
+			"SQLインジェクション対策: $wpdb->prepare()によるプリペアドステートメント"
+		]
+	}
+}

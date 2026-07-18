@@ -1,0 +1,319 @@
+{
+	"_meta": {
+		"description": "LiteWord投稿編集画面のメタボックス「入力フォーム」および「その他の設定」のAI向けメタ情報。各設定項目の意味・用途・推奨値をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21",
+		"sourceFiles": [
+			"functions/custom_post/post.php",
+			"functions/custom_post/common.php",
+			"functions/custom_post/function_input.php",
+			"functions/customizer/functions.php"
+		]
+	},
+	"metaBox": {
+		"id": "post_setting_page_setting",
+		"title": "入力フォーム",
+		"postType": "post",
+		"aiDescription": "投稿ページの編集画面に表示されるメタボックス。メインビジュアル（ファーストビュー）のパターン選択・画像設定・テキスト入力、目次・コメントの表示切替、カラー設定を行う。",
+		"sections": {
+			"mainVisual": {
+				"title": "メインビジュアルの設定",
+				"defaultOpen": true,
+				"aiDescription": "投稿ページ上部に表示されるメインビジュアル（ファーストビュー）の設定。3つのパターンから選択可能で、タイトル・サブタイトル・画像・説明文を入力する。",
+				"settings": {
+					"fv_select": {
+						"metaKey": "fv_select",
+						"inputType": "select",
+						"aiDescription": "メインビジュアルのデザインパターンを選択する。パターンによって表示レイアウトや利用可能な設定項目が変わる。",
+						"options": {
+							"fv_ptn_1": "パターン1 — 画像の上にタイトルを重ねないレイアウト。画像の比率を選択可能。",
+							"fv_ptn_2": "パターン2 — 画像の上にタイトルを重ねるレイアウト。フィルター色と透明度を設定可能。",
+							"fv_ptn_3": "パターン3 — 画像の上にタイトルを重ねるレイアウト（パターン2と異なるスタイル）。フィルター色と透明度を設定可能。"
+						},
+						"jsClass": "Lw_input_select_switch",
+						"userGuide": "パターン1は記事上部に画像を大きく表示したい場合に最適。パターン2・3はヒーロー画像の上にテキストを載せる視覚的なデザイン。"
+					},
+					"ttl_main": {
+						"metaKey": "ttl_main",
+						"inputType": "textarea",
+						"aiDescription": "メインビジュアルに表示されるメインタイトル。投稿のタイトル（post_title）とは別に、ビジュアル用のタイトルを設定できる。",
+						"userGuide": "改行可能。投稿タイトルよりもキャッチーで短い見出しを設定する。空の場合は投稿タイトルが使われることが多い。"
+					},
+					"ttl_sub": {
+						"metaKey": "ttl_sub",
+						"inputType": "textarea",
+						"aiDescription": "メインビジュアルに表示されるサブタイトル。メインタイトルの補足や英語表記などに使う。",
+						"userGuide": "改行可能。メインタイトルの上か下に小さく表示される。英語のキャッチフレーズや日付などを入れることが多い。"
+					},
+					"fv_image": {
+						"metaKey": "fv_image",
+						"inputType": "media",
+						"aiDescription": "メインビジュアルのイメージ画像（PC表示用）。全パターンで使用される。",
+						"visibleWhen": "fv_select = fv_ptn_1, fv_ptn_2, fv_ptn_3",
+						"userGuide": "推奨: 横1200px以上のJPEGまたはWebP。パターン1では画像の比率設定が使える。パターン2・3ではフルワイドで表示される。"
+					},
+					"fv_image_sp": {
+						"metaKey": "fv_image_sp",
+						"inputType": "media",
+						"aiDescription": "スマホ表示用のメインビジュアル画像。設定しない場合はPC用画像がそのまま使われる。",
+						"userGuide": "縦長のスマホ画面に最適化した画像を設定する。PC用画像をそのまま使うと横に潰れることがある。"
+					},
+					"fv_image_ratio": {
+						"metaKey": "fv_image_ratio",
+						"inputType": "select",
+						"aiDescription": "パターン1専用。メインビジュアル画像のアスペクト比（縦横比）を指定する。",
+						"visibleWhen": "fv_select = fv_ptn_1",
+						"options": {
+							"": "未選択",
+							"auto": "画像の元の比率をそのまま使用",
+							"16/6": "16:6 — 横長バナー（パノラマ風）",
+							"16/7": "16:7 — やや横長",
+							"16/8": "16:8 — 標準的な横長",
+							"16/9": "16:9 — ワイドスクリーン比率",
+							"4/3": "4:3 — 従来のモニター比率",
+							"3/2": "3:2 — 一眼レフの標準比率",
+							"1/1": "1:1 — 正方形"
+						},
+						"userGuide": "autoは画像の元サイズそのまま。16:9はスタンダード。16:6はヘッダー風の薄いバナーに適している。"
+					},
+					"fv_filter_color": {
+						"metaKey": "fv_filter_color",
+						"inputType": "color",
+						"aiDescription": "パターン2・3専用。メインビジュアル画像の上に重ねるフィルター（オーバーレイ）の色。テキストの可読性を高めるために使う。",
+						"visibleWhen": "fv_select = fv_ptn_2, fv_ptn_3",
+						"default": "#ADA993",
+						"userGuide": "暗い画像には白フィルター、明るい画像には黒フィルターが効果的。ブランドカラーのフィルターも雰囲気が出る。"
+					},
+					"fv_filter_opacity": {
+						"metaKey": "fv_filter_opacity",
+						"inputType": "range",
+						"aiDescription": "パターン2・3専用。フィルターの透明度。数値が大きいほどフィルター色が濃くなる。",
+						"visibleWhen": "fv_select = fv_ptn_2, fv_ptn_3",
+						"min": 0,
+						"max": 300,
+						"default": 20,
+						"userGuide": "20〜40がテキストが読みやすく画像も見える適切な範囲。0だとフィルターなし、100以上は画像がほぼ見えなくなる。"
+					},
+					"ttl_btm_p": {
+						"metaKey": "ttl_btm_p",
+						"inputType": "textarea",
+						"placeholder": "説明テキスト",
+						"aiDescription": "メインビジュアル内に表示される説明文。タイトルの下に補足テキストとして表示される。",
+						"userGuide": "記事の導入文やリード文として使う。長すぎるとメインビジュアルのバランスが崩れるため、2〜3行程度に収める。"
+					}
+				}
+			},
+			"otherSettings": {
+				"title": "その他の設定",
+				"defaultOpen": true,
+				"aiDescription": "目次やコメント欄の表示制御。カスタマイザーの全体設定を投稿単位で上書きする。",
+				"settings": {
+					"toc_page_switch": {
+						"metaKey": "toc_page_switch",
+						"inputType": "select",
+						"aiDescription": "この投稿の目次（Table of Contents）の表示/非表示。見出し（h2, h3等）から自動生成される目次。",
+						"options": {
+							"on": "表示する",
+							"off": "表示しない"
+						},
+						"userGuide": "長い記事には目次ONが推奨。短い記事や見出しが少ない記事ではOFFにする。"
+					},
+					"comment_page_switch": {
+						"metaKey": "comment_page_switch",
+						"inputType": "select",
+						"aiDescription": "この投稿のコメント欄の表示/非表示。",
+						"options": {
+							"on": "表示する",
+							"off": "表示しない"
+						},
+						"userGuide": "ブログ記事ではONにしてユーザーとのコミュニケーションを促進。お知らせ記事やニュースではOFFが一般的。"
+					}
+				}
+			},
+			"color": {
+				"title": "カラー設定",
+				"aiDescription": "この投稿ページ専用のカラー設定。カスタマイザーの全体カラー設定を上書きする。CSSカスタムプロパティとしてページに適用される。",
+				"settings": {
+					"color_main": {
+						"metaKey": "color_main",
+						"inputType": "color",
+						"aiDescription": "メインカラー。見出しやボタンの背景色などに使われる基調色。",
+						"default": "#ADA993",
+						"userGuide": "通常はカスタマイザーの設定に任せる。特定の投稿だけ別のテーマカラーにしたい場合に使う。"
+					},
+					"color_accent": {
+						"metaKey": "color_accent",
+						"inputType": "color",
+						"aiDescription": "アクセントカラー。CTAボタンや強調箇所に使われる。",
+						"default": "#ADA993"
+					},
+					"color_text": {
+						"metaKey": "color_text",
+						"inputType": "color",
+						"aiDescription": "本文テキストの色。",
+						"default": "#ADA993",
+						"userGuide": "背景色とのコントラスト比が4.5:1以上になるようにする（アクセシビリティ）。"
+					},
+					"color_return_btn": {
+						"metaKey": "color_return_btn",
+						"inputType": "color",
+						"aiDescription": "「トップに戻る」ボタンの色。",
+						"default": "#ADA993"
+					},
+					"color_1": {
+						"metaKey": "color_1",
+						"inputType": "color",
+						"aiDescription": "汎用カラー01。CSSカスタムプロパティ --color-1 として使える。",
+						"default": "#ADA993"
+					},
+					"color_2": {
+						"metaKey": "color_2",
+						"inputType": "color",
+						"aiDescription": "汎用カラー02。CSSカスタムプロパティ --color-2 として使える。",
+						"default": "#ADA993"
+					},
+					"color_3": {
+						"metaKey": "color_3",
+						"inputType": "color",
+						"aiDescription": "汎用カラー03。CSSカスタムプロパティ --color-3 として使える。",
+						"default": "#ADA993"
+					}
+				},
+				"note": "保存時に color_sub もメタキー配列に含まれるが、UIには表示されない（内部予約キー）。"
+			}
+		},
+		"saveMetaKeys": [
+			"ttl_main", "ttl_sub",
+			"fv_select", "fv_image", "fv_image_sp", "fv_image_ratio",
+			"fv_filter_color", "fv_filter_opacity",
+			"ttl_btm_p",
+			"toc_page_switch", "comment_page_switch",
+			"color_main", "color_sub", "color_accent", "color_text",
+			"color_return_btn", "color_1", "color_2", "color_3"
+		]
+	},
+	"commonMetaBox": {
+		"id": "common_setting_page_setting",
+		"title": "その他の設定",
+		"postType": ["post", "page"],
+		"aiDescription": "固定ページ・投稿の両方に表示される共通メタボックス。SEO設定、構造化データ（JSON-LD）、カスタムコードの挿入ができる。",
+		"sections": {
+			"seo": {
+				"title": "SEO設定",
+				"aiDescription": "検索エンジン最適化のための設定。タイトル・ディスクリプション・noindex・canonical・OGP画像・リダイレクトを制御する。",
+				"condition": "lw_extensions_seo_functions_switch === 'on' かつ LW_EXPANSION_BASE === true の場合のみ表示。LiteWordの拡張SEO機能が有効な場合に利用可能。",
+				"settings": {
+					"seo_title": {
+						"metaKey": "seo_title",
+						"inputType": "text",
+						"placeholder": "検索結果に表示されるタイトル",
+						"aiDescription": "検索結果やブラウザタブに表示されるSEOタイトル。空の場合は投稿のタイトルがそのまま使われる。",
+						"userGuide": "30〜60文字が推奨。重要なキーワードを前方に配置する。"
+					},
+					"seo_description": {
+						"metaKey": "seo_description",
+						"inputType": "textarea",
+						"rows": 3,
+						"placeholder": "検索結果に表示される要約",
+						"aiDescription": "検索結果のスニペットに表示されるメタディスクリプション。",
+						"userGuide": "80〜160文字が推奨。ページの内容を簡潔に要約し、クリックを促す文言にする。"
+					},
+					"seo_noindex": {
+						"metaKey": "seo_noindex",
+						"inputType": "select",
+						"aiDescription": "検索エンジンのインデックス制御。noindexに設定すると検索結果に表示されなくなる。",
+						"options": {
+							"noindex": "noindex（検索エンジンにインデックスさせない）",
+							"follow": "follow（インデックスさせる）"
+						},
+						"userGuide": "テスト投稿や非公開にしたい記事はnoindexに設定する。noindexにするとJSON-LDも出力されない。"
+					},
+					"seo_canonical": {
+						"metaKey": "seo_canonical",
+						"inputType": "text",
+						"placeholder": "https://example.com/page",
+						"aiDescription": "canonical URL。重複コンテンツ対策として正規URLを指定する。",
+						"userGuide": "同じ内容の記事が複数URLで存在する場合に正規URLを指定する。通常は空でOK。"
+					},
+					"seo_og_image": {
+						"metaKey": "seo_og_image",
+						"inputType": "media",
+						"aiDescription": "OGP画像。SNSでシェアされた時に表示される画像。",
+						"userGuide": "推奨サイズ: 1200x630px。設定しない場合はアイキャッチ画像またはサイト全体のOGP設定が使われる。"
+					},
+					"seo_301_redirect_url": {
+						"metaKey": "seo_301_redirect_url",
+						"inputType": "text",
+						"placeholder": "https://example.com/page",
+						"aiDescription": "301リダイレクトの元URL。ここに指定したURLにアクセスすると、この投稿に301リダイレクトされる。",
+						"userGuide": "記事のURLを変更した場合に旧URLからのアクセスを転送する。クイック編集からも設定可能。"
+					}
+				},
+				"note": "投稿（post）ではpage_title_displayは表示されない（固定ページ専用）。"
+			},
+			"jsonLd": {
+				"title": "構造化データ（JSON-LD）",
+				"aiDescription": "Googleリッチリザルト向けの構造化データ設定。投稿では lw_json_dl_single() で Article スキーマ等が自動生成される。",
+				"premium": true,
+				"premiumNote": "全機能がLW_HAS_SUBSCRIPTION === true の場合のみ利用可能。無料版ではプレミアムプランへの案内メッセージが表示される。",
+				"settings": {
+					"jsonLdPreview": {
+						"aiDescription": "この投稿で自動生成されるJSON-LDのプレビュー表示（読み取り専用）。lw_json_dl_single()が生成するArticleスキーマ等を表示する。",
+						"readOnly": true,
+						"notes": [
+							"著者の表示名がログインIDと同じ場合はセキュリティ警告が表示される（ログインID漏洩防止）",
+							"noindex設定の場合: JSON-LDは出力されない旨の警告が表示される"
+						]
+					},
+					"lw_custom_json_ld": {
+						"metaKey": "lw_custom_json_ld",
+						"inputType": "textarea",
+						"rows": 8,
+						"placeholder": "例: {\"@context\": \"https://schema.org\", \"@type\": \"FAQPage\", ...}",
+						"aiDescription": "カスタムJSON-LD。自動生成に加えて追加の構造化データを挿入できる。有効なJSON形式で入力する（scriptタグ不要）。",
+						"premium": true,
+						"validation": "保存時にjson_decode()で妥当性チェック。無効なJSONは保存されない。",
+						"userGuide": "FAQPage、HowTo等の構造化データを追加する場合に使う。記事内にQ&Aがある場合はFAQPageスキーマを追加するとリッチリザルトに表示される。"
+					}
+				}
+			},
+			"customCode": {
+				"title": "カスタムコード設定",
+				"aiDescription": "この投稿専用のカスタムコード（script, meta, CSS等）を挿入する。head内・footer前・投稿独自CSSの3か所に挿入可能。",
+				"settings": {
+					"seo_custom_head": {
+						"metaKey": "seo_custom_head",
+						"inputType": "textarea",
+						"rows": 4,
+						"placeholder": "<script>や<meta>など",
+						"aiDescription": "head内に挿入するHTML/スクリプト。<script>, <meta>, <link>等を自由に追加できる。unfiltered_html権限がある場合はフィルタリングされない。",
+						"htmlAllowed": true,
+						"userGuide": "この投稿だけに適用するトラッキングコードやmeta情報を追加する場合に使う。"
+					},
+					"seo_custom_footer": {
+						"metaKey": "seo_custom_footer",
+						"inputType": "textarea",
+						"rows": 4,
+						"placeholder": "<script>などのトラッキングコード",
+						"aiDescription": "footer前（</body>の直前）に挿入するHTML/スクリプト。",
+						"htmlAllowed": true,
+						"userGuide": "ページ読み込み速度に影響しにくい位置。チャットウィジェットやトラッキングコードに適している。"
+					},
+					"lw_custom_css": {
+						"metaKey": "lw_custom_css",
+						"inputType": "textarea",
+						"rows": 40,
+						"placeholder": "このページのみに適用されるCSS",
+						"aiDescription": "この投稿だけに適用されるカスタムCSS。<style>タグなしでCSSルールを直接記述する。",
+						"userGuide": "投稿固有のスタイル調整に使う。カスタマイザーの追加CSSは全ページに適用されるが、ここに書いたCSSはこの投稿だけに適用される。"
+					}
+				}
+			}
+		},
+		"saveMetaKeys": {
+			"plainFields": ["seo_title", "seo_description", "seo_noindex", "seo_canonical", "seo_301_redirect_url", "seo_og_image", "lw_custom_css", "page_title_display"],
+			"premiumFields": ["lw_custom_json_ld"],
+			"htmlFields": ["seo_custom_head", "seo_custom_footer"]
+		}
+	}
+}

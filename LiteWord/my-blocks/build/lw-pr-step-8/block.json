@@ -1,0 +1,76 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "wdl/lw-pr-step-8",
+    "version":  "1.0.0",
+    "title":  "step 04",
+    "category":  "lw-step",
+    "icon":  "lightbulb",
+    "description":  "番号付きステップカード（スタイル2）",
+    "aiDescription":  "01、02形式の番号付きステップカード。step-3の別デザイン。番号色をメインカラーに設定。採用フロー、サービス手順に最適。",
+    "aiNotes":  "このブロックは番号付きカード型ステップ。colorNoで番号色を設定。bgGradientで背景色調整。",
+    "aiHint": {
+        "description": "番号付きステップカード。01形式の番号+背景色。採用フロー・サービス手順に",
+        "excludeFromAutoSelect": false,
+        "contentAttributes": [],
+        "imageAttributes": [],
+        "notes": "属性がスタイル系のみ。contents配列がないためテンプレート経由で使用"
+    },
+    "supports":  {
+                     "anchor":  true
+                 },
+    "editorScript":  "file:./lw-pr-step-8.js",
+    "no":  4,
+    "attributes":  {
+                       "bgGradient":  {
+                                          "type":  "string",
+                                          "default":  "var(--color-main)",
+                                          "ai_description":  "背景グラデーション色。var(--color-main)推奨"
+                                      },
+                       "ulMaxWidth":  {
+                                          "type":  "number",
+                                          "default":  1080,
+                                          "ai_description":  "コンテンツ最大幅（px）"
+                                      },
+                       "fontNo":  {
+                                      "type":  "string",
+                                      "default":  "Murecho",
+                                      "ai_description":  "番号のフォント"
+                                  },
+                       "fontWeightNo":  {
+                                            "type":  "string",
+                                            "default":  "600",
+                                            "ai_description":  "番号のフォントウェイト"
+                                        },
+                       "colorNo":  {
+                                       "type":  "string",
+                                       "default":  "var(--color-main)",
+                                       "ai_description":  "番号の文字色。var(--color-main)推奨"
+                                   },
+                       "stepNo":  {
+                                      "type":  "string",
+                                      "default":  "01",
+                                      "ai_description":  "ステップ番号（01、02形式）"
+                                  },
+                       "liInPtPc":  {
+                                        "type":  "number",
+                                        "default":  0.6,
+                                        "ai_description":  "コンテンツ余白（上）PC用"
+                                    },
+                       "liInPtSp":  {
+                                        "type":  "number",
+                                        "default":  0.6,
+                                        "ai_description":  "コンテンツ余白（上）SP用"
+                                    },
+                       "stepBdrPc":  {
+                                         "type":  "number",
+                                         "default":  10,
+                                         "ai_description":  "角丸PC用（px）"
+                                     },
+                       "stepBdrSp":  {
+                                         "type":  "number",
+                                         "default":  10,
+                                         "ai_description":  "角丸SP用（px）"
+                                     }
+                   }
+}

@@ -48,7 +48,7 @@ module.exports = window["wp"]["element"];
   \*****************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-cta-4","version":"1.0.0","title":"CTA 04","category":"lw-cta","icon":"megaphone","description":"2カラムCTAブロック（有料）","supports":{"anchor":true},"attributes":{"linkUrl1":{"type":"string","default":""},"mainTitle1":{"type":"string","default":"Franchise"},"subTitle1":{"type":"string","default":"加盟店募集"},"desc1":{"type":"string","default":"独立を応援！フランチャイズ加盟しませんか？"},"backgroundImage1":{"type":"string","default":"https://lite-word.com/sample_img/shop/1.webp"},"filterColor1":{"type":"string","default":"rgba(38,129,147,1)"},"filterOpacity1":{"type":"number","default":60},"btnText1":{"type":"string","default":"詳細はこちら"},"bgColor1":{"type":"string","default":"#d88d00"},"textColor1":{"type":"string","default":"#ffffff"},"linkUrl2":{"type":"string","default":""},"mainTitle2":{"type":"string","default":"Recruit"},"subTitle2":{"type":"string","default":"求人情報"},"desc2":{"type":"string","default":"◯では、一緒に働くスタッフを全店で募集しております！"},"backgroundImage2":{"type":"string","default":"https://lite-word.com/sample_img/shop/5.webp"},"filterColor2":{"type":"string","default":"#690707"},"filterOpacity2":{"type":"number","default":60},"btnText2":{"type":"string","default":"詳細はこちら"},"bgColor2":{"type":"string","default":"#F02D2D"},"textColor2":{"type":"string","default":"#ffffff"},"maxWidth":{"type":"number","default":0}},"editorScript":"file:./paid-block-cta-4.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":4}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-cta-4","version":"1.0.0","title":"CTA 04","category":"lw-cta","icon":"megaphone","description":"2カラムCTAブロック（有料）","aiHint":{"description":"2カラムCTA。左右それぞれに背景画像+見出し+説明+ボタン。2つのCTA並列表示に","excludeFromAutoSelect":false,"contentAttributes":["mainTitle1","mainTitle2","subTitle1","subTitle2","desc1","desc2","btnText1","btnText2"],"imageAttributes":["backgroundImage1","backgroundImage2"]},"supports":{"anchor":true},"attributes":{"linkUrl1":{"type":"string","default":""},"mainTitle1":{"type":"string","default":"Franchise"},"subTitle1":{"type":"string","default":"加盟店募集"},"desc1":{"type":"string","default":"独立を応援！フランチャイズ加盟しませんか？"},"backgroundImage1":{"type":"string","default":"https://lite-word.com/sample_img/shop/1.webp"},"filterColor1":{"type":"string","default":"rgba(38,129,147,1)"},"filterOpacity1":{"type":"number","default":60},"btnText1":{"type":"string","default":"詳細はこちら"},"bgColor1":{"type":"string","default":"#d88d00"},"textColor1":{"type":"string","default":"#ffffff"},"linkUrl2":{"type":"string","default":""},"mainTitle2":{"type":"string","default":"Recruit"},"subTitle2":{"type":"string","default":"求人情報"},"desc2":{"type":"string","default":"◯では、一緒に働くスタッフを全店で募集しております！"},"backgroundImage2":{"type":"string","default":"https://lite-word.com/sample_img/shop/5.webp"},"filterColor2":{"type":"string","default":"#690707"},"filterOpacity2":{"type":"number","default":60},"btnText2":{"type":"string","default":"詳細はこちら"},"bgColor2":{"type":"string","default":"#F02D2D"},"textColor2":{"type":"string","default":"#ffffff"},"maxWidth":{"type":"number","default":0}},"editorScript":"file:./paid-block-cta-4.js","no":4}');
 
 /***/ })
 
@@ -224,7 +224,7 @@ __webpack_require__.r(__webpack_exports__);
       color: '#000000'
     }];
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u6A2A\u5E45\u306E\u8A2D\u5B9A",
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -467,7 +467,7 @@ __webpack_require__.r(__webpack_exports__);
         fill: textColor1
       }
     }, /*#__PURE__*/React.createElement("path", {
-      d: "M342.6 233.4c12.5 12.5 \r 12.5 32.8 0 45.3l-192 192c-12.5 \r 12.5-32.8 12.5-45.3 0s-12.5-32.8 \r 0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8 \r 0-45.3s32.8-12.5 45.3 0l192 192z"
+      d: "M342.6 233.4c12.5 12.5  12.5 32.8 0 45.3l-192 192c-12.5  12.5-32.8 12.5-45.3 0s-12.5-32.8  0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8  0-45.3s32.8-12.5 45.3 0l192 192z"
     })), /*#__PURE__*/React.createElement("div", {
       className: "btn_bg",
       style: {
@@ -538,7 +538,7 @@ __webpack_require__.r(__webpack_exports__);
         fill: textColor2
       }
     }, /*#__PURE__*/React.createElement("path", {
-      d: "M342.6 233.4c12.5 12.5 \r 12.5 32.8 0 45.3l-192 192c-12.5 \r 12.5-32.8 12.5-45.3 0s-12.5-32.8 \r 0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8 \r 0-45.3s32.8-12.5 45.3 0l192 192z"
+      d: "M342.6 233.4c12.5 12.5  12.5 32.8 0 45.3l-192 192c-12.5  12.5-32.8 12.5-45.3 0s-12.5-32.8  0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8  0-45.3s32.8-12.5 45.3 0l192 192z"
     })), /*#__PURE__*/React.createElement("div", {
       className: "btn_bg",
       style: {
@@ -623,7 +623,7 @@ __webpack_require__.r(__webpack_exports__);
         fill: textColor1
       }
     }, /*#__PURE__*/React.createElement("path", {
-      d: "M342.6 233.4c12.5 12.5 \r 12.5 32.8 0 45.3l-192 192c-12.5 \r 12.5-32.8 12.5-45.3 0s-12.5-32.8 \r 0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8 \r 0-45.3s32.8-12.5 45.3 0l192 192z"
+      d: "M342.6 233.4c12.5 12.5  12.5 32.8 0 45.3l-192 192c-12.5  12.5-32.8 12.5-45.3 0s-12.5-32.8  0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8  0-45.3s32.8-12.5 45.3 0l192 192z"
     })), /*#__PURE__*/React.createElement("div", {
       className: "btn_bg",
       style: {
@@ -671,7 +671,7 @@ __webpack_require__.r(__webpack_exports__);
         fill: textColor2
       }
     }, /*#__PURE__*/React.createElement("path", {
-      d: "M342.6 233.4c12.5 12.5 \r 12.5 32.8 0 45.3l-192 192c-12.5 \r 12.5-32.8 12.5-45.3 0s-12.5-32.8 \r 0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8 \r 0-45.3s32.8-12.5 45.3 0l192 192z"
+      d: "M342.6 233.4c12.5 12.5  12.5 32.8 0 45.3l-192 192c-12.5  12.5-32.8 12.5-45.3 0s-12.5-32.8  0-45.3L274.7 256 105.4 86.6c-12.5-12.5-12.5-32.8  0-45.3s32.8-12.5 45.3 0l192 192z"
     })), /*#__PURE__*/React.createElement("div", {
       className: "btn_bg",
       style: {

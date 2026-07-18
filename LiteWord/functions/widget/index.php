@@ -3,6 +3,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 //ウィジェットアイテムの登録
 get_template_part('./functions/widget/item/author');
 get_template_part('./functions/widget/item/my_parts');
+get_template_part('./functions/widget/item/shortcode');
 // ウィジェットエリアの登録
 function liteword_register_sidebar() {
     register_sidebar( array(
@@ -45,6 +46,15 @@ function liteword_register_sidebar() {
         'name'          => __( '投稿 本文の外側（下）', 'liteword' ),
         'id'            => 'post_bottom',
         'description'   => __( '投稿の下に表示されるウィジェットエリアです。', 'liteword' ),
+        'before_widget' => '<div id="%1$s" class="widget %2$s">',
+        'after_widget'  => '</div>',
+        'before_title'  => '<h2 class="widget-title">',
+        'after_title'   => '</h2>',
+    ) );
+    register_sidebar( array(
+        'name'          => __( 'カテゴリー （下・全幅）', 'liteword' ),
+        'id'            => 'category_bottom_widget_area_all',
+        'description'   => __( 'カテゴリーページの下に（フッターより上）に全幅表示されるウィジェットエリアです。主に「LWマイパーツ」でお使いください。', 'liteword' ),
         'before_widget' => '<div id="%1$s" class="widget %2$s">',
         'after_widget'  => '</div>',
         'before_title'  => '<h2 class="widget-title">',

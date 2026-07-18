@@ -1,0 +1,74 @@
+.lw-pr-column-1 {
+    position: relative;
+    box-sizing: border-box;
+    bottom: none !important;
+    * {
+        box-sizing: border-box;
+    }
+    >.custom_wrap > .block-editor-inner-blocks > .block-editor-block-list__layout {
+        padding: var(--column-1-wrap-padding-pc);
+        padding-bottom: 40px !important;
+        display: grid;
+        grid-template-columns: var(--column-1-gtc-pc);
+        column-gap: var(--column-1-column-gap-pc);
+        row-gap: var(--column-1-row-gap-pc);
+        background: var(--column-1-wrap-bg-pc);
+        border: none;
+        border-width: var(--column-1-border-width-pc);
+        border-style: var(--column-1-border-style-pc);
+        border-color: var(--column-1-border-color-pc);
+        border-radius: var(--column-1-bdr-pc);
+        > .wp-block,
+        > .wp-block > .wp-block {
+            margin: 0;
+            padding: 0;
+            width: 100%;
+        }
+        &::before {
+            position: absolute;
+            top: -24px;
+            right: 0;
+            padding: 0 1em;
+            height: 24px;
+            width: auto;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            content: "LW COLUMNN";
+            background: rgb(27, 27, 255);
+            color: #fff;
+            border-radius: 6px 6px 0 0;
+            font-size: 10px;
+            line-height: 1;
+        }
+        &:hover {
+            outline: 2px rgb(27, 27, 255) solid;
+            outline-offset: 4px;
+        }
+    }
+    .components-dropdown > .components-button {
+        background: #404040;
+        svg {
+            fill: #fff;
+        }
+    }
+    >.custom_wrap .custom_column_item {
+        >.block-editor-inner-blocks>.block-editor-block-list__layout {
+            padding: var(--column-1-item-padding-pc);
+            min-height: var(--column-1-item-min-h-pc);
+            background: var(--column-1-item-bg-pc);
+            border-radius: var(--column-1-item-bdr-pc);
+            border-width: var(--column-1-item-border-width-pc);
+            border-style: var(--column-1-item-border-style-pc);
+            border-color: var(--column-1-item-border-color-pc);
+            >* {
+                &:first-child {
+                    margin-top: 0;
+                }
+                &:last-child {
+                    margin-bottom: 0;
+                }
+            }
+        }
+    }
+}

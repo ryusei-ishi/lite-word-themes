@@ -7,12 +7,13 @@
 	"category": "lw-firstview",
 	"icon": "cover-image",
 	"editorScript": "file:./paid-block-fv-12.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "全画面FV（ヘッダー回り込み）。ロゴ+ナビ+見出し+2CTA+ニュース。動画対応。ブランドサイトに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["logoText", "headline", "cta1Text", "cta2Text", "newsLabel"],
+		"imageAttributes": ["logoImg", "bgImg"],
+		"notes": "ナビメニュー+ニュース配列あり。最も複雑なFVブロック"
+	},
 	"supports": {
 		"anchor": true
 	},

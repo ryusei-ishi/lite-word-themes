@@ -4,6 +4,10 @@
 // =====================================
 if ( ! defined( 'ABSPATH' ) ) exit;
 
+// 重複読み込み防止
+if ( defined( 'LW_BREADCRUMB_LOADED' ) ) return;
+define( 'LW_BREADCRUMB_LOADED', true );
+
 /**
  * lw_get_ancestors_cached()のキャッシュラッパー関数
  * パフォーマンス最適化のため、祖先チェーンをキャッシュ
@@ -61,6 +65,18 @@ function put_breadcrumbs( $args = array() ) {
 	// --------------------------------------------------
 	// ① デフォルト引数
 	// --------------------------------------------------
+	// カスタマイザーからHOMEの表記を取得
+	$home_text_setting = get_theme_mod( 'lw_breadcrumb_home_text', 'home' );
+	if ( $home_text_setting === 'page_title' ) {
+		$front_page_id = get_option( 'page_on_front' );
+		$home_text = $front_page_id ? get_the_title( $front_page_id ) : 'HOME';
+	} elseif ( $home_text_setting === 'custom_text' ) {
+		$custom = get_theme_mod( 'lw_breadcrumb_home_custom_text', '' );
+		$home_text = ! empty( $custom ) ? esc_html( $custom ) : 'HOME';
+	} else {
+		$home_text = 'HOME';
+	}
+
 	$defaults = array(
 		'nav_div'               => 'nav',
 		'aria_label'            => '',
@@ -72,7 +88,7 @@ function put_breadcrumbs( $args = array() ) {
 		'aria_current'          => '',
 		'show_home'             => true,
 		'show_current'          => true,
-		'home'                  => 'Home',
+		'home'                  => $home_text,
     'blog_home' => get_option( 'page_for_posts' )
         ? get_the_title( get_option( 'page_for_posts' ) )
         : 'Blog',

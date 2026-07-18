@@ -93,7 +93,7 @@ registerBlockType(metadata.name, {
 
 				<InspectorControls>
 					{/* 背景画像 */}
-					<PanelBody title="背景画像設定">
+					<PanelBody title="背景設定">
 						<p>PCの時</p>
 						<MediaUpload
 							onSelect={onChangeBackgroundImage}
@@ -192,7 +192,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* 文字色 */}
-					<PanelBody title="全体の文字の色">
+					<PanelBody title="色設定">
 						<ColorPalette
 							value={textColor}
 							onChange={(color) =>
@@ -202,7 +202,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* 高さ設定 */}
-					<PanelBody title="高さ設定">
+					<PanelBody title="レイアウト設定">
 						<p>PC用高さ</p>
 						<SelectControl
 							value={minHeightPc}
@@ -230,7 +230,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* 最大幅 */}
-					<PanelBody title="内側の最大横幅">
+					<PanelBody title="コンテンツ幅設定">
 						<RangeControl
 							label="最大幅 (px)"
 							value={maxWidth}
@@ -244,7 +244,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* テキスト位置 */}
-					<PanelBody title="テキスト配置">
+					<PanelBody title="配置設定">
 						<p>PC 表示</p>
 						<SelectControl
 							value={textAlignPc}

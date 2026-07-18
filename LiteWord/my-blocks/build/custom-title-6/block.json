@@ -10,26 +10,29 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "アクセントカラー付きシンプル見出し。メインタイトルのみ。サブタイトル不要な場面に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle"],
+		"imageAttributes": []
+	},
 	"attributes": {
 		"mainTitle": {
 			"type": "string",
-			"default": "CONTENT"
+			"default": "CONTENT",
+			"aiHint": { "role": "heading", "contentGuide": "セクション見出し（英語 or 日本語）。3〜15文字", "example": "FAQ" }
 		},
 		"accentColor": {
 			"type": "string",
-			"default": "var(--color-main)"
+			"default": "var(--color-main)",
+			"aiHint": { "skip": true }
 		},
 		"headingLevel": {
 			"type": "number",
-			"default": 2
+			"default": 2,
+			"aiHint": { "skip": true }
 		}
 	},
 	"editorScript": "file:./custom-title-6.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 6
 }

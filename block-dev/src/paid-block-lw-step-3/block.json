@@ -10,12 +10,12 @@
 		"anchor": true
 	},
 	"editorScript": "file:./paid-block-lw-step-3.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "番号付き縦型ステップ。01形式番号+タイトル+説明。背景色付き。採用フロー・手順に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"no": 3,
 	"attributes": {
 		"bgGradient": { "type": "string", "default": "var(--color-main)" },

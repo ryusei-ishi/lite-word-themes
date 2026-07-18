@@ -1,7 +1,7 @@
 /*!*******************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/lw-step-1/style.scss ***!
   \*******************************************************************************************************************/
-.lw_content_wrap.page .wp-block-wdl-lw-step-1 {
+.lw_content_wrap.page .lw-step-1 {
   margin-left: calc((100% - 100vw) / 2);
   width: 100vw;
 }

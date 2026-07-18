@@ -5,6 +5,7 @@
   margin: 0 auto;
   overflow: hidden;
   container-type: inline-size;
+  user-select: none;
 }
 .paid-block-lw-gallery-3 img {
   display: block;

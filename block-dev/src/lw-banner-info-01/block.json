@@ -6,6 +6,12 @@
 	"title": "バナー 01（3カラム）",
 	"category": "lw-banner",
 	"icon": "images-alt2",
+	"aiHint": {
+		"description": "画像バナー3カラム。画像+タイトル+説明+リンクのカード3枚。サービス紹介・メニュー案内に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["items"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -62,11 +68,5 @@
 		}
 	},
 	"editorScript": "file:./lw-banner-info-01.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 3
 }

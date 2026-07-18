@@ -1,0 +1,162 @@
+[
+  {
+    "name": "wdl/custom-title-4",
+    "attributes": {
+      "mainTitle": "アクセス",
+      "subTitle": "ACCESS",
+      "headingLevel": 2,
+      "subMarginBottomPc": 0.6,
+      "subMarginBottomSp": 0.6,
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": []
+  },
+  {
+    "name": "core/columns",
+    "attributes": {
+      "isStackedOnMobile": true,
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": [
+      {
+        "name": "core/column",
+        "attributes": {
+          "lw_bgEnabled": false,
+          "lw_bgColor": "var(--color-main)",
+          "lw_bgOpacity": 0.1,
+          "lw_bgFullWidth": true,
+          "maxWidthPx": 1200,
+          "borderEnabledTop": false,
+          "borderEnabledRight": false,
+          "borderEnabledBottom": false,
+          "borderEnabledLeft": false,
+          "enableScroll": false,
+          "minWidthTb": 1000,
+          "minWidthSp": 600
+        },
+        "innerBlocks": [
+          {
+            "name": "wdl/lw-company-2",
+            "attributes": {
+              "maxWidth": 1080,
+              "fontSizeClass": "font_size_m",
+              "dtWidthClass": "dt_width_m",
+              "lineHeight": 1.6,
+              "spFullDt": false,
+              "dtBackgroundColor": "#f0f0f0",
+              "dtTextColor": "#000000",
+              "ddTextColor": "#000000",
+              "borderColor": "#cccccc",
+              "items": [
+                {
+                  "dt": "会社名",
+                  "dtPlaceholder": "会社名",
+                  "dd": "株式会社〇〇不動産",
+                  "ddPlaceholder": "内容"
+                },
+                {
+                  "dt": "所在地",
+                  "dtPlaceholder": "所在地",
+                  "dd": "東京都〇〇区〇〇町1-1-1",
+                  "ddPlaceholder": "内容"
+                },
+                {
+                  "dt": "最寄り駅",
+                  "dtPlaceholder": "項目名",
+                  "dd": "〇〇駅",
+                  "ddPlaceholder": "内容"
+                },
+                {
+                  "dt": "電話番号",
+                  "dtPlaceholder": "電話番号",
+                  "dd": "03-1234-5678",
+                  "ddPlaceholder": "内容"
+                },
+                {
+                  "dt": "営業時間",
+                  "dtPlaceholder": "設立",
+                  "dd": "9:00～18:00",
+                  "ddPlaceholder": "内容"
+                }
+              ],
+              "lw_bgEnabled": false,
+              "lw_bgColor": "var(--color-main)",
+              "lw_bgOpacity": 0.1,
+              "lw_bgFullWidth": true,
+              "marginTopPc": "lw_margin_top_pc_0",
+              "maxWidthPx": 1200,
+              "borderEnabledTop": false,
+              "borderEnabledRight": false,
+              "borderEnabledBottom": false,
+              "borderEnabledLeft": false,
+              "enableScroll": false,
+              "minWidthTb": 1000,
+              "minWidthSp": 600
+            },
+            "innerBlocks": []
+          }
+        ]
+      },
+      {
+        "name": "core/column",
+        "attributes": {
+          "lw_bgEnabled": false,
+          "lw_bgColor": "var(--color-main)",
+          "lw_bgOpacity": 0.1,
+          "lw_bgFullWidth": true,
+          "maxWidthPx": 1200,
+          "borderEnabledTop": false,
+          "borderEnabledRight": false,
+          "borderEnabledBottom": false,
+          "borderEnabledLeft": false,
+          "enableScroll": false,
+          "minWidthTb": 1000,
+          "minWidthSp": 600
+        },
+        "innerBlocks": [
+          {
+            "name": "core/html",
+            "attributes": {
+              "content": "<iframe src=\"https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3240.8317691474404!2d139.76448647623135!3d35.68114412997809!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x60188bfbd89f700b%3A0x277c49ba34ed38!2z5p2x5Lqs6aeF!5e0!3m2!1sja!2sjp!4v1767429014356!5m2!1sja!2sjp\" width=\"600\" height=\"450\" style=\"border:0;\" allowfullscreen=\"\" loading=\"lazy\" referrerpolicy=\"no-referrer-when-downgrade\"></iframe>",
+              "lw_bgEnabled": false,
+              "lw_bgColor": "var(--color-main)",
+              "lw_bgOpacity": 0.1,
+              "lw_bgFullWidth": true,
+              "maxWidthPx": 1200,
+              "borderEnabledTop": false,
+              "borderEnabledRight": false,
+              "borderEnabledBottom": false,
+              "borderEnabledLeft": false,
+              "enableScroll": false,
+              "minWidthTb": 1000,
+              "minWidthSp": 600
+            },
+            "innerBlocks": []
+          }
+        ]
+      }
+    ]
+  }
+]

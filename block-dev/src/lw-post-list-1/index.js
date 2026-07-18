@@ -20,7 +20,7 @@ registerBlockType(metadata.name, {
         return (
             <div {...blockProps}>
                 <InspectorControls>
-                    <PanelBody title="設定" initialOpen={true}>
+                    <PanelBody title="基本設定" initialOpen={true}>
                         <RangeControl
                             label="出力数"
                             value={numberOfPosts}

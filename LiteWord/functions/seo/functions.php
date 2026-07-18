@@ -320,11 +320,13 @@ function lw_get_base_other_guide_text() {
  * サイトタイトルとキャッチフレーズを編集するポップアップ
  */
 function lw_site_settings_popup_button() {
+    $settings_url = admin_url( 'options-general.php' );
     ?>
-    <button type="button" class="lw-site-settings-btn" onclick="document.getElementById('lw-site-settings-modal').style.display='flex';">
+    <a href="<?php echo esc_url( $settings_url ); ?>" target="_blank" class="lw-site-settings-btn">
         <span class="dashicons dashicons-admin-settings"></span>
         <span>サイトタイトルとキャッチフレーズの変更</span>
-    </button>
+        <span class="dashicons dashicons-external" style="font-size:14px;width:14px;height:14px;"></span>
+    </a>
     <style>
     .lw-site-settings-btn {
         display: inline-flex;
@@ -340,11 +342,19 @@ function lw_site_settings_popup_button() {
         font-weight: 500;
         cursor: pointer;
         transition: all 0.2s ease;
+        text-decoration: none;
+    }
+    .lw-site-settings-btn:visited,
+    .lw-site-settings-btn:focus {
+        color: #fff;
+        text-decoration: none;
     }
     .lw-site-settings-btn:hover {
         background: linear-gradient(135deg, #008f6aff 0%, #108787ff 100%);
         transform: translateY(-1px);
         box-shadow: 0 4px 12px rgba(0,115,170,0.3);
+        color: #fff;
+        text-decoration: none;
     }
     .lw-site-settings-btn .dashicons {
         font-size: 16px;

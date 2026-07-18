@@ -42,15 +42,36 @@
         const [chatHistory, setChatHistory] = useState([]);
         const [isOpen, setIsOpen] = useState(false);
 
+        // AI機能の有効/無効状態を監視
+        const [aiEnabled, setAiEnabled] = useState(window.lwAiFeaturesEnabled || false);
+
         const { updateBlockAttributes } = useDispatch('core/block-editor');
 
         // プレミアムステータス
         const isPremium = lwAiBlockSidebarData.isPremium;
 
+        // AI機能のON/OFFイベントを監視
+        useEffect(() => {
+            const handleToggle = (e) => {
+                setAiEnabled(e.detail.enabled);
+            };
+            window.addEventListener('lwAiFeaturesToggle', handleToggle);
+            // 初期状態を同期
+            setAiEnabled(window.lwAiFeaturesEnabled || false);
+            return () => {
+                window.removeEventListener('lwAiFeaturesToggle', handleToggle);
+            };
+        }, []);
+
         // ブロックが変わったらチャット履歴をクリア
         useEffect(() => {
             setChatHistory([]);
         }, [clientId]);
+
+        // AI機能がOFFの場合は何も表示しない
+        if (!aiEnabled) {
+            return null;
+        }
 
         // AI指示を送信
         const handleSubmit = async () => {
@@ -129,7 +150,7 @@
         };
 
         // 近日公開予定フラグ（trueの間は機能を無効化）
-        const isComingSoon = true;
+        const isComingSoon = false;
 
         return createElement(PanelBody, {
             title: createElement(Fragment, null,
@@ -314,7 +335,5 @@
         'lw-ai-generator/with-ai-inspector-controls',
         withAIInspectorControls
     );
-
-    console.log('[LW AI Block] Inspector controls filter registered');
 
 })();

@@ -57,10 +57,18 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       imagePosition = attributes.imagePosition,
       linkButtonBackgroundColor = attributes.linkButtonBackgroundColor,
       linkButtonTextColor = attributes.linkButtonTextColor,
-      showTitle = attributes.showTitle;
+      showLinkButton = attributes.showLinkButton,
+      linkButtonBorderRadius = attributes.linkButtonBorderRadius,
+      showTitle = attributes.showTitle,
+      _attributes$maxWidth = attributes.maxWidth,
+      maxWidth = _attributes$maxWidth === void 0 ? 0 : _attributes$maxWidth,
+      textPaddingTopNone = attributes.textPaddingTopNone;
     var hasTitle = titleSub || title;
     var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
-      className: "paid-block-content-3 ".concat(imagePosition === 'right' ? 'right' : 'left')
+      className: "paid-block-content-3 ".concat(imagePosition === 'right' ? 'right' : 'left').concat(maxWidth !== 0 ? ' max-width-on' : ''),
+      style: {
+        '--content-3-max-w': maxWidth === 0 ? '100vw' : "".concat(maxWidth, "px")
+      }
     });
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: "\u30DE\u30CB\u30E5\u30A2\u30EB"
@@ -69,6 +77,30 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       href: "https://www.youtube.com/watch?v=kYmWiKIxdsc",
       target: "_blank"
     }, "\u3053\u306E\u30D6\u30ED\u30C3\u30AF\u306E\u4F7F\u3044\u65B9\u306F\u3053\u3061\u3089")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u5E45\u8A2D\u5B9A"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u6700\u5927\u5E45 (px)",
+      help: "0\u306E\u5834\u5408\u306F\u5168\u5E45\uFF08100vw\uFF09",
+      value: maxWidth,
+      onChange: function onChange(v) {
+        return setAttributes({
+          maxWidth: v
+        });
+      },
+      min: 800,
+      max: 2000,
+      step: 8
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u30C6\u30AD\u30B9\u30C8\u30A8\u30EA\u30A2\u8A2D\u5B9A"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+      label: "\u4E0A\u90E8\u30D1\u30C7\u30A3\u30F3\u30B0\u3092\u306A\u3057\u306B\u3059\u308B",
+      checked: textPaddingTopNone,
+      onChange: function onChange(v) {
+        return setAttributes({
+          textPaddingTopNone: v
+        });
+      }
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: "\u753B\u50CF\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
       onSelect: function onSelect(m) {
@@ -223,8 +255,27 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30EA\u30F3\u30AF\u30DC\u30BF\u30F3\u306E\u8272\u8A2D\u5B9A"
-    }, /*#__PURE__*/React.createElement("p", null, "\u80CC\u666F\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+      title: "\u30EA\u30F3\u30AF\u30DC\u30BF\u30F3\u8A2D\u5B9A"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+      label: "\u30EA\u30F3\u30AF\u30DC\u30BF\u30F3\u3092\u8868\u793A",
+      checked: showLinkButton,
+      onChange: function onChange(v) {
+        return setAttributes({
+          showLinkButton: v
+        });
+      }
+    }), showLinkButton && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u89D2\u4E38 (px)",
+      value: linkButtonBorderRadius,
+      onChange: function onChange(v) {
+        return setAttributes({
+          linkButtonBorderRadius: v
+        });
+      },
+      min: 0,
+      max: 50,
+      step: 1
+    }), /*#__PURE__*/React.createElement("p", null, "\u80CC\u666F\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: linkButtonBackgroundColor,
       onChange: function onChange(c) {
         return setAttributes({
@@ -238,7 +289,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
           linkButtonTextColor: c
         });
       }
-    }))), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
+    })))), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
       className: "paid-block-content-3__inner"
     }, /*#__PURE__*/React.createElement("div", {
       className: "paid-block-content-3__image"
@@ -249,7 +300,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         aspectRatio: "160/".concat(aspectRatioHeight)
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "paid-block-content-3__text"
+      className: "paid-block-content-3__text".concat(textPaddingTopNone ? ' padding-top-none' : '')
     }, showTitle && /*#__PURE__*/React.createElement("h3", {
       className: "ttl"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
@@ -300,7 +351,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         whiteSpace: 'pre-wrap'
       },
       "data-lw_font_set": contentFontSet
-    }), /*#__PURE__*/React.createElement("div", {
+    }), showLinkButton && /*#__PURE__*/React.createElement("div", {
       className: "paid-block-content-3__text_br_button"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
       label: "\u30EA\u30F3\u30AF\u30C6\u30AD\u30B9\u30C8",
@@ -342,10 +393,18 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       imagePosition = attributes.imagePosition,
       linkButtonBackgroundColor = attributes.linkButtonBackgroundColor,
       linkButtonTextColor = attributes.linkButtonTextColor,
-      showTitle = attributes.showTitle;
+      showLinkButton = attributes.showLinkButton,
+      linkButtonBorderRadius = attributes.linkButtonBorderRadius,
+      showTitle = attributes.showTitle,
+      _attributes$maxWidth2 = attributes.maxWidth,
+      maxWidth = _attributes$maxWidth2 === void 0 ? 0 : _attributes$maxWidth2,
+      textPaddingTopNone = attributes.textPaddingTopNone;
     var hasTitle = titleSub || title;
     var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-      className: "paid-block-content-3 ".concat(imagePosition === 'right' ? 'right' : 'left')
+      className: "paid-block-content-3 ".concat(imagePosition === 'right' ? 'right' : 'left').concat(maxWidth !== 0 ? ' max-width-on' : ''),
+      style: {
+        '--content-3-max-w': maxWidth === 0 ? '100vw' : "".concat(maxWidth, "px")
+      }
     });
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
       className: "paid-block-content-3__inner"
@@ -359,7 +418,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         aspectRatio: "160/".concat(aspectRatioHeight)
       }
     })), /*#__PURE__*/React.createElement("div", {
-      className: "paid-block-content-3__text"
+      className: "paid-block-content-3__text".concat(textPaddingTopNone ? ' padding-top-none' : '')
     }, showTitle && hasTitle && /*#__PURE__*/React.createElement("h3", {
       className: "ttl"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
@@ -393,13 +452,14 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         whiteSpace: 'pre-wrap'
       },
       "data-lw_font_set": contentFontSet
-    }), /*#__PURE__*/React.createElement("a", _extends({
+    }), showLinkButton && /*#__PURE__*/React.createElement("a", _extends({
       href: linkUrl,
       className: "paid-block-content-3__text_br_button",
       style: {
         fontWeight: linkFontWeight,
         backgroundColor: linkButtonBackgroundColor,
-        color: linkButtonTextColor
+        color: linkButtonTextColor,
+        borderRadius: "".concat(linkButtonBorderRadius, "px")
       },
       "data-lw_font_set": linkFontSet
     }, linkTarget && {
@@ -1108,7 +1168,7 @@ module.exports = window["wp"]["components"];
   \*********************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-content-3","version":"1.0.0","title":"Content 03","category":"lw-content","icon":"format-image","editorScript":"file:./paid-block-content-3.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"imageUrl":{"type":"string","default":"https://lite-word.com/sample_img/shop/2.webp"},"imageAlt":{"type":"string","default":""},"aspectRatioHeight":{"type":"number","default":120},"titleSub":{"type":"string","source":"html","selector":".paid-block-content-3__text h3 span.sub","default":"SUB TITLE"},"title":{"type":"string","source":"html","selector":".paid-block-content-3__text h3 span.main","default":"タイトルテキスト"},"borderColor":{"type":"string","default":"var(--color-main)"},"content":{"type":"string","source":"html","selector":".paid-block-content-3__text p","default":"テキストテキストテキストテキスト\\nテキストテキストテキストテキストテキストテキスト\\nテキストテキストテキストテキスト"},"linkUrl":{"type":"string","default":""},"linkText":{"type":"string","default":"MORE"},"linkTarget":{"type":"string","default":""},"titleFontSet":{"type":"string","default":""},"titleFontWeight":{"type":"string","default":""},"contentFontSet":{"type":"string","default":""},"contentFontWeight":{"type":"string","default":""},"linkFontSet":{"type":"string","default":""},"linkFontWeight":{"type":"string","default":""},"imagePosition":{"type":"string","default":"left"},"linkButtonBackgroundColor":{"type":"string","default":"var(--color-main)"},"linkButtonTextColor":{"type":"string","default":"#fff"},"showTitle":{"type":"boolean","default":true}},"no":3}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-content-3","version":"1.0.0","title":"Content 03","category":"lw-content","icon":"format-image","editorScript":"file:./paid-block-content-3.js","aiHint":{"description":"画像+テキスト2カラム。サブタイトル+メインタイトル+説明+リンクボタン。サービス紹介・強み説明に","excludeFromAutoSelect":false,"contentAttributes":["titleSub","title","content","linkText","linkUrl"],"imageAttributes":["imageUrl"]},"supports":{"anchor":true},"attributes":{"imageUrl":{"type":"string","default":"https://lite-word.com/sample_img/shop/2.webp"},"imageAlt":{"type":"string","default":""},"aspectRatioHeight":{"type":"number","default":120},"titleSub":{"type":"string","source":"html","selector":".paid-block-content-3__text h3 span.sub","default":"SUB TITLE"},"title":{"type":"string","source":"html","selector":".paid-block-content-3__text h3 span.main","default":"タイトルテキスト"},"borderColor":{"type":"string","default":"var(--color-main)"},"content":{"type":"string","source":"html","selector":".paid-block-content-3__text p","default":"テキストテキストテキストテキスト\\nテキストテキストテキストテキストテキストテキスト\\nテキストテキストテキストテキスト"},"linkUrl":{"type":"string","default":""},"linkText":{"type":"string","default":"MORE"},"linkTarget":{"type":"string","default":""},"titleFontSet":{"type":"string","default":""},"titleFontWeight":{"type":"string","default":""},"contentFontSet":{"type":"string","default":""},"contentFontWeight":{"type":"string","default":""},"linkFontSet":{"type":"string","default":""},"linkFontWeight":{"type":"string","default":""},"imagePosition":{"type":"string","default":"left"},"linkButtonBackgroundColor":{"type":"string","default":"var(--color-main)"},"linkButtonTextColor":{"type":"string","default":"#fff"},"showTitle":{"type":"boolean","default":true}},"no":3}');
 
 /***/ })
 

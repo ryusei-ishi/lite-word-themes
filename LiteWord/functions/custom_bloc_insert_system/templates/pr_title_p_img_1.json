@@ -1,0 +1,64 @@
+[
+  {
+    "name": "wdl/custom-title-4",
+    "attributes": {
+      "mainTitle": "【見出しを設定】",
+      "subTitle": "",
+      "headingLevel": 2,
+      "subMarginBottomPc": 0.6,
+      "subMarginBottomSp": 0.6,
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": []
+  },
+  {
+    "name": "wdl/lw-gallery-01",
+    "attributes": {
+      "text_1": "【説明テキスト1を入力】",
+      "text_2": "",
+      "showText1": true,
+      "showText2": false,
+      "text1AlignPc": "center_pc",
+      "text1AlignSp": "left_sp",
+      "text2AlignPc": "center_pc",
+      "text2AlignSp": "left_sp",
+      "items": [
+        {
+          "imgUrl": ""
+        },
+        {
+          "imgUrl": ""
+        },
+        {
+          "imgUrl": ""
+        }
+      ],
+      "maxWidthText": 800,
+      "maxWidth": 800,
+      "lw_bgEnabled": false,
+      "lw_bgColor": "var(--color-main)",
+      "lw_bgOpacity": 0.1,
+      "lw_bgFullWidth": true,
+      "maxWidthPx": 1200,
+      "borderEnabledTop": false,
+      "borderEnabledRight": false,
+      "borderEnabledBottom": false,
+      "borderEnabledLeft": false,
+      "enableScroll": false,
+      "minWidthTb": 1000,
+      "minWidthSp": 600
+    },
+    "innerBlocks": []
+  }
+]

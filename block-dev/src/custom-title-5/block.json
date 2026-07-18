@@ -10,34 +10,39 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "カラー・サイズ調整可能な見出し。大きな英語メイン+小さな日本語サブ。インパクト重視",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "subTitle"],
+		"imageAttributes": []
+	},
 	"attributes": {
 		"subTitle": {
 			"type": "string",
-			"default": "製品紹介"
+			"default": "製品紹介",
+			"aiHint": { "role": "subheading", "contentGuide": "日本語の補足タイトル。3〜10文字", "example": "製品紹介" }
 		},
 		"mainTitle": {
 			"type": "string",
-			"default": "PRODUCTS"
+			"default": "PRODUCTS",
+			"aiHint": { "role": "heading", "contentGuide": "英語のメインタイトル。大文字推奨。3〜15文字", "example": "PRODUCTS" }
 		},
 		"headingLevel": {
 			"type": "number",
-			"default": 2
+			"default": 2,
+			"aiHint": { "skip": true }
 		},
 		"mainTitleColor": {
 			"type": "string",
-			"default": "var(--color-main)"
+			"default": "var(--color-main)",
+			"aiHint": { "skip": true }
 		},
 		"fontSize": {
 			"type": "string",
-			"default": "l"
+			"default": "l",
+			"aiHint": { "skip": true }
 		}
 	},
 	"editorScript": "file:./custom-title-5.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 5
 }

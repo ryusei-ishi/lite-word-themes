@@ -12,6 +12,17 @@ get_template_part('./functions/css_js_set/front');
 //エディタ用のCSSとJS読み込み
 get_template_part('./functions/css_js_set/editor');
 
+// カスタマイザー保存時にCSS変数キャッシュをクリア
+function lw_clear_css_vars_cache() {
+    global $wpdb;
+    $wpdb->query(
+        "DELETE FROM {$wpdb->options}
+         WHERE option_name LIKE '_transient_lw_css_vars_%'
+         OR option_name LIKE '_transient_timeout_lw_css_vars_%'"
+    );
+}
+add_action('customize_save_after', 'lw_clear_css_vars_cache');
+
 // CSS変数を共通で適用する関数
 function lw_generate_css_variables() {
     $post_id = get_the_ID();
@@ -35,7 +46,7 @@ function lw_generate_css_variables() {
     :root {
         /* ------- layout ---------*/
         --max-width-clm-1: <?php 
-            $max_width_clm_1 = Lw_put_text("max_width_clm_1");
+            $max_width_clm_1 = get_post_meta(get_the_ID(),"max_width_clm_1",true);
             if(empty($max_width_clm_1)){
                 echo Lw_theme_mod_set("page_post_layout_max_width_clm_1", "1120px");
             } else {
@@ -222,23 +233,6 @@ function Lw_font_family_switch($font_family) {
 }
 //fontの指定------------------------------------------------
 function Lw_font_sets(){
-    $post_id = get_the_ID();
-    $page_type = is_page() ? 'page' : (is_single() ? 'single' : 'other');
-
-    // トランジェントキャッシュを使用してパフォーマンスを向上
-    if ($post_id) {
-        $post_modified = get_post_modified_time('U', false, $post_id);
-        $cache_key = 'lw_font_sets_' . $post_id . '_' . $page_type . '_' . $post_modified;
-        $cached_fonts = get_transient($cache_key);
-
-        if ($cached_fonts !== false) {
-            echo $cached_fonts;
-            return;
-        }
-    }
-
-    ob_start(); // 出力バッファリング開始
-
     //body
     $font_body_page = Lw_put_text("font_body");
     $font_body = $font_body_page;
@@ -304,6 +298,29 @@ function Lw_font_sets(){
                 --font-size-post-df_sp: <?=$font_df_size_sp?>;
             }
             <?php if(is_page()): ?>
+                <?php 
+                    $padding_lr_set = get_post_meta(get_the_ID(),"padding_lr_set",true);
+                    if(!empty($padding_lr_set) && $padding_lr_set === "off"){
+                        echo "
+                            .lw_content_wrap.page,
+                            .post_style.page{
+                                padding:0;
+                                width: 100%;
+                            }
+                        ";
+                    } 
+                ?>
+                <?php 
+                    $padding_tb_set = get_post_meta(get_the_ID(),"padding_tb_set",true);
+                    if(!empty($padding_tb_set) && $padding_tb_set === "off"){
+                        echo "
+                            .lw_content_wrap .first_content,
+                            .lw_content_wrap .last_content{
+                                display:none;
+                            }
+                        ";
+                    } 
+                ?>
                 .post_style.page{
                     font-family: <?=$font_page_style_set?>;
                     font-weight: <?=$font_body_weight?>;
@@ -358,16 +375,7 @@ function Lw_font_sets(){
                 }
             <?php endif; ?>
         </style>
-
     <?php
-    $font_output = ob_get_clean(); // バッファの内容を取得
-
-    // トランジェントにキャッシュを保存（1時間）
-    if ($post_id) {
-        set_transient($cache_key, $font_output, 3600);
-    }
-
-    echo $font_output;
 }
 add_action('wp_footer', 'Lw_font_sets');
 

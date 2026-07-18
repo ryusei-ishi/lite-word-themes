@@ -59,7 +59,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, "H".concat(level));
     }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30A2\u30AF\u30BB\u30F3\u30C8\u30AB\u30E9\u30FC\u8A2D\u5B9A"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: accentColor,
       onChange: onChangeAccentColor
@@ -162,7 +162,7 @@ module.exports = window["wp"]["components"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-6","version":"1.0.0","title":"見出しタイトル 06","category":"lw-heading","icon":"editor-textcolor","description":"メインタイトルを表示する見出しブロック（アクセントカラー付き）","supports":{"anchor":true},"attributes":{"mainTitle":{"type":"string","default":"CONTENT"},"accentColor":{"type":"string","default":"var(--color-main)"},"headingLevel":{"type":"number","default":2}},"editorScript":"file:./custom-title-6.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":6}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-6","version":"1.0.0","title":"見出しタイトル 06","category":"lw-heading","icon":"editor-textcolor","description":"メインタイトルを表示する見出しブロック（アクセントカラー付き）","supports":{"anchor":true},"aiHint":{"description":"アクセントカラー付きシンプル見出し。メインタイトルのみ。サブタイトル不要な場面に","excludeFromAutoSelect":false,"contentAttributes":["mainTitle"],"imageAttributes":[]},"attributes":{"mainTitle":{"type":"string","default":"CONTENT","aiHint":{"role":"heading","contentGuide":"セクション見出し（英語 or 日本語）。3〜15文字","example":"FAQ"}},"accentColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}}},"editorScript":"file:./custom-title-6.js","no":6}');
 
 /***/ })
 

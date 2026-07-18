@@ -7,12 +7,12 @@
 	"category": "lw-content",
 	"icon": "lightbulb",
 	"editorScript": "file:./lw-content-8.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "サブ+メインタイトル+説明+ボタンのカード配列。3カラム。サービス詳細・プラン紹介に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -229,7 +229,8 @@
 					"url": "#",
 					"btnText": "詳細はこちら"
 				}
-			]
+			],
+			"aiHint": { "role": "list", "contentGuide": "カード項目。2〜4個。各要素にsub(英語3〜10文字)+main(日本語5〜15文字)+text(20〜60文字)+btnText(4〜10文字)", "example": [{"sub": "PLAN A", "main": "スタンダード", "text": "基本的なサービスを全て含むプランです", "btnText": "詳細を見る"}] }
 		}
 	},
 	"no": 8

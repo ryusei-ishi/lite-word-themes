@@ -1,0 +1,153 @@
+{
+	"_meta": {
+		"description": "LiteWordウィジェット機能のAI向けメタ情報。ウィジェットエリアとカスタムウィジェットの構成・使い方をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21"
+	},
+	"overview": {
+		"aiDescription": "LiteWordテーマのウィジェット機能。サイドバー・フッター・投稿下・ドロワーメニューなど10箇所のウィジェットエリアと、3種類のカスタムウィジェットを提供する。従来のウィジェットエディタ（クラシック）を使用し、ブロックウィジェットエディタは無効化されている。",
+		"adminLocation": "WordPress管理画面 > 外観 > ウィジェット",
+		"editorType": "クラシックウィジェットエディタ（ブロックウィジェットエディタは無効化済み）",
+		"userGuide": "外観 > ウィジェットから、各エリアにウィジェットをドラッグ＆ドロップで配置する。LiteWord専用ウィジェットには【LW】の接頭辞が付いている。"
+	},
+	"widgetAreas": {
+		"sidebar_pc": {
+			"name": "サイドバー",
+			"id": "sidebar_pc",
+			"aiDescription": "サイドバーに表示されるウィジェットエリア。2カラムレイアウト時に表示される。投稿ページ・アーカイブページで使用。",
+			"userGuide": "ブログサイトでは、カテゴリー一覧・最近の投稿・検索バー・プロフィール情報などを配置する。"
+		},
+		"page_bottom": {
+			"name": "固定ページ（下）",
+			"id": "page_bottom",
+			"aiDescription": "固定ページの下部に表示されるウィジェットエリア。主にマイパーツウィジェットでの利用を想定。",
+			"userGuide": "固定ページ共通のCTAやお問い合わせフォームを表示するのに適している。マイパーツウィジェットを使えば、作成済みのパーツを簡単に挿入できる。"
+		},
+		"post_padding_bottom": {
+			"name": "投稿 本文の内側（下）",
+			"id": "post_padding_bottom",
+			"aiDescription": "投稿記事の本文エリア内の下部に表示されるウィジェットエリア。記事のpadding内に収まる。",
+			"userGuide": "記事を読み終わった直後に表示されるため、関連記事リンクやCTAの配置に効果的。"
+		},
+		"post_bottom": {
+			"name": "投稿 本文の外側（下）",
+			"id": "post_bottom",
+			"aiDescription": "投稿記事の本文エリアの外側（下）に表示されるウィジェットエリア。本文のpaddingの外に表示される。",
+			"userGuide": "広告バナーや全幅のCTAセクションなど、本文とは異なるレイアウトで表示したい要素に適している。"
+		},
+		"category_bottom_widget_area_all": {
+			"name": "カテゴリー（下・全幅）",
+			"id": "category_bottom_widget_area_all",
+			"aiDescription": "カテゴリーページの下部（フッターより上）に全幅表示されるウィジェットエリア。主にマイパーツウィジェットでの利用を想定。",
+			"userGuide": "カテゴリーページ共通のバナーやCTAを全幅で表示できる。マイパーツで作成したパーツを配置すると効果的。"
+		},
+		"footer_widget_area_all": {
+			"name": "フッター（上・全幅）",
+			"id": "footer_widget_area_all",
+			"aiDescription": "フッター上部に全幅表示されるウィジェットエリア。主にマイパーツウィジェットでの利用を想定。ブロックウィジェットは自動削除される仕様。",
+			"userGuide": "フッター上部の全幅エリア。お問い合わせCTAやサイトマップ的なリンク集を全幅で配置できる。",
+			"note": "ブロックウィジェットが配置された場合、自動的に削除される仕様（liteword_remove_block_widget_from_footer）。マイパーツウィジェットを使うこと。"
+		},
+		"footer_1": {
+			"name": "フッター（上・左）",
+			"id": "footer_1",
+			"aiDescription": "フッター上部の左カラムに表示されるウィジェットエリア。フッターが3カラム構成の場合に使用。",
+			"userGuide": "会社情報やロゴを表示するのに適している。"
+		},
+		"footer_2": {
+			"name": "フッター（上・中央）",
+			"id": "footer_2",
+			"aiDescription": "フッター上部の中央カラムに表示されるウィジェットエリア。",
+			"userGuide": "サービス一覧やナビゲーションリンクを配置する。"
+		},
+		"footer_3": {
+			"name": "フッター（上・右）",
+			"id": "footer_3",
+			"aiDescription": "フッター上部の右カラムに表示されるウィジェットエリア。",
+			"userGuide": "お問い合わせ情報やSNSリンクを配置する。"
+		},
+		"drawer_bottom": {
+			"name": "ドロワーメニュー（下）",
+			"id": "drawer_bottom",
+			"aiDescription": "スマホのハンバーガーメニュー（ドロワーメニュー）の下部に表示されるウィジェットエリア。",
+			"userGuide": "ドロワーメニュー内に電話番号やCTAボタンを追加したい場合に使う。"
+		}
+	},
+	"customWidgets": {
+		"author": {
+			"name": "【LW】執筆者",
+			"widgetId": "this_post_author_widget",
+			"aiDescription": "投稿ページ（is_single()）でのみ表示される、記事の執筆者情報ウィジェット。プロフィール画像・名前・自己紹介・SNSリンクを表示する。",
+			"displayCondition": "投稿ページ（is_single()）でのみ表示。固定ページやアーカイブページでは非表示。",
+			"displayContent": [
+				"プロフィール画像（カスタム画像 > Gravatar の優先順）",
+				"ユーザー表示名",
+				"プロフィール文（自己紹介）",
+				"詳細リンクボタン（ユーザーのホームページURL設定時のみ）",
+				"SNSリンクアイコン（サイト2/Instagram/X/LINE/Threads/note）"
+			],
+			"settings": {
+				"author_title_text": {
+					"aiDescription": "執筆者セクションのタイトルテキスト",
+					"default": "この記事の執筆者",
+					"userGuide": "「この記事を書いた人」「著者について」などに変更可能。"
+				},
+				"more_btn_text": {
+					"aiDescription": "詳細リンクボタンのテキスト",
+					"default": "詳細はこちら",
+					"userGuide": "「プロフィールを見る」「もっと見る」などに変更可能。ユーザーのURL（ホームページ）が設定されていない場合はボタン自体が非表示。"
+				}
+			},
+			"userGuide": "サイドバーや投稿下に配置して、記事の執筆者を表示する。複数の著者がいるサイトで特に有効。SNSリンクはユーザープロフィールで設定する。"
+		},
+		"myParts": {
+			"name": "【LW】マイパーツ呼び出し",
+			"widgetId": "lw_my_parts_shortcode_widget",
+			"aiDescription": "選択したマイパーツをウィジェットエリアに表示するウィジェット。内部的にはショートコード [my_parts_content] を実行する。",
+			"settings": {
+				"parts_id": {
+					"aiDescription": "表示するマイパーツをドロップダウンリストから選択。公開・下書きの全マイパーツが更新日順で一覧表示される。",
+					"type": "select",
+					"userGuide": "表示したいマイパーツを選択する。ステータス（publish/draft）も表示されるので確認しやすい。"
+				},
+				"show_draft": {
+					"aiDescription": "下書き状態のマイパーツも表示するかどうかのチェックボックス",
+					"type": "checkbox",
+					"default": false,
+					"userGuide": "チェックを入れると、下書き状態のパーツもフロントに表示される。制作中のプレビュー確認に便利。"
+				}
+			},
+			"outputWrapper": "div.post_style.lw_my_parts_widget[data-parts-id]",
+			"userGuide": "フッターやサイドバーにマイパーツを表示したい場合に使う。ショートコードを手動入力する必要がなく、ドロップダウンで選ぶだけで配置できる。"
+		},
+		"shortcode": {
+			"name": "【LW】ショートコード",
+			"widgetId": "lw_shortcode_widget",
+			"aiDescription": "任意のショートコードを実行して表示する汎用ウィジェット。Contact Form 7やその他プラグインのショートコードをウィジェットエリアに配置できる。",
+			"settings": {
+				"title": {
+					"aiDescription": "ウィジェットのタイトル（任意）。設定するとウィジェットの上部にh2で表示される。",
+					"type": "text",
+					"required": false,
+					"userGuide": "空欄にするとタイトルなしで表示される。"
+				},
+				"shortcode": {
+					"aiDescription": "実行するショートコードをテキストエリアに入力。複数行も可能。",
+					"type": "textarea",
+					"required": true,
+					"placeholder": "[shortcode_name]",
+					"userGuide": "例: [contact-form-7 id=\"123\"]、[my_parts_content id=\"45\"] など、WordPressで使える任意のショートコードを入力する。"
+				}
+			},
+			"outputWrapper": "div.lw_shortcode_widget_content",
+			"userGuide": "Contact Form 7のフォーム、目次、カスタムブロックなど、ショートコードで出力できるものならなんでもウィジェットエリアに配置できる。"
+		}
+	},
+	"removedWidgets": {
+		"aiDescription": "LiteWordテーマでは、使用頻度の低い標準ウィジェットが管理画面で非表示にされている。",
+		"removed": [
+			"WP_Widget_Calendar（カレンダー）",
+			"WP_Widget_Meta（メタ情報）"
+		]
+	}
+}

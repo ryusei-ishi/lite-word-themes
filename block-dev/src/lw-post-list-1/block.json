@@ -7,12 +7,13 @@
 	"category": "lw-post",
 	"icon": "editor-ul",
 	"editorScript": "file:./lw-post-list-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "投稿一覧カード。サムネイル+日付+カテゴリ+タイトル+抜粋。ブログ・お知らせセクションに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["numberOfPosts", "categoryId"],
+		"imageAttributes": [],
+		"notes": "動的ブロック。DBから投稿を取得して表示。テキストコンテンツの生成は不要"
+	},
 	"supports": {
 		"anchor": true
 	},

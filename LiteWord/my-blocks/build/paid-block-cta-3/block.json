@@ -7,6 +7,12 @@
 	"category": "lw-cta",
 	"icon": "megaphone",
 	"description": "電話番号付きCTAブロック（有料）",
+	"aiHint": {
+		"description": "電話番号CTA。画像+見出し+リード+ポイント3つ+電話番号+タップ誘導。店舗系業種のCTAに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "leadText", "listItem1", "listItem2", "listItem3", "phoneNumber", "tapTelText"],
+		"imageAttributes": ["imageUrl"]
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -69,11 +75,5 @@
 		}
 	},
 	"editorScript": "file:./paid-block-cta-3.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 3
 }

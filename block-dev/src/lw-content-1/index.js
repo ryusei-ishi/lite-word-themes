@@ -98,7 +98,7 @@ registerBlockType(metadata.name, {
                         )}
                     </PanelBody>
 
-                    <PanelBody title="リンク設定">
+                    <PanelBody title="基本設定">
                         <ToggleControl
                             label="新規タブで開く"
                             checked={linkTarget === '_blank'}
@@ -145,7 +145,7 @@ registerBlockType(metadata.name, {
                         />
                     </PanelBody>
 
-                    <PanelBody title="リンクボタンの色設定">
+                    <PanelBody title="色設定">
                         <p>背景色</p>
                         <ColorPalette
                             value={linkButtonBackgroundColor}

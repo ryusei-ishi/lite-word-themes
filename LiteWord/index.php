@@ -11,6 +11,14 @@ get_template_part('templates/drawer/index');
     <?php get_template_part('templates/archive/body/index'); ?>
     <?php get_template_part('templates/archive/post_list/index'); ?>
 </main>
+<?php
+    // category_bottom_widget_area_all は常に表示
+    if ( is_active_sidebar( 'category_bottom_widget_area_all' ) ) :
+        echo '<aside class="category_bottom_widget_area_all post_content" style="background-color: #fff;">';
+        dynamic_sidebar( 'category_bottom_widget_area_all' );
+        echo '</aside>';
+    endif;
+?>
 <?php 
 get_template_part( "templates/footer/index" );
 get_template_part( "templates/return_top/index" );

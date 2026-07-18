@@ -1,0 +1,176 @@
+{
+	"_meta": {
+		"description": "LiteWordカテゴリーカスタマイズ機能のAI向けメタ情報。カテゴリー編集画面の拡張フィールド・並び順・301リダイレクト・共通設定をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21"
+	},
+	"overview": {
+		"aiDescription": "WordPressのカテゴリー編集画面を拡張し、並び順・SEO設定・レイアウト制御・アイキャッチ画像・301リダイレクト・目次制御・カテゴリーページ本文など多数の機能を追加する。また、全カテゴリー共通のFV下コンテンツを一括設定する管理画面も提供する。",
+		"adminLocation": "WordPress管理画面 > 投稿 > カテゴリー > 各カテゴリーの「編集」",
+		"userGuide": "カテゴリーの編集画面を開くと、WordPressの標準項目（名前・スラッグ・説明等）の下に、LiteWord独自の拡張フィールドが表示される。"
+	},
+	"adminScreens": {
+		"categoryList": {
+			"title": "カテゴリー一覧",
+			"aiDescription": "カテゴリー一覧に「ID」列と「並び順」列が追加されている。並び順でソートされて表示される。クイック編集から並び順の変更も可能。",
+			"location": "投稿 > カテゴリー",
+			"addedColumns": {
+				"category_id": {
+					"aiDescription": "カテゴリーのタームID。ショートコードやテンプレートで指定する際に使う。",
+					"columnWidth": "40px"
+				},
+				"sort_order": {
+					"aiDescription": "カテゴリーの並び順。数字が小さいほど優先的に表示される。未設定は999として扱われる。",
+					"columnWidth": "80px"
+				}
+			},
+			"quickEdit": "クイック編集から並び順を変更可能。"
+		},
+		"categoryEdit": {
+			"title": "カテゴリー編集",
+			"aiDescription": "各カテゴリーの編集画面に追加されたLiteWord独自の拡張フィールド。",
+			"location": "投稿 > カテゴリー > 対象カテゴリーの「編集」をクリック"
+		},
+		"categoryCommon": {
+			"title": "全カテゴリー共通設定",
+			"aiDescription": "すべてのカテゴリーページのファーストビュー直下（FV下）に共通で表示されるコンテンツを設定する管理画面。TinyMCEビジュアルエディタ付き。",
+			"location": "投稿 > 全カテゴリー共通設定",
+			"optionKey": "lw_cat_common_content_fv_bottom",
+			"userGuide": "全カテゴリーページに同じバナーや説明文をまとめて設置したい場合に使う。例えば「記事の更新情報はSNSでお知らせしています」のようなバナーを一括表示できる。"
+		}
+	},
+	"categoryEditFields": {
+		"category_sort_order": {
+			"label": "並び順",
+			"aiDescription": "カテゴリーの表示順序を数値で指定する。数字が小さいほど優先的に表示される。未設定の場合は999として扱われ、名前順でソートされる。",
+			"metaKey": "category_sort_order",
+			"type": "number",
+			"min": 0,
+			"userGuide": "重要なカテゴリーほど小さい数字を設定する。例：お知らせ=1、ブログ=2、コラム=3。"
+		},
+		"category_redirect_from_url": {
+			"label": "リダイレクト元（旧 URL）",
+			"aiDescription": "テーマ内で完結する301リダイレクト設定。旧URLからこのカテゴリーの現在のURLへ自動転送する。サイトリニューアル等でカテゴリーURLが変わった場合に使う。",
+			"metaKey": "category_redirect_from_url",
+			"type": "url",
+			"placeholder": "http://example.com/old-category",
+			"technicalDetail": "template_redirectフックで処理。ホスト名+パスを正規化して比較。無限ループ防止あり。管理画面・Ajax・Cron・プレビューでは無効。",
+			"userGuide": "サイト内の旧URLを入力すると、そのURLにアクセスしたユーザーを現在のカテゴリーページに301リダイレクトする。SEOの評価を引き継ぐために使う。"
+		},
+		"category_toc_switch": {
+			"label": "目次の表示",
+			"aiDescription": "このカテゴリーに属する投稿で目次の表示を強制的に切り替える。カスタマイザーの全体設定や投稿個別の設定を上書きする。",
+			"metaKey": "category_toc_switch",
+			"type": "select",
+			"options": {
+				"": "未設定（通常の設定に従う）",
+				"on": "表示する",
+				"off": "非表示にする"
+			},
+			"userGuide": "FAQ系カテゴリーでは目次を非表示にし、長文記事カテゴリーでは目次を表示する、などの使い分けが可能。"
+		},
+		"category_long_description": {
+			"label": "カテゴリーページ本文",
+			"aiDescription": "カテゴリーアーカイブページに表示される長文の説明テキスト。TinyMCEビジュアルエディタ付きで、画像やリンクの挿入も可能。WordPressの標準「説明」フィールドとは別。",
+			"metaKey": "category_long_description",
+			"type": "wysiwyg",
+			"sanitize": "wp_kses_post",
+			"userGuide": "カテゴリーページにSEO向けの説明文を追加したい場合に使う。WordPressの標準「説明」フィールドはプレーンテキストだが、こちらはHTMLが使える。"
+		},
+		"category_seo_title": {
+			"label": "SEO用タイトル（titleタグ）",
+			"aiDescription": "カテゴリーアーカイブページの<title>タグに使用されるテキスト。空欄の場合はカテゴリー名がそのまま使われる。",
+			"metaKey": "category_seo_title",
+			"type": "text",
+			"userGuide": "カテゴリー名とは別に、検索結果で表示されるタイトルを最適化したい場合に使う。例：カテゴリー名「NEWS」→ SEOタイトル「最新ニュース・お知らせ | サイト名」"
+		},
+		"category_meta_description": {
+			"label": "メタディスクリプション",
+			"aiDescription": "カテゴリーアーカイブページのmeta descriptionタグに使用されるテキスト。検索結果のスニペットに表示される。",
+			"metaKey": "category_meta_description",
+			"type": "textarea",
+			"sanitize": "sanitize_textarea_field",
+			"userGuide": "120〜160文字程度で、カテゴリーの内容を簡潔に説明する文章を入力する。"
+		},
+		"category_noindex": {
+			"label": "noindex 設定",
+			"aiDescription": "このカテゴリーのアーカイブページを検索エンジンにインデックスさせないようにする。meta robots に noindex を追加。",
+			"metaKey": "category_noindex",
+			"type": "checkbox",
+			"value": "noindex",
+			"userGuide": "記事数が少ないカテゴリーや、テスト用カテゴリーなど、検索結果に表示したくないページに使う。"
+		},
+		"category_thumbnail_id": {
+			"label": "アイキャッチ画像",
+			"aiDescription": "カテゴリーのアイキャッチ画像。メディアライブラリからアップロード・選択できる。アーカイブページのFVに使用される。",
+			"metaKey": "category_thumbnail_id",
+			"type": "image",
+			"userGuide": "カテゴリーアーカイブページのファーストビューに表示される画像。未設定の場合はカスタマイザーで設定したデフォルト画像が使われる。"
+		},
+		"category_archive_fv_ptn": {
+			"label": "投稿アーカイブ：FVパターン",
+			"aiDescription": "このカテゴリーのアーカイブページのファーストビュー（ページ上部）のデザインパターンを個別に設定する。未選択の場合はカスタマイザーの全体設定に従う。",
+			"metaKey": "category_archive_fv_ptn",
+			"type": "select",
+			"options": {
+				"": "未選択（カスタマイザーの設定に従う）",
+				"ptn_1": "パターン1",
+				"ptn_2": "パターン2",
+				"ptn_3": "パターン3",
+				"ptn_none": "非表示"
+			},
+			"userGuide": "特定のカテゴリーだけFVのデザインを変えたい場合に使う。"
+		},
+		"category_archive_list_ptn": {
+			"label": "投稿アーカイブ：投稿一覧パターン",
+			"aiDescription": "このカテゴリーのアーカイブページで記事一覧をどのパターンで表示するかを個別に設定する。",
+			"metaKey": "category_archive_list_ptn",
+			"type": "select",
+			"options": {
+				"": "未選択（カスタマイザーの設定に従う）",
+				"ptn_1": "パターン1（カード型）",
+				"ptn_2": "パターン2（リスト型）",
+				"ptn_3": "パターン3（お知らせ一覧用・テキストのみ）",
+				"ptn_4": "パターン4"
+			},
+			"userGuide": "「お知らせ」カテゴリーはテキスト一覧型、「ブログ」カテゴリーはカード型、のように使い分けができる。"
+		},
+		"category_layout": {
+			"label": "投稿ページ：レイアウト",
+			"aiDescription": "このカテゴリーに属する投稿ページのカラムレイアウトを個別に設定する。カスタマイザーの全体設定を上書きする。",
+			"metaKey": "category_layout",
+			"type": "select",
+			"options": {
+				"": "未選択（カスタマイザーの設定に従う）",
+				"clm_1": "1カラム",
+				"clm_2_left": "2カラム（左サイドバー）",
+				"clm_2_right": "2カラム（右サイドバー）"
+			},
+			"userGuide": "コラム系カテゴリーは1カラム、ブログ系カテゴリーは2カラム、のように使い分けられる。"
+		},
+		"category_post_fv_ptn": {
+			"label": "投稿ページ：FVパターン",
+			"aiDescription": "このカテゴリーに属する投稿ページのファーストビュー（タイトル・アイキャッチ表示部分）のデザインパターンを個別に設定する。",
+			"metaKey": "category_post_fv_ptn",
+			"type": "select",
+			"options": {
+				"": "未選択（カスタマイザーの設定に従う）",
+				"fv_ptn_1": "パターン1",
+				"fv_ptn_2": "パターン2",
+				"fv_ptn_3": "パターン3"
+			},
+			"userGuide": "特定のカテゴリーだけ投稿ページのFVデザインを変えたい場合に使う。"
+		}
+	},
+	"technicalDetails": {
+		"sortingMechanism": {
+			"aiDescription": "カテゴリーの並び順はterms_clausesフィルターでSQLレベルで制御。category_sort_orderメタ値をLEFT JOINして、未設定は999として扱い、名前のアルファベット順でセカンダリソート。管理画面のみ適用（is_admin()チェック付き）。"
+		},
+		"redirectMechanism": {
+			"aiDescription": "template_redirectフックで301リダイレクト処理。URL正規化（スキーム除去・末尾スラッシュ除去・小文字化）してDB内の旧URLと比較。該当カテゴリーが見つかればwp_redirect()で301転送。無限ループ防止・管理画面除外あり。"
+		},
+		"saveFields": {
+			"aiDescription": "edited_categoryアクションで全フィールドを一括保存。各フィールドに適切なサニタイズ関数を適用（sanitize_text_field/absint/esc_url_raw/wp_kses_post等）。noindexはチェックボックスのため、未チェック時はdelete_term_metaで削除。"
+		}
+	}
+}

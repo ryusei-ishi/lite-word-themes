@@ -21,6 +21,9 @@ function lw_maybe_register_premium_blocks_for_preview() {
     global $lw_is_template_preview;
     $lw_is_template_preview = true;
 
+    // プレビュー中はブロック二重登録のNotice表示を抑制
+    @ini_set('display_errors', '0');
+
     // 管理バーを非表示
     add_filter('show_admin_bar', '__return_false');
 
@@ -129,6 +132,10 @@ function lw_handle_template_preview_page() {
     }
 
     // $lw_is_template_preview は init フックで既に設定済み
+
+    // プレビュー中はブロック二重登録のNoticeを抑制
+    $prev_display = ini_get('display_errors');
+    @ini_set('display_errors', '0');
 
     $rendered_content = do_blocks($content);
 
@@ -375,9 +382,13 @@ function lw_render_template_preview($request) {
     
     global $lw_is_template_preview;
     $lw_is_template_preview = true;
-    
+
+    // プレビュー中はPHP Noticeを非表示（ブロック二重登録の警告を抑制）
+    $prev_error_reporting = error_reporting();
+    error_reporting($prev_error_reporting & ~E_NOTICE & ~E_WARNING);
+
     $rendered_content = do_blocks($content);
-    
+
     $page_content_shadow = function_exists('Lw_put_text') ? Lw_put_text("page_content_shadow", "off") : "off";
     $page_content_shadow = ($page_content_shadow === "on") ? "shadow" : "";
     
@@ -460,7 +471,9 @@ function lw_render_template_preview($request) {
     <?php
     
     $html = ob_get_clean();
-    
+
+    error_reporting($prev_error_reporting);
+
     $lw_is_template_preview = false;
     
     return array(

@@ -43,10 +43,11 @@ registerBlockType( metadata.name, {
 			cta1Text, cta1Url, cta1Enable, cta1BgColor, cta1TextColor, cta1BorderWidth, cta1BorderColor,
 			cta2Text, cta2Url, cta2Enable, cta2TextColor,
 			leadText, headline, description, headingLevel,
-			bgType, bgImgPc, bgImgSp, bgImgAlt, videoUrl, videoSpeed,
+			bgType, bgImgPc, bgImgSp, bgImgAlt, videoUrl, videoUrlSp, videoSpeed,
 			bgFilterType, bgFilterColor, bgFilterGradient, bgFilterOpacity,
 			navMenuId, navMenuItems,
 			minHeightPc, minHeightTb, minHeightSp,
+			showHeader,
 		} = attributes;
 
 		/* --- WordPress標準設定を取得 --- */
@@ -93,6 +94,8 @@ registerBlockType( metadata.name, {
 		const onSelectBgSp =m=>setAttributes({bgImgSp:m.url});
 		const onSelectLogo =m=>setAttributes({logoImg:m.url});
 		const onSelectVid  =m=>setAttributes({videoUrl:m.url});
+		const onSelectVidSp=m=>setAttributes({videoUrlSp:m.url});
+		const getFileName = (url) => { try { return decodeURIComponent(url.split('/').pop().split('?')[0]); } catch(e) { return url.split('/').pop(); } };
 		const onChangeHeadingLevel = (newLevel) => {
 			setAttributes({ headingLevel: newLevel });
 		};
@@ -153,6 +156,11 @@ registerBlockType( metadata.name, {
 				</ToolbarGroup>
 			</BlockControls>
 			<InspectorControls>
+				{/* ヘッダー表示 */}
+				<PanelBody title="ヘッダー設定" initialOpen={true}>
+					<ToggleControl label="ヘッダーを表示" checked={showHeader} onChange={v=>setAttributes({showHeader:v})}
+						help={showHeader ? 'ロゴ・ナビ・ハンバーガーが表示されます' : 'ヘッダー部分が非表示になります'}/>
+				</PanelBody>
 				{/* ロゴ */}
 				<PanelBody title="ロゴ設定" initialOpen={false}>
 					<br/>
@@ -335,14 +343,27 @@ registerBlockType( metadata.name, {
 						/>
 					</>}
 					{bgType==='video' && <>
+						<p style={{ fontWeight: 'bold', marginBottom: '8px' }}>PC用動画</p>
 						<MediaUpload allowedTypes={['video']} value={videoUrl} onSelect={onSelectVid}
 							render={({open})=>(
 								<>
-									{videoUrl && <p style={{marginBottom:8}}>現在: {videoUrl.split('/').pop()}</p>}
+									{videoUrl && <><p style={{marginBottom:8, fontSize:'13px', wordBreak:'break-all'}}>{getFileName(videoUrl)}</p>
+										<Button variant="secondary" style={{marginRight:8}} onClick={()=>setAttributes({videoUrl:''})}>削除</Button></>}
 									<Button variant="secondary" onClick={open}>{videoUrl?'変更':'動画を選択'}</Button>
 								</>
 							)}/>
-							<br/><br/>
+						<br/><br/>
+						<p style={{ fontWeight: 'bold', marginBottom: '8px' }}>スマホ用動画</p>
+						<MediaUpload allowedTypes={['video']} value={videoUrlSp} onSelect={onSelectVidSp}
+							render={({open})=>(
+								<>
+									{videoUrlSp && <><p style={{marginBottom:8, fontSize:'13px', wordBreak:'break-all'}}>{getFileName(videoUrlSp)}</p>
+										<Button variant="secondary" style={{marginRight:8}} onClick={()=>setAttributes({videoUrlSp:''})}>削除</Button></>}
+									<Button variant="secondary" onClick={open}>{videoUrlSp?'変更':'動画を選択'}</Button>
+								</>
+							)}/>
+						<p style={{marginTop:8, fontSize:'12px', color:'#666'}}>※未設定の場合はPC用動画が使われます</p>
+						<br/>
 						<RangeControl label="再生速度" value={videoSpeed} onChange={v=>setAttributes({videoSpeed:v})}
 							min={0.25} max={2} step={0.05}/>
 						<div style={{marginTop:16, padding:10, backgroundColor:'#f0f0f0', borderRadius:4}}>
@@ -460,7 +481,7 @@ registerBlockType( metadata.name, {
 
 			{/* -------- プレビュー -------- */}
 			<div {...blockProps}>
-				<header className="fv_in_header">
+				{showHeader && <header className="fv_in_header">
 					<h1 className="logo"><a href={logoUrl || '#'}>
 						{logoImg
 							? <img src={logoImg} alt="" style={{height:logoImgHeight+'%',width:'auto'}}/>
@@ -475,7 +496,7 @@ registerBlockType( metadata.name, {
 							<li>メニュー未選択</li>}
 					</ul></nav>
 					<div className="ham_btn drawer_nav_open"><div className="in"><div></div><div></div></div></div>
-				</header>
+				</header>}
 
 				<div className="fv_inner">
 					<RichText 
@@ -485,9 +506,10 @@ registerBlockType( metadata.name, {
 						onChange={v=>setAttributes({leadText:v})}
 						placeholder="リードテキストを入力"
 					/>
-					<RichText 
+					<RichText
 						tagName={HeadingTag}
-						value={headline} 
+						className="custom_title"
+						value={headline}
 						onChange={v=>setAttributes({headline:v})}
 						placeholder="メインタイトルを入力"
 					/>
@@ -499,24 +521,24 @@ registerBlockType( metadata.name, {
 						placeholder="説明文を入力"
 					/>
 					{showCTAWrap && <div className="cta_wrap">
-						{showCTA1 && <a href={cta1Url}>
-							<RichText 
-								tagName="span" 
-								value={cta1Text} 
+						{showCTA1 && <div className="a">
+							<RichText
+								tagName="span"
+								value={cta1Text}
 								onChange={v=>setAttributes({cta1Text:v})}
 								placeholder="ご相談はこちら"
 								style={!cta1Text.trim() ? { opacity: 0.5, fontStyle: 'italic' } : {}}
 							/>
-						</a>}
-						{showCTA2 && <a href={cta2Url}>
-							<RichText 
-								tagName="span" 
-								value={cta2Text} 
+						</div>}
+						{showCTA2 && <div className="a">
+							<RichText
+								tagName="span"
+								value={cta2Text}
 								onChange={v=>setAttributes({cta2Text:v})}
 								placeholder="お問い合わせ"
 								style={!cta2Text.trim() ? { opacity: 0.5, fontStyle: 'italic' } : {}}
 							/>
-						</a>}
+						</div>}
 					</div>}
 				</div>
 
@@ -541,10 +563,11 @@ registerBlockType( metadata.name, {
 			cta1Text, cta1Url, cta1Enable, cta1BgColor, cta1TextColor, cta1BorderWidth, cta1BorderColor,
 			cta2Text, cta2Url, cta2Enable, cta2TextColor,
 			leadText, headline, description, headingLevel,
-			bgType, bgImgPc, bgImgSp, bgImgAlt, videoUrl, videoSpeed,
+			bgType, bgImgPc, bgImgSp, bgImgAlt, videoUrl, videoUrlSp, videoSpeed,
 			bgFilterType, bgFilterColor, bgFilterGradient, bgFilterOpacity,
 			navMenuItems,
 			minHeightPc, minHeightTb, minHeightSp,
+			showHeader,
 		} = attributes;
 
 		const show1 = cta1Enable&&cta1Text.trim();
@@ -581,57 +604,72 @@ registerBlockType( metadata.name, {
 		});
 
 		/* --- インライン JS --- */
+		/* NOTE: WordPress the_content フィルターが && を &#038;&#038; に変換するため、
+		   インラインスクリプト内では && を使用禁止。nested if で代替する。 */
 		const script = `
 (() => {
 'use strict';
 const ready = () => {
-
-  /* ---- ロゴリンクの設定 ---- */
   document.querySelectorAll('.logo a[data-home-url]').forEach(link => {
     if(!link.href || link.href === '' || link.href === window.location.href + '#') {
-      if(window.MyThemeSettings && window.MyThemeSettings.home_Url) {
-        link.href = window.MyThemeSettings.home_Url;
-      } else {
-        link.href = window.location.origin;
-      }
+      var mts = window.MyThemeSettings;
+      if(mts) { if(mts.home_Url) { link.href = mts.home_Url; return; } }
+      link.href = window.location.origin;
     }
   });
-
-  /* ---- video ---- */
-  document.querySelectorAll('.lazy-video').forEach(v=>{
-    v.style.display='block';
-    
-    const playbackRate = parseFloat(v.getAttribute('data-playback-rate')) || ${videoSpeed};
-    v.playbackRate = playbackRate;
-    
-    const playVideo = () => {
-      v.play().catch(err => {
-        console.log('Video autoplay failed:', err);
-      });
+  var vidPcUrl = '${videoUrl}';
+  var vidSpUrl = '${videoUrlSp || ''}';
+  var vidSpeed = ${videoSpeed};
+  var getVidType = function(url) {
+    if(url.endsWith('.webm')) return 'video/webm';
+    if(url.endsWith('.mov')) return 'video/quicktime';
+    return 'video/mp4';
+  };
+  document.querySelectorAll('.lazy-video').forEach(function(v) {
+    v.style.display = 'block';
+    var playbackRate = parseFloat(v.getAttribute('data-playback-rate')) || vidSpeed;
+    var switchVideo = function() {
+      if(!vidSpUrl) return;
+      var isSp = window.innerWidth <= 800;
+      var newSrc = isSp ? vidSpUrl : vidPcUrl;
+      var source = v.querySelector('source');
+      if(!source) return;
+      if(source.getAttribute('src') === newSrc) return;
+      source.setAttribute('src', newSrc);
+      source.setAttribute('type', getVidType(newSrc));
+      v.load();
+      v.playbackRate = playbackRate;
+      v.play().catch(function(){});
     };
-    
+    if(vidSpUrl) {
+      switchVideo();
+      var resizeTimer;
+      window.addEventListener('resize', function() {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(switchVideo, 200);
+      });
+    }
+    v.playbackRate = playbackRate;
+    var playVideo = function() { v.play().catch(function(){}); };
     if(v.readyState >= 1) {
       playVideo();
     } else {
-      v.addEventListener('loadedmetadata', () => {
+      v.addEventListener('loadedmetadata', function() {
         v.playbackRate = playbackRate;
         playVideo();
       });
     }
-    
-    document.addEventListener('click', () => {
-      if(v.paused) {
-        playVideo();
-      }
+    document.addEventListener('click', function() {
+      if(v.paused) { playVideo(); }
     }, { once: true });
   });
 };
-document.readyState==='loading'?document.addEventListener('DOMContentLoaded',ready):ready();
+if(document.readyState==='loading'){document.addEventListener('DOMContentLoaded',ready)}else{ready()}
 })();`.trim();
 
 		return (
 		<div {...blockProps}>
-			<header className="fv_in_header">
+			{showHeader && <header className="fv_in_header">
 				<h1 className="logo"><a href={logoUrl || '#'} data-home-url="">
 					{logoImg ? <img src={logoImg} alt="" style={{height:logoImgHeight+'%',width:'auto'}}/> :
 						<RichText.Content tagName="span" value={logoText}/>}
@@ -653,11 +691,11 @@ document.readyState==='loading'?document.addEventListener('DOMContentLoaded',rea
 					))}
 				</ul></nav>
 				<div className="ham_btn drawer_nav_open"><div className="in"><div></div><div></div></div></div>
-			</header>
+			</header>}
 
 			<div className="fv_inner">
 				{leadText && <RichText.Content tagName="p" className="lead_text" value={leadText}/>}
-				<RichText.Content tagName={HeadingTag} value={headline}/>
+				<RichText.Content tagName={HeadingTag} className="custom_title" value={headline}/>
 				{description && <RichText.Content tagName="p" className="desc" value={description}/>}
 				{showWrap && <div className="cta_wrap">
 					{show1 && <a href={cta1Url}>
@@ -678,7 +716,9 @@ document.readyState==='loading'?document.addEventListener('DOMContentLoaded',rea
 				</picture>
 			)}
 			{bgType==='video'&&videoUrl && <div className="bg_video">
-				<video autoPlay muted loop playsInline className="lazy-video" data-playback-rate={videoSpeed} preload="metadata">
+				<video autoPlay muted loop playsInline className="lazy-video"
+					data-playback-rate={videoSpeed}
+					preload="metadata">
 					<source src={videoUrl} type={videoUrl.endsWith('.mp4')?'video/mp4':videoUrl.endsWith('.webm')?'video/webm':videoUrl.endsWith('.mov')?'video/quicktime':'video/mp4'}/>
 				</video>
 			</div>}

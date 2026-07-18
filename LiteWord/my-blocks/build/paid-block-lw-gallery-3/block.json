@@ -6,6 +6,14 @@
 	"title": "Gallery 03 画像ギャラリー",
 	"category": "lw-banner",
 	"icon": "format-gallery",
+	"aiHint": {
+		"description": "ギャラリー（キャプション付き）。画像+キャプションのグリッド",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"images"
+		],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -66,11 +74,5 @@
 		}
 	},
 	"editorScript": "file:./paid-block-lw-gallery-3.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 3
 }

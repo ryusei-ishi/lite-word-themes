@@ -65,7 +65,7 @@ registerBlockType(metadata.name, {
 
 				{/* サイドバー */}
 				<InspectorControls>
-					<PanelBody title="タイトル文字色" initialOpen={false}>
+					<PanelBody title="色設定" initialOpen={false}>
 						<ColorPalette value={mainTitleColor} onChange={onChange('mainTitleColor')} />
 					</PanelBody>
 
@@ -81,11 +81,11 @@ registerBlockType(metadata.name, {
 						/>
 					</PanelBody>
 
-					<PanelBody title="背景色" initialOpen={false}>
+					<PanelBody title="背景設定" initialOpen={false}>
 						<ColorPalette value={backgroundColor} onChange={onChange('backgroundColor')} />
 					</PanelBody>
 
-					<PanelBody title="アイコンカラー" initialOpen={false}>
+					<PanelBody title="アイコン設定" initialOpen={false}>
 						<ColorPalette value={iconColor} onChange={onChange('iconColor')} />
 					</PanelBody>
 				</InspectorControls>

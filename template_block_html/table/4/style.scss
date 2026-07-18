@@ -1,0 +1,147 @@
+.lw_content_wrap.page {
+    .lw-pr-table-4 {
+        margin-left: calc((100% - 100vw) / 2);
+        width: 100vw;
+    }
+}
+.lw-pr-table-4 {
+    overflow-x: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    .lw-pr-table-4-wrap {
+        margin: 0 auto;
+        max-width: 1040px;
+        width: 100%;
+        table {
+            width: 100%;
+            margin: 0 24px;
+            border-collapse: collapse;
+            // border-color: var(--table-4-bd-wrap-color, red);
+            // border-style: solid;
+            // border-top-width: var(--table-4-bd-wrap-top-width, 2px);
+            // border-bottom-width: var(--table-4-bd-wrap-bottom-width, 2px);
+            // border-left-width: var(--table-4-bd-wrap-left-width, 2px);
+            // border-right-width: var(--table-4-bd-wrap-right-width, 2px);
+            // @media (max-width:800px) {
+
+            // }
+            th,
+            td {
+                padding: 8px;
+                border: var(--table-4-bd-width-df, 1px) var(--table-4-bd-width-style, solid)
+                    var(--table-4-bd-color-df, #ddd); //デフォルトの線
+                * {
+                    &:first-child {
+                        margin-top: 0;
+                    }
+                    &:last-child {
+                        margin-bottom: 0;
+                    }
+                }
+            }
+            thead {
+                th {
+                    background: #000;
+                    border-top: var(--table-4-bd-width-df, 1px) solid var(--table-4-th-bd-color-df, #e32e2e);
+                    border-bottom: none;
+                    color: #fff;
+                    border-right: var(--table-4-bd-width-df, 1px) var(--table-4-bd-width-style, solid)
+                        var(--table-4-th-bd-color-df, #e32e2e); //thの間の線の色
+                    &:first-of-type {
+                        border-left: var(--table-4-bd-width-df, 1px) solid var(--table-4-th-bd-color-df, #e32e2e);
+                    }
+                    &:last-of-type {
+                        border-right: var(--table-4-bd-width-df, 1px) var(--table-4-bd-width-style, solid)
+                            var(--table-4-bd-color-df, #ddd);
+                        border-right: var(--table-4-bd-width-df, 1px) solid var(--table-4-th-bd-color-df, #e32e2e);
+                    }
+                    &.sel_1.none {
+                        background: none;
+                        border-top: none;
+                        border-left: none !important;
+                    }
+                }
+            }
+            tbody {
+                tr {
+                    th{
+                        background: #000;
+                        color: #fff;
+                    }
+                    td {
+                    }
+                }
+            }
+            .sel_1 {
+                position: relative;
+                z-index: 10;
+                width: var(--table-4-sel-1, auto);
+            }
+            .sel_2 {
+                width: var(--table-4-sel-2, auto);
+            }
+            .sel_3 {
+                width: var(--table-4-sel-3, auto);
+            }
+            .sel_4 {
+                width: var(--table-4-sel-4, auto);
+            }
+            .sel_5 {
+                width: var(--table-4-sel-5, auto);
+            }
+            .sel_6 {
+                width: var(--table-4-sel-6, auto);
+            }
+            .sel_7 {
+                width: var(--table-4-sel-7, auto);
+            }
+            .sel_8 {
+                width: var(--table-4-sel-8, auto);
+            }
+            .sel_9 {
+                width: var(--table-4-sel-9, auto);
+            }
+            .sel_10 {
+                width: var(--table-4-sel-10, auto);
+            }
+        }
+    }
+}
+
+.test_table {
+    table {
+        width: 100%;
+        border-collapse: collapse;
+        th,
+        td {
+            padding: 8px;
+            border: 1px solid #ddd;
+        }
+        thead {
+            th {
+                background: #4a8bad;
+                color: #fff;
+                border-color: #3a7a9d;
+            }
+            .empty-cell {
+                background: none;
+                border-top: none;
+                border-left: none;
+            }
+        }
+        tbody {
+            th {
+                background: #e8f4f8;
+                font-weight: bold;
+                text-align: left;
+                border-right: 1px solid #4a8bad;
+            }
+            td {
+                text-align: left;
+            }
+        }
+    }
+}

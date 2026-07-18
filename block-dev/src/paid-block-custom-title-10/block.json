@@ -10,86 +10,48 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "画像付き見出し。左右にアイコン画像を配置可能。メイン+サブタイトル+下線装飾",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "subTitle"],
+		"imageAttributes": ["leftImage", "rightImage"]
+	},
 	"attributes": {
 		"subTitle": {
 			"type": "string",
-			"default": "製品紹介"
+			"default": "製品紹介",
+			"aiHint": { "role": "subheading", "contentGuide": "日本語の補足タイトル。3〜10文字", "example": "ギャラリー" }
 		},
 		"mainTitle": {
 			"type": "string",
-			"default": "PRODUCTS"
+			"default": "PRODUCTS",
+			"aiHint": { "role": "heading", "contentGuide": "英語のメインタイトル。大文字推奨", "example": "GALLERY" }
 		},
-		"headingLevel": {
-			"type": "number",
-			"default": 2
-		},
-		"mainTitleColor": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"sizeClass": {
-			"type": "string",
-			"default": "size_m"
-		},
+		"headingLevel": { "type": "number", "default": 2, "aiHint": { "skip": true } },
+		"mainTitleColor": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"sizeClass": { "type": "string", "default": "size_m", "aiHint": { "skip": true } },
 		"leftImage": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/icon/pc_1.png"
+			"default": "https://lite-word.com/sample_img/icon/pc_1.png",
+			"aiHint": { "role": "image", "note": "左側アイコン画像URL" }
 		},
 		"rightImage": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "role": "image", "note": "右側アイコン画像URL。省略可" }
 		},
-		"leftHeightEm": {
-			"type": "number",
-			"default": 1.5
-		},
-		"rightHeightEm": {
-			"type": "number",
-			"default": 1.5
-		},
-		"leftMarginEm": {
-			"type": "number",
-			"default": 0.4
-		},
-		"rightMarginEm": {
-			"type": "number",
-			"default": 0.4
-		},
-		"positionClass": {
-			"type": "string",
-			"default": "position_center"
-		},
-		"hideSubTitle": {
-			"type": "string",
-			"default": "off"
-		},
-		"hideMainTitle": {
-			"type": "string",
-			"default": "off"
-		},
-		"bdThickness": {
-			"type": "number",
-			"default": 2
-		},
-		"bdMarginTopEm": {
-			"type": "number",
-			"default": 0.1
-		},
-		"bdDisplay": {
-			"type": "string",
-			"default": "on"
-		},
-		"ttlFullWidth": {
-			"type": "string",
-			"default": "off"
-		}
+		"leftHeightEm": { "type": "number", "default": 1.5, "aiHint": { "skip": true } },
+		"rightHeightEm": { "type": "number", "default": 1.5, "aiHint": { "skip": true } },
+		"leftMarginEm": { "type": "number", "default": 0.4, "aiHint": { "skip": true } },
+		"rightMarginEm": { "type": "number", "default": 0.4, "aiHint": { "skip": true } },
+		"positionClass": { "type": "string", "default": "position_center", "aiHint": { "skip": true } },
+		"hideSubTitle": { "type": "string", "default": "off", "aiHint": { "skip": true } },
+		"hideMainTitle": { "type": "string", "default": "off", "aiHint": { "skip": true } },
+		"bdThickness": { "type": "number", "default": 2, "aiHint": { "skip": true } },
+		"bdMarginTopEm": { "type": "number", "default": 0.1, "aiHint": { "skip": true } },
+		"bdDisplay": { "type": "string", "default": "on", "aiHint": { "skip": true } },
+		"ttlFullWidth": { "type": "string", "default": "off", "aiHint": { "skip": true } }
 	},
 	"editorScript": "file:./paid-block-custom-title-10.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 10
 }

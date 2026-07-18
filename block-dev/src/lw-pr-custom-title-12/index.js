@@ -81,7 +81,7 @@ registerBlockType(metadata.name, {
                 </BlockControls>
 
                 <InspectorControls>
-                    <PanelBody title="表示順序設定">
+                    <PanelBody title="レイアウト設定">
                         <ToggleControl
                             label="メインとサブを入れ替える"
                             checked={orderReversed}
@@ -89,7 +89,7 @@ registerBlockType(metadata.name, {
                             help={orderReversed ? 'サブが上、メインが下' : 'メインが上、サブが下'}
                         />
                     </PanelBody>
-                    <PanelBody title="幅設定">
+                    <PanelBody title="レイアウト設定">
                         <RangeControl
                             label="最大幅 (px)"
                             value={maxWidth || undefined}
@@ -101,7 +101,7 @@ registerBlockType(metadata.name, {
                             help={maxWidth > 0 ? `${maxWidth}px` : '未設定（デフォルト幅）'}
                         />
                     </PanelBody>
-                    <PanelBody title="カラー設定">
+                    <PanelBody title="色設定">
                         <p><strong>メインカラー</strong></p>
                         <ColorPalette
                             value={colorMain}

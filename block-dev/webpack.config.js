@@ -58,7 +58,9 @@ module.exports = {
           { from: `./src/${dir}/style.css`, to: `${dir}/style.css`, noErrorOnMissing: true },
           { from: `./src/${dir}/editor.css`, to: `${dir}/editor.css`, noErrorOnMissing: true },
           { from: `./src/${dir}/block.json`, to: `${dir}/block.json`, noErrorOnMissing: true },
-          { from: `./src/${dir}/*.webp`, to: `${dir}/[name][ext]`, noErrorOnMissing: true }
+          { from: `./src/${dir}/*.webp`, to: `${dir}/[name][ext]`, noErrorOnMissing: true },
+          { from: `./src/${dir}/render.php`, to: `${dir}/render.php`, noErrorOnMissing: true },
+          { from: `./src/${dir}/view.js`, to: `${dir}/view.js`, noErrorOnMissing: true }
         ];
         return patterns;
       }).flat(), // 各ブロックのスタイルファイルとblock.jsonとwebp画像をサブディレクトリにコピー

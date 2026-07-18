@@ -7,59 +7,70 @@
 	"category": "lw-firstview",
 	"icon": "cover-image",
 	"editorScript": "file:./fv-6.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"supports": {
 		"anchor": true
+	},
+	"aiHint": {
+		"description": "下層ページ用FV。中央にタイトル+サブタイトル+背景画像。会社情報・採用ページ向け",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "subTitle"],
+		"imageAttributes": ["backgroundImage"]
 	},
 	"attributes": {
 		"backgroundImage": {
 			"type": "string",
-			"default": "https://cdn.pixabay.com/photo/2016/11/19/15/39/architecture-1839930_1280.jpg"
+			"default": "https://cdn.pixabay.com/photo/2016/11/19/15/39/architecture-1839930_1280.jpg",
+			"aiHint": { "role": "image", "note": "業種に合った背景画像URL" }
 		},
 		"backgroundImageSp": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "skip": true }
 		},
 		"mainTitle": {
 			"type": "string",
-			"default": "会社情報"
+			"default": "会社情報",
+			"aiHint": { "role": "heading", "contentGuide": "ページタイトル（日本語）。3〜10文字", "example": "会社概要" }
 		},
 		"subTitle": {
 			"type": "string",
-			"default": "COMPANY INFO"
+			"default": "COMPANY INFO",
+			"aiHint": { "role": "subheading", "contentGuide": "英語表記。ページタイトルの英訳", "example": "ABOUT US" }
 		},
 		"filterBackgroundColor": {
 			"type": "string",
-			"default": "#111"
+			"default": "#111",
+			"aiHint": { "skip": true }
 		},
 		"filterOpacity": {
 			"type": "number",
-			"default": 0.3
+			"default": 0.3,
+			"aiHint": { "skip": true }
 		},
 		"textColor": {
 			"type": "string",
-			"default": "#111"
+			"default": "#111",
+			"aiHint": { "skip": true }
 		},
 		"minHeightPc": {
 			"type": "string",
-			"default": "min-h-pc-400px"
+			"default": "min-h-pc-400px",
+			"aiHint": { "skip": true }
 		},
 		"minHeightTb": {
 			"type": "string",
-			"default": "min-h-tb-360px"
+			"default": "min-h-tb-360px",
+			"aiHint": { "skip": true }
 		},
 		"minHeightSp": {
 			"type": "string",
-			"default": "min-h-sp-280px"
+			"default": "min-h-sp-280px",
+			"aiHint": { "skip": true }
 		},
 		"mainTitleTag": {
 			"type": "string",
-			"default": "h1"
+			"default": "h1",
+			"aiHint": { "skip": true }
 		}
 	},
 	"no": 6

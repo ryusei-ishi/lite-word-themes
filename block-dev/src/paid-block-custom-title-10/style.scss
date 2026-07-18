@@ -7,7 +7,10 @@
   > h3.ttl,
   > h4.ttl,
   > h5.ttl,
-  > h6.ttl {
+  > h6.ttl,
+  > p.ttl,
+  > div.ttl {
+    margin: 0 !important;
     position: relative;
     padding-bottom: 6px;
     display: flex;
@@ -22,7 +25,9 @@
   &.size_l h3,
   &.size_l h4,
   &.size_l h5,
-  &.size_l h6 {
+  &.size_l h6,
+  &.size_l p,
+  &.size_l div.ttl {
     font-size: 40px;
     @container (max-width:800px) {
       font-size: 32px;
@@ -35,7 +40,9 @@
   &.size_m h3,
   &.size_m h4,
   &.size_m h5,
-  &.size_m h6 {
+  &.size_m h6,
+  &.size_m p,
+  &.size_m div.ttl {
     font-size: 32px;
     @container (max-width:800px) {
       font-size: 26px;
@@ -48,7 +55,9 @@
   &.size_s h3,
   &.size_s h4,
   &.size_s h5,
-  &.size_s h6 {
+  &.size_s h6,
+  &.size_s p,
+  &.size_s div.ttl {
     font-size: 28px;
     @container (max-width:800px) {
       font-size: 22px;
@@ -68,7 +77,9 @@
     > h3.ttl,
     > h4.ttl,
     > h5.ttl,
-    > h6.ttl {
+    > h6.ttl,
+    > p.ttl,
+    > div.ttl {
       justify-content: center;
       text-align: center;
     }
@@ -80,7 +91,9 @@
     > h3.ttl,
     > h4.ttl,
     > h5.ttl,
-    > h6.ttl {
+    > h6.ttl,
+    > p.ttl,
+    > div.ttl {
       justify-content: end;
       text-align: right;
     }

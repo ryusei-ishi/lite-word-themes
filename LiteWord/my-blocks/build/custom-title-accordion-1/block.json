@@ -10,46 +10,54 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "アコーディオン見出し。クリックで開閉。ステップ説明やFAQの大分類に。サブタイトル+メインタイトル",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "subTitle"],
+		"imageAttributes": []
+	},
 	"attributes": {
 		"subTitle": {
 			"type": "string",
-			"default": "STEP 1"
+			"default": "STEP 1",
+			"aiHint": { "role": "subheading", "contentGuide": "ステップ番号やカテゴリ名。3〜10文字", "example": "STEP 1" }
 		},
 		"mainTitle": {
 			"type": "string",
-			"default": "WordPressの初期設定"
+			"default": "WordPressの初期設定",
+			"aiHint": { "role": "heading", "contentGuide": "セクション見出し。5〜20文字", "example": "WordPressの初期設定" }
 		},
 		"headingLevel": {
 			"type": "number",
-			"default": 2
+			"default": 2,
+			"aiHint": { "skip": true }
 		},
 		"mainTitleColor": {
 			"type": "string",
-			"default": "var(--color-main)"
+			"default": "var(--color-main)",
+			"aiHint": { "skip": true }
 		},
 		"borderColor": {
 			"type": "string",
-			"default": "var(--color-main)"
+			"default": "var(--color-main)",
+			"aiHint": { "skip": true }
 		},
 		"borderWidth": {
 			"type": "number",
-			"default": 1
+			"default": 1,
+			"aiHint": { "skip": true }
 		},
 		"backgroundColor": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "skip": true }
 		},
 		"iconColor": {
 			"type": "string",
-			"default": "var(--color-main)"
+			"default": "var(--color-main)",
+			"aiHint": { "skip": true }
 		}
 	},
 	"editorScript": "file:./custom-title-accordion-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 1
 }

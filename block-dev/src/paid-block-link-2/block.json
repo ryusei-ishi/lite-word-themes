@@ -6,6 +6,19 @@
 	"title": "リンクリスト 2",
 	"category": "lw-list",
 	"icon": "lightbulb",
+	"aiHint": {
+		"description": "リンクカード。見出し+説明+リンク配列+背景画像。サービスナビに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"mainTitle",
+			"subTitle",
+			"mainExplanation",
+			"contents"
+		],
+		"imageAttributes": [
+			"bgImageUrl"
+		]
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -147,11 +160,5 @@
 		}
 	},
 	"editorScript": "file:./paid-block-link-2.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 2
 }

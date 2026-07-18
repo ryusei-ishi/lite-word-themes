@@ -10,12 +10,12 @@
 		"anchor": true
 	},
 	"editorScript": "file:./paid-block-lw-step-4.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "番号付きカード型ステップ。メインカラー番号+タイトル+説明。サービスフローに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"no": 4,
 	"attributes": {
 		"bgGradient": { "type": "string", "default": "var(--color-main)" },

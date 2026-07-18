@@ -161,6 +161,11 @@ add_action( 'admin_post_lw_mail_del_row', function () {
 		wp_die( 'Security check!' );
 	}
 
+	// ── 権限チェック
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( '権限がありません。' );
+	}
+
 	$row_id = intval( $_REQUEST['row_id'] ?? 0 );
 	$form   = intval( $_REQUEST['form_set_no'] ?? 0 );
 
@@ -194,6 +199,11 @@ add_action( 'admin_post_lw_mail_del_all', function () {
 
 	if ( ! wp_verify_nonce( $_REQUEST['_wpnonce'] ?? '', 'lw_mail_hist_nonce' ) ) {
 		wp_die( 'Security check!' );
+	}
+
+	// ── 権限チェック
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( '権限がありません。' );
 	}
 
 	$form = intval( $_REQUEST['form_set_no'] ?? 0 );

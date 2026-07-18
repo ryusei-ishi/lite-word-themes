@@ -6,6 +6,13 @@
 	"title": "お問合わせフォーム 03（ワンカラム・シンプル）",
 	"category": "lw-contact",
 	"icon": "email",
+	"aiHint": {
+		"description": "お問い合わせフォーム（ワンカラム）。メールフォーム表示。テキスト属性なし",
+		"excludeFromAutoSelect": true,
+		"contentAttributes": [],
+		"imageAttributes": [],
+		"excludeReason": "フォームブロック。テキスト生成不要"
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -60,11 +67,5 @@
 		}
 	},
 	"editorScript": "file:./lw-contact-3.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 3
 }

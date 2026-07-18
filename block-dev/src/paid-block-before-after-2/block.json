@@ -7,12 +7,17 @@
 	"category": "lw-voice",
 	"icon": "images-alt2",
 	"editorScript": "file:./paid-block-before-after-2.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "ビフォーアフターカード配列。複数の比較を並列表示",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"beforeLabel",
+			"afterLabel"
+		],
+		"imageAttributes": [
+			"items"
+		]
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -45,8 +50,12 @@
 		"items": {
 			"type": "array",
 			"default": [
-				{ "imgUrl": "https://lite-word.com/sample_img/women/6_2.webp" },
-				{ "imgUrl": "https://lite-word.com/sample_img/women/6.webp" }
+				{
+					"imgUrl": "https://lite-word.com/sample_img/women/6_2.webp"
+				},
+				{
+					"imgUrl": "https://lite-word.com/sample_img/women/6.webp"
+				}
 			]
 		}
 	}

@@ -1,0 +1,180 @@
+{
+	"_meta": {
+		"description": "LiteWordユーザープロフィール拡張機能のAI向けメタ情報。SNSリンク追加・プロフィール画像・プロフィール管理画面・フロント表示ショートコードをAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21"
+	},
+	"overview": {
+		"aiDescription": "WordPressのユーザープロフィールを拡張する機能群。(1) SNSリンク欄の追加、(2) カスタムプロフィール画像のアップロード、(3) プロフィール管理画面（管理者がカスタムフィールドを自由に定義）、(4) フロント表示用ショートコードの4つの機能で構成される。プロフィール管理画面はカスタマイザーの拡張機能設定でON/OFFを切り替えられる。",
+		"adminLocation": "WordPress管理画面 > ユーザー > プロフィール",
+		"userGuide": "ユーザープロフィール画面に、SNSリンク・プロフィール画像・カスタムフィールドが追加される。執筆者ウィジェットやフロント表示と連動する。"
+	},
+	"features": {
+		"snsContactMethods": {
+			"aiDescription": "WordPressのユーザープロフィール「連絡先情報」セクションにSNSリンク欄を追加する。user_contactmethodsフィルターで実装。",
+			"adminLocation": "ユーザー > プロフィール > 連絡先情報",
+			"fields": {
+				"homepage_2": {
+					"label": "サイト 2",
+					"aiDescription": "2つ目のウェブサイトURL。WordPress標準の「サイト」とは別にもう1つサイトURLを登録できる。",
+					"userGuide": "メインサイトの他に、ポートフォリオサイトやブログなど別のサイトがある場合に使う。"
+				},
+				"instagram": {
+					"label": "Instagram",
+					"aiDescription": "InstagramのプロフィールURL。",
+					"userGuide": "https://www.instagram.com/ユーザー名/ の形式でURLを入力する。"
+				},
+				"x": {
+					"label": "X (旧 Twitter)",
+					"aiDescription": "X（旧Twitter）のプロフィールURL。",
+					"userGuide": "https://x.com/ユーザー名 の形式でURLを入力する。"
+				},
+				"line": {
+					"label": "LINE",
+					"aiDescription": "LINEの公開プロフィールURLまたは友だち追加URL。",
+					"userGuide": "LINE公式アカウントの友だち追加URLを入力する。"
+				},
+				"threads": {
+					"label": "Threads",
+					"aiDescription": "ThreadsのプロフィールURL。",
+					"userGuide": "https://www.threads.net/@ユーザー名 の形式でURLを入力する。"
+				},
+				"note": {
+					"label": "note",
+					"aiDescription": "noteのプロフィールURL。",
+					"userGuide": "https://note.com/ユーザー名 の形式でURLを入力する。"
+				}
+			},
+			"displayedIn": "【LW】執筆者ウィジェット（author.php）でSNSアイコンリンクとして表示される。アイコンはテーマの assets/image/icon/ ディレクトリのSVG/PHPファイルを使用。"
+		},
+		"profileImage": {
+			"aiDescription": "WordPressのユーザープロフィール画面にカスタムプロフィール画像のアップロード機能を追加する。WordPressメディアライブラリを使用。Gravatarよりも優先的に表示される。",
+			"adminLocation": "ユーザー > プロフィール > 【LW】プロフィール画像",
+			"metaKey": "profile_image",
+			"metaValue": "画像のURL（esc_url_raw でサニタイズ）",
+			"controls": {
+				"uploadButton": {
+					"label": "画像を選択",
+					"aiDescription": "WordPressメディアライブラリを開いて画像を選択・アップロードする。"
+				},
+				"removeButton": {
+					"label": "画像を削除",
+					"aiDescription": "設定済みのプロフィール画像を削除する。画像が未設定の場合は非表示。"
+				},
+				"preview": {
+					"aiDescription": "設定済み画像のプレビュー表示（最大幅150px）。"
+				}
+			},
+			"avatarOverride": {
+				"aiDescription": "pre_get_avatarフィルターでWordPress標準のアバター（Gravatar）を上書きする。profile_imageメタが設定されていれば、get_avatar()の出力をカスタム画像に差し替える。WP_Comment・WP_User・ID・メールアドレスのすべてのパターンに対応。",
+				"priority": "カスタムプロフィール画像 > Gravatar > デフォルト画像",
+				"outputFormat": "<img alt class src width height loading='lazy'>（WP標準のavatar CSSクラスを踏襲）"
+			},
+			"jsFile": "assets/js/profile-image-uploader.js",
+			"userGuide": "プロフィール画面の「【LW】プロフィール画像」セクションで「画像を選択」をクリックし、メディアライブラリから画像を選ぶ。設定した画像は執筆者ウィジェットやコメント欄のアバターに反映される。"
+		},
+		"profileManager": {
+			"aiDescription": "管理者がカスタムプロフィールフィールドを自由に定義・管理できる機能。カスタマイザーの「拡張機能設定 > profile_manager_functions_switch」をONにすると有効になる。管理画面とフロント表示の2つのコンポーネントで構成される。",
+			"enableSetting": {
+				"customizer": "拡張機能設定 > ユーザープロフィール管理画面の有効化",
+				"settingKey": "lw_extensions_profile_manager_functions_switch",
+				"default": "off",
+				"options": {
+					"on": "有効（管理画面にプロフィール管理メニューが追加される）",
+					"off": "無効（デフォルト）"
+				}
+			},
+			"adminScreen": {
+				"title": "プロフィール管理",
+				"aiDescription": "管理者がプロフィールに表示するフィールドを管理する画面。フィールドの追加・削除・並び替え・タイプ変更が可能。定義したフィールドは全ユーザーのプロフィール編集画面に自動追加される。",
+				"location": "ユーザー > プロフィール管理",
+				"capability": "manage_options（管理者のみ）",
+				"optionKey": "lw_pm_profile_fields",
+				"fieldDefinition": {
+					"columns": {
+						"label": {
+							"aiDescription": "フィールドのラベル名。プロフィール編集画面でフィールドの見出しとして表示される。",
+							"type": "text",
+							"placeholder": "ラベル名"
+						},
+						"name": {
+							"aiDescription": "フィールドのuser_metaキー名。空欄の場合はラベルから自動生成される。見出し・段落タイプの場合は自動で固定名が付与される。",
+							"type": "text",
+							"placeholder": "フィールド名",
+							"autoGeneration": "heading_N / paragraph_N / ラベルのsanitize_key"
+						},
+						"type": {
+							"aiDescription": "フィールドのタイプ選択",
+							"type": "select",
+							"options": {
+								"text": "1行テキスト — 通常のテキスト入力フィールド",
+								"textarea": "テキストエリア — 複数行のテキスト入力フィールド",
+								"select": "選択肢 — ドロップダウンリスト（選択肢はoptionsに1行1項目で記入）",
+								"heading_h2": "見出し (h2) — セクション区切りの大見出し（データは保存されない）",
+								"heading_h3": "見出し (h3) — セクション区切りの小見出し（データは保存されない）",
+								"paragraph": "段落 (静的) — 説明文や注意書き（データは保存されない）"
+							}
+						},
+						"options": {
+							"aiDescription": "selectタイプの場合は選択肢を1行1項目で記入。paragraphタイプの場合は段落本文を記入。",
+							"type": "textarea",
+							"placeholder": "選択肢 or 段落本文"
+						},
+						"note": {
+							"aiDescription": "フィールドの補足テキスト。プロフィール編集画面でフィールドの下に灰色の説明文として表示される。",
+							"type": "textarea",
+							"placeholder": "補足テキスト (任意)"
+						},
+						"order": {
+							"aiDescription": "表示の並び順。数値が小さいほど上に表示される。行の上下ボタンで操作すると自動更新される。",
+							"type": "number"
+						}
+					},
+					"rowActions": {
+						"up": "行を上に移動",
+						"down": "行を下に移動",
+						"delete": "行を削除（最低1行は残す必要あり）",
+						"addRow": "新しい行を追加"
+					}
+				},
+				"metaCleanup": "フィールドを削除すると、全ユーザーの対応するuser_metaも自動削除される。",
+				"userGuide": "管理者がここでフィールドを定義すると、全ユーザーのプロフィール編集画面に「カスタムプロフィール」セクションとして追加される。会社名・部署・役職・資格など、サイトに応じた情報を収集できる。"
+			},
+			"frontDisplay": {
+				"shortcode": "lw_profile_info",
+				"aiDescription": "定義済みのカスタムプロフィールフィールドの値をフロントエンドで表示するショートコード。",
+				"usage": "[lw_profile_info user_id=\"1\"]",
+				"attributes": {
+					"user_id": {
+						"aiDescription": "表示するユーザーのID。デフォルトはログイン中のユーザー。",
+						"type": "integer",
+						"default": "get_current_user_id()"
+					}
+				},
+				"outputStructure": {
+					"wrapper": "div.lw-pm-profile-info",
+					"heading": "h2.lw-pm-heading / h3.lw-pm-heading",
+					"paragraph": "p.lw-pm-paragraph",
+					"field": "div.lw-pm-field.lw-pm-{name}",
+					"note": "span.lw-pm-note / p.lw-pm-note"
+				},
+				"behavior": "見出し・段落タイプはそのまま表示。text/textarea/selectタイプは値が空の場合は非表示。",
+				"userGuide": "固定ページや投稿にショートコードを挿入すると、そのユーザーのカスタムプロフィール情報が表示される。会員サイトのマイページなどで活用できる。"
+			}
+		}
+	},
+	"hooksSummary": {
+		"filters": {
+			"user_contactmethods": "SNSリンク欄の追加（優先度99）",
+			"pre_get_avatar": "カスタムプロフィール画像によるアバター上書き（優先度10）"
+		},
+		"actions": {
+			"show_user_profile": "プロフィール画像フィールド + カスタムフィールドの表示",
+			"edit_user_profile": "プロフィール画像フィールド + カスタムフィールドの表示（他ユーザー編集時）",
+			"personal_options_update": "プロフィール画像 + カスタムフィールドの保存",
+			"edit_user_profile_update": "プロフィール画像 + カスタムフィールドの保存（他ユーザー編集時）",
+			"admin_enqueue_scripts": "メディアアップローダーのスクリプト読み込み",
+			"admin_menu": "プロフィール管理サブメニュー追加（ユーザーメニュー下）"
+		}
+	}
+}

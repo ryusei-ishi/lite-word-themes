@@ -3,6 +3,7 @@
   margin-left: calc((100% - 100vw) / 2);
   width: 100vw;
 }
+
 .lw_content_wrap.page:has(.first_content + .wp-block-wdl-fv-7) .first_content {
   display: none;
 }
@@ -13,6 +14,7 @@
   z-index: 10;
   padding: 64px 48px;
   padding-bottom: 56px;
+  max-width: 100vw;
   height: 480px;
   display: flex;
   flex-wrap: wrap;
@@ -23,6 +25,7 @@
   background-position: center;
   box-sizing: border-box;
 }
+
 @container (max-width:980px) {
   .fv-7,
   .wp-block-wdl-fv-7 {
@@ -30,6 +33,7 @@
     padding-bottom: 40px;
   }
 }
+
 @container (max-width:800px) {
   .fv-7,
   .wp-block-wdl-fv-7 {
@@ -37,10 +41,12 @@
     padding-bottom: 32px;
   }
 }
+
 .fv-7 + .post_style > .wp-block-columns.has-background,
 .wp-block-wdl-fv-7 + .post_style > .wp-block-columns.has-background {
   margin-top: 0;
 }
+
 .fv-7 .fv-7__inner .title,
 .wp-block-wdl-fv-7 .fv-7__inner .title {
   margin: 0;
@@ -48,6 +54,7 @@
   color: #fff;
   text-align: center;
 }
+
 .fv-7 .fv-7__inner .title .sub,
 .wp-block-wdl-fv-7 .fv-7__inner .title .sub {
   margin-bottom: 0.5em;
@@ -55,36 +62,42 @@
   font-weight: 500;
   line-height: 1.6em;
 }
+
 @container (max-width:980px) {
   .fv-7 .fv-7__inner .title .sub,
   .wp-block-wdl-fv-7 .fv-7__inner .title .sub {
     font-size: 14px;
   }
 }
+
 @container (max-width:550px) {
   .fv-7 .fv-7__inner .title .sub,
   .wp-block-wdl-fv-7 .fv-7__inner .title .sub {
     font-size: 12px;
   }
 }
+
 .fv-7 .fv-7__inner .title .main,
 .wp-block-wdl-fv-7 .fv-7__inner .title .main {
   font-size: 56px;
   font-weight: 500;
   line-height: 1.3em;
 }
+
 @container (max-width:980px) {
   .fv-7 .fv-7__inner .title .main,
   .wp-block-wdl-fv-7 .fv-7__inner .title .main {
     font-size: 48px;
   }
 }
+
 @container (max-width:550px) {
   .fv-7 .fv-7__inner .title .main,
   .wp-block-wdl-fv-7 .fv-7__inner .title .main {
     font-size: 40px;
   }
 }
+
 .fv-7 .fv-7__inner p.description,
 .wp-block-wdl-fv-7 .fv-7__inner p.description {
   margin: 0;
@@ -93,12 +106,14 @@
   color: #fff;
   text-align: center;
 }
+
 @container (max-width:550px) {
   .fv-7 .fv-7__inner p.description,
   .wp-block-wdl-fv-7 .fv-7__inner p.description {
     font-size: 12px;
   }
 }
+
 .fv-7 .fv-7__inner .btn,
 .wp-block-wdl-fv-7 .fv-7__inner .btn {
   margin-top: 40px;
@@ -106,12 +121,14 @@
   display: flex;
   justify-content: center;
 }
+
 @container (max-width:550px) {
   .fv-7 .fv-7__inner .btn,
   .wp-block-wdl-fv-7 .fv-7__inner .btn {
     margin-top: 32px;
   }
 }
+
 .fv-7 .fv-7__inner .btn a.btn-text,
 .wp-block-wdl-fv-7 .fv-7__inner .btn a.btn-text {
   padding: 14px 24px;
@@ -125,6 +142,7 @@
   outline: 1px solid rgba(255, 255, 255, 0);
   transition: all 0.3s;
 }
+
 @container (max-width:550px) {
   .fv-7 .fv-7__inner .btn a.btn-text,
   .wp-block-wdl-fv-7 .fv-7__inner .btn a.btn-text {
@@ -132,11 +150,13 @@
     min-width: 180px;
   }
 }
+
 .fv-7 .fv-7__inner .btn a.btn-text:hover,
 .wp-block-wdl-fv-7 .fv-7__inner .btn a.btn-text:hover {
   outline-offset: -4px;
   outline-color: #fff;
 }
+
 .fv-7 .bg_image,
 .wp-block-wdl-fv-7 .bg_image {
   position: absolute;
@@ -147,24 +167,28 @@
   height: 100%;
   overflow: hidden;
 }
+
 .fv-7 .bg_image video,
 .wp-block-wdl-fv-7 .bg_image video {
   width: 100%;
   height: 100%;
-  -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
 }
+
 .fv-7 .bg_image .vimeo-wrapper,
 .wp-block-wdl-fv-7 .bg_image .vimeo-wrapper {
   position: absolute;
   top: 50%;
   left: 50%;
   width: 100vw;
-  height: 56.25vw; /* 16:9アスペクト比 */
+  height: 56.25vw;
+  /* 16:9アスペクト比 */
   min-height: 100vh;
-  min-width: 177.77vh; /* 16:9アスペクト比 */
+  min-width: 177.77vh;
+  /* 16:9アスペクト比 */
   transform: translate(-50%, -50%);
 }
+
 .fv-7 .bg_image .vimeo-wrapper iframe,
 .wp-block-wdl-fv-7 .bg_image .vimeo-wrapper iframe {
   position: absolute;
@@ -174,6 +198,7 @@
   height: 100%;
   pointer-events: none;
 }
+
 .fv-7 .bg_image .filter,
 .wp-block-wdl-fv-7 .bg_image .filter {
   position: absolute;
@@ -183,4 +208,4 @@
   width: 100%;
   height: 100%;
   mix-blend-mode: multiply;
-}/*# sourceMappingURL=style.css.map */
+}

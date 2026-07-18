@@ -69,7 +69,25 @@ function lw_my_parts_access_control() {
 	$wp_query->set_404();
 	status_header( 404 );
 	nocache_headers();
-	include( get_query_template( '404' ) );
+
+	// テーマに 404.php が無いと get_query_template('404') は空文字を返し、
+	// PHP 8 では include('') が ValueError（Path cannot be empty）で致命的エラーになる。
+	// 空チェックし、無ければ index.php にフォールバックする。
+	$template_404 = get_query_template( '404' );
+	if ( ! $template_404 ) {
+		$template_404 = get_query_template( 'index' );
+	}
+	if ( $template_404 ) {
+		// マイパーツ本文が 404 ページのループ／アーカイブ表示に漏れないよう、
+		// メインクエリを通常の 404 と同じ「空」の状態に揃えてから読み込む
+		$wp_query->posts             = array();
+		$wp_query->post_count        = 0;
+		$wp_query->post              = null;
+		$wp_query->max_num_pages     = 0;
+		$wp_query->queried_object    = null;
+		$wp_query->queried_object_id = 0;
+		include $template_404;
+	}
 	exit;
 }
 
@@ -195,6 +213,28 @@ function lw_register_my_parts_meta_fields() {
 		'schema' => array(
 			'type' => 'string',
 			'context' => array( 'view', 'edit' ),
+		),
+	));
+
+	// プレビュー用レンダリング済みHTML（エディタプレビューの安定性向上）
+	register_rest_field( 'lw_my_parts', 'preview_html', array(
+		'get_callback' => function( $object ) {
+			$post = get_post( $object['id'] );
+			if ( ! $post ) return '';
+
+			$editor_mode = get_post_meta( $post->ID, '_lw_editor_mode', true );
+			if ( 'code' === $editor_mode ) {
+				$html = get_post_meta( $post->ID, '_lw_custom_html', true ) ?: '';
+				$css  = get_post_meta( $post->ID, '_lw_custom_css', true ) ?: '';
+				return ( $css ? '<style>' . $css . '</style>' : '' ) . $html;
+			}
+
+			// 通常モード: ブロックをレンダリング
+			return apply_filters( 'the_content', $post->post_content );
+		},
+		'schema' => array(
+			'type' => 'string',
+			'context' => array( 'edit' ),
 		),
 	));
 }

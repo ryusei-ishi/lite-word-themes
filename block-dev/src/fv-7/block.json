@@ -7,79 +7,96 @@
 	"category": "lw-firstview",
 	"icon": "cover-image",
 	"editorScript": "file:./fv-7.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"supports": {
 		"anchor": true
+	},
+	"aiHint": {
+		"description": "動画背景FV。中央テキスト+ボタン+mp4/Vimeo背景。インパクト重視のトップページ向け",
+		"excludeFromAutoSelect": true,
+		"excludeReason": "動画URLをAIが生成できないため。ユーザーが手動で動画を設定する",
+		"contentAttributes": ["mainTitle", "subTitle", "description", "buttonText", "buttonUrl"],
+		"imageAttributes": []
 	},
 	"attributes": {
 		"subTitle": {
 			"type": "string",
-			"default": "初心者のためのWordPressテーマ"
+			"default": "初心者のためのWordPressテーマ",
+			"aiHint": { "role": "subheading", "contentGuide": "英語表記 or サブキャッチ", "example": "CREATIVE AGENCY" }
 		},
 		"mainTitle": {
 			"type": "string",
-			"default": "LiteWord"
+			"default": "LiteWord",
+			"aiHint": { "role": "heading", "contentGuide": "キャッチコピー。5〜15文字", "example": "映像で魅せる" }
 		},
 		"description": {
 			"type": "string",
-			"default": "テキストテキストテキストテキストテキストテキスト"
+			"default": "テキストテキストテキストテキストテキストテキスト",
+			"aiHint": { "role": "body", "contentGuide": "サービスの価値を1〜2文で。20〜50文字", "example": "私たちの映像制作で、あなたのビジネスを次のステージへ" }
 		},
 		"buttonText": {
 			"type": "string",
-			"default": "詳細はこちら"
+			"default": "詳細はこちら",
+			"aiHint": { "role": "button", "contentGuide": "動詞形。4〜10文字", "example": "お問い合わせ" }
 		},
 		"buttonUrl": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "role": "url", "contentGuide": "#contact 等のページ内リンク推奨" }
 		},
 		"showButton": {
 			"type": "boolean",
-			"default": true
+			"default": true,
+			"aiHint": { "skip": true }
 		},
 		"videoType": {
 			"type": "string",
-			"default": "media"
+			"default": "media",
+			"aiHint": { "skip": true }
 		},
 		"videoUrl": {
 			"type": "string",
-			"default": "https://cdn.pixabay.com/video/2023/11/19/189813-887078786_large.mp4"
+			"default": "https://cdn.pixabay.com/video/2023/11/19/189813-887078786_large.mp4",
+			"aiHint": { "skip": true, "note": "動画URLはユーザーが手動設定" }
 		},
 		"vimeoId": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "skip": true }
 		},
 		"filterColor": {
 			"type": "string",
-			"default": "#000000"
+			"default": "#000000",
+			"aiHint": { "skip": true }
 		},
 		"filterOpacity": {
 			"type": "number",
-			"default": 0.5
+			"default": 0.5,
+			"aiHint": { "skip": true }
 		},
 		"videoSpeed": {
 			"type": "number",
-			"default": 1.0
+			"default": 1.0,
+			"aiHint": { "skip": true }
 		},
 		"headingLevel": {
 			"type": "number",
-			"default": 1
+			"default": 1,
+			"aiHint": { "skip": true }
 		},
 		"minHeightPc": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "skip": true }
 		},
 		"minHeightTb": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "skip": true }
 		},
 		"minHeightSp": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "skip": true }
 		}
 	},
 	"no": 7

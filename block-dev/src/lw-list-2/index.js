@@ -56,8 +56,7 @@ registerBlockType(metadata.name, {
         const removeContent = ( i ) =>
             setAttributes( { contents: contents.filter( ( _, index ) => index !== i ) } );
         const updateContent = ( i, key, value ) => {
-            const updated = [ ...contents ];
-            updated[ i ][ key ] = value;
+            const updated = contents.map( ( item, index ) => index === i ? { ...item, [ key ]: value } : item );
             setAttributes( { contents: updated } );
         };
 
@@ -78,7 +77,7 @@ registerBlockType(metadata.name, {
             <>
                 <InspectorControls>
                     {/* 背景画像 */}
-                    <PanelBody title="背景画像">
+                    <PanelBody title="背景画像設定">
                         { backgroundImage && (
                             <img
                                 src={ backgroundImage }
@@ -105,7 +104,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* 背景色 */}
-                    <PanelBody title="背景">
+                    <PanelBody title="フィルター設定">
                         <SelectControl
                             label="フィルターの色"
                             value={ bgGradient }
@@ -123,7 +122,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* リスト設定 */}
-                    <PanelBody title="リスト部分の設定">
+                    <PanelBody title="色設定">
                         <ColorPalette
                             label="アイコンの色"
                             value={ colorLiSvg }

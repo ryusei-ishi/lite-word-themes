@@ -7,12 +7,18 @@
 	"category": "lw-voice",
 	"icon": "format-image",
 	"editorScript": "file:./paid-block-before-after-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "ビフォーアフター（シンプル）。左右画像+ラベルで比較",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"beforeText",
+			"afterText"
+		],
+		"imageAttributes": [
+			"beforeImageUrl",
+			"afterImageUrl"
+		]
+	},
 	"supports": {
 		"anchor": true
 	},

@@ -50,7 +50,7 @@ registerBlockType(metadata.name, {
                 </BlockControls>
 
                 <InspectorControls>
-                    <PanelBody title="背景画像設定">
+                    <PanelBody title="背景設定">
                         <p>PCの時</p>
                         <MediaUpload
                             onSelect={onChangeBackgroundImage}
@@ -102,7 +102,7 @@ registerBlockType(metadata.name, {
                             )}
                         />
                     </PanelBody>
-                    <PanelBody title="画像の上のフィルターの色と透明度">
+                    <PanelBody title="フィルター設定">
                         <p>色</p>
                         <ColorPalette
                             value={filterBackgroundColor}
@@ -117,21 +117,21 @@ registerBlockType(metadata.name, {
                             step={0.01}
                         />
                     </PanelBody>
-                    <PanelBody title="h1:afterの色設定">
+                    <PanelBody title="アクセント色設定">
                         <p>背景色</p>
                         <ColorPalette
                             value={h1AfterColor}
                             onChange={(color) => setAttributes({ h1AfterColor: color })}
                         />
                     </PanelBody>
-                    <PanelBody title="テキストの色">
+                    <PanelBody title="色設定">
                         <p>文字の色</p>
                         <ColorPalette
                             value={textColor}
                             onChange={(color) => setAttributes({ textColor: color })}
                         />
                     </PanelBody>
-                    <PanelBody title="高さ設定">
+                    <PanelBody title="レイアウト設定">
                         <p>PC用高さ</p>
                         <SelectControl
                             value={minHeightPc}

@@ -7,12 +7,20 @@
 	"category": "lw-content",
 	"icon": "admin-comments",
 	"editorScript": "file:./shin-gas-station-01-message-01.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "メッセージ。サブ+メイン+本文+キャプション+画像。代表挨拶。ショップテンプレート用",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"subTitle",
+			"mainTitle",
+			"bodyText",
+			"captionSub",
+			"captionMain"
+		],
+		"imageAttributes": [
+			"imgUrl"
+		]
+	},
 	"supports": {
 		"anchor": true
 	},

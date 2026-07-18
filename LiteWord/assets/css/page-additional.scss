@@ -146,7 +146,7 @@
                     padding-left: 1px;
                     padding-top: 1px;
                     width: 32px;
-                    height:32px;
+                    height: 32px;
                     display: flex;
                     align-items: center;
                     justify-content: center;
@@ -173,7 +173,7 @@
 /*--------
 toc_content
 ---------*/
-.toc_content {
+.toc_content.ptn_1 {
     margin: 64px auto;
     padding: 4px 14px;
     width: 100%;
@@ -240,6 +240,80 @@ toc_content
                 }
                 &:empty {
                     display: none;
+                }
+            }
+        }
+    }
+}
+.toc_content.ptn_2 {
+    position: relative;
+    z-index: 10;
+    margin: 48px auto;
+    padding: 40px;
+    width: 100%;
+    border-top: 8px solid var(--color-main);
+    @media (max-width: 700px) {
+        margin: 32px auto;
+        padding: 32px;
+    }
+    @media (max-width: 400px) {
+        padding: 32px 24px;
+    }
+    &::after {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+        width: 100%;
+        height: 100%;
+        content: "";
+        background: var(--color-main);
+        opacity: 0.15;
+    }
+    > .ttl {
+        margin-bottom: 1em;
+        text-align: center;
+        font-size: 20px;
+        color: var(--color-main);
+        font-weight: 500;
+        @media (max-width: 400px) {
+            font-size: 18px;
+        }
+    }
+    a{
+        color: var(--color-main);
+    }
+    .toc_list {
+        display: grid;
+        gap: 4px;
+        font-size: 16px;
+        @media (max-width: 700px) {
+            font-size: 14px;
+        }
+        li {
+            position: relative;
+            padding-left: 1.4em;
+            &::before {
+                position: absolute;
+                top: 0.7em;
+                left: 0;
+                content: "";
+                display: block;
+                height: 6px;
+                width: 6px;
+                border-radius: 50%;
+                background: var(--color-main);
+            }
+            > a {
+                line-height: 1.8em;
+            }
+            .toc_list_sub {
+                li {
+                    padding-left: 1.5em;
+                    font-size: 0.8em;
+                    a {
+                        line-height: 1.8em;
+                    }
                 }
             }
         }

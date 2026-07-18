@@ -85,7 +85,7 @@ registerBlockType(metadata.name, {
 				{/* ▼ サイドバー設定 */}
 				<InspectorControls>
 					{/* 背景画像 */}
-					<PanelBody title="背景画像設定">
+					<PanelBody title="背景設定">
 						<p>PC 用画像</p>
 						<MediaUpload
 							onSelect={ onChangeBackgroundImage }
@@ -144,7 +144,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* 文字色 */}
-					<PanelBody title="全体の文字の色">
+					<PanelBody title="色設定">
 						<ColorPalette
 							value={ textColor }
 							onChange={ color => setAttributes( { textColor: color } ) }
@@ -152,7 +152,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* 高さ設定 */}
-					<PanelBody title="高さ設定">
+					<PanelBody title="レイアウト設定">
 						<p>PC 高さ</p>
 						<SelectControl
 							value={ minHeightPc }

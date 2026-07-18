@@ -99,7 +99,7 @@ var replaceMarkWithSpan = function replaceMarkWithSpan() {
         }, "\u753B\u50CF\u3092", imageUrl ? '変更' : '選択'));
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u8272",
+      title: "\u80CC\u666F\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: backgroundColor,
@@ -109,7 +109,7 @@ var replaceMarkWithSpan = function replaceMarkWithSpan() {
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30C6\u30AD\u30B9\u30C8\u8272",
+      title: "\u8272\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "\u30BF\u30A4\u30C8\u30EB\u306E\u8272 (h2)")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: titleColor,
@@ -283,7 +283,7 @@ module.exports = window["wp"]["element"];
   \**********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/profile-1","version":"1.0.0","title":"プロフィール 01","category":"lw-content","icon":"id","editorScript":"file:./profile-1.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"no":1,"attributes":{"imageUrl":{"type":"string","default":"https://cdn.pixabay.com/photo/2020/06/30/10/05/photographer-5355840_1280.jpg"},"altText":{"type":"string","default":"プロフィール画像"},"profileTitle":{"type":"string","default":"PROFILE"},"content":{"type":"string","default":"名前：東京太郎\\n生年月日：1990年1月1日\\n出身地：東京都\\n趣味：読書、映画鑑賞、旅行"},"backgroundColor":{"type":"string","default":"#ebebeb"},"titleColor":{"type":"string","default":"#000000"},"contentColor":{"type":"string","default":"#000000"}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/profile-1","version":"1.0.0","title":"プロフィール 01","category":"lw-content","icon":"id","editorScript":"file:./profile-1.js","aiHint":{"description":"プロフィール。タイトル+画像+本文。代表紹介・スタッフ紹介に","excludeFromAutoSelect":false,"contentAttributes":["profileTitle","content"],"imageAttributes":["imageUrl"]},"supports":{"anchor":true},"no":1,"attributes":{"imageUrl":{"type":"string","default":"https://cdn.pixabay.com/photo/2020/06/30/10/05/photographer-5355840_1280.jpg"},"altText":{"type":"string","default":"プロフィール画像"},"profileTitle":{"type":"string","default":"PROFILE"},"content":{"type":"string","default":"名前：東京太郎\\n生年月日：1990年1月1日\\n出身地：東京都\\n趣味：読書、映画鑑賞、旅行"},"backgroundColor":{"type":"string","default":"#ebebeb"},"titleColor":{"type":"string","default":"#000000"},"contentColor":{"type":"string","default":"#000000"}}}');
 
 /***/ })
 

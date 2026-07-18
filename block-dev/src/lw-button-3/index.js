@@ -29,7 +29,7 @@ registerBlockType(metadata.name, {
                 <InspectorControls>
 
                     {/* ── 1. 基本設定 ── */}
-                    <PanelBody title="📝 基本設定" initialOpen={true}>
+                    <PanelBody title="基本設定" initialOpen={true}>
                         <div style={{ marginBottom: '15px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px', fontSize: '13px' }}>
                                 🔗 リンク先URL
@@ -50,7 +50,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 2. ボタンの見た目 ── */}
-                    <PanelBody title="🎨 ボタンの見た目" initialOpen={false}>
+                    <PanelBody title="色設定" initialOpen={false}>
                         <div style={{ marginBottom: '20px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>
                                 🌈 背景デザイン
@@ -88,7 +88,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 3. テキストの色設定 ── */}
-                    <PanelBody title="📝 テキストの色設定" initialOpen={false}>
+                    <PanelBody title="テキスト色設定" initialOpen={false}>
                         <div style={{ 
                             border: '1px solid #e0e0e0', 
                             borderRadius: '4px', 
@@ -128,7 +128,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 4. アイコン設定 ── */}
-                    <PanelBody title="✨ アイコン設定" initialOpen={false}>
+                    <PanelBody title="アイコン設定" initialOpen={false}>
                         <div style={{ marginBottom: '15px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>
                                 🎯 アイコンの種類

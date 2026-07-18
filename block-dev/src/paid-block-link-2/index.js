@@ -68,8 +68,7 @@ registerBlockType(metadata.name, {
 
         // リスト更新
         const updateContent = (index, key, value) => {
-            const newContents = [...contents];
-            newContents[index][key] = value;
+            const newContents = contents.map((item, i) => i === index ? { ...item, [key]: value } : item);
             setAttributes({ contents: newContents });
         };
 
@@ -78,7 +77,7 @@ registerBlockType(metadata.name, {
                 <InspectorControls>
 
                     {/* ── 1. 使い方ガイド ── */}
-                    <PanelBody title="📚 使い方ガイド" initialOpen={true}>
+                    <PanelBody title="マニュアル" initialOpen={true}>
                         <div style={{ textAlign: 'center', marginBottom: '15px' }}>
                             <Button
                                 variant="secondary"
@@ -95,7 +94,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 2. 背景の設定 ── */}
-                    <PanelBody title="🖼️ 背景の設定" initialOpen={false}>
+                    <PanelBody title="背景設定" initialOpen={false}>
                         <div style={{ marginBottom: '20px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>📸 背景画像</p>
                             <MediaUpload
@@ -157,7 +156,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 3. タイトルセクション ── */}
-                    <PanelBody title="📝 タイトルセクション" initialOpen={false}>
+                    <PanelBody title="タイトル設定" initialOpen={false}>
                         <div style={{ marginBottom: '15px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>🎯 タイトル下線の色</p>
                             <ColorPalette
@@ -171,7 +170,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 4. リスト項目の見た目 ── */}
-                    <PanelBody title="🎨 リスト項目の見た目" initialOpen={false}>
+                    <PanelBody title="色設定" initialOpen={false}>
                         <div style={{ marginBottom: '20px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>🏷️ 各項目の背景色</p>
                             <ColorPalette
@@ -206,7 +205,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 5. 文字スタイル設定 ── */}
-                    <PanelBody title="✍️ 文字スタイル設定" initialOpen={false}>
+                    <PanelBody title="フォント設定" initialOpen={false}>
                         <div style={{ 
                             border: '1px solid #ddd', 
                             borderRadius: '4px', 

@@ -7,37 +7,26 @@
 	"category": "lw-button",
 	"icon": "button",
 	"description": "有料リンクボタン（スタイル05）",
+	"aiHint": {
+		"description": "複数ボタン配列。電話番号+サブテキスト+アイコン。複数店舗の電話番号並列表示に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["buttons"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
 	"attributes": {
 		"blockId": {
-			"type": "string"
-		},
-		"fontWeight": {
 			"type": "string",
-			"default": "400"
+			"aiHint": { "skip": true }
 		},
-		"FontSet": {
-			"type": "string",
-			"default": ""
-		},
-		"position": {
-			"type": "string",
-			"default": "center"
-		},
-		"gapX": {
-			"type": "number",
-			"default": 12
-		},
-		"gapY": {
-			"type": "number",
-			"default": 12
-		},
-		"borderRadius": {
-			"type": "number",
-			"default": 12
-		},
+		"fontWeight": { "type": "string", "default": "400", "aiHint": { "skip": true } },
+		"FontSet": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"position": { "type": "string", "default": "center", "aiHint": { "skip": true } },
+		"gapX": { "type": "number", "default": 12, "aiHint": { "skip": true } },
+		"gapY": { "type": "number", "default": 12, "aiHint": { "skip": true } },
+		"borderRadius": { "type": "number", "default": 12, "aiHint": { "skip": true } },
 		"buttons": {
 			"type": "array",
 			"default": [
@@ -96,11 +85,5 @@
 		}
 	},
 	"editorScript": "file:./paid-block-lw-button-5.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 5
 }

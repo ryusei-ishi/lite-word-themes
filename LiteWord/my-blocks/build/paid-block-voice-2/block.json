@@ -7,12 +7,12 @@
 	"category": "lw-voice",
 	"icon": "format-status",
 	"editorScript": "file:./paid-block-voice-2.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "お客様の声（写真付き）。見出し+説明+写真+名前+コメントのカード。信頼感重視のレビューに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["blockTitleMain", "blockTitleSub", "explanation", "voices"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},

@@ -3,6 +3,8 @@ html :where(.wp-block) {
 }
 .editor-styles-wrapper {
     background: var(--color-content-bg-pc);
+    /* WP7.0でエディタ標準フォントがserif(明朝)に変更されたため、ベースをゴシックに明示 */
+    font-family: var(--font-family-gothic);
 }
 //引用
 .wp-block-quote {

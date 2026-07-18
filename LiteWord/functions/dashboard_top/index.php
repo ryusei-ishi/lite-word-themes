@@ -92,7 +92,8 @@ function lw_dashboard_enqueue_assets($hook) {
         true
     );
 
-    // アクティベート状態をチェック
+    // アクティベート状態をチェック（データ反映＝トークン同期が済んでいれば完了）
+    // プレミアム契約の有無（LW_HAS_SUBSCRIPTION）とは別軸。無料ユーザーでもトークン同期すれば「完了」扱いにする
     $current_user_id = get_current_user_id();
     $access_token = get_user_meta($current_user_id, 'lw_target_shop_token', true);
     $is_activated = !empty($access_token);
@@ -135,6 +136,15 @@ function lw_dashboard_sidebar_and_modals() {
     if (!$screen || $screen->id !== 'dashboard') {
         return;
     }
+
+    // デバッグ用：PHP処理時間計測開始
+    $lw_debug_start = microtime(true);
+    ?>
+    <script>
+    console.log('[LW Dashboard PHP] admin_footer HTML出力開始');
+    var lwPhpDebugStart = performance.now();
+    </script>
+    <?php
 
     // ダッシュボードを開いた時にテーブルが無ければ作成
     lw_maybe_create_instructions_table();
@@ -250,12 +260,126 @@ function lw_dashboard_sidebar_and_modals() {
         </div>
     </div>
 
+    <!-- 強制表示用インラインCSS（キャッシュ対策） -->
+    <style>
+    .lw-dashboard-content {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        margin-left: 400px !important;
+        /* GPU layer promotion */
+        transform: translateZ(0) !important;
+        will-change: transform, contents !important;
+        backface-visibility: hidden !important;
+        -webkit-backface-visibility: hidden !important;
+    }
+    .folded .lw-dashboard-content {
+        margin-left: 258px !important;
+    }
+    @media screen and (max-width: 782px) {
+        .lw-dashboard-content {
+            margin-left: 0 !important;
+        }
+        .lw-dashboard-sidebar {
+            position: relative !important;
+            width: 100% !important;
+        }
+    }
+    .lw-wizard-steps {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 12px !important;
+        transform: translateZ(0) !important;
+        will-change: contents !important;
+    }
+    .lw-wizard-step-wrapper {
+        display: flex !important;
+        transform: translateZ(0) !important;
+    }
+    </style>
+
+    <!-- 強制再描画スクリプト（スクロールしないと表示されない問題対策） -->
+    <script>
+    (function() {
+        var repaintCount = 0;
+
+        // 強制再描画関数
+        function forceRepaint() {
+            repaintCount++;
+            console.log('[LW FIX] 強制再描画 #' + repaintCount);
+
+            var content = document.getElementById('lw-dashboard-content');
+            var steps = document.querySelector('.lw-wizard-steps');
+
+            // 方法1: クラス追加・削除で再描画トリガー
+            if (content) {
+                content.classList.add('lw-force-repaint');
+                content.offsetHeight; // reflow強制
+                content.classList.remove('lw-force-repaint');
+            }
+
+            // 方法2: opacity微調整
+            if (steps) {
+                steps.style.opacity = '0.999';
+                requestAnimationFrame(function() {
+                    steps.style.opacity = '1';
+                });
+            }
+
+            // 方法3: 微小スクロール（初回のみ）
+            if (repaintCount === 1) {
+                var scrollPos = window.scrollY;
+                window.scrollTo(0, scrollPos + 1);
+                requestAnimationFrame(function() {
+                    window.scrollTo(0, scrollPos);
+                });
+            }
+        }
+
+        // DOMContentLoaded で実行
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                requestAnimationFrame(forceRepaint);
+                setTimeout(forceRepaint, 50);
+                setTimeout(forceRepaint, 200);
+                setTimeout(forceRepaint, 500);
+            });
+        } else {
+            requestAnimationFrame(forceRepaint);
+            setTimeout(forceRepaint, 50);
+            setTimeout(forceRepaint, 200);
+        }
+
+        // window.load でも実行
+        window.addEventListener('load', function() {
+            forceRepaint();
+            setTimeout(forceRepaint, 100);
+            setTimeout(forceRepaint, 300);
+        });
+
+        // リサイズ時にも再描画（ブラウザ幅変更で消える問題対策）
+        var resizeTimer;
+        window.addEventListener('resize', function() {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(forceRepaint, 100);
+        });
+    })();
+    </script>
+
     <!-- カスタムコンテンツエリア -->
     <div class="lw-dashboard-content" id="lw-dashboard-content">
+        <!-- DEBUG: lw-dashboard-content 開始 -->
+        <script>console.log('[LW DEBUG] lw-dashboard-content HTML開始');</script>
         <?php
         // LiteWordテーマ更新通知
         if ( function_exists( 'lw_get_theme_update_notice_html' ) ) {
             echo lw_get_theme_update_notice_html();
+        }
+        ?>
+        <?php
+        // AIチャットボタン
+        if (function_exists('lw_ai_chat_render_dashboard_button')) {
+            lw_ai_chat_render_dashboard_button();
         }
         ?>
         <h2 class="lw-wizard-title">サイト制作ウィザード</h2>
@@ -264,8 +388,8 @@ function lw_dashboard_sidebar_and_modals() {
         <?php
         $wizard_data = get_option('lw_wizard_status', array());
 
-        // アクティベート状態をチェック
-        // アクセストークンが保存されていればアクティベート完了とみなす
+        // アクティベート状態をチェック（データ反映＝トークン同期が済んでいれば完了）
+        // プレミアム契約の有無（LW_HAS_SUBSCRIPTION）とは別軸。無料ユーザーでもトークン同期すれば「完了」扱いにする
         $current_user_id = get_current_user_id();
         $access_token = get_user_meta($current_user_id, 'lw_target_shop_token', true);
         $is_activated = !empty($access_token);
@@ -294,7 +418,9 @@ function lw_dashboard_sidebar_and_modals() {
             </div>
         </div>
 
+        <script>console.log('[LW DEBUG] lw-wizard-steps 直前');</script>
         <div class="lw-wizard-steps<?php echo !$is_activated ? ' lw-not-activated' : ''; ?>">
+            <script>console.log('[LW DEBUG] lw-wizard-steps 内部開始');</script>
             <!-- ステップ1: アクティベート設定 -->
             <div class="lw-wizard-step-wrapper <?php echo $step_1_completed ? 'completed' : ''; ?> <?php echo $step_1_warning ? 'warning' : ''; ?>" data-step="1">
                 <a href="<?php echo admin_url('admin.php?page=lw_template_management'); ?>" target="_blank" class="lw-wizard-step">
@@ -2235,6 +2361,21 @@ function lw_dashboard_sidebar_and_modals() {
         endif;
     }
     ?>
+    <?php
+    // デバッグ用：PHP処理時間計測終了
+    $lw_debug_end = microtime(true);
+    $lw_debug_time = round(($lw_debug_end - $lw_debug_start) * 1000, 2);
+    ?>
+    <script>
+    (function() {
+        var phpTime = <?php echo $lw_debug_time; ?>;
+        var jsTime = (performance.now() - lwPhpDebugStart).toFixed(2);
+        console.log('[LW Dashboard PHP] admin_footer HTML出力完了');
+        console.log('[LW Dashboard PHP] PHP処理時間: ' + phpTime + 'ms');
+        console.log('[LW Dashboard PHP] HTML解析時間: ' + jsTime + 'ms');
+        console.log('[LW Dashboard PHP] 投稿データ量など重い場合はここが遅い可能性');
+    })();
+    </script>
     <?php
 }
 

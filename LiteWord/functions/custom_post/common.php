@@ -22,8 +22,8 @@ function Lw_add_common_setting_fields() {
  * =========================================================== */
 function insert_common_setting_meta_fields( $post ) {
 	?>
-	<input type="hidden" name="meta_nonce" id="meta_nonce"
-	       value="<?php echo wp_create_nonce( 'meta_nonce' ); ?>" />
+	<input type="hidden" name="common_meta_nonce" id="common_meta_nonce"
+	       value="<?php echo wp_create_nonce( 'common_meta_nonce' ); ?>" />
 	<div class="Lw_edit_style reset">
 		<?php
 		$lw_seo_functions = Lw_theme_mod_set( 'lw_extensions_seo_functions_switch', 'off' );
@@ -276,7 +276,7 @@ add_action( 'save_post', 'Lw_save_common_setting_meta_fields', 10, 1 );
 function Lw_save_common_setting_meta_fields( $post_id ) {
 
 	/* ---------- 基本チェック ---------- */
-	if ( ! isset( $_POST['meta_nonce'] ) || ! wp_verify_nonce( $_POST['meta_nonce'], 'meta_nonce' ) ) {
+	if ( ! isset( $_POST['common_meta_nonce'] ) || ! wp_verify_nonce( $_POST['common_meta_nonce'], 'common_meta_nonce' ) ) {
 		return;
 	}
 	if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) {
@@ -353,4 +353,115 @@ function Lw_save_common_setting_meta_fields( $post_id ) {
 		$safe_value === '' ? delete_post_meta( $post_id, $field )
 		                   : update_post_meta( $post_id, $field, $safe_value );
 	}
+}
+
+/* =============================================================
+ * 4) クイック編集：301リダイレクト設定
+ * =========================================================== */
+if ( is_admin() ) {
+
+	/* ---------- (A) 列追加 ---------- */
+	function lw_add_redirect_column( $columns ) {
+		$columns['lw_301_redirect'] = '301リダイレクト';
+		return $columns;
+	}
+	add_filter( 'manage_edit-page_columns',  'lw_add_redirect_column' );
+	add_filter( 'manage_edit-post_columns',  'lw_add_redirect_column' );
+
+	/* ---------- (B) 列の値を表示 ---------- */
+	function lw_render_redirect_column( $column, $post_id ) {
+		if ( $column !== 'lw_301_redirect' ) return;
+
+		$url = get_post_meta( $post_id, 'seo_301_redirect_url', true );
+		if ( $url !== '' ) {
+			echo '<span class="lw-301-url">' . esc_html( $url ) . '</span>';
+		} else {
+			echo '<span class="lw-301-url" style="color:#999;">—</span>';
+		}
+	}
+	add_action( 'manage_pages_custom_column', 'lw_render_redirect_column', 10, 2 );
+	add_action( 'manage_posts_custom_column', 'lw_render_redirect_column', 10, 2 );
+
+	/* ---------- (C) 列幅 ---------- */
+	add_action( 'admin_head', function () {
+		$screen = get_current_screen();
+		if ( $screen && in_array( $screen->id, [ 'edit-page', 'edit-post' ], true ) ) {
+			echo '<style>.column-lw_301_redirect{width:180px;}</style>';
+		}
+	} );
+
+	/* ---------- (D) クイック編集フォームにフィールド追加 ---------- */
+	add_action( 'quick_edit_custom_box', function ( $column_name, $post_type ) {
+		if ( $column_name !== 'lw_301_redirect' ) return;
+		if ( ! in_array( $post_type, [ 'post', 'page' ], true ) ) return;
+
+		wp_nonce_field( 'lw_quick_301_nonce', 'lw_quick_301_nonce_field' );
+		?>
+		<fieldset class="inline-edit-col-right" style="margin-top:8px;">
+			<div class="inline-edit-col">
+				<label class="inline-edit-redirect">
+					<span class="title">301リダイレクト元</span>
+					<span class="input-text-wrap">
+						<input type="text" name="seo_301_redirect_url"
+						       class="lw-quick-301-input"
+						       placeholder="/old-page や https://example.com/old"
+						       value="">
+					</span>
+				</label>
+			</div>
+		</fieldset>
+		<?php
+	}, 10, 2 );
+
+	/* ---------- (E) JSで現在値をクイック編集フォームへ注入 ---------- */
+	add_action( 'admin_footer-edit.php', function () {
+		$screen = get_current_screen();
+		if ( ! $screen || ! in_array( $screen->id, [ 'edit-page', 'edit-post' ], true ) ) return;
+		?>
+<script>
+(function(){
+	const origEdit = window.inlineEditPost?.edit;
+	if ( !origEdit ) return;
+
+	window.inlineEditPost.edit = function( id ) {
+		origEdit.apply( this, arguments );
+
+		/* id はリンクか tr 要素から取得 */
+		if ( typeof id === 'object' ) {
+			id = this.getId( id );
+		}
+		if ( !id ) return;
+
+		const row   = document.getElementById( 'post-' + id );
+		const editR = document.getElementById( 'edit-' + id );
+		if ( !row || !editR ) return;
+
+		const cell  = row.querySelector( '.lw-301-url' );
+		const input = editR.querySelector( '.lw-quick-301-input' );
+		if ( cell && input ) {
+			const val = cell.textContent.trim();
+			input.value = ( val === '—' ) ? '' : val;
+		}
+	};
+})();
+</script>
+		<?php
+	} );
+
+	/* ---------- (F) クイック編集からの保存処理 ---------- */
+	add_action( 'save_post', function ( $post_id ) {
+		/* nonceチェック（クイック編集経由のみ） */
+		if ( ! isset( $_POST['lw_quick_301_nonce_field'] )
+		     || ! wp_verify_nonce( $_POST['lw_quick_301_nonce_field'], 'lw_quick_301_nonce' ) ) {
+			return;
+		}
+		if ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) return;
+		if ( ! current_user_can( 'edit_post', $post_id ) ) return;
+
+		if ( isset( $_POST['seo_301_redirect_url'] ) ) {
+			$value = sanitize_textarea_field( $_POST['seo_301_redirect_url'] );
+			$value === '' ? delete_post_meta( $post_id, 'seo_301_redirect_url' )
+			              : update_post_meta( $post_id, 'seo_301_redirect_url', $value );
+		}
+	}, 10, 1 );
 }

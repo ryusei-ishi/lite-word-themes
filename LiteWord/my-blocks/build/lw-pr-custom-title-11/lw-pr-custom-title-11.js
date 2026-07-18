@@ -48,7 +48,7 @@ module.exports = window["wp"]["element"];
   \**********************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-custom-title-11","version":"1.0.0","title":"見出しタイトル 11","category":"lw-heading","icon":"editor-textcolor","description":"カスタムカラー対応見出しブロック","supports":{"anchor":true},"attributes":{"mainTitle":{"type":"string","default":"カスタムタイトル"},"subTitle":{"type":"string","default":"サブタイトル"},"headingLevel":{"type":"number","default":2},"colorMain":{"type":"string","default":"#0a71c0"},"colorMainText":{"type":"string","default":""},"colorSubText":{"type":"string","default":""},"orderReversed":{"type":"boolean","default":false},"maxWidth":{"type":"number","default":0},"borderRadius":{"type":"number","default":0},"minHeightPc":{"type":"number","default":0},"minHeightTb":{"type":"number","default":0},"minHeightSp":{"type":"number","default":0}},"editorScript":"file:./lw-pr-custom-title-11.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":11}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-custom-title-11","version":"1.0.0","title":"見出しタイトル 11","category":"lw-heading","icon":"editor-textcolor","description":"カスタムカラー対応見出しブロック","supports":{"anchor":true},"aiHint":{"description":"カスタムカラー見出し。メイン+サブタイトルの順序反転可能。装飾的な背景色付き見出し","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":[]},"attributes":{"mainTitle":{"type":"string","default":"カスタムタイトル","aiHint":{"role":"heading","contentGuide":"セクション見出し。3〜15文字","example":"選ばれる理由"}},"subTitle":{"type":"string","default":"サブタイトル","aiHint":{"role":"subheading","contentGuide":"英語表記 or 補足テキスト","example":"REASON"}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}},"colorMain":{"type":"string","default":"#0a71c0","aiHint":{"skip":true}},"colorMainText":{"type":"string","default":"","aiHint":{"skip":true}},"colorSubText":{"type":"string","default":"","aiHint":{"skip":true}},"orderReversed":{"type":"boolean","default":false,"aiHint":{"skip":true}},"maxWidth":{"type":"number","default":0,"aiHint":{"skip":true}},"borderRadius":{"type":"number","default":0,"aiHint":{"skip":true}},"minHeightPc":{"type":"number","default":0,"aiHint":{"skip":true}},"minHeightTb":{"type":"number","default":0,"aiHint":{"skip":true}},"minHeightSp":{"type":"number","default":0,"aiHint":{"skip":true}}},"editorScript":"file:./lw-pr-custom-title-11.js","no":11}');
 
 /***/ })
 
@@ -270,14 +270,14 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, "H".concat(level));
     }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u8868\u793A\u9806\u5E8F\u8A2D\u5B9A"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
       label: "\u30E1\u30A4\u30F3\u3068\u30B5\u30D6\u3092\u5165\u308C\u66FF\u3048\u308B",
       checked: orderReversed,
       onChange: onToggleOrder,
       help: orderReversed ? 'メインが上、サブが下' : 'サブが上、メインが下'
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u5E45\u8A2D\u5B9A"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u6700\u5927\u5E45 (px)",
       value: maxWidth || undefined,
@@ -288,7 +288,7 @@ __webpack_require__.r(__webpack_exports__);
       allowReset: true,
       help: maxWidth > 0 ? "".concat(maxWidth, "px") : '未設定(デフォルト幅)'
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u6700\u5C0F\u9AD8\u3055\u8A2D\u5B9A"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u6700\u5C0F\u9AD8\u3055 PC (px)",
       value: minHeightPc || undefined,
@@ -317,7 +317,7 @@ __webpack_require__.r(__webpack_exports__);
       allowReset: true,
       help: minHeightSp > 0 ? "".concat(minHeightSp, "px") : '未設定(タブレットの設定を継承)'
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30AB\u30E9\u30FC\u8A2D\u5B9A"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "\u30E1\u30A4\u30F3\u30AB\u30E9\u30FC")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
       value: colorMain,
       onChange: onChangeColorMain
@@ -328,7 +328,7 @@ __webpack_require__.r(__webpack_exports__);
       value: colorSubText,
       onChange: onChangeColorSubText
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u89D2\u4E38\u8A2D\u5B9A"
+      title: "\u67A0\u7DDA\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u89D2\u4E38 (px)",
       value: borderRadius || undefined,

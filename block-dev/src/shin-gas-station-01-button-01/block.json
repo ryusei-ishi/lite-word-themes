@@ -7,69 +7,38 @@
 	"category": "lw-button",
 	"icon": "button",
 	"description": "テンプレート専用リンクボタン",
+	"aiHint": {
+		"description": "テンプレート専用ボタン。アイコン付きリンクボタン。ショップテンプレート用",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["btnText", "btnUrl"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
 	"attributes": {
 		"btnText": {
 			"type": "string",
-			"default": "詳細はこちら"
+			"default": "詳細はこちら",
+			"aiHint": { "role": "button", "contentGuide": "動詞形。4〜10文字", "example": "詳細を見る" }
 		},
-		"bgGradient": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"colorMode": {
-			"type": "string",
-			"default": "select"
-		},
-		"customBgColor": {
-			"type": "string",
-			"default": "#0073aa"
-		},
-		"textColor": {
-			"type": "string",
-			"default": "#ffffff"
-		},
-		"fontWeight": {
-			"type": "string",
-			"default": "400"
-		},
+		"bgGradient": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"colorMode": { "type": "string", "default": "select", "aiHint": { "skip": true } },
+		"customBgColor": { "type": "string", "default": "#0073aa", "aiHint": { "skip": true } },
+		"textColor": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
+		"fontWeight": { "type": "string", "default": "400", "aiHint": { "skip": true } },
 		"btnUrl": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "role": "url", "contentGuide": "遷移先URL" }
 		},
-		"openNewTab": {
-			"type": "boolean",
-			"default": false
-		},
-		"FontSet": {
-			"type": "string",
-			"default": ""
-		},
-		"selectedIcon": {
-			"type": "string",
-			"default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 512\"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\"M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z\"/></svg>"
-		},
-		"iconColor": {
-			"type": "string",
-			"default": "#ffffff"
-		},
-		"borderWidth": {
-			"type": "number",
-			"default": 0
-		},
-		"borderColor": {
-			"type": "string",
-			"default": "var(--color-main)"
-		}
+		"openNewTab": { "type": "boolean", "default": false, "aiHint": { "skip": true } },
+		"FontSet": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"selectedIcon": { "type": "string", "default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 512\"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\"M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z\"/></svg>", "aiHint": { "skip": true } },
+		"iconColor": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
+		"borderWidth": { "type": "number", "default": 0, "aiHint": { "skip": true } },
+		"borderColor": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } }
 	},
 	"editorScript": "file:./shin-gas-station-01-button-01.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 15
 }

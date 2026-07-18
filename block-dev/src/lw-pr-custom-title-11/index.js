@@ -120,7 +120,7 @@ registerBlockType(metadata.name, {
                 </BlockControls>
 
                 <InspectorControls>
-                    <PanelBody title="表示順序設定">
+                    <PanelBody title="レイアウト設定">
                         <ToggleControl
                             label="メインとサブを入れ替える"
                             checked={orderReversed}
@@ -128,7 +128,7 @@ registerBlockType(metadata.name, {
                             help={orderReversed ? 'メインが上、サブが下' : 'サブが上、メインが下'}
                         />
                     </PanelBody>
-                    <PanelBody title="幅設定">
+                    <PanelBody title="レイアウト設定">
                         <RangeControl
                             label="最大幅 (px)"
                             value={maxWidth || undefined}
@@ -140,7 +140,7 @@ registerBlockType(metadata.name, {
                             help={maxWidth > 0 ? `${maxWidth}px` : '未設定(デフォルト幅)'}
                         />
                     </PanelBody>
-                    <PanelBody title="最小高さ設定">
+                    <PanelBody title="レイアウト設定">
                         <RangeControl
                             label="最小高さ PC (px)"
                             value={minHeightPc || undefined}
@@ -172,7 +172,7 @@ registerBlockType(metadata.name, {
                             help={minHeightSp > 0 ? `${minHeightSp}px` : '未設定(タブレットの設定を継承)'}
                         />
                     </PanelBody>
-                    <PanelBody title="カラー設定">
+                    <PanelBody title="色設定">
                         <p><strong>メインカラー</strong></p>
                         <ColorPalette
                             value={colorMain}
@@ -191,7 +191,7 @@ registerBlockType(metadata.name, {
                             onChange={onChangeColorSubText}
                         />
                     </PanelBody>
-                    <PanelBody title="角丸設定">
+                    <PanelBody title="枠線設定">
                         <RangeControl
                             label="角丸 (px)"
                             value={borderRadius || undefined}

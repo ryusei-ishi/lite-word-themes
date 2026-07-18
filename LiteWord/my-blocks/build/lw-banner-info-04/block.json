@@ -6,6 +6,12 @@
 	"title": "バナー 04（2カラム2行）",
 	"category": "lw-banner",
 	"icon": "images-alt2",
+	"aiHint": {
+		"description": "画像バナー2カラム2行。4枚のバナーを2x2グリッド配置。太字タイトル。サービスメニュー一覧に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["items"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -73,11 +79,5 @@
 		}
 	},
 	"editorScript": "file:./lw-banner-info-04.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 2
 }

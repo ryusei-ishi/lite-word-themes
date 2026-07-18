@@ -36,13 +36,20 @@ registerBlockType(metadata.name, {
 			linkFontSet, linkFontWeight,
 			imagePosition,
 			linkButtonBackgroundColor, linkButtonTextColor,
+			showLinkButton,
+			linkButtonBorderRadius,
 			showTitle,
+			maxWidth = 0,
+			textPaddingTopNone,
 		} = attributes;
 
 		const hasTitle = titleSub || title;
 
 		const blockProps = useBlockProps({
-            className: `paid-block-content-3 ${imagePosition === 'right' ? 'right' : 'left'}`
+            className: `paid-block-content-3 ${imagePosition === 'right' ? 'right' : 'left'}${maxWidth !== 0 ? ' max-width-on' : ''}`,
+            style: {
+                '--content-3-max-w': maxWidth === 0 ? '100vw' : `${maxWidth}px`,
+            },
         });
 
         return (
@@ -57,6 +64,28 @@ registerBlockType(metadata.name, {
 						>
 							このブロックの使い方はこちら
 						</Button>
+					</PanelBody>
+
+					{/* 幅設定 */}
+					<PanelBody title="幅設定">
+						<RangeControl
+							label="最大幅 (px)"
+							help="0の場合は全幅（100vw）"
+							value={maxWidth}
+							onChange={(v) => setAttributes({ maxWidth: v })}
+							min={800}
+							max={2000}
+							step={8}
+						/>
+					</PanelBody>
+
+					{/* テキストエリア設定 */}
+					<PanelBody title="テキストエリア設定">
+						<ToggleControl
+							label="上部パディングをなしにする"
+							checked={textPaddingTopNone}
+							onChange={(v) => setAttributes({ textPaddingTopNone: v })}
+						/>
 					</PanelBody>
 
 					{/* 画像設定 */}
@@ -182,18 +211,35 @@ registerBlockType(metadata.name, {
 						/>
 					</PanelBody>
 
-					{/* リンクボタン色 */}
-					<PanelBody title="リンクボタンの色設定">
-						<p>背景色</p>
-						<ColorPalette
-							value={linkButtonBackgroundColor}
-							onChange={(c) => setAttributes({ linkButtonBackgroundColor: c })}
+					{/* リンクボタン設定 */}
+					<PanelBody title="リンクボタン設定">
+						<ToggleControl
+							label="リンクボタンを表示"
+							checked={showLinkButton}
+							onChange={(v) => setAttributes({ showLinkButton: v })}
 						/>
-						<p>テキストの色</p>
-						<ColorPalette
-							value={linkButtonTextColor}
-							onChange={(c) => setAttributes({ linkButtonTextColor: c })}
-						/>
+						{showLinkButton && (
+							<>
+								<RangeControl
+									label="角丸 (px)"
+									value={linkButtonBorderRadius}
+									onChange={(v) => setAttributes({ linkButtonBorderRadius: v })}
+									min={0}
+									max={50}
+									step={1}
+								/>
+								<p>背景色</p>
+								<ColorPalette
+									value={linkButtonBackgroundColor}
+									onChange={(c) => setAttributes({ linkButtonBackgroundColor: c })}
+								/>
+								<p>テキストの色</p>
+								<ColorPalette
+									value={linkButtonTextColor}
+									onChange={(c) => setAttributes({ linkButtonTextColor: c })}
+								/>
+							</>
+						)}
 					</PanelBody>
 				</InspectorControls>
 
@@ -209,7 +255,7 @@ registerBlockType(metadata.name, {
 								/>
 							)}
 						</div>
-						<div className="paid-block-content-3__text">
+						<div className={`paid-block-content-3__text${textPaddingTopNone ? ' padding-top-none' : ''}`}>
 							{showTitle && (
 								<h3 className="ttl">
 									<RichText
@@ -243,18 +289,20 @@ registerBlockType(metadata.name, {
 								data-lw_font_set={contentFontSet}
 							/>
 
-							<div className="paid-block-content-3__text_br_button">
-								<TextControl
-									label="リンクテキスト"
-									value={linkText}
-									onChange={(v) => setAttributes({ linkText: v })}
-								/>
-								<TextControl
-									label="リンクURL"
-									value={linkUrl}
-									onChange={(v) => setAttributes({ linkUrl: v })}
-								/>
-							</div>
+							{showLinkButton && (
+								<div className="paid-block-content-3__text_br_button">
+									<TextControl
+										label="リンクテキスト"
+										value={linkText}
+										onChange={(v) => setAttributes({ linkText: v })}
+									/>
+									<TextControl
+										label="リンクURL"
+										value={linkUrl}
+										onChange={(v) => setAttributes({ linkUrl: v })}
+									/>
+								</div>
+							)}
 						</div>
 					</div>
 				</div>
@@ -273,13 +321,20 @@ registerBlockType(metadata.name, {
 			linkFontSet, linkFontWeight,
 			imagePosition,
 			linkButtonBackgroundColor, linkButtonTextColor,
+			showLinkButton,
+			linkButtonBorderRadius,
 			showTitle,
+			maxWidth = 0,
+			textPaddingTopNone,
 		} = attributes;
 
 		const hasTitle = titleSub || title;
 
 		const blockProps = useBlockProps.save({
-            className: `paid-block-content-3 ${imagePosition === 'right' ? 'right' : 'left'}`,
+            className: `paid-block-content-3 ${imagePosition === 'right' ? 'right' : 'left'}${maxWidth !== 0 ? ' max-width-on' : ''}`,
+            style: {
+                '--content-3-max-w': maxWidth === 0 ? '100vw' : `${maxWidth}px`,
+            },
         });
 
 		return (
@@ -295,7 +350,7 @@ registerBlockType(metadata.name, {
 							/>
 						)}
 					</div>
-					<div className="paid-block-content-3__text">
+					<div className={`paid-block-content-3__text${textPaddingTopNone ? ' padding-top-none' : ''}`}>
 						{showTitle && hasTitle && (
 							<h3 className="ttl">
 								<RichText.Content
@@ -324,19 +379,22 @@ registerBlockType(metadata.name, {
 							data-lw_font_set={contentFontSet}
 						/>
 
-						<a
-							href={linkUrl}
-							className="paid-block-content-3__text_br_button"
-							style={{
-								fontWeight     : linkFontWeight,
-								backgroundColor: linkButtonBackgroundColor,
-								color          : linkButtonTextColor,
-							}}
-							data-lw_font_set={linkFontSet}
-							{...(linkTarget && { target: linkTarget, rel: 'noopener noreferrer' })}
-						>
-							{linkText}
-						</a>
+						{showLinkButton && (
+							<a
+								href={linkUrl}
+								className="paid-block-content-3__text_br_button"
+								style={{
+									fontWeight     : linkFontWeight,
+									backgroundColor: linkButtonBackgroundColor,
+									color          : linkButtonTextColor,
+									borderRadius   : `${linkButtonBorderRadius}px`,
+								}}
+								data-lw_font_set={linkFontSet}
+								{...(linkTarget && { target: linkTarget, rel: 'noopener noreferrer' })}
+							>
+								{linkText}
+							</a>
+						)}
 					</div>
 				</div>
 			</div>

@@ -7,6 +7,16 @@
 	"category": "lw-cta",
 	"icon": "megaphone",
 	"description": "テンプレート専用CTAブロック2",
+	"aiHint": {
+		"description": "CTA（背景色のみ）。タイトル+説明+ボタン。ショップテンプレート用",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"title",
+			"text",
+			"buttonText"
+		],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -67,11 +77,5 @@
 		}
 	},
 	"editorScript": "file:./shin-gas-station-01-cta2.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 15
 }

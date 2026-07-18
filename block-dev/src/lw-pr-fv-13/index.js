@@ -102,7 +102,7 @@ registerBlockType(metadata.name, {
                     </ToolbarGroup>
                 </BlockControls>
                 <InspectorControls>
-                    <PanelBody title="全体の背景色" initialOpen={false}>
+                    <PanelBody title="背景設定" initialOpen={false}>
                         <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>背景色</p>
                         <ColorPalette
                             value={bgColor}
@@ -110,7 +110,7 @@ registerBlockType(metadata.name, {
                         />
                     </PanelBody>
 
-                    <PanelBody title="背景メディア" initialOpen={true}>
+                    <PanelBody title="背景設定" initialOpen={true}>
                         <SelectControl
                             label="背景タイプ"
                             value={backgroundType}

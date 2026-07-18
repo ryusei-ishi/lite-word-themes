@@ -48,14 +48,14 @@ registerBlockType(metadata.name, {
                         </div>
                     </PanelBody>
 
-                    <PanelBody title="カラー設定">
+                    <PanelBody title="色設定">
                         <p>リードテキストの色</p>
                         <ColorPalette
                             value={colorMain}
                             onChange={(newColor) => setAttributes({ colorMain: newColor })}
                         />
                     </PanelBody>
-                    <PanelBody title="スタイル設定">
+                    <PanelBody title="レイアウト設定">
                         <RangeControl
                             label="背景フィルターの透明度"
                             value={filterOpacity}

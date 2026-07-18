@@ -223,7 +223,17 @@ function insert_page_setting_meta_fields() {
                 <summary>レイアウト</summary>
                 <dl>
                     <dt class="left">最大横幅</dt>
-                    <dd><?= Lw_input_select("max_width_clm_1", ctm_max_width_arr()) ?></dd>     
+                    <dd><?= Lw_input_select("max_width_clm_1", ctm_max_width_arr()) ?></dd>  
+                    <dt class="left">左右の余白</dt>
+                    <dd><?= Lw_input_select("padding_lr_set", [
+                        "off" => "無し",
+                        "on" => "有り（デフォルト）",
+                    ]) ?></dd> 
+                    <dt class="left">上下の余白</dt>
+                    <dd><?= Lw_input_select("padding_tb_set", [
+                        "off" => "無し",
+                        "on" => "有り（デフォルト）",
+                    ]) ?></dd>     
                 </dl>
             </details>
         </div>
@@ -297,7 +307,7 @@ function insert_page_setting_meta_fields() {
                             headers: {
                                 'Content-Type': 'application/x-www-form-urlencoded',
                             },
-                            body: 'action=set_homepage&page_id=<?php echo get_the_ID(); ?>'
+                            body: 'action=set_homepage&page_id=<?php echo get_the_ID(); ?>&nonce=<?php echo wp_create_nonce("lw_set_homepage_nonce"); ?>'
                         })
                         .then(response => response.json())
                         .then(data => {
@@ -386,6 +396,8 @@ function Lw_save_page_setting_meta_fields( $post_id ) {
         'font_size_tb',
         'font_size_sp',
         'max_width_clm_1',
+        'padding_lr_set',
+        'padding_tb_set',
         'lw_page_animation_switch',
         'loading_anime_page_switch',
         'page_comment',

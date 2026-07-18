@@ -30,6 +30,7 @@
 .paid-block-fv-8 {
     container-type: inline-size;
     position: relative;
+   max-width: 100vw;
     border-bottom: 1px solid #eee;
     + .post_style > .wp-block-columns.has-background {
         margin-top: 0;

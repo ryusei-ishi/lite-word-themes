@@ -231,6 +231,20 @@ function lw_add_category_layout_field( $term ) {
 	</td>
 </tr>
 
+<!-- ▼ 目次の表示設定 -->
+<tr class="form-field">
+	<th scope="row"><label for="category_toc_switch">目次の表示</label></th>
+	<td>
+		<?php $toc_switch = get_term_meta( $term->term_id, 'category_toc_switch', true ); ?>
+		<select name="category_toc_switch" id="category_toc_switch">
+			<option value=""    <?php selected( $toc_switch, '' );    ?>>未設定（通常の設定に従う）</option>
+			<option value="on"  <?php selected( $toc_switch, 'on' );  ?>>表示する</option>
+			<option value="off" <?php selected( $toc_switch, 'off' ); ?>>非表示にする</option>
+		</select>
+		<p class="description">このカテゴリーの投稿で目次の表示を強制的に切り替えます。「未設定」の場合はカスタマイザーや投稿個別の設定に従います。</p>
+	</td>
+</tr>
+
 <!-- ▼ カテゴリーページ本文 -->
 <tr class="form-field">
 	<th scope="row"><label for="category_long_description">カテゴリーページ本文</label></th>
@@ -348,6 +362,7 @@ function lw_save_category_layout( $term_id ) {
 		'category_long_description'  => 'wp_kses_post',
 		'category_sort_order'        => 'absint',
 		'category_redirect_from_url' => 'esc_url_raw',      // ★ 追加
+		'category_toc_switch'        => 'sanitize_text_field',
 	];
 
 	foreach ( $meta_map as $field => $callback ) {

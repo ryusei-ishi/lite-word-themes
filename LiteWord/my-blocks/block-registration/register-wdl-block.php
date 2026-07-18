@@ -74,6 +74,8 @@ function wdl_get_premium_blocks() {
 	return [
 		"lw-pr-text-1",
 		"lw-pr-table-1",
+		"lw-pr-table-2",
+		"lw-pr-table-3",
 		"lw-pr-calendar-1",
 		"lw-pr-button-1",
 		"lw-pr-button-2",
@@ -97,6 +99,21 @@ function wdl_get_premium_blocks() {
 		"lw-pr-fv-16",
 		"lw-pr-fv-17",
 		"lw-pr-step-7",
+		"lw-pr-step-8",
+		"lw-pr-list-5",
+		"lw-pr-list-6",
+		"lw-pr-list-7",
+		"lw-pr-content-8",
+		"lw-pr-content-9",
+		"lw-pr-column-1",
+		"lw-pr-image-0",
+		"lw-pr-image-1",
+		"lw-pr-waku-1",
+		"lw-pr-comment-2",
+		"lw-pr-comment-3",
+		"lw-pr-qa-2",
+		"lw-pr-border-1",
+		"lw-pr-before-after-3",
 	];
 }
 
@@ -337,9 +354,7 @@ function wdl_enqueue_editor_block_lock() {
 	// インラインスクリプトでロック対象ブロックを渡す
 	wp_add_inline_script(
 		'wp-block-editor',
-		'window.wdlLockedBlocks = ' . wp_json_encode( $locked_block_names ) . ';' .
-		'console.log("[LW PHP Debug] shin-gas-station-01-custom-title-2 - in_locked: ' . ($is_in_locked ? 'true' : 'false') . ', in_all: ' . ($is_in_all ? 'true' : 'false') . ', in_unlocked: ' . ($is_in_unlocked ? 'true' : 'false') . '");' .
-		'console.log("[LW PHP Debug] Total locked blocks:", ' . count($locked_block_names) . ');',
+		'window.wdlLockedBlocks = ' . wp_json_encode( $locked_block_names ) . ';',
 		'before'
 	);
 }
@@ -398,12 +413,19 @@ function wdl_register_blocks() {
 			// render_callback を追加してフロントエンドでのCSS読み込みを制御
 			$current_block_name = $block_name;
 			$current_style_file = $style_css_file;
+			$render_php_file = get_theme_file_path( "{$block_dir}render.php" );
 
-			register_block_type( $block_dir_path, [
-				'render_callback' => function ( $attributes, $content, $block ) use ( $current_block_name, $current_style_file ) {
-					return wdl_render_block_callback( $current_block_name, $current_style_file, $content );
-				},
-			] );
+			// render.phpが存在する場合はblock.jsonのrenderに任せる（動的ブロック対応）
+			if ( file_exists( $render_php_file ) ) {
+				register_block_type( $block_dir_path );
+			} else {
+				// render.phpがない場合は従来通りrender_callbackを使用
+				register_block_type( $block_dir_path, [
+					'render_callback' => function ( $attributes, $content, $block ) use ( $current_block_name, $current_style_file ) {
+						return wdl_render_block_callback( $current_block_name, $current_style_file, $content );
+					},
+				] );
+			}
 
 			// ローカライズ用にスクリプトを取得して設定
 			$asset_file = get_theme_file_path( "{$block_dir}{$block_name}.asset.php" );
@@ -558,3 +580,28 @@ function wdl_enqueue_editor_block_reset_css() {
 	}
 }
 add_action( 'enqueue_block_assets', 'wdl_enqueue_editor_block_reset_css' );
+
+/**
+ * エディタのiframe内に 行コントロール等 共通サイドUI のCSSを読み込む
+ * ------------------------------------------------------------
+ * WP7.0 でエディタが iframe 化され、admin_enqueue_scripts 経由で読ませている
+ * editor_block_side.css がブロック描画 canvas（iframe内）に届かなくなったため、
+ * iframe に確実に届く enqueue_block_assets で読み込む（reset CSS と同じ方式）。
+ * is_admin() ガードでフロントには読み込まない。filemtime でキャッシュ自動更新。
+ */
+function wdl_enqueue_editor_block_side_css() {
+	if ( ! is_admin() ) {
+		return;
+	}
+
+	$css_path = get_theme_file_path( '/assets/css/editor_block_side.min.css' );
+	if ( file_exists( $css_path ) ) {
+		wp_enqueue_style(
+			'wdl-editor-block-side-iframe',
+			get_theme_file_uri( '/assets/css/editor_block_side.min.css' ),
+			[],
+			filemtime( $css_path )
+		);
+	}
+}
+add_action( 'enqueue_block_assets', 'wdl_enqueue_editor_block_side_css' );

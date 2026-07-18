@@ -1,0 +1,30 @@
+/*!********************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/lw-pr-custom-title-15/editor.scss ***!
+  \********************************************************************************************************************************/
+.lw-pr-custom-title-15 {
+  text-align: center;
+  border-bottom: none !important;
+  font-size: 17px;
+}
+.lw-pr-custom-title-15::after {
+  margin: 0 auto;
+  margin-top: var(--title-15-after-mt-pc, 1em);
+  content: "";
+  display: block;
+  height: 2px;
+  width: 100px;
+  background: var(--title-15-after-color, var(--color-main));
+}
+.lw-pr-custom-title-15 .main {
+  display: block;
+  text-align: center;
+  font-size: 2em;
+  line-height: 1.4em;
+  letter-spacing: 0.1em;
+}
+.lw-pr-custom-title-15 .sub {
+  margin-top: var(--custom-title-sub-margin-top-pc, 0.2em);
+  display: block;
+  font-size: 0.9em;
+  line-height: 1.6em;
+}

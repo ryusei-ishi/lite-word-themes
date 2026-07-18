@@ -1,0 +1,131 @@
+{
+	"_meta": {
+		"description": "LiteWordリンク一覧・破損リンク検出機能のAI向けメタ情報。各機能の意味・用途・仕組みをAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21"
+	},
+	"feature": {
+		"title": "リンク一覧・破損リンク検出",
+		"aiDescription": "サイト内の全ページ（投稿・固定ページ）に含まれるaタグを自動スキャンし、リンク切れや無効なアンカーを検出する管理画面機能。管理者権限（manage_options）が必要。管理メニュー「リンク一覧」からアクセスする。",
+		"userGuide": "サイトの品質管理に使う機能。リンク切れはSEOに悪影響を与えるため、定期的にチェックすることが推奨される。特にサイトリニューアルやページ削除の後に実行すると効果的。"
+	},
+	"database": {
+		"tableName": "wp_lw_link_list",
+		"aiDescription": "スキャン結果を保存するカスタムテーブル。投稿IDごとにリンク情報（JSON）、ページ内のid属性一覧（JSON）、リンク数を保存する。スキャン時にTRUNCATEして全件再挿入する方式。",
+		"columns": {
+			"id": "自動採番ID",
+			"post_id": "投稿ID（UNIQUE）",
+			"post_type": "投稿タイプ（page/post等）",
+			"post_title": "投稿タイトル",
+			"links_json": "ページ内の全aタグ情報をJSON配列で保存（href, text, source_field）",
+			"ids_json": "ページ内の全id属性値をJSON配列で保存（アンカーリンクの存在チェック用）",
+			"link_count": "リンク数",
+			"created_at": "作成日時",
+			"updated_at": "更新日時"
+		}
+	},
+	"components": {
+		"scanner": {
+			"class": "LW_Broken_Link_Check_Scanner",
+			"file": "class-scanner.php",
+			"aiDescription": "全公開ページからaタグとid属性を抽出するスキャナー。DOMDocumentを使用してネストされたHTML構造を正確にパースする。生コンテンツとフィルター適用後のコンテンツ両方からリンクを抽出し、重複を排除する。",
+			"methods": {
+				"scan_all_links": {
+					"aiDescription": "全公開投稿・固定ページをスキャンし、aタグとid属性を抽出する。戻り値は links（リンク配列）と pages（全ページ情報）。",
+					"userGuide": "サイト全体のリンクを一括で調べたい時に使う。ページ数が多いと処理に時間がかかる。"
+				},
+				"extract_all_a_tags": {
+					"aiDescription": "HTML文字列からDOMDocumentで全aタグを抽出。href属性値、テキスト内容（SVG/アイコン除外）、元のHTMLタグ、コンテンツ内での出現順（link_index）を返す。"
+				},
+				"extract_all_ids": {
+					"aiDescription": "HTML文字列から全id属性値を正規表現で抽出。アンカーリンクの存在チェックに使用する。"
+				}
+			}
+		},
+		"checker": {
+			"class": "LW_Broken_Link_Check_Checker",
+			"file": "class-checker.php",
+			"aiDescription": "URLにHTTPリクエストを送信してリンクの有効性をチェックするクラス。まずHEADリクエストを試み、失敗した場合はGETにフォールバックする。タイムアウトは10秒。SSL証明書エラーは無視する。",
+			"statusTypes": {
+				"ok": "有効（200系）",
+				"redirect": "リダイレクト（300系）— redirect_urlも返す",
+				"not_found": "リンク切れ（404）",
+				"client_error": "クライアントエラー（400系、404以外）",
+				"server_error": "サーバーエラー（500系）",
+				"timeout": "タイムアウト（10秒超過）",
+				"error": "接続エラー（DNS解決失敗等）",
+				"skip": "チェック対象外（mailto/tel/javascript/data/空URL）"
+			},
+			"userGuide": "バッチ処理で最大20件ずつチェックする。外部サイトへのリクエストを送るため、大量チェック時はサーバー負荷に注意。"
+		},
+		"adminPage": {
+			"file": "admin-page-all-links.php",
+			"aiDescription": "管理画面のリンク一覧ページ。投稿タイプ・ページ別にグループ表示し、リンクの有効性チェック結果をバッジで表示する。無効なアンカーリンク（#のみ、##等）には警告マークを表示。ID不在のアンカーリンクも検出する。",
+			"features": [
+				"リンクのHTTPステータスチェック（バッチ処理）",
+				"統計表示（総リンク数、有効/リダイレクト/エラー/無効#/ID不在）",
+				"インライン編集（リンクURLを管理画面から直接変更可能）",
+				"href='#' のみのリンクに警告バッジ表示",
+				"アンカーリンクの存在チェック（ターゲットページにid属性があるか確認）"
+			]
+		}
+	},
+	"ajaxEndpoints": {
+		"lw_link_list_scan": {
+			"aiDescription": "全ページをスキャンしてリンク情報をDBに保存する。スキャン完了後、リンク一覧とページ一覧を返す。",
+			"method": "POST",
+			"permission": "manage_options"
+		},
+		"lw_link_list_load": {
+			"aiDescription": "DBに保存済みのリンク情報を取得する（再スキャン不要）。",
+			"method": "POST",
+			"permission": "manage_options"
+		},
+		"lw_link_list_status": {
+			"aiDescription": "DBにデータがあるか、最終更新日時を返す。初回アクセス時の判定に使用。",
+			"method": "POST",
+			"permission": "manage_options"
+		},
+		"lw_link_list_check_batch": {
+			"aiDescription": "URLリスト（最大20件）の有効性をHTTPリクエストでチェックする。",
+			"method": "POST",
+			"permission": "manage_options",
+			"params": {
+				"urls": "チェックするURL配列（最大20件）"
+			}
+		},
+		"lw_link_list_get_checkable_urls": {
+			"aiDescription": "チェック可能なURLリストを生成する。mailto/tel/javascript/空URLを除外し、アンカーリンクはソースページURLと結合する。重複排除済み。",
+			"method": "POST",
+			"permission": "manage_options"
+		},
+		"lw_link_list_update_href": {
+			"aiDescription": "投稿のpost_content内の特定aタグのhref属性を直接書き換える。link_index（コンテンツ内の出現順）で対象を特定する。更新後、そのページのリンク情報をDBにも反映する。",
+			"method": "POST",
+			"permission": "manage_options",
+			"params": {
+				"post_id": "投稿ID",
+				"old_href": "変更前のURL",
+				"new_href": "変更後のURL",
+				"link_text": "リンクテキスト（特定用）",
+				"link_index": "コンテンツ内での出現順（0始まり）"
+			}
+		},
+		"lw_link_list_debug_log": {
+			"aiDescription": "フロントエンドJSからdebug.logにメッセージを出力するデバッグ用エンドポイント。",
+			"method": "POST",
+			"permission": "manage_options"
+		}
+	},
+	"skipConditions": {
+		"aiDescription": "以下のURLタイプはリンクチェックの対象外としてスキップされる。",
+		"types": [
+			"空のURL",
+			"mailto: で始まるURL",
+			"tel: で始まるURL",
+			"javascript: で始まるURL",
+			"data: で始まるURL",
+			"# のみのアンカーリンク（ただし警告バッジは表示）"
+		]
+	}
+}

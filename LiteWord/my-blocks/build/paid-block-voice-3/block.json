@@ -7,12 +7,12 @@
 	"category": "lw-voice",
 	"icon": "format-quote",
 	"editorScript": "file:./paid-block-voice-3.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "お客様の声スライダー。写真+名前+年代+職業+抜粋+詳細モーダル。カルーセル表示。リッチなレビューに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["voices"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},

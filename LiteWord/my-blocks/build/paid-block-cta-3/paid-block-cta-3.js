@@ -685,7 +685,7 @@ module.exports = window["wp"]["element"];
   \*****************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-cta-3","version":"1.0.0","title":"CTA 03","category":"lw-cta","icon":"megaphone","description":"電話番号付きCTAブロック（有料）","supports":{"anchor":true},"attributes":{"mainTitle":{"type":"string","default":"中古車・高価買取"},"leadText":{"type":"string","default":"365日年中無休お電話受付中\\n査定は完全無料です。"},"listItem1":{"type":"string","default":"即日買取"},"listItem2":{"type":"string","default":"出張買取"},"listItem3":{"type":"string","default":"実績多数"},"phoneNumber":{"type":"string","default":"0120-000-000"},"imageUrl":{"type":"string","default":"https://lite-word.com/sample_img/reception/women/6.webp"},"objectFit":{"type":"string","default":"object_fit_cover"},"objectPosition":{"type":"string","default":"object_position_center"},"bgColor":{"type":"string","default":"#f8f4de"},"bdColor":{"type":"string","default":"#f45353"},"tapTelText":{"type":"string","default":"タップしてお電話ください"},"fontTel":{"type":"string","default":"Montserrat"},"fontWeightTel":{"type":"string","default":""}},"editorScript":"file:./paid-block-cta-3.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":3}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-cta-3","version":"1.0.0","title":"CTA 03","category":"lw-cta","icon":"megaphone","description":"電話番号付きCTAブロック（有料）","aiHint":{"description":"電話番号CTA。画像+見出し+リード+ポイント3つ+電話番号+タップ誘導。店舗系業種のCTAに","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","leadText","listItem1","listItem2","listItem3","phoneNumber","tapTelText"],"imageAttributes":["imageUrl"]},"supports":{"anchor":true},"attributes":{"mainTitle":{"type":"string","default":"中古車・高価買取"},"leadText":{"type":"string","default":"365日年中無休お電話受付中\\n査定は完全無料です。"},"listItem1":{"type":"string","default":"即日買取"},"listItem2":{"type":"string","default":"出張買取"},"listItem3":{"type":"string","default":"実績多数"},"phoneNumber":{"type":"string","default":"0120-000-000"},"imageUrl":{"type":"string","default":"https://lite-word.com/sample_img/reception/women/6.webp"},"objectFit":{"type":"string","default":"object_fit_cover"},"objectPosition":{"type":"string","default":"object_position_center"},"bgColor":{"type":"string","default":"#f8f4de"},"bdColor":{"type":"string","default":"#f45353"},"tapTelText":{"type":"string","default":"タップしてお電話ください"},"fontTel":{"type":"string","default":"Montserrat"},"fontWeightTel":{"type":"string","default":""}},"editorScript":"file:./paid-block-cta-3.js","no":3}');
 
 /***/ })
 
@@ -1084,7 +1084,8 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOpti
       if (!richText) return '';
       // HTMLタグを全て除去
       var plainText = richText.replace(/<[^>]*>/g, '');
-      return plainText;
+      // 電話番号として有効な文字（数字・ハイフン・プラス）のみ残す
+      return plainText.replace(/[^\d\-\+]/g, '');
     };
     var plainPhoneNumber = getPlainPhoneNumber(phoneNumber);
 

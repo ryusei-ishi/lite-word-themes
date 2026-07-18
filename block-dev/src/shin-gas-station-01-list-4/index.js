@@ -40,8 +40,7 @@ registerBlockType(metadata.name, {
 
         // コンテンツを更新
         const updateContent = (index, key, value) => {
-            const updatedContents = [...contents];
-            updatedContents[index][key] = value;
+            const updatedContents = contents.map((content, i) => i === index ? { ...content, [key]: value } : content);
             setAttributes({ contents: updatedContents });
         };
 

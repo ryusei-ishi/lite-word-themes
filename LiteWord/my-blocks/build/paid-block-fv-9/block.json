@@ -7,12 +7,13 @@
 	"category": "lw-firstview",
 	"icon": "images-alt2",
 	"editorScript": "file:./paid-block-fv-9.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "画像スライダーFV。複数画像を自動切替。テキストなし。ビジュアル重視のトップページに",
+		"excludeFromAutoSelect": true,
+		"excludeReason": "テキスト属性がほぼなく画像URLの配列のみ。AI生成に不向き",
+		"contentAttributes": [],
+		"imageAttributes": ["slides"]
+	},
 	"supports": {
 		"anchor": true
 	},

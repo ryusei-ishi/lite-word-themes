@@ -1,0 +1,29 @@
+.lw-pr-border-1 {
+  position: relative;
+  box-sizing: border-box;
+  margin-left: var(--border-1-ml-pc) !important;
+  margin-right: var(--border-1-mr-pc) !important;
+}
+
+.lw-pr-border-1::before {
+  position: absolute;
+  top: -24px;
+  right: 0;
+  padding: 0 1em;
+  height: 24px;
+  width: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  content: "LW BORDER";
+  background: #1b1bff;
+  color: #fff;
+  border-radius: 6px 6px 0 0;
+  font-size: 10px;
+  line-height: 1;
+}
+
+.lw-pr-border-1:hover {
+  outline: 2px #1b1bff solid;
+  outline-offset: 4px;
+}

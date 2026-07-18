@@ -7,12 +7,12 @@
 	"category": "lw-voice",
 	"icon": "format-status",
 	"editorScript": "file:./lw-voice-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "お客様の声カード。h2タイトル+名前+見出し+コメントの繰り返し。レビュー・体験談セクションに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["h2Title", "testimonials"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},

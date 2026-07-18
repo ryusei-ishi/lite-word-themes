@@ -23,7 +23,6 @@
 .lw-step-2 ul.lw-step-2__inner li.lw-step-2__li {
   position: relative;
   background: #fff;
-  border-width: 1px;
   border-style: solid;
 }
 .lw-step-2 ul.lw-step-2__inner li.lw-step-2__li + li {

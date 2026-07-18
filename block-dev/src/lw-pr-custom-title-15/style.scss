@@ -1,0 +1,100 @@
+.lw-pr-custom-title-15 {
+  margin-top: 2em;
+  margin-bottom: 1.5em;
+  text-align: center;
+  font-size: var(--title-15-font-size_pc, 16px) !important;
+  @media (max-width: 800px) {
+    font-size: var(--title-15-font-size_sp, 16px) !important;
+  }
+  &:not([class*="lw_padding_bottom_"]) {
+    padding-bottom: 0 !important;
+  }
+  &::after {
+    margin: 0 auto;
+    margin-top: var(--title-15-after-mt-pc, 1em) !important;
+    content: "";
+    display: block;
+    height: var(--title-15-after-h-pc, 4px);
+    width: var(--title-15-after-w-pc, 50px);
+    background: var(--title-15-after-color, var(--color-main)) !important;
+    @media (max-width: 800px) {
+      width: var(--title-15-after-w-sp,50px);
+      height: var(---title-15-after-h-sp,  4px);
+      margin-top: var(--title-15-after-mt-sp, var(--title-15-after-mt-pc, 0.8em)) !important;
+    }
+  }
+  &.position_left_pc {
+    text-align: left;
+    &::after {
+      margin-left: 0;
+    }
+  }
+  &.position_right_pc {
+    text-align: right;
+    &::after {
+      margin-right: 0;
+    }
+  }
+  &.position_left_sp {
+    @media (max-width: 800px) {
+      text-align: left;
+    }
+    &::after {
+      @media (max-width: 800px) {
+        margin-left: 0;
+      }
+    }
+  }
+  &.position_right_sp {
+    @media (max-width: 800px) {
+      text-align: right;
+    }
+    &::after {
+      @media (max-width: 800px) {
+        margin-right: 0;
+      }
+    }
+  }
+  &.position_center_sp {
+    @media (max-width: 800px) {
+      text-align: center;
+    }
+    &::after {
+      @media (max-width: 800px) {
+        margin-left: auto;
+        margin-right: auto;
+      }
+    }
+  }
+  .main {
+    display: block;
+    font-size: 2em;
+    letter-spacing: 0.1em;
+    line-height: 1.4em;
+    @container (max-width:800px) {
+      font-size: 1.8em;
+    }
+    @container (max-width:600px) {
+      font-size: 1.4em;
+    }
+    @container (max-width:500px) {
+      font-size: 1.375em;
+    }
+    span {
+      display: inline-block;
+    }
+  }
+  .sub {
+    margin-top: var(--custom-title-sub-margin-top-pc, 0.2em);
+    display: block;
+    font-size: 1em;
+    line-height: 1.6em;
+    @container (max-width:600px) {
+      margin-top: var(--custom-title-sub-margin-top-sp, var(--custom-title-sub-margin-top-pc, 0.2em));
+      font-size: 0.8em;
+    }
+    span {
+      display: inline-block;
+    }
+  }
+}

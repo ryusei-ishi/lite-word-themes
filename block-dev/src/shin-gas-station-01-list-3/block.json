@@ -9,31 +9,19 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "シンプルチェックリスト。背景色+ボーダー付き。箇条書き向け。ショップテンプレート用",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"attributes": {
-		"fontLi": {
-			"type": "string",
-			"default": ""
-		},
-		"fontColorLi": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"fontWeightLi": {
-			"type": "string",
-			"default": "600"
-		},
-		"backgroundColor": {
-			"type": "string",
-			"default": "#FAFAFA"
-		},
-		"borderColor": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"borderSize": {
-			"type": "number",
-			"default": 0
-		},
+		"fontLi": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"fontColorLi": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"fontWeightLi": { "type": "string", "default": "600", "aiHint": { "skip": true } },
+		"backgroundColor": { "type": "string", "default": "#FAFAFA", "aiHint": { "skip": true } },
+		"borderColor": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"borderSize": { "type": "number", "default": 0, "aiHint": { "skip": true } },
 		"contents": {
 			"type": "array",
 			"source": "query",
@@ -59,11 +47,5 @@
 		}
 	},
 	"editorScript": "file:./shin-gas-station-01-list-3.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 15
 }

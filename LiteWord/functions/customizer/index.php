@@ -24,6 +24,7 @@ if(is_customize_preview()){
     }
     get_template_part("./functions/customizer/header/ptn_5_set");
     get_template_part("./functions/customizer/header/ptn_6_set");
+    get_template_part("./functions/customizer/header/ptn_short_code");
     //ドロワー
     get_template_part('./functions/customizer/drawer/drawer_set');
     for ($i=1; $i <= 1; $i++) { 
@@ -37,6 +38,7 @@ if(is_customize_preview()){
         get_template_part("./functions/customizer/footer/ptn_3_set");
     }
     get_template_part("./functions/customizer/footer/ptn_4_set");
+    get_template_part("./functions/customizer/footer/ptn_short_code");
     //追従CTA
     get_template_part('./functions/customizer/follow_bottom_cta/follow_bottom_cta_set');
     for ($i=1; $i <= 2; $i++) { 
@@ -63,4 +65,6 @@ if(is_customize_preview()){
     if(LW_EXPANSION_BASE){
         get_template_part('./functions/customizer/lw_extensions');
     }
+    //パンクズリスト
+    get_template_part("./functions/customizer/lw_breadcrumb");
 }

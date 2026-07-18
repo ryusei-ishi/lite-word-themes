@@ -1,0 +1,688 @@
+{
+	"_meta": {
+		"description": "LiteWord固定ページ編集画面のメタボックス「ページ独自のデザイン設定」および「その他の設定」のAI向けメタ情報。各設定項目の意味・用途・推奨値をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21",
+		"sourceFiles": [
+			"functions/custom_post/page.php",
+			"functions/custom_post/common.php",
+			"functions/custom_post/function_input.php",
+			"functions/customizer/functions.php"
+		]
+	},
+	"metaBox": {
+		"id": "page_setting_page_setting",
+		"title": "ページ独自のデザイン設定",
+		"postType": "page",
+		"aiDescription": "固定ページごとにカスタマイザーの全体設定を上書きできるメタボックス。ヘッダー・フッター・ドロワー・カラー・フォント・レイアウト・背景などをページ単位で個別に設定する。未選択の場合はカスタマイザーの全体設定が適用される。",
+		"sections": {
+			"header": {
+				"title": "ヘッダーの設定",
+				"aiDescription": "このページ専用のヘッダーパターンやロゴを設定する。カスタマイザーの全体設定を上書きして、ページごとに異なるヘッダーを表示できる。",
+				"settings": {
+					"header_select": {
+						"metaKey": "header_select",
+						"inputType": "select",
+						"aiDescription": "このページで使用するヘッダーのデザインパターンを選択する。",
+						"options": {
+							"": "未選択（カスタマイザー設定に従う）",
+							"ptn_1": "ヘッダーパターン1（デフォルト）— ロゴ左+メニュー右",
+							"ptn_2": "ヘッダーパターン2 — ロゴ中央+メニュー下",
+							"ptn_3": "ヘッダーパターン3 — ロゴ左+メニュー左寄せ",
+							"ptn_4": "ヘッダーパターン4 — テンプレート依存（条件付き表示）",
+							"ptn_5": "ヘッダーパターン5 — ロゴ左+説明テキスト+ピックアップメニュー",
+							"ptn_6": "ヘッダーパターン6 — ロゴ左+メニュー右（アンダーライン型hover）",
+							"ptn_short_code": "ショートコード — 完全カスタムヘッダー",
+							"none": "非表示"
+						},
+						"userGuide": "LPではnone（非表示）にしてコンテンツに集中させることが多い。通常ページは未選択でカスタマイザー設定に従う。",
+						"jsClass": "Lw_input_select_switch"
+					},
+					"header_menu_select": {
+						"metaKey": "header_menu_select",
+						"inputType": "select",
+						"aiDescription": "このページのヘッダーに表示するナビゲーションメニューを選択する。WordPressの「外観 > メニュー」で作成したメニューから選ぶ。",
+						"options": "動的生成（wp_get_nav_menus()から取得）",
+						"premium": true,
+						"premiumNote": "LW_HAS_SUBSCRIPTION === true の場合のみ表示。無料版では「LiteWordプレミアム限定機能」のメッセージが表示される。",
+						"userGuide": "ページごとに異なるメニューを表示したい場合に使う。例：LPでは簡素なメニュー、通常ページではフルメニュー。"
+					},
+					"logo_header_page_switch": {
+						"metaKey": "logo_header_page_switch",
+						"inputType": "select",
+						"aiDescription": "このページのヘッダーロゴの表示形式を切り替える。",
+						"options": {
+							"": "未選択（カスタマイザー設定に従う）",
+							"logo_text": "テキスト — テキストでロゴを表示",
+							"logo_img": "画像 — 画像でロゴを表示"
+						},
+						"userGuide": "通常は未選択でカスタマイザー設定に従う。特定ページだけ白背景用のロゴに変えたい場合などに使う。"
+					},
+					"logo_header_page_text": {
+						"metaKey": "logo_header_page_text",
+						"inputType": "text",
+						"aiDescription": "テキストロゴの表示テキスト。HTML（span, a, mark, br等の限定タグ）が使える。",
+						"htmlAllowed": true,
+						"allowedTags": ["a", "span", "mark", "br", "b", "strong", "i", "em", "u", "small", "sup", "sub"],
+						"userGuide": "span要素でdata-lw_font_set属性を使うと一部だけフォントを変更できる。"
+					},
+					"logo_text_font_family": {
+						"metaKey": "logo_text_font_family",
+						"inputType": "select",
+						"aiDescription": "テキストロゴのフォントファミリー。Google Fontsを含む豊富なフォントから選択可能。",
+						"options": "ctm_font_family_arr()から動的生成。ゴシック・明朝・丸ゴシック・手書き風・英字フォント等。プレミアム限定フォントあり。",
+						"userGuide": "ブランドイメージに合ったフォントを選ぶ。明朝体は高級感、ゴシック体は読みやすさ、筆記体は洗練された印象。"
+					},
+					"logo_text_font_weight": {
+						"metaKey": "logo_text_font_weight",
+						"inputType": "select",
+						"aiDescription": "テキストロゴのフォントの太さ。",
+						"options": {
+							"": "指定なし",
+							"100": "100（最も細い）",
+							"200": "200",
+							"300": "300（ライト）",
+							"400": "400（通常）",
+							"500": "500（ミディアム）",
+							"600": "600（セミボールド）",
+							"700": "700（ボールド）",
+							"800": "800",
+							"900": "900（最も太い）"
+						},
+						"userGuide": "通常は400〜700が読みやすい。フォントによっては対応していないウェイトがある。"
+					},
+					"logo_header_page_img": {
+						"metaKey": "logo_header_page_img",
+						"inputType": "media",
+						"aiDescription": "画像ロゴのURL。メディアライブラリから選択する。",
+						"userGuide": "推奨: 透過PNG。高さ40〜60px程度の画像が最適。Retina対応には2倍サイズの画像を使う。"
+					},
+					"logo_header_page_size_pc": {
+						"metaKey": "logo_header_page_size_pc",
+						"inputType": "range",
+						"aiDescription": "PC表示時のロゴサイズ（高さ）。",
+						"min": 0,
+						"max": 300,
+						"default": 38,
+						"unit": "px",
+						"userGuide": "38pxがデフォルト。ヘッダーの高さに合わせて調整する。"
+					},
+					"logo_header_page_size_tb": {
+						"metaKey": "logo_header_page_size_tb",
+						"inputType": "range",
+						"aiDescription": "タブレット表示時のロゴサイズ（高さ）。",
+						"min": 0,
+						"max": 300,
+						"default": 34,
+						"unit": "px",
+						"userGuide": "34pxがデフォルト。PCより若干小さめが一般的。"
+					},
+					"logo_header_page_size_sp": {
+						"metaKey": "logo_header_page_size_sp",
+						"inputType": "range",
+						"aiDescription": "スマホ表示時のロゴサイズ（高さ）。",
+						"min": 0,
+						"max": 300,
+						"default": 30,
+						"unit": "px",
+						"userGuide": "30pxがデフォルト。スマホではコンパクトに。"
+					},
+					"logo_header_page_url": {
+						"metaKey": "logo_header_page_url",
+						"inputType": "text",
+						"aiDescription": "ロゴをクリックしたときのリンク先URL。空の場合はサイトトップページにリンクされる。",
+						"userGuide": "通常は空のままでOK（トップページに遷移する）。特定のページに飛ばしたい場合に設定する。"
+					},
+					"header_page_cta_color_bg": {
+						"metaKey": "header_page_cta_color_bg",
+						"inputType": "color",
+						"aiDescription": "ヘッダー内のアクションボタン（CTA）の背景色。",
+						"default": "#ADA993",
+						"userGuide": "サイトのアクセントカラーや目立つ色を設定する。CTAボタンは周囲と差別化した色が効果的。"
+					},
+					"page_pickup_menu_page_switch": {
+						"metaKey": "page_pickup_menu_page_switch",
+						"inputType": "select",
+						"aiDescription": "ヘッダー下のピックアップメニュー（おすすめコンテンツへのリンクバー）の表示/非表示。",
+						"options": {
+							"on": "表示する",
+							"off": "表示しない"
+						},
+						"userGuide": "トップページでは表示、LPでは非表示にすることが多い。"
+					}
+				}
+			},
+			"drawer": {
+				"title": "ドロワーの設定",
+				"aiDescription": "スマホ・タブレットで表示されるドロワーメニュー（ハンバーガーメニュー）の設定。このページ専用のパターンやメニューを指定できる。",
+				"settings": {
+					"drawer_page_switch": {
+						"metaKey": "drawer_page_switch",
+						"inputType": "select",
+						"aiDescription": "このページで使用するドロワーのデザインパターン。",
+						"options": {
+							"": "未選択（カスタマイザー設定に従う）",
+							"ptn_1": "ドロワーパターン1（デフォルト）",
+							"none": "非表示"
+						},
+						"userGuide": "LPではnoneに設定してメニューを隠し、ページからの離脱を防ぐことがある。"
+					},
+					"drawer_menu_select": {
+						"metaKey": "drawer_menu_select",
+						"inputType": "select",
+						"aiDescription": "このページのドロワーに表示するナビゲーションメニューを選択する。",
+						"options": "動的生成（wp_get_nav_menus()から取得）",
+						"premium": true,
+						"premiumNote": "LW_HAS_SUBSCRIPTION === true の場合のみ表示。無料版では「LiteWordプレミアム限定機能」のメッセージが表示される。",
+						"userGuide": "PCメニューとは異なるメニュー構成をスマホで使いたい場合に設定する。"
+					}
+				}
+			},
+			"footer": {
+				"title": "フッターの設定",
+				"aiDescription": "このページ専用のフッターパターンやロゴを設定する。カスタマイザーの全体設定を上書きできる。",
+				"settings": {
+					"footer_select": {
+						"metaKey": "footer_select",
+						"inputType": "select",
+						"aiDescription": "このページで使用するフッターのデザインパターン。",
+						"options": {
+							"": "未選択（カスタマイザー設定に従う）",
+							"ptn_1": "フッターパターン1（デフォルト）",
+							"ptn_2": "フッターパターン2",
+							"ptn_3": "フッターパターン3（テンプレート依存・条件付き表示）",
+							"ptn_4": "フッターパターン4",
+							"ptn_short_code": "ショートコード — 完全カスタムフッター",
+							"none": "非表示"
+						},
+						"userGuide": "LPでは簡素なフッターかnoneにすることが多い。ショートコードで完全カスタムも可能。",
+						"jsClass": "Lw_input_select_switch"
+					},
+					"footer_menu_select": {
+						"metaKey": "footer_menu_select",
+						"inputType": "select",
+						"aiDescription": "このページのフッターに表示するナビゲーションメニューを選択する。",
+						"options": "動的生成（wp_get_nav_menus()から取得）",
+						"premium": true,
+						"premiumNote": "LW_HAS_SUBSCRIPTION === true の場合のみ表示。無料版では「LiteWordプレミアム限定機能」のメッセージが表示される。",
+						"userGuide": "フッターに特定のメニューを表示したい場合に使う。"
+					},
+					"logo_footer_page_switch": {
+						"metaKey": "logo_footer_page_switch",
+						"inputType": "select",
+						"aiDescription": "このページのフッターロゴの表示形式を切り替える。",
+						"options": {
+							"": "未選択（カスタマイザー設定に従う）",
+							"logo_text": "テキスト — テキストでロゴを表示",
+							"logo_img": "画像 — 画像でロゴを表示"
+						},
+						"userGuide": "通常は未選択でOK。フッターだけ別のロゴを使いたい場合に設定する。"
+					},
+					"logo_footer_page_text": {
+						"metaKey": "logo_footer_page_text",
+						"inputType": "text",
+						"aiDescription": "フッターのテキストロゴの表示テキスト。HTML（限定タグ）が使える。",
+						"htmlAllowed": true,
+						"allowedTags": ["a", "span", "mark", "br", "b", "strong", "i", "em", "u", "small", "sup", "sub"]
+					},
+					"logo_footer_text_font_family": {
+						"metaKey": "logo_footer_text_font_family",
+						"inputType": "select",
+						"aiDescription": "フッターテキストロゴのフォントファミリー。",
+						"options": "ctm_font_family_arr()から動的生成"
+					},
+					"logo_footer_text_font_weight": {
+						"metaKey": "logo_footer_text_font_weight",
+						"inputType": "select",
+						"aiDescription": "フッターテキストロゴのフォントの太さ。",
+						"options": {
+							"": "指定なし",
+							"100": "100", "200": "200", "300": "300", "400": "400", "500": "500",
+							"600": "600", "700": "700", "800": "800", "900": "900"
+						}
+					},
+					"logo_footer_page_img": {
+						"metaKey": "logo_footer_page_img",
+						"inputType": "media",
+						"aiDescription": "フッター画像ロゴのURL。メディアライブラリから選択する。"
+					},
+					"logo_footer_page_size_pc": {
+						"metaKey": "logo_footer_page_size_pc",
+						"inputType": "range",
+						"aiDescription": "PC表示時のフッターロゴサイズ（高さ）。",
+						"min": 0, "max": 300, "default": 38, "unit": "px"
+					},
+					"logo_footer_page_size_tb": {
+						"metaKey": "logo_footer_page_size_tb",
+						"inputType": "range",
+						"aiDescription": "タブレット表示時のフッターロゴサイズ（高さ）。",
+						"min": 0, "max": 300, "default": 34, "unit": "px"
+					},
+					"logo_footer_page_size_sp": {
+						"metaKey": "logo_footer_page_size_sp",
+						"inputType": "range",
+						"aiDescription": "スマホ表示時のフッターロゴサイズ（高さ）。",
+						"min": 0, "max": 300, "default": 30, "unit": "px"
+					},
+					"logo_footer_page_url": {
+						"metaKey": "logo_footer_page_url",
+						"inputType": "text",
+						"aiDescription": "フッターロゴをクリックしたときのリンク先URL。空の場合はサイトトップページにリンクされる。"
+					}
+				}
+			},
+			"followCta": {
+				"title": "追従CTA設定",
+				"aiDescription": "スクロールしても画面下部に追従して表示されるCTA（コールトゥアクション）バーの設定。お問い合わせや予約ボタンなどに使う。",
+				"settings": {
+					"follow_bottom_cta_ptn": {
+						"metaKey": "follow_bottom_cta_ptn",
+						"inputType": "select",
+						"aiDescription": "フッター追従CTAのデザインパターンを選択する。",
+						"options": {
+							"": "未選択（カスタマイザー設定に従う）",
+							"ptn_1": "追従CTAパターン1",
+							"ptn_2": "追従CTAパターン2",
+							"none": "非表示"
+						},
+						"userGuide": "店舗サイトやLPでは追従CTAが効果的。ブログ記事ページでは非表示にすることも多い。CTAの内容（ボタンテキスト・リンク先等）はカスタマイザーで設定する。"
+					}
+				}
+			},
+			"color": {
+				"title": "カラー設定",
+				"aiDescription": "このページ専用のカラー設定。カスタマイザーの全体カラー設定を上書きする。CSSカスタムプロパティとしてページに適用される。",
+				"settings": {
+					"color_main": {
+						"metaKey": "color_main",
+						"inputType": "color",
+						"aiDescription": "メインカラー。サイト全体の基調色。見出しやボタンの背景色などに使われる。",
+						"default": "#ADA993",
+						"userGuide": "ブランドカラーを設定する。ページごとに変えると統一感が崩れるため、通常は未設定でカスタマイザーに従う。"
+					},
+					"color_accent": {
+						"metaKey": "color_accent",
+						"inputType": "color",
+						"aiDescription": "アクセントカラー。CTAボタンや強調箇所に使われる。メインカラーと対比する色。",
+						"default": "#ADA993",
+						"userGuide": "目立たせたいボタンやリンクに使われる。メインカラーの補色や暖色が効果的。"
+					},
+					"color_text": {
+						"metaKey": "color_text",
+						"inputType": "color",
+						"aiDescription": "本文テキストの色。",
+						"default": "#ADA993",
+						"userGuide": "背景色とのコントラスト比が4.5:1以上になるようにする（アクセシビリティ）。通常は#333〜#555程度の濃いグレー。"
+					},
+					"color_return_btn": {
+						"metaKey": "color_return_btn",
+						"inputType": "color",
+						"aiDescription": "「トップに戻る」ボタンの色。画面右下に表示されるスクロールトップボタン。",
+						"default": "#ADA993"
+					},
+					"color_1": {
+						"metaKey": "color_1",
+						"inputType": "color",
+						"aiDescription": "汎用カラー01。CSSカスタムプロパティ --color-1 として使える追加カラー。",
+						"default": "#ADA993",
+						"userGuide": "セクション背景色やボーダー色など、メイン・アクセント以外に使いたい色を設定する。"
+					},
+					"color_2": {
+						"metaKey": "color_2",
+						"inputType": "color",
+						"aiDescription": "汎用カラー02。CSSカスタムプロパティ --color-2 として使える追加カラー。",
+						"default": "#ADA993"
+					},
+					"color_3": {
+						"metaKey": "color_3",
+						"inputType": "color",
+						"aiDescription": "汎用カラー03。CSSカスタムプロパティ --color-3 として使える追加カラー。",
+						"default": "#ADA993"
+					}
+				},
+				"note": "保存時に color_sub もメタキー配列に含まれるが、UIには表示されない（内部予約キー）。"
+			},
+			"font": {
+				"title": "フォント",
+				"aiDescription": "このページ専用のフォント設定。ページ全体の本文フォントを上書きする。",
+				"settings": {
+					"font_body": {
+						"metaKey": "font_body",
+						"inputType": "select",
+						"aiDescription": "ページ全体の本文フォントファミリー。",
+						"options": "ctm_font_family_arr()から動的生成。システムフォント（ゴシック・明朝）、Google Fonts（Noto Sans JP, Noto Serif JP等）から選択。プレミアム限定フォント約25種を含む。",
+						"userGuide": "サイト全体と異なるフォントをこのページだけ使いたい場合に設定する。通常は未選択。"
+					},
+					"font_body_weight": {
+						"metaKey": "font_body_weight",
+						"inputType": "select",
+						"aiDescription": "本文フォントの太さ。",
+						"options": {
+							"": "指定なし",
+							"100": "100", "200": "200", "300": "300", "400": "400（通常）",
+							"500": "500", "600": "600", "700": "700（ボールド）", "800": "800", "900": "900"
+						}
+					},
+					"font_size_pc": {
+						"metaKey": "font_size_pc",
+						"inputType": "select",
+						"aiDescription": "PC表示時の本文文字サイズ。",
+						"options": {
+							"": "指定なし（カスタマイザー設定に従う）",
+							"12px": "12px", "13px": "13px", "14px": "14px", "15px": "15px",
+							"16px": "16px（推奨）", "17px": "17px", "18px": "18px", "19px": "19px", "20px": "20px"
+						},
+						"userGuide": "16pxが標準。LPでは大きめ（17〜18px）にすると読みやすい。"
+					},
+					"font_size_tb": {
+						"metaKey": "font_size_tb",
+						"inputType": "select",
+						"aiDescription": "タブレット表示時の本文文字サイズ。",
+						"options": {
+							"": "指定なし", "12px": "12px", "13px": "13px", "14px": "14px", "15px": "15px",
+							"16px": "16px", "17px": "17px", "18px": "18px", "19px": "19px", "20px": "20px"
+						}
+					},
+					"font_size_sp": {
+						"metaKey": "font_size_sp",
+						"inputType": "select",
+						"aiDescription": "スマホ表示時の本文文字サイズ。",
+						"options": {
+							"": "指定なし", "12px": "12px", "13px": "13px", "14px": "14px", "15px": "15px",
+							"16px": "16px", "17px": "17px", "18px": "18px", "19px": "19px", "20px": "20px"
+						},
+						"userGuide": "14〜16pxが推奨。小さすぎると読みにくく、大きすぎるとスクロール量が増える。"
+					}
+				}
+			},
+			"layout": {
+				"title": "レイアウト",
+				"aiDescription": "このページのコンテンツエリアのレイアウト設定。横幅や余白を制御する。",
+				"settings": {
+					"max_width_clm_1": {
+						"metaKey": "max_width_clm_1",
+						"inputType": "select",
+						"aiDescription": "コンテンツエリアの最大横幅。1カラムレイアウト時のコンテンツ幅を指定する。",
+						"options": "ctm_max_width_arr()から動的生成。「未選択」「横幅100%」「1440px〜640px（8px刻み）」から選択。",
+						"userGuide": "通常のページは960〜1200px。LPでは100%にしてフルワイドにすることが多い。ブログ記事は700〜800pxが読みやすい。"
+					},
+					"padding_lr_set": {
+						"metaKey": "padding_lr_set",
+						"inputType": "select",
+						"aiDescription": "コンテンツエリアの左右の余白の有無。",
+						"options": {
+							"off": "無し — コンテンツが画面端まで広がる",
+							"on": "有り（デフォルト） — 左右にpadding付き"
+						},
+						"userGuide": "フルワイドのLPでは「無し」にして画面いっぱいに広げる。通常ページは「有り」が読みやすい。"
+					},
+					"padding_tb_set": {
+						"metaKey": "padding_tb_set",
+						"inputType": "select",
+						"aiDescription": "コンテンツエリアの上下の余白の有無。",
+						"options": {
+							"off": "無し — ヘッダー直下からコンテンツ開始",
+							"on": "有り（デフォルト） — 上下にpadding付き"
+						},
+						"userGuide": "ファーストビューをヘッダーに密着させたいLPでは「無し」が有効。通常ページは「有り」。"
+					}
+				}
+			},
+			"pageBackground": {
+				"title": "ページ背景の設定",
+				"aiDescription": "ページ全体の背景色・背景画像・コンテンツエリアの背景色を設定する。PC/スマホ別に指定可能。",
+				"settings": {
+					"color_page_bg_pc": {
+						"metaKey": "color_page_bg_pc",
+						"inputType": "color",
+						"aiDescription": "PC表示時のページ全体（body）の背景色。コンテンツエリアの外側に見える色。",
+						"default": "#ADA993",
+						"userGuide": "コンテンツ背景色と異なる色にすると、コンテンツエリアが浮き上がって見える。"
+					},
+					"color_page_bg_pc_opacity": {
+						"metaKey": "color_page_bg_pc_opacity",
+						"inputType": "range",
+						"aiDescription": "PC表示時のページ背景色の透明度。0で完全に透明、100で完全に不透明。",
+						"min": 0,
+						"max": 100,
+						"default": 100,
+						"unit": "%",
+						"userGuide": "背景画像を透かして見せたい場合に透明度を下げる。"
+					},
+					"color_page_bg_sp": {
+						"metaKey": "color_page_bg_sp",
+						"inputType": "color",
+						"aiDescription": "スマホ表示時のページ全体の背景色。PCと別の色を指定できる。",
+						"default": "#ADA993"
+					},
+					"color_content_bg_pc": {
+						"metaKey": "color_content_bg_pc",
+						"inputType": "color",
+						"aiDescription": "PC表示時のコンテンツエリア（記事本文部分）の背景色。",
+						"default": "#ADA993",
+						"userGuide": "白（#FFFFFF）が最も読みやすい。薄いグレーやクリーム色も上品な印象になる。"
+					},
+					"color_content_bg_sp": {
+						"metaKey": "color_content_bg_sp",
+						"inputType": "color",
+						"aiDescription": "スマホ表示時のコンテンツエリアの背景色。",
+						"default": "#ADA993"
+					},
+					"page_content_shadow": {
+						"metaKey": "page_content_shadow",
+						"inputType": "select",
+						"aiDescription": "コンテンツエリアにbox-shadowを付けるかどうか。",
+						"options": {
+							"on": "表示する — コンテンツエリアに影が付く",
+							"off": "表示しない"
+						},
+						"userGuide": "ページ背景色とコンテンツ背景色が異なる場合に影を付けると立体感が出る。"
+					},
+					"lw_page_bg_img": {
+						"metaKey": "lw_page_bg_img",
+						"inputType": "media",
+						"aiDescription": "ページ全体の背景画像または動画のURL。メディアライブラリから選択する。",
+						"userGuide": "大きな画像を設定するとページの読み込みが遅くなる。WebP形式・圧縮済みの画像を推奨。動画の場合はMP4形式。"
+					}
+				}
+			},
+			"other": {
+				"title": "その他",
+				"aiDescription": "アニメーション・ローディング・コメントなど、その他のページ固有設定。",
+				"settings": {
+					"lw_page_animation_switch": {
+						"metaKey": "lw_page_animation_switch",
+						"inputType": "select",
+						"aiDescription": "スクロールアニメーション（フェードイン等）の有効/無効を切り替える。",
+						"options": {
+							"": "未選択（カスタマイザー設定に従う）",
+							"on": "ON — アニメーション有効",
+							"off": "OFF — アニメーション無効"
+						},
+						"condition": "LW_EXPANSION_BASE === true の場合のみ表示される。拡張機能がインストールされていない場合は非表示。",
+						"userGuide": "LPではアニメーションONが効果的。表示速度を優先する場合はOFFにする。"
+					},
+					"loading_anime_page_switch": {
+						"metaKey": "loading_anime_page_switch",
+						"inputType": "select",
+						"aiDescription": "ページ読み込み時のローディングアニメーション（スプラッシュスクリーン）を制御する。",
+						"options": {
+							"": "カスタマイザー設定を使用",
+							"off": "このページで無効にする"
+						},
+						"premium": true,
+						"premiumNote": "LW_HAS_SUBSCRIPTION === true の場合のみ表示。無料版では「LiteWordプレミアム限定機能」のメッセージが表示される。",
+						"userGuide": "LPではローディングアニメーションを無効にして、すぐにコンテンツを見せたい場合がある。"
+					},
+					"page_comment": {
+						"metaKey": "page_comment",
+						"inputType": "textarea",
+						"rows": 6,
+						"aiDescription": "このページに対する管理者用メモ・コメント。フロントエンドには表示されない内部メモ欄。",
+						"userGuide": "制作者同士の引き継ぎメモや、ページの目的・更新予定などを記録するのに便利。公開サイトには一切表示されない。"
+					}
+				}
+			}
+		},
+		"additionalFeatures": {
+			"setAsHomepage": {
+				"aiDescription": "「このページをトップページに設定する」ボタン。WordPressの「設定 > 表示設定 > 固定ページ」を一括でこのページに設定するAJAX機能。",
+				"userGuide": "トップページに設定したい固定ページでこのボタンを押すだけで設定完了。「設定 > 表示設定」を開く必要がない。"
+			}
+		},
+		"saveMetaKeys": [
+			"header_select", "header_menu_select",
+			"logo_header_page_switch", "logo_header_page_text", "logo_text_font_family", "logo_text_font_weight",
+			"logo_header_page_img", "logo_header_page_size_pc", "logo_header_page_size_tb", "logo_header_page_size_sp", "logo_header_page_url",
+			"header_page_cta_color_bg", "page_pickup_menu_page_switch",
+			"drawer_page_switch", "drawer_menu_select",
+			"footer_select", "footer_menu_select",
+			"logo_footer_page_switch", "logo_footer_page_text", "logo_footer_text_font_family", "logo_footer_text_font_weight",
+			"logo_footer_page_img", "logo_footer_page_size_pc", "logo_footer_page_size_tb", "logo_footer_page_size_sp", "logo_footer_page_url",
+			"follow_bottom_cta_ptn",
+			"color_main", "color_sub", "color_accent", "color_text", "color_return_btn", "color_1", "color_2", "color_3",
+			"color_page_bg_pc", "color_page_bg_pc_opacity", "color_page_bg_sp",
+			"color_content_bg_pc", "color_content_bg_sp", "page_content_shadow", "lw_page_bg_img",
+			"font_body", "font_body_weight", "font_size_pc", "font_size_tb", "font_size_sp",
+			"max_width_clm_1", "padding_lr_set", "padding_tb_set",
+			"lw_page_animation_switch", "loading_anime_page_switch", "page_comment"
+		]
+	},
+	"commonMetaBox": {
+		"id": "common_setting_page_setting",
+		"title": "その他の設定",
+		"postType": ["post", "page"],
+		"aiDescription": "固定ページ・投稿の両方に表示される共通メタボックス。SEO設定、構造化データ（JSON-LD）、カスタムコードの挿入ができる。",
+		"sections": {
+			"seo": {
+				"title": "SEO設定",
+				"aiDescription": "検索エンジン最適化のための設定。タイトル・ディスクリプション・noindex・canonical・OGP画像・リダイレクトを制御する。",
+				"condition": "lw_extensions_seo_functions_switch === 'on' かつ LW_EXPANSION_BASE === true の場合のみ表示。LiteWordの拡張SEO機能が有効な場合に利用可能。",
+				"settings": {
+					"seo_title": {
+						"metaKey": "seo_title",
+						"inputType": "text",
+						"placeholder": "検索結果に表示されるタイトル",
+						"aiDescription": "検索結果やブラウザタブに表示されるSEOタイトル。空の場合はページのタイトルがそのまま使われる。",
+						"userGuide": "30〜60文字が推奨。重要なキーワードを前方に配置する。ページタイトルと異なるSEO用タイトルを設定したい場合に使う。"
+					},
+					"seo_description": {
+						"metaKey": "seo_description",
+						"inputType": "textarea",
+						"rows": 3,
+						"placeholder": "検索結果に表示される要約",
+						"aiDescription": "検索結果のスニペットに表示されるメタディスクリプション。",
+						"userGuide": "80〜160文字が推奨。ページの内容を簡潔に要約し、クリックを促す文言にする。"
+					},
+					"seo_noindex": {
+						"metaKey": "seo_noindex",
+						"inputType": "select",
+						"aiDescription": "検索エンジンのインデックス制御。noindexに設定すると検索結果に表示されなくなる。",
+						"options": {
+							"noindex": "noindex（検索エンジンにインデックスさせない）",
+							"follow": "follow（インデックスさせる）"
+						},
+						"userGuide": "下書きページ、テストページ、サンキューページなどは noindex に設定する。noindexにするとJSON-LDも出力されない。"
+					},
+					"seo_canonical": {
+						"metaKey": "seo_canonical",
+						"inputType": "text",
+						"placeholder": "https://example.com/page",
+						"aiDescription": "canonical URL。重複コンテンツ対策として正規URLを指定する。",
+						"userGuide": "同じ内容のページが複数のURLで存在する場合に、正規のURLを指定する。通常は空でOK。"
+					},
+					"seo_og_image": {
+						"metaKey": "seo_og_image",
+						"inputType": "media",
+						"aiDescription": "OGP画像。SNS（Facebook、Twitter等）でシェアされた時に表示される画像。",
+						"userGuide": "推奨サイズ: 1200x630px。設定しない場合はアイキャッチ画像またはサイト全体のOGP設定が使われる。"
+					},
+					"seo_301_redirect_url": {
+						"metaKey": "seo_301_redirect_url",
+						"inputType": "text",
+						"placeholder": "https://example.com/page",
+						"aiDescription": "301リダイレクトの元URL。ここに指定したURLにアクセスすると、このページに301リダイレクトされる。旧URLから新URLへの恒久的な転送。",
+						"userGuide": "ページのURLを変更した場合に、旧URLからのアクセスを新ページに転送する。SEO評価の引き継ぎにも有効。クイック編集からも設定可能。"
+					},
+					"page_title_display": {
+						"metaKey": "page_title_display",
+						"inputType": "select",
+						"aiDescription": "titleタグにサイトタイトルを含めるかどうかの制御。固定ページ専用設定。",
+						"options": {
+							"": "未選択（サイト全体の設定に従う）",
+							"on": "サイトタイトルをtitleタグに表示させる",
+							"off": "サイトタイトルをtitleタグに表示させない"
+						},
+						"premium": true,
+						"premiumNote": "LW_HAS_SUBSCRIPTION === true の場合のみ表示。",
+						"postTypeLimit": "page",
+						"userGuide": "LPではサイトタイトルを非表示にしてページ固有のタイトルだけにすることがある。"
+					}
+				}
+			},
+			"jsonLd": {
+				"title": "構造化データ（JSON-LD）",
+				"aiDescription": "Googleリッチリザルト向けの構造化データ設定。自動生成されるJSON-LDのプレビューと、カスタムJSON-LDの追加が可能。",
+				"premium": true,
+				"premiumNote": "全機能がLW_HAS_SUBSCRIPTION === true の場合のみ利用可能。無料版ではプレミアムプランへの案内メッセージが表示される。",
+				"settings": {
+					"jsonLdPreview": {
+						"aiDescription": "このページで自動生成されるJSON-LDのプレビュー表示（読み取り専用）。lw_json_dl_single()（投稿）またはlw_json_dl_page()（固定ページ）が生成するJSON-LDを表示する。noindex設定の場合はJSON-LDが出力されない旨の警告が表示される。",
+						"readOnly": true,
+						"notes": [
+							"投稿の場合: 著者の表示名がログインIDと同じ場合はセキュリティ警告が表示される",
+							"noindex設定の場合: JSON-LDは出力されない旨の警告が表示される"
+						]
+					},
+					"lw_custom_json_ld": {
+						"metaKey": "lw_custom_json_ld",
+						"inputType": "textarea",
+						"rows": 8,
+						"placeholder": "例: {\"@context\": \"https://schema.org\", \"@type\": \"FAQPage\", ...}",
+						"aiDescription": "カスタムJSON-LD。自動生成に加えて追加の構造化データを挿入できる。有効なJSON形式で入力する必要がある（scriptタグ不要）。",
+						"premium": true,
+						"validation": "保存時にjson_decode()で妥当性チェック。無効なJSONは保存されない。",
+						"userGuide": "FAQPage、HowTo、Eventなど、自動生成されないタイプの構造化データを追加する場合に使う。"
+					}
+				}
+			},
+			"customCode": {
+				"title": "カスタムコード設定",
+				"aiDescription": "このページ専用のカスタムコード（script, meta, CSS等）を挿入する。head内・footer前・ページ独自CSSの3か所に挿入可能。",
+				"settings": {
+					"seo_custom_head": {
+						"metaKey": "seo_custom_head",
+						"inputType": "textarea",
+						"rows": 4,
+						"placeholder": "<script>や<meta>など",
+						"aiDescription": "head内に挿入するHTML/スクリプト。<script>, <meta>, <link>等を自由に追加できる。unfiltered_html権限がある場合はフィルタリングされない。",
+						"htmlAllowed": true,
+						"userGuide": "Google Analytics、Facebook Pixel、カスタムmetaタグなどをページ単位で追加する場合に使う。"
+					},
+					"seo_custom_footer": {
+						"metaKey": "seo_custom_footer",
+						"inputType": "textarea",
+						"rows": 4,
+						"placeholder": "<script>などのトラッキングコード",
+						"aiDescription": "footer前（</body>の直前）に挿入するHTML/スクリプト。トラッキングコードやウィジェットの埋め込みに使う。",
+						"htmlAllowed": true,
+						"userGuide": "ページ読み込み速度に影響しにくい位置。チャットウィジェットやトラッキングコードの設置に適している。"
+					},
+					"lw_custom_css": {
+						"metaKey": "lw_custom_css",
+						"inputType": "textarea",
+						"rows": 40,
+						"placeholder": "このページのみに適用されるCSS",
+						"aiDescription": "このページだけに適用されるカスタムCSS。<style>タグなしでCSSルールを直接記述する。",
+						"userGuide": "ページ固有のスタイル調整に使う。カスタマイザーの追加CSSは全ページに適用されるが、ここに書いたCSSはこのページだけに適用される。"
+					}
+				}
+			}
+		},
+		"saveMetaKeys": {
+			"plainFields": ["seo_title", "seo_description", "seo_noindex", "seo_canonical", "seo_301_redirect_url", "seo_og_image", "lw_custom_css", "page_title_display"],
+			"premiumFields": ["lw_custom_json_ld"],
+			"htmlFields": ["seo_custom_head", "seo_custom_footer"]
+		}
+	}
+}

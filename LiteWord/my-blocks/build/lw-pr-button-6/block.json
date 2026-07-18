@@ -1,0 +1,180 @@
+{
+    "$schema":  "https://schemas.wp.org/trunk/block.json",
+    "apiVersion":  3,
+    "name":  "wdl/lw-pr-button-6",
+    "version":  "1.0.0",
+    "title":  "ボタン 06",
+    "category":  "lw-button",
+    "icon":  "button",
+    "description":  "グリッドレイアウトのボタンブロック。複数ボタンを配置可能。",
+    "aiHint": {
+        "description": "グリッドレイアウト複数ボタン。2〜4個のボタンを格子状に配置。ナビゲーション・サービス一覧のリンクに",
+        "excludeFromAutoSelect": false,
+        "contentAttributes": ["button6Buttons"],
+        "imageAttributes": []
+    },
+    "supports":  {
+                     "anchor":  true,
+                     "className":  true
+                 },
+    "attributes":  {
+                       "button6Buttons":  {
+                                              "type":  "array",
+                                              "default":  [
+                                                              {
+                                                                  "text":  "リンクテキスト",
+                                                                  "url":  "",
+                                                                  "isBlank":  false
+                                                              },
+                                                              {
+                                                                  "text":  "リンクテキスト",
+                                                                  "url":  "",
+                                                                  "isBlank":  false
+                                                              }
+                                                          ],
+                                              "aiHint": { "role": "list", "contentGuide": "ボタン配列。各要素に text(4〜15文字) と url を設定。2〜4個", "example": [{"text": "サービス紹介", "url": "/service/"}, {"text": "料金プラン", "url": "/pricing/"}] }
+                                          },
+                       "button6MaxWidthPc":  {
+                                                 "type":  "number",
+                                                 "default":  600
+                                             },
+                       "button6MaxWidthSp":  {
+                                                 "type":  "number",
+                                                 "default":  -1
+                                             },
+                       "button6ColumnsPc":  {
+                                                "type":  "number",
+                                                "default":  2
+                                            },
+                       "button6ColumnsSp":  {
+                                                "type":  "number",
+                                                "default":  1
+                                            },
+                       "button6RowGapPc":  {
+                                               "type":  "number",
+                                               "default":  16
+                                           },
+                       "button6RowGapSp":  {
+                                               "type":  "number",
+                                               "default":  -1
+                                           },
+                       "button6ColumnGapPc":  {
+                                                  "type":  "number",
+                                                  "default":  24
+                                              },
+                       "button6ColumnGapSp":  {
+                                                  "type":  "number",
+                                                  "default":  8
+                                              },
+                       "button6PaddingTopPc":  {
+                                                   "type":  "number",
+                                                   "default":  12
+                                               },
+                       "button6PaddingRightPc":  {
+                                                     "type":  "number",
+                                                     "default":  12
+                                                 },
+                       "button6PaddingBottomPc":  {
+                                                      "type":  "number",
+                                                      "default":  12
+                                                  },
+                       "button6PaddingLeftPc":  {
+                                                    "type":  "number",
+                                                    "default":  12
+                                                },
+                       "button6PaddingTopSp":  {
+                                                   "type":  "number",
+                                                   "default":  -1
+                                               },
+                       "button6PaddingRightSp":  {
+                                                     "type":  "number",
+                                                     "default":  -1
+                                                 },
+                       "button6PaddingBottomSp":  {
+                                                      "type":  "number",
+                                                      "default":  -1
+                                                  },
+                       "button6PaddingLeftSp":  {
+                                                    "type":  "number",
+                                                    "default":  -1
+                                                },
+                       "button6MinHeightPc":  {
+                                                  "type":  "number",
+                                                  "default":  64
+                                              },
+                       "button6MinHeightSp":  {
+                                                  "type":  "number",
+                                                  "default":  56
+                                              },
+                       "button6PositionPc":  {
+                                                 "type":  "string",
+                                                 "default":  "center"
+                                             },
+                       "button6PositionSp":  {
+                                                 "type":  "string",
+                                                 "default":  ""
+                                             },
+                       "button6FontSizePc":  {
+                                                 "type":  "number",
+                                                 "default":  16
+                                             },
+                       "button6FontSizeSp":  {
+                                                 "type":  "number",
+                                                 "default":  15
+                                             },
+                       "button6BorderWidthPc":  {
+                                                    "type":  "number",
+                                                    "default":  2
+                                                },
+                       "button6BorderWidthSp":  {
+                                                    "type":  "number",
+                                                    "default":  1
+                                                },
+                       "button6BorderStyle":  {
+                                                  "type":  "string",
+                                                  "default":  "solid"
+                                              },
+                       "button6BorderColor":  {
+                                                  "type":  "string",
+                                                  "default":  "var(--color-main)"
+                                              },
+                       "button6TextColor":  {
+                                                "type":  "string",
+                                                "default":  "#000000"
+                                            },
+                       "button6BorderRadiusPc":  {
+                                                     "type":  "number",
+                                                     "default":  10
+                                                 },
+                       "button6BorderRadiusSp":  {
+                                                     "type":  "number",
+                                                     "default":  -1
+                                                 },
+                       "button6BgColor":  {
+                                              "type":  "string",
+                                              "default":  "#ffffff"
+                                          },
+                       "button6FontSet":  {
+                                              "type":  "string",
+                                              "default":  ""
+                                          },
+                       "button6FontWeight":  {
+                                                 "type":  "string",
+                                                 "default":  ""
+                                             },
+                       "button6ShowArrow":  {
+                                                "type":  "boolean",
+                                                "default":  false
+                                            },
+                       "button6TextAlign":  {
+                                                "type":  "string",
+                                                "default":  "center"
+                                            },
+                       "button6ArrowColor":  {
+                                                 "type":  "string",
+                                                 "default":  "var(--color-main)"
+                                             }
+                   },
+    "editorScript":  "file:./lw-pr-button-6.js",
+    "no":  6
+}

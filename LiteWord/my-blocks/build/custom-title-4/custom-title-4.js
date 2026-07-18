@@ -78,7 +78,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, "H".concat(level));
     }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB\u306E\u30DE\u30FC\u30B8\u30F3\u8A2D\u5B9A"
+      title: "\u4F59\u767D\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "PC\u7248 \u4E0B\u30DE\u30FC\u30B8\u30F3 (em)",
       value: subMarginBottomPc,
@@ -206,7 +206,7 @@ module.exports = window["wp"]["element"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-4","version":"1.0.0","title":"見出しタイトル 04","category":"lw-heading","icon":"editor-textcolor","description":"メインタイトルとサブタイトルを表示する見出しブロック（マージン調整可能）","supports":{"anchor":true},"attributes":{"mainTitle":{"type":"string","default":"タイトル"},"subTitle":{"type":"string","default":"サブタイトル"},"headingLevel":{"type":"number","default":2},"subMarginBottomPc":{"type":"number","default":0.6},"subMarginBottomSp":{"type":"number","default":0.6}},"editorScript":"file:./custom-title-4.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":4}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-4","version":"1.0.0","title":"見出しタイトル 04","category":"lw-heading","icon":"editor-textcolor","description":"メインタイトルとサブタイトルを表示する見出しブロック（マージン調整可能）","supports":{"anchor":true},"aiHint":{"description":"マージン調整可能な見出し。メインタイトル+サブタイトル。下のコンテンツとの余白を細かく調整","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":[]},"attributes":{"mainTitle":{"type":"string","default":"タイトル","aiHint":{"role":"heading","contentGuide":"セクション見出し。3〜15文字","example":"ご利用の流れ"}},"subTitle":{"type":"string","default":"サブタイトル","aiHint":{"role":"subheading","contentGuide":"英語表記 or 補足テキスト","example":"FLOW"}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}},"subMarginBottomPc":{"type":"number","default":0.6,"aiHint":{"skip":true}},"subMarginBottomSp":{"type":"number","default":0.6,"aiHint":{"skip":true}}},"editorScript":"file:./custom-title-4.js","no":4}');
 
 /***/ })
 

@@ -19,6 +19,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/lw-content-8/style.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-content-8/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/lw-content-8/block.json");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -134,8 +140,9 @@ var alignOptions = [{
       });
     };
     var updateContent = function updateContent(index, key, value) {
-      var list = _toConsumableArray(contents);
-      list[index][key] = value;
+      var list = contents.map(function (item, i) {
+        return i === index ? _objectSpread(_objectSpread({}, item), {}, _defineProperty({}, key, value)) : item;
+      });
       setAttributes({
         contents: list
       });
@@ -144,7 +151,7 @@ var alignOptions = [{
       className: 'lw-content-8'
     });
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30B9\u30BF\u30A4\u30EB\u306E\u8ABF\u6574",
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\u30AB\u30E9\u30E0\u6570",
@@ -233,7 +240,7 @@ var alignOptions = [{
       min: 0,
       max: 100
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30E1\u30A4\u30F3\u30BF\u30A4\u30C8\u30EB\u90E8\u5206",
+      title: "\u30BF\u30A4\u30C8\u30EB\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\u30BF\u30A4\u30C8\u30EB\u30BF\u30B0",
@@ -314,7 +321,7 @@ var alignOptions = [{
       min: 0,
       max: 10
     }), /*#__PURE__*/React.createElement("hr", null)), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB\u90E8\u5206",
+      title: "\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
       label: "\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB\u3092\u8868\u793A",
@@ -374,7 +381,7 @@ var alignOptions = [{
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u8AAC\u660E\u90E8\u5206",
+      title: "\u30C6\u30AD\u30B9\u30C8\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("p", null, "\u8AAC\u660E\u6587\u6587\u5B57\u8272"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: fontColorLiP,
@@ -1456,7 +1463,7 @@ module.exports = window["wp"]["components"];
   \*************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-content-8","version":"1.0.0","title":"Content 08","category":"lw-content","icon":"lightbulb","editorScript":"file:./lw-content-8.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"fontLi":{"type":"string","default":""},"fontColorLi":{"type":"string","default":""},"fontWeightLi":{"type":"string","default":"600"},"titleFontSizeClass":{"type":"string","default":"font_size_m"},"fontLiP":{"type":"string","default":""},"fontColorLiP":{"type":"string","default":"var(--color-black)"},"fontWeightLiP":{"type":"string","default":"400"},"textFontSizeClass":{"type":"string","default":"font_size_m"},"titleTag":{"type":"string","default":"h3"},"titleBorderColor":{"type":"string","default":"var(--color-main)"},"titleBorderSize":{"type":"number","default":2},"liBorderColor":{"type":"string","default":"var(--color-main)"},"liBorderSize":{"type":"number","default":2},"liPaddingTop":{"type":"number","default":24},"liPaddingBottom":{"type":"number","default":24},"liPaddingLeft":{"type":"number","default":24},"liPaddingRight":{"type":"number","default":24},"liBorderRadius":{"type":"number","default":8},"subBorderColor":{"type":"string","default":"var(--color-main)"},"subBorderSize":{"type":"number","default":1},"subFontColor":{"type":"string","default":"var(--color-main)"},"subBgColor":{"type":"string","default":"#ffffff"},"showSub":{"type":"boolean","default":true},"fontLiSub":{"type":"string","default":""},"fontWeightLiSub":{"type":"string","default":"600"},"fontLiMain":{"type":"string","default":""},"fontWeightLiMain":{"type":"string","default":"700"},"columnClass":{"type":"string","default":"clm_3"},"mainAlign":{"type":"string","default":"left"},"innerMaxWidth":{"type":"number","default":1200},"btnMarginTop":{"type":"number","default":16},"btnHeight":{"type":"number","default":56},"btnBgColor":{"type":"string","default":"var(--color-main)"},"btnFontColor":{"type":"string","default":"#ffffff"},"btnFontSize":{"type":"number","default":15},"btnBorderRadius":{"type":"number","default":2},"btnBorderColor":{"type":"string","default":"var(--color-main)"},"btnBorderSize":{"type":"number","default":0},"showButton":{"type":"boolean","default":true},"contents":{"type":"array","source":"query","selector":".lw-content-8__li","query":{"sub":{"type":"string","source":"html","selector":".ttl .sub"},"main":{"type":"string","source":"html","selector":".ttl .main"},"text":{"type":"string","source":"html","selector":".lw-content-8__text"},"url":{"type":"string","source":"attribute","selector":".link","attribute":"href","default":""},"btnText":{"type":"string","source":"html","selector":".btn","default":"詳細はこちら"}},"default":[{"sub":"サブタイトル","main":"タイトルタイトル","text":"説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。","url":"#","btnText":"詳細はこちら"},{"sub":"サブタイトル","main":"タイトルタイトル","text":"説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。","url":"#","btnText":"詳細はこちら"},{"sub":"サブタイトル","main":"タイトルタイトル","text":"説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。","url":"#","btnText":"詳細はこちら"}]}},"no":8}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-content-8","version":"1.0.0","title":"Content 08","category":"lw-content","icon":"lightbulb","editorScript":"file:./lw-content-8.js","aiHint":{"description":"サブ+メインタイトル+説明+ボタンのカード配列。3カラム。サービス詳細・プラン紹介に","excludeFromAutoSelect":false,"contentAttributes":["contents"],"imageAttributes":[]},"supports":{"anchor":true},"attributes":{"fontLi":{"type":"string","default":""},"fontColorLi":{"type":"string","default":""},"fontWeightLi":{"type":"string","default":"600"},"titleFontSizeClass":{"type":"string","default":"font_size_m"},"fontLiP":{"type":"string","default":""},"fontColorLiP":{"type":"string","default":"var(--color-black)"},"fontWeightLiP":{"type":"string","default":"400"},"textFontSizeClass":{"type":"string","default":"font_size_m"},"titleTag":{"type":"string","default":"h3"},"titleBorderColor":{"type":"string","default":"var(--color-main)"},"titleBorderSize":{"type":"number","default":2},"liBorderColor":{"type":"string","default":"var(--color-main)"},"liBorderSize":{"type":"number","default":2},"liPaddingTop":{"type":"number","default":24},"liPaddingBottom":{"type":"number","default":24},"liPaddingLeft":{"type":"number","default":24},"liPaddingRight":{"type":"number","default":24},"liBorderRadius":{"type":"number","default":8},"subBorderColor":{"type":"string","default":"var(--color-main)"},"subBorderSize":{"type":"number","default":1},"subFontColor":{"type":"string","default":"var(--color-main)"},"subBgColor":{"type":"string","default":"#ffffff"},"showSub":{"type":"boolean","default":true},"fontLiSub":{"type":"string","default":""},"fontWeightLiSub":{"type":"string","default":"600"},"fontLiMain":{"type":"string","default":""},"fontWeightLiMain":{"type":"string","default":"700"},"columnClass":{"type":"string","default":"clm_3"},"mainAlign":{"type":"string","default":"left"},"innerMaxWidth":{"type":"number","default":1200},"btnMarginTop":{"type":"number","default":16},"btnHeight":{"type":"number","default":56},"btnBgColor":{"type":"string","default":"var(--color-main)"},"btnFontColor":{"type":"string","default":"#ffffff"},"btnFontSize":{"type":"number","default":15},"btnBorderRadius":{"type":"number","default":2},"btnBorderColor":{"type":"string","default":"var(--color-main)"},"btnBorderSize":{"type":"number","default":0},"showButton":{"type":"boolean","default":true},"contents":{"type":"array","source":"query","selector":".lw-content-8__li","query":{"sub":{"type":"string","source":"html","selector":".ttl .sub"},"main":{"type":"string","source":"html","selector":".ttl .main"},"text":{"type":"string","source":"html","selector":".lw-content-8__text"},"url":{"type":"string","source":"attribute","selector":".link","attribute":"href","default":""},"btnText":{"type":"string","source":"html","selector":".btn","default":"詳細はこちら"}},"default":[{"sub":"サブタイトル","main":"タイトルタイトル","text":"説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。","url":"#","btnText":"詳細はこちら"},{"sub":"サブタイトル","main":"タイトルタイトル","text":"説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。","url":"#","btnText":"詳細はこちら"},{"sub":"サブタイトル","main":"タイトルタイトル","text":"説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。説明文を入力してください。","url":"#","btnText":"詳細はこちら"}],"aiHint":{"role":"list","contentGuide":"カード項目。2〜4個。各要素にsub(英語3〜10文字)+main(日本語5〜15文字)+text(20〜60文字)+btnText(4〜10文字)","example":[{"sub":"PLAN A","main":"スタンダード","text":"基本的なサービスを全て含むプランです","btnText":"詳細を見る"}]}}},"no":8}');
 
 /***/ })
 

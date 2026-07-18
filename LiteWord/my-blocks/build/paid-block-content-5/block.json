@@ -7,12 +7,12 @@
 	"category": "lw-content",
 	"icon": "format-image",
 	"editorScript": "file:./paid-block-content-5.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "フルワイド画像+テキストオーバーレイ。大きな背景画像の上にタイトル+説明文。インパクト重視の紹介セクションに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["pcTitle", "pcBody"],
+		"imageAttributes": ["pcImage"]
+	},
 	"supports": {
 		"anchor": true
 	},

@@ -282,6 +282,31 @@
     margin-top: 24px;
 }
 
+/* 2つのボタン横並び */
+.lw-ai-modal-actions-dual {
+    display: flex;
+    gap: 12px;
+}
+
+.lw-ai-modal-actions-dual .lw-ai-modal-btn {
+    flex: 1;
+}
+
+.lw-ai-modal-actions-dual .lw-ai-modal-btn-secondary {
+    background: #f1f5f9;
+    color: #475569;
+    box-shadow: none;
+    border: 1px solid #e2e8f0;
+}
+
+.lw-ai-modal-actions-dual .lw-ai-modal-btn-secondary:hover:not(:disabled) {
+    background: #e2e8f0;
+}
+
+.lw-ai-btn-icon {
+    font-size: 18px;
+}
+
 /* ボタン */
 .lw-ai-modal-btn {
     display: inline-flex;
@@ -1431,4 +1456,1412 @@
 .lw-ai-btn-text:hover {
     color: #374151;
     background: #e5e7eb;
+}
+
+/* ==========================================================================
+   構成案プレビュー画面
+   ========================================================================== */
+.lw-ai-outline-modal .components-modal__content {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.lw-ai-outline-content {
+    max-width: 700px;
+}
+
+.lw-ai-outline-header {
+    background: #f8fafc;
+    border-radius: 8px;
+    padding: 16px;
+    margin-bottom: 20px;
+}
+
+.lw-ai-outline-title-row {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 12px;
+}
+
+.lw-ai-outline-title-row:last-child {
+    margin-bottom: 0;
+}
+
+.lw-ai-outline-label {
+    font-size: 13px;
+    font-weight: 600;
+    color: #64748b;
+    min-width: 100px;
+}
+
+.lw-ai-outline-input {
+    flex: 1;
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 14px;
+}
+
+.lw-ai-outline-input:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.lw-ai-outline-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 20px;
+}
+
+.lw-ai-outline-section {
+    background: #fff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    overflow: hidden;
+}
+
+.lw-ai-outline-section-header {
+    background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 50%, #3B82F6 100%);
+    color: white;
+    padding: 10px 16px;
+    font-size: 13px;
+    font-weight: 600;
+}
+
+.lw-ai-outline-fields {
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.lw-ai-outline-field {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+}
+
+.lw-ai-outline-field label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #64748b;
+}
+
+.lw-ai-outline-field input,
+.lw-ai-outline-field textarea {
+    padding: 8px 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    font-size: 14px;
+    font-family: inherit;
+    resize: vertical;
+}
+
+.lw-ai-outline-field input:focus,
+.lw-ai-outline-field textarea:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.lw-ai-outline-field-half {
+    display: inline-flex;
+    width: calc(50% - 6px);
+}
+
+.lw-ai-outline-items {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-top: 8px;
+    padding-top: 12px;
+    border-top: 1px dashed #e2e8f0;
+}
+
+.lw-ai-outline-item {
+    background: #f8fafc;
+    border-radius: 6px;
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lw-ai-outline-item .lw-ai-outline-field label {
+    font-size: 11px;
+}
+
+.lw-ai-outline-desc {
+    color: #64748b;
+    font-size: 13px;
+    margin-bottom: 16px;
+}
+
+.lw-ai-outline-textarea-section {
+    margin-bottom: 20px;
+}
+
+.lw-ai-outline-textarea {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    line-height: 1.6;
+    resize: vertical;
+    min-height: 400px;
+}
+
+.lw-ai-outline-textarea:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+/* ==========================================================================
+   セクション生成進捗
+   ========================================================================== */
+.lw-ai-section-progress {
+    background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    padding: 20px;
+    margin-bottom: 16px;
+    text-align: center;
+}
+
+.lw-ai-section-progress-header {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    margin-bottom: 12px;
+    font-size: 16px;
+    font-weight: 600;
+    color: #4f46e5;
+}
+
+.lw-ai-section-progress-warning {
+    background-color: #fef3c7;
+    border: 1px solid #f59e0b;
+    border-radius: 6px;
+    padding: 10px 16px;
+    margin-bottom: 16px;
+    font-size: 13px;
+    color: #92400e;
+    text-align: center;
+}
+
+.lw-ai-section-progress-info {
+    font-size: 24px;
+    font-weight: 700;
+    color: #1e293b;
+    margin-bottom: 4px;
+}
+
+.lw-ai-section-progress-name {
+    font-size: 14px;
+    color: #64748b;
+    margin-bottom: 16px;
+}
+
+.lw-ai-progress-bar-container {
+    height: 8px;
+    background: #e2e8f0;
+    border-radius: 4px;
+    overflow: hidden;
+}
+
+.lw-ai-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #a855f7 100%);
+    border-radius: 4px;
+    transition: width 0.3s ease;
+}
+
+/* ==========================================================================
+   ヒアリング画面
+   ========================================================================== */
+.lw-ai-interview-modal .components-modal__content {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.lw-ai-interview-desc-row {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    margin-bottom: 20px;
+}
+
+.lw-ai-interview-desc {
+    flex: 1;
+    color: #64748b;
+    font-size: 14px;
+    margin: 0;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border-left: 4px solid #6366f1;
+}
+
+.lw-ai-sample-answer-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 10px 14px;
+    background: linear-gradient(135deg, #f0abfc 0%, #c084fc 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    white-space: nowrap;
+    box-shadow: 0 2px 4px rgba(192, 132, 252, 0.3);
+}
+
+.lw-ai-sample-answer-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(192, 132, 252, 0.4);
+}
+
+.lw-ai-sample-answer-btn:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+.lw-ai-sample-answer-btn.is-generating {
+    background: linear-gradient(135deg, #d8b4fe 0%, #a78bfa 100%);
+}
+
+.lw-ai-interview-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin-bottom: 24px;
+}
+
+.lw-ai-interview-question {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lw-ai-interview-label {
+    font-size: 14px;
+    font-weight: 600;
+    color: #334155;
+}
+
+.lw-ai-interview-input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    font-size: 14px;
+    font-family: inherit;
+    line-height: 1.5;
+    resize: vertical;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.lw-ai-interview-input:focus {
+    outline: none;
+    border-color: #6366f1;
+    box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.1);
+}
+
+.lw-ai-interview-input::placeholder {
+    color: #94a3b8;
+}
+
+/* ==========================================================================
+   ページタイプ選択画面
+   ========================================================================== */
+.lw-ai-page-type-section {
+    padding: 20px 0;
+}
+
+.lw-ai-page-type-label {
+    font-size: 18px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 20px;
+    text-align: center;
+}
+
+.lw-ai-page-type-cards {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 16px;
+}
+
+.lw-ai-page-type-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 24px 16px;
+    background: #ffffff;
+    border: 2px solid #e2e8f0;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    text-align: center;
+}
+
+.lw-ai-page-type-card:hover {
+    border-color: #6366f1;
+    background: linear-gradient(135deg, rgba(139, 92, 246, 0.05) 0%, rgba(99, 102, 241, 0.05) 100%);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(99, 102, 241, 0.15);
+}
+
+.lw-ai-page-type-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.lw-ai-page-type-desc {
+    font-size: 13px;
+    color: #64748b;
+    line-height: 1.4;
+}
+
+.lw-ai-page-type-modal .lw-ai-modal-content {
+    max-width: 500px;
+}
+
+/* 必須マーク */
+.lw-ai-required {
+    color: #ef4444;
+    font-weight: 600;
+}
+
+/* inputタイプのスタイル調整 */
+input.lw-ai-interview-input {
+    padding: 10px 12px;
+    height: auto;
+}
+
+/* ==========================================================================
+   パーツプレビュー画面
+   ========================================================================== */
+.lw-ai-parts-modal .components-modal__content {
+    max-height: 80vh;
+    overflow-y: auto;
+}
+
+.lw-ai-parts-content {
+    max-width: 700px;
+}
+
+.lw-ai-parts-header {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.lw-ai-parts-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 8px;
+}
+
+.lw-ai-parts-desc {
+    font-size: 14px;
+    color: #64748b;
+}
+
+.lw-ai-parts-list {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+/* 全セクション一覧表示用 */
+.lw-ai-all-sections {
+    overflow-y: auto;
+    padding-right: 8px;
+}
+
+/* ==========================================================================
+   パーツプレビューカード (lw-pp-*)
+   ========================================================================== */
+
+/* カード全体 */
+.lw-pp-card {
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 12px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.lw-pp-card:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.lw-pp-card.is-loading {
+    opacity: 0.7;
+    pointer-events: none;
+}
+
+/* カードヘッダー */
+.lw-pp-header {
+    background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 50%, #3B82F6 100%);
+    color: #ffffff;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 12px 16px;
+}
+
+.lw-pp-header span {
+    color: #ffffff;
+}
+
+.lw-pp-num {
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.lw-pp-type {
+    background: rgba(255, 255, 255, 0.2);
+    padding: 4px 10px;
+    border-radius: 4px;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.lw-pp-name {
+    margin-left: auto;
+    font-size: 13px;
+    opacity: 0.9;
+}
+
+/* 編集ボタン */
+.lw-pp-edit-btn {
+    background: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: #ffffff;
+    width: 28px;
+    height: 28px;
+    border-radius: 6px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 14px;
+    transition: background 0.2s;
+}
+
+.lw-pp-edit-btn:hover {
+    background: rgba(255, 255, 255, 0.3);
+}
+
+.lw-pp-edit-btn.is-active {
+    background: rgba(255, 255, 255, 0.4);
+}
+
+/* カード説明 */
+.lw-pp-desc {
+    background: #f8fafc;
+    color: #64748b;
+    padding: 10px 16px;
+    font-size: 13px;
+    border-bottom: 1px solid #e2e8f0;
+}
+
+/* カードボディ（コンテンツ） */
+.lw-pp-body {
+    background: #ffffff;
+    color: #334155;
+    padding: 16px;
+}
+
+/* コンテンツ内の項目 */
+.lw-pp-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+    margin-bottom: 8px;
+}
+
+.lw-pp-item:last-child {
+    margin-bottom: 0;
+}
+
+/* ラベル */
+.lw-pp-label {
+    color: #64748b;
+    font-size: 12px;
+    font-weight: 600;
+    flex-shrink: 0;
+    min-width: 80px;
+}
+
+/* 値 */
+.lw-pp-value {
+    color: #334155;
+    font-size: 13px;
+    line-height: 1.5;
+}
+
+/* リスト */
+.lw-pp-body ul {
+    margin: 8px 0 4px 0;
+    padding-left: 20px;
+    font-size: 13px;
+    color: #334155;
+    list-style: disc;
+}
+
+.lw-pp-body li {
+    margin-bottom: 4px;
+    color: #334155;
+}
+
+/* パーツ切り替えドロップダウン */
+.lw-pp-switch {
+    background: #f8fafc;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    border-top: 1px solid #e2e8f0;
+}
+
+.lw-pp-select {
+    background: #ffffff;
+    color: #334155;
+    border: 1px solid #e2e8f0;
+    border-radius: 6px;
+    padding: 8px 12px;
+    flex: 1;
+    font-size: 13px;
+}
+
+.lw-pp-select:focus {
+    outline: none;
+    border-color: #8B5CF6;
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+/* 編集中カード */
+.lw-pp-card.is-editing {
+    border-color: #8B5CF6;
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+/* 編集可能項目 */
+.lw-pp-editable {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 6px;
+}
+
+.lw-pp-editable .lw-pp-label {
+    font-weight: 600;
+    color: #1d2327;
+    margin-bottom: 2px;
+}
+
+/* テキストエリア */
+.lw-pp-textarea {
+    width: 100%;
+    padding: 8px 10px;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+    font-size: 13px;
+    line-height: 1.5;
+    resize: vertical;
+    background: #ffffff;
+    color: #1d2327;
+}
+
+.lw-pp-textarea:focus {
+    outline: none;
+    border-color: #8B5CF6;
+    box-shadow: 0 0 0 2px rgba(139, 92, 246, 0.2);
+}
+
+/* 配列アイテム表示 */
+.lw-pp-items {
+    margin-bottom: 8px;
+}
+
+.lw-pp-items ul {
+    margin: 8px 0 4px 0;
+    padding-left: 20px;
+    font-size: 13px;
+    color: #334155;
+    list-style: disc;
+}
+
+.lw-pp-items li {
+    margin-bottom: 4px;
+}
+
+/* 配列編集リスト */
+.lw-pp-items-edit-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lw-pp-item-textarea {
+    width: 100%;
+}
+
+/* 他X件表示 */
+.lw-pp-more {
+    font-size: 12px;
+    color: #6366f1;
+    font-style: italic;
+}
+
+.lw-ai-all-sections::-webkit-scrollbar {
+    width: 6px;
+}
+
+.lw-ai-all-sections::-webkit-scrollbar-track {
+    background: #f1f5f9;
+    border-radius: 3px;
+}
+
+.lw-ai-all-sections::-webkit-scrollbar-thumb {
+    background: #c4b5fd;
+    border-radius: 3px;
+}
+
+.lw-ai-all-sections::-webkit-scrollbar-thumb:hover {
+    background: #8b5cf6;
+}
+
+/* セクション情報 */
+.lw-ai-section-info {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 16px;
+}
+
+.lw-ai-section-count {
+    font-size: 13px;
+    color: #64748b;
+    padding: 6px 12px;
+    background: #f1f5f9;
+    border-radius: 20px;
+}
+
+
+.lw-ai-part-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    padding: 20px;
+    color: #6366f1;
+    font-size: 14px;
+}
+
+/* パーツモーダルのアクションエリア */
+.lw-ai-modal-actions-row {
+    display: flex;
+    gap: 12px;
+    margin-top: 20px;
+}
+
+.lw-ai-modal-actions-row .lw-ai-modal-btn {
+    flex: 1;
+}
+
+.lw-ai-modal-btn-back {
+    background: #f3f4f6;
+    color: #374151;
+    border: 1px solid #e5e7eb;
+}
+
+.lw-ai-modal-btn-back:hover {
+    background: #e5e7eb;
+}
+
+/* 画像ソース選択（パーツモーダル用） */
+.lw-ai-image-source-section {
+    padding: 16px;
+    background: #fefce8;
+    border: 1px solid #fde047;
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.lw-ai-image-source-label {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    color: #854d0e;
+    margin-bottom: 10px;
+}
+
+.lw-ai-image-source-select {
+    width: 100%;
+    padding: 10px 12px;
+    border: 1px solid #fde047;
+    border-radius: 6px;
+    font-size: 14px;
+    background: white;
+    cursor: pointer;
+}
+
+.lw-ai-image-source-select:focus {
+    outline: none;
+    border-color: #eab308;
+    box-shadow: 0 0 0 3px rgba(234, 179, 8, 0.1);
+}
+
+/* 構成案モーダルの「パーツを選択して生成」ボタン */
+.lw-ai-modal-btn-parts {
+    background: linear-gradient(135deg, #f0abfc 0%, #c084fc 100%);
+    color: white;
+    box-shadow: 0 4px 14px rgba(192, 132, 252, 0.4);
+}
+
+.lw-ai-modal-btn-parts:hover:not(:disabled) {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(192, 132, 252, 0.5);
+}
+
+.lw-ai-modal-btn-parts:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none;
+}
+
+.lw-ai-modal-btn-parts.is-generating {
+    background: linear-gradient(135deg, #d8b4fe 0%, #a78bfa 100%);
+}
+
+/* パーツ選択中のプログレス表示 */
+.lw-ai-parts-selecting {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    text-align: center;
+}
+
+.lw-ai-parts-selecting-icon {
+    margin-bottom: 16px;
+}
+
+.lw-ai-parts-selecting-text {
+    font-size: 16px;
+    font-weight: 600;
+    color: #6366f1;
+    margin-bottom: 8px;
+}
+
+.lw-ai-parts-selecting-subtext {
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* レスポンシブ対応 */
+@media (max-width: 600px) {
+    .lw-pp-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+    }
+
+    .lw-pp-switch {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 8px;
+    }
+
+    .lw-ai-modal-actions-row {
+        flex-direction: column;
+    }
+}
+
+/* ==========================================================================
+   保存した構成案
+   ========================================================================== */
+
+/* モード選択画面の「保存した構成案から生成」リンク */
+.lw-ai-saved-outlines-link {
+    margin-top: 20px;
+    padding-top: 16px;
+    border-top: 1px dashed #e2e8f0;
+    text-align: center;
+}
+
+.lw-ai-saved-outlines-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: #f8fafc;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    color: #64748b;
+    font-size: 14px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.lw-ai-saved-outlines-btn:hover:not(:disabled) {
+    background: #f1f5f9;
+    border-color: #cbd5e1;
+    color: #475569;
+}
+
+.lw-ai-saved-outlines-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.lw-ai-saved-outlines-btn.is-loading {
+    color: #6366f1;
+}
+
+.lw-ai-saved-icon {
+    font-size: 16px;
+}
+
+/* 保存した構成案一覧画面 */
+.lw-ai-saved-outlines-section {
+    padding: 16px 0;
+}
+
+.lw-ai-saved-outlines-label {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1e293b;
+    margin-bottom: 16px;
+}
+
+.lw-ai-saved-outlines-empty {
+    text-align: center;
+    padding: 40px 20px;
+    color: #94a3b8;
+    font-size: 14px;
+    background: #f8fafc;
+    border-radius: 8px;
+    border: 1px dashed #e2e8f0;
+}
+
+.lw-ai-saved-outlines-list {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.lw-ai-saved-outline-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    background: #ffffff;
+    border: 1px solid #e2e8f0;
+    border-radius: 8px;
+    transition: all 0.2s ease;
+}
+
+.lw-ai-saved-outline-item:hover {
+    border-color: #c4b5fd;
+    box-shadow: 0 2px 8px rgba(139, 92, 246, 0.1);
+}
+
+.lw-ai-saved-outline-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+}
+
+.lw-ai-saved-outline-name {
+    font-size: 14px;
+    font-weight: 600;
+    color: #1e293b;
+    flex: 1;
+}
+
+.lw-ai-saved-outline-date {
+    font-size: 12px;
+    color: #94a3b8;
+}
+
+.lw-ai-saved-outline-type {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 3px 8px;
+    background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+    color: white;
+    border-radius: 4px;
+}
+
+.lw-ai-saved-outline-delete {
+    width: 32px;
+    height: 32px;
+    margin-right: 8px;
+    background: #fef2f2;
+    border: none;
+    border-radius: 6px;
+    color: #dc2626;
+    font-size: 18px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lw-ai-saved-outline-delete:hover {
+    background: #dc2626;
+    color: white;
+}
+
+/* 構成案プレビューのヘッダー行 */
+.lw-ai-outline-header-row {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+}
+
+.lw-ai-save-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 6px 14px;
+    background: #f0fdf4;
+    border: 1px solid #86efac;
+    border-radius: 6px;
+    color: #16a34a;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.lw-ai-save-btn:hover:not(:disabled) {
+    background: #dcfce7;
+    border-color: #4ade80;
+}
+
+.lw-ai-save-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.lw-ai-save-btn.is-saving {
+    color: #6366f1;
+    background: #eef2ff;
+    border-color: #a5b4fc;
+}
+
+/* ==========================================================================
+   生成中のロック状態
+   ========================================================================== */
+.lw-ai-modal-locked .components-modal__header-heading-container button {
+    display: none !important;
+}
+
+.lw-ai-modal-locked .components-modal__content {
+    pointer-events: none;
+    position: relative;
+}
+
+.lw-ai-modal-locked .lw-ai-section-progress {
+    pointer-events: auto;
+}
+
+/* 生成中オーバーレイ */
+.lw-ai-generating-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    backdrop-filter: blur(2px);
+}
+
+.lw-ai-generating-message {
+    text-align: center;
+    padding: 24px;
+    background: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.lw-ai-generating-message .lw-ai-sparkle-spin {
+    margin-bottom: 12px;
+}
+
+.lw-ai-generating-message p {
+    margin: 0;
+    font-size: 14px;
+    color: #64748b;
+}
+
+/* 最終チェック状態 */
+.lw-ai-section-progress-name {
+    font-size: 13px;
+    color: #6366f1;
+    font-weight: 500;
+    margin-top: 8px;
+}
+
+/* ==========================================================================
+   パーツプレビュー画面のヘッダーボタン
+   ========================================================================== */
+.lw-ai-parts-header-buttons {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 16px;
+}
+
+.lw-ai-save-parts-btn {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    padding: 8px 16px;
+    background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+    border: none;
+    border-radius: 8px;
+    color: white;
+    font-size: 13px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    box-shadow: 0 2px 4px rgba(16, 185, 129, 0.3);
+}
+
+.lw-ai-save-parts-btn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(16, 185, 129, 0.4);
+}
+
+.lw-ai-save-parts-btn:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+/* ==========================================================================
+   保存一覧のパーツデータバッジ
+   ========================================================================== */
+.lw-ai-saved-outline-parts-badge {
+    display: inline-block;
+    padding: 2px 8px;
+    background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+    border-radius: 12px;
+    color: white;
+    font-size: 10px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.lw-ai-saved-outline-item.has-parts-data {
+    border-left: 3px solid #8B5CF6;
+}
+
+.lw-ai-saved-outline-content {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 8px;
+}
+
+/* ==========================================================================
+   順次セクション生成UI
+   ========================================================================== */
+
+/* セクションナビゲーション */
+.lw-ai-section-nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+    border-radius: 8px;
+    margin-bottom: 16px;
+}
+
+.lw-ai-section-progress-indicator {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.lw-ai-section-current {
+    font-weight: 600;
+    color: #1e40af;
+    font-size: 15px;
+}
+
+.lw-ai-section-generated {
+    font-size: 13px;
+    color: #059669;
+    background: #d1fae5;
+    padding: 2px 8px;
+    border-radius: 4px;
+}
+
+.lw-ai-section-nav-buttons {
+    display: flex;
+    gap: 8px;
+}
+
+.lw-ai-nav-btn {
+    padding: 6px 12px;
+    border: 1px solid #94a3b8;
+    background: white;
+    border-radius: 4px;
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s;
+}
+
+.lw-ai-nav-btn:hover:not(:disabled) {
+    background: #f1f5f9;
+    border-color: #64748b;
+}
+
+.lw-ai-nav-btn:disabled {
+    opacity: 0.4;
+    cursor: not-allowed;
+}
+
+/* 単一セクション表示 */
+.lw-ai-single-section {
+    max-height: none;
+}
+
+/* 順次生成アクションボタン */
+.lw-ai-sequential-actions {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+}
+
+.lw-ai-modal-btn-secondary {
+    background: #f1f5f9;
+    border: 1px solid #cbd5e1;
+    color: #475569;
+}
+
+.lw-ai-modal-btn-secondary:hover:not(:disabled) {
+    background: #e2e8f0;
+    border-color: #94a3b8;
+}
+
+/* パーツ読み込み中表示 */
+.lw-ai-part-loading {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px 20px;
+    color: #6366f1;
+}
+
+.lw-ai-part-loading .lw-ai-loading-spinner {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    width: auto;
+    height: auto;
+    border: none;
+    animation: none;
+}
+
+/* ==========================================================================
+   自動生成モーダル
+   ========================================================================== */
+.lw-ai-auto-generating-modal {
+    max-width: 500px;
+}
+
+.lw-ai-auto-generating-content {
+    text-align: center;
+    padding: 30px 20px;
+}
+
+.lw-ai-auto-gen-header {
+    margin-bottom: 30px;
+}
+
+.lw-ai-auto-gen-header svg {
+    color: #6366f1;
+    margin-bottom: 16px;
+}
+
+.lw-ai-auto-gen-header h3 {
+    font-size: 20px;
+    font-weight: 600;
+    color: #1e293b;
+    margin: 0;
+}
+
+.lw-ai-auto-gen-progress {
+    margin-bottom: 24px;
+}
+
+.lw-ai-auto-gen-progress-text {
+    font-size: 24px;
+    font-weight: 700;
+    color: #6366f1;
+    margin-bottom: 12px;
+}
+
+.lw-ai-auto-gen-progress-bar-container {
+    width: 100%;
+    height: 12px;
+    background: #e2e8f0;
+    border-radius: 6px;
+    overflow: hidden;
+    margin-bottom: 12px;
+}
+
+.lw-ai-auto-gen-progress-bar {
+    height: 100%;
+    background: linear-gradient(90deg, #8b5cf6, #6366f1, #3b82f6);
+    border-radius: 6px;
+    transition: width 0.5s ease;
+}
+
+.lw-ai-auto-gen-progress-bar.is-complete {
+    background: linear-gradient(90deg, #22c55e, #16a34a);
+}
+
+.lw-ai-auto-gen-progress-name {
+    font-size: 14px;
+    color: #64748b;
+}
+
+.lw-ai-auto-gen-warning {
+    font-size: 12px;
+    color: #94a3b8;
+    padding: 12px 16px;
+    background: #f8fafc;
+    border-radius: 8px;
+    margin-top: 20px;
+}
+
+/* ==========================================================================
+   AI機能 ON/OFF トグルスイッチ
+   ========================================================================== */
+.lw-ai-header-controls {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.lw-ai-toggle-switch {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+    user-select: none;
+}
+
+.lw-ai-toggle-switch.is-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.lw-ai-toggle-switch.is-loading {
+    cursor: wait;
+}
+
+.lw-ai-toggle-switch input {
+    display: none;
+}
+
+.lw-ai-toggle-slider {
+    position: relative;
+    width: 36px;
+    height: 20px;
+    background: #cbd5e1;
+    border-radius: 20px;
+    transition: all 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.lw-ai-toggle-switch input:checked + .lw-ai-toggle-slider {
+    background: linear-gradient(135deg, #8B5CF6 0%, #6366F1 100%);
+}
+
+.lw-ai-toggle-slider::before {
+    content: '';
+    position: absolute;
+    left: 2px;
+    width: 16px;
+    height: 16px;
+    background: white;
+    border-radius: 50%;
+    transition: all 0.3s ease;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.2);
+}
+
+.lw-ai-toggle-switch input:checked + .lw-ai-toggle-slider::before {
+    transform: translateX(16px);
+}
+
+.lw-ai-toggle-spinner {
+    width: 12px;
+    height: 12px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
+    border-top-color: white;
+    border-radius: 50%;
+    animation: lw-ai-spin 0.8s linear infinite;
+}
+
+.lw-ai-toggle-label {
+    font-size: 11px;
+    font-weight: 600;
+    color: #64748b;
+    white-space: nowrap;
+    min-width: 38px;
+}
+
+.lw-ai-toggle-switch input:checked ~ .lw-ai-toggle-label {
+    color: #8B5CF6;
+}
+
+/* AI生成ボタン（無効時） */
+.lw-ai-header-button.is-inactive {
+    background: #94a3b8;
+    box-shadow: none;
+    opacity: 0.7;
+}
+
+.lw-ai-header-button.is-inactive:hover {
+    transform: none;
+    box-shadow: none;
 }

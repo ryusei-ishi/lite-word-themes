@@ -122,15 +122,14 @@ jQuery(document).ready(function ($) {
 
   // 指定された要素にスクロールする関数
   function scrollToTarget(targetElement) {
+    if (!targetElement) return;
     const offsetHeight = getFixedElementsHeight();
-    if (offsetHeight > 0 && targetElement) {
-      const elementPosition =
-        targetElement.getBoundingClientRect().top + window.pageYOffset;
-      window.scrollTo({
-        top: elementPosition - offsetHeight,
-        behavior: "smooth",
-      });
-    }
+    const elementPosition =
+      targetElement.getBoundingClientRect().top + window.pageYOffset;
+    window.scrollTo({
+      top: elementPosition - offsetHeight,
+      behavior: "smooth",
+    });
   }
 
   // ページ読み込み時：別ページからのアンカーリンク対応

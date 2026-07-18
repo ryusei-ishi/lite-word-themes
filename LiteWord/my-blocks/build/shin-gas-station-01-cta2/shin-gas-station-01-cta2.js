@@ -675,7 +675,7 @@ module.exports = window["wp"]["components"];
   \*************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-cta2","version":"1.0.0","title":"CTA 2 shin shop pattern 01","category":"lw-cta","icon":"megaphone","description":"テンプレート専用CTAブロック2","supports":{"anchor":true},"attributes":{"title":{"type":"string","source":"html","selector":".shin-gas-station-01-cta2__title .main","default":"お問い合わせ・ご相談"},"text":{"type":"string","source":"html","selector":"p","default":"フランチャイズ加盟に関するご相談や当運営店舗に関するご意見など<br>お気軽にお問い合わせくださいませ。"},"buttonText":{"type":"string","source":"html","selector":"a span.text","default":"お問い合わせ"},"buttonUrl":{"type":"string","default":"#"},"openInNewTab":{"type":"boolean","default":false},"filterColor":{"type":"string","default":"#054161"},"filterOpacity":{"type":"number","default":0.05},"buttonTextColor":{"type":"string","default":"#fff"},"buttonBackgroundColor":{"type":"string","default":"var(--color-main)"},"buttonBorderColor":{"type":"string","default":"var(--color-main)"},"buttonBorderSize":{"type":"number","default":1},"selectedIcon":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z\\"/></svg>"}},"editorScript":"file:./shin-gas-station-01-cta2.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":15}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-cta2","version":"1.0.0","title":"CTA 2 shin shop pattern 01","category":"lw-cta","icon":"megaphone","description":"テンプレート専用CTAブロック2","aiHint":{"description":"CTA（背景色のみ）。タイトル+説明+ボタン。ショップテンプレート用","excludeFromAutoSelect":false,"contentAttributes":["title","text","buttonText"],"imageAttributes":[]},"supports":{"anchor":true},"attributes":{"title":{"type":"string","source":"html","selector":".shin-gas-station-01-cta2__title .main","default":"お問い合わせ・ご相談"},"text":{"type":"string","source":"html","selector":"p","default":"フランチャイズ加盟に関するご相談や当運営店舗に関するご意見など<br>お気軽にお問い合わせくださいませ。"},"buttonText":{"type":"string","source":"html","selector":"a span.text","default":"お問い合わせ"},"buttonUrl":{"type":"string","default":"#"},"openInNewTab":{"type":"boolean","default":false},"filterColor":{"type":"string","default":"#054161"},"filterOpacity":{"type":"number","default":0.05},"buttonTextColor":{"type":"string","default":"#fff"},"buttonBackgroundColor":{"type":"string","default":"var(--color-main)"},"buttonBorderColor":{"type":"string","default":"var(--color-main)"},"buttonBorderSize":{"type":"number","default":1},"selectedIcon":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z\\"/></svg>"}},"editorScript":"file:./shin-gas-station-01-cta2.js","no":15}');
 
 /***/ })
 
@@ -839,7 +839,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
       className: 'shin-gas-station-01-cta2'
     });
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30EA\u30F3\u30AF\u306E\u8A2D\u5B9A"
+      title: "\u57FA\u672C\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
       label: "\u30EA\u30F3\u30AF\u5148URL",
       value: buttonUrl,
@@ -849,7 +849,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
       checked: openInNewTab,
       onChange: onToggleOpenInNewTab
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30EA\u30F3\u30AF\u30DC\u30BF\u30F3\u306E\u8272\u8A2D\u5B9A"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u30DC\u30BF\u30F3\u6587\u5B57\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
       color: buttonTextColor,
       onChangeComplete: function onChangeComplete(color) {
@@ -883,7 +883,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u306E\u8272\u8A2D\u5B9A"
+      title: "\u80CC\u666F\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPicker, {
       color: filterColor,
       onChangeComplete: function onChangeComplete(color) {
@@ -892,7 +892,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u306E\u4E0D\u900F\u660E\u5EA6\u8A2D\u5B9A"
+      title: "\u30D5\u30A3\u30EB\u30BF\u30FC\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u4E0D\u900F\u660E\u5EA6",
       value: filterOpacity,

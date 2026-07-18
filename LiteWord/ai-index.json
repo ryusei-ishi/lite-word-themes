@@ -1,0 +1,92 @@
+{
+	"_meta": {
+		"description": "LiteWordテーマのAI向け情報インデックス。AIキャラクターはまずこのファイルを読んで、テーマの全体像と各メタ情報の在処を把握すること。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21",
+		"usage": "このファイルはテーマのルートディレクトリに配置される。AIがLiteWordテーマについて理解するための入口（目次）として機能する。WordPressの動作には一切影響しない。"
+	},
+	"theme": {
+		"name": "LiteWord",
+		"description": "初心者でも簡単にきれいなサイトが作れるWordPressテーマ。無料版とプレミアムプラン（有料版）がある。約1,000人が利用中。",
+		"themeRoot": "wp-content/themes/LiteWord/"
+	},
+	"aiResources": {
+		"blocks": {
+			"description": "カスタムブロック142個のメタ情報。各ブロックの用途・入力項目・推奨値をaiHintフィールドに記載。",
+			"location": "my-blocks/build/*/block.json",
+			"field": "aiHint",
+			"count": 142,
+			"notes": "ブロックレベルのaiHint（description, contentAttributes, imageAttributes）と、属性レベルのaiHint（role, contentGuide, example, skip）がある。"
+		},
+		"customizer": {
+			"description": "カスタマイザー（外観 > カスタマイズ）の全設定。パネル13個・セクション30+・設定キー35個のaiDescription・userGuideを記載。",
+			"location": "functions/customizer/customizer-ai-hints.json"
+		},
+		"pageEditor": {
+			"description": "固定ページ編集画面のメタボックス「ページ独自のデザイン設定」。ページ単位でヘッダー・フッター・ドロワー・カラー・フォント・レイアウト・背景・SEO・カスタムコードを上書きできる。",
+			"location": "functions/custom_post/page-editor-ai-hints.json"
+		},
+		"postEditor": {
+			"description": "投稿編集画面のメタボックス「入力フォーム」。記事ごとにメインビジュアル（3パターン）・目次・コメント・カラーを設定できる。",
+			"location": "functions/custom_post/post-editor-ai-hints.json"
+		},
+		"mailForm": {
+			"description": "お問い合わせフォーム機能。複数フォーム管理・送信先メール・サンクスメール・受信履歴・reCAPTCHA対応。管理画面「Lwお問い合わせ」から操作。",
+			"location": "functions/mail_form/mail-form-ai-hints.json"
+		},
+		"seo": {
+			"description": "SEO設定。タイトルタグ構成・OGP・サイトマップ・GA4/GTM・301リダイレクト・JSON-LD構造化データ。管理画面「Lw SEO設定」から操作。",
+			"location": "functions/seo/seo-ai-hints.json"
+		},
+		"templateManagement": {
+			"description": "テンプレート管理・プレミアム認証・テーマ更新。LiteWord SHOPとの連携（契約→アクティベート→テンプレート反映）、14日間無料トライアル、テーマ自動更新。",
+			"location": "functions/lw_template_management/template-management-ai-hints.json"
+		},
+		"myParts": {
+			"description": "マイパーツ（カスタムコード再利用）。HTML/CSS/JSを保存してショートコードで呼び出す機能。管理画面「マイパーツ」から操作。",
+			"location": "functions/lw_my_parts/my-parts-ai-hints.json"
+		},
+		"widgets": {
+			"description": "ウィジェット。10箇所のウィジェットエリアと3種類のカスタムウィジェット（執筆者・マイパーツ呼び出し・ショートコード）。",
+			"location": "functions/widget/widget-ai-hints.json"
+		},
+		"categorySettings": {
+			"description": "カテゴリーカスタマイズ。アイキャッチ・並び順・SEO設定・アーカイブデザインをカテゴリー単位で設定。",
+			"location": "functions/category_set/category-ai-hints.json"
+		},
+		"userProfile": {
+			"description": "ユーザープロフィール拡張。SNS連絡先追加・カスタムプロフィール画像・プロフィール管理画面（プレミアム）。",
+			"location": "functions/user_data/user-profile-ai-hints.json"
+		},
+		"aiChat": {
+			"description": "AIチャットボット。マニュアルページやダッシュボードで質問できるAIアシスタント（猫ロボットキャラクター）。カテゴリ別質問・音声入力・チャット履歴対応。",
+			"location": "functions/lw_ai_chat/ai-chat-ai-hints.json"
+		},
+		"aiSystem": {
+			"description": "AI画像・ページ生成システム。ブロックエディタ内でAI画像検索・ページ自動生成・テキストリライト・マイパーツAI生成が可能。Gemini API使用。",
+			"location": "functions/lw_ai_system/ai-system-ai-hints.json"
+		},
+		"brokenLinkCheck": {
+			"description": "破損リンク検出。サイト内の全リンクをスキャンし、404等の破損リンクを検出・一覧表示。管理画面「全リンク一覧」から操作。",
+			"location": "functions/lw_broken_link_check/broken-link-ai-hints.json",
+			"status": "未完成 — 機能自体が開発途中のため、マニュアル対象外"
+		},
+		"pageWizard": {
+			"description": "ページ設定ウィザード。固定ページ新規作成時に自動表示されるポップアップ。タイトル・スラッグをまとめて設定。",
+			"location": "functions/page-setting-wizard/page-wizard-ai-hints.json"
+		},
+		"pageTemplateInsert": {
+			"description": "ページテンプレート一括作成。テーマ内蔵テンプレートから複数ページを一括生成。サンプルページ・セールス系・業種別等のカテゴリ。",
+			"location": "functions/lw_page_template_insert/page-template-ai-hints.json"
+		},
+		"dashboard": {
+			"description": "ダッシュボードトップ＋カスタムブロック挿入UI。サイト制作ウィザード・ページツリー・タスク管理・SEOチェック・ブロック挿入パネル。",
+			"location": "functions/dashboard_top/dashboard-ai-hints.json"
+		}
+	},
+	"keyConceptsForAI": {
+		"customizerVsPageEditor": "カスタマイザーはサイト全体のデフォルト設定。ページ編集画面のメタボックスはページ単位の上書き設定。メタボックスで値を設定すると、そのページだけカスタマイザーの設定より優先される。",
+		"premiumFeatures": "LW_HAS_SUBSCRIPTION === true の場合にプレミアム機能が有効。フォント種類増加・パターン数増加・ページ独自メニュー選択・SEO機能・JSON-LD等が追加される。",
+		"settingKeyPrefix": "カスタマイザーの設定キーは theme_mod として保存（プレフィックス: {$set}_{キー名}）。ページ編集画面の設定は post_meta として保存（キー名そのまま）。"
+	}
+}

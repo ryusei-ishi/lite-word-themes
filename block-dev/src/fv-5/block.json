@@ -7,59 +7,70 @@
 	"category": "lw-firstview",
 	"icon": "cover-image",
 	"editorScript": "file:./fv-5.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"supports": {
 		"anchor": true
+	},
+	"aiHint": {
+		"description": "下層ページ用FV。中央にタイトル+説明文。色ベタ塗り背景。サービス詳細ページ向け",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "description"],
+		"imageAttributes": []
 	},
 	"attributes": {
 		"backgroundImage": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "skip": true }
 		},
 		"backgroundImageSp": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "skip": true }
 		},
 		"mainTitle": {
 			"type": "string",
-			"default": "PORTFOLIO"
+			"default": "PORTFOLIO",
+			"aiHint": { "role": "heading", "contentGuide": "ページタイトル（英語 or 日本語）。3〜15文字", "example": "SERVICE" }
 		},
 		"description": {
 			"type": "string",
-			"default": "テキストを入力してください。"
+			"default": "テキストを入力してください。",
+			"aiHint": { "role": "body", "contentGuide": "ページの概要を1文で。15〜40文字", "example": "私たちのサービスをご紹介します" }
 		},
 		"filterBackgroundColor": {
 			"type": "string",
-			"default": "var(--color-main)"
+			"default": "var(--color-main)",
+			"aiHint": { "skip": true }
 		},
 		"filterOpacity": {
 			"type": "number",
-			"default": 0.95
+			"default": 0.95,
+			"aiHint": { "skip": true }
 		},
 		"textColor": {
 			"type": "string",
-			"default": "#fff"
+			"default": "#fff",
+			"aiHint": { "skip": true }
 		},
 		"minHeightPc": {
 			"type": "string",
-			"default": "min-h-pc-280px"
+			"default": "min-h-pc-280px",
+			"aiHint": { "skip": true }
 		},
 		"minHeightTb": {
 			"type": "string",
-			"default": "min-h-tb-220px"
+			"default": "min-h-tb-220px",
+			"aiHint": { "skip": true }
 		},
 		"minHeightSp": {
 			"type": "string",
-			"default": "min-h-sp-180px"
+			"default": "min-h-sp-180px",
+			"aiHint": { "skip": true }
 		},
 		"mainTitleTag": {
 			"type": "string",
-			"default": "h1"
+			"default": "h1",
+			"aiHint": { "skip": true }
 		}
 	},
 	"no": 5

@@ -20,6 +20,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-pr-table-1/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/lw-pr-table-1/block.json");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
 function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
@@ -91,10 +92,37 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       fontSizeCellSp = attributes.fontSizeCellSp,
       lineHeightCell = attributes.lineHeightCell,
       gapSize = attributes.gapSize,
+      rowCellPosition = attributes.rowCellPosition,
+      rowHeadPosition = attributes.rowHeadPosition,
+      maxWidthOffPc = attributes.maxWidthOffPc,
+      showScrollHint = attributes.showScrollHint,
       headers = attributes.headers,
       rows = attributes.rows;
+
+    // 位置設定からCSS値を生成
+    var getPositionStyles = function getPositionStyles(position) {
+      switch (position) {
+        case 'left':
+          return {
+            align: 'left',
+            justify: 'flex-start'
+          };
+        case 'right':
+          return {
+            align: 'right',
+            justify: 'flex-end'
+          };
+        default:
+          return {
+            align: 'center',
+            justify: 'center'
+          };
+      }
+    };
+    var cellPositionStyles = getPositionStyles(rowCellPosition);
+    var headPositionStyles = getPositionStyles(rowHeadPosition);
     var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
-      className: 'lw-pr-table-1'
+      className: "lw-pr-table-1".concat(maxWidthOffPc ? ' max_width_off_pc' : '')
     });
 
     // ヘッダー更新関数（テキスト）
@@ -172,8 +200,9 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
 
     // 行データ更新関数
     var updateRow = function updateRow(rowIndex, key, value) {
-      var updated = _toConsumableArray(rows);
-      updated[rowIndex][key] = value;
+      var updated = rows.map(function (row, i) {
+        return i === rowIndex ? _objectSpread(_objectSpread({}, row), {}, _defineProperty({}, key, value)) : row;
+      });
       setAttributes({
         rows: updated
       });
@@ -181,15 +210,20 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
 
     // セル更新関数
     var updateCell = function updateCell(rowIndex, cellIndex, value) {
-      var updated = _toConsumableArray(rows);
-      if (!updated[rowIndex].cells || updated[rowIndex].cells.length !== columnCount - 1) {
-        updated[rowIndex].cells = Array(columnCount - 1).fill({
+      var updated = rows.map(function (row, i) {
+        if (i !== rowIndex) return row;
+        var baseCells = !row.cells || row.cells.length !== columnCount - 1 ? Array(columnCount - 1).fill({
           content: ''
+        }) : row.cells;
+        var newCells = baseCells.map(function (cell, ci) {
+          return ci === cellIndex ? {
+            content: value
+          } : cell;
         });
-      }
-      updated[rowIndex].cells[cellIndex] = {
-        content: value
-      };
+        return _objectSpread(_objectSpread({}, row), {}, {
+          cells: newCells
+        });
+      });
       setAttributes({
         rows: updated
       });
@@ -282,7 +316,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       return header.bgColor || headerBgColor;
     };
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCD0 \u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A",
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
       label: "\u30D8\u30C3\u30C0\u30FC\u884C\u3092\u975E\u8868\u793A",
@@ -340,8 +374,46 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       },
       min: 0,
       max: 10
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: "\u884C\u30D8\u30C3\u30C0\u30FC\u914D\u7F6E",
+      value: rowHeadPosition,
+      options: [{
+        label: '左寄せ',
+        value: 'left'
+      }, {
+        label: '中央',
+        value: 'center'
+      }, {
+        label: '右寄せ',
+        value: 'right'
+      }],
+      onChange: function onChange(value) {
+        return setAttributes({
+          rowHeadPosition: value
+        });
+      },
+      help: "\u9805\u76EE\u540D\u30BB\u30EB\u306E\u914D\u7F6E"
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: "\u30C7\u30FC\u30BF\u30BB\u30EB\u914D\u7F6E",
+      value: rowCellPosition,
+      options: [{
+        label: '左寄せ',
+        value: 'left'
+      }, {
+        label: '中央',
+        value: 'center'
+      }, {
+        label: '右寄せ',
+        value: 'right'
+      }],
+      onChange: function onChange(value) {
+        return setAttributes({
+          rowCellPosition: value
+        });
+      },
+      help: "\u30C7\u30FC\u30BF\u30BB\u30EB\u306E\u914D\u7F6E"
     })), columnCount >= 2 && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCBB \u30AB\u30E9\u30E0\u5E45\u8A2D\u5B9A\uFF08PC\uFF09",
+      title: "\u30AB\u30E9\u30E0\u5E45\u8A2D\u5B9A\uFF08PC\uFF09",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u9805\u76EE\u5217\u306E\u5E45 (px)",
@@ -432,7 +504,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       min: 100,
       max: 800
     })), columnCount >= 2 && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCF1 \u30AB\u30E9\u30E0\u5E45\u8A2D\u5B9A\uFF08SP\uFF09",
+      title: "\u30AB\u30E9\u30E0\u5E45\u8A2D\u5B9A\uFF08SP\uFF09",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u9805\u76EE\u5217\u306E\u5E45 (px)",
@@ -515,7 +587,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       min: 80,
       max: 600
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83C\uDFA8 \u8272\u8A2D\u5B9A",
+      title: "\u8272\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement("div", {
       style: {
@@ -621,7 +693,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         });
       }
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCDD \u5217\u30D8\u30C3\u30C0\u30FC\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A",
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A\uFF08\u5217\u30D8\u30C3\u30C0\u30FC\uFF09",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\u30D5\u30A9\u30F3\u30C8\u30D5\u30A1\u30DF\u30EA\u30FC",
@@ -673,7 +745,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       max: 2.5,
       step: 0.1
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCDD \u884C\u30D8\u30C3\u30C0\u30FC\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A",
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A\uFF08\u884C\u30D8\u30C3\u30C0\u30FC\uFF09",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\u30D5\u30A9\u30F3\u30C8\u30D5\u30A1\u30DF\u30EA\u30FC",
@@ -725,7 +797,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       max: 2.5,
       step: 0.1
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\uD83D\uDCDD \u30BB\u30EB\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A",
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A\uFF08\u30BB\u30EB\uFF09",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\u30D5\u30A9\u30F3\u30C8\u30D5\u30A1\u30DF\u30EA\u30FC",
@@ -776,6 +848,27 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       min: 1,
       max: 2.5,
       step: 0.1
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u305D\u306E\u4ED6\u8A2D\u5B9A",
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+      label: "PC\u6642 \u5168\u5E45\u89E3\u9664",
+      checked: maxWidthOffPc,
+      onChange: function onChange(value) {
+        return setAttributes({
+          maxWidthOffPc: value
+        });
+      },
+      help: "PC\u8868\u793A\u6642\u306B\u30C6\u30FC\u30D6\u30EB\u306E\u5168\u5E45\u3092\u89E3\u9664\u3057\u307E\u3059"
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+      label: "\u6A2A\u30B9\u30AF\u30ED\u30FC\u30EB\u30D2\u30F3\u30C8\u3092\u8868\u793A",
+      checked: showScrollHint,
+      onChange: function onChange(value) {
+        return setAttributes({
+          showScrollHint: value
+        });
+      },
+      help: "SP\u8868\u793A\u6642\u306B\u6A2A\u30B9\u30AF\u30ED\u30FC\u30EB\u53EF\u80FD\u306A\u6307\u30A2\u30A4\u30B3\u30F3\u3092\u8868\u793A\u3057\u307E\u3059"
     }))), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
       className: "wrap_table",
       style: {
@@ -810,7 +903,12 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         // 行間のCSS変数を追加
         '--lw-table-line-height-header': lineHeightHeader,
         '--lw-table-line-height-cell': lineHeightCell,
-        '--lw-table-line-height-row-header': lineHeightRowHeader
+        '--lw-table-line-height-row-header': lineHeightRowHeader,
+        // セル配置のCSS変数
+        '--lw-table-row-cell-position-align': cellPositionStyles.align,
+        '--lw-table-row-cell-position-justify': cellPositionStyles.justify,
+        '--lw-table-row-cell-head-position-align': headPositionStyles.align,
+        '--lw-table-row-cell-head-position-justify': headPositionStyles.justify
       }
     }, !hideTableHeader && /*#__PURE__*/React.createElement("div", {
       className: "lw_table_head",
@@ -858,33 +956,61 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
           return updateRow(rowIndex, 'header', value);
         },
         placeholder: "\u9805\u76EE\u540D"
-      })), Array.from({
-        length: columnCount - 1
-      }).map(function (_, cellIndex) {
-        return /*#__PURE__*/React.createElement("div", {
-          key: cellIndex,
-          className: "cell",
-          "data-lw_font_set": fontFamilyCell,
-          style: {
-            padding: '0.7em 0.7em',
-            background: cellBgColor,
-            color: cellTextColor,
-            fontWeight: fontWeightCell,
-            fontSize: "".concat(fontSizeCell, "px"),
-            lineHeight: lineHeightCell,
-            boxShadow: "0 0 3px ".concat(shadowColor)
-          }
-        }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
-          className: "text",
-          value: row.cells && row.cells[cellIndex] ? row.cells[cellIndex].content : '',
-          onChange: function onChange(value) {
-            return updateCell(rowIndex, cellIndex, value);
-          },
-          placeholder: "\u5185\u5BB9"
-        }));
-      }), /*#__PURE__*/React.createElement("div", {
+      })), function () {
+        var effectiveAlign = row.cellAlign ? getPositionStyles(row.cellAlign) : null;
+        return Array.from({
+          length: columnCount - 1
+        }).map(function (_, cellIndex) {
+          return /*#__PURE__*/React.createElement("div", {
+            key: cellIndex,
+            className: "cell",
+            "data-lw_font_set": fontFamilyCell,
+            style: _objectSpread({
+              padding: '0.7em 0.7em',
+              background: cellBgColor,
+              color: cellTextColor,
+              fontWeight: fontWeightCell,
+              fontSize: "".concat(fontSizeCell, "px"),
+              lineHeight: lineHeightCell,
+              boxShadow: "0 0 3px ".concat(shadowColor)
+            }, effectiveAlign && {
+              textAlign: effectiveAlign.align,
+              justifyContent: effectiveAlign.justify
+            })
+          }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
+            className: "text",
+            style: effectiveAlign ? {
+              textAlign: effectiveAlign.align
+            } : undefined,
+            value: row.cells && row.cells[cellIndex] ? row.cells[cellIndex].content : '',
+            onChange: function onChange(value) {
+              return updateCell(rowIndex, cellIndex, value);
+            },
+            placeholder: "\u5185\u5BB9"
+          }));
+        });
+      }(), /*#__PURE__*/React.createElement("div", {
         className: "lw-table-item-controls"
-      }, /*#__PURE__*/React.createElement("button", {
+      }, /*#__PURE__*/React.createElement("select", {
+        value: row.cellAlign || '',
+        onChange: function onChange(e) {
+          return updateRow(rowIndex, 'cellAlign', e.target.value);
+        },
+        style: {
+          fontSize: '11px',
+          padding: '2px 4px',
+          width: 'auto'
+        },
+        title: "\u30BB\u30EB\u914D\u7F6E"
+      }, /*#__PURE__*/React.createElement("option", {
+        value: ""
+      }, "\u914D\u7F6E:\u30C7\u30D5\u30A9\u30EB\u30C8"), /*#__PURE__*/React.createElement("option", {
+        value: "left"
+      }, "\u914D\u7F6E:\u5DE6"), /*#__PURE__*/React.createElement("option", {
+        value: "center"
+      }, "\u914D\u7F6E:\u4E2D\u592E"), /*#__PURE__*/React.createElement("option", {
+        value: "right"
+      }, "\u914D\u7F6E:\u53F3")), /*#__PURE__*/React.createElement("button", {
         type: "button",
         onClick: function onClick() {
           return moveRow(rowIndex, -1);
@@ -960,10 +1086,37 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       fontSizeCellSp = attributes.fontSizeCellSp,
       lineHeightCell = attributes.lineHeightCell,
       gapSize = attributes.gapSize,
+      rowCellPosition = attributes.rowCellPosition,
+      rowHeadPosition = attributes.rowHeadPosition,
+      maxWidthOffPc = attributes.maxWidthOffPc,
+      showScrollHint = attributes.showScrollHint,
       headers = attributes.headers,
       rows = attributes.rows;
+
+    // 位置設定からCSS値を生成
+    var getPositionStyles = function getPositionStyles(position) {
+      switch (position) {
+        case 'left':
+          return {
+            align: 'left',
+            justify: 'flex-start'
+          };
+        case 'right':
+          return {
+            align: 'right',
+            justify: 'flex-end'
+          };
+        default:
+          return {
+            align: 'center',
+            justify: 'center'
+          };
+      }
+    };
+    var cellPositionStyles = getPositionStyles(rowCellPosition);
+    var headPositionStyles = getPositionStyles(rowHeadPosition);
     var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-      className: 'lw-pr-table-1'
+      className: "lw-pr-table-1".concat(maxWidthOffPc ? ' max_width_off_pc' : '')
     });
 
     // テーブル幅の計算
@@ -1003,7 +1156,9 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       if (typeof header === 'string') return headerBgColor;
       return header.bgColor || headerBgColor;
     };
-    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", _extends({}, blockProps, {
+      "data-scroll-hint": showScrollHint ? "true" : undefined
+    }), /*#__PURE__*/React.createElement("div", {
       className: "wrap_table",
       role: "table",
       "aria-label": "\u6599\u91D1\u30D7\u30E9\u30F3\u6BD4\u8F03\u8868",
@@ -1039,7 +1194,12 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         // 行間のCSS変数を追加
         '--lw-table-line-height-header': lineHeightHeader,
         '--lw-table-line-height-row-header': lineHeightRowHeader,
-        '--lw-table-line-height-cell': lineHeightCell
+        '--lw-table-line-height-cell': lineHeightCell,
+        // セル配置のCSS変数
+        '--lw-table-row-cell-position-align': cellPositionStyles.align,
+        '--lw-table-row-cell-position-justify': cellPositionStyles.justify,
+        '--lw-table-row-cell-head-position-align': headPositionStyles.align,
+        '--lw-table-row-cell-head-position-justify': headPositionStyles.justify
       }
     }, !hideTableHeader && /*#__PURE__*/React.createElement("div", {
       className: "lw_table_head",
@@ -1068,10 +1228,12 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         value: getHeaderText(header)
       }));
     })), rows.map(function (row, rowIndex) {
+      var effectiveAlign = row.cellAlign ? getPositionStyles(row.cellAlign) : null;
       return /*#__PURE__*/React.createElement("div", {
         key: rowIndex,
         className: "lw_table_row ".concat(rowIndex === 0 ? 'first' : '', " ").concat(rowIndex === rows.length - 1 ? 'last' : ''),
-        role: "row"
+        role: "row",
+        "data-cell-align": row.cellAlign || undefined
       }, /*#__PURE__*/React.createElement("div", {
         className: "cell row_head",
         role: "rowheader",
@@ -1095,19 +1257,24 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
           className: "cell",
           role: "cell",
           "data-lw_font_set": fontFamilyCell,
-          style: {
+          style: _objectSpread({
             background: cellBgColor,
             color: cellTextColor,
             fontWeight: fontWeightCell,
             boxShadow: "0 0 3px ".concat(shadowColor),
             lineHeight: lineHeightCell
-          }
+          }, effectiveAlign && {
+            textAlign: effectiveAlign.align,
+            justifyContent: effectiveAlign.justify
+          })
         }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
           tagName: "span",
           className: "text",
-          style: {
+          style: _objectSpread({
             lineHeight: lineHeightCell
-          },
+          }, effectiveAlign && {
+            textAlign: effectiveAlign.align
+          }),
           value: cell.content
         }));
       }));
@@ -1814,7 +1981,7 @@ module.exports = window["wp"]["components"];
   \**************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-table-1","version":"1.0.0","title":"価格表 01","category":"lw-table","icon":"editor-table","editorScript":"file:./lw-pr-table-1.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true,"className":true},"attributes":{"columnCount":{"type":"number","default":4},"hideTableHeader":{"type":"boolean","default":false},"cellWidth1":{"type":"number","default":200},"cellWidth2":{"type":"number","default":200},"cellWidth3":{"type":"number","default":200},"cellWidth4":{"type":"number","default":200},"cellWidth5":{"type":"number","default":200},"cellWidth6":{"type":"number","default":200},"cellWidth7":{"type":"number","default":200},"cellWidth8":{"type":"number","default":200},"cellWidth1Sp":{"type":"number","default":160},"cellWidth2Sp":{"type":"number","default":160},"cellWidth3Sp":{"type":"number","default":160},"cellWidth4Sp":{"type":"number","default":160},"cellWidth5Sp":{"type":"number","default":160},"cellWidth6Sp":{"type":"number","default":160},"cellWidth7Sp":{"type":"number","default":160},"cellWidth8Sp":{"type":"number","default":160},"radiusSize":{"type":"number","default":12},"headerBgColor":{"type":"string","default":"var(--color-main)"},"headerTextColor":{"type":"string","default":"#ffffff"},"useIndividualHeaderBg":{"type":"boolean","default":false},"cellBgColor":{"type":"string","default":"#ffffff"},"cellTextColor":{"type":"string","default":"#333333"},"shadowColor":{"type":"string","default":"rgba(37, 37, 37, 0.3)"},"fontFamilyHeader":{"type":"string","default":""},"fontWeightHeader":{"type":"string","default":"600"},"fontSizeHeader":{"type":"number","default":17},"fontSizeHeaderSp":{"type":"number","default":16},"lineHeightHeader":{"type":"number","default":1.5},"fontFamilyRowHeader":{"type":"string","default":""},"fontWeightRowHeader":{"type":"string","default":"600"},"fontSizeRowHeader":{"type":"number","default":17},"fontSizeRowHeaderSp":{"type":"number","default":16},"lineHeightRowHeader":{"type":"number","default":1.6},"fontFamilyCell":{"type":"string","default":""},"fontWeightCell":{"type":"string","default":"400"},"fontSizeCell":{"type":"number","default":17},"fontSizeCellSp":{"type":"number","default":16},"lineHeightCell":{"type":"number","default":1.6},"gapSize":{"type":"number","default":3},"headers":{"type":"array","default":[{"text":"ベーシック","bgColor":""},{"text":"スタンダード","bgColor":""},{"text":"プレミアム","bgColor":""}]},"rows":{"type":"array","source":"query","selector":".lw_table_row","query":{"header":{"type":"string","source":"html","selector":".row_head .text"},"cells":{"type":"array","source":"query","selector":".cell:not(.row_head)","query":{"content":{"type":"string","source":"html","selector":".text"}}}},"default":[{"header":"月額料金","cells":[{"content":"¥3,000"},{"content":"¥5,000"},{"content":"¥10,000"}]},{"header":"ストレージ容量","cells":[{"content":"10GB"},{"content":"50GB"},{"content":"無制限"}]},{"header":"メールサポート","cells":[{"content":"〇"},{"content":"〇"},{"content":"〇"}]}]}},"no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-table-1","version":"1.0.0","title":"テーブル 01（価格表など）","category":"lw-table","icon":"editor-table","editorScript":"file:./lw-pr-table-1.js","viewScript":"file:./view.js","aiHint":{"description":"料金テーブル。ヘッダー+行の表形式。料金プラン・比較表に","excludeFromAutoSelect":true,"contentAttributes":[],"imageAttributes":[],"excludeReason":"複雑なネスト構造のテーブル。AI直接生成非推奨。テンプレート経由で使用"},"supports":{"anchor":true,"className":true},"attributes":{"columnCount":{"type":"number","default":4},"hideTableHeader":{"type":"boolean","default":false},"cellWidth1":{"type":"number","default":200},"cellWidth2":{"type":"number","default":200},"cellWidth3":{"type":"number","default":200},"cellWidth4":{"type":"number","default":200},"cellWidth5":{"type":"number","default":200},"cellWidth6":{"type":"number","default":200},"cellWidth7":{"type":"number","default":200},"cellWidth8":{"type":"number","default":200},"cellWidth1Sp":{"type":"number","default":160},"cellWidth2Sp":{"type":"number","default":160},"cellWidth3Sp":{"type":"number","default":160},"cellWidth4Sp":{"type":"number","default":160},"cellWidth5Sp":{"type":"number","default":160},"cellWidth6Sp":{"type":"number","default":160},"cellWidth7Sp":{"type":"number","default":160},"cellWidth8Sp":{"type":"number","default":160},"radiusSize":{"type":"number","default":12},"headerBgColor":{"type":"string","default":"var(--color-main)"},"headerTextColor":{"type":"string","default":"#ffffff"},"useIndividualHeaderBg":{"type":"boolean","default":false},"cellBgColor":{"type":"string","default":"#ffffff"},"cellTextColor":{"type":"string","default":"#333333"},"shadowColor":{"type":"string","default":"rgba(37, 37, 37, 0.3)"},"fontFamilyHeader":{"type":"string","default":""},"fontWeightHeader":{"type":"string","default":"600"},"fontSizeHeader":{"type":"number","default":17},"fontSizeHeaderSp":{"type":"number","default":16},"lineHeightHeader":{"type":"number","default":1.5},"fontFamilyRowHeader":{"type":"string","default":""},"fontWeightRowHeader":{"type":"string","default":"600"},"fontSizeRowHeader":{"type":"number","default":17},"fontSizeRowHeaderSp":{"type":"number","default":16},"lineHeightRowHeader":{"type":"number","default":1.6},"fontFamilyCell":{"type":"string","default":""},"fontWeightCell":{"type":"string","default":"400"},"fontSizeCell":{"type":"number","default":17},"fontSizeCellSp":{"type":"number","default":16},"lineHeightCell":{"type":"number","default":1.6},"showScrollHint":{"type":"boolean","default":false},"gapSize":{"type":"number","default":3},"headers":{"type":"array","default":[{"text":"ベーシック","bgColor":""},{"text":"スタンダード","bgColor":""},{"text":"プレミアム","bgColor":""}]},"rows":{"type":"array","source":"query","selector":".lw_table_row","query":{"header":{"type":"string","source":"html","selector":".row_head .text"},"cellAlign":{"type":"string","source":"attribute","attribute":"data-cell-align"},"cells":{"type":"array","source":"query","selector":".cell:not(.row_head)","query":{"content":{"type":"string","source":"html","selector":".text"}}}},"default":[{"header":"月額料金","cells":[{"content":"¥3,000"},{"content":"¥5,000"},{"content":"¥10,000"}]},{"header":"ストレージ容量","cells":[{"content":"10GB"},{"content":"50GB"},{"content":"無制限"}]},{"header":"メールサポート","cells":[{"content":"〇"},{"content":"〇"},{"content":"〇"}]}]}},"no":1}');
 
 /***/ })
 

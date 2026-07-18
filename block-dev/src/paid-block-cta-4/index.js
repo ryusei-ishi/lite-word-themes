@@ -89,7 +89,7 @@ registerBlockType(metadata.name, {
             <div {...blockProps}>
                 <InspectorControls>
                     {/* 横幅の設定 */}
-                    <PanelBody title="横幅の設定" initialOpen={false}>
+                    <PanelBody title="レイアウト設定" initialOpen={false}>
                         <div style={{ 
                             border: '1px solid #e0e0e0', 
                             borderRadius: '4px', 

@@ -320,7 +320,3 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 </script>
 
-<?php
-// Site settings popup modal
-lw_site_settings_modal();
-?>

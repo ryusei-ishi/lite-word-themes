@@ -6,6 +6,14 @@
 	"title": "画像カード 02",
 	"category": "lw-media",
 	"icon": "format-image",
+	"aiHint": {
+		"description": "画像カード。画像+テキストのカード配列。サービス紹介・メニュー表示に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"items"
+		],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -108,11 +116,5 @@
 		}
 	},
 	"editorScript": "file:./lw-image-2.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 2
 }

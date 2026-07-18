@@ -71,7 +71,7 @@ registerBlockType(metadata.name, {
                             />
                         </PanelBody>
                     ))}
-                     <PanelBody title="画像部分の最大横幅">
+                     <PanelBody title="レイアウト設定">
                         <RangeControl
                             label="最大幅 (px)"
                             value={maxWidth}

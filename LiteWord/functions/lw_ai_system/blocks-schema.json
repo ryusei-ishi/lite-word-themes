@@ -1,0 +1,1769 @@
+{
+  "version": "1.0.0",
+  "lastUpdated": "2026-03-17",
+  "totalBlocks": 96,
+  "totalSampleFiles": 107,
+  "note": "107サンプルファイルのうち11ファイルは同一ブロックの別バリエーション（-2サフィックス）。ユニークブロック数は96。",
+  "blocks": {
+    "wdl/fv-1": {
+      "sampleFile": "fv-1.php",
+      "category": "firstview",
+      "tier": "free",
+      "label": "ファーストビュー — 中央テキスト+CTAボタン+背景画像",
+      "description": "中央にh1メインタイトル+サブテキスト+pタグの説明文+CTAボタン1つ。背景画像とフィルターカラー設定可能。トップページ向け。",
+      "recommendedFor": ["top", "lp"],
+      "elements": {
+        "headings": {"h1": 1},
+        "paragraphs": 1,
+        "buttons": 1,
+        "images": {"background": 1}
+      },
+      "attributes": {
+        "buttonUrl": {"type": "url", "description": "ボタンリンク先"},
+        "filterBackgroundColor": {"type": "color", "description": "背景フィルターカラー"},
+        "filterOpacity": {"type": "number", "description": "フィルター透明度（0〜1）"}
+      }
+    },
+    "wdl/fv-2": {
+      "sampleFile": "fv-2.php",
+      "category": "firstview",
+      "tier": "free",
+      "label": "ファーストビュー — シンプル中央タイトルのみ",
+      "description": "中央にh1タイトルのみ。背景はメインカラーのフィルター。アクセントラインあり。下層ページ向けのシンプルなFV。",
+      "recommendedFor": ["subpage"],
+      "elements": {
+        "headings": {"h1": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/fv-3": {
+      "sampleFile": "fv-3.php",
+      "category": "firstview",
+      "tier": "free",
+      "label": "ファーストビュー — 画像のみ",
+      "description": "h1タグの中に画像のみを表示。PC/SP画像を別々に設定可能。ロゴや写真をFVに大きく見せたい場合に。",
+      "recommendedFor": ["top", "lp"],
+      "elements": {
+        "headings": {"h1": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {"main": 1}
+      },
+      "attributes": {}
+    },
+    "wdl/fv-4": {
+      "sampleFile": "fv-4.php",
+      "category": "firstview",
+      "tier": "free",
+      "label": "ファーストビュー — 左寄せテキスト+背景カラー",
+      "description": "左側にサブタイトル+メインタイトル+説明文（pタグ）。背景はメインカラーフィルター。テキスト中心のFV。",
+      "recommendedFor": ["top", "lp", "corporate"],
+      "elements": {
+        "headings": {"h1": 1},
+        "paragraphs": 1,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/fv-5": {
+      "sampleFile": "fv-5.php",
+      "category": "firstview",
+      "tier": "free",
+      "label": "ファーストビュー — 中央タイトル+説明文+背景カラー",
+      "description": "中央にメインタイトル+説明文。背景はメインカラーフィルター。ポートフォリオ等の下層ページ向け。",
+      "recommendedFor": ["subpage", "portfolio"],
+      "elements": {
+        "headings": {"h1": 1},
+        "paragraphs": 1,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/fv-6": {
+      "sampleFile": "fv-6.php",
+      "category": "firstview",
+      "tier": "free",
+      "label": "ファーストビュー — 中央タイトル+サブタイトル+背景画像",
+      "description": "中央にメインタイトル+英字サブタイトル。背景画像必須+暗めフィルター。会社情報など下層ページ向け。",
+      "recommendedFor": ["subpage", "corporate"],
+      "elements": {
+        "headings": {"h1": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {"background": 1}
+      },
+      "attributes": {}
+    },
+    "wdl/fv-7": {
+      "sampleFile": "fv-7.php",
+      "category": "firstview",
+      "tier": "free",
+      "label": "ファーストビュー — 動画背景（Vimeo）+テキスト+CTA",
+      "description": "背景にVimeo動画を自動再生。中央にサブタイトル+メインタイトル+説明文+CTAボタン。動画背景のインパクトあるFV。",
+      "recommendedFor": ["top", "lp"],
+      "elements": {
+        "headings": {"h1": 1},
+        "paragraphs": 1,
+        "buttons": 1,
+        "images": {}
+      },
+      "attributes": {
+        "videoType": {"type": "select", "options": ["vimeo"], "description": "動画タイプ"},
+        "vimeoId": {"type": "text", "description": "VimeoのビデオID"}
+      }
+    },
+    "wdl/paid-block-fv-8": {
+      "sampleFile": "fv-8.php",
+      "category": "firstview",
+      "tier": "paid",
+      "label": "ファーストビュー — 業種特化型（左テキスト+右画像+特徴バッジ）",
+      "description": "左にh2メインタイトル+リード文+特徴リスト（3つのバッジ）+補足テキスト、右に人物画像+満足度ポイント表示。水回り・修理系など業種特化型LP向け。",
+      "recommendedFor": ["lp", "service"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 2,
+        "buttons": 0,
+        "images": {"main": 1},
+        "lists": {"ul": 1}
+      },
+      "attributes": {
+        "mainTitle": {"type": "richtext", "description": "メインタイトル（HTML対応）"},
+        "leadText": {"type": "richtext", "description": "リード文（HTML対応）"}
+      }
+    },
+    "wdl/paid-block-fv-9": {
+      "sampleFile": "fv-9.php",
+      "category": "firstview",
+      "tier": "paid",
+      "label": "ファーストビュー — 画像スライドショー（Swiper）",
+      "description": "Swiperを使った全画面フェードスライドショー。複数の背景画像を自動切り替え。ページネーション+ナビゲーション付き。",
+      "recommendedFor": ["top"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {"slide": 2}
+      },
+      "attributes": {
+        "blockId": {"type": "text", "description": "ブロック一意ID（自動生成）"}
+      }
+    },
+    "wdl/paid-block-fv-10": {
+      "sampleFile": "fv-10.php",
+      "category": "firstview",
+      "tier": "paid",
+      "label": "ファーストビュー — シンプルページタイトル（かわいい系）",
+      "description": "中央にh1ページタイトル。内側にボーダー付き装飾パネル。パステルカラーの背景。女性向け・可愛い系の下層ページ向け。",
+      "recommendedFor": ["subpage"],
+      "elements": {
+        "headings": {"h1": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-fv-11": {
+      "sampleFile": "fv-11.php",
+      "category": "firstview",
+      "tier": "paid",
+      "label": "ファーストビュー — スライド背景+中央テキスト+CTA",
+      "description": "Swiperフェードスライド背景の上に、中央配置のサブタイトル+メインタイトル+説明文+CTAボタン。高級感のあるFV。",
+      "recommendedFor": ["top", "lp"],
+      "elements": {
+        "headings": {"h1": 1},
+        "paragraphs": 1,
+        "buttons": 1,
+        "images": {"slide": 2}
+      },
+      "attributes": {
+        "blockId": {"type": "text", "description": "ブロック一意ID"}
+      }
+    },
+    "wdl/paid-block-fv-12": {
+      "sampleFile": "fv-12.php",
+      "category": "firstview",
+      "tier": "paid",
+      "label": "ファーストビュー — ヘッダーナビ内蔵+NEWS+CTA2つ",
+      "description": "FV内にヘッダーナビゲーション（ドロワーメニュー対応）+h2キャッチ+CTA2つ+NEWSティッカー。背景画像+フィルター。1ページ完結型サイト向け。",
+      "recommendedFor": ["top", "one-page"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 0,
+        "buttons": 2,
+        "images": {"background": 1},
+        "navigation": true,
+        "newsTicker": true
+      },
+      "attributes": {
+        "navMenuId": {"type": "number", "description": "WordPressナビメニューID"},
+        "navMenuItems": {"type": "array", "description": "メニュー項目配列"}
+      }
+    },
+    "wdl/lw-pr-fv-13": {
+      "sampleFile": "fv-13.php",
+      "category": "firstview",
+      "tier": "premium",
+      "label": "ファーストビュー — 左テキスト+右画像+CTA（モダン）",
+      "description": "左にh2メインタイトル（インラインカラー対応）+説明文+CTAボタン、右に背景画像。CSS変数で全色カスタマイズ可能。モダンなトップページ向け。",
+      "recommendedFor": ["top", "lp"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 1,
+        "buttons": 1,
+        "images": {"background": 1}
+      },
+      "attributes": {
+        "mainTitle": {"type": "richtext", "description": "メインタイトル（HTML・mark対応）"},
+        "description": {"type": "richtext", "description": "説明文"},
+        "filterColor": {"type": "color", "description": "画像フィルターカラー"},
+        "ctaBgColor": {"type": "color", "description": "CTAボタン背景色"}
+      }
+    },
+    "wdl/lw-pr-fv-14": {
+      "sampleFile": "fv-14.php",
+      "category": "firstview",
+      "tier": "premium",
+      "label": "ファーストビュー — ヘッダーナビ内蔵+リードテキスト+CTA2つ+動画対応",
+      "description": "FV内ヘッダーナビ+リードテキスト+h2キャッチ+説明文+CTA2つ。背景画像または動画対応。100vh全画面。コーポレート・LP向け。",
+      "recommendedFor": ["top", "lp", "corporate"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 2,
+        "buttons": 2,
+        "images": {"background": 1},
+        "navigation": true
+      },
+      "attributes": {
+        "bgFilterOpacity": {"type": "number", "description": "背景フィルター透明度"}
+      }
+    },
+    "wdl/lw-pr-fv-15": {
+      "sampleFile": "fv-15.php",
+      "category": "firstview",
+      "tier": "premium",
+      "label": "ファーストビュー — 左テキスト+右画像+CTA（フォント選択可）",
+      "description": "左にh2キャッチ+説明文+CTAボタン、右に背景画像。フォント選択・ストローク装飾・全色CSS変数カスタマイズ対応。",
+      "recommendedFor": ["top", "lp"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 1,
+        "buttons": 1,
+        "images": {"background": 1}
+      },
+      "attributes": {
+        "mainTitle": {"type": "richtext", "description": "メインキャッチフレーズ"},
+        "description": {"type": "richtext", "description": "説明文"},
+        "bgColor": {"type": "color", "description": "全体背景色"},
+        "filterColor": {"type": "color", "description": "画像フィルター色"},
+        "titleFont": {"type": "font", "description": "タイトルフォント"},
+        "buttonText": {"type": "text", "description": "CTAボタンテキスト"},
+        "ctaBgColor": {"type": "color", "description": "CTAボタン背景色"},
+        "ctaBorderRadius": {"type": "number", "description": "CTAボタン角丸px"}
+      }
+    },
+    "wdl/lw-pr-fv-16": {
+      "sampleFile": "fv-16.php",
+      "category": "firstview",
+      "tier": "premium",
+      "label": "ファーストビュー — 全画面中央テキスト+CTA+背景画像（万能型）",
+      "description": "ヘッダー高さを考慮した100vh。中央にh2メインタイトル+説明文+CTAボタン。背景画像+内側フィルター。CSS変数で全てカスタマイズ可能な万能型FV。",
+      "recommendedFor": ["top", "lp"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 1,
+        "buttons": 1,
+        "images": {"background": 1}
+      },
+      "attributes": {}
+    },
+    "wdl/cta-1": {
+      "sampleFile": "cta-1.php",
+      "category": "cta",
+      "tier": "free",
+      "label": "CTA — 中央テキスト+ボタン+背景画像",
+      "description": "h2見出し+説明テキスト+CTAボタン1つ。背景画像+カラーフィルター。基本的なCTAセクション。",
+      "recommendedFor": ["lp", "service", "corporate"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 1,
+        "buttons": 1,
+        "images": {"background": 1}
+      },
+      "attributes": {}
+    },
+    "wdl/cta-2": {
+      "sampleFile": "cta-2.php",
+      "category": "cta",
+      "tier": "free",
+      "label": "CTA — 電話番号+メールボタン+住所+背景画像",
+      "description": "h2見出し+住所テキスト+電話番号リンク（大きな数字表示）+メールボタン。背景画像+フィルター。お問い合わせ誘導に最適。",
+      "recommendedFor": ["corporate", "clinic", "shop"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 1,
+        "buttons": 2,
+        "images": {"background": 1}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-cta-3": {
+      "sampleFile": "lw-block-cta-3.php",
+      "category": "cta",
+      "tier": "paid",
+      "label": "CTA — 電話番号+画像+特徴バッジ（業種特化型）",
+      "description": "h2タイトル+リード文+特徴バッジ3つ+大きな電話番号表示+右に画像。全体がtelリンク。「タップして電話」テキスト付き。買取・修理系LP向け。",
+      "recommendedFor": ["lp", "service"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 1,
+        "buttons": 0,
+        "images": {"main": 1},
+        "lists": {"ul": 1}
+      },
+      "attributes": {
+        "leadText": {"type": "richtext", "description": "リード文"},
+        "bgColor": {"type": "color", "description": "背景色"}
+      }
+    },
+    "wdl/paid-block-cta-4": {
+      "sampleFile": "lw-block-cta-4.php",
+      "category": "cta",
+      "tier": "paid",
+      "label": "CTA — 2カラム対比CTA（背景画像+ボタン各1）",
+      "description": "2カラムで左右に異なるCTA。各カラムにh2英字タイトル+日本語サブ+説明文+ボタン+背景画像+カラーフィルター。求人+加盟店など2つの導線に最適。",
+      "recommendedFor": ["corporate", "lp"],
+      "elements": {
+        "headings": {"h2": 2},
+        "paragraphs": 2,
+        "buttons": 2,
+        "images": {"background": 2}
+      },
+      "attributes": {}
+    },
+    "wdl/custom-title-1": {
+      "sampleFile": "custom-title-1.php",
+      "category": "title",
+      "tier": "free",
+      "label": "タイトル — 中央揃え（メイン+サブ）",
+      "description": "中央揃えのh2見出し。メインタイトル+サブタイトルの2段構成。シンプルで汎用的。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/custom-title-2": {
+      "sampleFile": "custom-title-2.php",
+      "category": "title",
+      "tier": "free",
+      "label": "タイトル — 左揃え（英字メイン+サブ）",
+      "description": "左揃えのh2見出し。英字メインタイトル+英字サブタイトル。モダンなセクション区切り向け。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/custom-title-3": {
+      "sampleFile": "custom-title-3.php",
+      "category": "title",
+      "tier": "free",
+      "label": "タイトル — 左揃え英字+アクセントライン+日本語説明",
+      "description": "左揃えh2。英字大見出し+メインカラーのアクセントライン+日本語の説明テキスト。モダンデザイン。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/custom-title-4": {
+      "sampleFile": "custom-title-4.php",
+      "category": "title",
+      "tier": "free",
+      "label": "タイトル — 中央揃え（サブ上+メイン下）",
+      "description": "中央揃えのh2見出し。サブタイトルが上、メインタイトルが下の2段構成。custom-title-1の逆順。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/custom-title-5": {
+      "sampleFile": "custom-title-5.php",
+      "category": "title",
+      "tier": "free",
+      "label": "タイトル — 中央揃え+下線ボーダー",
+      "description": "中央揃えh2。日本語サブタイトル（メインカラー）+英字メインタイトル+メインカラーの下線ボーダー。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/custom-title-6": {
+      "sampleFile": "custom-title-6.php",
+      "category": "title",
+      "tier": "free",
+      "label": "タイトル — 左ボーダー飾り付き",
+      "description": "h2見出し。英字タイトル+左側にメインカラーの縦ボーダー飾り。シンプルでビジネス系向け。",
+      "recommendedFor": ["any", "corporate"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-custom-title-7": {
+      "sampleFile": "custom-title-7.php",
+      "category": "title",
+      "tier": "paid",
+      "label": "タイトル — サブ+メイン+グラデーション下線ボーダー（中央）",
+      "description": "中央揃えh2。サブタイトル（メインカラー）+メインタイトル+2色グラデーションの下線ボーダー。サイズ選択（S/M/L）可能。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {
+        "sizeClass": {"type": "select", "options": ["size_s", "size_m", "size_l"], "description": "サイズ"}
+      }
+    },
+    "wdl/paid-block-custom-title-8": {
+      "sampleFile": "custom-title-8.php",
+      "category": "title",
+      "tier": "paid",
+      "label": "タイトル — サブ+メイン+グラデーション下線ボーダー（左揃え）",
+      "description": "左揃えh2。サブタイトル+メインタイトル+グラデーション下線ボーダー（左から右にフェード）。custom-title-7の左揃え版。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-custom-title-9": {
+      "sampleFile": "custom-title-9.php",
+      "category": "title",
+      "tier": "paid",
+      "label": "タイトル — サブ+メイン+縦グラデーションライン",
+      "description": "h2見出し。サブタイトル+メインタイトル+縦方向のグラデーションライン装飾。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-custom-title-10": {
+      "sampleFile": "custom-title-10.php",
+      "category": "title",
+      "tier": "paid",
+      "label": "タイトル — アイコン画像付き+サブ+メイン+下線",
+      "description": "中央揃えh2。左にアイコン画像+サブタイトル+メインタイトル+メインカラー下線。アイコンで視覚的にカテゴリを示せる。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {"icon": 1}
+      },
+      "attributes": {
+        "sizeClass": {"type": "select", "options": ["size_s", "size_m", "size_l"], "description": "サイズ"}
+      }
+    },
+    "wdl/lw-pr-custom-title-11": {
+      "sampleFile": "custom-title-11.php",
+      "category": "title",
+      "tier": "premium",
+      "label": "タイトル — カラー帯付き（サブ+メイン）",
+      "description": "h2見出し。メインカラー帯の上にサブタイトル+メインタイトル。帯の色・角丸をカスタマイズ可能。バリエーション: サブなし版あり。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {
+        "colorMain": {"type": "color", "description": "メインカラー"},
+        "borderRadius": {"type": "number", "description": "角丸px"}
+      }
+    },
+    "wdl/lw-pr-custom-title-12": {
+      "sampleFile": "custom-title-12.php",
+      "category": "title",
+      "tier": "premium",
+      "label": "タイトル — メイン上+サブ下（2色ライン装飾）",
+      "description": "h2見出し。メインタイトル（太ライン装飾）+サブタイトル。メイン色・サブ色を個別設定可能。順序反転・最大幅指定対応。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {
+        "colorMain": {"type": "color", "description": "メインカラー"},
+        "colorSub": {"type": "color", "description": "サブカラー"},
+        "orderReversed": {"type": "boolean", "description": "順序反転"},
+        "maxWidth": {"type": "number", "description": "最大幅px"}
+      }
+    },
+    "wdl/lw-pr-custom-title-13": {
+      "sampleFile": "custom-title-13.php",
+      "category": "title",
+      "tier": "premium",
+      "label": "タイトル — サブ+メイン+左右装飾ライン",
+      "description": "h2見出し。サブタイトル+メインタイトル+左右に装飾ライン。順序反転・最大幅・メインカラー設定可能。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {
+        "colorMain": {"type": "color", "description": "メインカラー"},
+        "orderReversed": {"type": "boolean", "description": "順序反転"},
+        "maxWidth": {"type": "number", "description": "最大幅px"}
+      }
+    },
+    "wdl/lw-pr-custom-title-14": {
+      "sampleFile": "custom-title-14.php",
+      "category": "title",
+      "tier": "premium",
+      "label": "タイトル — ラベル付きサブ+メイン（背景帯）",
+      "description": "h2見出し。サブタイトルがラベル背景帯付き+メインタイトル。色・角丸・配置（左/右）カスタマイズ可能。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {}
+      },
+      "attributes": {
+        "mainTitle": {"type": "text", "description": "メインタイトル"},
+        "colorMain": {"type": "color", "description": "メインカラー"},
+        "alignmentPc": {"type": "select", "options": ["left", "center", "right"], "description": "PC配置"}
+      }
+    },
+    "wdl/lw-banner-info-01": {
+      "sampleFile": "lw-banner-info-01.php",
+      "category": "banner",
+      "tier": "free",
+      "label": "バナー — 3カラム画像+タイトル+説明文",
+      "description": "3カラム。各カラムに画像+h3タイトル+説明テキスト+暗めフィルター。画像の上にテキストをオーバーレイ。サービス一覧に最適。見出しなしブロック。",
+      "recommendedFor": ["service", "top"],
+      "elements": {
+        "headings": {"h3": 3},
+        "paragraphs": 3,
+        "buttons": 0,
+        "images": {"card": 3}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-banner-info-02": {
+      "sampleFile": "lw-banner-info-02.php",
+      "category": "banner",
+      "tier": "free",
+      "label": "バナー — 4カラム画像+タイトル+説明文",
+      "description": "4カラム。各カラムに画像+h3タイトル+説明テキスト+暗めフィルター。banner-info-01の4カラム版。見出しなしブロック。",
+      "recommendedFor": ["service", "top"],
+      "elements": {
+        "headings": {"h3": 4},
+        "paragraphs": 4,
+        "buttons": 0,
+        "images": {"card": 4}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-banner-info-03": {
+      "sampleFile": "lw-banner-info-03.php",
+      "category": "banner",
+      "tier": "free",
+      "label": "バナー — 3カラム画像+テキスト（max800px）",
+      "description": "3カラム、最大幅800px。各カラムに画像+h3タイトル+短い説明テキスト。コンパクトなバナー。見出しなしブロック。",
+      "recommendedFor": ["service", "top"],
+      "elements": {
+        "headings": {"h3": 3},
+        "paragraphs": 3,
+        "buttons": 0,
+        "images": {"card": 3}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-banner-info-04": {
+      "sampleFile": "lw-banner-info-04.php",
+      "category": "banner",
+      "tier": "free",
+      "label": "バナー — 4カラム画像+テキスト（太字タイトル）",
+      "description": "4カラム、最大幅800px。各カラムに画像+h3太字タイトル+短い説明テキスト。見出しなしブロック。",
+      "recommendedFor": ["service", "top"],
+      "elements": {
+        "headings": {"h3": 4},
+        "paragraphs": 4,
+        "buttons": 0,
+        "images": {"card": 4}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-banner-info-05": {
+      "sampleFile": "lw-banner-info-05.php",
+      "category": "banner",
+      "tier": "free",
+      "label": "バナー — 2×2カラム画像+テキスト（中央寄せ）",
+      "description": "2カラム×2行（計4枚）。各カラムに画像+h3太字タイトル+短い説明テキスト（中央寄せ）。ギャラリー・サービス一覧向け。見出しなしブロック。",
+      "recommendedFor": ["service", "gallery"],
+      "elements": {
+        "headings": {"h3": 4},
+        "paragraphs": 4,
+        "buttons": 0,
+        "images": {"card": 4}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-before-after-1": {
+      "sampleFile": "lw-block-before-after-1.php",
+      "category": "before-after",
+      "tier": "paid",
+      "label": "ビフォーアフター — 左右2枚並べ+矢印",
+      "description": "Before画像とAfter画像を左右に並べて比較。中央に矢印アイコン。Before/Afterテキストラベル付き。施術前後の比較に。見出しなしブロック。",
+      "recommendedFor": ["clinic", "beauty", "service"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {"comparison": 2}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-before-after-2": {
+      "sampleFile": "lw-block-before-after-2.php",
+      "category": "before-after",
+      "tier": "paid",
+      "label": "ビフォーアフター — スライダー比較（線を動かして比較）",
+      "description": "1枚の画像上にスライダーラインがあり、左右にドラッグしてBefore/Afterを比較。タッチ対応。ラベル付き。見出しなしブロック。",
+      "recommendedFor": ["clinic", "beauty", "renovation"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {"comparison": 2}
+      },
+      "attributes": {
+        "items": {"type": "array", "description": "Before/After画像URL配列"}
+      }
+    },
+    "wdl/paid-block-contact-2": {
+      "sampleFile": "lw-block-contact-2.php",
+      "category": "contact",
+      "tier": "paid",
+      "label": "お問い合わせフォーム — タイトル+説明+フォーム+背景画像",
+      "description": "h1英字タイトル+日本語サブ+説明文+LiteWordメールフォーム（ショートコード）。背景画像+カラーフィルター。ページ全体のお問い合わせセクション向け。",
+      "recommendedFor": ["contact", "corporate"],
+      "elements": {
+        "headings": {"h1": 1},
+        "paragraphs": 1,
+        "buttons": 0,
+        "images": {"background": 1},
+        "forms": 1
+      },
+      "attributes": {
+        "descriptionAlignSP": {"type": "select", "options": ["sp_left", "sp_center"], "description": "SP時の説明文配置"}
+      }
+    },
+    "wdl/lw-contact-3": {
+      "sampleFile": "lw-block-contact-3.php",
+      "category": "contact",
+      "tier": "free",
+      "label": "お問い合わせフォーム — シンプルフォーム（カラーカスタマイズ）",
+      "description": "LiteWordメールフォームのみ表示。ラベル色・入力欄背景色・ボタン色・必須バッジ色をCSS変数でカスタマイズ可能。見出しなしブロック。",
+      "recommendedFor": ["contact"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {},
+        "forms": 1
+      },
+      "attributes": {
+        "formId": {"type": "number", "description": "メールフォームID"},
+        "maxWidth": {"type": "number", "description": "最大幅px"},
+        "labelColor": {"type": "color", "description": "ラベル色"},
+        "inputBgColor": {"type": "color", "description": "入力欄背景色"},
+        "buttonBgColor": {"type": "color", "description": "送信ボタン色"}
+      }
+    },
+    "wdl/lw-button-01": {
+      "sampleFile": "lw-button-1.php",
+      "category": "button",
+      "tier": "free",
+      "label": "ボタン — シンプル塗りつぶし（中央配置）",
+      "description": "基本の塗りつぶしボタン。テキスト+背景色+角丸+ボーダー設定可能。中央配置。サイズ中。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 1,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-button-02": {
+      "sampleFile": "lw-button-2.php",
+      "category": "button",
+      "tier": "free",
+      "label": "ボタン — 矢印アイコン付き（メインカラー背景）",
+      "description": "テキスト+右矢印アイコン+メインカラー背景。ボーダー設定可能。フォント選択対応。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 1,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-button-03": {
+      "sampleFile": "lw-button-3.php",
+      "category": "button",
+      "tier": "free",
+      "label": "ボタン — サブテキスト+アイコン+メインテキスト（大型CTA）",
+      "description": "上にサブテキスト（メインカラー）+メールアイコン+メインテキスト。大きめのCTAボタン。資料ダウンロード等に。",
+      "recommendedFor": ["cta", "lp"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 1,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-lw-button-4": {
+      "sampleFile": "lw-button-4.php",
+      "category": "button",
+      "tier": "paid",
+      "label": "ボタン — 丸型+内側ボーダー+矢印（中型）",
+      "description": "角丸ボタン+右矢印アイコン+内側ボーダー装飾。メインカラー背景。サイズM/L選択可能。中央配置。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 1,
+        "images": {}
+      },
+      "attributes": {
+        "blockId": {"type": "text", "description": "ブロック一意ID"}
+      }
+    },
+    "wdl/paid-block-lw-button-5": {
+      "sampleFile": "lw-button-5.php",
+      "category": "button",
+      "tier": "paid",
+      "label": "ボタン — 複数ボタンセット（LINE・電話・資料請求など）",
+      "description": "最大3つのボタンを横並び表示。各ボタンにアイコン+メインテキスト+サブテキスト。ボタンごとに色・アイコン・有効/無効を設定可能。LINE・電話・資料請求の複合CTAに最適。",
+      "recommendedFor": ["cta", "lp", "service"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 3,
+        "images": {}
+      },
+      "attributes": {
+        "blockId": {"type": "text", "description": "ブロック一意ID"},
+        "buttons": {"type": "array", "description": "ボタン配列（最大3つ、各ボタンにbtnText/subText/bgColor/icon等）"},
+        "gapX": {"type": "number", "description": "ボタン間の横間隔px"},
+        "borderRadius": {"type": "number", "description": "ボタン角丸px"}
+      }
+    },
+    "wdl/lw-pr-button-1": {
+      "sampleFile": "lw-pr-button-1.php",
+      "category": "button",
+      "tier": "premium",
+      "label": "ボタン — 吹き出しサブテキスト+メイン+矢印（大型CTA）",
+      "description": "上に吹き出し風サブテキスト+メインボタンテキスト+右矢印。シェイクアニメーション対応。アイコン設定可能。影・ボーダー・角丸カスタマイズ。",
+      "recommendedFor": ["cta", "lp"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 1,
+        "images": {}
+      },
+      "attributes": {
+        "textMain": {"type": "text", "description": "メインテキスト"},
+        "bgColor": {"type": "color", "description": "背景色"},
+        "bgColorHover": {"type": "color", "description": "ホバー背景色"},
+        "iconMain": {"type": "svg", "description": "メインアイコンSVG"},
+        "shakeAnimation": {"type": "boolean", "description": "揺れアニメーション有効"}
+      }
+    },
+    "wdl/lw-pr-button-2": {
+      "sampleFile": "lw-pr-button-2.php",
+      "category": "button",
+      "tier": "premium",
+      "label": "ボタン — 上サブテキスト+角丸ボタン（グラデーション対応）",
+      "description": "ボタン上にサブテキスト（＼テキスト／形式）+メインボタン。グラデーション背景対応。シェイクアニメーション・右矢印アイコン対応。",
+      "recommendedFor": ["cta", "lp"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 1,
+        "images": {}
+      },
+      "attributes": {
+        "bgGradient": {"type": "gradient", "description": "背景グラデーション"},
+        "bgGradientHover": {"type": "gradient", "description": "ホバーグラデーション"},
+        "borderRadius": {"type": "number", "description": "角丸px"},
+        "shakeAnimation": {"type": "boolean", "description": "揺れアニメーション"}
+      }
+    },
+    "wdl/lw-pr-button-3": {
+      "sampleFile": "lw-pr-button-3.php",
+      "category": "button",
+      "tier": "premium",
+      "label": "ボタン — 大型CTA（アイコン+サブ+メイン、グラデーション対応）",
+      "description": "大型CTAボタン。上にサブテキスト+左にアイコン+メインテキスト。グラデーション背景対応。シェイクアニメーション対応。資料ダウンロードに最適。",
+      "recommendedFor": ["cta", "lp"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 1,
+        "images": {}
+      },
+      "attributes": {
+        "bgColor": {"type": "gradient", "description": "背景色/グラデーション"},
+        "bgColorHover": {"type": "gradient", "description": "ホバー背景色"},
+        "borderRadius": {"type": "number", "description": "角丸px"},
+        "shakeAnimation": {"type": "boolean", "description": "揺れアニメーション"}
+      }
+    },
+    "wdl/lw-pr-button-4": {
+      "sampleFile": "lw-pr-button-4.php",
+      "category": "button",
+      "tier": "premium",
+      "label": "ボタン — 大型電話番号CTA（アイコン+番号+受付時間）",
+      "description": "大型電話番号CTAボタン。電話アイコン+大きな電話番号+下に受付時間テキスト。tel:リンク。グラデーション背景対応。シェイクアニメーション対応。",
+      "recommendedFor": ["cta", "clinic", "shop"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 1,
+        "images": {}
+      },
+      "attributes": {
+        "bgColor": {"type": "gradient", "description": "背景色/グラデーション"},
+        "bgColorHover": {"type": "gradient", "description": "ホバー背景色"},
+        "borderRadius": {"type": "number", "description": "角丸px"},
+        "iconMain": {"type": "svg", "description": "アイコンSVG"},
+        "shakeAnimation": {"type": "boolean", "description": "揺れアニメーション"}
+      }
+    },
+    "wdl/lw-pr-button-5": {
+      "sampleFile": "lw-pr-button-5.php",
+      "category": "button",
+      "tier": "premium",
+      "label": "ボタン — 小型CTA（アイコン+テキスト）",
+      "description": "小型CTAボタン。左にアイコン+テキスト。コンパクトなサイズ。色・角丸・シェイクアニメーション設定可能。インライン使用向け。",
+      "recommendedFor": ["any"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 1,
+        "images": {}
+      },
+      "attributes": {
+        "bgColor": {"type": "color", "description": "背景色"},
+        "bgColorHover": {"type": "color", "description": "ホバー背景色"},
+        "borderRadius": {"type": "number", "description": "角丸px"},
+        "iconMain": {"type": "svg", "description": "アイコンSVG"}
+      }
+    },
+    "wdl/lw-comment-1": {
+      "sampleFile": "lw-comment-1.php",
+      "category": "content",
+      "tier": "free",
+      "label": "コメント — 吹き出し形式（画像+名前+テキスト）",
+      "description": "左に人物画像+名前、右に吹き出し形式のコメントテキスト。代表者コメントやお客様の声の個別表示に。左右切り替え可能。",
+      "recommendedFor": ["voice", "message", "any"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 1,
+        "buttons": 0,
+        "images": {"avatar": 1}
+      },
+      "attributes": {
+        "title": {"type": "richtext", "description": "コメントテキスト"},
+        "imageUrl": {"type": "image", "description": "人物画像URL"}
+      }
+    },
+    "wdl/lw-company-1": {
+      "sampleFile": "lw-company-1.php",
+      "category": "company",
+      "tier": "free",
+      "label": "会社概要 — シンプルテーブル（dt/dd形式）",
+      "description": "dl/dt/dd形式のシンプルなテーブル。項目名+内容の2カラム。ボーダー区切り。フォント・色カスタマイズ可能。見出しなしブロック。",
+      "recommendedFor": ["corporate", "about"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {},
+        "tables": {"rows": 11}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-company-2": {
+      "sampleFile": "lw-company-2.php",
+      "category": "company",
+      "tier": "free",
+      "label": "会社概要 — 背景色付きテーブル（左項目名に背景色）",
+      "description": "項目名に背景色+内容のテーブル形式。ボーダーで囲まれたデザイン。フォント・色・ボーダー色カスタマイズ可能。見出しなしブロック。",
+      "recommendedFor": ["corporate", "about"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {},
+        "tables": {"rows": 4}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-lw-company-3": {
+      "sampleFile": "lw-company-3.php",
+      "category": "company",
+      "tier": "paid",
+      "label": "会社概要 — 矢印デザインテーブル（メインカラー項目名+矢印）",
+      "description": "項目名がメインカラー背景+矢印デザイン+内容。モダンなデザインの会社概要テーブル。見出しなしブロック。",
+      "recommendedFor": ["corporate", "about"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {},
+        "tables": {"rows": 4}
+      },
+      "attributes": {
+        "dtWidthClass": {"type": "select", "options": ["dt_width_s", "dt_width_m", "dt_width_l"], "description": "項目名の幅"}
+      }
+    },
+    "wdl/lw-content-1": {
+      "sampleFile": "lw-content-1.php",
+      "category": "content",
+      "tier": "free",
+      "label": "コンテンツ — 画像+テキスト+ボタン（2カラム横並び）",
+      "description": "左に画像+右にh3タイトル+説明文+「詳細はこちら」ボタン。左右切り替え可能。サービス紹介・特徴説明に。",
+      "recommendedFor": ["service", "features", "any"],
+      "elements": {
+        "headings": {"h3": 1},
+        "paragraphs": 1,
+        "buttons": 1,
+        "images": {"main": 1}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-content-2": {
+      "sampleFile": "lw-content-2.php",
+      "category": "content",
+      "tier": "free",
+      "label": "コンテンツ — 3カラムカード（画像+テキスト+ボタン）",
+      "description": "3カラムのカード。各カードに画像+説明テキスト+「詳細はこちら」リンクボタン。サービス一覧に最適。",
+      "recommendedFor": ["service", "features"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 3,
+        "buttons": 3,
+        "images": {"card": 3}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-content-3": {
+      "sampleFile": "lw-content-3.php",
+      "category": "content",
+      "tier": "paid",
+      "label": "コンテンツ — 画像+サブ+タイトル+説明文+ボタン（2カラム装飾付き）",
+      "description": "左に画像+右に英字サブタイトル+h3メインタイトル+アクセントライン+説明文+MOREボタン。左右切り替え可能。サービス詳細紹介に。",
+      "recommendedFor": ["service", "features", "about"],
+      "elements": {
+        "headings": {"h3": 1},
+        "paragraphs": 1,
+        "buttons": 1,
+        "images": {"main": 1}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-content-4": {
+      "sampleFile": "lw-content-4.php",
+      "category": "content",
+      "tier": "paid",
+      "label": "コンテンツ — テキスト+8枚ギャラリーグリッド",
+      "description": "左にh2英字タイトル+サブテキスト+説明文+CTAボタン。右に8枚の画像をグリッド表示。ポートフォリオ・施工事例向け。",
+      "recommendedFor": ["gallery", "portfolio", "service"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 1,
+        "buttons": 1,
+        "images": {"gallery": 8}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-content-5": {
+      "sampleFile": "lw-content-5.php",
+      "category": "content",
+      "tier": "paid",
+      "label": "コンテンツ — 画像+タイトル+2段組テキスト（マガジン風）",
+      "description": "大きな画像+h2タイトルオーバーレイ+2段組（column-count:2）の本文テキスト。マガジン・メディア風のレイアウト。",
+      "recommendedFor": ["about", "blog", "magazine"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 1,
+        "buttons": 0,
+        "images": {"main": 1}
+      },
+      "attributes": {
+        "pcTitle": {"type": "richtext", "description": "PCタイトル（HTML対応）"},
+        "pcBody": {"type": "richtext", "description": "PC本文テキスト"}
+      }
+    },
+    "wdl/paid-block-content-6": {
+      "sampleFile": "lw-content-6.php",
+      "category": "content",
+      "tier": "paid",
+      "label": "コンテンツ — 画像+テキスト+ボタン（シンプル2カラム）",
+      "description": "左に大きな画像+右にテキスト+Learn Moreボタン。シンプルな2カラムレイアウト。",
+      "recommendedFor": ["about", "service", "any"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 1,
+        "buttons": 1,
+        "images": {"main": 1}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-content-7": {
+      "sampleFile": "lw-content-7.php",
+      "category": "content",
+      "tier": "paid",
+      "label": "コンテンツ — 3カラムカード（画像オーバーレイタイトル+説明文）",
+      "description": "3カラムのカード。各カードに画像（下部にh3タイトルオーバーレイ+メインカラーボーダー）+説明テキスト。特徴紹介・強み訴求に。見出しなしブロック。",
+      "recommendedFor": ["features", "service"],
+      "elements": {
+        "headings": {"h3": 3},
+        "paragraphs": 3,
+        "buttons": 0,
+        "images": {"card": 3}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-content-8": {
+      "sampleFile": "lw-content-8.php",
+      "category": "content",
+      "tier": "free",
+      "label": "コンテンツ — 3カラムカード（ボーダー枠+サブ+タイトル+説明+ボタン）",
+      "description": "3カラムのボーダー付きカード。各カードにサブタイトルバッジ+h3タイトル+ボーダー区切り+説明文+CTAボタン。プラン比較・サービス紹介に。見出しなしブロック。",
+      "recommendedFor": ["service", "price", "features"],
+      "elements": {
+        "headings": {"h3": 3},
+        "paragraphs": 3,
+        "buttons": 3,
+        "images": {}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-gallery-01": {
+      "sampleFile": "lw-gallery-01.php",
+      "category": "gallery",
+      "tier": "free",
+      "label": "ギャラリー — 3枚グリッド+上下テキスト",
+      "description": "上に説明テキスト+3枚の画像グリッド+下に説明テキスト。最大幅800px。シンプルなギャラリー。見出しなしブロック。",
+      "recommendedFor": ["gallery", "portfolio"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 2,
+        "buttons": 0,
+        "images": {"gallery": 3}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-gallery-02": {
+      "sampleFile": "lw-gallery-02.php",
+      "category": "gallery",
+      "tier": "free",
+      "label": "ギャラリー — 5枚グリッド",
+      "description": "5枚の画像をグリッド表示。テキストなし。シンプルなフォトギャラリー。見出しなしブロック。",
+      "recommendedFor": ["gallery", "portfolio"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {"gallery": 5}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-lw-gallery-3": {
+      "sampleFile": "lw-gallery-3.php",
+      "category": "gallery",
+      "tier": "paid",
+      "label": "ギャラリー — スライドショー（メイン+サムネイル）",
+      "description": "Swiperベースのスライドギャラリー。メイン画像+下にサムネイル一覧。4枚以上設定可能。ナビゲーション矢印付き。見出しなしブロック。",
+      "recommendedFor": ["gallery", "portfolio", "shop"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {"gallery": 5}
+      },
+      "attributes": {
+        "maxWidthPx": {"type": "number", "description": "最大幅px"}
+      }
+    },
+    "wdl/paid-block-history-1": {
+      "sampleFile": "lw-history-1.php",
+      "category": "history",
+      "tier": "paid",
+      "label": "沿革 — タイムライン形式（年+月+テキスト）",
+      "description": "タイムライン形式の沿革表示。年見出し+ドット装飾+月(dt)+内容(dd)のイベント一覧。左にラインが走るデザイン。見出しなしブロック。",
+      "recommendedFor": ["corporate", "about"],
+      "elements": {
+        "headings": {"h3": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {},
+        "tables": {"rows": 4}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-image-1": {
+      "sampleFile": "lw-image-1.php",
+      "category": "content",
+      "tier": "paid",
+      "label": "画像 — ネームプレート付き（スタッフ紹介用）",
+      "description": "画像+下部にネームプレート（肩書+名前）。アスペクト比設定可能。角丸。スタッフ紹介・チーム紹介に最適。",
+      "recommendedFor": ["staff", "team"],
+      "elements": {
+        "headings": {"h3": 1},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {"main": 1}
+      },
+      "attributes": {
+        "namePlateColor": {"type": "color", "description": "ネームプレート背景色"},
+        "fontSizeClass": {"type": "select", "options": ["font_size_s", "font_size_m", "font_size_l"], "description": "フォントサイズ"}
+      }
+    },
+    "wdl/lw-link-list-1": {
+      "sampleFile": "lw-link-list-1.php",
+      "category": "content",
+      "tier": "free",
+      "label": "リンクリスト — アイコン付きボタングリッド（背景画像対応）",
+      "description": "h2タイトル+説明テキスト+2カラムのアイコン付きリンクボタン一覧。背景画像+メインカラーフィルター対応。SNSリンクやサイトマップ向け。",
+      "recommendedFor": ["link", "sns", "footer"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 1,
+        "buttons": 4,
+        "images": {"background": 1}
+      },
+      "attributes": {
+        "titleText": {"type": "richtext", "description": "タイトルテキスト"},
+        "BtnGap": {"type": "number", "description": "ボタン間隔px"}
+      }
+    },
+    "wdl/paid-block-link-2": {
+      "sampleFile": "lw-link-list-2.php",
+      "category": "content",
+      "tier": "paid",
+      "label": "リンクリスト — アイコン+タイトル+説明（背景画像+ダーク）",
+      "description": "h2メインタイトル（アクセントライン付き）+サブ+説明文+アイコン付きリンクカード3つ。暗めの背景画像+フィルター。インフォメーション・サイト案内向け。",
+      "recommendedFor": ["link", "information"],
+      "elements": {
+        "headings": {"h2": 1, "h4": 3},
+        "paragraphs": 4,
+        "buttons": 3,
+        "images": {"background": 1}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-list-1": {
+      "sampleFile": "lw-list-1.php",
+      "category": "list",
+      "tier": "free",
+      "label": "リスト — 番号付きリスト（メインカラー番号バッジ）",
+      "description": "番号付きリスト。各項目にメインカラー背景の番号バッジ+テキスト+メインカラーボーダー。特徴・強みの訴求に。見出しなしブロック。",
+      "recommendedFor": ["features", "service"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 3,
+        "buttons": 0,
+        "images": {},
+        "lists": {"items": 3}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-list-2": {
+      "sampleFile": "lw-list-2.php",
+      "category": "list",
+      "tier": "free",
+      "label": "リスト — チェックアイコン付き+背景カラー+見出し",
+      "description": "h2タイトル+チェックマークアイコン付きリスト。メインカラーフィルター背景。背景画像設定可能。悩み・課題の提示に。",
+      "recommendedFor": ["solution", "problem", "features"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 3,
+        "buttons": 0,
+        "images": {"background": 1},
+        "lists": {"items": 3}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-list-3": {
+      "sampleFile": "lw-list-3.php",
+      "category": "list",
+      "tier": "free",
+      "label": "リスト — チェックアイコン+ボーダー区切り",
+      "description": "メインカラーのチェックアイコン+テキスト。各項目にメインカラーのボーダー区切り。シンプルなチェックリスト。見出しなしブロック。",
+      "recommendedFor": ["features", "service"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 4,
+        "buttons": 0,
+        "images": {},
+        "lists": {"items": 4}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-list-4": {
+      "sampleFile": "lw-list-4.php",
+      "category": "list",
+      "tier": "free",
+      "label": "リスト — チェックボックスアイコン+ボーダー枠",
+      "description": "メインカラーのチェックボックスアイコン+テキスト。全体がメインカラーのボーダー枠で囲まれている。最大幅800px。見出しなしブロック。",
+      "recommendedFor": ["features", "service", "checklist"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 4,
+        "buttons": 0,
+        "images": {},
+        "lists": {"items": 4}
+      },
+      "attributes": {
+        "bgColor": {"type": "color", "description": "背景色"}
+      }
+    },
+    "wdl/lw-message-1": {
+      "sampleFile": "lw-message-1.php",
+      "category": "content",
+      "tier": "free",
+      "label": "メッセージ — 代表挨拶（テキスト+写真+名前）",
+      "description": "左にh3英字サブタイトル+メインタイトル+リード文（メインカラー）+説明文。右に人物写真+肩書+名前。代表挨拶・メッセージに最適。",
+      "recommendedFor": ["about", "corporate", "message"],
+      "elements": {
+        "headings": {"h3": 1},
+        "paragraphs": 2,
+        "buttons": 0,
+        "images": {"avatar": 1}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-news-list-1": {
+      "sampleFile": "lw-news-list-1.php",
+      "category": "news",
+      "tier": "free",
+      "label": "ニュース — 日付+カテゴリ+タイトル一覧",
+      "description": "WordPress REST APIで最新投稿を取得して表示。日付+カテゴリバッジ+タイトル。表示件数・カテゴリ・投稿タイプ設定可能。見出しなしブロック。",
+      "recommendedFor": ["news", "top"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {},
+        "dynamic": true
+      },
+      "attributes": {}
+    },
+    "wdl/lw-post-list-1": {
+      "sampleFile": "lw-post-list-1.php",
+      "category": "news",
+      "tier": "free",
+      "label": "投稿リスト — 3カラムカード（サムネイル+カテゴリ+日付+タイトル+抜粋）",
+      "description": "WordPress REST APIで最新投稿を取得。3カラムのカード形式でサムネイル画像+カテゴリ+日付+タイトル+抜粋テキスト。ブログ一覧向け。見出しなしブロック。",
+      "recommendedFor": ["news", "blog", "top"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {},
+        "dynamic": true
+      },
+      "attributes": {}
+    },
+    "wdl/lw-post-list-2": {
+      "sampleFile": "lw-post-list-2.php",
+      "category": "news",
+      "tier": "free",
+      "label": "投稿リスト — 3カラムカード（背景色バッジ付きカテゴリ）",
+      "description": "WordPress REST APIで最新投稿を取得。3カラムのカード形式。post-list-1と類似だがカテゴリバッジが背景色付き。見出しなしブロック。",
+      "recommendedFor": ["news", "blog", "top"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {},
+        "dynamic": true
+      },
+      "attributes": {}
+    },
+    "wdl/lw-post-list-3": {
+      "sampleFile": "lw-post-list-3.php",
+      "category": "news",
+      "tier": "free",
+      "label": "投稿リスト — 3カラムカード（サムネイル+カテゴリ+タイトルのみ）",
+      "description": "WordPress REST APIで最新投稿を取得。3カラムのカード形式。サムネイル+カテゴリ+日付+タイトル（抜粋なし）。コンパクトな投稿一覧。見出しなしブロック。",
+      "recommendedFor": ["news", "blog", "top"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {},
+        "dynamic": true
+      },
+      "attributes": {}
+    },
+    "wdl/lw-pr-calendar-1": {
+      "sampleFile": "lw-pr-calendar-1.php",
+      "category": "calendar",
+      "tier": "premium",
+      "label": "カレンダー — 週間営業時間テーブル",
+      "description": "週間カレンダーテーブル。曜日ヘッダー+時間帯ごとの営業状況（○/×）。メインカラーのヘッダー背景。クリニック・サロン向け。見出しなしブロック。",
+      "recommendedFor": ["clinic", "salon", "shop"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {},
+        "tables": {"rows": 2, "columns": 8}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-pr-table-1": {
+      "sampleFile": "lw-pr-table-1.php",
+      "category": "table",
+      "tier": "premium",
+      "label": "テーブル — 比較表/料金表（複数カラム対応）",
+      "description": "カスタマイズ可能な比較テーブル。ヘッダー行（各カラム個別背景色対応）+行ヘッダー+データセル。プラン比較・料金比較に最適。見出しなしブロック。",
+      "recommendedFor": ["price", "comparison", "service"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {},
+        "tables": {"rows": 3, "columns": 4}
+      },
+      "attributes": {
+        "radiusSize": {"type": "number", "description": "角丸サイズpx"},
+        "headerBgColor": {"type": "color", "description": "ヘッダー背景色"},
+        "useIndividualHeaderBg": {"type": "boolean", "description": "ヘッダー個別背景色使用"},
+        "headers": {"type": "array", "description": "ヘッダー配列（text, bgColor）"}
+      }
+    },
+    "wdl/lw-qa-1": {
+      "sampleFile": "lw-qa-1.php",
+      "category": "faq",
+      "tier": "free",
+      "label": "FAQ — アコーディオン形式Q&A",
+      "description": "Q（質問）+A（回答）のアコーディオン形式。クリックで回答を開閉。Q/Aラベル+メインカラーのアクセント。8〜15件推奨。見出しなしブロック。",
+      "recommendedFor": ["faq", "service", "any"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 6,
+        "buttons": 0,
+        "images": {},
+        "faq": {"items": 3}
+      },
+      "attributes": {
+        "blockId": {"type": "text", "description": "ブロック一意ID"}
+      }
+    },
+    "wdl/lw-step-1": {
+      "sampleFile": "lw-step-1.php",
+      "category": "step",
+      "tier": "free",
+      "label": "ステップ — 背景色付き縦列ステップ（h2タイトル付き）",
+      "description": "h2見出しタイトル+縦列ステップリスト。各ステップにh3タイトル（メインカラー背景）+説明文+下矢印アイコン。メインカラーの薄い背景。",
+      "recommendedFor": ["step", "flow"],
+      "elements": {
+        "headings": {"h2": 1, "h3": 5},
+        "paragraphs": 5,
+        "buttons": 0,
+        "images": {},
+        "steps": {"items": 5}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-step-2": {
+      "sampleFile": "lw-step-2.php",
+      "category": "step",
+      "tier": "free",
+      "label": "ステップ — ボーダー付き縦列ステップ",
+      "description": "h2タイトルなし。メインカラーのボーダー付き縦列ステップ。各ステップにh3タイトル（メインカラー背景）+説明文+下矢印。見出しなしブロック。",
+      "recommendedFor": ["step", "flow"],
+      "elements": {
+        "headings": {"h3": 5},
+        "paragraphs": 5,
+        "buttons": 0,
+        "images": {},
+        "steps": {"items": 5}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-lw-step-3": {
+      "sampleFile": "lw-step-3.php",
+      "category": "step",
+      "tier": "paid",
+      "label": "ステップ — 番号+タイトル+説明（メインカラー番号バッジ）",
+      "description": "01/02/03の番号バッジ（メインカラー背景）+h3タイトル+説明文。メインカラーのボーダー区切り。見出しなしブロック。",
+      "recommendedFor": ["step", "flow"],
+      "elements": {
+        "headings": {"h3": 3},
+        "paragraphs": 3,
+        "buttons": 0,
+        "images": {},
+        "steps": {"items": 3}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-lw-step-4": {
+      "sampleFile": "lw-step-4.php",
+      "category": "step",
+      "tier": "paid",
+      "label": "ステップ — 番号+タイトル+説明（メインカラー文字番号）",
+      "description": "01/02/03の番号（メインカラー文字）+h3タイトル+説明文。step-3と類似だが番号がテキスト色。見出しなしブロック。",
+      "recommendedFor": ["step", "flow"],
+      "elements": {
+        "headings": {"h3": 3},
+        "paragraphs": 3,
+        "buttons": 0,
+        "images": {},
+        "steps": {"items": 3}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-lw-step-5": {
+      "sampleFile": "lw-step-5.php",
+      "category": "step",
+      "tier": "paid",
+      "label": "ステップ — カード形式（番号バッジ+タイトル+説明、影付き）",
+      "description": "各ステップがカード形式。メインカラー番号バッジ+h3タイトル+説明文。影（box-shadow）付き。見出しなしブロック。",
+      "recommendedFor": ["step", "flow"],
+      "elements": {
+        "headings": {"h3": 3},
+        "paragraphs": 3,
+        "buttons": 0,
+        "images": {},
+        "steps": {"items": 3}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-lw-step-6": {
+      "sampleFile": "lw-step-6.php",
+      "category": "step",
+      "tier": "paid",
+      "label": "ステップ — 番号+画像+タイトル+説明+リンク（カード形式）",
+      "description": "各ステップがカード形式。メインカラー番号バッジ+画像+h3タイトル（メインカラーボーダー付き）+説明文。リンク設定可能。見出しなしブロック。",
+      "recommendedFor": ["step", "flow", "service"],
+      "elements": {
+        "headings": {"h3": 3},
+        "paragraphs": 3,
+        "buttons": 0,
+        "images": {"card": 3},
+        "steps": {"items": 3}
+      },
+      "attributes": {}
+    },
+    "wdl/lw-voice-1": {
+      "sampleFile": "lw-voice-1.php",
+      "category": "voice",
+      "tier": "free",
+      "label": "お客様の声 — シンプルカード（名前バッジ+見出し+テキスト）",
+      "description": "h2「お客様の声」タイトル+カード形式。各カードにメインカラー名前バッジ+h3見出し+短いレビューテキスト。背景色付き。",
+      "recommendedFor": ["voice", "review"],
+      "elements": {
+        "headings": {"h2": 1, "h3": 3},
+        "paragraphs": 3,
+        "buttons": 0,
+        "images": {},
+        "voice": {"items": 3}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-voice-2": {
+      "sampleFile": "lw-voice-2.php",
+      "category": "voice",
+      "tier": "paid",
+      "label": "お客様の声 — 写真付き2カラム（肩書+名前+レビュー）",
+      "description": "h2タイトル+VOICEサブ+説明文。2カラムのカード。各カードに写真+「thank you」装飾+肩書+名前+レビューテキスト。フィルター背景色。",
+      "recommendedFor": ["voice", "review"],
+      "elements": {
+        "headings": {"h2": 1, "h3": 4},
+        "paragraphs": 5,
+        "buttons": 0,
+        "images": {"avatar": 4},
+        "voice": {"items": 4}
+      },
+      "attributes": {
+        "filterColor": {"type": "color", "description": "背景フィルター色"},
+        "voiceThanksFontColor": {"type": "color", "description": "thank you文字色"}
+      }
+    },
+    "wdl/paid-block-voice-3": {
+      "sampleFile": "lw-voice-3.php",
+      "category": "voice",
+      "tier": "paid",
+      "label": "お客様の声 — スライダー+モーダルポップアップ",
+      "description": "Swiperスライダーで3カラムのお客様カード。写真+名前+年代/職業+抜粋。クリックでモーダルポップアップに全文表示。長文レビュー対応。見出しなしブロック。",
+      "recommendedFor": ["voice", "review"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 0,
+        "buttons": 0,
+        "images": {"avatar": 3},
+        "voice": {"items": 3},
+        "dynamic": true
+      },
+      "attributes": {
+        "blockId": {"type": "text", "description": "ブロック一意ID"}
+      }
+    },
+    "wdl/profile-1": {
+      "sampleFile": "profile-1.php",
+      "category": "content",
+      "tier": "free",
+      "label": "プロフィール — 画像+テキスト（2カラム）",
+      "description": "左に画像+右にh2「PROFILE」+プロフィールテキスト（pre-wrap）。背景色付き。個人紹介・自己紹介向け。",
+      "recommendedFor": ["about", "profile", "staff"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 1,
+        "buttons": 0,
+        "images": {"main": 1}
+      },
+      "attributes": {
+        "imageUrl": {"type": "image", "description": "プロフィール画像URL"},
+        "altText": {"type": "text", "description": "画像alt"}
+      }
+    },
+    "wdl/solution-1": {
+      "sampleFile": "solution-1.php",
+      "category": "content",
+      "tier": "free",
+      "label": "ソリューション — 3カラムカード（画像+テキスト、ボーダー丸）",
+      "description": "3カラム。各カードにメインカラーボーダーの丸画像+テキスト。悩みの提示やサービス特徴・スタッフ紹介に。見出しなしブロック。",
+      "recommendedFor": ["solution", "features", "staff"],
+      "elements": {
+        "headings": {},
+        "paragraphs": 3,
+        "buttons": 0,
+        "images": {"card": 3}
+      },
+      "attributes": {}
+    },
+    "wdl/paid-block-solution-2": {
+      "sampleFile": "solution-2.php",
+      "category": "content",
+      "tier": "paid",
+      "label": "ソリューション — ボーダー枠+h2タイトル+アイコンリスト",
+      "description": "メインカラーのボーダー枠内にh2タイトル（メインカラー背景帯）+アイコン画像付きリスト（縦区切り線）。課題・悩みの提示に最適。見出しなしブロック。",
+      "recommendedFor": ["solution", "problem"],
+      "elements": {
+        "headings": {"h2": 1},
+        "paragraphs": 3,
+        "buttons": 0,
+        "images": {"icon": 3},
+        "lists": {"items": 3}
+      },
+      "attributes": {
+        "blockId": {"type": "text", "description": "ブロック一意ID"}
+      }
+    }
+  },
+  "categories": {
+    "firstview": {
+      "label": "ファーストビュー",
+      "description": "ページ先頭のメインビジュアル。h1/h2タイトル+背景画像/動画+CTAボタンが基本構成。",
+      "blockCount": 16
+    },
+    "cta": {
+      "label": "CTA・お問い合わせ誘導",
+      "description": "行動を促すセクション。電話・メール・ボタンでの誘導。",
+      "blockCount": 4
+    },
+    "contact": {
+      "label": "お問い合わせフォーム",
+      "description": "LiteWordメールフォームを埋め込むブロック。",
+      "blockCount": 2
+    },
+    "title": {
+      "label": "タイトル・見出し",
+      "description": "セクションの見出し。中央/左揃え、装飾ライン付きなど多様なスタイル。",
+      "blockCount": 14
+    },
+    "button": {
+      "label": "ボタン",
+      "description": "リンクやアクション用ボタン。シンプルなものから大型CTA、複数ボタンセットまで。",
+      "blockCount": 16
+    },
+    "banner": {
+      "label": "バナー・告知",
+      "description": "画像+テキストのカード形式バナー。サービス一覧等に使用。",
+      "blockCount": 5
+    },
+    "content": {
+      "label": "コンテンツ",
+      "description": "テキスト+画像の組み合わせ。2カラム・3カラム・ギャラリー付きなど。",
+      "blockCount": 14
+    },
+    "list": {
+      "label": "リスト",
+      "description": "番号付き・チェックアイコン付きのリスト。特徴や悩みの列挙に。",
+      "blockCount": 4
+    },
+    "company": {
+      "label": "会社概要・事業者情報",
+      "description": "テーブル形式の会社情報表示。",
+      "blockCount": 3
+    },
+    "step": {
+      "label": "ステップ・流れ",
+      "description": "利用の流れや手順をステップ形式で表示。",
+      "blockCount": 6
+    },
+    "voice": {
+      "label": "お客様の声・レビュー",
+      "description": "顧客の声やレビューをカード・スライダー形式で表示。",
+      "blockCount": 3
+    },
+    "faq": {
+      "label": "よくある質問",
+      "description": "アコーディオン形式のQ&A。",
+      "blockCount": 1
+    },
+    "gallery": {
+      "label": "ギャラリー・写真集",
+      "description": "写真をグリッドまたはスライドで表示。",
+      "blockCount": 3
+    },
+    "news": {
+      "label": "お知らせ・ニュース・投稿一覧",
+      "description": "WordPress投稿をREST APIで動的取得して表示。",
+      "blockCount": 4
+    },
+    "before-after": {
+      "label": "ビフォーアフター",
+      "description": "施術前後の変化を2枚比較またはスライダーで表示。",
+      "blockCount": 2
+    },
+    "history": {
+      "label": "沿革・歴史",
+      "description": "タイムライン形式で歴史を表示。",
+      "blockCount": 1
+    },
+    "calendar": {
+      "label": "カレンダー・スケジュール",
+      "description": "営業日カレンダーやスケジュール表。",
+      "blockCount": 1
+    },
+    "table": {
+      "label": "テーブル・比較表",
+      "description": "料金プラン比較やメニュー表などのテーブル。",
+      "blockCount": 1
+    }
+  },
+  "tierInfo": {
+    "free": {
+      "label": "無料",
+      "description": "LiteWordテーマに標準付属のブロック",
+      "prefix": "なし（fv-*, custom-title-*, lw-*）",
+      "count": 51
+    },
+    "premium": {
+      "label": "プレミアム",
+      "description": "プレミアムプラン限定ブロック",
+      "prefix": "lw-pr-*",
+      "count": 25
+    },
+    "paid": {
+      "label": "有料（単品購入）",
+      "description": "個別購入可能な有料ブロック",
+      "prefix": "paid-block-*, lw-block-*",
+      "count": 31
+    }
+  },
+  "sectionTypeMapping": {
+    "firstview": "firstview",
+    "introduction": "content",
+    "features": "content",
+    "treatment": "content",
+    "service": "content",
+    "solution": "content",
+    "problem": "list",
+    "flow": "step",
+    "step": "step",
+    "voice": "voice",
+    "review": "voice",
+    "testimonial": "voice",
+    "faq": "faq",
+    "question": "faq",
+    "price": "table",
+    "menu": "table",
+    "staff": "content",
+    "team": "content",
+    "profile": "content",
+    "company": "company",
+    "about": "company",
+    "access": "company",
+    "location": "company",
+    "map": "company",
+    "cta": "cta",
+    "contact": "contact",
+    "reservation": "cta",
+    "before_after": "before-after",
+    "gallery": "gallery",
+    "photo": "gallery",
+    "news": "news",
+    "blog": "news",
+    "history": "history",
+    "calendar": "calendar",
+    "button": "button",
+    "title": "title",
+    "banner": "banner",
+    "list": "list"
+  }
+}

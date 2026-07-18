@@ -73,6 +73,12 @@
   align-items: center;
   justify-content: center;
 }
+.lw-list-4 ul.lw-list-4__inner li.lw-list-4__li .icon.position_top {
+  align-items: start;
+}
+.lw-list-4 ul.lw-list-4__inner li.lw-list-4__li .icon.position_top svg, .lw-list-4 ul.lw-list-4__inner li.lw-list-4__li .icon.position_top img {
+  margin-top: 0.2em;
+}
 .lw-list-4 ul.lw-list-4__inner li.lw-list-4__li .icon svg, .lw-list-4 ul.lw-list-4__inner li.lw-list-4__li .icon img {
   width: 100%;
   height: auto;

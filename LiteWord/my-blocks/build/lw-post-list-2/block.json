@@ -7,12 +7,13 @@
 	"category": "lw-post",
 	"icon": "editor-ul",
 	"editorScript": "file:./lw-post-list-2.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "投稿一覧リスト型。横並びのサムネイル+タイトル+抜粋。コンパクトなニュース表示に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["numberOfPosts", "categoryId"],
+		"imageAttributes": [],
+		"notes": "動的ブロック。DBから投稿を取得して表示"
+	},
 	"supports": {
 		"anchor": true
 	},

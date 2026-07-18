@@ -94,6 +94,8 @@ get_template_part('./functions/lw_premium_login/setup');//ショップURL設定
 get_template_part('./functions/lw_premium_login/popup');//ショップログインポップアップ
 // AIシステム（REST APIを使用するため、is_admin()の外で読み込む必要がある）
 get_template_part('./functions/lw_ai_system/index');
+// AIチャットサポート（ダッシュボードポップアップ + REST APIプロキシ）
+get_template_part('./functions/lw_ai_chat/index');
 
 if(is_admin()){
     get_template_part('./functions/noscript_message');//JSを利用していない場合のメッセージ
@@ -102,8 +104,13 @@ if(is_admin()){
     get_template_part('./functions/category_set/category_common_edit');//カテゴリー共通設定
     get_template_part('./functions/dashboard_top/index');//ダッシュボートTOPのページの見た目など
     get_template_part('./functions/manual/index');//マニュアルページ
+}
+// テーマアップデート: 管理画面に加え WP-CLI（wp theme update）でも更新フックを登録する。
+// is_admin() は WP-CLI で false のため、これを外に出さないと `wp theme update` が更新を検知できない。
+if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
     get_template_part('./functions/theme_update');//テーマアップデート
 }
+//get_template_part('./functions/lw_broken_link_check/index');//リンク切れチェック
 $notification_paid_features = Lw_theme_mod_set("notification_paid_features", "on");
 if($notification_paid_features == "on"){
     get_template_part('./functions/lw_template_management/lw_check_trial_popup');//無料体験
@@ -136,15 +143,19 @@ if($mail_form_switch_all === "on"){
 $lw_comment_functions = Lw_theme_mod_set("lw_extensions_comment_functions_switch", "off");
 if($lw_comment_functions === "on" && LW_EXPANSION_BASE){
     get_template_part('./functions/comment/index');//コメント機能
+} else {
+    get_template_part('./functions/comment/disable');//コメント完全無効化（REST API・XML-RPC含む）
 }
 get_template_part('./functions/custom_post/index');//カスタム投稿タイプ系
 get_template_part('./functions/front_page_setting');//フロントページ設定API
 get_template_part('./functions/save_template');//テンプレートの保存
 get_template_part('./functions/share_buttons');//シェアボタン
+get_template_part('./functions/breadcrumb');//パンくずリスト
 get_template_part('./functions/lw_my_parts/index');//LWマイパーツ
 get_template_part('./functions/lw_page_template_insert/index');//LWページテンプレート挿入
 get_template_part('./functions/custom_bloc_insert_system/index');//custom_bloc_insert_system
 get_template_part('./functions/page-setting-wizard/index');//page-setting-wizard
+get_template_part('./functions/code_page/index');//コーディング専用 完全白紙のページ
 
 //ショップURL
 function lw_shop_url(){
@@ -155,9 +166,16 @@ include( get_theme_file_path('/my-blocks/block-registration/register-wdl-block.p
 get_template_part('./my-blocks/block-registration/block_category_set');
 //jsにパスを通す
 function rw_localize_theme_settings() {
+    static $already_output = false;
+    if ($already_output) {
+        return;
+    }
+    $already_output = true;
     ?>
-    <script type="text/javascript">
+    <script>
         var MyThemeSettings = {
+            themeUrl: '<?php echo esc_js(get_template_directory_uri()); ?>',
+            homeUrl: '<?php echo esc_js(home_url()); ?>',
             theme_Url: '<?php echo esc_js(get_template_directory_uri()); ?>',
             home_Url: '<?php echo esc_js(home_url()); ?>',
         };
@@ -166,8 +184,8 @@ function rw_localize_theme_settings() {
 }
 // フロントエンド用の設定を wp_head に渡す
 add_action('wp_head', 'rw_localize_theme_settings');
-// ブロックエディタ用の設定を渡す
-add_action('enqueue_block_assets', 'rw_localize_theme_settings');
+// 管理画面用の設定を渡す
+add_action('admin_head', 'rw_localize_theme_settings');
 if(is_admin()){
     //カウントダウンタイマーのエディター用スクリプト
     get_template_part( "templates/deadline_setting/editor" );
@@ -203,7 +221,7 @@ function redirect_after_theme_switch_js() {
     // 現在のページがテーマ切り替え画面の場合にのみスクリプトを追加
     if (isset($_GET['activated']) && is_admin()) {
         ?>
-        <script type="text/javascript">
+        <script>
             // テーマ切り替え後に指定のURLへリダイレクト
             window.location.href = "<?php echo admin_url(); ?>";
         </script>

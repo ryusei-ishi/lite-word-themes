@@ -7,12 +7,12 @@
 	"category": "lw-firstview",
 	"icon": "cover-image",
 	"editorScript": "file:./shin-gas-station-01-fv-lower-01.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "下層ページ用FV。メイン+サブタイトル+背景画像。シンプル。ショップテンプレート用",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "subTitle"],
+		"imageAttributes": ["backgroundImage", "backgroundImageSp"]
+	},
 	"supports": {
 		"anchor": true
 	},

@@ -9,7 +9,16 @@
   display: block;
 }
 
-.header_menu_pc > li:nth-last-of-type(2) > ul ul, .header_menu_pc > li:nth-last-of-type(3) > ul ul,
+.header_menu_pc > li:nth-last-of-type(1) > ul, .header_menu_pc > li:nth-last-of-type(2) > ul, .header_menu_pc > li:nth-last-of-type(3) > ul,
+.header_nav > .menu > ul > li:nth-last-of-type(1) > ul,
+.header_nav > .menu > ul > li:nth-last-of-type(2) > ul,
+.header_nav > .menu > ul > li:nth-last-of-type(3) > ul {
+  left: initial;
+  right: -20px;
+}
+
+.header_menu_pc > li:nth-last-of-type(1) > ul ul, .header_menu_pc > li:nth-last-of-type(2) > ul ul, .header_menu_pc > li:nth-last-of-type(3) > ul ul,
+.header_nav > .menu > ul > li:nth-last-of-type(1) > ul ul,
 .header_nav > .menu > ul > li:nth-last-of-type(2) > ul ul,
 .header_nav > .menu > ul > li:nth-last-of-type(3) > ul ul {
   padding: 0;

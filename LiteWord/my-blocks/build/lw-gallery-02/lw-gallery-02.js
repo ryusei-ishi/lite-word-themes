@@ -219,7 +219,7 @@ module.exports = window["wp"]["components"];
   \**************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-gallery-02","version":"1.0.0","title":"ギャラリー 02","category":"lw-banner","icon":"format-gallery","supports":{"anchor":true},"attributes":{"images":{"type":"array","default":["https://lite-word.com/sample_img/shop/1.webp","https://lite-word.com/sample_img/shop/2.webp","https://lite-word.com/sample_img/shop/3.webp","https://lite-word.com/sample_img/shop/4.webp","https://lite-word.com/sample_img/shop/5.webp","","",""]}},"editorScript":"file:./lw-gallery-02.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":2}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-gallery-02","version":"1.0.0","title":"ギャラリー 02","category":"lw-banner","icon":"format-gallery","aiHint":{"description":"ギャラリー（画像のみ）。画像グリッド。ポートフォリオ・施設写真に","excludeFromAutoSelect":false,"contentAttributes":[],"imageAttributes":["images"]},"supports":{"anchor":true},"attributes":{"images":{"type":"array","default":["https://lite-word.com/sample_img/shop/1.webp","https://lite-word.com/sample_img/shop/2.webp","https://lite-word.com/sample_img/shop/3.webp","https://lite-word.com/sample_img/shop/4.webp","https://lite-word.com/sample_img/shop/5.webp","","",""]}},"editorScript":"file:./lw-gallery-02.js","no":2}');
 
 /***/ })
 

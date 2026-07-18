@@ -6,6 +6,13 @@
 	"title": "Lw スペーサー（PC・TB・SP）",
 	"category": "lw-utility",
 	"icon": "align-wide",
+	"aiHint": {
+		"description": "スペーサー。PC/TB/SPの高さ指定。セクション間余白に",
+		"excludeFromAutoSelect": true,
+		"contentAttributes": [],
+		"imageAttributes": [],
+		"excludeReason": "余白調整のみ。テキスト生成不要"
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -23,11 +30,5 @@
 			"default": 40
 		}
 	},
-	"editorScript": "file:./lw-space-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css"
+	"editorScript": "file:./lw-space-1.js"
 }

@@ -38,7 +38,7 @@ module.exports = window["wp"]["components"];
   \****************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-contact","version":"1.0.0","title":"お問合わせフォーム shin shop pattern 01","category":"lw-contact","icon":"email","supports":{"anchor":true},"editorScript":"file:./shin-gas-station-01-contact.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":15,"attributes":{"formId":{"type":"number","default":1}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-contact","version":"1.0.0","title":"お問合わせフォーム shin shop pattern 01","category":"lw-contact","icon":"email","aiHint":{"description":"お問い合わせフォーム。ショップテンプレート用。テキスト属性なし","excludeFromAutoSelect":true,"contentAttributes":[],"imageAttributes":[],"excludeReason":"フォームブロック。テキスト生成不要"},"supports":{"anchor":true},"editorScript":"file:./shin-gas-station-01-contact.js","no":15,"attributes":{"formId":{"type":"number","default":1}}}');
 
 /***/ })
 

@@ -91,7 +91,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, "H".concat(level));
     }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u80CC\u666F\u753B\u50CF\u8A2D\u5B9A"
+      title: "\u80CC\u666F\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "PC\u306E\u6642"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
       onSelect: onChangeBackgroundImage,
       allowedTypes: ['image'],
@@ -174,7 +174,7 @@ __webpack_require__.r(__webpack_exports__);
       max: 1,
       step: 0.01
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u5168\u4F53\u306E\u6587\u5B57\u306E\u8272"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: textColor,
       onChange: function onChange(color) {
@@ -183,7 +183,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u9AD8\u3055\u8A2D\u5B9A"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "PC\u7528\u9AD8\u3055"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       value: minHeightPc,
       options: (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.minHeightPcClassOptionArr)(),
@@ -209,7 +209,7 @@ __webpack_require__.r(__webpack_exports__);
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u5185\u5074\u306E\u6700\u5927\u6A2A\u5E45"
+      title: "\u30B3\u30F3\u30C6\u30F3\u30C4\u5E45\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u6700\u5927\u5E45 (px)",
       value: maxWidth,
@@ -222,7 +222,7 @@ __webpack_require__.r(__webpack_exports__);
       max: 1600,
       step: 8
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30C6\u30AD\u30B9\u30C8\u914D\u7F6E"
+      title: "\u914D\u7F6E\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "PC \u8868\u793A"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       value: textAlignPc,
       options: [{
@@ -1105,7 +1105,7 @@ module.exports = window["wp"]["data"];
   \*****************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/fv-4","version":"1.0.0","title":"固定ページタイトル 04（トップ用）","category":"lw-firstview","icon":"cover-image","editorScript":"file:./fv-4.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"backgroundImage":{"type":"string","default":""},"backgroundImageSp":{"type":"string","default":""},"mainTitle":{"type":"string","default":"Lite Word"},"subTitle":{"type":"string","default":"軽量で簡単なWordPressテーマ"},"description":{"type":"string","default":"デザイナーとプログラマーが共同で開発した\\nコーポレートサイトやオウンドメディアに最適なテーマ"},"filterBackgroundColor":{"type":"string","default":"var(--color-main)"},"filterOpacity":{"type":"number","default":1},"textColor":{"type":"string","default":"#fff"},"minHeightPc":{"type":"string","default":"min-h-pc-480px"},"minHeightTb":{"type":"string","default":"min-h-tb-400px"},"minHeightSp":{"type":"string","default":"min-h-sp-360px"},"maxWidth":{"type":"number","default":1040},"textAlignPc":{"type":"string","default":"pc_left"},"textAlignSp":{"type":"string","default":"sp_left"},"headingLevel":{"type":"number","default":1}},"no":4}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/fv-4","version":"1.0.0","title":"固定ページタイトル 04（トップ用）","category":"lw-firstview","icon":"cover-image","editorScript":"file:./fv-4.js","supports":{"anchor":true},"aiHint":{"description":"コーポレート・士業向けFV。左寄せテキスト+背景色or画像。情報量が多い業種に最適","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle","description"],"imageAttributes":["backgroundImage"]},"attributes":{"backgroundImage":{"type":"string","default":"","aiHint":{"role":"image","note":"背景画像URL。色ベタ塗りにする場合は空でOK"}},"backgroundImageSp":{"type":"string","default":"","aiHint":{"skip":true}},"mainTitle":{"type":"string","default":"Lite Word","aiHint":{"role":"heading","contentGuide":"サービス名 or キャッチコピー。5〜20文字","example":"ビジネスを加速する"}},"subTitle":{"type":"string","default":"軽量で簡単なWordPressテーマ","aiHint":{"role":"subheading","contentGuide":"英語表記 or サブキャッチ","example":"CONSULTING SERVICE"}},"description":{"type":"string","default":"デザイナーとプログラマーが共同で開発した\\nコーポレートサイトやオウンドメディアに最適なテーマ","aiHint":{"role":"body","contentGuide":"サービス概要を1〜3文で。30〜80文字。改行可","example":"20年の実績で、お客様のビジネス課題を\\n戦略立案から実行まで一貫してサポートします"}},"filterBackgroundColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"filterOpacity":{"type":"number","default":1,"aiHint":{"skip":true}},"textColor":{"type":"string","default":"#fff","aiHint":{"skip":true}},"minHeightPc":{"type":"string","default":"min-h-pc-480px","aiHint":{"skip":true}},"minHeightTb":{"type":"string","default":"min-h-tb-400px","aiHint":{"skip":true}},"minHeightSp":{"type":"string","default":"min-h-sp-360px","aiHint":{"skip":true}},"maxWidth":{"type":"number","default":1040,"aiHint":{"skip":true}},"textAlignPc":{"type":"string","default":"pc_left","aiHint":{"skip":true}},"textAlignSp":{"type":"string","default":"sp_left","aiHint":{"skip":true}},"headingLevel":{"type":"number","default":1,"aiHint":{"skip":true}}},"no":4}');
 
 /***/ })
 

@@ -75,7 +75,7 @@ registerBlockType(metadata.name, {
 				{/* サイドバー */}
 				<InspectorControls>
 					{/* サイズ設定 */}
-					<PanelBody title="サイズ設定" initialOpen>
+					<PanelBody title="レイアウト設定" initialOpen>
 						<RadioControl
 							label="PCサイズ"
 							selected={ sizeClass }
@@ -89,7 +89,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* ★ 追加：スマホサイズ設定 */}
-					<PanelBody title="スマホサイズ設定" initialOpen>
+					<PanelBody title="レイアウト設定（SP）" initialOpen>
 						<RadioControl
 							label="SPサイズ"
 							selected={ sizeSpClass }
@@ -104,7 +104,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* 位置設定 */}
-					<PanelBody title="位置設定" initialOpen>
+					<PanelBody title="配置設定" initialOpen>
 						<RadioControl
 							label="配置"
 							selected={ positionClass }
@@ -117,7 +117,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* カラー設定 */}
-					<PanelBody title="カラー設定" initialOpen>
+					<PanelBody title="色設定" initialOpen>
 						<p>メインタイトルカラー</p>
 						<ColorPalette
 							value={ mainTitleColor }
@@ -138,7 +138,7 @@ registerBlockType(metadata.name, {
 					</PanelBody>
 
 					{/* デザイン詳細 */}
-					<PanelBody title="デザイン詳細" initialOpen>
+					<PanelBody title="その他設定" initialOpen>
 						<RangeControl
 							label="左ボーダー透明度（%）"
 							min={ 0 } max={ 100 } step={ 0.1 }

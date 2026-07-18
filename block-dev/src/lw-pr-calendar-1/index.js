@@ -34,8 +34,11 @@ registerBlockType(metadata.name, {
         };
 
         const updateBodyCell = (rowIndex, cellIndex, value) => {
-            const newBodyRows = [...bodyRows];
-            newBodyRows[rowIndex][cellIndex] = value;
+            const newBodyRows = bodyRows.map((row, r) =>
+                r === rowIndex
+                    ? row.map((cell, c) => (c === cellIndex ? value : cell))
+                    : row
+            );
             setAttributes({ bodyRows: newBodyRows });
         };
 

@@ -202,7 +202,7 @@ function lw_shop_login_popup_html() {
 		right: 0;
 		bottom: 0;
 		background: rgba(0, 0, 0, 0.6);
-		z-index: 999999;
+		z-index: 9999;
 		align-items: center;
 		justify-content: center;
 	}

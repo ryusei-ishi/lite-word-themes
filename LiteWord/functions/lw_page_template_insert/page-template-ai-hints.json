@@ -1,0 +1,148 @@
+{
+	"_meta": {
+		"description": "LiteWordページテンプレート一括作成機能のAI向けメタ情報。テーマ内蔵のテンプレートファイルから固定ページを一括生成する仕組みをAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21"
+	},
+	"feature": {
+		"title": "ページテンプレート一括作成",
+		"aiDescription": "LiteWordテーマに内蔵されたページテンプレート（PHPファイル）から固定ページを一括生成する管理画面機能。テンプレートのプレビュー、選択、一括挿入が可能。固定ページ一覧の「テンプレートの挿入」サブメニューからアクセスする。プレミアムブロックを含むテンプレートもプレビュー可能（プレビュー時に一時的にプレミアムブロックを登録する仕組み）。",
+		"userGuide": "新しくサイトを作る際に、よく使うページ（トップページ・お問合わせ・会社概要・サービス紹介等）をテンプレートから一括で作成できる機能。テンプレートはブロックエディタ用のコンテンツ（wp:xxx形式のコメント記法）として挿入される。"
+	},
+	"architecture": {
+		"files": {
+			"index.php": "エントリーポイント。管理画面ではadmin用、フロントではfrontend用を読み込む。",
+			"lw-page-template-admin.php": "管理画面用。テンプレート一覧画面の表示、テンプレート設定の定義、固定ページ一覧への「テンプレートの挿入」ボタン追加。",
+			"lw-page-template-frontend.php": "フロント用。REST APIエンドポイントとテンプレートプレビュー機能を提供。"
+		}
+	},
+	"templateCategories": {
+		"aiDescription": "テンプレートは大きく5つのカテゴリに分類される。各カテゴリの中にサブカテゴリがあり、その中に具体的なテンプレートが含まれる。",
+		"categories": {
+			"standard-page": {
+				"label": "サンプルページ",
+				"aiDescription": "一般的なWebサイトで必要な基本ページのテンプレート集。",
+				"subCategories": {
+					"top": {
+						"label": "トップページ",
+						"aiDescription": "サイトのメインページ。業種別に複数パターン（カメラマン系、税理士系ブログ、美容室系、カフェ系、動物病院系、インテリア系、ヘアーサロン系、ショップ系、アウトドア系、リフォーム系、法律事務所系、お米農家系等）。",
+						"templateCount": 15
+					},
+					"service": {
+						"label": "サービス紹介",
+						"aiDescription": "サービス内容を紹介するページ。施術メニュー、法律事務所、会計事務所等の業種別パターン。",
+						"templateCount": 4
+					},
+					"company": {
+						"label": "会社情報",
+						"aiDescription": "会社概要・法人情報を掲載するページ。クリニック向けパターンあり。",
+						"templateCount": 3
+					},
+					"contact": {
+						"label": "お問合わせページ",
+						"aiDescription": "お問合わせフォームを掲載するページ。LiteWord内蔵メールフォームと連動。6パターン。",
+						"templateCount": 6
+					},
+					"profile": {
+						"label": "自己紹介・プロフィール",
+						"aiDescription": "自己紹介ページ。占い師系、税理士系、英会話教室系等の業種別パターン。",
+						"templateCount": 5
+					},
+					"access": {
+						"label": "アクセス・地図",
+						"aiDescription": "アクセス情報・地図を掲載するページ。",
+						"templateCount": 2
+					},
+					"recruit": {
+						"label": "採用情報",
+						"aiDescription": "採用情報ページ。スタートアップ企業、不動産系等。",
+						"templateCount": 2
+					},
+					"pricing": { "label": "料金表", "templateCount": 0 },
+					"cases": { "label": "実績・事例", "templateCount": 0 },
+					"news": { "label": "お知らせ一覧", "templateCount": 0 }
+				}
+			},
+			"sales-framework": {
+				"label": "セールス系フレームワーク",
+				"aiDescription": "LP（ランディングページ）制作用のマーケティングフレームワーク別テンプレート。将来的に各フレームワークのテンプレートが追加される予定。",
+				"subCategories": {
+					"aidma": "AIDMA（認知→行動）",
+					"aisas": "AISAS（検索型購買）",
+					"pasona": "PASONA（問題解決型）",
+					"pas": "PAS（シンプル訴求）",
+					"quest": "QUEST（教育型セールス）",
+					"fab": "FAB（機能→利益変換）"
+				}
+			},
+			"content-type": {
+				"label": "コンテンツ構成別",
+				"aiDescription": "コンテンツの構成パターン別テンプレート。",
+				"subCategories": {
+					"video-cta": "動画メイン + CTA",
+					"story": "ストーリー型（起承転結）",
+					"comparison": "比較表メイン",
+					"faq": "FAQ中心型",
+					"testimonial": "お客様の声メイン",
+					"before-after": "ビフォーアフター型"
+				}
+			},
+			"lead-generation": {
+				"label": "リード獲得特化",
+				"aiDescription": "見込み客の情報を獲得するためのLP テンプレート。",
+				"subCategories": {
+					"whitepaper": "ホワイトペーパーDL",
+					"webinar": "ウェビナー登録",
+					"consultation": "無料相談予約",
+					"document": "資料請求",
+					"newsletter": "メルマガ登録",
+					"assessment": "無料診断・査定"
+				}
+			},
+			"industry": {
+				"label": "業種別テンプレート",
+				"aiDescription": "特定の業種に最適化されたLP テンプレート。",
+				"subCategories": {
+					"realestate": "不動産（物件紹介）",
+					"beauty": "美容・エステ"
+				}
+			}
+		}
+	},
+	"templateFileStructure": {
+		"aiDescription": "テンプレートファイルはテーマディレクトリ内の page_template/ 配下に配置される。各テンプレートはWordPressブロックエディタ形式（<!-- wp:xxx -->記法）のPHPファイル。",
+		"basePath": "page_template/",
+		"example": "page_template/top/ptn_1.php",
+		"publicFlag": "publicがtrueのテンプレートは一般公開向け、falseは開発中・特定業種向け"
+	},
+	"restApiEndpoints": {
+		"getTemplate": {
+			"route": "lw-template/v1/get-template",
+			"method": "POST",
+			"permission": "edit_pages",
+			"aiDescription": "指定されたテンプレートファイルの内容（ブロックマークアップ）を取得する。自動復旧スクリプトを付与して返す。",
+			"params": {
+				"template_path": "テンプレートファイルの相対パス（例: page_template/top/ptn_1.php）"
+			},
+			"userGuide": "取得したコンテンツはブロックエディタにそのまま挿入できる形式。"
+		},
+		"renderTemplate": {
+			"route": "lw-template/v1/render-template",
+			"method": "POST",
+			"permission": "edit_pages",
+			"aiDescription": "テンプレートをレンダリングして完全なHTMLページとして返す。プレビュー用。do_blocksでブロックをレンダリングし、テーマのCSSも適用する。"
+		}
+	},
+	"previewSystem": {
+		"aiDescription": "テンプレートプレビューはiframe内で表示される。?lw_template_preview=1パラメータでアクセスすると、ヘッダー・フッターなしの本文のみを表示する。プレビュー中はプレミアムブロックを一時的に登録し、全ブロックCSSを読み込む。投稿APIのfetchをオーバーライドしてサンプルデータを返す仕組み。",
+		"samplePosts": "プレビュー中はREST APIの投稿取得リクエストをインターセプトし、6件のダミー記事データを即座に返す（実際のAPI呼び出しをスキップ）。",
+		"premiumBlockPreview": "wdl_get_all_premium_paid_blocks()でプレミアムブロック一覧を取得し、未登録のものをプレビュー用に一時登録する。",
+		"autoRecovery": "テンプレート挿入時、ブロックの復旧が必要な場合に自動で「復旧」ボタンをクリックするスクリプトを付与する。"
+	},
+	"adminMenuIntegration": {
+		"aiDescription": "固定ページの管理メニューにサブメニュー「テンプレートの挿入」を追加。また、固定ページ一覧画面にも「Lw専用 固定ページテンプレートの挿入」ボタンをjQueryで動的に追加する。",
+		"menuSlug": "lw_page_template_insert",
+		"parentMenu": "edit.php?post_type=page",
+		"permission": "edit_pages"
+	}
+}

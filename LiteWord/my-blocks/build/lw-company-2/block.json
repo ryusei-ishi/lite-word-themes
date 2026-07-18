@@ -6,6 +6,12 @@
 	"title": "会社概要 02",
 	"category": "lw-table",
 	"icon": "building",
+	"aiHint": {
+		"description": "会社概要テーブル（背景色付きdt）。項目名+内容の定義リスト。不動産・士業の会社情報に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["items"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -115,11 +121,5 @@
 		}
 	},
 	"editorScript": "file:./lw-company-2.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 2
 }

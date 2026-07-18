@@ -39,6 +39,63 @@
     overflow-x: auto;
     font-size: var(--lw-table-font-size, 17px);
 
+    // --- SP scroll hint (view.js generates dynamically) ---
+    .lw-pr-table-1__scroll-hint {
+        display: none;
+        @media (max-width: 800px) {
+            display: block;
+            position: sticky;
+            left: 0;
+            width: calc(100vw - 48px);
+            height: 0;
+            overflow: visible;
+            pointer-events: none;
+            z-index: 5;
+            animation: table1-hint-fade 4s ease-in-out forwards;
+
+            &.is-scrolled {
+                opacity: 0 !important;
+                transition: opacity 0.3s;
+            }
+        }
+    }
+    .lw-pr-table-1__scroll-hint-inner {
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 12px;
+        padding: 10px 20px 8px;
+    }
+    .lw-pr-table-1__scroll-hint-arrows {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        .arrow-left,
+        .arrow-right {
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 1;
+        }
+    }
+    .lw-pr-table-1__scroll-hint-icon {
+        display: block;
+        line-height: 0;
+        animation: table1-hand-swipe 1.5s ease-in-out infinite;
+    }
+    .lw-pr-table-1__scroll-hint-text {
+        color: #fff;
+        font-size: 11px;
+        white-space: nowrap;
+        line-height: 1;
+    }
+
     // スクロールバーを常に非表示
     -ms-overflow-style: none; // IE、Edge
     scrollbar-width: none; // Firefox
@@ -57,7 +114,20 @@
     * {
         box-sizing: border-box;
     }
-
+    &.max_width_off_pc {
+        margin: 32px 0;
+        margin-left: 0 !important;
+        padding: 0;
+        width: 100% !important;
+        @media (max-width: 800px) {
+            margin-left: calc((100% - 100vw) / 2) !important;
+            padding: 0 24px;
+            width: 100vw !important;
+        }
+        @media (max-width: 500px) {
+            padding: 0 24px 0 12px;
+        }
+    }
     .wrap_table {
         margin: 0 auto;
         width: var(--lw-table-width);
@@ -165,6 +235,7 @@
                 .cell {
                     &.row_head {
                         border-radius: var(--lw-table-radius-size) 0 0 0;
+                        text-align: var(--lw-table-row-cell-head-position-align, center);
                     }
                 }
             }
@@ -185,12 +256,22 @@
                 text-align: center;
                 line-height: var(--lw-table-line-height-cell, 1.6);
                 font-size: var(--lw-table-font-size-cell, 16px);
+                text-align: var(--lw-table-row-cell-position-align, center);
+                justify-content: var(--lw-table-row-cell-position-justify, center);
+                .text {
+                    text-align: var(--lw-table-row-cell-position-align, center);
+                }
                 @media (max-width: 800px) {
                     font-size: var(--lw-table-font-size-cell-sp, 15px);
                 }
                 &.row_head {
                     line-height: var(--lw-table-line-height-row-header, 1.6);
                     font-size: var(--lw-table-font-size-row-header, 16px);
+                    text-align: var(--lw-table-row-cell-head-position-align, center);
+                    justify-content: var(--lw-table-row-cell-head-position-justify, center);
+                    .text {
+                        text-align: var(--lw-table-row-cell-head-position-align, center);
+                    }
                     @media (max-width: 800px) {
                         font-size: var(--lw-table-font-size-row-header-sp, 15px) !important;
                     }
@@ -201,4 +282,17 @@
     .lw-table-item-controls {
         right: -47px;
     }
+}
+
+@keyframes table1-hint-fade {
+    0%   { opacity: 0; }
+    10%  { opacity: 1; }
+    75%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes table1-hand-swipe {
+    0%, 100% { transform: translateX(0); }
+    25%      { transform: translateX(-12px); }
+    75%      { transform: translateX(12px); }
 }

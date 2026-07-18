@@ -54,6 +54,7 @@ body:has(.voice-modal.active) .follow_bottom_cta {
 }
 
 .paid-block-voice-3 {
+  position: relative;
   padding: 0 24px;
 }
 @container (max-width: 800px) {
@@ -62,6 +63,7 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   }
 }
 .paid-block-voice-3 > .inner {
+  position: relative;
   max-width: var(--paid-block-voice-3-max-width, var(--max-width-clm-1, 1120px));
   margin: 0 auto;
 }
@@ -210,7 +212,9 @@ body:has(.voice-modal.active) .follow_bottom_cta {
     font-size: 14px;
   }
 }
-.paid-block-voice-3 .voice-modal {
+
+.paid-block-voice-3 .voice-modal,
+.paid-block-voice-3-modal {
   position: fixed;
   top: 0;
   left: 0;
@@ -225,14 +229,17 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   visibility: hidden;
   transition: all 0.3s ease;
 }
-.paid-block-voice-3 .voice-modal.active {
+.paid-block-voice-3 .voice-modal.active,
+.paid-block-voice-3-modal.active {
   opacity: 1;
   visibility: visible;
 }
-.paid-block-voice-3 .voice-modal.active .modal-content {
+.paid-block-voice-3 .voice-modal.active .modal-content,
+.paid-block-voice-3-modal.active .modal-content {
   transform: scale(1);
 }
-.paid-block-voice-3 .voice-modal .modal-overlay {
+.paid-block-voice-3 .voice-modal .modal-overlay,
+.paid-block-voice-3-modal .modal-overlay {
   position: absolute;
   top: 0;
   left: 0;
@@ -241,7 +248,8 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   background: rgba(0, 0, 0, 0.7);
   cursor: pointer;
 }
-.paid-block-voice-3 .voice-modal .modal-content {
+.paid-block-voice-3 .voice-modal .modal-content,
+.paid-block-voice-3-modal .modal-content {
   position: relative;
   z-index: 1;
   background: #fff;
@@ -251,21 +259,26 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   transform: scale(0.9);
   transition: transform 0.3s ease;
 }
-.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar {
+.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar,
+.paid-block-voice-3-modal .modal-content::-webkit-scrollbar {
   width: 8px;
 }
-.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar-track {
+.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar-track,
+.paid-block-voice-3-modal .modal-content::-webkit-scrollbar-track {
   background: #f1f1f1;
   border-radius: 10px;
 }
-.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar-thumb {
+.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar-thumb,
+.paid-block-voice-3-modal .modal-content::-webkit-scrollbar-thumb {
   background: #ccc;
   border-radius: 10px;
 }
-.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar-thumb:hover {
+.paid-block-voice-3 .voice-modal .modal-content::-webkit-scrollbar-thumb:hover,
+.paid-block-voice-3-modal .modal-content::-webkit-scrollbar-thumb:hover {
   background: #aaa;
 }
-.paid-block-voice-3 .voice-modal .modal-close {
+.paid-block-voice-3 .voice-modal .modal-close,
+.paid-block-voice-3-modal .modal-close {
   position: absolute;
   top: 16px;
   right: 16px;
@@ -282,15 +295,18 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   z-index: 2;
   transition: all 0.3s ease;
 }
-.paid-block-voice-3 .voice-modal .modal-close:hover {
+.paid-block-voice-3 .voice-modal .modal-close:hover,
+.paid-block-voice-3-modal .modal-close:hover {
   background: rgba(0, 0, 0, 0.1);
 }
-.paid-block-voice-3 .voice-modal .modal-close svg {
+.paid-block-voice-3 .voice-modal .modal-close svg,
+.paid-block-voice-3-modal .modal-close svg {
   width: 20px;
   height: 20px;
   color: #666;
 }
-.paid-block-voice-3 .voice-modal .modal-body {
+.paid-block-voice-3 .voice-modal .modal-body,
+.paid-block-voice-3-modal .modal-body {
   position: relative;
   padding: 50px 48px 40px;
   max-height: 70vh;
@@ -298,11 +314,13 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   overflow-y: auto;
 }
 @container (max-width: 600px) {
-  .paid-block-voice-3 .voice-modal .modal-body {
+  .paid-block-voice-3 .voice-modal .modal-body,
+  .paid-block-voice-3-modal .modal-body {
     padding: 50px 24px 32px;
   }
 }
-.paid-block-voice-3 .voice-modal .modal-photo {
+.paid-block-voice-3 .voice-modal .modal-photo,
+.paid-block-voice-3-modal .modal-photo {
   width: 120px;
   height: 120px;
   margin: 0 auto 24px;
@@ -310,22 +328,26 @@ body:has(.voice-modal.active) .follow_bottom_cta {
   overflow: hidden;
   border: 4px solid #f0f0f0;
 }
-.paid-block-voice-3 .voice-modal .modal-photo img {
+.paid-block-voice-3 .voice-modal .modal-photo img,
+.paid-block-voice-3-modal .modal-photo img {
   width: 100%;
   height: 100%;
   object-fit: cover;
 }
-.paid-block-voice-3 .voice-modal .modal-name {
+.paid-block-voice-3 .voice-modal .modal-name,
+.paid-block-voice-3-modal .modal-name {
   font-size: 1.4em;
   font-weight: 600;
   margin: 0 0 8px 0;
   color: #333;
 }
-.paid-block-voice-3 .voice-modal .modal-meta {
+.paid-block-voice-3 .voice-modal .modal-meta,
+.paid-block-voice-3-modal .modal-meta {
   font-size: 0.9em;
   color: #999;
 }
-.paid-block-voice-3 .voice-modal .modal-text {
+.paid-block-voice-3 .voice-modal .modal-text,
+.paid-block-voice-3-modal .modal-text {
   margin-top: 1.5em;
   padding-bottom: 32px;
   font-size: 0.95em;

@@ -50,7 +50,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 2. ボタンの見た目 ── */}
-                    <PanelBody title="ボタンの見た目" initialOpen={false}>
+                    <PanelBody title="色設定" initialOpen={false}>
                         <div style={{ marginBottom: '20px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>
                                 🌈 背景デザイン

@@ -2,6 +2,8 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 add_action('wp_ajax_set_homepage', 'Lw_ajax_set_homepage');
 function Lw_ajax_set_homepage() {
+    check_ajax_referer('lw_set_homepage_nonce', 'nonce');
+
     if (!current_user_can('manage_options')) {
         wp_send_json_error('権限がありません');
     }

@@ -41,13 +41,13 @@ registerBlockType(metadata.name, {
             <div {...blockProps}>
                 <InspectorControls>
                     {/* リンクの設定 */}
-                    <PanelBody title="リンクの設定">
+                    <PanelBody title="基本設定">
                         <TextControl label="リンク先URL" value={buttonUrl} onChange={onChangeButtonUrl} />
                         <ToggleControl label="リンクを新規タブで開く" checked={openInNewTab} onChange={onToggleOpenInNewTab} />
                     </PanelBody>
 
                     {/* 画像の設定 */}
-                    <PanelBody title="背景画像の設定">
+                    <PanelBody title="背景設定">
                         <MediaUpload onSelect={onSelectImage} allowedTypes="image" value={imageUrl}
                             render={({ open }) => (
                                 <>
@@ -61,12 +61,12 @@ registerBlockType(metadata.name, {
                         <ColorPicker color={filterColor} onChangeComplete={(value) => onChangeFilterColor(value.hex)} />
                     </PanelBody>
                     {/* テキストの配置設定 */}
-                    <PanelBody title="テキストの配置設定">
+                    <PanelBody title="配置設定">
                         <SelectControl label="PCでのテキスト配置" value={pcTextAlign} options={[{ label: '中央寄せ', value: 'center' }, { label: '左寄せ', value: 'left' }]} onChange={onChangePcTextAlign} />
                         <SelectControl label="スマホでのテキスト配置" value={mobileTextAlign} options={[{ label: '中央寄せ', value: 'center' }, { label: '左寄せ', value: 'left' }]} onChange={onChangeMobileTextAlign} />
                     </PanelBody>
                     {/* ボタンの色の設定 */}
-                    <PanelBody title="リンクボタンの設定">
+                    <PanelBody title="色設定">
                         <p>ボタンの背景色</p>
                         <ColorPicker color={buttonBackgroundColor} onChangeComplete={(value) => onChangeButtonBackgroundColor(value.hex)} />
                         <p>ボタンのボーダーの色（外枠）</p>

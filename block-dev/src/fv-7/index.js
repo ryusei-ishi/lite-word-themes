@@ -128,7 +128,7 @@ registerBlockType(metadata.name, {
                             step={0.1}
                         />
                     </PanelBody>
-                    <PanelBody title="高さ設定">
+                    <PanelBody title="レイアウト設定">
                         <p>PC用高さ</p>
                         <SelectControl
                             value={minHeightPc}

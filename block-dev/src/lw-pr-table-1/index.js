@@ -25,7 +25,7 @@ registerBlockType(metadata.name, {
     edit({ attributes, setAttributes }) {
         const {
             columnCount,
-            hideTableHeader, 
+            hideTableHeader,
             cellWidth1, cellWidth2, cellWidth3, cellWidth4, cellWidth5, cellWidth6, cellWidth7, cellWidth8,
             cellWidth1Sp, cellWidth2Sp, cellWidth3Sp, cellWidth4Sp, cellWidth5Sp, cellWidth6Sp, cellWidth7Sp, cellWidth8Sp,
             radiusSize,
@@ -37,11 +37,30 @@ registerBlockType(metadata.name, {
             fontFamilyRowHeader, fontWeightRowHeader, fontSizeRowHeader, fontSizeRowHeaderSp, lineHeightRowHeader,
             fontFamilyCell, fontWeightCell, fontSizeCell, fontSizeCellSp, lineHeightCell,
             gapSize,
+            rowCellPosition,
+            rowHeadPosition,
+            maxWidthOffPc,
+            showScrollHint,
             headers, rows
         } = attributes;
 
+        // 位置設定からCSS値を生成
+        const getPositionStyles = (position) => {
+            switch (position) {
+                case 'left':
+                    return { align: 'left', justify: 'flex-start' };
+                case 'right':
+                    return { align: 'right', justify: 'flex-end' };
+                default:
+                    return { align: 'center', justify: 'center' };
+            }
+        };
+
+        const cellPositionStyles = getPositionStyles(rowCellPosition);
+        const headPositionStyles = getPositionStyles(rowHeadPosition);
+
         const blockProps = useBlockProps({
-            className: 'lw-pr-table-1'
+            className: `lw-pr-table-1${maxWidthOffPc ? ' max_width_off_pc' : ''}`
         });
 
         // ヘッダー更新関数（テキスト）
@@ -96,18 +115,24 @@ registerBlockType(metadata.name, {
 
         // 行データ更新関数
         const updateRow = (rowIndex, key, value) => {
-            const updated = [...rows];
-            updated[rowIndex][key] = value;
+            const updated = rows.map((row, i) =>
+                i === rowIndex ? { ...row, [key]: value } : row
+            );
             setAttributes({ rows: updated });
         };
 
         // セル更新関数
         const updateCell = (rowIndex, cellIndex, value) => {
-            const updated = [...rows];
-            if (!updated[rowIndex].cells || updated[rowIndex].cells.length !== columnCount - 1) {
-                updated[rowIndex].cells = Array(columnCount - 1).fill({ content: '' });
-            }
-            updated[rowIndex].cells[cellIndex] = { content: value };
+            const updated = rows.map((row, i) => {
+                if (i !== rowIndex) return row;
+                const baseCells = (!row.cells || row.cells.length !== columnCount - 1)
+                    ? Array(columnCount - 1).fill({ content: '' })
+                    : row.cells;
+                const newCells = baseCells.map((cell, ci) =>
+                    ci === cellIndex ? { content: value } : cell
+                );
+                return { ...row, cells: newCells };
+            });
             setAttributes({ rows: updated });
         };
 
@@ -197,7 +222,7 @@ registerBlockType(metadata.name, {
             <>
                 <InspectorControls>
                     {/* レイアウト設定 */}
-                    <PanelBody title="📐 レイアウト設定" initialOpen={true}>
+                    <PanelBody title="レイアウト設定" initialOpen={true}>
                         <ToggleControl
                             label="ヘッダー行を非表示"
                             checked={hideTableHeader}
@@ -235,11 +260,35 @@ registerBlockType(metadata.name, {
                             min={0}
                             max={10}
                         />
+
+                        <SelectControl
+                            label="行ヘッダー配置"
+                            value={rowHeadPosition}
+                            options={[
+                                { label: '左寄せ', value: 'left' },
+                                { label: '中央', value: 'center' },
+                                { label: '右寄せ', value: 'right' },
+                            ]}
+                            onChange={(value) => setAttributes({ rowHeadPosition: value })}
+                            help="項目名セルの配置"
+                        />
+
+                        <SelectControl
+                            label="データセル配置"
+                            value={rowCellPosition}
+                            options={[
+                                { label: '左寄せ', value: 'left' },
+                                { label: '中央', value: 'center' },
+                                { label: '右寄せ', value: 'right' },
+                            ]}
+                            onChange={(value) => setAttributes({ rowCellPosition: value })}
+                            help="データセルの配置"
+                        />
                     </PanelBody>
 
                     {/* カラム幅設定（PC） */}
                     {columnCount >= 2 && (
-                        <PanelBody title="💻 カラム幅設定（PC）" initialOpen={false}>
+                        <PanelBody title="カラム幅設定（PC）" initialOpen={false}>
                             <RangeControl
                                 label="項目列の幅 (px)"
                                 value={cellWidth1}
@@ -346,7 +395,7 @@ registerBlockType(metadata.name, {
 
                     {/* カラム幅設定（SP） */}
                     {columnCount >= 2 && (
-                        <PanelBody title="📱 カラム幅設定（SP）" initialOpen={false}>
+                        <PanelBody title="カラム幅設定（SP）" initialOpen={false}>
                             <RangeControl
                                 label="項目列の幅 (px)"
                                 value={cellWidth1Sp}
@@ -428,7 +477,7 @@ registerBlockType(metadata.name, {
                     )}
 
                     {/* 色設定 */}
-                    <PanelBody title="🎨 色設定" initialOpen={false}>
+                    <PanelBody title="色設定" initialOpen={false}>
                         <div style={{ marginBottom: '20px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>
                                 ヘッダー背景色(共通)
@@ -504,7 +553,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* 列ヘッダーフォント設定 */}
-                    <PanelBody title="📝 列ヘッダーフォント設定" initialOpen={false}>
+                    <PanelBody title="フォント設定（列ヘッダー）" initialOpen={false}>
                         <SelectControl
                             label="フォントファミリー"
                             value={fontFamilyHeader}
@@ -546,7 +595,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* 行ヘッダーフォント設定 */}
-                    <PanelBody title="📝 行ヘッダーフォント設定" initialOpen={false}>
+                    <PanelBody title="フォント設定（行ヘッダー）" initialOpen={false}>
                         <SelectControl
                             label="フォントファミリー"
                             value={fontFamilyRowHeader}
@@ -588,7 +637,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* セルフォント設定 */}
-                    <PanelBody title="📝 セルフォント設定" initialOpen={false}>
+                    <PanelBody title="フォント設定（セル）" initialOpen={false}>
                         <SelectControl
                             label="フォントファミリー"
                             value={fontFamilyCell}
@@ -626,6 +675,21 @@ registerBlockType(metadata.name, {
                             min={1}
                             max={2.5}
                             step={0.1}
+                        />
+                    </PanelBody>
+
+                    <PanelBody title="その他設定" initialOpen={false}>
+                        <ToggleControl
+                            label="PC時 全幅解除"
+                            checked={maxWidthOffPc}
+                            onChange={(value) => setAttributes({ maxWidthOffPc: value })}
+                            help="PC表示時にテーブルの全幅を解除します"
+                        />
+                        <ToggleControl
+                            label="横スクロールヒントを表示"
+                            checked={showScrollHint}
+                            onChange={(value) => setAttributes({ showScrollHint: value })}
+                            help="SP表示時に横スクロール可能な指アイコンを表示します"
                         />
                     </PanelBody>
                 </InspectorControls>
@@ -669,6 +733,11 @@ registerBlockType(metadata.name, {
                             '--lw-table-line-height-cell': lineHeightCell,
                             '--lw-table-line-height-row-header': lineHeightRowHeader,
 
+                            // セル配置のCSS変数
+                            '--lw-table-row-cell-position-align': cellPositionStyles.align,
+                            '--lw-table-row-cell-position-justify': cellPositionStyles.justify,
+                            '--lw-table-row-cell-head-position-align': headPositionStyles.align,
+                            '--lw-table-row-cell-head-position-justify': headPositionStyles.justify,
                         }}
                     >
                         {/* ヘッダー行 */}
@@ -727,33 +796,51 @@ registerBlockType(metadata.name, {
                                     />
                                 </div>
                                 
-                                {Array.from({ length: columnCount - 1 }).map((_, cellIndex) => (
-                                    <div 
-                                        key={cellIndex} 
-                                        className="cell"
-                                        data-lw_font_set={fontFamilyCell}
-                                        style={{
-                                            padding: '0.7em 0.7em',
-                                            background: cellBgColor,
-                                            color: cellTextColor,
-                                            fontWeight: fontWeightCell,
-                                            fontSize: `${fontSizeCell}px`,
-                                            lineHeight: lineHeightCell,
-                                            boxShadow: `0 0 3px ${shadowColor}`
-                                        }}
-                                    >
-                                        <RichText
-                                            className="text"
-                                            value={row.cells && row.cells[cellIndex] ? row.cells[cellIndex].content : ''}
-                                            onChange={(value) => updateCell(rowIndex, cellIndex, value)}
-                                            placeholder="内容"
-                    
-                                        />
-                                    </div>
-                                ))}
+                                {(() => {
+                                    const effectiveAlign = row.cellAlign ? getPositionStyles(row.cellAlign) : null;
+                                    return Array.from({ length: columnCount - 1 }).map((_, cellIndex) => (
+                                        <div
+                                            key={cellIndex}
+                                            className="cell"
+                                            data-lw_font_set={fontFamilyCell}
+                                            style={{
+                                                padding: '0.7em 0.7em',
+                                                background: cellBgColor,
+                                                color: cellTextColor,
+                                                fontWeight: fontWeightCell,
+                                                fontSize: `${fontSizeCell}px`,
+                                                lineHeight: lineHeightCell,
+                                                boxShadow: `0 0 3px ${shadowColor}`,
+                                                ...(effectiveAlign && {
+                                                    textAlign: effectiveAlign.align,
+                                                    justifyContent: effectiveAlign.justify,
+                                                })
+                                            }}
+                                        >
+                                            <RichText
+                                                className="text"
+                                                style={effectiveAlign ? { textAlign: effectiveAlign.align } : undefined}
+                                                value={row.cells && row.cells[cellIndex] ? row.cells[cellIndex].content : ''}
+                                                onChange={(value) => updateCell(rowIndex, cellIndex, value)}
+                                                placeholder="内容"
+                                            />
+                                        </div>
+                                    ));
+                                })()}
 
                                 {/* 行コントロール */}
                                 <div className="lw-table-item-controls">
+                                    <select
+                                        value={row.cellAlign || ''}
+                                        onChange={(e) => updateRow(rowIndex, 'cellAlign', e.target.value)}
+                                        style={{ fontSize: '11px', padding: '2px 4px', width: 'auto' }}
+                                        title="セル配置"
+                                    >
+                                        <option value="">配置:デフォルト</option>
+                                        <option value="left">配置:左</option>
+                                        <option value="center">配置:中央</option>
+                                        <option value="right">配置:右</option>
+                                    </select>
                                     <button
                                         type="button"
                                         onClick={() => moveRow(rowIndex, -1)}
@@ -814,11 +901,30 @@ registerBlockType(metadata.name, {
             fontFamilyRowHeader, fontWeightRowHeader, fontSizeRowHeader, fontSizeRowHeaderSp, lineHeightRowHeader,
             fontFamilyCell, fontWeightCell, fontSizeCell, fontSizeCellSp, lineHeightCell,
             gapSize,
+            rowCellPosition,
+            rowHeadPosition,
+            maxWidthOffPc,
+            showScrollHint,
             headers, rows
         } = attributes;
 
+        // 位置設定からCSS値を生成
+        const getPositionStyles = (position) => {
+            switch (position) {
+                case 'left':
+                    return { align: 'left', justify: 'flex-start' };
+                case 'right':
+                    return { align: 'right', justify: 'flex-end' };
+                default:
+                    return { align: 'center', justify: 'center' };
+            }
+        };
+
+        const cellPositionStyles = getPositionStyles(rowCellPosition);
+        const headPositionStyles = getPositionStyles(rowHeadPosition);
+
         const blockProps = useBlockProps.save({
-            className: 'lw-pr-table-1'
+            className: `lw-pr-table-1${maxWidthOffPc ? ' max_width_off_pc' : ''}`
         });
 
         // テーブル幅の計算
@@ -861,8 +967,8 @@ registerBlockType(metadata.name, {
         };
 
         return (
-            <div {...blockProps}>
-                <div 
+            <div {...blockProps} data-scroll-hint={showScrollHint ? "true" : undefined}>
+                <div
                     className="wrap_table"
                     role="table"
                     aria-label="料金プラン比較表"
@@ -900,6 +1006,12 @@ registerBlockType(metadata.name, {
                         '--lw-table-line-height-header': lineHeightHeader,
                         '--lw-table-line-height-row-header': lineHeightRowHeader,
                         '--lw-table-line-height-cell': lineHeightCell,
+
+                        // セル配置のCSS変数
+                        '--lw-table-row-cell-position-align': cellPositionStyles.align,
+                        '--lw-table-row-cell-position-justify': cellPositionStyles.justify,
+                        '--lw-table-row-cell-head-position-align': headPositionStyles.align,
+                        '--lw-table-row-cell-head-position-justify': headPositionStyles.justify,
                     }}
                 >
                      {/* ヘッダー行 */}
@@ -936,57 +1048,68 @@ registerBlockType(metadata.name, {
                     )}
 
                     {/* データ行 */}
-                    {rows.map((row, rowIndex) => (
-                        <div 
-                            key={rowIndex} 
-                            className={`lw_table_row ${rowIndex === 0 ? 'first' : ''} ${rowIndex === rows.length - 1 ? 'last' : ''}`}
-                            role="row"
-                        >
-                            <div 
-                                className="cell row_head"
-                                role="rowheader"
-                                data-lw_font_set={fontFamilyRowHeader}
-                                style={{
-                                    background: headerBgColor,
-                                    color: headerTextColor,
-                                    fontWeight: fontWeightRowHeader,
-                                    lineHeight: lineHeightRowHeader,
-                                }}
+                    {rows.map((row, rowIndex) => {
+                        const effectiveAlign = row.cellAlign ? getPositionStyles(row.cellAlign) : null;
+                        return (
+                            <div
+                                key={rowIndex}
+                                className={`lw_table_row ${rowIndex === 0 ? 'first' : ''} ${rowIndex === rows.length - 1 ? 'last' : ''}`}
+                                role="row"
+                                data-cell-align={row.cellAlign || undefined}
                             >
-                                <RichText.Content
-                                    tagName="span"
-                                    className="text"
-                                    style = {{ lineHeight: lineHeightRowHeader,}}
-                                    value={row.header}
-                                />
+                                <div
+                                    className="cell row_head"
+                                    role="rowheader"
+                                    data-lw_font_set={fontFamilyRowHeader}
+                                    style={{
+                                        background: headerBgColor,
+                                        color: headerTextColor,
+                                        fontWeight: fontWeightRowHeader,
+                                        lineHeight: lineHeightRowHeader,
+                                    }}
+                                >
+                                    <RichText.Content
+                                        tagName="span"
+                                        className="text"
+                                        style = {{ lineHeight: lineHeightRowHeader,}}
+                                        value={row.header}
+                                    />
+                                </div>
+
+                                {row.cells && row.cells.map((cell, cellIndex) => (
+                                    cellIndex < columnCount - 1 && (
+                                        <div
+                                            key={cellIndex}
+                                            className="cell"
+                                            role="cell"
+                                            data-lw_font_set={fontFamilyCell}
+                                            style={{
+                                                background: cellBgColor,
+                                                color: cellTextColor,
+                                                fontWeight: fontWeightCell,
+                                                boxShadow: `0 0 3px ${shadowColor}`,
+                                                lineHeight: lineHeightCell,
+                                                ...(effectiveAlign && {
+                                                    textAlign: effectiveAlign.align,
+                                                    justifyContent: effectiveAlign.justify,
+                                                })
+                                            }}
+                                        >
+                                            <RichText.Content
+                                                tagName="span"
+                                                className="text"
+                                                style={{
+                                                    lineHeight: lineHeightCell,
+                                                    ...(effectiveAlign && { textAlign: effectiveAlign.align }),
+                                                }}
+                                                value={cell.content}
+                                            />
+                                        </div>
+                                    )
+                                ))}
                             </div>
-                            
-                            {row.cells && row.cells.map((cell, cellIndex) => (
-                                cellIndex < columnCount - 1 && (
-                                    <div 
-                                        key={cellIndex} 
-                                        className="cell"
-                                        role="cell"
-                                        data-lw_font_set={fontFamilyCell}
-                                        style={{
-                                            background: cellBgColor,
-                                            color: cellTextColor,
-                                            fontWeight: fontWeightCell,
-                                            boxShadow: `0 0 3px ${shadowColor}`,
-                                            lineHeight: lineHeightCell
-                                        }}
-                                    >
-                                        <RichText.Content
-                                            tagName="span"
-                                            className="text"
-                                            style={{ lineHeight: lineHeightCell, }}
-                                            value={cell.content}
-                                        />
-                                    </div>
-                                )
-                            ))}
-                        </div>
-                    ))}
+                        );
+                    })}
                 </div>
             </div>
         );

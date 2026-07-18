@@ -41,8 +41,9 @@ registerBlockType( metadata.name, {
 
 		/* コンテンツ更新 */
 		const updateContent = ( index, key, value ) => {
-			const newContents       = [ ...contents ];
-			newContents[ index ][ key ] = value;
+			const newContents = contents.map( ( content, i ) =>
+				i === index ? { ...content, [ key ]: value } : content
+			);
 			setAttributes( { contents: newContents } );
 		};
 
@@ -55,7 +56,7 @@ registerBlockType( metadata.name, {
 			<div {...blockProps}>
 				{/* === サイドバー === */}
 				<InspectorControls>
-					<PanelBody title="全体のフォント設定">
+					<PanelBody title="フォント設定">
 						<SelectControl
 							label="フォントの種類"
 							value={ fontSet }

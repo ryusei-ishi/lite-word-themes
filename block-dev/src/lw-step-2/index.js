@@ -19,7 +19,7 @@ registerBlockType(metadata.name, {
         const { attributes, setAttributes } = props;
         const { bgGradient,  ulMaxWidth,
                 fontH3, fontWeightH3,
-                fontP,fontWeightP,  contents, colorLiSvg 
+                fontP,fontWeightP,  contents, colorLiSvg, borderWidth
             } = attributes;
 
         // コンテンツを追加
@@ -36,8 +36,7 @@ registerBlockType(metadata.name, {
 
         // コンテンツを更新
         const updateContent = (index, key, value) => {
-            const updatedContents = [...contents];
-            updatedContents[index][key] = value;
+            const updatedContents = contents.map((content, i) => i === index ? { ...content, [key]: value } : content);
             setAttributes({ contents: updatedContents });
         };
 
@@ -49,13 +48,21 @@ registerBlockType(metadata.name, {
             <>
                 <InspectorControls>
 
-                    <PanelBody title="リスト部分の設定">
+                    <PanelBody title="色設定">
                         <RangeControl
                             label='最大横幅'
                             value={ulMaxWidth}
                             onChange={(value) => setAttributes({ ulMaxWidth: value })}
                             min={600}
                             max={1280}
+                            step={1}
+                        />
+                        <RangeControl
+                            label='枠の太さ (px)'
+                            value={borderWidth}
+                            onChange={(value) => setAttributes({ borderWidth: value })}
+                            min={0}
+                            max={10}
                             step={1}
                         />
                         <p>枠の色</p>
@@ -100,7 +107,7 @@ registerBlockType(metadata.name, {
                 <div {...blockProps}>
                     <ul className="lw-step-2__inner" style={{maxWidth:ulMaxWidth}}>
                         {contents.map((content, index) => (
-                            <li className="lw-step-2__li" key={index} style={{borderColor:bgGradient}}>
+                            <li className="lw-step-2__li" key={index} style={{borderColor:bgGradient, borderWidth: borderWidth}}>
                                 <RichText
                                     tagName="h3"
                                     value={content.title}
@@ -134,13 +141,13 @@ registerBlockType(metadata.name, {
 
     save: function (props) {
         const { attributes } = props;
-        const { ulMaxWidth, fontH3, fontWeightH3, fontP, fontWeightP, contents, bgGradient, colorLiSvg } = attributes;
+        const { ulMaxWidth, fontH3, fontWeightH3, fontP, fontWeightP, contents, bgGradient, colorLiSvg, borderWidth } = attributes;
 
         return (
             <div className="lw-step-2">
                 <ul className="lw-step-2__inner" style={{ maxWidth: ulMaxWidth }}>
                     {contents.map((content, index) => (
-                        <li className="lw-step-2__li" key={index} style={{borderColor:bgGradient}}>
+                        <li className="lw-step-2__li" key={index} style={{borderColor:bgGradient, borderWidth: borderWidth}}>
                             <RichText.Content
                                 tagName="h3"
                                 value={content.title}

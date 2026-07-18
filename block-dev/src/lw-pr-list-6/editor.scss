@@ -1,0 +1,158 @@
+.lw-pr-list-6 {
+    container-type: inline-size;
+
+    .custom_list_items {
+        display: grid;
+        grid-template-columns: repeat(var(--columns-pc, 4), 1fr);
+        gap: 32px 8px;
+
+        @container (max-width: 799px) {
+            grid-template-columns: repeat(var(--columns-sp, 2), 1fr);
+        }
+    }
+
+    .custom_item {
+        position: relative;
+
+        .image {
+            position: relative;
+            width: 100%;
+
+            img {
+                display: block;
+                width: 100%;
+                object-fit: cover;
+            }
+
+            .label {
+                position: absolute;
+                bottom: 0;
+                right: 0;
+                z-index: 10;
+                padding: 0.5em 1em;
+                min-width: 100px;
+                background: var(--list-6-label-bg, var(--color-accent, #007cba));
+                color: var(--list-6-label-color, #fff);
+                font-size: var(--list-6-label-fontsize-pc, 17px);
+                text-align: center;
+
+                &:empty::before {
+                    content: "ラベル";
+                    opacity: 0.5;
+                }
+            }
+        }
+    }
+
+    /* 画像ラッパー */
+    .lw-pr-list-6__image-wrap {
+        position: relative;
+
+        &:hover .lw-pr-list-6__image-remove {
+            opacity: 1;
+        }
+    }
+
+    /* 画像削除ボタン */
+    .lw-pr-list-6__image-remove {
+        position: absolute;
+        top: 4px;
+        right: 4px;
+        width: 24px;
+        height: 24px;
+        padding: 0;
+        font-size: 16px;
+        font-weight: bold;
+        color: #fff;
+        background: rgba(0, 0, 0, 0.6);
+        border: none;
+        border-radius: 50%;
+        cursor: pointer;
+        opacity: 0;
+        transition: opacity 0.15s ease;
+
+        &:hover {
+            background: #cc1818;
+        }
+    }
+
+    /* 画像プレースホルダー */
+    .lw-pr-list-6__image-placeholder {
+        font-size: 12px;
+        color: #666;
+        border: 2px dashed #ccc;
+        transition: all 0.15s ease;
+
+        &:hover {
+            border-color: #007cba;
+            color: #007cba;
+        }
+    }
+
+    /* アイテムコントロール */
+    .lw-pr-list-6__item-controls {
+        display: flex;
+        gap: 4px;
+        justify-content: center;
+        margin-top: 8px;
+    }
+
+    /* 移動ボタン */
+    .lw-pr-list-6__move-btn {
+        padding: 4px 10px;
+        font-size: 12px;
+        color: #1e1e1e;
+        background: #fff;
+        border: 1px solid #949494;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+
+        &:hover:not(:disabled) {
+            background: #f0f0f0;
+            border-color: #1e1e1e;
+        }
+
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+    }
+
+    /* アイテム削除ボタン */
+    .lw-pr-list-6__item-remove {
+        padding: 4px 10px;
+        font-size: 12px;
+        color: #cc1818;
+        background: #fff;
+        border: 1px solid #cc1818;
+        border-radius: 3px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+
+        &:hover {
+            background: #cc1818;
+            color: #fff;
+        }
+    }
+
+    /* アイテム追加ボタン */
+    .lw-pr-list-6__add-btn {
+        display: block;
+        width: 100%;
+        margin-top: 20px;
+        padding: 12px 24px;
+        font-size: 14px;
+        font-weight: 500;
+        color: #fff;
+        background: #007cba;
+        border: none;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.15s ease;
+
+        &:hover {
+            background: #006ba1;
+        }
+    }
+}

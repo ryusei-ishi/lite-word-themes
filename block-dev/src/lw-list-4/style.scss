@@ -60,6 +60,12 @@
         display: flex;
         align-items: center;
         justify-content: center;
+        &.position_top{
+          align-items: start;
+          svg, img{
+            margin-top: 0.2em;
+          }
+        }
         svg,img{
           width: 100%;
           height: auto;

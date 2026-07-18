@@ -257,8 +257,14 @@ if ( is_array( $settings ) ) {
 			}
 	
 			/* ── 宛先判定 ── */
-			$recipients = array_filter( preg_split( '/[;,]+/', trim( $to_addr ) ), 'is_email' );
-			if ( empty( $recipients ) ) continue;
+			$recipients = array_filter(
+				array_map( 'sanitize_email', preg_split( '/[;,]+/', trim( $to_addr ) ) ),
+				'is_email'
+			);
+			if ( empty( $recipients ) ) {
+				error_log( '[LW Mail Form] サンクスメール送信先が無効です: ' . $to_addr );
+				continue;
+			}
 	
 			/* ── 行間 1.8em の HTML 本文へ変換 ── */
 			$body_html = '<html><body style="font-family:Arial, sans-serif; line-height:1.8;">'

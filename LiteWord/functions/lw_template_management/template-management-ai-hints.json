@@ -1,0 +1,458 @@
+{
+	"_meta": {
+		"description": "LiteWordテンプレート管理・プレミアム認証・テーマ更新のAI向けメタ情報。3機能は「LiteWord SHOPとの連携」という共通テーマで繋がっている。WordPressの動作には一切影響しない。",
+		"version": "1.0",
+		"lastUpdated": "2026-03-21",
+		"scope": "lw_template_management/ + lw_premium_login/ + theme_update.php"
+	},
+
+	"overview": {
+		"aiDescription": "LiteWordテーマはLiteWord Studio（shop.lite-word.com）と連携し、プレミアム機能・テンプレート・テーマ更新を管理する。ユーザーがLiteWord Studioでアカウント作成→契約→WordPressサイト側でアクティベートする流れ。",
+		"shopUrl": "https://shop.lite-word.com",
+		"shopApiEndpoint": "/wp-json/liteword/v1/secure-purchase-history",
+		"connectionFlow": [
+			"1. ユーザーがLiteWord Studio（shop.lite-word.com）でアカウント作成",
+			"2. プレミアムプランを契約（または無料トライアル開始）",
+			"3. WordPress管理画面「Lwデータ反映処理」を開く",
+			"4. 「LiteWord Studioにログイン」ボタンでポップアップログイン",
+			"5. ログイン成功→アクセストークンが自動入力→アクティベート実行",
+			"6. APIがshop.lite-word.comに問い合わせ、購入履歴・契約状態を取得",
+			"7. wp_lw_template_settingテーブルにデータ保存",
+			"8. LW_HAS_SUBSCRIPTION定数がtrueになり、プレミアム機能が有効化"
+		],
+		"adminMenuLocation": "管理画面左メニュー「Lwデータ反映処理」（position: 24、dashicons-admin-generic）"
+	},
+
+	"templateManagement": {
+		"title": "テンプレート管理・データ反映処理",
+		"aiDescription": "LiteWord Studioで購入したテンプレート・ブロック・サブスクリプションをWordPressサイトに反映する機能。管理画面メニュー「Lwデータ反映処理」から操作する。",
+		"sourceFiles": {
+			"index.php": "メニュー登録・ルーティング・管理バーのステータス表示",
+			"lw_template_activate.php": "アクティベート画面UI（トークン入力→API認証→データ保存）",
+			"lw_template_activate_json.php": "JSONファイルアップロードによるアクティベート（代替手段）",
+			"lw_template_functions.php": "共通関数（テーブル作成・API処理・LwTemplateSettingクラス）",
+			"lw_template_list.php": "ブロック一覧表示（無料/有料/購入済みの表示分け）",
+			"lw_check_trial_popup.php": "14日間無料トライアルのポップアップ表示・管理"
+		},
+
+		"database": {
+			"tableName": "wp_lw_template_setting",
+			"aiDescription": "テンプレート・ブロック・サブスクリプションの購入状態を管理するテーブル。テーマ有効化時またはログイン時に自動作成される。",
+			"columns": {
+				"id": "bigint(20) AUTO_INCREMENT PRIMARY KEY",
+				"template_id": "varchar(255) — テンプレートやブロックの識別ID",
+				"timestamp": "datetime — 購入日時またはアクティベート日時",
+				"active_flag": "tinyint(1) — 1=有効、0=無効"
+			},
+			"specialTemplateIds": {
+				"paid-lw-parts-sub-hbjkjhkljh": {
+					"aiDescription": "サブスクリプション（月額/年額）の購入フラグ。active_flag=1ならサブスクリプション契約中。",
+					"userGuide": "LiteWord Studioでプレミアムプランを契約すると自動的にこのIDが登録される。"
+				},
+				"sub_pre_set": {
+					"aiDescription": "サブスクリプションのドメイン認証フラグ。契約があっても、登録ドメインと一致しないとactive_flag=0になる。",
+					"userGuide": "サブスクリプション契約とドメイン認証の両方が揃って初めてプレミアム機能が有効になる。"
+				},
+				"trial_period": {
+					"aiDescription": "14日間無料トライアルのフラグ。timestampが開始日、active_flag=1なら試用中。14日経過後は自動的に0になる。",
+					"userGuide": "トライアル終了後60日経過すると、再度トライアルオファーが表示される。"
+				}
+			}
+		},
+
+		"activateProcess": {
+			"title": "アクティベート処理",
+			"aiDescription": "ユーザーがトークンを入力してアクティベートボタンを押すと、shop.lite-word.comのAPIに問い合わせて購入履歴を取得し、ローカルDBに保存する。",
+			"steps": [
+				"1. トークンをuser_metaに保存（lw_target_shop_token）",
+				"2. APIリクエスト: GET /wp-json/liteword/v1/secure-purchase-history?token={token}&domain={current_domain}",
+				"3. レスポンスからpurchases配列を処理",
+				"4. 既存テンプレートのactive_flagを一旦0にリセット（購入解除されたものを無効化）",
+				"5. trial_periodはリセット対象から除外",
+				"6. 各購入アイテムのallowed_domainとサイトURLを照合",
+				"7. ドメインが一致すればactive_flag=1、不一致なら0で保存",
+				"8. サブスクリプション情報（subscription.is_active）も処理",
+				"9. lw_expansion_base_functionsオプションをtrueに設定"
+			],
+			"autoFetchOnLogin": {
+				"aiDescription": "管理者がWordPressにログインすると、保存済みトークンを使ってAPIに自動問い合わせし、テンプレートデータを最新化する。",
+				"hook": "wp_login",
+				"function": "lw_auto_fetch_templates_on_login",
+				"condition": "管理者権限 + トークン保存済み"
+			}
+		},
+
+		"domainValidation": {
+			"aiDescription": "テンプレートやサブスクリプションはドメイン単位で管理される。購入時に登録したドメインと、WordPressサイトのドメインが一致しないとactive_flag=0になる。",
+			"normalization": "www.有無・http/https・末尾スラッシュの違いを吸収して比較する（lw_normalize_url_parts関数）",
+			"subdomainSupport": "サブスクリプションの場合、サブドメインも許可される（例: blog.example.com は example.com の契約で利用可能）"
+		},
+
+		"resetAndDelete": {
+			"resetTemplates": {
+				"aiDescription": "wp_lw_template_settingテーブルを全件削除（TRUNCATE）する。テンプレートデータのリセット用。",
+				"nonce": "lw_reset_templates_action"
+			},
+			"deleteToken": {
+				"aiDescription": "user_metaからlw_target_shop_tokenとlw_shop_user_tokenを削除する。LiteWord Studioとの接続解除用。",
+				"nonce": "lw_delete_token_action"
+			}
+		},
+
+		"blockTypes": {
+			"aiDescription": "ブロック一覧画面では、各ブロックを無料ブロック・有料ブロック（購入済み/未購入）に分類して表示する。",
+			"types": {
+				"block": "無料ブロック — 全ユーザーが利用可能",
+				"paid_block_purchased": "有料ブロック（購入済み）— active_flag=1のブロック",
+				"paid_block_not_purchased": "有料ブロック（未購入）— 価格表示と購入ページリンクを表示"
+			}
+		},
+
+		"outrightPurchaseBlocks": {
+			"aiDescription": "買い切り専用ブロックはサブスクリプションに含まれない。個別購入またはテンプレートセット購入が必要。テンプレートセットに含まれるブロックは、そのテンプレートが有効なら利用可能。",
+			"function": "block_Outright_purchase_only()",
+			"examples": [
+				"shin-gas-station-01系ブロック（template_001またはshin_gas_station_01の購入が必要）",
+				"kaoru_lp_01系ブロック（paid-block-fv-8, paid-block-cta-3）"
+			]
+		},
+
+		"adminBarStatus": {
+			"aiDescription": "管理バー右側にLiteWordの契約状態を表示する。プレミアムなら金色の「LiteWordプレミアム」、フリーならグレーの「LiteWordフリー」。",
+			"hook": "admin_bar_menu",
+			"function": "add_liteword_status_to_admin_bar"
+		}
+	},
+
+	"premiumSubscription": {
+		"title": "プレミアム認証・判定ロジック",
+		"aiDescription": "LW_HAS_SUBSCRIPTIONはPHP定数（bool）で、テーマ読み込み時に一度だけ判定される。プレミアム機能の表示/非表示はこの定数で制御される。JavaScriptにもwindow.LW_HAS_SUBSCRIPTIONとして出力される。",
+
+		"constant": {
+			"name": "LW_HAS_SUBSCRIPTION",
+			"type": "bool",
+			"definedIn": "lw_template_functions.php",
+			"function": "lw_define_subscription_constant()",
+			"trueConditions": [
+				"paid-lw-parts-sub-hbjkjhkljh の active_flag が 1（サブスクリプション契約中）",
+				"sub_pre_set の active_flag が 1（ドメイン認証済みサブスクリプション）",
+				"trial_period の active_flag が 1 かつ 開始日から14日以内（トライアル期間中）"
+			],
+			"userGuide": "この定数がtrueの場合、プレミアム専用ブロック・フォント・ローディングアニメなど全てのプレミアム機能が利用可能になる。"
+		},
+
+		"helperFunctions": {
+			"lw_is_subscription_active": {
+				"aiDescription": "サブスクリプション（有料契約）が有効かどうかを判定する。トライアルは含まない。",
+				"returns": "bool — paid-lw-parts-sub-hbjkjhkljh または sub_pre_set のactive_flagが1ならtrue"
+			},
+			"lw_is_trial_active": {
+				"aiDescription": "トライアル期間が有効かどうかを判定する。サブスクリプション契約者はfalseを返す。",
+				"returns": "bool — trial_periodのactive_flagが1かつ残り日数>0ならtrue"
+			},
+			"lw_get_trial_days_remaining": {
+				"aiDescription": "トライアルの残り日数を返す。",
+				"returns": "int — 残り日数（0以上）"
+			}
+		}
+	},
+
+	"trial": {
+		"title": "14日間無料トライアル",
+		"aiDescription": "初回ログイン時にプレミアム機能の14日間無料体験を提案するポップアップシステム。ユーザーは「試してみる」「今はスキップ」を選択できる。",
+		"sourceFile": "lw_check_trial_popup.php",
+
+		"lifecycle": {
+			"firstLogin": {
+				"aiDescription": "trial_periodレコードが存在しない場合、初回試用開始ポップアップを表示する。",
+				"popup": "lw_render_trial_start_popup() — プレミアム機能の紹介+「14日間無料で試す」ボタン"
+			},
+			"duringTrial": {
+				"aiDescription": "試用期間中は残り5日以下になると警告ポップアップを表示する。",
+				"popup": "lw_render_trial_warning_popup() — 残り日数+「プレミアムプランに加入する」リンク"
+			},
+			"trialExpired": {
+				"aiDescription": "14日間経過後、期限切れポップアップを1回だけ表示する。同時にactive_flagを0に更新。",
+				"popup": "lw_render_trial_expired_popup() — 期限切れ通知+「プレミアムプランに加入する」リンク"
+			},
+			"retrial": {
+				"aiDescription": "トライアル終了後60日経過すると、再度トライアルオファーが表示される。何度でも利用可能。",
+				"condition": "trial_period.active_flag == 0 かつ timestamp から60日以上経過"
+			}
+		},
+
+		"ajaxActions": {
+			"lw_activate_trial": {
+				"aiDescription": "トライアルを開始する。trial_periodレコードを作成（または更新）し、active_flag=1、timestamp=現在時刻にする。",
+				"nonce": "lw_trial_nonce"
+			},
+			"lw_skip_trial_for_60days": {
+				"aiDescription": "トライアルを60日間スキップする。trial_periodレコードを作成（または更新）し、active_flag=0、timestamp=現在時刻にする。",
+				"nonce": "lw_skip_trial_nonce"
+			}
+		},
+
+		"adminNotice": {
+			"aiDescription": "トライアル期間中は管理画面上部に残り日数を表示する通知バーが出る。サブスクリプション契約者には表示しない。",
+			"hook": "admin_notices",
+			"function": "lw_show_trial_notice"
+		}
+	},
+
+	"premiumLogin": {
+		"title": "LiteWord Studioログインポップアップ",
+		"aiDescription": "WordPress管理画面からLiteWord Studio（shop.lite-word.com）にログインするためのポップアップ機能。data-lw-shop-action='login'属性を持つ要素をクリックすると表示される。",
+		"sourceFiles": {
+			"setup.php": "ショップURL自動設定（ローカル環境 vs 本番環境の切り替え）",
+			"popup.php": "ポップアップHTML/CSS/JS出力・AJAX処理"
+		},
+
+		"shopUrlSetup": {
+			"aiDescription": "admin_init時にホスト名を判定し、ローカル環境ならlocalhost用URL、本番環境ならshop.lite-word.comをlw_shop_urlオプションに保存する。",
+			"function": "lw_setup_local_shop_url",
+			"option": "lw_shop_url"
+		},
+
+		"popupFlow": {
+			"noToken": {
+				"aiDescription": "トークンがない場合（初回接続）。メールアドレスとパスワードの入力フォームを表示。ログイン成功→トークン保存→アクティベートページなら自動アクティベート。",
+				"steps": [
+					"1. ユーザーがメールアドレス/ユーザー名とパスワードを入力",
+					"2. shop.lite-word.com/wp-json/liteword/v1/auth にPOSTリクエスト",
+					"3. 認証成功→アクセストークンをuser_metaに保存（lw_shop_user_token）",
+					"4. アクティベートページの場合、lw-activate-login-successイベントを発火",
+					"5. トークンがlw_template_activate.phpの入力欄に自動セットされ、フォーム送信"
+				]
+			},
+			"hasToken": {
+				"aiDescription": "トークンがある場合（2回目以降）。保存済みトークンで自動認証を試み、成功すれば「LiteWord Studioに接続済み」を表示。ドメイン未認証の場合は再度パスワード入力を求める。",
+				"states": {
+					"verified": "認証済み — 「プレミアムプランにアップグレード」「アカウント情報の確認」ボタンを表示",
+					"authRequired": "ドメイン未認証 — パスワード入力フォームを表示",
+					"tokenRequired": "トークン無効 — トークン再設定を促すメッセージを表示"
+				}
+			}
+		},
+
+		"ajaxAction": {
+			"name": "lw_save_shop_token",
+			"aiDescription": "トークンをuser_metaに保存する。ログインポップアップからの認証成功時に呼ばれる。",
+			"nonce": "lw_save_shop_token",
+			"userMetaKey": "lw_shop_user_token"
+		},
+
+		"userMetaKeys": {
+			"lw_target_shop_token": "アクティベート用トークン（テンプレート取得APIの認証に使用）",
+			"lw_shop_user_token": "ログインポップアップ用トークン（LiteWord Studioへのシングルサインオンに使用）"
+		},
+
+		"triggerAttribute": {
+			"aiDescription": "HTMLのdata-lw-shop-action='login'属性を持つ要素をクリックするとポップアップが開く。data-redirect属性でログイン後のリダイレクト先を指定可能。",
+			"example": "<a href='#' data-lw-shop-action='login' data-redirect='/account/'>マイページ</a>"
+		}
+	},
+
+	"themeUpdate": {
+		"title": "テーマ自動更新",
+		"aiDescription": "LiteWordテーマの更新をWordPress標準の更新システムに統合する機能。lite-word.comのJSONファイルから最新バージョン情報を取得し、更新がある場合は管理画面に通知・ワンクリック更新ボタンを表示する。",
+		"sourceFile": "theme_update.php",
+
+		"updateCheck": {
+			"aiDescription": "pre_set_site_transient_update_themes フィルターでWordPressの更新チェックに独自の更新情報を流し込む。",
+			"function": "lw_check_for_theme_update",
+			"updateJsonUrl": "https://lite-word.com/theme-files/theme-update.json",
+			"jsonFormat": {
+				"version": "最新バージョン番号（例: 2.5.0）",
+				"download_url": "テーマZIPファイルのURL",
+				"changelog": "更新内容の説明テキスト"
+			},
+			"process": [
+				"1. theme-update.jsonをGETで取得",
+				"2. 現在のテーマバージョンと比較（version_compare）",
+				"3. 新しいバージョンがある場合、$transient->response に更新情報を追加",
+				"4. WordPressが標準の更新フローで処理（外観>テーマ の更新通知も自動表示）"
+			],
+			"userGuide": "テーマの更新通知は「外観 > テーマ」と「ダッシュボード > 更新」に表示される。自動更新を有効にすることも可能。"
+		},
+
+		"updateNotice": {
+			"aiDescription": "管理画面のadmin_noticesに更新通知バーを表示する。グラデーション背景のリッチなデザイン。「今すぐ更新」ボタンと「更新ページへ」ボタンの2つ。",
+			"function": "lw_theme_update_notice",
+			"excludedPages": "ダッシュボード（dashboard）では表示しない（カスタムエリアで表示するため）",
+			"permission": "update_themes権限を持つユーザーのみ"
+		},
+
+		"dashboardNotice": {
+			"aiDescription": "ダッシュボードのカスタムエリア用のHTML出力関数。admin_noticesとは別にダッシュボードウィジェットから呼ばれる。",
+			"function": "lw_get_theme_update_notice_html",
+			"returns": "string — 更新通知のHTML（更新がなければ空文字列）"
+		},
+
+		"dashboardNoticeCleanup": {
+			"aiDescription": "ダッシュボードではWordPress標準のadmin_noticesとall_admin_noticesを全て除去し、LiteWord独自の通知のみ表示する。",
+			"function": "lw_hide_dashboard_notices",
+			"hook": "admin_head-index.php"
+		}
+	},
+
+	"troubleshooting": {
+		"title": "トラブルシューティング",
+		"aiDescription": "認証・テンプレート・更新に関するよくある問題と解決方法。",
+		"issues": {
+			"activateFailed": {
+				"symptom": "アクティベートに失敗しました。トークンをご確認ください。",
+				"causes": [
+					"トークンが間違っている（コピーミス）",
+					"LiteWord Studioのアカウントが無効化されている",
+					"API通信エラー（shop.lite-word.comにアクセスできない）"
+				],
+				"solutions": [
+					"LiteWord Studioにログインしてトークンを再取得",
+					"トークンの前後に空白が入っていないか確認",
+					"サーバーのファイアウォールでshop.lite-word.comへのアクセスがブロックされていないか確認"
+				]
+			},
+			"premiumNotActive": {
+				"symptom": "プレミアムプランを契約しているのに管理バーに「LiteWordフリー」と表示される",
+				"causes": [
+					"ドメインがLiteWord Studioの登録ドメインと一致していない",
+					"アクティベートが完了していない",
+					"サブスクリプションの支払いが失敗している"
+				],
+				"solutions": [
+					"「Lwデータ反映処理」画面でアクティベートを再実行",
+					"LiteWord Studioでドメイン登録を確認",
+					"www有無・http/httpsの違いを確認"
+				]
+			},
+			"trialNotStarting": {
+				"symptom": "トライアルのポップアップが表示されない",
+				"causes": [
+					"既にサブスクリプション契約中（ポップアップは非表示になる）",
+					"前回のトライアル終了から60日未経過",
+					"管理者権限がない"
+				],
+				"solutions": [
+					"lw_is_subscription_active()の戻り値を確認",
+					"wp_lw_template_settingテーブルのtrial_periodレコードを確認"
+				]
+			},
+			"updateNotShowing": {
+				"symptom": "テーマの更新通知が表示されない",
+				"causes": [
+					"theme-update.jsonにアクセスできない",
+					"現在のバージョンが最新と同じ",
+					"update_themes権限がない"
+				],
+				"solutions": [
+					"https://lite-word.com/theme-files/theme-update.json にブラウザでアクセスして確認",
+					"WordPressの更新チェックを手動実行（「ダッシュボード > 更新」で「再確認」）"
+				]
+			},
+			"domainMismatch": {
+				"symptom": "テンプレートのactive_flagが0になる",
+				"causes": [
+					"APIレスポンスのallowed_domainとサイトURLが不一致",
+					"サブドメインの扱い（サブスクリプションはサブドメイン許可、買い切りは完全一致）"
+				],
+				"solutions": [
+					"LiteWord Studioのドメイン設定でサイトのドメインを追加",
+					"home_url()の値をデバッグログで確認"
+				]
+			}
+		}
+	},
+
+	"LwTemplateSettingClass": {
+		"title": "LwTemplateSetting クラス",
+		"aiDescription": "テンプレート設定テーブルへのアクセスを提供するクラス。キャッシュ機能付きで、同一リクエスト内でのDB問い合わせ回数を最小化する。",
+		"sourceFile": "lw_template_functions.php",
+		"methods": {
+			"get_template_settings": {
+				"aiDescription": "全データを取得（キャッシュなし）",
+				"returns": "array"
+			},
+			"get_template_setting_by_id": {
+				"aiDescription": "指定template_idのデータを取得（キャッシュあり）",
+				"params": "string $template_id",
+				"returns": "array|null"
+			},
+			"has_template_id": {
+				"aiDescription": "template_idが存在するか判定（キャッシュあり）",
+				"params": "string $template_id",
+				"returns": "bool"
+			},
+			"get_active_templates": {
+				"aiDescription": "active_flag=1のデータを配列で取得",
+				"returns": "array"
+			},
+			"get_active_template_ids": {
+				"aiDescription": "有効なtemplate_idの配列を返す（キャッシュあり）",
+				"returns": "array"
+			},
+			"save_template_setting": {
+				"aiDescription": "新しいテンプレート設定を保存。キャッシュは自動クリアされる。",
+				"params": "string $template_id, int $active_flag = 1",
+				"returns": "bool"
+			}
+		}
+	},
+
+	"globalFunctions": {
+		"title": "グローバル関数一覧",
+		"aiDescription": "テンプレート管理で使用される主要なグローバル関数。",
+		"functions": {
+			"lw_define_subscription_constant": {
+				"aiDescription": "LW_HAS_SUBSCRIPTION定数の値を決定する。テーマ読み込み時に1回だけ呼ばれる。"
+			},
+			"lw_process_api_data_to_templates": {
+				"aiDescription": "APIレスポンスデータをパースしてwp_lw_template_settingテーブルに保存する共通関数。アクティベートとログイン時の自動取得の両方で使用。",
+				"params": "array $data — APIレスポンスのデコード済みデータ",
+				"returns": "bool — 成功/失敗"
+			},
+			"lw_save_or_update_template": {
+				"aiDescription": "テンプレート設定を保存または更新する。存在チェック→INSERT/UPDATE。",
+				"params": "string $template_id, string $timestamp, int $active_flag"
+			},
+			"lw_active_template_ids": {
+				"aiDescription": "有効なテンプレートIDの配列を返す。テンプレートに紐づくブロックIDも展開して含める。",
+				"returns": "array"
+			},
+			"lw_active_page_template": {
+				"aiDescription": "有効なページテンプレートに紐づくブロックIDの配列を返す。",
+				"returns": "array"
+			},
+			"block_Outright_purchase_only": {
+				"aiDescription": "買い切り専用ブロックのうち、未購入のブロックIDの配列を返す。サブスクリプションがあっても個別購入していなければ除外対象。",
+				"returns": "array"
+			},
+			"templateSettingCheck": {
+				"aiDescription": "指定IDのテンプレートがテーブルに存在するかを判定する。",
+				"params": "string $id",
+				"returns": "bool"
+			},
+			"create_lw_template_setting_table": {
+				"aiDescription": "wp_lw_template_settingテーブルを作成する。テーブルが存在しない場合のみ実行。",
+				"triggers": "after_switch_theme, wp_login（管理者のみ）"
+			}
+		}
+	},
+
+	"wpOptions": {
+		"title": "使用するwp_optionsキー",
+		"keys": {
+			"lw_shop_url": "LiteWord StudioのURL（ローカル/本番で自動切替）",
+			"lw_shop_login_id": "LiteWord StudioのログインID（APIレスポンスから取得）",
+			"lw_expansion_base_functions": "拡張機能の基本設定フラグ（アクティベート成功時にtrue）"
+		}
+	},
+
+	"wpUserMetaKeys": {
+		"title": "使用するuser_metaキー",
+		"keys": {
+			"lw_target_shop_token": "テンプレート取得API用のアクセストークン",
+			"lw_shop_user_token": "LiteWord Studioログインポップアップ用のアクセストークン",
+			"lw_trial_expired_shown_{date}": "トライアル期限切れポップアップの表示済みフラグ"
+		}
+	}
+}

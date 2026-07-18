@@ -6,6 +6,15 @@
 	"title": "ソリューション 02",
 	"category": "lw-content",
 	"icon": "lightbulb",
+	"aiHint": {
+		"description": "ソリューションカード。タイトル+画像+テキストの配列。課題解決の提案に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"title",
+			"items"
+		],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -66,11 +75,5 @@
 		}
 	},
 	"editorScript": "file:./paid-block-solution-2.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 2
 }

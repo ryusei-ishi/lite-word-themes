@@ -11,9 +11,12 @@
 
     // WordPress API の存在確認
     if (!window.wp || !window.wp.data || !window.MyThemeSettings) {
-        console.warn('WDL Dynamic Styles: Required WordPress APIs or MyThemeSettings not available');
         return;
     }
+
+    // デバッグモード（URLに?wdl_debug=1がある場合のみログ出力）
+    var WDL_DEBUG = window.location.search.includes('wdl_debug=1');
+    var log = WDL_DEBUG ? console.log.bind(console, '[WDL]') : function() {};
 
     // 初期読み込みフラグ（ページロード時のみtrue、自動保存時はfalse）
     var isInitialPageLoad = true;
@@ -173,7 +176,9 @@
 
     // ブロック名からCSSディレクトリ名へのマッピング
     var blockSlugMap = {
-        'lw-button-01': 'lw-button-1'
+        'lw-button-01': 'lw-button-1',
+        'lw-button-02': 'lw-button-2',
+        'lw-button-03': 'lw-button-3'
     };
 
     class WDLDynamicStyleLoader {
@@ -285,7 +290,7 @@
                 if (iframe) {
                     // iframeのload イベントを監視
                     iframe.addEventListener('load', function() {
-                        console.log('WDL Dynamic Styles: iframe loaded, re-injecting styles');
+                        log('iframe loaded, re-injecting styles');
                         self.reinjectAllStylesToIframe();
                     });
 
@@ -307,7 +312,7 @@
                     mutation.addedNodes.forEach(function(node) {
                         if (node.tagName === 'IFRAME' &&
                             (node.name === 'editor-canvas' || node.classList.contains('editor-canvas'))) {
-                            console.log('WDL Dynamic Styles: New iframe detected');
+                            log('New iframe detected');
                             node.addEventListener('load', function() {
                                 self.reinjectAllStylesToIframe();
                             });
@@ -374,7 +379,7 @@
                 return;
             }
 
-            console.log('WDL Dynamic Styles: Starting enhanced block monitoring');
+            log('Starting enhanced block monitoring');
 
             var self = this;
             var previousBlockTypes = new Set();
@@ -384,7 +389,7 @@
                 clearTimeout(debounceTimer);
                 debounceTimer = setTimeout(function() {
                     self.checkForNewBlocks(previousBlockTypes);
-                }, 50);
+                }, 200);
             });
 
             var originalInsertBlocks = wp.data.dispatch('core/block-editor').insertBlocks;
@@ -424,7 +429,7 @@
                 });
 
                 if (newBlockTypes.length > 0) {
-                    console.log('WDL Dynamic Styles: New blocks detected:', newBlockTypes);
+                    log('New blocks detected:', newBlockTypes);
                     newBlockTypes.forEach(function(blockType) {
                         self.loadBlockStyle(blockType, true);
                     });
@@ -489,7 +494,7 @@
                 var self = this;
 
                 if (currentBlockTypes.length > 0) {
-                    console.log('WDL Dynamic Styles: Loading existing blocks:', currentBlockTypes);
+                    log('Loading existing blocks:', currentBlockTypes);
 
                     var loadedCount = 0;
                     var totalCount = currentBlockTypes.length;
@@ -621,7 +626,6 @@
                     self.pendingStyles.delete(blockType);
                     self.loadedStyles.add(blockType);
                     self.forceRemoveAllLoadingOverlays();
-                    self.forceEditorRefresh();
                 }
             };
 
@@ -716,7 +720,6 @@
                         self.loadedStyles.add(blockType);
                         self.retryAttempts.delete(blockType);
                         self.removeLoadingOverlay(blockType);
-                        self.forceEditorRefresh();
                         if (onComplete) onComplete();
                     }
                 };
@@ -778,13 +781,13 @@
             link.type = 'text/css';
 
             link.onerror = function() {
-                console.warn('WDL Dynamic Styles: Failed to load', type, 'stylesheet:', href);
+                log('Failed to load', type, 'stylesheet:', href);
 
                 var attempts = self.retryAttempts.get(blockType) || 0;
                 if (attempts < self.maxRetries) {
                     self.retryAttempts.set(blockType, attempts + 1);
                     setTimeout(function() {
-                        console.log('WDL Dynamic Styles: Retrying load for', blockType);
+                        log('Retrying load for', blockType);
                         self.loadStylesheet(id, href, type, blockType, onSuccess, onError);
                     }, 500 * (attempts + 1));
                 } else {
@@ -793,7 +796,7 @@
             };
 
             link.onload = function() {
-                console.log('WDL Dynamic Styles: Successfully loaded', type, 'stylesheet for:', blockType);
+                log('Successfully loaded', type, 'stylesheet for:', blockType);
                 if (onSuccess) onSuccess();
             };
 
@@ -816,11 +819,11 @@
                         iframeLink.href = href;
                         iframeLink.type = 'text/css';
                         iframeDoc.head.appendChild(iframeLink);
-                        console.log('WDL Dynamic Styles: Injected to iframe:', id);
+                        log('Injected to iframe:', id);
                     }
                 } catch (e) {
                     // クロスオリジンでアクセスできない場合は無視
-                    console.warn('WDL Dynamic Styles: Cannot access iframe:', e.message);
+                    log('Cannot access iframe:', e.message);
                 }
             });
         }
@@ -847,7 +850,7 @@
             this.pendingStyles.clear();
             this.pendingBlockElements.clear();
             this.retryAttempts.clear();
-            console.log('WDL Dynamic Styles: Monitoring stopped');
+            log('Monitoring stopped');
         }
     }
 

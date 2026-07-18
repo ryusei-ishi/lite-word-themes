@@ -9,67 +9,33 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "カード型リスト。ボーダー+背景色付きカード。アイコン画像も設定可能。1〜3カラム対応",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": ["iconUrl"]
+	},
 	"attributes": {
-		"fontLi": {
-			"type": "string",
-			"default": ""
-		},
-		"fontWeightLi": {
-			"type": "string",
-			"default": ""
-		},
-		"sizeLi": {
-			"type": "string",
-			"default": "size_m"
-		},
-		"textColor": {
-			"type": "string",
-			"default": ""
-		},
-		"colorLiSvg": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
+		"fontLi": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"fontWeightLi": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"sizeLi": { "type": "string", "default": "size_m", "aiHint": { "skip": true } },
+		"textColor": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"colorLiSvg": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
 		"iconUrl": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "role": "image", "note": "アイコン画像URL。省略可" }
 		},
-		"iconSize": {
-			"type": "number",
-			"default": 1.2
-		},
-		"borderColor": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"borderWidth": {
-			"type": "number",
-			"default": 2
-		},
-		"borderStyle": {
-			"type": "string",
-			"default": "solid"
-		},
-		"borderRadius": {
-			"type": "number",
-			"default": 0.5
-		},
-		"maxWidth": {
-			"type": "number",
-			"default": 800
-		},
-		"bgColor": {
-			"type": "string",
-			"default": "#fff"
-		},
-		"colClass": {
-			"type": "string",
-			"default": "clm_1"
-		},
-		"noBorder": {
-			"type": "boolean",
-			"default": false
-		},
+		"iconSize": { "type": "number", "default": 1.2, "aiHint": { "skip": true } },
+		"iconPositionTop": { "type": "boolean", "default": false, "aiHint": { "skip": true } },
+		"borderColor": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
+		"borderWidth": { "type": "number", "default": 2, "aiHint": { "skip": true } },
+		"borderStyle": { "type": "string", "default": "solid", "aiHint": { "skip": true } },
+		"borderRadius": { "type": "number", "default": 0.5, "aiHint": { "skip": true } },
+		"maxWidth": { "type": "number", "default": 800, "aiHint": { "skip": true } },
+		"bgColor": { "type": "string", "default": "#fff", "aiHint": { "skip": true } },
+		"colClass": { "type": "string", "default": "clm_1", "aiHint": { "skip": true } },
+		"noBorder": { "type": "boolean", "default": false, "aiHint": { "skip": true } },
 		"contents": {
 			"type": "array",
 			"source": "query",
@@ -82,27 +48,14 @@
 				}
 			},
 			"default": [
-				{
-					"text": "リストテキストリストテキスト "
-				},
-				{
-					"text": "リストテキストリストテキスト "
-				},
-				{
-					"text": "リストテキストリストテキスト "
-				},
-				{
-					"text": "リストテキストリストテキスト "
-				}
-			]
+				{ "text": "リストテキストリストテキスト " },
+				{ "text": "リストテキストリストテキスト " },
+				{ "text": "リストテキストリストテキスト " },
+				{ "text": "リストテキストリストテキスト " }
+			],
+			"aiHint": { "role": "list", "contentGuide": "カード項目。3〜8個。各text 10〜30文字", "example": [{"text": "駅から徒歩3分の好立地"}] }
 		}
 	},
 	"editorScript": "file:./lw-list-4.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 4
 }

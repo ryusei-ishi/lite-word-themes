@@ -10,54 +10,64 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "位置調整対応見出し。メイン+サブタイトル。PC/SP別配置設定。角丸背景付き",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "subTitle"],
+		"imageAttributes": []
+	},
 	"attributes": {
 		"mainTitle": {
 			"type": "string",
-			"default": "カスタムタイトルカスタムタイトル"
+			"default": "カスタムタイトルカスタムタイトル",
+			"aiHint": { "role": "heading", "contentGuide": "セクション見出し。3〜20文字", "example": "よくあるご質問" }
 		},
 		"subTitle": {
 			"type": "string",
-			"default": "サブタイトルサブタイトル"
+			"default": "サブタイトルサブタイトル",
+			"aiHint": { "role": "subheading", "contentGuide": "英語表記 or 補足テキスト", "example": "FAQ" }
 		},
 		"headingLevel": {
 			"type": "number",
-			"default": 2
+			"default": 2,
+			"aiHint": { "skip": true }
 		},
 		"colorMain": {
 			"type": "string",
-			"default": "#0a71c0"
+			"default": "#0a71c0",
+			"aiHint": { "skip": true }
 		},
 		"colorMainText": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "skip": true }
 		},
 		"colorSubText": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "skip": true }
 		},
 		"maxWidth": {
 			"type": "number",
-			"default": 0
+			"default": 0,
+			"aiHint": { "skip": true }
 		},
 		"borderRadius": {
 			"type": "number",
-			"default": 6
+			"default": 6,
+			"aiHint": { "skip": true }
 		},
 		"alignmentPc": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "skip": true }
 		},
 		"alignmentSp": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "skip": true }
 		}
 	},
 	"editorScript": "file:./lw-pr-custom-title-14.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 14
 }

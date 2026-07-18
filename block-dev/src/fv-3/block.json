@@ -7,35 +7,41 @@
 	"category": "lw-firstview",
 	"icon": "format-image",
 	"editorScript": "file:./fv-3.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"supports": {
 		"anchor": true
+	},
+	"aiHint": {
+		"description": "画像のみのFV。テキスト属性なし。デザイナーが作った画像をそのまま表示する用途",
+		"excludeFromAutoSelect": true,
+		"excludeReason": "テキスト属性がないためAIがコンテンツを生成できない",
+		"contentAttributes": [],
+		"imageAttributes": ["imagePc", "imageSp"]
 	},
 	"attributes": {
 		"imagePc": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "role": "image", "note": "PC用FV画像URL" }
 		},
 		"imageSp": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "role": "image", "note": "SP用FV画像URL" }
 		},
 		"altText": {
 			"type": "string",
-			"default": ""
+			"default": "",
+			"aiHint": { "role": "alt", "contentGuide": "画像の説明。業種名+内容", "example": "美容サロンのメインビジュアル" }
 		},
 		"headingTag": {
 			"type": "string",
-			"default": "h1"
+			"default": "h1",
+			"aiHint": { "skip": true }
 		},
 		"widthSetting": {
 			"type": "string",
-			"default": "full"
+			"default": "full",
+			"aiHint": { "skip": true }
 		}
 	},
 	"no": 3

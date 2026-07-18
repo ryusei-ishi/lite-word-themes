@@ -7,9 +7,12 @@
                 display: block;
             }
         }
+        &:nth-last-of-type(1),
         &:nth-last-of-type(2),
         &:nth-last-of-type(3) {
             > ul {
+                left: initial;
+                right: -20px;
                 ul {
                     padding: 0;
                     left: initial;

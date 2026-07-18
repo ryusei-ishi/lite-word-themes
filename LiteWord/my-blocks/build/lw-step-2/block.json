@@ -10,12 +10,12 @@
 		"anchor": true
 	},
 	"editorScript": "file:./lw-step-2.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "カード型ステップ。ボーダー付きカード+番号+見出し+説明の繰り返し。サービス手順に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
 	"no": 2,
 	"attributes": {
 		"bgGradient": {
@@ -45,6 +45,10 @@
 		"colorLiSvg": {
 			"type": "string",
 			"default": "var(--color-main)"
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 1
 		},
 		"contents": {
 			"type": "array",

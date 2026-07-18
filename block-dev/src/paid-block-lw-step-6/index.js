@@ -68,8 +68,7 @@ registerBlockType(metadata.name, {
 			setAttributes({ contents: contents.filter((_, idx) => idx !== i) });
 
 		const updateContent = (i, key, val) => {
-			const arr = [...contents];
-			arr[i][key] = val;
+			const arr = contents.map((item, idx) => idx === i ? { ...item, [key]: val } : item);
 			setAttributes({ contents: arr });
 		};
 

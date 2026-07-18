@@ -19,6 +19,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/lw-voice-1/style.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-voice-1/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/lw-voice-1/block.json");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -82,8 +88,9 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
 
     // testimonial更新
     var updateTestimonial = function updateTestimonial(index, key, value) {
-      var updatedTestimonials = _toConsumableArray(testimonials);
-      updatedTestimonials[index][key] = value;
+      var updatedTestimonials = testimonials.map(function (testimonial, i) {
+        return i === index ? _objectSpread(_objectSpread({}, testimonial), {}, _defineProperty({}, key, value)) : testimonial;
+      });
       setAttributes({
         testimonials: updatedTestimonials
       });
@@ -137,7 +144,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         label: '背景色'
       }]
     }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u25A0\u30E1\u30A4\u30F3\u30BF\u30A4\u30C8\u30EB\u306E\u8A2D\u5B9A"
+      title: "\u30BF\u30A4\u30C8\u30EB\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         padding: '10px',
@@ -183,7 +190,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         label: 'テキストの色'
       }]
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u25A0\u30B3\u30E1\u30F3\u30C8\u5185\uFF1A\u540D\u524D\u90E8\u5206\u306E\u8A2D\u5B9A"
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A\uFF08\u540D\u524D\uFF09"
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         padding: '10px',
@@ -228,7 +235,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         label: '背景色'
       }]
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u25A0\u30B3\u30E1\u30F3\u30C8\u5185\uFF1A\u30BF\u30A4\u30C8\u30EB\u306E\u8A2D\u5B9A"
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A\uFF08\u30BF\u30A4\u30C8\u30EB\uFF09"
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         padding: '10px',
@@ -265,7 +272,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         label: 'テキストの色'
       }]
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u25A0\u30B3\u30E1\u30F3\u30C8\u5185\uFF1A\u672C\u6587\u306E\u8A2D\u5B9A"
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A\uFF08\u672C\u6587\uFF09"
     }, /*#__PURE__*/React.createElement("div", {
       style: {
         padding: '10px',
@@ -1137,7 +1144,7 @@ module.exports = window["wp"]["components"];
   \***********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-voice-1","version":"1.0.0","title":"お客様の声 01","category":"lw-voice","icon":"format-status","editorScript":"file:./lw-voice-1.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"testimonials":{"type":"array","source":"query","selector":".lw-voice-1__li","query":{"name":{"type":"string","source":"text","selector":".lw-voice-1__name"},"title":{"type":"string","source":"html","selector":".lw-voice-1__text h3"},"content":{"type":"string","source":"html","selector":".lw-voice-1__text p"}},"default":[{"name":"20代男性 Y.M様","title":"とても親切で、丁寧な対応でした。","content":"とても親切で、丁寧な対応でした。また、何かあればお願いしたいと思います。"},{"name":"30代女性 A.S様","title":"迅速な対応に感謝します。","content":"迅速な対応に感謝します。また利用したいと思います。"},{"name":"40代男性 K.T様","title":"期待以上のサービスでした。","content":"期待以上のサービスでした。友人にも勧めたいと思います。"}]},"h2Title":{"type":"string","default":"お客様の声"},"h2FontSet":{"type":"string","default":"Noto Sans JP"},"h2FontWeight":{"type":"string","default":"600"},"h2TextColor":{"type":"string","default":"#000000"},"nameTextColor":{"type":"string","default":"#ffffff"},"nameBackgroundColor":{"type":"string","default":"var(--color-main)"},"nameFontSet":{"type":"string","default":"Noto Sans JP"},"nameFontWeight":{"type":"string","default":"500"},"h3TextColor":{"type":"string","default":"#000000"},"h3FontSet":{"type":"string","default":"Noto Sans JP"},"h3FontWeight":{"type":"string","default":"500"},"pTextColor":{"type":"string","default":"#000000"},"pFontSet":{"type":"string","default":"Noto Sans JP"},"pFontWeight":{"type":"string","default":"500"},"backgroundColor":{"type":"string","default":"#eeeeee"}},"no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-voice-1","version":"1.0.0","title":"お客様の声 01","category":"lw-voice","icon":"format-status","editorScript":"file:./lw-voice-1.js","aiHint":{"description":"お客様の声カード。h2タイトル+名前+見出し+コメントの繰り返し。レビュー・体験談セクションに","excludeFromAutoSelect":false,"contentAttributes":["h2Title","testimonials"],"imageAttributes":[]},"supports":{"anchor":true},"attributes":{"testimonials":{"type":"array","source":"query","selector":".lw-voice-1__li","query":{"name":{"type":"string","source":"text","selector":".lw-voice-1__name"},"title":{"type":"string","source":"html","selector":".lw-voice-1__text h3"},"content":{"type":"string","source":"html","selector":".lw-voice-1__text p"}},"default":[{"name":"20代男性 Y.M様","title":"とても親切で、丁寧な対応でした。","content":"とても親切で、丁寧な対応でした。また、何かあればお願いしたいと思います。"},{"name":"30代女性 A.S様","title":"迅速な対応に感謝します。","content":"迅速な対応に感謝します。また利用したいと思います。"},{"name":"40代男性 K.T様","title":"期待以上のサービスでした。","content":"期待以上のサービスでした。友人にも勧めたいと思います。"}]},"h2Title":{"type":"string","default":"お客様の声"},"h2FontSet":{"type":"string","default":"Noto Sans JP"},"h2FontWeight":{"type":"string","default":"600"},"h2TextColor":{"type":"string","default":"#000000"},"nameTextColor":{"type":"string","default":"#ffffff"},"nameBackgroundColor":{"type":"string","default":"var(--color-main)"},"nameFontSet":{"type":"string","default":"Noto Sans JP"},"nameFontWeight":{"type":"string","default":"500"},"h3TextColor":{"type":"string","default":"#000000"},"h3FontSet":{"type":"string","default":"Noto Sans JP"},"h3FontWeight":{"type":"string","default":"500"},"pTextColor":{"type":"string","default":"#000000"},"pFontSet":{"type":"string","default":"Noto Sans JP"},"pFontWeight":{"type":"string","default":"500"},"backgroundColor":{"type":"string","default":"#eeeeee"}},"no":1}');
 
 /***/ })
 

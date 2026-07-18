@@ -78,12 +78,12 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, "H".concat(level));
     }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30AB\u30E9\u30FC\u8A2D\u5B9A"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u30E1\u30A4\u30F3\u30BF\u30A4\u30C8\u30EB\u30AB\u30E9\u30FC"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: mainTitleColor,
       onChange: onChangeMainTitleColor
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30D5\u30A9\u30F3\u30C8\u30B5\u30A4\u30BA\u8A2D\u5B9A"
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\u30D5\u30A9\u30F3\u30C8\u30B5\u30A4\u30BA",
       value: fontSize,
@@ -210,7 +210,7 @@ module.exports = window["wp"]["components"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-5","version":"1.0.0","title":"見出しタイトル 05","category":"lw-heading","icon":"editor-textcolor","description":"メインタイトルとサブタイトルを表示する見出しブロック（カラー・サイズ調整可能）","supports":{"anchor":true},"attributes":{"subTitle":{"type":"string","default":"製品紹介"},"mainTitle":{"type":"string","default":"PRODUCTS"},"headingLevel":{"type":"number","default":2},"mainTitleColor":{"type":"string","default":"var(--color-main)"},"fontSize":{"type":"string","default":"l"}},"editorScript":"file:./custom-title-5.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":5}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-5","version":"1.0.0","title":"見出しタイトル 05","category":"lw-heading","icon":"editor-textcolor","description":"メインタイトルとサブタイトルを表示する見出しブロック（カラー・サイズ調整可能）","supports":{"anchor":true},"aiHint":{"description":"カラー・サイズ調整可能な見出し。大きな英語メイン+小さな日本語サブ。インパクト重視","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":[]},"attributes":{"subTitle":{"type":"string","default":"製品紹介","aiHint":{"role":"subheading","contentGuide":"日本語の補足タイトル。3〜10文字","example":"製品紹介"}},"mainTitle":{"type":"string","default":"PRODUCTS","aiHint":{"role":"heading","contentGuide":"英語のメインタイトル。大文字推奨。3〜15文字","example":"PRODUCTS"}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}},"mainTitleColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"fontSize":{"type":"string","default":"l","aiHint":{"skip":true}}},"editorScript":"file:./custom-title-5.js","no":5}');
 
 /***/ })
 

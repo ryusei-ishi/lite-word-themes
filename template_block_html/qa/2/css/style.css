@@ -1,0 +1,107 @@
+.lw-pr-qa-2 {
+  margin: 32px 0;
+}
+
+.lw-pr-qa-2 .lw-pr-qa-2__wrap {
+  margin: 0 auto;
+  max-width: 800px;
+  display: grid;
+  gap: 40px;
+}
+
+.lw-pr-qa-2 .lw-pr-qa-2__wrap .lw-pr-qa-2__q_wrap {
+  display: grid;
+  align-items: start;
+  align-content: start;
+  grid-template-columns: 160px calc(100% - 160px);
+}
+
+.lw-pr-qa-2 .lw-pr-qa-2__wrap .lw-pr-qa-2__q_wrap .lw-pr-qa-2__q_image {
+  width: 100%;
+  aspect-ratio: 1;
+  border: 2px solid #3c7fc3;
+  border-color: var(--qa-2-dt-image-bd-color, #3c7fc3);
+  border-radius: 100%;
+  background: #fff;
+  overflow: hidden;
+}
+
+.lw-pr-qa-2 .lw-pr-qa-2__wrap .lw-pr-qa-2__q_wrap .lw-pr-qa-2__q_image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.lw-pr-qa-2 .lw-pr-qa-2__wrap .lw-pr-qa-2__q_wrap .lw-pr-qa-2__q_text {
+  padding-left: 32px;
+}
+
+.lw-pr-qa-2 .lw-pr-qa-2__wrap .lw-pr-qa-2__q_wrap .lw-pr-qa-2__q_text > p.text {
+  position: relative;
+  z-index: 10;
+  margin: 0;
+  padding: 20px 24px;
+  margin: 0;
+  color: #3c7fc3;
+  font-size: var(--qa-2-dt-text-fontsize-pc, 24px);
+}
+
+.lw-pr-qa-2 .lw-pr-qa-2__wrap .lw-pr-qa-2__q_wrap .lw-pr-qa-2__q_text > p.text::after, .lw-pr-qa-2 .lw-pr-qa-2__wrap .lw-pr-qa-2__q_wrap .lw-pr-qa-2__q_text > p.text::before {
+  position: absolute;
+  z-index: -1;
+  content: "";
+  display: block;
+  background: var(--qa-2-dt-text-bg, #eaf4ff);
+}
+
+.lw-pr-qa-2 .lw-pr-qa-2__wrap .lw-pr-qa-2__q_wrap .lw-pr-qa-2__q_text > p.text::before {
+  top: 20px;
+  left: -22px;
+  width: 24px;
+  height: 22px;
+  clip-path: polygon(100% 0, 100% 100%, 0 50%);
+}
+
+.lw-pr-qa-2 .lw-pr-qa-2__wrap .lw-pr-qa-2__q_wrap .lw-pr-qa-2__q_text > p.text::after {
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 12px;
+}
+
+.lw-pr-qa-2 .lw-pr-qa-2__wrap .lw-pr-qa-2__a_wrap {
+  display: grid;
+  grid-template-columns: calc(100% - 160px) 160px;
+  gap: 24px;
+}
+
+.lw-pr-qa-2 .lw-pr-qa-2__wrap .lw-pr-qa-2__a_wrap.clm_1 {
+  grid-template-columns: 1fr;
+}
+
+.lw-pr-qa-2 .lw-pr-qa-2__wrap .lw-pr-qa-2__a_wrap .lw-pr-qa-2__a_text *:first-child {
+  margin-top: 0;
+}
+
+.lw-pr-qa-2 .lw-pr-qa-2__wrap .lw-pr-qa-2__a_wrap .lw-pr-qa-2__a_text *:last-child {
+  margin-bottom: 0;
+}
+
+.lw-pr-qa-2 .lw-pr-qa-2__wrap .lw-pr-qa-2__a_wrap .lw-pr-qa-2__a_image {
+  margin-left: auto;
+  width: 100%;
+  max-width: 160px;
+  aspect-ratio: 1;
+  border: 2px solid #3c7fc3;
+  border-color: var(--qa-2-dd-image-bd-color, #3c7fc3);
+  border-radius: 100%;
+  background: #fff;
+  overflow: hidden;
+}
+
+.lw-pr-qa-2 .lw-pr-qa-2__wrap .lw-pr-qa-2__a_wrap .lw-pr-qa-2__a_image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}

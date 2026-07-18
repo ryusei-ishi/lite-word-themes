@@ -10,34 +10,23 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "下線カスタマイズ見出し。メインタイトルのみ。シンプルな下線装飾。ショップテンプレート用",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle"],
+		"imageAttributes": []
+	},
 	"attributes": {
 		"mainTitle": {
 			"type": "string",
-			"default": "タイトル"
+			"default": "タイトル",
+			"aiHint": { "role": "heading", "contentGuide": "セクション見出し。3〜15文字", "example": "営業時間" }
 		},
-		"headingLevel": {
-			"type": "number",
-			"default": 2
-		},
-		"underlineHeight": {
-			"type": "number",
-			"default": 1
-		},
-		"underlineColor": {
-			"type": "string",
-			"default": "#C6C6C6"
-		},
-		"uniqueId": {
-			"type": "string",
-			"default": ""
-		}
+		"headingLevel": { "type": "number", "default": 2, "aiHint": { "skip": true } },
+		"underlineHeight": { "type": "number", "default": 1, "aiHint": { "skip": true } },
+		"underlineColor": { "type": "string", "default": "#C6C6C6", "aiHint": { "skip": true } },
+		"uniqueId": { "type": "string", "default": "", "aiHint": { "skip": true } }
 	},
 	"editorScript": "file:./shin-gas-station-01-custom-title-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 15
 }

@@ -7,12 +7,14 @@
 	"category": "lw-heading",
 	"icon": "admin-customizer",
 	"editorScript": "file:./lw-pr-text-1.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
+	"aiHint": {
+		"description": "グラデーションテキスト。テキストにグラデーション効果。見出し演出に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"text"
+		],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},

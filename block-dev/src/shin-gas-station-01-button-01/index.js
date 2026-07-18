@@ -32,7 +32,7 @@ registerBlockType(metadata.name, {
                 <InspectorControls>
 
                     {/* ── 1. 基本設定 ── */}
-                    <PanelBody title="📝 基本設定" initialOpen={true}>
+                    <PanelBody title="基本設定" initialOpen={true}>
                         <div style={{ marginBottom: '15px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px', fontSize: '13px' }}>
                                 🔗 リンク先URL
@@ -53,7 +53,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 2. ボタンの見た目 ── */}
-                    <PanelBody title="🎨 ボタンの見た目" initialOpen={false}>
+                    <PanelBody title="色設定" initialOpen={false}>
                         <div style={{ marginBottom: '20px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '12px' }}>
                                 🌈 背景デザイン
@@ -131,7 +131,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 3. アイコン設定 ── */}
-                    <PanelBody title="✨ アイコン設定" initialOpen={false}>
+                    <PanelBody title="アイコン設定" initialOpen={false}>
                         <div style={{ marginBottom: '15px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>
                                 🎯 アイコンの種類
@@ -161,7 +161,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
 
                     {/* ── 4. 枠線設定 ── */}
-                    <PanelBody title="🖍️ 枠線の設定" initialOpen={false}>
+                    <PanelBody title="枠線設定" initialOpen={false}>
                         <div style={{ marginBottom: borderWidth > 0 ? '15px' : '0px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>
                                 📏 枠線の太さ (px)

@@ -21,6 +21,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./style.scss */ "./src/lw-qa-1/style.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-qa-1/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./block.json */ "./src/lw-qa-1/block.json");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -84,8 +90,9 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOpti
       });
     };
     var updateContent = function updateContent(i, k, v) {
-      var c = _toConsumableArray(contents);
-      c[i][k] = v;
+      var c = contents.map(function (item, idx) {
+        return idx === i ? _objectSpread(_objectSpread({}, item), {}, _defineProperty({}, k, v)) : item;
+      });
       setAttributes({
         contents: c
       });
@@ -97,7 +104,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOpti
 
     /* -------- JSX -------- */
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30E1\u30A4\u30F3\u30AB\u30E9\u30FC"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: mainColor,
       onChange: function onChange(v) {
@@ -106,7 +113,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOpti
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30E9\u30D9\u30EB\u306E\u30D5\u30A9\u30F3\u30C8"
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A\uFF08\u30E9\u30D9\u30EB\uFF09"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\u30D5\u30A9\u30F3\u30C8",
       value: FontLabel,
@@ -126,7 +133,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOpti
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "QA \u30C6\u30AD\u30B9\u30C8\u306E\u30D5\u30A9\u30F3\u30C8"
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A\uFF08\u30C6\u30AD\u30B9\u30C8\uFF09"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\u30D5\u30A9\u30F3\u30C8",
       value: fontP,
@@ -1012,7 +1019,7 @@ module.exports = window["wp"]["element"];
   \********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-qa-1","version":"1.0.0","title":"よくある質問 01","category":"lw-faq","icon":"lightbulb","supports":{"anchor":true},"attributes":{"blockId":{"type":"string"},"FontLabel":{"type":"string","default":"Roboto"},"fontWeightLabel":{"type":"string","default":""},"mainColor":{"type":"string","default":"var(--color-main)"},"fontP":{"type":"string","default":""},"fontWeightDt":{"type":"string","default":""},"fontWeightDd":{"type":"string","default":""},"contents":{"type":"array","source":"query","selector":".lw-qa-1__dl","query":{"text_q":{"type":"string","source":"html","selector":".lw-qa-1__text_q p"},"text_a":{"type":"string","source":"html","selector":".lw-qa-1__text_a p"}},"default":[{"text_q":"質問テキスト質問テキスト質問テキスト","text_a":"回答テキスト回答テキスト回答テキスト回答テキスト"},{"text_q":"質問テキスト質問テキスト質問テキスト","text_a":"回答テキスト回答テキスト回答テキスト回答テキスト"},{"text_q":"質問テキスト質問テキスト質問テキスト","text_a":"回答テキスト回答テキスト回答テキスト回答テキスト"},{"text_q":"質問テキスト質問テキスト質問テキスト","text_a":"回答テキスト回答テキスト回答テキスト回答テキスト"},{"text_q":"質問テキスト質問テキスト質問テキスト","text_a":"回答テキスト回答テキスト回答テキスト回答テキスト"}]}},"editorScript":"file:./lw-qa-1.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-qa-1","version":"1.0.0","title":"よくある質問 01","category":"lw-faq","icon":"lightbulb","aiHint":{"description":"よくある質問アコーディオン。Q+Aの繰り返し。クリックで回答開閉。FAQセクションに","excludeFromAutoSelect":false,"contentAttributes":["contents"],"imageAttributes":[]},"supports":{"anchor":true},"attributes":{"blockId":{"type":"string"},"FontLabel":{"type":"string","default":"Roboto"},"fontWeightLabel":{"type":"string","default":""},"mainColor":{"type":"string","default":"var(--color-main)"},"fontP":{"type":"string","default":""},"fontWeightDt":{"type":"string","default":""},"fontWeightDd":{"type":"string","default":""},"contents":{"type":"array","source":"query","selector":".lw-qa-1__dl","query":{"text_q":{"type":"string","source":"html","selector":".lw-qa-1__text_q p"},"text_a":{"type":"string","source":"html","selector":".lw-qa-1__text_a p"}},"default":[{"text_q":"質問テキスト質問テキスト質問テキスト","text_a":"回答テキスト回答テキスト回答テキスト回答テキスト"},{"text_q":"質問テキスト質問テキスト質問テキスト","text_a":"回答テキスト回答テキスト回答テキスト回答テキスト"},{"text_q":"質問テキスト質問テキスト質問テキスト","text_a":"回答テキスト回答テキスト回答テキスト回答テキスト"},{"text_q":"質問テキスト質問テキスト質問テキスト","text_a":"回答テキスト回答テキスト回答テキスト回答テキスト"},{"text_q":"質問テキスト質問テキスト質問テキスト","text_a":"回答テキスト回答テキスト回答テキスト回答テキスト"}]}},"editorScript":"file:./lw-qa-1.js","no":1}');
 
 /***/ })
 

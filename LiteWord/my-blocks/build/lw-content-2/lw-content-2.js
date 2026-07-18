@@ -19,6 +19,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/lw-content-2/style.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-content-2/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/lw-content-2/block.json");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -88,8 +94,9 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       });
     };
     var updateContent = function updateContent(i, key, val) {
-      var arr = _toConsumableArray(contents);
-      arr[i][key] = val;
+      var arr = contents.map(function (item, idx) {
+        return idx === i ? _objectSpread(_objectSpread({}, item), {}, _defineProperty({}, key, val)) : item;
+      });
       setAttributes({
         contents: arr
       });
@@ -102,7 +109,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       }
     });
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30AB\u30E9\u30E0\u6570"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\u30AB\u30E9\u30E0\u6570",
       value: columnClass,
@@ -122,7 +129,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30BF\u30A4\u30C8\u30EB",
+      title: "\u30BF\u30A4\u30C8\u30EB\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
       label: "\u30BF\u30A4\u30C8\u30EB\u3092\u8868\u793A",
@@ -158,7 +165,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u672C\u6587\u30D5\u30A9\u30F3\u30C8"
+      title: "\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       label: "\u30D5\u30A9\u30F3\u30C8\u7A2E\u985E",
       value: fontSet,
@@ -185,7 +192,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u753B\u50CF\u6BD4\u7387",
+      title: "\u753B\u50CF\u8A2D\u5B9A",
       initialOpen: false
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u9AD8\u3055(px) \u2013 \u5E45\u306F1600\u56FA\u5B9A",
@@ -1090,7 +1097,7 @@ module.exports = window["wp"]["components"];
   \*************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-content-2","version":"1.0.0","title":"content 02","category":"lw-content","icon":"lightbulb","editorScript":"file:./lw-content-2.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","supports":{"anchor":true},"attributes":{"contents":{"type":"array","source":"query","selector":".lw-content-2_content","query":{"title":{"type":"string","source":"html","selector":".ttl","default":"タイトル"},"text":{"type":"string","source":"html","selector":".lw-content-2_text p"},"image":{"type":"string","source":"attribute","selector":"figure img","attribute":"src"},"buttonText":{"type":"string","source":"html","selector":".lw-content-2_btn","default":""},"buttonUrl":{"type":"string","source":"attribute","selector":".lw-content-2_btn","attribute":"href","default":""},"buttonBgColor":{"type":"string","source":"attribute","selector":".lw-content-2_btn","attribute":"data-bgcolor","default":""},"buttonTextColor":{"type":"string","source":"attribute","selector":".lw-content-2_btn","attribute":"data-textcolor","default":"#ffffff"}},"default":[{"title":"タイトル","text":"テキストテキストテキストテキストテキストテキストテキストテキストテキスト","image":"","buttonText":"","buttonUrl":"","buttonBgColor":"var(--color-accent)","buttonTextColor":"#ffffff"},{"title":"タイトル","text":"テキストテキストテキストテキストテキストテキストテキストテキストテキスト","image":"","buttonText":"","buttonUrl":"","buttonBgColor":"var(--color-accent)","buttonTextColor":"#ffffff"},{"title":"タイトル","text":"テキストテキストテキストテキストテキストテキストテキストテキストテキスト","image":"","buttonText":"","buttonUrl":"","buttonBgColor":"var(--color-accent)","buttonTextColor":"#ffffff"}]},"fontSet":{"type":"string","default":"","source":"attribute","selector":".lw-content-2","attribute":"data-lw_font_set"},"fontWeight":{"type":"string","default":""},"columnClass":{"type":"string","default":"clm_3"},"showTitle":{"type":"boolean","default":false},"titleFontSet":{"type":"string","default":""},"titleFontWeight":{"type":"string","default":""},"titleColor":{"type":"string","default":""},"textColor":{"type":"string","default":""},"imageHeight":{"type":"number","default":1200}},"no":2}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-content-2","version":"1.0.0","title":"content 02","category":"lw-content","icon":"lightbulb","editorScript":"file:./lw-content-2.js","aiHint":{"description":"カード型コンテンツ。画像+タイトル+説明+ボタンのカード配列。3カラムグリッド。サービス紹介・メニュー一覧に","excludeFromAutoSelect":false,"contentAttributes":["contents"],"imageAttributes":[]},"supports":{"anchor":true},"attributes":{"contents":{"type":"array","source":"query","selector":".lw-content-2_content","query":{"title":{"type":"string","source":"html","selector":".ttl","default":"タイトル"},"text":{"type":"string","source":"html","selector":".lw-content-2_text p"},"image":{"type":"string","source":"attribute","selector":"figure img","attribute":"src"},"buttonText":{"type":"string","source":"html","selector":".lw-content-2_btn","default":""},"buttonUrl":{"type":"string","source":"attribute","selector":".lw-content-2_btn","attribute":"href","default":""},"buttonBgColor":{"type":"string","source":"attribute","selector":".lw-content-2_btn","attribute":"data-bgcolor","default":""},"buttonTextColor":{"type":"string","source":"attribute","selector":".lw-content-2_btn","attribute":"data-textcolor","default":"#ffffff"}},"default":[{"title":"タイトル","text":"テキストテキストテキストテキストテキストテキストテキストテキストテキスト","image":"","buttonText":"","buttonUrl":"","buttonBgColor":"var(--color-accent)","buttonTextColor":"#ffffff"},{"title":"タイトル","text":"テキストテキストテキストテキストテキストテキストテキストテキストテキスト","image":"","buttonText":"","buttonUrl":"","buttonBgColor":"var(--color-accent)","buttonTextColor":"#ffffff"},{"title":"タイトル","text":"テキストテキストテキストテキストテキストテキストテキストテキストテキスト","image":"","buttonText":"","buttonUrl":"","buttonBgColor":"var(--color-accent)","buttonTextColor":"#ffffff"}],"aiHint":{"role":"list","contentGuide":"カード項目。3〜6個。各要素にtitle(5〜15文字)とtext(20〜60文字)を設定","example":[{"title":"カウンセリング","text":"お悩みをじっくり伺い最適なプランをご提案します"}]}},"fontSet":{"type":"string","default":"","source":"attribute","selector":".lw-content-2","attribute":"data-lw_font_set","aiHint":{"skip":true}},"fontWeight":{"type":"string","default":"","aiHint":{"skip":true}},"columnClass":{"type":"string","default":"clm_3","aiHint":{"skip":true}},"showTitle":{"type":"boolean","default":false,"aiHint":{"skip":true}},"titleFontSet":{"type":"string","default":"","aiHint":{"skip":true}},"titleFontWeight":{"type":"string","default":"","aiHint":{"skip":true}},"titleColor":{"type":"string","default":"","aiHint":{"skip":true}},"textColor":{"type":"string","default":"","aiHint":{"skip":true}},"imageHeight":{"type":"number","default":1200,"aiHint":{"skip":true}}},"no":2}');
 
 /***/ })
 

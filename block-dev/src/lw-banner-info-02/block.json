@@ -6,6 +6,12 @@
 	"title": "バナー 02（4カラム）",
 	"category": "lw-banner",
 	"icon": "images-alt2",
+	"aiHint": {
+		"description": "画像バナー4カラム。画像+タイトル+説明+リンクのカード4枚。メニュー・施設案内に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["items"],
+		"imageAttributes": []
+	},
 	"supports": {
 		"anchor": true
 	},
@@ -69,11 +75,5 @@
 		}
 	},
 	"editorScript": "file:./lw-banner-info-02.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 4
 }

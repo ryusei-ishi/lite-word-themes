@@ -10,34 +10,39 @@
 	"supports": {
 		"anchor": true
 	},
+	"aiHint": {
+		"description": "アクセントカラー付き見出し。メインタイトル+サブタイトル。左寄せ対応。装飾的な見出しに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["mainTitle", "subTitle"],
+		"imageAttributes": []
+	},
 	"attributes": {
 		"mainTitle": {
 			"type": "string",
-			"default": "CONTENT"
+			"default": "CONTENT",
+			"aiHint": { "role": "heading", "contentGuide": "セクション見出し（英語 or 日本語）。3〜15文字", "example": "ABOUT US" }
 		},
 		"subTitle": {
 			"type": "string",
-			"default": "テキストテキストテキストテキスト<br>テキストテキキストテキスト"
+			"default": "テキストテキストテキストテキスト<br>テキストテキキストテキスト",
+			"aiHint": { "role": "subheading", "contentGuide": "補足説明テキスト。20〜50文字。改行可", "example": "お客様に選ばれ続ける理由を<br>ご紹介します" }
 		},
 		"textAlignment": {
 			"type": "string",
-			"default": "left"
+			"default": "left",
+			"aiHint": { "skip": true }
 		},
 		"accentColor": {
 			"type": "string",
-			"default": "var(--color-main)"
+			"default": "var(--color-main)",
+			"aiHint": { "skip": true }
 		},
 		"headingLevel": {
 			"type": "number",
-			"default": 2
+			"default": 2,
+			"aiHint": { "skip": true }
 		}
 	},
 	"editorScript": "file:./custom-title-3.js",
-	"editorStyle": [
-		"file:./editor.css",
-		"file:../../../assets/css/font_style.min.css",
-		"file:../../../assets/css/editor_block_side.min.css"
-	],
-	"style": "file:./style.css",
 	"no": 3
 }

@@ -65,8 +65,9 @@ registerBlockType(metadata.name, {
 		const removeContent = ( i ) =>
 			setAttributes( { contents : contents.filter( ( _, idx ) => idx !== i ) } );
 		const updateContent = ( i, key, val ) => {
-			const arr = [ ...contents ];
-			arr[i][key] = val;
+			const arr = contents.map( ( item, idx ) =>
+				idx === i ? { ...item, [key]: val } : item
+			);
 			setAttributes( { contents : arr } );
 		};
 
@@ -80,7 +81,7 @@ registerBlockType(metadata.name, {
 			<>
 				<InspectorControls>
                     {/* カラム */}
-					<PanelBody title="カラム数">
+					<PanelBody title="レイアウト設定">
 						<SelectControl
 							label="カラム数"
 							value={columnClass}
@@ -93,7 +94,7 @@ registerBlockType(metadata.name, {
 						/>
 					</PanelBody>
 
-                <PanelBody title="タイトル" initialOpen={false}>
+                <PanelBody title="タイトル設定" initialOpen={false}>
 						<ToggleControl
 							label="タイトルを表示"
 							checked={showTitle}
@@ -118,7 +119,7 @@ registerBlockType(metadata.name, {
 						/>
 					</PanelBody>
 
-                <PanelBody title="本文フォント">
+                <PanelBody title="フォント設定">
 						<SelectControl
 							label="フォント種類"
 							value={fontSet}
@@ -138,7 +139,7 @@ registerBlockType(metadata.name, {
 						/>
 					</PanelBody>
 
-                <PanelBody title="画像比率" initialOpen={false}>
+                <PanelBody title="画像設定" initialOpen={false}>
 						<RangeControl
 							label="高さ(px) – 幅は1600固定"
 							min={400}

@@ -48,7 +48,7 @@ module.exports = window["wp"]["element"];
   \**********************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-custom-title-14","version":"1.0.0","title":"見出しタイトル 14","category":"lw-heading","icon":"editor-textcolor","description":"位置調整対応見出しブロック","supports":{"anchor":true},"attributes":{"mainTitle":{"type":"string","default":"カスタムタイトルカスタムタイトル"},"subTitle":{"type":"string","default":"サブタイトルサブタイトル"},"headingLevel":{"type":"number","default":2},"colorMain":{"type":"string","default":"#0a71c0"},"colorMainText":{"type":"string","default":""},"colorSubText":{"type":"string","default":""},"maxWidth":{"type":"number","default":0},"borderRadius":{"type":"number","default":6},"alignmentPc":{"type":"string","default":""},"alignmentSp":{"type":"string","default":""}},"editorScript":"file:./lw-pr-custom-title-14.js","editorStyle":["file:./editor.css","file:../../../assets/css/font_style.min.css","file:../../../assets/css/editor_block_side.min.css"],"style":"file:./style.css","no":14}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-custom-title-14","version":"1.0.0","title":"見出しタイトル 14","category":"lw-heading","icon":"editor-textcolor","description":"位置調整対応見出しブロック","supports":{"anchor":true},"aiHint":{"description":"位置調整対応見出し。メイン+サブタイトル。PC/SP別配置設定。角丸背景付き","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":[]},"attributes":{"mainTitle":{"type":"string","default":"カスタムタイトルカスタムタイトル","aiHint":{"role":"heading","contentGuide":"セクション見出し。3〜20文字","example":"よくあるご質問"}},"subTitle":{"type":"string","default":"サブタイトルサブタイトル","aiHint":{"role":"subheading","contentGuide":"英語表記 or 補足テキスト","example":"FAQ"}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}},"colorMain":{"type":"string","default":"#0a71c0","aiHint":{"skip":true}},"colorMainText":{"type":"string","default":"","aiHint":{"skip":true}},"colorSubText":{"type":"string","default":"","aiHint":{"skip":true}},"maxWidth":{"type":"number","default":0,"aiHint":{"skip":true}},"borderRadius":{"type":"number","default":6,"aiHint":{"skip":true}},"alignmentPc":{"type":"string","default":"","aiHint":{"skip":true}},"alignmentSp":{"type":"string","default":"","aiHint":{"skip":true}}},"editorScript":"file:./lw-pr-custom-title-14.js","no":14}');
 
 /***/ })
 
@@ -255,7 +255,7 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, "H".concat(level));
     }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u4F4D\u7F6E\u8A2D\u5B9A"
+      title: "\u914D\u7F6E\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "PC\u8868\u793A")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RadioControl, {
       selected: alignmentPc,
       options: [{
@@ -289,7 +289,7 @@ __webpack_require__.r(__webpack_exports__);
       }],
       onChange: onChangeAlignmentSp
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u5E45\u8A2D\u5B9A"
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u6700\u5927\u5E45 (px)",
       value: maxWidth || undefined,
@@ -300,7 +300,7 @@ __webpack_require__.r(__webpack_exports__);
       allowReset: true,
       help: maxWidth > 0 ? "".concat(maxWidth, "px") : '未設定（デフォルト幅）'
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u30AB\u30E9\u30FC\u8A2D\u5B9A"
+      title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "\u30E1\u30A4\u30F3\u30AB\u30E9\u30FC")), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
       value: colorMain,
       onChange: onChangeColorMain
@@ -311,7 +311,7 @@ __webpack_require__.r(__webpack_exports__);
       value: colorSubText,
       onChange: onChangeColorSubText
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
-      title: "\u89D2\u4E38\u8A2D\u5B9A"
+      title: "\u67A0\u7DDA\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u89D2\u4E38 (px)",
       value: borderRadius || undefined,

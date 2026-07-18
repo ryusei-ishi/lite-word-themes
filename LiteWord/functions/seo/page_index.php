@@ -156,26 +156,31 @@ function lw_build_page_tree(
 		$children = $page_children_map[ $page->ID ] ?? [];
 		$has_children = ! empty( $children );
 
-		/* ---------- タイトル部分 ---------- */
-		if ( $has_children ) {
-			/* 子ページがある場合のみリンクを付与 */
-			$url = add_query_arg(
-				[
-					'page'   => LW_SEO_MENU_SLUG,
-					'type'   => 'page',
-					'parent' => $page->ID,
-					'sort'   => $sort_param,
-				],
-				admin_url( 'admin.php' )
-			);
-			$title_html = '<a href="' . esc_url( $url ) . '">' . esc_html( $page->post_title ) . '</a>';
-		} else {
-			/* 子ページが無いページはリンクなし */
-			$title_html = esc_html( $page->post_title );
-		}
+		/* ---------- タイトル部分（常にリンク付き） ---------- */
+		$url = add_query_arg(
+			[
+				'page'   => LW_SEO_MENU_SLUG,
+				'type'   => 'page',
+				'parent' => $page->ID,
+				'sort'   => $sort_param,
+			],
+			admin_url( 'admin.php' )
+		);
+		$title_html = '<a href="' . esc_url( $url ) . '">' . esc_html( $page->post_title ) . '</a>';
 
 		/* ---------- リスト出力 ---------- */
 		$html .= '<li class="' . esc_attr( $li_class ) . '">' . $title_html;
+
+		/* ── 子ページタイトル一覧（投稿タイトル表示と同じパターン） ── */
+		if ( $has_children ) {
+			$html .= '<ul class="lw-page-level-' . ( $depth + 1 ) . ' page-titles">';
+			foreach ( $children as $child ) {
+				$html .= '<li class="page-child-title page-level-' . ( $depth + 1 ) . '">' .
+				         '<a href="' . esc_url( get_permalink( $child->ID ) ) . '" target="_blank" rel="noopener noreferrer">' .
+				         esc_html( $child->post_title ) . '</a></li>';
+			}
+			$html .= '</ul>';
+		}
 
 		/* 再帰（子を持つ場合のみ） */
 		if ( $has_children ) {
@@ -322,7 +327,7 @@ function lw_seo_bulk_edit_page() {
 			}
 
 			/* メタ差分 */
-			foreach ( [ 'seo_title', 'seo_description', 'seo_noindex', 'seo_og_image' ] as $meta_key ) {
+			foreach ( [ 'seo_title', 'seo_description', 'seo_noindex', 'seo_og_image', 'seo_301_redirect_url' ] as $meta_key ) {
 				if ( ! isset( $_POST[$meta_key][$post_id] ) ) continue;
 
 				$new_val = $meta_key === 'seo_description'
@@ -661,6 +666,7 @@ function lw_seo_bulk_edit_page() {
 				$seo_desc  = get_post_meta( $post->ID, 'seo_description', true );
 				$seo_noidx = get_post_meta( $post->ID, 'seo_noindex',     true ) ?: 'follow';
 				$ogp_url   = get_post_meta( $post->ID, 'seo_og_image',    true );
+				$seo_301   = get_post_meta( $post->ID, 'seo_301_redirect_url', true );
 
 				$feat_id  = get_post_thumbnail_id( $post->ID );
 				$feat_url = $feat_id ? wp_get_attachment_image_url( $feat_id, 'thumbnail' ) : '';
@@ -685,6 +691,10 @@ function lw_seo_bulk_edit_page() {
 							<div>
 								<label>メタディスクリプション</label>
 								<textarea name="seo_description[<?php echo $post->ID; ?>]" rows="2"><?php echo esc_textarea($seo_desc); ?></textarea>
+							</div>
+							<div>
+								<label>301リダイレクト元</label>
+								<input name="seo_301_redirect_url[<?php echo $post->ID; ?>]" value="<?php echo esc_attr($seo_301); ?>" placeholder="/old-page や https://example.com/old">
 							</div>
 						</div>
 

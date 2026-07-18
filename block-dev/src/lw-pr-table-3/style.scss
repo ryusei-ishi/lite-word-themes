@@ -1,0 +1,172 @@
+.lw-pr-table-3 {
+    margin: 24px 0;
+    padding: 4px 0;
+    overflow-x: scroll;
+    @media (max-width:700px) {
+        margin: 16px -20px;
+        padding:4px 24px;
+        width: 100vw;
+    }
+    // --- SP スクロールヒント（view.js で動的生成） ---
+    .lw-pr-table-3__scroll-hint {
+        display: none;
+        @media (max-width: 800px) {
+            display: block;
+            position: sticky;
+            left: 0;
+            width: calc(100vw - 48px);
+            height: 0;
+            overflow: visible;
+            pointer-events: none;
+            z-index: 5;
+            animation: table3-hint-fade 4s ease-in-out forwards;
+
+            &.is-scrolled {
+                opacity: 0 !important;
+                transition: opacity 0.3s;
+            }
+        }
+    }
+    .lw-pr-table-3__scroll-hint-inner {
+        position: absolute;
+        top: 40px;
+        left: 50%;
+        transform: translateX(-50%);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        background: rgba(0, 0, 0, 0.6);
+        border-radius: 12px;
+        padding: 10px 20px 8px;
+    }
+    .lw-pr-table-3__scroll-hint-arrows {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+        .arrow-left,
+        .arrow-right {
+            color: #fff;
+            font-size: 20px;
+            font-weight: bold;
+            line-height: 1;
+        }
+    }
+    .lw-pr-table-3__scroll-hint-icon {
+        display: block;
+        line-height: 0;
+        animation: table3-hand-swipe 1.5s ease-in-out infinite;
+    }
+    .lw-pr-table-3__scroll-hint-text {
+        color: #fff;
+        font-size: 11px;
+        white-space: nowrap;
+        line-height: 1;
+    }
+
+    .lw-pr-table-3__wrap {
+        display: grid;
+        gap: 2px;
+        grid-template-columns: var(--table-3-clm-1-pc) var(--table-3-clm-2-pc);
+        @for $i from 3 through 10 {
+            &.clm_#{$i} {
+                $columns: ();
+                @for $j from 1 through $i {
+                    $columns: append($columns, var(--table-3-clm-#{$j}-pc));
+                }
+                grid-template-columns: $columns;
+            }
+        }
+        @media (max-width: 800px) {
+            min-width: var(--table-3-total-sp, 1200px);
+            grid-template-columns: var(--table-3-clm-1-sp) var(--table-3-clm-2-sp);
+            @for $i from 3 through 10 {
+                &.clm_#{$i} {
+                    $columns: ();
+                    @for $j from 1 through $i {
+                        $columns: append($columns, var(--table-3-clm-#{$j}-sp));
+                    }
+                    grid-template-columns: $columns;
+                }
+            }
+        }
+        .main_head {
+            @media (max-width: 800px) {
+                font-size: var(--table-3-fs-main-head-sp) !important;
+            }
+        }
+        .row_head {
+            @media (max-width: 800px) {
+                font-size: var(--table-3-fs-row-head-sp) !important;
+            }
+        }
+        .lw-pr-table-3__cell{
+            padding: 1em;
+            box-shadow: 0 0 6px rgba(0, 0, 0, 0.1);
+            .lw-pr-table-3__cell-inner {
+                width: 100%;
+            }
+            @media (max-width: 800px) {
+                font-size: var(--table-3-fs-cell-sp) !important;
+            }
+        }
+        &:has(.row_head):has(.main_head){
+            .lw-pr-table-3__cell{
+                &:first-of-type{
+                    opacity: 0;
+                }
+            }   
+        }
+        // --- デザインパターン 1: 角丸（外側） ---
+        &.design_ptn_1{
+            .main_head{
+                border-radius: 12px 12px 0 0;
+            }
+            // main_head が1つだけの場合
+            .main_head_first.main_head_last{
+                border-radius: 12px 12px 0 0;
+            }
+            .row_head_first{
+                border-radius: 12px 0 0 0;
+            }
+            .row_head_last{
+                border-radius: 0 0 0 12px;
+            }
+            .row_head_first.row_head_last{
+                border-radius: 12px 0 0 12px;
+            }
+            .cell_first_row_last_col{
+                border-radius: 0 12px 0 0;
+            }
+            .cell_last_row_last_col{
+                border-radius: 0 0 12px 0;
+            }
+            // main_head がある場合、row_head_first と cell_first_row の角丸は不要
+            &:has(.main_head){
+                .cell_first_row_last_col{
+                    border-radius: 0;
+                }
+            }
+        }
+
+        // --- デザインパターン 2: 角丸（全セル） ---
+        &.design_ptn_2{
+            .lw-pr-table-3__cell{
+                border-radius: 8px;
+            }
+        }
+    }
+}
+
+@keyframes table3-hint-fade {
+    0%   { opacity: 0; }
+    10%  { opacity: 1; }
+    75%  { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+@keyframes table3-hand-swipe {
+    0%, 100% { transform: translateX(0); }
+    25%      { transform: translateX(-12px); }
+    75%      { transform: translateX(12px); }
+}
