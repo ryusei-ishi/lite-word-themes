@@ -118,7 +118,9 @@
 .company-profile-item .lw-table-item-controls,
 .lw-list-1 .lw-list-1_content .lw-table-item-controls,
 .lw-list-3 .lw-list-3__li .lw-table-item-controls,
-.lw-company-3__row .lw-table-item-controls {
+.lw-company-3__row .lw-table-item-controls,
+.lw-pr-table-2 .table-2__row .lw-table-item-controls,
+.lw-pr-calendar-1 .table_body + .lw-table-item-controls {
   top: 2px;
   right: 2px;
   bottom: auto;
@@ -145,7 +147,13 @@
 .lw-list-3 .lw-list-3__li .lw-table-item-controls .remove-item-button,
 .lw-company-3__row .lw-table-item-controls .move-up-button,
 .lw-company-3__row .lw-table-item-controls .move-down-button,
-.lw-company-3__row .lw-table-item-controls .remove-item-button {
+.lw-company-3__row .lw-table-item-controls .remove-item-button,
+.lw-pr-table-2 .table-2__row .lw-table-item-controls .move-up-button,
+.lw-pr-table-2 .table-2__row .lw-table-item-controls .move-down-button,
+.lw-pr-table-2 .table-2__row .lw-table-item-controls .remove-item-button,
+.lw-pr-calendar-1 .table_body + .lw-table-item-controls .move-up-button,
+.lw-pr-calendar-1 .table_body + .lw-table-item-controls .move-down-button,
+.lw-pr-calendar-1 .table_body + .lw-table-item-controls .remove-item-button {
   position: static;
   top: auto;
   right: auto;
@@ -165,7 +173,13 @@
 .lw-list-3 .lw-list-3__li .lw-table-item-controls .remove-item-button:disabled,
 .lw-company-3__row .lw-table-item-controls .move-up-button:disabled,
 .lw-company-3__row .lw-table-item-controls .move-down-button:disabled,
-.lw-company-3__row .lw-table-item-controls .remove-item-button:disabled {
+.lw-company-3__row .lw-table-item-controls .remove-item-button:disabled,
+.lw-pr-table-2 .table-2__row .lw-table-item-controls .move-up-button:disabled,
+.lw-pr-table-2 .table-2__row .lw-table-item-controls .move-down-button:disabled,
+.lw-pr-table-2 .table-2__row .lw-table-item-controls .remove-item-button:disabled,
+.lw-pr-calendar-1 .table_body + .lw-table-item-controls .move-up-button:disabled,
+.lw-pr-calendar-1 .table_body + .lw-table-item-controls .move-down-button:disabled,
+.lw-pr-calendar-1 .table_body + .lw-table-item-controls .remove-item-button:disabled {
   opacity: 0.4;
   cursor: not-allowed;
 }
@@ -173,9 +187,18 @@
 .company-profile-item .lw-table-item-controls .remove-item-button,
 .lw-list-1 .lw-list-1_content .lw-table-item-controls .remove-item-button,
 .lw-list-3 .lw-list-3__li .lw-table-item-controls .remove-item-button,
-.lw-company-3__row .lw-table-item-controls .remove-item-button {
+.lw-company-3__row .lw-table-item-controls .remove-item-button,
+.lw-pr-table-2 .table-2__row .lw-table-item-controls .remove-item-button,
+.lw-pr-calendar-1 .table_body + .lw-table-item-controls .remove-item-button {
   grid-column: 1/-1;
   width: auto;
+}
+
+/* カレンダー01はセル(○×)を隠さないよう、元設計どおり表の右外に出す。
+   自ブロック style.css の .lw-pr-calendar-1 .lw-table-item-controls { right:-48px }
+   と同じ値だが、上のクラスタ側(0,3,0)が right:2px で勝ってしまうためここで再宣言。 */
+.lw-pr-calendar-1 .table_body + .lw-table-item-controls {
+  right: -48px;
 }
 
 /* リスト02 専用 ---------------------------------------------------------------
