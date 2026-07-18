@@ -105,3 +105,102 @@
         background: var(--color-accent);
     }
 }
+
+/* 会社概要01/02/03・リスト01/03 のクラスタ整列 --------------------------------
+   既定の .lw-table-item-controls は「行の高さいっぱいに伸びるコンテナ」に
+   ↑↓を上端・削除を下端に絶対配置するため、行が高いとボタンが離散し、
+   リスト01/03 は自ブロック style.css の上書き（height:30px 等）と衝突して
+   ボタン同士が重なっていた。ここで行の右上に ↑↓（上段）＋削除（下段）の
+   コンパクトなクラスタとして grid で整列し直す。
+   リスト01/03 の style.css 側上書き（詳細度0,2,0・後読み）に勝つため、
+   行クラスを挟んだ詳細度0,3,0のセレクタで top/right/height/margin を再宣言。
+   各ブロックの行クラスにスコープしているので他ブロックには影響しない。 */
+.lw-company-1__dl .lw-table-item-controls,
+.company-profile-item .lw-table-item-controls,
+.lw-list-1 .lw-list-1_content .lw-table-item-controls,
+.lw-list-3 .lw-list-3__li .lw-table-item-controls,
+.lw-company-3__row .lw-table-item-controls {
+    top: 2px;
+    right: 2px;
+    bottom: auto;
+    left: auto;
+    height: auto;
+    min-height: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 20px 20px;
+    gap: 2px;
+    z-index: 10;
+
+    .move-up-button,
+    .move-down-button,
+    .remove-item-button {
+        position: static;
+        top: auto;
+        right: auto;
+        bottom: auto;
+
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+    }
+
+    .remove-item-button {
+        grid-column: 1 / -1;
+        width: auto;
+    }
+}
+
+/* リスト02 専用 ---------------------------------------------------------------
+   コントロールが独自クラス .lw-list-2__item-controls（共通クラスなし）のため
+   共通スタイルが一切当たらず、素のボタンが行内テキストの横に流れ込んでいた。
+   行 li.lw-list-2__li は position:relative 済み（自ブロックstyle.css・iframe到達済み）。
+   上のクラスタと同じ見た目（↑↓上段・削除下段）をこのクラスに直接定義する。 */
+.lw-list-2__li .lw-list-2__item-controls {
+    position: absolute;
+    top: 2px;
+    right: 2px;
+    margin: 0;
+    display: grid;
+    grid-template-columns: 20px 20px;
+    gap: 2px;
+    z-index: 10;
+
+    .move-up-button,
+    .move-down-button,
+    .remove-item-button {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 12px;
+        line-height: 1;
+        color: #fff !important;
+        border: none;
+        border-radius: 2px;
+        cursor: pointer;
+
+        &:hover {
+            opacity: 0.8;
+        }
+
+        &:disabled {
+            opacity: 0.4;
+            cursor: not-allowed;
+        }
+    }
+
+    .move-up-button,
+    .move-down-button {
+        width: 20px;
+        height: 20px;
+        background: #4e4e4e;
+    }
+
+    .remove-item-button {
+        grid-column: 1 / -1;
+        padding: 4px;
+        white-space: nowrap;
+        background: var(--color-accent);
+    }
+}
