@@ -485,9 +485,10 @@ var objectFitOptions = [{
       liBorderSize = attributes.liBorderSize,
       liBorderRadius = attributes.liBorderRadius,
       contents = attributes.contents;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "paid-block-lw-step-6 wp-block-wdl-paid-block-lw-step-6"
-    }, /*#__PURE__*/React.createElement("ul", {
+    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+      className: 'paid-block-lw-step-6'
+    });
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("ul", {
       className: "paid-block-lw-step-6__inner"
     }, contents.map(function (c, i) {
       var numText = c.number ? c.number : "".concat(i + 1);
@@ -554,7 +555,106 @@ var objectFitOptions = [{
         }
       }))));
     })));
-  }
+  },
+  deprecated: [{
+    apiVersion: _block_json__WEBPACK_IMPORTED_MODULE_7__.apiVersion,
+    attributes: _block_json__WEBPACK_IMPORTED_MODULE_7__.attributes,
+    supports: _block_json__WEBPACK_IMPORTED_MODULE_7__.supports,
+    save: function save(_ref4) {
+      var attributes = _ref4.attributes;
+      var fontLi = attributes.fontLi,
+        fontColorLi = attributes.fontColorLi,
+        fontWeightLi = attributes.fontWeightLi,
+        titleFontSizeClass = attributes.titleFontSizeClass,
+        fontLiP = attributes.fontLiP,
+        fontColorLiP = attributes.fontColorLiP,
+        fontWeightLiP = attributes.fontWeightLiP,
+        textFontSizeClass = attributes.textFontSizeClass,
+        borderColor = attributes.borderColor,
+        borderSize = attributes.borderSize,
+        imageBorderRadius = attributes.imageBorderRadius,
+        imageObjectFit = attributes.imageObjectFit,
+        imageAspectH = attributes.imageAspectH,
+        titleTag = attributes.titleTag,
+        titleBorderColor = attributes.titleBorderColor,
+        titleBorderSize = attributes.titleBorderSize,
+        numberBgColor = attributes.numberBgColor,
+        showNumber = attributes.showNumber,
+        liBorderColor = attributes.liBorderColor,
+        liBorderSize = attributes.liBorderSize,
+        liBorderRadius = attributes.liBorderRadius,
+        contents = attributes.contents;
+      return /*#__PURE__*/React.createElement("div", {
+        className: "paid-block-lw-step-6 wp-block-wdl-paid-block-lw-step-6"
+      }, /*#__PURE__*/React.createElement("ul", {
+        className: "paid-block-lw-step-6__inner"
+      }, contents.map(function (c, i) {
+        var numText = c.number ? c.number : "".concat(i + 1);
+        var Tag = c.url ? 'a' : 'div';
+        var props = c.url ? {
+          href: c.url,
+          className: 'link'
+        } : {
+          className: 'link'
+        };
+        return /*#__PURE__*/React.createElement("li", {
+          key: i,
+          className: "paid-block-lw-step-6__li",
+          style: {
+            borderColor: liBorderColor,
+            borderWidth: liBorderSize,
+            borderStyle: liBorderSize > 0 ? 'solid' : 'none',
+            borderRadius: "".concat(liBorderRadius, "px")
+          }
+        }, showNumber && /*#__PURE__*/React.createElement("div", {
+          className: "number",
+          style: {
+            backgroundColor: numberBgColor,
+            color: '#fff',
+            fontWeight: '700'
+          }
+        }, /*#__PURE__*/React.createElement("span", null, numText)), (0,_wordpress_element__WEBPACK_IMPORTED_MODULE_3__.createElement)(Tag, props, /*#__PURE__*/React.createElement(React.Fragment, null, c.image && /*#__PURE__*/React.createElement("div", {
+          className: "image",
+          style: {
+            borderRadius: "".concat(imageBorderRadius, "px"),
+            borderColor: borderColor,
+            borderWidth: borderSize,
+            borderStyle: borderSize > 0 ? 'solid' : 'none',
+            aspectRatio: imageAspectH > 0 ? "400 / ".concat(imageAspectH) : undefined
+          }
+        }, /*#__PURE__*/React.createElement("img", {
+          src: c.image,
+          alt: "",
+          style: {
+            objectFit: imageObjectFit
+          }
+        })), c.ttl && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+          tagName: titleTag,
+          className: "ttl ".concat(titleFontSizeClass),
+          value: c.ttl,
+          "data-lw_font_set": fontLi,
+          style: {
+            fontWeight: fontWeightLi,
+            fontFamily: fontLi || undefined,
+            color: fontColorLi,
+            borderBottomColor: titleBorderColor,
+            borderBottomWidth: titleBorderSize,
+            borderBottomStyle: titleBorderSize > 0 ? 'solid' : 'none'
+          }
+        }), c.text && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+          tagName: "p",
+          className: "paid-block-lw-step-6__text ".concat(textFontSizeClass),
+          value: c.text,
+          "data-lw_font_set": fontLiP,
+          style: {
+            fontWeight: fontWeightLiP,
+            fontFamily: fontLiP || undefined,
+            color: fontColorLiP
+          }
+        }))));
+      })));
+    }
+  }]
 });
 
 /***/ }),

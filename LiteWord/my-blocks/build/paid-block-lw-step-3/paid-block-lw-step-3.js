@@ -331,9 +331,10 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       var str = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       return str.trim() !== '';
     };
-    return /*#__PURE__*/React.createElement("div", {
+    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
       className: "paid-block-lw-step-3 ".concat(fontSizeClass)
-    }, /*#__PURE__*/React.createElement("ul", {
+    });
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("ul", {
       className: "lw-step-2__inner",
       style: {
         maxWidth: ulMaxWidth
@@ -377,7 +378,78 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         }
       })));
     })));
-  }
+  },
+  deprecated: [{
+    apiVersion: _block_json__WEBPACK_IMPORTED_MODULE_6__.apiVersion,
+    attributes: _block_json__WEBPACK_IMPORTED_MODULE_6__.attributes,
+    save: function save(_ref3) {
+      var attributes = _ref3.attributes;
+      var bgGradient = attributes.bgGradient,
+        ulMaxWidth = attributes.ulMaxWidth,
+        fontSizeClass = attributes.fontSizeClass,
+        fontNo = attributes.fontNo,
+        fontWeightNo = attributes.fontWeightNo,
+        colorNo = attributes.colorNo,
+        titleTag = attributes.titleTag,
+        fontH3 = attributes.fontH3,
+        fontWeightH3 = attributes.fontWeightH3,
+        colorH3 = attributes.colorH3,
+        fontP = attributes.fontP,
+        fontWeightP = attributes.fontWeightP,
+        colorP = attributes.colorP,
+        contents = attributes.contents;
+      var hasContent = function hasContent() {
+        var str = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+        return str.trim() !== '';
+      };
+      return /*#__PURE__*/React.createElement("div", {
+        className: "paid-block-lw-step-3 ".concat(fontSizeClass)
+      }, /*#__PURE__*/React.createElement("ul", {
+        className: "lw-step-2__inner",
+        style: {
+          maxWidth: ulMaxWidth
+        }
+      }, contents.map(function (c, i) {
+        return /*#__PURE__*/React.createElement("li", {
+          className: "lw-step-2__li",
+          key: i,
+          style: {
+            borderColor: bgGradient
+          }
+        }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+          tagName: "div",
+          className: "lw-step-2__li_no",
+          value: c.no,
+          "data-lw_font_set": fontNo,
+          style: {
+            fontWeight: fontWeightNo,
+            background: bgGradient,
+            color: colorNo || undefined
+          }
+        }), /*#__PURE__*/React.createElement("div", {
+          className: "lw-step-2__li_in"
+        }, hasContent(c.title) && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+          tagName: titleTag,
+          className: "lw-step-2__li_title ttl",
+          value: c.title,
+          "data-lw_font_set": fontH3,
+          style: {
+            fontWeight: fontWeightH3,
+            color: colorH3 || undefined
+          }
+        }), hasContent(c.text) && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+          tagName: "p",
+          className: "lw-step-2__li_text",
+          value: c.text,
+          "data-lw_font_set": fontP,
+          style: {
+            fontWeight: fontWeightP,
+            color: colorP || undefined
+          }
+        })));
+      })));
+    }
+  }]
 });
 
 /***/ }),

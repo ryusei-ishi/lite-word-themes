@@ -22,6 +22,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/paid-block-voice-3/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./block.json */ "./src/paid-block-voice-3/block.json");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _extends() { return _extends = Object.assign ? Object.assign.bind() : function (n) { for (var e = 1; e < arguments.length; e++) { var t = arguments[e]; for (var r in t) ({}).hasOwnProperty.call(t, r) && (n[r] = t[r]); } return n; }, _extends.apply(null, arguments); }
 function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
 function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
 function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
@@ -701,6 +702,12 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOpti
       excerptFontSet = attributes.excerptFontSet,
       excerptFontWeight = attributes.excerptFontWeight;
 
+    /* ---------- ブロックProps (apiVersion:3) -----------------*/
+    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+      id: blockId,
+      className: 'paid-block-voice-3 init-hide'
+    });
+
     /* ---------- データをJSONとして埋め込み ---------------------*/
     var voiceDataJson = JSON.stringify(voices);
 
@@ -729,12 +736,10 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOpti
     var initScript = "\n(function(){\n    const selector = \"#".concat(blockId, "\";\n    const section = document.querySelector(selector);\n    if (!section) return;\n\n    // \u30C7\u30FC\u30BF\u3092\u53D6\u5F97\n    const voiceData = JSON.parse(section.getAttribute('data-voices'));\n    const fontSettings = JSON.parse(section.getAttribute('data-font-settings'));\n\n    // ========== HTML\u751F\u6210 ==========\n    function generateHTML() {\n        const swiperWrapper = section.querySelector('.swiper-wrapper');\n        if (!swiperWrapper) return;\n\n        const slidesHTML = voiceData.map((voice, index) => `\n            <div class=\"swiper-slide\">\n                <div class=\"voice-card\" data-voice-id=\"${index}\">\n                    <div class=\"photo\">\n                        <img loading=\"lazy\" src=\"${voice.photo}\" alt=\"${voice.alt || voice.name}\">\n                    </div>\n                    <h3 \n                        class=\"name\" \n                        data-lw_font_set=\"${fontSettings.nameFontSet}\"\n                        style=\"font-weight: ${fontSettings.nameFontWeight}\"\n                    >${voice.name}</h3>\n                    ${voice.age || voice.job ? '<p class=\"meta\">' + (voice.age || '') + ' / ' + (voice.job || '') + '</p>' : ''}\n                    <p \n                        class=\"excerpt\"\n                        data-lw_font_set=\"${fontSettings.excerptFontSet}\"\n                        style=\"font-weight: ${fontSettings.excerptFontWeight}\"\n                    >${voice.excerpt}</p>\n                    <div class=\"more-btn\">\u7D9A\u304D\u3092\u8AAD\u3080</div>\n                </div>\n            </div>\n        `).join('');\n\n        swiperWrapper.innerHTML = slidesHTML;\n    }\n\n    // ========== Swiper\u521D\u671F\u5316 ==========\n    const MAX_RETRY = 30;\n    let retry = 0;\n\n    const initSwiper = () => {\n        if (typeof Swiper === \"undefined\") return false;\n        const swiperEl = section.querySelector('.voice-swiper');\n        if (!swiperEl) return false;\n        const already = swiperEl.swiper;\n        if (already) return true;\n\n        new Swiper(swiperEl, {\n            slidesPerView: 1,\n            spaceBetween: 20,\n            loop: ").concat(loop, ",\n            speed: ").concat(sliderSpeed, ",\n            autoplay: {\n                delay: ").concat(autoplayDelay, ",\n                disableOnInteraction: ").concat(disableOnInteraction, "\n            },\n            observer: true,\n            observeParents: true,\n            ").concat(showPagination ? "\n            pagination: {\n                el: selector + \" .swiper-pagination\",\n                clickable: ".concat(paginationClickable, "\n            },") : '', "\n            ").concat(showNavigation ? "\n            navigation: {\n                nextEl: selector + \" .swiper-button-next\",\n                prevEl: selector + \" .swiper-button-prev\"\n            }," : '', "\n            breakpoints: {\n                600: {\n                    slidesPerView: ").concat(slidesPerView600, ",\n                    spaceBetween: ").concat(spaceBetween600, ",\n                },\n                900: {\n                    slidesPerView: ").concat(slidesPerView900, ",\n                    spaceBetween: ").concat(spaceBetween900, ",\n                },\n            },\n        });\n\n        section.classList.remove(\"init-hide\");\n        return true;\n    };\n\n    // ========== \u30E2\u30FC\u30C0\u30EB\u51E6\u7406 ==========\n    function initModal() {\n        // \u2605 \u65E2\u306Bbody\u76F4\u4E0B\u306B\u79FB\u52D5\u6E08\u307F\u304B\u30C1\u30A7\u30C3\u30AF\uFF08\u8907\u6570\u30D6\u30ED\u30C3\u30AF\u5BFE\u5FDC\uFF09\n        let modal = document.querySelector('.paid-block-voice-3-modal[data-for-block=\"").concat(blockId, "\"]');\n\n        if (!modal) {\n            // \u307E\u3060\u79FB\u52D5\u3057\u3066\u3044\u306A\u3044\u5834\u5408\u3001\u30BB\u30AF\u30B7\u30E7\u30F3\u5185\u304B\u3089\u53D6\u5F97\n            modal = section.querySelector('.paid-block-voice-3-modal');\n            if (!modal) return;\n\n            // \u2605 \u30E2\u30FC\u30C0\u30EB\u3092body\u76F4\u4E0B\u306B\u79FB\u52D5\uFF08\u4ED6\u30D6\u30ED\u30C3\u30AF\u306Ez-index\u5F71\u97FF\u3092\u56DE\u907F\uFF09\n            document.body.appendChild(modal);\n            modal.setAttribute('data-for-block', '").concat(blockId, "');\n        }\n\n        const closeBtn = modal.querySelector('.modal-close');\n        const overlay = modal.querySelector('.modal-overlay');\n\n        // \u30AB\u30FC\u30C9\u30AF\u30EA\u30C3\u30AF\u3067\u30E2\u30FC\u30C0\u30EB\u8868\u793A\n        section.addEventListener('click', function(e) {\n            const card = e.target.closest('.voice-card');\n            if (!card) return;\n\n            const voiceId = parseInt(card.getAttribute('data-voice-id'));\n            const data = voiceData[voiceId];\n            \n            if (data) {\n                modal.querySelector('.modal-photo img').src = data.photo;\n                modal.querySelector('.modal-photo img').alt = data.alt || data.name;\n                modal.querySelector('.modal-name').textContent = data.name;\n                const modalMeta = modal.querySelector('.modal-meta');\n                if (data.age || data.job) {\n                    modalMeta.textContent = `${data.age || ''} / ${data.job || ''}`;\n                    modalMeta.style.display = '';\n                } else {\n                    modalMeta.style.display = 'none';\n                }\n                modal.querySelector('.modal-text').textContent = data.text;\n                \n                modal.classList.add('active');\n                document.body.style.overflow = 'hidden';\n            }\n        });\n\n        // \u30E2\u30FC\u30C0\u30EB\u3092\u9589\u3058\u308B\n        function closeModal() {\n            modal.classList.remove('active');\n            document.body.style.overflow = '';\n        }\n\n        closeBtn.addEventListener('click', closeModal);\n        overlay.addEventListener('click', closeModal);\n\n        // ESC\u30AD\u30FC\u3067\u9589\u3058\u308B\n        document.addEventListener('keydown', function(e) {\n            if (e.key === 'Escape' && modal.classList.contains('active')) {\n                closeModal();\n            }\n        });\n    }\n\n    // ========== \u521D\u671F\u5316\u5B9F\u884C ==========\n    // 1. HTML\u751F\u6210\n    generateHTML();\n\n    // 2. Swiper\u521D\u671F\u5316\uFF08\u8907\u6570\u30C8\u30EA\u30AC\u30FC\uFF09\n    document.addEventListener(\"DOMContentLoaded\", initSwiper, { once: true });\n    window.addEventListener(\"lw:swiperReady\", initSwiper, { once: true });\n\n    const timer = setInterval(() => {\n        if (initSwiper() || ++retry >= MAX_RETRY) clearInterval(timer);\n    }, 150);\n\n    setTimeout(() => {\n        const el = document.querySelector(selector);\n        if (el) el.classList.remove(\"init-hide\");\n    }, 5000);\n\n    // 3. \u30E2\u30FC\u30C0\u30EB\u521D\u671F\u5316\n    initModal();\n})();\n        ");
 
     /* ---------- JSX 出力 -------------------------------------*/
-    return /*#__PURE__*/React.createElement("div", {
-      id: blockId,
-      className: "paid-block-voice-3 init-hide",
+    return /*#__PURE__*/React.createElement("div", _extends({}, blockProps, {
       "data-voices": voiceDataJson,
       "data-font-settings": fontSettingsJson
-    }, /*#__PURE__*/React.createElement("div", {
+    }), /*#__PURE__*/React.createElement("div", {
       className: "inner",
       style: innerStyle
     }, /*#__PURE__*/React.createElement("div", {
@@ -802,7 +807,146 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOpti
         __html: initScript
       }
     }), /*#__PURE__*/React.createElement("noscript", null, /*#__PURE__*/React.createElement("style", null, "#".concat(blockId, "{opacity:1!important}"))));
-  }
+  },
+  // ------------------------------------------------------------------
+  // ▶ Deprecated（旧save: useBlockProps.save() 未使用・名札なし世代）
+  //   旧形式で保存されたHTMLを受け止め、次回保存時に新saveへ移行する
+  // ------------------------------------------------------------------
+  deprecated: [{
+    apiVersion: _block_json__WEBPACK_IMPORTED_MODULE_7__.apiVersion,
+    attributes: _block_json__WEBPACK_IMPORTED_MODULE_7__.attributes,
+    supports: _block_json__WEBPACK_IMPORTED_MODULE_7__.supports,
+    save: function save(_ref6) {
+      var attributes = _ref6.attributes;
+      var blockId = attributes.blockId,
+        voices = attributes.voices,
+        autoplayDelay = attributes.autoplayDelay,
+        loop = attributes.loop,
+        disableOnInteraction = attributes.disableOnInteraction,
+        showPagination = attributes.showPagination,
+        paginationClickable = attributes.paginationClickable,
+        showNavigation = attributes.showNavigation,
+        sliderSpeed = attributes.sliderSpeed,
+        slidesPerView600 = attributes.slidesPerView600,
+        slidesPerView900 = attributes.slidesPerView900,
+        spaceBetween600 = attributes.spaceBetween600,
+        spaceBetween900 = attributes.spaceBetween900,
+        maxWidthContainer = attributes.maxWidthContainer,
+        cardBgColor = attributes.cardBgColor,
+        cardShadowColor = attributes.cardShadowColor,
+        nameColor = attributes.nameColor,
+        excerptColor = attributes.excerptColor,
+        metaColor = attributes.metaColor,
+        btnBgColor = attributes.btnBgColor,
+        btnTextColor = attributes.btnTextColor,
+        nameFontSet = attributes.nameFontSet,
+        nameFontWeight = attributes.nameFontWeight,
+        excerptFontSet = attributes.excerptFontSet,
+        excerptFontWeight = attributes.excerptFontWeight;
+
+      /* ---------- データをJSONとして埋め込み ---------------------*/
+      var voiceDataJson = JSON.stringify(voices);
+
+      /* ---------- フォント設定をdata属性として埋め込み -----------*/
+      var fontSettingsJson = JSON.stringify({
+        nameFontSet: nameFontSet,
+        nameFontWeight: nameFontWeight,
+        excerptFontSet: excerptFontSet,
+        excerptFontWeight: excerptFontWeight
+      });
+
+      /* ---------- スタイル変数を作成 ---------------------------*/
+      var innerStyle = _objectSpread(_objectSpread({
+        '--paid-block-voice-3-max-width': "".concat(maxWidthContainer, "px"),
+        '--lw-voice-card-bg': cardBgColor,
+        '--lw-voice-name-color': nameColor,
+        '--lw-voice-excerpt-color': excerptColor,
+        '--lw-voice-meta-color': metaColor
+      }, btnBgColor && {
+        '--color-btn-bg': btnBgColor
+      }), btnTextColor && {
+        '--color-btn-text': btnTextColor
+      });
+
+      /* ---------- Swiper + モーダル初期化スクリプト --------------*/
+      var initScript = "\n(function(){\n    const selector = \"#".concat(blockId, "\";\n    const section = document.querySelector(selector);\n    if (!section) return;\n\n    // \u30C7\u30FC\u30BF\u3092\u53D6\u5F97\n    const voiceData = JSON.parse(section.getAttribute('data-voices'));\n    const fontSettings = JSON.parse(section.getAttribute('data-font-settings'));\n\n    // ========== HTML\u751F\u6210 ==========\n    function generateHTML() {\n        const swiperWrapper = section.querySelector('.swiper-wrapper');\n        if (!swiperWrapper) return;\n\n        const slidesHTML = voiceData.map((voice, index) => `\n            <div class=\"swiper-slide\">\n                <div class=\"voice-card\" data-voice-id=\"${index}\">\n                    <div class=\"photo\">\n                        <img loading=\"lazy\" src=\"${voice.photo}\" alt=\"${voice.alt || voice.name}\">\n                    </div>\n                    <h3 \n                        class=\"name\" \n                        data-lw_font_set=\"${fontSettings.nameFontSet}\"\n                        style=\"font-weight: ${fontSettings.nameFontWeight}\"\n                    >${voice.name}</h3>\n                    ${voice.age || voice.job ? '<p class=\"meta\">' + (voice.age || '') + ' / ' + (voice.job || '') + '</p>' : ''}\n                    <p \n                        class=\"excerpt\"\n                        data-lw_font_set=\"${fontSettings.excerptFontSet}\"\n                        style=\"font-weight: ${fontSettings.excerptFontWeight}\"\n                    >${voice.excerpt}</p>\n                    <div class=\"more-btn\">\u7D9A\u304D\u3092\u8AAD\u3080</div>\n                </div>\n            </div>\n        `).join('');\n\n        swiperWrapper.innerHTML = slidesHTML;\n    }\n\n    // ========== Swiper\u521D\u671F\u5316 ==========\n    const MAX_RETRY = 30;\n    let retry = 0;\n\n    const initSwiper = () => {\n        if (typeof Swiper === \"undefined\") return false;\n        const swiperEl = section.querySelector('.voice-swiper');\n        if (!swiperEl) return false;\n        const already = swiperEl.swiper;\n        if (already) return true;\n\n        new Swiper(swiperEl, {\n            slidesPerView: 1,\n            spaceBetween: 20,\n            loop: ").concat(loop, ",\n            speed: ").concat(sliderSpeed, ",\n            autoplay: {\n                delay: ").concat(autoplayDelay, ",\n                disableOnInteraction: ").concat(disableOnInteraction, "\n            },\n            observer: true,\n            observeParents: true,\n            ").concat(showPagination ? "\n            pagination: {\n                el: selector + \" .swiper-pagination\",\n                clickable: ".concat(paginationClickable, "\n            },") : '', "\n            ").concat(showNavigation ? "\n            navigation: {\n                nextEl: selector + \" .swiper-button-next\",\n                prevEl: selector + \" .swiper-button-prev\"\n            }," : '', "\n            breakpoints: {\n                600: {\n                    slidesPerView: ").concat(slidesPerView600, ",\n                    spaceBetween: ").concat(spaceBetween600, ",\n                },\n                900: {\n                    slidesPerView: ").concat(slidesPerView900, ",\n                    spaceBetween: ").concat(spaceBetween900, ",\n                },\n            },\n        });\n\n        section.classList.remove(\"init-hide\");\n        return true;\n    };\n\n    // ========== \u30E2\u30FC\u30C0\u30EB\u51E6\u7406 ==========\n    function initModal() {\n        // \u2605 \u65E2\u306Bbody\u76F4\u4E0B\u306B\u79FB\u52D5\u6E08\u307F\u304B\u30C1\u30A7\u30C3\u30AF\uFF08\u8907\u6570\u30D6\u30ED\u30C3\u30AF\u5BFE\u5FDC\uFF09\n        let modal = document.querySelector('.paid-block-voice-3-modal[data-for-block=\"").concat(blockId, "\"]');\n\n        if (!modal) {\n            // \u307E\u3060\u79FB\u52D5\u3057\u3066\u3044\u306A\u3044\u5834\u5408\u3001\u30BB\u30AF\u30B7\u30E7\u30F3\u5185\u304B\u3089\u53D6\u5F97\n            modal = section.querySelector('.paid-block-voice-3-modal');\n            if (!modal) return;\n\n            // \u2605 \u30E2\u30FC\u30C0\u30EB\u3092body\u76F4\u4E0B\u306B\u79FB\u52D5\uFF08\u4ED6\u30D6\u30ED\u30C3\u30AF\u306Ez-index\u5F71\u97FF\u3092\u56DE\u907F\uFF09\n            document.body.appendChild(modal);\n            modal.setAttribute('data-for-block', '").concat(blockId, "');\n        }\n\n        const closeBtn = modal.querySelector('.modal-close');\n        const overlay = modal.querySelector('.modal-overlay');\n\n        // \u30AB\u30FC\u30C9\u30AF\u30EA\u30C3\u30AF\u3067\u30E2\u30FC\u30C0\u30EB\u8868\u793A\n        section.addEventListener('click', function(e) {\n            const card = e.target.closest('.voice-card');\n            if (!card) return;\n\n            const voiceId = parseInt(card.getAttribute('data-voice-id'));\n            const data = voiceData[voiceId];\n            \n            if (data) {\n                modal.querySelector('.modal-photo img').src = data.photo;\n                modal.querySelector('.modal-photo img').alt = data.alt || data.name;\n                modal.querySelector('.modal-name').textContent = data.name;\n                const modalMeta = modal.querySelector('.modal-meta');\n                if (data.age || data.job) {\n                    modalMeta.textContent = `${data.age || ''} / ${data.job || ''}`;\n                    modalMeta.style.display = '';\n                } else {\n                    modalMeta.style.display = 'none';\n                }\n                modal.querySelector('.modal-text').textContent = data.text;\n                \n                modal.classList.add('active');\n                document.body.style.overflow = 'hidden';\n            }\n        });\n\n        // \u30E2\u30FC\u30C0\u30EB\u3092\u9589\u3058\u308B\n        function closeModal() {\n            modal.classList.remove('active');\n            document.body.style.overflow = '';\n        }\n\n        closeBtn.addEventListener('click', closeModal);\n        overlay.addEventListener('click', closeModal);\n\n        // ESC\u30AD\u30FC\u3067\u9589\u3058\u308B\n        document.addEventListener('keydown', function(e) {\n            if (e.key === 'Escape' && modal.classList.contains('active')) {\n                closeModal();\n            }\n        });\n    }\n\n    // ========== \u521D\u671F\u5316\u5B9F\u884C ==========\n    // 1. HTML\u751F\u6210\n    generateHTML();\n\n    // 2. Swiper\u521D\u671F\u5316\uFF08\u8907\u6570\u30C8\u30EA\u30AC\u30FC\uFF09\n    document.addEventListener(\"DOMContentLoaded\", initSwiper, { once: true });\n    window.addEventListener(\"lw:swiperReady\", initSwiper, { once: true });\n\n    const timer = setInterval(() => {\n        if (initSwiper() || ++retry >= MAX_RETRY) clearInterval(timer);\n    }, 150);\n\n    setTimeout(() => {\n        const el = document.querySelector(selector);\n        if (el) el.classList.remove(\"init-hide\");\n    }, 5000);\n\n    // 3. \u30E2\u30FC\u30C0\u30EB\u521D\u671F\u5316\n    initModal();\n})();\n        ");
+
+      /* ---------- JSX 出力 -------------------------------------*/
+      return /*#__PURE__*/React.createElement("div", {
+        id: blockId,
+        className: "paid-block-voice-3 init-hide",
+        "data-voices": voiceDataJson,
+        "data-font-settings": fontSettingsJson
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "inner",
+        style: innerStyle
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "swiper voice-swiper"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "swiper-wrapper"
+      }), showPagination && /*#__PURE__*/React.createElement("div", {
+        className: "swiper-pagination"
+      }))), showNavigation && /*#__PURE__*/React.createElement("div", {
+        className: "swiper-button-prev"
+      }), showNavigation && /*#__PURE__*/React.createElement("div", {
+        className: "swiper-button-next"
+      }), /*#__PURE__*/React.createElement("div", {
+        className: "voice-modal paid-block-voice-3-modal"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "modal-overlay"
+      }), /*#__PURE__*/React.createElement("div", {
+        className: "modal-content"
+      }, /*#__PURE__*/React.createElement("button", {
+        className: "modal-close"
+      }, /*#__PURE__*/React.createElement("svg", {
+        xmlns: "http://www.w3.org/2000/svg",
+        width: "24",
+        height: "24",
+        viewBox: "0 0 24 24",
+        fill: "none",
+        stroke: "currentColor",
+        strokeWidth: "2",
+        strokeLinecap: "round",
+        strokeLinejoin: "round"
+      }, /*#__PURE__*/React.createElement("line", {
+        x1: "18",
+        y1: "6",
+        x2: "6",
+        y2: "18"
+      }), /*#__PURE__*/React.createElement("line", {
+        x1: "6",
+        y1: "6",
+        x2: "18",
+        y2: "18"
+      }))), /*#__PURE__*/React.createElement("div", {
+        className: "modal-body"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "modal-photo"
+      }, /*#__PURE__*/React.createElement("img", {
+        src: "",
+        alt: ""
+      })), /*#__PURE__*/React.createElement("h3", {
+        className: "modal-name",
+        "data-lw_font_set": nameFontSet,
+        style: {
+          fontWeight: nameFontWeight
+        }
+      }), /*#__PURE__*/React.createElement("p", {
+        className: "modal-meta"
+      }), /*#__PURE__*/React.createElement("div", {
+        className: "modal-text",
+        "data-lw_font_set": excerptFontSet,
+        style: {
+          fontWeight: excerptFontWeight
+        }
+      })))), /*#__PURE__*/React.createElement("script", {
+        type: "text/javascript",
+        dangerouslySetInnerHTML: {
+          __html: initScript
+        }
+      }), /*#__PURE__*/React.createElement("noscript", null, /*#__PURE__*/React.createElement("style", null, "#".concat(blockId, "{opacity:1!important}"))));
+    }
+  }]
 });
 
 /***/ }),

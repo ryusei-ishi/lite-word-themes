@@ -666,9 +666,10 @@ var alignOptions = [{
       btnBorderSize = attributes.btnBorderSize,
       showButton = attributes.showButton,
       contents = attributes.contents;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "lw-content-8"
-    }, /*#__PURE__*/React.createElement("ul", {
+    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+      className: 'lw-content-8'
+    });
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("ul", {
       className: "lw-content-8__inner ".concat(columnClass),
       style: {
         maxWidth: "".concat(innerMaxWidth, "px"),
@@ -761,7 +762,150 @@ var alignOptions = [{
         }
       }))));
     })));
-  }
+  },
+  deprecated: [{
+    apiVersion: _block_json__WEBPACK_IMPORTED_MODULE_6__.apiVersion,
+    attributes: _block_json__WEBPACK_IMPORTED_MODULE_6__.attributes,
+    supports: _block_json__WEBPACK_IMPORTED_MODULE_6__.supports,
+    save: function save(_ref3) {
+      var attributes = _ref3.attributes;
+      var fontLi = attributes.fontLi,
+        fontColorLi = attributes.fontColorLi,
+        fontWeightLi = attributes.fontWeightLi,
+        titleFontSizeClass = attributes.titleFontSizeClass,
+        fontLiP = attributes.fontLiP,
+        fontColorLiP = attributes.fontColorLiP,
+        fontWeightLiP = attributes.fontWeightLiP,
+        textFontSizeClass = attributes.textFontSizeClass,
+        titleTag = attributes.titleTag,
+        titleBorderColor = attributes.titleBorderColor,
+        titleBorderSize = attributes.titleBorderSize,
+        liBorderColor = attributes.liBorderColor,
+        liBorderSize = attributes.liBorderSize,
+        liPaddingTop = attributes.liPaddingTop,
+        liPaddingBottom = attributes.liPaddingBottom,
+        liPaddingLeft = attributes.liPaddingLeft,
+        liPaddingRight = attributes.liPaddingRight,
+        liBorderRadius = attributes.liBorderRadius,
+        subBorderColor = attributes.subBorderColor,
+        subBorderSize = attributes.subBorderSize,
+        subFontColor = attributes.subFontColor,
+        subBgColor = attributes.subBgColor,
+        showSub = attributes.showSub,
+        fontLiSub = attributes.fontLiSub,
+        fontWeightLiSub = attributes.fontWeightLiSub,
+        fontLiMain = attributes.fontLiMain,
+        fontWeightLiMain = attributes.fontWeightLiMain,
+        columnClass = attributes.columnClass,
+        mainAlign = attributes.mainAlign,
+        innerMaxWidth = attributes.innerMaxWidth,
+        btnMarginTop = attributes.btnMarginTop,
+        btnHeight = attributes.btnHeight,
+        btnBgColor = attributes.btnBgColor,
+        btnFontColor = attributes.btnFontColor,
+        btnFontSize = attributes.btnFontSize,
+        btnBorderRadius = attributes.btnBorderRadius,
+        btnBorderColor = attributes.btnBorderColor,
+        btnBorderSize = attributes.btnBorderSize,
+        showButton = attributes.showButton,
+        contents = attributes.contents;
+      return /*#__PURE__*/React.createElement("div", {
+        className: "lw-content-8"
+      }, /*#__PURE__*/React.createElement("ul", {
+        className: "lw-content-8__inner ".concat(columnClass),
+        style: {
+          maxWidth: "".concat(innerMaxWidth, "px"),
+          margin: '0 auto'
+        }
+      }, contents.map(function (item, idx) {
+        var LinkTag = item.url ? 'a' : 'div';
+        var linkProps = item.url ? {
+          href: item.url,
+          className: 'link'
+        } : {
+          className: 'link'
+        };
+        return /*#__PURE__*/React.createElement("li", {
+          key: idx,
+          className: "lw-content-8__li",
+          style: {
+            borderColor: liBorderColor,
+            borderWidth: liBorderSize,
+            borderStyle: liBorderSize > 0 ? 'solid' : 'none',
+            paddingTop: "".concat(liPaddingTop, "px"),
+            paddingBottom: "".concat(liPaddingBottom, "px"),
+            paddingLeft: "".concat(liPaddingLeft, "px"),
+            paddingRight: "".concat(liPaddingRight, "px"),
+            borderRadius: "".concat(liBorderRadius, "px")
+          }
+        }, createElement(LinkTag, linkProps, /*#__PURE__*/React.createElement(React.Fragment, null, createElement(titleTag, {
+          className: "ttl ".concat(titleFontSizeClass),
+          'data-lw_font_set': fontLi,
+          style: {
+            fontWeight: fontWeightLi,
+            color: fontColorLi,
+            borderBottomColor: titleBorderColor,
+            borderBottomWidth: titleBorderSize,
+            borderBottomStyle: titleBorderSize > 0 ? 'solid' : 'none'
+          }
+        }, /*#__PURE__*/React.createElement(React.Fragment, null, showSub && item.sub && /*#__PURE__*/React.createElement("span", {
+          className: "sub",
+          dangerouslySetInnerHTML: {
+            __html: item.sub
+          },
+          "data-lw_font_set": fontLiSub,
+          style: {
+            fontWeight: fontWeightLiSub,
+            borderColor: subBorderColor,
+            borderWidth: subBorderSize,
+            borderStyle: subBorderSize > 0 ? 'solid' : 'none',
+            display: 'inline-block',
+            color: subFontColor,
+            backgroundColor: subBgColor
+          }
+        }), item.main && /*#__PURE__*/React.createElement("span", {
+          className: "main ".concat(mainAlign),
+          dangerouslySetInnerHTML: {
+            __html: item.main
+          },
+          "data-lw_font_set": fontLiMain,
+          style: {
+            fontWeight: fontWeightLiMain
+          }
+        }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+          tagName: "p",
+          className: "lw-content-8__text ".concat(textFontSizeClass),
+          value: item.text,
+          "data-lw_font_set": fontLiP,
+          style: {
+            fontWeight: fontWeightLiP,
+            color: fontColorLiP
+          }
+        }), item.url && showButton && (item.btnText || '詳細はこちら') && /*#__PURE__*/React.createElement("div", {
+          className: "link_btn",
+          dangerouslySetInnerHTML: {
+            __html: item.btnText || '詳細はこちら'
+          },
+          style: {
+            marginTop: "".concat(btnMarginTop, "px"),
+            padding: '0 1em',
+            height: "".concat(btnHeight, "px"),
+            width: '100%',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+            background: btnBgColor,
+            color: btnFontColor,
+            fontSize: "".concat(btnFontSize, "px"),
+            borderRadius: "".concat(btnBorderRadius, "px"),
+            borderColor: btnBorderColor,
+            borderWidth: "".concat(btnBorderSize, "px"),
+            borderStyle: btnBorderSize > 0 ? 'solid' : 'none'
+          }
+        }))));
+      })));
+    }
+  }]
 });
 
 /***/ }),

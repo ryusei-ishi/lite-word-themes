@@ -584,6 +584,293 @@ registerBlockType(metadata.name, {
             excerptFontSet, excerptFontWeight,
         } = attributes;
 
+        /* ---------- ブロックProps (apiVersion:3) -----------------*/
+        const blockProps = useBlockProps.save({
+            id: blockId,
+            className: 'paid-block-voice-3 init-hide'
+        });
+
+        /* ---------- データをJSONとして埋め込み ---------------------*/
+        const voiceDataJson = JSON.stringify( voices );
+
+        /* ---------- フォント設定をdata属性として埋め込み -----------*/
+        const fontSettingsJson = JSON.stringify({
+            nameFontSet,
+            nameFontWeight,
+            excerptFontSet,
+            excerptFontWeight,
+        });
+
+        /* ---------- スタイル変数を作成 ---------------------------*/
+        const innerStyle = {
+            '--paid-block-voice-3-max-width': `${ maxWidthContainer }px`,
+            '--lw-voice-card-bg': cardBgColor,
+            '--lw-voice-name-color': nameColor,
+            '--lw-voice-excerpt-color': excerptColor,
+            '--lw-voice-meta-color': metaColor,
+            ...(btnBgColor && { '--color-btn-bg': btnBgColor }),
+            ...(btnTextColor && { '--color-btn-text': btnTextColor }),
+        };
+
+        /* ---------- Swiper + モーダル初期化スクリプト --------------*/
+        const initScript = `
+(function(){
+    const selector = "#${ blockId }";
+    const section = document.querySelector(selector);
+    if (!section) return;
+
+    // データを取得
+    const voiceData = JSON.parse(section.getAttribute('data-voices'));
+    const fontSettings = JSON.parse(section.getAttribute('data-font-settings'));
+
+    // ========== HTML生成 ==========
+    function generateHTML() {
+        const swiperWrapper = section.querySelector('.swiper-wrapper');
+        if (!swiperWrapper) return;
+
+        const slidesHTML = voiceData.map((voice, index) => \`
+            <div class="swiper-slide">
+                <div class="voice-card" data-voice-id="\${index}">
+                    <div class="photo">
+                        <img loading="lazy" src="\${voice.photo}" alt="\${voice.alt || voice.name}">
+                    </div>
+                    <h3 
+                        class="name" 
+                        data-lw_font_set="\${fontSettings.nameFontSet}"
+                        style="font-weight: \${fontSettings.nameFontWeight}"
+                    >\${voice.name}</h3>
+                    \${voice.age || voice.job ? '<p class="meta">' + (voice.age || '') + ' / ' + (voice.job || '') + '</p>' : ''}
+                    <p 
+                        class="excerpt"
+                        data-lw_font_set="\${fontSettings.excerptFontSet}"
+                        style="font-weight: \${fontSettings.excerptFontWeight}"
+                    >\${voice.excerpt}</p>
+                    <div class="more-btn">続きを読む</div>
+                </div>
+            </div>
+        \`).join('');
+
+        swiperWrapper.innerHTML = slidesHTML;
+    }
+
+    // ========== Swiper初期化 ==========
+    const MAX_RETRY = 30;
+    let retry = 0;
+
+    const initSwiper = () => {
+        if (typeof Swiper === "undefined") return false;
+        const swiperEl = section.querySelector('.voice-swiper');
+        if (!swiperEl) return false;
+        const already = swiperEl.swiper;
+        if (already) return true;
+
+        new Swiper(swiperEl, {
+            slidesPerView: 1,
+            spaceBetween: 20,
+            loop: ${ loop },
+            speed: ${ sliderSpeed },
+            autoplay: {
+                delay: ${ autoplayDelay },
+                disableOnInteraction: ${ disableOnInteraction }
+            },
+            observer: true,
+            observeParents: true,
+            ${ showPagination ? `
+            pagination: {
+                el: selector + " .swiper-pagination",
+                clickable: ${ paginationClickable }
+            },` : '' }
+            ${ showNavigation ? `
+            navigation: {
+                nextEl: selector + " .swiper-button-next",
+                prevEl: selector + " .swiper-button-prev"
+            },` : '' }
+            breakpoints: {
+                600: {
+                    slidesPerView: ${ slidesPerView600 },
+                    spaceBetween: ${ spaceBetween600 },
+                },
+                900: {
+                    slidesPerView: ${ slidesPerView900 },
+                    spaceBetween: ${ spaceBetween900 },
+                },
+            },
+        });
+
+        section.classList.remove("init-hide");
+        return true;
+    };
+
+    // ========== モーダル処理 ==========
+    function initModal() {
+        // ★ 既にbody直下に移動済みかチェック（複数ブロック対応）
+        let modal = document.querySelector('.paid-block-voice-3-modal[data-for-block="${blockId}"]');
+
+        if (!modal) {
+            // まだ移動していない場合、セクション内から取得
+            modal = section.querySelector('.paid-block-voice-3-modal');
+            if (!modal) return;
+
+            // ★ モーダルをbody直下に移動（他ブロックのz-index影響を回避）
+            document.body.appendChild(modal);
+            modal.setAttribute('data-for-block', '${blockId}');
+        }
+
+        const closeBtn = modal.querySelector('.modal-close');
+        const overlay = modal.querySelector('.modal-overlay');
+
+        // カードクリックでモーダル表示
+        section.addEventListener('click', function(e) {
+            const card = e.target.closest('.voice-card');
+            if (!card) return;
+
+            const voiceId = parseInt(card.getAttribute('data-voice-id'));
+            const data = voiceData[voiceId];
+            
+            if (data) {
+                modal.querySelector('.modal-photo img').src = data.photo;
+                modal.querySelector('.modal-photo img').alt = data.alt || data.name;
+                modal.querySelector('.modal-name').textContent = data.name;
+                const modalMeta = modal.querySelector('.modal-meta');
+                if (data.age || data.job) {
+                    modalMeta.textContent = \`\${data.age || ''} / \${data.job || ''}\`;
+                    modalMeta.style.display = '';
+                } else {
+                    modalMeta.style.display = 'none';
+                }
+                modal.querySelector('.modal-text').textContent = data.text;
+                
+                modal.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+        });
+
+        // モーダルを閉じる
+        function closeModal() {
+            modal.classList.remove('active');
+            document.body.style.overflow = '';
+        }
+
+        closeBtn.addEventListener('click', closeModal);
+        overlay.addEventListener('click', closeModal);
+
+        // ESCキーで閉じる
+        document.addEventListener('keydown', function(e) {
+            if (e.key === 'Escape' && modal.classList.contains('active')) {
+                closeModal();
+            }
+        });
+    }
+
+    // ========== 初期化実行 ==========
+    // 1. HTML生成
+    generateHTML();
+
+    // 2. Swiper初期化（複数トリガー）
+    document.addEventListener("DOMContentLoaded", initSwiper, { once: true });
+    window.addEventListener("lw:swiperReady", initSwiper, { once: true });
+
+    const timer = setInterval(() => {
+        if (initSwiper() || ++retry >= MAX_RETRY) clearInterval(timer);
+    }, 150);
+
+    setTimeout(() => {
+        const el = document.querySelector(selector);
+        if (el) el.classList.remove("init-hide");
+    }, 5000);
+
+    // 3. モーダル初期化
+    initModal();
+})();
+        `;
+
+        /* ---------- JSX 出力 -------------------------------------*/
+        return (
+            <div
+                {...blockProps}
+                data-voices={ voiceDataJson }
+                data-font-settings={ fontSettingsJson }
+            >
+                <div className="inner" style={ innerStyle }>
+                    <div className="swiper voice-swiper">
+                        <div className="swiper-wrapper">
+                            {/* JavaScriptで動的生成 */}
+                        </div>
+                        {/* Pagination */}
+                        { showPagination && <div className="swiper-pagination"></div> }
+                    </div>
+                </div>
+
+                {/* Navigation */}
+                { showNavigation && <div className="swiper-button-prev"></div> }
+                { showNavigation && <div className="swiper-button-next"></div> }
+
+                {/* Modal */}
+                <div className="voice-modal paid-block-voice-3-modal">
+                    <div className="modal-overlay"></div>
+                    <div className="modal-content">
+                        <button className="modal-close">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                                <line x1="18" y1="6" x2="6" y2="18"></line>
+                                <line x1="6" y1="6" x2="18" y2="18"></line>
+                            </svg>
+                        </button>
+                        <div className="modal-body">
+                            <div className="modal-photo">
+                                <img src="" alt="" />
+                            </div>
+                            <h3 
+                                className="modal-name"
+                                data-lw_font_set={ nameFontSet }
+                                style={{ fontWeight: nameFontWeight }}
+                            ></h3>
+                            <p className="modal-meta"></p>
+                            <div 
+                                className="modal-text"
+                                data-lw_font_set={ excerptFontSet }
+                                style={{ fontWeight: excerptFontWeight }}
+                            ></div>
+                        </div>
+                    </div>
+                </div>
+
+                {/* 初期化スクリプト */}
+                <script type="text/javascript" dangerouslySetInnerHTML={ { __html: initScript } } />
+
+                {/* JS完全オフ環境向けフォールバック */}
+                <noscript>
+                    <style>{`#${ blockId }{opacity:1!important}`}</style>
+                </noscript>
+            </div>
+        );
+    },
+
+    // ------------------------------------------------------------------
+    // ▶ Deprecated（旧save: useBlockProps.save() 未使用・名札なし世代）
+    //   旧形式で保存されたHTMLを受け止め、次回保存時に新saveへ移行する
+    // ------------------------------------------------------------------
+    deprecated: [
+        {
+            apiVersion: metadata.apiVersion,
+            attributes: metadata.attributes,
+            supports: metadata.supports,
+            save: ( { attributes } ) => {
+        const {
+            blockId, voices,
+            autoplayDelay, loop, disableOnInteraction,
+            showPagination, paginationClickable,
+            showNavigation, sliderSpeed,
+            slidesPerView600, slidesPerView900,
+            spaceBetween600, spaceBetween900,
+            maxWidthContainer,
+            // デザイン設定
+            cardBgColor, cardShadowColor,
+            nameColor, excerptColor, metaColor,
+            btnBgColor, btnTextColor,
+            nameFontSet, nameFontWeight,
+            excerptFontSet, excerptFontWeight,
+        } = attributes;
+
         /* ---------- データをJSONとして埋め込み ---------------------*/
         const voiceDataJson = JSON.stringify( voices );
 
@@ -839,4 +1126,6 @@ registerBlockType(metadata.name, {
             </div>
         );
     },
+        },
+    ],
 });

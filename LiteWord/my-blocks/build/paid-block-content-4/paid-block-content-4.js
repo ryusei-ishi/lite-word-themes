@@ -474,9 +474,10 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       }
       return classes.join(' ');
     };
-    return /*#__PURE__*/React.createElement("div", {
-      className: "paid-block-content-4"
-    }, /*#__PURE__*/React.createElement("section", {
+    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+      className: 'paid-block-content-4'
+    });
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("section", {
       className: "conts"
     }, /*#__PURE__*/React.createElement("div", {
       className: "cont"
@@ -540,7 +541,131 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         }
       })) : null;
     }))));
-  }
+  },
+  /* ────────────────────────────────────────────────
+   * 旧 save（useBlockProps.save() 移行前・名札なし）
+   * ──────────────────────────────────────────────── */
+  deprecated: [{
+    apiVersion: _block_json__WEBPACK_IMPORTED_MODULE_4__.apiVersion,
+    attributes: _block_json__WEBPACK_IMPORTED_MODULE_4__.attributes,
+    supports: _block_json__WEBPACK_IMPORTED_MODULE_4__.supports,
+    save: function save(_ref4) {
+      var attributes = _ref4.attributes;
+      var mainTitle = attributes.mainTitle,
+        subTitle = attributes.subTitle,
+        bottomText = attributes.bottomText,
+        ctaText = attributes.ctaText,
+        ctaUrl = attributes.ctaUrl,
+        mainTitleColor = attributes.mainTitleColor,
+        highlightColor = attributes.highlightColor,
+        ctaBorderColor = attributes.ctaBorderColor,
+        ctaTextColor = attributes.ctaTextColor,
+        ctaBorderWidth = attributes.ctaBorderWidth,
+        ctaBorderRadius = attributes.ctaBorderRadius,
+        imageRadius = attributes.imageRadius,
+        pcButtonState = attributes.pcButtonState,
+        mobileButtonState = attributes.mobileButtonState,
+        images = attributes.images;
+
+      /* ボタンの状態に応じたクラス名を生成（保存版） */
+      var getButtonClasses = function getButtonClasses() {
+        var classes = ['cont_btn'];
+        if (pcButtonState === 'w_full') {
+          classes.push('w_full');
+        } else if (pcButtonState === 'none') {
+          classes.push('none');
+        }
+        if (mobileButtonState === 'sp_w_full') {
+          classes.push('sp_w_full');
+        } else if (mobileButtonState === 'sp_none') {
+          classes.push('sp_none');
+        }
+        return classes.join(' ');
+      };
+
+      /* .btn_bg用のクラス名を生成（保存版） */
+      var getBtnBgClasses = function getBtnBgClasses() {
+        var classes = ['btn_bg'];
+        if (pcButtonState === 'w_full') {
+          classes.push('w_full');
+        } else if (pcButtonState === 'none') {
+          classes.push('none');
+        }
+        if (mobileButtonState === 'sp_w_full') {
+          classes.push('sp_w_full');
+        } else if (mobileButtonState === 'sp_none') {
+          classes.push('sp_none');
+        }
+        return classes.join(' ');
+      };
+      return /*#__PURE__*/React.createElement("div", {
+        className: "paid-block-content-4"
+      }, /*#__PURE__*/React.createElement("section", {
+        className: "conts"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "cont"
+      }, /*#__PURE__*/React.createElement("h2", {
+        className: "ttl"
+      }, /*#__PURE__*/React.createElement("div", {
+        style: {
+          color: mainTitleColor
+        },
+        dangerouslySetInnerHTML: {
+          __html: mainTitle
+        }
+      }), /*#__PURE__*/React.createElement("span", {
+        className: "sub",
+        style: {
+          color: highlightColor
+        },
+        dangerouslySetInnerHTML: {
+          __html: subTitle
+        }
+      })), bottomText && bottomText.trim() && /*#__PURE__*/React.createElement("p", {
+        className: "ttl_btm_p"
+      }, /*#__PURE__*/React.createElement("span", {
+        dangerouslySetInnerHTML: {
+          __html: bottomText
+        }
+      })), /*#__PURE__*/React.createElement("a", {
+        className: getButtonClasses(),
+        href: ctaUrl,
+        style: {
+          borderColor: ctaBorderColor,
+          borderWidth: "".concat(ctaBorderWidth, "px"),
+          borderRadius: "".concat(ctaBorderRadius, "px"),
+          color: ctaTextColor
+        }
+      }, /*#__PURE__*/React.createElement("span", {
+        dangerouslySetInnerHTML: {
+          __html: ctaText
+        }
+      }), /*#__PURE__*/React.createElement("div", {
+        className: getBtnBgClasses(),
+        style: {
+          background: ctaBorderColor,
+          borderRadius: "".concat(ctaBorderRadius, "px")
+        }
+      }))), /*#__PURE__*/React.createElement("div", {
+        className: "gallery_in"
+      }, images.map(function (img, i) {
+        return img.url ? /*#__PURE__*/React.createElement("div", {
+          className: "image",
+          key: i,
+          style: {
+            borderRadius: "".concat(imageRadius, "px"),
+            overflow: 'hidden'
+          }
+        }, /*#__PURE__*/React.createElement("img", {
+          src: img.url,
+          alt: img.alt,
+          style: {
+            borderRadius: "".concat(imageRadius, "px")
+          }
+        })) : null;
+      }))));
+    }
+  }]
 });
 
 /***/ }),

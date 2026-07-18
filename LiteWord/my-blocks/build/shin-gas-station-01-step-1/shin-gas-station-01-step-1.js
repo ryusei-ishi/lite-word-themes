@@ -273,9 +273,10 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       fontWeightLi = attributes.fontWeightLi,
       contents = attributes.contents,
       borderColor = attributes.borderColor;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "shin-gas-station-01-step-1"
-    }, /*#__PURE__*/React.createElement("ul", {
+    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+      className: 'shin-gas-station-01-step-1'
+    });
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("ul", {
       className: "shin-gas-station-01-step-1__inner"
     }, contents.map(function (content, index) {
       return /*#__PURE__*/React.createElement("li", {
@@ -315,7 +316,69 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         }
       })));
     })));
-  }
+  },
+  deprecated: [{
+    apiVersion: _block_json__WEBPACK_IMPORTED_MODULE_6__.apiVersion,
+    attributes: _block_json__WEBPACK_IMPORTED_MODULE_6__.attributes,
+    save: function save(props) {
+      var attributes = props.attributes;
+      var fontLi = attributes.fontLi,
+        fontColorLi = attributes.fontColorLi,
+        backgroundColor = attributes.backgroundColor,
+        borderSize = attributes.borderSize,
+        fontLiP = attributes.fontLiP,
+        fontColorLiP = attributes.fontColorLiP,
+        fontWeightLiP = attributes.fontWeightLiP,
+        stepFont = attributes.stepFont,
+        stepFontColor = attributes.stepFontColor,
+        stepFontWeight = attributes.stepFontWeight,
+        fontWeightLi = attributes.fontWeightLi,
+        contents = attributes.contents,
+        borderColor = attributes.borderColor;
+      return /*#__PURE__*/React.createElement("div", {
+        className: "shin-gas-station-01-step-1"
+      }, /*#__PURE__*/React.createElement("ul", {
+        className: "shin-gas-station-01-step-1__inner"
+      }, contents.map(function (content, index) {
+        return /*#__PURE__*/React.createElement("li", {
+          className: "shin-gas-station-01-step-1__li",
+          key: index,
+          style: {
+            borderColor: borderColor,
+            backgroundColor: backgroundColor,
+            borderWidth: borderSize
+          }
+        }, /*#__PURE__*/React.createElement("span", {
+          className: "no",
+          "data-lw_font_set": stepFont,
+          style: {
+            background: borderColor,
+            color: stepFontColor,
+            fontWeight: stepFontWeight
+          }
+        }, "Step.", String(index + 1).padStart(2, '0')), /*#__PURE__*/React.createElement("span", {
+          className: "shin-gas-station-01-step-1__text"
+        }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+          tagName: "h4",
+          className: "ttl",
+          value: content.ttl,
+          "data-lw_font_set": fontLi,
+          style: {
+            fontWeight: fontWeightLi,
+            color: fontColorLi
+          }
+        }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+          tagName: "p",
+          value: content.text,
+          "data-lw_font_set": fontLiP,
+          style: {
+            fontWeight: fontWeightLiP,
+            color: fontColorLiP
+          }
+        })));
+      })));
+    }
+  }]
 });
 
 /***/ }),

@@ -254,8 +254,8 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       fontWeight = _props$attributes2.fontWeight,
       headItems = _props$attributes2.headItems,
       bodyRows = _props$attributes2.bodyRows;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "lw-pr-calendar-1",
+    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+      className: 'lw-pr-calendar-1',
       style: {
         '--color-table-item-bd': colorTableItemBd,
         '--color-table-head-item-bg': colorTableHeadItemBg,
@@ -263,7 +263,8 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         '--color-table-body-item-text': colorTableBodyItemText,
         '--color-table-body-item-first-text': colorTableBodyItemFirstText
       }
-    }, /*#__PURE__*/React.createElement("div", {
+    });
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
       className: "wrap_table"
     }, /*#__PURE__*/React.createElement("div", {
       className: "table_head"
@@ -297,7 +298,67 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         }));
       }));
     })));
-  }
+  },
+  deprecated: [{
+    apiVersion: _block_json__WEBPACK_IMPORTED_MODULE_6__.apiVersion,
+    attributes: _block_json__WEBPACK_IMPORTED_MODULE_6__.attributes,
+    supports: _block_json__WEBPACK_IMPORTED_MODULE_6__.supports,
+    save: function save(props) {
+      var _props$attributes3 = props.attributes,
+        colorTableItemBd = _props$attributes3.colorTableItemBd,
+        colorTableHeadItemBg = _props$attributes3.colorTableHeadItemBg,
+        colorTableHeadItemText = _props$attributes3.colorTableHeadItemText,
+        colorTableBodyItemText = _props$attributes3.colorTableBodyItemText,
+        colorTableBodyItemFirstText = _props$attributes3.colorTableBodyItemFirstText,
+        fontSet = _props$attributes3.fontSet,
+        fontWeight = _props$attributes3.fontWeight,
+        headItems = _props$attributes3.headItems,
+        bodyRows = _props$attributes3.bodyRows;
+      return /*#__PURE__*/React.createElement("div", {
+        className: "lw-pr-calendar-1",
+        style: {
+          '--color-table-item-bd': colorTableItemBd,
+          '--color-table-head-item-bg': colorTableHeadItemBg,
+          '--color-table-head-item-text': colorTableHeadItemText,
+          '--color-table-body-item-text': colorTableBodyItemText,
+          '--color-table-body-item-first-text': colorTableBodyItemFirstText
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "wrap_table"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "table_head"
+      }, headItems.map(function (item, index) {
+        return /*#__PURE__*/React.createElement("div", {
+          key: index,
+          className: "item ".concat(index === 0 ? 'first' : ''),
+          "data-lw_font_set": fontSet,
+          style: {
+            fontWeight: fontWeight
+          }
+        }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+          tagName: "span",
+          value: item
+        }));
+      })), bodyRows.map(function (row, rowIndex) {
+        return /*#__PURE__*/React.createElement("div", {
+          key: rowIndex,
+          className: "table_body"
+        }, row.map(function (cell, cellIndex) {
+          return /*#__PURE__*/React.createElement("div", {
+            key: cellIndex,
+            className: "item ".concat(cellIndex === 0 ? 'first' : ''),
+            "data-lw_font_set": fontSet,
+            style: {
+              fontWeight: fontWeight
+            }
+          }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+            tagName: "span",
+            value: cell
+          }));
+        }));
+      })));
+    }
+  }]
 });
 
 /***/ }),

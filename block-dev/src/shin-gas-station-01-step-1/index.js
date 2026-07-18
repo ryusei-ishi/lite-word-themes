@@ -176,6 +176,55 @@ registerBlockType(metadata.name, {
                 stepFont, stepFontColor, stepFontWeight,
             fontWeightLi, contents,borderColor } = attributes;
 
+        const blockProps = useBlockProps.save({
+            className: 'shin-gas-station-01-step-1'
+        });
+
+        return (
+            <div {...blockProps}>
+                <ul className="shin-gas-station-01-step-1__inner">
+                    {contents.map((content, index) => (
+                        <li className="shin-gas-station-01-step-1__li" key={index}  style={{borderColor:borderColor,backgroundColor:backgroundColor,borderWidth:borderSize}}>
+                            <span
+                                className="no"
+                                data-lw_font_set={stepFont}
+                                style={{background:borderColor,color:stepFontColor,fontWeight:stepFontWeight}}
+                            >
+                                Step.{String(index + 1).padStart(2, '0')}
+                            </span>
+                            <span className="shin-gas-station-01-step-1__text">
+                                <RichText.Content
+                                    tagName="h4"
+                                    className='ttl'
+                                    value={content.ttl}
+                                    data-lw_font_set={fontLi}
+                                    style={{ fontWeight: fontWeightLi, color: fontColorLi }}
+                                />
+                                <RichText.Content
+                                    tagName="p"
+                                    value={content.text}
+                                    data-lw_font_set={fontLiP}
+                                    style={{ fontWeight: fontWeightLiP, color: fontColorLiP }}
+                                />
+                            </span>
+                        </li>
+                    ))}
+                </ul>
+            </div>
+        );
+    },
+    deprecated: [
+        {
+            apiVersion: metadata.apiVersion,
+            attributes: metadata.attributes,
+            save: function (props) {
+        const { attributes } = props;
+        const { fontLi,
+                fontColorLi,backgroundColor,borderSize,
+                fontLiP, fontColorLiP, fontWeightLiP,
+                stepFont, stepFontColor, stepFontWeight,
+            fontWeightLi, contents,borderColor } = attributes;
+
         return (
             <div className="shin-gas-station-01-step-1">
                 <ul className="shin-gas-station-01-step-1__inner">
@@ -208,5 +257,7 @@ registerBlockType(metadata.name, {
                 </ul>
             </div>
         );
-    }
+            }
+        }
+    ]
 });

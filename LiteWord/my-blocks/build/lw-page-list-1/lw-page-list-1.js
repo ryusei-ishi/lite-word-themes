@@ -340,7 +340,7 @@ var imagePatternOptions = [{
       exFont = attributes.exFont,
       exFontWeight = attributes.exFontWeight,
       catBgColor = attributes.catBgColor;
-    return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+    return /*#__PURE__*/React.createElement("div", _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(), /*#__PURE__*/React.createElement("div", {
       className: "filter",
       style: {
         background: catBgColor
@@ -368,7 +368,59 @@ var imagePatternOptions = [{
         __html: "\n/* =========================================================\n * front-end script \u2013 \u30DA\u30FC\u30B8\u4E00\u89A7\u30D6\u30ED\u30C3\u30AF (\u8907\u6570\u5BFE\u5FDC)\n * ======================================================= */\ndocument.addEventListener('DOMContentLoaded', () => {\n\n  document.querySelectorAll('.lw_page-list-1').forEach(async (container) => {\n\n    const per        = parseInt(container.dataset.number, 10) || 4;          // \u8868\u793A\u4E0A\u9650\n    let   parentId   = parseInt(container.dataset.parent, 10);\n    const orderOpt   = container.dataset.order || 'date_desc';\n    const target     = container.dataset.target || '_self';\n    const fText      = (container.dataset.filter || '').toLowerCase();\n    const imgPattern = container.dataset.imgPattern || 'ptn_1';\n    const showDate   = container.dataset.dateVisible === '1';\n    const showEx     = container.dataset.exVisible   === '1';\n    const dFont      = container.dataset.dateFont,  dW = container.dataset.dateFontWeight;\n    const tFont      = container.dataset.titleFont, tW = container.dataset.titleFontWeight;\n    const eFont      = container.dataset.exFont,    eW = container.dataset.exFontWeight;\n\n    /* \u89AA ID \u304C 0 \u306E\u5834\u5408\u306F\u73FE\u5728\u30DA\u30FC\u30B8 ID \u3092\u63A1\u7528 */\n    if (parentId === 0) {\n      const m = document.body.className.match(/page-id-(\\d+)/);\n      parentId = m ? parseInt(m[1], 10) : 0;\n    }\n\n    /* \u4E26\u3073\u9806\u30D1\u30E9\u30E1\u30FC\u30BF */\n    let orderby = 'date', dir = 'desc';\n    if (orderOpt === 'date_asc')  { dir = 'asc'; }\n    if (orderOpt === 'title_asc') { orderby = 'title'; dir = 'asc'; }\n\n    /* =====================================================\n     * 100 \u4EF6\u305A\u3064\u3059\u3079\u3066\u53D6\u5F97 \u2192 \u30D5\u30A3\u30EB\u30BF \u2192 \u4E0A\u9650\u4EF6\u6570\u306B\u4E38\u3081\u308B\n     * =================================================== */\n    const perRequest = 100;                    // REST API 1 \u56DE\u306E\u6700\u5927\u53D6\u5F97\u6570\n    let   page       = 1;\n    let   allPages   = [];\n\n    try {\n      while (true) {\n        let api = `${MyThemeSettings.home_Url}/wp-json/wp/v2/pages?per_page=${perRequest}&page=${page}&orderby=${orderby}&order=${dir}&_embed`;\n        if (parentId) api += `&parent=${parentId}`;\n\n        const res   = await fetch(api);\n        const items = await res.json();\n\n        if (!Array.isArray(items)) break;\n\n        allPages = allPages.concat(items);\n\n        const totalPages = parseInt(res.headers.get('X-WP-TotalPages') || '1', 10);\n        if (page >= totalPages) break;\n        page++;\n      }\n\n      /* ---------- \u30D5\u30A3\u30EB\u30BF\uFF06\u30B9\u30E9\u30A4\u30B9 ---------- */\n      if (fText) {\n        allPages = allPages.filter(p =>\n          (p.title && p.title.rendered || '').toLowerCase().includes(fText)\n        );\n      }\n      const list = allPages.slice(0, per);\n\n      /* ---------- \u51FA\u529B ---------- */\n      if (list.length === 0) {\n        container.innerHTML = '<p>\u8A72\u5F53\u3059\u308B\u30DA\u30FC\u30B8\u304C\u3042\u308A\u307E\u305B\u3093\u3002</p>';\n        return;\n      }\n\n      let html = '<ul class=\"page-list-1__wrap\">';\n      list.forEach(p => {\n        const link  = p.link;\n        const title = p.title.rendered;\n        const date  = new Date(p.date).toLocaleDateString();\n        const img   = p._embedded && p._embedded['wp:featuredmedia']\n                        ? p._embedded['wp:featuredmedia'][0].source_url\n                        : `${MyThemeSettings.theme_Url}/assets/image/no_image/2.webp`;\n        const ex    = p.excerpt && p.excerpt.rendered\n                        ? p.excerpt.rendered.replace(/<[^>]+>/g, '').substring(0, 40) + '\u2026'\n                        : '';\n\n        html += `\n<li>\n  <a href=\"${link}\" target=\"${target}\"${target === '_blank' ? ' rel=\"noopener\"' : ''}>\n    <figure class=\"${imgPattern}\"><img loading=\"lazy\" src=\"${img}\" alt=\"${title}\"></figure>\n    <div class=\"in\">\n      <div class=\"data\">${ showDate ? `<div class=\"date\" style=\"font-weight:${dW};\" data-lw_font_set=\"${dFont}\"><span>${date}</span></div>` : '' }</div>\n      <h3 style=\"font-weight:${tW};\" data-lw_font_set=\"${tFont}\">${title}</h3>\n      ${ showEx ? `<p style=\"font-weight:${eW};\" data-lw_font_set=\"${eFont}\">${ex}</p>` : '' }\n    </div>\n  </a>\n</li>`;\n      });\n      html += '</ul>';\n      container.innerHTML = html;\n\n    } catch (e) {\n      console.error(e);\n      container.innerHTML = '<p>\u30DA\u30FC\u30B8\u3092\u8AAD\u307F\u8FBC\u3081\u307E\u305B\u3093\u3067\u3057\u305F\u3002</p>';\n    }\n\n  }); // end forEach\n\n});\n\t\t\t\t"
       }
     }));
-  }
+  },
+  deprecated: [{
+    apiVersion: _block_json__WEBPACK_IMPORTED_MODULE_7__.apiVersion,
+    attributes: _block_json__WEBPACK_IMPORTED_MODULE_7__.attributes,
+    supports: _block_json__WEBPACK_IMPORTED_MODULE_7__.supports,
+    save: function save(_ref3) {
+      var attributes = _ref3.attributes;
+      var uid = attributes.uid,
+        numberOfPages = attributes.numberOfPages,
+        parentPageId = attributes.parentPageId,
+        orderOption = attributes.orderOption,
+        openInNewTab = attributes.openInNewTab,
+        filterText = attributes.filterText,
+        imagePattern = attributes.imagePattern,
+        showDate = attributes.showDate,
+        showExcerpt = attributes.showExcerpt,
+        dateFont = attributes.dateFont,
+        dateFontWeight = attributes.dateFontWeight,
+        titleFont = attributes.titleFont,
+        titleFontWeight = attributes.titleFontWeight,
+        exFont = attributes.exFont,
+        exFontWeight = attributes.exFontWeight,
+        catBgColor = attributes.catBgColor;
+      return /*#__PURE__*/React.createElement("div", null, /*#__PURE__*/React.createElement("div", {
+        className: "filter",
+        style: {
+          background: catBgColor
+        }
+      }), /*#__PURE__*/React.createElement("div", {
+        id: "lw-page-list-".concat(uid) /* ★ ユニーク ID */,
+        className: "lw_page-list-1",
+        "data-number": numberOfPages,
+        "data-parent": parentPageId,
+        "data-order": orderOption,
+        "data-target": openInNewTab ? '_blank' : '_self',
+        "data-filter": filterText,
+        "data-img-pattern": imagePattern,
+        "data-date-visible": showDate ? '1' : '0',
+        "data-ex-visible": showExcerpt ? '1' : '0',
+        "data-date-font": dateFont,
+        "data-date-font-weight": dateFontWeight,
+        "data-title-font": titleFont,
+        "data-title-font-weight": titleFontWeight,
+        "data-ex-font": exFont,
+        "data-ex-font-weight": exFontWeight,
+        "data-cat-bg-color": catBgColor
+      }), /*#__PURE__*/React.createElement("script", {
+        dangerouslySetInnerHTML: {
+          __html: "\n/* =========================================================\n * front-end script \u2013 \u30DA\u30FC\u30B8\u4E00\u89A7\u30D6\u30ED\u30C3\u30AF (\u8907\u6570\u5BFE\u5FDC)\n * ======================================================= */\ndocument.addEventListener('DOMContentLoaded', () => {\n\n  document.querySelectorAll('.lw_page-list-1').forEach(async (container) => {\n\n    const per        = parseInt(container.dataset.number, 10) || 4;          // \u8868\u793A\u4E0A\u9650\n    let   parentId   = parseInt(container.dataset.parent, 10);\n    const orderOpt   = container.dataset.order || 'date_desc';\n    const target     = container.dataset.target || '_self';\n    const fText      = (container.dataset.filter || '').toLowerCase();\n    const imgPattern = container.dataset.imgPattern || 'ptn_1';\n    const showDate   = container.dataset.dateVisible === '1';\n    const showEx     = container.dataset.exVisible   === '1';\n    const dFont      = container.dataset.dateFont,  dW = container.dataset.dateFontWeight;\n    const tFont      = container.dataset.titleFont, tW = container.dataset.titleFontWeight;\n    const eFont      = container.dataset.exFont,    eW = container.dataset.exFontWeight;\n\n    /* \u89AA ID \u304C 0 \u306E\u5834\u5408\u306F\u73FE\u5728\u30DA\u30FC\u30B8 ID \u3092\u63A1\u7528 */\n    if (parentId === 0) {\n      const m = document.body.className.match(/page-id-(\\d+)/);\n      parentId = m ? parseInt(m[1], 10) : 0;\n    }\n\n    /* \u4E26\u3073\u9806\u30D1\u30E9\u30E1\u30FC\u30BF */\n    let orderby = 'date', dir = 'desc';\n    if (orderOpt === 'date_asc')  { dir = 'asc'; }\n    if (orderOpt === 'title_asc') { orderby = 'title'; dir = 'asc'; }\n\n    /* =====================================================\n     * 100 \u4EF6\u305A\u3064\u3059\u3079\u3066\u53D6\u5F97 \u2192 \u30D5\u30A3\u30EB\u30BF \u2192 \u4E0A\u9650\u4EF6\u6570\u306B\u4E38\u3081\u308B\n     * =================================================== */\n    const perRequest = 100;                    // REST API 1 \u56DE\u306E\u6700\u5927\u53D6\u5F97\u6570\n    let   page       = 1;\n    let   allPages   = [];\n\n    try {\n      while (true) {\n        let api = `${MyThemeSettings.home_Url}/wp-json/wp/v2/pages?per_page=${perRequest}&page=${page}&orderby=${orderby}&order=${dir}&_embed`;\n        if (parentId) api += `&parent=${parentId}`;\n\n        const res   = await fetch(api);\n        const items = await res.json();\n\n        if (!Array.isArray(items)) break;\n\n        allPages = allPages.concat(items);\n\n        const totalPages = parseInt(res.headers.get('X-WP-TotalPages') || '1', 10);\n        if (page >= totalPages) break;\n        page++;\n      }\n\n      /* ---------- \u30D5\u30A3\u30EB\u30BF\uFF06\u30B9\u30E9\u30A4\u30B9 ---------- */\n      if (fText) {\n        allPages = allPages.filter(p =>\n          (p.title && p.title.rendered || '').toLowerCase().includes(fText)\n        );\n      }\n      const list = allPages.slice(0, per);\n\n      /* ---------- \u51FA\u529B ---------- */\n      if (list.length === 0) {\n        container.innerHTML = '<p>\u8A72\u5F53\u3059\u308B\u30DA\u30FC\u30B8\u304C\u3042\u308A\u307E\u305B\u3093\u3002</p>';\n        return;\n      }\n\n      let html = '<ul class=\"page-list-1__wrap\">';\n      list.forEach(p => {\n        const link  = p.link;\n        const title = p.title.rendered;\n        const date  = new Date(p.date).toLocaleDateString();\n        const img   = p._embedded && p._embedded['wp:featuredmedia']\n                        ? p._embedded['wp:featuredmedia'][0].source_url\n                        : `${MyThemeSettings.theme_Url}/assets/image/no_image/2.webp`;\n        const ex    = p.excerpt && p.excerpt.rendered\n                        ? p.excerpt.rendered.replace(/<[^>]+>/g, '').substring(0, 40) + '\u2026'\n                        : '';\n\n        html += `\n<li>\n  <a href=\"${link}\" target=\"${target}\"${target === '_blank' ? ' rel=\"noopener\"' : ''}>\n    <figure class=\"${imgPattern}\"><img loading=\"lazy\" src=\"${img}\" alt=\"${title}\"></figure>\n    <div class=\"in\">\n      <div class=\"data\">${ showDate ? `<div class=\"date\" style=\"font-weight:${dW};\" data-lw_font_set=\"${dFont}\"><span>${date}</span></div>` : '' }</div>\n      <h3 style=\"font-weight:${tW};\" data-lw_font_set=\"${tFont}\">${title}</h3>\n      ${ showEx ? `<p style=\"font-weight:${eW};\" data-lw_font_set=\"${eFont}\">${ex}</p>` : '' }\n    </div>\n  </a>\n</li>`;\n      });\n      html += '</ul>';\n      container.innerHTML = html;\n\n    } catch (e) {\n      console.error(e);\n      container.innerHTML = '<p>\u30DA\u30FC\u30B8\u3092\u8AAD\u307F\u8FBC\u3081\u307E\u305B\u3093\u3067\u3057\u305F\u3002</p>';\n    }\n\n  }); // end forEach\n\n});\n\t\t\t\t"
+        }
+      }));
+    }
+  }]
 });
 
 /***/ }),

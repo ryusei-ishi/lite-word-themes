@@ -493,6 +493,150 @@ registerBlockType(metadata.name, {
 			contents,
 		} = attributes;
 
+		const blockProps = useBlockProps.save({
+			className: 'lw-content-8'
+		});
+
+		return (
+			<div {...blockProps}>
+				<ul
+					className={ `lw-content-8__inner ${ columnClass }` }
+					style={ { maxWidth: `${ innerMaxWidth }px`, margin: '0 auto' } }
+				>
+					{ contents.map( ( item, idx ) => {
+						const LinkTag   = item.url ? 'a' : 'div';
+						const linkProps = item.url
+							? { href: item.url, className: 'link' }
+							: { className: 'link' };
+
+						return (
+							<li
+								key={ idx }
+								className="lw-content-8__li"
+								style={ {
+									borderColor   : liBorderColor,
+									borderWidth   : liBorderSize,
+									borderStyle   : liBorderSize > 0 ? 'solid' : 'none',
+									paddingTop    : `${ liPaddingTop }px`,
+									paddingBottom : `${ liPaddingBottom }px`,
+									paddingLeft   : `${ liPaddingLeft }px`,
+									paddingRight  : `${ liPaddingRight }px`,
+									borderRadius  : `${ liBorderRadius }px`,
+								} }
+							>
+								{ createElement(
+									LinkTag,
+									linkProps,
+									<>
+										{/* タイトル */}
+										{ createElement(
+											titleTag,
+											{
+												className          : `ttl ${ titleFontSizeClass }`,
+												'data-lw_font_set' : fontLi,
+												style: {
+													fontWeight        : fontWeightLi,
+													color             : fontColorLi,
+													borderBottomColor : titleBorderColor,
+													borderBottomWidth : titleBorderSize,
+													borderBottomStyle : titleBorderSize > 0 ? 'solid' : 'none',
+												},
+											},
+											<>
+												{ showSub && item.sub && (
+													<span
+														className="sub"
+														dangerouslySetInnerHTML={ { __html: item.sub } }
+														data-lw_font_set={ fontLiSub }
+														style={ {
+															fontWeight     : fontWeightLiSub,
+															borderColor    : subBorderColor,
+															borderWidth    : subBorderSize,
+															borderStyle    : subBorderSize > 0 ? 'solid' : 'none',
+															display        : 'inline-block',
+															color          : subFontColor,
+															backgroundColor: subBgColor,
+														} }
+													/>
+												) }
+												{ item.main && (
+													<span
+														className={ `main ${ mainAlign }` }
+														dangerouslySetInnerHTML={ { __html: item.main } }
+														data-lw_font_set={ fontLiMain }
+														style={ { fontWeight: fontWeightLiMain } }
+													/>
+												) }
+											</>
+										) }
+
+										{/* 説明文 */}
+										<RichText.Content
+											tagName="p"
+											className={ `lw-content-8__text ${ textFontSizeClass }` }
+											value={ item.text }
+											data-lw_font_set={ fontLiP }
+											style={ {
+												fontWeight: fontWeightLiP,
+												color     : fontColorLiP,
+											} }
+										/>
+
+										{/* ボタン（URLが入力されていてshowButtonがtrueの場合のみ表示） */}
+										{ item.url && showButton && (item.btnText || '詳細はこちら') && (
+											<div
+												className="link_btn"
+												dangerouslySetInnerHTML={ { __html: item.btnText || '詳細はこちら' } }
+												style={ {
+													marginTop      : `${ btnMarginTop }px`,
+													padding        : '0 1em',
+													height         : `${ btnHeight }px`,
+													width          : '100%',
+													display        : 'flex',
+													alignItems     : 'center',
+													justifyContent : 'center',
+													background     : btnBgColor,
+													color          : btnFontColor,
+													fontSize       : `${ btnFontSize }px`,
+													borderRadius   : `${ btnBorderRadius }px`,
+													borderColor    : btnBorderColor,
+													borderWidth    : `${ btnBorderSize }px`,
+													borderStyle    : btnBorderSize > 0 ? 'solid' : 'none',
+												} }
+											/>
+										) }
+									</>
+								) }
+							</li>
+						);
+					} ) }
+				</ul>
+			</div>
+		);
+	},
+
+	deprecated: [
+		{
+			apiVersion: metadata.apiVersion,
+			attributes: metadata.attributes,
+			supports: metadata.supports,
+			save( { attributes } ) {
+		const {
+			fontLi, fontColorLi, fontWeightLi, titleFontSizeClass,
+			fontLiP, fontColorLiP, fontWeightLiP, textFontSizeClass,
+			titleTag, titleBorderColor, titleBorderSize,
+			liBorderColor, liBorderSize,
+			liPaddingTop, liPaddingBottom, liPaddingLeft, liPaddingRight, liBorderRadius,
+			subBorderColor, subBorderSize, subFontColor, subBgColor, showSub,
+			fontLiSub, fontWeightLiSub,
+			fontLiMain, fontWeightLiMain,
+			columnClass, mainAlign, innerMaxWidth,
+			btnMarginTop, btnHeight,
+			btnBgColor, btnFontColor, btnFontSize, btnBorderRadius,
+			btnBorderColor, btnBorderSize, showButton,
+			contents,
+		} = attributes;
+
 		return (
 			<div className="lw-content-8">
 				<ul
@@ -609,5 +753,7 @@ registerBlockType(metadata.name, {
 				</ul>
 			</div>
 		);
-	},
+			},
+		},
+	],
 } );

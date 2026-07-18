@@ -337,6 +337,10 @@ registerBlockType(metadata.name, {
 			contents,
 		} = attributes;
 
+		const blockProps = useBlockProps.save({
+			className: `lw-pr-step-7 ${fontSizeClass}`
+		});
+
 		const hasContent = (str='') => str.trim() !== '';
 
 		// 旧属性との互換性を保つ
@@ -344,7 +348,7 @@ registerBlockType(metadata.name, {
 		const finalColumnSp = columnCountSp || columnCount || 2;
 
 		return (
-			<div className={`lw-pr-step-7 ${fontSizeClass}`}>
+			<div {...blockProps}>
 				<ul
 					className="lw-pr-step-7__inner"
 					style={{
@@ -410,4 +414,96 @@ registerBlockType(metadata.name, {
 			</div>
 		);
 	},
+
+	deprecated: [
+		{
+			apiVersion: metadata.apiVersion,
+			attributes: metadata.attributes,
+			supports: metadata.supports,
+			save({ attributes }) {
+				const {
+					circleBgColor, cardBgColor, borderColor, ulMaxWidth, columnCountPc, columnCountSp, columnCount,
+					fontSizeClass,
+					fontNo, fontWeightNo, colorNo,
+					titleTag,
+					fontH3, fontWeightH3, colorH3,
+					fontP,  fontWeightP,  colorP,
+					contents,
+				} = attributes;
+
+				const hasContent = (str='') => str.trim() !== '';
+
+				// 旧属性との互換性を保つ
+				const finalColumnPc = columnCountPc || columnCount || 3;
+				const finalColumnSp = columnCountSp || columnCount || 2;
+
+				return (
+					<div className={`lw-pr-step-7 ${fontSizeClass}`}>
+						<ul
+							className="lw-pr-step-7__inner"
+							style={{
+								maxWidth: ulMaxWidth,
+								'--column-pc': finalColumnPc,
+								'--column-sp': finalColumnSp
+							}}
+						>
+							{contents.map((c, i) => (
+								<li
+									className="lw-pr-step-7__li"
+									key={i}
+									style={{
+										backgroundColor: cardBgColor,
+										borderColor: borderColor
+									}}
+								>
+									{/* STEP番号 */}
+									<div
+										className="lw-pr-step-7__li_no"
+										data-lw_font_set={fontNo}
+										style={{
+											fontWeight: fontWeightNo,
+											backgroundColor: circleBgColor,
+											color: colorNo || undefined,
+										}}
+									>
+										{i + 1}
+									</div>
+
+									<div className="lw-pr-step-7__li_in">
+										{/* タイトル */}
+										{hasContent(c.title) && (
+											<RichText.Content
+												tagName={titleTag}
+												className="lw-pr-step-7__li_title ttl"
+												value={c.title}
+												data-lw_font_set={fontH3}
+												style={{
+													fontWeight: fontWeightH3,
+													color: colorH3 || undefined,
+												}}
+											/>
+										)}
+
+										{/* 本文 */}
+										{hasContent(c.text) && (
+											<RichText.Content
+												tagName="p"
+												className="lw-pr-step-7__li_text"
+												value={c.text}
+												data-lw_font_set={fontP}
+												style={{
+													fontWeight: fontWeightP,
+													color: colorP || undefined,
+												}}
+											/>
+										)}
+									</div>
+								</li>
+							))}
+						</ul>
+					</div>
+				);
+			},
+		},
+	],
 });

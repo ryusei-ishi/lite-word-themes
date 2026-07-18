@@ -319,8 +319,12 @@ registerBlockType(metadata.name, {
 			contents,
 		} = attributes;
 
+		const blockProps = useBlockProps.save({
+			className: 'paid-block-lw-step-6'
+		});
+
 		return (
-			<div className="paid-block-lw-step-6 wp-block-wdl-paid-block-lw-step-6">
+			<div {...blockProps}>
 				<ul className="paid-block-lw-step-6__inner">
 					{contents.map((c, i) => {
 						const numText = c.number ? c.number : `${i + 1}`;
@@ -417,4 +421,121 @@ registerBlockType(metadata.name, {
 			</div>
 		);
 	},
+	deprecated: [
+		{
+			apiVersion: metadata.apiVersion,
+			attributes: metadata.attributes,
+			supports: metadata.supports,
+			save({ attributes }) {
+				const {
+					fontLi, fontColorLi, fontWeightLi, titleFontSizeClass,
+					fontLiP, fontColorLiP, fontWeightLiP, textFontSizeClass,
+					borderColor, borderSize, imageBorderRadius,
+					imageObjectFit, imageAspectH,
+					titleTag, titleBorderColor, titleBorderSize,
+					numberBgColor, showNumber,
+					liBorderColor, liBorderSize, liBorderRadius,
+					contents,
+				} = attributes;
+
+				return (
+					<div className="paid-block-lw-step-6 wp-block-wdl-paid-block-lw-step-6">
+						<ul className="paid-block-lw-step-6__inner">
+							{contents.map((c, i) => {
+								const numText = c.number ? c.number : `${i + 1}`;
+								const Tag   = c.url ? 'a' : 'div';
+								const props = c.url ? { href: c.url, className: 'link' } : { className: 'link' };
+
+								return (
+									<li
+										key={i}
+										className="paid-block-lw-step-6__li"
+										style={{
+											borderColor : liBorderColor,
+											borderWidth : liBorderSize,
+											borderStyle : liBorderSize > 0 ? 'solid' : 'none',
+											borderRadius: `${liBorderRadius}px`,
+										}}
+									>
+										{/* 番号 */}
+										{showNumber && (
+											<div
+												className="number"
+												style={{
+													backgroundColor: numberBgColor,
+													color          : '#fff',
+													fontWeight     : '700',
+												}}
+											>
+												<span>{numText}</span>
+											</div>
+										)}
+
+										{createElement(
+											Tag,
+											props,
+											<>
+												{/* 画像 */}
+												{c.image && (
+													<div
+														className="image"
+														style={{
+															borderRadius: `${imageBorderRadius}px`,
+															borderColor ,
+															borderWidth : borderSize,
+															borderStyle : borderSize > 0 ? 'solid' : 'none',
+															aspectRatio: imageAspectH > 0 ? `400 / ${imageAspectH}` : undefined,
+														}}
+													>
+														<img
+															src={c.image}
+															alt=""
+															style={{ objectFit: imageObjectFit }}
+														/>
+													</div>
+												)}
+
+												{/* タイトル */}
+												{c.ttl && (
+													<RichText.Content
+														tagName={titleTag}
+														className={`ttl ${titleFontSizeClass}`}
+														value={c.ttl}
+														data-lw_font_set={fontLi}
+														style={{
+															fontWeight : fontWeightLi,
+															fontFamily : fontLi || undefined,
+															color      : fontColorLi,
+															borderBottomColor: titleBorderColor,
+															borderBottomWidth: titleBorderSize,
+															borderBottomStyle: titleBorderSize > 0 ? 'solid' : 'none',
+														}}
+													/>
+												)}
+
+												{/* 説明文 */}
+												{c.text && (
+													<RichText.Content
+														tagName="p"
+														className={`paid-block-lw-step-6__text ${textFontSizeClass}`}
+														value={c.text}
+														data-lw_font_set={fontLiP}
+														style={{
+															fontWeight: fontWeightLiP,
+															fontFamily: fontLiP || undefined,
+															color     : fontColorLiP,
+														}}
+													/>
+												)}
+											</>
+										)}
+									</li>
+								);
+							})}
+						</ul>
+					</div>
+				);
+			},
+		},
+	],
 });

@@ -429,6 +429,119 @@ registerBlockType(metadata.name, {
 			return classes.join(' ');
 		};
 
+		const blockProps = useBlockProps.save({
+			className: 'paid-block-content-4'
+		});
+
+		return (
+			<div {...blockProps}>
+				<section className="conts">
+					<div className="cont">
+						<h2 className="ttl">
+							<div style={ { color: mainTitleColor } } dangerouslySetInnerHTML={ { __html: mainTitle } } />
+							<span className="sub" style={ { color: highlightColor } } dangerouslySetInnerHTML={ { __html: subTitle } } />
+						</h2>
+
+						{ bottomText && bottomText.trim() && (
+							<p className="ttl_btm_p">
+								<span dangerouslySetInnerHTML={ { __html: bottomText } } />
+							</p>
+						) }
+
+						<a
+							className={ getButtonClasses() }
+							href={ ctaUrl }
+							style={ {
+								borderColor : ctaBorderColor,
+								borderWidth : `${ ctaBorderWidth }px`,
+								borderRadius: `${ ctaBorderRadius }px`,
+								color       : ctaTextColor,
+							} }
+						>
+							<span dangerouslySetInnerHTML={ { __html: ctaText } } />
+							<div className={ getBtnBgClasses() } style={ { background: ctaBorderColor, borderRadius: `${ ctaBorderRadius }px` } } />
+						</a>
+					</div>
+
+					<div className="gallery_in">
+						{ images.map( ( img, i ) =>
+							img.url ? (
+								<div className="image" key={ i } style={ { borderRadius: `${ imageRadius }px`, overflow: 'hidden' } }>
+									<img src={ img.url } alt={ img.alt } style={ { borderRadius: `${ imageRadius }px` } } />
+								</div>
+							) : null
+						) }
+					</div>
+				</section>
+			</div>
+		);
+	},
+
+	/* ────────────────────────────────────────────────
+	 * 旧 save（useBlockProps.save() 移行前・名札なし）
+	 * ──────────────────────────────────────────────── */
+	deprecated: [
+		{
+			apiVersion: metadata.apiVersion,
+			attributes: metadata.attributes,
+			supports: metadata.supports,
+			save: function ( { attributes } ) {
+		const {
+			mainTitle,
+			subTitle,
+			bottomText,
+			ctaText,
+			ctaUrl,
+			mainTitleColor,
+			highlightColor,
+			ctaBorderColor,
+			ctaTextColor,
+			ctaBorderWidth,
+			ctaBorderRadius,
+			imageRadius,
+			pcButtonState,
+			mobileButtonState,
+			images,
+		} = attributes;
+
+		/* ボタンの状態に応じたクラス名を生成（保存版） */
+		const getButtonClasses = () => {
+			let classes = ['cont_btn'];
+			
+			if (pcButtonState === 'w_full') {
+				classes.push('w_full');
+			} else if (pcButtonState === 'none') {
+				classes.push('none');
+			}
+			
+			if (mobileButtonState === 'sp_w_full') {
+				classes.push('sp_w_full');
+			} else if (mobileButtonState === 'sp_none') {
+				classes.push('sp_none');
+			}
+			
+			return classes.join(' ');
+		};
+
+		/* .btn_bg用のクラス名を生成（保存版） */
+		const getBtnBgClasses = () => {
+			let classes = ['btn_bg'];
+			
+			if (pcButtonState === 'w_full') {
+				classes.push('w_full');
+			} else if (pcButtonState === 'none') {
+				classes.push('none');
+			}
+			
+			if (mobileButtonState === 'sp_w_full') {
+				classes.push('sp_w_full');
+			} else if (mobileButtonState === 'sp_none') {
+				classes.push('sp_none');
+			}
+			
+			return classes.join(' ');
+		};
+
 		return (
 			<div className="paid-block-content-4">
 				<section className="conts">
@@ -471,5 +584,7 @@ registerBlockType(metadata.name, {
 				</section>
 			</div>
 		);
-	},
+			},
+		},
+	],
 });

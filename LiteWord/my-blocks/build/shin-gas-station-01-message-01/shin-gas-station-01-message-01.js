@@ -178,9 +178,10 @@ __webpack_require__.r(__webpack_exports__);
       captionSub = attributes.captionSub,
       captionMain = attributes.captionMain,
       colorMain = attributes.colorMain;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "shin-gas-station-01-message-01"
-    }, /*#__PURE__*/React.createElement("div", {
+    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+      className: 'shin-gas-station-01-message-01'
+    });
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
       className: "shin-gas-station-01-message-01__wrap"
     }, /*#__PURE__*/React.createElement("div", {
       className: "text__in"
@@ -221,7 +222,68 @@ __webpack_require__.r(__webpack_exports__);
       src: imgUrl,
       alt: imgAlt
     })))));
-  }
+  },
+  deprecated: [{
+    apiVersion: _block_json__WEBPACK_IMPORTED_MODULE_5__.apiVersion,
+    attributes: _block_json__WEBPACK_IMPORTED_MODULE_5__.attributes,
+    supports: {
+      anchor: true
+    },
+    save: function save(props) {
+      var attributes = props.attributes;
+      var subTitle = attributes.subTitle,
+        mainTitle = attributes.mainTitle,
+        bodyText = attributes.bodyText,
+        imgUrl = attributes.imgUrl,
+        imgAlt = attributes.imgAlt,
+        captionSub = attributes.captionSub,
+        captionMain = attributes.captionMain,
+        colorMain = attributes.colorMain;
+      return /*#__PURE__*/React.createElement("div", {
+        className: "shin-gas-station-01-message-01"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "shin-gas-station-01-message-01__wrap"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "text__in"
+      }, /*#__PURE__*/React.createElement("h3", {
+        className: "title"
+      }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+        tagName: "div",
+        className: "main",
+        "data-lw_font_set": "Montserrat",
+        value: mainTitle
+      }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+        tagName: "div",
+        className: "sub",
+        value: subTitle,
+        style: {
+          color: colorMain
+        }
+      })), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+        tagName: "p",
+        className: "description",
+        value: bodyText.replace(/\n/g, '<br />')
+      }), /*#__PURE__*/React.createElement("figcaption", {
+        className: "img_caption"
+      }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+        tagName: "span",
+        className: "sub",
+        value: captionSub
+      }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+        tagName: "span",
+        className: "main",
+        value: captionMain
+      }))), /*#__PURE__*/React.createElement("div", {
+        className: "image"
+      }, /*#__PURE__*/React.createElement("figure", {
+        className: "img"
+      }, /*#__PURE__*/React.createElement("img", {
+        loading: "lazy",
+        src: imgUrl,
+        alt: imgAlt
+      })))));
+    }
+  }]
 });
 
 /***/ }),

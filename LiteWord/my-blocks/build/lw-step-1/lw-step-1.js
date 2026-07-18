@@ -254,9 +254,10 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
       bgGradient = attributes.bgGradient,
       filterOpacity = attributes.filterOpacity,
       colorLiSvg = attributes.colorLiSvg;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "lw-step-1"
-    }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+      className: 'lw-step-1'
+    });
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
       tagName: "h2",
       className: "lw-step-1__title",
       value: titleText
@@ -302,7 +303,73 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
         opacity: filterOpacity
       }
     }));
-  }
+  },
+  deprecated: [{
+    apiVersion: _block_json__WEBPACK_IMPORTED_MODULE_6__.apiVersion,
+    attributes: _block_json__WEBPACK_IMPORTED_MODULE_6__.attributes,
+    supports: _block_json__WEBPACK_IMPORTED_MODULE_6__.supports,
+    save: function save(props) {
+      var attributes = props.attributes;
+      var titleText = attributes.titleText,
+        ulMaxWidth = attributes.ulMaxWidth,
+        fontH3 = attributes.fontH3,
+        fontWeightH3 = attributes.fontWeightH3,
+        fontP = attributes.fontP,
+        fontWeightP = attributes.fontWeightP,
+        contents = attributes.contents,
+        bgGradient = attributes.bgGradient,
+        filterOpacity = attributes.filterOpacity,
+        colorLiSvg = attributes.colorLiSvg;
+      return /*#__PURE__*/React.createElement("div", {
+        className: "lw-step-1"
+      }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+        tagName: "h2",
+        className: "lw-step-1__title",
+        value: titleText
+      }), /*#__PURE__*/React.createElement("ul", {
+        className: "lw-step-1__inner",
+        style: {
+          maxWidth: ulMaxWidth
+        }
+      }, contents.map(function (content, index) {
+        return /*#__PURE__*/React.createElement("li", {
+          className: "lw-step-1__li",
+          key: index
+        }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+          tagName: "h3",
+          value: content.title,
+          "data-lw_font_set": fontH3,
+          style: {
+            fontWeight: fontWeightH3,
+            background: bgGradient
+          }
+        }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+          tagName: "p",
+          value: content.text,
+          "data-lw_font_set": fontP,
+          style: {
+            fontWeight: fontWeightP
+          }
+        }), /*#__PURE__*/React.createElement("span", {
+          className: "icon",
+          style: {
+            fill: colorLiSvg
+          }
+        }, /*#__PURE__*/React.createElement("svg", {
+          xmlns: "http://www.w3.org/2000/svg",
+          viewBox: "0 0 512 512"
+        }, /*#__PURE__*/React.createElement("path", {
+          d: "M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z"
+        }))));
+      })), /*#__PURE__*/React.createElement("div", {
+        className: "lw-step-1__filter",
+        style: {
+          background: bgGradient,
+          opacity: filterOpacity
+        }
+      }));
+    }
+  }]
 });
 
 /***/ }),

@@ -122,6 +122,49 @@ registerBlockType(metadata.name, {
     save: function (props) {
         const { attributes } = props;
         const { subTitle, mainTitle, bodyText, imgUrl, imgAlt, captionSub, captionMain, colorMain } = attributes;
+
+        const blockProps = useBlockProps.save({
+            className: 'shin-gas-station-01-message-01'
+        });
+
+        return (
+            <div {...blockProps}>
+                <div className="shin-gas-station-01-message-01__wrap">
+                    <div className="text__in">
+                        <h3 className="title">
+                            <RichText.Content tagName="div" className="main" data-lw_font_set="Montserrat" value={mainTitle} />
+                            <RichText.Content 
+                            tagName="div" className="sub" value={subTitle} style={{ color: colorMain }}/>
+                        </h3>
+                        <RichText.Content 
+                            tagName="p" 
+                            className="description" 
+                            value={bodyText.replace(/\n/g, '<br />')} 
+                        />
+                        <figcaption className="img_caption">
+                            <RichText.Content tagName="span" className="sub" value={captionSub} />
+                            <RichText.Content tagName="span" className="main" value={captionMain} />
+                        </figcaption>
+                    </div>
+                    <div className="image">
+                        <figure className="img">
+                            <img loading="lazy" src={imgUrl} alt={imgAlt} />
+                        </figure>
+                    </div>
+                </div>
+            </div>
+        );
+    },
+    deprecated: [
+        {
+            apiVersion: metadata.apiVersion,
+            attributes: metadata.attributes,
+            supports: {
+                anchor: true,
+            },
+            save: function (props) {
+        const { attributes } = props;
+        const { subTitle, mainTitle, bodyText, imgUrl, imgAlt, captionSub, captionMain, colorMain } = attributes;
     
         return (
             <div className="shin-gas-station-01-message-01">
@@ -150,5 +193,7 @@ registerBlockType(metadata.name, {
                 </div>
             </div>
         );
-    }
+    },
+        },
+    ],
 });

@@ -238,9 +238,10 @@ __webpack_require__.r(__webpack_exports__);
       filterOpacity = attributes.filterOpacity,
       maxWidth = attributes.maxWidth,
       alignLeft = attributes.alignLeft;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "lw-message-1"
-    }, /*#__PURE__*/React.createElement("div", {
+    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+      className: 'lw-message-1'
+    });
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
       className: "lw-message-1__wrap".concat(alignLeft ? ' image_left' : ''),
       style: {
         maxWidth: "".concat(maxWidth, "px")
@@ -296,7 +297,85 @@ __webpack_require__.r(__webpack_exports__);
         backgroundColor: colorMain
       }
     }));
-  }
+  },
+  deprecated: [{
+    apiVersion: _block_json__WEBPACK_IMPORTED_MODULE_5__.apiVersion,
+    attributes: _block_json__WEBPACK_IMPORTED_MODULE_5__.attributes,
+    supports: _block_json__WEBPACK_IMPORTED_MODULE_5__.supports,
+    save: function save(props) {
+      var attributes = props.attributes;
+      var subTitle = attributes.subTitle,
+        mainTitle = attributes.mainTitle,
+        leadText = attributes.leadText,
+        bodyText = attributes.bodyText,
+        imgUrl = attributes.imgUrl,
+        imgAlt = attributes.imgAlt,
+        captionSub = attributes.captionSub,
+        captionMain = attributes.captionMain,
+        colorMain = attributes.colorMain,
+        filterOpacity = attributes.filterOpacity,
+        maxWidth = attributes.maxWidth,
+        alignLeft = attributes.alignLeft;
+      return /*#__PURE__*/React.createElement("div", {
+        className: "lw-message-1"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "lw-message-1__wrap".concat(alignLeft ? ' image_left' : ''),
+        style: {
+          maxWidth: "".concat(maxWidth, "px")
+        }
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "text__in"
+      }, /*#__PURE__*/React.createElement("h3", {
+        className: "title"
+      }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+        tagName: "div",
+        className: "sub",
+        value: subTitle,
+        style: {
+          color: colorMain
+        }
+      }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+        tagName: "div",
+        className: "main",
+        value: mainTitle
+      })), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+        tagName: "p",
+        className: "lead",
+        value: leadText.replace(/\n/g, '<br />'),
+        style: {
+          color: colorMain
+        }
+      }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+        tagName: "p",
+        className: "description",
+        value: bodyText.replace(/\n/g, '<br />')
+      })), /*#__PURE__*/React.createElement("div", {
+        className: "image"
+      }, /*#__PURE__*/React.createElement("figure", {
+        className: "img"
+      }, /*#__PURE__*/React.createElement("img", {
+        loading: "lazy",
+        src: imgUrl,
+        alt: imgAlt
+      })), /*#__PURE__*/React.createElement("figcaption", {
+        className: "img_caption"
+      }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+        tagName: "span",
+        className: "sub",
+        value: captionSub
+      }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+        tagName: "span",
+        className: "main",
+        value: captionMain
+      })))), /*#__PURE__*/React.createElement("div", {
+        className: "bg_filter",
+        style: {
+          opacity: filterOpacity,
+          backgroundColor: colorMain
+        }
+      }));
+    }
+  }]
 });
 
 /***/ }),

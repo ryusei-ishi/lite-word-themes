@@ -160,8 +160,12 @@ registerBlockType(metadata.name, {
         const { attributes } = props;
         const { titleText, ulMaxWidth, fontH3, fontWeightH3, fontP, fontWeightP, contents, bgGradient, filterOpacity, colorLiSvg } = attributes;
 
+        const blockProps = useBlockProps.save({
+            className: 'lw-step-1'
+        });
+
         return (
-            <div className="lw-step-1">
+            <div {...blockProps}>
                 <RichText.Content
                     tagName="h2"
                     className="lw-step-1__title"
@@ -193,6 +197,52 @@ registerBlockType(metadata.name, {
                 <div className="lw-step-1__filter" style={{ background: bgGradient, opacity: filterOpacity }}></div>
             </div>
         );
-    }
+    },
+
+    deprecated: [
+        {
+            apiVersion: metadata.apiVersion,
+            attributes: metadata.attributes,
+            supports: metadata.supports,
+            save: function (props) {
+                const { attributes } = props;
+                const { titleText, ulMaxWidth, fontH3, fontWeightH3, fontP, fontWeightP, contents, bgGradient, filterOpacity, colorLiSvg } = attributes;
+
+                return (
+                    <div className="lw-step-1">
+                        <RichText.Content
+                            tagName="h2"
+                            className="lw-step-1__title"
+                            value={titleText}
+                        />
+                        <ul className="lw-step-1__inner" style={{ maxWidth: ulMaxWidth }}>
+                            {contents.map((content, index) => (
+                                <li className="lw-step-1__li" key={index}>
+                                    <RichText.Content
+                                        tagName="h3"
+                                        value={content.title}
+                                        data-lw_font_set={fontH3}
+                                        style={{ fontWeight: fontWeightH3, background: bgGradient }}
+                                    />
+                                    <RichText.Content
+                                        tagName="p"
+                                        value={content.text}
+                                        data-lw_font_set={fontP}
+                                        style={{ fontWeight: fontWeightP }}
+                                    />
+                                    <span className="icon" style={{ fill: colorLiSvg }}>
+                                        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+                                            <path d="M233.4 406.6c12.5 12.5 32.8 12.5 45.3 0l192-192c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L256 338.7 86.6 169.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l192 192z" />
+                                        </svg>
+                                    </span>
+                                </li>
+                            ))}
+                        </ul>
+                        <div className="lw-step-1__filter" style={{ background: bgGradient, opacity: filterOpacity }}></div>
+                    </div>
+                );
+            }
+        }
+    ]
 
 });

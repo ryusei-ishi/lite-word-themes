@@ -221,7 +221,7 @@ registerBlockType(metadata.name, {
 		} = attributes;
 
 		return (
-			<div>
+			<div {...useBlockProps.save()}>
 				<div className="filter" style={{background:catBgColor}}/>
 				<div
 					id={`lw-page-list-${uid}`}               /* ★ ユニーク ID */
@@ -350,4 +350,155 @@ document.addEventListener('DOMContentLoaded', () => {
 			</div>
 		);
 	},
+
+	deprecated: [
+		{
+			apiVersion: metadata.apiVersion,
+			attributes: metadata.attributes,
+			supports: metadata.supports,
+			save: ( { attributes } ) => {
+
+		const {
+			uid,
+			numberOfPages, parentPageId, orderOption,
+			openInNewTab, filterText,
+			imagePattern, showDate, showExcerpt,
+			dateFont, dateFontWeight,
+			titleFont, titleFontWeight,
+			exFont, exFontWeight,
+			catBgColor,
+		} = attributes;
+
+		return (
+			<div>
+				<div className="filter" style={{background:catBgColor}}/>
+				<div
+					id={`lw-page-list-${uid}`}               /* ★ ユニーク ID */
+					className="lw_page-list-1"
+					data-number={numberOfPages}
+					data-parent={parentPageId}
+					data-order={orderOption}
+					data-target={openInNewTab ? '_blank' : '_self'}
+					data-filter={filterText}
+					data-img-pattern={imagePattern}
+					data-date-visible={showDate ? '1' : '0'}
+					data-ex-visible={showExcerpt ? '1' : '0'}
+					data-date-font={dateFont}
+					data-date-font-weight={dateFontWeight}
+					data-title-font={titleFont}
+					data-title-font-weight={titleFontWeight}
+					data-ex-font={exFont}
+					data-ex-font-weight={exFontWeight}
+					data-cat-bg-color={catBgColor}
+				/>
+				<script dangerouslySetInnerHTML={{__html:`
+/* =========================================================
+ * front-end script – ページ一覧ブロック (複数対応)
+ * ======================================================= */
+document.addEventListener('DOMContentLoaded', () => {
+
+  document.querySelectorAll('.lw_page-list-1').forEach(async (container) => {
+
+    const per        = parseInt(container.dataset.number, 10) || 4;          // 表示上限
+    let   parentId   = parseInt(container.dataset.parent, 10);
+    const orderOpt   = container.dataset.order || 'date_desc';
+    const target     = container.dataset.target || '_self';
+    const fText      = (container.dataset.filter || '').toLowerCase();
+    const imgPattern = container.dataset.imgPattern || 'ptn_1';
+    const showDate   = container.dataset.dateVisible === '1';
+    const showEx     = container.dataset.exVisible   === '1';
+    const dFont      = container.dataset.dateFont,  dW = container.dataset.dateFontWeight;
+    const tFont      = container.dataset.titleFont, tW = container.dataset.titleFontWeight;
+    const eFont      = container.dataset.exFont,    eW = container.dataset.exFontWeight;
+
+    /* 親 ID が 0 の場合は現在ページ ID を採用 */
+    if (parentId === 0) {
+      const m = document.body.className.match(/page-id-(\\d+)/);
+      parentId = m ? parseInt(m[1], 10) : 0;
+    }
+
+    /* 並び順パラメータ */
+    let orderby = 'date', dir = 'desc';
+    if (orderOpt === 'date_asc')  { dir = 'asc'; }
+    if (orderOpt === 'title_asc') { orderby = 'title'; dir = 'asc'; }
+
+    /* =====================================================
+     * 100 件ずつすべて取得 → フィルタ → 上限件数に丸める
+     * =================================================== */
+    const perRequest = 100;                    // REST API 1 回の最大取得数
+    let   page       = 1;
+    let   allPages   = [];
+
+    try {
+      while (true) {
+        let api = \`\${MyThemeSettings.home_Url}/wp-json/wp/v2/pages?per_page=\${perRequest}&page=\${page}&orderby=\${orderby}&order=\${dir}&_embed\`;
+        if (parentId) api += \`&parent=\${parentId}\`;
+
+        const res   = await fetch(api);
+        const items = await res.json();
+
+        if (!Array.isArray(items)) break;
+
+        allPages = allPages.concat(items);
+
+        const totalPages = parseInt(res.headers.get('X-WP-TotalPages') || '1', 10);
+        if (page >= totalPages) break;
+        page++;
+      }
+
+      /* ---------- フィルタ＆スライス ---------- */
+      if (fText) {
+        allPages = allPages.filter(p =>
+          (p.title && p.title.rendered || '').toLowerCase().includes(fText)
+        );
+      }
+      const list = allPages.slice(0, per);
+
+      /* ---------- 出力 ---------- */
+      if (list.length === 0) {
+        container.innerHTML = '<p>該当するページがありません。</p>';
+        return;
+      }
+
+      let html = '<ul class="page-list-1__wrap">';
+      list.forEach(p => {
+        const link  = p.link;
+        const title = p.title.rendered;
+        const date  = new Date(p.date).toLocaleDateString();
+        const img   = p._embedded && p._embedded['wp:featuredmedia']
+                        ? p._embedded['wp:featuredmedia'][0].source_url
+                        : \`\${MyThemeSettings.theme_Url}/assets/image/no_image/2.webp\`;
+        const ex    = p.excerpt && p.excerpt.rendered
+                        ? p.excerpt.rendered.replace(/<[^>]+>/g, '').substring(0, 40) + '…'
+                        : '';
+
+        html += \`
+<li>
+  <a href="\${link}" target="\${target}"\${target === '_blank' ? ' rel="noopener"' : ''}>
+    <figure class="\${imgPattern}"><img loading="lazy" src="\${img}" alt="\${title}"></figure>
+    <div class="in">
+      <div class="data">\${ showDate ? \`<div class="date" style="font-weight:\${dW};" data-lw_font_set="\${dFont}"><span>\${date}</span></div>\` : '' }</div>
+      <h3 style="font-weight:\${tW};" data-lw_font_set="\${tFont}">\${title}</h3>
+      \${ showEx ? \`<p style="font-weight:\${eW};" data-lw_font_set="\${eFont}">\${ex}</p>\` : '' }
+    </div>
+  </a>
+</li>\`;
+      });
+      html += '</ul>';
+      container.innerHTML = html;
+
+    } catch (e) {
+      console.error(e);
+      container.innerHTML = '<p>ページを読み込めませんでした。</p>';
+    }
+
+  }); // end forEach
+
+});
+				`}}/>
+			</div>
+		);
+			},
+		},
+	],
 });

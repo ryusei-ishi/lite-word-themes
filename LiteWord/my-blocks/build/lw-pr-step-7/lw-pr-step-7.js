@@ -421,6 +421,9 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       fontWeightP = attributes.fontWeightP,
       colorP = attributes.colorP,
       contents = attributes.contents;
+    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+      className: "lw-pr-step-7 ".concat(fontSizeClass)
+    });
     var hasContent = function hasContent() {
       var str = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
       return str.trim() !== '';
@@ -429,9 +432,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
     // 旧属性との互換性を保つ
     var finalColumnPc = columnCountPc || columnCount || 3;
     var finalColumnSp = columnCountSp || columnCount || 2;
-    return /*#__PURE__*/React.createElement("div", {
-      className: "lw-pr-step-7 ".concat(fontSizeClass)
-    }, /*#__PURE__*/React.createElement("ul", {
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("ul", {
       className: "lw-pr-step-7__inner",
       style: {
         maxWidth: ulMaxWidth,
@@ -476,7 +477,89 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         }
       })));
     })));
-  }
+  },
+  deprecated: [{
+    apiVersion: _block_json__WEBPACK_IMPORTED_MODULE_6__.apiVersion,
+    attributes: _block_json__WEBPACK_IMPORTED_MODULE_6__.attributes,
+    supports: _block_json__WEBPACK_IMPORTED_MODULE_6__.supports,
+    save: function save(_ref3) {
+      var attributes = _ref3.attributes;
+      var circleBgColor = attributes.circleBgColor,
+        cardBgColor = attributes.cardBgColor,
+        borderColor = attributes.borderColor,
+        ulMaxWidth = attributes.ulMaxWidth,
+        columnCountPc = attributes.columnCountPc,
+        columnCountSp = attributes.columnCountSp,
+        columnCount = attributes.columnCount,
+        fontSizeClass = attributes.fontSizeClass,
+        fontNo = attributes.fontNo,
+        fontWeightNo = attributes.fontWeightNo,
+        colorNo = attributes.colorNo,
+        titleTag = attributes.titleTag,
+        fontH3 = attributes.fontH3,
+        fontWeightH3 = attributes.fontWeightH3,
+        colorH3 = attributes.colorH3,
+        fontP = attributes.fontP,
+        fontWeightP = attributes.fontWeightP,
+        colorP = attributes.colorP,
+        contents = attributes.contents;
+      var hasContent = function hasContent() {
+        var str = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : '';
+        return str.trim() !== '';
+      };
+
+      // 旧属性との互換性を保つ
+      var finalColumnPc = columnCountPc || columnCount || 3;
+      var finalColumnSp = columnCountSp || columnCount || 2;
+      return /*#__PURE__*/React.createElement("div", {
+        className: "lw-pr-step-7 ".concat(fontSizeClass)
+      }, /*#__PURE__*/React.createElement("ul", {
+        className: "lw-pr-step-7__inner",
+        style: {
+          maxWidth: ulMaxWidth,
+          '--column-pc': finalColumnPc,
+          '--column-sp': finalColumnSp
+        }
+      }, contents.map(function (c, i) {
+        return /*#__PURE__*/React.createElement("li", {
+          className: "lw-pr-step-7__li",
+          key: i,
+          style: {
+            backgroundColor: cardBgColor,
+            borderColor: borderColor
+          }
+        }, /*#__PURE__*/React.createElement("div", {
+          className: "lw-pr-step-7__li_no",
+          "data-lw_font_set": fontNo,
+          style: {
+            fontWeight: fontWeightNo,
+            backgroundColor: circleBgColor,
+            color: colorNo || undefined
+          }
+        }, i + 1), /*#__PURE__*/React.createElement("div", {
+          className: "lw-pr-step-7__li_in"
+        }, hasContent(c.title) && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+          tagName: titleTag,
+          className: "lw-pr-step-7__li_title ttl",
+          value: c.title,
+          "data-lw_font_set": fontH3,
+          style: {
+            fontWeight: fontWeightH3,
+            color: colorH3 || undefined
+          }
+        }), hasContent(c.text) && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+          tagName: "p",
+          className: "lw-pr-step-7__li_text",
+          value: c.text,
+          "data-lw_font_set": fontP,
+          style: {
+            fontWeight: fontWeightP,
+            color: colorP || undefined
+          }
+        })));
+      })));
+    }
+  }]
 });
 
 /***/ }),

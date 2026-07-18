@@ -321,8 +321,12 @@ registerBlockType(metadata.name, {
 			boxShadow   : `0 0 ${shadowBlur}px ${hexToRgba(shadowColor, shadowAlpha)}`,
 		};
 
+		const blockProps = useBlockProps.save({
+			className: `paid-block-lw-step-5 ${fontSizeClass}`,
+		});
+
 		return (
-			<div className={`paid-block-lw-step-5 ${fontSizeClass}`}>
+			<div {...blockProps}>
 				<ul className="lw-step__inner" style={{ maxWidth:ulMaxWidth }}>
 					{contents.map((c,i)=>(
 						<li className="lw-step__li" key={i} style={liStyle}>
@@ -370,4 +374,84 @@ registerBlockType(metadata.name, {
 			</div>
 		);
 	},
+
+	/* ======================================================
+	 * 3) 旧形式（useBlockProps.save 未使用・名札なし）の受け皿
+	 * ==================================================== */
+	deprecated: [
+		{
+			apiVersion: metadata.apiVersion,
+			attributes: metadata.attributes,
+
+			save({ attributes }) {
+				const {
+					bgGradient, ulMaxWidth, fontSizeClass,
+					borderWidth, borderStyle, borderColor,
+					shadowBlur, shadowColor, shadowAlpha,
+					fontNo, fontWeightNo, colorNo,
+					titleTag, fontH3, fontWeightH3, colorH3,
+					fontP,  fontWeightP,  colorP,
+					contents,
+				} = attributes;
+
+				const hasContent = (str='')=>str.trim()!=='';  // 空判定
+
+				const liStyle = {
+					borderWidth : `${borderWidth}px`,
+					borderStyle,
+					borderColor,
+					boxShadow   : `0 0 ${shadowBlur}px ${hexToRgba(shadowColor, shadowAlpha)}`,
+				};
+
+				return (
+					<div className={`paid-block-lw-step-5 ${fontSizeClass}`}>
+						<ul className="lw-step__inner" style={{ maxWidth:ulMaxWidth }}>
+							{contents.map((c,i)=>(
+								<li className="lw-step__li" key={i} style={liStyle}>
+									<RichText.Content
+										tagName="div"
+										className="lw-step__li_no"
+										value={c.no}
+										data-lw_font_set={fontNo}
+										style={{
+											fontWeight:fontWeightNo,
+											background:bgGradient,
+											color:colorNo||undefined,
+										}}
+									/>
+
+									<div className="lw-step__li_in">
+										{hasContent(c.title) && (
+											<RichText.Content
+												tagName={titleTag}
+												className="lw-step__li_title ttl"
+												value={c.title}
+												data-lw_font_set={fontH3}
+												style={{
+													fontWeight:fontWeightH3,
+													color:colorH3||undefined,
+												}}
+											/>
+										)}
+										{hasContent(c.text) && (
+											<RichText.Content
+												tagName="p"
+												className="lw-step__li_text"
+												value={c.text}
+												data-lw_font_set={fontP}
+												style={{
+													fontWeight:fontWeightP,
+													color:colorP||undefined,
+												}}
+											/>
+										)}
+									</div>
+								</li>
+							))}
+						</ul>
+					</div>
+				);
+			},
+		},
+	],
 });

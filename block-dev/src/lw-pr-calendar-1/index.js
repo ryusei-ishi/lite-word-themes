@@ -216,17 +216,19 @@ registerBlockType(metadata.name, {
             }
         } = props;
 
+        const blockProps = useBlockProps.save({
+            className: 'lw-pr-calendar-1',
+            style: {
+                '--color-table-item-bd': colorTableItemBd,
+                '--color-table-head-item-bg': colorTableHeadItemBg,
+                '--color-table-head-item-text': colorTableHeadItemText,
+                '--color-table-body-item-text': colorTableBodyItemText,
+                '--color-table-body-item-first-text': colorTableBodyItemFirstText
+            }
+        });
+
         return (
-            <div 
-                className="lw-pr-calendar-1"
-                style={{
-                    '--color-table-item-bd': colorTableItemBd,
-                    '--color-table-head-item-bg': colorTableHeadItemBg,
-                    '--color-table-head-item-text': colorTableHeadItemText,
-                    '--color-table-body-item-text': colorTableBodyItemText,
-                    '--color-table-body-item-first-text': colorTableBodyItemFirstText
-                }}
-            >
+            <div {...blockProps}>
                 <div className="wrap_table">
                     <div className="table_head">
                         {headItems.map((item, index) => (
@@ -263,5 +265,75 @@ registerBlockType(metadata.name, {
                 </div>
             </div>
         );
-    }
+    },
+    deprecated: [
+        {
+            apiVersion: metadata.apiVersion,
+            attributes: metadata.attributes,
+            supports: metadata.supports,
+            save: function(props) {
+                const {
+                    attributes: {
+                        colorTableItemBd,
+                        colorTableHeadItemBg,
+                        colorTableHeadItemText,
+                        colorTableBodyItemText,
+                        colorTableBodyItemFirstText,
+                        fontSet,
+                        fontWeight,
+                        headItems,
+                        bodyRows
+                    }
+                } = props;
+
+                return (
+                    <div 
+                        className="lw-pr-calendar-1"
+                        style={{
+                            '--color-table-item-bd': colorTableItemBd,
+                            '--color-table-head-item-bg': colorTableHeadItemBg,
+                            '--color-table-head-item-text': colorTableHeadItemText,
+                            '--color-table-body-item-text': colorTableBodyItemText,
+                            '--color-table-body-item-first-text': colorTableBodyItemFirstText
+                        }}
+                    >
+                        <div className="wrap_table">
+                            <div className="table_head">
+                                {headItems.map((item, index) => (
+                                    <div 
+                                        key={index} 
+                                        className={`item ${index === 0 ? 'first' : ''}`}
+                                        data-lw_font_set={fontSet}
+                                        style={{ fontWeight: fontWeight }}
+                                    >
+                                        <RichText.Content
+                                            tagName="span"
+                                            value={item}
+                                        />
+                                    </div>
+                                ))}
+                            </div>
+                            {bodyRows.map((row, rowIndex) => (
+                                <div key={rowIndex} className="table_body">
+                                    {row.map((cell, cellIndex) => (
+                                        <div 
+                                            key={cellIndex} 
+                                            className={`item ${cellIndex === 0 ? 'first' : ''}`}
+                                            data-lw_font_set={fontSet}
+                                            style={{ fontWeight: fontWeight }}
+                                        >
+                                            <RichText.Content
+                                                tagName="span"
+                                                value={cell}
+                                            />
+                                        </div>
+                                    ))}
+                                </div>
+                            ))}
+                        </div>
+                    </div>
+                );
+            }
+        }
+    ]
 });

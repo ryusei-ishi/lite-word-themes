@@ -149,8 +149,12 @@ registerBlockType(metadata.name, {
         const { attributes } = props;
         const { subTitle, mainTitle, leadText, bodyText, imgUrl, imgAlt, captionSub, captionMain, colorMain, filterOpacity, maxWidth, alignLeft } = attributes;
 
+        const blockProps = useBlockProps.save({
+            className: 'lw-message-1'
+        });
+
         return (
-            <div className="lw-message-1">
+            <div {...blockProps}>
                 <div className={`lw-message-1__wrap${alignLeft ? ' image_left' : ''}`} style={{ maxWidth: `${maxWidth}px` }}>
                     <div className="text__in">
                         <h3 className="title">
@@ -183,5 +187,51 @@ registerBlockType(metadata.name, {
                 <div className="bg_filter" style={{ opacity: filterOpacity,backgroundColor:colorMain }}></div>
             </div>
         );
-    }
+    },
+    deprecated: [
+        {
+            apiVersion: metadata.apiVersion,
+            attributes: metadata.attributes,
+            supports: metadata.supports,
+            save: function (props) {
+                const { attributes } = props;
+                const { subTitle, mainTitle, leadText, bodyText, imgUrl, imgAlt, captionSub, captionMain, colorMain, filterOpacity, maxWidth, alignLeft } = attributes;
+
+                return (
+                    <div className="lw-message-1">
+                        <div className={`lw-message-1__wrap${alignLeft ? ' image_left' : ''}`} style={{ maxWidth: `${maxWidth}px` }}>
+                            <div className="text__in">
+                                <h3 className="title">
+                                    <RichText.Content 
+                                    tagName="div" className="sub" value={subTitle} style={{ color: colorMain }}/>
+                                    <RichText.Content tagName="div" className="main" value={mainTitle} />
+                                </h3>
+                                <RichText.Content 
+                                    tagName="p" 
+                                    className="lead" 
+                                    value={leadText.replace(/\n/g, '<br />')} 
+                                    style={{ color: colorMain }}
+                                />
+                                <RichText.Content 
+                                    tagName="p" 
+                                    className="description" 
+                                    value={bodyText.replace(/\n/g, '<br />')} 
+                                />
+                            </div>
+                            <div className="image">
+                                <figure className="img">
+                                    <img loading="lazy" src={imgUrl} alt={imgAlt} />
+                                </figure>
+                                <figcaption className="img_caption">
+                                    <RichText.Content tagName="span" className="sub" value={captionSub} />
+                                    <RichText.Content tagName="span" className="main" value={captionMain} />
+                                </figcaption>
+                            </div>
+                        </div>
+                        <div className="bg_filter" style={{ opacity: filterOpacity,backgroundColor:colorMain }}></div>
+                    </div>
+                );
+            }
+        }
+    ]
 });
