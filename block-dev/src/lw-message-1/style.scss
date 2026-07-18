@@ -158,3 +158,46 @@
     }
   }
 }
+
+/* 画像を左に配置（.image_left）— 横並び（PC）時のみ左右反転
+   - エディタcanvas(iframe)には container-type の祖先が無く @container が発火しない
+     → 反転本体は @container の外（既定状態）に書く。min-width側に入れるとエディタで見えない
+   - grid-row: 1 は必須。省くと grid の疎自動配置の仕様で .image が2行目に落ちる
+   - このセレクタは既存より特異度が高く @container 内の既存ルールにも勝ってしまうため、
+     縦積み(650px以下)では grid-template-columns / padding / justify-content を再宣言して打ち消す */
+.lw-message-1 {
+  .lw-message-1__wrap.image_left {
+    grid-template-columns: 35% 65%;
+    .text__in {
+      grid-column: 2;
+      grid-row: 1;
+      padding-right: 0;
+      padding-left: 64px;
+      @container (max-width:900px) {
+        padding-left: 32px;
+      }
+    }
+    .image {
+      grid-column: 1;
+      grid-row: 1;
+      figcaption.img_caption {
+        justify-content: start;
+      }
+    }
+    @container (max-width:650px) {
+      grid-template-columns: 1fr;
+      .text__in {
+        grid-column: auto;
+        grid-row: auto;
+        padding-left: 0;
+      }
+      .image {
+        grid-column: auto;
+        grid-row: auto;
+        figcaption.img_caption {
+          justify-content: end;
+        }
+      }
+    }
+  }
+}

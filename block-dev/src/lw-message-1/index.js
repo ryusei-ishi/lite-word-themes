@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText, InspectorControls, MediaUpload, useBlockProps } from '@wordpress/block-editor';
-import { PanelBody, Button, TextControl, RangeControl, ColorPalette } from '@wordpress/components';
+import { PanelBody, Button, TextControl, RangeControl, ColorPalette, ToggleControl } from '@wordpress/components';
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
@@ -8,7 +8,7 @@ import metadata from './block.json';
 registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
-        const { subTitle, mainTitle, leadText, bodyText, imgUrl, imgAlt, captionSub, captionMain, colorMain, filterOpacity, maxWidth } = attributes;
+        const { subTitle, mainTitle, leadText, bodyText, imgUrl, imgAlt, captionSub, captionMain, colorMain, filterOpacity, maxWidth, alignLeft } = attributes;
 
         const blockProps = useBlockProps({
             className: 'lw-message-1'
@@ -46,6 +46,14 @@ registerBlockType(metadata.name, {
                                 placeholder="画像の説明を入力"
                             />
                         </div>
+                        <div style={{ marginTop: '10px' }}>
+                            <ToggleControl
+                                label="画像を左に配置"
+                                help="PCなど横並び表示のときだけ左右が入れ替わります（縦積み時は通常の並び）"
+                                checked={alignLeft}
+                                onChange={(value) => setAttributes({ alignLeft: value })}
+                            />
+                        </div>
                     </PanelBody>
 
                     <PanelBody title="色設定">
@@ -75,7 +83,7 @@ registerBlockType(metadata.name, {
                     </PanelBody>
                 </InspectorControls>
                 <div {...blockProps}>
-                    <div className="lw-message-1__wrap" style={{ maxWidth: `${maxWidth}px` }}>
+                    <div className={`lw-message-1__wrap${alignLeft ? ' image_left' : ''}`} style={{ maxWidth: `${maxWidth}px` }}>
                         <div className="text__in">
                             <h3 className="title">
                                 <RichText
@@ -139,11 +147,11 @@ registerBlockType(metadata.name, {
     },
     save: function (props) {
         const { attributes } = props;
-        const { subTitle, mainTitle, leadText, bodyText, imgUrl, imgAlt, captionSub, captionMain, colorMain, filterOpacity, maxWidth } = attributes;
-    
+        const { subTitle, mainTitle, leadText, bodyText, imgUrl, imgAlt, captionSub, captionMain, colorMain, filterOpacity, maxWidth, alignLeft } = attributes;
+
         return (
             <div className="lw-message-1">
-                <div className="lw-message-1__wrap" style={{ maxWidth: `${maxWidth}px` }}>
+                <div className={`lw-message-1__wrap${alignLeft ? ' image_left' : ''}`} style={{ maxWidth: `${maxWidth}px` }}>
                     <div className="text__in">
                         <h3 className="title">
                             <RichText.Content 

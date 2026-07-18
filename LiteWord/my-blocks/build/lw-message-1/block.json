@@ -66,6 +66,11 @@
 		"maxWidth": {
 			"type": "number",
 			"default": ""
+		},
+		"alignLeft": {
+			"type": "boolean",
+			"default": false,
+			"aiHint": { "skip": true }
 		}
 	},
 	"editorScript": "file:./lw-message-1.js",

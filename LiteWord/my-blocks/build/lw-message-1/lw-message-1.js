@@ -38,7 +38,8 @@ __webpack_require__.r(__webpack_exports__);
       captionMain = attributes.captionMain,
       colorMain = attributes.colorMain,
       filterOpacity = attributes.filterOpacity,
-      maxWidth = attributes.maxWidth;
+      maxWidth = attributes.maxWidth,
+      alignLeft = attributes.alignLeft;
     var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
       className: 'lw-message-1'
     });
@@ -84,6 +85,19 @@ __webpack_require__.r(__webpack_exports__);
         });
       },
       placeholder: "\u753B\u50CF\u306E\u8AAC\u660E\u3092\u5165\u529B"
+    })), /*#__PURE__*/React.createElement("div", {
+      style: {
+        marginTop: '10px'
+      }
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+      label: "\u753B\u50CF\u3092\u5DE6\u306B\u914D\u7F6E",
+      help: "PC\u306A\u3069\u6A2A\u4E26\u3073\u8868\u793A\u306E\u3068\u304D\u3060\u3051\u5DE6\u53F3\u304C\u5165\u308C\u66FF\u308F\u308A\u307E\u3059\uFF08\u7E26\u7A4D\u307F\u6642\u306F\u901A\u5E38\u306E\u4E26\u3073\uFF09",
+      checked: alignLeft,
+      onChange: function onChange(value) {
+        return setAttributes({
+          alignLeft: value
+        });
+      }
     }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "\u30EA\u30FC\u30C9\u30C6\u30AD\u30B9\u30C8\u306E\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
@@ -118,7 +132,7 @@ __webpack_require__.r(__webpack_exports__);
       max: 1200,
       step: 10
     }))), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
-      className: "lw-message-1__wrap",
+      className: "lw-message-1__wrap".concat(alignLeft ? ' image_left' : ''),
       style: {
         maxWidth: "".concat(maxWidth, "px")
       }
@@ -222,11 +236,12 @@ __webpack_require__.r(__webpack_exports__);
       captionMain = attributes.captionMain,
       colorMain = attributes.colorMain,
       filterOpacity = attributes.filterOpacity,
-      maxWidth = attributes.maxWidth;
+      maxWidth = attributes.maxWidth,
+      alignLeft = attributes.alignLeft;
     return /*#__PURE__*/React.createElement("div", {
       className: "lw-message-1"
     }, /*#__PURE__*/React.createElement("div", {
-      className: "lw-message-1__wrap",
+      className: "lw-message-1__wrap".concat(alignLeft ? ' image_left' : ''),
       style: {
         maxWidth: "".concat(maxWidth, "px")
       }
@@ -346,7 +361,7 @@ module.exports = window["wp"]["components"];
   \*************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-message-1","version":"1.0.0","title":"メッセージ 01","category":"lw-content","icon":"admin-comments","aiHint":{"description":"メッセージブロック。サブタイトル+見出し+リード+本文+画像。代表挨拶・想いに","excludeFromAutoSelect":false,"contentAttributes":["subTitle","mainTitle","leadText","bodyText"],"imageAttributes":["imgUrl"]},"supports":{"anchor":true},"attributes":{"subTitle":{"type":"string","default":"message"},"mainTitle":{"type":"string","default":"代表あいさつ"},"leadText":{"type":"string","default":"テキストテキストテキストテキスト。\\nテキストテキストテキストテキストテキスト"},"bodyText":{"type":"string","default":"テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト\\nテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"},"imgUrl":{"type":"string","default":"https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?w=400&h=400&auto=format&fit=crop&q=80"},"imgAlt":{"type":"string","default":"代表の写真"},"captionSub":{"type":"string","default":"代表取締役"},"captionMain":{"type":"string","default":"山田太郎"},"colorMain":{"type":"string","default":"var(--color-main)"},"filterOpacity":{"type":"number","default":0.05},"maxWidth":{"type":"number","default":""}},"editorScript":"file:./lw-message-1.js","no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-message-1","version":"1.0.0","title":"メッセージ 01","category":"lw-content","icon":"admin-comments","aiHint":{"description":"メッセージブロック。サブタイトル+見出し+リード+本文+画像。代表挨拶・想いに","excludeFromAutoSelect":false,"contentAttributes":["subTitle","mainTitle","leadText","bodyText"],"imageAttributes":["imgUrl"]},"supports":{"anchor":true},"attributes":{"subTitle":{"type":"string","default":"message"},"mainTitle":{"type":"string","default":"代表あいさつ"},"leadText":{"type":"string","default":"テキストテキストテキストテキスト。\\nテキストテキストテキストテキストテキスト"},"bodyText":{"type":"string","default":"テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト\\nテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"},"imgUrl":{"type":"string","default":"https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?w=400&h=400&auto=format&fit=crop&q=80"},"imgAlt":{"type":"string","default":"代表の写真"},"captionSub":{"type":"string","default":"代表取締役"},"captionMain":{"type":"string","default":"山田太郎"},"colorMain":{"type":"string","default":"var(--color-main)"},"filterOpacity":{"type":"number","default":0.05},"maxWidth":{"type":"number","default":""},"alignLeft":{"type":"boolean","default":false,"aiHint":{"skip":true}}},"editorScript":"file:./lw-message-1.js","no":1}');
 
 /***/ })
 
