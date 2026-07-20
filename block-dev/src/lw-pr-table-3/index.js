@@ -391,6 +391,47 @@ registerBlockType(metadata.name, {
 			setSelected(null);
 		};
 
+		// --- 列統合チェック ---（横・縦いずれかの統合が絡む列は移動不可。行移動の isRowInvolvedInVerticalMerge と対称の保守的ガード）
+		const isColInvolvedInHorizontalMerge = (ci) => {
+			return rows.some((row) => {
+				const cell = row.cells[ci];
+				return !!cell && ((cell.spanCol || 1) > 1 || (cell.spanRow || 1) > 1 || cell.hidden);
+			});
+		};
+
+		// --- 列移動 ---（ci はデータ列インデックス。項目列は移動不可）
+		const canMoveColLeft = (ci) => ci > 0 && !isColInvolvedInHorizontalMerge(ci) && !isColInvolvedInHorizontalMerge(ci - 1);
+		const canMoveColRight = (ci) => ci >= 0 && ci < dataCols - 1 && !isColInvolvedInHorizontalMerge(ci) && !isColInvolvedInHorizontalMerge(ci + 1);
+
+		// 隣接データ列 a, b を入れ替える。headers 等の列配列は項目列分 +1 ずれる
+		const swapCols = (a, b) => {
+			const swapAt = (arr, fill) => {
+				const c = [...arr];
+				while (c.length <= b + 1) c.push(fill);
+				[c[a + 1], c[b + 1]] = [c[b + 1], c[a + 1]];
+				return c;
+			};
+			const newRows = rows.map((row) => {
+				const cells = [...row.cells];
+				while (cells.length <= b) cells.push({ content: "", spanRow: 1, spanCol: 1, hidden: false });
+				[cells[a], cells[b]] = [cells[b], cells[a]];
+				return { ...row, cells };
+			});
+			setAttributes({
+				headers: swapAt(headers, ""),
+				headerBgColors: swapAt(headerBgColors, ""),
+				headerOutlineColors: swapAt(headerOutlineColors, ""),
+				headerOutlineWidths: swapAt(headerOutlineWidths, 0),
+				colWidthPc: swapAt(colWidthPc, 200),
+				colWidthSp: swapAt(colWidthSp, 120),
+				rows: newRows,
+			});
+			setSelected(null);
+		};
+
+		const moveColLeft = (ci) => swapCols(ci - 1, ci);
+		const moveColRight = (ci) => swapCols(ci, ci + 1);
+
 		// --- 選択判定 ---
 		const isSelectedCell = (ri, ci) => selected && selected.type === "cell" && selected.row === ri && selected.col === ci;
 		const isSelectedRowHead = (ri) => selected && selected.type === "rowHead" && selected.row === ri;
@@ -448,6 +489,12 @@ registerBlockType(metadata.name, {
 				)}
 				{hideRowHead && ci === 0 && canMoveRowDown(ri) && (
 					<button type="button" onClick={() => moveRowDown(ri)} title="下に移動">移動↓</button>
+				)}
+				{hideMainHead && ri === 0 && canMoveColLeft(ci) && (
+					<button type="button" onClick={() => moveColLeft(ci)} title="左に移動">移動←</button>
+				)}
+				{hideMainHead && ri === 0 && canMoveColRight(ci) && (
+					<button type="button" onClick={() => moveColRight(ci)} title="右に移動">移動→</button>
 				)}
 				{canMergeCellDown(ri, ci) && (
 					<button type="button" onClick={() => mergeCellDown(ri, ci)} title="下と統合">統合↓</button>
@@ -570,6 +617,12 @@ registerBlockType(metadata.name, {
 		// --- ツールバー (列ヘッダー) ---
 		const renderMainHeadToolbar = (i) => (
 			<div className="lw-pr-table-3__merge-toolbar" onClick={(e) => e.stopPropagation()}>
+				{canMoveColLeft(i - 1) && (
+					<button type="button" onClick={() => moveColLeft(i - 1)} title="左に移動">移動←</button>
+				)}
+				{canMoveColRight(i - 1) && (
+					<button type="button" onClick={() => moveColRight(i - 1)} title="右に移動">移動→</button>
+				)}
 				<button
 					type="button"
 					onClick={() => setShowPopover(showPopover === "bg" ? null : "bg")}

@@ -558,6 +558,65 @@ var normalizeRow = function normalizeRow(row) {
       setSelected(null);
     };
 
+    // --- 列統合チェック ---（横・縦いずれかの統合が絡む列は移動不可。行移動の isRowInvolvedInVerticalMerge と対称の保守的ガード）
+    var isColInvolvedInHorizontalMerge = function isColInvolvedInHorizontalMerge(ci) {
+      return rows.some(function (row) {
+        var cell = row.cells[ci];
+        return !!cell && ((cell.spanCol || 1) > 1 || (cell.spanRow || 1) > 1 || cell.hidden);
+      });
+    };
+
+    // --- 列移動 ---（ci はデータ列インデックス。項目列は移動不可）
+    var canMoveColLeft = function canMoveColLeft(ci) {
+      return ci > 0 && !isColInvolvedInHorizontalMerge(ci) && !isColInvolvedInHorizontalMerge(ci - 1);
+    };
+    var canMoveColRight = function canMoveColRight(ci) {
+      return ci >= 0 && ci < dataCols - 1 && !isColInvolvedInHorizontalMerge(ci) && !isColInvolvedInHorizontalMerge(ci + 1);
+    };
+
+    // 隣接データ列 a, b を入れ替える。headers 等の列配列は項目列分 +1 ずれる
+    var swapCols = function swapCols(a, b) {
+      var swapAt = function swapAt(arr, fill) {
+        var c = _toConsumableArray(arr);
+        while (c.length <= b + 1) c.push(fill);
+        var _ref4 = [c[b + 1], c[a + 1]];
+        c[a + 1] = _ref4[0];
+        c[b + 1] = _ref4[1];
+        return c;
+      };
+      var newRows = rows.map(function (row) {
+        var cells = _toConsumableArray(row.cells);
+        while (cells.length <= b) cells.push({
+          content: "",
+          spanRow: 1,
+          spanCol: 1,
+          hidden: false
+        });
+        var _ref5 = [cells[b], cells[a]];
+        cells[a] = _ref5[0];
+        cells[b] = _ref5[1];
+        return _objectSpread(_objectSpread({}, row), {}, {
+          cells: cells
+        });
+      });
+      setAttributes({
+        headers: swapAt(headers, ""),
+        headerBgColors: swapAt(headerBgColors, ""),
+        headerOutlineColors: swapAt(headerOutlineColors, ""),
+        headerOutlineWidths: swapAt(headerOutlineWidths, 0),
+        colWidthPc: swapAt(colWidthPc, 200),
+        colWidthSp: swapAt(colWidthSp, 120),
+        rows: newRows
+      });
+      setSelected(null);
+    };
+    var moveColLeft = function moveColLeft(ci) {
+      return swapCols(ci - 1, ci);
+    };
+    var moveColRight = function moveColRight(ci) {
+      return swapCols(ci, ci + 1);
+    };
+
     // --- 選択判定 ---
     var isSelectedCell = function isSelectedCell(ri, ci) {
       return selected && selected.type === "cell" && selected.row === ri && selected.col === ci;
@@ -657,7 +716,19 @@ var normalizeRow = function normalizeRow(row) {
           return moveRowDown(ri);
         },
         title: "\u4E0B\u306B\u79FB\u52D5"
-      }, "\u79FB\u52D5\u2193"), canMergeCellDown(ri, ci) && /*#__PURE__*/React.createElement("button", {
+      }, "\u79FB\u52D5\u2193"), hideMainHead && ri === 0 && canMoveColLeft(ci) && /*#__PURE__*/React.createElement("button", {
+        type: "button",
+        onClick: function onClick() {
+          return moveColLeft(ci);
+        },
+        title: "\u5DE6\u306B\u79FB\u52D5"
+      }, "\u79FB\u52D5\u2190"), hideMainHead && ri === 0 && canMoveColRight(ci) && /*#__PURE__*/React.createElement("button", {
+        type: "button",
+        onClick: function onClick() {
+          return moveColRight(ci);
+        },
+        title: "\u53F3\u306B\u79FB\u52D5"
+      }, "\u79FB\u52D5\u2192"), canMergeCellDown(ri, ci) && /*#__PURE__*/React.createElement("button", {
         type: "button",
         onClick: function onClick() {
           return mergeCellDown(ri, ci);
@@ -817,7 +888,19 @@ var normalizeRow = function normalizeRow(row) {
         onClick: function onClick(e) {
           return e.stopPropagation();
         }
-      }, /*#__PURE__*/React.createElement("button", {
+      }, canMoveColLeft(i - 1) && /*#__PURE__*/React.createElement("button", {
+        type: "button",
+        onClick: function onClick() {
+          return moveColLeft(i - 1);
+        },
+        title: "\u5DE6\u306B\u79FB\u52D5"
+      }, "\u79FB\u52D5\u2190"), canMoveColRight(i - 1) && /*#__PURE__*/React.createElement("button", {
+        type: "button",
+        onClick: function onClick() {
+          return moveColRight(i - 1);
+        },
+        title: "\u53F3\u306B\u79FB\u52D5"
+      }, "\u79FB\u52D5\u2192"), /*#__PURE__*/React.createElement("button", {
         type: "button",
         onClick: function onClick() {
           return setShowPopover(showPopover === "bg" ? null : "bg");
@@ -1532,8 +1615,8 @@ var normalizeRow = function normalizeRow(row) {
       isDestructive: true
     }, "\u6700\u5F8C\u306E\u884C\u3092\u524A\u9664"))));
   },
-  save: function save(_ref4) {
-    var attributes = _ref4.attributes;
+  save: function save(_ref6) {
+    var attributes = _ref6.attributes;
     var columnCount = attributes.columnCount,
       colWidthPc = attributes.colWidthPc,
       colWidthSp = attributes.colWidthSp,
