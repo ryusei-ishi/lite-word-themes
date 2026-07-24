@@ -2310,148 +2310,35 @@ PROMPT;
             @set_time_limit( 600 );
         }
 
-        foreach ( $blocks as $block_index => &$block ) {
-            if ( ! isset( $block['attributes'] ) ) {
-                continue;
-            }
+        // 収集 → 並列生成 → 書き戻し（旧実装は 1枚ずつ self::generate_image を逐次呼び）。
+        // ツリー全体（items / contents / voices / innerBlocks を含む）を1パスで走査し、
+        // 生成が必要な画像スロットへの「参照」を集めてから、まとめて並列生成する。
+        $prompts = array();
+        $targets = array();
+        self::lw_collect_image_jobs( $blocks, $image_attrs, $prompts, $targets );
 
-            $block_name = isset( $block['blockName'] ) ? $block['blockName'] : ( isset( $block['name'] ) ? $block['name'] : 'unknown' );
+        $image_count = count( $prompts );
 
-            foreach ( $image_attrs as $attr ) {
-                if ( isset( $block['attributes'][ $attr ] ) ) {
-                    $value = $block['attributes'][ $attr ];
+        if ( $image_count > 0 ) {
+            $generated = self::generate_images_batch( $prompts );
 
-                    // URLでない場合（プロンプトの場合）、画像を生成
-                    if ( ! empty( $value ) && ! filter_var( $value, FILTER_VALIDATE_URL ) && strpos( $value, 'data:' ) !== 0 ) {
-                        $image_count++;
-
-                        try {
-                            $generated_url = self::generate_image( $value );
-
-                            if ( ! is_wp_error( $generated_url ) ) {
-                                $block['attributes'][ $attr ] = $generated_url;
-                                $success_count++;
-                            } else {
-                                $fail_count++;
-                                error_log( '[LW AI Image] 画像生成失敗 #' . $image_count . ': ' . $generated_url->get_error_message() );
-                                // 失敗した場合は元のプロンプトを保持（再生成時に利用可能）
-                                // $block['attributes'][ $attr ] はそのまま（$valueが残る）
-                            }
-                        } catch ( Exception $e ) {
-                            $fail_count++;
-                            error_log( '[LW AI Image] 画像生成例外 #' . $image_count . ': ' . $e->getMessage() );
-                        } catch ( Error $e ) {
-                            $fail_count++;
-                            error_log( '[LW AI Image] 画像生成エラー #' . $image_count . ': ' . $e->getMessage() );
-                        }
-                    }
-                }
-            }
-
-            // items配列内の画像も処理
-            if ( isset( $block['attributes']['items'] ) && is_array( $block['attributes']['items'] ) ) {
-                foreach ( $block['attributes']['items'] as $item_index => &$item ) {
-                    if ( isset( $item['imgUrl'] ) && ! empty( $item['imgUrl'] ) && ! filter_var( $item['imgUrl'], FILTER_VALIDATE_URL ) && strpos( $item['imgUrl'], 'data:' ) !== 0 ) {
-                        $image_count++;
-
-                        try {
-                            $generated_url = self::generate_image( $item['imgUrl'] );
-                            if ( ! is_wp_error( $generated_url ) ) {
-                                $item['imgUrl'] = $generated_url;
-                                $success_count++;
-                            } else {
-                                $fail_count++;
-                                error_log( '[LW AI Image] items画像生成失敗 #' . $image_count . ': ' . $generated_url->get_error_message() );
-                                // 元のプロンプトを保持
-                            }
-                        } catch ( Exception $e ) {
-                            $fail_count++;
-                            error_log( '[LW AI Image] items画像生成例外 #' . $image_count . ': ' . $e->getMessage() );
-                        } catch ( Error $e ) {
-                            $fail_count++;
-                            error_log( '[LW AI Image] items画像生成エラー #' . $image_count . ': ' . $e->getMessage() );
-                        }
-                    }
-                }
-                unset( $item );
-            }
-
-            // contents配列内の画像も処理（solution-1等で使用）
-            if ( isset( $block['attributes']['contents'] ) && is_array( $block['attributes']['contents'] ) ) {
-                foreach ( $block['attributes']['contents'] as $content_index => &$content_item ) {
-                    // contents配列内の各画像属性をチェック
-                    foreach ( $image_attrs as $img_attr ) {
-                        if ( isset( $content_item[ $img_attr ] ) && ! empty( $content_item[ $img_attr ] ) && ! filter_var( $content_item[ $img_attr ], FILTER_VALIDATE_URL ) && strpos( $content_item[ $img_attr ], 'data:' ) !== 0 ) {
-                            $image_count++;
-
-                            try {
-                                $generated_url = self::generate_image( $content_item[ $img_attr ] );
-                                if ( ! is_wp_error( $generated_url ) ) {
-                                    $content_item[ $img_attr ] = $generated_url;
-                                    $success_count++;
-                                } else {
-                                    $fail_count++;
-                                    error_log( '[LW AI Image] contents画像生成失敗 #' . $image_count . ': ' . $generated_url->get_error_message() );
-                                    // 元のプロンプトを保持
-                                }
-                            } catch ( Exception $e ) {
-                                $fail_count++;
-                                error_log( '[LW AI Image] contents画像生成例外 #' . $image_count . ': ' . $e->getMessage() );
-                            } catch ( Error $e ) {
-                                $fail_count++;
-                                error_log( '[LW AI Image] contents画像生成エラー #' . $image_count . ': ' . $e->getMessage() );
-                            }
-                        }
-                    }
-                }
-                unset( $content_item );
-            }
-
-            // voices配列内の画像も処理（paid-block-voice-3等で使用）
-            if ( isset( $block['attributes']['voices'] ) && is_array( $block['attributes']['voices'] ) ) {
-                foreach ( $block['attributes']['voices'] as $voice_index => &$voice_item ) {
-                    // voices配列内の各画像属性をチェック（特にphoto）
-                    foreach ( $image_attrs as $img_attr ) {
-                        if ( isset( $voice_item[ $img_attr ] ) && ! empty( $voice_item[ $img_attr ] ) && ! filter_var( $voice_item[ $img_attr ], FILTER_VALIDATE_URL ) && strpos( $voice_item[ $img_attr ], 'data:' ) !== 0 ) {
-                            $image_count++;
-
-                            try {
-                                $generated_url = self::generate_image( $voice_item[ $img_attr ] );
-                                if ( ! is_wp_error( $generated_url ) ) {
-                                    $voice_item[ $img_attr ] = $generated_url;
-                                    $success_count++;
-                                } else {
-                                    $fail_count++;
-                                    error_log( '[LW AI Image] voices画像生成失敗 #' . $image_count . ': ' . $generated_url->get_error_message() );
-                                    // 元のプロンプトを保持
-                                }
-                            } catch ( Exception $e ) {
-                                $fail_count++;
-                                error_log( '[LW AI Image] voices画像生成例外 #' . $image_count . ': ' . $e->getMessage() );
-                            } catch ( Error $e ) {
-                                $fail_count++;
-                                error_log( '[LW AI Image] voices画像生成エラー #' . $image_count . ': ' . $e->getMessage() );
-                            }
-                        }
-                    }
-                }
-                unset( $voice_item );
-            }
-
-            // innerBlocksも再帰的に処理
-            if ( isset( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) && ! empty( $block['innerBlocks'] ) ) {
-                $inner_result = self::process_image_generation( $block['innerBlocks'], true );
-                if ( is_array( $inner_result ) && isset( $inner_result['blocks'] ) ) {
-                    $block['innerBlocks'] = $inner_result['blocks'];
-                    $success_count += $inner_result['image_stats']['success'];
-                    $fail_count += $inner_result['image_stats']['fail'];
-                    $image_count += $inner_result['image_stats']['total'];
+            foreach ( $targets as $i => &$slot ) {
+                $res = isset( $generated[ $i ] ) ? $generated[ $i ] : null;
+                if ( is_string( $res ) && '' !== $res ) {
+                    // 生成成功: スロット（プロンプト）を 画像URL / data URI に置き換える
+                    $slot = $res;
+                    $success_count++;
                 } else {
-                    $block['innerBlocks'] = $inner_result;
+                    // 失敗: 元のプロンプトを保持（$slot はそのまま。再生成時に利用可能）
+                    $fail_count++;
+                    if ( is_wp_error( $res ) ) {
+                        error_log( '[LW AI Image] 画像生成失敗 #' . ( $i + 1 ) . ': ' . $res->get_error_message() );
+                    }
                 }
             }
+            unset( $slot );
+            unset( $targets );
         }
-        unset( $block );
 
         return array(
             'blocks' => $blocks,
@@ -2461,6 +2348,102 @@ PROMPT;
                 'total'   => $image_count,
             ),
         );
+    }
+
+    /**
+     * 値が「生成すべき画像プロンプト」か判定する。
+     * 既にURL、または data: URI（埋め込み画像）の場合は生成不要。
+     * 旧 process_image_generation のインライン判定（!empty && !URL && strpos!==0）と同一。
+     * is_string ガードは安全側の追加（非文字列は生成対象にしない）。
+     *
+     * @param mixed $value 属性値
+     * @return bool 生成が必要なプロンプトなら true
+     */
+    private static function lw_is_image_prompt( $value ) {
+        return is_string( $value )
+            && ! empty( $value )
+            && ! filter_var( $value, FILTER_VALIDATE_URL )
+            && strpos( $value, 'data:' ) !== 0;
+    }
+
+    /**
+     * ブロックツリーを走査し、生成が必要な画像スロットのプロンプトと
+     * 「書き込み先スロットへの参照」を収集する（並列生成の前処理）。
+     *
+     * $prompts[$i] のプロンプトと $targets[$i] の参照は同じ順序で対応する。
+     * $targets はスロットへの参照なので、後で $targets[$i] = $url とすると
+     * 元のブロック配列のその位置が書き換わる。
+     * 収集対象は旧実装と完全に一致させる:
+     *   - トップ属性: $image_attrs 全て
+     *   - items[]:    imgUrl のみ
+     *   - contents[]: $image_attrs 全て
+     *   - voices[]:   $image_attrs 全て
+     *   - innerBlocks: 再帰（同じ $prompts / $targets に集約）
+     * ※ 'attributes' を持たないブロックは（innerBlocks 含め）スキップ = 旧実装踏襲。
+     *
+     * @param array $blocks      ブロック配列（参照で受け、スロット参照を集める）
+     * @param array $image_attrs 画像属性名の一覧
+     * @param array $prompts     [出力] プロンプト文字列の配列（参照）
+     * @param array $targets     [出力] スロットへの参照の配列（参照）
+     * @return void
+     */
+    private static function lw_collect_image_jobs( array &$blocks, array $image_attrs, array &$prompts, array &$targets ) {
+        foreach ( $blocks as &$block ) {
+            if ( ! isset( $block['attributes'] ) ) {
+                continue;
+            }
+
+            // トップレベルの画像属性
+            foreach ( $image_attrs as $attr ) {
+                if ( isset( $block['attributes'][ $attr ] ) && self::lw_is_image_prompt( $block['attributes'][ $attr ] ) ) {
+                    $prompts[] = $block['attributes'][ $attr ];
+                    $targets[] = &$block['attributes'][ $attr ];
+                }
+            }
+
+            // items[]（imgUrl のみ）
+            if ( isset( $block['attributes']['items'] ) && is_array( $block['attributes']['items'] ) ) {
+                foreach ( $block['attributes']['items'] as &$item ) {
+                    if ( isset( $item['imgUrl'] ) && self::lw_is_image_prompt( $item['imgUrl'] ) ) {
+                        $prompts[] = $item['imgUrl'];
+                        $targets[] = &$item['imgUrl'];
+                    }
+                }
+                unset( $item );
+            }
+
+            // contents[]（全画像属性）
+            if ( isset( $block['attributes']['contents'] ) && is_array( $block['attributes']['contents'] ) ) {
+                foreach ( $block['attributes']['contents'] as &$content_item ) {
+                    foreach ( $image_attrs as $img_attr ) {
+                        if ( isset( $content_item[ $img_attr ] ) && self::lw_is_image_prompt( $content_item[ $img_attr ] ) ) {
+                            $prompts[] = $content_item[ $img_attr ];
+                            $targets[] = &$content_item[ $img_attr ];
+                        }
+                    }
+                }
+                unset( $content_item );
+            }
+
+            // voices[]（全画像属性）
+            if ( isset( $block['attributes']['voices'] ) && is_array( $block['attributes']['voices'] ) ) {
+                foreach ( $block['attributes']['voices'] as &$voice_item ) {
+                    foreach ( $image_attrs as $img_attr ) {
+                        if ( isset( $voice_item[ $img_attr ] ) && self::lw_is_image_prompt( $voice_item[ $img_attr ] ) ) {
+                            $prompts[] = $voice_item[ $img_attr ];
+                            $targets[] = &$voice_item[ $img_attr ];
+                        }
+                    }
+                }
+                unset( $voice_item );
+            }
+
+            // innerBlocks は同じ収集先に再帰集約（旧実装は個別バッチ→今回はツリー全体で1バッチ）
+            if ( isset( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) && ! empty( $block['innerBlocks'] ) ) {
+                self::lw_collect_image_jobs( $block['innerBlocks'], $image_attrs, $prompts, $targets );
+            }
+        }
+        unset( $block );
     }
 
     /**
@@ -3707,6 +3690,225 @@ PROMPT;
      * @param string $prompt 画像生成プロンプト
      * @return string|WP_Error 画像URLまたはエラー
      */
+    /**
+     * Imagen 用の画像プロンプト（テキスト禁止・日本人指定の定型ラッパ）を返す。
+     * generate_image()（単体）と generate_images_batch()（並列）で共有する。
+     *
+     * @param string $prompt 元プロンプト
+     * @return string ラップ済みプロンプト
+     */
+    private static function lw_imagen_image_prompt( $prompt ) {
+        return "High-quality, professional photograph for a website: {$prompt}. Style: modern, clean, suitable for business website hero section or background. Photorealistic. If people appear in the image, they must be Japanese. IMPORTANT: Do NOT include any text, letters, words, numbers, watermarks, logos, or any written content in the image. The image must be purely visual with no text elements whatsoever.";
+    }
+
+    /**
+     * Imagen 4 predict のリクエストボディ配列を組み立てる。
+     * generate_image()（単体）と generate_images_batch()（並列）で共有し、
+     * 単体版と並列版でボディがズレないようにする。
+     *
+     * @param string $prompt 元プロンプト
+     * @return array リクエストボディ
+     */
+    private static function lw_imagen_request_body( $prompt ) {
+        return array(
+            'instances' => array(
+                array(
+                    'prompt' => self::lw_imagen_image_prompt( $prompt ),
+                ),
+            ),
+            'parameters' => array(
+                'sampleCount'      => 1,
+                'aspectRatio'      => '16:9',
+                'personGeneration' => 'allow_adult',
+            ),
+        );
+    }
+
+    /**
+     * Imagen 4 の 200 レスポンス（json_decode 済み配列）から画像を取り出し、
+     * メディアライブラリに保存して URL を返す。使用量も記録する。
+     * predictions が無い（形式異常）場合は null を返し、呼び出し側がフォールバックする。
+     *
+     * @param array|null $data   デコード済みレスポンス
+     * @param string     $prompt 元プロンプト（保存ファイル名用）
+     * @return string|null URL文字列 | data URI、または形式異常時 null
+     */
+    private static function lw_imagen_extract_url( $data, $prompt ) {
+        if ( isset( $data['predictions'][0]['bytesBase64Encoded'] ) ) {
+            $base64_data = $data['predictions'][0]['bytesBase64Encoded'];
+            $mime_type   = isset( $data['predictions'][0]['mimeType'] ) ? $data['predictions'][0]['mimeType'] : 'image/png';
+
+            // 画像生成をトラッキング
+            if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
+                LW_AI_Generator_Usage_Tracker::log_usage( 'image', 'imagen-4.0', 0, 0, 1 );
+            }
+
+            // メディアライブラリに保存
+            $upload_result = self::save_generated_image( $base64_data, $mime_type, $prompt );
+
+            if ( is_wp_error( $upload_result ) ) {
+                error_log( '[LW AI Image Gen] メディア保存失敗、Base64で返却: ' . $upload_result->get_error_message() );
+                return 'data:' . $mime_type . ';base64,' . $base64_data;
+            }
+
+            return $upload_result;
+        }
+
+        return null;
+    }
+
+    /**
+     * 画像生成の1コールを例外隔離して実行する。
+     * 旧 process_image_generation の per-image catch(Exception)/catch(Error) と同じ役割で、
+     * 1枚の生成が Throwable を投げても、バッチ全体（＝ページ生成）を巻き込まないようにする。
+     * 投げられた場合はその1枚だけ WP_Error にして返す（＝失敗扱い・元プロンプト保持）。
+     *
+     * @param callable $fn 画像1枚を生成し URL|WP_Error を返すクロージャ
+     * @return string|WP_Error
+     */
+    private static function lw_run_image_call( callable $fn ) {
+        try {
+            return $fn();
+        } catch ( \Throwable $e ) {
+            error_log( '[LW AI Image] 画像生成で例外を捕捉（1枚をスキップ）: ' . $e->getMessage() );
+            return new WP_Error( 'image_exception', $e->getMessage() );
+        }
+    }
+
+    /**
+     * 複数プロンプトの画像を並列生成する（Imagen 4 を同時発火 → 失敗分のみ Gemini フォールバック）。
+     *
+     * 単体版 generate_image() は 1枚ずつ wp_remote_post を待つため N枚で N×レイテンシかかる。
+     * ここでは WordPress 同梱の WpOrg\Requests\Requests::request_multiple() で Imagen への
+     * POST を同時に投げ、待ち時間を実質 1回分に畳む。レート制限(429)とメモリ（1枚数MBのbase64）を
+     * 考慮し、$chunk 件ずつに分けて発火する。
+     * Imagen が失敗（通信 / 非200 / 形式異常）したスロットは、単体版と同じ
+     * generate_image_with_gemini() に順次フォールバックし既存挙動を保つ。
+     * 並列プリミティブが使えない環境では単体版に順次フォールバックする（＝旧挙動）。
+     *
+     * @param array $prompts プロンプト文字列の配列（0始まり連番想定）
+     * @return array $prompts と同じキーで URL文字列 | data URI | WP_Error
+     */
+    private static function generate_images_batch( $prompts ) {
+        $results = array();
+
+        $api_key = self::get_api_key();
+        if ( empty( $api_key ) ) {
+            foreach ( $prompts as $i => $p ) {
+                $results[ $i ] = new WP_Error( 'no_api_key', 'Gemini APIキーが設定されていません' );
+            }
+            return $results;
+        }
+
+        // 並列プリミティブが無い環境では単体版に順次フォールバック（挙動は旧実装と同じ）。
+        // さらに WP プロキシ設定がある環境では request_multiple が WP_Http のプロキシ層を
+        // 経由せず全滅しうるため、WPのHTTP層を通す単体版に順次フォールバックする。
+        $proxy_enabled = false;
+        if ( class_exists( 'WP_HTTP_Proxy' ) ) {
+            $proxy         = new WP_HTTP_Proxy();
+            $proxy_enabled = $proxy->is_enabled();
+        }
+        if ( $proxy_enabled
+            || ! class_exists( '\WpOrg\Requests\Requests' )
+            || ! method_exists( '\WpOrg\Requests\Requests', 'request_multiple' ) ) {
+            foreach ( $prompts as $i => $p ) {
+                $results[ $i ] = self::lw_run_image_call( static function () use ( $p ) {
+                    return self::generate_image( $p );
+                } );
+            }
+            return $results;
+        }
+
+        // 同時接続数の上限。多すぎると Imagen の 429 やメモリ膨張を招くため絞る。
+        $chunk  = 5;
+        $verify = ABSPATH . WPINC . '/certificates/ca-bundle.crt';
+        $shared_options = array(
+            'timeout'         => 120,
+            'connect_timeout' => 15,
+            'verify'          => file_exists( $verify ) ? $verify : true,
+        );
+
+        $chunks = array_chunk( array_keys( $prompts ), $chunk );
+
+        foreach ( $chunks as $chunk_indices ) {
+            $requests = array();
+            foreach ( $chunk_indices as $i ) {
+                $requests[ $i ] = array(
+                    'url'     => self::IMAGE_API_ENDPOINT,
+                    'type'    => \WpOrg\Requests\Requests::POST,
+                    'headers' => array(
+                        'Content-Type'   => 'application/json',
+                        'x-goog-api-key' => $api_key,
+                    ),
+                    'data'    => wp_json_encode( self::lw_imagen_request_body( $prompts[ $i ] ) ),
+                );
+            }
+
+            // request_multiple 自体が失敗したら、この塊を単体版で順次フォールバック
+            try {
+                $responses = \WpOrg\Requests\Requests::request_multiple( $requests, $shared_options );
+            } catch ( \Throwable $e ) {
+                error_log( '[LW AI Image] 並列リクエスト失敗、単体にフォールバック: ' . $e->getMessage() );
+                foreach ( $chunk_indices as $i ) {
+                    $results[ $i ] = self::lw_run_image_call( static function () use ( $prompts, $i ) {
+                        return self::generate_image( $prompts[ $i ] );
+                    } );
+                }
+                continue;
+            }
+
+            // 失敗スロットは Gemini フォールバックへ回す（成功分はここで確定）
+            $fallback_indices = array();
+
+            foreach ( $chunk_indices as $i ) {
+                $res = isset( $responses[ $i ] ) ? $responses[ $i ] : null;
+
+                if ( $res instanceof \WpOrg\Requests\Response && 200 === (int) $res->status_code ) {
+                    // 保存・使用量記録を例外隔離（1枚の save 例外で全体を止めない）。
+                    // 旧挙動どおり、保存中の例外はその1枚を「失敗」にする（Geminiは試さない）。
+                    try {
+                        $data = json_decode( $res->body, true );
+                        $url  = self::lw_imagen_extract_url( $data, $prompts[ $i ] );
+                    } catch ( \Throwable $e ) {
+                        error_log( '[LW AI Image] Imagen 保存/記録で例外（1枚失敗）: ' . $e->getMessage() );
+                        $results[ $i ] = new WP_Error( 'image_exception', $e->getMessage() );
+                        continue;
+                    }
+                    if ( null !== $url ) {
+                        $results[ $i ] = $url;
+                        continue;
+                    }
+                    // 形式異常 → フォールバック
+                    error_log( '[LW AI Image] Imagen 並列レスポンス形式異常 → Geminiにフォールバック' );
+                    $fallback_indices[] = $i;
+                } else {
+                    // 通信エラー / 非200 → フォールバック
+                    if ( $res instanceof \WpOrg\Requests\Response ) {
+                        $err = json_decode( $res->body, true );
+                        $msg = isset( $err['error']['message'] ) ? $err['error']['message'] : ( 'HTTP ' . $res->status_code );
+                        error_log( '[LW AI Image] Imagen 並列エラー: ' . $msg . ' → Geminiにフォールバック' );
+                    } elseif ( $res instanceof \WpOrg\Requests\Exception ) {
+                        error_log( '[LW AI Image] Imagen 並列通信エラー: ' . $res->getMessage() . ' → Geminiにフォールバック' );
+                    }
+                    $fallback_indices[] = $i;
+                }
+            }
+
+            // この塊の base64 レスポンスを手放してメモリを解放
+            unset( $responses );
+
+            // フォールバックは順次（失敗は例外的なので直列で十分・既存挙動を保持）。
+            // Gemini 側の保存等が Throwable を投げても、その1枚を失敗にして続行する。
+            foreach ( $fallback_indices as $i ) {
+                $results[ $i ] = self::lw_run_image_call( static function () use ( $prompts, $i ) {
+                    return self::generate_image_with_gemini( $prompts[ $i ] );
+                } );
+            }
+        }
+
+        return $results;
+    }
+
     public static function generate_image( $prompt ) {
         $api_key = self::get_api_key();
 
@@ -3715,22 +3917,8 @@ PROMPT;
             return new WP_Error( 'no_api_key', 'Gemini APIキーが設定されていません' );
         }
 
-        // 画像生成用のプロンプトを構築（テキスト禁止・日本人指定を強調）
-        $image_prompt = "High-quality, professional photograph for a website: {$prompt}. Style: modern, clean, suitable for business website hero section or background. Photorealistic. If people appear in the image, they must be Japanese. IMPORTANT: Do NOT include any text, letters, words, numbers, watermarks, logos, or any written content in the image. The image must be purely visual with no text elements whatsoever.";
-
-        // Imagen 3 用のリクエストボディ
-        $request_body = array(
-            'instances' => array(
-                array(
-                    'prompt' => $image_prompt
-                )
-            ),
-            'parameters' => array(
-                'sampleCount' => 1,
-                'aspectRatio' => '16:9',
-                'personGeneration' => 'allow_adult'
-            )
-        );
+        // Imagen 4 用のリクエストボディ（並列版と共有）
+        $request_body = self::lw_imagen_request_body( $prompt );
 
         // Imagen 4はx-goog-api-keyヘッダーで認証する必要がある
         $response = wp_remote_post(
@@ -3765,25 +3953,10 @@ PROMPT;
 
         $data = json_decode( $response_body, true );
 
-        // Imagen 4のレスポンス形式で画像データを抽出
-        if ( isset( $data['predictions'][0]['bytesBase64Encoded'] ) ) {
-            $base64_data = $data['predictions'][0]['bytesBase64Encoded'];
-            $mime_type = isset( $data['predictions'][0]['mimeType'] ) ? $data['predictions'][0]['mimeType'] : 'image/png';
-
-            // 画像生成をトラッキング
-            if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-                LW_AI_Generator_Usage_Tracker::log_usage( 'image', 'imagen-4.0', 0, 0, 1 );
-            }
-
-            // メディアライブラリに保存
-            $upload_result = self::save_generated_image( $base64_data, $mime_type, $prompt );
-
-            if ( is_wp_error( $upload_result ) ) {
-                error_log( '[LW AI Image Gen] メディア保存失敗、Base64で返却: ' . $upload_result->get_error_message() );
-                return 'data:' . $mime_type . ';base64,' . $base64_data;
-            }
-
-            return $upload_result;
+        // Imagen 4のレスポンス形式で画像データを抽出（保存・使用量記録は共有ヘルパー）
+        $url = self::lw_imagen_extract_url( $data, $prompt );
+        if ( null !== $url ) {
+            return $url;
         }
 
         // フォールバック: Gemini 2.0 Flashで画像生成
