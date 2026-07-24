@@ -156,7 +156,35 @@ class LW_AI_Generator_Block_Settings {
                 $block['aiDescription'] = $block_data['aiDescription'];
             }
 
-            // AI設定（aiDescriptionまたはaiNotes）があるブロックのみ追加
+            // aiHint（全142ブロックが持つ）を取り込む。
+            // 従来は aiDescription / aiNotes を持つ9ブロックしか一覧に載らず、
+            // 残り133ブロックはAIから存在が見えていなかった。
+            // aiHint には用途の説明と、テキスト・画像を入れる正確な属性名が入っている。
+            if ( isset( $block_data['aiHint'] ) && is_array( $block_data['aiHint'] ) ) {
+                $hint           = $block_data['aiHint'];
+                $block['aiHint'] = $hint;
+
+                // 説明は aiHint 側を既定にする（aiDescription があればそちらを優先）
+                if ( empty( $block['aiDescription'] ) && ! empty( $hint['description'] ) ) {
+                    $block['aiDescription'] = $hint['description'];
+                }
+
+                // AIに入れさせたい属性名（推測ではなく実在する名前）
+                if ( ! empty( $hint['contentAttributes'] ) ) {
+                    $block['contentAttributes'] = $hint['contentAttributes'];
+                }
+                if ( ! empty( $hint['imageAttributes'] ) ) {
+                    $block['imageAttributes'] = $hint['imageAttributes'];
+                }
+
+                // 自動選択から外したいブロックの指定
+                if ( ! empty( $hint['excludeFromAutoSelect'] ) ) {
+                    $block['excludeFromAutoSelect'] = true;
+                }
+            }
+
+            // 説明が用意されているブロックだけを一覧に載せる
+            // （aiHint の追加により、対象は9件から142件へ広がる）
             if ( ! empty( $block['aiDescription'] ) || ! empty( $block['aiNotes'] ) ) {
                 $blocks[] = $block;
             }
@@ -170,6 +198,142 @@ class LW_AI_Generator_Block_Settings {
         });
 
         return $blocks;
+    }
+
+    /**
+     * 生成されたブロックに実際のテキストが入っているかを検査する
+     *
+     * AIが属性名を間違えたり、値を入れ忘れたりすると、
+     * 見た目は生成できているのにサンプル文言のまま公開される事故が起きる。
+     * 「テキストがちゃんと入っているか」を機械的に確認するための検査。
+     *
+     * @param array $blocks 生成されたブロック配列（name / attributes を持つ）
+     * @return array{ok:bool,issues:array,checked:int} 検査結果
+     */
+    public static function inspect_generated_blocks( $blocks ) {
+        $issues  = array();
+        $checked = 0;
+
+        if ( ! is_array( $blocks ) ) {
+            return array( 'ok' => true, 'issues' => array(), 'checked' => 0 );
+        }
+
+        // 差し替え忘れを示すサンプル文言
+        $placeholders = array( 'テキストテキスト', 'サンプルテキスト', 'Lite Word', 'ダミー', 'lorem ipsum' );
+
+        $catalog = array();
+        foreach ( self::get_all_blocks() as $block ) {
+            $catalog[ $block['name'] ] = $block;
+        }
+
+        foreach ( $blocks as $block ) {
+            // 生成系の正規形は blockName（name は正規化前の互換キー）。両方見る
+            $name = isset( $block['blockName'] ) ? $block['blockName'] : ( isset( $block['name'] ) ? $block['name'] : '' );
+            if ( '' === $name || ! isset( $catalog[ $name ] ) ) {
+                continue;
+            }
+
+            $checked++;
+            $attrs         = isset( $block['attributes'] ) ? $block['attributes'] : array();
+            $text_fields   = isset( $catalog[ $name ]['contentAttributes'] ) ? $catalog[ $name ]['contentAttributes'] : array();
+            $filled        = 0;
+
+            foreach ( $text_fields as $field ) {
+                $value = isset( $attrs[ $field ] ) ? $attrs[ $field ] : null;
+
+                if ( is_string( $value ) && '' !== trim( wp_strip_all_tags( $value ) ) ) {
+                    $filled++;
+
+                    foreach ( $placeholders as $ph ) {
+                        if ( false !== stripos( $value, $ph ) ) {
+                            $issues[] = array(
+                                'block'  => $name,
+                                'field'  => $field,
+                                'reason' => 'サンプル文言が残っています（' . $ph . '）',
+                            );
+                            break;
+                        }
+                    }
+                }
+            }
+
+            // テキスト欄を持つブロックなのに1つも埋まっていない
+            if ( ! empty( $text_fields ) && 0 === $filled ) {
+                $issues[] = array(
+                    'block'  => $name,
+                    'field'  => implode( ' / ', $text_fields ),
+                    'reason' => 'テキストが1つも入っていません（属性名の誤りの可能性）',
+                );
+            }
+        }
+
+        return array(
+            'ok'      => empty( $issues ),
+            'issues'  => $issues,
+            'checked' => $checked,
+        );
+    }
+
+    /**
+     * AIにブロックを選ばせるための軽量な一覧を返す
+     *
+     * get_all_blocks() は attributes の完全定義を含むため、142ブロック分だと
+     * 46KB（約1.2万トークン）になりプロンプトを圧迫する。
+     * ブロックを「選ぶ」のに必要なのは用途の説明と、値を入れる属性名だけなので、
+     * それだけに絞ったものを返す。属性の型や既定値が要る場面では
+     * get_block_definitions() / get_single_block_definition() を使うこと。
+     *
+     * @param array $allowed_names 対象を絞る場合はブロック名の配列（省略時は全件）
+     * @return array
+     */
+    public static function get_block_catalog( $allowed_names = array() ) {
+        $catalog     = array();
+        $found_names = array();
+
+        foreach ( self::get_all_blocks() as $block ) {
+            if ( ! empty( $allowed_names ) && ! in_array( $block['name'], $allowed_names, true ) ) {
+                continue;
+            }
+
+            // 自動選択から外す指定があるブロックは候補に出さない。
+            // ただし呼び出し元が許可リストで明示指定した場合は、その意思を優先する
+            // （purpose.json の厳選には lw-space-1 等の除外指定ブロックが含まれる）。
+            if ( empty( $allowed_names ) && ! empty( $block['excludeFromAutoSelect'] ) ) {
+                continue;
+            }
+
+            $found_names[] = $block['name'];
+
+            $item = array(
+                'name'        => $block['name'],
+                'title'       => $block['title'],
+                'description' => isset( $block['aiDescription'] ) ? $block['aiDescription'] : '',
+                'type'        => $block['blockType'],
+            );
+
+            if ( ! empty( $block['contentAttributes'] ) ) {
+                $item['textFields'] = $block['contentAttributes'];
+            }
+            if ( ! empty( $block['imageAttributes'] ) ) {
+                $item['imageFields'] = $block['imageAttributes'];
+            }
+            if ( ! empty( $block['aiNotes'] ) ) {
+                $item['notes'] = $block['aiNotes'];
+            }
+
+            $catalog[] = $item;
+        }
+
+        // 許可リストに実在しない名前が混ざっていたら気付けるようにしておく
+        // （purpose.json の書き間違いで黙って候補が減る事故の再発防止）。
+        if ( ! empty( $allowed_names ) ) {
+            $missing = array_diff( $allowed_names, $found_names );
+            if ( ! empty( $missing ) ) {
+                error_log( '[LW AI] get_block_catalog: 許可リストに実在しないブロック名: ' . implode( ', ', $missing ) );
+            }
+        }
+
+        return $catalog;
     }
 
     /**

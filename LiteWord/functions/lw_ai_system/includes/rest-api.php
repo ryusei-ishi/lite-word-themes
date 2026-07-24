@@ -1761,6 +1761,10 @@ function lw_ai_system_get_available_parts( $section_type ) {
  * パーツ自動選択（構成案からパーツを選択＆最適化テキスト生成）
  */
 function lw_ai_system_select_parts( WP_REST_Request $request ) {
+    // 選定→再最適化の直列2コール（各timeout 60秒）×セクション数になり得るため、
+    // 実時間でカウントする環境でPHPが先に打ち切られないようにする（他のAIハンドラと同じ作法）。
+    @set_time_limit( 300 );
+
     $sections      = $request->get_param( 'sections' );
     $business_type = $request->get_param( 'businessType' );
 
@@ -1799,7 +1803,19 @@ function lw_ai_system_select_parts( WP_REST_Request $request ) {
         );
 
         if ( is_wp_error( $ai_result ) ) {
-            // エラー時は最初のパーツをデフォルトで使用
+            // AIが選べなかった場合は一覧の先頭パーツで代替する。
+            // ここが黙って通ると「業種を変えても毎回同じレイアウトになる」症状になり、
+            // しかも画面にもログにも痕跡が残らないため原因追跡ができなかった。
+            // 代替したことを呼び出し側とログの両方に残す。
+            $error_message = $ai_result->get_error_message();
+
+            error_log( sprintf(
+                '[LiteWord AI] パーツ選定に失敗したため既定のパーツを使用しました。section=%s part=%s reason=%s',
+                $section_type,
+                $available_parts[0]['name'],
+                $error_message
+            ) );
+
             $result_sections[] = array(
                 'type'             => $section_type,
                 'selectedPart'     => $available_parts[0]['name'],
@@ -1807,7 +1823,10 @@ function lw_ai_system_select_parts( WP_REST_Request $request ) {
                 'partDescription'  => $available_parts[0]['description'],
                 'availableParts'   => $available_parts,
                 'optimizedContent' => $section,
-                'error'            => $ai_result->get_error_message(),
+                'error'            => $error_message,
+                // 画面側がこのフラグを見て「AIが選んだ結果ではない」と示せるようにする
+                'usedFallback'     => true,
+                'fallbackReason'   => $error_message,
             );
         } else {
             $result_sections[] = array(

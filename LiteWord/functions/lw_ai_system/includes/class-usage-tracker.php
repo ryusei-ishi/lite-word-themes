@@ -24,11 +24,22 @@ class LW_AI_Generator_Usage_Tracker {
      */
     const PRICING = array(
         'gemini-2.5-flash' => array(
-            'input'  => 0.075,  // $0.075 per 1M input tokens
-            'output' => 0.30,   // $0.30 per 1M output tokens
+            'input'  => 0.30,   // $0.30 per 1M input tokens
+            'output' => 2.50,   // $2.50 per 1M output tokens（思考トークンを含む）
+        ),
+        'gemini-2.5-pro' => array(
+            'input'  => 1.25,   // $1.25 per 1M input tokens
+            'output' => 10.00,  // $10.00 per 1M output tokens
+        ),
+        'gemini-2.5-flash-lite' => array(
+            'input'  => 0.10,
+            'output' => 0.40,
         ),
         'imagen-4.0' => array(
-            'per_image' => 0.03,  // 約$0.03 per image
+            'per_image' => 0.04,  // Imagen 4 標準は $0.04 per image（$0.03 は旧 Imagen 3 の価格）
+        ),
+        'gemini-2.5-flash-image' => array(
+            'per_image' => 0.039, // 1画像≒1290出力トークン × $30/1M
         ),
     );
 
@@ -140,12 +151,48 @@ class LW_AI_Generator_Usage_Tracker {
      * @param int    $image_count 画像生成数
      * @return float
      */
+    /**
+     * モデル名から適用する料金を決める
+     *
+     * 前方一致ではなく「より具体的な名前を優先」で判定する
+     * （gemini-2.5-flash-lite が gemini-2.5-flash に吸われないように）。
+     *
+     * @param string $model モデル名
+     * @return array{input:float,output:float}
+     */
+    private static function lw_ai_resolve_pricing( $model ) {
+        $candidates = array();
+
+        foreach ( self::PRICING as $name => $price ) {
+            if ( ! isset( $price['input'] ) ) {
+                continue; // 画像モデルは対象外
+            }
+            if ( false !== strpos( $model, $name ) ) {
+                $candidates[ $name ] = $price;
+            }
+        }
+
+        if ( empty( $candidates ) ) {
+            // 未知のモデルは flash 価格で概算する
+            return self::PRICING['gemini-2.5-flash'];
+        }
+
+        // 名前が長い＝より具体的な指定を採用
+        uksort( $candidates, function ( $a, $b ) {
+            return strlen( $b ) - strlen( $a );
+        } );
+
+        return reset( $candidates );
+    }
+
     public static function calculate_cost( $model, $input_tokens, $output_tokens, $image_count ) {
         $cost = 0;
 
         // テキスト生成コスト
+        // モデル名に "gemini" が含まれれば一律 flash 価格で計算していたため、
+        // Pro を使う機能のコストが実際の 1/30 程度で表示されていた。
         if ( strpos( $model, 'gemini' ) !== false ) {
-            $pricing = self::PRICING['gemini-2.5-flash'];
+            $pricing = self::lw_ai_resolve_pricing( $model );
             $cost += ( $input_tokens / 1000000 ) * $pricing['input'];
             $cost += ( $output_tokens / 1000000 ) * $pricing['output'];
         }

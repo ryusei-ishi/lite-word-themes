@@ -1385,6 +1385,18 @@
                     }
 
                     var selectedSection = selectData.sections[0];
+
+                    // AIがパーツを選べず既定のパーツで代替された場合は、そのことを伝える。
+                    // 従来はこの error を読み捨てていたため、
+                    // 「業種を変えても毎回同じレイアウトになる」原因が誰にも見えなかった。
+                    if (selectedSection.usedFallback) {
+                        console.warn(
+                            'LiteWord AI: セクション「' + sectionLabel + '」はAIがパーツを選べず、' +
+                            '既定のパーツ（' + (selectedSection.selectedPart || '不明') + '）を使いました。理由: ' +
+                            (selectedSection.fallbackReason || '不明')
+                        );
+                    }
+
                     var selectedPart = selectedSection.selectedPart || '';
                     var selectedPartType = '';
                     if (selectedPart) {

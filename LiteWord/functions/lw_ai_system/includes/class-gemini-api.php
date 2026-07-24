@@ -66,6 +66,91 @@ class LW_AI_Generator_Gemini_API {
      *
      * @return string|false
      */
+    /**
+     * 既定で使うモデルを返す
+     *
+     * 実測（2026-07-19・構成案の生成で比較）:
+     *   gemini-2.5-flash      10,933ms / 10セクション / 6,173字
+     *   gemini-3.5-flash       7,552ms / 10セクション / 5,066字  ← 速くて内容も同等
+     *   gemini-3.1-flash-lite  4,092ms /  7セクション / 2,667字  ← 速いが構成が薄くなる
+     *
+     * 既定は現行のまま（2.5-flash）にして後方互換を保つ。
+     * オプション lw_ai_generator_model で切り替えられる。
+     *
+     * @return string モデル名
+     */
+    public static function get_default_model() {
+        $model = get_option( 'lw_ai_generator_model', '' );
+
+        if ( ! is_string( $model ) || '' === trim( $model ) ) {
+            $model = 'gemini-2.5-flash';
+        }
+
+        /**
+         * 使用するGeminiモデルを差し替えるフィルタ
+         *
+         * @param string $model モデル名
+         */
+        // 前後の空白・改行はURLに直結して全リクエストを壊すので必ず落とす
+        // （wp-cli や SQL 直更新で末尾改行が混入しがち）。
+        return trim( (string) apply_filters( 'lw_ai_generator_model', $model ) );
+    }
+
+    /**
+     * パーツ選定・整形に使うモデルを返す
+     *
+     * これらは「候補から1つ選ぶ」「文面を整える」処理で、思考の恩恵が薄い。
+     * 従来の 2.5-pro は実測1回18秒かかり、セクション数だけ繰り返されるため
+     * ページ全体の待ち時間を押し上げていた（10セクションで約3分）。
+     *
+     * @return string モデル名
+     */
+    public static function get_part_select_model() {
+        $model = get_option( 'lw_ai_generator_part_model', '' );
+
+        if ( ! is_string( $model ) || '' === trim( $model ) ) {
+            $model = self::get_default_model();
+        }
+
+        /**
+         * パーツ選定に使うモデルを差し替えるフィルタ
+         *
+         * @param string $model モデル名
+         */
+        return trim( (string) apply_filters( 'lw_ai_generator_part_model', $model ) );
+    }
+
+    /**
+     * モデルに応じた thinkingConfig を返す（送るべきでない場合は null）
+     *
+     * gemini-2.5-pro は思考を切れない（Budget 0 は 400
+     * "This model only works in thinking mode"）。また thinkingConfig を
+     * 知らない旧世代モデル（1.5系/2.0系）に送っても 400 になる。
+     * 思考制御を送ってよいのは Flash 系だけとし、それ以外のモデルでは
+     * 明示的に正のバジェットが指定された場合のみ送る。
+     *
+     * @param string $model  モデル名
+     * @param int    $budget 思考トークン上限（0=思考オフ）
+     * @return array|null
+     */
+    public static function build_thinking_config( $model, $budget ) {
+        $model = (string) $model;
+
+        // thinkingConfig を持たない旧世代（1.5系/2.0系）は Flash でも送らない
+        $is_legacy = ( false !== stripos( $model, '1.5' ) || false !== stripos( $model, '2.0' ) );
+        $is_flash  = ( ! $is_legacy && false !== stripos( $model, 'flash' ) );
+
+        if ( $is_flash ) {
+            return array( 'thinkingBudget' => (int) $budget );
+        }
+
+        if ( ! $is_legacy && (int) $budget > 0 ) {
+            return array( 'thinkingBudget' => (int) $budget );
+        }
+
+        return null;
+    }
+
     public static function get_api_key() {
         if ( class_exists( 'LW_AI_Generator_Admin_Settings' ) ) {
             return LW_AI_Generator_Admin_Settings::get_api_key();
@@ -86,7 +171,7 @@ class LW_AI_Generator_Gemini_API {
             return new WP_Error( 'no_api_key', 'Gemini APIキーが設定されていません' );
         }
 
-        $model           = isset( $config['model'] ) ? $config['model'] : 'gemini-2.5-flash';
+        $model           = isset( $config['model'] ) ? $config['model'] : self::get_default_model();
         $temperature     = isset( $config['temperature'] ) ? $config['temperature'] : 0.7;
         $max_tokens      = isset( $config['maxOutputTokens'] ) ? $config['maxOutputTokens'] : 8192;
         $timeout         = isset( $config['timeout'] ) ? $config['timeout'] : 60;
@@ -100,6 +185,17 @@ class LW_AI_Generator_Gemini_API {
         );
         if ( isset( $config['responseMimeType'] ) ) {
             $gen_config['responseMimeType'] = $config['responseMimeType'];
+        }
+
+        // 思考トークンの制御。
+        // Gemini 2.5系は既定で「思考」が走り、実測で1回あたり約1,568トークン
+        // （出力本体583トークンの2.7倍）を消費し、待ち時間の大半を占めていた。
+        // ページ生成のように出力形式が決まっている処理では思考の恩恵が薄いため、
+        // 既定で切る。個別に効かせたい処理は $config['thinkingBudget'] で上書きできる。
+        $thinking_budget = isset( $config['thinkingBudget'] ) ? (int) $config['thinkingBudget'] : 0;
+        $thinking_config = self::build_thinking_config( $model, $thinking_budget );
+        if ( null !== $thinking_config ) {
+            $gen_config['thinkingConfig'] = $thinking_config;
         }
 
         $request_body = array(
@@ -151,9 +247,21 @@ class LW_AI_Generator_Gemini_API {
         $input_tokens   = isset( $data['usageMetadata']['promptTokenCount'] ) ? $data['usageMetadata']['promptTokenCount'] : 0;
         $output_tokens  = isset( $data['usageMetadata']['candidatesTokenCount'] ) ? $data['usageMetadata']['candidatesTokenCount'] : 0;
 
-        // 使用量をトラッキング
+        // 思考トークンは candidatesTokenCount に含まれないが、出力として課金される。
+        // これを数えていなかったため、使用量画面が実際の請求額を大きく下回っていた。
+        $thinking_tokens = isset( $data['usageMetadata']['thoughtsTokenCount'] )
+            ? (int) $data['usageMetadata']['thoughtsTokenCount']
+            : 0;
+
+        // 使用量をトラッキング（思考分を出力に含めて実請求に合わせる）
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-            LW_AI_Generator_Usage_Tracker::log_usage( $usage_label, $model, $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage(
+                $usage_label,
+                $model,
+                $input_tokens,
+                $output_tokens + $thinking_tokens,
+                0
+            );
         }
 
         return array(
@@ -1142,6 +1250,71 @@ COLORS;
      * @param bool $return_array 配列で返すかどうか
      * @return string|array
      */
+    /**
+     * 用途別に厳選されたブロック名の一覧を返す
+     *
+     * purpose.json はセクションタイプごとに「このセクションならこれを使う」という
+     * 少数のブロックを説明つきで持っている（22タイプ・実質51ブロック）。
+     * AIに142ブロック全部から選ばせると迷って遅くなるため、既定ではここに載るものだけを候補にする。
+     *
+     * @return array ブロック名の配列（取得できない場合は空配列＝絞り込みなし）
+     */
+    public static function get_curated_block_names() {
+        $purpose_data = self::get_purpose_data();
+        if ( empty( $purpose_data['purposes'] ) || ! is_array( $purpose_data['purposes'] ) ) {
+            return array();
+        }
+
+        $names = array();
+        foreach ( $purpose_data['purposes'] as $purpose ) {
+            if ( empty( $purpose['blocks'] ) || ! is_array( $purpose['blocks'] ) ) {
+                continue;
+            }
+            foreach ( array_keys( $purpose['blocks'] ) as $block_name ) {
+                $names[ $block_name ] = true;
+            }
+        }
+
+        return array_keys( $names );
+    }
+
+    /**
+     * ブロックを選ばせるための軽量カタログをJSON文字列で返す
+     *
+     * 用途・入れる属性名だけを持つ一覧。attributes の完全定義は含まない。
+     * 属性の型や既定値が必要な場面では get_single_block_definition() を使うこと。
+     *
+     * @param array $allowed_block_names 絞り込む場合はブロック名の配列
+     * @return string JSON文字列
+     */
+    public static function get_block_catalog_json( $allowed_block_names = array() ) {
+        if ( ! class_exists( 'LW_AI_Generator_Block_Settings' ) ) {
+            return '[]';
+        }
+
+        $catalog = LW_AI_Generator_Block_Settings::get_block_catalog( $allowed_block_names );
+
+        // プレミアム以外のユーザーには有料ブロックを見せない。
+        // is_block_available() は blockType / slug キーを見るため、判定用に詰め替える。
+        $premium_status = self::get_premium_status();
+        $catalog        = array_values( array_filter(
+            $catalog,
+            function ( $item ) use ( $premium_status ) {
+                $name  = isset( $item['name'] ) ? $item['name'] : '';
+                $slug  = ( false !== strpos( $name, '/' ) ) ? substr( $name, strpos( $name, '/' ) + 1 ) : $name;
+                $probe = array(
+                    'blockType' => isset( $item['type'] ) ? $item['type'] : 'free',
+                    'slug'      => $slug,
+                );
+
+                return self::is_block_available( $probe, $premium_status );
+            }
+        ) );
+
+        // 整形すると1.4倍に膨らむだけでAIの読み取り精度は変わらないため、圧縮したまま渡す
+        return wp_json_encode( $catalog, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES );
+    }
+
     public static function get_block_definitions( $return_array = false ) {
         // 各ブロックのblock.jsonから直接読み込み
         $all_blocks = LW_AI_Generator_Block_Settings::get_all_blocks();
@@ -1300,7 +1473,16 @@ COLORS;
      *
      * @return string
      */
-    public static function extract_block_constraints() {
+    /**
+     * ブロックの配置ルール（aiNotes）を組み立てる
+     *
+     * 「このブロックはh2見出しを内包するので直前にcustom-title系を置かない」といった、
+     * レイアウトが崩れないための注意書き。
+     *
+     * @param array $allowed_block_names 対象を絞る場合はブロック名の配列
+     * @return string
+     */
+    public static function extract_block_constraints( $allowed_block_names = array() ) {
         $schema = self::get_block_definitions( true );
 
         if ( empty( $schema['blocks'] ) ) {
@@ -1310,8 +1492,15 @@ COLORS;
         $constraints = array();
 
         foreach ( $schema['blocks'] as $block ) {
+            $block_name = isset( $block['name'] ) ? $block['name'] : '';
+
+            // そのセクションで使えないブロックの注意書きを混ぜると、
+            // 「リストにないブロックは使うな」という指示と矛盾してAIが混乱する
+            if ( ! empty( $allowed_block_names ) && ! in_array( $block_name, $allowed_block_names, true ) ) {
+                continue;
+            }
+
             if ( ! empty( $block['aiNotes'] ) ) {
-                $block_name = isset( $block['name'] ) ? $block['name'] : '';
                 $block_title = isset( $block['title'] ) ? $block['title'] : '';
                 $constraints[] = "- **{$block_name}**（{$block_title}）: {$block['aiNotes']}";
             }
@@ -1396,7 +1585,10 @@ COLORS;
      * @return string
      */
     public static function build_prompt( $user_request, $image_source = 'ai' ) {
-        $block_definitions = self::get_block_definitions();
+        // 142ブロック全部を候補にすると、選択に迷って生成が遅くなり、トークンも無駄に増える。
+        // purpose.json に用途別で厳選されたブロック（51件）だけを候補にする。
+        // ユーザーが特定のブロックを名指しした場合は get_single_block_definition() で個別に引く。
+        $block_definitions = self::get_block_catalog_json( self::get_curated_block_names() );
         $block_constraints = self::extract_block_constraints();
         $custom_block_prompts = self::extract_custom_block_prompts();
         $theme_colors_prompt = self::get_theme_colors_prompt();
@@ -2018,7 +2210,8 @@ PROMPT;
      * @return string プロンプト
      */
     private static function build_prompt_from_outline( $outline_text, $image_source = 'ai' ) {
-        $block_definitions = self::get_block_definitions();
+        // build_prompt と同じ理由で、厳選ブロックだけを候補にする
+        $block_definitions = self::get_block_catalog_json( self::get_curated_block_names() );
         $block_constraints = self::extract_block_constraints();
         $theme_colors_prompt = self::get_theme_colors_prompt();
 
@@ -2286,6 +2479,9 @@ PROMPT;
         $api_result = self::call_gemini_text_api( $prompt, array(
             'temperature'      => 0.7,
             'maxOutputTokens'  => 16384,
+            // 他の処理はJSON指定済みだが、最も出力が大きいこの処理だけ抜けていた。
+            // 指定が無いとAIがコードフェンスや前置きを付け、正規表現で剥がす処理に依存する。
+            'responseMimeType' => 'application/json',
             'usage_label'      => 'section',
         ) );
 
@@ -2569,7 +2765,12 @@ PROMPT;
             }
         }
 
-        $block_constraints = self::extract_block_constraints();
+        // このセクションで使えるブロックの注意書きだけを渡す。
+        // 全ブロック分を渡すと「リストにないブロックは使うな」という指示と
+        // 矛盾する情報が同居し、AIのブロック選択を撹乱する。
+        $block_constraints = self::extract_block_constraints(
+            isset( $allowed_block_names ) ? $allowed_block_names : array()
+        );
         $theme_colors_prompt = self::get_theme_colors_prompt();
 
         $image_instruction = '';
@@ -3072,6 +3273,8 @@ RULES;
         // 使用量をトラッキング
         $input_tokens = isset( $data['usageMetadata']['promptTokenCount'] ) ? $data['usageMetadata']['promptTokenCount'] : 0;
         $output_tokens = isset( $data['usageMetadata']['candidatesTokenCount'] ) ? $data['usageMetadata']['candidatesTokenCount'] : 0;
+        // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
+        $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
             LW_AI_Generator_Usage_Tracker::log_usage( 'optimize', 'gemini-2.5-flash', $input_tokens, $output_tokens, 0 );
         }
@@ -3332,6 +3535,18 @@ PROMPT;
             return new WP_Error( 'no_api_key', 'APIキーが設定されていません' );
         }
 
+        // モデル名はURLに直結するため必ず許可リストで検証する。
+        // generate_myparts 経由は検証済みだが、RESTの previewOnly 経路は
+        // リクエストの model がそのままここへ届くので、この関数側でも守る。
+        $allowed_models = array(
+            'gemini-2.5-flash',
+            'gemini-2.5-pro',
+            'gemini-2.5-flash-lite',
+        );
+        if ( ! in_array( $model, $allowed_models, true ) ) {
+            $model = 'gemini-2.5-flash';
+        }
+
         // MIMEタイプを推測
         $mime_type = 'image/jpeg';
         if ( strpos( $reference_image, 'iVBOR' ) === 0 ) {
@@ -3478,6 +3693,8 @@ PROMPT;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) && isset( $data['usageMetadata'] ) ) {
             $input_tokens  = isset( $data['usageMetadata']['promptTokenCount'] ) ? $data['usageMetadata']['promptTokenCount'] : 0;
             $output_tokens = isset( $data['usageMetadata']['candidatesTokenCount'] ) ? $data['usageMetadata']['candidatesTokenCount'] : 0;
+            // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
+            $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
             LW_AI_Generator_Usage_Tracker::log_usage( 'image_analysis', $model, $input_tokens, $output_tokens, 0 );
         }
 
@@ -3600,13 +3817,14 @@ PROMPT;
                 )
             ),
             'generationConfig' => array(
-                'responseModalities' => array( 'image', 'text' ),
-                'responseMimeType' => 'text/plain'
+                // Modality enum は大文字（小文字だとJSON enumパースで弾かれる）。
+                // responseMimeType は画像出力と両立しないため指定しない。
+                'responseModalities' => array( 'IMAGE', 'TEXT' ),
             )
         );
 
-        // Gemini 2.0 Flash Exp を使用（画像生成対応）
-        $gemini_image_endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+        // 画像出力対応モデル（Nano Banana）。素の 2.5-flash は IMAGE モダリティ非対応
+        $gemini_image_endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-image:generateContent';
 
         $response = wp_remote_post(
             $gemini_image_endpoint,
@@ -3649,7 +3867,7 @@ PROMPT;
 
                     // 画像生成をトラッキング
                     if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-                        LW_AI_Generator_Usage_Tracker::log_usage( 'image', 'gemini-2.5-flash', 0, 0, 1 );
+                        LW_AI_Generator_Usage_Tracker::log_usage( 'image', 'gemini-2.5-flash-image', 0, 0, 1 );
                     }
 
                     self::debug_log( '[LW AI Image Gen] Gemini 2.5 Flash Image 成功！画像生成完了' );
@@ -4352,6 +4570,8 @@ PROMPT;
         // 使用量をトラッキング
         $input_tokens = isset( $data['usageMetadata']['promptTokenCount'] ) ? $data['usageMetadata']['promptTokenCount'] : 0;
         $output_tokens = isset( $data['usageMetadata']['candidatesTokenCount'] ) ? $data['usageMetadata']['candidatesTokenCount'] : 0;
+        // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
+        $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
             LW_AI_Generator_Usage_Tracker::log_usage( 'auto_highlight', 'gemini-2.5-flash', $input_tokens, $output_tokens, 0 );
         }
@@ -4450,6 +4670,8 @@ PROMPT;
         // 使用量をトラッキング
         $input_tokens = isset( $data['usageMetadata']['promptTokenCount'] ) ? $data['usageMetadata']['promptTokenCount'] : 0;
         $output_tokens = isset( $data['usageMetadata']['candidatesTokenCount'] ) ? $data['usageMetadata']['candidatesTokenCount'] : 0;
+        // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
+        $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
             LW_AI_Generator_Usage_Tracker::log_usage( 'auto_highlight_multi', 'gemini-2.5-flash', $input_tokens, $output_tokens, 0 );
         }
@@ -4570,6 +4792,8 @@ PROMPT;
         // 使用量をトラッキング
         $input_tokens = isset( $data['usageMetadata']['promptTokenCount'] ) ? $data['usageMetadata']['promptTokenCount'] : 0;
         $output_tokens = isset( $data['usageMetadata']['candidatesTokenCount'] ) ? $data['usageMetadata']['candidatesTokenCount'] : 0;
+        // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
+        $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
             LW_AI_Generator_Usage_Tracker::log_usage( 'generate_text', 'gemini-2.5-flash', $input_tokens, $output_tokens, 0 );
         }
@@ -5114,6 +5338,8 @@ PROMPT;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) && isset( $data['usageMetadata'] ) ) {
             $input_tokens  = isset( $data['usageMetadata']['promptTokenCount'] ) ? $data['usageMetadata']['promptTokenCount'] : 0;
             $output_tokens = isset( $data['usageMetadata']['candidatesTokenCount'] ) ? $data['usageMetadata']['candidatesTokenCount'] : 0;
+            // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
+            $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
             LW_AI_Generator_Usage_Tracker::log_usage( 'typo_check', 'gemini-2.5-flash', $input_tokens, $output_tokens, 0 );
         }
 
@@ -5600,6 +5826,8 @@ PROMPT;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) && isset( $data['usageMetadata'] ) ) {
             $input_tokens  = isset( $data['usageMetadata']['promptTokenCount'] ) ? $data['usageMetadata']['promptTokenCount'] : 0;
             $output_tokens = isset( $data['usageMetadata']['candidatesTokenCount'] ) ? $data['usageMetadata']['candidatesTokenCount'] : 0;
+            // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
+            $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
             LW_AI_Generator_Usage_Tracker::log_usage( 'myparts_generate', $model, $input_tokens, $output_tokens, 0 );
         }
 
@@ -6334,12 +6562,23 @@ PROMPT;
             )
         );
 
+        // 候補から選ぶ・整えるだけの処理なので思考は不要（思考オフ）。
+        // ただし 2.5-pro は思考を切れない（Budget 0 で "This model only works in thinking mode"）ため、
+        // Flash 系のときだけ thinkingConfig を送る（build_thinking_config が判定）。
+        $thinking_config = self::build_thinking_config( self::get_part_select_model(), 0 );
+        if ( null !== $thinking_config ) {
+            $request_body['generationConfig']['thinkingConfig'] = $thinking_config;
+        }
+
+        // 従来は 2.5-pro 固定で、パーツ選定は実測1回18秒（セクション数だけ繰り返される）。
+        // タイムアウト30秒に収まらず失敗して既定パーツへ差し替わるのが
+        // 「業種を変えても毎回同じレイアウトになる」主因だった。
         $response = wp_remote_post(
-            self::API_ENDPOINT_PRO . '?key=' . $api_key,
+            self::get_model_endpoint( self::get_part_select_model() ) . '?key=' . $api_key,
             array(
                 'headers' => array( 'Content-Type' => 'application/json' ),
                 'body'    => json_encode( $request_body ),
-                'timeout' => 30, // PHP max_execution_time内に収まるよう短縮
+                'timeout' => 60, // 余裕をもたせる（30秒だと失敗しフォールバックしていた）
             )
         );
 
@@ -6375,8 +6614,10 @@ PROMPT;
         // 使用量をトラッキング
         $input_tokens = isset( $data['usageMetadata']['promptTokenCount'] ) ? $data['usageMetadata']['promptTokenCount'] : 0;
         $output_tokens = isset( $data['usageMetadata']['candidatesTokenCount'] ) ? $data['usageMetadata']['candidatesTokenCount'] : 0;
+        // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
+        $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-            LW_AI_Generator_Usage_Tracker::log_usage( 'template_optimize', 'gemini-2.5-pro', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'template_optimize', self::get_part_select_model(), $input_tokens, $output_tokens, 0 );
         }
 
         return $result;
@@ -6468,12 +6709,23 @@ PROMPT;
             )
         );
 
+        // 候補から選ぶ・整えるだけの処理なので思考は不要（思考オフ）。
+        // ただし 2.5-pro は思考を切れない（Budget 0 で "This model only works in thinking mode"）ため、
+        // Flash 系のときだけ thinkingConfig を送る（build_thinking_config が判定）。
+        $thinking_config = self::build_thinking_config( self::get_part_select_model(), 0 );
+        if ( null !== $thinking_config ) {
+            $request_body['generationConfig']['thinkingConfig'] = $thinking_config;
+        }
+
+        // 従来は 2.5-pro 固定で、パーツ選定は実測1回18秒（セクション数だけ繰り返される）。
+        // タイムアウト30秒に収まらず失敗して既定パーツへ差し替わるのが
+        // 「業種を変えても毎回同じレイアウトになる」主因だった。
         $response = wp_remote_post(
-            self::API_ENDPOINT_PRO . '?key=' . $api_key,
+            self::get_model_endpoint( self::get_part_select_model() ) . '?key=' . $api_key,
             array(
                 'headers' => array( 'Content-Type' => 'application/json' ),
                 'body'    => json_encode( $request_body ),
-                'timeout' => 30, // PHP max_execution_time内に収まるよう短縮
+                'timeout' => 60, // 余裕をもたせる（30秒だと失敗しフォールバックしていた）
             )
         );
 
@@ -6509,8 +6761,10 @@ PROMPT;
         // 使用量をトラッキング
         $input_tokens = isset( $data['usageMetadata']['promptTokenCount'] ) ? $data['usageMetadata']['promptTokenCount'] : 0;
         $output_tokens = isset( $data['usageMetadata']['candidatesTokenCount'] ) ? $data['usageMetadata']['candidatesTokenCount'] : 0;
+        // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
+        $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-            LW_AI_Generator_Usage_Tracker::log_usage( 'part_select', 'gemini-2.5-pro', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'part_select', self::get_part_select_model(), $input_tokens, $output_tokens, 0 );
         }
 
         // 選択されたパーツがブロックの場合、block.jsonの属性情報を使って再最適化
@@ -6638,12 +6892,23 @@ PROMPT;
             )
         );
 
+        // 候補から選ぶ・整えるだけの処理なので思考は不要（思考オフ）。
+        // ただし 2.5-pro は思考を切れない（Budget 0 で "This model only works in thinking mode"）ため、
+        // Flash 系のときだけ thinkingConfig を送る（build_thinking_config が判定）。
+        $thinking_config = self::build_thinking_config( self::get_part_select_model(), 0 );
+        if ( null !== $thinking_config ) {
+            $request_body['generationConfig']['thinkingConfig'] = $thinking_config;
+        }
+
+        // 従来は 2.5-pro 固定で、パーツ選定は実測1回18秒（セクション数だけ繰り返される）。
+        // タイムアウト30秒に収まらず失敗して既定パーツへ差し替わるのが
+        // 「業種を変えても毎回同じレイアウトになる」主因だった。
         $response = wp_remote_post(
-            self::API_ENDPOINT_PRO . '?key=' . $api_key,
+            self::get_model_endpoint( self::get_part_select_model() ) . '?key=' . $api_key,
             array(
                 'headers' => array( 'Content-Type' => 'application/json' ),
                 'body'    => json_encode( $request_body ),
-                'timeout' => 30, // PHP max_execution_time内に収まるよう短縮
+                'timeout' => 60, // 余裕をもたせる（30秒だと失敗しフォールバックしていた）
             )
         );
 
@@ -6679,8 +6944,10 @@ PROMPT;
         // 使用量をトラッキング
         $input_tokens = isset( $data['usageMetadata']['promptTokenCount'] ) ? $data['usageMetadata']['promptTokenCount'] : 0;
         $output_tokens = isset( $data['usageMetadata']['candidatesTokenCount'] ) ? $data['usageMetadata']['candidatesTokenCount'] : 0;
+        // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
+        $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-            LW_AI_Generator_Usage_Tracker::log_usage( 'block_optimize', 'gemini-2.5-pro', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'block_optimize', self::get_part_select_model(), $input_tokens, $output_tokens, 0 );
         }
 
         return $result;
@@ -6781,12 +7048,23 @@ PROMPT;
             )
         );
 
+        // 候補から選ぶ・整えるだけの処理なので思考は不要（思考オフ）。
+        // ただし 2.5-pro は思考を切れない（Budget 0 で "This model only works in thinking mode"）ため、
+        // Flash 系のときだけ thinkingConfig を送る（build_thinking_config が判定）。
+        $thinking_config = self::build_thinking_config( self::get_part_select_model(), 0 );
+        if ( null !== $thinking_config ) {
+            $request_body['generationConfig']['thinkingConfig'] = $thinking_config;
+        }
+
+        // 従来は 2.5-pro 固定で、パーツ選定は実測1回18秒（セクション数だけ繰り返される）。
+        // タイムアウト30秒に収まらず失敗して既定パーツへ差し替わるのが
+        // 「業種を変えても毎回同じレイアウトになる」主因だった。
         $response = wp_remote_post(
-            self::API_ENDPOINT_PRO . '?key=' . $api_key,
+            self::get_model_endpoint( self::get_part_select_model() ) . '?key=' . $api_key,
             array(
                 'headers' => array( 'Content-Type' => 'application/json' ),
                 'body'    => json_encode( $request_body ),
-                'timeout' => 30, // PHP max_execution_time内に収まるよう短縮
+                'timeout' => 60, // 余裕をもたせる（30秒だと失敗しフォールバックしていた）
             )
         );
 
@@ -6822,8 +7100,10 @@ PROMPT;
         // 使用量をトラッキング
         $input_tokens = isset( $data['usageMetadata']['promptTokenCount'] ) ? $data['usageMetadata']['promptTokenCount'] : 0;
         $output_tokens = isset( $data['usageMetadata']['candidatesTokenCount'] ) ? $data['usageMetadata']['candidatesTokenCount'] : 0;
+        // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
+        $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-            LW_AI_Generator_Usage_Tracker::log_usage( 'part_optimize', 'gemini-2.5-pro', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'part_optimize', self::get_part_select_model(), $input_tokens, $output_tokens, 0 );
         }
 
         return $result;
@@ -6951,6 +7231,8 @@ PROMPT;
         // 使用量をトラッキング
         $input_tokens = isset( $data['usageMetadata']['promptTokenCount'] ) ? $data['usageMetadata']['promptTokenCount'] : 0;
         $output_tokens = isset( $data['usageMetadata']['candidatesTokenCount'] ) ? $data['usageMetadata']['candidatesTokenCount'] : 0;
+        // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
+        $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
             LW_AI_Generator_Usage_Tracker::log_usage( 'content_review', 'gemini-2.5-flash', $input_tokens, $output_tokens, 0 );
         }
