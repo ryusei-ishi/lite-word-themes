@@ -96,8 +96,21 @@ function lw_mail_download_csv_handler() {
 	// 出力バッファを開く
 	$output = fopen( 'php://output', 'w' );
 
+	// 🔒 CSV/数式インジェクション対策: 先頭が = + - @ タブ/CR のセルをアポストロフィで無害化する。
+	// 匿名フォーム値（sanitize_textarea_field は先頭の = 等を残す）が、管理者の Excel/Sheets で
+	// 数式（=HYPERLINK / =WEBSERVICE 等）として実行されるのを防ぐ。
+	if ( ! function_exists( 'lw_csv_neutralize_cell' ) ) {
+		function lw_csv_neutralize_cell( $v ) {
+			$v = (string) $v;
+			if ( $v !== '' && preg_match( '/^[=+\-@\t\r]/', $v ) ) {
+				$v = "'" . $v;
+			}
+			return $v;
+		}
+	}
+
 	// ヘッダー行を出力
-	fputcsv( $output, $header );
+	fputcsv( $output, array_map( 'lw_csv_neutralize_cell', $header ) );
 
 	// データ行を出力
 	foreach ( $csv_data as $row ) {
@@ -109,7 +122,7 @@ function lw_mail_download_csv_handler() {
 		while ( count( $line ) < count( $header ) ) {
 			$line[] = '';
 		}
-		fputcsv( $output, $line );
+		fputcsv( $output, array_map( 'lw_csv_neutralize_cell', $line ) );
 	}
 
 	fclose( $output );

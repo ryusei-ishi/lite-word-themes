@@ -337,17 +337,15 @@ function Lw_save_common_setting_meta_fields( $post_id ) {
 		$raw_value = wp_unslash( $_POST[ $field ] );
 
 		if ( current_user_can( 'unfiltered_html' ) ) {
+			// 管理者/編集者など unfiltered_html 保持者のみ、<script> 等を含む生HTMLを保存できる
+			// （GA・Meta ピクセル等の埋め込みは従来どおり利用可能）。WordPress 標準の権限境界に合わせる。
 			$safe_value = $raw_value;
 		} else {
-			$allowed = wp_kses_allowed_html( 'post' );
-			$allowed['script'] = [
-				'type'   => true,
-				'src'    => true,
-				'async'  => true,
-				'defer'  => true,
-				'charset'=> true,
-			];
-			$safe_value = wp_kses( $raw_value, $allowed );
+			// 🔒 unfiltered_html 非保持（Author/Contributor 等）には <script> を許可しない。
+			// 旧実装は wp_kses の許可リストに script を足していたため、下位ロールが任意JSを
+			// 全訪問者・管理者の <head>/<footer> に注入できた（unfiltered_html 境界破り）。
+			// wp_kses_post() は投稿本文相当の安全なタグのみ通し、script / on* 属性を除去する。
+			$safe_value = wp_kses_post( $raw_value );
 		}
 
 		$safe_value === '' ? delete_post_meta( $post_id, $field )

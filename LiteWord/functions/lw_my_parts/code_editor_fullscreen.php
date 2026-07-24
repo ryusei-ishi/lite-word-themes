@@ -1277,7 +1277,15 @@ function lw_save_fullscreen_editor_ajax() {
 	$custom_html = isset( $_POST['custom_html'] ) ? wp_unslash( $_POST['custom_html'] ) : '';
 	$custom_css = isset( $_POST['custom_css'] ) ? wp_unslash( $_POST['custom_css'] ) : '';
 	$custom_js = isset( $_POST['custom_js'] ) ? wp_unslash( $_POST['custom_js'] ) : ''; // ★ 追加
-	
+
+	// 🔒 生の HTML/CSS/JS を保存できるのは unfiltered_html 保持者（管理者/編集者）のみ。
+	// 下位ロール（Author/Contributor）向けにサニタイズ（save_post 経路と同一の扱い）。
+	if ( ! current_user_can( 'unfiltered_html' ) ) {
+		$custom_html = wp_kses_post( $custom_html );        // script / on* 属性を除去
+		$custom_css  = str_replace( '<', '', $custom_css );  // </style><script> 脱出を防ぐ
+		$custom_js   = '';                                   // 生JSの保存を許可しない
+	}
+
 	// 保存
 	update_post_meta( $post_id, '_lw_custom_html', $custom_html );
 	update_post_meta( $post_id, '_lw_custom_css', $custom_css );

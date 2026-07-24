@@ -128,11 +128,18 @@ function lw_get_instructions_upload_dir() {
 
     if (!file_exists($instructions_dir)) {
         wp_mkdir_p($instructions_dir);
-        // .htaccessで直接アクセス制限（セキュリティ）
-        $htaccess = $instructions_dir . '/.htaccess';
-        if (!file_exists($htaccess)) {
-            file_put_contents($htaccess, "Options -Indexes\n");
-        }
+    }
+
+    // .htaccess で一覧禁止＋PHP実行禁止（多層防御）。既存ディレクトリにも確実に適用するため、
+    // PHP実行禁止（FilesMatch）が未記載なら書き直す。
+    $htaccess = $instructions_dir . '/.htaccess';
+    $htaccess_content = "Options -Indexes\n"
+        . "<FilesMatch \"\\.(php|phtml|phar|php[0-9]|pht|phps)$\">\n"
+        . "  <IfModule mod_authz_core.c>\n    Require all denied\n  </IfModule>\n"
+        . "  <IfModule !mod_authz_core.c>\n    Order Allow,Deny\n    Deny from all\n  </IfModule>\n"
+        . "</FilesMatch>\n";
+    if (!file_exists($htaccess) || strpos((string) @file_get_contents($htaccess), 'FilesMatch') === false) {
+        @file_put_contents($htaccess, $htaccess_content);
     }
 
     return array(
@@ -361,19 +368,31 @@ function lw_delete_instruction($id) {
 function lw_upload_instruction_image($file) {
     $upload_dir = lw_get_instructions_upload_dir();
 
-    // ファイルタイプチェック
-    $allowed_types = array('image/jpeg', 'image/png', 'image/gif', 'image/webp');
-    if (!in_array($file['type'], $allowed_types)) {
-        return new WP_Error('invalid_type', '許可されていないファイル形式です');
-    }
-
     // ファイルサイズチェック（5MB）
     if ($file['size'] > 5 * 1024 * 1024) {
         return new WP_Error('too_large', 'ファイルサイズが大きすぎます（最大5MB）');
     }
 
+    // 🔒 実データを検証して画像タイプを確定する。
+    // クライアント送信の $file['type']（MIMEヘッダ）やファイル名の拡張子は偽装可能なため信用しない。
+    // getimagesize() は実ピクセルを読める本物の画像のときだけ成功する（SVG/PHP等は失敗）。
+    $image_info = @getimagesize($file['tmp_name']);
+    if ($image_info === false || empty($image_info[2])) {
+        return new WP_Error('invalid_type', '画像ファイルとして読み取れませんでした');
+    }
+    $type_to_ext = array(
+        IMAGETYPE_JPEG => 'jpg',
+        IMAGETYPE_PNG  => 'png',
+        IMAGETYPE_GIF  => 'gif',
+        IMAGETYPE_WEBP => 'webp',
+    );
+    if (!isset($type_to_ext[$image_info[2]])) {
+        return new WP_Error('invalid_type', '許可されていない画像形式です（jpg / png / gif / webp のみ）');
+    }
+    // 拡張子は sniff 結果から決める（ユーザーのファイル名は一切使わない）
+    $ext = $type_to_ext[$image_info[2]];
+
     // ユニークなファイル名を生成
-    $ext = pathinfo($file['name'], PATHINFO_EXTENSION);
     $filename = uniqid('inst_') . '_' . time() . '.' . $ext;
     $filepath = $upload_dir['path'] . '/' . $filename;
 

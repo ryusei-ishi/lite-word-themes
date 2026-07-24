@@ -2130,17 +2130,35 @@ function lw_save_code_editor_meta( $post_id, $post ) {
 	if ( isset( $_POST['lw_code_editor_nonce'] ) && 
 	     wp_verify_nonce( $_POST['lw_code_editor_nonce'], 'lw_save_code_editor' ) ) {
 		
+		// 🔒 生の HTML/CSS/JS を保存できるのは unfiltered_html 保持者（管理者/編集者）のみ。
+		// マイパーツは実質 unfiltered_html 機能で、下位ロール（Author/Contributor）が
+		// [my_parts_content] 経由で全訪問者・管理者に任意JSを注入できる問題を塞ぐ。
+		// サイト所有者（管理者）運用では従来どおり JS/CSS/HTML を自由に書ける（機能維持）。
+		$can_raw = current_user_can( 'unfiltered_html' );
+
 		if ( isset( $_POST['lw_custom_html'] ) ) {
-			update_post_meta( $post_id, '_lw_custom_html', wp_unslash( $_POST['lw_custom_html'] ) );
+			$html = wp_unslash( $_POST['lw_custom_html'] );
+			if ( ! $can_raw ) {
+				$html = wp_kses_post( $html ); // script / on* 属性を除去
+			}
+			update_post_meta( $post_id, '_lw_custom_html', $html );
 		}
-		
+
 		if ( isset( $_POST['lw_custom_css'] ) ) {
-			update_post_meta( $post_id, '_lw_custom_css', wp_unslash( $_POST['lw_custom_css'] ) );
+			$css = wp_unslash( $_POST['lw_custom_css'] );
+			if ( ! $can_raw ) {
+				$css = str_replace( '<', '', $css ); // </style><script> 脱出を防ぐ
+			}
+			update_post_meta( $post_id, '_lw_custom_css', $css );
 		}
-		
+
 		// ★ JavaScript保存を追加
 		if ( isset( $_POST['lw_custom_js'] ) ) {
-			update_post_meta( $post_id, '_lw_custom_js', wp_unslash( $_POST['lw_custom_js'] ) );
+			$js = wp_unslash( $_POST['lw_custom_js'] );
+			if ( ! $can_raw ) {
+				$js = ''; // 下位ロールには生JSの保存を許可しない
+			}
+			update_post_meta( $post_id, '_lw_custom_js', $js );
 		}
 	}
 }
