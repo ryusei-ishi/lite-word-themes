@@ -425,7 +425,8 @@ function lw_render_code_editor_metabox( $post ) {
 					<div style="flex: 1; min-width: 180px;">
 						<label style="font-size: 12px; opacity: 0.9; display: block; margin-bottom: 4px;">AIモデル</label>
 						<select id="lw-ai-model" style="width: 100%; padding: 8px 12px; border: none; border-radius: 4px; font-size: 14px;">
-							<option value="gemini-2.5-flash">Gemini 2.5 Flash（推奨）</option>
+							<option value="gemini-3.5-flash">Gemini 3.5 Flash（推奨・高速）</option>
+							<option value="gemini-3.1-flash-lite">Gemini 3.1 Flash Lite（最速）</option>
 							<option value="gemini-2.5-pro">Gemini 2.5 Pro（高品質）</option>
 						</select>
 					</div>
@@ -1326,28 +1327,28 @@ function lw_render_code_editor_metabox( $post ) {
 				// 背景色
 				if (colors.background) {
 					html += '<div style="display: flex; align-items: center; gap: 5px;">';
-					html += '<span style="width: 24px; height: 24px; border-radius: 4px; background: ' + colors.background + '; border: 1px solid #ddd;"></span>';
+					html += '<span style="width: 24px; height: 24px; border-radius: 4px; background: ' + escapeHtml(colors.background) + '; border: 1px solid #ddd;"></span>';
 					html += '<input type="text" id="lw-preview-color-background" value="' + escapeHtml(colors.background) + '" style="width: 100px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;" placeholder="背景色">';
 					html += '</div>';
 				}
 				// メインテキスト色
 				if (colors.text_primary) {
 					html += '<div style="display: flex; align-items: center; gap: 5px;">';
-					html += '<span style="width: 24px; height: 24px; border-radius: 4px; background: ' + colors.text_primary + '; border: 1px solid #ddd;"></span>';
+					html += '<span style="width: 24px; height: 24px; border-radius: 4px; background: ' + escapeHtml(colors.text_primary) + '; border: 1px solid #ddd;"></span>';
 					html += '<input type="text" id="lw-preview-color-primary" value="' + escapeHtml(colors.text_primary) + '" style="width: 100px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;" placeholder="テキスト色">';
 					html += '</div>';
 				}
 				// サブテキスト色
 				if (colors.text_secondary) {
 					html += '<div style="display: flex; align-items: center; gap: 5px;">';
-					html += '<span style="width: 24px; height: 24px; border-radius: 4px; background: ' + colors.text_secondary + '; border: 1px solid #ddd;"></span>';
+					html += '<span style="width: 24px; height: 24px; border-radius: 4px; background: ' + escapeHtml(colors.text_secondary) + '; border: 1px solid #ddd;"></span>';
 					html += '<input type="text" id="lw-preview-color-secondary" value="' + escapeHtml(colors.text_secondary) + '" style="width: 100px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;" placeholder="サブテキスト">';
 					html += '</div>';
 				}
 				// アクセント色
 				if (colors.accent) {
 					html += '<div style="display: flex; align-items: center; gap: 5px;">';
-					html += '<span style="width: 24px; height: 24px; border-radius: 4px; background: ' + colors.accent + '; border: 1px solid #ddd;"></span>';
+					html += '<span style="width: 24px; height: 24px; border-radius: 4px; background: ' + escapeHtml(colors.accent) + '; border: 1px solid #ddd;"></span>';
 					html += '<input type="text" id="lw-preview-color-accent" value="' + escapeHtml(colors.accent) + '" style="width: 100px; padding: 5px; border: 1px solid #ddd; border-radius: 4px; font-size: 12px;" placeholder="アクセント">';
 					html += '</div>';
 				}
@@ -1617,7 +1618,11 @@ function lw_render_code_editor_metabox( $post ) {
 							}
 						}
 
-						$status.text(response.message || '生成完了！');
+						if (!response.html && !response.css && !response.js) {
+							$status.text('⚠️ 生成結果が空でした。もう一度お試しください');
+						} else {
+							$status.text(response.message || '生成完了！');
+						}
 						hidePreviewDialog();
 
 						// エディタをリフレッシュ
@@ -1692,7 +1697,11 @@ function lw_render_code_editor_metabox( $post ) {
 							}
 						}
 
-						$status.text(response.message || '生成完了！');
+						if (!response.html && !response.css && !response.js) {
+							$status.text('⚠️ 生成結果が空でした。もう一度お試しください');
+						} else {
+							$status.text(response.message || '生成完了！');
+						}
 
 						// エディタをリフレッシュ
 						setTimeout(function() {

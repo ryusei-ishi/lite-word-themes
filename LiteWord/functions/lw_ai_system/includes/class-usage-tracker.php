@@ -35,6 +35,16 @@ class LW_AI_Generator_Usage_Tracker {
             'input'  => 0.10,
             'output' => 0.40,
         ),
+        // 🔸 3.x の単価は暫定（公式単価が判明したら要更新）。行が無いと get_pricing() の
+        //    フォールバック（gemini-2.5-flash 単価）で集計されるため、近い旧世代の単価を暫定採用。
+        'gemini-3.5-flash' => array(
+            'input'  => 0.30,   // 暫定: 2.5-flash と同値
+            'output' => 2.50,   // 暫定
+        ),
+        'gemini-3.1-flash-lite' => array(
+            'input'  => 0.10,   // 暫定: 2.5-flash-lite と同値
+            'output' => 0.40,   // 暫定
+        ),
         'imagen-4.0' => array(
             'per_image' => 0.04,  // Imagen 4 標準は $0.04 per image（$0.03 は旧 Imagen 3 の価格）
         ),

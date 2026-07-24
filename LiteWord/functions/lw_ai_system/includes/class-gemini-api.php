@@ -52,6 +52,31 @@ class LW_AI_Generator_Gemini_API {
     const NO_IMAGE_PLACEHOLDER = 'https://placehold.co/800x600/e2e8f0/64748b?text=No+Image';
 
     /**
+     * マイパーツ / 参考画像分析で許可するモデル（モデル名はURLに直結するため許可リストで検証）。
+     * 2026-07-19 実測ベンチ（下記 get_default_model コメント参照）に基づく推奨セット:
+     *   推奨=gemini-3.5-flash（2.5-flash と同等品質で高速）/ 高速=gemini-3.1-flash-lite /
+     *   高品質=gemini-2.5-pro（3.x pro は未ベンチのため据え置き）。
+     * 旧 2.5 系（flash / flash-lite）は後方互換（保存済み設定・既存呼び出し）のため残す。
+     * 未知モデルは self::DEFAULT_MYPARTS_MODEL に降格する。
+     * 🚨 この定数を変えたら以下も必ず揃える:
+     *   - ドロップダウン: functions/lw_my_parts/code_editor.php（AIモデル select）
+     *   - REST 既定:      functions/lw_ai_system/includes/rest-api.php（myparts-generate の model 既定）
+     *   - 料金表:         functions/lw_ai_system/includes/class-usage-tracker.php（PRICING）
+     */
+    const ALLOWED_MYPARTS_MODELS = array(
+        'gemini-3.5-flash',
+        'gemini-3.1-flash-lite',
+        'gemini-2.5-pro',
+        'gemini-2.5-flash',
+        'gemini-2.5-flash-lite',
+    );
+
+    /**
+     * 許可リスト外だったときに降格する既定モデル（＝推奨モデル）。
+     */
+    const DEFAULT_MYPARTS_MODEL = 'gemini-3.5-flash';
+
+    /**
      * モデル名からAPIエンドポイントを取得
      *
      * @param string $model モデル名
@@ -74,8 +99,8 @@ class LW_AI_Generator_Gemini_API {
      *   gemini-3.5-flash       7,552ms / 10セクション / 5,066字  ← 速くて内容も同等
      *   gemini-3.1-flash-lite  4,092ms /  7セクション / 2,667字  ← 速いが構成が薄くなる
      *
-     * 既定は現行のまま（2.5-flash）にして後方互換を保つ。
-     * オプション lw_ai_generator_model で切り替えられる。
+     * 既定を gemini-3.5-flash に更新（2026-07-24・上記ベンチで 2.5-flash と同等品質かつ高速）。
+     * オプション lw_ai_generator_model で切り替えられる（保存済みの値があればそれが優先）。
      *
      * @return string モデル名
      */
@@ -83,7 +108,7 @@ class LW_AI_Generator_Gemini_API {
         $model = get_option( 'lw_ai_generator_model', '' );
 
         if ( ! is_string( $model ) || '' === trim( $model ) ) {
-            $model = 'gemini-2.5-flash';
+            $model = 'gemini-3.5-flash';
         }
 
         /**
@@ -3511,7 +3536,7 @@ PROMPT;
      * @param string $user_request ユーザーのリクエスト（コンテキスト用）
      * @return array|WP_Error 分析結果またはエラー
      */
-    public static function analyze_reference_image( $reference_image, $model = 'gemini-2.5-flash', $user_request = '' ) {
+    public static function analyze_reference_image( $reference_image, $model = self::DEFAULT_MYPARTS_MODEL, $user_request = '' ) {
         $api_key = self::get_api_key();
 
         if ( empty( $api_key ) ) {
@@ -3521,13 +3546,9 @@ PROMPT;
         // モデル名はURLに直結するため必ず許可リストで検証する。
         // generate_myparts 経由は検証済みだが、RESTの previewOnly 経路は
         // リクエストの model がそのままここへ届くので、この関数側でも守る。
-        $allowed_models = array(
-            'gemini-2.5-flash',
-            'gemini-2.5-pro',
-            'gemini-2.5-flash-lite',
-        );
-        if ( ! in_array( $model, $allowed_models, true ) ) {
-            $model = 'gemini-2.5-flash';
+        // 許可リストは self::ALLOWED_MYPARTS_MODELS に一本化（generate_myparts と共有）。
+        if ( ! in_array( $model, self::ALLOWED_MYPARTS_MODELS, true ) ) {
+            $model = self::DEFAULT_MYPARTS_MODEL;
         }
 
         // MIMEタイプを推測
@@ -5528,7 +5549,7 @@ PROMPT;
      * @param array|null $confirmed_analysis プレビューで確認済みの分析データ（省略時は新規分析）
      * @return array|WP_Error
      */
-    public static function generate_myparts( $user_request, $parts_type = '', $parts_number = 1, $model = 'gemini-2.5-flash', $reference_image = '', $current_code = null, $generate_images = false, $confirmed_analysis = null ) {
+    public static function generate_myparts( $user_request, $parts_type = '', $parts_number = 1, $model = self::DEFAULT_MYPARTS_MODEL, $reference_image = '', $current_code = null, $generate_images = false, $confirmed_analysis = null ) {
         self::debug_log( '[LW MyParts Gemini] generate_myparts() 開始' );
 
         $api_key = self::get_api_key();
@@ -5540,16 +5561,10 @@ PROMPT;
 
         self::debug_log( '[LW MyParts Gemini] APIキー: 設定済み' );
 
-        // 許可されたモデルのリスト
-        $allowed_models = array(
-            'gemini-2.5-flash',
-            'gemini-2.5-pro',
-            'gemini-2.5-flash-lite',
-        );
-
-        // モデル名のバリデーション
-        if ( ! in_array( $model, $allowed_models, true ) ) {
-            $model = 'gemini-2.5-flash'; // デフォルト
+        // モデル名のバリデーション（許可リストは self::ALLOWED_MYPARTS_MODELS に一本化・
+        // analyze_reference_image と共有。未知モデルは推奨モデルに降格）
+        if ( ! in_array( $model, self::ALLOWED_MYPARTS_MODELS, true ) ) {
+            $model = self::DEFAULT_MYPARTS_MODEL;
         }
 
         self::debug_log( '[LW MyParts Gemini] 使用モデル: ' . $model );
@@ -6056,40 +6071,49 @@ PROMPT;
             if ( preg_match_all( '/https?:\/\/picsum\.photos\/(\d+)\/(\d+)(?:\?random=\d+)?/', $all_content, $matches, PREG_SET_ORDER ) ) {
                 self::debug_log( '[LW MyParts Gemini] ステップ3: ' . count( $matches ) . '枚の画像を検出' );
 
-                foreach ( $matches as $index => $match ) {
+                // 収集: 先頭から最大3件のユニークな picsum URL のプロンプトを集める
+                // （API制限・時間を考慮して1回の生成は最大3枚まで＝旧実装の「最大3枚」を踏襲）。
+                // ※ 旧実装は「3成功するまで後続URLへフォールスルー」だったが、本実装は生成回数を
+                //    3に固定する（並列化＋コスト上限のため）。picsum が4枚以上かつ先頭が
+                //    Imagen/Gemini 両方で失敗する稀ケースでのみ置換枚数が減りうる。上限3枚の
+                //    意図は不変で、逐次リトライで過剰生成するより安全側と判断（意図的な差）。
+                $image_jobs = array(); // full_url => プロンプト
+                foreach ( $matches as $match ) {
                     $full_url = $match[0];
-                    $width = $match[1];
-                    $height = $match[2];
-
-                    // 画像のコンテキストを推測（分析結果とHTML周辺情報から）
+                    if ( isset( $image_jobs[ $full_url ] ) ) {
+                        continue; // 同一URLは1回だけ
+                    }
                     $image_context = self::build_image_prompt( $html_output, $full_url, $user_request, $image_analysis );
-
-                    // 色調ヒントがあれば追加
                     if ( ! empty( $color_hint ) ) {
                         $image_context .= ', ' . $color_hint;
                     }
-
-                    self::debug_log( '[LW MyParts Gemini] ステップ3: 画像' . ( $index + 1 ) . '生成中...' );
-                    self::debug_log( '[LW MyParts Gemini] - 画像プロンプト: ' . mb_substr( $image_context, 0, 150 ) );
-
-                    // AI画像を生成
-                    $generated_url = self::generate_image( $image_context );
-
-                    if ( ! is_wp_error( $generated_url ) && ! empty( $generated_url ) ) {
-                        // URLを置き換え（HTMLとCSS両方）
-                        $html_output = str_replace( $full_url, $generated_url, $html_output );
-                        $css_output = str_replace( $full_url, $generated_url, $css_output );
-                        $images_generated++;
-                        self::debug_log( '[LW MyParts Gemini] ステップ3: 画像' . ( $index + 1 ) . '生成成功' );
-                    } else {
-                        self::debug_log( '[LW MyParts Gemini] ステップ3: 画像' . ( $index + 1 ) . '生成失敗' );
-                    }
-
-                    // API制限を考慮して少し待機（最大3枚まで）
-                    if ( $images_generated >= 3 ) {
+                    $image_jobs[ $full_url ] = $image_context;
+                    if ( count( $image_jobs ) >= 3 ) {
                         break;
                     }
-                    usleep( 500000 ); // 0.5秒待機
+                }
+
+                // 並列生成（#112 の generate_images_batch を利用。チャンク分割・例外隔離・
+                // Imagen→Gemini フォールバックは内部で処理される。旧実装の1枚ずつ逐次＋usleep を置換）
+                if ( ! empty( $image_jobs ) ) {
+                    $job_urls    = array_keys( $image_jobs );
+                    $job_prompts = array_values( $image_jobs );
+                    self::debug_log( '[LW MyParts Gemini] ステップ3: ' . count( $job_prompts ) . '枚を並列生成...' );
+
+                    $generated_urls = self::generate_images_batch( $job_prompts );
+
+                    foreach ( $job_urls as $i => $full_url ) {
+                        $g = isset( $generated_urls[ $i ] ) ? $generated_urls[ $i ] : null;
+                        if ( is_string( $g ) && '' !== $g ) {
+                            // URLを置き換え（HTMLとCSS両方）
+                            $html_output = str_replace( $full_url, $g, $html_output );
+                            $css_output  = str_replace( $full_url, $g, $css_output );
+                            $images_generated++;
+                            self::debug_log( '[LW MyParts Gemini] ステップ3: 画像' . ( $i + 1 ) . '生成成功' );
+                        } else {
+                            self::debug_log( '[LW MyParts Gemini] ステップ3: 画像' . ( $i + 1 ) . '生成失敗' );
+                        }
+                    }
                 }
             } else {
                 self::debug_log( '[LW MyParts Gemini] ステップ3: picsum.photos URLなし - スキップ' );
