@@ -3,6 +3,12 @@ if ( !defined( 'ABSPATH' ) ) exit;
 
 //関数の読み込み
 get_template_part('./functions/mail_form/functions');
+//添付ファイルの流量制限（IP・回数・累積バイト）
+get_template_part('./functions/mail_form/upload_rate');
+//添付ファイルの形式判定（許可形式・サイズ上限・ファイル名）
+get_template_part('./functions/mail_form/upload_types');
+//添付ファイルの受理（許可キー・形状ガード・保存）
+get_template_part('./functions/mail_form/upload_guard');
 //ショートコードとしてフォームを表示
 get_template_part('./functions/mail_form/form_put');
 //送信処理

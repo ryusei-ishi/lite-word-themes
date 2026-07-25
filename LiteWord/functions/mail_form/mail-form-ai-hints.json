@@ -117,8 +117,8 @@
 				},
 				"image": {
 					"label": "画像アップロード",
-					"aiDescription": "画像ファイルのアップロードフィールド。JPEG/PNG/GIF対応。選択後に即座にプレビューが表示される。送信時はwp_handle_upload()でWordPressのuploadsディレクトリに保存され、URLが値として記録される。",
-					"htmlOutput": "<input type=\"file\" accept=\".jpg,.jpeg,.png,.gif,image/*\">",
+					"aiDescription": "画像・PDFのアップロードフィールド。JPEG/PNG/GIF/WebP/BMP/TIFF/HEIC/HEIF/AVIF と PDF に対応（ZIP・動画・Office文書は受け付けない）。1ファイル10MBまで（サーバーの上限がこれより小さい場合はそちらが優先）。選択後に即座にプレビューが表示される。送信時はwp_handle_upload()でWordPressのuploadsディレクトリに保存され、URLが値として記録される。実データを検証して許可形式以外は受理せず、その場合も送信自体は成功し「（添付ファイル「◯◯」は受理されませんでした：理由）」が値として記録される。",
+					"htmlOutput": "<input type=\"file\" accept=\".jpg,.jpeg,.png,.gif,.webp,.bmp,.tif,.tiff,.heic,.heif,.avif,.pdf,image/*\">",
 					"maxPreviewWidth": "480px"
 				},
 				"date": {

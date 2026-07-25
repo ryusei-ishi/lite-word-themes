@@ -247,7 +247,9 @@ foreach ( $form_data as $idx => $field ) :
 			<input type="file"
 			       class="lw_image_input"
 			       name="<?= esc_attr( $name_base ); ?>"
-			       accept=".jpg,.jpeg,.png,.gif,image/*"
+			       <?php /* accept はサーバ側の許可形式（画像＋PDF・upload_types.php）に合わせる。
+			                image/* は iOS/Android のカメラ・ギャラリー選択のために残す。 */ ?>
+			       accept=".jpg,.jpeg,.png,.gif,.webp,.bmp,.tif,.tiff,.heic,.heif,.avif,.pdf,image/*"
 			       <?= $req_attr; ?> >
 
 			

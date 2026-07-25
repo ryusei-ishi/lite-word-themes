@@ -39,6 +39,14 @@ function lw_mail_form_submit() {
 	$post_title  = $post_id ? get_the_title( $post_id )  : '';
 	$post_author = $post_id ? intval( get_post_field( 'post_author', $post_id ) ) : 0;
 
+	/* === 設定に保存してあるフォーム項目情報 ======================
+	 *  管理UIは JSON 文字列で保存するが、lw-remote-manager 経由で PHP 配列が入る
+	 *  こともあるため両対応のまま扱う（この分岐を削るとフォーム定義が読めなくなる）。
+	 *  添付ファイルの許可キー判定に使うので $_FILES の処理より前に読む。
+	 *----------------------------------------------------------------*/
+	$settings_raw = get_option( "lw_mail_form_set_{$form_set_no}", [] );
+	$settings     = is_string( $settings_raw ) ? json_decode( $settings_raw, true ) : $settings_raw;
+
 	/* === フォームデータを組み立て ================================ */
 	$form_array = [];
 
@@ -56,24 +64,31 @@ function lw_mail_form_submit() {
 		}
 	}
 
-	/* 3) アップロードされた画像ファイルを処理（任意） */
-	if ( ! empty( $_FILES ) ) {
-		require_once ABSPATH . 'wp-admin/includes/file.php';
-		foreach ( $_FILES as $key => $info ) {
-			if ( strpos( $key, 'form_' ) !== 0 || $info['error'] !== UPLOAD_ERR_OK ) continue;
-			$upload = wp_handle_upload( $info, [ 'test_form' => false ] );
-			if ( ! empty( $upload['url'] ) ) {
-				/* 画像 URL を値として保持（メール／履歴にそのまま出力可能） */
-				$form_array[ $key ] = $upload['url'];
-			}
-		}
+	/* form_data に配列以外のJSON（"abc" など）を入れられた場合の保険。
+	   これが無いと以降の配列操作が PHP 8 で fatal になる。 */
+	if ( ! is_array( $form_array ) ) {
+		$form_array = [];
 	}
 
-	if ( empty( $form_array ) || ! is_array( $form_array ) ) {
+	/* 3) 添付ファイル（画像アップロード欄）の受理 ==================
+	 *  🔒 処理順を「仕分け → 流量制限 → reCAPTCHA → 検証・保存」で固定する。
+	 *     添付付きリクエストで reCAPTCHA の外部通信（wp_remote_get・既定 timeout 5 秒）を
+	 *     先に消費させないため、流量制限を前に通す。
+	 *  🚨 受理できなくても送信自体は失敗させない（詳細 → upload_guard.php）。
+	 *----------------------------------------------------------------*/
+	$upload_plan    = lw_mail_form_collect_uploads( $settings );
+	$upload_blocked = ! empty( $upload_plan['files'] ) && ! lw_mail_form_upload_rate_ok();
+
+	/* 中身が何も無いリクエストはここで終わらせる（外部通信も保存もさせない） */
+	if ( empty( $form_array ) && empty( $upload_plan['files'] ) && empty( $upload_plan['rejects'] ) ) {
 		wp_send_json_error( [ 'message' => 'フォームデータが正しく送信されていません。' ] );
 	}
 
-	/* === reCAPTCHA（任意） === */
+	/* === reCAPTCHA（任意・既定OFF） ===
+	 *  🚨 必須化しないこと。lw_recaptcha_switch は既定「無効」で、can_use_recaptcha() は
+	 *     LINEアプリ内ブラウザでも false になる。必須化すると未設定サイトと LINE 経由の
+	 *     問い合わせが全部止まる。
+	 *----------------------------------------------------------------*/
 	if ( can_use_recaptcha() ) {
 		$token = isset( $_POST['g-recaptcha-response'] ) ? sanitize_text_field( $_POST['g-recaptcha-response'] ) : '';
 		if ( ! $token ) {
@@ -90,15 +105,24 @@ function lw_mail_form_submit() {
 		if ( empty( $body['success'] ) || ( isset( $body['score'] ) && $body['score'] < 0.5 ) ) {
 			wp_send_json_error( [ 'message' => 'reCAPTCHA の検証に失敗しました。' ] );
 		}
-		unset( $form_array['g-recaptcha-response'] );
 	}
 
-	/* === 不要キー削除 & サニタイズ === */
+	$form_array = lw_mail_form_store_uploads( $form_array, $upload_plan, $upload_blocked );
+
+	if ( empty( $form_array ) || ! is_array( $form_array ) ) {
+		wp_send_json_error( [ 'message' => 'フォームデータが正しく送信されていません。' ] );
+	}
+
+	/* === 不要キー削除 & サニタイズ ===
+	 *  g-recaptcha-response は reCAPTCHA が無効なサイトでも（旧 form_data 経路から）
+	 *  混入し得るため、条件を付けずここで削除する。
+	 *----------------------------------------------------------------*/
 	unset(
 		$form_array['lw_mail_nonce'],
 		$form_array['_wp_http_referer'],
 		$form_array['lw_mail_form_set_no'],
-		 $form_array['lw_current_post_id'] 
+		 $form_array['lw_current_post_id'] ,
+		$form_array['g-recaptcha-response']
 	);
 	$clean = [];
 	foreach ( $form_array as $k => $v ) {
@@ -107,18 +131,19 @@ function lw_mail_form_submit() {
 			: sanitize_textarea_field( $v );
 	}
 
-	/* === 設定に保存してあるフォーム項目情報 === */
-	$settings_raw = get_option( "lw_mail_form_set_{$form_set_no}", [] );
-	$settings     = is_string( $settings_raw ) ? json_decode( $settings_raw, true ) : $settings_raw;
-
-/* === 設定に保存してあるフォーム項目情報 === */
+/* === 設定に保存してあるフォーム項目情報（$settings は冒頭で読み込み済み） === */
 $label_map = [];
 $sc_map    = [];
 
 if ( is_array( $settings ) ) {
 	foreach ( $settings as $idx => $st ) {
 
-		$fname = 'form_' . ( $idx + 1 );   // form_1 / form_2 …
+		/* 非数値キー（不正な option）に算術を掛けると PHP 8 で TypeError＝fatal になる */
+		if ( ! is_int( $idx ) && ! preg_match( '/^[0-9]+$/', (string) $idx ) ) {
+			continue;
+		}
+
+		$fname = 'form_' . ( (int) $idx + 1 );   // form_1 / form_2 …
 
 		/* ---------- ラベル ---------- */
 		if ( ! empty( $st['label_text'] ) ) {
