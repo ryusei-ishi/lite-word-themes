@@ -28,6 +28,26 @@ function lw_ai_chat_proxy($request) {
 
     // ★ Phase 2: ページ生成意図の検出
     $page_action = lw_ai_chat_detect_page_generation( $question );
+
+    /* 🔒 ページ生成はプレミアム（14日試用を含む）限定。
+          チャットは無料でも使えるが、ここで契約状態を見ないと
+          「作るにゃ！」と案内してから REST 側で 403 になり、
+          利用者には「約束したのに失敗した」ようにしか見えない。
+          UIの他の導線（admin-ui.js・block-ai-sidebar.js・text-selection-ai.js）は
+          すべて isPremium でボタンを塞いでいるので、ここだけが素通りだった。 */
+    if ( $page_action && function_exists( 'lw_ai_system_has_subscription' ) && ! lw_ai_system_has_subscription() ) {
+        $answer  = "ページの自動生成はプレミアムプラン限定の機能だにゃ。\n\n";
+        $answer .= "14日間は無料でお試しできるにゃ！詳しくはこちらを見てにゃ。\n\n";
+        $answer .= "📖 **マニュアル**: [AIページ自動生成](https://lite-word.com/manual/ai-system/) / [無料・有料プランの違い](https://lite-word.com/manual/plans/)";
+
+        lw_ai_chat_save_local( $user_id, $question, $answer );
+
+        return array(
+            'answer'     => $answer,
+            'is_premium' => lw_ai_chat_is_premium(),
+        );
+    }
+
     if ( $page_action ) {
         // セッション進捗の確認
         $status = class_exists( 'LW_AI_Session_Manager' )

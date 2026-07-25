@@ -15,9 +15,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/generate', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_generate_with_ai',
-        'permission_callback' => function() {
-            return current_user_can( 'edit_posts' );
-        },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'prompt' => array(
                 'required'          => false,
@@ -43,9 +41,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/generate-interview', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_generate_interview',
-        'permission_callback' => function() {
-            return current_user_can( 'edit_posts' );
-        },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'prompt' => array(
                 'required'          => true,
@@ -59,9 +55,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/generate-outline', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_generate_outline',
-        'permission_callback' => function() {
-            return current_user_can( 'edit_posts' );
-        },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'prompt' => array(
                 'required'          => true,
@@ -87,9 +81,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/generate-section', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_generate_section',
-        'permission_callback' => function() {
-            return current_user_can( 'edit_posts' );
-        },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'sectionText' => array(
                 'required'          => true,
@@ -135,9 +127,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/generate-sample-answers', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_generate_sample_answers',
-        'permission_callback' => function() {
-            return current_user_can( 'edit_posts' );
-        },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'prompt' => array(
                 'required'          => true,
@@ -168,9 +158,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/optimize-block', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_optimize_block',
-        'permission_callback' => function() {
-            return current_user_can( 'edit_posts' );
-        },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'screenshot' => array(
                 'required'          => true,
@@ -198,9 +186,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/block-instruction', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_block_instruction',
-        'permission_callback' => function() {
-            return current_user_can( 'edit_posts' );
-        },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'blockName' => array( 'required' => true, 'type' => 'string' ),
             'currentAttributes' => array( 'required' => true, 'type' => 'object' ),
@@ -213,14 +199,14 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/usage-stats', array(
         'methods'             => 'GET',
         'callback'            => 'lw_ai_system_get_usage_stats',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
     ) );
 
     // 自動ハイライト
     register_rest_route( 'lw-ai-generator/v1', '/auto-highlight', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_auto_highlight',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'text' => array( 'required' => true, 'type' => 'string', 'sanitize_callback' => 'sanitize_textarea_field' ),
             'highlightStyle' => array( 'required' => false, 'type' => 'string', 'default' => 'marker' ),
@@ -231,7 +217,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/auto-highlight-multi', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_auto_highlight_multi',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'text' => array( 'required' => true, 'type' => 'string', 'sanitize_callback' => 'sanitize_textarea_field' ),
             'styles' => array( 'required' => true, 'type' => 'array' ),
@@ -242,7 +228,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/generate-text', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_generate_text',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'prompt' => array( 'required' => true, 'type' => 'string', 'sanitize_callback' => 'sanitize_textarea_field' ),
             'originalText' => array( 'required' => true, 'type' => 'string', 'sanitize_callback' => 'sanitize_textarea_field' ),
@@ -256,14 +242,14 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/custom-prompts', array(
         'methods'             => 'GET',
         'callback'            => 'lw_ai_system_get_custom_prompts',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
     ) );
 
     // カスタムプロンプト保存
     register_rest_route( 'lw-ai-generator/v1', '/custom-prompts', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_save_custom_prompt',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
         'args'                => array(
             'name' => array( 'required' => true, 'type' => 'string', 'sanitize_callback' => 'sanitize_text_field' ),
             'prompt' => array( 'required' => true, 'type' => 'string', 'sanitize_callback' => 'sanitize_textarea_field' ),
@@ -275,7 +261,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/custom-prompts/(?P<id>\d+)', array(
         'methods'             => 'DELETE',
         'callback'            => 'lw_ai_system_delete_custom_prompt',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
         'args'                => array( 'id' => array( 'required' => true, 'type' => 'integer' ) ),
     ) );
 
@@ -283,7 +269,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/custom-prompts/(?P<id>\d+)', array(
         'methods'             => 'PUT',
         'callback'            => 'lw_ai_system_update_custom_prompt',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
         'args'                => array(
             'id' => array( 'required' => true, 'type' => 'integer' ),
             'name' => array( 'required' => true, 'type' => 'string', 'sanitize_callback' => 'sanitize_text_field' ),
@@ -296,7 +282,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/check-typo', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_check_typo',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'blocks' => array( 'required' => true, 'type' => 'array' ),
         ),
@@ -306,7 +292,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/myparts-generate', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_myparts_generate',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'prompt' => array(
                 'required'          => true,
@@ -369,14 +355,14 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/saved-outlines', array(
         'methods'             => 'GET',
         'callback'            => 'lw_ai_system_get_saved_outlines',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
     ) );
 
     // パターン保存
     register_rest_route( 'lw-ai-generator/v1', '/saved-outlines', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_save_outline',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
         'args'                => array(
             'name' => array( 'required' => true, 'type' => 'string', 'sanitize_callback' => 'sanitize_text_field' ),
             'pageType' => array( 'required' => false, 'type' => 'string', 'sanitize_callback' => 'sanitize_text_field', 'default' => '' ),
@@ -392,7 +378,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/saved-outlines/(?P<id>[a-zA-Z0-9_-]+)', array(
         'methods'             => 'PUT',
         'callback'            => 'lw_ai_system_update_outline',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
         'args'                => array(
             'id' => array( 'required' => true, 'type' => 'string' ),
             'name' => array( 'required' => true, 'type' => 'string', 'sanitize_callback' => 'sanitize_text_field' ),
@@ -409,7 +395,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/saved-outlines/(?P<id>[a-zA-Z0-9_-]+)', array(
         'methods'             => 'DELETE',
         'callback'            => 'lw_ai_system_delete_outline',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
         'args'                => array( 'id' => array( 'required' => true, 'type' => 'string' ) ),
     ) );
 
@@ -417,14 +403,14 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/saved-sections', array(
         'methods'             => 'GET',
         'callback'            => 'lw_ai_system_get_saved_sections',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
     ) );
 
     // セクション保存
     register_rest_route( 'lw-ai-generator/v1', '/saved-sections', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_save_section',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
         'args'                => array(
             'name' => array( 'required' => true, 'type' => 'string', 'sanitize_callback' => 'sanitize_text_field' ),
             'type' => array( 'required' => true, 'type' => 'string', 'sanitize_callback' => 'sanitize_text_field' ),
@@ -436,7 +422,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/saved-sections/(?P<id>[a-zA-Z0-9_-]+)', array(
         'methods'             => 'DELETE',
         'callback'            => 'lw_ai_system_delete_section',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
         'args'                => array( 'id' => array( 'required' => true, 'type' => 'string' ) ),
     ) );
 
@@ -448,7 +434,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/select-parts', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_select_parts',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'sections' => array( 'required' => true, 'type' => 'array' ),
             'businessType' => array( 'required' => false, 'type' => 'string', 'default' => '' ),
@@ -459,7 +445,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/switch-part', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_switch_part',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'sectionType' => array( 'required' => true, 'type' => 'string', 'sanitize_callback' => 'sanitize_text_field' ),
             'newPart' => array( 'required' => true, 'type' => 'string', 'sanitize_callback' => 'sanitize_text_field' ),
@@ -476,7 +462,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/review-content', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_system_review_content',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'blocks' => array(
                 'required'    => true,
@@ -500,7 +486,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/sessions', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_session_create',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
         'args'                => array(
             'postId'           => array( 'type' => 'integer', 'default' => 0 ),
             'pageType'         => array( 'type' => 'string', 'default' => 'lp', 'sanitize_callback' => 'sanitize_text_field' ),
@@ -517,28 +503,28 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/sessions/(?P<id>\d+)', array(
         'methods'             => 'GET',
         'callback'            => 'lw_ai_session_get',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
     ) );
 
     // セッション一覧（直近5件）
     register_rest_route( 'lw-ai-generator/v1', '/sessions', array(
         'methods'             => 'GET',
         'callback'            => 'lw_ai_session_list',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
     ) );
 
     // セッション削除
     register_rest_route( 'lw-ai-generator/v1', '/sessions/(?P<id>\d+)', array(
         'methods'             => 'DELETE',
         'callback'            => 'lw_ai_session_delete',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
     ) );
 
     // セクション単体生成（前後文脈付き）
     register_rest_route( 'lw-ai-generator/v1', '/sessions/(?P<session_id>\d+)/sections/(?P<index>\d+)/generate', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_session_generate_section',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'selectedPart'     => array( 'type' => 'string', 'default' => '' ),
             'selectedPartType' => array( 'type' => 'string', 'default' => '' ),
@@ -549,21 +535,21 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/sessions/(?P<id>\d+)/blocks', array(
         'methods'             => 'GET',
         'callback'            => 'lw_ai_session_get_blocks',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
     ) );
 
     // セッション状況サマリー（AIチャット・ダッシュボードから確認用）
     register_rest_route( 'lw-ai-generator/v1', '/sessions/status', array(
         'methods'             => 'GET',
         'callback'            => 'lw_ai_session_status',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_manage_data',
     ) );
 
     // 次の未完了セクションを自動生成（AIキャラがトリガー）
     register_rest_route( 'lw-ai-generator/v1', '/sessions/(?P<id>\d+)/generate-next', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_session_generate_next',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_generate',
     ) );
 
     // ★ Phase 2: 一括ページ生成（チャットから呼び出し）
@@ -571,7 +557,7 @@ function lw_ai_system_register_rest_routes() {
     register_rest_route( 'lw-ai-generator/v1', '/generate-page', array(
         'methods'             => 'POST',
         'callback'            => 'lw_ai_generate_page',
-        'permission_callback' => function() { return current_user_can( 'edit_posts' ); },
+        'permission_callback' => 'lw_ai_system_can_generate',
         'args'                => array(
             'prompt'       => array( 'required' => true, 'type' => 'string', 'sanitize_callback' => 'sanitize_textarea_field' ),
             'pageType'     => array( 'type' => 'string', 'default' => 'lp', 'sanitize_callback' => 'sanitize_text_field' ),
@@ -587,6 +573,31 @@ add_action( 'rest_api_init', 'lw_ai_system_register_rest_routes' );
  * ========================================================= */
 
 function lw_ai_session_create( WP_REST_Request $request ) {
+
+    /* 🔒 セッションの新規作成は「生成の開始」なので、契約状態も確認する。
+          参照(GET)と削除(DELETE)は解約後も使えるようにするため対象外。 */
+    if ( ! lw_ai_system_has_subscription() ) {
+        return new WP_REST_Response( array(
+            'success' => false,
+            'code'    => 'lw_ai_premium_required',
+            'message' => 'AI生成機能はプレミアムプラン限定です。ご契約中の場合は、管理画面の「Lwデータ反映処理」から再度アクティベートしてください。',
+        ), 403 );
+    }
+
+    /* 🔒 ページ生成の日次上限をここでも確認する。
+          /generate-page は Step 0 で check_daily_limit() を通すが、
+          「/sessions で自分でセッションを作って /sessions/{id}/generate-next を繰り返す」
+          経路には上限が無く、日次上限を丸ごと回避できていた。
+          数えている単位はセッション行なので、作成の入口はここと /generate-page の2つだけ。 */
+    $rate_limit = LW_AI_Session_Manager::check_daily_limit();
+    if ( ! $rate_limit['allowed'] ) {
+        return new WP_REST_Response( array(
+            'success'   => false,
+            'message'   => '本日のページ生成上限（' . $rate_limit['limit'] . '回/日）に達しました。明日またお試しください。',
+            'rateLimit' => $rate_limit,
+        ), 429 );
+    }
+
     $session_id = LW_AI_Session_Manager::create_session( array(
         'post_id'           => $request->get_param( 'postId' ),
         'page_type'         => $request->get_param( 'pageType' ),

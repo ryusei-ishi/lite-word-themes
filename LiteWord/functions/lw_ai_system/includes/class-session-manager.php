@@ -691,8 +691,11 @@ class LW_AI_Session_Manager {
             );
         }
 
-        // 本日のセッション数をカウント（UTC日付ベース）
-        $today_start = gmdate( 'Y-m-d 00:00:00' );
+        // 本日のセッション数をカウント
+        // 🔒 created_at は current_time('mysql')＝サイトのタイムゾーンで入る（:140-141）ので、
+        //    比較もサイト時間に揃える。gmdate() だと時間系が混ざり、日本時間では
+        //    リセットが朝9時になり最大33時間分を数えてしまう（UTCマイナス圏では逆に上限が効かない）。
+        $today_start = current_time( 'Y-m-d 00:00:00' );
         $used = (int) $wpdb->get_var( $wpdb->prepare(
             "SELECT COUNT(*) FROM " . self::sessions_table() .
             " WHERE user_id = %d AND created_at >= %s",

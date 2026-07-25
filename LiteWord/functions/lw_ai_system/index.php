@@ -25,6 +25,8 @@ require_once LW_AI_SYSTEM_DIR . 'includes/class-admin-settings.php';
 require_once LW_AI_SYSTEM_DIR . 'includes/class-block-settings.php';
 require_once LW_AI_SYSTEM_DIR . 'includes/class-usage-tracker.php';
 require_once LW_AI_SYSTEM_DIR . 'includes/class-session-manager.php';
+// AI生成の権限・契約状態・回数上限（REST の permission_callback で使う）
+require_once LW_AI_SYSTEM_DIR . 'includes/access-control.php';
 
 // マーケティング知識ファイル読み込み
 require_once LW_AI_SYSTEM_DIR . 'marketing_materials/lp_default.php';
