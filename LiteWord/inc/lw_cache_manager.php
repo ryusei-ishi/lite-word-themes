@@ -241,7 +241,12 @@ class LW_Cache_Manager {
     private function lw_cache_fetch_html($url) {
         $response = wp_remote_get($url, array(
             'timeout' => 30,
-            'sslverify' => false,
+            // 🔒 取得したHTMLはキャッシュファイルとして全訪問者に配信されるため必ず検証する。
+            //    外すと MITM で差し込まれた内容がそのまま配信され続ける。
+            //    ※このクラスは現在どこからも読み込まれていない（実体は plugins/lw-cache）。
+            //      復活させる場合は自己リクエストになる点に注意（オリジンの証明書が不正な
+            //      環境ではキャッシュ生成が失敗する。その場合は取得元URLの見直しで対応する）。
+            'sslverify' => true,
             'headers' => array(
                 'User-Agent' => 'LiteWord-Cache-Generator'
             )

@@ -16,6 +16,26 @@ function lw_ai_chat_api_url() {
 }
 
 /**
+ * 外部への wp_remote_* で TLS 証明書を検証するか。
+ *
+ * 🔒 原則 true。検証を外すと MITM で
+ *   ・lite-word.com から取得したマニュアルHTMLを差し替えられ、wp-admin 上で管理者権限のXSSになる
+ *   ・Gemini API へのリクエストに載る API キーを傍受される
+ * ローカル開発（localhost）だけ例外にしている。以前は WP_DEBUG だけで判定していたため、
+ * 本番で WP_DEBUG を有効にしているサイトでも検証が外れていた。
+ *
+ * @return bool
+ */
+function lw_ai_chat_sslverify() {
+
+    if ( defined( 'WP_DEBUG' ) && WP_DEBUG && strpos( home_url(), 'localhost' ) !== false ) {
+        return false;
+    }
+
+    return true;
+}
+
+/**
  * サイトキーを取得（なければ生成して保存）
  */
 function lw_ai_chat_get_site_key() {

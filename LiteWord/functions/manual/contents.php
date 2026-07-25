@@ -995,7 +995,9 @@ function lw_manual_fetch_api_content($page_id, $post_type = 'page') {
             'Accept' => 'application/json',
         ),
         'cookies'     => array(),
-        'sslverify'   => false,
+        // 🔒 lite-word.com から取得した本文は wp-admin 上に描画されるため必ず検証する。
+        //    外すと MITM でマニュアルHTMLを差し替えられ、管理者権限のXSSになる。
+        'sslverify'   => true,
     );
     
     foreach ($endpoints as $url) {

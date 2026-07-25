@@ -71,7 +71,7 @@ function lw_ai_chat_call_gemini_local($api_key, $question, $history, $site_setti
             ],
         ]),
         'timeout'   => $is_pro ? 60 : 60,
-        'sslverify' => !defined('WP_DEBUG') || !WP_DEBUG,
+        'sslverify' => lw_ai_chat_sslverify(),
     ]);
 
     if (is_wp_error($response)) {
@@ -131,7 +131,7 @@ function lw_ai_chat_call_remote($question, $history, $honeypot) {
             'website'    => $honeypot,
         ]),
         'timeout'   => 35,
-        'sslverify' => !defined('WP_DEBUG') || !WP_DEBUG,
+        'sslverify' => lw_ai_chat_sslverify(),
     ]);
 
     if (is_wp_error($response)) {
@@ -239,7 +239,7 @@ function lw_ai_chat_get_manual_by_category($slugs) {
         $url = 'http://localhost/SUPPORT_LOUNGE/LiteWord/wp-json/lw-manual/v1/manual-content?slugs=' . urlencode($slug_str);
     }
 
-    $response = wp_remote_get($url, ['timeout' => 15, 'sslverify' => false]);
+    $response = wp_remote_get($url, ['timeout' => 15, 'sslverify' => lw_ai_chat_sslverify()]);
     if (is_wp_error($response)) return '';
 
     $content = json_decode(wp_remote_retrieve_body($response), true)['content'] ?? '';
@@ -291,7 +291,7 @@ function lw_ai_chat_get_manual_content() {
         $url = 'http://localhost/SUPPORT_LOUNGE/LiteWord/wp-json/lw-manual/v1/manual-content';
     }
 
-    $response = wp_remote_get($url, ['timeout' => 15, 'sslverify' => false]);
+    $response = wp_remote_get($url, ['timeout' => 15, 'sslverify' => lw_ai_chat_sslverify()]);
     if (is_wp_error($response)) return '';
 
     $content = json_decode(wp_remote_retrieve_body($response), true)['content'] ?? '';
