@@ -2344,10 +2344,31 @@ PROMPT;
 
         $image_count = count( $prompts );
 
-        if ( $image_count > 0 ) {
-            $generated = self::generate_images_batch( $prompts );
+        // 🔒 枚数の歯止め（1リクエスト上限／1日上限）。1枚 $0.04 かかるうえ、
+        //    ここまで来る枚数は「AIが返したブロックに画像スロットが何個あったか」で決まり
+        //    利用者が直接指定するものではないため、発火の直前で必ず絞る。
+        //    ⚠ 上限超過はエラーにしない。生成せずに元のプロンプトを残す＝「1枚が生成に
+        //      失敗した」のと同じ状態にして、ページ生成そのものは成功させる。
+        //    ⚠ 関数が無い環境（部分デプロイ等）では絞らず従来どおり動かす（fatal を作らない）。
+        //    ⚠ 数えるのは「発火した枚数」で、成功した枚数ではない。APIキーが無効なサイトでは
+        //      1枚も出来ないのに日次の枠を消費するが、成否を待って数えると失敗のたびに
+        //      何度でも再挑戦できて歯止めにならないため、確保が先で正しい（枠は翌日リセット）。
+        $allowed = function_exists( 'lw_ai_system_reserve_image_slots' )
+            ? lw_ai_system_reserve_image_slots( $image_count )
+            : $image_count;
+        $skipped_count = max( 0, $image_count - $allowed );
+        if ( $skipped_count > 0 ) {
+            error_log( '[LW AI Image] 枚数上限のため ' . $skipped_count . '枚を生成せずスキップ（要求 ' . $image_count . '枚 / 生成 ' . $allowed . '枚）' );
+        }
+
+        if ( $allowed > 0 ) {
+            // 上限までのプロンプトだけ発火する（$prompts / $targets は 0始まりの連番）
+            $generated = self::generate_images_batch( array_slice( $prompts, 0, $allowed, true ) );
 
             foreach ( $targets as $i => &$slot ) {
+                if ( $i >= $allowed ) {
+                    break; // 上限超過分。プロンプトを残したまま何もしない（失敗としても数えない）
+                }
                 $res = isset( $generated[ $i ] ) ? $generated[ $i ] : null;
                 if ( is_string( $res ) && '' !== $res ) {
                     // 生成成功: スロット（プロンプト）を 画像URL / data URI に置き換える
@@ -2370,6 +2391,7 @@ PROMPT;
             'image_stats' => array(
                 'success' => $success_count,
                 'fail'    => $fail_count,
+                'skipped' => $skipped_count, // 枚数上限に達して生成しなかった数（失敗ではない）
                 'total'   => $image_count,
             ),
         );
