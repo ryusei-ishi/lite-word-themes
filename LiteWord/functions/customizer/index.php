@@ -10,10 +10,12 @@ if(is_customize_preview()){
     get_template_part('./functions/customizer/font');
     //投稿ページ
     get_template_part('./functions/customizer/single_post');
+    get_template_part('./functions/customizer/single/ptn_short_code');
     //固定ページ
     get_template_part('./functions/customizer/page_post');
     //アーカイブページ
     get_template_part('./functions/customizer/archive_page');
+    get_template_part('./functions/customizer/archive/ptn_short_code');
     //ヘッダー
     get_template_part('./functions/customizer/header/header_set');
     get_template_part("./functions/customizer/header/ptn_1_set");
@@ -64,6 +66,10 @@ if(is_customize_preview()){
     //拡張機能
     if(LW_EXPANSION_BASE){
         get_template_part('./functions/customizer/lw_extensions');
+    }
+    //会員限定ページ（ログイン画面のデザイン・投稿のFVを残すか）
+    if(LW_EXPANSION_BASE){
+        get_template_part('./functions/customizer/membership');
     }
     //パンクズリスト
     get_template_part("./functions/customizer/lw_breadcrumb");

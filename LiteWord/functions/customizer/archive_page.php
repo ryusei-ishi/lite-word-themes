@@ -26,6 +26,7 @@ function archive_page_custom( $wp_customize ) {
             'ptn_2' => 'パターン2',
             'ptn_3' => 'パターン3',
             'ptn_4' => 'パターン4（プレミアム限定）',
+            'ptn_short_code' => 'ショートコード',
         ];
     }else{
         // 無料プランの場合
@@ -36,6 +37,7 @@ function archive_page_custom( $wp_customize ) {
             'ptn_2' => 'パターン2',
             'ptn_3' => 'パターン3',
             'ptn_4_invalid' => 'パターン4（プレミアム限定）',
+            'ptn_short_code' => 'ショートコード',
         ];
     }
     $pst_list_ptn_arr = [
@@ -44,7 +46,8 @@ function archive_page_custom( $wp_customize ) {
         'ptn_2' => 'パターン2',
         'ptn_3' => 'パターン3（お知らせ一覧用）',
         'ptn_4' => 'パターン4',
-       
+        'ptn_short_code' => 'ショートコード',
+
     ];
     $set_ttl = 'パターンの選択'; // セクションタイトル
     $sec = 'archive_page_ptn_sec'; // セクションID

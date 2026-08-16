@@ -65,7 +65,10 @@ function single_post_custom( $wp_customize ) {
     // コントロール
     $items = [
         [
-            ['radio', 'fv_ptn', '', 'FVパターンの選択', [''=>'パターン１', 'fv_ptn_2' => 'パターン２']],
+            ['radio', 'fv_ptn', '', 'FVパターンの選択', [''=>'パターン１', 'fv_ptn_2' => 'パターン２', 'fv_ptn_short_code' => 'ショートコード']],
+            // ↓「ショートコード」を選んだ時だけ出る入力欄。ラジオの直下に置きたいのでここで登録する。
+            //   出し分け（active_callback）とJSは functions/customizer/single/ptn_short_code.php にある
+            ['text', 'fv_ptn_short_code_put', '', 'ショートコードを入力してください'],
             ['radio', 'fv_category', '', 'カテゴリー', [''=>'表示', 'none' => '非表示']],
         ]
     ];
