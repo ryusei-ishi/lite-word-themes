@@ -1,0 +1,273 @@
+.lw_member_register.ptn_2 {
+  --member-accent: var(--color-main, #2f6fed);
+  --member-text: var(--color-text, #333333);
+  --member-muted: #6b7280;
+  --member-border: #dcdfe4;
+  --member-error: var(--color-red, #d34a4a);
+  padding: 48px 0 56px 0;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  box-sizing: border-box;
+}
+@media (max-width: 600px) {
+  .lw_member_register.ptn_2 {
+    padding: 32px 0 40px 0;
+  }
+}
+.lw_member_register.ptn_2 * {
+  box-sizing: border-box;
+}
+.lw_member_register.ptn_2 .admin_note {
+  padding: 16px 20px;
+  max-width: 480px;
+  width: 100%;
+  font-size: 14px;
+  line-height: 1.9;
+  color: var(--member-muted);
+  background: #f6f6f6;
+  border: 1px dashed var(--member-border);
+  border-radius: 6px;
+}
+.lw_member_register.ptn_2 .inner {
+  max-width: 480px;
+  width: 100%;
+  text-align: center;
+}
+.lw_member_register.ptn_2 .icon {
+  margin: 0 auto 24px auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--member-accent);
+}
+@media (max-width: 600px) {
+  .lw_member_register.ptn_2 .icon {
+    margin-bottom: 20px;
+  }
+}
+.lw_member_register.ptn_2 .title {
+  font-size: 22px;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 0.08em;
+  font-feature-settings: "palt";
+  color: var(--member-text);
+}
+@media (max-width: 600px) {
+  .lw_member_register.ptn_2 .title {
+    font-size: 19px;
+  }
+}
+.lw_member_register.ptn_2 .lead {
+  margin-top: 14px;
+  font-size: 14px;
+  line-height: 2;
+  font-feature-settings: "palt";
+  color: var(--member-muted);
+}
+@media (max-width: 600px) {
+  .lw_member_register.ptn_2 .lead {
+    font-size: 13px;
+  }
+}
+.lw_member_register.ptn_2 .error {
+  margin-top: 24px;
+  padding: 12px 16px;
+  font-size: 14px;
+  line-height: 1.6;
+  text-align: left;
+  color: var(--member-error);
+  background: color-mix(in srgb, var(--member-error) 8%, transparent);
+  border-radius: 6px;
+}
+.lw_member_register.ptn_2 .error p + p {
+  margin-top: 6px;
+}
+.lw_member_register.ptn_2 .form {
+  margin-top: 36px;
+  padding-top: 32px;
+  text-align: left;
+  border-top: 1px solid var(--member-border);
+}
+@media (max-width: 600px) {
+  .lw_member_register.ptn_2 .form {
+    margin-top: 28px;
+    padding-top: 24px;
+  }
+}
+.lw_member_register.ptn_2 .label {
+  margin-top: 24px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  color: var(--member-muted);
+}
+.lw_member_register.ptn_2 .label:first-of-type {
+  margin-top: 0;
+}
+.lw_member_register.ptn_2 .req {
+  padding: 2px 6px;
+  font-size: 10px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  color: #fff;
+  background: var(--member-error);
+  border-radius: 3px;
+}
+.lw_member_register.ptn_2 .input {
+  margin-top: 6px;
+  padding: 0 14px;
+  width: 100%;
+  height: 44px;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--member-text);
+  background: none;
+  border: none;
+  border-bottom: 1px solid var(--member-border);
+  border-radius: 0;
+  transition: border-color 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.lw_member_register.ptn_2 .input:focus {
+  outline: none;
+  border-bottom-color: var(--member-accent);
+}
+.lw_member_register.ptn_2 .textarea {
+  padding: 12px 14px;
+  height: auto;
+  min-height: 110px;
+  line-height: 1.8;
+  resize: vertical;
+  border: 1px solid var(--member-border);
+  border-radius: 6px;
+}
+.lw_member_register.ptn_2 .textarea:focus {
+  border-color: var(--member-accent);
+}
+.lw_member_register.ptn_2 .select {
+  padding: 0 10px;
+  -webkit-appearance: menulist;
+  appearance: menulist;
+}
+.lw_member_register.ptn_2 .code {
+  max-width: 260px;
+  font-size: 24px;
+  font-weight: 700;
+  letter-spacing: 0.4em;
+  text-align: center;
+  text-indent: 0.4em;
+}
+.lw_member_register.ptn_2 .field_error {
+  margin-top: 6px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--member-error);
+}
+.lw_member_register.ptn_2 .field_note {
+  margin-top: 6px;
+  font-size: 12px;
+  line-height: 1.7;
+  color: var(--member-muted);
+}
+.lw_member_register.ptn_2 .group_title {
+  margin-top: 32px;
+  font-size: 14px;
+  font-weight: 700;
+  line-height: 1.6;
+  letter-spacing: 0.04em;
+  color: var(--member-text);
+}
+.lw_member_register.ptn_2 .group_note {
+  margin-top: 8px;
+  font-size: 13px;
+  line-height: 1.8;
+  color: var(--member-muted);
+}
+.lw_member_register.ptn_2 .consent {
+  margin-top: 28px;
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+  font-size: 13px;
+  line-height: 1.7;
+  color: var(--member-text);
+  cursor: pointer;
+}
+.lw_member_register.ptn_2 .consent input {
+  margin-top: 3px;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+  accent-color: var(--member-accent);
+  cursor: pointer;
+}
+.lw_member_register.ptn_2 .consent a {
+  color: var(--member-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.lw_member_register.ptn_2 .note {
+  margin-top: 20px;
+  font-size: 12px;
+  line-height: 1.8;
+  color: var(--member-muted);
+}
+.lw_member_register.ptn_2 .submit {
+  margin-top: 28px;
+  padding: 0 20px;
+  width: 100%;
+  height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.4;
+  letter-spacing: 0.1em;
+  text-align: center;
+  text-decoration: none;
+  color: #fff;
+  background: var(--member-accent);
+  border: none;
+  border-radius: 999px;
+  cursor: pointer;
+  transition: opacity 0.2s, transform 0.2s;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.lw_member_register.ptn_2 .submit:hover {
+  opacity: 0.85;
+}
+.lw_member_register.ptn_2 .submit:active {
+  transform: translateY(1px);
+}
+.lw_member_register.ptn_2 .submit:focus-visible {
+  outline: 3px solid color-mix(in srgb, var(--member-accent) 40%, transparent);
+  outline-offset: 2px;
+}
+.lw_member_register.ptn_2 .actions {
+  margin-top: 24px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+}
+.lw_member_register.ptn_2 .link {
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--member-muted);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: color 0.2s;
+}
+.lw_member_register.ptn_2 .link:hover {
+  color: var(--member-accent);
+}

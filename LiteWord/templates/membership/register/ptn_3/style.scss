@@ -1,0 +1,309 @@
+// パターン3（横並び）
+// PCでは左に案内文・右にフォーム。900px以下で縦積みになる。
+// ⚠️ テーマの reset.css は要素を列挙する型で input / select / textarea を含まない。
+//    box-sizing はこの中で自分でかけている
+.lw_member_register.ptn_3 {
+    --member-accent: var(--color-main, #2f6fed);
+    --member-text: var(--color-text, #333333);
+    --member-muted: #6b7280;
+    --member-border: #dcdfe4;
+    --member-card-bg: #ffffff;
+    --member-error: var(--color-red, #d34a4a);
+    padding: 40px 0 48px 0;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    box-sizing: border-box;
+    @media (max-width: 600px) {
+        padding: 24px 0 32px 0;
+    }
+    *{
+        box-sizing: border-box;
+    }
+    .admin_note{
+        padding: 16px 20px;
+        max-width: 900px;
+        width: 100%;
+        font-size: 14px;
+        line-height: 1.9;
+        color: var(--member-muted);
+        background: #f6f6f6;
+        border: 1px dashed var(--member-border);
+        border-radius: 8px;
+    }
+    .card{
+        max-width: 900px;
+        width: 100%;
+        display: grid;
+        grid-template-columns: 5fr 7fr;
+        overflow: hidden;
+        background: var(--member-card-bg);
+        border: 1px solid var(--member-border);
+        border-radius: 14px;
+        box-shadow: 0 6px 28px rgba(0, 0, 0, 0.06);
+        @media (max-width: 900px) {
+            grid-template-columns: 1fr;
+        }
+        @media (max-width: 600px) {
+            border-radius: 12px;
+        }
+    }
+    // 左（スマホでは上）
+    // ⚠️ ログイン画面の同じパターンは justify-content:center だが、こちらは真似ない。
+    //    登録フォームはプロフィール項目まで出すと縦に長くなるので、中央寄せだと
+    //    左が青いだけの余白になって、案内文が画面外に外れる
+    .side{
+        padding: 48px 36px;
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        color: #fff;
+        background: var(--member-accent);
+        @media (max-width: 900px) {
+            padding: 36px 32px;
+            text-align: center;
+            align-items: center;
+        }
+        @media (max-width: 600px) {
+            padding: 32px 24px;
+        }
+    }
+    .icon{
+        margin-bottom: 20px;
+        width: 56px;
+        height: 56px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.18);
+        color: #fff;
+        @media (max-width: 600px) {
+            margin-bottom: 16px;
+            width: 50px;
+            height: 50px;
+        }
+    }
+    .side .title{
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1.5;
+        letter-spacing: 0.04em;
+        font-feature-settings: "palt";
+        color: #fff;
+        @media (max-width: 600px) {
+            font-size: 20px;
+        }
+    }
+    .side .lead{
+        margin-top: 14px;
+        font-size: 14px;
+        line-height: 1.9;
+        font-feature-settings: "palt";
+        color: rgba(255, 255, 255, 0.9);
+        @media (max-width: 600px) {
+            font-size: 13px;
+        }
+    }
+    // 右（スマホでは下）
+    .main{
+        padding: 48px 40px;
+        @media (max-width: 600px) {
+            padding: 32px 20px;
+        }
+    }
+    .main .lead{
+        font-size: 14px;
+        line-height: 1.9;
+        font-feature-settings: "palt";
+        color: var(--member-muted);
+        @media (max-width: 600px) {
+            font-size: 13px;
+        }
+    }
+    .error{
+        margin-bottom: 24px;
+        padding: 12px 16px;
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--member-error);
+        background: color-mix(in srgb, var(--member-error) 8%, transparent);
+        border: 1px solid color-mix(in srgb, var(--member-error) 30%, transparent);
+        border-radius: 8px;
+        p + p{
+            margin-top: 6px;
+        }
+    }
+    .label{
+        margin-top: 20px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 13px;
+        font-weight: 600;
+        line-height: 1.6;
+        color: var(--member-text);
+        &:first-of-type{
+            margin-top: 0;
+        }
+    }
+    .req{
+        padding: 2px 6px;
+        font-size: 11px;
+        font-weight: 700;
+        line-height: 1.4;
+        letter-spacing: 0.04em;
+        color: #fff;
+        background: var(--member-error);
+        border-radius: 3px;
+    }
+    .input{
+        margin-top: 8px;
+        padding: 0 14px;
+        width: 100%;
+        height: 50px;
+        font-size: 16px;
+        line-height: 1.6;
+        color: var(--member-text);
+        background: #fff;
+        border: 1px solid var(--member-border);
+        border-radius: 8px;
+        transition: border-color 0.2s, box-shadow 0.2s;
+        -webkit-appearance: none;
+        appearance: none;
+        &:focus{
+            outline: none;
+            border-color: var(--member-accent);
+            box-shadow: 0 0 0 3px color-mix(in srgb, var(--member-accent) 18%, transparent);
+        }
+    }
+    .textarea{
+        padding: 12px 14px;
+        height: auto;
+        min-height: 120px;
+        line-height: 1.8;
+        resize: vertical;
+    }
+    // 矢印が消えると選べることが伝わらないので、select だけ標準の見た目に戻す
+    .select{
+        padding: 0 10px;
+        -webkit-appearance: menulist;
+        appearance: menulist;
+    }
+    // 認証番号は6桁だけなので、間隔を空けて大きく見せる
+    .code{
+        max-width: 260px;
+        font-size: 24px;
+        font-weight: 700;
+        letter-spacing: 0.4em;
+        text-align: center;
+        text-indent: 0.4em;   // letter-spacing のぶん右にずれるのを戻す
+    }
+    .field_error{
+        margin-top: 6px;
+        font-size: 13px;
+        line-height: 1.6;
+        color: var(--member-error);
+    }
+    .field_note{
+        margin-top: 6px;
+        font-size: 12px;
+        line-height: 1.7;
+        color: var(--member-muted);
+    }
+    .group_title{
+        margin-top: 28px;
+        padding-bottom: 8px;
+        font-size: 15px;
+        font-weight: 700;
+        line-height: 1.6;
+        color: var(--member-text);
+        border-bottom: 1px solid var(--member-border);
+    }
+    .group_note{
+        margin-top: 8px;
+        font-size: 13px;
+        line-height: 1.8;
+        color: var(--member-muted);
+    }
+    .consent{
+        margin-top: 24px;
+        display: flex;
+        align-items: flex-start;
+        gap: 8px;
+        font-size: 14px;
+        line-height: 1.7;
+        color: var(--member-text);
+        cursor: pointer;
+        input{
+            margin-top: 3px;
+            width: 17px;
+            height: 17px;
+            flex-shrink: 0;
+            accent-color: var(--member-accent);
+            cursor: pointer;
+        }
+        a{
+            color: var(--member-accent);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+        }
+    }
+    .note{
+        margin-top: 20px;
+        font-size: 12px;
+        line-height: 1.8;
+        color: var(--member-muted);
+    }
+    .submit{
+        margin-top: 24px;
+        padding: 0 20px;
+        width: 100%;
+        height: 52px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 16px;
+        font-weight: 700;
+        line-height: 1.4;
+        letter-spacing: 0.06em;
+        text-align: center;
+        text-decoration: none;
+        color: #fff;
+        background: var(--member-accent);
+        border: none;
+        border-radius: 8px;
+        cursor: pointer;
+        transition: opacity 0.2s, transform 0.2s;
+        -webkit-appearance: none;
+        appearance: none;
+        &:hover{
+            opacity: 0.85;
+        }
+        &:active{
+            transform: translateY(1px);
+        }
+        &:focus-visible{
+            outline: 3px solid color-mix(in srgb, var(--member-accent) 40%, transparent);
+            outline-offset: 2px;
+        }
+    }
+    .actions{
+        margin-top: 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+    }
+    .link{
+        font-size: 14px;
+        line-height: 1.6;
+        color: var(--member-muted);
+        text-decoration: underline;
+        text-underline-offset: 3px;
+        transition: color 0.2s;
+        &:hover{
+            color: var(--member-accent);
+        }
+    }
+}
