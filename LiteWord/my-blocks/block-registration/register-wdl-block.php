@@ -112,8 +112,10 @@ function wdl_get_premium_blocks() {
 		"lw-pr-comment-2",
 		"lw-pr-comment-3",
 		"lw-pr-qa-2",
+		"lw-pr-qa-3",
 		"lw-pr-border-1",
 		"lw-pr-before-after-3",
+		"lw-pr-post-list-4",
 	];
 }
 

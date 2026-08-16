@@ -1,0 +1,109 @@
+// エディタ内には .lw_content_wrap（コンテナ）が無く @container が効かないので、
+// ブロック自身をコンテナにしてPC/スマホの切り替えを再現する
+[data-type="wdl/lw-pr-qa-3"] {
+  container-type: inline-size;
+}
+
+.wp-block-wdl-lw-pr-qa-3,
+[data-type="wdl/lw-pr-qa-3"] {
+  position: relative;
+  z-index: 10;
+  margin: 40px auto;
+  max-width: var(--qa3-max-w, 100%);
+  width: 100%;
+  box-sizing: border-box;
+  @container (max-width:700px) {
+    margin: 32px auto;
+  }
+  * {
+    box-sizing: border-box;
+  }
+
+  dl.qa-3__item {
+    margin: 0;
+    padding: var(--qa3-gap, 24px) 0;
+    border-bottom: 1px solid var(--qa3-line, #e0e0e0);
+    // 上端と下端には線を出さない（項目の「間」だけに引く）
+    &:first-of-type {
+      padding-top: 0;
+    }
+    &:last-of-type {
+      padding-bottom: 0;
+      border-bottom: none;
+    }
+
+    dt,
+    dd {
+      margin: 0;
+      padding: 0;
+      display: grid;
+      // ラベル幅を固定しているので、Q と A の本文の頭が必ず揃う
+      grid-template-columns: var(--qa3-label-w, 32px) 1fr;
+      // 文字サイズが違ってもラベルと本文の1行目のベースラインが揃う
+      align-items: baseline;
+    }
+    // 質問と回答の間隔。項目どうしの間隔の半分にして、Q と A のまとまりを保つ
+    dd {
+      margin-top: calc(var(--qa3-gap, 24px) / 2);
+    }
+
+    .label {
+      display: block;
+      line-height: 1.6em;
+      font-size: var(--qa3-label-size-pc, 18px);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      @container (max-width:700px) {
+        font-size: var(--qa3-label-size-sp, 16px);
+      }
+    }
+    dt .label {
+      color: var(--qa3-q-color, var(--color-main));
+    }
+    dd .label {
+      color: var(--qa3-a-color, var(--color-accent));
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      line-height: 1.8em;
+      font-feature-settings: "palt";
+      // 本文中のリンクはテーマ共通の見た目に合わせる
+      a {
+        text-decoration: underline;
+        color: var(--color-link-common, #06c);
+      }
+    }
+    p.qa-3__q_text {
+      line-height: 1.6em;
+      font-size: var(--qa3-q-size-pc, 17px);
+      // サイドバーの「太さ」が未選択のときの既定。質問だけ少し強くする
+      font-weight: 600;
+      @container (max-width:700px) {
+        font-size: var(--qa3-q-size-sp, 15px);
+      }
+    }
+    p.qa-3__a_text {
+      font-size: var(--qa3-a-size-pc, 15px);
+      @container (max-width:700px) {
+        font-size: var(--qa3-a-size-sp, 14px);
+      }
+    }
+  }
+}
+
+// ---- ここから下はエディタ専用（操作ボタン）。save() には出力されない ----
+[data-type="wdl/lw-pr-qa-3"] {
+  .qa-3__tools {
+    margin-top: 8px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+  .qa-3__add {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -1,0 +1,5 @@
+// ⚠️ このファイルは実質使われない。
+// block.json に editorStyle が無く、エディタ側は editor-dynamic-styles.js が
+// build/{block}/style.css だけを canvas(iframe) に注入する仕組みのため、
+// editor.css はどこからも enqueue されない。
+// エディタ専用の指定は style.scss の [data-type="wdl/lw-pr-qa-3"] 側に書くこと。

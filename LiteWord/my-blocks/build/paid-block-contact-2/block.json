@@ -58,6 +58,27 @@
 			"type": "number",
 			"default": 0.5
 		},
+		"textColor": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"inputBgColor": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"inputBorderColor": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
 		"requiredBgColor": {
 			"type": "string",
 			"default": "#da3838"

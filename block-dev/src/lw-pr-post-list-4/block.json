@@ -1,0 +1,41 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-post-list-4",
+	"version": "1.0.0",
+	"title": "投稿一覧 4（カードグリッド）",
+	"category": "lw-post",
+	"icon": "grid-view",
+	"description": "サムネイル付きカードをグリッドで並べる投稿一覧。日付+カテゴリ+タイトルのみのシンプル構成",
+	"editorScript": "file:./lw-pr-post-list-4.js",
+	"aiDescription": "サムネイル付きカードをグリッド状に並べる投稿一覧。日付・カテゴリ・タイトルのみのシンプルな構成で、お知らせ・新着情報セクションに最適。カラム数（2〜4）が選べ、背景画像と背景色（透明度つき）を付けると画面幅いっぱいの帯になる。",
+	"aiNotes": "動的ブロック。DBから投稿を取得して表示するためテキストコンテンツの生成は不要。抜粋は表示しない。背景画像の上に背景色を重ねる場合は透明度を下げる。",
+	"aiHint": {
+		"description": "投稿一覧カードグリッド。サムネイル+日付+カテゴリ+タイトル。お知らせ・新着情報に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["numberOfPosts", "categoryId"],
+		"imageAttributes": ["bgImage"],
+		"notes": "動的ブロック。DBから投稿を取得して表示。抜粋なし・タイトルは1行省略。bgImage は装飾用の背景画像で必須ではない"
+	},
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"numberOfPosts": {"type": "number", "default": 6},
+		"categoryId": {"type": "string", "default": ""},
+		"postType": {"type": "string", "default": "post"},
+		"columns": {"type": "number", "default": 3},
+		"bgImage": {"type": "string", "default": "", "aiHint": {"role": "image", "note": "背景画像URL。無くてもよい"}},
+		"bgColor": {"type": "string", "default": ""},
+		"bgOpacity": {"type": "number", "default": 100},
+		"dateFormat": {"type": "string", "default": "md_day"},
+		"dateFont": {"type": "string", "default": "Noto Sans JP"},
+		"dateFontWeight": {"type": "string", "default": "400"},
+		"catFont": {"type": "string", "default": "Noto Sans JP"},
+		"catFontWeight": {"type": "string", "default": "400"},
+		"catBgColor": {"type": "string", "default": "var(--color-main)"},
+		"titleFont": {"type": "string", "default": "Noto Sans JP"},
+		"titleFontWeight": {"type": "string", "default": "400"}
+	},
+	"no": 4
+}

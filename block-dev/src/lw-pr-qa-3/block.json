@@ -1,0 +1,127 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-qa-3",
+	"version": "1.0.0",
+	"title": "よくある質問 03",
+	"category": "lw-faq",
+	"icon": "editor-help",
+	"description": "開閉しないシンプルなよくある質問。Q と A を罫線区切りで縦に並べます。",
+	"aiHint": {
+		"description": "よくある質問（開閉なし）。QとAを罫線区切りで縦に並べる。最初から全部読ませたいFAQに",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["contents"],
+		"imageAttributes": []
+	},
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"maxWidth": {
+			"type": "number",
+			"default": 0
+		},
+		"itemGap": {
+			"type": "number",
+			"default": 24
+		},
+		"labelStyle": {
+			"type": "string",
+			"default": "plain"
+		},
+		"labelWidth": {
+			"type": "number",
+			"default": 32
+		},
+		"qLabelColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"aLabelColor": {
+			"type": "string",
+			"default": "var(--color-accent)"
+		},
+		"lineColor": {
+			"type": "string",
+			"default": "#e0e0e0"
+		},
+		"labelFont": {
+			"type": "string",
+			"default": "Roboto"
+		},
+		"labelFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"labelFontSizePc": {
+			"type": "number",
+			"default": 18
+		},
+		"labelFontSizeSp": {
+			"type": "number",
+			"default": 16
+		},
+		"textFont": {
+			"type": "string",
+			"default": ""
+		},
+		"qFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"aFontWeight": {
+			"type": "string",
+			"default": ""
+		},
+		"qFontSizePc": {
+			"type": "number",
+			"default": 17
+		},
+		"qFontSizeSp": {
+			"type": "number",
+			"default": 15
+		},
+		"aFontSizePc": {
+			"type": "number",
+			"default": 15
+		},
+		"aFontSizeSp": {
+			"type": "number",
+			"default": 14
+		},
+		"contents": {
+			"type": "array",
+			"source": "query",
+			"selector": ".qa-3__item",
+			"query": {
+				"text_q": {
+					"type": "string",
+					"source": "html",
+					"selector": ".qa-3__q_text"
+				},
+				"text_a": {
+					"type": "string",
+					"source": "html",
+					"selector": ".qa-3__a_text"
+				}
+			},
+			"default": [
+				{
+					"text_q": "質問テキストをここに入力します",
+					"text_a": "回答テキストをここに入力します。開閉しないので、読ませたい内容をそのまま書いてください。"
+				},
+				{
+					"text_q": "質問テキストをここに入力します",
+					"text_a": "回答テキストをここに入力します。開閉しないので、読ませたい内容をそのまま書いてください。"
+				},
+				{
+					"text_q": "質問テキストをここに入力します",
+					"text_a": "回答テキストをここに入力します。開閉しないので、読ませたい内容をそのまま書いてください。"
+				}
+			]
+		}
+	},
+	"editorScript": "file:./lw-pr-qa-3.js",
+	"no": 3
+}

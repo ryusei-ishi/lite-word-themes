@@ -38,7 +38,7 @@ module.exports = window["wp"]["components"];
   \*********************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-contact-2","version":"1.0.0","title":"お問合わせフォーム 02","category":"lw-contact","icon":"email","aiHint":{"description":"お問い合わせ（背景画像付き）。見出し+説明+フォーム表示","excludeFromAutoSelect":true,"contentAttributes":["mainTitle","subTitle","description"],"imageAttributes":["bgImageUrl","bgImageUrlSp"],"excludeReason":"フォームブロック。コンテンツ生成は見出し部分のみ"},"supports":{"anchor":true},"editorScript":"file:./paid-block-contact-2.js","no":2,"attributes":{"formId":{"type":"number","default":1},"mainTitle":{"type":"string","default":"CONTACT"},"subTitle":{"type":"string","default":"お問合わせフォーム"},"description":{"type":"string","default":"ご不明な点やご相談がございましたら、下記のお問い合わせフォームよりお気軽にご連絡ください。"},"bgImageUrl":{"type":"string","default":"https://lite-word.com/sample_img/background/6.webp"},"bgImageUrlSp":{"type":"string","default":""},"bgColor":{"type":"string","default":"#03294C"},"bgOpacity":{"type":"number","default":0.5},"requiredBgColor":{"type":"string","default":"#da3838"},"submitBgColor":{"type":"string","default":"#EE3131"},"mainTitleLevel":{"type":"string","default":"h1"},"maxWidth":{"type":"string","default":"800px"},"descriptionAlignPC":{"type":"string","default":"pc_center"},"descriptionAlignSP":{"type":"string","default":"sp_center"}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-contact-2","version":"1.0.0","title":"お問合わせフォーム 02","category":"lw-contact","icon":"email","aiHint":{"description":"お問い合わせ（背景画像付き）。見出し+説明+フォーム表示","excludeFromAutoSelect":true,"contentAttributes":["mainTitle","subTitle","description"],"imageAttributes":["bgImageUrl","bgImageUrlSp"],"excludeReason":"フォームブロック。コンテンツ生成は見出し部分のみ"},"supports":{"anchor":true},"editorScript":"file:./paid-block-contact-2.js","no":2,"attributes":{"formId":{"type":"number","default":1},"mainTitle":{"type":"string","default":"CONTACT"},"subTitle":{"type":"string","default":"お問合わせフォーム"},"description":{"type":"string","default":"ご不明な点やご相談がございましたら、下記のお問い合わせフォームよりお気軽にご連絡ください。"},"bgImageUrl":{"type":"string","default":"https://lite-word.com/sample_img/background/6.webp"},"bgImageUrlSp":{"type":"string","default":""},"bgColor":{"type":"string","default":"#03294C"},"bgOpacity":{"type":"number","default":0.5},"textColor":{"type":"string","default":"","aiHint":{"skip":true}},"inputBgColor":{"type":"string","default":"","aiHint":{"skip":true}},"inputBorderColor":{"type":"string","default":"","aiHint":{"skip":true}},"requiredBgColor":{"type":"string","default":"#da3838"},"submitBgColor":{"type":"string","default":"#EE3131"},"mainTitleLevel":{"type":"string","default":"h1"},"maxWidth":{"type":"string","default":"800px"},"descriptionAlignPC":{"type":"string","default":"pc_center"},"descriptionAlignSP":{"type":"string","default":"sp_center"}}}');
 
 /***/ })
 
@@ -154,6 +154,9 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       bgImageUrlSp = attributes.bgImageUrlSp,
       bgColor = attributes.bgColor,
       bgOpacity = attributes.bgOpacity,
+      textColor = attributes.textColor,
+      inputBgColor = attributes.inputBgColor,
+      inputBorderColor = attributes.inputBorderColor,
       requiredBgColor = attributes.requiredBgColor,
       submitBgColor = attributes.submitBgColor,
       mainTitleLevel = attributes.mainTitleLevel,
@@ -171,8 +174,21 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
     /* ─ RangeControl 用の数値化（未設定なら 0） ─ */
     var widthNumber = parseInt(maxWidth, 10) || 0;
+
+    /* ─ 色は CSS 変数で流し込む ─
+     * フォーム部分はショートコードで後から生成されるため、要素に直接 style を付けられない。
+     * ブロックのルートに変数を置けば、CSS 側（style.scss）で子孫までまとめて効かせられる。
+     * 未設定の変数は出力しない＝従来どおりの色（style.scss のフォールバック）になる。 */
+    var colorVars = {};
+    if (textColor) colorVars['--lw-contact2-text'] = textColor;
+    if (inputBgColor) colorVars['--lw-contact2-input-bg'] = inputBgColor;
+    /* 枠線は「値まるごと」を変数に入れる。未設定なら CSS 側の既定 none が効き、
+     * 1px 分もレイアウトが動かない（transparent を既定にするとズレる） */
+    if (inputBorderColor) colorVars['--lw-contact2-input-border'] = "1px solid ".concat(inputBorderColor);
+    var colorStyle = Object.keys(colorVars).length ? colorVars : undefined;
     var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
-      className: 'paid-block-contact-2'
+      className: 'paid-block-contact-2',
+      style: colorStyle
     });
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, {
       label: "\u898B\u51FA\u3057\u30EC\u30D9\u30EB"
@@ -310,6 +326,45 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       min: 0,
       max: 1,
       step: 0.05
+    }), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "\u6587\u5B57\u306E\u8272")), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: '-0.5em',
+        fontSize: '12px',
+        color: '#757575'
+      }
+    }, "\u30BF\u30A4\u30C8\u30EB\u30FB\u8AAC\u660E\u6587\u30FB\u9805\u76EE\u540D\u30FB\u88DC\u8DB3\u30FB\u540C\u610F\u6587\u304C\u307E\u3068\u3081\u3066\u5909\u308F\u308A\u307E\u3059\u3002\u80CC\u666F\u3092\u8584\u304F\u3057\u305F\u3068\u304D\u306F\u9ED2\u7CFB\u306B\u3057\u3066\u304F\u3060\u3055\u3044\u3002\u672A\u8A2D\u5B9A\u306F\u767D\u3067\u3059\u3002"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+      value: textColor,
+      onChange: function onChange(color) {
+        return setAttributes({
+          textColor: color || ''
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "\u5165\u529B\u6B04\u306E\u80CC\u666F\u8272")), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: '-0.5em',
+        fontSize: '12px',
+        color: '#757575'
+      }
+    }, "\u5165\u529B\u6B04\u30FB\u30D7\u30EB\u30C0\u30A6\u30F3\u30FB\u30E9\u30B8\u30AA\u30DC\u30BF\u30F3\u30FB\u30C1\u30A7\u30C3\u30AF\u30DC\u30C3\u30AF\u30B9\u306E\u80CC\u666F\u8272\u304C\u307E\u3068\u3081\u3066\u5909\u308F\u308A\u307E\u3059\u3002\u672A\u8A2D\u5B9A\u306F\u8584\u3044\u30B0\u30EC\u30FC\u306A\u306E\u3067\u3001\u80CC\u666F\u3092\u767D\u3063\u307D\u304F\u3059\u308B\u3068\u5165\u529B\u6B04\u304C\u898B\u3048\u306A\u304F\u306A\u308A\u307E\u3059\u3002"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+      value: inputBgColor,
+      onChange: function onChange(color) {
+        return setAttributes({
+          inputBgColor: color || ''
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "\u5165\u529B\u6B04\u306E\u67A0\u7DDA\u306E\u8272")), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: '-0.5em',
+        fontSize: '12px',
+        color: '#757575'
+      }
+    }, "\u5165\u529B\u6B04\u30FB\u30D7\u30EB\u30C0\u30A6\u30F3\u30FB\u30E9\u30B8\u30AA\u30DC\u30BF\u30F3\u30FB\u30C1\u30A7\u30C3\u30AF\u30DC\u30C3\u30AF\u30B9\u306E\u67A0\u7DDA\u304C\u307E\u3068\u3081\u3066\u5909\u308F\u308A\u307E\u3059\u3002\u672A\u8A2D\u5B9A\u306A\u3089\u5165\u529B\u6B04\u306F\u67A0\u7DDA\u306A\u3057\u3001\u30E9\u30B8\u30AA\u3068\u30C1\u30A7\u30C3\u30AF\u30DC\u30C3\u30AF\u30B9\u306F\u6587\u5B57\u306E\u8272\u306E\u67A0\u7DDA\u306B\u306A\u308A\u307E\u3059\u3002"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
+      value: inputBorderColor,
+      onChange: function onChange(color) {
+        return setAttributes({
+          inputBorderColor: color || ''
+        });
+      }
     }), /*#__PURE__*/React.createElement("p", null, /*#__PURE__*/React.createElement("strong", null, "\u5FC5\u9808\u30A2\u30A4\u30B3\u30F3\u306E\u80CC\u666F\u8272")), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: requiredBgColor,
       onChange: function onChange(color) {
@@ -450,6 +505,9 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       bgImageUrlSp = attributes.bgImageUrlSp,
       bgColor = attributes.bgColor,
       bgOpacity = attributes.bgOpacity,
+      textColor = attributes.textColor,
+      inputBgColor = attributes.inputBgColor,
+      inputBorderColor = attributes.inputBorderColor,
       requiredBgColor = attributes.requiredBgColor,
       submitBgColor = attributes.submitBgColor,
       mainTitleLevel = attributes.mainTitleLevel,
@@ -457,8 +515,16 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       descriptionAlignPC = attributes.descriptionAlignPC,
       descriptionAlignSP = attributes.descriptionAlignSP;
     var TagName = mainTitleLevel;
+
+    /* 色は CSS 変数で渡す。どれも未設定なら style を出力しない＝既存ブロックと同じ HTML になる */
+    var colorVars = {};
+    if (textColor) colorVars['--lw-contact2-text'] = textColor;
+    if (inputBgColor) colorVars['--lw-contact2-input-bg'] = inputBgColor;
+    if (inputBorderColor) colorVars['--lw-contact2-input-border'] = "1px solid ".concat(inputBorderColor);
+    var colorStyle = Object.keys(colorVars).length ? colorVars : undefined;
     var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-      className: 'paid-block-contact-2'
+      className: 'paid-block-contact-2',
+      style: colorStyle
     });
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
       className: "this_wrap",
@@ -500,7 +566,78 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
         display: 'block'
       }
     })))), /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t\t.submit_wrap button   { background-color: ".concat(submitBgColor, " !important; }\n\t\t\t\t\t.required.is-required { background-color: ").concat(requiredBgColor, " !important; }\n\t\t\t\t")));
-  }
+  },
+  /* ==================================================
+   * 旧バージョン（文字色を追加する前の save）
+   * 既に配置済みのブロックが「このブロックには問題があります」にならないよう残す。
+   * 文字色が未設定なら新しい save も同じHTMLを出すので通常こちらは使われないが、保険として置く。
+   * ================================================= */
+  deprecated: [{
+    apiVersion: _block_json__WEBPACK_IMPORTED_MODULE_3__.apiVersion,
+    attributes: _block_json__WEBPACK_IMPORTED_MODULE_3__.attributes,
+    supports: _block_json__WEBPACK_IMPORTED_MODULE_3__.supports,
+    save: function save(_ref5) {
+      var attributes = _ref5.attributes;
+      var formId = attributes.formId,
+        mainTitle = attributes.mainTitle,
+        subTitle = attributes.subTitle,
+        description = attributes.description,
+        bgImageUrl = attributes.bgImageUrl,
+        bgImageUrlSp = attributes.bgImageUrlSp,
+        bgColor = attributes.bgColor,
+        bgOpacity = attributes.bgOpacity,
+        requiredBgColor = attributes.requiredBgColor,
+        submitBgColor = attributes.submitBgColor,
+        mainTitleLevel = attributes.mainTitleLevel,
+        maxWidth = attributes.maxWidth,
+        descriptionAlignPC = attributes.descriptionAlignPC,
+        descriptionAlignSP = attributes.descriptionAlignSP;
+      var TagName = mainTitleLevel;
+      var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+        className: 'paid-block-contact-2'
+      });
+      return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
+        className: "this_wrap",
+        style: {
+          maxWidth: maxWidth
+        }
+      }, /*#__PURE__*/React.createElement(TagName, {
+        className: "title"
+      }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+        tagName: "span",
+        className: "main",
+        value: mainTitle
+      }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+        tagName: "span",
+        className: "sub",
+        value: subTitle
+      })), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+        tagName: "p",
+        className: "description ".concat(descriptionAlignPC, " ").concat(descriptionAlignSP),
+        value: description
+      }), "[lw_mail_form_select id='".concat(formId, "']"), /*#__PURE__*/React.createElement("div", {
+        className: "bg_filter"
+      }, /*#__PURE__*/React.createElement("div", {
+        className: "bg_filter_inner",
+        style: {
+          backgroundColor: bgColor,
+          opacity: bgOpacity
+        }
+      }), (bgImageUrl || bgImageUrlSp) && /*#__PURE__*/React.createElement("picture", null, /*#__PURE__*/React.createElement("source", {
+        srcSet: bgImageUrlSp,
+        media: "(max-width: 800px)"
+      }), /*#__PURE__*/React.createElement("source", {
+        srcSet: bgImageUrl,
+        media: "(min-width: 801px)"
+      }), /*#__PURE__*/React.createElement("img", {
+        src: bgImageUrl,
+        alt: "\u80CC\u666F\u753B\u50CF",
+        style: {
+          display: 'block'
+        }
+      })))), /*#__PURE__*/React.createElement("style", null, "\n\t\t\t\t\t\t\t.submit_wrap button   { background-color: ".concat(submitBgColor, " !important; }\n\t\t\t\t\t\t\t.required.is-required { background-color: ").concat(requiredBgColor, " !important; }\n\t\t\t\t\t\t")));
+    }
+  }]
 });
 /******/ })()
 ;

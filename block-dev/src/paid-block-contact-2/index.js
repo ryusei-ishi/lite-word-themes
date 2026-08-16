@@ -39,6 +39,9 @@ registerBlockType( metadata.name, {
 			bgImageUrlSp,
 			bgColor,
 			bgOpacity,
+			textColor,
+			inputBgColor,
+			inputBorderColor,
 			requiredBgColor,
 			submitBgColor,
 			mainTitleLevel,
@@ -54,8 +57,21 @@ registerBlockType( metadata.name, {
 		/* ─ RangeControl 用の数値化（未設定なら 0） ─ */
 		const widthNumber = parseInt( maxWidth, 10 ) || 0;
 
+		/* ─ 色は CSS 変数で流し込む ─
+		 * フォーム部分はショートコードで後から生成されるため、要素に直接 style を付けられない。
+		 * ブロックのルートに変数を置けば、CSS 側（style.scss）で子孫までまとめて効かせられる。
+		 * 未設定の変数は出力しない＝従来どおりの色（style.scss のフォールバック）になる。 */
+		const colorVars = {};
+		if ( textColor )    colorVars['--lw-contact2-text']     = textColor;
+		if ( inputBgColor ) colorVars['--lw-contact2-input-bg'] = inputBgColor;
+		/* 枠線は「値まるごと」を変数に入れる。未設定なら CSS 側の既定 none が効き、
+		 * 1px 分もレイアウトが動かない（transparent を既定にするとズレる） */
+		if ( inputBorderColor ) colorVars['--lw-contact2-input-border'] = `1px solid ${ inputBorderColor }`;
+		const colorStyle = Object.keys( colorVars ).length ? colorVars : undefined;
+
 		const blockProps = useBlockProps({
-			className: 'paid-block-contact-2'
+			className: 'paid-block-contact-2',
+			style: colorStyle,
 		});
 
 		return (
@@ -212,6 +228,36 @@ registerBlockType( metadata.name, {
 							step={ 0.05 }
 						/>
 
+						{/* 文字色（タイトル・説明文・項目名・補足・同意文をまとめて変更） */}
+						<p><strong>文字の色</strong></p>
+						<p style={ { marginTop:'-0.5em', fontSize:'12px', color:'#757575' } }>
+							タイトル・説明文・項目名・補足・同意文がまとめて変わります。背景を薄くしたときは黒系にしてください。未設定は白です。
+						</p>
+						<ColorPalette
+							value={ textColor }
+							onChange={ ( color ) => setAttributes( { textColor: color || '' } ) }
+						/>
+
+						{/* 入力欄の背景色（入力欄・プルダウン・ラジオ・チェックボックス共通） */}
+						<p><strong>入力欄の背景色</strong></p>
+						<p style={ { marginTop:'-0.5em', fontSize:'12px', color:'#757575' } }>
+							入力欄・プルダウン・ラジオボタン・チェックボックスの背景色がまとめて変わります。未設定は薄いグレーなので、背景を白っぽくすると入力欄が見えなくなります。
+						</p>
+						<ColorPalette
+							value={ inputBgColor }
+							onChange={ ( color ) => setAttributes( { inputBgColor: color || '' } ) }
+						/>
+
+						{/* 入力欄の枠線の色（入力欄・プルダウン・ラジオ・チェックボックス共通） */}
+						<p><strong>入力欄の枠線の色</strong></p>
+						<p style={ { marginTop:'-0.5em', fontSize:'12px', color:'#757575' } }>
+							入力欄・プルダウン・ラジオボタン・チェックボックスの枠線がまとめて変わります。未設定なら入力欄は枠線なし、ラジオとチェックボックスは文字の色の枠線になります。
+						</p>
+						<ColorPalette
+							value={ inputBorderColor }
+							onChange={ ( color ) => setAttributes( { inputBorderColor: color || '' } ) }
+						/>
+
 						{/* 必須アイコン背景色 */}
 						<p><strong>必須アイコンの背景色</strong></p>
 						<ColorPalette
@@ -337,6 +383,9 @@ registerBlockType( metadata.name, {
 			bgImageUrlSp,
 			bgColor,
 			bgOpacity,
+			textColor,
+			inputBgColor,
+			inputBorderColor,
 			requiredBgColor,
 			submitBgColor,
 			mainTitleLevel,
@@ -347,8 +396,16 @@ registerBlockType( metadata.name, {
 
 		const TagName = mainTitleLevel;
 
+		/* 色は CSS 変数で渡す。どれも未設定なら style を出力しない＝既存ブロックと同じ HTML になる */
+		const colorVars = {};
+		if ( textColor )    colorVars['--lw-contact2-text']     = textColor;
+		if ( inputBgColor ) colorVars['--lw-contact2-input-bg'] = inputBgColor;
+		if ( inputBorderColor ) colorVars['--lw-contact2-input-border'] = `1px solid ${ inputBorderColor }`;
+		const colorStyle = Object.keys( colorVars ).length ? colorVars : undefined;
+
 		const blockProps = useBlockProps.save({
-			className: 'paid-block-contact-2'
+			className: 'paid-block-contact-2',
+			style: colorStyle,
 		});
 
 		return (
@@ -397,4 +454,82 @@ registerBlockType( metadata.name, {
 			</div>
 		);
 	},
+
+	/* ==================================================
+	 * 旧バージョン（文字色を追加する前の save）
+	 * 既に配置済みのブロックが「このブロックには問題があります」にならないよう残す。
+	 * 文字色が未設定なら新しい save も同じHTMLを出すので通常こちらは使われないが、保険として置く。
+	 * ================================================= */
+	deprecated: [
+		{
+			apiVersion: metadata.apiVersion,
+			attributes: metadata.attributes,
+			supports  : metadata.supports,
+			save( { attributes } ) {
+				const {
+					formId,
+					mainTitle,
+					subTitle,
+					description,
+					bgImageUrl,
+					bgImageUrlSp,
+					bgColor,
+					bgOpacity,
+					requiredBgColor,
+					submitBgColor,
+					mainTitleLevel,
+					maxWidth,
+					descriptionAlignPC,
+					descriptionAlignSP,
+				} = attributes;
+
+				const TagName = mainTitleLevel;
+
+				const blockProps = useBlockProps.save({
+					className: 'paid-block-contact-2'
+				});
+
+				return (
+					<div {...blockProps}>
+						<div className="this_wrap" style={ { maxWidth } }>
+							<TagName className="title">
+								<RichText.Content tagName="span" className="main" value={ mainTitle } />
+								<RichText.Content tagName="span" className="sub"  value={ subTitle } />
+							</TagName>
+
+							<RichText.Content
+								tagName="p"
+								className={ `description ${ descriptionAlignPC } ${ descriptionAlignSP }` }
+								value={ description }
+							/>
+
+							{ `[lw_mail_form_select id='${ formId }']` }
+
+							<div className="bg_filter">
+								<div
+									className="bg_filter_inner"
+									style={ {
+										backgroundColor: bgColor,
+										opacity       : bgOpacity,
+									} }
+								/>
+								{ ( bgImageUrl || bgImageUrlSp ) && (
+									<picture>
+										<source srcSet={ bgImageUrlSp } media="(max-width: 800px)" />
+										<source srcSet={ bgImageUrl   } media="(min-width: 801px)" />
+										<img src={ bgImageUrl } alt="背景画像" style={ { display:'block' } } />
+									</picture>
+								) }
+							</div>
+						</div>
+
+						<style>{ `
+							.submit_wrap button   { background-color: ${ submitBgColor } !important; }
+							.required.is-required { background-color: ${ requiredBgColor } !important; }
+						` }</style>
+					</div>
+				);
+			},
+		},
+	],
 } );

@@ -198,6 +198,14 @@ function lw_block_arr() {
             'image' => $url . 'lw-news-list-1.webp',
             'description' => '',
         ],
+        [
+            'type' => 'pr_block',
+            'id' => 'lw-pr-post-list-4',
+            'title' => '最新投稿・記事一覧 04（カードグリッド）',
+            'file' => $url . 'lw-pr-post-list-4.php',
+            'image' => $url . 'lw-pr-post-list-4.webp',
+            'description' => 'サムネイル付きのカードをグリッドで並べる投稿一覧です。日付・カテゴリ・タイトルのみのシンプルな構成で、カラム数（2〜4）が選べます。背景色を設定すると画面幅いっぱいの帯になります。',
+        ],
            
         [
             'type' => 'h2',
@@ -606,6 +614,14 @@ function lw_block_arr() {
             'file' => $url . 'lw-qa-1.php',
             'image' => $url . 'lw-qa-1.webp',
             'description' => '',
+        ],
+        [
+            'type' => 'pr_block',
+            'id' => 'lw-pr-qa-3',
+            'title' => 'よくある質問 03',
+            'file' => $url . 'lw-pr-qa-3.php',
+            'image' => $url . 'lw-pr-qa-3.webp',
+            'description' => '開閉しないシンプルなよくある質問です。QとAを罫線区切りで縦に並べます。ラベルは Q / A のほか Q1・Q2 の連番も選べます。',
         ],
         [
             'type' => 'h2',

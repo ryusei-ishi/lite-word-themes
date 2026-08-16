@@ -1,0 +1,17 @@
+# 作業環境・OS が作るもの
+.claude/
+.vscode/
+.DS_Store
+Thumbs.db
+nul
+
+# 編集前の退避ファイル
+*.bak
+*.orig
+
+# 配布・退避用の zip
+# ⚠️ リリース成果物の LiteWord.zip は既に追跡済みなので、この指定の影響を受けない
+LiteWord_*.zip
+LiteWord 改善前.zip
+LiteWord__/
+block-dev/src_*.zip

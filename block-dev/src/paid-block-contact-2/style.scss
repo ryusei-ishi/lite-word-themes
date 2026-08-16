@@ -55,7 +55,7 @@
     margin: 0 auto;
     .title {
       text-align: center;
-      color: #fff;
+      color: var(--lw-contact2-text, #fff);
       span.main {
         display: block;
         font-size: 48px;
@@ -88,7 +88,7 @@
     p.description {
       margin-top: 2.5em;
       line-height: 2;
-      color: #fff;
+      color: var(--lw-contact2-text, #fff);
       text-align: center;
       font-size: 16px;
       @container (max-width: 600px) {
@@ -115,7 +115,7 @@
     .form_group {
       position: relative;
       padding: 24px 0;
-      color: #fff;
+      color: var(--lw-contact2-text, #fff);
       grid-template-columns: 270px calc(100% - 270px);
       @container (max-width: 800px) {
         padding: 16px 0;
@@ -130,7 +130,7 @@
           display: flex;
           justify-content: start;
           gap: 20px;
-          color: #fff;
+          color: var(--lw-contact2-text, #fff);
           .required {
             margin-top: 6px;
             padding: 6px;
@@ -152,7 +152,7 @@
           padding-left: 0;
         }
         .supplement_text{
-          color: #fff;
+          color: var(--lw-contact2-text, #fff);
         }
       }
       input[type="text"],
@@ -164,9 +164,10 @@
         padding: 0.8em 0.8em 0.6em 0.8em;
         line-height: 1.8em;
         width: 100%;
-        background: #f6f6f6;
+        background: var(--lw-contact2-input-bg, #f6f6f6);
         border-radius: 0;
-        border: none;
+        // 枠線は値ごと変数で受ける。未設定なら none のままなのでレイアウトが動かない
+        border: var(--lw-contact2-input-border, none);
         @container (max-width: 800px) {
           font-size: var(--font-size-post-df_tb);
         }
@@ -186,11 +187,12 @@
       select {
         padding: 1em 0.8em 0.8em 0.8em;
         border-radius: 0;
-        border: none;
+        border: var(--lw-contact2-input-border, none);
         appearance: none;
         -webkit-appearance: none;
         -moz-appearance: none;
-        background-color: #fff;
+        // 矢印アイコンを消さないよう background-color だけを差し替える
+        background-color: var(--lw-contact2-input-bg, #fff);
         background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 320 512'%3E%3Cpath d='M182.6 470.6c-12.5 12.5-32.8 12.5-45.3 0l-128-128c-9.2-9.2-11.9-22.9-6.9-34.9s16.6-19.8 29.6-19.8l256 0c12.9 0 24.6 7.8 29.6 19.8s2.2 25.7-6.9 34.9l-128 128z' fill='%234e4e4e'/%3E%3C/svg%3E");
         background-repeat: no-repeat;
         background-position: right 8px top 40%;
@@ -206,7 +208,7 @@
           cursor: pointer;
           + label {
             margin-top: 0 !important;
-            color: #fff;
+            color: var(--lw-contact2-text, #fff);
           }
           input {
             position: relative;
@@ -214,13 +216,14 @@
             width: 18px;
             height: 18px;
             accent-color: var(--color-main);
-            border: none;
             appearance: none;
             -webkit-appearance: none;
             -moz-appearance: none;
-            border: none;
+            // 入力欄と共通の指定があればそれに従い、無ければ文字色に連動した枠線で輪郭を出す
+            // （背景を薄くすると白い丸が背景に溶けて消えるため）
+            border: var(--lw-contact2-input-border, 1px solid var(--lw-contact2-text, #fff));
             outline: none;
-            background: #fff;
+            background: var(--lw-contact2-input-bg, #fff);
             border-radius: 50%;
             &:checked::before {
               position: absolute;
@@ -248,11 +251,12 @@
         -moz-appearance: none;
         width: 18px;
         height: 18px;
-        background-color: #f0f0f0; /* 未選択時の背景 */
+        background-color: var(--lw-contact2-input-bg, #f0f0f0); /* 未選択時の背景 */
         cursor: pointer;
         position: relative;
         outline: none;
-        border: none; /* ← ボーダーを完全に消す */
+        // 入力欄と共通の指定があればそれに従い、無ければ文字色に連動した枠線で輪郭を出す
+        border: var(--lw-contact2-input-border, 1px solid var(--lw-contact2-text, #fff));
         &:checked::after {
           content: "";
           position: absolute;
@@ -267,10 +271,10 @@
   }
   .consent_check_wrap {
     margin-top: 16px;
-    color: #fff;
+    color: var(--lw-contact2-text, #fff);
     p {
       a {
-        color: #fff;
+        color: var(--lw-contact2-text, #fff);
       }
     }
   }
