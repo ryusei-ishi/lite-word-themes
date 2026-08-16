@@ -96,6 +96,8 @@ get_template_part('./functions/lw_premium_login/popup');//ショップログイ�
 get_template_part('./functions/lw_ai_system/index');
 // AIチャットサポート（ダッシュボードポップアップ + REST APIプロキシ）
 get_template_part('./functions/lw_ai_chat/index');
+// カテゴリーの色（REST APIにカテゴリー色を乗せるため、is_admin()の外で読み込む必要がある）
+get_template_part('./functions/category_set/category_color');
 
 if(is_admin()){
     get_template_part('./functions/noscript_message');//JSを利用していない場合のメッセージ
