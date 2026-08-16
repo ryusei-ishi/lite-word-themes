@@ -1,5 +1,5 @@
 {
-    "version": "2.2.2",
-    "changelog": "WordPress7.0アップデートによって、編集画面の大幅なデザインの崩れを改善いたしました。",
-    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.2.2/LiteWord.zip"
+    "version": "2.3.0",
+    "changelog": "会員登録・権限（ロール）設定・カテゴリー単位の会員限定を追加しました。デザインブロックを2種類追加し、ファーストビューや投稿一覧をショートコードで差し替えられるようになりました。",
+    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.3.0/LiteWord.zip"
 }
