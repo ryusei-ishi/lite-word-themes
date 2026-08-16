@@ -6431,6 +6431,36 @@ PROMPT;
     // パーツ選択・最適化メソッド
     // ========================================
 
+    /** ブロック名 → block.json のパス。1リクエストで1回だけ作る */
+    private static $block_json_map = null;
+
+    /**
+     * ブロック名から block.json を探す（フォルダ名と一致しないブロック用）
+     *
+     * 通常は「ブロック名 = フォルダ名」なので呼ばれない。
+     * lw-button-01 / 02 / 03 のようにフォルダ名だけ 0 が付かないものがあるため、
+     * 素直なパスで見つからなかったときだけ全 block.json を読んで対応表を作る。
+     *
+     * @param string $block_name ブロック名（例: wdl/lw-button-01）
+     * @return string|null block.json のフルパス。無ければ null
+     */
+    private static function find_block_json_by_name( $block_name ) {
+
+        if ( self::$block_json_map === null ) {
+            self::$block_json_map = array();
+
+            $pattern = get_template_directory() . '/my-blocks/build/*/block.json';
+            foreach ( (array) glob( $pattern ) as $path ) {
+                $data = json_decode( (string) file_get_contents( $path ), true );
+                if ( is_array( $data ) && isset( $data['name'] ) ) {
+                    self::$block_json_map[ $data['name'] ] = $path;
+                }
+            }
+        }
+
+        return isset( self::$block_json_map[ $block_name ] ) ? self::$block_json_map[ $block_name ] : null;
+    }
+
     /**
      * ブロックのblock.jsonから属性情報を取得
      *
@@ -6445,8 +6475,15 @@ PROMPT;
         $block_json_path = get_template_directory() . '/my-blocks/build/' . $folder_name . '/block.json';
 
         if ( ! file_exists( $block_json_path ) ) {
-            error_log( '[LW AI] block.json not found: ' . $block_json_path );
-            return null;
+            // ⚠️ フォルダ名とブロック名が食い違うブロックがある
+            //    （wdl/lw-button-01 → フォルダは lw-button-1。02・03 も同じ）。
+            //    その場合だけ、全 block.json から名前で引き直す。
+            $block_json_path = self::find_block_json_by_name( $block_name );
+
+            if ( $block_json_path === null ) {
+                error_log( '[LW AI] block.json not found: ' . $block_name );
+                return null;
+            }
         }
 
         $json_content = file_get_contents( $block_json_path );

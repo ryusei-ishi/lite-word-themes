@@ -483,7 +483,10 @@ function ctm_font_family_arr(){
 }
 //jsに配列を渡す
 add_action('admin_enqueue_scripts', function() {
-    if (!get_current_screen()?->is_block_editor()) return;
+    // ⚠️ ?-> は PHP 8.0 以降の構文。このファイルは is_admin() の外から読み込まれるので、
+    //    使うと PHP 7.4 のサイトでフロントごと parse error になる（style.css は 7.4 を宣言している）。
+    $screen = get_current_screen();
+    if ( ! $screen || ! $screen->is_block_editor() ) return;
     
     $fonts = ctm_font_family_arr();
     $options = [];

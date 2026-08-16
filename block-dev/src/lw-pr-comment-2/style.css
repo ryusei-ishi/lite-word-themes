@@ -107,7 +107,7 @@
 }
 
 .lw-pr-comment-2 .lw-pr-comment-2__wrap .lw-pr-comment-2__text > p::before {
-  top: 20px;
+  top: var(--comment-2-triangle-top, 20%);
   left: -22px;
   width: 24px;
   height: 22px;
