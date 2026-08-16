@@ -51,8 +51,10 @@ function lw_membership_customizer( $wp_customize ) {
                 '会員（<strong>記事を書けない権限</strong>＝購読者や、購読者をベースに作った権限）に対して、'
                 . 'サイト上部の管理バーを出さず、<code>/wp-admin/</code> を開いてもトップページに戻します。<br>'
                 . '寄稿者・投稿者・編集者は記事を書くために管理画面が必要なので対象外です。<br>'
-                . '⚠️ OFFにすると、会員にもWordPressの管理画面が見えるようになります。',
-                ctm_switch_array( '入れない（既定）' ),
+                . '会員サイトとして使う場合はONにしてください。<br>'
+                . '⚠️ 既定は「入れる」です。ONにすると、会員は自分のプロフィール画面'
+                . '（メールアドレス・パスワードの変更）も開けなくなります。',
+                ctm_switch_array( '入れる（既定）' ),
             ],
         ],
         lw_membership_register_customizer_items(),
