@@ -78,11 +78,103 @@ function lw_get_term_allowed_roles_for( $term_id, $target ) {
 	return lw_get_term_allowed_roles( $term_id );
 }
 
+
+/* ---------------------------------------------------------------
+ * カテゴリーの階層（親から子への継承）
+ *
+ * 🚨 2026-08-20 に修正。それまでは「親の設定は子に継承しない」作りだったため、
+ *    親を会員限定にしても、子カテゴリーの一覧と、子だけに入れた投稿が
+ *    未ログインで丸ごと読めていた（実機で確認）。
+ *    WordPress は子カテゴリーに入れても親には自動で入らないので、
+ *    階層で整理した人ほど中身が全部公開になるという逆転が起きていた。
+ *
+ * 決め方は3つ。term meta `_lw_role_mode` に持つ。
+ *   'inherit' … 親の設定に従う（既定。メタを持たない状態がこれ）
+ *   'public'  … 制限しない。親が会員限定でも、このカテゴリーは全員が見られる
+ *   'custom'  … このカテゴリーで指定した権限だけ（`_lw_allowed_roles`）
+ *
+ * 探し方は「いちばん近い設定が勝つ」。自分から親へ順にたどり、
+ * public か custom が見つかった時点で打ち止め。誰も設定していなければ制限なし。
+ * ------------------------------------------------------------- */
+
+/**
+ * カテゴリーの閲覧権限の決め方
+ *
+ * ⚠️ 既存データ（`_lw_role_mode` を持たない）の扱い:
+ *    権限が入っていれば custom、入っていなければ inherit とみなす。
+ *    これにより、今まで制限をかけていたカテゴリーの挙動は変わらない。
+ *
+ * @param int $term_id
+ * @return string inherit|public|custom
+ */
+function lw_get_term_role_mode( $term_id ) {
+
+	$mode = (string) get_term_meta( $term_id, '_lw_role_mode', true );
+	if ( in_array( $mode, [ 'inherit', 'public', 'custom' ], true ) ) {
+		return $mode;
+	}
+	return lw_get_term_allowed_roles( $term_id ) ? 'custom' : 'inherit';
+}
+
+/**
+ * 親をたどって実際に効く閲覧権限を求める
+ *
+ * @param int    $term_id
+ * @param string $target 'single'（投稿）か 'archive'（カテゴリー一覧）
+ * @return array 空配列なら制限なし
+ */
+function lw_get_effective_term_roles( $term_id, $target ) {
+
+	$term_id = (int) $term_id;
+	if ( $term_id <= 0 ) {
+		return [];
+	}
+
+	$chain = array_merge( [ $term_id ], get_ancestors( $term_id, 'category' ) );
+
+	foreach ( $chain as $id ) {
+		$mode = lw_get_term_role_mode( $id );
+
+		if ( $mode === 'public' ) {
+			return [];   // ここで打ち止め。上の親が会員限定でも公開する
+		}
+		if ( $mode === 'custom' ) {
+			// 適用範囲（投稿だけ／一覧だけ）を踏まえて返す。
+			// 対象外なら空＝制限なし。ここで打ち止めにするのは
+			// 「いちばん近い設定が勝つ」を分かりやすく保つため。
+			return lw_get_term_allowed_roles_for( $id, $target );
+		}
+	}
+
+	return [];   // 自分も親も誰も設定していない
+}
+
+/**
+ * このカテゴリーが親から受け継いでいる設定（管理画面の表示用）
+ *
+ * @param int $term_id
+ * @return array{term_id:int,roles:array}|null 継いでいる元が無ければ null
+ */
+function lw_get_inherited_term_setting( $term_id ) {
+
+	foreach ( get_ancestors( (int) $term_id, 'category' ) as $id ) {
+		$mode = lw_get_term_role_mode( $id );
+		if ( $mode === 'public' ) {
+			return [ 'term_id' => $id, 'roles' => [] ];
+		}
+		if ( $mode === 'custom' ) {
+			return [ 'term_id' => $id, 'roles' => lw_get_term_allowed_roles( $id ) ];
+		}
+	}
+	return null;
+}
+
 /**
  * 投稿が属するカテゴリー側の閲覧権限（複数カテゴリーなら和集合）
  *
  * 1つでも設定のあるカテゴリーに属していれば制限がかかる。
- * ⚠️ 親カテゴリーの設定は継承しない（設定したカテゴリーそのものだけ）。
+ * ⚠️ 親カテゴリーの設定も継承する（2026-08-20〜）。いちばん近い設定が勝つ。
+ *    子で「制限しない」を選べば、親が会員限定でもそのカテゴリーは公開できる。
  * ⚠️ 適用範囲が「アーカイブだけ」のカテゴリーは、ここでは無視する。
  *
  * @param int $post_id
@@ -97,7 +189,7 @@ function lw_get_category_allowed_roles_for_post( $post_id ) {
 
 	$roles = [];
 	foreach ( $terms as $term ) {
-		$roles = array_merge( $roles, lw_get_term_allowed_roles_for( $term->term_id, 'single' ) );
+		$roles = array_merge( $roles, lw_get_effective_term_roles( $term->term_id, 'single' ) );
 	}
 
 	return lw_normalize_allowed_roles( $roles );

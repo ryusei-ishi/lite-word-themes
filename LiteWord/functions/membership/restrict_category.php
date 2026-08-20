@@ -21,26 +21,73 @@ if ( !defined( 'ABSPATH' ) ) exit;
 add_action( 'category_edit_form_fields', 'lw_add_category_view_role_field' );
 function lw_add_category_view_role_field( $term ) {
 
-	$saved = lw_get_term_allowed_roles( $term->term_id );
-	$roles = wp_roles()->roles;
+	$saved     = lw_get_term_allowed_roles( $term->term_id );
+	$mode      = lw_get_term_role_mode( $term->term_id );
+	$inherited = lw_get_inherited_term_setting( $term->term_id );
+	$roles     = wp_roles()->roles;
+
+	/* 「親を継ぐ」を選ぶと実際どうなるかを、その場で文章にして見せる */
+	if ( ! $inherited ) {
+		$inherit_note = '上に親カテゴリーが無いので、この場合は全員が見られます。';
+	} elseif ( empty( $inherited['roles'] ) ) {
+		$parent = get_term( $inherited['term_id'], 'category' );
+		$inherit_note = sprintf(
+			'いま継いでいるのは「%s」の<strong>制限しない</strong>設定です。全員が見られます。',
+			esc_html( $parent && ! is_wp_error( $parent ) ? $parent->name : '親カテゴリー' )
+		);
+	} else {
+		$parent = get_term( $inherited['term_id'], 'category' );
+		$all    = wp_roles()->roles;
+		$names  = array_map( function ( $key ) use ( $all ) {
+			return esc_html( translate_user_role( $all[ $key ]['name'] ?? $key ) );
+		}, $inherited['roles'] );
+		$inherit_note = sprintf(
+			'いま継いでいるのは「%s」の設定です（<strong>%s</strong>だけ閲覧可）。',
+			esc_html( $parent && ! is_wp_error( $parent ) ? $parent->name : '親カテゴリー' ),
+			implode( '・', $names )
+		);
+	}
 
 	wp_nonce_field( 'lw_category_view_role_save', 'lw_category_view_role_nonce' );
 	?>
 	<tr class="form-field">
 		<th scope="row"><label>観覧権限</label></th>
 		<td>
-			<p class="description" style="margin:0 0 8px;">
-				チェックを付けた権限だけ閲覧可（無選択なら全員可）。<br>
-				このカテゴリーの<strong>投稿</strong>と<strong>カテゴリー一覧ページ</strong>の両方に効きます。<br>
+			<p class="description" style="margin:0 0 10px;">
+				このカテゴリーの<strong>投稿</strong>と<strong>カテゴリー一覧ページ</strong>に効きます。<br>
 				投稿側の「観覧権限」が設定されている場合は、<strong>そちらが優先</strong>されます。
 			</p>
-			<?php foreach ( $roles as $role_key => $role_data ) : ?>
-				<label style="display:block;margin-bottom:4px;">
-					<input type="checkbox" name="lw_category_allowed_roles[]" value="<?php echo esc_attr( $role_key ); ?>"
-						<?php checked( in_array( $role_key, $saved, true ) ); ?>>
-					<?php echo esc_html( translate_user_role( $role_data['name'] ) ); ?>
-				</label>
-			<?php endforeach; ?>
+
+			<label style="display:block;margin-bottom:6px;">
+				<input type="radio" name="lw_category_role_mode" value="inherit" <?php checked( $mode, 'inherit' ); ?>>
+				<strong>親カテゴリーに従う</strong>（既定）
+			</label>
+			<p class="description" style="margin:-2px 0 10px 24px;"><?php echo wp_kses_post( $inherit_note ); ?></p>
+
+			<label style="display:block;margin-bottom:6px;">
+				<input type="radio" name="lw_category_role_mode" value="public" <?php checked( $mode, 'public' ); ?>>
+				<strong>制限しない</strong>（全員が見られる）
+			</label>
+			<p class="description" style="margin:-2px 0 10px 24px;">
+				親カテゴリーが会員限定でも、<strong>ここだけは公開</strong>にできます。
+			</p>
+
+			<label style="display:block;margin-bottom:6px;">
+				<input type="radio" name="lw_category_role_mode" value="custom" <?php checked( $mode, 'custom' ); ?>>
+				<strong>指定した権限だけ</strong>
+			</label>
+			<div style="margin:0 0 4px 24px;">
+				<?php foreach ( $roles as $role_key => $role_data ) : ?>
+					<label style="display:block;margin-bottom:4px;">
+						<input type="checkbox" name="lw_category_allowed_roles[]" value="<?php echo esc_attr( $role_key ); ?>"
+							<?php checked( in_array( $role_key, $saved, true ) ); ?>>
+						<?php echo esc_html( translate_user_role( $role_data['name'] ) ); ?>
+					</label>
+				<?php endforeach; ?>
+				<p class="description" style="margin:4px 0 0;">
+					1つもチェックしないまま保存すると「親カテゴリーに従う」に戻ります。
+				</p>
+			</div>
 		</td>
 	</tr>
 
@@ -82,14 +129,33 @@ function lw_save_category_view_role( $term_id ) {
 		return;
 	}
 
+	$mode = isset( $_POST['lw_category_role_mode'] ) ? sanitize_key( $_POST['lw_category_role_mode'] ) : 'inherit';
+	if ( ! in_array( $mode, [ 'inherit', 'public', 'custom' ], true ) ) {
+		$mode = 'inherit';
+	}
+
 	$roles = ( isset( $_POST['lw_category_allowed_roles'] ) && is_array( $_POST['lw_category_allowed_roles'] ) )
 		? array_values( array_filter( array_map( 'sanitize_key', $_POST['lw_category_allowed_roles'] ) ) )
 		: [];
 
-	if ( empty( $roles ) ) {
-		delete_term_meta( $term_id, '_lw_allowed_roles' );
-	} else {
+	// 「指定した権限だけ」を選んだのに1つもチェックが無い＝指定できていないので、親に従う扱いに戻す
+	if ( $mode === 'custom' && empty( $roles ) ) {
+		$mode = 'inherit';
+	}
+
+	if ( $mode === 'custom' ) {
 		update_term_meta( $term_id, '_lw_allowed_roles', $roles );
+		update_term_meta( $term_id, '_lw_role_mode', 'custom' );
+
+	} elseif ( $mode === 'public' ) {
+		// 親が会員限定でも、このカテゴリーは全員が見られる
+		delete_term_meta( $term_id, '_lw_allowed_roles' );
+		update_term_meta( $term_id, '_lw_role_mode', 'public' );
+
+	} else {
+		// 既定（親に従う）はメタを持たない
+		delete_term_meta( $term_id, '_lw_allowed_roles' );
+		delete_term_meta( $term_id, '_lw_role_mode' );
 	}
 
 	// 適用範囲（既定の both のときはメタを持たない）
@@ -123,15 +189,38 @@ function lw_render_category_view_role_column( $content, $column_name, $term_id )
 		return $content;
 	}
 
+	$all_roles = wp_roles()->roles;
+	$names_of  = function ( $keys ) use ( $all_roles ) {
+		return implode( ', ', array_map( function ( $key ) use ( $all_roles ) {
+			return esc_html( translate_user_role( $all_roles[ $key ]['name'] ?? $key ) );
+		}, $keys ) );
+	};
+
+	$mode = lw_get_term_role_mode( $term_id );
+
+	/* 親が会員限定でも、ここだけ公開しているケース */
+	if ( $mode === 'public' ) {
+		return '<span class="lw-role-label">制限しない</span>';
+	}
+
+	/* 親に従っているケース。何を継いでいるかまで出す */
+	if ( $mode === 'inherit' ) {
+		$inherited = lw_get_inherited_term_setting( $term_id );
+		if ( ! $inherited || empty( $inherited['roles'] ) ) {
+			return '<span class="lw-role-label">全員可</span>';
+		}
+		$parent = get_term( $inherited['term_id'], 'category' );
+		return $names_of( $inherited['roles'] )
+			. '<br><span style="color:#646970;">親「'
+			. esc_html( $parent && ! is_wp_error( $parent ) ? $parent->name : '?' )
+			. '」から継承</span>';
+	}
+
+	/* このカテゴリーで指定しているケース */
 	$roles = lw_get_term_allowed_roles( $term_id );
 	if ( empty( $roles ) ) {
 		return '<span class="lw-role-label">全員可</span>';
 	}
-
-	$all_roles = wp_roles()->roles;
-	$names = array_map( function ( $role_key ) use ( $all_roles ) {
-		return esc_html( translate_user_role( $all_roles[ $role_key ]['name'] ?? $role_key ) );
-	}, $roles );
 
 	$scope_label = [
 		'both'    => '',
@@ -140,5 +229,5 @@ function lw_render_category_view_role_column( $content, $column_name, $term_id )
 	];
 	$scope = lw_get_term_restrict_scope( $term_id );
 
-	return implode( ', ', $names ) . ( $scope_label[ $scope ] ?? '' );
+	return $names_of( $roles ) . ( $scope_label[ $scope ] ?? '' );
 }
