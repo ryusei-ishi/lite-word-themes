@@ -158,6 +158,7 @@ get_template_part('./functions/lw_page_template_insert/index');//LWページテ�
 get_template_part('./functions/custom_bloc_insert_system/index');//custom_bloc_insert_system
 get_template_part('./functions/page-setting-wizard/index');//page-setting-wizard
 get_template_part('./functions/code_page/index');//コーディング専用 完全白紙のページ
+get_template_part('./functions/lw_block_link_resolver/index');//ブロックのリンク先を固定ページID・カテゴリーIDから引き直す
 
 //ショップURL
 function lw_shop_url(){

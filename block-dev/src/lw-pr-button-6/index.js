@@ -22,6 +22,7 @@ import {
 } from "@wordpress/components";
 import metadata from "./block.json";
 import { fontOptionsArr, fontWeightOptionsArr } from "../utils.js";
+import { LinkPicker, lwLinkProps } from "../link-picker.js";
 
 /* フォントオプション */
 const fontOptions = fontOptionsArr();
@@ -84,9 +85,16 @@ registerBlockType(metadata.name, {
 			setAttributes({ button6Buttons: newButtons });
 		};
 
+		/* リンク設定のように複数の項目をまとめて更新する用 */
+		const updateButtonMany = (index, patch) => {
+			const newButtons = [...button6Buttons];
+			newButtons[index] = { ...newButtons[index], ...patch };
+			setAttributes({ button6Buttons: newButtons });
+		};
+
 		const addButton = () => {
 			setAttributes({
-				button6Buttons: [...button6Buttons, { text: "リンクテキスト", url: "", isBlank: false }],
+				button6Buttons: [...button6Buttons, { text: "リンクテキスト", linkType: "url", url: "", isBlank: false }],
 			});
 		};
 
@@ -182,11 +190,9 @@ registerBlockType(metadata.name, {
 										/>
 									</div>
 								</div>
-								<TextControl
-									label="URL"
-									value={button.url}
-									onChange={(v) => updateButton(index, "url", v)}
-									type="url"
+								<LinkPicker
+									link={button}
+									onChange={(patch) => updateButtonMany(index, patch)}
 								/>
 								<ToggleControl
 									label="新しいタブで開く"
@@ -614,13 +620,19 @@ registerBlockType(metadata.name, {
 		return (
 			<div {...blockProps}>
 				<div className="lw-pr-button-6__wrap" style={wrapStyle}>
-					{button6Buttons.map((button, index) => (
+					{button6Buttons.map((button, index) => {
+						/* リンク種別が url（＝既存のボタン全部）のときは data 属性が undefined になり、
+						   React が出力しないので、保存されるHTMLは従来と完全に同じになる */
+						const lp = lwLinkProps(button);
+						return (
 						<a
 							key={index}
-							href={button.url || "#"}
+							href={lp.href}
 							className="lw-pr-button-6__item"
 							target={button.isBlank ? "_blank" : undefined}
 							rel={button.isBlank ? "noopener noreferrer" : undefined}
+							data-lw-link-type={lp.linkType}
+							data-lw-link-id={lp.linkId}
 						>
 							<RichText.Content
 								tagName="div"
@@ -635,7 +647,8 @@ registerBlockType(metadata.name, {
 								</span>
 							)}
 						</a>
-					))}
+						);
+					})}
 				</div>
 			</div>
 		);
