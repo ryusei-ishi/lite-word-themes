@@ -496,8 +496,16 @@ function lw_get_integrated_template_configs() {
                     'templates' => []
                 ],
                 'professional' => [
-                    'label' => '士業（弁護士・税理士）',
-                    'templates' => []
+                    'label' => '士業（弁護士・税理士・行政書士）',
+                    'templates' => [
+                        [
+                            'name' => '行政書士事務所 トップページ',
+                            'description' => '許認可・相続・会社設立の相談を受ける行政書士事務所向け。<br>お悩み6つ／選ばれる6つの理由／解決事例3件／代表あいさつ／お知らせ／CTA',
+                            'preview_url' => '',
+                            'path' => 'page_template/gyoseishoshi/top_1/index.php',
+                            'public' => false,
+                        ],
+                    ]
                 ],
                 'medical' => [
                     'label' => '医療・クリニック',
