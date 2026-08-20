@@ -2,6 +2,273 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/link-picker.js":
+/*!****************************!*\
+  !*** ./src/link-picker.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   LinkPicker: () => (/* binding */ LinkPicker),
+/* harmony export */   linkTypeOptions: () => (/* binding */ linkTypeOptions),
+/* harmony export */   lwLinkFromAttrs: () => (/* binding */ lwLinkFromAttrs),
+/* harmony export */   lwLinkProps: () => (/* binding */ lwLinkProps),
+/* harmony export */   lwLinkPropsFromAttrs: () => (/* binding */ lwLinkPropsFromAttrs),
+/* harmony export */   lwLinkToAttrs: () => (/* binding */ lwLinkToAttrs),
+/* harmony export */   lwLinkType: () => (/* binding */ lwLinkType)
+/* harmony export */ });
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/**
+ * LiteWord – リンク先の指定（共通部品）
+ * ------------------------------------------------------------
+ *  URL の直接入力に加えて、固定ページ・カテゴリーを一覧から選べるようにする。
+ *  一覧は打ち込んだ文字で絞り込める（ページ数が多いサイト向け）。
+ *
+ *  🚨 設計の前提（ここを崩すと既存ページが壊れる）
+ *  ・ブロックは静的ブロックのまま。save の出力は変えない。
+ *    リンク種別が "url"（＝既存のボタン全部）のときは lwLinkProps が
+ *    data 属性を undefined で返すので、React が属性ごと出力しない。
+ *    ＝ 保存されるHTMLは今までと1バイトも変わらない。
+ *  ・固定ページ / カテゴリーを選んだときだけ data-lw-link-type / data-lw-link-id が付く。
+ *    実際のURLはフロントで render_block フィルタが引き直す
+ *    （functions/lw_block_link_resolver/index.php）。
+ *    そのため、あとでスラッグを変えてもリンクは古くならない。
+ *  ・href には選んだ時点のURLを焼いておく。フィルタが効かない場面でも飛べるようにするため。
+ *
+ *  🚨 一覧の取り方
+ *  ・全件取得（per_page:-1）はしない。固定ページが数百ある納品先で編集画面が固まるため。
+ *    打った文字をサーバーへ渡して検索し、上限 LIST_LIMIT 件だけ受け取る。
+ *  ・入力のたびに叩かないよう useDebouncedInput で待つ。
+ *  ・すでに選んである項目は、検索結果に含まれなくても名前が出るように単独で引く。
+ *
+ *  使い方（ブロック側）
+ *    import { LinkPicker, lwLinkProps } from "../link-picker.js";
+ *    edit: <LinkPicker link={button} onChange={(patch) => updateButtonMany(index, patch)} />
+ *    save: const lp = lwLinkProps(button);
+ *          <a href={lp.href} data-lw-link-type={lp.linkType} data-lw-link-id={lp.linkId}>
+ * ----------------------------------------------------------- */
+
+
+
+
+/** 一度に出す候補の数 */
+var LIST_LIMIT = 50;
+
+/** リンク種別 */
+var linkTypeOptions = [{
+  label: "URLを直接入力",
+  value: "url"
+}, {
+  label: "固定ページから選ぶ",
+  value: "page"
+}, {
+  label: "カテゴリーから選ぶ",
+  value: "category"
+}];
+
+/** 既存データ（linkType を持たないもの）は URL 指定として扱う */
+function lwLinkType(link) {
+  return link && link.linkType ? link.linkType : "url";
+}
+
+/**
+ * save で <a> に渡す値を作る。
+ * URL 指定のときは data 属性を undefined にして、従来どおりの出力に保つ。
+ */
+function lwLinkProps(link) {
+  var type = lwLinkType(link);
+  var href = link && link.url || "#";
+  if (type === "page" && link && link.pageId) {
+    return {
+      href: href,
+      linkType: "page",
+      linkId: String(link.pageId)
+    };
+  }
+  if (type === "category" && link && link.categoryId) {
+    return {
+      href: href,
+      linkType: "category",
+      linkId: String(link.categoryId)
+    };
+  }
+  return {
+    href: href,
+    linkType: undefined,
+    linkId: undefined
+  };
+}
+
+/** 編集画面のリンク設定UI */
+function LinkPicker(_ref) {
+  var link = _ref.link,
+    _onChange = _ref.onChange,
+    _ref$label = _ref.label,
+    label = _ref$label === void 0 ? "リンク先" : _ref$label;
+  var type = lwLinkType(link);
+  var isPage = type === "page";
+  var isCategory = type === "category";
+  var selectedId = isPage ? link && link.pageId || 0 : isCategory ? link && link.categoryId || 0 : 0;
+
+  /* 打ち込んだ文字。debounced のほうだけをサーバーへ渡す */
+  var _useDebouncedInput = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__.useDebouncedInput)(""),
+    _useDebouncedInput2 = _slicedToArray(_useDebouncedInput, 3),
+    search = _useDebouncedInput2[0],
+    setSearch = _useDebouncedInput2[1],
+    debouncedSearch = _useDebouncedInput2[2];
+  var _useSelect = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(function (select) {
+      var core = select("core");
+      if (!isPage && !isCategory) return {
+        records: [],
+        selected: null,
+        isLoading: false
+      };
+      var kind = isPage ? "postType" : "taxonomy";
+      var name = isPage ? "page" : "category";
+      var query = isPage ? {
+        per_page: LIST_LIMIT,
+        status: "publish",
+        orderby: "title",
+        order: "asc",
+        _fields: "id,title,link"
+      } : {
+        per_page: LIST_LIMIT,
+        orderby: "name",
+        order: "asc",
+        _fields: "id,name,link,count"
+      };
+      if (debouncedSearch) query.search = debouncedSearch;
+      return {
+        records: core.getEntityRecords(kind, name, query),
+        /* 選択済みの項目は検索結果に入らないことがあるので単独で引く */
+        selected: selectedId ? core.getEntityRecord(kind, name, selectedId) : null,
+        isLoading: !core.hasFinishedResolution("getEntityRecords", [kind, name, query])
+      };
+    }, [isPage, isCategory, debouncedSearch, selectedId]),
+    records = _useSelect.records,
+    selected = _useSelect.selected,
+    isLoading = _useSelect.isLoading;
+  var labelOf = function labelOf(r) {
+    if (!r) return "";
+    if (isPage) return r.title && (r.title.rendered || r.title) || "(無題)";
+    return r.name + "（" + (r.count !== undefined ? r.count + "件" : "") + "）";
+  };
+  var list = records || [];
+  var options = list.map(function (r) {
+    return {
+      label: labelOf(r) + "  #" + r.id,
+      value: String(r.id)
+    };
+  });
+  /* 選択済みが候補に無ければ先頭に足す（名前が消えないように） */
+  if (selectedId && selected && !options.some(function (o) {
+    return o.value === String(selectedId);
+  })) {
+    options.unshift({
+      label: labelOf(selected) + "  #" + selected.id,
+      value: String(selectedId)
+    });
+  }
+  var pick = function pick(v) {
+    var id = v ? Number(v) : 0;
+    var hit = list.find(function (r) {
+      return String(r.id) === String(v);
+    }) || (selected && String(selected.id) === String(v) ? selected : null);
+    var url = hit && hit.link ? hit.link : "";
+    _onChange(isPage ? {
+      pageId: id,
+      url: url
+    } : {
+      categoryId: id,
+      url: url
+    });
+  };
+  var listHelp = isLoading ? "読み込み中…" : list.length >= LIST_LIMIT ? "上位 " + LIST_LIMIT + " 件を表示しています。見つからないときは名前を打ち込んで絞り込んでください。" : debouncedSearch && list.length === 0 ? "見つかりませんでした。" : "名前の一部を打ち込むと絞り込めます。";
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.SelectControl, {
+    label: label,
+    value: type,
+    options: linkTypeOptions,
+    onChange: function onChange(v) {
+      return _onChange({
+        linkType: v
+      });
+    },
+    help: helpText(type)
+  }), type === "url" && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.TextControl, {
+    label: "URL",
+    value: link && link.url || "",
+    onChange: function onChange(v) {
+      return _onChange({
+        url: v
+      });
+    },
+    type: "url"
+  }), (isPage || isCategory) && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ComboboxControl, {
+    label: isPage ? "固定ページ" : "カテゴリー",
+    value: selectedId ? String(selectedId) : null,
+    options: options,
+    onChange: pick,
+    onFilterValueChange: setSearch,
+    help: listHelp,
+    allowReset: true
+  }));
+}
+
+/** 種別ごとの説明文 */
+function helpText(type) {
+  if (type === "page") return "選んだ固定ページのURLを自動で使います。あとでスラッグを変えても追従します。";
+  if (type === "category") return "選んだカテゴリーの一覧ページへリンクします。";
+  return "";
+}
+
+/* ──────────────────────────────────────────────────────────
+ * 平たい属性のブロック用のつなぎ
+ *   ボタン06 は配列の中に {linkType,url,pageId,categoryId} を持つが、
+ *   ほとんどのブロックは btnUrl / buttonUrl のように属性が平たく並んでいる。
+ *   その両方で同じ LinkPicker を使えるようにするための変換。
+ *
+ *   keys の例: { url: "btnUrl", type: "btnLinkType", page: "btnPageId", category: "btnCategoryId" }
+ * ────────────────────────────────────────────────────────── */
+
+/** 平たい属性 → LinkPicker が受け取る形 */
+function lwLinkFromAttrs(attributes, keys) {
+  return {
+    linkType: attributes[keys.type],
+    url: attributes[keys.url],
+    pageId: attributes[keys.page],
+    categoryId: attributes[keys.category]
+  };
+}
+
+/** LinkPicker が返す差分 → 平たい属性名に直す */
+function lwLinkToAttrs(patch, keys) {
+  var out = {};
+  if ("linkType" in patch) out[keys.type] = patch.linkType;
+  if ("url" in patch) out[keys.url] = patch.url;
+  if ("pageId" in patch) out[keys.page] = patch.pageId;
+  if ("categoryId" in patch) out[keys.category] = patch.categoryId;
+  return out;
+}
+
+/** 平たい属性から save 用の値を作る（lwLinkProps の平たい版） */
+function lwLinkPropsFromAttrs(attributes, keys) {
+  return lwLinkProps(lwLinkFromAttrs(attributes, keys));
+}
+
+/***/ }),
+
 /***/ "./src/lw-pr-button-5/index.js":
 /*!*************************************!*\
   !*** ./src/lw-pr-button-5/index.js ***!
@@ -19,6 +286,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/lw-pr-button-5/style.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-pr-button-5/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/lw-pr-button-5/block.json");
+/* harmony import */ var _link_picker_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../link-picker.js */ "./src/link-picker.js");
 
 
 
@@ -26,6 +294,15 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+var LINK_KEYS = {
+  url: 'btnUrl',
+  type: 'btnLinkType',
+  page: 'btnPageId',
+  category: 'btnCategoryId'
+};
 
 // オプション配列を定義
 var fontOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontOptionsArr)();
@@ -82,20 +359,11 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
       style: {
         marginBottom: '15px'
       }
-    }, /*#__PURE__*/React.createElement("p", {
-      style: {
-        fontWeight: 'bold',
-        marginBottom: '8px',
-        fontSize: '13px'
+    }, /*#__PURE__*/React.createElement(_link_picker_js__WEBPACK_IMPORTED_MODULE_7__.LinkPicker, {
+      link: (0,_link_picker_js__WEBPACK_IMPORTED_MODULE_7__.lwLinkFromAttrs)(attributes, LINK_KEYS),
+      onChange: function onChange(patch) {
+        return setAttributes((0,_link_picker_js__WEBPACK_IMPORTED_MODULE_7__.lwLinkToAttrs)(patch, LINK_KEYS));
       }
-    }, "\uD83D\uDD17 \u30EA\u30F3\u30AF\u5148URL"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.URLInput, {
-      value: btnUrl,
-      onChange: function onChange(newUrl) {
-        return setAttributes({
-          btnUrl: newUrl
-        });
-      },
-      help: "\u30DC\u30BF\u30F3\u3092\u30AF\u30EA\u30C3\u30AF\u3057\u305F\u6642\u306E\u79FB\u52D5\u5148URL\u3092\u5165\u529B\u3057\u3066\u304F\u3060\u3055\u3044"
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
       label: "\u65B0\u3057\u3044\u30BF\u30D6\u3067\u958B\u304F",
       checked: openNewTab,
@@ -596,7 +864,9 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
       className: wrapBtnClassName
     }, /*#__PURE__*/React.createElement("a", {
-      href: btnUrl || '#',
+      href: (0,_link_picker_js__WEBPACK_IMPORTED_MODULE_7__.lwLinkPropsFromAttrs)(attributes, LINK_KEYS).href,
+      "data-lw-link-type": (0,_link_picker_js__WEBPACK_IMPORTED_MODULE_7__.lwLinkPropsFromAttrs)(attributes, LINK_KEYS).linkType,
+      "data-lw-link-id": (0,_link_picker_js__WEBPACK_IMPORTED_MODULE_7__.lwLinkPropsFromAttrs)(attributes, LINK_KEYS).linkId,
       target: openNewTab ? '_blank' : undefined,
       rel: openNewTab ? 'noopener noreferrer' : undefined,
       className: "lw_btn_a ".concat(shakeAnimation ? "lw_btn_shake_".concat(shakeIntensity) : ''),
@@ -1329,13 +1599,33 @@ module.exports = window["wp"]["components"];
 
 /***/ }),
 
+/***/ "@wordpress/compose":
+/*!*********************************!*\
+  !*** external ["wp","compose"] ***!
+  \*********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["compose"];
+
+/***/ }),
+
+/***/ "@wordpress/data":
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["data"];
+
+/***/ }),
+
 /***/ "./src/lw-pr-button-5/block.json":
 /*!***************************************!*\
   !*** ./src/lw-pr-button-5/block.json ***!
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-button-5","version":"1.0.0","title":"PRボタン 05","category":"lw-button","icon":"download","description":"ダウンロード用プレミアムボタン","aiHint":{"description":"ダウンロードボタン（1段テキスト）。ダウンロードアイコン+テキスト。コンパクトなCTAに","excludeFromAutoSelect":false,"contentAttributes":["textMain","btnUrl"],"imageAttributes":[]},"supports":{"anchor":true,"className":true},"attributes":{"textMain":{"type":"string","default":"資料ダウンロードはこちら","aiHint":{"role":"button","contentGuide":"ボタンテキスト。5〜15文字","example":"カタログをダウンロード"}},"btnUrl":{"type":"string","default":"","aiHint":{"role":"url","contentGuide":"ダウンロードURL or ページURL"}},"openNewTab":{"type":"boolean","default":false,"aiHint":{"skip":true}},"btnAlign":{"type":"string","default":"center","aiHint":{"skip":true}},"btnAlignSp":{"type":"string","default":"default","aiHint":{"skip":true}},"bgColor":{"type":"string","default":"#e1a20e","aiHint":{"skip":true}},"bgColorHover":{"type":"string","default":"#c4880b","aiHint":{"skip":true}},"textColorMain":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"borderWidth":{"type":"number","default":0,"aiHint":{"skip":true}},"borderColor":{"type":"string","default":"#000000","aiHint":{"skip":true}},"borderRadius":{"type":"number","default":48,"aiHint":{"skip":true}},"iconMain":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z\\"/></svg>","aiHint":{"skip":true}},"iconMainColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"iconMainSize":{"type":"number","default":24,"aiHint":{"skip":true}},"iconMainMarginRight":{"type":"number","default":4,"aiHint":{"skip":true}},"FontSet":{"type":"string","default":"","aiHint":{"skip":true}},"fontWeight":{"type":"string","default":"500","aiHint":{"skip":true}},"fontSizeMain":{"type":"number","default":16,"aiHint":{"skip":true}},"fontSizeMainSp":{"type":"number","default":14,"aiHint":{"skip":true}},"paddingY":{"type":"number","default":0.6,"aiHint":{"skip":true}},"paddingX":{"type":"number","default":1.2,"aiHint":{"skip":true}},"transitionDuration":{"type":"number","default":0.3,"aiHint":{"skip":true}},"shakeAnimation":{"type":"boolean","default":false,"aiHint":{"skip":true}},"shakeInterval":{"type":"number","default":3,"aiHint":{"skip":true}},"shakeIntensity":{"type":"string","default":"normal","aiHint":{"skip":true}},"shadowX":{"type":"number","default":0,"aiHint":{"skip":true}},"shadowY":{"type":"number","default":0,"aiHint":{"skip":true}},"shadowBlur":{"type":"number","default":6,"aiHint":{"skip":true}},"shadowOpacity":{"type":"number","default":0.2,"aiHint":{"skip":true}}},"editorScript":"file:./lw-pr-button-5.js","no":5}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-button-5","version":"1.0.0","title":"PRボタン 05","category":"lw-button","icon":"download","description":"ダウンロード用プレミアムボタン","aiHint":{"description":"ダウンロードボタン（1段テキスト）。ダウンロードアイコン+テキスト。コンパクトなCTAに","excludeFromAutoSelect":false,"contentAttributes":["textMain","btnUrl"],"imageAttributes":[]},"supports":{"anchor":true,"className":true},"attributes":{"textMain":{"type":"string","default":"資料ダウンロードはこちら","aiHint":{"role":"button","contentGuide":"ボタンテキスト。5〜15文字","example":"カタログをダウンロード"}},"btnUrl":{"type":"string","default":"","aiHint":{"role":"url","contentGuide":"ダウンロードURL or ページURL"}},"openNewTab":{"type":"boolean","default":false,"aiHint":{"skip":true}},"btnAlign":{"type":"string","default":"center","aiHint":{"skip":true}},"btnAlignSp":{"type":"string","default":"default","aiHint":{"skip":true}},"bgColor":{"type":"string","default":"#e1a20e","aiHint":{"skip":true}},"bgColorHover":{"type":"string","default":"#c4880b","aiHint":{"skip":true}},"textColorMain":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"borderWidth":{"type":"number","default":0,"aiHint":{"skip":true}},"borderColor":{"type":"string","default":"#000000","aiHint":{"skip":true}},"borderRadius":{"type":"number","default":48,"aiHint":{"skip":true}},"iconMain":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z\\"/></svg>","aiHint":{"skip":true}},"iconMainColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"iconMainSize":{"type":"number","default":24,"aiHint":{"skip":true}},"iconMainMarginRight":{"type":"number","default":4,"aiHint":{"skip":true}},"FontSet":{"type":"string","default":"","aiHint":{"skip":true}},"fontWeight":{"type":"string","default":"500","aiHint":{"skip":true}},"fontSizeMain":{"type":"number","default":16,"aiHint":{"skip":true}},"fontSizeMainSp":{"type":"number","default":14,"aiHint":{"skip":true}},"paddingY":{"type":"number","default":0.6,"aiHint":{"skip":true}},"paddingX":{"type":"number","default":1.2,"aiHint":{"skip":true}},"transitionDuration":{"type":"number","default":0.3,"aiHint":{"skip":true}},"shakeAnimation":{"type":"boolean","default":false,"aiHint":{"skip":true}},"shakeInterval":{"type":"number","default":3,"aiHint":{"skip":true}},"shakeIntensity":{"type":"string","default":"normal","aiHint":{"skip":true}},"shadowX":{"type":"number","default":0,"aiHint":{"skip":true}},"shadowY":{"type":"number","default":0,"aiHint":{"skip":true}},"shadowBlur":{"type":"number","default":6,"aiHint":{"skip":true}},"shadowOpacity":{"type":"number","default":0.2,"aiHint":{"skip":true}},"btnLinkType":{"type":"string","default":"url"},"btnPageId":{"type":"number","default":0},"btnCategoryId":{"type":"number","default":0}},"editorScript":"file:./lw-pr-button-5.js","no":5}');
 
 /***/ })
 

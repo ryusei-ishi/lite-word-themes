@@ -25,6 +25,11 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 function lw_link_resolver_blocks() {
 	return apply_filters( 'lw_link_resolver_blocks', array(
 		'wdl/lw-pr-button-6',   // ボタン 06
+		'wdl/lw-pr-button-1',   // PRボタン 01
+		'wdl/lw-pr-button-2',   // PRボタン 02
+		'wdl/lw-pr-button-3',   // PRボタン 03
+		'wdl/lw-pr-button-4',   // PRボタン 04
+		'wdl/lw-pr-button-5',   // PRボタン 05
 	) );
 }
 

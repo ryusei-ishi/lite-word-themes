@@ -10,7 +10,11 @@
 	"aiHint": {
 		"description": "電話番号ボタン。電話アイコン+電話番号+受付時間。店舗系業種のCTAに",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["textMain", "textSub", "btnUrl"],
+		"contentAttributes": [
+			"textMain",
+			"textSub",
+			"btnUrl"
+		],
 		"imageAttributes": [],
 		"notes": "textMainは電話番号、btnUrlはtel:形式。IT・EC系には不向き"
 	},
@@ -22,56 +26,280 @@
 		"textMain": {
 			"type": "string",
 			"default": "0120-000-000",
-			"aiHint": { "role": "phone", "contentGuide": "電話番号。ハイフン付き", "example": "03-0000-0000" }
+			"aiHint": {
+				"role": "phone",
+				"contentGuide": "電話番号。ハイフン付き",
+				"example": "03-0000-0000"
+			}
 		},
 		"textSub": {
 			"type": "string",
 			"default": "受付時間 9:00〜18:00（土日祝除く）",
-			"aiHint": { "role": "body", "contentGuide": "受付時間・休業日", "example": "受付時間 10:00〜19:00（水曜定休）" }
+			"aiHint": {
+				"role": "body",
+				"contentGuide": "受付時間・休業日",
+				"example": "受付時間 10:00〜19:00（水曜定休）"
+			}
 		},
 		"btnUrl": {
 			"type": "string",
 			"default": "tel:0120000000",
-			"aiHint": { "role": "url", "contentGuide": "tel:電話番号（ハイフンなし）", "example": "tel:0300000000" }
+			"aiHint": {
+				"role": "url",
+				"contentGuide": "tel:電話番号（ハイフンなし）",
+				"example": "tel:0300000000"
+			}
 		},
 		"openNewTab": {
 			"type": "boolean",
 			"default": false,
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		},
-		"btnAlign": { "type": "string", "default": "center", "aiHint": { "skip": true } },
-		"btnAlignSp": { "type": "string", "default": "default", "aiHint": { "skip": true } },
-		"bgColor": { "type": "string", "default": "#09488c", "aiHint": { "skip": true } },
-		"bgColorHover": { "type": "string", "default": "#063366", "aiHint": { "skip": true } },
-		"textColorMain": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
-		"textColorSub": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
-		"borderWidth": { "type": "number", "default": 0, "aiHint": { "skip": true } },
-		"borderColor": { "type": "string", "default": "#000000", "aiHint": { "skip": true } },
-		"borderRadius": { "type": "number", "default": 2, "aiHint": { "skip": true } },
-		"iconMain": { "type": "string", "default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"><path d=\"M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z\"/></svg>", "aiHint": { "skip": true } },
-		"iconMainColor": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
-		"iconMainSize": { "type": "number", "default": 32, "aiHint": { "skip": true } },
-		"iconMainMarginRight": { "type": "number", "default": 8, "aiHint": { "skip": true } },
-		"iconMainMarginLeft": { "type": "number", "default": -8, "aiHint": { "skip": true } },
-		"FontSet": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"fontWeightMain": { "type": "string", "default": "500", "aiHint": { "skip": true } },
-		"fontWeightSub": { "type": "string", "default": "500", "aiHint": { "skip": true } },
-		"fontSizeMain": { "type": "number", "default": 28, "aiHint": { "skip": true } },
-		"fontSizeMainSp": { "type": "number", "default": 18, "aiHint": { "skip": true } },
-		"fontSizeSub": { "type": "number", "default": 14, "aiHint": { "skip": true } },
-		"letterSpacing": { "type": "number", "default": 0.05, "aiHint": { "skip": true } },
-		"maxWidth": { "type": "number", "default": 580, "aiHint": { "skip": true } },
-		"maxWidthSp": { "type": "number", "default": 480, "aiHint": { "skip": true } },
-		"paddingY": { "type": "number", "default": 1.2, "aiHint": { "skip": true } },
-		"paddingX": { "type": "number", "default": 1.5, "aiHint": { "skip": true } },
-		"transitionDuration": { "type": "number", "default": 0.3, "aiHint": { "skip": true } },
-		"shakeAnimation": { "type": "boolean", "default": false, "aiHint": { "skip": true } },
-		"shakeInterval": { "type": "number", "default": 3, "aiHint": { "skip": true } },
-		"shakeIntensity": { "type": "string", "default": "normal", "aiHint": { "skip": true } },
-		"shadowX": { "type": "number", "default": 0, "aiHint": { "skip": true } },
-		"shadowY": { "type": "number", "default": 0, "aiHint": { "skip": true } },
-		"shadowBlur": { "type": "number", "default": 6, "aiHint": { "skip": true } },
-		"shadowOpacity": { "type": "number", "default": 0.2, "aiHint": { "skip": true } }
+		"btnAlign": {
+			"type": "string",
+			"default": "center",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"btnAlignSp": {
+			"type": "string",
+			"default": "default",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"bgColor": {
+			"type": "string",
+			"default": "#09488c",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"bgColorHover": {
+			"type": "string",
+			"default": "#063366",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"textColorMain": {
+			"type": "string",
+			"default": "#ffffff",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"textColorSub": {
+			"type": "string",
+			"default": "#ffffff",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 0,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "#000000",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 2,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"iconMain": {
+			"type": "string",
+			"default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"><path d=\"M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z\"/></svg>",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"iconMainColor": {
+			"type": "string",
+			"default": "#ffffff",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"iconMainSize": {
+			"type": "number",
+			"default": 32,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"iconMainMarginRight": {
+			"type": "number",
+			"default": 8,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"iconMainMarginLeft": {
+			"type": "number",
+			"default": -8,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"FontSet": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontWeightMain": {
+			"type": "string",
+			"default": "500",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontWeightSub": {
+			"type": "string",
+			"default": "500",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontSizeMain": {
+			"type": "number",
+			"default": 28,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontSizeMainSp": {
+			"type": "number",
+			"default": 18,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontSizeSub": {
+			"type": "number",
+			"default": 14,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"letterSpacing": {
+			"type": "number",
+			"default": 0.05,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 580,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"maxWidthSp": {
+			"type": "number",
+			"default": 480,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"paddingY": {
+			"type": "number",
+			"default": 1.2,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"paddingX": {
+			"type": "number",
+			"default": 1.5,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"transitionDuration": {
+			"type": "number",
+			"default": 0.3,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"shakeAnimation": {
+			"type": "boolean",
+			"default": false,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"shakeInterval": {
+			"type": "number",
+			"default": 3,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"shakeIntensity": {
+			"type": "string",
+			"default": "normal",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"shadowX": {
+			"type": "number",
+			"default": 0,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"shadowY": {
+			"type": "number",
+			"default": 0,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"shadowBlur": {
+			"type": "number",
+			"default": 6,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"shadowOpacity": {
+			"type": "number",
+			"default": 0.2,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"btnLinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"btnPageId": {
+			"type": "number",
+			"default": 0
+		},
+		"btnCategoryId": {
+			"type": "number",
+			"default": 0
+		}
 	},
 	"editorScript": "file:./lw-pr-button-4.js",
 	"no": 4

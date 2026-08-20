@@ -12,7 +12,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony export */ __webpack_require__.d(__webpack_exports__, {
 /* harmony export */   LinkPicker: () => (/* binding */ LinkPicker),
 /* harmony export */   linkTypeOptions: () => (/* binding */ linkTypeOptions),
+/* harmony export */   lwLinkFromAttrs: () => (/* binding */ lwLinkFromAttrs),
 /* harmony export */   lwLinkProps: () => (/* binding */ lwLinkProps),
+/* harmony export */   lwLinkPropsFromAttrs: () => (/* binding */ lwLinkPropsFromAttrs),
+/* harmony export */   lwLinkToAttrs: () => (/* binding */ lwLinkToAttrs),
 /* harmony export */   lwLinkType: () => (/* binding */ lwLinkType)
 /* harmony export */ });
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
@@ -228,6 +231,40 @@ function helpText(type) {
   if (type === "page") return "選んだ固定ページのURLを自動で使います。あとでスラッグを変えても追従します。";
   if (type === "category") return "選んだカテゴリーの一覧ページへリンクします。";
   return "";
+}
+
+/* ──────────────────────────────────────────────────────────
+ * 平たい属性のブロック用のつなぎ
+ *   ボタン06 は配列の中に {linkType,url,pageId,categoryId} を持つが、
+ *   ほとんどのブロックは btnUrl / buttonUrl のように属性が平たく並んでいる。
+ *   その両方で同じ LinkPicker を使えるようにするための変換。
+ *
+ *   keys の例: { url: "btnUrl", type: "btnLinkType", page: "btnPageId", category: "btnCategoryId" }
+ * ────────────────────────────────────────────────────────── */
+
+/** 平たい属性 → LinkPicker が受け取る形 */
+function lwLinkFromAttrs(attributes, keys) {
+  return {
+    linkType: attributes[keys.type],
+    url: attributes[keys.url],
+    pageId: attributes[keys.page],
+    categoryId: attributes[keys.category]
+  };
+}
+
+/** LinkPicker が返す差分 → 平たい属性名に直す */
+function lwLinkToAttrs(patch, keys) {
+  var out = {};
+  if ("linkType" in patch) out[keys.type] = patch.linkType;
+  if ("url" in patch) out[keys.url] = patch.url;
+  if ("pageId" in patch) out[keys.page] = patch.pageId;
+  if ("categoryId" in patch) out[keys.category] = patch.categoryId;
+  return out;
+}
+
+/** 平たい属性から save 用の値を作る（lwLinkProps の平たい版） */
+function lwLinkPropsFromAttrs(attributes, keys) {
+  return lwLinkProps(lwLinkFromAttrs(attributes, keys));
 }
 
 /***/ }),

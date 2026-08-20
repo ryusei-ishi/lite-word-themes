@@ -22,6 +22,10 @@ import {
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS = { url: 'btnUrl', type: 'btnLinkType', page: 'btnPageId', category: 'btnCategoryId' };
 
 // オプション配列を定義
 const fontOptions = fontOptionsArr();
@@ -66,13 +70,9 @@ registerBlockType(metadata.name, {
                     {/* ── 1. 基本設定 ── */}
                     <PanelBody title="基本設定" initialOpen={true}>
                         <div style={{ marginBottom: '15px' }}>
-                            <p style={{ fontWeight: 'bold', marginBottom: '8px', fontSize: '13px' }}>
-                                🔗 リンク先URL
-                            </p>
-                            <URLInput
-                                value={btnUrl}
-                                onChange={(newUrl) => setAttributes({ btnUrl: newUrl })}
-                                help="ボタンをクリックした時の移動先URLを入力してください"
+                            <LinkPicker
+                                link={lwLinkFromAttrs(attributes, LINK_KEYS)}
+                                onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}
                             />
                         </div>
                         
@@ -599,7 +599,9 @@ registerBlockType(metadata.name, {
             <div {...blockProps}>
                 <div className={wrapBtnClassName}>
                     <a 
-                        href={btnUrl || '#'}
+                        href={lwLinkPropsFromAttrs(attributes, LINK_KEYS).href}
+                        data-lw-link-type={lwLinkPropsFromAttrs(attributes, LINK_KEYS).linkType}
+                        data-lw-link-id={lwLinkPropsFromAttrs(attributes, LINK_KEYS).linkId}
                         target={openNewTab ? '_blank' : undefined}
                         rel={openNewTab ? 'noopener noreferrer' : undefined}
                         className={`lw_btn_a ${shakeAnimation ? `lw_btn_shake_${shakeIntensity}` : ''}`}

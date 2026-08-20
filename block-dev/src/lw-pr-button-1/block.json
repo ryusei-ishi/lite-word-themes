@@ -10,7 +10,11 @@
 	"aiHint": {
 		"description": "2段テキスト+アイコン付きプレミアムボタン。角丸+影+振動アニメーション対応。CTA導線に",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["textMain", "textSub", "btnUrl"],
+		"contentAttributes": [
+			"textMain",
+			"textSub",
+			"btnUrl"
+		],
 		"imageAttributes": []
 	},
 	"supports": {
@@ -21,56 +25,279 @@
 		"textSub": {
 			"type": "string",
 			"default": "＼ テキストテキストテキスト ／",
-			"aiHint": { "role": "subheading", "contentGuide": "補足テキスト（小さい文字）。＼ ／で囲む。10〜20文字", "example": "＼ まずはお気軽にご相談ください ／" }
+			"aiHint": {
+				"role": "subheading",
+				"contentGuide": "補足テキスト（小さい文字）。＼ ／で囲む。10〜20文字",
+				"example": "＼ まずはお気軽にご相談ください ／"
+			}
 		},
 		"textMain": {
 			"type": "string",
 			"default": "資料をダウンロード",
-			"aiHint": { "role": "button", "contentGuide": "メインボタンテキスト。5〜15文字", "example": "無料資料をダウンロード" }
+			"aiHint": {
+				"role": "button",
+				"contentGuide": "メインボタンテキスト。5〜15文字",
+				"example": "無料資料をダウンロード"
+			}
 		},
 		"btnUrl": {
 			"type": "string",
 			"default": "",
-			"aiHint": { "role": "url", "contentGuide": "遷移先URL" }
+			"aiHint": {
+				"role": "url",
+				"contentGuide": "遷移先URL"
+			}
 		},
-		"openNewTab": { "type": "boolean", "default": false, "aiHint": { "skip": true } },
-		"btnAlign": { "type": "string", "default": "center", "aiHint": { "skip": true } },
-		"btnAlignSp": { "type": "string", "default": "default", "aiHint": { "skip": true } },
-		"bgColor": { "type": "string", "default": "#3e3a39", "aiHint": { "skip": true } },
-		"bgColorHover": { "type": "string", "default": "#483c39ff", "aiHint": { "skip": true } },
-		"bgColorSub": { "type": "string", "default": "#f9bb00", "aiHint": { "skip": true } },
-		"textColorMain": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
-		"textColorSub": { "type": "string", "default": "#000000", "aiHint": { "skip": true } },
-		"borderWidth": { "type": "number", "default": 3, "aiHint": { "skip": true } },
-		"borderColor": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
-		"borderRadius": { "type": "number", "default": 64, "aiHint": { "skip": true } },
-		"iconMain": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"openNewTab": {
+			"type": "boolean",
+			"default": false,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"btnAlign": {
+			"type": "string",
+			"default": "center",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"btnAlignSp": {
+			"type": "string",
+			"default": "default",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"bgColor": {
+			"type": "string",
+			"default": "#3e3a39",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"bgColorHover": {
+			"type": "string",
+			"default": "#483c39ff",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"bgColorSub": {
+			"type": "string",
+			"default": "#f9bb00",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"textColorMain": {
+			"type": "string",
+			"default": "#ffffff",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"textColorSub": {
+			"type": "string",
+			"default": "#000000",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 3,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "#ffffff",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 64,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"iconMain": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
 		"iconRight": {
 			"type": "string",
 			"default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 320 512\"><path d=\"M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z\"/></svg>",
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		},
-		"iconMainColor": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
-		"iconRightColor": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
-		"iconMainSize": { "type": "number", "default": 20, "aiHint": { "skip": true } },
-		"iconRightSize": { "type": "number", "default": 12, "aiHint": { "skip": true } },
-		"iconMainMarginRight": { "type": "number", "default": 8, "aiHint": { "skip": true } },
-		"FontSet": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"fontWeight": { "type": "string", "default": "700", "aiHint": { "skip": true } },
-		"fontWeightSub": { "type": "string", "default": "600", "aiHint": { "skip": true } },
-		"fontSizeMain": { "type": "number", "default": 20, "aiHint": { "skip": true } },
-		"fontSizeMainSp": { "type": "number", "default": 18, "aiHint": { "skip": true } },
-		"fontSizeSub": { "type": "number", "default": 12, "aiHint": { "skip": true } },
-		"maxWidth": { "type": "number", "default": 340, "aiHint": { "skip": true } },
-		"maxWidthSp": { "type": "number", "default": 300, "aiHint": { "skip": true } },
-		"transitionDuration": { "type": "number", "default": 0.3, "aiHint": { "skip": true } },
-		"shakeAnimation": { "type": "boolean", "default": false, "aiHint": { "skip": true } },
-		"shakeInterval": { "type": "number", "default": 3, "aiHint": { "skip": true } },
-		"shakeIntensity": { "type": "string", "default": "normal", "aiHint": { "skip": true } },
-		"shadowX": { "type": "number", "default": 0, "aiHint": { "skip": true } },
-		"shadowY": { "type": "number", "default": 0, "aiHint": { "skip": true } },
-		"shadowBlur": { "type": "number", "default": 6, "aiHint": { "skip": true } },
-		"shadowOpacity": { "type": "number", "default": 0.2, "aiHint": { "skip": true } }
+		"iconMainColor": {
+			"type": "string",
+			"default": "#ffffff",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"iconRightColor": {
+			"type": "string",
+			"default": "#ffffff",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"iconMainSize": {
+			"type": "number",
+			"default": 20,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"iconRightSize": {
+			"type": "number",
+			"default": 12,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"iconMainMarginRight": {
+			"type": "number",
+			"default": 8,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"FontSet": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontWeight": {
+			"type": "string",
+			"default": "700",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontWeightSub": {
+			"type": "string",
+			"default": "600",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontSizeMain": {
+			"type": "number",
+			"default": 20,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontSizeMainSp": {
+			"type": "number",
+			"default": 18,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontSizeSub": {
+			"type": "number",
+			"default": 12,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 340,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"maxWidthSp": {
+			"type": "number",
+			"default": 300,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"transitionDuration": {
+			"type": "number",
+			"default": 0.3,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"shakeAnimation": {
+			"type": "boolean",
+			"default": false,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"shakeInterval": {
+			"type": "number",
+			"default": 3,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"shakeIntensity": {
+			"type": "string",
+			"default": "normal",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"shadowX": {
+			"type": "number",
+			"default": 0,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"shadowY": {
+			"type": "number",
+			"default": 0,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"shadowBlur": {
+			"type": "number",
+			"default": 6,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"shadowOpacity": {
+			"type": "number",
+			"default": 0.2,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"btnLinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"btnPageId": {
+			"type": "number",
+			"default": 0
+		},
+		"btnCategoryId": {
+			"type": "number",
+			"default": 0
+		}
 	},
 	"editorScript": "file:./lw-pr-button-1.js",
 	"no": 1
