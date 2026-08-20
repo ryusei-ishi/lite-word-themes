@@ -42,7 +42,7 @@ function lw_dashboard_news_widget() {
                 <span class="dashicons dashicons-admin-home"></span>
                 公式サイト
             </a>
-            <a href="https://lite-word.com/contact/" target="_blank" class="lw-btn">
+            <a href="https://lite-word.com/cf/" target="_blank" class="lw-btn">
                 <span class="dashicons dashicons-email"></span>
                 お問い合わせ
             </a>

@@ -110,7 +110,7 @@
 			"aiDescription": "LiteWordからのお知らせを表示するウィジェット。公式サイト・お問い合わせ・マニュアルへのリンクボタン付き。お知らせデータは lw_dashboard_news_items フィルターでカスタマイズ可能。",
 			"links": {
 				"officialSite": "https://lite-word.com/",
-				"contact": "https://lite-word.com/contact/",
+				"contact": "https://lite-word.com/cf/",
 				"manual": "admin.php?page=lw-manual-viewer"
 			}
 		},
