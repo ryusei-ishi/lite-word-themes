@@ -84,6 +84,14 @@
 			"location": "functions/dashboard_top/dashboard-ai-hints.json"
 		}
 	},
+	"skills": {
+		"samplePageFactory": {
+			"description": "AI（MCP / REST API / Claude in Chrome）から LiteWord のページを作る手順書。既存ページを雛形にテキストと画像を差し替えて量産する。業種別サンプルページ・実案件のページ制作の両方で使う。",
+			"location": "skills/sample-page-factory/SKILL.md",
+			"verifyScript": "skills/sample-page-factory/verify-page.js",
+			"notes": "🚨 ページ本文を API から書き込む前に必ず読むこと。ブロックの JSON 属性がバックスラッシュ剥がれと KSES で黙って壊れる罠が5つある。公開前の検品手順も含む。"
+		}
+	},
 	"keyConceptsForAI": {
 		"customizerVsPageEditor": "カスタマイザーはサイト全体のデフォルト設定。ページ編集画面のメタボックスはページ単位の上書き設定。メタボックスで値を設定すると、そのページだけカスタマイザーの設定より優先される。",
 		"premiumFeatures": "LW_HAS_SUBSCRIPTION === true の場合にプレミアム機能が有効。フォント種類増加・パターン数増加・ページ独自メニュー選択・SEO機能・JSON-LD等が追加される。",
