@@ -209,9 +209,24 @@ function woocommerce_support() {
   }
 }
 //Mixed Contentエラーを防ぐ（httpsのページの場合のエラーです）-----------------------------------------------------
+// ⚠️ 置換は「自サイトのホスト」に限定すること。本文中の http:// を無条件に置換すると、
+//    HTTPS非対応の外部サイトへのリンクが必ず切れる（2026-08-21 修正）
 function force_https_for_media($content) {
-    if (is_ssl()) { // ページがHTTPSで読み込まれている場合
-        $content = str_replace("http://", "https://", $content); // 全てのHTTPリンクをHTTPSに置換
+    if (!is_ssl() || !is_string($content) || strpos($content, 'http://') === false) {
+        return $content;
+    }
+    $host = parse_url(home_url(), PHP_URL_HOST);
+    if (empty($host)) {
+        return $content;
+    }
+    $hosts = array($host);
+    if (strpos($host, 'www.') === 0) {
+        $hosts[] = substr($host, 4);   // www あり設定 → www なしの書き方も救う
+    } else {
+        $hosts[] = 'www.' . $host;     // www なし設定 → www ありの書き方も救う
+    }
+    foreach (array_unique($hosts) as $h) {
+        $content = str_replace('http://' . $h, 'https://' . $h, $content);
     }
     return $content;
 }
