@@ -1,0 +1,227 @@
+{
+  "title": "キャンペーン・期間限定のご案内（写真バナー3枚＋条件）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋写真バナー3枚（暗くした写真の上に白文字）＋ご利用条件の囲い4行＋ご予約ボタン。季節のキャンペーン・初回限定・記念日の特典に。バナーにはリンクを貼れるので、詳細ページを作ったら差し先を入れてください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "季節のキャンペーン",
+        "subTitle": "CAMPAIGN",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "いまの時期だけの特典をご用意しました。ご予約のときにお申し出ください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-banner-info-01",
+      "attributes": {
+        "filterBackgroundColor": "#000000",
+        "filterOpacity": 0.5,
+        "items": [
+          {
+            "title": "はじめての方 30%OFF",
+            "description": "初回のご利用にかぎり、通常価格から30%引きでご案内します。",
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/camp_01.webp",
+            "alt": "木の扉が少し開いた明るい入口",
+            "linkUrl": "",
+            "openInNewTab": false
+          },
+          {
+            "title": "おふたりで 20%OFF",
+            "description": "ご友人・ご家族とご一緒のご予約で、おふたりとも20%引きです。",
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/camp_02.webp",
+            "alt": "窓辺のテーブルに並んだ2つのカップ",
+            "linkUrl": "",
+            "openInNewTab": false
+          },
+          {
+            "title": "平日午前は 1,000円引き",
+            "description": "10時から13時までにお越しいただける方への割引です。",
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/camp_03.webp",
+            "alt": "大きな窓から朝の光が差し込むテーブル",
+            "linkUrl": "",
+            "openInNewTab": false
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 900,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1PaddingTopSp": 20,
+        "waku1PaddingBottomSp": 20,
+        "waku1PaddingLeftSp": 18,
+        "waku1PaddingRightSp": 18,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderWidthSp": 1,
+        "waku1BorderColorPc": "#e5e9ee",
+        "waku1BorderColorSp": "#e5e9ee",
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "ご利用にあたって",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "17px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "14px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "<strong>期間</strong>　2026年〇月〇日（〇）から〇月〇日（〇）まで",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "<strong>対象</strong>　期間中にご来店いただいた方（ご予約の有無は問いません）",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "10px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "<strong>回数</strong>　おひとり様、期間中1回までご利用いただけます",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "10px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "<strong>ご注意</strong>　他の割引・クーポンとの併用はできません。ご予約のときにお申し出ください",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "10px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ 混み合う時間帯はご希望に添えないことがあります。お早めにご相談ください。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "0px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "この特典で予約する",
+        "textSub": "＼ 期間限定のご案内です ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}
