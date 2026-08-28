@@ -8,11 +8,12 @@
     "icon":  "format-chat",
     "description":  "Q\u0026Aブロック。質問と回答を画像付きで表示。",
     "aiHint": {
-        "description": "Q&A（画像付き）。質問者・回答者の画像+吹き出し形式。InnerBlocks使用のためAI直接生成非推奨",
+        "description": "Q&A（画像付き）。質問者・回答者の画像+吹き出し形式。子ブロックを並べて作るのでAI直接生成は非推奨",
         "excludeFromAutoSelect": true,
-        "excludeReason": "InnerBlocksでQ&Aペアを管理するためAIが直接コンテンツを生成できない",
+        "excludeReason": "子ブロック（lw-pr-qa-2-item）を並べないと中身が入らないため。テンプレート経由で使う",
         "contentAttributes": [],
-        "imageAttributes": []
+        "imageAttributes": [],
+        "notes": "このブロックは親子構造。親（lw-pr-qa-2）は入れ物で、テキストも画像も持たない。中身は子ブロック wdl/lw-pr-qa-2-item を並べて作る。子は qImage（質問者の絵）/ qText（質問文）/ aImage（回答者の絵）/ useOneColumn を属性で持ち、回答の本文だけ子の InnerBlocks（core/paragraph）に入れる。Q&A 1件につき子1つ。⚠️ 子には独立したディレクトリが無く、親の js が親子とも registerBlockType している。build/lw-pr-qa-2-item を探しても無いので、存在しないブロックだと誤判定しないこと。⚠️ 質問文の色（青）とアイコンの寸法は CSS 固定で、属性では変えられない。⚠️ 既定の画像は placehold.jp（他社CDN）なので、テンプレートやサンプルでは必ず自前の画像URLを渡すこと。"
     },
     "supports":  {
                      "anchor":  true,

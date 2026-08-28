@@ -1,0 +1,383 @@
+{
+  "title": "会社概要（数字カード3枚＋会社情報の表）",
+  "description": "【型A：表が主役】見出し＋数字カード3枚＋会社情報の表。会社概要・事業所案内に。数字はご自身のものに、表の項目は業種に合わせて増減してください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "会社概要",
+        "subTitle": "COMPANY",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "創業から今日まで、どんな会社なのかを数字と基本情報でご紹介します。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-column-1",
+      "attributes": {
+        "columnsPc": 3,
+        "columnsSp": 1,
+        "columnGapPc": 16,
+        "rowGapPc": 16,
+        "columnGapSp": 12,
+        "rowGapSp": 12
+      },
+      "innerBlocks": [
+        {
+          "name": "wdl/lw-pr-waku-1",
+          "attributes": {
+            "waku1MaxWidthPc": 420,
+            "waku1MaxWidthSp": 420,
+            "waku1PaddingTopPc": 28,
+            "waku1PaddingBottomPc": 22,
+            "waku1PaddingLeftPc": 16,
+            "waku1PaddingRightPc": 16,
+            "waku1PaddingTopSp": 20,
+            "waku1PaddingBottomSp": 16,
+            "waku1PaddingLeftSp": 12,
+            "waku1PaddingRightSp": 12,
+            "waku1BorderWidthPc": 1,
+            "waku1BorderWidthSp": 1,
+            "waku1BorderColorPc": "#dfe4ea",
+            "waku1BorderColorSp": "#dfe4ea",
+            "waku1BgColorPc": "#ffffff",
+            "waku1BgColorSp": "#ffffff"
+          },
+          "innerBlocks": [
+            {
+              "name": "core/heading",
+              "attributes": {
+                "content": "1998<span style=\"font-size:60%;margin-left:2px;\">年</span>",
+                "level": 3,
+                "textAlign": "center",
+                "style": {
+                  "color": {
+                    "text": "var(--color-main)"
+                  },
+                  "typography": {
+                    "fontSize": "38px"
+                  }
+                }
+              },
+              "innerBlocks": []
+            },
+            {
+              "name": "core/paragraph",
+              "attributes": {
+                "content": "創業",
+                "align": "center",
+                "style": {
+                  "typography": {
+                    "fontSize": "14px"
+                  },
+                  "spacing": {
+                    "margin": {
+                      "top": "8px",
+                      "bottom": "0px"
+                    }
+                  }
+                }
+              },
+              "innerBlocks": []
+            }
+          ]
+        },
+        {
+          "name": "wdl/lw-pr-waku-1",
+          "attributes": {
+            "waku1MaxWidthPc": 420,
+            "waku1MaxWidthSp": 420,
+            "waku1PaddingTopPc": 28,
+            "waku1PaddingBottomPc": 22,
+            "waku1PaddingLeftPc": 16,
+            "waku1PaddingRightPc": 16,
+            "waku1PaddingTopSp": 20,
+            "waku1PaddingBottomSp": 16,
+            "waku1PaddingLeftSp": 12,
+            "waku1PaddingRightSp": 12,
+            "waku1BorderWidthPc": 1,
+            "waku1BorderWidthSp": 1,
+            "waku1BorderColorPc": "#dfe4ea",
+            "waku1BorderColorSp": "#dfe4ea",
+            "waku1BgColorPc": "#ffffff",
+            "waku1BgColorSp": "#ffffff"
+          },
+          "innerBlocks": [
+            {
+              "name": "core/heading",
+              "attributes": {
+                "content": "1,200<span style=\"font-size:60%;margin-left:2px;\">件</span>",
+                "level": 3,
+                "textAlign": "center",
+                "style": {
+                  "color": {
+                    "text": "var(--color-main)"
+                  },
+                  "typography": {
+                    "fontSize": "38px"
+                  }
+                }
+              },
+              "innerBlocks": []
+            },
+            {
+              "name": "core/paragraph",
+              "attributes": {
+                "content": "これまでのご依頼",
+                "align": "center",
+                "style": {
+                  "typography": {
+                    "fontSize": "14px"
+                  },
+                  "spacing": {
+                    "margin": {
+                      "top": "8px",
+                      "bottom": "0px"
+                    }
+                  }
+                }
+              },
+              "innerBlocks": []
+            }
+          ]
+        },
+        {
+          "name": "wdl/lw-pr-waku-1",
+          "attributes": {
+            "waku1MaxWidthPc": 420,
+            "waku1MaxWidthSp": 420,
+            "waku1PaddingTopPc": 28,
+            "waku1PaddingBottomPc": 22,
+            "waku1PaddingLeftPc": 16,
+            "waku1PaddingRightPc": 16,
+            "waku1PaddingTopSp": 20,
+            "waku1PaddingBottomSp": 16,
+            "waku1PaddingLeftSp": 12,
+            "waku1PaddingRightSp": 12,
+            "waku1BorderWidthPc": 1,
+            "waku1BorderWidthSp": 1,
+            "waku1BorderColorPc": "#dfe4ea",
+            "waku1BorderColorSp": "#dfe4ea",
+            "waku1BgColorPc": "#ffffff",
+            "waku1BgColorSp": "#ffffff"
+          },
+          "innerBlocks": [
+            {
+              "name": "core/heading",
+              "attributes": {
+                "content": "24<span style=\"font-size:60%;margin-left:2px;\">名</span>",
+                "level": 3,
+                "textAlign": "center",
+                "style": {
+                  "color": {
+                    "text": "var(--color-main)"
+                  },
+                  "typography": {
+                    "fontSize": "38px"
+                  }
+                }
+              },
+              "innerBlocks": []
+            },
+            {
+              "name": "core/paragraph",
+              "attributes": {
+                "content": "スタッフ",
+                "align": "center",
+                "style": {
+                  "typography": {
+                    "fontSize": "14px"
+                  },
+                  "spacing": {
+                    "margin": {
+                      "top": "8px",
+                      "bottom": "0px"
+                    }
+                  }
+                }
+              },
+              "innerBlocks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-border-1",
+      "attributes": {
+        "maxWidthPc": 100,
+        "maxWidthUnitPc": "%",
+        "borderWidthPc": 1,
+        "borderColorPc": "#e5e9ee",
+        "borderStylePc": "solid",
+        "maxWidthSp": 100,
+        "maxWidthUnitSp": "%",
+        "borderWidthSp": 1,
+        "borderColorSp": "#e5e9ee",
+        "borderStyleSp": "solid"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 200,
+        "dtFixedSp": true,
+        "dtWidthSp": 100,
+        "dtBgColor": "#f7f9fb",
+        "dlBorderColor": "#dfe4ea",
+        "rowBorderColor": "#dfe4ea",
+        "dtBorderColor": "#dfe4ea",
+        "dtFontWeight": "600",
+        "cellPaddingPc": 16,
+        "cellPaddingSp": 12,
+        "fontSizePc": 16,
+        "fontSizeSp": 15,
+        "rows": [
+          {
+            "dtText": "商号",
+            "ddText": "株式会社〇〇〇〇",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "設立",
+            "ddText": "1998年4月",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "代表者",
+            "ddText": "代表取締役　山田 太郎",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "資本金",
+            "ddText": "1,000万円",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "所在地",
+            "ddText": "〒000-0000　〇〇県〇〇市〇〇町1-2-3　〇〇ビル 2F",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "電話番号",
+            "ddText": "000-000-0000　（受付 9:00 - 18:00）",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "従業員数",
+            "ddText": "24名（うちパート・アルバイト6名）",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "事業内容",
+            "ddText": "〇〇の設計・施工／〇〇のメンテナンス／〇〇用品の販売<br>住宅から店舗まで、規模を問わずお受けしています。",
+            "pcClm1": true,
+            "spClm1": true,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "許可番号",
+            "ddText": "〇〇県知事許可（般-00）第00000号",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "取引銀行",
+            "ddText": "〇〇銀行 〇〇支店／〇〇信用金庫 〇〇支店",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ 記載の内容は2026年7月現在のものです。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

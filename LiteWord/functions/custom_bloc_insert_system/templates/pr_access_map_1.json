@@ -1,0 +1,117 @@
+{
+  "title": "アクセス・店舗情報（表＋地図の置き場）",
+  "description": "【型A：表が主役】見出し＋店舗情報の表＋道順の説明＋地図の置き場。アクセス案内に。地図はご自身のGoogleマップの埋め込みコードに差し替えてください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "アクセス",
+        "subTitle": "ACCESS",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "駅からの道順と、お車でお越しの場合をご案内します。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-company-2",
+      "attributes": {
+        "maxWidth": 900,
+        "dtWidthClass": "dt_width_m",
+        "items": [
+          {
+            "dt": "店舗名",
+            "dd": "〇〇〇〇 △△店",
+            "dtPlaceholder": "店舗名",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "住所",
+            "dd": "〒000-0000　〇〇県〇〇市〇〇町1-2-3　〇〇ビル 2F",
+            "dtPlaceholder": "住所",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "電話",
+            "dd": "0120-000-000",
+            "dtPlaceholder": "電話",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "営業時間",
+            "dd": "9:00 - 18:00",
+            "dtPlaceholder": "営業時間",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "定休日",
+            "dd": "木曜・日曜・祝日",
+            "dtPlaceholder": "定休日",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "駐車場",
+            "dd": "建物裏に3台（無料）／満車のときは近くのコインパーキングをご案内します",
+            "dtPlaceholder": "駐車場",
+            "ddPlaceholder": "内容"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "<strong>電車でお越しの方</strong><br>〇〇線「〇〇駅」東口を出て、大通りを右へ徒歩5分。1階が〇〇のビルの2階です。青い看板が目印です。"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "<strong>お車でお越しの方</strong><br>国道〇号線「〇〇交差点」を〇〇方面へ。2つ目の信号を左折してすぐ右手です。建物の裏手が駐車場になっています。"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/html",
+      "attributes": {
+        "content": "<!-- ここに Google マップの埋め込みコードを貼ってください。\n     Google マップで店舗を検索 → 共有 → 地図を埋め込む → HTMLをコピー → ここに貼り付け -->\n<div style=\"padding:48px 16px;text-align:center;background:#f2f5f8;border:1px dashed #b9c6d3;border-radius:8px;color:#5a6b7c;font-size:14px;\">ここに Google マップの埋め込みコードを貼ってください</div>"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

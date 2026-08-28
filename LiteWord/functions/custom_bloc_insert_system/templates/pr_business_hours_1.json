@@ -1,0 +1,165 @@
+{
+  "title": "診療時間・営業時間（曜日表＋はじめての方への案内）",
+  "description": "【型A：表が主役】見出し＋予約についてのひとこと＋曜日ごとの○△×の表＋注釈＋「はじめての方へ」の囲み。クリニック・サロン・店舗の営業日案内に。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "診療時間",
+        "subTitle": "HOURS",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "ご予約なしでも受け付けておりますが、<br>お待たせしないためにお電話でのご予約をおすすめしています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-calendar-1",
+      "attributes": {
+        "headItems": [
+          "診療時間",
+          "月",
+          "火",
+          "水",
+          "木",
+          "金",
+          "土",
+          "日"
+        ],
+        "bodyRows": [
+          [
+            "9:00 - 12:30",
+            "○",
+            "○",
+            "○",
+            "×",
+            "○",
+            "○",
+            "×"
+          ],
+          [
+            "14:30 - 18:30",
+            "○",
+            "○",
+            "○",
+            "×",
+            "○",
+            "△",
+            "×"
+          ]
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "△ は 17:00 までの短縮診療です。木曜・日曜・祝日は休診いたします。<br><strong>受付は終了時刻の30分前まで</strong>です。年末年始・お盆の休診日はお知らせでご案内します。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "はじめてご来院の方へ",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "保険証と、お薬を飲んでいる方はお薬手帳をお持ちください。問診票のご記入に10分ほどいただきますので、<strong>予約時刻の15分前</strong>にお越しいただけると安心です。"
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-4",
+      "attributes": {
+        "textMain": "0120-000-000",
+        "textSub": "ご予約・お問い合わせ ／ 土曜も受け付けています",
+        "btnUrl": "tel:0120000000",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

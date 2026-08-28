@@ -1,0 +1,51 @@
+{
+  "title": "コンセプト・想い（縦長写真＋大きな見出し＋2段組の本文）",
+  "description": "【型B：説明が主役】左に縦長の写真、右に大きな見出しと2段組の本文。「なぜこの仕事をしているか」「どんな考えで作っているか」を読ませるセクションです。トップページの中ほどや、会社案内・私たちについてのページに。文例は工務店ですが、書き換えればどの業種でも使えます。⚠️ スマホでは写真が横長に切り取られ、その上に見出しが白抜きで重なります。中央に主役があって、上下を切られても成立する写真を選んでください。見出しが長いと写真を覆ってしまうので、スマホ用の見出しを別に短く書くこともできます。",
+  "blocks": [
+    {
+      "name": "wdl/paid-block-content-5",
+      "attributes": {
+        "pcImage": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/concept_01.webp",
+        "spImage": "",
+        "imgAlt": "",
+        "pcTitle": "数を追わない、と決めた。",
+        "spTitle": "",
+        "headingLevel": 2,
+        "pcBody": "わたしたちが年に手がけるのは、10棟ほどです。数を増やせば、打ち合わせに出られる回数は減ります。図面ができたあとに「ここはこうしたい」と思う瞬間が必ずあって、そのときに相談できる相手が近くにいるかどうかで、住まいは変わると考えています。だから、最初にお会いした担当者が引き渡しまで見届けます。住んでからのほうが、ずっと長い。引き渡しの日を、終わりにしないための決まりです。",
+        "textColumns": "2",
+        "verticalCenter": true,
+        "aspectRatioHeight": 650,
+        "contsMaxWidth": 1200
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "わたしたちについて",
+        "textSub": "＼ これまでの仕事もご覧いただけます ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

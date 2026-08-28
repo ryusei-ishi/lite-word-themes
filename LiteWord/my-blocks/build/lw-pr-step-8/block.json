@@ -8,13 +8,13 @@
     "icon":  "lightbulb",
     "description":  "番号付きステップカード（スタイル2）",
     "aiDescription":  "01、02形式の番号付きステップカード。step-3の別デザイン。番号色をメインカラーに設定。採用フロー、サービス手順に最適。",
-    "aiNotes":  "このブロックは番号付きカード型ステップ。colorNoで番号色を設定。bgGradientで背景色調整。",
+    "aiNotes":  "1ブロック＝1ステップ。番号は stepNo 属性、段の中身は InnerBlocks に置く。ステップの数だけこのブロックを並べる。colorNo で番号の色を設定。",
     "aiHint": {
-        "description": "番号付きステップカード。01形式の番号+背景色。採用フロー・サービス手順に",
+        "description": "番号つきステップカード（1ブロック＝1段）。採用の選考フロー・サービスの手順に",
         "excludeFromAutoSelect": false,
         "contentAttributes": [],
         "imageAttributes": [],
-        "notes": "属性がスタイル系のみ。contents配列がないためテンプレート経由で使用"
+        "notes": "1ブロック＝1ステップ。番号は stepNo 属性（01 の形）で、段の中身は InnerBlocks に置く（見出し＋説明など自由）。lw-pr-step-7 のような contents 配列は持たないので、4段のフローを作りたければこのブロックを4つ並べる。⚠️ 属性名 bgGradient は背景ではなく枠線の色（save() が border-color にしか渡していない。2026-08-28 に実際の save() で描画して確認した。それ以前 aiNotes に bgGradientで背景色調整 と書いてあったのは誤り）。⚠️ 自前で margin:32px 0 を持っているので、段と段の間や前後にスペーサーを足すと空きすぎる。"
     },
     "supports":  {
                      "anchor":  true

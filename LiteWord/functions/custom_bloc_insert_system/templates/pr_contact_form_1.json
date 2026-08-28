@@ -1,0 +1,133 @@
+{
+  "title": "お問い合わせ（送信できるフォーム＋電話の窓口）",
+  "description": "【型B：説明が主役】背景写真の帯の中にお問い合わせフォーム＋電話の窓口の囲み＋注釈。お問い合わせページに。フォームを1つも作っていないサイトでも、お名前・メールアドレス・お問合せ内容の3項目が既定で表示され、送信内容はWordPressの管理者メールアドレスに届きます。項目を増やす・送信先を変える・自動返信を付けるときは管理画面の「Lwお問い合わせ」から設定し、このブロックの「フォームID」をそのフォームの番号（最初に作ったものなら1）に変えてください。",
+  "blocks": [
+    {
+      "name": "wdl/paid-block-contact-2",
+      "attributes": {
+        "mainTitle": "お問い合わせ",
+        "subTitle": "CONTACT",
+        "mainTitleLevel": "h2",
+        "description": "ご相談・お見積りは無料です。<br>1営業日以内にご返信します。",
+        "formId": 9,
+        "bgImageUrl": "https://lite-word.com/sample_img/background/6.webp",
+        "maxWidth": "800px"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1PaddingTopSp": 20,
+        "waku1PaddingBottomSp": 20,
+        "waku1PaddingLeftSp": 16,
+        "waku1PaddingRightSp": 16,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "お電話でも承っています",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "メールが届かないことがあるため、お急ぎのご用件はお電話が確実です。",
+            "align": "center",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-4",
+      "attributes": {
+        "textMain": "000-000-0000",
+        "textSub": "受付 9:00 - 18:00 ／ 日曜・祝日を除く",
+        "btnUrl": "tel:0000000000",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ いただいた個人情報は、お問い合わせへの回答以外の目的では使用しません。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

@@ -1,0 +1,113 @@
+{
+  "title": "メニュー・料金一覧（写真つきカード6品）",
+  "description": "【型C：写真が主役】見出し＋案内のひとこと＋写真つきメニューカード6品＋注釈＋予約への導線。サロン・整体・ネイル・エステのメニューページに。写真・メニュー名・所要時間・価格を差し替えてお使いください。品数を増やすときはカードを3の倍数にすると列が欠けません。料金プランを比較して選ばせたいときは「料金プラン（3プラン比較）」のほうが向いています。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "メニュー・料金",
+        "subTitle": "MENU",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "はじめての方は、まず60分のコースをおすすめしています。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "bottom": "0px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-content-7",
+      "attributes": {
+        "pcColumns": "3",
+        "titleTag": "h3",
+        "contents": [
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/menu_01.webp",
+            "ttl": "肩・首のコース",
+            "text": "<strong>60分　6,600円</strong><br>デスクワークで固まった肩と首をゆるめます。"
+          },
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/menu_02.webp",
+            "ttl": "ヘッドケア",
+            "text": "<strong>40分　4,400円</strong><br>頭皮をほぐして目の疲れを軽くします。"
+          },
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/menu_03.webp",
+            "ttl": "ハンドケア",
+            "text": "<strong>30分　3,300円</strong><br>指先まで整えて、手元の印象を明るく。"
+          },
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/menu_04.webp",
+            "ttl": "アロマ全身",
+            "text": "<strong>90分　9,900円</strong><br>お好みの香りを選んで全身をゆっくり。"
+          },
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/menu_05.webp",
+            "ttl": "姿勢の相談つき",
+            "text": "<strong>75分　8,800円</strong><br>施術のあとに、自宅でできる体操をお伝えします。"
+          },
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/menu_06.webp",
+            "ttl": "はじめての方",
+            "text": "<strong>60分　4,400円</strong><br>カウンセリング込み。お一人さま1回かぎり。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ 表示は税込価格です。指名料・延長料金はいただいておりません。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "0px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "空き時間を見る",
+        "textSub": "＼ 当日のご予約も承っています ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

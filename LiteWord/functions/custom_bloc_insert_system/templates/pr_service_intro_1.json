@@ -1,0 +1,100 @@
+{
+  "title": "サービス紹介（画像と文章を左右交互に3件）",
+  "description": "【型C：写真が主役】正方形の写真と説明文を左右交互に3件並べます。サービスが3つくらいあって、それぞれに詳しいページがあるサイトに。文例はパソコン教室ですが、コース名・説明・ボタンの行き先を書き換えればどの業種でも使えます。各件の1行目（太字）が小見出しです。ブロック自体に見出しの設定は無いため、本文の先頭に太字で入れてあります。⚠️ 写真は正方形で表示され、左上にグレーの影が重なるデザインです。被写体が中央にある写真を選んでください。ボタンが不要なときは「ボタンを表示」をOFFにできます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "コースのご案内",
+        "subTitle": "COURSE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "はじめての方から、仕事で使う方まで。3つのコースをご用意しています。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "bottom": "0px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-content-6",
+      "attributes": {
+        "alignRight": false,
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/intro_01.webp",
+        "imageAlt": "",
+        "textContent": "<strong style=\"display:block;font-size:20px;line-height:1.6;margin-bottom:10px\">はじめてのパソコン教室</strong>電源の入れ方とマウスの動かし方から始めます。「習うより慣れる」で、ご自身のパソコンを持ち込んで練習していただけます。1回90分・3名までの少人数制なので、分からないところはその場で聞けます。",
+        "buttonText": "コースの詳細を見る",
+        "buttonUrl": "/course/beginner/",
+        "showButton": true,
+        "buttonRadius": 4
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-content-6",
+      "attributes": {
+        "alignRight": true,
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/intro_02.webp",
+        "imageAlt": "",
+        "textContent": "<strong style=\"display:block;font-size:20px;line-height:1.6;margin-bottom:10px\">仕事で使うExcel講座</strong>関数と表計算を、実際の業務でよく使う形から覚えます。お使いのファイルをお持ちいただければ、その場で一緒に作り直します。請求書・勤怠表・売上集計など、目的が決まっている方に向いています。",
+        "buttonText": "カリキュラムを見る",
+        "buttonUrl": "/course/excel/",
+        "showButton": true,
+        "buttonRadius": 4
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-content-6",
+      "attributes": {
+        "alignRight": false,
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/intro_03.webp",
+        "imageAlt": "",
+        "textContent": "<strong style=\"display:block;font-size:20px;line-height:1.6;margin-bottom:10px\">スマホ・タブレット相談</strong>「文字が小さい」「写真の送り方が分からない」といった小さなことでも大丈夫です。1回30分から、設定だけのご相談も承ります。ご予約なしでも、空いていればその場でお受けしています。",
+        "buttonText": "相談できることを見る",
+        "buttonUrl": "/course/smartphone/",
+        "showButton": true,
+        "buttonRadius": 4
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "無料体験のお申し込み",
+        "textSub": "＼ 見学だけでも歓迎です ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

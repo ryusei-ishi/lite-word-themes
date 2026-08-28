@@ -1,0 +1,91 @@
+{
+  "title": "ごあいさつ（代表の言葉＋プロフィール表）",
+  "description": "【型B：説明が主役】見出し＋代表の写真と言葉＋プロフィール表。ごあいさつ・院長挨拶・代表メッセージに。誰がやっているお店なのかを伝えるセクションです。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "ごあいさつ",
+        "subTitle": "MESSAGE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-comment-2",
+      "attributes": {
+        "comment2ImageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/message_01.webp",
+        "comment2ImagePosition": "left",
+        "comment2MaxWidth": 860,
+        "comment2TextColor": "#333333",
+        "comment2Text": "「よく分からないまま任せてしまった」という話を、これまで何度も聞いてきました。だからうちでは、なぜそれが必要なのかを必ずご説明してから進めます。聞き返していただいて構いませんし、その場で決めていただかなくても構いません。"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-3",
+      "attributes": {
+        "columnCount": 2,
+        "tableAlign": "center",
+        "hideMainHead": true,
+        "colWidthPc": [
+          140,
+          520
+        ],
+        "colWidthSp": [
+          100,
+          240
+        ],
+        "headers": [
+          "",
+          ""
+        ],
+        "rows": [
+          {
+            "header": "氏名",
+            "cells": [
+              "山田 太郎"
+            ]
+          },
+          {
+            "header": "経歴",
+            "cells": [
+              "同業で10年勤めたのち、2014年に独立"
+            ]
+          },
+          {
+            "header": "資格",
+            "cells": [
+              "〇〇技能士1級 ／ 〇〇管理者"
+            ]
+          },
+          {
+            "header": "休みの日は",
+            "cells": [
+              "子どもと自転車で出かけています"
+            ]
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

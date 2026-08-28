@@ -8,10 +8,11 @@
 	"icon": "format-image",
 	"editorScript": "file:./paid-block-content-6.js",
 	"aiHint": {
-		"description": "画像+テキスト+ボタン2カラム。シンプルな左右配置。反転可能。サービス概要説明に",
+		"description": "画像＋説明文＋ボタンの左右2カラム。alignRight で左右を反転できるので、複数並べて交互配置にできる。サービス紹介・コース紹介・特長の説明に",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["textContent", "buttonText", "buttonUrl"],
-		"imageAttributes": ["imageUrl"]
+		"imageAttributes": ["imageUrl"],
+		"notes": "alignRight:true で画像が右に来るので、複数並べて交互に入れるとジグザグに組める。🚨 見出し（タイトル）の属性が無い。複数並べるとどれが何の話か分からなくなるので、textContent の先頭に <strong style=display:block;font-size:20px;margin-bottom:10px> で小見出しを作る（textContent はそのままHTMLとして書き出されるので strong / br / span が使える。ただし中身は <p> なので h2〜h6 は入れられない）。🚨 画像枠は正方形（figure::before の padding-top:100%）で object-fit:cover。さらに img が top:40px / left:40px にずれていて左上に #ddd の影が出る装飾なので、被写体が中央にある正方形の写真を渡す（影の色はCSS固定で属性から変えられない）。自前で margin:64px 0 48px を持つので前後にスペーサーを足さない。ボタンは min-width:240px・枠線1px固定で、showButton:false で消せる。700px以下では縦積みになり、文章が margin-top:-56px で画像の下端に少し重なる（意図された重ね）。"
 	},
 	"supports": {
 		"anchor": true
@@ -40,6 +41,18 @@
 		"buttonUrl": {
 			"type": "string",
 			"default": "#"
+		},
+		"buttonLinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"buttonPageId": {
+			"type": "number",
+			"default": 0
+		},
+		"buttonCategoryId": {
+			"type": "number",
+			"default": 0
 		},
 		"showButton": {
 			"type": "boolean",

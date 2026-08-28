@@ -1,0 +1,76 @@
+{
+  "title": "お問い合わせCTA（背景画像＋ボタン）",
+  "description": "【型B：説明が主役】背景画像の帯の中に、見出し・ひとこと・大きなボタン。ページの一番下に置く問い合わせ導線に。ボタンのリンク先は必ず設定してください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-bg-1",
+      "attributes": {
+        "backgroundType": "image",
+        "imagePc": "https://lite-word.com/sample_img/background/2.webp",
+        "imageSp": "https://lite-word.com/sample_img/background/2.webp",
+        "isFullWidth": true,
+        "minHeightPc": "min-h-pc-360px",
+        "minHeightTb": "min-h-tb-340px",
+        "minHeightSp": "min-h-sp-320px",
+        "filterTypePc": "solid",
+        "filterColorPc": "var(--color-main)",
+        "opacityPc": 0.6
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "まずはお気軽にご相談ください",
+            "level": 2,
+            "textAlign": "center",
+            "style": {
+              "color": {
+                "text": "#ffffff"
+              },
+              "typography": {
+                "fontSize": "28px"
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "ご相談・お見積もりは無料です。内容をうかがったうえで、無理のないご提案をいたします。",
+            "align": "center",
+            "style": {
+              "color": {
+                "text": "#ffffff"
+              },
+              "typography": {
+                "fontSize": "16px"
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "wdl/lw-pr-button-2",
+          "attributes": {
+            "textSub": "＼ ご相談・お見積もりは無料 ／",
+            "textMain": "お問い合わせはこちら",
+            "btnUrl": "",
+            "btnAlign": "center",
+            "textColorSub": "#ffffff"
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

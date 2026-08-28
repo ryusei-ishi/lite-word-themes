@@ -13,7 +13,8 @@
 		"contentAttributes": [
 			"text"
 		],
-		"imageAttributes": []
+		"imageAttributes": [],
+		"notes": "グラデーションのアニメーションは属性では止められない。save() が gradient-slide-anime クラスを無条件に付け、CSS 側も animation の変数にフォールバック（lw-pr-text-1-gradient-slide-anime-1）を持つため、animationPattern を空にしても色が流れ続ける（2026-08-28 実測）。ずっと動いていてよいキャッチコピー向けで、会社概要の数字のように落ち着かせたい所には使わない。fontSizePc の単位は em（既定1）。48 のような px のつもりの値を渡すと 48em になって壊れる。"
 	},
 	"supports": {
 		"anchor": true

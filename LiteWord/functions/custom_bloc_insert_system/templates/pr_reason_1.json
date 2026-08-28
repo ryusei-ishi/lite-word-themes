@@ -1,0 +1,84 @@
+{
+  "title": "選ばれる理由（4つの理由・番号つき）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋番号つきの理由カード4枚＋締めの一文＋相談ボタン。強み・特徴・お約束の紹介に。カードは4の倍数にすると最後の行が欠けません。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "選ばれる理由",
+        "subTitle": "REASON",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "はじめての方から、いちばん多くいただくご不安が4つあります。<br>その4つに、こうお答えしています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-list-6",
+      "attributes": {
+        "colorTitle": "#333333",
+        "fontSizeTtlSp": 16,
+        "items": [
+          {
+            "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/reason_01.webp",
+            "label": "理由 01",
+            "title": "まず全体をご説明",
+            "description": "何を・いつ・いくらで行うのかを、着手前に紙でお渡しします。分からないところは何度でもご説明します。"
+          },
+          {
+            "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/reason_02.webp",
+            "label": "理由 02",
+            "title": "追加費用はなし",
+            "description": "追加費用は発生しません。作業中に想定外のことが見つかった場合も、必ず一度お手を止めてご相談します。"
+          },
+          {
+            "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/reason_03.webp",
+            "label": "理由 03",
+            "title": "土日も開けています",
+            "description": "平日にお時間が取れない方のために、土日も9時から18時まで受け付けています。ご予約は前日までにお願いします。"
+          },
+          {
+            "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/reason_04.webp",
+            "label": "理由 04",
+            "title": "担当は最後まで同じ",
+            "description": "途中で担当が変わることはありません。前回お話しした内容を、もう一度説明していただく必要はありません。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "「こんなことを聞いてもいいのかな」という内容で構いません。<br>まずは今のご状況だけ、聞かせてください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "無料で相談してみる",
+        "textSub": "＼ 見積りだけでも構いません ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

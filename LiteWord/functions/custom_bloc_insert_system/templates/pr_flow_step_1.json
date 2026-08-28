@@ -1,0 +1,94 @@
+{
+  "title": "ご利用の流れ（6ステップ・所要時間つき）",
+  "description": "【型B：説明が主役】見出し＋ひとこと＋番号つきステップ6件（所要時間と必要なものつき）＋注釈＋問い合わせボタン。ご利用の流れ・お申し込みの手順・施工の流れに。3の倍数にすると行が欠けません。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "ご利用の流れ",
+        "subTitle": "FLOW",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お問い合わせから完了まで、6つの段階に分けてご案内します。<br>それぞれ、どのくらいかかるかも書いています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-step-7",
+      "attributes": {
+        "circleBgColor": "var(--color-main)",
+        "columnCountPc": 3,
+        "columnCountSp": 1,
+        "contents": [
+          {
+            "title": "お問い合わせ",
+            "text": "お電話またはフォームからご連絡ください。折り返しのご連絡は当日中、遅くとも翌営業日にいたします。"
+          },
+          {
+            "title": "日程のご相談",
+            "text": "ご都合のよい日時をうかがいます。土曜・日曜のご希望も承ります。所要は5分ほどです。"
+          },
+          {
+            "title": "カウンセリング",
+            "text": "ご要望とご予算をうかがいます。約60分・費用はいただきません。当日ご用意いただくものはありません。"
+          },
+          {
+            "title": "お見積もりのご提示",
+            "text": "内容を書面でお出しします。3営業日以内にお渡しします。この場でお決めいただかなくて構いません。"
+          },
+          {
+            "title": "作業・お仕上げ",
+            "text": "内容により1日〜1週間ほど。進み具合はその都度、写真つきでご報告します。"
+          },
+          {
+            "title": "お引き渡しとご確認",
+            "text": "一緒に確認していただき、気になるところがあればその場で直します。お支払いはこのあとです。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※期間は目安です。内容やご希望の日程によって前後します。<br>お急ぎの事情がある場合は、お問い合わせのときにお伝えください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "まずは問い合わせてみる",
+        "textSub": "＼ 日程の相談だけでも構いません ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

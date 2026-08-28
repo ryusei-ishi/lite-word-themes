@@ -1,0 +1,201 @@
+{
+  "title": "対応エリア（費用の線引きで2つに分けたチェックリスト）",
+  "description": "【型B：説明が主役】見出し＋対応エリアのチェックリスト2組（出張費無料／別途交通費）＋注釈＋相談への導線。工務店・リフォーム・清掃・出張サービスのエリア案内に。地域名はご自身の商圏に、費用の線引きは実際の運用に合わせて書き換えてください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "対応エリア",
+        "subTitle": "AREA",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "下記のエリアへお伺いしています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "出張費無料でお伺いするエリア",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-list-7",
+      "attributes": {
+        "colClass": "clm_2",
+        "columnWidths": [
+          1
+        ],
+        "fontSizePc": 16,
+        "fontSizeSp": 15,
+        "rowGapPc": 14,
+        "columnGapPc": 24,
+        "listGroups": [
+          {
+            "contents": [
+              {
+                "text": "〇〇市（全域）"
+              },
+              {
+                "text": "△△市（全域）"
+              },
+              {
+                "text": "□□町（全域）"
+              },
+              {
+                "text": "◇◇村（全域）"
+              },
+              {
+                "text": "××市 北部"
+              },
+              {
+                "text": "××市 中央部"
+              },
+              {
+                "text": "〇△市 東部"
+              },
+              {
+                "text": "△□町 南部"
+              }
+            ]
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "別途、交通費をいただくエリア",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-list-7",
+      "attributes": {
+        "colClass": "clm_2",
+        "columnWidths": [
+          1
+        ],
+        "fontSizePc": 16,
+        "fontSizeSp": 15,
+        "rowGapPc": 14,
+        "columnGapPc": 24,
+        "listGroups": [
+          {
+            "contents": [
+              {
+                "text": "●●市（全域）"
+              },
+              {
+                "text": "▲▲市（全域）"
+              },
+              {
+                "text": "■■町（全域）"
+              },
+              {
+                "text": "◆◆村（全域）"
+              }
+            ]
+          }
+        ],
+        "colorLiSvg": "#9aa7b4"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ 上記は目安です。同じ市内でも場所によって変わることがあります。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "エリアを相談する",
+        "textSub": "＼ 記載のない地域もご相談ください ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

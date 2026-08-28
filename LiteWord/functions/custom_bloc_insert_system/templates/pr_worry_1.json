@@ -1,0 +1,76 @@
+{
+  "title": "こんなお悩み（チェックリスト＋受け）",
+  "description": "【型B：説明が主役】見出し＋ひとこと＋2列のチェックリスト6件＋受けの一文＋相談ボタン。ページの前半に置いて、悩みから解決につなげる導入セクションに。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "こんなお悩みはありませんか",
+        "subTitle": "PROBLEM",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "ご相談にみえる方から、よくうかがう内容です。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-list-5",
+      "attributes": {
+        "listColumns": 1,
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/worry_01.webp",
+        "leftItems": [
+          "何から始めればいいか分からない",
+          "費用がいくらかかるのか不安",
+          "相談できる相手がいない",
+          "忙しくて後回しになっている",
+          "以前どこかで失敗した",
+          "強く勧められるのが苦手"
+        ],
+        "rightItems": []
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "<strong>ひとつでも当てはまったら、まずお話だけ聞かせてください。</strong><br>その場でお決めいただく必要はありません。うかがったうえで「今は必要ありません」とお伝えすることもあります。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "無料で相談してみる",
+        "textSub": "＼ 話を聞くだけでも構いません ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

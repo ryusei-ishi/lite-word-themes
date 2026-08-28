@@ -1,0 +1,87 @@
+{
+  "title": "店内の様子（写真グリッド5枚）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋写真グリッド5枚＋補足。店内・施設・雰囲気の紹介に。写真1枚ずつに別々のリンクを設定できます。実績・事例は文字が必要なので別のテンプレートを使ってください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "店内の様子",
+        "subTitle": "GALLERY",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "はじめての方が入りやすいよう、中の様子を載せています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-image-1",
+      "attributes": {
+        "columnsPc": 5,
+        "columnsSp": 2,
+        "gapPc": 12,
+        "gapSp": 8,
+        "imgBorderRadius": 6,
+        "images": [
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/gallery_01.webp",
+            "altText": "入口から見た店内",
+            "linkUrl": ""
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/gallery_02.webp",
+            "altText": "商品棚",
+            "linkUrl": ""
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/gallery_03.webp",
+            "altText": "施術スペース",
+            "linkUrl": ""
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/gallery_04.webp",
+            "altText": "洗面まわり",
+            "linkUrl": ""
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/gallery_05.webp",
+            "altText": "待合スペース",
+            "linkUrl": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お一人でお越しの方がほとんどです。お子さま連れも歓迎しています。<br>ベビーカーのまま入っていただけます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

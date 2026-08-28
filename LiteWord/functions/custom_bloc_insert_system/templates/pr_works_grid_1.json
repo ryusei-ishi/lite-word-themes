@@ -1,0 +1,85 @@
+{
+  "title": "実績・事例（事例カード4件）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋事例カード4件（種別・内容・結果）＋一覧ボタン。施工事例・制作実績・導入事例に。写真だけのギャラリーとは別物として使えます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "実績・事例",
+        "subTitle": "WORKS",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "これまでお手伝いした事例の一部です。<br>どんなご相談から、どこがどう変わったかを載せています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-list-6",
+      "attributes": {
+        "colorTitle": "#333333",
+        "fontSizeTtlSp": 16,
+        "items": [
+          {
+            "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/works_01.webp",
+            "label": "店舗改装",
+            "title": "棚の高さを見直し",
+            "description": "「奥の商品が見てもらえない」というご相談から。棚を低くして視線を通したところ、奥まで足を運ぶ方が増えました。"
+          },
+          {
+            "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/works_02.webp",
+            "label": "新規開業",
+            "title": "カウンターを設計",
+            "description": "一人で回せる店にしたい、というご要望。動く距離が短くなるよう配置し、忙しい時間帯もお待たせしなくなりました。"
+          },
+          {
+            "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/works_03.webp",
+            "label": "待合の改善",
+            "title": "待つ場所を作った",
+            "description": "立ったままお待たせしていた場所に、腰かけと荷物置きを。滞在中の居心地が変わったと言っていただきました。"
+          },
+          {
+            "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/works_04.webp",
+            "label": "外まわり",
+            "title": "入口を明るく",
+            "description": "「入りづらい」と言われていた入口を、中の様子が見える形に。通りがかりの方のご来店が増えました。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "事例をもっと見る",
+        "textSub": "＼ 似た事例があるかもしれません ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

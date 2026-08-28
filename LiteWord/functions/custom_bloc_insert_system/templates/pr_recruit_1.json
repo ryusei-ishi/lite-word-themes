@@ -1,0 +1,387 @@
+{
+  "title": "採用情報（募集要項の表＋選考の流れ4ステップ）",
+  "description": "【型A：表が主役】見出し＋募集要項の表＋選考の流れ4ステップ＋応募への導線。求人・採用ページに。条件はご自身の募集内容に、選考の流れは実際の進め方に合わせて書き換えてください。ステップは1ブロック＝1段なので、増やすときはカードごとコピーしてください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "採用情報",
+        "subTitle": "RECRUIT",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "一緒に働く仲間を募集しています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "募集要項",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 200,
+        "dtFixedSp": true,
+        "dtWidthSp": 100,
+        "dtBgColor": "#f7f9fb",
+        "dlBorderColor": "#dfe4ea",
+        "rowBorderColor": "#dfe4ea",
+        "dtBorderColor": "#dfe4ea",
+        "dtFontWeight": "600",
+        "cellPaddingPc": 16,
+        "cellPaddingSp": 12,
+        "fontSizePc": 16,
+        "fontSizeSp": 15,
+        "rows": [
+          {
+            "dtText": "職種",
+            "ddText": "〇〇スタッフ（未経験の方も歓迎します）",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "雇用形態",
+            "ddText": "正社員 ／ パート・アルバイト",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "勤務地",
+            "ddText": "〒000-0000　〇〇県〇〇市〇〇町1-2-3　（〇〇駅から徒歩5分）",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "勤務時間",
+            "ddText": "9:00 - 18:00（実働8時間・休憩60分）　※シフト制",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "給与",
+            "ddText": "月給 220,000円 〜 350,000円<br>パート・アルバイトは時給 1,100円 〜（経験・能力を考慮のうえ決定します）",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "休日",
+            "ddText": "週休2日制 ／ 年末年始・夏季休暇 ／ 有給休暇",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "待遇・福利厚生",
+            "ddText": "各種社会保険完備 ／ 交通費支給（月30,000円まで） ／ 資格取得支援制度 ／ 制服貸与 ／ 昇給年1回 ／ 賞与年2回<br>入社後は先輩がついて仕事を覚えていただくので、はじめての方でも安心してください。",
+            "pcClm1": true,
+            "spClm1": true,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "応募資格",
+            "ddText": "学歴・年齢・経験は問いません。<br>普通自動車免許（AT限定可）をお持ちの方を歓迎します。",
+            "pcClm1": true,
+            "spClm1": true,
+            "bgColor": "",
+            "textColor": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "選考の流れ",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-step-8",
+      "attributes": {
+        "stepNo": "01"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "応募する",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "ページ下のボタンかお電話でご連絡ください。24時間受け付けています。",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-pr-step-8",
+      "attributes": {
+        "stepNo": "02"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "書類を確認します",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "履歴書を拝見し、3営業日以内にこちらからご連絡します。",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-pr-step-8",
+      "attributes": {
+        "stepNo": "03"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "面接（1回）",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "職場をご覧いただきながらお話しします。所要時間は30分ほどです。",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-pr-step-8",
+      "attributes": {
+        "stepNo": "04"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "採用・入社",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "入社日はご都合に合わせて調整します。まずはご希望をお聞かせください。",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ ご応募いただいた情報は採用選考の目的にのみ使用します。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "0px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "応募する",
+        "textSub": "＼ 話を聞くだけでも歓迎です ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

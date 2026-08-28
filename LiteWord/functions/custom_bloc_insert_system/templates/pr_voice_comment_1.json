@@ -1,0 +1,106 @@
+{
+  "title": "お客様の声（吹き出し・2件）",
+  "description": "【型B：説明が主役】見出し＋ひとこと＋顔写真つきの吹き出しコメント2件＋一覧ボタン。感想・レビュー・インタビューの掲載に。吹き出しの中は自由に編集できます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "お客様の声",
+        "subTitle": "VOICE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "ご利用いただいた方に、<br>来る前の不安と、実際どうだったかをうかがいました。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-comment-3",
+      "attributes": {
+        "comment3ImageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/voice_01.webp",
+        "comment3AlignItems": "end"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "<strong>30代・女性 ／ はじめてのご利用</strong>"
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "正直、何を頼めばいいのかも分かっていませんでした。それでも状況を聞いたうえで「今はここまでで十分です」と言っていただけて、必要のないものを勧められないんだ、と安心できました。"
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-comment-3",
+      "attributes": {
+        "comment3ImageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/voice_02.webp",
+        "comment3AlignItems": "end"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "<strong>40代・男性 ／ 3年目のご利用</strong>"
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "以前ほかで失敗しているので不安でしたが、作業の前に写真つきで説明があり、終わったあとも同じように報告をいただけました。金額も最初の見積もりから動きませんでした。"
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "お客様の声をもっと見る",
+        "textSub": "＼ 同じお悩みの方の声もあります ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

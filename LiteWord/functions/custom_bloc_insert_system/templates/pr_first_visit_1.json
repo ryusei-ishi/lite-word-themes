@@ -1,0 +1,134 @@
+{
+  "title": "はじめての方へ（キャラクター付きQ&A・4件／フラットイラスト）",
+  "description": "【型B：説明が主役】見出し＋初めての方の不安に答える対話形式のQ&A4件＋相談への導線。費用・所要時間・持ち物・断れるかの4つに絞ってあります。キャラクターはフラットイラストで、線画で色数が少ないので、士業・医療・工務店まで業種を選びません。同じ内容で絵柄違いのテンプレートが3つあります（フラットイラスト／アニメテイスト／水彩）。よくある質問全般は別のセクション（よくある質問）をお使いください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "はじめての方へ",
+        "subTitle": "FIRST VISIT",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "初めてご利用の方から、よくいただくご質問をまとめました。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "bottom": "0px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-qa-2",
+      "attributes": {
+        "maxWidth": 900
+      },
+      "innerBlocks": [
+        {
+          "name": "wdl/lw-pr-qa-2-item",
+          "attributes": {
+            "qImage": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/qa_q_01.webp",
+            "qText": "見積もりだけお願いすることはできますか？",
+            "aImage": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/qa_a_01.webp"
+          },
+          "innerBlocks": [
+            {
+              "name": "core/paragraph",
+              "attributes": {
+                "content": "もちろん可能です。お見積もりは無料で、その場でご契約いただく必要はありません。内容を見てから、ゆっくりご検討ください。"
+              },
+              "innerBlocks": []
+            }
+          ]
+        },
+        {
+          "name": "wdl/lw-pr-qa-2-item",
+          "attributes": {
+            "qImage": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/qa_q_01.webp",
+            "qText": "どのくらい時間がかかりますか？",
+            "aImage": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/qa_a_01.webp"
+          },
+          "innerBlocks": [
+            {
+              "name": "core/paragraph",
+              "attributes": {
+                "content": "初回のご相談は30分ほどです。作業そのものにかかる期間は内容によって変わりますので、お見積もりのときに目安をお伝えします。"
+              },
+              "innerBlocks": []
+            }
+          ]
+        },
+        {
+          "name": "wdl/lw-pr-qa-2-item",
+          "attributes": {
+            "qImage": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/qa_q_01.webp",
+            "qText": "事前に何を用意すればいいですか？",
+            "aImage": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/qa_a_01.webp"
+          },
+          "innerBlocks": [
+            {
+              "name": "core/paragraph",
+              "attributes": {
+                "content": "特にご準備は要りません。図面やお写真、以前の見積書などがあればお持ちいただけると、より具体的なご提案ができます。"
+              },
+              "innerBlocks": []
+            }
+          ]
+        },
+        {
+          "name": "wdl/lw-pr-qa-2-item",
+          "attributes": {
+            "qImage": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/qa_q_01.webp",
+            "qText": "話を聞いたうえで断ってもいいですか？",
+            "aImage": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/qa_a_01.webp"
+          },
+          "innerBlocks": [
+            {
+              "name": "core/paragraph",
+              "attributes": {
+                "content": "もちろんです。無理におすすめすることはありません。他社さんと比べていただいたうえで決めていただいて構いません。"
+              },
+              "innerBlocks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "相談してみる",
+        "textSub": "＼ ここに無いことも気軽に聞いてください ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

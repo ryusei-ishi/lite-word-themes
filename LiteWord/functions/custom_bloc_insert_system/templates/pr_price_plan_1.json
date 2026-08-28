@@ -1,0 +1,176 @@
+{
+  "title": "料金プラン（3プラン比較・おすすめ強調つき）",
+  "description": "【型A：表が主役】見出し＋選び方のひとこと＋3プランの比較表（真ん中を強調）＋注釈＋相談ボタン。料金・コース・会員種別の案内に。スマホでは横スクロールします。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "料金プラン",
+        "subTitle": "PRICE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "ご利用の頻度に合わせて、3つのプランをご用意しています。<br>途中でのプラン変更も、いつでも承ります。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-1",
+      "attributes": {
+        "columnCount": 4,
+        "showScrollHint": true,
+        "useIndividualHeaderBg": true,
+        "cellWidth1": 230,
+        "cellWidth2": 190,
+        "cellWidth3": 190,
+        "cellWidth4": 190,
+        "cellWidth1Sp": 150,
+        "cellWidth2Sp": 130,
+        "cellWidth3Sp": 130,
+        "cellWidth4Sp": 130,
+        "headers": [
+          {
+            "text": "ライト",
+            "bgColor": "#8ba2b8"
+          },
+          {
+            "text": "スタンダード<br><span style=\"font-size:13px;font-weight:400;opacity:.85\">いちばん人気</span>",
+            "bgColor": "var(--color-main)"
+          },
+          {
+            "text": "プレミアム",
+            "bgColor": "#8ba2b8"
+          }
+        ],
+        "rows": [
+          {
+            "header": "月額料金",
+            "cells": [
+              {
+                "content": "<strong>5,500円</strong>"
+              },
+              {
+                "content": "<strong>9,800円</strong>"
+              },
+              {
+                "content": "<strong>15,000円</strong>"
+              }
+            ]
+          },
+          {
+            "header": "ご利用回数",
+            "cells": [
+              {
+                "content": "月1回"
+              },
+              {
+                "content": "月2回"
+              },
+              {
+                "content": "回数制限なし"
+              }
+            ]
+          },
+          {
+            "header": "1回あたりの時間",
+            "cells": [
+              {
+                "content": "30分"
+              },
+              {
+                "content": "60分"
+              },
+              {
+                "content": "90分"
+              }
+            ]
+          },
+          {
+            "header": "個別カウンセリング",
+            "cells": [
+              {
+                "content": "－"
+              },
+              {
+                "content": "○"
+              },
+              {
+                "content": "○"
+              }
+            ]
+          },
+          {
+            "header": "当日のご予約",
+            "cells": [
+              {
+                "content": "－"
+              },
+              {
+                "content": "△ <span style=\"font-size:13px;font-weight:400;opacity:.85\">空きがあれば</span>"
+              },
+              {
+                "content": "○"
+              }
+            ]
+          },
+          {
+            "header": "こんな方に",
+            "cells": [
+              {
+                "content": "まずは試したい"
+              },
+              {
+                "content": "続けて通いたい"
+              },
+              {
+                "content": "しっかり整えたい"
+              }
+            ]
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※すべて税込価格です。お支払いは現金・各種カード・電子マネーがご利用いただけます。<br>※プランの変更・解約は、翌月ぶんから反映されます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 16,
+        "tbHeight": 12,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "料金について相談する",
+        "textSub": "＼ どのプランが合うか一緒に考えます ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

@@ -13,7 +13,8 @@
         "description": "高機能チェックリスト。カラム分割+グループ化対応。カスタムアイコン可。特徴一覧・対応サービス列挙に",
         "excludeFromAutoSelect": false,
         "contentAttributes": ["listGroups"],
-        "imageAttributes": ["iconUrl"]
+        "imageAttributes": ["iconUrl"],
+        "notes": "listGroups は [{ contents: [{ text: 〇〇市（全域） }] }] の形で（キーは contents と text）、**1グループ＝1つの ul**。グループを増やすと ul が縦に積まれる（間隔は innerRowGapPc）。⚠️ グループに見出しは付けられない（contents しか持たない）ので、「無料エリア」「別途交通費」のように分けたいときは、このブロックを2つ置いてそれぞれの前に見出しブロックを置く。🚨 columnWidths は **グループ（ul）の並べ方** であって ul の中の列数ではない。既定が [1, 2] なので、グループが1つしかないとリストが左の 1fr に押し込まれ、右半分が空いて幅が半分になる（2026-08-28 に実際に踏んだ）。グループが1つなら [1] にする。ul の中の列数は colClass のほう（clm_1＝1列 / clm_2＝2列）で、clm_2 なら項目数は偶数にする（奇数だと最後の行が片側だけ空く）。bgColor は ul に直接かかるが li に余白が無いので、敷くと文字が縁に貼り付いて窮屈になる。区別を付けたいだけなら colorLiSvg（チェックの色）を変えるほうがよい。"
     },
     "supports":  {
                      "anchor":  true

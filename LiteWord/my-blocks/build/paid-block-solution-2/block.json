@@ -7,13 +7,14 @@
 	"category": "lw-content",
 	"icon": "lightbulb",
 	"aiHint": {
-		"description": "ソリューションカード。タイトル+画像+テキストの配列。課題解決の提案に",
+		"description": "色帯の見出しの下に、画像＋短い一言のカードが3列で並ぶ帯。ひと言で言い切れるものを3つ挙げる場面に（こんなことが解決できます・お支払い方法・3つのお約束）",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": [
 			"title",
 			"items"
 		],
-		"imageAttributes": []
+		"imageAttributes": ["items.imgSrc"],
+		"notes": "🚨 カードは3列で固定。grid-template-columns:repeat(3,1fr) にメディアクエリが1つも当たっていないので、スマホでも1列にならない。代わりに文字が 20px→16→14→11px まで小さくなる。だから items はちょうど3つにすること（4つ入れると3＋1になって最後の1枚だけが次の段に取り残される）。🚨 1件の text は1行9文字までにする。375px幅だと1列が約95pxで、10文字以上は語の途中で折り返す。長い説明が要るなら lw-pr-list-6 や paid-block-content-7 を使う。text は source:html なので strong と br が使える（改行コードは効かない）。1行目を strong の見出し、2行目を短い中身にすると3列でも読める。🚨 colorMain を空にすると、項目どうしの区切り線が消える。線は save() が出すインライン style（li + li::before の background）でしか描かれず、style.css 側に色が無いため。既定の var(--color-main) のままにしておけばサイトのメインカラーに自動で合う（このブロックは値を background と borderColor にそのまま入れるだけなので、lw-pr-custom-title-11〜14 のような自己参照の問題は起きない）。imageSize は normal か icon の2つだけ。normal は幅いっぱいに 16/10 で cover、icon は 120×100 に contain。blockId は書かない（編集画面が自動で振る）。ブロック自身が margin:64px 0 を持つので前後にスペーサーを足さない。⚠️ title の既定値が「このな事が解決できます」で誤字（正しくは「こんな事が」）。必ず自分で title を入れること。"
 	},
 	"supports": {
 		"anchor": true
@@ -42,6 +43,13 @@
 					"source": "attribute",
 					"selector": "img",
 					"attribute": "src"
+				},
+				"alt": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "img",
+					"attribute": "alt",
+					"default": ""
 				},
 				"text": {
 					"type": "string",

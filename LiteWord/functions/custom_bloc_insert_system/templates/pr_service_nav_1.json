@@ -1,0 +1,96 @@
+{
+  "title": "サービス一覧ナビ（丸いバッジ6つ・各ページへの入口）",
+  "description": "【型C：写真が主役】背景写真の帯の上に、丸いバッジを6つ並べたサイト内ナビ。トップページの中ほどや、各ページの終わりに置いて「次にどこを見ればいいか」を示します。アイコンはブロックの設定から41種の中で入れ替えられます。🚨 各バッジのリンク先は仮に /first/ /menu/ /flow/ /staff/ /gallery/ /access/ を入れてあります。実際のページのURLに変更してください（空にすると押せなくなり、丸の中の矢印も消えます）。",
+  "blocks": [
+    {
+      "name": "wdl/paid-block-link-2",
+      "attributes": {
+        "mainTitle": "サービスのご案内",
+        "subTitle": "SERVICE",
+        "titleBdColor": "#c8a96a",
+        "mainExplanation": "知りたいことから選べます。<br>はじめての方はいちばん上からどうぞ。",
+        "contents": [
+          {
+            "ttl": "はじめての方へ",
+            "text": "流れとご準備",
+            "url": "/first/",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d=\"M96 0C43 0 0 43 0 96L0 416c0 53 43 96 96 96l288 0 32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l0-64c17.7 0 32-14.3 32-32l0-320c0-17.7-14.3-32-32-32L384 0 96 0zm0 384l256 0 0 64L96 448c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16l192 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-192 0c-8.8 0-16-7.2-16-16zm16 48l192 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-192 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z\"/></svg>",
+            "imageUrl": ""
+          },
+          {
+            "ttl": "メニュー・料金",
+            "text": "全メニューと価格",
+            "url": "/menu/",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 384 512\"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d=\"M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 288c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128z\"/></svg>",
+            "imageUrl": ""
+          },
+          {
+            "ttl": "ご利用の流れ",
+            "text": "ご予約から当日まで",
+            "url": "/flow/",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\"M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z\"/></svg>",
+            "imageUrl": ""
+          },
+          {
+            "ttl": "スタッフ紹介",
+            "text": "担当する人のこと",
+            "url": "/staff/",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 448 512\"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d=\"M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z\"/></svg>",
+            "imageUrl": ""
+          },
+          {
+            "ttl": "店内の様子",
+            "text": "写真でご覧ください",
+            "url": "/gallery/",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d=\"M149.1 64.8L138.7 96 64 96C28.7 96 0 124.7 0 160L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-256c0-35.3-28.7-64-64-64l-74.7 0L362.9 64.8C356.4 45.2 338.1 32 317.4 32L194.6 32c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z\"/></svg>",
+            "imageUrl": ""
+          },
+          {
+            "ttl": "アクセス",
+            "text": "地図・営業時間",
+            "url": "/access/",
+            "icon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 576 512\"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d=\"M575.8 255.5c0 18-15 32.1-32 32.1l-32 0 .7 160.2c0 2.7-.2 5.4-.5 8.1l0 16.2c0 22.1-17.9 40-40 40l-16 0c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1L416 512l-24 0c-22.1 0-40-17.9-40-40l0-24 0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32l0 64 0 24c0 22.1-17.9 40-40 40l-24 0-31.9 0c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2l-16 0c-22.1 0-40-17.9-40-40l0-112c0-.9 0-1.9 .1-2.8l0-69.7-32 0c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z\"/></svg>",
+            "imageUrl": ""
+          }
+        ],
+        "bgImageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/nav_bg_01.webp",
+        "bgImageAlt": "",
+        "bgFilterColor": "#000",
+        "bgFilterOpacity": 0.65,
+        "borderColor": "#ffffff",
+        "borderSize": 1,
+        "backgroundColor": "#000000",
+        "backgroundOpacity": 0.25
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "お問い合わせはこちら",
+        "textSub": "＼ どれを見ればよいか一緒に考えます ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

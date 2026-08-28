@@ -1,0 +1,173 @@
+{
+  "title": "お支払い・キャンセル規定（支払い方法3つ＋変更の決まり）",
+  "description": "【型A：表が主役】見出し＋ひとこと＋支払い方法3つ（色帯＋写真つき3列）＋変更・キャンセルの表4行＋例外の断り＋問い合わせボタン。料金ページの下や、予約制のサービスページの締めに。金額は書かず割合だけなので業種を選びません。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "お支払い・ご利用について",
+        "subTitle": "PAYMENT",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "当日のお支払い方法と、ご予約の変更・キャンセルについてご案内します。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "bottom": "0px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-solution-2",
+      "attributes": {
+        "title": "お支払いは3つの方法から選べます",
+        "colorMain": "var(--color-main)",
+        "items": [
+          {
+            "imgSrc": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/pay_01.webp",
+            "alt": "受付カウンターに置かれた財布とトレー",
+            "imageSize": "normal",
+            "text": "<strong>現金</strong><br>領収書も発行します"
+          },
+          {
+            "imgSrc": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/pay_02.webp",
+            "alt": "カード決済端末にカードをかざしているところ",
+            "imageSize": "normal",
+            "text": "<strong>クレジットカード</strong><br>VISA / Master / JCB"
+          },
+          {
+            "imgSrc": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/pay_03.webp",
+            "alt": "カウンターのQRコードをスマートフォンで読み取っているところ",
+            "imageSize": "normal",
+            "text": "<strong>QRコード決済</strong><br>PayPay / 楽天ペイ"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "ご予約の変更・キャンセルについて",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "20px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 200,
+        "dtFixedSp": true,
+        "dtWidthSp": 120,
+        "dtBgColor": "#f7f9fb",
+        "dlBorderColor": "#dfe4ea",
+        "rowBorderColor": "#dfe4ea",
+        "dtBorderColor": "#dfe4ea",
+        "dtFontWeight": "600",
+        "cellPaddingPc": 16,
+        "cellPaddingSp": 12,
+        "fontSizePc": 16,
+        "fontSizeSp": 15,
+        "rows": [
+          {
+            "dtText": "変更",
+            "ddText": "前日までにご連絡いただければ、日時の変更は何度でも無料です",
+            "pcClm1": false,
+            "spClm1": false
+          },
+          {
+            "dtText": "前日まで",
+            "ddText": "キャンセル料はいただきません",
+            "pcClm1": false,
+            "spClm1": false
+          },
+          {
+            "dtText": "当日",
+            "ddText": "ご利用料金の50%",
+            "pcClm1": false,
+            "spClm1": false
+          },
+          {
+            "dtText": "連絡なし",
+            "ddText": "ご利用料金の100%",
+            "pcClm1": false,
+            "spClm1": false
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "<strong>体調不良や交通機関の乱れなど、やむを得ない事情のときはキャンセル料をいただきません。</strong><br>まずはお電話ください。次のご予約の相談までその場でおうかがいします。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ キャンセル料は、次回ご来店時にあわせてお支払いいただけます。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "0px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "ご予約・お問い合わせ",
+        "textSub": "＼ ご不明な点はお気軽に ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

@@ -7,8 +7,8 @@
 	"category": "lw-contact",
 	"icon": "email",
 	"aiHint": {
-		"description": "お問い合わせ（背景画像付き）。見出し+説明+フォーム表示",
-		"excludeFromAutoSelect": true,
+		"description": "実際に送信できるお問い合わせフォーム。背景写真の帯の中に見出し＋説明＋フォーム。お問い合わせページ本体に",
+		"excludeFromAutoSelect": false,
 		"contentAttributes": [
 			"mainTitle",
 			"subTitle",
@@ -18,7 +18,7 @@
 			"bgImageUrl",
 			"bgImageUrlSp"
 		],
-		"excludeReason": "フォームブロック。コンテンツ生成は見出し部分のみ"
+		"notes": "フォーム本体は属性ではなく、save() が書き出すショートコード [lw_mail_form_select id=1] を、表示のときに PHP（functions/mail_form/form_put.php）が展開して作る。だから項目を増やす・減らすのは管理画面の Lwお問い合わせ からで、AI が書けるのはmainTitle / subTitle / description の3つだけ。フォームの中身は生成しなくてよい。⚠️ フォームを1つも作っていないサイトでも空にならない。lw_mail_form_set_1 が無ければお名前／メールアドレス／お問合せ内容 の3項目が既定で出て、送信先も未設定ならWordPress の管理者メールアドレスに届く（2026-08-28 に form_put.php と mail-ajax.php で確認）。⚠️ mainTitleLevel の既定は h1。ページの途中に置くセクションでは h2 にすること。⚠️ 見出しは main が48px・sub が16px で、文字サイズは属性で変えられない。他のセクションと語順をそろえるなら main に日本語・sub に英字を入れるが、その分だけ大きく出る。⚠️ mainTitle と subTitle を空にすると空の見出しタグがHTMLに残るので空にしない。"
 	},
 	"supports": {
 		"anchor": true

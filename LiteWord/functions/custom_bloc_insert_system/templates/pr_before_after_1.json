@@ -1,0 +1,52 @@
+{
+  "title": "ビフォーアフター（回数と期間つき）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋左右の比較画像＋注釈。ブロックを複製すれば事例を増やせます。施術結果・リフォーム事例・清掃前後の比較に。回数と期間を添えると信頼されやすくなります。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "施術前と施術後",
+        "subTitle": "BEFORE / AFTER",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "実際にご利用いただいた方の変化です。<br>何回・どのくらいの期間かかったかも、あわせてご覧ください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-before-after-3",
+      "attributes": {
+        "beforeImageUrl": "https://lite-word.com/sample_img/before_after/1_1.webp",
+        "afterImageUrl": "https://lite-word.com/sample_img/before_after/1_2.webp",
+        "beforeText": "Before",
+        "afterText": "After",
+        "beforeDescription": "30代女性・施術前",
+        "afterDescription": "全8回 ／ 約4か月"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※写真はイメージです。効果や仕上がりには個人差があり、必要な回数・期間にも幅があります。<br>カウンセリングのときに、その方に合わせた見通しをお伝えします。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

@@ -8,11 +8,13 @@
 	"icon": "editor-table",
 	"description": "dl/dt/dd形式のテーブルブロック。各セルにブロックを追加可能。",
 	"aiHint": {
-		"description": "テーブル（InnerBlocks）。各セルにInnerBlocksで自由コンテンツ",
-		"excludeFromAutoSelect": true,
-		"contentAttributes": [],
+		"description": "項目名＋内容の2カラムの表。会社概要・事業者情報・仕様・料金の内訳など、項目が並ぶ情報に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"rows"
+		],
 		"imageAttributes": [],
-		"excludeReason": "InnerBlocks使用のテーブル。AI直接生成非推奨"
+		"notes": "rows は [{\"dtText\":\"商号\",\"ddText\":\"株式会社〇〇\",\"pcClm1\":null,\"spClm1\":null,\"bgColor\":\"\",\"textColor\":\"\"}] の形。属性だけで完成するので InnerBlocks は要らない（2026-08-28 に実際の save() で描画して確認。それ以前ここに『InnerBlocks使用のテーブル。AI直接生成非推奨』と書いてあったのは誤りで、そのせいで候補から外れていた）。pcClm1 / spClm1 を true にするとその行だけ項目名が上・内容が下の全幅になるので、事業内容のように文が長い項目に使う。ddText には <br> が使える。dtFixedSp:true のとき、スマホの項目名は dtWidthSp の幅で折り返す（100px なら4文字まで。『許可・登録』の5文字は2行に割れた）ので項目名は短くする。"
 	},
 	"supports": {
 		"anchor": true,

@@ -1,0 +1,458 @@
+{
+  "title": "プライバシーポリシー（個人情報の取り扱い・8項目のひな形）",
+  "description": "【型B：説明が主役】見出し＋本文8項目＋お問い合わせ窓口。お問い合わせフォームを置くサイトに必ず1枚必要な「個人情報の取り扱い」のひな形です。固定ページを1枚作って貼れば、そのまま公開できる文章が入っています。〇〇（事業者名・住所・電話・メール）と制定日を、ご自身のものに書き換えてください。⚠️ 一般的な内容のひな形です。実際に取得している情報・利用目的・Cookieの利用状況と合っているか、公開前に必ず読み直してください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "プライバシーポリシー",
+        "subTitle": "PRIVACY POLICY",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "〇〇（以下「当社」といいます）は、お問い合わせやサービスのご提供にあたってお預かりする個人情報を、次のとおり取り扱います。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 900,
+        "waku1PaddingTopPc": 40,
+        "waku1PaddingBottomPc": 40,
+        "waku1PaddingLeftPc": 40,
+        "waku1PaddingRightPc": 40,
+        "waku1PaddingTopSp": 24,
+        "waku1PaddingBottomSp": 24,
+        "waku1PaddingLeftSp": 18,
+        "waku1PaddingRightSp": 18,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderWidthSp": 1,
+        "waku1BorderColorPc": "#e5e9ee",
+        "waku1BorderColorSp": "#e5e9ee",
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#ffffff"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "1. 個人情報の取得について",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "17px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "10px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "当社は、お問い合わせフォーム、お電話、ご来店・ご訪問の際に、お名前、ご住所、電話番号、メールアドレスなど、お客様を識別できる情報を、適法かつ公正な手段で取得します。取得にあたっては、あらかじめ利用目的をお知らせします。",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "2. 利用目的",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "17px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "30px",
+                  "bottom": "10px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "お預かりした個人情報は、次の目的の範囲内でのみ利用します。<br>・お問い合わせ、ご相談、ご予約への対応<br>・サービスのご提供、お見積り、ご請求<br>・ご契約後のアフターフォロー<br>・ご希望の方への、新しいサービスのご案内<br>・サービス改善のための分析（個人は特定しません）<br>これ以外の目的で利用する必要が生じた場合は、あらためてご本人の同意をいただきます。",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "3. 第三者への提供",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "17px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "30px",
+                  "bottom": "10px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "お預かりした個人情報は、次の場合を除いて、ご本人の同意なく第三者へ提供することはありません。<br>・法令に基づき公的機関から開示を求められた場合<br>・人の生命、身体または財産を守るために必要で、ご本人の同意を得ることが難しい場合",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "4. 業務の委託",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "17px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "30px",
+                  "bottom": "10px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "サービスをご提供するために、配送、決済、システムの保守などの業務を外部に委託することがあります。この場合、委託先へお渡しするのは業務に必要な範囲の情報だけとし、適切に取り扱われるよう契約を結び、管理を行います。",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "5. 安全管理",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "17px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "30px",
+                  "bottom": "10px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "個人情報の漏えい、紛失、改ざんを防ぐため、取り扱う担当者を限り、保管場所の施錠や通信の暗号化（SSL）など、必要な安全対策を行います。保管する必要がなくなった情報は、速やかに消去または廃棄します。",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "6. 開示・訂正・利用停止のご請求",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "17px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "30px",
+                  "bottom": "10px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "個人情報の開示、訂正、追加、削除、利用停止のお申し出があった場合は、ご本人であることを確認したうえで、法令にしたがって速やかに対応します。お申し出は、このページ下部の窓口へご連絡ください。",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "7. Cookie（クッキー）とアクセス解析",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "17px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "30px",
+                  "bottom": "10px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "当サイトでは、ご利用の状況を把握して表示やサービスを改善するために、Cookie を利用したアクセス解析ツールを使用することがあります。取得するのは、ご覧になったページや滞在時間などの情報で、お名前などお客様個人を特定できる情報は含まれません。ブラウザの設定から Cookie の受け取りを拒否することもできます。",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "8. 本方針の変更",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "17px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "30px",
+                  "bottom": "10px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "法令の改正やサービス内容の変更にあわせて、本方針を見直すことがあります。変更した場合は、当サイト上でお知らせします。",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "制定日：2026年4月1日　／　最終改定日：2026年8月1日",
+            "align": "right",
+            "style": {
+              "typography": {
+                "fontSize": "13px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "32px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1PaddingTopSp": 20,
+        "waku1PaddingBottomSp": 20,
+        "waku1PaddingLeftSp": 16,
+        "waku1PaddingRightSp": 16,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderWidthSp": 1,
+        "waku1BorderColorPc": "#dfe4ea",
+        "waku1BorderColorSp": "#dfe4ea",
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "個人情報に関するお問い合わせ窓口",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "10px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "〇〇株式会社　個人情報保護管理者<br>〒000-0000　〇〇県〇〇市〇〇町1-2-3<br>電話：000-000-0000（平日 9:00〜18:00）<br>メール：privacy@example.com",
+            "align": "center",
+            "style": {
+              "typography": {
+                "fontSize": "15px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

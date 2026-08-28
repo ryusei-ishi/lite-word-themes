@@ -1,0 +1,80 @@
+{
+  "title": "スタッフ紹介（3人・担当とひとことつき）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋スタッフカード3人（経験年数・担当・ひとこと）＋問い合わせボタン。スタッフ紹介・施術者紹介・チーム紹介に。人数を変えるときは列数もあわせてください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "スタッフ紹介",
+        "subTitle": "STAFF",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "担当する者をご紹介します。<br>ご指名も承りますので、お問い合わせのときにお申し付けください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-list-6",
+      "attributes": {
+        "columnsPC": 3,
+        "columnsSP": 1,
+        "colorTitle": "#333333",
+        "items": [
+          {
+            "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/staff_01.webp",
+            "label": "経験5年",
+            "title": "佐藤 みなみ",
+            "description": "はじめての方のご相談を主に担当しています。「聞くのが恥ずかしい」と思うようなことこそ、遠慮なくお尋ねください。"
+          },
+          {
+            "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/staff_02.webp",
+            "label": "経験12年 ／ 〇〇技能士1級",
+            "title": "田中 健一",
+            "description": "難しい案件や、他店で断られたご相談を引き受けています。できないときは、できない理由をはっきりお伝えします。"
+          },
+          {
+            "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/staff_03.webp",
+            "label": "経験8年",
+            "title": "鈴木 ゆかり",
+            "description": "ご利用後のフォローとご相談窓口を担当。前回どうだったかを覚えていますので、続きからお話しできます。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "担当者を指名して相談する",
+        "textSub": "＼ ご指名の追加料金はいただきません ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

@@ -1,0 +1,92 @@
+{
+  "title": "サービス内容（カードスライダー・4件）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋横スクロールするカードスライダー4件＋一覧ボタン。提供しているサービス・メニュー・コースの紹介に。スマホでも指でスクロールできます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "サービス内容",
+        "subTitle": "SERVICE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "ご相談から、お引き渡しのあとまで。<br>ひととおりを当社だけでお受けしています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-content-9",
+      "attributes": {
+        "autoplay": false,
+        "slides": [
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/service_01.webp",
+            "altText": "",
+            "title": "初回カウンセリング",
+            "description": "ご要望とご予算をうかがい、進め方をご提案します。約60分・費用はいただきません。",
+            "linkUrl": "",
+            "openNewTab": false
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/service_02.webp",
+            "altText": "",
+            "title": "お見積もりとご提案",
+            "description": "内容を書面でお出しします。金額はこの時点で確定し、あとから増えることはありません。",
+            "linkUrl": "",
+            "openNewTab": false
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/service_03.webp",
+            "altText": "",
+            "title": "作業・お仕上げ",
+            "description": "担当者が責任をもって進めます。進み具合はその都度、写真つきでご報告します。",
+            "linkUrl": "",
+            "openNewTab": false
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/service_04.webp",
+            "altText": "",
+            "title": "アフターメンテナンス",
+            "description": "お引き渡し後も年1回点検にうかがいます。気になることがあればいつでもご連絡ください。",
+            "linkUrl": "",
+            "openNewTab": false
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "サービスの詳細を見る",
+        "textSub": "＼ ご相談だけでも歓迎します ／",
+        "btnUrl": "",
+        "btnAlign": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}
