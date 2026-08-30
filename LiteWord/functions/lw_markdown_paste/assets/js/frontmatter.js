@@ -37,6 +37,14 @@
 		// 先頭が `---` の行でなければフロントマター無し
 		var m = text.match( /^---[ \t]*\n([\s\S]*?)\n---[ \t]*(?:\n|$)/ );
 		if ( ! m ) {
+			// 🚨 開きの --- はあるのに閉じが無いと、meta が丸ごと本文の文字になる。
+			//    黙って落ちると気づけないので知らせる。
+			if ( text.split( '\n' )[ 0 ].trim() === '---' ) {
+				result.warnings.push(
+					'フロントマターの終わりの「---」が見つかりません。' +
+						'title / category / slug / description が本文の文字になっています'
+				);
+			}
 			return result;
 		}
 

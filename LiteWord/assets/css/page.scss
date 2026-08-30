@@ -709,6 +709,8 @@ body {
     > ul:not([class]),
     > ul.wp-block-list:not([class*="is-style-li_"]),
     .wp-block-columns ul.wp-block-list:not([class*="is-style-li_"]),
+    .lw-pr-waku-1 ul.wp-block-list:not([class*="is-style-li_"]),
+    .wp-block-group ul.wp-block-list:not([class*="is-style-li_"]),
     [class^="custom-title-accordion-"] > ul:not([class*="is-style-li_"]),
     [class^="custom-title-accordion-"] > ul.wp-block-list:not([class*="is-style-li_"]) {
         margin: 1.6em auto;
@@ -735,6 +737,8 @@ body {
     > ol:not([class]),
     > ol.wp-block-list:not([class*="is-style-li_"]),
     .wp-block-columns ol.wp-block-list:not([class*="is-style-li_"]),
+    .lw-pr-waku-1 ol.wp-block-list:not([class*="is-style-li_"]),
+    .wp-block-group ol.wp-block-list:not([class*="is-style-li_"]),
     [class^="custom-title-accordion-"] > ol:not([class*="is-style-li_"]),
     [class^="custom-title-accordion-"] > ol.wp-block-list:not([class*="is-style-li_"]) {
         margin: 1.6em auto;
@@ -770,7 +774,11 @@ body {
         display: none;
     }
     .wp-block-columns ul:not([class*="is-style-li_"]),
-    .wp-block-columns ol:not([class*="is-style-li_"]) {
+    .lw-pr-waku-1 ul:not([class*="is-style-li_"]),
+    .wp-block-group ul:not([class*="is-style-li_"]),
+    .wp-block-columns ol:not([class*="is-style-li_"]),
+    .lw-pr-waku-1 ol:not([class*="is-style-li_"]),
+    .wp-block-group ol:not([class*="is-style-li_"]) {
         padding-left: 0.3em;
     }
     p.has-background,
@@ -830,6 +838,14 @@ body {
     /* テーブル */
     > p:not([class]) + .wp-block-table {
         margin-top: 1.5em;
+    }
+    /* 🚨 コードと表は上下マージンを持たないので、次に来るブロックがマージン0だと
+       ぴったりくっつく（:::box の lw-pr-waku-1 / :::bg のグループがこれに当たる）。
+       下マージンを持たせて解決する。マージンは相殺されるので、
+       すでに広く空いている組（見出しなど）の隙間は変わらない。 */
+    > .wp-block-code,
+    > .wp-block-table {
+        margin-bottom: 1.5em;
     }
     //classic editor table
     > table {

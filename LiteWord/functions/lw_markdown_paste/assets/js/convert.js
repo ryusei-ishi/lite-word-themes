@@ -1,8 +1,9 @@
 /**
  * LiteWord Markdown Paste ─ 変換の本線
  * ---------------------------------------------------------------
- * フロントマターを外す → ::: を切り出す → 素の部分は WordPress 自身の
- * 変換器（pasteHandler）に渡す → 拡張記法は blocks.js でブロックにする。
+ * 下ごしらえ（sanitize）→ フロントマターを外す → ::: を切り出す →
+ * 素の部分は WordPress 自身の変換器（pasteHandler）に渡す →
+ * 拡張記法は blocks.js でブロックにする → 最後に点検（inspect）。
  *
  * 🚨 変換をブラウザの中で終わらせるのが肝。サーバーへ完成HTMLを送ると
  *    KSES が <picture>/<svg>/<iframe> を削り、バックスラッシュも1段剥がれる
@@ -39,9 +40,10 @@
 	 * @return {{meta: Object, blocks: Array, warnings: string[], stats: Object}}
 	 */
 	function convert( markdown ) {
-		var fm = window.LWMdFrontmatter.parse( markdown );
+		var pre = window.LWMdSanitize.prepare( markdown );
+		var fm = window.LWMdFrontmatter.parse( pre.text );
 		var split = window.LWMdDirectives.split( fm.body );
-		var warnings = fm.warnings.concat( split.warnings );
+		var warnings = pre.warnings.concat( fm.warnings, split.warnings );
 
 		var blocks = [];
 		var used = {};
@@ -60,40 +62,36 @@
 			blocks = blocks.concat( made );
 		} );
 
+		var inspect = window.LWMdInspect;
+
+		var broken = inspect.countBrokenParagraphs( blocks );
+		if ( broken ) {
+			warnings.push(
+				'文の途中で切れている段落が ' + broken + '個 あります（段落の最後が「、」で終わっています）。' +
+					'AI が1つの文を空行で刻んだときに起きます。そのまま入りますが、読みにくければ書き直してください'
+			);
+		}
+
 		// 行内の飾り（:red[…] / :u[…] など）を最後にまとめて差し込む
 		if ( window.LWMdInlineFormat ) {
 			window.LWMdInlineFormat.applyToBlocks( blocks );
 		}
 
+		var stats = {
+			blockCount: blocks.length,
+			directives: used,
+			headings: inspect.countHeadings( blocks ),
+		};
+
+		// 使いすぎ・知らない飾りは最後にまとめて言う（本文には手を入れない）
+		warnings = warnings.concat( inspect.overuse( stats, inspect.scanInline( fm.body ) ) );
+
 		return {
 			meta: fm.meta,
 			blocks: blocks,
 			warnings: warnings,
-			stats: {
-				blockCount: blocks.length,
-				directives: used,
-				headings: countHeadings( blocks ),
-			},
+			stats: stats,
 		};
-	}
-
-	/**
-	 * 見出しの数を数える（貼る前の目安表示に使う）
-	 *
-	 * @param {Array} blocks
-	 * @return {number}
-	 */
-	function countHeadings( blocks ) {
-		var n = 0;
-		( blocks || [] ).forEach( function ( b ) {
-			if ( b && b.name === 'core/heading' ) {
-				n++;
-			}
-			if ( b && b.innerBlocks && b.innerBlocks.length ) {
-				n += countHeadings( b.innerBlocks );
-			}
-		} );
-		return n;
 	}
 
 	window.LWMdConvert = { convert: convert, markdownToBlocks: markdownToBlocks };

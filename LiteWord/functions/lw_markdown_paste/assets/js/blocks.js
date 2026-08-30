@@ -15,6 +15,10 @@
 	var inline = H.inline;
 	var create = H.create;
 
+	/** :::bg の背景色。Gutenberg の「背景」と同じ仕組みで、枠線は付けない */
+	var BG_COLOR = '#f6f7f8';
+	var BG_PADDING = '24px';
+
 	/* ============================================================
 	 * 各記法
 	 * ========================================================== */
@@ -29,6 +33,34 @@
 			return [ create( 'wdl/lw-pr-waku-1', {}, inner ) ];
 		}
 		return [ create( 'core/group', {}, inner ) ];
+	}
+
+	/** :::bg … ::: → 薄い背景で包む（枠線なし。Gutenberg のグループの背景） */
+	function bg( seg, ctx ) {
+		var inner = ctx.markdownToBlocks( seg.body );
+		if ( inner.length === 0 ) {
+			return [];
+		}
+		return [
+			create(
+				'core/group',
+				{
+					style: {
+						color: { background: BG_COLOR },
+						spacing: {
+							padding: {
+								top: BG_PADDING,
+								right: BG_PADDING,
+								bottom: BG_PADDING,
+								left: BG_PADDING,
+							},
+						},
+					},
+					layout: { type: 'constrained' },
+				},
+				inner
+			),
+		];
 	}
 
 	/** :::check … ::: → チェックマーク付きリスト */
@@ -129,6 +161,7 @@
 	var CTA = window.LWMdBlocksCta;
 	var HANDLERS = {
 		box: box,
+		bg: bg,
 		check: check,
 		steps: steps,
 		qa: qa,

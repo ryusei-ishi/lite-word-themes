@@ -63,9 +63,11 @@ function lw_md_paste_enqueue_block_editor_assets() {
 		'directives'    => array(),
 		'block-helpers' => array( 'wp-blocks' ),
 		'inline-format' => array(),
+		'sanitize'      => array( 'lw-md-paste-directives' ),
+		'inspect'       => array( 'lw-md-paste-directives', 'lw-md-paste-inline-format' ),
 		'blocks-cta'    => array( 'lw-md-paste-block-helpers', 'lw-md-paste-directives' ),
 		'blocks'        => array( 'lw-md-paste-blocks-cta', 'lw-md-paste-frontmatter' ),
-		'convert'       => array( 'wp-blocks', 'lw-md-paste-blocks', 'lw-md-paste-inline-format' ),
+		'convert'       => array( 'wp-blocks', 'lw-md-paste-blocks', 'lw-md-paste-inline-format', 'lw-md-paste-sanitize', 'lw-md-paste-inspect' ),
 		'apply-meta'    => array( 'wp-data', 'wp-api-fetch' ),
 		'panel'         => array(
 			'lw-md-paste-convert',

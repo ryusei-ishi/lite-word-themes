@@ -16,11 +16,36 @@
 	'use strict';
 
 	/** 対応する名前。ここに無いものは素のマークダウンとして扱う */
-	var KNOWN = [ 'box', 'check', 'steps', 'qa', 'voice', 'button', 'cta' ];
+	var KNOWN = [ 'box', 'bg', 'check', 'steps', 'qa', 'voice', 'button', 'cta' ];
 
 	var OPEN_RE = /^:::[ \t]*([a-zA-Z][a-zA-Z0-9_-]*)[ \t]*(.*)$/;
 	var CLOSE_RE = /^:::[ \t]*$/;
 	var FENCE_RE = /^[ \t]{0,3}(```+|~~~+)/;
+	/** 「:::」の書き損ない（全角が混ざる・コロンが4つ以上）。効かないので知らせる */
+	var BAD_OPEN_RE = /^[ \t]{0,3}([:：]{3,})[ \t]*(\S*)/;
+
+	/**
+	 * その行がコード囲みの記号なら、その記号を返す（違えば null）
+	 *
+	 * 🚨 ``` で始まっていても、同じ行にもう1つ ` があるなら、それは行内コード
+	 *    （```foo``` のような書き方）であって囲みではない。囲みと見なすと、
+	 *    以降の行が全部「コードの中」扱いになり、記法の検査が黙って止まる
+	 *    （実際に起きた。閉じ忘れも全角も、そこから先は一切警告が出なくなった）。
+	 *
+	 * @param {string} line
+	 * @return {string|null}
+	 */
+	function fenceOf( line ) {
+		var m = line.match( FENCE_RE );
+		if ( ! m ) {
+			return null;
+		}
+		var tail = line.slice( line.indexOf( m[ 1 ] ) + m[ 1 ].length );
+		if ( m[ 1 ].charAt( 0 ) === '`' && tail.indexOf( '`' ) !== -1 ) {
+			return null;
+		}
+		return m[ 1 ];
+	}
 
 	/**
 	 * コード囲み（``` / ~~~）の中にある行に印を付ける
@@ -35,21 +60,49 @@
 		var inside = new Array( lines.length ).fill( false );
 		var marker = null;
 		for ( var i = 0; i < lines.length; i++ ) {
-			var m = lines[ i ].match( FENCE_RE );
+			var mark = fenceOf( lines[ i ] );
 			if ( marker === null ) {
-				if ( m ) {
-					marker = m[ 1 ];
+				if ( mark ) {
+					marker = mark;
 					inside[ i ] = true; // 囲みの記号の行も中扱い
 				}
 				continue;
 			}
 			inside[ i ] = true;
 			// 閉じは同じ記号で、開いたときと同じ長さ以上
-			if ( m && m[ 1 ].charAt( 0 ) === marker.charAt( 0 ) && m[ 1 ].length >= marker.length ) {
+			if ( mark && mark.charAt( 0 ) === marker.charAt( 0 ) && mark.length >= marker.length ) {
 				marker = null;
 			}
 		}
 		return inside;
+	}
+
+	/**
+	 * 飾りの中に別の飾りが書かれていないか探す
+	 *
+	 * 🚨 入れ子は受け付けない（最初に出た閉じ ::: でその飾りは終わる）。
+	 *    黙って中身の文字として残ると書いた人が気づけないので、見つけたら知らせる。
+	 *
+	 * @param {string[]} bodyLines 飾りの中身の行
+	 * @param {number}   offset    元の本文での開始行（0始まり）
+	 * @return {string[]}
+	 */
+	function findNested( bodyLines, offset ) {
+		var inner = markFences( bodyLines );
+		var out = [];
+		bodyLines.forEach( function ( line, k ) {
+			if ( inner[ k ] ) {
+				return;
+			}
+			var m = line.match( OPEN_RE );
+			if ( m ) {
+				out.push(
+					( offset + k + 1 ) + '行目の「:::' + m[ 1 ].toLowerCase() +
+						'」は飾りの中にあります。飾りの入れ子はできないので、そのままの文字として残しました'
+				);
+			}
+		} );
+		return out;
 	}
 
 	/**
@@ -68,6 +121,21 @@
 		var segments = [];
 		var warnings = [];
 		var buffer = [];
+
+		// 全角のコロンで書かれていないか（記法として効かないので先に知らせる）
+		lines.forEach( function ( line, k ) {
+			if ( inFence[ k ] ) {
+				return;
+			}
+			var z = line.match( BAD_OPEN_RE );
+			// 正しい「:::」だけは素通り。それ以外（全角混じり・コロン4つ以上）は知らせる
+			if ( z && z[ 1 ] !== ':::' ) {
+				warnings.push(
+					( k + 1 ) + '行目の「' + z[ 1 ] + z[ 2 ] + '」は飾りの書き方が違います。' +
+						'半角のコロン3つ「:::」で書いてください（そのままの文字として残しました）'
+				);
+			}
+		} );
 
 		function flushMarkdown() {
 			if ( buffer.length === 0 ) {
@@ -118,6 +186,7 @@
 				body: lines.slice( i + 1, end ).join( '\n' ),
 				line: i + 1,
 			} );
+			warnings = warnings.concat( findNested( lines.slice( i + 1, end ), i + 1 ) );
 			i = end;
 		}
 
@@ -167,6 +236,8 @@
 		split: split,
 		parseFields: parseFields,
 		parseListItems: parseListItems,
+		markFences: markFences,
+		fenceOf: fenceOf,
 		KNOWN: KNOWN,
 	};
 } )();
