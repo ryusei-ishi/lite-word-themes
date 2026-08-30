@@ -20,6 +20,37 @@
 
 	var OPEN_RE = /^:::[ \t]*([a-zA-Z][a-zA-Z0-9_-]*)[ \t]*(.*)$/;
 	var CLOSE_RE = /^:::[ \t]*$/;
+	var FENCE_RE = /^[ \t]{0,3}(```+|~~~+)/;
+
+	/**
+	 * コード囲み（``` / ~~~）の中にある行に印を付ける
+	 *
+	 * 🚨 これが無いと、記事の中で「:::box と書きます」のような説明をコード囲みで
+	 *    見せたときに、その行が本物の記法として拾われて中身が消える。
+	 *
+	 * @param {string[]} lines
+	 * @return {boolean[]} 行ごとに「コード囲みの中か」
+	 */
+	function markFences( lines ) {
+		var inside = new Array( lines.length ).fill( false );
+		var marker = null;
+		for ( var i = 0; i < lines.length; i++ ) {
+			var m = lines[ i ].match( FENCE_RE );
+			if ( marker === null ) {
+				if ( m ) {
+					marker = m[ 1 ];
+					inside[ i ] = true; // 囲みの記号の行も中扱い
+				}
+				continue;
+			}
+			inside[ i ] = true;
+			// 閉じは同じ記号で、開いたときと同じ長さ以上
+			if ( m && m[ 1 ].charAt( 0 ) === marker.charAt( 0 ) && m[ 1 ].length >= marker.length ) {
+				marker = null;
+			}
+		}
+		return inside;
+	}
 
 	/**
 	 * 本文を断片の配列に分ける
@@ -33,6 +64,7 @@
 	 */
 	function split( body ) {
 		var lines = String( body == null ? '' : body ).split( '\n' );
+		var inFence = markFences( lines );
 		var segments = [];
 		var warnings = [];
 		var buffer = [];
@@ -49,7 +81,7 @@
 		}
 
 		for ( var i = 0; i < lines.length; i++ ) {
-			var open = lines[ i ].match( OPEN_RE );
+			var open = inFence[ i ] ? null : lines[ i ].match( OPEN_RE );
 
 			if ( ! open ) {
 				buffer.push( lines[ i ] );
@@ -63,10 +95,11 @@
 				continue;
 			}
 
-			// 閉じ ::: を探す（入れ子は受け付けない＝最初に出た閉じで終わる）
+			// 閉じ ::: を探す（入れ子は受け付けない＝最初に出た閉じで終わる。
+			// コード囲みの中の ::: は閉じとみなさない）
 			var end = -1;
 			for ( var j = i + 1; j < lines.length; j++ ) {
-				if ( CLOSE_RE.test( lines[ j ] ) ) {
+				if ( ! inFence[ j ] && CLOSE_RE.test( lines[ j ] ) ) {
 					end = j;
 					break;
 				}
