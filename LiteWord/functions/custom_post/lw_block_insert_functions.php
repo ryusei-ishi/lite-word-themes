@@ -21,7 +21,7 @@ class LwBlockInsertSystem {
             $this->template_dir_uri . '/assets/css/common.min.css',
             $this->template_dir_uri . '/assets/css/page.min.css',
             $this->template_dir_uri . '/assets/css/font_style.min.css',
-            $this->template_dir_uri . '/my-blocks/build/style-lw-button-1/style-lw-button-1.css',
+            $this->template_dir_uri . '/my-blocks/build/lw-button-1/style.css',
             $this->template_dir_uri . '/my-blocks/build/lw-button-2/style.css',
             $this->template_dir_uri . '/my-blocks/build/lw-button-3/style.css',
         ];

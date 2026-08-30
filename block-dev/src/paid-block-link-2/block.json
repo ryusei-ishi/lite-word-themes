@@ -97,6 +97,10 @@
 			"type": "string",
 			"default": "https://lite-word.com/sample_img/forest/1.webp"
 		},
+		"bgImageAlt": {
+			"type": "string",
+			"default": ""
+		},
 		"contents": {
 			"type": "array",
 			"source": "query",
@@ -132,7 +136,16 @@
 					"selector": "img.selected_image",
 					"attribute": "data-img",
 					"default": ""
-				}
+				},
+				"imageAlt": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "img.selected_image",
+					"attribute": "alt",
+					"default": ""
+				},
+				"linkType": { "type": "string", "source": "attribute", "selector": ".link", "attribute": "data-lw-link-type" },
+				"linkId": { "type": "string", "source": "attribute", "selector": ".link", "attribute": "data-lw-link-id" }
 			},
 			"default": [
 				{

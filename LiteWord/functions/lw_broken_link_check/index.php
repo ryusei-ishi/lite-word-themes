@@ -1,623 +1,312 @@
 <?php
 /**
- * リンク一覧機能
+ * リンク一覧機能 — モジュールの入口。
+ *
+ * ここには「定数・読み込み・メニュー登録」しか置かない。
+ *
+ *   guard.php          … 権限・nonce・プレミアム判定（AJAX は必ずここを通す）
+ *   store.php          … wp_lw_link_list（ページごとのリンク一覧）
+ *   results-store.php  … wp_lw_link_check_results（HTTPチェックの結果）
+ *   scan-state.php     … どちらの方式で採ったか・読めなかったページ・共通リンク（option）
+ *   class-scanner.php  … 軽いスキャン（DB内で完結）
+ *   class-crawler.php  … しっかりスキャン（公開URLを取得して解析）
+ *   class-checker.php  … HTTP ステータス判定
+ *   ajax/*.php         … AJAX ハンドラ
+ *   admin/*            … 管理画面（表示・アセット）
+ *
+ * リンクの集め方は2通りある（2026-08-22 Ryuichi 判断）。
+ * 詳しい違いと、どちらを使うべきかは scan-state.php の冒頭に書いてある。
  *
  * @package LiteWord
  */
 
-if (!defined('ABSPATH')) {
+if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 
-// 定数定義
-if (!defined('LW_BROKEN_LINK_CHECK_PATH')) {
-    define('LW_BROKEN_LINK_CHECK_PATH', get_template_directory() . '/functions/lw_broken_link_check/');
-}
-if (!defined('LW_BROKEN_LINK_CHECK_URL')) {
-    define('LW_BROKEN_LINK_CHECK_URL', get_template_directory_uri() . '/functions/lw_broken_link_check/');
-}
+/* -------------------------------------------------------------
+ * 定数
+ * ----------------------------------------------------------- */
 
-// スキャナークラスを読み込み
-$scanner_file = LW_BROKEN_LINK_CHECK_PATH . 'class-scanner.php';
-if (file_exists($scanner_file)) {
-    require_once $scanner_file;
+if ( ! defined( 'LW_BROKEN_LINK_CHECK_PATH' ) ) {
+    define( 'LW_BROKEN_LINK_CHECK_PATH', get_template_directory() . '/functions/lw_broken_link_check/' );
+}
+if ( ! defined( 'LW_BROKEN_LINK_CHECK_URL' ) ) {
+    define( 'LW_BROKEN_LINK_CHECK_URL', get_template_directory_uri() . '/functions/lw_broken_link_check/' );
 }
 
-// チェッカークラスを読み込み
-$checker_file = LW_BROKEN_LINK_CHECK_PATH . 'class-checker.php';
-if (file_exists($checker_file)) {
-    require_once $checker_file;
+// 管理メニューの slug（admin/enqueue.php が hook 名の組み立てに使う）
+if ( ! defined( 'LW_LINK_LIST_MENU_SLUG' ) ) {
+    define( 'LW_LINK_LIST_MENU_SLUG', 'lw_link_list' );
 }
 
-/**
- * テーブル名を取得
- */
-function lw_link_list_get_table_name() {
-    global $wpdb;
-    return $wpdb->prefix . 'lw_link_list';
+// AJAX の nonce アクション名
+if ( ! defined( 'LW_LINK_LIST_NONCE_ACTION' ) ) {
+    define( 'LW_LINK_LIST_NONCE_ACTION', 'lw_link_list_ajax' );
 }
 
-/**
- * データベーステーブル作成
- */
-function lw_link_list_create_table() {
-    global $wpdb;
-
-    $table_name = lw_link_list_get_table_name();
-    $charset_collate = $wpdb->get_charset_collate();
-
-    $sql = "CREATE TABLE $table_name (
-        id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-        post_id bigint(20) UNSIGNED NOT NULL,
-        post_type varchar(50) NOT NULL,
-        post_title varchar(255) NOT NULL,
-        links_json longtext NOT NULL,
-        ids_json longtext,
-        link_count int(11) NOT NULL DEFAULT 0,
-        created_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
-        updated_at datetime NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
-        PRIMARY KEY (id),
-        UNIQUE KEY post_id (post_id),
-        KEY post_type (post_type)
-    ) $charset_collate;";
-
-    require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
-    dbDelta($sql);
+// 1リクエストで処理する件数。共用サーバーのタイムアウトに収まる大きさにする
+if ( ! defined( 'LW_LINK_LIST_SCAN_BATCH' ) ) {
+    define( 'LW_LINK_LIST_SCAN_BATCH', 20 );
+}
+if ( ! defined( 'LW_LINK_LIST_CHECK_BATCH' ) ) {
+    define( 'LW_LINK_LIST_CHECK_BATCH', 20 );
 }
 
-/**
- * データベースにデータがあるか確認
- */
-function lw_link_list_has_data() {
-    global $wpdb;
-    $table_name = lw_link_list_get_table_name();
+/* しっかりスキャン（公開URLの巡回）— HTTP を伴うので数字は控えめにする */
 
-    // テーブルが存在するかチェック
-    $table_exists = $wpdb->get_var($wpdb->prepare(
-        "SHOW TABLES LIKE %s",
-        $table_name
-    ));
+// 1リクエストで取りに行くページ数。1ページ8秒 × 3 = 最悪24秒
+if ( ! defined( 'LW_LINK_LIST_CRAWL_BATCH' ) ) {
+    define( 'LW_LINK_LIST_CRAWL_BATCH', 3 );
+}
 
-    if (!$table_exists) {
-        return false;
+// 巡回するページ数の上限。超えたぶんは対象から外し、外した件数を必ず画面に出す
+if ( ! defined( 'LW_LINK_LIST_CRAWL_MAX' ) ) {
+    define( 'LW_LINK_LIST_CRAWL_MAX', 200 );
+}
+
+// 読めなかったページを画面に並べる上限（全部並べても読めない）
+if ( ! defined( 'LW_LINK_LIST_CRAWL_ERROR_MAX' ) ) {
+    define( 'LW_LINK_LIST_CRAWL_ERROR_MAX', 20 );
+}
+
+/* 巡回の間隔（🚨 自分のサイトを短時間に何度も叩くと 429 で弾かれる） */
+
+// ページとページの間に空ける時間（ミリ秒）
+if ( ! defined( 'LW_LINK_LIST_CRAWL_DELAY_MS' ) ) {
+    define( 'LW_LINK_LIST_CRAWL_DELAY_MS', 250 );
+}
+
+// リンクの有効性を確かめるときに、1本ごとに空ける時間（ミリ秒）。
+// 同じ相手（YouTube・Amazon・自サイト）に何本もリンクが向いていることは普通にある
+if ( ! defined( 'LW_LINK_LIST_CHECK_DELAY_MS' ) ) {
+    define( 'LW_LINK_LIST_CHECK_DELAY_MS', 200 );
+}
+
+// 一度 429 を食らったあとに空ける時間（ミリ秒）
+if ( ! defined( 'LW_LINK_LIST_CRAWL_SLOW_DELAY_MS' ) ) {
+    define( 'LW_LINK_LIST_CRAWL_SLOW_DELAY_MS', 1200 );
+}
+
+// 429 のあと、待ってからやり直すまでの上限（秒）
+if ( ! defined( 'LW_LINK_LIST_CRAWL_RETRY_MAX_SEC' ) ) {
+    define( 'LW_LINK_LIST_CRAWL_RETRY_MAX_SEC', 5 );
+}
+
+// 「弾かれた」ことを次のリクエストへ伝える置き場
+if ( ! defined( 'LW_LINK_LIST_THROTTLED_TRANSIENT' ) ) {
+    define( 'LW_LINK_LIST_THROTTLED_TRANSIENT', 'lw_link_list_crawl_throttled' );
+}
+
+/* サイト共通のリンク（ヘッダー・フッター・メニュー）の見分け方 */
+
+// 全ページの何割に出ていたら「共通」とみなすか
+//
+// 🚨 0.6 では厳しすぎた（2026-08-22 に lite-word.com の実データで判明）。
+//    175ページのサイトで、フッターの利用規約・プライバシーポリシー・特商法が
+//    ちょうど100ページ＝57%だったため共通と判定されず、
+//    たった6本のために 600行以上の繰り返しが一覧に残った。
+//    実データの分布では 20〜99ページに出るURLが1本も無く（16本が100ページ以上、
+//    残りは19ページ以下）、10%〜50%のどこに置いても結果が同じだった。
+//    真ん中の 0.3 なら、しきい値が多少ぶれても判定が変わらない。
+if ( ! defined( 'LW_LINK_LIST_COMMON_RATIO' ) ) {
+    define( 'LW_LINK_LIST_COMMON_RATIO', 0.3 );
+}
+
+// 割合で出した数がこれを下回っても、これ未満のページ数では共通としない。
+// 2ページに出ているだけのものを「サイト共通」と呼ぶと、そのページ固有の情報が消える
+if ( ! defined( 'LW_LINK_LIST_COMMON_MIN_HITS' ) ) {
+    define( 'LW_LINK_LIST_COMMON_MIN_HITS', 3 );
+}
+
+// ページ数がこれ未満のサイトでは共通判定をしない（3ページ中2ページは共通ではない）
+if ( ! defined( 'LW_LINK_LIST_COMMON_MIN_PAGES' ) ) {
+    define( 'LW_LINK_LIST_COMMON_MIN_PAGES', 5 );
+}
+
+/* option 名（🚨 テーブルに列を足さない。理由は scan-state.php の冒頭） */
+
+if ( ! defined( 'LW_LINK_LIST_MODE_OPTION' ) ) {
+    define( 'LW_LINK_LIST_MODE_OPTION', 'lw_link_list_scan_mode' );
+}
+if ( ! defined( 'LW_LINK_LIST_CRAWL_ERRORS_OPTION' ) ) {
+    define( 'LW_LINK_LIST_CRAWL_ERRORS_OPTION', 'lw_link_list_crawl_errors' );
+}
+if ( ! defined( 'LW_LINK_LIST_SKIPPED_OPTION' ) ) {
+    define( 'LW_LINK_LIST_SKIPPED_OPTION', 'lw_link_list_skipped' );
+}
+if ( ! defined( 'LW_LINK_LIST_COMMON_OPTION' ) ) {
+    define( 'LW_LINK_LIST_COMMON_OPTION', 'lw_link_list_common_links' );
+}
+if ( ! defined( 'LW_LINK_LIST_THROTTLED_OPTION' ) ) {
+    define( 'LW_LINK_LIST_THROTTLED_OPTION', 'lw_link_list_was_throttled' );
+}
+
+// テーブル定義のバージョン（🚨 dbDelta を毎回走らせないためのガードに使う）
+if ( ! defined( 'LW_LINK_LIST_DB_VERSION' ) ) {
+    define( 'LW_LINK_LIST_DB_VERSION', '1.0' );
+}
+if ( ! defined( 'LW_LINK_LIST_DB_VERSION_OPTION' ) ) {
+    define( 'LW_LINK_LIST_DB_VERSION_OPTION', 'lw_link_list_db_ver' );
+}
+if ( ! defined( 'LW_LINK_CHECK_DB_VERSION' ) ) {
+    define( 'LW_LINK_CHECK_DB_VERSION', '1.0' );
+}
+if ( ! defined( 'LW_LINK_CHECK_DB_VERSION_OPTION' ) ) {
+    define( 'LW_LINK_CHECK_DB_VERSION_OPTION', 'lw_link_check_db_ver' );
+}
+
+/* サイト診断（SEOの健全性）*/
+
+if ( ! defined( 'LW_SITE_DIAGNOSE_MENU_SLUG' ) ) {
+    define( 'LW_SITE_DIAGNOSE_MENU_SLUG', 'lw_site_diagnose' );
+}
+
+// 1リクエストで本文を調べるページ数。HTTP を伴わないのでリンクのスキャンより多く取れる
+if ( ! defined( 'LW_SITE_DIAGNOSE_BATCH' ) ) {
+    define( 'LW_SITE_DIAGNOSE_BATCH', 30 );
+}
+
+if ( ! defined( 'LW_SITE_ISSUES_DB_VERSION' ) ) {
+    define( 'LW_SITE_ISSUES_DB_VERSION', '1.0' );
+}
+if ( ! defined( 'LW_SITE_ISSUES_DB_VERSION_OPTION' ) ) {
+    define( 'LW_SITE_ISSUES_DB_VERSION_OPTION', 'lw_site_issues_db_ver' );
+}
+// 一覧ページ（トップの投稿一覧・カテゴリー）から張られているページのID。孤立判定に使う。
+// 🚨 中身は「一覧ページ1本ごとの内訳」（2026-08-23〜）。平らなID配列だった旧形式も読める
+if ( ! defined( 'LW_SITE_ARCHIVE_LINKS_OPTION' ) ) {
+    define( 'LW_SITE_ARCHIVE_LINKS_OPTION', 'lw_site_archive_links' );
+}
+// 巡回の締めで取りに行く一覧ページの本数。1本ごとに HTTP が1回増えるので控えめにする
+if ( ! defined( 'LW_SITE_ARCHIVE_CRAWL_MAX' ) ) {
+    define( 'LW_SITE_ARCHIVE_CRAWL_MAX', 10 );
+}
+
+// 「公開していないページのURL」を実際に叩いた結果の置き場（R10 の根拠）。
+// 🚨 これが空のうちは R10 を🔴にしない。転送で救われていることがある（2026-08-23 本番実測）
+if ( ! defined( 'LW_SITE_DRAFT_LINK_STATUS_OPTION' ) ) {
+    define( 'LW_SITE_DRAFT_LINK_STATUS_OPTION', 'lw_site_draft_link_status' );
+}
+// 1回の巡回で叩いてよい本数。超えたぶんは「確認していない」として残す（黙って切らない）
+if ( ! defined( 'LW_SITE_DRAFT_LINK_VERIFY_MAX' ) ) {
+    define( 'LW_SITE_DRAFT_LINK_VERIFY_MAX', 30 );
+}
+// 確認に使ってよい時間（秒）。巡回の締めは他の仕事も持っているので居座らない
+if ( ! defined( 'LW_SITE_DRAFT_LINK_VERIFY_BUDGET' ) ) {
+    define( 'LW_SITE_DRAFT_LINK_VERIFY_BUDGET', 15 );
+}
+if ( ! defined( 'LW_SITE_ISSUES_META_OPTION' ) ) {
+    define( 'LW_SITE_ISSUES_META_OPTION', 'lw_site_issues_meta' );
+}
+
+/* -------------------------------------------------------------
+ * 読み込み
+ * ----------------------------------------------------------- */
+
+foreach (
+    array(
+        'guard.php',
+        'store.php',
+        'results-store.php',
+        'scan-state.php',
+        'issues-store.php',
+        'issues-report.php',
+        'diagnostics-dictionary.php',
+        'class-scanner.php',
+        'class-crawler.php',
+        'class-checker.php',
+        'class-url-index.php',
+        // 検査ルール（1ルール1ファイル）。順番に意味は無いが、増えたらここに足す
+        'rules/r10-draft-link.php',
+        'rules/r13-orphan.php',
+        'rules/r14-archive-orphan.php',
+        'rules/r15-redirect.php',
+        'rules/r20-sitemap-noindex.php',
+        'rules/r22-duplicate-title.php',
+        'rules/r23-title-length.php',
+        'rules/r24-description.php',
+        'rules/r30-heading.php',
+        'rules/r32-image-alt.php',
+        'rules/r34-title-suffix.php',
+        'rules/r35-placeholder.php',
+        // ルールを読んでからエンジン（エンジンは関数名で呼ぶ）
+        'class-diagnostics.php',
+        'ajax/scan.php',
+        'ajax/crawl.php',
+        'ajax/check.php',
+        'ajax/edit.php',
+        'ajax/diagnose.php',
+        'admin/enqueue.php',
+    ) as $lw_link_list_file
+) {
+    $lw_link_list_path = LW_BROKEN_LINK_CHECK_PATH . $lw_link_list_file;
+    if ( file_exists( $lw_link_list_path ) ) {
+        require_once $lw_link_list_path;
     }
-
-    // データ件数をチェック
-    $count = $wpdb->get_var("SELECT COUNT(*) FROM $table_name");
-    return $count > 0;
 }
+unset( $lw_link_list_file, $lw_link_list_path );
 
-/**
- * データベースからリンク情報を取得
- *
- * @return array ['links' => リンク配列, 'pages' => 全ページ情報配列]
- */
-function lw_link_list_get_from_db() {
-    global $wpdb;
-    $table_name = lw_link_list_get_table_name();
-
-    $results = $wpdb->get_results(
-        "SELECT * FROM $table_name ORDER BY post_type, post_id",
-        ARRAY_A
-    );
-
-    if (!$results) {
-        return array(
-            'links' => array(),
-            'pages' => array(),
-        );
-    }
-
-    $all_links = array();
-    $all_pages = array();
-
-    foreach ($results as $row) {
-        $post_id = (int) $row['post_id'];
-        $edit_link = get_edit_post_link($post_id, 'raw');
-
-        // id属性リストを取得
-        $ids = array();
-        if (!empty($row['ids_json'])) {
-            $ids = json_decode($row['ids_json'], true);
-            if (!is_array($ids)) {
-                $ids = array();
-            }
-        }
-
-        // ページ情報を記録（リンクの有無に関わらず）
-        $all_pages[] = array(
-            'post_id' => $post_id,
-            'post_type' => $row['post_type'],
-            'post_title' => $row['post_title'],
-            'link_count' => (int) $row['link_count'],
-            'edit_link' => $edit_link,
-            'ids' => $ids,
-        );
-
-        // リンク情報を展開
-        $links = json_decode($row['links_json'], true);
-        if (is_array($links) && count($links) > 0) {
-            foreach ($links as $link) {
-                $link['source_type'] = 'post';
-                $link['source_id'] = $post_id;
-                $link['source_title'] = $row['post_title'];
-                $link['post_type'] = $row['post_type'];
-                $link['edit_link'] = $edit_link;
-                $all_links[] = $link;
-            }
-        }
-    }
-
-    return array(
-        'links' => $all_links,
-        'pages' => $all_pages,
-    );
-}
-
-/**
- * スキャン結果をデータベースに保存
- *
- * @param array $links リンク情報配列
- * @param array $all_pages 全ページ情報配列（リンクがないページも含む）
- */
-function lw_link_list_save_to_db($links, $all_pages = array()) {
-    global $wpdb;
-    $table_name = lw_link_list_get_table_name();
-
-    // テーブル作成（存在しなければ）
-    lw_link_list_create_table();
-
-    // 既存データを削除
-    $wpdb->query("TRUNCATE TABLE $table_name");
-
-    // 全ページをベースにデータを構築
-    $pages = array();
-
-    // まず、全ページを初期化（リンクなしとして）
-    foreach ($all_pages as $page_info) {
-        $post_id = $page_info['post_id'];
-        $pages[$post_id] = array(
-            'post_id' => $post_id,
-            'post_type' => $page_info['post_type'],
-            'post_title' => $page_info['post_title'],
-            'links' => array(),
-            'ids' => isset($page_info['ids']) ? $page_info['ids'] : array(),
-        );
-    }
-
-    // リンク情報を追加
-    foreach ($links as $link) {
-        if ($link['source_type'] !== 'post') {
-            continue;
-        }
-
-        $post_id = $link['source_id'];
-
-        // ページがまだなければ追加（後方互換性のため）
-        if (!isset($pages[$post_id])) {
-            $pages[$post_id] = array(
-                'post_id' => $post_id,
-                'post_type' => $link['post_type'],
-                'post_title' => $link['source_title'],
-                'links' => array(),
-            );
-        }
-
-        // リンク情報（DB保存用に不要なフィールドを除く）
-        $pages[$post_id]['links'][] = array(
-            'href' => $link['href'],
-            'text' => $link['text'],
-            'source_field' => $link['source_field'],
-        );
-    }
-
-    // データベースに挿入（リンクがないページも含む）
-    foreach ($pages as $page) {
-        $wpdb->insert(
-            $table_name,
-            array(
-                'post_id' => $page['post_id'],
-                'post_type' => $page['post_type'],
-                'post_title' => $page['post_title'],
-                'links_json' => json_encode($page['links'], JSON_UNESCAPED_UNICODE),
-                'ids_json' => json_encode(isset($page['ids']) ? $page['ids'] : array(), JSON_UNESCAPED_UNICODE),
-                'link_count' => count($page['links']),
-            ),
-            array('%d', '%s', '%s', '%s', '%s', '%d')
-        );
-    }
-
-    return count($pages);
-}
-
-/**
- * 最終更新日時を取得
- */
-function lw_link_list_get_last_updated() {
-    global $wpdb;
-    $table_name = lw_link_list_get_table_name();
-
-    // テーブルが存在するかチェック
-    $table_exists = $wpdb->get_var($wpdb->prepare(
-        "SHOW TABLES LIKE %s",
-        $table_name
-    ));
-
-    if (!$table_exists) {
-        return null;
-    }
-
-    $last_updated = $wpdb->get_var("SELECT MAX(updated_at) FROM $table_name");
-    return $last_updated;
-}
+/* -------------------------------------------------------------
+ * 管理メニュー
+ * ----------------------------------------------------------- */
 
 /**
  * 管理メニュー登録
+ *
+ * プレミアム限定（2026-08-22 Ryuichi 判断）。
+ * 使えない人にはメニュー自体を出さない。AJAX 側でも同じ判定を通す。
+ *
+ * @return void
  */
 function lw_broken_link_check_admin_menu() {
+    if ( ! lw_link_list_can_use() ) {
+        return;
+    }
+
     add_menu_page(
         'リンク一覧',
         'リンク一覧',
         'manage_options',
-        'lw_link_list',
+        LW_LINK_LIST_MENU_SLUG,
         'lw_broken_link_check_all_links_page',
         'dashicons-admin-links',
         25
     );
+
+    add_submenu_page(
+        LW_LINK_LIST_MENU_SLUG,
+        'サイト診断',
+        'サイト診断',
+        'manage_options',
+        LW_SITE_DIAGNOSE_MENU_SLUG,
+        'lw_site_diagnose_page'
+    );
 }
-add_action('admin_menu', 'lw_broken_link_check_admin_menu');
+add_action( 'admin_menu', 'lw_broken_link_check_admin_menu' );
 
 /**
  * リンク一覧ページ表示
+ *
+ * @return void
  */
 function lw_broken_link_check_all_links_page() {
-    require_once LW_BROKEN_LINK_CHECK_PATH . 'admin-page-all-links.php';
+    if ( ! lw_link_list_can_use() ) {
+        wp_die( esc_html__( 'この機能を利用する権限がありません。', 'lite-word' ) );
+    }
+
+    require LW_BROKEN_LINK_CHECK_PATH . 'admin/page.php';
 }
 
 /**
- * AJAXハンドラー: リンクスキャン（データベースに保存）
+ * サイト診断ページ表示
+ *
+ * @return void
  */
-function lw_link_list_scan_ajax() {
-    // 権限チェック
-    if (!current_user_can('manage_options')) {
-        wp_send_json_error(array('message' => '権限がありません。'));
+function lw_site_diagnose_page() {
+    if ( ! lw_link_list_can_use() ) {
+        wp_die( esc_html__( 'この機能を利用する権限がありません。', 'lite-word' ) );
     }
 
-    // スキャン実行
-    $scan_result = LW_Broken_Link_Check_Scanner::scan_all_links();
-    $links = $scan_result['links'];
-    $pages = $scan_result['pages'];
-
-    // データベースに保存（全ページ情報も含む）
-    $saved_pages = lw_link_list_save_to_db($links, $pages);
-
-    // 編集リンクを追加
-    foreach ($links as &$link) {
-        if ($link['source_type'] === 'post') {
-            $link['edit_link'] = get_edit_post_link($link['source_id'], 'raw');
-        }
-    }
-
-    // 全ページに編集リンクを追加（idsは既にスキャン時に含まれている）
-    foreach ($pages as &$page) {
-        $page['edit_link'] = get_edit_post_link($page['post_id'], 'raw');
-    }
-
-    wp_send_json_success(array(
-        'links' => $links,
-        'pages' => $pages,
-        'total' => count($links),
-        'pages_saved' => $saved_pages,
-    ));
+    require LW_BROKEN_LINK_CHECK_PATH . 'admin/diagnostics-page.php';
 }
-add_action('wp_ajax_lw_link_list_scan', 'lw_link_list_scan_ajax');
-
-/**
- * AJAXハンドラー: データベースからリンク取得
- */
-function lw_link_list_load_ajax() {
-    // 権限チェック
-    if (!current_user_can('manage_options')) {
-        wp_send_json_error(array('message' => '権限がありません。'));
-    }
-
-    $data = lw_link_list_get_from_db();
-    $links = $data['links'];
-    $pages = $data['pages'];
-
-    wp_send_json_success(array(
-        'links' => $links,
-        'pages' => $pages,
-        'total' => count($links),
-    ));
-}
-add_action('wp_ajax_lw_link_list_load', 'lw_link_list_load_ajax');
-
-/**
- * AJAXハンドラー: データベース状態チェック
- */
-function lw_link_list_status_ajax() {
-    // 権限チェック
-    if (!current_user_can('manage_options')) {
-        wp_send_json_error(array('message' => '権限がありません。'));
-    }
-
-    $has_data = lw_link_list_has_data();
-    $last_updated = lw_link_list_get_last_updated();
-
-    wp_send_json_success(array(
-        'has_data' => $has_data,
-        'last_updated' => $last_updated,
-    ));
-}
-add_action('wp_ajax_lw_link_list_status', 'lw_link_list_status_ajax');
-
-/**
- * AJAXハンドラー: リンク有効性チェック（バッチ処理）
- */
-function lw_link_list_check_batch_ajax() {
-    // 権限チェック
-    if (!current_user_can('manage_options')) {
-        wp_send_json_error(array('message' => '権限がありません。'));
-    }
-
-    // URLリストを取得
-    $urls = isset($_POST['urls']) ? $_POST['urls'] : array();
-
-    if (empty($urls) || !is_array($urls)) {
-        wp_send_json_error(array('message' => 'URLが指定されていません。'));
-    }
-
-    // バッチサイズ制限（最大20件）
-    $urls = array_slice($urls, 0, 20);
-
-    // チェック実行
-    $results = LW_Broken_Link_Check_Checker::check_batch($urls);
-
-    wp_send_json_success(array(
-        'results' => $results,
-        'checked' => count($results),
-    ));
-}
-add_action('wp_ajax_lw_link_list_check_batch', 'lw_link_list_check_batch_ajax');
-
-/**
- * AJAXハンドラー: チェック対象URLリストを取得
- */
-function lw_link_list_get_checkable_urls_ajax() {
-    // 権限チェック
-    if (!current_user_can('manage_options')) {
-        wp_send_json_error(array('message' => '権限がありません。'));
-    }
-
-    $data = lw_link_list_get_from_db();
-    $links = $data['links'];
-
-    error_log('[LW Link Check] === チェック対象URL取得開始 ===');
-    error_log('[LW Link Check] DB内リンク数: ' . count($links));
-    error_log('[LW Link Check] ページ数: ' . (isset($data['pages']) ? count($data['pages']) : 0));
-
-    // デバッグ情報
-    $debug = array(
-        'links_count' => count($links),
-        'pages_count' => isset($data['pages']) ? count($data['pages']) : 0,
-    );
-
-    // チェック可能なURLのみ抽出（重複排除）
-    $checkable_urls = array();
-    $seen = array();
-    $skipped = array();
-
-    foreach ($links as $link) {
-        $href = isset($link['href']) ? $link['href'] : '';
-        $source_id = isset($link['source_id']) ? $link['source_id'] : 0;
-
-        // 空はスキップ
-        if (empty($href)) {
-            $skipped[] = array('reason' => 'empty', 'href' => $href);
-            continue;
-        }
-
-        // mailto、tel、javascriptはスキップ
-        if (stripos($href, 'mailto:') === 0) {
-            $skipped[] = array('reason' => 'mailto', 'href' => $href);
-            continue;
-        }
-        if (stripos($href, 'tel:') === 0) {
-            $skipped[] = array('reason' => 'tel', 'href' => $href);
-            continue;
-        }
-        if (stripos($href, 'javascript:') === 0) {
-            $skipped[] = array('reason' => 'javascript', 'href' => $href);
-            continue;
-        }
-
-        // アンカーリンク（#で始まる）はソースページのURLを付与
-        if (strpos($href, '#') === 0) {
-            if ($source_id > 0) {
-                $page_url = get_permalink($source_id);
-                if ($page_url) {
-                    // ページURLの末尾の/を削除してアンカーを付与
-                    $href = rtrim($page_url, '/') . $href;
-                } else {
-                    $skipped[] = array('reason' => 'no_permalink', 'href' => $href);
-                    continue;
-                }
-            } else {
-                $skipped[] = array('reason' => 'no_source_id', 'href' => $href);
-                continue;
-            }
-        }
-
-        // 重複チェック
-        if (isset($seen[$href])) {
-            continue;
-        }
-        $seen[$href] = true;
-
-        $checkable_urls[] = $href;
-    }
-
-    $debug['skipped_count'] = count($skipped);
-    $debug['skipped_sample'] = array_slice($skipped, 0, 5);
-    $debug['checkable_count'] = count($checkable_urls);
-
-    error_log('[LW Link Check] スキップ数: ' . count($skipped));
-    error_log('[LW Link Check] チェック対象URL数: ' . count($checkable_urls));
-    if (count($checkable_urls) > 0) {
-        error_log('[LW Link Check] チェック対象URLサンプル: ' . implode(', ', array_slice($checkable_urls, 0, 5)));
-    }
-    if (count($skipped) > 0) {
-        error_log('[LW Link Check] スキップサンプル: ' . print_r(array_slice($skipped, 0, 5), true));
-    }
-    error_log('[LW Link Check] === チェック対象URL取得完了 ===');
-
-    wp_send_json_success(array(
-        'urls' => $checkable_urls,
-        'total' => count($checkable_urls),
-        'debug' => $debug,
-    ));
-}
-add_action('wp_ajax_lw_link_list_get_checkable_urls', 'lw_link_list_get_checkable_urls_ajax');
-
-/**
- * AJAXハンドラー: JavaScriptからのデバッグログをdebug.logに出力
- */
-function lw_link_list_debug_log_ajax() {
-    // 権限チェック
-    if (!current_user_can('manage_options')) {
-        wp_send_json_error();
-    }
-
-    $message = isset($_POST['message']) ? sanitize_text_field($_POST['message']) : '';
-    $data = isset($_POST['data']) ? $_POST['data'] : null;
-
-    if (!empty($message)) {
-        if ($data !== null) {
-            error_log('[LW Link Check] ' . $message . ': ' . print_r($data, true));
-        } else {
-            error_log('[LW Link Check] ' . $message);
-        }
-    }
-
-    wp_send_json_success();
-}
-add_action('wp_ajax_lw_link_list_debug_log', 'lw_link_list_debug_log_ajax');
-
-/**
- * AJAXハンドラー: リンクURLを直接編集
- */
-function lw_link_list_update_href_ajax() {
-    // 権限チェック
-    if (!current_user_can('manage_options')) {
-        wp_send_json_error(array('message' => '権限がありません。'));
-    }
-
-    // パラメータ取得
-    $post_id = isset($_POST['post_id']) ? intval($_POST['post_id']) : 0;
-    $old_href = isset($_POST['old_href']) ? $_POST['old_href'] : '';
-    $new_href = isset($_POST['new_href']) ? $_POST['new_href'] : '';
-    $link_text = isset($_POST['link_text']) ? $_POST['link_text'] : '';
-    $link_index = isset($_POST['link_index']) ? intval($_POST['link_index']) : 0;
-
-    if ($post_id <= 0) {
-        wp_send_json_error(array('message' => '投稿IDが無効です。'));
-    }
-
-    // 投稿を取得
-    $post = get_post($post_id);
-    if (!$post) {
-        wp_send_json_error(array('message' => '投稿が見つかりません。'));
-    }
-
-    $content = $post->post_content;
-
-    // aタグの開始タグの位置を全て取得（DOMDocumentと同じ順序で）
-    $replaced = false;
-    $a_tag_positions = array();
-
-    // 全てのaタグ開始タグを検索（<a で始まり > で終わる部分）
-    if (preg_match_all('/<a\s[^>]*>/i', $content, $matches, PREG_OFFSET_CAPTURE)) {
-        foreach ($matches[0] as $match) {
-            $a_tag_positions[] = array(
-                'tag' => $match[0],
-                'pos' => $match[1],
-            );
-        }
-    }
-
-    // 指定されたインデックスのaタグを置換
-    if (isset($a_tag_positions[$link_index])) {
-        $target = $a_tag_positions[$link_index];
-        $old_tag = $target['tag'];
-        $pos = $target['pos'];
-
-        // href属性があるか確認
-        if (preg_match('/\shref\s*=\s*(["\'])([^\1]*?)\1/i', $old_tag)) {
-            // href属性を置換
-            $new_tag = preg_replace(
-                '/(\shref\s*=\s*["\'])([^"\']*)(["\']\s*)/i',
-                '${1}' . esc_attr($new_href) . '${3}',
-                $old_tag
-            );
-        } else {
-            // href属性がない場合は追加
-            $new_tag = preg_replace('/^<a\s/i', '<a href="' . esc_attr($new_href) . '" ', $old_tag);
-        }
-
-        if ($new_tag !== $old_tag) {
-            $content = substr_replace($content, $new_tag, $pos, strlen($old_tag));
-            $replaced = true;
-        }
-    }
-
-    if (!$replaced) {
-        wp_send_json_error(array(
-            'message' => '該当するリンクが見つかりませんでした。',
-            'debug' => array(
-                'old_href' => $old_href,
-                'link_text' => $link_text,
-                'link_index' => $link_index,
-                'total_a_tags' => count($a_tag_positions),
-            )
-        ));
-    }
-
-    // 投稿を更新
-    $result = wp_update_post(array(
-        'ID' => $post_id,
-        'post_content' => $content,
-    ), true);
-
-    if (is_wp_error($result)) {
-        wp_send_json_error(array('message' => '投稿の更新に失敗しました: ' . $result->get_error_message()));
-    }
-
-    // DB内のリンク情報も更新（再スキャン）
-    $post = get_post($post_id);
-    $filtered_content = apply_filters('the_content', $post->post_content);
-    $page_ids = LW_Broken_Link_Check_Scanner::extract_all_ids($filtered_content);
-    $links = LW_Broken_Link_Check_Scanner::extract_all_a_tags($post->post_content);
-
-    // DBを更新
-    global $wpdb;
-    $table_name = lw_link_list_get_table_name();
-    $wpdb->update(
-        $table_name,
-        array(
-            'links_json' => json_encode($links, JSON_UNESCAPED_UNICODE),
-            'ids_json' => json_encode($page_ids, JSON_UNESCAPED_UNICODE),
-            'link_count' => count($links),
-        ),
-        array('post_id' => $post_id),
-        array('%s', '%s', '%d'),
-        array('%d')
-    );
-
-    wp_send_json_success(array(
-        'message' => 'リンクを更新しました。',
-        'new_href' => $new_href,
-        'links' => $links,
-    ));
-}
-add_action('wp_ajax_lw_link_list_update_href', 'lw_link_list_update_href_ajax');

@@ -148,7 +148,9 @@
         "textMain": "0120-000-000",
         "textSub": "ご予約・お問い合わせ ／ 土曜も受け付けています",
         "btnUrl": "tel:0120000000",
-        "btnAlign": "center"
+        "btnAlign": "center",
+        "bgColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "bgColorHover": "color-mix(in srgb, var(--color-main) 40%, #000)"
       },
       "innerBlocks": []
     },

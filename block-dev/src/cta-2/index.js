@@ -8,11 +8,15 @@ import { PanelBody, Button, ColorPicker, TextControl, SelectControl, RangeContro
 import { leftButtonIconSvgArr } from '../utils.js';
 
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS = { url: 'mailUrl', type: 'mailLinkType', page: 'mailPageId', category: 'mailCategoryId' };
 
 // SVG アイコンオプションを定義
 const iconSvgOptions = leftButtonIconSvgArr();
 
-registerBlockType(metadata.name, {
+const lwBlockDef = {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const {
@@ -75,6 +79,10 @@ registerBlockType(metadata.name, {
                     {/* リンクボタンの設定 */}
                     <PanelBody title="テキスト設定">
                         <TextControl label="ボタンURL" value={mailUrl} onChange={(value) => setAttributes({ mailUrl: value })} />
+                        <LinkPicker
+                            link={lwLinkFromAttrs(attributes, LINK_KEYS)}
+                            onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}
+                        />
                         <SelectControl
                             label="アイコン"
                             value={selectedIcon}
@@ -216,7 +224,7 @@ registerBlockType(metadata.name, {
                                     value={phoneText}
                                 />
                             </a>
-                            <a href={mailUrl} className="mail" style={{ backgroundColor: buttonBackgroundColor, color: buttonTextColor }}>
+                            <a href={mailUrl} data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkType} data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkId} className="mail" style={{ backgroundColor: buttonBackgroundColor, color: buttonTextColor }}>
 
                                 {selectedIcon && (
                                     <div
@@ -238,4 +246,27 @@ registerBlockType(metadata.name, {
             </div>
         );
     }
-});
+};
+
+/* ------------------------------------------------------------------
+ * #1169（2026-08-27）既定値の他社CDN直リンクを自社素材に差し替えた。
+ * 既定値と同じ値はブロックコメントに書かれないので、既定値のまま使っている
+ * 既存ページは「保存HTMLは旧URL／ブロックは新しい既定値」で食い違う。
+ * 旧既定値を持った版を残して、開いて保存し直しても画像が入れ替わらないようにする。
+ * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
+ * ------------------------------------------------------------------ */
+const LW_1169_OLD = JSON.parse( JSON.stringify( metadata.attributes ) );
+LW_1169_OLD.backgroundImage.default = "https://cdn.pixabay.com/photo/2022/03/27/12/46/china-7094961_960_720.jpg";
+
+/* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
+ *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の
+ *    大多数がこれ）がどの版にも当たらなくなる。だから既存の版それぞれについて
+ *    旧既定値を持たせた双子を作って先に並べる。元の版も残す（画像を自分で差し替えた人向け）。 */
+const lwPrev1169 = lwBlockDef.deprecated || [];
+lwBlockDef.deprecated = [
+	{ attributes: LW_1169_OLD, save: lwBlockDef.save },
+	...lwPrev1169.map( ( d ) => ( { ...d, attributes: LW_1169_OLD } ) ),
+	...lwPrev1169,
+];
+
+registerBlockType( metadata.name, lwBlockDef );

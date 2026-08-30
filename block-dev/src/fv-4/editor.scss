@@ -83,26 +83,26 @@
             margin-bottom: 0.1em;
             display: block;
             line-height: 1.4em;
-            font-size: 24px;
+            font-size: var(--fv4-sub-pc, 24px);
             letter-spacing: 0.1em;
             font-weight: 500;
             @container (max-width:700px) {
-                font-size: 18px;
+                font-size: var(--fv4-sub-tb, 18px);
             }
             @container (max-width:500px) {
-                font-size: 16px;
+                font-size: var(--fv4-sub-sp, 16px);
             }
         }
         .main {
             display: block;
             line-height: 1.4em;
-            font-size: 72px;
+            font-size: var(--fv4-main-pc, 72px);
             letter-spacing: 0.05em;
             @container (max-width:700px) {
-                font-size: 56px;
+                font-size: var(--fv4-main-tb, 56px);
             }
             @container (max-width:500px) {
-                font-size: 48px;
+                font-size: min(var(--fv4-main-sp, 48px), 8.5vw); /* 🚨 2026-08-26 style.scss と同じ上限。片方だけ直すと編集画面が古いまま */
             }
         }
     }

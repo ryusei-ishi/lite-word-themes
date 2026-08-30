@@ -43,6 +43,18 @@
 			"default": "",
 			"aiHint": { "role": "url", "contentGuide": "#contact 等のページ内リンク推奨" }
 		},
+		"buttonLinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"buttonPageId": {
+			"type": "number",
+			"default": 0
+		},
+		"buttonCategoryId": {
+			"type": "number",
+			"default": 0
+		},
 		"showButton": {
 			"type": "boolean",
 			"default": true,
@@ -55,7 +67,7 @@
 		},
 		"videoUrl": {
 			"type": "string",
-			"default": "https://cdn.pixabay.com/video/2023/11/19/189813-887078786_large.mp4",
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/v/fv7_default.mp4",
 			"aiHint": { "skip": true, "note": "動画URLはユーザーが手動設定" }
 		},
 		"vimeoId": {

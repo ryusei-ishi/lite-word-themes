@@ -49,13 +49,44 @@ $default_data = [
 
 /* ─────────────────────────────
  * 3) POSTされていれば保存
+ *
+ * 🔒 保存の前に必ず3つ確かめる（2026-08-23 追加・IdeaVoice #124 の #357）。
+ *    ここは admin.php?page=lw_mail_form_set から読まれるだけの画面テンプレートで、
+ *    以前は POST が来たら無条件に update_option していた。つまり
+ *    ログイン中の管理者に細工したページを踏ませるだけで、問合せフォームの
+ *    入力項目を丸ごと書き換えられた（項目の削除・差し替え）。
+ *      ① nonce  … 他所から投げられた POST を弾く（CSRF 本体の対策）
+ *      ② 権限   … メニューは manage_options だが、この画面が他から読まれても守れるようにする
+ *      ③ 中身   … JSON として配列に戻せるものだけ保存する（壊れた設定を書き込ませない）
+ * ⚠ 保存する文字列そのものは従来どおり手を加えない。表示側（form_put.php）が
+ *   esc_html / esc_attr で escape しているので、ここで削ると既存サイトの表示が変わる。
  * ─────────────────────────── */
 if (
 	isset( $_POST['form_set_no'] )       && $_POST['form_set_no']       !== '' &&
 	isset( $_POST['form_set_item_arr'] ) && $_POST['form_set_item_arr'] !== ''
 ) {
+	// ① nonce（失敗したら WordPress 標準の「リンクの有効期限が切れています」で止まる）
+	check_admin_referer( 'lw_mail_form_set_' . $form_set_no, 'lw_mail_form_set_nonce' );
+
+	// ② 権限
+	if ( ! current_user_can( 'manage_options' ) ) {
+		wp_die( 'この操作を行う権限がありません。' );
+	}
+
+	// ③ 保存先が今開いている画面と同じか（別のフォームへの書き込みを防ぐ）
+	if ( sanitize_text_field( wp_unslash( $_POST['form_set_no'] ) ) !== (string) $form_set_no ) {
+		wp_die( '保存先のフォームが一致しません。' );
+	}
+
 	$form_set_item_arr = wp_unslash( $_POST['form_set_item_arr'] );
-	update_option( "lw_mail_form_set_" . $form_set_no, $form_set_item_arr );
+
+	// ④ 中身が JSON の配列に戻せるか
+	$decoded = json_decode( $form_set_item_arr, true );
+	if ( json_last_error() !== JSON_ERROR_NONE || ! is_array( $decoded ) ) {
+		echo '<div class="notice notice-error"><p>入力項目の形式が正しくないため保存しませんでした。</p></div>';
+	} else {
+		update_option( "lw_mail_form_set_" . $form_set_no, $form_set_item_arr );
+	}
 }
 
 /* ─────────────────────────────
@@ -76,6 +107,7 @@ if ( ! is_array( $saved_data ) ) {
 	<?= lw_mail_set_tab_menu( $form_set_no ); ?>
 	<div class="lw_mail_form_set_wrap bg_color">
 		<form class="mail_form_set" id="lw_mail_form_set" action="" method="post">
+			<?php wp_nonce_field( 'lw_mail_form_set_' . $form_set_no, 'lw_mail_form_set_nonce' ); ?>
 			<div class="toggle_all_btns">
 				<button type="button" class="toggle_all_btn" id="expand_all_btn">全て開く</button>
 				<button type="button" class="toggle_all_btn" id="collapse_all_btn">全て閉じる</button>

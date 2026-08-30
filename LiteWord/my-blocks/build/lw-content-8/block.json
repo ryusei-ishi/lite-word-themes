@@ -8,10 +8,11 @@
 	"icon": "lightbulb",
 	"editorScript": "file:./lw-content-8.js",
 	"aiHint": {
-		"description": "サブ+メインタイトル+説明+ボタンのカード配列。3カラム。サービス詳細・プラン紹介に",
+		"description": "サブ（英字バッジ）＋見出し＋説明文＋ボタンのカードが並ぶ。写真が無くても成立する。強み・プラン・免許や許可など、1件ずつ読ませたいものを並べるときに",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["contents"],
-		"imageAttributes": []
+		"imageAttributes": [],
+		"notes": "サブ（英字の小さなバッジ）＋見出し＋説明文＋ボタンのカードが並ぶ。写真が無くても成立する。強み・プラン・免許や許可のように、1件ずつ読ませたいものを並べるときに。列は columnClass（clm_2 / clm_3 / clm_4・既定は clm_3）。800px以下で2カラム、550px以下で1カラムに落ちる。🚨 固定ページでは画面幅いっぱいに広がる（.lw_content_wrap.page で width:100vw）。内側の幅は innerMaxWidth（既定1200）で決まるので、同じページの他のブロックと幅をそろえたいときは 1040 などを明示する。🚨 このブロックをページの一番上に置くと、本文の上の余白（.first_content）が消える。全幅ブロックをファーストビューとして使うための仕掛けなので、途中に置くぶんには関係ない。🚨 リンク先が無い一覧では showButton:false にして全カードのボタンを消す。既定ではボタンが出るので、contents[].url を空のままにすると href=\"\" のボタンが並び、押すとページが再読み込みされる。ボタンを出すなら url を必ず入れる。カードの枠線・サブのバッジ・ボタンは既定がすべて var(--color-main) で、ページのメインカラーに自動で追従する（色は指定しなくてよい）。showSub:false でバッジを消せる。文字の大きさは titleFontSizeClass / textFontSizeClass（font_size_s / m / l）。contents は sub（英字3〜10字。バッジなので短く）＋ main（日本語5〜15字）＋ text（40〜70字）。カードの高さは一番長い text にそろう。mainAlign:\"center\" で見出しを中央寄せにできる。自前で margin:40px 0 を持つので、前後にスペーサーを足さない。"
 	},
 	"supports": {
 		"anchor": true
@@ -203,9 +204,11 @@
 				"btnText": {
 					"type": "string",
 					"source": "html",
-					"selector": ".btn",
+					"selector": ".link_btn",
 					"default": "詳細はこちら"
-				}
+				},
+				"linkType": { "type": "string", "source": "attribute", "selector": ".link", "attribute": "data-lw-link-type" },
+				"linkId": { "type": "string", "source": "attribute", "selector": ".link", "attribute": "data-lw-link-id" }
 			},
 			"default": [
 				{

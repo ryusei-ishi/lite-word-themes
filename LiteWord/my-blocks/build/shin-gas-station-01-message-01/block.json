@@ -40,7 +40,7 @@
 		},
 		"imgUrl": {
 			"type": "string",
-			"default": "https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?w=400&h=400&auto=format&fit=crop&q=80"
+			"default": "https://lite-word.com/sample_img/women/2.webp"
 		},
 		"imgAlt": {
 			"type": "string",

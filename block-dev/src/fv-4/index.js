@@ -25,6 +25,22 @@ import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
 
+/**
+ * 文字サイズの CSS 変数を組み立てる。
+ * 値が 0（未設定）のものは何も返さないので、既定のままのブロックは
+ * 保存される HTML がこれまでと 1 バイトも変わらない（＝既存ページが無効にならない）。
+ */
+function fvSizeVars(a) {
+	const v = {};
+	if (a.mainFontSizePc) v['--fv4-main-pc'] = `${a.mainFontSizePc}px`;
+	if (a.mainFontSizeTb) v['--fv4-main-tb'] = `${a.mainFontSizeTb}px`;
+	if (a.mainFontSizeSp) v['--fv4-main-sp'] = `${a.mainFontSizeSp}px`;
+	if (a.subFontSizePc) v['--fv4-sub-pc'] = `${a.subFontSizePc}px`;
+	if (a.subFontSizeTb) v['--fv4-sub-tb'] = `${a.subFontSizeTb}px`;
+	if (a.subFontSizeSp) v['--fv4-sub-sp'] = `${a.subFontSizeSp}px`;
+	return v;
+}
+
 registerBlockType(metadata.name, {
 	/* --------------------------------------------------
 	 * 編集画面
@@ -47,6 +63,12 @@ registerBlockType(metadata.name, {
 			textAlignPc,
 			textAlignSp,
 			headingLevel,
+			mainFontSizePc,
+			mainFontSizeTb,
+			mainFontSizeSp,
+			subFontSizePc,
+			subFontSizeTb,
+			subFontSizeSp,
 		} = attributes;
 
 		// useBlockPropsは条件付きreturnの前に呼ぶ（Reactフックのルール）
@@ -243,6 +265,89 @@ registerBlockType(metadata.name, {
 						/>
 					</PanelBody>
 
+					{/* 文字サイズ */}
+					<PanelBody title="文字サイズ設定" initialOpen={false}>
+						<p style={{ fontSize: '12px', color: '#666', marginTop: 0, lineHeight: 1.6 }}>
+							空欄のままなら今までどおりの大きさです。タイトルが長くて
+							スマホで何行にも折り返してしまうときだけ下げてください。
+							もとに戻すときは各項目の「リセット」を押します。
+						</p>
+						<p style={{ margin: '20px 0 4px', fontWeight: 600 }}>メインタイトル</p>
+						<RangeControl
+							label="パソコン"
+							value={mainFontSizePc || undefined}
+							onChange={(value) =>
+								setAttributes({ mainFontSizePc: value ? value : 0 })
+							}
+							min={16}
+							max={120}
+							step={1}
+							allowReset
+							help={mainFontSizePc ? '' : '空欄＝これまでどおり（72px）'}
+						/>
+						<RangeControl
+							label="タブレット"
+							value={mainFontSizeTb || undefined}
+							onChange={(value) =>
+								setAttributes({ mainFontSizeTb: value ? value : 0 })
+							}
+							min={16}
+							max={120}
+							step={1}
+							allowReset
+							help={mainFontSizeTb ? '' : '空欄＝これまでどおり（64px・狭いと56px）'}
+						/>
+						<RangeControl
+							label="スマホ"
+							value={mainFontSizeSp || undefined}
+							onChange={(value) =>
+								setAttributes({ mainFontSizeSp: value ? value : 0 })
+							}
+							min={12}
+							max={80}
+							step={1}
+							allowReset
+							help={mainFontSizeSp ? '' : '空欄＝これまでどおり（48px）'}
+						/>
+						<p style={{ margin: '24px 0 4px', fontWeight: 600 }}>サブタイトル</p>
+						<RangeControl
+							label="パソコン"
+							value={subFontSizePc || undefined}
+							onChange={(value) =>
+								setAttributes({ subFontSizePc: value ? value : 0 })
+							}
+							min={10}
+							max={48}
+							step={1}
+							allowReset
+							help={subFontSizePc ? '' : '空欄＝これまでどおり（24px）'}
+						/>
+						<RangeControl
+							label="タブレット"
+							value={subFontSizeTb || undefined}
+							onChange={(value) =>
+								setAttributes({ subFontSizeTb: value ? value : 0 })
+							}
+							min={10}
+							max={48}
+							step={1}
+							allowReset
+							help={subFontSizeTb ? '' : '空欄＝これまでどおり（18px）'}
+						/>
+						<RangeControl
+							label="スマホ"
+							value={subFontSizeSp || undefined}
+							onChange={(value) =>
+								setAttributes({ subFontSizeSp: value ? value : 0 })
+							}
+							min={8}
+							max={40}
+							step={1}
+							allowReset
+							help={subFontSizeSp ? '' : '空欄＝これまでどおり（16px）'}
+						/>
+					</PanelBody>
+
 					{/* テキスト位置 */}
 					<PanelBody title="配置設定">
 						<p>PC 表示</p>
@@ -278,7 +383,7 @@ registerBlockType(metadata.name, {
 				<div {...blockProps}>
 					<div
 						className={`fv-4_inner ${textAlignPc} ${textAlignSp}`}
-						style={{ maxWidth: maxWidth }}
+						style={{ maxWidth: maxWidth, ...fvSizeVars(attributes) }}
 					>
 						<TagName style={{ color: textColor }}>
 							<RichText
@@ -357,6 +462,12 @@ registerBlockType(metadata.name, {
 			textAlignPc,
 			textAlignSp,
 			headingLevel,
+			mainFontSizePc,
+			mainFontSizeTb,
+			mainFontSizeSp,
+			subFontSizePc,
+			subFontSizeTb,
+			subFontSizeSp,
 		} = attributes;
 
 		const TagName = `h${headingLevel}`;
@@ -369,7 +480,7 @@ registerBlockType(metadata.name, {
 			<div {...blockProps}>
 				<div
 					className={`fv-4_inner ${textAlignPc} ${textAlignSp}`}
-					style={{ maxWidth: maxWidth }}
+					style={{ maxWidth: maxWidth, ...fvSizeVars(attributes) }}
 				>
 					<TagName className="ttl" style={{ color: textColor }}>
 						<RichText.Content

@@ -24,6 +24,10 @@ import {
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う、配列の要素の中のキー名 */
+const LINK_KEYS = { url: 'btnUrl', type: 'linkType', page: 'pageId', category: 'categoryId' };
 
 /* ─ オプション配列 ─ */
 const fontOptions       = fontOptionsArr();
@@ -78,6 +82,11 @@ registerBlockType(metadata.name, {
 
 		const updateBtn = (i,k,v)=>{
 			const arr=[...buttons]; arr[i]={...arr[i],[k]:v}; setAttributes({buttons:arr});
+		};
+
+		/* リンク設定のように複数のキーをまとめて入れ替える用 */
+		const updateBtnMulti = (i, patch) => {
+			setAttributes({ buttons: buttons.map((it, k) => k === i ? { ...it, ...patch } : it) });
 		};
 
 		const posClass=`position_${position}`;
@@ -184,6 +193,10 @@ registerBlockType(metadata.name, {
 											value={btn.btnUrl}
 											onChange={v=>updateBtn(i,'btnUrl',v)}
 											help="ボタンをクリックした時の移動先URLを入力してください"
+										/>
+										<LinkPicker
+										    link={lwLinkFromAttrs(btn, LINK_KEYS)}
+										    onChange={(patch) => updateBtnMulti(i, lwLinkToAttrs(patch, LINK_KEYS))}
 										/>
 										
 										<ToggleControl 
@@ -412,6 +425,8 @@ registerBlockType(metadata.name, {
 							}}>
 							<a className="a"
 								href={btn.btnUrl || '#'}
+								data-lw-link-type={lwLinkDataPropsFromAttrs(btn, LINK_KEYS).linkType}
+								data-lw-link-id={lwLinkDataPropsFromAttrs(btn, LINK_KEYS).linkId}
 								target={btn.openNewTab ? '_blank':undefined}
 								rel={btn.openNewTab ? 'noopener noreferrer':undefined}
 								style={{color:btn.textColor,fontWeight, textDecoration: 'none'}}

@@ -19,6 +19,13 @@ import {
 import { Fragment } from '@wordpress/element';
 
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS_2 = { url: 'linkUrl2', type: 'link2LinkType', page: 'link2PageId', category: 'link2CategoryId' };
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS_1 = { url: 'linkUrl1', type: 'link1LinkType', page: 'link1PageId', category: 'link1CategoryId' };
 
 registerBlockType(metadata.name, {
     /**
@@ -138,6 +145,10 @@ registerBlockType(metadata.name, {
                             value={linkUrl1}
                             onChange={(value) => setAttributes({ linkUrl1: value })}
                         />
+                        <LinkPicker
+                            link={lwLinkFromAttrs(attributes, LINK_KEYS_1)}
+                            onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS_1))}
+                        />
                         <MediaUpload
                             onSelect={onChangeBgImage1}
                             allowedTypes={['image']}
@@ -212,6 +223,10 @@ registerBlockType(metadata.name, {
                             label="リンク先URL"
                             value={linkUrl2}
                             onChange={(value) => setAttributes({ linkUrl2: value })}
+                        />
+                        <LinkPicker
+                            link={lwLinkFromAttrs(attributes, LINK_KEYS_2)}
+                            onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS_2))}
                         />
                         <MediaUpload
                             onSelect={onChangeBgImage2}
@@ -495,7 +510,7 @@ registerBlockType(metadata.name, {
                 <ul>
                     {/* ==== CTA1 ==== */}
                     <li>
-                        <a href={linkUrl1 || '#'}>
+                        <a href={linkUrl1 || '#'} data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS_1).linkType} data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS_1).linkId}>
                             <h2 className="ttl parts_page_ttl_main" data-lw_font_set="Lato">
                                 <div className="main">
                                     <RichText.Content value={mainTitle1} />
@@ -546,7 +561,7 @@ registerBlockType(metadata.name, {
 
                     {/* ==== CTA2 ==== */}
                     <li>
-                        <a href={linkUrl2 || '#'}>
+                        <a href={linkUrl2 || '#'} data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS_2).linkType} data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS_2).linkId}>
                             <h2 className="ttl parts_page_ttl_main">
                                 <div className="main" data-lw_font_set="Lato">
                                     <RichText.Content value={mainTitle2} />

@@ -9,8 +9,12 @@
 	"aiHint": {
 		"description": "画像バナー3カラム。画像+タイトル+説明+リンクのカード3枚。サービス紹介・メニュー案内に",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["items"],
-		"imageAttributes": []
+		"contentAttributes": [
+			"items"
+		],
+		"imageAttributes": [
+			"items.imgUrl"
+		]
 	},
 	"supports": {
 		"anchor": true
@@ -46,21 +50,24 @@
 				{
 					"title": "タイトルタイトル",
 					"description": "説明テキスト説明テキスト説明テキスト説明テキスト",
-					"imgUrl": "https://picsum.photos/1000/1000?random=1",
+					"imgUrl": "https://lite-word.com/sample_img/shop/1.webp",
+					"alt": "",
 					"linkUrl": "",
 					"openInNewTab": false
 				},
 				{
 					"title": "タイトルタイトル",
 					"description": "説明テキスト説明テキスト説明テキスト説明テキスト",
-					"imgUrl": "https://picsum.photos/1000/1000?random=2",
+					"imgUrl": "https://lite-word.com/sample_img/shop/2.webp",
+					"alt": "",
 					"linkUrl": "",
 					"openInNewTab": false
 				},
 				{
 					"title": "タイトルタイトル",
 					"description": "説明テキスト説明テキスト説明テキスト説明テキスト",
-					"imgUrl": "https://picsum.photos/1000/1000?random=3",
+					"imgUrl": "https://lite-word.com/sample_img/shop/3.webp",
+					"alt": "",
 					"linkUrl": "",
 					"openInNewTab": false
 				}

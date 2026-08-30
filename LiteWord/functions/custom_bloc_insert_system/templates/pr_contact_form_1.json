@@ -99,7 +99,9 @@
         "textMain": "000-000-0000",
         "textSub": "受付 9:00 - 18:00 ／ 日曜・祝日を除く",
         "btnUrl": "tel:0000000000",
-        "btnAlign": "center"
+        "btnAlign": "center",
+        "bgColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "bgColorHover": "color-mix(in srgb, var(--color-main) 40%, #000)"
       },
       "innerBlocks": []
     },

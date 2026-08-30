@@ -8,18 +8,57 @@ wp_enqueue_style('post_list_related_1_style', get_template_directory_uri() . '/t
 $current_post_id = get_the_ID();
 $current_categories = wp_get_post_categories($current_post_id);
 
+/* 出したい本数 */
+$related_want = 6;
+$related_ids  = array();
+
+/* ① 同じカテゴリーからランダムに集める（従来どおり） */
 if ($current_categories) {
-    $args = array(
+    $related_ids = get_posts(array(
         'post_type' => 'post',
-        'posts_per_page' => 6,
+        'post_status' => 'publish',
+        'posts_per_page' => $related_want,
         'post__not_in' => array($current_post_id),
         'category__in' => $current_categories,
         'orderby' => 'rand',
+        'fields' => 'ids',
         'no_found_rows' => true, // ページネーション不要なら追加でパフォーマンス向上
         'update_post_meta_cache' => false,
         'update_post_term_cache' => false
-    );
-    $related_posts = new WP_Query($args);
+    ));
+}
+
+/*
+ * ② 足りない分をサイト全体からランダムに拾って埋める。
+ *    同じカテゴリーに自分しかいない記事や、カテゴリーが付いていない記事では
+ *    ①だけだと関連記事が1本も出ず、その記事からどこへも進めなくなるため。
+ *    新着順だとどの記事でも同じ最新6本ばかりが並ぶので、①と同じく rand にする。
+ */
+if (count($related_ids) < $related_want) {
+    $related_fill = get_posts(array(
+        'post_type' => 'post',
+        'post_status' => 'publish',
+        'posts_per_page' => $related_want - count($related_ids),
+        'post__not_in' => array_merge(array($current_post_id), $related_ids),
+        'orderby' => 'rand',
+        'fields' => 'ids',
+        'no_found_rows' => true,
+        'update_post_meta_cache' => false,
+        'update_post_term_cache' => false
+    ));
+    $related_ids = array_merge($related_ids, $related_fill);
+}
+
+if ($related_ids) {
+    $related_posts = new WP_Query(array(
+        'post_type' => 'post',
+        'post_status' => 'publish',
+        'post__in' => $related_ids,
+        'orderby' => 'post__in',
+        'posts_per_page' => count($related_ids),
+        'ignore_sticky_posts' => true,
+        'no_found_rows' => true
+    ));
 
     if ($related_posts->have_posts()): ?>
         <section class="post_list_related_1" itemscope itemtype="http://schema.org/ItemList">

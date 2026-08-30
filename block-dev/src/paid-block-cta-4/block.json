@@ -8,10 +8,11 @@
 	"icon": "megaphone",
 	"description": "2カラムCTAブロック（有料）",
 	"aiHint": {
-		"description": "2カラムCTA。左右それぞれに背景画像+見出し+説明+ボタン。2つのCTA並列表示に",
+		"description": "画面いっぱいの帯を左右に割って2つの行き先を並べるCTA。相談と資料請求・個人と法人・初めての方と2回目以降のように、迷っている人に2択を出す場面に",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["mainTitle1", "mainTitle2", "subTitle1", "subTitle2", "desc1", "desc2", "btnText1", "btnText2"],
-		"imageAttributes": ["backgroundImage1", "backgroundImage2"]
+		"imageAttributes": ["backgroundImage1", "backgroundImage2"],
+		"notes": "左右それぞれに 背景画像・色フィルタ・見出し・説明・ボタン を持つ。🚨 見出しは h2 固定で属性ではレベルを変えられない。左右で h2 が2つ出るので、上に別の見出しブロックを重ねないこと（帯そのものが見出しを持つ扱いにする）。大きく出るのは mainTitle（40px・1180px以下は32px）で subTitle は16px。既定は英字が mainTitle・日本語が subTitle だが、日本語を mainTitle に入れるほうが他のセクションとそろう。🚨 文章の幅は 304px しかない（a の max-width）。1180px超なら16pxで1行19字、以下は14pxで1行21字なので、desc は40字前後（2〜3行）に収める。🚨 パネルの高さは 480 → 450 → 430 → 380px と固定で、800px以下は上下2段（360px）になる。中身は縦中央。🚨 既定のボタン色は白文字に対してコントラストが足りない（#d88d00 で 2.7:1、#F02D2D で 4.3:1。本文の下限は 4.5:1）。ボタンは白地にして textColor を濃い色にするのが安全。🚨 背景写真の上に白い16pxの説明文が乗るので、写真のハイライトが飛んでいると filterOpacity を 80 にしても 4.5:1 に届かない。暗めの写真を選ぶか、フィルタ色を濃くすること。filterColor / bgColor / textColor はインラインstyleに直接入るので var(--color-main) を渡してよい。filterOpacity は 0〜100 の数値。🚨 href は linkUrl が空でも # になり押せてしまうので、必ず行き先を入れる。固定ページでは画面いっぱいに広がるので前後にスペーサーを足さない。背景画像の alt は CTA1背景 / CTA2背景 で固定。maxWidth を1以上にすると中央寄せになるが 700px以下では結局全幅に戻る。"
 	},
 	"supports": {
 		"anchor": true
@@ -20,6 +21,18 @@
 		"linkUrl1": {
 			"type": "string",
 			"default": ""
+		},
+		"link1LinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"link1PageId": {
+			"type": "number",
+			"default": 0
+		},
+		"link1CategoryId": {
+			"type": "number",
+			"default": 0
 		},
 		"mainTitle1": {
 			"type": "string",
@@ -60,6 +73,18 @@
 		"linkUrl2": {
 			"type": "string",
 			"default": ""
+		},
+		"link2LinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"link2PageId": {
+			"type": "number",
+			"default": 0
+		},
+		"link2CategoryId": {
+			"type": "number",
+			"default": 0
 		},
 		"mainTitle2": {
 			"type": "string",

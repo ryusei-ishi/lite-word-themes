@@ -215,6 +215,18 @@
 			"type": "string",
 			"default": ""
 		},
+		"waku1LinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"waku1PageId": {
+			"type": "number",
+			"default": 0
+		},
+		"waku1CategoryId": {
+			"type": "number",
+			"default": 0
+		},
 		"waku1LinkNewTab": {
 			"type": "boolean",
 			"default": false

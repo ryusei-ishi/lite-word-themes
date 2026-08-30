@@ -133,7 +133,7 @@
 <!-- wp:columns {"verticalAlignment":"top"} -->
 <div class="wp-block-columns are-vertically-aligned-top"><!-- wp:column {"verticalAlignment":"top"} -->
 <div class="wp-block-column is-vertically-aligned-top"><!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://dummyimage.com/800x500/cccccc/000000.png&amp;text=Sample+Image" alt=""/></figure>
+<figure class="wp-block-image size-large"><img src="https://lite-word.com/sample_img/school/7.webp" alt=""/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 
@@ -147,7 +147,7 @@
 <!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://dummyimage.com/800x500/cccccc/000000.png&amp;text=Sample+Image" alt=""/></figure>
+<figure class="wp-block-image size-large"><img src="https://lite-word.com/sample_img/school/7.webp" alt=""/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 
@@ -161,7 +161,7 @@
 <!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://dummyimage.com/800x500/cccccc/000000.png&amp;text=Sample+Image" alt=""/></figure>
+<figure class="wp-block-image size-large"><img src="https://lite-word.com/sample_img/school/7.webp" alt=""/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 
@@ -467,7 +467,7 @@
 <!-- /wp:wdl/lw-space-1 -->
 
 <!-- wp:wdl/custom-title-1 {"mainTitle":"\u003cspan data-lw_font_set=\u0022sora\u0022 class=\u0022custom-font-settings custom-font-settings\u0022\u003eQ \u0026amp; A\u003c/span\u003e","subTitle":"不用品買取でよく頂くご質問"} -->
-<h2 class="wp-block-wdl-custom-title-1 custom-title-1"><span class="main"><span data-lw_font_set="sora" class="custom-font-settings custom-font-settings">Q &amp; A</span></span><span class="sub">不用品買取でよく頂くご質問</span></h2>
+<h2 class="wp-block-wdl-custom-title-1 custom-title-1" style="--custom-title-sub-margin-top-pc:0.2em;--custom-title-sub-margin-top-sp:0.2em"><span class="main"><span data-lw_font_set="sora" class="custom-font-settings custom-font-settings">Q &amp; A</span></span><span class="sub">不用品買取でよく頂くご質問</span></h2>
 <!-- /wp:wdl/custom-title-1 -->
 
 <!-- wp:paragraph {"align":"center","className":"is-style-p_sp_left"} -->

@@ -83,7 +83,8 @@
             font-size: 36px;
           }
           @container (max-width: 500px) {
-            font-size: 28px;
+            /* 🚨 2026-08-26: 375px 幅だと2行目に1文字だけ落ちる。画面幅からも上限をかける */
+            font-size: min(28px, 6.8vw);
           }
         }
       }

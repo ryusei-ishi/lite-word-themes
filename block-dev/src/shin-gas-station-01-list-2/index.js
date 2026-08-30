@@ -12,6 +12,7 @@ import {
 import './editor.scss';
 import metadata from './block.json';
 import './style.scss';
+import { LinkPicker, lwLinkFromItem, lwLinkToItem, lwLinkDataPropsFromItem } from '../link-picker.js';
 
 registerBlockType(metadata.name, {
 	edit: (props) => {
@@ -51,6 +52,11 @@ registerBlockType(metadata.name, {
 				i === index ? { ...item, [key]: value } : item
 			);
 			setAttributes({ items: newItems });
+		};
+
+		/* リンク設定のように複数のキーをまとめて入れ替える用 */
+		const updateItemMulti = (i, patch) => {
+			setAttributes({ items: items.map((it, k) => k === i ? { ...it, ...patch } : it) });
 		};
 
 		return (
@@ -220,6 +226,10 @@ registerBlockType(metadata.name, {
 										placeholder="リンク URL を入力"
 										style={{ marginTop: '8px' }}
 									/>
+									<LinkPicker
+									    link={lwLinkFromItem(item, 'url')}
+									    onChange={(patch) => updateItemMulti(index, lwLinkToItem(patch, 'url'))}
+									/>
 								</div>
                                 <div className="delete_item_btn">
                                     <Button
@@ -276,7 +286,7 @@ registerBlockType(metadata.name, {
 								<RichText.Content tagName="p" value={item.description} />
 								{/* リンクURLが設定されている場合のみ .btn を表示 */}
 								{ item.url && item.url !== '' && (
-									<a className="btn" href={item.url}>
+									<a className="btn" href={item.url} data-lw-link-type={lwLinkDataPropsFromItem(item, 'url').linkType} data-lw-link-id={lwLinkDataPropsFromItem(item, 'url').linkId}>
 										<span className="btn-label">{item.btnLabel}</span>
 										<svg
 											xmlns="http://www.w3.org/2000/svg"

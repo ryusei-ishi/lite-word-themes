@@ -23,6 +23,10 @@ import {
 	__experimentalHeading as Heading,
 } from "@wordpress/components";
 import metadata from "./block.json";
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS = { url: 'waku1LinkUrl', type: 'waku1LinkType', page: 'waku1PageId', category: 'waku1CategoryId' };
 
 /* エフェクトオプション */
 const effectOptions = [
@@ -1011,6 +1015,10 @@ registerBlockType(metadata.name, {
 							placeholder="https://example.com"
 							help="設定すると枠全体がリンクになります"
 						/>
+						<LinkPicker
+						    link={lwLinkFromAttrs(attributes, LINK_KEYS)}
+						    onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}
+						/>
 						{waku1LinkUrl && (
 							<ToggleControl
 								label="新しいタブで開く"
@@ -1181,6 +1189,8 @@ registerBlockType(metadata.name, {
 			...(waku1LinkUrl
 				? {
 						href: waku1LinkUrl,
+						'data-lw-link-type': lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkType,
+						'data-lw-link-id': lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkId,
 						...(waku1LinkNewTab
 							? { target: "_blank", rel: "noopener noreferrer" }
 							: {}),

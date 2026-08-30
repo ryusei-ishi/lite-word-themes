@@ -20,6 +20,16 @@ class LW_AI_Generator_Usage_Tracker {
     const TABLE_NAME = 'lw_ai_usage_logs';
 
     /**
+     * テーブル定義の版。定義を変えたらここを上げる（次のリクエストで1回だけ作り直す）
+     */
+    const DB_VER = '1.0';
+
+    /**
+     * 作成済みを記録するオプション名（autoload させて判定でクエリを増やさない）
+     */
+    const DB_VER_OPTION = 'lw_ai_usage_db_ver';
+
+    /**
      * Gemini API 料金（1M トークンあたり USD）
      */
     const PRICING = array(
@@ -63,9 +73,20 @@ class LW_AI_Generator_Usage_Tracker {
 
     /**
      * テーブルが存在しなければ作成
+     * ------------------------------------------------------------
+     * ⚠️ init() から呼ばれるため全リクエストで走る。作成済みをオプションに記録して
+     *    2回目以降は SHOW TABLES を打たない（毎リクエスト1クエリの削減）。
+     *    テーブルを消された場合は log_usage() の insert 失敗時に $force で作り直す。
+     *
+     * @param bool $force 記録を無視して必ず存在確認からやり直す
      */
-    public static function maybe_create_table() {
+    public static function maybe_create_table( $force = false ) {
         global $wpdb;
+
+        // 作成済みの記録があればディスク・DBを触らずに戻る
+        if ( ! $force && get_option( self::DB_VER_OPTION ) === self::DB_VER ) {
+            return;
+        }
 
         $table_name = $wpdb->prefix . self::TABLE_NAME;
 
@@ -76,6 +97,7 @@ class LW_AI_Generator_Usage_Tracker {
         ) );
 
         if ( $table_exists === $table_name ) {
+            update_option( self::DB_VER_OPTION, self::DB_VER, true );
             return;
         }
 
@@ -97,6 +119,11 @@ class LW_AI_Generator_Usage_Tracker {
 
         require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
         dbDelta( $sql );
+
+        // dbDelta が失敗していたら記録しない（次のリクエストでやり直す）
+        if ( $wpdb->get_var( $wpdb->prepare( "SHOW TABLES LIKE %s", $table_name ) ) === $table_name ) {
+            update_option( self::DB_VER_OPTION, self::DB_VER, true );
+        }
 
         error_log( '[LW AI Usage] Table created: ' . $table_name );
     }
@@ -144,6 +171,25 @@ class LW_AI_Generator_Usage_Tracker {
             ),
             array( '%s', '%s', '%d', '%d', '%d', '%f', '%s' )
         );
+
+        if ( $result === false ) {
+            // テーブルを消された場合の保険。記録を捨てて作り直し、1回だけやり直す
+            delete_option( self::DB_VER_OPTION );
+            self::maybe_create_table( true );
+            $result = $wpdb->insert(
+                $table_name,
+                array(
+                    'request_type'       => $request_type,
+                    'model'              => $model,
+                    'input_tokens'       => $input_tokens,
+                    'output_tokens'      => $output_tokens,
+                    'image_count'        => $image_count,
+                    'estimated_cost_usd' => $estimated_cost,
+                    'created_at'         => current_time( 'mysql' ),
+                ),
+                array( '%s', '%s', '%d', '%d', '%d', '%f', '%s' )
+            );
+        }
 
         if ( $result === false ) {
             error_log( '[LW AI Usage] Insert failed: ' . $wpdb->last_error );

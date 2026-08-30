@@ -7,6 +7,7 @@ import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromItem, lwLinkToItem, lwLinkDataPropsFromItem } from '../link-picker.js';
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
@@ -42,6 +43,11 @@ registerBlockType(metadata.name, {
         const updateContent = (index, key, value) => {
             const updatedContents = contents.map((content, i) => i === index ? { ...content, [key]: value } : content);
             setAttributes({ contents: updatedContents });
+        };
+
+        /* リンク設定のように複数のキーをまとめて入れ替える用 */
+        const updateContentMulti = (i, patch) => {
+            setAttributes({ contents: contents.map((it, k) => k === i ? { ...it, ...patch } : it) });
         };
 
         return (
@@ -181,6 +187,10 @@ registerBlockType(metadata.name, {
                                         onChange={(value) => updateContent(index, 'url', value)}
                                         style={{ marginTop: '12px', maxWidth: '300px' }}
                                     />
+                                    <LinkPicker
+                                        link={lwLinkFromItem(content, 'url')}
+                                        onChange={(patch) => updateContentMulti(index, lwLinkToItem(patch, 'url'))}
+                                    />
                                 <button className="shin-gas-station-01-list-4__remove_btn" onClick={() => removeContent(index)}>削除</button>
                             </li>
                         ))}
@@ -208,7 +218,7 @@ registerBlockType(metadata.name, {
                 <ul className="shin-gas-station-01-list-4__inner">
                     {contents.map((content, index) => {
                         const TagName = content.url ? 'a' : 'div';
-                        const linkProps = content.url ? { href: content.url, className: 'link' } : { className: 'link' };
+                        const linkProps = content.url ? { href: content.url, 'data-lw-link-type': lwLinkDataPropsFromItem(content, 'url').linkType, 'data-lw-link-id': lwLinkDataPropsFromItem(content, 'url').linkId, className: 'link' } : { className: 'link' };
     
                         return (
                             <li

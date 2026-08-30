@@ -210,7 +210,9 @@
         "textMain": "この特典で予約する",
         "textSub": "＼ 期間限定のご案内です ／",
         "btnUrl": "",
-        "btnAlign": "center"
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
       },
       "innerBlocks": []
     },

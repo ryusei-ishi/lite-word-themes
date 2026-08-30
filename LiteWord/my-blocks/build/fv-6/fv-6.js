@@ -21,6 +21,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./style.scss */ "./src/fv-6/style.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/fv-6/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./block.json */ "./src/fv-6/block.json");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 /**
  * LiteWord – 固定ページタイトル 06（下層用）
  * src/fv-6/index.js
@@ -33,7 +45,7 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_7__.name, {
+var lwBlockDef = {
   /* ----------------------------------------------------------
    * 編集画面
    * -------------------------------------------------------- */
@@ -42,6 +54,7 @@ __webpack_require__.r(__webpack_exports__);
       setAttributes = _ref.setAttributes;
     var backgroundImage = attributes.backgroundImage,
       backgroundImageSp = attributes.backgroundImageSp,
+      backgroundImageAlt = attributes.backgroundImageAlt,
       mainTitle = attributes.mainTitle,
       subTitle = attributes.subTitle,
       filterBackgroundColor = attributes.filterBackgroundColor,
@@ -68,7 +81,8 @@ __webpack_require__.r(__webpack_exports__);
     /* 画像選択ハンドラ */
     var onChangeBackgroundImage = function onChangeBackgroundImage(media) {
       return setAttributes({
-        backgroundImage: media.url
+        backgroundImage: media.url,
+        backgroundImageAlt: media.alt || ''
       });
     };
     var onChangeBackgroundImageSp = function onChangeBackgroundImageSp(media) {
@@ -148,6 +162,18 @@ __webpack_require__.r(__webpack_exports__);
           variant: "secondary",
           onClick: open
         }, "\u753B\u50CF\u3092\u9078\u629E"));
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: "\u753B\u50CF\u306E\u8AAC\u660E\uFF08alt\uFF09",
+      help: "目の見えない方や検索エンジンに、この画像が何かを伝える文です。例：ガラス張りのオフィスビルを見上げた外観",
+      value: backgroundImageAlt || '',
+      onChange: function onChange(value) {
+        return setAttributes({
+          backgroundImageAlt: value
+        });
+      },
+      style: {
+        marginTop: '16px'
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: "\u30D5\u30A3\u30EB\u30BF\u30FC\u8A2D\u5B9A"
@@ -242,7 +268,7 @@ __webpack_require__.r(__webpack_exports__);
       className: "bg_image"
     }, backgroundImage && /*#__PURE__*/React.createElement("img", {
       src: backgroundImage,
-      alt: ""
+      alt: backgroundImageAlt || ''
     })), /*#__PURE__*/React.createElement("div", {
       className: "filter",
       style: {
@@ -258,6 +284,7 @@ __webpack_require__.r(__webpack_exports__);
     var attributes = _ref4.attributes;
     var backgroundImage = attributes.backgroundImage,
       backgroundImageSp = attributes.backgroundImageSp,
+      backgroundImageAlt = attributes.backgroundImageAlt,
       mainTitle = attributes.mainTitle,
       subTitle = attributes.subTitle,
       filterBackgroundColor = attributes.filterBackgroundColor,
@@ -310,12 +337,37 @@ __webpack_require__.r(__webpack_exports__);
       media: "(min-width: 801px)"
     }), /*#__PURE__*/React.createElement("img", {
       src: backgroundImage,
-      alt: "",
+      alt: backgroundImageAlt || '',
       loading: "eager",
       fetchpriority: "high"
     })));
   }
-});
+};
+
+/* ------------------------------------------------------------------
+ * #1169（2026-08-27）既定値の他社CDN直リンクを自社素材に差し替えた。
+ * 既定値と同じ値はブロックコメントに書かれないので、既定値のまま使っている
+ * 既存ページは「保存HTMLは旧URL／ブロックは新しい既定値」で食い違う。
+ * 旧既定値を持った版を残して、開いて保存し直しても画像が入れ替わらないようにする。
+ * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
+ * ------------------------------------------------------------------ */
+var LW_1169_OLD = JSON.parse(JSON.stringify(_block_json__WEBPACK_IMPORTED_MODULE_7__.attributes));
+LW_1169_OLD.backgroundImage["default"] = "https://cdn.pixabay.com/photo/2016/11/19/15/39/architecture-1839930_1280.jpg";
+
+/* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
+ *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の
+ *    大多数がこれ）がどの版にも当たらなくなる。だから既存の版それぞれについて
+ *    旧既定値を持たせた双子を作って先に並べる。元の版も残す（画像を自分で差し替えた人向け）。 */
+var lwPrev1169 = lwBlockDef.deprecated || [];
+lwBlockDef.deprecated = [{
+  attributes: LW_1169_OLD,
+  save: lwBlockDef.save
+}].concat(_toConsumableArray(lwPrev1169.map(function (d) {
+  return _objectSpread(_objectSpread({}, d), {}, {
+    attributes: LW_1169_OLD
+  });
+})), _toConsumableArray(lwPrev1169));
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_7__.name, lwBlockDef);
 
 /***/ }),
 
@@ -1026,7 +1078,7 @@ module.exports = window["wp"]["data"];
   \*****************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/fv-6","version":"1.0.0","title":"固定ページタイトル 06（下層用）","category":"lw-firstview","icon":"cover-image","editorScript":"file:./fv-6.js","supports":{"anchor":true},"aiHint":{"description":"下層ページ用FV。中央にタイトル+サブタイトル+背景画像。会社情報・採用ページ向け","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":["backgroundImage"]},"attributes":{"backgroundImage":{"type":"string","default":"https://cdn.pixabay.com/photo/2016/11/19/15/39/architecture-1839930_1280.jpg","aiHint":{"role":"image","note":"業種に合った背景画像URL"}},"backgroundImageSp":{"type":"string","default":"","aiHint":{"skip":true}},"mainTitle":{"type":"string","default":"会社情報","aiHint":{"role":"heading","contentGuide":"ページタイトル（日本語）。3〜10文字","example":"会社概要"}},"subTitle":{"type":"string","default":"COMPANY INFO","aiHint":{"role":"subheading","contentGuide":"英語表記。ページタイトルの英訳","example":"ABOUT US"}},"filterBackgroundColor":{"type":"string","default":"#111","aiHint":{"skip":true}},"filterOpacity":{"type":"number","default":0.3,"aiHint":{"skip":true}},"textColor":{"type":"string","default":"#111","aiHint":{"skip":true}},"minHeightPc":{"type":"string","default":"min-h-pc-400px","aiHint":{"skip":true}},"minHeightTb":{"type":"string","default":"min-h-tb-360px","aiHint":{"skip":true}},"minHeightSp":{"type":"string","default":"min-h-sp-280px","aiHint":{"skip":true}},"mainTitleTag":{"type":"string","default":"h1","aiHint":{"skip":true}}},"no":6}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/fv-6","version":"1.0.0","title":"固定ページタイトル 06（下層用）","category":"lw-firstview","icon":"cover-image","editorScript":"file:./fv-6.js","supports":{"anchor":true},"aiHint":{"description":"下層ページ用FV。中央にタイトル+サブタイトル+背景画像。会社情報・採用ページ向け","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":["backgroundImage"],"notes":"下層ページ用。中央に白い箱が入り、その中にタイトルと英字サブが乗る。箱があるぶん、背景写真が明るくても暗くても文字が読める。テンプレートでいちばん使われている形（93本中24本）。 ［2026-08-27 追記］タイトルは白い箱の中に描かれる。textColor を白にすると文字が消えるので必ず濃い色にする。フィルタは mix-blend-mode: multiply なので白は効かない。"},"attributes":{"backgroundImage":{"type":"string","default":"https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/koumuten_1.webp","aiHint":{"role":"image","note":"業種に合った背景画像URL"}},"backgroundImageSp":{"type":"string","default":"","aiHint":{"skip":true}},"backgroundImageAlt":{"type":"string","default":"","aiHint":{"role":"alt","contentGuide":"背景画像の説明","example":"ガラス張りのオフィスビルの外観"}},"mainTitle":{"type":"string","default":"会社情報","aiHint":{"role":"heading","contentGuide":"ページタイトル（日本語）。3〜10文字","example":"会社概要"}},"subTitle":{"type":"string","default":"COMPANY INFO","aiHint":{"role":"subheading","contentGuide":"英語表記。ページタイトルの英訳","example":"ABOUT US"}},"filterBackgroundColor":{"type":"string","default":"#111","aiHint":{"skip":true}},"filterOpacity":{"type":"number","default":0.3,"aiHint":{"skip":true}},"textColor":{"type":"string","default":"#111","aiHint":{"skip":true}},"minHeightPc":{"type":"string","default":"min-h-pc-400px","aiHint":{"skip":true}},"minHeightTb":{"type":"string","default":"min-h-tb-360px","aiHint":{"skip":true}},"minHeightSp":{"type":"string","default":"min-h-sp-280px","aiHint":{"skip":true}},"mainTitleTag":{"type":"string","default":"h1","aiHint":{"skip":true}}},"no":6}');
 
 /***/ })
 

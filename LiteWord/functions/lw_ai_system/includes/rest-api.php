@@ -195,6 +195,13 @@ function lw_ai_system_register_rest_routes() {
         ),
     ) );
 
+    // 本日の残り回数（自分の分だけ・読み取り専用・#359）
+    register_rest_route( 'lw-ai-generator/v1', '/quota', array(
+        'methods'             => 'GET',
+        'callback'            => 'lw_ai_system_get_quota',
+        'permission_callback' => function () { return current_user_can( 'edit_posts' ); },
+    ) );
+
     // API使用量取得
     register_rest_route( 'lw-ai-generator/v1', '/usage-stats', array(
         'methods'             => 'GET',
@@ -1142,6 +1149,16 @@ function lw_ai_system_block_instruction( WP_REST_Request $request ) {
             if ( isset( $result['updatedAttributes'][ $img_attr ] ) ) {
                 $img_value = $result['updatedAttributes'][ $img_attr ];
                 if ( ! empty( $img_value ) && ! filter_var( $img_value, FILTER_VALIDATE_URL ) ) {
+                    // 🔒 枚数の歯止め（1リクエスト上限／1日上限）。1枚 $0.04 かかる。
+                    //    ⚠ 上限超過はエラーにせず、その属性を落として「生成に失敗した1枚」と同じ状態にする。
+                    //    ⚠ 関数が無い環境（部分デプロイ等）では絞らず従来どおり動かす（fatal を作らない）。
+                    if ( function_exists( 'lw_ai_system_reserve_one_image' ) && ! lw_ai_system_reserve_one_image() ) {
+                        unset( $result['updatedAttributes'][ $img_attr ] );
+                        $result['response'] .= "
+
+⚠️ 画像生成の上限に達したため、この画像は生成していません";
+                        continue;
+                    }
                     $generated_image = LW_AI_Generator_Gemini_API::generate_image( $img_value );
                     if ( ! is_wp_error( $generated_image ) ) {
                         $result['updatedAttributes'][ $img_attr ] = $generated_image;
@@ -1161,6 +1178,11 @@ function lw_ai_system_block_instruction( WP_REST_Request $request ) {
             foreach ( $result['updatedAttributes']['items'] as &$item ) {
                 foreach ( $item_image_attrs as $item_img_attr ) {
                     if ( isset( $item[ $item_img_attr ] ) && ! empty( $item[ $item_img_attr ] ) && ! filter_var( $item[ $item_img_attr ], FILTER_VALIDATE_URL ) ) {
+                        // 🔒 枚数の歯止め。items の件数は AI の返答しだいで上限が無いため、
+                        //    1枚ごとに枠を取ってから発火する（取れなければプロンプトのまま残す）。
+                        if ( function_exists( 'lw_ai_system_reserve_one_image' ) && ! lw_ai_system_reserve_one_image() ) {
+                            continue;
+                        }
                         $generated_image = LW_AI_Generator_Gemini_API::generate_image( $item[ $item_img_attr ] );
                         if ( ! is_wp_error( $generated_image ) ) {
                             $item[ $item_img_attr ] = $generated_image;
@@ -1173,6 +1195,19 @@ function lw_ai_system_block_instruction( WP_REST_Request $request ) {
     }
 
     return new WP_REST_Response( array( 'success' => true, 'response' => $result['response'], 'updatedAttributes' => isset( $result['updatedAttributes'] ) ? $result['updatedAttributes'] : array() ), 200 );
+}
+
+/**
+ * 本日の残り回数を返す（自分の分だけ・読み取り専用）
+ *
+ * 誰の分を見るかは指定できない（必ず現在のユーザー）。
+ */
+function lw_ai_system_get_quota() {
+    if ( ! function_exists( 'lw_ai_system_quota_summary' ) ) {
+        return new WP_REST_Response( array( 'success' => false, 'message' => 'quota not available' ), 500 );
+    }
+
+    return new WP_REST_Response( array( 'success' => true, 'quota' => lw_ai_system_quota_summary() ), 200 );
 }
 
 /**

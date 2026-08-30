@@ -10,12 +10,16 @@ import './editor.scss';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う、配列の要素の中のキー名 */
+const LINK_KEYS = { url: 'linkUrl', type: 'linkType', page: 'pageId', category: 'categoryId' };
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType(metadata.name, {
+const lwBlockDef = {
     edit: function (props) {
         const { attributes, setAttributes } = props;
         const { items, titleFontFamily, titleFontWeight, pFontFamily, pFontWeight,
@@ -26,6 +30,11 @@ registerBlockType(metadata.name, {
         const updateItem = (index, key, value) => {
             const newItems = items.map((item, i) => (i === index ? { ...item, [key]: value } : item));
             setAttributes({ items: newItems });
+        };
+
+        /* リンク設定のように複数のキーをまとめて入れ替える用 */
+        const updateItemMulti = (i, patch) => {
+            setAttributes({ items: items.map((it, k) => k === i ? { ...it, ...patch } : it) });
         };
 
         // useBlockProps で apiVersion 3 対応
@@ -42,6 +51,10 @@ registerBlockType(metadata.name, {
                                 label="リンク先URL"
                                 value={item.linkUrl}
                                 onChange={(url) => updateItem(index, 'linkUrl', url)}
+                            />
+                            <LinkPicker
+                                link={lwLinkFromAttrs(item, LINK_KEYS)}
+                                onChange={(patch) => updateItemMulti(index, lwLinkToAttrs(patch, LINK_KEYS))}
                             />
                             <ToggleControl
                                 label="新規タブで開く"
@@ -187,6 +200,8 @@ registerBlockType(metadata.name, {
                         // プロパティ設定
                         const wrapperProps = hasLink ? {
                             href: item.linkUrl,
+                            'data-lw-link-type': lwLinkDataPropsFromAttrs(item, LINK_KEYS).linkType,
+                            'data-lw-link-id': lwLinkDataPropsFromAttrs(item, LINK_KEYS).linkId,
                             target: item.openInNewTab ? '_blank' : undefined,
                             rel: item.openInNewTab ? 'noopener noreferrer' : undefined,
                         } : {
@@ -216,7 +231,97 @@ registerBlockType(metadata.name, {
                 </ul>
             </nav>
         );
-    }
+    },
+    // 旧マークアップ（リンクが無くても <a href="" data-open-in-new-tab="false"> を出していた頃）を
+    // そのまま読めるようにしておく。これが無いと、その頃に作られたページが
+    // 編集画面で「このブロックには、想定されていないか無効なコンテンツが含まれています」になる。
+    // ⚠️ deprecated の中身は当時のコードの写し。きれいにしようとして書き換えないこと。
+    deprecated: [
+        {
+            attributes: metadata.attributes,
+            save: function (props) {
+                    const { attributes } = props;
+                    const {
+                        items,
+                        titleFontFamily,
+                        titleFontWeight,
+                        pFontFamily,
+                        pFontWeight,
+                        filterBackgroundColor,
+                        filterOpacity,
+                        maxWidth
+                    } = attributes;
+            
+                    // useBlockProps.save() で apiVersion 3 対応
+                    const blockProps = useBlockProps.save({
+                        className: 'lw-banner-info-05'
+                    });
+            
+                    return (
+                        <nav {...blockProps}>
+                            <ul className="lw-banner-info-05__wrap" style={{ maxWidth: maxWidth }}>
+                                {items.map((item, index) => {
+                                    // 旧版はリンクの有無にかかわらず <a> を出していた
+                                    const WrapperTag = 'a';
+                                    const wrapperProps = {
+                                        href: item.linkUrl,
+                                        target: item.openInNewTab ? '_blank' : undefined,
+                                        rel: item.openInNewTab ? 'noopener noreferrer' : undefined,
+                                        'data-open-in-new-tab': item.openInNewTab,
+                                    };
+            
+                                    return (
+                                        <li key={index}>
+                                            <WrapperTag {...wrapperProps}>
+                                                {item.imgUrl && (
+                                                    <img loading="lazy" src={item.imgUrl} alt="画像サムネイル" />
+                                                )}
+                                                <h3 className="title" style={{ fontWeight: titleFontWeight }} data-lw_font_set={titleFontFamily}>
+                                                    <RichText.Content tagName="span" value={item.title} />
+                                                </h3>
+                                                <p className="description" style={{ fontWeight: pFontWeight }} data-lw_font_set={pFontFamily}>
+                                                    <RichText.Content tagName="span" value={item.description} />
+                                                </p>
+                                                <div 
+                                                    className="filter"
+                                                    style={{ backgroundColor: filterBackgroundColor, opacity: filterOpacity }}
+                                                ></div>
+                                            </WrapperTag>
+                                        </li>
+                                    );
+                                })}
+                            </ul>
+                        </nav>
+                    );
+                }
+        },
+    ],
     
     
-});
+};
+
+/* ------------------------------------------------------------------
+ * #1169（2026-08-27）既定値の他社CDN直リンクを自社素材に差し替えた。
+ * 既定値と同じ値はブロックコメントに書かれないので、既定値のまま使っている
+ * 既存ページは「保存HTMLは旧URL／ブロックは新しい既定値」で食い違う。
+ * 旧既定値を持った版を残して、開いて保存し直しても画像が入れ替わらないようにする。
+ * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
+ * ------------------------------------------------------------------ */
+const LW_1169_OLD = JSON.parse( JSON.stringify( metadata.attributes ) );
+LW_1169_OLD.items.default[0].imgUrl = "https://picsum.photos/1000/1000?random=1";
+LW_1169_OLD.items.default[1].imgUrl = "https://picsum.photos/1000/1000?random=2";
+LW_1169_OLD.items.default[2].imgUrl = "https://picsum.photos/1000/1000?random=3";
+LW_1169_OLD.items.default[3].imgUrl = "https://picsum.photos/1000/1000?random=4";
+
+/* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
+ *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の
+ *    大多数がこれ）がどの版にも当たらなくなる。だから既存の版それぞれについて
+ *    旧既定値を持たせた双子を作って先に並べる。元の版も残す（画像を自分で差し替えた人向け）。 */
+const lwPrev1169 = lwBlockDef.deprecated || [];
+lwBlockDef.deprecated = [
+	{ attributes: LW_1169_OLD, save: lwBlockDef.save },
+	...lwPrev1169.map( ( d ) => ( { ...d, attributes: LW_1169_OLD } ) ),
+	...lwPrev1169,
+];
+
+registerBlockType( metadata.name, lwBlockDef );

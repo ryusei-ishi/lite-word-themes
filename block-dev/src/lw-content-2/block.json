@@ -65,7 +65,9 @@
 					"selector": ".lw-content-2_btn",
 					"attribute": "data-textcolor",
 					"default": "#ffffff"
-				}
+				},
+				"linkType": { "type": "string", "source": "attribute", "selector": ".lw-content-2_btn", "attribute": "data-lw-link-type" },
+				"linkId": { "type": "string", "source": "attribute", "selector": ".lw-content-2_btn", "attribute": "data-lw-link-id" }
 			},
 			"default": [
 				{

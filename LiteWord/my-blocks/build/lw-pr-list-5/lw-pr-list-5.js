@@ -156,7 +156,7 @@ var deprecated = [{
     }))));
   }
 }];
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_6__.name, {
+var lwBlockDef = {
   deprecated: deprecated,
   edit: function edit(_ref2) {
     var attributes = _ref2.attributes,
@@ -458,7 +458,32 @@ var deprecated = [{
       alt: imageAlt
     }))));
   }
-});
+};
+
+/* ------------------------------------------------------------------
+ * #1169（2026-08-27）既定値の他社CDN直リンクを自社素材に差し替えた。
+ * 既定値と同じ値はブロックコメントに書かれないので、既定値のまま使っている
+ * 既存ページは「保存HTMLは旧URL／ブロックは新しい既定値」で食い違う。
+ * 旧既定値を持った版を残して、開いて保存し直しても画像が入れ替わらないようにする。
+ * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
+ * ------------------------------------------------------------------ */
+var LW_1169_OLD = JSON.parse(JSON.stringify(_block_json__WEBPACK_IMPORTED_MODULE_6__.attributes));
+LW_1169_OLD.imageUrl["default"] = "https://placehold.co/800x320";
+
+/* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
+ *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の
+ *    大多数がこれ）がどの版にも当たらなくなる。だから既存の版それぞれについて
+ *    旧既定値を持たせた双子を作って先に並べる。元の版も残す（画像を自分で差し替えた人向け）。 */
+var lwPrev1169 = lwBlockDef.deprecated || [];
+lwBlockDef.deprecated = [{
+  attributes: LW_1169_OLD,
+  save: lwBlockDef.save
+}].concat(_toConsumableArray(lwPrev1169.map(function (d) {
+  return _objectSpread(_objectSpread({}, d), {}, {
+    attributes: LW_1169_OLD
+  });
+})), _toConsumableArray(lwPrev1169));
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_6__.name, lwBlockDef);
 
 /***/ }),
 
@@ -1159,7 +1184,7 @@ module.exports = window["wp"]["components"];
   \*************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-list-5","version":"1.0.0","title":"List 05","category":"lw-list","icon":"editor-ul","description":"リスト+画像ブロック（1列/2列選択可）","aiDescription":"リストと画像を組み合わせたレイアウト。1列または2列のリスト表示を選択可能。サービス内容や特徴を箇条書きで説明する際に最適。","aiNotes":"このブロックはリスト+画像構成。listColumnsで1列/2列を切替。leftItemsとrightItems（2列時のみ）でリスト項目を管理。背景色とテキスト色をカスタマイズ可能。","aiHint":{"description":"リスト+画像。1列/2列のチェックリスト+下部に画像。サービス内容・特徴一覧に","excludeFromAutoSelect":false,"contentAttributes":["leftItems","rightItems"],"imageAttributes":["imageUrl"]},"supports":{"anchor":true},"attributes":{"leftItems":{"type":"array","default":["テキストテキ","テキストテキ","テキストテキ"],"ai_description":"左列のリスト項目。3～5項目推奨"},"rightItems":{"type":"array","default":["テキストテキ","テキストテキ","テキストテキ"],"ai_description":"右列のリスト項目。3～5項目推奨"},"imageUrl":{"type":"string","default":"https://placehold.co/800x320","ai_description":"画像URL"},"imageAlt":{"type":"string","default":"","ai_description":"画像のalt属性"},"bgColor":{"type":"string","default":"#f7f7f7","ai_description":"リスト部分の背景色"},"textColor":{"type":"string","default":"var(--color-main)","ai_description":"リストテキストの色"},"listFontSet":{"type":"string","default":"","ai_description":"リストのフォント"},"listFontWeight":{"type":"string","default":"","ai_description":"リストのフォントウェイト"},"listColumns":{"type":"number","default":2,"ai_description":"リストの列数（1または2）"}},"editorScript":"file:./lw-pr-list-5.js","no":5}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-list-5","version":"1.0.0","title":"List 05","category":"lw-list","icon":"editor-ul","description":"リスト+画像ブロック（1列/2列選択可）","aiDescription":"リストと画像を組み合わせたレイアウト。1列または2列のリスト表示を選択可能。サービス内容や特徴を箇条書きで説明する際に最適。","aiNotes":"このブロックはリスト+画像構成。listColumnsで1列/2列を切替。leftItemsとrightItems（2列時のみ）でリスト項目を管理。背景色とテキスト色をカスタマイズ可能。","aiHint":{"description":"リスト+画像。1列/2列のチェックリスト+下部に画像。サービス内容・特徴一覧に","excludeFromAutoSelect":false,"contentAttributes":["leftItems","rightItems"],"imageAttributes":["imageUrl"]},"supports":{"anchor":true},"attributes":{"leftItems":{"type":"array","default":["テキストテキ","テキストテキ","テキストテキ"],"ai_description":"左列のリスト項目。3～5項目推奨"},"rightItems":{"type":"array","default":["テキストテキ","テキストテキ","テキストテキ"],"ai_description":"右列のリスト項目。3～5項目推奨"},"imageUrl":{"type":"string","default":"https://lite-word.com/sample_img/slide/1.webp","ai_description":"画像URL"},"imageAlt":{"type":"string","default":"","ai_description":"画像のalt属性"},"bgColor":{"type":"string","default":"#f7f7f7","ai_description":"リスト部分の背景色"},"textColor":{"type":"string","default":"var(--color-main)","ai_description":"リストテキストの色"},"listFontSet":{"type":"string","default":"","ai_description":"リストのフォント"},"listFontWeight":{"type":"string","default":"","ai_description":"リストのフォントウェイト"},"listColumns":{"type":"number","default":2,"ai_description":"リストの列数（1または2）"}},"editorScript":"file:./lw-pr-list-5.js","no":5}');
 
 /***/ })
 

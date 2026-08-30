@@ -40,6 +40,8 @@
 			"default": "",
 			"aiHint": { "role": "image", "note": "右側アイコン画像URL。省略可" }
 		},
+		"leftImageAlt": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"rightImageAlt": { "type": "string", "default": "", "aiHint": { "skip": true } },
 		"leftHeightEm": { "type": "number", "default": 1.5, "aiHint": { "skip": true } },
 		"rightHeightEm": { "type": "number", "default": 1.5, "aiHint": { "skip": true } },
 		"leftMarginEm": { "type": "number", "default": 0.4, "aiHint": { "skip": true } },

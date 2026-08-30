@@ -89,7 +89,9 @@
         "textMain": "お客様の声をもっと見る",
         "textSub": "＼ 同じお悩みの方の声もあります ／",
         "btnUrl": "",
-        "btnAlign": "center"
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
       },
       "innerBlocks": []
     },

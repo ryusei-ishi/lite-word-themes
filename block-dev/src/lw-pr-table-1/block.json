@@ -2,18 +2,21 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "wdl/lw-pr-table-1",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"title": "テーブル 01（価格表など）",
 	"category": "lw-table",
 	"icon": "editor-table",
 	"editorScript": "file:./lw-pr-table-1.js",
 	"viewScript": "file:./view.js",
 	"aiHint": {
-		"description": "料金テーブル。ヘッダー+行の表形式。料金プラン・比較表に",
-		"excludeFromAutoSelect": true,
-		"contentAttributes": [],
+		"description": "料金表・比較表。ヘッダー+行の表形式。プラン比較に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"headers",
+			"rows"
+		],
 		"imageAttributes": [],
-		"excludeReason": "複雑なネスト構造のテーブル。AI直接生成非推奨。テンプレート経由で使用"
+		"notes": "headers は [{\"text\":\"ベーシック\"}] の形。rows は [{\"header\":\"月額料金\",\"cells\":[{\"content\":\"3,000円\"}]}] の形で、cells の数は headers の数に合わせる。セルの統合はできないので、統合が要るときは lw-pr-table-3 を使う。"
 	},
 	"supports": {
 		"anchor": true,
@@ -187,6 +190,15 @@
 		"gapSize": {
 			"type": "number",
 			"default": 3
+		},
+		"rowCellPosition": {
+			"type": "string"
+		},
+		"rowHeadPosition": {
+			"type": "string"
+		},
+		"maxWidthOffPc": {
+			"type": "boolean"
 		},
 		"headers": {
 			"type": "array",

@@ -31,6 +31,207 @@ import {
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う、配列の要素の中のキー名 */
+const LINK_KEYS_SLIDE = { url: 'linkUrl', type: 'linkType', page: 'pageId', category: 'categoryId' };
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS_CTA = { url: 'ctaLinkUrl', type: 'ctaLinkType', page: 'ctaPageId', category: 'ctaCategoryId' };
+
+/* save は deprecated からも使うので先に名前を付ける（本文をひとつだけ持ち、写し間違いを防ぐ） */
+const saveBlockFv11 = ( { attributes } ) => {
+    const {
+        blockId, slides,
+        layoutType, maxWidth,
+        autoplayDelay, sliderEffect, crossFade,
+        loop, disableOnInteraction,
+        showPagination, paginationClickable,
+        showNavigation, sliderSpeed,
+        paginationColor, nextButtonColor,
+        /* ★ 追加属性 */
+        minHeightPc, minHeightTb, minHeightSp,
+        subTitle, mainTitle, descriptionText,
+        buttonLabel, ctaLinkUrl, ctaOpenNewTab,
+        showCtaButton,
+        filterColor, filterOpacity,
+    } = attributes;
+
+    const blockProps = useBlockProps.save({
+        id: blockId,
+        className: `${layoutType === 'full'
+            ? 'swiper paid-block-fv-11 max-w init-hide'
+            : 'swiper paid-block-fv-11 init-hide'} ${minHeightPc} ${minHeightTb} ${minHeightSp}`,
+        style: layoutType === 'fixed' ? { maxWidth } : { maxWidth: '100vw' }
+    });
+
+    /* ---------- Swiper 設定文字列（observer 追加） -------------*/
+    /* 🚨 2026-08-26: 自分の要素を "#" + blockId でしか探せなかった。
+     *   blockId が空のまま保存されたマークアップ（ページテンプレート・AI生成）だと
+     *   セレクタが "#" だけになり querySelector が例外を投げる。その結果 init-hide が
+     *   外れず、フロントで高さ0＝真っ白になっていた（2026-08-26 に実測）。
+     *   🚨 blockId があるときの出力は1バイトも変えないこと。変えると既存ページが
+     *      編集画面で「ブロックが壊れています」になる（save() の出力がそのまま検証対象のため）。 */
+    const rootFinder = blockId
+        ? `const selector = "#${ blockId }";`
+        : [
+            'var _sc = document.currentScript;',
+            'var _root = ( _sc && _sc.closest ) ? _sc.closest(".paid-block-fv-11") : null;',
+            'if ( !_root ) _root = document.querySelector(".paid-block-fv-11:not([data-lw-init])");',
+            'if ( !_root ) return;',
+            '_root.setAttribute("data-lw-init","1");',
+            'if ( !_root.id ) _root.id = "paid-block-fv-11-" + Math.random().toString(36).slice(2,10);',
+            'const selector = "#" + _root.id;',
+          ].join(String.fromCharCode(10));
+    /* 色の指定も同じ理由。blockId が無いときはクラスで当てる */
+    const cssRoot = blockId ? `#${ blockId }` : '.paid-block-fv-11';
+
+    const swiperConfig = `
+(function(){
+${ rootFinder }
+const MAX_RETRY = 30; // 30 × 150ms = 4.5s
+let retry = 0;
+
+const initSwiper = () => {
+    if ( typeof Swiper === "undefined" ) return false;
+    const already = document.querySelector(selector).swiper;
+    if ( already ) return true; // 二重初期化しない
+
+    const config = {
+        loop: ${ loop },
+        effect: "${ sliderEffect }",
+        speed: ${ sliderSpeed },
+        autoplay: {
+            delay: ${ autoplayDelay },
+            disableOnInteraction: ${ disableOnInteraction }
+        },
+        observer: true,
+        observeParents: true,
+        ${ sliderEffect === 'fade' ? `fadeEffect: { crossFade: ${ crossFade } },` : '' }
+        ${ showPagination ? `
+            pagination: {
+                el: selector + " .swiper-pagination",
+                clickable: ${ paginationClickable }
+            },` : '' }
+        ${ showNavigation ? `
+            navigation: {
+                nextEl: selector + " .swiper-button-next",
+                prevEl: selector + " .swiper-button-prev"
+            },` : '' }
+    };
+    new Swiper( selector, config );
+    document.querySelector(selector).classList.remove("init-hide");
+    return true;
+};
+
+/* ① DOMContentLoaded 直後 */
+document.addEventListener("DOMContentLoaded", initSwiper, { once:true });
+
+/* ② lw:swiperReady (既存仕組み維持) */
+window.addEventListener("lw:swiperReady", initSwiper, { once:true });
+
+/* ③ ポーリング（Swiper読み込み遅延対策） */
+const timer = setInterval(() => {
+    if ( initSwiper() || ++retry >= MAX_RETRY ) clearInterval(timer);
+}, 150);
+
+/* ④ それでも失敗したら 5s で init-hide を解除し static 画像表示 */
+setTimeout(() => {
+    const el = document.querySelector(selector);
+    if ( el ) el.classList.remove("init-hide");
+}, 5000);
+})();
+    `;
+
+    /* ---------- JSX 出力 -------------------------------------*/
+    return (
+        <div {...blockProps}>
+            <div className="text_in center">
+                <div className="in">
+                    <h1 className="ttl">
+                        { subTitle && (
+                            <>
+                                <RichText.Content
+                                    tagName="span"
+                                    className="sub"
+                                    value={ subTitle }
+                                />
+                                {' '} {/* subTitle がある場合だけ半角スペース */}
+                            </>
+                        )}
+                        <RichText.Content tagName="span" className="main" value={ mainTitle } />
+                    </h1>
+                    <RichText.Content tagName="p" className="description" value={ descriptionText } />
+                    { showCtaButton && (
+                        <span className="cta_btn">
+                            <a
+                                href={ ctaLinkUrl || '#' }
+                                data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS_CTA).linkType}
+                                data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS_CTA).linkId}
+                                className="btn_link"
+                                target={ ctaOpenNewTab ? '_blank' : undefined }
+                                rel={ ctaOpenNewTab ? 'noopener noreferrer' : undefined }
+                            >
+                                <RichText.Content tagName="span" value={ buttonLabel } />
+                            </a>
+                        </span>
+                    ) }
+                </div>
+            </div>
+            <div className="swiper-wrapper">
+                { slides.map( ( slide, i ) => {
+                    const spImgSrc = slide.spImgUrl || slide.pcImgUrl;
+                    const picture = (
+                        <picture className="bg_img">
+                            <source srcSet={ spImgSrc } media="(max-width:800px)" />
+                            <source srcSet={ slide.pcImgUrl } media="(min-width:801px)" />
+                            <img src={ slide.pcImgUrl } alt={ slide.altText } />
+                        </picture>
+                    );
+                    return (
+                        <div className="swiper-slide" key={ i }>
+                            { slide.linkUrl ? (
+                                <a href={ slide.linkUrl } data-lw-link-type={lwLinkDataPropsFromAttrs(slide, LINK_KEYS_SLIDE).linkType} data-lw-link-id={lwLinkDataPropsFromAttrs(slide, LINK_KEYS_SLIDE).linkId} target="_blank" rel="noopener noreferrer">
+                                    { picture }
+                                </a>
+                            ) : picture }
+                        </div>
+                    );
+                } ) }
+                {/* ★ フィルター要素 */}
+                <div
+                    className="image_filter"
+                    style={ {
+                        backgroundColor: filterColor,
+                        opacity        : filterOpacity,
+                    } }
+                ></div>
+            </div>
+
+            {/* ページネーション / ナビ */}
+            { showPagination && <div className="swiper-pagination"></div> }
+            { showNavigation && <div className="swiper-button-prev"></div> }
+            { showNavigation && <div className="swiper-button-next"></div> }
+
+            {/* Swiper 初期化スクリプト */}
+            <script type="text/javascript" dangerouslySetInnerHTML={ { __html: swiperConfig } } />
+
+            {/* 色カスタマイズ */}
+            { showPagination && paginationColor && (
+                <style>{`
+                    ${ cssRoot } .swiper-pagination-bullet { background-color:${ paginationColor }; }
+                    ${ cssRoot } .swiper-button-next,
+                    ${ cssRoot } .swiper-button-prev { color:${ nextButtonColor }; }
+                `}</style>
+            )}
+
+            {/* JS が完全にオフの環境向けフォールバック */}
+            <noscript>
+                <style>{`${ cssRoot }{opacity:1!important}`}</style>
+            </noscript>
+        </div>
+    );
+};
 
 registerBlockType(metadata.name, {
     // ------------------------------------------------------------------
@@ -68,6 +269,11 @@ registerBlockType(metadata.name, {
                 i === index ? { ...slide, [key]: value } : slide
             );
             setAttributes( { slides: newSlides } );
+        };
+
+        /* リンク設定のように複数のキーをまとめて入れ替える用 */
+        const updateSlideMulti = (i, patch) => {
+            setAttributes({ slides: slides.map((it, k) => k === i ? { ...it, ...patch } : it) });
         };
 
         const addSlide = () => {
@@ -191,6 +397,10 @@ registerBlockType(metadata.name, {
                                     value={ ctaLinkUrl }
                                     onChange={ (v)=>setAttributes({ ctaLinkUrl:v }) }
                                 />
+                                <LinkPicker
+                                    link={lwLinkFromAttrs(attributes, LINK_KEYS_CTA)}
+                                    onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS_CTA))}
+                                />
                                 <ToggleControl
                                     label="新規タブで開く"
                                     checked={ ctaOpenNewTab }
@@ -284,6 +494,10 @@ registerBlockType(metadata.name, {
                                     label="リンク先URL (任意)"
                                     value={ slide.linkUrl }
                                     onChange={ (v)=>updateSlide(index,'linkUrl',v) }
+                                />
+                                <LinkPicker
+                                    link={lwLinkFromAttrs(slide, LINK_KEYS_SLIDE)}
+                                    onChange={(patch) => updateSlideMulti(index, lwLinkToAttrs(patch, LINK_KEYS_SLIDE))}
                                 />
 
                                 <Button
@@ -475,174 +689,19 @@ registerBlockType(metadata.name, {
     // ------------------------------------------------------------------
     // ▶ Save
     // ------------------------------------------------------------------
-    save: ( { attributes } ) => {
-        const {
-            blockId, slides,
-            layoutType, maxWidth,
-            autoplayDelay, sliderEffect, crossFade,
-            loop, disableOnInteraction,
-            showPagination, paginationClickable,
-            showNavigation, sliderSpeed,
-            paginationColor, nextButtonColor,
-            /* ★ 追加属性 */
-            minHeightPc, minHeightTb, minHeightSp,
-            subTitle, mainTitle, descriptionText,
-            buttonLabel, ctaLinkUrl, ctaOpenNewTab,
-            showCtaButton,
-            filterColor, filterOpacity,
-        } = attributes;
-
-        const blockProps = useBlockProps.save({
-            id: blockId,
-            className: `${layoutType === 'full'
-                ? 'swiper paid-block-fv-11 max-w init-hide'
-                : 'swiper paid-block-fv-11 init-hide'} ${minHeightPc} ${minHeightTb} ${minHeightSp}`,
-            style: layoutType === 'fixed' ? { maxWidth } : { maxWidth: '100vw' }
-        });
-
-        /* ---------- Swiper 設定文字列（observer 追加） -------------*/
-        const swiperConfig = `
-(function(){
-    const selector = "#${ blockId }";
-    const MAX_RETRY = 30; // 30 × 150ms = 4.5s
-    let retry = 0;
-
-    const initSwiper = () => {
-        if ( typeof Swiper === "undefined" ) return false;
-        const already = document.querySelector(selector).swiper;
-        if ( already ) return true; // 二重初期化しない
-
-        const config = {
-            loop: ${ loop },
-            effect: "${ sliderEffect }",
-            speed: ${ sliderSpeed },
-            autoplay: {
-                delay: ${ autoplayDelay },
-                disableOnInteraction: ${ disableOnInteraction }
+    save: saveBlockFv11,
+    /* 2026-08-23: slides の既定に入っていた見本の alt（「スライド1のalt」など）をやめて空にした。
+     * それより前に作られたページは slides を既定のまま（＝本文に書かずに）保存していることがあり、
+     * 新しい既定で読むと alt が変わって「無効なコンテンツ」になる。ここで旧既定を持たせて読めるようにする。
+     * 出力するHTMLは同じなので save は使い回す。
+     * ⚠️ この deprecated を消すと、449サイトの既存ページが編集画面で壊れる。 */
+    deprecated: [
+        {
+            attributes: {
+                ...metadata.attributes,
+                slides: { ...metadata.attributes.slides, default: [{"pcImgUrl":"https://lite-word.com/sample_img/shop/6.webp","spImgUrl":"","altText":"スライド1のalt","linkUrl":""},{"pcImgUrl":"https://lite-word.com/sample_img/shop/2.webp","spImgUrl":"","altText":"スライド2のalt","linkUrl":""}] },
             },
-            observer: true,
-            observeParents: true,
-            ${ sliderEffect === 'fade' ? `fadeEffect: { crossFade: ${ crossFade } },` : '' }
-            ${ showPagination ? `
-                pagination: {
-                    el: selector + " .swiper-pagination",
-                    clickable: ${ paginationClickable }
-                },` : '' }
-            ${ showNavigation ? `
-                navigation: {
-                    nextEl: selector + " .swiper-button-next",
-                    prevEl: selector + " .swiper-button-prev"
-                },` : '' }
-        };
-        new Swiper( selector, config );
-        document.querySelector(selector).classList.remove("init-hide");
-        return true;
-    };
-
-    /* ① DOMContentLoaded 直後 */
-    document.addEventListener("DOMContentLoaded", initSwiper, { once:true });
-
-    /* ② lw:swiperReady (既存仕組み維持) */
-    window.addEventListener("lw:swiperReady", initSwiper, { once:true });
-
-    /* ③ ポーリング（Swiper読み込み遅延対策） */
-    const timer = setInterval(() => {
-        if ( initSwiper() || ++retry >= MAX_RETRY ) clearInterval(timer);
-    }, 150);
-
-    /* ④ それでも失敗したら 5s で init-hide を解除し static 画像表示 */
-    setTimeout(() => {
-        const el = document.querySelector(selector);
-        if ( el ) el.classList.remove("init-hide");
-    }, 5000);
-})();
-        `;
-
-        /* ---------- JSX 出力 -------------------------------------*/
-        return (
-            <div {...blockProps}>
-                <div className="text_in center">
-                    <div className="in">
-                        <h1 className="ttl">
-                            { subTitle && (
-                                <>
-                                    <RichText.Content
-                                        tagName="span"
-                                        className="sub"
-                                        value={ subTitle }
-                                    />
-                                    {' '} {/* subTitle がある場合だけ半角スペース */}
-                                </>
-                            )}
-                            <RichText.Content tagName="span" className="main" value={ mainTitle } />
-                        </h1>
-                        <RichText.Content tagName="p" className="description" value={ descriptionText } />
-                        { showCtaButton && (
-                            <span className="cta_btn">
-                                <a
-                                    href={ ctaLinkUrl || '#' }
-                                    className="btn_link"
-                                    target={ ctaOpenNewTab ? '_blank' : undefined }
-                                    rel={ ctaOpenNewTab ? 'noopener noreferrer' : undefined }
-                                >
-                                    <RichText.Content tagName="span" value={ buttonLabel } />
-                                </a>
-                            </span>
-                        ) }
-                    </div>
-                </div>
-                <div className="swiper-wrapper">
-                    { slides.map( ( slide, i ) => {
-                        const spImgSrc = slide.spImgUrl || slide.pcImgUrl;
-                        const picture = (
-                            <picture className="bg_img">
-                                <source srcSet={ spImgSrc } media="(max-width:800px)" />
-                                <source srcSet={ slide.pcImgUrl } media="(min-width:801px)" />
-                                <img src={ slide.pcImgUrl } alt={ slide.altText } />
-                            </picture>
-                        );
-                        return (
-                            <div className="swiper-slide" key={ i }>
-                                { slide.linkUrl ? (
-                                    <a href={ slide.linkUrl } target="_blank" rel="noopener noreferrer">
-                                        { picture }
-                                    </a>
-                                ) : picture }
-                            </div>
-                        );
-                    } ) }
-                    {/* ★ フィルター要素 */}
-                    <div
-                        className="image_filter"
-                        style={ {
-                            backgroundColor: filterColor,
-                            opacity        : filterOpacity,
-                        } }
-                    ></div>
-                </div>
-
-                {/* ページネーション / ナビ */}
-                { showPagination && <div className="swiper-pagination"></div> }
-                { showNavigation && <div className="swiper-button-prev"></div> }
-                { showNavigation && <div className="swiper-button-next"></div> }
-
-                {/* Swiper 初期化スクリプト */}
-                <script type="text/javascript" dangerouslySetInnerHTML={ { __html: swiperConfig } } />
-
-                {/* 色カスタマイズ */}
-                { showPagination && paginationColor && (
-                    <style>{`
-                        #${ blockId } .swiper-pagination-bullet { background-color:${ paginationColor }; }
-                        #${ blockId } .swiper-button-next,
-                        #${ blockId } .swiper-button-prev { color:${ nextButtonColor }; }
-                    `}</style>
-                )}
-
-                {/* JS が完全にオフの環境向けフォールバック */}
-                <noscript>
-                    <style>{`#${ blockId }{opacity:1!important}`}</style>
-                </noscript>
-            </div>
-        );
-    },
+            save: saveBlockFv11,
+        },
+    ],
 });

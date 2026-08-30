@@ -36,6 +36,18 @@
 			"default": "",
 			"aiHint": { "role": "url", "contentGuide": "遷移先URL" }
 		},
+		"btnLinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"btnPageId": {
+			"type": "number",
+			"default": 0
+		},
+		"btnCategoryId": {
+			"type": "number",
+			"default": 0
+		},
 		"openNewTab": { "type": "boolean", "default": false, "aiHint": { "skip": true } },
 		"FontSet": { "type": "string", "default": "", "aiHint": { "skip": true } },
 		"selectedIcon": {

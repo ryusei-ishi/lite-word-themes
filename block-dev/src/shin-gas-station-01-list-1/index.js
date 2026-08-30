@@ -12,6 +12,7 @@ import {
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromItem, lwLinkToItem, lwLinkDataPropsFromItem } from '../link-picker.js';
 
 registerBlockType(metadata.name, {
     edit: function (props) {
@@ -49,6 +50,11 @@ registerBlockType(metadata.name, {
                 i === index ? { ...content, [key]: value } : content
             );
             setAttributes({ contents: updatedContents });
+        };
+
+        /* リンク設定のように複数のキーをまとめて入れ替える用 */
+        const updateContentMulti = (i, patch) => {
+            setAttributes({ contents: contents.map((it, k) => k === i ? { ...it, ...patch } : it) });
         };
 
         return (
@@ -126,6 +132,10 @@ registerBlockType(metadata.name, {
                                         onChange={(value) => updateContent(index, 'url', value)}
                                         style={{ marginTop: '12px', maxWidth: '300px' }}
                                     />
+                                    <LinkPicker
+                                        link={lwLinkFromItem(content, 'url')}
+                                        onChange={(patch) => updateContentMulti(index, lwLinkToItem(patch, 'url'))}
+                                    />
                                 </div>
 
                                 <div className="bottom_content">
@@ -164,7 +174,7 @@ registerBlockType(metadata.name, {
                     {contents.map((content, index) => {
                         // URL が設定されていない場合は div.link、設定されている場合は a.link
                         const LinkTag = content.url ? 'a' : 'div';
-                        const linkProps = content.url ? { href: content.url } : {};
+                        const linkProps = content.url ? { href: content.url , 'data-lw-link-type': lwLinkDataPropsFromItem(content, 'url').linkType, 'data-lw-link-id': lwLinkDataPropsFromItem(content, 'url').linkId} : {};
                         const nextBtn = (
                             <div className="next_btn">
                                 <div>

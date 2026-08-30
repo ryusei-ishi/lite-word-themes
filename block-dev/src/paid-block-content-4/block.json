@@ -37,6 +37,18 @@
 			"type": "string",
 			"default": "#"
 		},
+		"ctaLinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"ctaPageId": {
+			"type": "number",
+			"default": 0
+		},
+		"ctaCategoryId": {
+			"type": "number",
+			"default": 0
+		},
 		"mainTitleColor": {
 			"type": "string",
 			"default": "#333"

@@ -18,13 +18,25 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./style.scss */ "./src/lw-pr-content-8/style.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-pr-content-8/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./block.json */ "./src/lw-pr-content-8/block.json");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 
 
 
 
 
 
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
+var lwBlockDef = {
   edit: function edit(_ref) {
     var attributes = _ref.attributes,
       setAttributes = _ref.setAttributes;
@@ -228,7 +240,32 @@ __webpack_require__.r(__webpack_exports__);
       className: "content_in"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InnerBlocks.Content, null)));
   }
-});
+};
+
+/* ------------------------------------------------------------------
+ * #1169（2026-08-27）既定値の他社CDN直リンクを自社素材に差し替えた。
+ * 既定値と同じ値はブロックコメントに書かれないので、既定値のまま使っている
+ * 既存ページは「保存HTMLは旧URL／ブロックは新しい既定値」で食い違う。
+ * 旧既定値を持った版を残して、開いて保存し直しても画像が入れ替わらないようにする。
+ * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
+ * ------------------------------------------------------------------ */
+var LW_1169_OLD = JSON.parse(JSON.stringify(_block_json__WEBPACK_IMPORTED_MODULE_5__.attributes));
+LW_1169_OLD.imageUrl["default"] = "https://placehold.co/400x400";
+
+/* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
+ *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の
+ *    大多数がこれ）がどの版にも当たらなくなる。だから既存の版それぞれについて
+ *    旧既定値を持たせた双子を作って先に並べる。元の版も残す（画像を自分で差し替えた人向け）。 */
+var lwPrev1169 = lwBlockDef.deprecated || [];
+lwBlockDef.deprecated = [{
+  attributes: LW_1169_OLD,
+  save: lwBlockDef.save
+}].concat(_toConsumableArray(lwPrev1169.map(function (d) {
+  return _objectSpread(_objectSpread({}, d), {}, {
+    attributes: LW_1169_OLD
+  });
+})), _toConsumableArray(lwPrev1169));
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, lwBlockDef);
 
 /***/ }),
 
@@ -292,7 +329,7 @@ module.exports = window["wp"]["components"];
   \****************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-content-8","version":"1.0.0","title":"Content 08","category":"lw-content","icon":"align-pull-left","description":"画像+コンテンツエリアブロック","aiDescription":"左側に画像、右側にコンテンツエリアを配置した2カラムレイアウト。コンテンツエリアには任意のブロックを配置可能。","aiNotes":"InnerBlocksでコンテンツエリアを自由に編集可能。背景色、最大幅、角丸をカスタマイズ可能。","aiHint":{"description":"画像+InnerBlocksの2カラム。左に画像、右に自由コンテンツエリア。InnerBlocks使用のためAI直接生成非推奨","excludeFromAutoSelect":true,"excludeReason":"InnerBlocksを使用するためAIが直接コンテンツを生成できない","contentAttributes":[],"imageAttributes":["imageUrl"]},"supports":{"anchor":true},"attributes":{"imageUrl":{"type":"string","default":"https://placehold.co/400x400","ai_description":"左側の画像URL"},"imageAlt":{"type":"string","default":"","ai_description":"画像のalt属性"},"maxWidth":{"type":"number","default":1040,"ai_description":"最大幅（px）"},"bgColor":{"type":"string","default":"#f5f5f5","ai_description":"背景色"},"bdrPc":{"type":"number","default":10,"ai_description":"角丸PC（px）"},"bdrSp":{"type":"number","default":10,"ai_description":"角丸SP（px）"},"minHeight":{"type":"number","default":378,"ai_description":"最小の高さ（px）"},"borderWidth":{"type":"number","default":2,"ai_description":"枠線の太さ（px）"},"borderColor":{"type":"string","default":"var(--color-main)","ai_description":"枠線の色"}},"editorScript":"file:./lw-pr-content-8.js","no":8}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-content-8","version":"1.0.0","title":"Content 08","category":"lw-content","icon":"align-pull-left","description":"画像+コンテンツエリアブロック","aiDescription":"左側に画像、右側にコンテンツエリアを配置した2カラムレイアウト。コンテンツエリアには任意のブロックを配置可能。","aiNotes":"InnerBlocksでコンテンツエリアを自由に編集可能。背景色、最大幅、角丸をカスタマイズ可能。","aiHint":{"description":"画像+InnerBlocksの2カラム。左に画像、右に自由コンテンツエリア。InnerBlocks使用のためAI直接生成非推奨","excludeFromAutoSelect":true,"excludeReason":"InnerBlocksを使用するためAIが直接コンテンツを生成できない","contentAttributes":[],"imageAttributes":["imageUrl"]},"supports":{"anchor":true},"attributes":{"imageUrl":{"type":"string","default":"https://lite-word.com/sample_img/shop/5.webp","ai_description":"左側の画像URL"},"imageAlt":{"type":"string","default":"","ai_description":"画像のalt属性"},"maxWidth":{"type":"number","default":1040,"ai_description":"最大幅（px）"},"bgColor":{"type":"string","default":"#f5f5f5","ai_description":"背景色"},"bdrPc":{"type":"number","default":10,"ai_description":"角丸PC（px）"},"bdrSp":{"type":"number","default":10,"ai_description":"角丸SP（px）"},"minHeight":{"type":"number","default":378,"ai_description":"最小の高さ（px）"},"borderWidth":{"type":"number","default":2,"ai_description":"枠線の太さ（px）"},"borderColor":{"type":"string","default":"var(--color-main)","ai_description":"枠線の色"}},"editorScript":"file:./lw-pr-content-8.js","no":8}');
 
 /***/ })
 

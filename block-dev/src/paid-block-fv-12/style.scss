@@ -208,7 +208,8 @@
                 font-size: 36px !important;
             }
             @media (max-width: 700px) {
-                font-size: 32px !important;
+                /* 🚨 2026-08-26: 375px 幅だと 10文字で右端ぎりぎり。画面幅からも上限をかける */
+                font-size: min(32px, 7.6vw) !important;
             }
         }
         .cta_wrap {

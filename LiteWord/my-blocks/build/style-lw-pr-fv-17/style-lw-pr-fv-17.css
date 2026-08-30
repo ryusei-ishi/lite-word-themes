@@ -1,6 +1,7 @@
 /*!*********************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/lw-pr-fv-17/style.scss ***!
   \*********************************************************************************************************************/
+@charset "UTF-8";
 .lw_content_wrap.page .lw-pr-fv-17 {
   margin-left: calc((100% - 100vw) / 2);
   width: 100vw;
@@ -64,7 +65,7 @@
 }
 @media (max-width: 800px) {
   .lw-pr-fv-17 .bg_image {
-    opacity: var(--bg_image-op-pc, --bg_image-op-pc, 1);
+    opacity: var(--bg_image-op-sp, 1);
   }
 }
 .lw-pr-fv-17 .bg_image img {
@@ -91,7 +92,7 @@
 }
 @media (max-width: 800px) {
   .lw-pr-fv-17 .bg_image_left {
-    opacity: var(--bg_image_left-op-pc, --bg_image_left-op-pc, 1);
+    opacity: var(--bg_image_left-op-sp, 1);
   }
 }
 .lw-pr-fv-17 .bg_image_right {
@@ -100,7 +101,7 @@
 }
 @media (max-width: 800px) {
   .lw-pr-fv-17 .bg_image_right {
-    opacity: var(--bg_image_right-op-pc, --bg_image_right-op-pc, 1);
+    opacity: var(--bg_image_right-op-sp, 1);
   }
 }
 .lw-pr-fv-17 .lw_breadcrumb {
@@ -120,6 +121,17 @@
     bottom: initial;
     top: 100%;
     padding: 1em 0;
+    /* 🚨 スマホではパンくずがFVの外（下）に出る。PCで白にしていると背景に溶けて読めないので、
+       スマホだけ別の色を指定できるようにしてある。指定が無ければPCの指定→従来の値の順で落ちる。 */
+  }
+  .lw-pr-fv-17 .lw_breadcrumb li {
+    color: var(--bc-color-sp, var(--color-black));
+  }
+  .lw-pr-fv-17 .lw_breadcrumb li:has(+ li)::after {
+    background: var(--bc-color-sp, var(--color-main));
+  }
+  .lw-pr-fv-17 .lw_breadcrumb li a {
+    color: var(--bc-color-sp, var(--color-main));
   }
 }
 @media (max-width: 500px) {
@@ -130,7 +142,9 @@
 .lw-pr-fv-17 .lw_breadcrumb li {
   display: flex;
   align-items: center;
-  color: var(--color-black);
+  /* --bc-color-pc は render.php が「パンくずリストの色（PC）」を指定されたときだけ出す。
+     指定が無ければ第2引数の従来の値がそのまま効くので、既存ページの見た目は変わらない。 */
+  color: var(--bc-color-pc, var(--color-black));
 }
 .lw-pr-fv-17 .lw_breadcrumb li:has(+ li)::after {
   margin: 0 0.4em;
@@ -138,20 +152,21 @@
   height: 1px;
   content: "";
   display: block;
-  background: var(--color-main);
+  background: var(--bc-color-pc, var(--color-main));
   transform: translateY(0.1em);
 }
 .lw-pr-fv-17 .lw_breadcrumb li a {
   display: flex;
   align-items: center;
   gap: 0.5em;
-  color: var(--color-main);
+  color: var(--bc-color-pc, var(--color-main));
   text-decoration: none;
 }
 .lw-pr-fv-17 .lw_breadcrumb li a svg {
   height: 1em;
   width: auto;
-  fill: var(--color-main);
+  /* 家アイコンはリンクの文字色に合わせる（指定が無ければ従来と同じ --color-main になる） */
+  fill: currentColor;
 }
 .lw-pr-fv-17 + h2,
 .lw-pr-fv-17 + h3,

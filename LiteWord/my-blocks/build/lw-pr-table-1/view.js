@@ -8,26 +8,42 @@ document.addEventListener('DOMContentLoaded', function () {
 
 	var tables = document.querySelectorAll('.lw-pr-table-1[data-scroll-hint="true"]');
 	tables.forEach(function (el) {
-		if (el.scrollWidth <= el.clientWidth) return;
+		// 表が画面に入ってから出す。ページを開いた瞬間に出すと、長いページでは
+		// 表までスクロールして来た頃にヒントが消えていて、利用者が気づけない。
+		var show = function () {
+			// 画像が読み込まれて幅が確定してから判定する（DOMContentLoaded 時点では正しく出ないことがある）
+			if (el.scrollWidth <= el.clientWidth) return;
 
-		var hint = document.createElement('div');
-		hint.className = 'lw-pr-table-1__scroll-hint';
-		hint.innerHTML =
-			'<div class="lw-pr-table-1__scroll-hint-inner">' +
-				'<span class="lw-pr-table-1__scroll-hint-arrows">' +
-					'<span class="arrow-left">\u2039</span>' +
-					'<span class="arrow-right">\u203a</span>' +
-				'</span>' +
-				'<span class="lw-pr-table-1__scroll-hint-icon">' + HAND_SVG + '</span>' +
-				'<span class="lw-pr-table-1__scroll-hint-text">\u30b9\u30af\u30ed\u30fc\u30eb\u3067\u304d\u307e\u3059</span>' +
-			'</div>';
-		el.insertBefore(hint, el.firstChild);
+			var hint = document.createElement('div');
+			hint.className = 'lw-pr-table-1__scroll-hint';
+			hint.innerHTML =
+				'<div class="lw-pr-table-1__scroll-hint-inner">' +
+					'<span class="lw-pr-table-1__scroll-hint-arrows">' +
+						'<span class="arrow-left">\u2039</span>' +
+						'<span class="arrow-right">\u203a</span>' +
+					'</span>' +
+					'<span class="lw-pr-table-1__scroll-hint-icon">' + HAND_SVG + '</span>' +
+					'<span class="lw-pr-table-1__scroll-hint-text">\u30b9\u30af\u30ed\u30fc\u30eb\u3067\u304d\u307e\u3059</span>' +
+				'</div>';
+			el.insertBefore(hint, el.firstChild);
 
-		var hide = function () {
-			hint.classList.add('is-scrolled');
+			var hide = function () {
+				hint.classList.add('is-scrolled');
+			};
+
+			el.addEventListener('scroll', hide, { once: true });
+			setTimeout(hide, 4000);
 		};
 
-		el.addEventListener('scroll', hide, { once: true });
-		setTimeout(hide, 4000);
+		if (typeof IntersectionObserver === 'undefined') { show(); return; }
+
+		var io = new IntersectionObserver(function (entries) {
+			entries.forEach(function (entry) {
+				if (!entry.isIntersecting) return;
+				io.disconnect();
+				show();
+			});
+		}, { rootMargin: '0px 0px -15% 0px' });
+		io.observe(el);
 	});
 });

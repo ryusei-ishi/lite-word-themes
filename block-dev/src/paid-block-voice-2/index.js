@@ -7,6 +7,7 @@ import {
 } from '@wordpress/block-editor';
 import {
     PanelBody,
+    TextControl,
     Button,
     ColorPalette,
     RangeControl,
@@ -49,9 +50,13 @@ registerBlockType(metadata.name, {
         } = attributes;
 
         // voices 配列の要素を更新
-        const updateVoice = (index, key, value) => {
+        const updateVoice = (index, key, value) =>
+            updateVoiceMulti(index, { [key]: value });
+
+        // 画像を選び直したときに URL と alt をまとめて入れ替えるため、複数キー版を用意する
+        const updateVoiceMulti = (index, patch) => {
             const updated = voices.map((item, i) =>
-                i === index ? { ...item, [key]: value } : item
+                i === index ? { ...item, ...patch } : item
             );
             setAttributes({ voices: updated });
         };
@@ -254,15 +259,22 @@ registerBlockType(metadata.name, {
                                 <li key={index}>
                                     <div className="image">
                                         <div className="in">
-                                            {item.image && <img src={item.image} alt="" />}
+                                            {item.image && <img src={item.image} alt={item.alt || ''} />}
                                             <MediaUpload
-                                                onSelect={(media) => updateVoice(index, 'image', media.url)}
+                                                onSelect={(media) => updateVoiceMulti(index, { image: media.url, alt: media.alt || '' })}
                                                 allowedTypes={['image']}
                                                 render={({ open }) => (
                                                     <Button onClick={open} isSecondary>
                                                         画像を{item.image ? '変更' : '選択'}
                                                     </Button>
                                                 )}
+                                            />
+                                            <TextControl
+                                                label="画像の説明（alt）"
+                                                help="目の見えない方や検索エンジンに、この画像が何かを伝える文です。例：笑顔でこちらを見る30代の女性"
+                                                value={item.alt || ''}
+                                                onChange={(v) => updateVoice(index, 'alt', v)}
+                                                style={{ marginTop: '8px' }}
                                             />
                                             <RichText
                                                 tagName="span"
@@ -416,7 +428,7 @@ registerBlockType(metadata.name, {
                                 <div className="image">
                                     <div className="in">
                                         {/* 画像 */}
-                                        {item.image && <img src={item.image} alt="" />}
+                                        {item.image && <img src={item.image} alt={item.alt || ''} />}
                                         {/* Thanks */}
                                         <RichText.Content
                                             tagName="span"

@@ -19,6 +19,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/lw-comment-1/style.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-comment-1/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/lw-comment-1/block.json");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 
 
 
@@ -30,23 +36,100 @@ __webpack_require__.r(__webpack_exports__);
 // フォントオプションを変数に定義
 var fontOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontOptionsArr)();
 var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOptionsArr)();
+
+/* save は deprecated からも使うので先に名前を付ける（写し間違いを防ぐため本文はひとつだけ持つ） */
+var saveComment1 = function saveComment1(props) {
+  var _props$attributes = props.attributes,
+    name = _props$attributes.name,
+    title = _props$attributes.title,
+    imageUrl = _props$attributes.imageUrl,
+    imageColor = _props$attributes.imageColor,
+    altText = _props$attributes.altText,
+    commentAlignment = _props$attributes.commentAlignment,
+    nameFontSet = _props$attributes.nameFontSet,
+    nameFontWeight = _props$attributes.nameFontWeight,
+    nameTextColor = _props$attributes.nameTextColor,
+    titleFontSet = _props$attributes.titleFontSet,
+    titleFontWeight = _props$attributes.titleFontWeight,
+    titleTextColor = _props$attributes.titleTextColor,
+    commentBgColor = _props$attributes.commentBgColor,
+    maxWidth = _props$attributes.maxWidth;
+  var alignmentClass = commentAlignment === 'right' ? 'right' : 'left';
+  var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+    className: "lw-comment-1 ".concat(alignmentClass)
+  });
+  return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
+    className: "lw-comment-1__wrap",
+    style: {
+      maxWidth: "".concat(maxWidth, "px")
+    }
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lw-comment-1__image"
+  }, imageUrl ? /*#__PURE__*/React.createElement("img", {
+    src: imageUrl,
+    alt: altText,
+    style: {
+      borderColor: imageColor
+    }
+  }) : /*#__PURE__*/React.createElement("div", {
+    className: "no_image",
+    style: {
+      borderColor: imageColor,
+      color: imageColor
+    }
+  }, "No Image"), /*#__PURE__*/React.createElement("div", {
+    className: "lw-comment-1__name"
+  }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+    tagName: "p",
+    className: "lw-p",
+    value: name,
+    style: {
+      fontFamily: nameFontSet,
+      fontWeight: nameFontWeight,
+      color: nameTextColor
+    }
+  }))), /*#__PURE__*/React.createElement("div", {
+    className: "lw-comment-1__text_wrap"
+  }, /*#__PURE__*/React.createElement("div", {
+    className: "lw-comment-1__text"
+  }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+    tagName: "p",
+    value: title,
+    className: "lw-p",
+    style: {
+      fontFamily: titleFontSet,
+      fontWeight: titleFontWeight,
+      color: titleTextColor
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "lw-arrow",
+    style: {
+      backgroundColor: commentBgColor
+    }
+  }), /*#__PURE__*/React.createElement("div", {
+    className: "lw-bg_color",
+    style: {
+      backgroundColor: commentBgColor
+    }
+  })))));
+};
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_6__.name, {
   edit: function edit(props) {
-    var _props$attributes = props.attributes,
-      name = _props$attributes.name,
-      title = _props$attributes.title,
-      imageUrl = _props$attributes.imageUrl,
-      imageColor = _props$attributes.imageColor,
-      altText = _props$attributes.altText,
-      commentAlignment = _props$attributes.commentAlignment,
-      nameFontSet = _props$attributes.nameFontSet,
-      nameFontWeight = _props$attributes.nameFontWeight,
-      nameTextColor = _props$attributes.nameTextColor,
-      titleFontSet = _props$attributes.titleFontSet,
-      titleFontWeight = _props$attributes.titleFontWeight,
-      titleTextColor = _props$attributes.titleTextColor,
-      commentBgColor = _props$attributes.commentBgColor,
-      maxWidth = _props$attributes.maxWidth,
+    var _props$attributes2 = props.attributes,
+      name = _props$attributes2.name,
+      title = _props$attributes2.title,
+      imageUrl = _props$attributes2.imageUrl,
+      imageColor = _props$attributes2.imageColor,
+      altText = _props$attributes2.altText,
+      commentAlignment = _props$attributes2.commentAlignment,
+      nameFontSet = _props$attributes2.nameFontSet,
+      nameFontWeight = _props$attributes2.nameFontWeight,
+      nameTextColor = _props$attributes2.nameTextColor,
+      titleFontSet = _props$attributes2.titleFontSet,
+      titleFontWeight = _props$attributes2.titleFontWeight,
+      titleTextColor = _props$attributes2.titleTextColor,
+      commentBgColor = _props$attributes2.commentBgColor,
+      maxWidth = _props$attributes2.maxWidth,
       setAttributes = props.setAttributes;
     var alignmentClass = commentAlignment === 'right' ? 'right' : 'left';
     var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
@@ -55,7 +138,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
     var onImageSelect = function onImageSelect(media) {
       setAttributes({
         imageUrl: media.url,
-        altText: media.alt || '画像'
+        altText: media.alt || ''
       });
     };
     var onChangeCommentAlignment = function onChangeCommentAlignment(newAlignment) {
@@ -85,6 +168,18 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
             marginTop: '10px'
           }
         }, "\u753B\u50CF\u3092", imageUrl ? '変更' : '選択'));
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: "\u753B\u50CF\u306E\u8AAC\u660E\uFF08alt\uFF09",
+      help: "\u76EE\u306E\u898B\u3048\u306A\u3044\u65B9\u3084\u691C\u7D22\u30A8\u30F3\u30B8\u30F3\u306B\u3001\u3053\u306E\u753B\u50CF\u304C\u4F55\u304B\u3092\u4F1D\u3048\u308B\u6587\u3067\u3059\u3002\u4F8B\uFF1A\u7B11\u9854\u3067\u3053\u3061\u3089\u3092\u898B\u308B\u5973\u6027\u306E\u30A4\u30E9\u30B9\u30C8",
+      value: altText || '',
+      onChange: function onChange(v) {
+        return setAttributes({
+          altText: v
+        });
+      },
+      style: {
+        marginTop: '10px'
       }
     }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
       label: "\u753B\u50CF\u306E\u67A0\u7DDA\u8272",
@@ -252,81 +347,21 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       }
     }))))));
   },
-  save: function save(props) {
-    var _props$attributes2 = props.attributes,
-      name = _props$attributes2.name,
-      title = _props$attributes2.title,
-      imageUrl = _props$attributes2.imageUrl,
-      imageColor = _props$attributes2.imageColor,
-      altText = _props$attributes2.altText,
-      commentAlignment = _props$attributes2.commentAlignment,
-      nameFontSet = _props$attributes2.nameFontSet,
-      nameFontWeight = _props$attributes2.nameFontWeight,
-      nameTextColor = _props$attributes2.nameTextColor,
-      titleFontSet = _props$attributes2.titleFontSet,
-      titleFontWeight = _props$attributes2.titleFontWeight,
-      titleTextColor = _props$attributes2.titleTextColor,
-      commentBgColor = _props$attributes2.commentBgColor,
-      maxWidth = _props$attributes2.maxWidth;
-    var alignmentClass = commentAlignment === 'right' ? 'right' : 'left';
-    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-      className: "lw-comment-1 ".concat(alignmentClass)
-    });
-    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
-      className: "lw-comment-1__wrap",
-      style: {
-        maxWidth: "".concat(maxWidth, "px")
+  save: saveComment1,
+  /* 2026-08-23: altText の既定を「画像」から空に変えた。
+   * それより前に作られたページは altText を書かずに保存しているので、
+   * 新しい既定（空）で読むと alt="" になって出力が変わり「無効なコンテンツ」になる。
+   * ここで旧既定を持たせて読めるようにする。出力するHTMLは同じなので save は使い回す。
+   * ⚠️ この deprecated を消すと、449サイトの既存ページが編集画面で壊れる。 */
+  deprecated: [{
+    attributes: _objectSpread(_objectSpread({}, _block_json__WEBPACK_IMPORTED_MODULE_6__.attributes), {}, {
+      altText: {
+        type: 'string',
+        "default": '画像'
       }
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "lw-comment-1__image"
-    }, imageUrl ? /*#__PURE__*/React.createElement("img", {
-      src: imageUrl,
-      alt: altText,
-      style: {
-        borderColor: imageColor
-      }
-    }) : /*#__PURE__*/React.createElement("div", {
-      className: "no_image",
-      style: {
-        borderColor: imageColor,
-        color: imageColor
-      }
-    }, "No Image"), /*#__PURE__*/React.createElement("div", {
-      className: "lw-comment-1__name"
-    }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
-      tagName: "p",
-      className: "lw-p",
-      value: name,
-      style: {
-        fontFamily: nameFontSet,
-        fontWeight: nameFontWeight,
-        color: nameTextColor
-      }
-    }))), /*#__PURE__*/React.createElement("div", {
-      className: "lw-comment-1__text_wrap"
-    }, /*#__PURE__*/React.createElement("div", {
-      className: "lw-comment-1__text"
-    }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
-      tagName: "p",
-      value: title,
-      className: "lw-p",
-      style: {
-        fontFamily: titleFontSet,
-        fontWeight: titleFontWeight,
-        color: titleTextColor
-      }
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "lw-arrow",
-      style: {
-        backgroundColor: commentBgColor
-      }
-    }), /*#__PURE__*/React.createElement("div", {
-      className: "lw-bg_color",
-      style: {
-        backgroundColor: commentBgColor
-      }
-    })))));
-  }
+    }),
+    save: saveComment1
+  }]
 });
 
 /***/ }),
@@ -1028,7 +1063,7 @@ module.exports = window["wp"]["components"];
   \*************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-comment-1","version":"1.0.0","title":"吹き出しコメント 1","category":"lw-comment","icon":"format-chat","aiHint":{"description":"吹き出しコメント。名前+タイトル+アバター画像。レビュー・感想表示に","excludeFromAutoSelect":false,"contentAttributes":["name","title"],"imageAttributes":["imageUrl"]},"supports":{"anchor":true},"attributes":{"name":{"type":"string","default":"お名前"},"title":{"type":"string","default":"こんにちは！コメントサンプルです。"},"imageUrl":{"type":"string","default":""},"imageColor":{"type":"string","default":"var(--color-main)"},"altText":{"type":"string","default":"画像"},"commentAlignment":{"type":"string","default":"left"},"commentBgColor":{"type":"string","default":"#eeeeee"},"nameFontSet":{"type":"string","default":""},"nameFontWeight":{"type":"string","default":""},"nameTextColor":{"type":"string","default":"#000000"},"titleFontSet":{"type":"string","default":""},"titleFontWeight":{"type":"string","default":""},"titleTextColor":{"type":"string","default":"#000000"},"maxWidth":{"type":"number","default":1200}},"editorScript":"file:./lw-comment-1.js","no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-comment-1","version":"1.0.0","title":"吹き出しコメント 1","category":"lw-comment","icon":"format-chat","aiHint":{"description":"吹き出しコメント。名前+タイトル+アバター画像。レビュー・感想表示に","excludeFromAutoSelect":false,"contentAttributes":["name","title"],"imageAttributes":["imageUrl"]},"supports":{"anchor":true},"attributes":{"name":{"type":"string","default":"お名前"},"title":{"type":"string","default":"こんにちは！コメントサンプルです。"},"imageUrl":{"type":"string","default":""},"imageColor":{"type":"string","default":"var(--color-main)"},"altText":{"type":"string","default":""},"commentAlignment":{"type":"string","default":"left"},"commentBgColor":{"type":"string","default":"#eeeeee"},"nameFontSet":{"type":"string","default":""},"nameFontWeight":{"type":"string","default":""},"nameTextColor":{"type":"string","default":"#000000"},"titleFontSet":{"type":"string","default":""},"titleFontWeight":{"type":"string","default":""},"titleTextColor":{"type":"string","default":"#000000"},"maxWidth":{"type":"number","default":1200}},"editorScript":"file:./lw-comment-1.js","no":1}');
 
 /***/ })
 

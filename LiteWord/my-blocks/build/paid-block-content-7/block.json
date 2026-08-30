@@ -11,7 +11,7 @@
 		"description": "画像+タイトル+説明文のカード配列。3カラム。学習塾・スクール・サービス紹介に",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["contents"],
-		"imageAttributes": []
+		"imageAttributes": ["contents.image"]
 	},
 	"supports": {
 		"anchor": true
@@ -92,6 +92,13 @@
 					"selector": "img",
 					"attribute": "src"
 				},
+				"alt": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "img",
+					"attribute": "alt",
+					"default": ""
+				},
 				"ttl": {
 					"type": "string",
 					"source": "html",
@@ -108,7 +115,9 @@
 					"selector": ".link",
 					"attribute": "href",
 					"default": ""
-				}
+				},
+				"linkType": { "type": "string", "source": "attribute", "selector": ".link", "attribute": "data-lw-link-type" },
+				"linkId": { "type": "string", "source": "attribute", "selector": ".link", "attribute": "data-lw-link-id" }
 			},
 			"default": [
 				{

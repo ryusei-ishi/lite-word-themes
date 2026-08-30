@@ -7,17 +7,20 @@
 	"category": "lw-content",
 	"icon": "admin-comments",
 	"aiHint": {
-		"description": "メッセージブロック。サブタイトル+見出し+リード+本文+画像。代表挨拶・想いに",
+		"description": "全幅の色帯の中に、サブ＋見出し＋大きな一文＋本文と、縦長の写真＋肩書きを1枚にまとめたメッセージ。代表あいさつ・院長あいさつ・想い・創業のきっかけに",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": [
 			"subTitle",
 			"mainTitle",
 			"leadText",
-			"bodyText"
+			"bodyText",
+			"captionSub",
+			"captionMain"
 		],
 		"imageAttributes": [
 			"imgUrl"
-		]
+		],
+		"notes": "🚨 固定ページでは画面幅いっぱいの帯になる（.lw_content_wrap.page で margin-left:calc((100% - 100vw)/2); width:100vw）。背景は .bg_filter ＝ background:var(--color-main) を filterOpacity（既定 0.05・0〜1）で薄めたもので、ページのメインカラーに自動で追従する（色は指定しなくてよい）。自前で padding:80px 32px（500px以下は 48px 20px）を持つので、前後にスペーサーを足さない。中身は grid で 文章65%／写真35%。650px以下で縦積み。alignLeft:true にすると写真が左（35%／65%）に来る。🚨 写真枠は aspect-ratio:1/1.4 の object-fit:cover ＝ 縦長。maxWidth:1040 なら約364×510px なので、画像も 1:1.4（900×1260 など）で用意すれば1ミリも切られない。胸から上まで寄ったポートレートにすること（引きの絵は顔が読めない）。🚨 maxWidth の既定は空文字で、そのまま max-width:px という無効な値が出る（CSSの既定値に落ちるので壊れはしないが、同じページの他のブロックと幅がそろわない）。必ず数値で渡す。他のセクションに合わせるなら 1040。見出しは h3（h2 ではない）。だから上に見出しブロックを重ねてよい。文字は4段 — subTitle（18px・サイト色）／ mainTitle（32px・1080px以下で28→22）／ leadText（26px・サイト色・太字）／ bodyText（16px・行間2.4em）。4つとも :empty { display:none } なので、空にすればその行ごと消える。🚨 leadText と bodyText は white-space:pre-line。改行文字がそのまま行分けになる（br は要らない。空行を入れれば段落が分かれる）。maxWidth:1040 なら leadText は1行23字・bodyText は1行38字なので、段落ごとに2行で収まるように割る（3行目に2文字だけ落ちる形を作らない）。写真の下の肩書きは captionSub（14px）＋ captionMain（22px 太字）で右寄せ。既定は 代表取締役 ／ 山田太郎。colorMain は subTitle と leadText の色にそのまま入るので var(--color-main) を渡してよい（lw-pr-custom-title-11〜14 のような自己参照は起きない）。"
 	},
 	"supports": {
 		"anchor": true
@@ -41,7 +44,7 @@
 		},
 		"imgUrl": {
 			"type": "string",
-			"default": "https://images.unsplash.com/photo-1534308143481-c55f00be8bd7?w=400&h=400&auto=format&fit=crop&q=80"
+			"default": "https://lite-word.com/sample_img/women/2.webp"
 		},
 		"imgAlt": {
 			"type": "string",
@@ -70,7 +73,9 @@
 		"alignLeft": {
 			"type": "boolean",
 			"default": false,
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		}
 	},
 	"editorScript": "file:./lw-message-1.js",

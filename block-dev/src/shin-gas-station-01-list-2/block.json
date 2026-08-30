@@ -12,8 +12,14 @@
 	"aiHint": {
 		"description": "背景画像+タイトル付きカード型リスト。番号+画像+タイトル+説明+ボタン。会社概要・事業紹介に。ショップテンプレート用",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["topTitleSub", "topTitleMain", "items"],
-		"imageAttributes": ["bgImage"]
+		"contentAttributes": [
+			"topTitleSub",
+			"topTitleMain",
+			"items"
+		],
+		"imageAttributes": [
+			"bgImage"
+		]
 	},
 	"attributes": {
 		"bgImage": {
@@ -21,7 +27,7 @@
 			"source": "attribute",
 			"selector": ".bg_image img",
 			"attribute": "src",
-			"default": "https://picsum.photos/1000/1000?random=4"
+			"default": "https://lite-word.com/sample_img/shop/4.webp"
 		},
 		"filterColor": {
 			"type": "string",
@@ -45,7 +51,7 @@
 			"selector": "li.item",
 			"default": [
 				{
-					"itemImage": "https://picsum.photos/1000/1000?random=1",
+					"itemImage": "https://lite-word.com/sample_img/shop/1.webp",
 					"no": "01",
 					"sub": "Greeting",
 					"main": "代表あいさつ",
@@ -54,7 +60,7 @@
 					"url": ""
 				},
 				{
-					"itemImage": "https://picsum.photos/1000/1000?random=2",
+					"itemImage": "https://lite-word.com/sample_img/shop/2.webp",
 					"no": "02",
 					"sub": "Overview & History",
 					"main": "会社概要・沿革",
@@ -63,7 +69,7 @@
 					"url": ""
 				},
 				{
-					"itemImage": "https://picsum.photos/1000/1000?random=3",
+					"itemImage": "https://lite-word.com/sample_img/shop/3.webp",
 					"no": "03",
 					"sub": "Office Infomation",
 					"main": "事業所案内",
@@ -114,6 +120,18 @@
 					"selector": ".btn",
 					"attribute": "href",
 					"default": ""
+				},
+				"linkType": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".btn",
+					"attribute": "data-lw-link-type"
+				},
+				"linkId": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".btn",
+					"attribute": "data-lw-link-id"
 				}
 			}
 		}

@@ -226,7 +226,9 @@
 .cta-2 .cta-2__wrap nav a.mail svg {
   margin-top: 3px;
   height: 1.2em;
-  fill: #fff;
+  /* 🚨 fill を直接指定すると .icon の style="fill: buttonTextColor" が効かず
+     アイコンが必ず白になる（白いボタンで消える）。既定は #ffffff なので見た目は変わらない。 */
+  fill: inherit;
 }
 .wp-block-wdl-cta-2 .cta-2__wrap nav a.mail:hover,
 .cta-2 .cta-2__wrap nav a.mail:hover {

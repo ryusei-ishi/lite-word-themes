@@ -1,0 +1,100 @@
+{
+  "title": "お客様の声（写真つきカード・4件）",
+  "description": "【型C：写真が主役】色帯の中に、顔写真つきのお客様の声カードを4件。1件は「どんな方か・お名前・ご感想」の3点でできています。感想・レビュー・導入事例の掲載に。掲載にあたってはご本人の許可を得てください。",
+  "blocks": [
+    {
+      "name": "wdl/paid-block-voice-2",
+      "attributes": {
+        "blockTitleMain": "お客様の声",
+        "blockTitleSub": "VOICE",
+        "explanation": "実際にご利用いただいた方から届いた、<br>ありのままのご感想です。",
+        "filterColor": "var(--color-main)",
+        "filterOpacity": 0.9,
+        "voices": [
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/voice2_01.webp",
+            "alt": "ご感想をくださった20代の女性のお客様",
+            "thanks": "thank you",
+            "sub": "20代・女性 ／ はじめてのご利用",
+            "nameBig": "高橋",
+            "nameSmall": "さま",
+            "comment": "何をお願いすればいいのかも分からないまま相談しました。今やったほうがいいことと、後からで大丈夫なことを分けて教えていただけたので、迷わずに決められました。"
+          },
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/voice2_02.webp",
+            "alt": "ご感想をくださった50代の男性のお客様",
+            "thanks": "thank you",
+            "sub": "50代・男性 ／ 法人のお客様",
+            "nameBig": "田村",
+            "nameSmall": "さま",
+            "comment": "最初にいただいた見積もりから金額が動かず、社内への説明がとても楽でした。途中の進みぐあいも区切りごとに連絡をいただけたので、任せていて不安になりませんでした。"
+          },
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/voice2_03.webp",
+            "alt": "ご感想をくださった60代の女性のお客様",
+            "thanks": "thank you",
+            "sub": "60代・女性 ／ 知人からのご紹介",
+            "nameBig": "松本",
+            "nameSmall": "さま",
+            "comment": "難しい言葉が出てきたらどうしようと身構えていましたが、そのつど分かる言葉に言いかえてくださいました。同じことを何度うかがっても、いやな顔をされませんでした。"
+          },
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/voice2_04.webp",
+            "alt": "ご感想をくださった30代の男性のお客様",
+            "thanks": "thank you",
+            "sub": "30代・男性 ／ 2回目のご利用",
+            "nameBig": "西村",
+            "nameSmall": "さま",
+            "comment": "前回よくしていただいたので、今回は迷わずこちらにお願いしました。前のときの内容を覚えていてくださって、はじめから話が早かったのが助かりました。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ 掲載しているのはお客様個人のご感想であり、効果や結果をお約束するものではありません。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "24px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "お問い合わせはこちら",
+        "textSub": "＼ ご相談だけでも大丈夫です ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

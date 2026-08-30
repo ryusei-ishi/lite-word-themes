@@ -10,6 +10,7 @@ import {
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
+	TextControl,
 	Button,
 	ToolbarGroup,
 	ToolbarButton,
@@ -27,7 +28,7 @@ registerBlockType( metadata.name, {
 	edit( { attributes, setAttributes } ) {
 		const {
 			subTitle, mainTitle, headingLevel, mainTitleColor, sizeClass,
-			leftImage, rightImage, leftHeightEm, rightHeightEm,
+			leftImage, rightImage, leftImageAlt, rightImageAlt, leftHeightEm, rightHeightEm,
 			leftMarginEm, rightMarginEm, positionClass,
 			hideSubTitle, hideMainTitle,
 			bdThickness, bdMarginTopEm, bdDisplay,
@@ -40,7 +41,7 @@ registerBlockType( metadata.name, {
 			className: `paid-block-custom-title-10 ${ positionClass } ${ sizeClass }`
 		});
 
-		const onSelectImage = ( side ) => ( media ) => setAttributes( { [ side ]: media.url } );
+		const onSelectImage = ( side ) => ( media ) => setAttributes( { [ side ]: media.url, [ side + 'Alt' ]: media.alt || '' } );
 		const removeImage   = ( side ) => setAttributes( { [ side ]: '' } );
 
 		return (
@@ -137,6 +138,12 @@ registerBlockType( metadata.name, {
 								) }
 							/>
 						</MediaUploadCheck>
+						<TextControl
+							label="左画像の説明（alt）"
+							help="見出しの飾りとして置いた画像なら、空のままで構いません（読み上げに邪魔が入らない方がよいため）。意味のある画像のときだけ書いてください"
+							value={ leftImageAlt || '' }
+							onChange={ v => setAttributes( { leftImageAlt: v } ) }
+						/>
 						<br /><br />
 						<RangeControl
 							label="左画像 大きさ (em)"
@@ -171,6 +178,12 @@ registerBlockType( metadata.name, {
 								) }
 							/>
 						</MediaUploadCheck>
+						<TextControl
+							label="右画像の説明（alt）"
+							help="見出しの飾りとして置いた画像なら、空のままで構いません（読み上げに邪魔が入らない方がよいため）。意味のある画像のときだけ書いてください"
+							value={ rightImageAlt || '' }
+							onChange={ v => setAttributes( { rightImageAlt: v } ) }
+						/>
 						<br /><br />
 						<RangeControl
 							label="右画像 大きさ (em)"
@@ -234,7 +247,7 @@ registerBlockType( metadata.name, {
 									marginRight: `${ leftMarginEm }em`,
 								} }
 							>
-								<img src={ leftImage } alt="" />
+								<img src={ leftImage } alt={ leftImageAlt || '' } />
 							</span>
 						) }
 
@@ -270,7 +283,7 @@ registerBlockType( metadata.name, {
 									marginLeft: `${ rightMarginEm }em`,
 								} }
 							>
-								<img src={ rightImage } alt="" />
+								<img src={ rightImage } alt={ rightImageAlt || '' } />
 							</span>
 						) }
 
@@ -295,7 +308,7 @@ registerBlockType( metadata.name, {
 	save( { attributes } ) {
 		const {
 			subTitle, mainTitle, headingLevel, mainTitleColor, sizeClass,
-			leftImage, rightImage, leftHeightEm, rightHeightEm,
+			leftImage, rightImage, leftImageAlt, rightImageAlt, leftHeightEm, rightHeightEm,
 			leftMarginEm, rightMarginEm, positionClass,
 			hideSubTitle, hideMainTitle,
 			bdThickness, bdMarginTopEm, bdDisplay,
@@ -308,10 +321,10 @@ registerBlockType( metadata.name, {
 
 		const Tag = [ 'p', 'div' ].includes( headingLevel ) ? headingLevel : `h${ headingLevel }`;
 
-		const maybeImage = ( url, cls, styleObj ) =>
+		const maybeImage = ( url, cls, alt, styleObj ) =>
 			url && (
 				<span className={ cls } style={ styleObj }>
-					<img src={ url } alt="" />
+					<img src={ url } alt={ alt || '' } />
 				</span>
 			);
 
@@ -332,6 +345,7 @@ registerBlockType( metadata.name, {
 					{ maybeImage(
 						leftImage,
 						'image_left',
+						leftImageAlt,
 						{
 							height     : `${ leftHeightEm }em`,
 							marginRight: `${ leftMarginEm }em`,
@@ -348,6 +362,7 @@ registerBlockType( metadata.name, {
 					{ maybeImage(
 						rightImage,
 						'image_right',
+						rightImageAlt,
 						{
 							height    : `${ rightHeightEm }em`,
 							marginLeft: `${ rightMarginEm }em`,

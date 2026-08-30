@@ -13,29 +13,83 @@
 	"aiHint": {
 		"description": "投稿一覧カードグリッド。サムネイル+日付+カテゴリ+タイトル。お知らせ・新着情報に",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["numberOfPosts", "categoryId"],
-		"imageAttributes": ["bgImage"],
-		"notes": "動的ブロック。DBから投稿を取得して表示。抜粋なし・タイトルは1行省略。bgImage は装飾用の背景画像で必須ではない"
+		"contentAttributes": [
+			"numberOfPosts",
+			"categoryId"
+		],
+		"imageAttributes": [
+			"bgImage"
+		],
+		"notes": "サムネイル+日付+カテゴリ+タイトルのカードグリッド。動的ブロックなのでDBから投稿を取る。投稿が1件も無いサイトでは何も出ないので、記事を用意できないページには置かない。"
 	},
 	"supports": {
 		"anchor": true
 	},
 	"attributes": {
-		"numberOfPosts": {"type": "number", "default": 6},
-		"categoryId": {"type": "string", "default": ""},
-		"postType": {"type": "string", "default": "post"},
-		"columns": {"type": "number", "default": 3},
-		"bgImage": {"type": "string", "default": "", "aiHint": {"role": "image", "note": "背景画像URL。無くてもよい"}},
-		"bgColor": {"type": "string", "default": ""},
-		"bgOpacity": {"type": "number", "default": 100},
-		"dateFormat": {"type": "string", "default": "md_day"},
-		"dateFont": {"type": "string", "default": "Noto Sans JP"},
-		"dateFontWeight": {"type": "string", "default": "400"},
-		"catFont": {"type": "string", "default": "Noto Sans JP"},
-		"catFontWeight": {"type": "string", "default": "400"},
-		"catBgColor": {"type": "string", "default": "var(--color-main)"},
-		"titleFont": {"type": "string", "default": "Noto Sans JP"},
-		"titleFontWeight": {"type": "string", "default": "400"}
+		"numberOfPosts": {
+			"type": "number",
+			"default": 6
+		},
+		"categoryId": {
+			"type": "string",
+			"default": ""
+		},
+		"postType": {
+			"type": "string",
+			"default": "post"
+		},
+		"columns": {
+			"type": "number",
+			"default": 3
+		},
+		"bgImage": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"role": "image",
+				"note": "背景画像URL。無くてもよい"
+			}
+		},
+		"bgColor": {
+			"type": "string",
+			"default": ""
+		},
+		"bgOpacity": {
+			"type": "number",
+			"default": 100
+		},
+		"dateFormat": {
+			"type": "string",
+			"default": "md_day"
+		},
+		"dateFont": {
+			"type": "string",
+			"default": "Noto Sans JP"
+		},
+		"dateFontWeight": {
+			"type": "string",
+			"default": "400"
+		},
+		"catFont": {
+			"type": "string",
+			"default": "Noto Sans JP"
+		},
+		"catFontWeight": {
+			"type": "string",
+			"default": "400"
+		},
+		"catBgColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"titleFont": {
+			"type": "string",
+			"default": "Noto Sans JP"
+		},
+		"titleFontWeight": {
+			"type": "string",
+			"default": "400"
+		}
 	},
 	"no": 4
 }

@@ -10,8 +10,16 @@
 	"aiHint": {
 		"description": "中央テキスト+背景画像FV。大きな見出し+説明+CTAボタン。飲食・美容・ECのビジュアル訴求に最適",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["mainTitle", "description", "buttonText"],
-		"imageAttributes": ["imageUrlPc", "imageUrlSp"]
+		"contentAttributes": [
+			"mainTitle",
+			"description",
+			"buttonText"
+		],
+		"imageAttributes": [
+			"imageUrlPc",
+			"imageUrlSp"
+		],
+		"notes": "背景写真の上に半透明の暗い箱を置き、その中に左寄せで見出し＋説明＋CTAが入る。「中央に大きな見出し」ではない（2026-08-26 に実物で確認）。箱があるので写真が明るくても文字が読める。写真を大きく見せたい業種（飲食・美容・EC）に向く。 ［2026-08-27 追記］fvInnerBgColor / fvInnerBgOpacity が内側の帯。白 0.82 にすると写真の上でも一番読みやすくなり、0 にすると帯が消えて写真がそのまま見える。imageUrlPc は空にできない。"
 	},
 	"supports": {
 		"anchor": true
@@ -35,7 +43,7 @@
 		},
 		"imageUrlPc": {
 			"type": "string",
-			"default": "https://plus.unsplash.com/premium_photo-1670360414946-e33a828d1d52?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1171"
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/sub_6.webp"
 		},
 		"imageUrlSp": {
 			"type": "string",
@@ -55,7 +63,7 @@
 		},
 		"videoSpeed": {
 			"type": "number",
-			"default": 1.0
+			"default": 1
 		},
 		"headingLevel": {
 			"type": "number",
@@ -120,6 +128,18 @@
 		"buttonUrl": {
 			"type": "string",
 			"default": ""
+		},
+		"buttonLinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"buttonPageId": {
+			"type": "number",
+			"default": 0
+		},
+		"buttonCategoryId": {
+			"type": "number",
+			"default": 0
 		},
 		"ctaBgColor": {
 			"type": "string",

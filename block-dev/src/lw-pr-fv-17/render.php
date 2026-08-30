@@ -28,13 +28,24 @@ $bg_image_left_op_sp    = $attributes['bgImageLeftOpacitySp'] ?? 1;
 $bg_image_right_op_pc   = $attributes['bgImageRightOpacityPc'] ?? 1;
 $bg_image_right_op_sp   = $attributes['bgImageRightOpacitySp'] ?? 1;
 $margin_bottom_zero     = $attributes['marginBottomZero'] ?? false;
+// パンくずリストの色（空なら従来どおりテーマの色。スマホは空ならPCの指定を引き継ぐ）
+$breadcrumb_color_pc    = $attributes['breadcrumbColorPc'] ?? '';
+$breadcrumb_color_sp    = $attributes['breadcrumbColorSp'] ?? '';
 
 // ブロックのラッパークラス
 $wrapper_args = array(
     'class' => "lw-pr-fv-17 {$min_height_pc} {$min_height_tb} {$min_height_sp}"
 );
-if ( $margin_bottom_zero ) {
-    $wrapper_args['style'] = 'margin-bottom: 0;';
+$wrapper_style = $margin_bottom_zero ? 'margin-bottom: 0;' : '';
+// 指定されたときだけ変数を出す。空なら style.css の既定値（テーマの色）がそのまま効く
+if ( $breadcrumb_color_pc !== '' ) {
+    $wrapper_style .= '--bc-color-pc: ' . $breadcrumb_color_pc . ';';
+}
+if ( $breadcrumb_color_sp !== '' ) {
+    $wrapper_style .= '--bc-color-sp: ' . $breadcrumb_color_sp . ';';
+}
+if ( $wrapper_style !== '' ) {
+    $wrapper_args['style'] = $wrapper_style;
 }
 $wrapper_attributes = get_block_wrapper_attributes( $wrapper_args );
 
@@ -59,10 +70,18 @@ if ( ! in_array( $main_title_tag, $allowed_tags, true ) ) {
 
         <?php
         // パンくずリスト
+        // 🚨 put_breadcrumbs() はフロントページだと <li>HOME</li> ひとつだけを出す。
+        //    「HOME」しか無いパンくずは道案内にならないうえ、FVの絵の上に文字が乗るだけなので出さない。
+        //    項目が2つ以上あるときだけ出す（1件だけの JSON-LD BreadcrumbList も一緒に抑止される）。
         if ( function_exists( 'put_breadcrumbs' ) ) {
+            ob_start();
             put_breadcrumbs( array(
                 'ul_class' => 'lw_breadcrumb',
             ) );
+            $breadcrumb_html = ob_get_clean();
+            if ( substr_count( $breadcrumb_html, '<li' ) >= 2 ) {
+                echo $breadcrumb_html;
+            }
         }
         ?>
     </div>

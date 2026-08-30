@@ -5,6 +5,10 @@ import { fontOptionsArr, fontWeightOptionsArr, ButtonBackgroundOptionsArr, right
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS = { url: 'btnUrl', type: 'btnLinkType', page: 'btnPageId', category: 'btnCategoryId' };
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
@@ -38,6 +42,10 @@ registerBlockType(metadata.name, {
                                 value={btnUrl}
                                 onChange={(newUrl) => setAttributes({ btnUrl: newUrl })}
                                 help="ボタンをクリックした時の移動先URLを入力してください"
+                            />
+                            <LinkPicker
+                                link={lwLinkFromAttrs(attributes, LINK_KEYS)}
+                                onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}
                             />
                         </div>
                         
@@ -204,7 +212,7 @@ registerBlockType(metadata.name, {
         return (
             <div {...blockProps}>
                 <div className='a_inner'>
-                    <a href={btnUrl} target={props.attributes.openNewTab ? '_blank' : '_self'}>
+                    <a href={btnUrl} data-lw-link-type={lwLinkDataPropsFromAttrs(props.attributes, LINK_KEYS).linkType} data-lw-link-id={lwLinkDataPropsFromAttrs(props.attributes, LINK_KEYS).linkId} target={props.attributes.openNewTab ? '_blank' : '_self'}>
                         <RichText.Content
                             tagName="span"
                             className="text_sub"

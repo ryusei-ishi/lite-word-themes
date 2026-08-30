@@ -254,7 +254,13 @@ function lw_mail_form_store_uploads( $form_array, $plan, $rate_blocked = false )
 				   セキュリティプラグインが介入できる経路を潰さない）。 */
 				$original     = $info['name'];
 				$info['name'] = lw_mail_form_safe_upload_filename( $original, $ext );
-				$upload       = wp_handle_upload( $info, array( 'test_form' => false, 'mimes' => $mimes ) );
+
+				/* 保存先は uploads/lw-mail-form/（.htaccess でスクリプト実行を禁止した専用ディレクトリ）。
+				   切り替えは upload_store.php に閉じてあり、この1回だけ掛けて必ず外す。
+				   関数が無い環境（部分デプロイ等）では従来どおり uploads 直下に置く。 */
+				$upload = function_exists( 'lw_mail_form_handle_attachment_upload' )
+					? lw_mail_form_handle_attachment_upload( $info, $mimes )
+					: wp_handle_upload( $info, array( 'test_form' => false, 'mimes' => $mimes ) );
 
 				if ( ! empty( $upload['url'] ) ) {
 					$form_array[ $key ] = $upload['url'];

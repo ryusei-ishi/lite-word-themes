@@ -85,7 +85,9 @@
                 font-size: 2.6em;
             }
             @container (max-width:500px) {
-                font-size: 2.4em;
+                /* 🚨 2026-08-26: 375px 幅だと 38px になり、見出しが左右いっぱいまで届く。
+                 *   画面幅からも上限をかけて必ず余白を残す（fv-4 と同じ考え方）。 */
+                font-size: min(2.4em, 8.4vw);
             }
             &:has(> span[class*="fs-"]) {
                 line-height: 1em;

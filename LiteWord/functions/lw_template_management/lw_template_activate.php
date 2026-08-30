@@ -46,6 +46,7 @@ if ( $_SERVER['REQUEST_METHOD'] === 'POST' && isset( $_POST['reset_templates'] )
 
 	global $wpdb;
 	$wpdb->query( "TRUNCATE TABLE {$wpdb->prefix}lw_template_setting" );
+	LwTemplateSetting::flush_cache(); // 書いたら必ずキャッシュを捨てる
 
 	$message = '<div class="up_message"><p>テンプレートデータをリセットしました。</p></div>';
 }

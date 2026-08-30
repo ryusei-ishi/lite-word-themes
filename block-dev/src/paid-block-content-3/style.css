@@ -1,11 +1,13 @@
 .lw_content_wrap.page .paid-block-content-3 {
   margin-left: calc((100% - 100vw) / 2);
+  width: 100vw;
   max-width: var(--content-3-max-w, 100vw);
 }
 
 .lw_content_wrap.page .paid-block-content-3.max-width-on {
   margin-left: auto;
   margin-right: auto;
+  width: 100%;
 }
 
 .wp-block:has(.paid-block-content-3) {

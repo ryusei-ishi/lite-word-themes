@@ -39,6 +39,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       sizeClass = attributes.sizeClass,
       leftImage = attributes.leftImage,
       rightImage = attributes.rightImage,
+      leftImageAlt = attributes.leftImageAlt,
+      rightImageAlt = attributes.rightImageAlt,
       leftHeightEm = attributes.leftHeightEm,
       rightHeightEm = attributes.rightHeightEm,
       leftMarginEm = attributes.leftMarginEm,
@@ -56,7 +58,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     });
     var onSelectImage = function onSelectImage(side) {
       return function (media) {
-        return setAttributes(_defineProperty({}, side, media.url));
+        return setAttributes(_defineProperty(_defineProperty({}, side, media.url), side + 'Alt', media.alt || ''));
       };
     };
     var removeImage = function removeImage(side) {
@@ -173,7 +175,16 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
           onClick: open
         }, "\u753B\u50CF\u3092\u9078\u629E");
       }
-    })), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: "\u5DE6\u753B\u50CF\u306E\u8AAC\u660E\uFF08alt\uFF09",
+      help: "\u898B\u51FA\u3057\u306E\u98FE\u308A\u3068\u3057\u3066\u7F6E\u3044\u305F\u753B\u50CF\u306A\u3089\u3001\u7A7A\u306E\u307E\u307E\u3067\u69CB\u3044\u307E\u305B\u3093\uFF08\u8AAD\u307F\u4E0A\u3052\u306B\u90AA\u9B54\u304C\u5165\u3089\u306A\u3044\u65B9\u304C\u3088\u3044\u305F\u3081\uFF09\u3002\u610F\u5473\u306E\u3042\u308B\u753B\u50CF\u306E\u3068\u304D\u3060\u3051\u66F8\u3044\u3066\u304F\u3060\u3055\u3044",
+      value: leftImageAlt || '',
+      onChange: function onChange(v) {
+        return setAttributes({
+          leftImageAlt: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u5DE6\u753B\u50CF \u5927\u304D\u3055 (em)",
       min: 0.1,
       max: 2,
@@ -219,7 +230,16 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
           onClick: open
         }, "\u753B\u50CF\u3092\u9078\u629E");
       }
-    })), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: "\u53F3\u753B\u50CF\u306E\u8AAC\u660E\uFF08alt\uFF09",
+      help: "\u898B\u51FA\u3057\u306E\u98FE\u308A\u3068\u3057\u3066\u7F6E\u3044\u305F\u753B\u50CF\u306A\u3089\u3001\u7A7A\u306E\u307E\u307E\u3067\u69CB\u3044\u307E\u305B\u3093\uFF08\u8AAD\u307F\u4E0A\u3052\u306B\u90AA\u9B54\u304C\u5165\u3089\u306A\u3044\u65B9\u304C\u3088\u3044\u305F\u3081\uFF09\u3002\u610F\u5473\u306E\u3042\u308B\u753B\u50CF\u306E\u3068\u304D\u3060\u3051\u66F8\u3044\u3066\u304F\u3060\u3055\u3044",
+      value: rightImageAlt || '',
+      onChange: function onChange(v) {
+        return setAttributes({
+          rightImageAlt: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
       label: "\u53F3\u753B\u50CF \u5927\u304D\u3055 (em)",
       min: 0.1,
       max: 2,
@@ -303,7 +323,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       }
     }, /*#__PURE__*/React.createElement("img", {
       src: leftImage,
-      alt: ""
+      alt: leftImageAlt || ''
     })), /*#__PURE__*/React.createElement("span", {
       className: "text_wrap"
     }, hideSubTitle === 'off' && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
@@ -337,7 +357,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       }
     }, /*#__PURE__*/React.createElement("img", {
       src: rightImage,
-      alt: ""
+      alt: rightImageAlt || ''
     })), bdDisplay === 'on' && /*#__PURE__*/React.createElement("span", {
       className: "bd",
       style: {
@@ -356,6 +376,8 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       sizeClass = attributes.sizeClass,
       leftImage = attributes.leftImage,
       rightImage = attributes.rightImage,
+      leftImageAlt = attributes.leftImageAlt,
+      rightImageAlt = attributes.rightImageAlt,
       leftHeightEm = attributes.leftHeightEm,
       rightHeightEm = attributes.rightHeightEm,
       leftMarginEm = attributes.leftMarginEm,
@@ -371,13 +393,13 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       className: "paid-block-custom-title-10 ".concat(positionClass, " ").concat(sizeClass)
     });
     var Tag = ['p', 'div'].includes(headingLevel) ? headingLevel : "h".concat(headingLevel);
-    var maybeImage = function maybeImage(url, cls, styleObj) {
+    var maybeImage = function maybeImage(url, cls, alt, styleObj) {
       return url && /*#__PURE__*/React.createElement("span", {
         className: cls,
         style: styleObj
       }, /*#__PURE__*/React.createElement("img", {
         src: url,
-        alt: ""
+        alt: alt || ''
       }));
     };
     var maybeText = function maybeText(val, cls, styleObj) {
@@ -390,14 +412,14 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
     };
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement(Tag, {
       className: "ttl".concat(ttlFullWidth === 'on' ? ' w_100' : '')
-    }, maybeImage(leftImage, 'image_left', {
+    }, maybeImage(leftImage, 'image_left', leftImageAlt, {
       height: "".concat(leftHeightEm, "em"),
       marginRight: "".concat(leftMarginEm, "em")
     }), /*#__PURE__*/React.createElement("span", {
       className: "text_wrap"
     }, hideSubTitle === 'off' && maybeText(subTitle, 'sub', {
       color: mainTitleColor
-    }), hideMainTitle === 'off' && maybeText(mainTitle, 'main')), maybeImage(rightImage, 'image_right', {
+    }), hideMainTitle === 'off' && maybeText(mainTitle, 'main')), maybeImage(rightImage, 'image_right', rightImageAlt, {
       height: "".concat(rightHeightEm, "em"),
       marginLeft: "".concat(rightMarginEm, "em")
     }), bdDisplay === 'on' && /*#__PURE__*/React.createElement("span", {
@@ -473,7 +495,7 @@ module.exports = window["wp"]["components"];
   \***************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-custom-title-10","version":"1.0.0","title":"見出しタイトル 10","category":"lw-heading","icon":"editor-textcolor","description":"画像付き見出しブロック","supports":{"anchor":true},"aiHint":{"description":"画像付き見出し。左右にアイコン画像を配置可能。メイン+サブタイトル+下線装飾","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":["leftImage","rightImage"]},"attributes":{"subTitle":{"type":"string","default":"製品紹介","aiHint":{"role":"subheading","contentGuide":"日本語の補足タイトル。3〜10文字","example":"ギャラリー"}},"mainTitle":{"type":"string","default":"PRODUCTS","aiHint":{"role":"heading","contentGuide":"英語のメインタイトル。大文字推奨","example":"GALLERY"}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}},"mainTitleColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"sizeClass":{"type":"string","default":"size_m","aiHint":{"skip":true}},"leftImage":{"type":"string","default":"https://lite-word.com/sample_img/icon/pc_1.png","aiHint":{"role":"image","note":"左側アイコン画像URL"}},"rightImage":{"type":"string","default":"","aiHint":{"role":"image","note":"右側アイコン画像URL。省略可"}},"leftHeightEm":{"type":"number","default":1.5,"aiHint":{"skip":true}},"rightHeightEm":{"type":"number","default":1.5,"aiHint":{"skip":true}},"leftMarginEm":{"type":"number","default":0.4,"aiHint":{"skip":true}},"rightMarginEm":{"type":"number","default":0.4,"aiHint":{"skip":true}},"positionClass":{"type":"string","default":"position_center","aiHint":{"skip":true}},"hideSubTitle":{"type":"string","default":"off","aiHint":{"skip":true}},"hideMainTitle":{"type":"string","default":"off","aiHint":{"skip":true}},"bdThickness":{"type":"number","default":2,"aiHint":{"skip":true}},"bdMarginTopEm":{"type":"number","default":0.1,"aiHint":{"skip":true}},"bdDisplay":{"type":"string","default":"on","aiHint":{"skip":true}},"ttlFullWidth":{"type":"string","default":"off","aiHint":{"skip":true}}},"editorScript":"file:./paid-block-custom-title-10.js","no":10}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-custom-title-10","version":"1.0.0","title":"見出しタイトル 10","category":"lw-heading","icon":"editor-textcolor","description":"画像付き見出しブロック","supports":{"anchor":true},"aiHint":{"description":"画像付き見出し。左右にアイコン画像を配置可能。メイン+サブタイトル+下線装飾","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":["leftImage","rightImage"]},"attributes":{"subTitle":{"type":"string","default":"製品紹介","aiHint":{"role":"subheading","contentGuide":"日本語の補足タイトル。3〜10文字","example":"ギャラリー"}},"mainTitle":{"type":"string","default":"PRODUCTS","aiHint":{"role":"heading","contentGuide":"英語のメインタイトル。大文字推奨","example":"GALLERY"}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}},"mainTitleColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"sizeClass":{"type":"string","default":"size_m","aiHint":{"skip":true}},"leftImage":{"type":"string","default":"https://lite-word.com/sample_img/icon/pc_1.png","aiHint":{"role":"image","note":"左側アイコン画像URL"}},"rightImage":{"type":"string","default":"","aiHint":{"role":"image","note":"右側アイコン画像URL。省略可"}},"leftImageAlt":{"type":"string","default":"","aiHint":{"skip":true}},"rightImageAlt":{"type":"string","default":"","aiHint":{"skip":true}},"leftHeightEm":{"type":"number","default":1.5,"aiHint":{"skip":true}},"rightHeightEm":{"type":"number","default":1.5,"aiHint":{"skip":true}},"leftMarginEm":{"type":"number","default":0.4,"aiHint":{"skip":true}},"rightMarginEm":{"type":"number","default":0.4,"aiHint":{"skip":true}},"positionClass":{"type":"string","default":"position_center","aiHint":{"skip":true}},"hideSubTitle":{"type":"string","default":"off","aiHint":{"skip":true}},"hideMainTitle":{"type":"string","default":"off","aiHint":{"skip":true}},"bdThickness":{"type":"number","default":2,"aiHint":{"skip":true}},"bdMarginTopEm":{"type":"number","default":0.1,"aiHint":{"skip":true}},"bdDisplay":{"type":"string","default":"on","aiHint":{"skip":true}},"ttlFullWidth":{"type":"string","default":"off","aiHint":{"skip":true}}},"editorScript":"file:./paid-block-custom-title-10.js","no":10}');
 
 /***/ })
 

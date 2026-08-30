@@ -7,10 +7,11 @@
 	"category": "lw-faq",
 	"icon": "lightbulb",
 	"aiHint": {
-		"description": "よくある質問アコーディオン。Q+Aの繰り返し。クリックで回答開閉。FAQセクションに",
+		"description": "押すと答えが開くよくある質問。Q と A の組を contents 配列で持つ。質問が多くてもページが縦に伸びないので、8〜15件のFAQに向く",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["contents"],
-		"imageAttributes": []
+		"imageAttributes": [],
+		"notes": "contents は [{ text_q, text_a }] の配列。lw-pr-qa-3 と同じ形なので入れ替えやすい。全部読ませたい少数のFAQは開閉しない lw-pr-qa-3、数が多いものはこちら。🚨 blockId は書かないこと。開閉の JS は document.currentScript.parentNode を使う ID 非依存版なので空でも動き、書くと同じテンプレを2ページに貼ったときに id が重複する。⚠️ 質問文は 14字までにする。375px だと15字から2行になり、か。 だけが次の行に落ちる（2026-08-29 実測）。⚠️ mainColor は Q ラベルの飾りの色でインラインstyleに直接入るので var(--color-main) を渡してよい。開いた項目は dl に active が付く。"
 	},
 	"supports": {
 		"anchor": true

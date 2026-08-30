@@ -10,10 +10,11 @@
 		"anchor": true
 	},
 	"aiHint": {
-		"description": "カード型リスト。ボーダー+背景色付きカード。アイコン画像も設定可能。1〜3カラム対応",
+		"description": "枠で囲ったチェックマーク付きのリスト。1列か2列。お約束・特長・持ち物・注意事項など、短い一文を並べる場面に",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["contents"],
-		"imageAttributes": ["iconUrl"]
+		"imageAttributes": ["iconUrl"],
+		"notes": "contents は [{ text }] の配列。🚨 カードではない。枠線と背景は ul にまとめて1つ掛かるだけで、中の li には枠も背景も無い。実体は枠で囲ったチェックリスト。🚨 colClass は clm_1（1列）と clm_2（2列）の2つだけ。エディタの選択肢も2つで CSS にも clm_3 は無いので、3列を指定しても1列のまま何も起きない（旧 aiHint の 1〜3カラム対応 は誤り。2026-08-29 に実測して直した）。clm_2 にするなら項目数は偶数にする（750px以下で1列に戻る）。チェックのアイコンは SVG 固定で色だけ colorLiSvg で変わる（iconUrl に画像URLを入れれば絵を差し替えられる）。borderColor / colorLiSvg はインラインstyleに直接入るので var(--color-main) を渡してよい。maxWidth の既定 800 が ul の max-width になる。1行に入るのは PC で約35字・375px では約13字なので、375px で2行に収めたいなら1件25字までにする。自前で margin:24px 0 を持つので前後にスペーサーを足さない。noBorder:true にすると枠と内側の余白がまるごと消えて、ただのチェックリストになる。"
 	},
 	"attributes": {
 		"fontLi": { "type": "string", "default": "", "aiHint": { "skip": true } },

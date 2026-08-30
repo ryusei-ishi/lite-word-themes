@@ -112,6 +112,7 @@ function lw_trial_popup_script() {
                 array('%d'),
                 array('%s')
             );
+            LwTemplateSetting::flush_cache(); // 書いたら必ずキャッシュを捨てる
         }
         
         lw_render_trial_expired_popup();
@@ -149,6 +150,7 @@ function lw_check_and_show_expired_popup_if_needed() {
                     array('%d'),
                     array('%s')
                 );
+                LwTemplateSetting::flush_cache(); // 書いたら必ずキャッシュを捨てる
                 
                 lw_render_trial_expired_popup();
             }
@@ -1194,6 +1196,8 @@ function lw_activate_trial_callback() {
         );
     }
     
+    LwTemplateSetting::flush_cache(); // 書いたら必ずキャッシュを捨てる
+
     if ($result !== false) {
         wp_send_json_success('試用期間が有効になりました');
     } else {
@@ -1251,6 +1255,8 @@ function lw_skip_trial_for_60days_callback() {
         );
     }
     
+    LwTemplateSetting::flush_cache(); // 書いたら必ずキャッシュを捨てる
+
     if ($result !== false) {
         wp_send_json_success('60日間スキップされました');
     } else {

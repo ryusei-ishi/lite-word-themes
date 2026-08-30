@@ -7,6 +7,10 @@ get_template_part('./functions/mail_form/functions');
 get_template_part('./functions/mail_form/upload_rate');
 //添付ファイルの形式判定（許可形式・サイズ上限・ファイル名）
 get_template_part('./functions/mail_form/upload_types');
+//添付ファイルの保存先（専用ディレクトリ・スクリプト実行の禁止）
+get_template_part('./functions/mail_form/upload_store');
+//添付ファイルの棚卸し（読むだけ・削除はしない）
+get_template_part('./functions/mail_form/upload_inventory');
 //添付ファイルの受理（許可キー・形状ガード・保存）
 get_template_part('./functions/mail_form/upload_guard');
 //ショートコードとしてフォームを表示

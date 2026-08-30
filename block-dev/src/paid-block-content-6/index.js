@@ -15,6 +15,10 @@ import {
 import './editor.scss';
 import metadata from './block.json';
 import './style.scss';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS = { url: 'buttonUrl', type: 'buttonLinkType', page: 'buttonPageId', category: 'buttonCategoryId' };
 
 registerBlockType(metadata.name, {
     edit: (props) => {
@@ -178,6 +182,10 @@ registerBlockType(metadata.name, {
                             onChange={ onChangeButtonUrl }
                             placeholder="https://example.com"
                         />
+                        <LinkPicker
+                            link={lwLinkFromAttrs(props.attributes, LINK_KEYS)}
+                            onChange={(patch) => props.setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}
+                        />
                         <RangeControl
                             label="角丸 (px)"
                             value={ buttonRadius }
@@ -272,6 +280,8 @@ registerBlockType(metadata.name, {
                                 tagName="a"
                                 className="btn"
                                 href={ buttonUrl }
+                                data-lw-link-type={lwLinkDataPropsFromAttrs(props.attributes, LINK_KEYS).linkType}
+                                data-lw-link-id={lwLinkDataPropsFromAttrs(props.attributes, LINK_KEYS).linkId}
                                 value={ buttonText }
                                 style={{ borderRadius: `${buttonRadius}px` }}
                             />

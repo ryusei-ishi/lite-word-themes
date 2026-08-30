@@ -46,6 +46,18 @@
 			"default": "#",
 			"aiHint": { "role": "url", "contentGuide": "#contact 推奨" }
 		},
+		"buttonLinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"buttonPageId": {
+			"type": "number",
+			"default": 0
+		},
+		"buttonCategoryId": {
+			"type": "number",
+			"default": 0
+		},
 		"openInNewTab": {
 			"type": "boolean",
 			"default": false,

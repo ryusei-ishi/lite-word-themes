@@ -130,7 +130,8 @@ var normalizeRow = function normalizeRow(row) {
       mainHeadPaddingY = attributes.mainHeadPaddingY,
       rowHeadPaddingY = attributes.rowHeadPaddingY,
       cellPaddingY = attributes.cellPaddingY,
-      designPattern = attributes.designPattern;
+      designPattern = attributes.designPattern,
+      tableAlign = attributes.tableAlign;
     var rows = rawRows.map(normalizeRow);
     var gridColumns = hideRowHead ? columnCount - 1 : columnCount;
     var dataCols = columnCount - 1;
@@ -950,7 +951,10 @@ var normalizeRow = function normalizeRow(row) {
         return updateMainHeadOutlineWidth(i, width);
       }));
     };
-    var wrapClassName = "lw-pr-table-3__wrap".concat(gridColumns >= 3 ? " clm_".concat(gridColumns) : "").concat(designPattern ? " ".concat(designPattern) : "");
+
+    // 🚨 tableAlign が既定の "left" のときは、いままでと1文字も変わらない出力にする。
+    //    （約1000サイトの既存ページを「壊れています」にしないため。deprecated が要らないのはこれが理由）
+    var wrapClassName = "lw-pr-table-3__wrap".concat(gridColumns >= 3 ? " clm_".concat(gridColumns) : "").concat(designPattern ? " ".concat(designPattern) : "").concat(tableAlign === "center" ? " is_center" : "");
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
       title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A",
       initialOpen: true
@@ -1004,6 +1008,22 @@ var normalizeRow = function normalizeRow(row) {
       onChange: function onChange(value) {
         return setAttributes({
           designPattern: value
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.SelectControl, {
+      label: "\u8868\u306E\u4F4D\u7F6E",
+      value: tableAlign,
+      help: "\u8868\u304C\u672C\u6587\u306E\u5E45\u3088\u308A\u72ED\u3044\u3068\u304D\u306E\u7F6E\u304D\u3069\u3053\u308D\u3002\u65E2\u5B9A\u306F\u5DE6\u5BC4\u305B\uFF08\u5F93\u6765\u3069\u304A\u308A\uFF09",
+      options: [{
+        label: "左寄せ",
+        value: "left"
+      }, {
+        label: "中央寄せ",
+        value: "center"
+      }],
+      onChange: function onChange(value) {
+        return setAttributes({
+          tableAlign: value
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_3__.PanelBody, {
@@ -1658,7 +1678,8 @@ var normalizeRow = function normalizeRow(row) {
       mainHeadPaddingY = attributes.mainHeadPaddingY,
       rowHeadPaddingY = attributes.rowHeadPaddingY,
       cellPaddingY = attributes.cellPaddingY,
-      designPattern = attributes.designPattern;
+      designPattern = attributes.designPattern,
+      tableAlign = attributes.tableAlign;
     var rows = rawRows.map(normalizeRow);
     var gridColumns = hideRowHead ? columnCount - 1 : columnCount;
     var dataCols = columnCount - 1;
@@ -1702,7 +1723,9 @@ var normalizeRow = function normalizeRow(row) {
     var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_2__.useBlockProps.save({
       className: "lw-pr-table-3"
     });
-    var wrapClassName = "lw-pr-table-3__wrap".concat(gridColumns >= 3 ? " clm_".concat(gridColumns) : "").concat(designPattern ? " ".concat(designPattern) : "");
+    // 🚨 tableAlign が既定の "left" のときは、いままでと1文字も変わらない出力にする。
+    //    （約1000サイトの既存ページを「壊れています」にしないため。deprecated が要らないのはこれが理由）
+    var wrapClassName = "lw-pr-table-3__wrap".concat(gridColumns >= 3 ? " clm_".concat(gridColumns) : "").concat(designPattern ? " ".concat(designPattern) : "").concat(tableAlign === "center" ? " is_center" : "");
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
       className: wrapClassName,
       style: cssVars
@@ -2524,7 +2547,7 @@ module.exports = window["wp"]["element"];
   \**************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-table-3","version":"1.0.0","title":"テーブル 03（セルの統合が出来るパターン）","category":"lw-table","icon":"editor-table","description":"Grid方式テーブル。セル統合対応。","editorScript":"file:./lw-pr-table-3.js","viewScript":"file:./view.js","aiHint":{"description":"料金テーブル（別デザイン）。ヘッダー+行の表形式","excludeFromAutoSelect":true,"contentAttributes":[],"imageAttributes":[],"excludeReason":"複雑なネスト構造のテーブル。AI直接生成非推奨"},"supports":{"anchor":true,"className":true},"attributes":{"columnCount":{"type":"number","default":4},"colWidthPc":{"type":"array","default":[200,200,200,200]},"colWidthSp":{"type":"array","default":[120,120,120,120]},"gapSize":{"type":"number","default":2},"hideMainHead":{"type":"boolean","default":false},"hideRowHead":{"type":"boolean","default":false},"headers":{"type":"array","default":["","プラン1","プラン2","プラン3"]},"headerBgColors":{"type":"array","default":["","","",""]},"headerOutlineColors":{"type":"array","default":["","","",""]},"headerOutlineWidths":{"type":"array","default":[0,0,0,0]},"rows":{"type":"array","default":[{"header":"月額料金","cells":["¥3,000","¥5,000","¥10,000"]},{"header":"容量","cells":["10GB","50GB","無制限"]}]},"fontFamilyMainHead":{"type":"string","default":""},"fontWeightMainHead":{"type":"string","default":"600"},"fontSizeMainHead":{"type":"number","default":16},"fontSizeMainHeadSp":{"type":"number","default":14},"lineHeightMainHead":{"type":"number","default":1.6},"mainHeadBgColor":{"type":"string","default":"var(--color-main)"},"mainHeadTextColor":{"type":"string","default":"#ffffff"},"fontFamilyRowHead":{"type":"string","default":""},"fontWeightRowHead":{"type":"string","default":"600"},"fontSizeRowHead":{"type":"number","default":16},"fontSizeRowHeadSp":{"type":"number","default":14},"lineHeightRowHead":{"type":"number","default":1.6},"rowHeadBgColor":{"type":"string","default":"var(--color-main)"},"rowHeadTextColor":{"type":"string","default":"#ffffff"},"fontFamilyCell":{"type":"string","default":""},"fontWeightCell":{"type":"string","default":"400"},"fontSizeCell":{"type":"number","default":16},"fontSizeCellSp":{"type":"number","default":14},"lineHeightCell":{"type":"number","default":1.6},"cellBgColor":{"type":"string","default":"#ffffff"},"cellTextColor":{"type":"string","default":"#333333"},"cellPaddingY":{"type":"number","default":16},"mainHeadPaddingY":{"type":"number","default":16},"rowHeadPaddingY":{"type":"number","default":16},"designPattern":{"type":"string","default":""},"textAlignMainHead":{"type":"string","default":"center"},"textAlignRowHead":{"type":"string","default":"center"},"textAlignCell":{"type":"string","default":"center"},"verticalAlignMainHead":{"type":"string","default":"center"},"verticalAlignRowHead":{"type":"string","default":"center"},"verticalAlignCell":{"type":"string","default":"center"}},"no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-table-3","version":"1.0.0","title":"テーブル 03（セルの統合が出来るパターン）","category":"lw-table","icon":"editor-table","description":"Grid方式テーブル。セル統合対応。","editorScript":"file:./lw-pr-table-3.js","viewScript":"file:./view.js","aiHint":{"description":"料金テーブル（別デザイン）。ヘッダー+行の表形式","excludeFromAutoSelect":true,"contentAttributes":[],"imageAttributes":[],"excludeReason":"複雑なネスト構造のテーブル。AI直接生成非推奨"},"supports":{"anchor":true,"className":true},"attributes":{"columnCount":{"type":"number","default":4},"colWidthPc":{"type":"array","default":[200,200,200,200]},"colWidthSp":{"type":"array","default":[120,120,120,120]},"gapSize":{"type":"number","default":2},"hideMainHead":{"type":"boolean","default":false},"hideRowHead":{"type":"boolean","default":false},"headers":{"type":"array","default":["","プラン1","プラン2","プラン3"]},"headerBgColors":{"type":"array","default":["","","",""]},"headerOutlineColors":{"type":"array","default":["","","",""]},"headerOutlineWidths":{"type":"array","default":[0,0,0,0]},"rows":{"type":"array","default":[{"header":"月額料金","cells":["¥3,000","¥5,000","¥10,000"]},{"header":"容量","cells":["10GB","50GB","無制限"]}]},"fontFamilyMainHead":{"type":"string","default":""},"fontWeightMainHead":{"type":"string","default":"600"},"fontSizeMainHead":{"type":"number","default":16},"fontSizeMainHeadSp":{"type":"number","default":14},"lineHeightMainHead":{"type":"number","default":1.6},"mainHeadBgColor":{"type":"string","default":"var(--color-main)"},"mainHeadTextColor":{"type":"string","default":"#ffffff"},"fontFamilyRowHead":{"type":"string","default":""},"fontWeightRowHead":{"type":"string","default":"600"},"fontSizeRowHead":{"type":"number","default":16},"fontSizeRowHeadSp":{"type":"number","default":14},"lineHeightRowHead":{"type":"number","default":1.6},"rowHeadBgColor":{"type":"string","default":"var(--color-main)"},"rowHeadTextColor":{"type":"string","default":"#ffffff"},"fontFamilyCell":{"type":"string","default":""},"fontWeightCell":{"type":"string","default":"400"},"fontSizeCell":{"type":"number","default":16},"fontSizeCellSp":{"type":"number","default":14},"lineHeightCell":{"type":"number","default":1.6},"cellBgColor":{"type":"string","default":"#ffffff"},"cellTextColor":{"type":"string","default":"#333333"},"cellPaddingY":{"type":"number","default":16},"mainHeadPaddingY":{"type":"number","default":16},"rowHeadPaddingY":{"type":"number","default":16},"designPattern":{"type":"string","default":""},"tableAlign":{"type":"string","default":"left","aiHint":{"skip":true}},"textAlignMainHead":{"type":"string","default":"center"},"textAlignRowHead":{"type":"string","default":"center"},"textAlignCell":{"type":"string","default":"center"},"verticalAlignMainHead":{"type":"string","default":"center"},"verticalAlignRowHead":{"type":"string","default":"center"},"verticalAlignCell":{"type":"string","default":"center"}},"no":1}');
 
 /***/ })
 

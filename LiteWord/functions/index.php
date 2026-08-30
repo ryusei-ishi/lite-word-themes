@@ -112,7 +112,10 @@ if(is_admin()){
 if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
     get_template_part('./functions/theme_update');//テーマアップデート
 }
-//get_template_part('./functions/lw_broken_link_check/index');//リンク切れチェック
+// リンク一覧・リンク切れチェック（管理画面のみ／プレミアム限定。可否は lw_link_list_can_use()）
+if ( is_admin() ) {
+    get_template_part('./functions/lw_broken_link_check/index');
+}
 $notification_paid_features = Lw_theme_mod_set("notification_paid_features", "on");
 if($notification_paid_features == "on"){
     get_template_part('./functions/lw_template_management/lw_check_trial_popup');//無料体験

@@ -22,6 +22,10 @@ import { useEffect } from '@wordpress/element';
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う、配列の要素の中のキー名 */
+const LINK_KEYS = { url: 'linkUrl', type: 'linkType', page: 'pageId', category: 'categoryId' };
 
 // ★ HTTPをHTTPSに変換するヘルパー関数を追加
 const ensureHttps = (url) => {
@@ -36,6 +40,157 @@ const ensureHttps = (url) => {
     // return url.replace(/^https?:/, '');
     
     return url;
+};
+
+/* save は deprecated からも使うので先に名前を付ける（本文をひとつだけ持ち、写し間違いを防ぐ） */
+const saveBlockFv9 = ( { attributes } ) => {
+    const {
+        blockId, slides,
+        layoutType, maxWidth,
+        autoplayDelay, sliderEffect, crossFade,
+        loop, disableOnInteraction,
+        showPagination, paginationClickable,
+        showNavigation, sliderSpeed,
+        paginationColor, nextButtonColor
+    } = attributes;
+
+    const blockProps = useBlockProps.save({
+        id: blockId,
+        className: layoutType === 'full'
+            ? 'swiper paid-block-fv-9 max-w init-hide'
+            : 'swiper paid-block-fv-9 init-hide',
+        style: layoutType === 'fixed' ? { maxWidth } : { maxWidth: '100vw' }
+    });
+
+    /* ---------- Swiper 設定文字列（observer 追加） ---------------*/
+    /* 🚨 2026-08-26: 自分の要素を "#" + blockId でしか探せなかった。
+     *   blockId が空のまま保存されたマークアップ（ページテンプレート・AI生成）だと
+     *   セレクタが "#" だけになり querySelector が例外を投げる。その結果 init-hide が
+     *   外れず、フロントで高さ0＝真っ白になっていた（2026-08-26 に実測）。
+     *   🚨 blockId があるときの出力は1バイトも変えないこと。変えると既存ページが
+     *      編集画面で「ブロックが壊れています」になる（save() の出力がそのまま検証対象のため）。 */
+    const rootFinder = blockId
+        ? `const selector = "#${ blockId }";`
+        : [
+            'var _sc = document.currentScript;',
+            'var _root = ( _sc && _sc.closest ) ? _sc.closest(".paid-block-fv-9") : null;',
+            'if ( !_root ) _root = document.querySelector(".paid-block-fv-9:not([data-lw-init])");',
+            'if ( !_root ) return;',
+            '_root.setAttribute("data-lw-init","1");',
+            'if ( !_root.id ) _root.id = "paid-block-fv-9-" + Math.random().toString(36).slice(2,10);',
+            'const selector = "#" + _root.id;',
+          ].join(String.fromCharCode(10));
+    /* 色の指定も同じ理由。blockId が無いときはクラスで当てる */
+    const cssRoot = blockId ? `#${ blockId }` : '.paid-block-fv-9';
+
+    const swiperConfig = `
+(function(){
+${ rootFinder }
+const MAX_RETRY = 30; // 30 × 150ms = 4.5s
+let retry = 0;
+
+const initSwiper = () => {
+    if ( typeof Swiper === "undefined" ) return false;
+    const already = document.querySelector(selector).swiper;
+    if ( already ) return true; // 二重初期化しない
+
+    const config = {
+        loop: ${ loop },
+        effect: "${ sliderEffect }",
+        speed: ${ sliderSpeed },
+        autoplay: {
+            delay: ${ autoplayDelay },
+            disableOnInteraction: ${ disableOnInteraction }
+        },
+        observer: true,
+        observeParents: true,
+        ${ sliderEffect === 'fade' ? `fadeEffect: { crossFade: ${ crossFade } },` : '' }
+        ${ showPagination ? `
+            pagination: {
+                el: selector + " .swiper-pagination",
+                clickable: ${ paginationClickable }
+            },` : '' }
+        ${ showNavigation ? `
+            navigation: {
+                nextEl: selector + " .swiper-button-next",
+                prevEl: selector + " .swiper-button-prev"
+            },` : '' }
+    };
+    new Swiper( selector, config );
+    document.querySelector(selector).classList.remove("init-hide");
+    return true;
+};
+
+/* ① DOMContentLoaded 直後 */
+document.addEventListener("DOMContentLoaded", initSwiper, { once:true });
+
+/* ② lw:swiperReady (既存仕組み維持) */
+window.addEventListener("lw:swiperReady", initSwiper, { once:true });
+
+/* ③ ポーリング（Swiper読み込み遅延対策） */
+const timer = setInterval(() => {
+    if ( initSwiper() || ++retry >= MAX_RETRY ) clearInterval(timer);
+}, 150);
+
+/* ④ それでも失敗したら 5s で init-hide を解除し static 画像表示 */
+setTimeout(() => {
+    const el = document.querySelector(selector);
+    if ( el ) el.classList.remove("init-hide");
+}, 5000);
+})();
+    `;
+
+    /* ---------- JSX 出力 -----------------------------------------*/
+    return (
+        <div {...blockProps}>
+            <div className="swiper-wrapper">
+                { slides.map( ( slide, i ) => {
+                    // ★ フロントエンドでもHTTPS変換を適用（念のため）
+                    const pcImgUrl = ensureHttps(slide.pcImgUrl);
+                    const spImgUrl = ensureHttps(slide.spImgUrl || slide.pcImgUrl);
+                    
+                    const picture = (
+                        <picture className="bg_img">
+                            <source srcSet={ spImgUrl } media="(max-width:800px)" />
+                            <source srcSet={ pcImgUrl } media="(min-width:801px)" />
+                            <img src={ pcImgUrl } alt={ slide.altText } />
+                        </picture>
+                    );
+                    return (
+                        <div className="swiper-slide" key={ i }>
+                            { slide.linkUrl ? (
+                                <a href={ slide.linkUrl } data-lw-link-type={lwLinkDataPropsFromAttrs(slide, LINK_KEYS).linkType} data-lw-link-id={lwLinkDataPropsFromAttrs(slide, LINK_KEYS).linkId} target="_blank" rel="noopener noreferrer">
+                                    { picture }
+                                </a>
+                            ) : picture }
+                        </div>
+                    );
+                } ) }
+            </div>
+
+            {/* ページネーション / ナビ */}
+            { showPagination && <div className="swiper-pagination"></div> }
+            { showNavigation && <div className="swiper-button-prev"></div> }
+            { showNavigation && <div className="swiper-button-next"></div> }
+
+            {/* Swiper 初期化スクリプト */}
+            <script type="text/javascript" dangerouslySetInnerHTML={ { __html: swiperConfig } } />
+
+            {/* 色カスタマイズ */}
+            { showPagination && paginationColor && (
+                <style>{`
+                    ${ cssRoot } .swiper-pagination-bullet { background-color:${ paginationColor }; }
+                    ${ cssRoot } .swiper-button-next,
+                    ${ cssRoot } .swiper-button-prev { color:${ nextButtonColor }; }
+                `}</style>
+            )}
+
+            {/* JS が完全にオフの環境向けフォールバック */}
+            <noscript>
+                <style>{`${ cssRoot }{opacity:1!important}`}</style>
+            </noscript>
+        </div>
+    );
 };
 
 registerBlockType(metadata.name, {
@@ -73,6 +228,11 @@ registerBlockType(metadata.name, {
                 i === index ? { ...slide, [key]: processedValue } : slide
             );
             setAttributes( { slides: newSlides } );
+        };
+
+        /* リンク設定のように複数のキーをまとめて入れ替える用 */
+        const updateSlideMulti = (i, patch) => {
+            setAttributes({ slides: slides.map((it, k) => k === i ? { ...it, ...patch } : it) });
         };
 
         const addSlide = () => {
@@ -244,6 +404,10 @@ registerBlockType(metadata.name, {
                                     value={ slide.linkUrl }
                                     onChange={ (v)=>updateSlide(index,'linkUrl',v) }
                                 />
+                                <LinkPicker
+                                    link={lwLinkFromAttrs(slide, LINK_KEYS)}
+                                    onChange={(patch) => updateSlideMulti(index, lwLinkToAttrs(patch, LINK_KEYS))}
+                                />
 
                                 <Button
                                     isDestructive
@@ -381,133 +545,19 @@ registerBlockType(metadata.name, {
     // ------------------------------------------------------------------
     // ▶ Save
     // ------------------------------------------------------------------
-    save: ( { attributes } ) => {
-        const {
-            blockId, slides,
-            layoutType, maxWidth,
-            autoplayDelay, sliderEffect, crossFade,
-            loop, disableOnInteraction,
-            showPagination, paginationClickable,
-            showNavigation, sliderSpeed,
-            paginationColor, nextButtonColor
-        } = attributes;
-
-        const blockProps = useBlockProps.save({
-            id: blockId,
-            className: layoutType === 'full'
-                ? 'swiper paid-block-fv-9 max-w init-hide'
-                : 'swiper paid-block-fv-9 init-hide',
-            style: layoutType === 'fixed' ? { maxWidth } : { maxWidth: '100vw' }
-        });
-
-        /* ---------- Swiper 設定文字列（observer 追加） ---------------*/
-        const swiperConfig = `
-(function(){
-    const selector = "#${ blockId }";
-    const MAX_RETRY = 30; // 30 × 150ms = 4.5s
-    let retry = 0;
-
-    const initSwiper = () => {
-        if ( typeof Swiper === "undefined" ) return false;
-        const already = document.querySelector(selector).swiper;
-        if ( already ) return true; // 二重初期化しない
-
-        const config = {
-            loop: ${ loop },
-            effect: "${ sliderEffect }",
-            speed: ${ sliderSpeed },
-            autoplay: {
-                delay: ${ autoplayDelay },
-                disableOnInteraction: ${ disableOnInteraction }
+    save: saveBlockFv9,
+    /* 2026-08-23: slides の既定に入っていた見本の alt（「スライド1のalt」など）をやめて空にした。
+     * それより前に作られたページは slides を既定のまま（＝本文に書かずに）保存していることがあり、
+     * 新しい既定で読むと alt が変わって「無効なコンテンツ」になる。ここで旧既定を持たせて読めるようにする。
+     * 出力するHTMLは同じなので save は使い回す。
+     * ⚠️ この deprecated を消すと、449サイトの既存ページが編集画面で壊れる。 */
+    deprecated: [
+        {
+            attributes: {
+                ...metadata.attributes,
+                slides: { ...metadata.attributes.slides, default: [{"pcImgUrl":"https://lite-word.com/sample_img/slide/1.webp","spImgUrl":"","altText":"スライド1のalt","linkUrl":""},{"pcImgUrl":"https://lite-word.com/sample_img/slide/2.webp","spImgUrl":"","altText":"スライド2のalt","linkUrl":""}] },
             },
-            observer: true,
-            observeParents: true,
-            ${ sliderEffect === 'fade' ? `fadeEffect: { crossFade: ${ crossFade } },` : '' }
-            ${ showPagination ? `
-                pagination: {
-                    el: selector + " .swiper-pagination",
-                    clickable: ${ paginationClickable }
-                },` : '' }
-            ${ showNavigation ? `
-                navigation: {
-                    nextEl: selector + " .swiper-button-next",
-                    prevEl: selector + " .swiper-button-prev"
-                },` : '' }
-        };
-        new Swiper( selector, config );
-        document.querySelector(selector).classList.remove("init-hide");
-        return true;
-    };
-
-    /* ① DOMContentLoaded 直後 */
-    document.addEventListener("DOMContentLoaded", initSwiper, { once:true });
-
-    /* ② lw:swiperReady (既存仕組み維持) */
-    window.addEventListener("lw:swiperReady", initSwiper, { once:true });
-
-    /* ③ ポーリング（Swiper読み込み遅延対策） */
-    const timer = setInterval(() => {
-        if ( initSwiper() || ++retry >= MAX_RETRY ) clearInterval(timer);
-    }, 150);
-
-    /* ④ それでも失敗したら 5s で init-hide を解除し static 画像表示 */
-    setTimeout(() => {
-        const el = document.querySelector(selector);
-        if ( el ) el.classList.remove("init-hide");
-    }, 5000);
-})();
-        `;
-
-        /* ---------- JSX 出力 -----------------------------------------*/
-        return (
-            <div {...blockProps}>
-                <div className="swiper-wrapper">
-                    { slides.map( ( slide, i ) => {
-                        // ★ フロントエンドでもHTTPS変換を適用（念のため）
-                        const pcImgUrl = ensureHttps(slide.pcImgUrl);
-                        const spImgUrl = ensureHttps(slide.spImgUrl || slide.pcImgUrl);
-                        
-                        const picture = (
-                            <picture className="bg_img">
-                                <source srcSet={ spImgUrl } media="(max-width:800px)" />
-                                <source srcSet={ pcImgUrl } media="(min-width:801px)" />
-                                <img src={ pcImgUrl } alt={ slide.altText } />
-                            </picture>
-                        );
-                        return (
-                            <div className="swiper-slide" key={ i }>
-                                { slide.linkUrl ? (
-                                    <a href={ slide.linkUrl } target="_blank" rel="noopener noreferrer">
-                                        { picture }
-                                    </a>
-                                ) : picture }
-                            </div>
-                        );
-                    } ) }
-                </div>
-
-                {/* ページネーション / ナビ */}
-                { showPagination && <div className="swiper-pagination"></div> }
-                { showNavigation && <div className="swiper-button-prev"></div> }
-                { showNavigation && <div className="swiper-button-next"></div> }
-
-                {/* Swiper 初期化スクリプト */}
-                <script type="text/javascript" dangerouslySetInnerHTML={ { __html: swiperConfig } } />
-
-                {/* 色カスタマイズ */}
-                { showPagination && paginationColor && (
-                    <style>{`
-                        #${ blockId } .swiper-pagination-bullet { background-color:${ paginationColor }; }
-                        #${ blockId } .swiper-button-next,
-                        #${ blockId } .swiper-button-prev { color:${ nextButtonColor }; }
-                    `}</style>
-                )}
-
-                {/* JS が完全にオフの環境向けフォールバック */}
-                <noscript>
-                    <style>{`#${ blockId }{opacity:1!important}`}</style>
-                </noscript>
-            </div>
-        );
-    }
+            save: saveBlockFv9,
+        },
+    ],
 });

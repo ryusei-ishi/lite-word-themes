@@ -5,8 +5,12 @@ import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
 
-registerBlockType(metadata.name, {
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS = { url: 'buttonUrl', type: 'buttonLinkType', page: 'buttonPageId', category: 'buttonCategoryId' };
+
+const lwBlockDef = {
     edit: ({ attributes, setAttributes }) => {
         const { 
             mainTitle, 
@@ -291,6 +295,10 @@ registerBlockType(metadata.name, {
                                     onChange={(value) => setAttributes({ buttonUrl: value })}
                                     placeholder="リンク先のURLを入力"
                                 />
+                                <LinkPicker
+                                    link={lwLinkFromAttrs(attributes, LINK_KEYS)}
+                                    onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}
+                                />
                                 <hr style={{ margin: '20px 0', borderTop: '1px solid #ddd' }} />
                                 <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>ボタンスタイル</p>
                                 <p style={{ fontWeight: 'bold', marginTop: '12px', marginBottom: '8px' }}>背景色</p>
@@ -450,7 +458,7 @@ registerBlockType(metadata.name, {
                     <RichText.Content tagName="p" className="description" data-lw_font_set={descriptionFont} value={description} />
                     {showButton && buttonText && buttonText.trim() !== '' && (
                         <div className="cta_wrap">
-                            <a href={buttonUrl}>
+                            <a href={buttonUrl} data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkType} data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkId}>
                                 <RichText.Content value={buttonText} />
                             </a>
                         </div>
@@ -487,4 +495,27 @@ registerBlockType(metadata.name, {
             </div>
         );
     }
-});
+};
+
+/* ------------------------------------------------------------------
+ * #1169（2026-08-27）既定値の他社CDN直リンクを自社素材に差し替えた。
+ * 既定値と同じ値はブロックコメントに書かれないので、既定値のまま使っている
+ * 既存ページは「保存HTMLは旧URL／ブロックは新しい既定値」で食い違う。
+ * 旧既定値を持った版を残して、開いて保存し直しても画像が入れ替わらないようにする。
+ * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
+ * ------------------------------------------------------------------ */
+const LW_1169_OLD = JSON.parse( JSON.stringify( metadata.attributes ) );
+LW_1169_OLD.imageUrlPc.default = "https://images.unsplash.com/photo-1631679706909-1844bbd07221?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1092";
+
+/* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
+ *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の
+ *    大多数がこれ）がどの版にも当たらなくなる。だから既存の版それぞれについて
+ *    旧既定値を持たせた双子を作って先に並べる。元の版も残す（画像を自分で差し替えた人向け）。 */
+const lwPrev1169 = lwBlockDef.deprecated || [];
+lwBlockDef.deprecated = [
+	{ attributes: LW_1169_OLD, save: lwBlockDef.save },
+	...lwPrev1169.map( ( d ) => ( { ...d, attributes: LW_1169_OLD } ) ),
+	...lwPrev1169,
+];
+
+registerBlockType( metadata.name, lwBlockDef );

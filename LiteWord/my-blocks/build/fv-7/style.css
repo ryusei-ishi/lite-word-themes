@@ -172,6 +172,8 @@
 .wp-block-wdl-fv-7 .bg_image video {
   width: 100%;
   height: 100%;
+  /* 2つ目以降の fv-7 でも動画を出す（save の inline display:none を上書き） */
+  display: block !important;
   object-fit: cover;
 }
 

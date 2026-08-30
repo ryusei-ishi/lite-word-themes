@@ -1,0 +1,617 @@
+{
+  "_meta": {
+    "description": "LiteWord ページ構成レギュレーション。ページ種別ごとに「どの枠を、どの順番で置くか」を定義する。AIがページを作るときは必ずこの順番に従う。順番は固定で、変えてよいのは各枠にどのブロックを使うかだけ（→ layout-patterns.json）。",
+    "version": "1.0",
+    "lastUpdated": "2026-08-22",
+    "usage": "①このファイルで pageType を選び sections の順に枠を並べる ②各枠に入れるブロックは layout-patterns.json のパターン（A/B/C）から取る ③ブロックのマークアップは lw_get_block_sample か lw_build_block で取得する（手書きしない）",
+    "whyOrderIsFixed": "順番は構造化データ（JSON-LD）から逆算している。検索エンジンがそのページを理解するために必要な情報＝訪問者が探している情報。だから枠が埋まらないということは、その情報を用意していないということ。思いつきで章を並べない。",
+    "affectsWordPress": false
+  },
+  "principles": [
+    "h1はページに1つ。FVの見出しがh1。以降のセクション見出しはh2、その中はh3。",
+    "最後は必ずCTAで閉じる。行動できない出口でページを終わらせない。",
+    "同じブロックを1ページに4つ以上置かない。3つ以上を連続させない。単調になった瞬間にテンプレートの価値が消える。",
+    "色は var(--color-main) に寄せる。ベタ書きの色を混ぜると、お客さんのサイト色で崩れる。",
+    "必須(required:true)の枠を落とさない。落とすなら、その情報を用意できていないということ。",
+    "1つのサイトの中では見出し・CTA・FVの系統を揃える（→ layout-patterns.json の siteConstants）。揃えるから「同じサイト」に見え、本文の型を変えても崩れない。",
+    "検品は必ず全ページをブラウザで開いて客として見る。バイト一致や無効ブロック0件は前提であって検品ではない。"
+  ],
+  "buildingProcedure": {
+    "description": "ページの作り方。🚨 サイトをまとめて一気に作らない。1ページ完成させて、確認してから次へ進む。",
+    "why": "MCPのリクエストには上限がある（既定 100回/時）。これは「間違えてAPIを使いすぎない」ための安全装置なので、上限を上げて回避しない。まとめて作ろうとすると途中で止まり、中途半端なページが残る。1ページずつなら上限に当たらない。",
+    "steps": [
+      "1. このファイルで pageType を決め、sections の順に枠を並べる（ここはリクエストを使わない）",
+      "2. layout-patterns.json で型（A/B/C）と siteConstants のプリセットを決める（ここもリクエストを使わない）",
+      "3. そのページで使うブロックを1回でまとめて調べる … lw_get_block_hints_batch（1リクエスト）",
+      "4. そのページのブロックを1回でまとめて組む … lw_build_blocks_batch（1リクエスト）",
+      "5. 並べて1ページぶんの本文にし、create_post で下書きとして入れる（1リクエスト）",
+      "6. 公開URLを開いて目で見る。崩れていたら直す",
+      "7. ここまで終わってから次のページへ進む"
+    ],
+    "budget": {
+      "perPage": "バッチツールを使えば1ページ 3〜5リクエスト。100回/時なら1時間に20ページ以上作れる。",
+      "dontDoThis": "1ブロックずつ lw_build_block を呼ぶと1ページで20回前後、16ページで300回を超えて必ず止まる。バッチ版を使う。",
+      "ifBlocked": "429（レート制限）が返ったら待つ。上限設定を変えて突破しない。"
+    }
+  },
+  "slots": {
+    "fv": {
+      "label": "ファーストビュー",
+      "role": "何屋か・どこで・何が強みかを1画面で伝える。h1はここ。",
+      "jsonLd": [
+        "name",
+        "image",
+        "areaServed"
+      ]
+    },
+    "lead": {
+      "label": "リード＋こんな方へ",
+      "role": "このページが誰のためのものかを名指しする。3〜6項目。",
+      "jsonLd": [
+        "description",
+        "audience"
+      ]
+    },
+    "problem": {
+      "label": "悩みの提示",
+      "role": "訪問者が自分のことだと気づく文。3〜6項目。",
+      "jsonLd": [
+        "description"
+      ]
+    },
+    "services": {
+      "label": "取扱業務（カード一覧）",
+      "role": "何を頼めるかを一覧で見せ、各詳細ページへ送る。",
+      "jsonLd": [
+        "hasOfferCatalog"
+      ]
+    },
+    "reasons": {
+      "label": "選ばれる理由",
+      "role": "他と何が違うかを3〜5点。数字か具体で言う。",
+      "jsonLd": [
+        "description"
+      ]
+    },
+    "scope": {
+      "label": "できること（対応範囲）",
+      "role": "この業務でどこまでやるか。やらないことも書く。",
+      "jsonLd": [
+        "hasOfferCatalog",
+        "Offer"
+      ]
+    },
+    "requirements": {
+      "label": "要件・対象条件",
+      "role": "頼める人の条件。満たさない場合の代替も書く。",
+      "jsonLd": [
+        "eligibleCustomerType"
+      ]
+    },
+    "price": {
+      "label": "料金",
+      "role": "報酬額と実費を分けて書く。総額の目安を必ず出す。",
+      "jsonLd": [
+        "offers",
+        "priceSpecification"
+      ],
+      "critical": true
+    },
+    "flow": {
+      "label": "手続きの流れ",
+      "role": "依頼から完了までの段階。各段階に所要日数を入れる。",
+      "jsonLd": [
+        "HowTo.step"
+      ],
+      "critical": true
+    },
+    "documents": {
+      "label": "必要書類・期間",
+      "role": "お客さんが用意するものと、こちらが用意するものを分ける。",
+      "jsonLd": [
+        "HowTo.supply",
+        "totalTime"
+      ]
+    },
+    "faq": {
+      "label": "よくある質問",
+      "role": "問い合わせ前の不安を潰す。実際に来た質問を書く。",
+      "jsonLd": [
+        "FAQPage.mainEntity"
+      ],
+      "critical": true
+    },
+    "voice": {
+      "label": "事例・お客様の声",
+      "role": "実績の証明。業種・地域・結果を具体で。",
+      "jsonLd": [
+        "review",
+        "aggregateRating"
+      ]
+    },
+    "related": {
+      "label": "関連業務への導線",
+      "role": "あわせて頼まれることの多い業務へ送る。回遊させる。",
+      "jsonLd": [
+        "isRelatedTo"
+      ]
+    },
+    "message": {
+      "label": "代表あいさつ",
+      "role": "誰がやっているかを見せる。顔と名前。",
+      "jsonLd": [
+        "founder",
+        "Person"
+      ]
+    },
+    "profile": {
+      "label": "経歴",
+      "role": "いつから何をしてきたか。",
+      "jsonLd": [
+        "alumniOf",
+        "worksFor"
+      ]
+    },
+    "credentials": {
+      "label": "資格・登録番号",
+      "role": "士業は登録番号が信用の実体。必ず出す。",
+      "jsonLd": [
+        "hasCredential"
+      ]
+    },
+    "news": {
+      "label": "お知らせ",
+      "role": "動いているサイトだと示す。更新が止まるなら置かない。",
+      "jsonLd": []
+    },
+    "office": {
+      "label": "事務所情報",
+      "role": "住所・電話・営業時間。LocalBusinessはこれが無いと成立しない。",
+      "jsonLd": [
+        "address",
+        "telephone",
+        "openingHours"
+      ],
+      "critical": true
+    },
+    "access": {
+      "label": "アクセス・地図",
+      "role": "最寄駅からの分数と地図。",
+      "jsonLd": [
+        "geo"
+      ],
+      "note": "地図はブロックにせず core/html の iframe で置く。API経由の保存では iframe が保存フィルタで落ちるため、管理者のブラウザから保存すること。"
+    },
+    "history": {
+      "label": "沿革",
+      "role": "続いていることの証明。",
+      "jsonLd": []
+    },
+    "catalog": {
+      "label": "業務カード一覧",
+      "role": "一覧ページの本体。各項目が詳細ページへのリンクを持つ。",
+      "jsonLd": [
+        "ItemList.itemListElement"
+      ]
+    },
+    "choose_help": {
+      "label": "選び方の補助",
+      "role": "どれを頼めばいいか分からない人を迷子にしない。",
+      "jsonLd": []
+    },
+    "price_policy": {
+      "label": "料金の考え方",
+      "role": "なぜその金額なのか。安さ以外の理由を書く。",
+      "jsonLd": []
+    },
+    "expenses": {
+      "label": "別途かかる実費",
+      "role": "印紙・登録免許税など。後出しにしない。",
+      "jsonLd": []
+    },
+    "payment": {
+      "label": "支払い方法・タイミング",
+      "role": "着手金の有無、支払い手段。",
+      "jsonLd": []
+    },
+    "overview_time": {
+      "label": "全体像・所要期間",
+      "role": "ぜんぶで何日かかるかを先に言う。",
+      "jsonLd": [
+        "totalTime"
+      ]
+    },
+    "prepare": {
+      "label": "準備物",
+      "role": "依頼する前に用意しておくもの。",
+      "jsonLd": [
+        "HowTo.supply"
+      ]
+    },
+    "contact_methods": {
+      "label": "連絡手段の一覧",
+      "role": "電話・メール・フォーム・LINE。相手に選ばせる。",
+      "jsonLd": [
+        "ContactPoint"
+      ]
+    },
+    "hours": {
+      "label": "受付時間",
+      "role": "いつ返事が来るかを明示する。",
+      "jsonLd": [
+        "openingHours"
+      ]
+    },
+    "form": {
+      "label": "お問い合わせフォーム",
+      "role": "入力欄。必ず実機でラベルと入力欄が見えるか確認する。",
+      "jsonLd": [],
+      "critical": true
+    },
+    "after_send": {
+      "label": "送信後の流れ",
+      "role": "送ったあと何が起きるか。返信までの時間。",
+      "jsonLd": []
+    },
+    "preamble": {
+      "label": "前文",
+      "role": "規約・ポリシーの目的。",
+      "jsonLd": []
+    },
+    "terms": {
+      "label": "条文",
+      "role": "見出し＋本文の繰り返し。",
+      "jsonLd": []
+    },
+    "revision": {
+      "label": "制定日・改定日",
+      "role": "いつ版が変わったか。",
+      "jsonLd": []
+    },
+    "operator": {
+      "label": "事業者名・連絡先",
+      "role": "誰が責任を持つか。",
+      "jsonLd": [
+        "Organization"
+      ]
+    },
+    "cta": {
+      "label": "CTA",
+      "role": "次の行動を1つに絞る。電話とフォームの2択まで。",
+      "jsonLd": [
+        "contactPoint"
+      ],
+      "critical": true
+    }
+  },
+  "pageTypes": {
+    "top": {
+      "label": "トップページ",
+      "schema": [
+        "LocalBusiness",
+        "WebSite"
+      ],
+      "note": "LocalBusinessは住所・電話・営業時間が無いと成立しない。officeを落とさない。",
+      "sections": [
+        {
+          "slot": "fv",
+          "required": true
+        },
+        {
+          "slot": "problem",
+          "required": false
+        },
+        {
+          "slot": "services",
+          "required": true
+        },
+        {
+          "slot": "reasons",
+          "required": true
+        },
+        {
+          "slot": "voice",
+          "required": false
+        },
+        {
+          "slot": "message",
+          "required": false
+        },
+        {
+          "slot": "flow",
+          "required": true
+        },
+        {
+          "slot": "faq",
+          "required": false
+        },
+        {
+          "slot": "news",
+          "required": false,
+          "note": "更新し続けられないなら置かない"
+        },
+        {
+          "slot": "office",
+          "required": true
+        },
+        {
+          "slot": "cta",
+          "required": true
+        }
+      ]
+    },
+    "service_list": {
+      "label": "取扱業務の一覧",
+      "schema": [
+        "ItemList",
+        "OfferCatalog"
+      ],
+      "sections": [
+        {
+          "slot": "fv",
+          "required": true
+        },
+        {
+          "slot": "lead",
+          "required": true
+        },
+        {
+          "slot": "catalog",
+          "required": true
+        },
+        {
+          "slot": "choose_help",
+          "required": false
+        },
+        {
+          "slot": "cta",
+          "required": true
+        }
+      ]
+    },
+    "service": {
+      "label": "業務（サービス）詳細",
+      "schema": [
+        "Service",
+        "FAQPage",
+        "HowTo"
+      ],
+      "note": "料金・流れ・FAQが無いサービスページは検索でも人でも評価されない。",
+      "sections": [
+        {
+          "slot": "fv",
+          "required": true
+        },
+        {
+          "slot": "lead",
+          "required": true
+        },
+        {
+          "slot": "scope",
+          "required": true
+        },
+        {
+          "slot": "requirements",
+          "required": false
+        },
+        {
+          "slot": "price",
+          "required": true
+        },
+        {
+          "slot": "flow",
+          "required": true
+        },
+        {
+          "slot": "documents",
+          "required": false
+        },
+        {
+          "slot": "faq",
+          "required": true
+        },
+        {
+          "slot": "voice",
+          "required": false
+        },
+        {
+          "slot": "related",
+          "required": true
+        },
+        {
+          "slot": "cta",
+          "required": true
+        }
+      ]
+    },
+    "price": {
+      "label": "料金・費用",
+      "schema": [
+        "OfferCatalog",
+        "PriceSpecification"
+      ],
+      "sections": [
+        {
+          "slot": "fv",
+          "required": true
+        },
+        {
+          "slot": "price_policy",
+          "required": true
+        },
+        {
+          "slot": "price",
+          "required": true
+        },
+        {
+          "slot": "expenses",
+          "required": true
+        },
+        {
+          "slot": "payment",
+          "required": false
+        },
+        {
+          "slot": "faq",
+          "required": false
+        },
+        {
+          "slot": "cta",
+          "required": true
+        }
+      ]
+    },
+    "flow": {
+      "label": "ご依頼の流れ",
+      "schema": [
+        "HowTo"
+      ],
+      "sections": [
+        {
+          "slot": "fv",
+          "required": true
+        },
+        {
+          "slot": "overview_time",
+          "required": true
+        },
+        {
+          "slot": "flow",
+          "required": true
+        },
+        {
+          "slot": "prepare",
+          "required": false
+        },
+        {
+          "slot": "faq",
+          "required": false
+        },
+        {
+          "slot": "cta",
+          "required": true
+        }
+      ]
+    },
+    "about": {
+      "label": "事務所概要",
+      "schema": [
+        "AboutPage",
+        "LocalBusiness"
+      ],
+      "sections": [
+        {
+          "slot": "fv",
+          "required": true
+        },
+        {
+          "slot": "office",
+          "required": true
+        },
+        {
+          "slot": "access",
+          "required": true
+        },
+        {
+          "slot": "history",
+          "required": false
+        },
+        {
+          "slot": "cta",
+          "required": true
+        }
+      ]
+    },
+    "person": {
+      "label": "代表あいさつ",
+      "schema": [
+        "Person"
+      ],
+      "sections": [
+        {
+          "slot": "fv",
+          "required": true
+        },
+        {
+          "slot": "message",
+          "required": true
+        },
+        {
+          "slot": "profile",
+          "required": true
+        },
+        {
+          "slot": "credentials",
+          "required": false
+        },
+        {
+          "slot": "cta",
+          "required": true
+        }
+      ]
+    },
+    "contact": {
+      "label": "お問い合わせ",
+      "schema": [
+        "ContactPage",
+        "ContactPoint"
+      ],
+      "note": "フォームは必ず実機で「ラベルと入力欄が見えるか」を確認する。白背景に白文字を出した事故がある（2026-08-22）。",
+      "sections": [
+        {
+          "slot": "fv",
+          "required": true
+        },
+        {
+          "slot": "contact_methods",
+          "required": true
+        },
+        {
+          "slot": "hours",
+          "required": true
+        },
+        {
+          "slot": "form",
+          "required": true
+        },
+        {
+          "slot": "after_send",
+          "required": false
+        },
+        {
+          "slot": "access",
+          "required": false
+        }
+      ]
+    },
+    "legal": {
+      "label": "プライバシーポリシー／利用規約",
+      "schema": [
+        "WebPage"
+      ],
+      "note": "ここだけはカスタムブロックを使わず core の見出しと段落で書く。読みやすさが最優先。",
+      "sections": [
+        {
+          "slot": "fv",
+          "required": true
+        },
+        {
+          "slot": "preamble",
+          "required": true
+        },
+        {
+          "slot": "terms",
+          "required": true
+        },
+        {
+          "slot": "revision",
+          "required": true
+        },
+        {
+          "slot": "operator",
+          "required": true
+        }
+      ]
+    }
+  }
+}

@@ -32,7 +32,7 @@ import metadata from './block.json';
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
-registerBlockType(metadata.name, {
+const lwBlockDef = {
     title   : 'お客様の声 03 (スライダー・モーダル付き)',
     icon    : 'format-quote',
     category: 'lw-voice',
@@ -613,11 +613,39 @@ registerBlockType(metadata.name, {
         };
 
         /* ---------- Swiper + モーダル初期化スクリプト --------------*/
+        /* 🚨 2026-08-26: 自分の要素を "#" + blockId でしか探せなかった。
+         *   blockId が空のまま保存されたマークアップ（ページテンプレート・AI生成）だと
+         *   セレクタが "#" だけになって section が取れず、init-hide が外れないまま
+         *   フロントで高さ0＝真っ白になっていた（2026-08-26 に実測）。
+         *   🚨 blockId があるときの出力は1バイトも変えないこと（既存ページの検証が壊れる）。 */
+        const rootFinder = blockId
+            ? [
+                `    const selector = "#${ blockId }";`,
+                '    const section = document.querySelector(selector);',
+                '    if (!section) return;',
+              ].join(String.fromCharCode(10))
+            : [
+                '    var _sc = document.currentScript;',
+                '    var _root = ( _sc && _sc.closest ) ? _sc.closest(".paid-block-voice-3") : null;',
+                '    if ( !_root ) _root = document.querySelector(".paid-block-voice-3:not([data-lw-init])");',
+                '    if ( !_root ) return;',
+                '    _root.setAttribute("data-lw-init","1");',
+                '    if ( !_root.id ) _root.id = "paid-block-voice-3-" + Math.random().toString(36).slice(2,10);',
+                '    const selector = "#" + _root.id;',
+                '    const section = _root;',
+              ].join(String.fromCharCode(10));
+        /* モーダルは「どのブロックのものか」を id で紐づけている。id が無いときは実行時に振った id を使う */
+        const Q1 = String.fromCharCode(39); /* 入れ子のクォートを読みやすくするため */
+        const modalSel = blockId
+            ? Q1 + '.paid-block-voice-3-modal[data-for-block="' + blockId + '"]' + Q1
+            : Q1 + '.paid-block-voice-3-modal[data-for-block="' + Q1 + ' + section.id + ' + Q1 + '"]' + Q1;
+        const modalId = blockId ? Q1 + blockId + Q1 : 'section.id';
+        /* 色の指定も同じ理由。blockId が無いときはクラスで当てる */
+        const cssRoot = blockId ? `#${ blockId }` : '.paid-block-voice-3';
+
         const initScript = `
 (function(){
-    const selector = "#${ blockId }";
-    const section = document.querySelector(selector);
-    if (!section) return;
+${ rootFinder }
 
     // データを取得
     const voiceData = JSON.parse(section.getAttribute('data-voices'));
@@ -704,7 +732,7 @@ registerBlockType(metadata.name, {
     // ========== モーダル処理 ==========
     function initModal() {
         // ★ 既にbody直下に移動済みかチェック（複数ブロック対応）
-        let modal = document.querySelector('.paid-block-voice-3-modal[data-for-block="${blockId}"]');
+        let modal = document.querySelector(${ modalSel });
 
         if (!modal) {
             // まだ移動していない場合、セクション内から取得
@@ -713,7 +741,7 @@ registerBlockType(metadata.name, {
 
             // ★ モーダルをbody直下に移動（他ブロックのz-index影響を回避）
             document.body.appendChild(modal);
-            modal.setAttribute('data-for-block', '${blockId}');
+            modal.setAttribute('data-for-block', ${ modalId });
         }
 
         const closeBtn = modal.querySelector('.modal-close');
@@ -839,7 +867,7 @@ registerBlockType(metadata.name, {
 
                 {/* JS完全オフ環境向けフォールバック */}
                 <noscript>
-                    <style>{`#${ blockId }{opacity:1!important}`}</style>
+                    <style>{`${ cssRoot }{opacity:1!important}`}</style>
                 </noscript>
             </div>
         );
@@ -1128,4 +1156,29 @@ registerBlockType(metadata.name, {
     },
         },
     ],
-});
+};
+
+/* ------------------------------------------------------------------
+ * #1169（2026-08-27）既定値の他社CDN直リンクを自社素材に差し替えた。
+ * 既定値と同じ値はブロックコメントに書かれないので、既定値のまま使っている
+ * 既存ページは「保存HTMLは旧URL／ブロックは新しい既定値」で食い違う。
+ * 旧既定値を持った版を残して、開いて保存し直しても画像が入れ替わらないようにする。
+ * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
+ * ------------------------------------------------------------------ */
+const LW_1169_OLD = JSON.parse( JSON.stringify( metadata.attributes ) );
+LW_1169_OLD.voices.default[0].photo = "https://picsum.photos/200/200?random=1";
+LW_1169_OLD.voices.default[1].photo = "https://picsum.photos/200/200?random=2";
+LW_1169_OLD.voices.default[2].photo = "https://picsum.photos/200/200?random=3";
+
+/* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
+ *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の
+ *    大多数がこれ）がどの版にも当たらなくなる。だから既存の版それぞれについて
+ *    旧既定値を持たせた双子を作って先に並べる。元の版も残す（画像を自分で差し替えた人向け）。 */
+const lwPrev1169 = lwBlockDef.deprecated || [];
+lwBlockDef.deprecated = [
+	{ attributes: LW_1169_OLD, save: lwBlockDef.save },
+	...lwPrev1169.map( ( d ) => ( { ...d, attributes: LW_1169_OLD } ) ),
+	...lwPrev1169,
+];
+
+registerBlockType( metadata.name, lwBlockDef );

@@ -55,6 +55,18 @@
 			"type": "string",
 			"default": ""
 		},
+		"linkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"pageId": {
+			"type": "number",
+			"default": 0
+		},
+		"categoryId": {
+			"type": "number",
+			"default": 0
+		},
 		"linkText": {
 			"type": "string",
 			"default": "MORE"
@@ -99,9 +111,25 @@
 			"type": "string",
 			"default": "#fff"
 		},
+		"showLinkButton": {
+			"type": "boolean",
+			"default": false
+		},
+		"linkButtonBorderRadius": {
+			"type": "number",
+			"default": 3
+		},
 		"showTitle": {
 			"type": "boolean",
 			"default": true
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 0
+		},
+		"textPaddingTopNone": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"no": 3

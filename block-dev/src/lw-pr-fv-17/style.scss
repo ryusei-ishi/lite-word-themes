@@ -55,7 +55,7 @@
         height: 100%;
         opacity: var(--bg_image-op-pc, 1);
         @media (max-width: 800px) {
-            opacity: var(--bg_image-op-pc, --bg_image-op-pc, 1);
+            opacity: var(--bg_image-op-sp, 1);
         }
         img {
             object-fit: cover;
@@ -79,14 +79,14 @@
         left: 0;
         opacity: var(--bg_image_left-op-pc, 1);
         @media (max-width: 800px) {
-            opacity: var(--bg_image_left-op-pc, --bg_image_left-op-pc, 1);
+            opacity: var(--bg_image_left-op-sp, 1);
         }
     }
     .bg_image_right {
         right: 0;
         opacity: var(--bg_image_right-op-pc, 1);
         @media (max-width: 800px) {
-            opacity: var(--bg_image_right-op-pc, --bg_image_right-op-pc, 1);
+            opacity: var(--bg_image_right-op-sp, 1);
         }
     }
     .lw_breadcrumb {
@@ -104,6 +104,17 @@
             bottom: initial;
             top: 100%;
             padding: 1em 0;
+            /* 🚨 スマホではパンくずがFVの外（下）に出る。PCで白にしていると背景に溶けて読めないので、
+               スマホだけ別の色を指定できるようにしてある。指定が無ければPCの指定→従来の値の順で落ちる。 */
+            li {
+                color: var(--bc-color-sp, var(--color-black));
+                &:has(+ li)::after {
+                    background: var(--bc-color-sp, var(--color-main));
+                }
+                a {
+                    color: var(--bc-color-sp, var(--color-main));
+                }
+            }
         }
         @media (max-width: 500px) {
             font-size: 10px;
@@ -111,7 +122,9 @@
         li {
             display: flex;
             align-items: center;
-            color: var(--color-black);
+            /* --bc-color-pc は render.php が「パンくずリストの色（PC）」を指定されたときだけ出す。
+               指定が無ければ第2引数の従来の値がそのまま効くので、既存ページの見た目は変わらない。 */
+            color: var(--bc-color-pc, var(--color-black));
             &:has(+ li) {
                 &::after {
                     margin: 0 0.4em;
@@ -119,7 +132,7 @@
                     height: 1px;
                     content: "";
                     display: block;
-                    background: var(--color-main);
+                    background: var(--bc-color-pc, var(--color-main));
                     transform: translateY(0.1em);
                 }
             }
@@ -127,12 +140,13 @@
                 display: flex;
                 align-items: center;
                 gap: 0.5em;
-                color: var(--color-main);
+                color: var(--bc-color-pc, var(--color-main));
                 text-decoration: none;
                 svg {
                     height: 1em;
                     width: auto;
-                    fill: var(--color-main);
+                    /* 家アイコンはリンクの文字色に合わせる（指定が無ければ従来と同じ --color-main になる） */
+                    fill: currentColor;
                 }
             }
         }

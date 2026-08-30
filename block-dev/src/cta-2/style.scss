@@ -177,7 +177,11 @@
         svg {
           margin-top: 3px;
           height: 1.2em;
-          fill: #fff;
+          // 🚨 fill を直接指定すると、save() が .icon に付けた
+          //    style="fill: buttonTextColor" が効かず**アイコンが必ず白**になる
+          //    （白いボタンにすると消える。2026-08-26 に実際そうなっていた）。
+          //    既定の buttonTextColor は #ffffff なので、inherit にしても既定の見た目は変わらない。
+          fill: inherit;
         }
         &:hover {
           opacity: 0.8;

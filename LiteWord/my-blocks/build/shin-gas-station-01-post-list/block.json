@@ -31,6 +31,18 @@
 			"type": "string",
 			"default": "#"
 		},
+		"linkLinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"linkPageId": {
+			"type": "number",
+			"default": 0
+		},
+		"linkCategoryId": {
+			"type": "number",
+			"default": 0
+		},
 		"openInNewTab": {
 			"type": "boolean",
 			"default": false

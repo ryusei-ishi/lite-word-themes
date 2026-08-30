@@ -10,10 +10,11 @@
 		"anchor": true
 	},
 	"aiHint": {
-		"description": "背景色付きリスト。タイトル+チェックマーク付き項目一覧。悩み・課題・こんな方におすすめに",
+		"description": "画面いっぱいに広がる色帯の中に、チェックマーク付きの白いカードが2列で並ぶ。見出しはこのブロック自身が持つ。こんなお悩み・こんな方に向いています・できることの一覧に",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["titleText", "contents"],
-		"imageAttributes": ["backgroundImage"]
+		"imageAttributes": ["backgroundImage"],
+		"notes": "contents は [{ text }] の配列。🚨 backgroundImage を必ず渡すこと。空にすると save() が background-image:url() をそのまま書き出し（空判定が無い）、空の url() はそのページ自身をもう一度取りに行くので毎表示で無駄なリクエストが1本増える。🚨 カードは2列で、750px以下で1列になる。**項目数は偶数**にすること（奇数だと最後の1枚だけが取り残される）。4件か6件が使いやすい。⚠️ text は white-space:pre-wrap なので **改行がそのまま効く**。1件を2行に割ると読みやすい（paid-block-content-7 は改行が効かず br が要る。ブロックごとに違う）。⚠️ contents[].borderColor は save() が読んでいないので書いても何も起きない。⚠️ 見出しはこのブロック自身が h2 で出す（titleText が空なら見出しごと出ない）ので、上に別の見出しブロックを重ねないこと。⚠️ 帯は全幅に広がり、自前で上下 88px / 64px の padding を持つ（450px以下は 64px / 32px）ので前後にスペーサーを足さない。⚠️ bgGradient（帯の色）・filterOpacity・colorLiSvg（チェックの色）はインラインstyleに直接入るので var(--color-main) や var(--color-accent) を渡してよい。filterOpacity の既定 0.8 は帯がほぼ単色になって写真が見えない。写真の質感を出すなら 0.7 あたりだが、**白い見出しとのコントラストが 3:1 を切らないか**を渡す写真ごとに確かめること。"
 	},
 	"attributes": {
 		"backgroundImage": { "type": "string", "default": "", "aiHint": { "role": "image", "note": "背景画像URL。省略可" } },

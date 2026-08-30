@@ -9,7 +9,9 @@
 	"aiHint": {
 		"description": "画像バナー2カラム2行（別デザイン）。4枚バナーの2x2グリッド。ギャラリー風の案内に",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["items"],
+		"contentAttributes": [
+			"items"
+		],
 		"imageAttributes": []
 	},
 	"supports": {
@@ -50,28 +52,28 @@
 				{
 					"title": "タイトルタイトル",
 					"description": "説明テキスト説明テ",
-					"imgUrl": "https://picsum.photos/1000/1000?random=1",
+					"imgUrl": "https://lite-word.com/sample_img/shop/1.webp",
 					"linkUrl": "",
 					"openInNewTab": false
 				},
 				{
 					"title": "タイトルタイトル",
 					"description": "説明テキスト説明テ",
-					"imgUrl": "https://picsum.photos/1000/1000?random=2",
+					"imgUrl": "https://lite-word.com/sample_img/shop/2.webp",
 					"linkUrl": "",
 					"openInNewTab": false
 				},
 				{
 					"title": "タイトルタイトル",
 					"description": "説明テキスト説明テ",
-					"imgUrl": "https://picsum.photos/1000/1000?random=3",
+					"imgUrl": "https://lite-word.com/sample_img/shop/3.webp",
 					"linkUrl": "",
 					"openInNewTab": false
 				},
 				{
 					"title": "タイトルタイトル",
 					"description": "説明テキスト説明テ",
-					"imgUrl": "https://picsum.photos/1000/1000?random=4",
+					"imgUrl": "https://lite-word.com/sample_img/shop/4.webp",
 					"linkUrl": "",
 					"openInNewTab": false
 				}

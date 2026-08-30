@@ -11,10 +11,13 @@
 	},
 	"editorScript": "file:./paid-block-lw-step-3.js",
 	"aiHint": {
-		"description": "番号付き縦型ステップ。01形式番号+タイトル+説明。背景色付き。採用フロー・手順に",
+		"description": "行型の番号つきステップ。左にサイト色の番号タイル、右に見出しと説明。段数が多い手続き（5段以上）でも縦に積めて読みやすい。ご利用までの流れ・申し込みの手順・採用フローに",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["contents"],
-		"imageAttributes": []
+		"contentAttributes": [
+			"contents"
+		],
+		"imageAttributes": [],
+		"notes": "1ブロックで全段を持つ（contents 配列）。lw-pr-step-8 の「1ブロック＝1段」とは逆なので、段を増やすときはブロックを足すのではなく contents を足す。見た目は**行型** — 左にサイト色の番号タイル、右に白地の見出しと説明。1行ずつ横に長いので、**段数が多い手続き（5段以上）でも縦に積めて読みやすい**。丸番号を3列に並べる lw-pr-step-7 とは向きが違う。🚨 bgGradient は名前と違って「背景のグラデーション」ではない。save() が **li の border-color** と **番号タイルの background** の2か所に同じ値を書く。既定が var(--color-main) なので**ページのメインカラーに自動で追従する。色は指定しなくてよい**。🚨 文字の大きさは fontSizeClass（font_size_s / m / l）**1つで全部決まる**。見出しは 1em、説明は 0.71em の相対値なので、見出しだけ小さくすることはできない。font_size_m なら PC で 見出し24px・説明17px、800px以下 22/15.6、**550px以下 18/12.8**。🚨 スマホで説明が 12.8px まで落ちるので、**1段の説明は60字まで**にする。🚨 番号の列は 2.4em 固定（font_size_m の PC で約58px）。**「01」「02」の2桁向け**で、「STEP1」のような文字を入れると溢れる。説明は white-space: pre-wrap なので改行がそのまま効く（br は要らない）。contents は [{ no, title, text }] の3つだけ。**写真は入らない**（写真つきの流れにしたいなら lw-pr-content-8）。titleTag の既定は h3。セクション見出し（h2）の下に置くならそのままでよい。ulMaxWidth（既定1080）で内側の幅を決める。自前で margin: 32px 0（800px以下は 24px）を持つので、前後にスペーサーを足さない。"
 	},
 	"no": 3,
 	"attributes": {

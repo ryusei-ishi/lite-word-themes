@@ -5,6 +5,10 @@ import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS = { url: 'linkUrl', type: 'linkLinkType', page: 'linkPageId', category: 'linkCategoryId' };
 
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
@@ -33,6 +37,10 @@ registerBlockType(metadata.name, {
                         <URLInput
                             value={linkUrl}
                             onChange={(url) => setAttributes({ linkUrl: url })}
+                        />
+                        <LinkPicker
+                            link={lwLinkFromAttrs(attributes, LINK_KEYS)}
+                            onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}
                         />
                         <ToggleControl
                             label="新規タブで開く"
@@ -212,7 +220,7 @@ registerBlockType(metadata.name, {
                         </h2>
                         {linkUrl && (
                         <nav>
-                            <a href={linkUrl} target={openInNewTab ? '_blank' : '_self'}>  
+                            <a href={linkUrl} data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkType} data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkId} target={openInNewTab ? '_blank' : '_self'}>  
                                 <span className="text">{linkText}</span>
                                 <svg xmlns="http://www.w3.org/2000/svg" width="39.5" height="4.197" viewBox="0 0 39.5 4.197">
                                     <g id="グループ_16" data-name="グループ 16" transform="translate(-179.5 -2154.803)">

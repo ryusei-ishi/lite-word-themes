@@ -67,6 +67,14 @@ registerBlockType(metadata.name, {
                     {/* ── 1. 基本設定 ── */}
                     <PanelBody title="基本設定" initialOpen={true}>
                         <div style={{ marginBottom: '15px' }}>
+                            <p style={{ fontWeight: 'bold', marginBottom: '8px', fontSize: '13px' }}>
+                                🔗 リンク先URL
+                            </p>
+                            <URLInput
+                                value={btnUrl}
+                                onChange={(newUrl) => setAttributes({ btnUrl: newUrl })}
+                                help="ボタンをクリックした時の移動先URLを入力してください"
+                            />
                             <LinkPicker
                                 link={lwLinkFromAttrs(attributes, LINK_KEYS)}
                                 onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}

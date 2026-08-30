@@ -7,6 +7,7 @@ import {
 } from '@wordpress/block-editor';
 import {
     PanelBody,
+    TextControl,
     Button,
     SelectControl,
     ColorPicker,
@@ -34,9 +35,13 @@ registerBlockType(metadata.name, {
             className: `paid-block-solution-2 ${blockId || ''}`
         });
 
-        const updateItem = (index, field, value) => {
+        const updateItem = (index, field, value) =>
+            updateItemMulti(index, { [field]: value });
+
+        /* 画像を選び直したときに URL と alt をまとめて入れ替えるため、複数キー版を用意する */
+        const updateItemMulti = (index, patch) => {
             const newItems = items.map((item, i) =>
-                i === index ? { ...item, [field]: value } : item
+                i === index ? { ...item, ...patch } : item
             );
             setAttributes({ items: newItems });
         };
@@ -119,18 +124,17 @@ registerBlockType(metadata.name, {
                                         data-imagesize={item.imageSize}
                                     >
                                         {item.imgSrc && (
-                                            <img src={item.imgSrc} alt="" />
+                                            <img src={item.imgSrc} alt={item.alt || ''} />
                                         )}
                                     </div>
 
                                     <div className="img_upload">
                                         <MediaUpload
                                             onSelect={(media) =>
-                                                updateItem(
-                                                    index,
-                                                    'imgSrc',
-                                                    media.url
-                                                )
+                                                updateItemMulti(index, {
+                                                    imgSrc: media.url,
+                                                    alt: media.alt || '',
+                                                })
                                             }
                                             allowedTypes={['image']}
                                             render={({ open }) => (
@@ -163,6 +167,14 @@ registerBlockType(metadata.name, {
                                             )}
                                         />
                                     </div>
+
+                                    <TextControl
+                                        label="画像の説明（alt）"
+                                        help="目の見えない方や検索エンジンに、この画像が何かを伝える文です。飾りのアイコンなら空のままで構いません"
+                                        value={item.alt || ''}
+                                        onChange={(v) => updateItem(index, 'alt', v)}
+                                        style={{ marginTop: '8px' }}
+                                    />
 
                                     <RichText
                                         tagName="p"
@@ -225,7 +237,7 @@ registerBlockType(metadata.name, {
                                         data-imagesize={item.imageSize}
                                     >
                                         {item.imgSrc && (
-                                            <img src={item.imgSrc} alt="" />
+                                            <img src={item.imgSrc} alt={item.alt || ''} />
                                         )}
                                     </div>
                                     <RichText.Content

@@ -39,7 +39,7 @@
 		},
 		"altText": {
 			"type": "string",
-			"default": "画像"
+			"default": ""
 		},
 		"commentAlignment": {
 			"type": "string",

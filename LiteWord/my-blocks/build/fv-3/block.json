@@ -15,33 +15,51 @@
 		"excludeFromAutoSelect": true,
 		"excludeReason": "テキスト属性がないためAIがコンテンツを生成できない",
 		"contentAttributes": [],
-		"imageAttributes": ["imagePc", "imageSp"]
+		"imageAttributes": [
+			"imagePc",
+			"imageSp"
+		],
+		"notes": "画像を1枚置くだけのブロック。文字は一切乗らない。写真そのものが主役の業種（フォトスタジオ・作品紹介）に向く。高さは画像の縦横比のままになるので、横長（16:9前後）の画像を使う。"
 	},
 	"attributes": {
 		"imagePc": {
 			"type": "string",
 			"default": "",
-			"aiHint": { "role": "image", "note": "PC用FV画像URL" }
+			"aiHint": {
+				"role": "image",
+				"note": "PC用FV画像URL"
+			}
 		},
 		"imageSp": {
 			"type": "string",
 			"default": "",
-			"aiHint": { "role": "image", "note": "SP用FV画像URL" }
+			"aiHint": {
+				"role": "image",
+				"note": "SP用FV画像URL"
+			}
 		},
 		"altText": {
 			"type": "string",
 			"default": "",
-			"aiHint": { "role": "alt", "contentGuide": "画像の説明。業種名+内容", "example": "美容サロンのメインビジュアル" }
+			"aiHint": {
+				"role": "alt",
+				"contentGuide": "画像の説明。業種名+内容",
+				"example": "美容サロンのメインビジュアル"
+			}
 		},
 		"headingTag": {
 			"type": "string",
 			"default": "h1",
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"widthSetting": {
 			"type": "string",
 			"default": "full",
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		}
 	},
 	"no": 3

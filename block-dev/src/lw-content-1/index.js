@@ -17,6 +17,10 @@ import {fontOptionsArr,fontWeightOptionsArr} from '../utils.js';
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS = { url: 'linkUrl', type: 'linkType', page: 'pageId', category: 'categoryId' };
 
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
@@ -24,7 +28,7 @@ const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
 
-registerBlockType(metadata.name, {
+const lwBlockDef = {
     edit: (props) => {
         const { attributes, setAttributes } = props;
         const {
@@ -192,6 +196,10 @@ registerBlockType(metadata.name, {
                                     value={linkUrl}
                                     onChange={(value) => setAttributes({ linkUrl: value })}
                                 />
+                                <LinkPicker
+                                    link={lwLinkFromAttrs(attributes, LINK_KEYS)}
+                                    onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}
+                                />
                             </div>
                         </div>
                     </div>
@@ -247,6 +255,8 @@ registerBlockType(metadata.name, {
                         />
                         <a
                             href={linkUrl}
+                            data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkType}
+                            data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkId}
                             className="lw-content-1__text_br_button"
                             style={{
                                 fontWeight: linkFontWeight,
@@ -263,4 +273,27 @@ registerBlockType(metadata.name, {
             </div>
         );
     },
-});
+};
+
+/* ------------------------------------------------------------------
+ * #1169（2026-08-27）既定値の他社CDN直リンクを自社素材に差し替えた。
+ * 既定値と同じ値はブロックコメントに書かれないので、既定値のまま使っている
+ * 既存ページは「保存HTMLは旧URL／ブロックは新しい既定値」で食い違う。
+ * 旧既定値を持った版を残して、開いて保存し直しても画像が入れ替わらないようにする。
+ * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
+ * ------------------------------------------------------------------ */
+const LW_1169_OLD = JSON.parse( JSON.stringify( metadata.attributes ) );
+LW_1169_OLD.imageUrl.default = "https://picsum.photos/1000/1000?random=1";
+
+/* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
+ *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の
+ *    大多数がこれ）がどの版にも当たらなくなる。だから既存の版それぞれについて
+ *    旧既定値を持たせた双子を作って先に並べる。元の版も残す（画像を自分で差し替えた人向け）。 */
+const lwPrev1169 = lwBlockDef.deprecated || [];
+lwBlockDef.deprecated = [
+	{ attributes: LW_1169_OLD, save: lwBlockDef.save },
+	...lwPrev1169.map( ( d ) => ( { ...d, attributes: LW_1169_OLD } ) ),
+	...lwPrev1169,
+];
+
+registerBlockType( metadata.name, lwBlockDef );

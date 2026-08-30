@@ -1,0 +1,3 @@
+<!-- wp:wdl/lw-pr-fv-17 {"backgroundImage":"https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/fv17_bg_paper.webp","backgroundImageSp":"https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/fv17_bg_paper.webp","mainTitle":"就業規則の見直し","description":"実態と合っていない規則は、いざというとき会社を守れません。","filterBackgroundColor":"#1b3a5c","textColor":"#333333","breadcrumbColorPc":"#4a5a6a","breadcrumbColorSp":"#4a5a6a","minHeightPc":"min-h-pc-320px","minHeightTb":"min-h-tb-280px","minHeightSp":"min-h-sp-220px","bgImageRightPc":"https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/fv17_deco2_right.webp","bgImageRightSp":"https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/fv17_deco2_right.webp"} -->
+
+<!-- /wp:wdl/lw-pr-fv-17 -->

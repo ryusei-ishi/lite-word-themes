@@ -224,7 +224,7 @@
   margin-bottom: 0.1em;
   display: block;
   line-height: 1.4em;
-  font-size: 24px;
+  font-size: var(--fv4-sub-pc, 24px);
   letter-spacing: 0.1em;
   font-weight: 500;
 }
@@ -235,7 +235,7 @@
   .fv-4 h4 .sub,
   .fv-4 h5 .sub,
   .fv-4 h6 .sub {
-    font-size: 18px;
+    font-size: var(--fv4-sub-tb, 18px);
   }
 }
 @container (max-width:500px) {
@@ -245,7 +245,7 @@
   .fv-4 h4 .sub,
   .fv-4 h5 .sub,
   .fv-4 h6 .sub {
-    font-size: 16px;
+    font-size: var(--fv4-sub-sp, 16px);
   }
 }
 .fv-4 h1 .main,
@@ -256,7 +256,7 @@
 .fv-4 h6 .main {
   display: block;
   line-height: 1.4em;
-  font-size: 72px;
+  font-size: var(--fv4-main-pc, 72px);
   letter-spacing: 0.05em;
 }
 @container (max-width:700px) {
@@ -266,7 +266,7 @@
   .fv-4 h4 .main,
   .fv-4 h5 .main,
   .fv-4 h6 .main {
-    font-size: 56px;
+    font-size: var(--fv4-main-tb, 56px);
   }
 }
 @container (max-width:500px) {
@@ -276,7 +276,7 @@
   .fv-4 h4 .main,
   .fv-4 h5 .main,
   .fv-4 h6 .main {
-    font-size: 48px;
+    font-size: min(var(--fv4-main-sp, 48px), 8.5vw); /* 🚨 2026-08-26 style.scss と同じ上限。片方だけ直すと編集画面が古いまま */
   }
 }
 .fv-4 p {

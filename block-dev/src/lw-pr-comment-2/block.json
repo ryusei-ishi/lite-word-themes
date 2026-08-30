@@ -8,14 +8,15 @@
 	"icon": "format-chat",
 	"description": "吹き出しスタイルのコメントブロック。画像とテキストを配置。",
 	"aiHint": {
-		"description": "吹き出しコメント（プレミアム）。テキスト+アバター画像。レビュー表示に",
+		"description": "吹き出しコメント（全幅）。写真+コメント。本人の言葉を短く見せる。院長挨拶・スタッフの一言に",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": [
 			"comment2Text"
 		],
 		"imageAttributes": [
 			"comment2ImageUrl"
-		]
+		],
+		"notes": "名前欄を持たないので、誰の言葉かは直前の見出しか直後のプロフィールで示す。経歴表の前に置くと「履歴書」ではなく「人物」に見える。"
 	},
 	"supports": {
 		"anchor": true,
@@ -32,7 +33,7 @@
 		},
 		"comment2ImageUrl": {
 			"type": "string",
-			"default": "https://placehold.co/200x200/e8e8e8/999999?text=Image"
+			"default": "https://lite-word.com/sample_img/women/6.webp"
 		},
 		"comment2ImageId": {
 			"type": "number",

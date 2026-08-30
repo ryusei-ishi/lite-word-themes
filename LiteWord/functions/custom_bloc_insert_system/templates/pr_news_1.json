@@ -1,0 +1,99 @@
+{
+  "title": "お知らせ・新着情報（固定の1件＋自動で並ぶ新着3件）",
+  "description": "【型B：説明が主役】見出し＋何を載せる場所かのひとこと＋いま一番読ませたい1件の囲み＋投稿から自動で並ぶ新着カード3件＋一覧への導線。トップページのお知らせ欄に。⚠️ 新着カードは投稿（ブログ記事）から自動で並びます。記事がまだ1件も無いサイトではその部分が空になります。件数・カテゴリの絞り込みはブロックの設定から変えられます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "お知らせ",
+        "subTitle": "NEWS",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "休業日のご案内や新メニューの紹介など、<br>お知らせしたいことを掲載しています。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "bottom": "40px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "【重要】◯月◯日（◯）は臨時休業いたします",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "設備点検のため、終日お休みをいただきます。ご不便をおかけしますが何卒ご了承ください。休業中にいただいたお問い合わせには、<strong>翌営業日から順にご返信</strong>いたします。"
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-post-list-1",
+      "attributes": {
+        "numberOfPosts": 3
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "お知らせ一覧を見る",
+        "textSub": "過去のお知らせもこちらから",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

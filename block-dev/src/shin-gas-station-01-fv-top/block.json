@@ -10,8 +10,15 @@
 	"aiHint": {
 		"description": "トップ用FV。PC/SP別テキスト完全分離。サブ+メイン+説明+背景画像。ショップテンプレート用",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["subTitle", "mainTitle", "description"],
-		"imageAttributes": ["backgroundImage", "backgroundImageSp"]
+		"contentAttributes": [
+			"subTitle",
+			"mainTitle",
+			"description"
+		],
+		"imageAttributes": [
+			"backgroundImage",
+			"backgroundImageSp"
+		]
 	},
 	"supports": {
 		"anchor": true
@@ -20,7 +27,7 @@
 	"attributes": {
 		"backgroundImage": {
 			"type": "string",
-			"default": "https://cdn.pixabay.com/photo/2013/10/14/10/37/froet-gas-195389_1280.jpg"
+			"default": "https://lite-word.com/sample_img/shin/gas_station/bg_1.webp"
 		},
 		"backgroundImageSp": {
 			"type": "string",

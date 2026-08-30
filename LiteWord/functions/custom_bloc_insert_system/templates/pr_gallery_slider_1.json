@@ -1,0 +1,163 @@
+{
+  "title": "作品ギャラリー（大きな写真をめくって見る・6枚）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋大きな写真のスライド6枚（下にサムネイル）＋お作りするときの目安の表＋ご相談への導線。作品や商品そのものが売りものの仕事（菓子・パン・花・ネイル・木工・写真）に。写真は右下に名前の札が出るので、右下に大事なものが写っていないものを選んでください。雰囲気を並べて見せたいだけなら「店内の様子」（グリッド）のほうが向きます。⚠️ このブロックは写真1枚ずつにリンクを張れません。リンクが要るなら「店内の様子」を使ってください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "作品ギャラリー",
+        "subTitle": "GALLERY",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "ひとつずつ手で作っています。写真をめくって、質感や大きさを見てみてください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-lw-gallery-3",
+      "attributes": {
+        "images": [
+          {
+            "url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/bake_01.webp",
+            "alt": "季節のフルーツを並べたタルト",
+            "caption": "季節のタルト"
+          },
+          {
+            "url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/bake_02.webp",
+            "alt": "焼きたてのスコーンを網の上で冷ましているところ",
+            "caption": "スコーン"
+          },
+          {
+            "url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/bake_03.webp",
+            "alt": "白い皿に取り分けたパウンドケーキ",
+            "caption": "パウンドケーキ"
+          },
+          {
+            "url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/bake_04.webp",
+            "alt": "リボンをかけた焼き菓子の詰め合わせ",
+            "caption": "詰め合わせ"
+          },
+          {
+            "url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/bake_05.webp",
+            "alt": "麻布の上に置いた丸いカンパーニュ",
+            "caption": "カンパーニュ"
+          },
+          {
+            "url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/bake_06.webp",
+            "alt": "白いケーキスタンドにのせたホールケーキ",
+            "caption": "ホールケーキ"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "お作りするときの目安",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-company-1",
+      "attributes": {
+        "maxWidth": 1080,
+        "spFullDt": true,
+        "borderColor": "#dfe4ea",
+        "contents": [
+          {
+            "title": "ご注文から",
+            "text": "10日前後（12月は3週間ほどいただきます）"
+          },
+          {
+            "title": "大きさ",
+            "text": "直径15cm（4〜6人分）／18cm（6〜8人分）"
+          },
+          {
+            "title": "お渡し",
+            "text": "店頭でのお受け取り、または宅配（クール便）"
+          },
+          {
+            "title": "1日の数",
+            "text": "手作りのため、1日6台までとしています"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ 写真はすべて実際にお作りしたものです。内容は季節によって変わります。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "この形で相談する",
+        "textSub": "＼ ご相談・お見積りは無料です ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

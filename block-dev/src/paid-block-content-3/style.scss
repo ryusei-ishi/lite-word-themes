@@ -1,10 +1,14 @@
 .lw_content_wrap.page {
   .paid-block-content-3 {
     margin-left: calc((100% - 100vw) / 2);
+    // width が無いと右側だけ親の幅で止まり、左寄せに見える（他の全幅ブロックと同じく 100vw を明示する）
+    width: 100vw;
     max-width: var(--content-3-max-w, 100vw);
     &.max-width-on{
       margin-left: auto;
       margin-right: auto;
+      // 最大幅を指定したときは親の幅を基準にして中央へ（上の 100vw を打ち消す）
+      width: 100%;
     }
   }
 }

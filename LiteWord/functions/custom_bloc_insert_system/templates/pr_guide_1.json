@@ -1,0 +1,137 @@
+{
+  "title": "ご利用案内（3つの使い方＋ご利用までの流れ5段）",
+  "description": "【型B：説明が主役】写真3枚のモザイクで使い方を見せてから、左に番号タイル・右に見出しと説明の行型ステップで手続きを5段に分けて示す段。介護・福祉・施設・教室・レンタルなど、「申し込んでから始まるまでに何をするのか」を先に見せたいときに。段数が増えても縦に積めるので、6段・7段に増やしても崩れません。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "ご利用案内",
+        "subTitle": "GUIDE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "はじめてのご利用でも迷わないように、「通い」「泊まり」「訪問」の使い分けと、ご相談から始まるまでの流れをまとめました。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-image-2",
+      "attributes": {
+        "maxWidthPx": 640,
+        "alignClass": "center",
+        "items": [
+          {
+            "imgSrc": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/guide_01.webp",
+            "altText": "畳の部屋で利用者とスタッフが低いテーブルを囲んでいる",
+            "text": "通い",
+            "fColor": "#000000",
+            "fOpac": 0.35,
+            "fBlend": "normal"
+          },
+          {
+            "imgSrc": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/guide_02.webp",
+            "altText": "ひと組だけ敷かれた布団と小さな行灯",
+            "text": "泊まり",
+            "fColor": "#000000",
+            "fOpac": 0.35,
+            "fBlend": "normal"
+          },
+          {
+            "imgSrc": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/guide_03.webp",
+            "altText": "玄関先で利用者に寄り添うスタッフ",
+            "text": "訪問",
+            "fColor": "#000000",
+            "fOpac": 0.35,
+            "fBlend": "normal"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-lw-step-3",
+      "attributes": {
+        "ulMaxWidth": 1040,
+        "fontSizeClass": "font_size_m",
+        "contents": [
+          {
+            "no": "01",
+            "title": "まずはご相談",
+            "text": "お電話でもメールでも構いません。「何から始めればいいか分からない」という段階でお声がけください。"
+          },
+          {
+            "no": "02",
+            "title": "見学・ご説明",
+            "text": "実際の建物と、ふだんの過ごし方をご覧いただきます。ご家族だけでのご見学もできます。"
+          },
+          {
+            "no": "03",
+            "title": "聞き取り",
+            "text": "ご本人の一日の過ごし方と、ご家族が困っていることを伺います。ここにいちばん時間をかけます。"
+          },
+          {
+            "no": "04",
+            "title": "ご契約・計画づくり",
+            "text": "担当のケアマネジャーと一緒に、通う日と泊まる日を決めます。書類はこちらでご用意します。"
+          },
+          {
+            "no": "05",
+            "title": "ご利用開始",
+            "text": "はじめのひと月は回数を少なめにして、慣れ具合を見ながら増やします。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※要介護認定をまだ受けていない方、申請中の方もご相談いただけます。<br>どこに何を申請するかからご案内します。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "0px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "見学を申し込む",
+        "textSub": "＼ ご家族だけでのご見学もできます ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

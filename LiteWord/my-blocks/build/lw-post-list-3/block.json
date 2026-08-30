@@ -8,11 +8,11 @@
 	"icon": "editor-ul",
 	"editorScript": "file:./lw-post-list-3.js",
 	"aiHint": {
-		"description": "投稿一覧テキストのみ。日付+カテゴリ+タイトルの行表示。お知らせ・更新履歴に",
+		"description": "2カラムで1件が横並びの投稿一覧（左に正方形のサムネイル、右に日付＋カテゴリ＋タイトル）。抜粋が出ないぶん件数を多めに並べられる。お知らせ・更新履歴に",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["numberOfPosts", "categoryId"],
 		"imageAttributes": [],
-		"notes": "動的ブロック。画像なしのテキストリスト形式"
+		"notes": "動的ブロック。表示のときに wp-json から投稿を取ってきて JS で並べるので、文章を生成する必要は無い（渡すのは numberOfPosts と categoryId だけ）。🚨 同じページにこのブロックを2つ置かないこと。save() が書き出す script が querySelector（単数）で最初の1つしか見ないので、2つ目は空のままになる。🚨 テキストだけのリストではない。サムネイルが出る（140px の正方形・450px以下120px・400px以下112px）。画像なしの行だけのリストが欲しいときは lw-news-list-1 を使う。2列・800px以下1列なので件数は偶数にする。抜粋は出ない（内部では作っているが li に書き出していない）。背景は catBgColor を10%の濃さで敷いた全幅の帯で、カテゴリバッジも同じ色の塗りつぶし（既定 var(--color-main)。値は直接 style に入るので var(...) を渡してよい）。自前で padding:40px（550px以下24px・400px以下16px）を持ち、上下のマージンは持たない。固定ページでは画面幅いっぱいに広がる。サムネイル未設定の記事はテーマの no_image に落ちる。投稿が0件のサイトでは何も出ない。"
 	},
 	"supports": {
 		"anchor": true

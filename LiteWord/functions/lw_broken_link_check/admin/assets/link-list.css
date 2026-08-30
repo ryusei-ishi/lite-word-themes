@@ -1,0 +1,708 @@
+.lw-link-list-wrap {
+    max-width: 1600px;
+}
+
+.lw-link-list-controls {
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+}
+
+.lw-link-list-controls .button-primary {
+    font-size: 14px;
+    padding: 8px 20px;
+    height: auto;
+}
+
+.lw-link-list-loading {
+    display: none;
+    margin-top: 15px;
+    padding: 20px;
+    background: #f0f6fc;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+    text-align: center;
+}
+
+.lw-link-list-loading .spinner {
+    float: none;
+    margin: 0 10px 0 0;
+    vertical-align: middle;
+}
+
+.lw-link-list-loading-text {
+    font-size: 14px;
+    color: #333;
+}
+
+.lw-link-list-stats {
+    display: none;
+    gap: 10px;
+    margin: 20px 0;
+    flex-wrap: wrap;
+}
+
+.lw-link-list-stat {
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    padding: 10px 15px;
+    text-align: center;
+    min-width: 80px;
+}
+
+.lw-link-list-stat-number {
+    display: block;
+    font-size: 20px;
+    font-weight: 700;
+    color: #333;
+}
+
+.lw-link-list-stat-label {
+    display: block;
+    font-size: 11px;
+    color: #666;
+    margin-top: 3px;
+}
+
+.lw-link-type {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.lw-link-empty { background: #f8d7da; color: #721c24; }
+.lw-link-anchor { background: #e2e3e5; color: #383d41; }
+.lw-link-internal { background: #d4edda; color: #155724; }
+.lw-link-external { background: #cce5ff; color: #004085; }
+.lw-link-relative { background: #d1ecf1; color: #0c5460; }
+.lw-link-mailto { background: #fff3cd; color: #856404; }
+.lw-link-tel { background: #d4edda; color: #155724; }
+.lw-link-js { background: #f5c6cb; color: #721c24; }
+.lw-link-other { background: #e9ecef; color: #6c757d; }
+
+.lw-link-list-results {
+    display: none;
+}
+
+/* タブナビゲーション */
+.lw-link-tabs {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0;
+    margin-bottom: 0;
+    border-bottom: 1px solid #ccd0d4;
+    background: #f6f7f7;
+    padding: 0 10px;
+}
+
+.lw-link-tab {
+    padding: 12px 20px;
+    background: transparent;
+    border: none;
+    border-bottom: 3px solid transparent;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: 500;
+    color: #50575e;
+    transition: all 0.2s;
+    margin-bottom: -1px;
+}
+
+.lw-link-tab:hover {
+    color: #2271b1;
+    background: #fff;
+}
+
+.lw-link-tab.active {
+    color: #2271b1;
+    background: #fff;
+    border-bottom-color: #2271b1;
+}
+
+.lw-link-tab-count {
+    display: inline-block;
+    background: #e0e0e0;
+    color: #50575e;
+    padding: 2px 8px;
+    border-radius: 10px;
+    font-size: 11px;
+    margin-left: 6px;
+}
+
+.lw-link-tab.active .lw-link-tab-count {
+    background: #2271b1;
+    color: #fff;
+}
+
+.lw-link-tab-content {
+    display: none;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-top: none;
+    padding: 20px;
+}
+
+.lw-link-tab-content.active {
+    display: block;
+}
+
+/* グループセクション */
+.lw-link-group {
+    margin-bottom: 30px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+}
+
+.lw-link-group-header {
+    padding: 15px 20px;
+    background: #f6f7f7;
+    border-bottom: 1px solid #ccd0d4;
+    cursor: pointer;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.lw-link-group-header:hover {
+    background: #f0f0f1;
+}
+
+.lw-link-group-title {
+    font-size: 15px;
+    font-weight: 600;
+    color: #1d2327;
+    margin: 0;
+}
+
+.lw-link-group-count {
+    font-size: 13px;
+    color: #666;
+    background: #e0e0e0;
+    padding: 2px 10px;
+    border-radius: 10px;
+}
+
+.lw-link-group-content {
+    padding: 0;
+}
+
+.lw-link-group.collapsed .lw-link-group-content {
+    display: none;
+}
+
+.lw-link-group-toggle {
+    font-size: 18px;
+    color: #666;
+    transition: transform 0.2s;
+}
+
+.lw-link-group.collapsed .lw-link-group-toggle {
+    transform: rotate(-90deg);
+}
+
+/* ページ単位のサブグループ */
+.lw-link-page {
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.lw-link-page:last-child {
+    border-bottom: none;
+}
+
+.lw-link-page-header {
+    padding: 12px 20px;
+    background: #fafafa;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+}
+
+.lw-link-page-header:hover {
+    background: #f5f5f5;
+}
+
+.lw-link-page-title {
+    font-size: 13px;
+    font-weight: 500;
+    color: #2271b1;
+}
+
+.lw-link-page-title a {
+    text-decoration: none;
+}
+
+.lw-link-page-title a:hover {
+    text-decoration: underline;
+}
+
+.lw-link-page-count {
+    font-size: 12px;
+    color: #999;
+}
+
+.lw-link-page-links {
+    padding: 0 20px 15px;
+}
+
+.lw-link-page.collapsed .lw-link-page-links {
+    display: none;
+}
+
+/* リンクテーブル */
+.lw-link-list-table {
+    margin: 0;
+    border: none;
+    box-shadow: none;
+}
+
+.lw-link-list-table th,
+.lw-link-list-table td {
+    padding: 8px 10px;
+}
+
+.lw-link-list-table .column-href {
+    width: 40%;
+    word-break: break-all;
+}
+
+.lw-link-list-table .column-type {
+    width: 10%;
+}
+
+.lw-link-list-table .column-text {
+    width: 35%;
+}
+
+.lw-link-list-table .column-action {
+    width: 15%;
+    text-align: center;
+}
+
+.lw-href-value {
+    font-family: monospace;
+    font-size: 12px;
+    color: #333;
+    word-break: break-all;
+}
+
+.lw-href-value.empty {
+    color: #dc3232;
+    font-style: italic;
+}
+
+.lw-link-text {
+    color: #666;
+    font-size: 12px;
+}
+
+.lw-link-list-filters {
+    margin: 15px 0;
+    padding: 10px 15px;
+    background: #f6f7f7;
+    border: 1px solid #dcdcde;
+    border-radius: 4px;
+}
+
+.lw-link-list-filters label {
+    margin-right: 15px;
+    cursor: pointer;
+}
+
+.lw-link-list-filters input[type="checkbox"] {
+    margin-right: 5px;
+}
+
+.lw-link-list-search {
+    margin: 15px 0;
+}
+
+.lw-link-list-search input[type="search"] {
+    width: 300px;
+    padding: 5px 10px;
+}
+
+.lw-no-links {
+    padding: 20px;
+    color: #666;
+    font-style: italic;
+}
+
+/* リンクチェック関連 */
+.lw-link-check-controls {
+    margin-top: 15px;
+    padding-top: 15px;
+    border-top: 1px solid #dcdcde;
+}
+
+.lw-link-check-progress {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    background: #f0f6fc;
+    border: 1px solid #c3c4c7;
+    border-radius: 4px;
+}
+
+.lw-progress-bar-container {
+    background: #e0e0e0;
+    border-radius: 4px;
+    height: 24px;
+    overflow: hidden;
+    margin-bottom: 10px;
+}
+
+.lw-progress-bar {
+    background: linear-gradient(90deg, #2271b1, #135e96);
+    height: 100%;
+    width: 0%;
+    transition: width 0.3s ease;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    font-size: 12px;
+    font-weight: 600;
+}
+
+.lw-progress-text {
+    text-align: center;
+    color: #666;
+    font-size: 13px;
+}
+
+.lw-check-results-summary {
+    display: none;
+    margin-top: 15px;
+    padding: 15px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+}
+
+.lw-check-results-summary h4 {
+    margin: 0 0 10px 0;
+    font-size: 14px;
+}
+
+.lw-check-stat {
+    display: inline-block;
+    margin-right: 20px;
+    font-size: 13px;
+}
+
+.lw-check-stat-ok { color: #46b450; }
+.lw-check-stat-redirect { color: #ffb900; }
+.lw-check-stat-error { color: #dc3232; }
+/* 「確認できず」は赤にしない。リンク切れと同じ色にすると、
+   相手が自動チェックを断っただけのものまで壊れて見える */
+.lw-check-stat-unverified { color: #996800; cursor: help; }
+.lw-check-stat-timeout { color: #826eb4; }
+.lw-check-stat-skip { color: #999; }
+
+/* ステータスバッジ */
+.lw-link-status {
+    display: inline-block;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+.lw-status-ok { background: #d4edda; color: #155724; }
+.lw-status-redirect { background: #fff3cd; color: #856404; }
+.lw-status-not_found { background: #f8d7da; color: #721c24; }
+.lw-status-unverified { background: #fdf3d8; color: #6b5200; }
+.lw-status-client_error { background: #f8d7da; color: #721c24; }
+.lw-status-server_error { background: #f8d7da; color: #721c24; }
+.lw-status-timeout { background: #e2e3e5; color: #383d41; }
+.lw-status-error { background: #f8d7da; color: #721c24; }
+.lw-status-skip { background: #e9ecef; color: #6c757d; }
+.lw-status-checking { background: #cce5ff; color: #004085; }
+
+/* 警告マーク（href="#" のみのリンク用） */
+.lw-link-warning {
+    display: inline-block;
+    color: #d63638;
+    font-weight: bold;
+    margin-left: 6px;
+    cursor: help;
+}
+
+.lw-link-warning-badge {
+    display: inline-block;
+    background: #fcf0f1;
+    border: 1px solid #d63638;
+    color: #d63638;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+/* エラーマーク（アンカーID不在用） */
+.lw-link-error {
+    display: inline-block;
+    color: #dc3232;
+    font-weight: bold;
+    margin-left: 6px;
+    cursor: help;
+}
+
+.lw-link-error-badge {
+    display: inline-block;
+    background: #f8d7da;
+    border: 1px solid #dc3232;
+    color: #dc3232;
+    padding: 2px 6px;
+    border-radius: 3px;
+    font-size: 10px;
+    font-weight: 600;
+    margin-left: 8px;
+}
+
+/* インライン編集機能 */
+.lw-edit-btn {
+    padding: 2px 8px;
+    font-size: 11px;
+    margin-left: 8px;
+    cursor: pointer;
+    background: #f0f0f1;
+    border: 1px solid #c3c4c7;
+    border-radius: 3px;
+    color: #2271b1;
+}
+
+.lw-edit-btn:hover {
+    background: #e5e5e5;
+    border-color: #999;
+}
+
+.lw-edit-form {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.lw-edit-input {
+    flex: 1;
+    min-width: 200px;
+    padding: 4px 8px;
+    font-family: monospace;
+    font-size: 12px;
+    border: 1px solid #2271b1;
+    border-radius: 3px;
+}
+
+.lw-edit-input:focus {
+    outline: none;
+    border-color: #007cba;
+    box-shadow: 0 0 0 1px #007cba;
+}
+
+.lw-save-btn {
+    padding: 4px 12px;
+    font-size: 12px;
+    background: #2271b1;
+    border: 1px solid #2271b1;
+    border-radius: 3px;
+    color: #fff;
+    cursor: pointer;
+}
+
+.lw-save-btn:hover {
+    background: #135e96;
+    border-color: #135e96;
+}
+
+.lw-save-btn:disabled {
+    background: #a0a5aa;
+    border-color: #a0a5aa;
+    cursor: not-allowed;
+}
+
+.lw-cancel-btn {
+    padding: 4px 12px;
+    font-size: 12px;
+    background: #f0f0f1;
+    border: 1px solid #c3c4c7;
+    border-radius: 3px;
+    color: #50575e;
+    cursor: pointer;
+}
+
+.lw-cancel-btn:hover {
+    background: #e5e5e5;
+    border-color: #999;
+}
+
+.lw-edit-saving {
+    color: #2271b1;
+    font-size: 12px;
+}
+
+.lw-edit-success {
+    color: #46b450;
+    font-size: 12px;
+}
+
+.lw-edit-error {
+    color: #dc3232;
+    font-size: 12px;
+}
+
+/* ブロックが出力していて本文から直接編集できないリンクの印 */
+.lw-edit-na {
+    color: #a7aaad;
+    cursor: help;
+}
+
+/* 安全でない宛先として送信しなかったもの */
+.lw-link-status.lw-status-blocked {
+    background: #f0f0f1;
+    color: #50575e;
+}
+
+/* ------------------------------------------------------------------
+ * 集め方の切り替え（軽い / しっかり）
+ * ---------------------------------------------------------------- */
+
+.lw-scan-modes {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+}
+
+.lw-scan-modes .dashicons {
+    vertical-align: middle;
+    margin-right: 5px;
+}
+
+/* 2行のボタン。何が違うかをボタン自身に書いておく
+   （「もう一度調べる」「もう一度しっかり調べる」は頭が揃って見分けがつかなかった） */
+.lw-scan-modes .lw-scan-button {
+    display: inline-flex;
+    align-items: center;
+    height: auto;
+    min-height: 0;
+    padding: 9px 16px;
+    line-height: 1.35;
+    text-align: left;
+    white-space: normal;
+}
+
+.lw-scan-modes .lw-scan-button .dashicons {
+    flex: none;
+    width: 20px;
+    height: 20px;
+    margin-right: 8px;
+    font-size: 20px;
+}
+
+.lw-scan-button-labels {
+    display: flex;
+    flex-direction: column;
+}
+
+.lw-scan-button-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.lw-scan-button-sub {
+    font-size: 11px;
+    font-weight: 400;
+    opacity: 0.85;
+}
+
+.lw-scan-modes .lw-last-updated {
+    margin-left: 5px;
+    color: #666;
+    font-size: 13px;
+}
+
+.lw-scan-modes-help {
+    margin: 12px 0 0;
+    color: #50575e;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+/* いまの一覧がどちらで採られたか。件数が変わる理由をここで必ず伝える */
+.lw-scan-mode-badge {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: #f6f7f7;
+    border-left: 4px solid #c3c4c7;
+    border-radius: 2px;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.lw-mode-tag {
+    display: inline-block;
+    margin-right: 8px;
+    padding: 2px 8px;
+    border-radius: 3px;
+    font-weight: 600;
+    white-space: nowrap;
+}
+
+.lw-mode-tag-full {
+    background: #00a32a;
+    color: #fff;
+}
+
+.lw-mode-tag-light {
+    background: #dba617;
+    color: #fff;
+}
+
+.lw-mode-note {
+    color: #50575e;
+}
+
+/* 読めなかったページ・上限で外したページ */
+.lw-crawl-notice {
+    display: none;
+    margin-top: 12px;
+    padding: 10px 12px;
+    background: #fcf9e8;
+    border-left: 4px solid #dba617;
+    border-radius: 2px;
+    font-size: 13px;
+}
+
+.lw-crawl-notice p {
+    margin: 0 0 6px;
+}
+
+.lw-crawl-error-list {
+    margin: 0 0 0 18px;
+    list-style: disc;
+    color: #50575e;
+}
+
+/* サイト共通のリンクが、何ページに出ているか */
+.lw-common-count {
+    display: inline-block;
+    margin-left: 8px;
+    padding: 1px 7px;
+    background: #f0f0f1;
+    border-radius: 9px;
+    color: #50575e;
+    font-size: 11px;
+    white-space: nowrap;
+}

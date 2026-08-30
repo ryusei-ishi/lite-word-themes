@@ -1,0 +1,3 @@
+<!-- wp:wdl/paid-block-fv-10 {"mainTitle":"アクセス","textColor":"#ffffff","minHeightPc":"min-h-pc-320px","minHeightTb":"min-h-tb-280px","minHeightSp":"min-h-sp-220px","titleFontSizeClass":"font_size_l"} -->
+<div class="wp-block-wdl-paid-block-fv-10 paid-block-fv-10 min-h-pc-320px min-h-tb-280px min-h-sp-220px"><div class="fv-10_inner"><h1 class="ttl font_size_l" style="color:#ffffff"><span class="main" style="color:#ffffff">アクセス</span></h1><div class="inner_filter" style="background-color:#FC99AA;border-color:#FFFFFF;border-width:4px;border-style:solid;border-radius:12px;box-shadow:0px 3px 6px 0px rgba(0,0,0,0.06)"></div></div><div class="filter" style="background-color:#FFF8D4;opacity:1"></div></div>
+<!-- /wp:wdl/paid-block-fv-10 -->

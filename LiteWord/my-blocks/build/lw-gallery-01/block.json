@@ -57,13 +57,16 @@
 			"type": "array",
 			"default": [
 				{
-					"imgUrl": "https://picsum.photos/1000/1000?random=1"
+					"imgUrl": "https://lite-word.com/sample_img/shop/1.webp",
+					"alt": ""
 				},
 				{
-					"imgUrl": "https://picsum.photos/1000/1000?random=2"
+					"imgUrl": "https://lite-word.com/sample_img/shop/2.webp",
+					"alt": ""
 				},
 				{
-					"imgUrl": "https://picsum.photos/1000/1000?random=3"
+					"imgUrl": "https://lite-word.com/sample_img/shop/3.webp",
+					"alt": ""
 				}
 			]
 		},

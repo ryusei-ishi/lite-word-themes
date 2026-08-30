@@ -10,10 +10,11 @@
 		"anchor": true
 	},
 	"aiHint": {
-		"description": "リンクリスト。タイトル+ボタン型リンク一覧。SNSリンクやナビゲーション向け。2カラムグリッド",
+		"description": "SNSや関連サイトへの入口をまとめる帯。背景写真＋サイト色のフィルタの上に、アイコンつきのボタン型リンクが並ぶ。ページの一番下、フッターの手前に置く",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["titleText", "titleBottomText", "contents"],
-		"imageAttributes": ["backgroundImage"]
+		"contentAttributes": ["titleText", "titleBottomText"],
+		"imageAttributes": ["backgroundImage"],
+		"notes": "背景写真の帯の中に、アイコンつきのボタン型リンクが並ぶ。ページの一番下、フッターの手前に置く。🚨 backgroundImage を空にしないこと。空のまま save すると style=background-image:url() が書き出され、空の url() は【そのページ自身をもう一度取りに行く】（image-popup.js の img src= と同じ型）。🚨 contents[].link を空にしないこと。href= が空になり、押すとページが再読み込みされる。🚨 icon は SVG のマークアップそのものを受け取る（dangerouslySetInnerHTML）。クラス名を入れるとその文字が画面に出る。選べる41種はこのブロック自身のエディタバンドルbuild/lw-link-list-1/lw-link-list-1.js の var icon_* にあり、SNS系（instagram / line / youtube / x /threads / facebook / tiktok / pinterest）もそろっている。塗りは .icon { fill: colorLiSvg } なので単色・塗りつぶしの svg だけを入れる。🚨 既定は【サイト色の帯の上に、サイト色のボタン】（帯も colorLiBg も var(--color-main)）で同じ色が重なって沈む。ボタンは colorLiBg を #ffffff、colorLiText を濃いグレー、colorLiSvg と colorLiBorder をサイト色にする。🚨 backgroundSwitch を false にすると padding が 0 になり背景も消えるが、見出しの色は CSS で #fff 固定のまま（属性が無い）なので、白い紙の上で見出しが消える。背景なしで使うなら hideTitle:true とセットにする。🚨 filterOpacity は写真の見え方と文字の読みやすさの両方を決める。既定 0.9 は写真がほぼ見えない。⚠️ background-size:cover ＋ background-position:0 0 なので、PC（横長の帯）では画像の【上端】が、スマホ（縦長の帯）では画像の【左端】が見える。同じ写真でも見えている場所が違うので、明るいものを左や上中央に置くと、白い見出しが片方だけ読めなくなる。両方で測ること。⚠️ 列は BtnClm（1/2/3/4）。750px以下は BtnClmSp で決まり、既定は1列。2列にすると1件あたりの文字幅が約90px（14pxで6文字）しかなく、9文字のラベルは語の途中で割れる。ブロック自身が h2 40px 白・中央（titleText）を持つので、上に別の見出しブロックを重ねない。固定ページでは画面幅いっぱいに広がり、自前で上下64pxの padding を持つので前後にスペーサーを足さない。リンクには target=_blank と rel=noopener noreferrer が自動で付く。"
 	},
 	"attributes": {
 		"MaxWidth": { "type": "number", "default": 800, "aiHint": { "skip": true } },
@@ -65,7 +66,9 @@
 					"source": "attribute",
 					"selector": ".lw-link-list-1__icon",
 					"attribute": "data-icon"
-				}
+				},
+				"linkType": { "type": "string", "source": "attribute", "selector": ".lw-link-list-1__link", "attribute": "data-lw-link-type" },
+				"linkId": { "type": "string", "source": "attribute", "selector": ".lw-link-list-1__link", "attribute": "data-lw-link-id" }
 			},
 			"default": [
 				{ "text": "ホームページ", "link": "", "icon": "" },

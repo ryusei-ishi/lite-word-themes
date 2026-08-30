@@ -22,6 +22,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/shin-gas-station-01-fv-top/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./block.json */ "./src/shin-gas-station-01-fv-top/block.json");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -49,7 +55,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 /* フォント関連オプションを取得 */
 var fontOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontOptionsArr)();
 var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOptionsArr)();
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_7__.name, {
+var lwBlockDef = {
   /* --------------------------------------------------
    * 編集画面
    * -------------------------------------------------- */
@@ -578,7 +584,32 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOpti
       alt: "\u80CC\u666F\u753B\u50CF"
     })));
   }
-});
+};
+
+/* ------------------------------------------------------------------
+ * #1169（2026-08-27）既定値の他社CDN直リンクを自社素材に差し替えた。
+ * 既定値と同じ値はブロックコメントに書かれないので、既定値のまま使っている
+ * 既存ページは「保存HTMLは旧URL／ブロックは新しい既定値」で食い違う。
+ * 旧既定値を持った版を残して、開いて保存し直しても画像が入れ替わらないようにする。
+ * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
+ * ------------------------------------------------------------------ */
+var LW_1169_OLD = JSON.parse(JSON.stringify(_block_json__WEBPACK_IMPORTED_MODULE_7__.attributes));
+LW_1169_OLD.backgroundImage["default"] = "https://cdn.pixabay.com/photo/2013/10/14/10/37/froet-gas-195389_1280.jpg";
+
+/* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
+ *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の
+ *    大多数がこれ）がどの版にも当たらなくなる。だから既存の版それぞれについて
+ *    旧既定値を持たせた双子を作って先に並べる。元の版も残す（画像を自分で差し替えた人向け）。 */
+var lwPrev1169 = lwBlockDef.deprecated || [];
+lwBlockDef.deprecated = [{
+  attributes: LW_1169_OLD,
+  save: lwBlockDef.save
+}].concat(_toConsumableArray(lwPrev1169.map(function (d) {
+  return _objectSpread(_objectSpread({}, d), {}, {
+    attributes: LW_1169_OLD
+  });
+})), _toConsumableArray(lwPrev1169));
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_7__.name, lwBlockDef);
 
 /***/ }),
 
@@ -1289,7 +1320,7 @@ module.exports = window["wp"]["data"];
   \***************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-fv-top","version":"1.0.0","title":"FV（トップ用）shin shop pattern 01","category":"lw-firstview","icon":"cover-image","editorScript":"file:./shin-gas-station-01-fv-top.js","aiHint":{"description":"トップ用FV。PC/SP別テキスト完全分離。サブ+メイン+説明+背景画像。ショップテンプレート用","excludeFromAutoSelect":false,"contentAttributes":["subTitle","mainTitle","description"],"imageAttributes":["backgroundImage","backgroundImageSp"]},"supports":{"anchor":true},"no":15,"attributes":{"backgroundImage":{"type":"string","default":"https://cdn.pixabay.com/photo/2013/10/14/10/37/froet-gas-195389_1280.jpg"},"backgroundImageSp":{"type":"string","default":""},"subTitle":{"type":"string","default":"Drive freely live comfortably."},"mainTitle":{"type":"string","default":"自由に走り<br>快適に暮らす"},"subTitleSp":{"type":"string","default":""},"mainTitleSp":{"type":"string","default":""},"mainLineHeightSp":{"type":"string","default":""},"mainMarginTopSp":{"type":"string","default":""},"mainMarginBottomSp":{"type":"string","default":""},"mainFontSetSp":{"type":"string","default":""},"mainFontWeightSp":{"type":"string","default":""},"description":{"type":"string","default":"人々の車生活をより豊かにするためのソリューションをご提供"},"descriptionSp":{"type":"string","default":""},"filterBackgroundColor":{"type":"string","default":"#000000"},"filterOpacity":{"type":"number","default":0.1},"textColor":{"type":"string","default":"#fff"},"minHeightPc":{"type":"string","default":"min-h-pc-100vh-header-100"},"minHeightTb":{"type":"string","default":"min-h-tb-600px"},"minHeightSp":{"type":"string","default":"min-h-sp-480px"},"maxWidth":{"type":"number","default":2000}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-fv-top","version":"1.0.0","title":"FV（トップ用）shin shop pattern 01","category":"lw-firstview","icon":"cover-image","editorScript":"file:./shin-gas-station-01-fv-top.js","aiHint":{"description":"トップ用FV。PC/SP別テキスト完全分離。サブ+メイン+説明+背景画像。ショップテンプレート用","excludeFromAutoSelect":false,"contentAttributes":["subTitle","mainTitle","description"],"imageAttributes":["backgroundImage","backgroundImageSp"]},"supports":{"anchor":true},"no":15,"attributes":{"backgroundImage":{"type":"string","default":"https://lite-word.com/sample_img/shin/gas_station/bg_1.webp"},"backgroundImageSp":{"type":"string","default":""},"subTitle":{"type":"string","default":"Drive freely live comfortably."},"mainTitle":{"type":"string","default":"自由に走り<br>快適に暮らす"},"subTitleSp":{"type":"string","default":""},"mainTitleSp":{"type":"string","default":""},"mainLineHeightSp":{"type":"string","default":""},"mainMarginTopSp":{"type":"string","default":""},"mainMarginBottomSp":{"type":"string","default":""},"mainFontSetSp":{"type":"string","default":""},"mainFontWeightSp":{"type":"string","default":""},"description":{"type":"string","default":"人々の車生活をより豊かにするためのソリューションをご提供"},"descriptionSp":{"type":"string","default":""},"filterBackgroundColor":{"type":"string","default":"#000000"},"filterOpacity":{"type":"number","default":0.1},"textColor":{"type":"string","default":"#fff"},"minHeightPc":{"type":"string","default":"min-h-pc-100vh-header-100"},"minHeightTb":{"type":"string","default":"min-h-tb-600px"},"minHeightSp":{"type":"string","default":"min-h-sp-480px"},"maxWidth":{"type":"number","default":2000}}}');
 
 /***/ })
 

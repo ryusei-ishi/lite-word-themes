@@ -220,7 +220,8 @@
 }
 @media (max-width: 700px) {
   .paid-block-fv-12 .fv_inner > h2 {
-    font-size: 32px !important;
+    /* 🚨 2026-08-26: 375px 幅だと 10文字で右端ぎりぎり。画面幅からも上限をかける */
+    font-size: min(32px, 7.6vw) !important;
   }
 }
 .paid-block-fv-12 .fv_inner .cta_wrap {

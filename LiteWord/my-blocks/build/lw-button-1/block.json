@@ -32,6 +32,18 @@
 			"default": "",
 			"aiHint": { "role": "url", "contentGuide": "遷移先URL。#contact や /about/ 等" }
 		},
+		"linkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"pageId": {
+			"type": "number",
+			"default": 0
+		},
+		"categoryId": {
+			"type": "number",
+			"default": 0
+		},
 		"openInNewTab": { "type": "boolean", "default": false, "aiHint": { "skip": true } },
 		"fontSize": { "type": "number", "default": 100, "aiHint": { "skip": true } },
 		"maxWidth": { "type": "number", "default": 240, "aiHint": { "skip": true } },

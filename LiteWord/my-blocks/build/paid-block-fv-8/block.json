@@ -10,8 +10,20 @@
 	"aiHint": {
 		"description": "テキスト重視FV。メインタイトル+サブ+リード+ポイント3つ+ボトムテキスト。背景画像付き。情報量多い業種に",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["mainTitle", "subTitle", "leadText", "listItem_1", "listItem_2", "listItem_3", "bottomText"],
-		"imageAttributes": ["backgroundImagePc", "backgroundImageSp"]
+		"contentAttributes": [
+			"mainTitle",
+			"subTitle",
+			"leadText",
+			"listItem_1",
+			"listItem_2",
+			"listItem_3",
+			"bottomText"
+		],
+		"imageAttributes": [
+			"backgroundImagePc",
+			"backgroundImageSp"
+		],
+		"notes": "🚨 listItem_1〜3 は丸いバッジ。「2文字＋改行＋2文字」で書く（既定値が \"最短\\n即日\"）。5文字以上の言葉を入れると丸からはみ出す。🚨 PointText_1〜3 は右下の丸メダルの3点セットで、1=ラベル（例 お客様満足度）／2=数値（例 98）／3=単位（例 点）。バラバラの言葉を3つ入れると意味が通らない見た目になる。出したくないときは showPoint を false に。"
 	},
 	"supports": {
 		"anchor": true

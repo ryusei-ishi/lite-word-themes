@@ -379,8 +379,26 @@ function lw_auto_fetch_templates_on_login( $user_login, $user ) {
 class LwTemplateSetting {
 
     private $table_name;
-    private $all_settings = null;        // 全データのキャッシュ
-    private $active_settings = null;     // active = 1 のデータキャッシュ
+
+    /* ------------------------------------------------------------------
+     * キャッシュはインスタンスではなくクラス（＝1リクエスト）で持つ。
+     *   new LwTemplateSetting() がテーマ全体で25箇所あり、インスタンス単位だと
+     *   同じ SELECT * FROM wp_lw_template_setting が1リクエストで21回走っていた。
+     * 🚨 テーブルを書き換えたら必ず LwTemplateSetting::flush_cache() を呼ぶこと。
+     *    呼び忘れると、保存直後に古い値を返す（試用期間の判定・ブロックの解放判定が狂う）。
+     *    現在の呼び出し元: save_template_setting() / lw_check_trial_popup.php（4箇所）/
+     *    lw_template_activate.php の TRUNCATE
+     * ---------------------------------------------------------------- */
+    private static $all_settings = null;        // 全データのキャッシュ
+    private static $active_settings = null;     // active = 1 のデータキャッシュ
+
+    /**
+     * キャッシュを捨てる（テーブルを書き換えた直後に必ず呼ぶ）
+     */
+    public static function flush_cache() {
+        self::$all_settings    = null;
+        self::$active_settings = null;
+    }
 
     public function __construct() {
         global $wpdb;
@@ -430,32 +448,32 @@ class LwTemplateSetting {
      * lw_template_setting テーブルの全データを [template_id => row] 形式で取得（キャッシュ付き）
      */
     public function get_all_settings_assoc() {
-        if ($this->all_settings === null) {
+        if (self::$all_settings === null) {
             global $wpdb;
             $results = $wpdb->get_results("SELECT * FROM {$this->table_name}", ARRAY_A);
             $assoc = [];
             foreach ($results as $row) {
                 $assoc[$row['template_id']] = $row;
             }
-            $this->all_settings = $assoc;
+            self::$all_settings = $assoc;
         }
-        return $this->all_settings;
+        return self::$all_settings;
     }
 
     /**
      * active_flag = 1 のデータを [template_id => row] 形式で取得（キャッシュ付き）
      */
     public function get_active_templates_assoc() {
-        if ($this->active_settings === null) {
+        if (self::$active_settings === null) {
             global $wpdb;
             $results = $wpdb->get_results("SELECT * FROM {$this->table_name} WHERE active_flag = 1", ARRAY_A);
             $assoc = [];
             foreach ($results as $row) {
                 $assoc[$row['template_id']] = $row;
             }
-            $this->active_settings = $assoc;
+            self::$active_settings = $assoc;
         }
-        return $this->active_settings;
+        return self::$active_settings;
     }
 
     /**
@@ -474,9 +492,8 @@ class LwTemplateSetting {
             array('%s', '%s', '%d')
         );
 
-        // キャッシュリセット
-        $this->all_settings = null;
-        $this->active_settings = null;
+        // キャッシュリセット（クラス全体）
+        self::flush_cache();
 
         return $result !== false;
     }
@@ -547,7 +564,10 @@ function lw_active_page_template() {
     foreach ($LwTemplateItems as $item) {
         // 有料テンプレートのみを処理
         if (isset($item['item_detail']) && !empty($item['item_detail']['paid']) && $item['item_detail']['paid'] === true) {
-            $template_id = $item['item_detail']['template_id'];
+            // 🚨 template_id が無い有料アイテムがあると Undefined array key の Warning が出る（2026-08-26）。
+            //    無ければ商品ではないので、この関数の対象から外す
+            $template_id = $item['item_detail']['template_id'] ?? '';
+            if ( $template_id === '' ) { continue; }
             $block_used = $item['item_detail']['block_used'] ?? []; // block_usedが存在しない場合は空配列
             
             // template_idがデータベースに存在し、active_flag = 1（購入済み）かをチェック

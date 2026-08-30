@@ -20,6 +20,10 @@ import {
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS = { url: 'btnUrl', type: 'btnLinkType', page: 'btnPageId', category: 'btnCategoryId' };
 
 /* ───────── オプション配列 ───────── */
 const fontOptions       = fontOptionsArr();
@@ -68,6 +72,10 @@ registerBlockType(metadata.name, {
 							value={ btnUrl }
 							onChange={ v => setAttributes({ btnUrl: v }) }
 							help="ボタンをクリックした時の移動先URLを入力してください"
+						/>
+						<LinkPicker
+						    link={lwLinkFromAttrs(attributes, LINK_KEYS)}
+						    onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}
 						/>
 						<ToggleControl
 							label="新しいタブで開く"
@@ -283,6 +291,8 @@ registerBlockType(metadata.name, {
 						className="a"
 						value={ btnText }
 						href={ btnUrl }
+						data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkType}
+						data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkId}
 						target={ openNewTab ? '_blank' : undefined }
 						rel={ openNewTab ? 'noopener noreferrer' : undefined }
 						style={{ color:textColor, fontWeight }}

@@ -21,6 +21,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./style.scss */ "./src/fv-4/style.scss");
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./editor.scss */ "./src/fv-4/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./block.json */ "./src/fv-4/block.json");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
 
 
 
@@ -29,6 +35,22 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+/**
+ * 文字サイズの CSS 変数を組み立てる。
+ * 値が 0（未設定）のものは何も返さないので、既定のままのブロックは
+ * 保存される HTML がこれまでと 1 バイトも変わらない（＝既存ページが無効にならない）。
+ */
+function fvSizeVars(a) {
+  var v = {};
+  if (a.mainFontSizePc) v['--fv4-main-pc'] = "".concat(a.mainFontSizePc, "px");
+  if (a.mainFontSizeTb) v['--fv4-main-tb'] = "".concat(a.mainFontSizeTb, "px");
+  if (a.mainFontSizeSp) v['--fv4-main-sp'] = "".concat(a.mainFontSizeSp, "px");
+  if (a.subFontSizePc) v['--fv4-sub-pc'] = "".concat(a.subFontSizePc, "px");
+  if (a.subFontSizeTb) v['--fv4-sub-tb'] = "".concat(a.subFontSizeTb, "px");
+  if (a.subFontSizeSp) v['--fv4-sub-sp'] = "".concat(a.subFontSizeSp, "px");
+  return v;
+}
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_7__.name, {
   /* --------------------------------------------------
    * 編集画面
@@ -50,7 +72,13 @@ __webpack_require__.r(__webpack_exports__);
       maxWidth = attributes.maxWidth,
       textAlignPc = attributes.textAlignPc,
       textAlignSp = attributes.textAlignSp,
-      headingLevel = attributes.headingLevel;
+      headingLevel = attributes.headingLevel,
+      mainFontSizePc = attributes.mainFontSizePc,
+      mainFontSizeTb = attributes.mainFontSizeTb,
+      mainFontSizeSp = attributes.mainFontSizeSp,
+      subFontSizePc = attributes.subFontSizePc,
+      subFontSizeTb = attributes.subFontSizeTb,
+      subFontSizeSp = attributes.subFontSizeSp;
 
     // useBlockPropsは条件付きreturnの前に呼ぶ（Reactフックのルール）
     var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
@@ -222,6 +250,104 @@ __webpack_require__.r(__webpack_exports__);
       max: 1600,
       step: 8
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u6587\u5B57\u30B5\u30A4\u30BA\u8A2D\u5B9A",
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement("p", {
+      style: {
+        fontSize: '12px',
+        color: '#666',
+        marginTop: 0,
+        lineHeight: 1.6
+      }
+    }, "\u7A7A\u6B04\u306E\u307E\u307E\u306A\u3089\u4ECA\u307E\u3067\u3069\u304A\u308A\u306E\u5927\u304D\u3055\u3067\u3059\u3002\u30BF\u30A4\u30C8\u30EB\u304C\u9577\u304F\u3066 \u30B9\u30DE\u30DB\u3067\u4F55\u884C\u306B\u3082\u6298\u308A\u8FD4\u3057\u3066\u3057\u307E\u3046\u3068\u304D\u3060\u3051\u4E0B\u3052\u3066\u304F\u3060\u3055\u3044\u3002 \u3082\u3068\u306B\u623B\u3059\u3068\u304D\u306F\u5404\u9805\u76EE\u306E\u300C\u30EA\u30BB\u30C3\u30C8\u300D\u3092\u62BC\u3057\u307E\u3059\u3002"), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '20px 0 4px',
+        fontWeight: 600
+      }
+    }, "\u30E1\u30A4\u30F3\u30BF\u30A4\u30C8\u30EB"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u30D1\u30BD\u30B3\u30F3",
+      value: mainFontSizePc || undefined,
+      onChange: function onChange(value) {
+        return setAttributes({
+          mainFontSizePc: value ? value : 0
+        });
+      },
+      min: 16,
+      max: 120,
+      step: 1,
+      allowReset: true,
+      help: mainFontSizePc ? '' : '空欄＝これまでどおり（72px）'
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u30BF\u30D6\u30EC\u30C3\u30C8",
+      value: mainFontSizeTb || undefined,
+      onChange: function onChange(value) {
+        return setAttributes({
+          mainFontSizeTb: value ? value : 0
+        });
+      },
+      min: 16,
+      max: 120,
+      step: 1,
+      allowReset: true,
+      help: mainFontSizeTb ? '' : '空欄＝これまでどおり（64px・狭いと56px）'
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u30B9\u30DE\u30DB",
+      value: mainFontSizeSp || undefined,
+      onChange: function onChange(value) {
+        return setAttributes({
+          mainFontSizeSp: value ? value : 0
+        });
+      },
+      min: 12,
+      max: 80,
+      step: 1,
+      allowReset: true,
+      help: mainFontSizeSp ? '' : '空欄＝これまでどおり（48px）'
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '24px 0 4px',
+        fontWeight: 600
+      }
+    }, "\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u30D1\u30BD\u30B3\u30F3",
+      value: subFontSizePc || undefined,
+      onChange: function onChange(value) {
+        return setAttributes({
+          subFontSizePc: value ? value : 0
+        });
+      },
+      min: 10,
+      max: 48,
+      step: 1,
+      allowReset: true,
+      help: subFontSizePc ? '' : '空欄＝これまでどおり（24px）'
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u30BF\u30D6\u30EC\u30C3\u30C8",
+      value: subFontSizeTb || undefined,
+      onChange: function onChange(value) {
+        return setAttributes({
+          subFontSizeTb: value ? value : 0
+        });
+      },
+      min: 10,
+      max: 48,
+      step: 1,
+      allowReset: true,
+      help: subFontSizeTb ? '' : '空欄＝これまでどおり（18px）'
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u30B9\u30DE\u30DB",
+      value: subFontSizeSp || undefined,
+      onChange: function onChange(value) {
+        return setAttributes({
+          subFontSizeSp: value ? value : 0
+        });
+      },
+      min: 8,
+      max: 40,
+      step: 1,
+      allowReset: true,
+      help: subFontSizeSp ? '' : '空欄＝これまでどおり（16px）'
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: "\u914D\u7F6E\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement("p", null, "PC \u8868\u793A"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
       value: textAlignPc,
@@ -259,9 +385,9 @@ __webpack_require__.r(__webpack_exports__);
       }
     }))), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
       className: "fv-4_inner ".concat(textAlignPc, " ").concat(textAlignSp),
-      style: {
+      style: _objectSpread({
         maxWidth: maxWidth
-      }
+      }, fvSizeVars(attributes))
     }, /*#__PURE__*/React.createElement(TagName, {
       style: {
         color: textColor
@@ -338,16 +464,22 @@ __webpack_require__.r(__webpack_exports__);
       maxWidth = attributes.maxWidth,
       textAlignPc = attributes.textAlignPc,
       textAlignSp = attributes.textAlignSp,
-      headingLevel = attributes.headingLevel;
+      headingLevel = attributes.headingLevel,
+      mainFontSizePc = attributes.mainFontSizePc,
+      mainFontSizeTb = attributes.mainFontSizeTb,
+      mainFontSizeSp = attributes.mainFontSizeSp,
+      subFontSizePc = attributes.subFontSizePc,
+      subFontSizeTb = attributes.subFontSizeTb,
+      subFontSizeSp = attributes.subFontSizeSp;
     var TagName = "h".concat(headingLevel);
     var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
       className: "fv-4 ".concat(minHeightPc, " ").concat(minHeightTb, " ").concat(minHeightSp)
     });
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
       className: "fv-4_inner ".concat(textAlignPc, " ").concat(textAlignSp),
-      style: {
+      style: _objectSpread({
         maxWidth: maxWidth
-      }
+      }, fvSizeVars(attributes))
     }, /*#__PURE__*/React.createElement(TagName, {
       className: "ttl",
       style: {
@@ -1105,7 +1237,7 @@ module.exports = window["wp"]["data"];
   \*****************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/fv-4","version":"1.0.0","title":"固定ページタイトル 04（トップ用）","category":"lw-firstview","icon":"cover-image","editorScript":"file:./fv-4.js","supports":{"anchor":true},"aiHint":{"description":"コーポレート・士業向けFV。左寄せテキスト+背景色or画像。情報量が多い業種に最適","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle","description"],"imageAttributes":["backgroundImage"]},"attributes":{"backgroundImage":{"type":"string","default":"","aiHint":{"role":"image","note":"背景画像URL。色ベタ塗りにする場合は空でOK"}},"backgroundImageSp":{"type":"string","default":"","aiHint":{"skip":true}},"mainTitle":{"type":"string","default":"Lite Word","aiHint":{"role":"heading","contentGuide":"サービス名 or キャッチコピー。5〜20文字","example":"ビジネスを加速する"}},"subTitle":{"type":"string","default":"軽量で簡単なWordPressテーマ","aiHint":{"role":"subheading","contentGuide":"英語表記 or サブキャッチ","example":"CONSULTING SERVICE"}},"description":{"type":"string","default":"デザイナーとプログラマーが共同で開発した\\nコーポレートサイトやオウンドメディアに最適なテーマ","aiHint":{"role":"body","contentGuide":"サービス概要を1〜3文で。30〜80文字。改行可","example":"20年の実績で、お客様のビジネス課題を\\n戦略立案から実行まで一貫してサポートします"}},"filterBackgroundColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"filterOpacity":{"type":"number","default":1,"aiHint":{"skip":true}},"textColor":{"type":"string","default":"#fff","aiHint":{"skip":true}},"minHeightPc":{"type":"string","default":"min-h-pc-480px","aiHint":{"skip":true}},"minHeightTb":{"type":"string","default":"min-h-tb-400px","aiHint":{"skip":true}},"minHeightSp":{"type":"string","default":"min-h-sp-360px","aiHint":{"skip":true}},"maxWidth":{"type":"number","default":1040,"aiHint":{"skip":true}},"textAlignPc":{"type":"string","default":"pc_left","aiHint":{"skip":true}},"textAlignSp":{"type":"string","default":"sp_left","aiHint":{"skip":true}},"headingLevel":{"type":"number","default":1,"aiHint":{"skip":true}}},"no":4}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/fv-4","version":"1.0.0","title":"固定ページタイトル 04（トップ用）","category":"lw-firstview","icon":"cover-image","editorScript":"file:./fv-4.js","supports":{"anchor":true},"aiHint":{"description":"コーポレート・士業向けFV。左寄せテキスト+背景色or画像。情報量が多い業種に最適","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle","description"],"imageAttributes":["backgroundImage"]},"attributes":{"backgroundImage":{"type":"string","default":"","aiHint":{"role":"image","note":"背景画像URL。色ベタ塗りにする場合は空でOK"}},"backgroundImageSp":{"type":"string","default":"","aiHint":{"skip":true}},"mainTitle":{"type":"string","default":"Lite Word","aiHint":{"role":"heading","contentGuide":"サービス名 or キャッチコピー。5〜20文字","example":"ビジネスを加速する"}},"subTitle":{"type":"string","default":"軽量で簡単なWordPressテーマ","aiHint":{"role":"subheading","contentGuide":"英語表記 or サブキャッチ","example":"CONSULTING SERVICE"}},"description":{"type":"string","default":"デザイナーとプログラマーが共同で開発した\\nコーポレートサイトやオウンドメディアに最適なテーマ","aiHint":{"role":"body","contentGuide":"サービス概要を1〜3文で。30〜80文字。改行可","example":"20年の実績で、お客様のビジネス課題を\\n戦略立案から実行まで一貫してサポートします"}},"filterBackgroundColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"filterOpacity":{"type":"number","default":1,"aiHint":{"skip":true}},"textColor":{"type":"string","default":"#fff","aiHint":{"skip":true}},"minHeightPc":{"type":"string","default":"min-h-pc-480px","aiHint":{"skip":true}},"minHeightTb":{"type":"string","default":"min-h-tb-400px","aiHint":{"skip":true}},"minHeightSp":{"type":"string","default":"min-h-sp-360px","aiHint":{"skip":true}},"maxWidth":{"type":"number","default":1040,"aiHint":{"skip":true}},"textAlignPc":{"type":"string","default":"pc_left","aiHint":{"skip":true}},"textAlignSp":{"type":"string","default":"sp_left","aiHint":{"skip":true}},"mainFontSizePc":{"type":"number","default":0,"aiHint":{"skip":true,"note":"メインタイトルの文字サイズ(px)・PC。0は未設定で既定の72px"}},"mainFontSizeTb":{"type":"number","default":0,"aiHint":{"skip":true,"note":"メインタイトルの文字サイズ(px)・タブレット。0は未設定で既定の64px"}},"mainFontSizeSp":{"type":"number","default":0,"aiHint":{"skip":true,"note":"メインタイトルの文字サイズ(px)・スマホ。0は未設定で既定の56/48px"}},"subFontSizePc":{"type":"number","default":0,"aiHint":{"skip":true,"note":"サブタイトルの文字サイズ(px)・PC。0は未設定で既定の24px"}},"subFontSizeTb":{"type":"number","default":0,"aiHint":{"skip":true,"note":"サブタイトルの文字サイズ(px)・タブレット。0は未設定で既定の18px"}},"subFontSizeSp":{"type":"number","default":0,"aiHint":{"skip":true,"note":"サブタイトルの文字サイズ(px)・スマホ。0は未設定で既定の18/16px"}},"headingLevel":{"type":"number","default":1,"aiHint":{"skip":true}}},"no":4}');
 
 /***/ })
 

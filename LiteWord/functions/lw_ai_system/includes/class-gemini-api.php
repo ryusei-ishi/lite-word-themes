@@ -774,6 +774,66 @@ class LW_AI_Generator_Gemini_API {
     }
 
     /**
+     * AI が返した WordPress 標準ブロックの「入れ物」を外す。
+     *
+     * 🚨 2026-08-26 に staff セクションで実際に起きた（#1120）。
+     *    purpose.json で候補を5つ渡しているのに、AI が core/columns を土台にして
+     *    その中に paid-block-image-1 を3つ並べる形を自作した。
+     *    テーマのデザインから外れるうえ、カラム幅や余白もテーマの設計と合わない。
+     *
+     *    プロンプト側でも core/* を禁止したが、生成AIの出力は保証できないので
+     *    ここでも外す。**入れ物だけを外し、中のブロックはそのまま残す**ので内容は失われない。
+     *
+     * @param array $blocks ブロック配列
+     * @param int   $depth  再帰の深さ（壊れたJSONで無限に潜らないための保険）
+     * @return array
+     */
+    private static function unwrap_core_containers( $blocks, $depth = 0 ) {
+        if ( ! is_array( $blocks ) || $depth > 5 ) {
+            return $blocks;
+        }
+
+        // 中身を持つだけの「入れ物」。見た目を持つ core/image 等は対象にしない
+        // （消すと内容が失われるため。そちらはプロンプト側の禁止に任せる）
+        $containers = array( 'core/columns', 'core/column', 'core/group', 'core/row', 'core/stack' );
+
+        $out = array();
+        foreach ( $blocks as $block ) {
+            if ( ! is_array( $block ) ) {
+                $out[] = $block;
+                continue;
+            }
+
+            $name = '';
+            if ( isset( $block['blockName'] ) ) {
+                $name = $block['blockName'];
+            } elseif ( isset( $block['name'] ) ) {
+                $name = $block['name'];
+            }
+
+            $inner = ( isset( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) )
+                ? self::unwrap_core_containers( $block['innerBlocks'], $depth + 1 )
+                : array();
+
+            if ( in_array( $name, $containers, true ) ) {
+                error_log( '[LW AI] 生成結果から ' . $name . ' の入れ物を外しました（中の '
+                    . count( $inner ) . ' ブロックはそのまま残します）' );
+                foreach ( $inner as $child ) {
+                    $out[] = $child;
+                }
+                continue;
+            }
+
+            if ( isset( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {
+                $block['innerBlocks'] = $inner;
+            }
+            $out[] = $block;
+        }
+
+        return $out;
+    }
+
+    /**
      * ブロックのキー名を正規化（name → blockName）
      *
      * @param array $blocks ブロック配列
@@ -812,10 +872,16 @@ class LW_AI_Generator_Gemini_API {
      * @param array $overrides 上書きするコンテンツ
      * @return array 更新されたブロック配列
      */
-    private static function apply_content_overrides( $blocks, $overrides ) {
+    private static function apply_content_overrides( $blocks, $overrides, &$done = null ) {
         if ( empty( $overrides ) || ! is_array( $blocks ) ) {
             return $blocks;
         }
+
+        // 🚨 2026-08-29: 文字列の上書きは「最初に一致した1ブロックだけ」に当てる。
+        //    それまでは同じ値が innerBlocks まで含めた全ブロックに書き込まれていたため、
+        //    見出しも段落も全部同じ文になっていた（pr_staff_1 は3人とも同じ名前になっていた）。
+        //    $done は木全体で1つ。再帰にも同じものを渡す。画像のキーは対象外（従来どおり）。
+        if ( $done === null ) { $done = array(); }
 
         // ★★★ 複数ブロックテンプレート対応 ★★★
         // contentBlocks / sections 配列がある場合、同じタイプのブロックに順番に適用
@@ -891,6 +957,10 @@ class LW_AI_Generator_Gemini_API {
 
             $block_name = isset( $block['blockName'] ) ? $block['blockName'] : ( isset( $block['name'] ) ? $block['name'] : '' );
 
+            // 🚨 2026-08-29: core/html は中身がHTMLの塊（地図の iframe など）。
+            //    content という属性名がテキストの上書きと衝突して、地図が文章に置き換わっていた。
+            $is_raw_html = ( $block_name === 'core/html' );
+
             // 各オーバーライドキーをチェック
             foreach ( $overrides as $override_key => $override_value ) {
                 // items, contentsは別途処理
@@ -902,9 +972,16 @@ class LW_AI_Generator_Gemini_API {
                     continue;
                 }
 
+                // 🚨 画像のキーだけは従来どおり（全ブロックに足す）。文字列のキーは1回だけ。
+                $is_image_key = in_array( $override_key, $image_attrs, true );
+                if ( ! $is_image_key && ( $is_raw_html || isset( $done[ $override_key ] ) ) ) {
+                    continue;
+                }
+
                 // 直接一致する属性があれば最優先で上書き
                 if ( array_key_exists( $override_key, $block['attributes'] ) ) {
                     $block['attributes'][ $override_key ] = $override_value;
+                    if ( ! $is_image_key ) { $done[ $override_key ] = true; }
                     continue;
                 }
 
@@ -920,6 +997,7 @@ class LW_AI_Generator_Gemini_API {
                     foreach ( $text_attr_mapping[ $override_key ] as $attr_name ) {
                         if ( array_key_exists( $attr_name, $block['attributes'] ) ) {
                             $block['attributes'][ $attr_name ] = $override_value;
+                            $done[ $override_key ] = true;
                             $applied = true;
                             break;
                         }
@@ -1124,7 +1202,7 @@ class LW_AI_Generator_Gemini_API {
 
             // innerBlocksも再帰的に処理
             if ( isset( $block['innerBlocks'] ) && is_array( $block['innerBlocks'] ) ) {
-                $block['innerBlocks'] = self::apply_content_overrides( $block['innerBlocks'], $overrides );
+                $block['innerBlocks'] = self::apply_content_overrides( $block['innerBlocks'], $overrides, $done );
             }
         }
         unset( $block );
@@ -1300,7 +1378,52 @@ COLORS;
             }
         }
 
-        return array_keys( $names );
+        return self::filter_by_enabled_blocks( array_keys( $names ) );
+    }
+
+    /**
+     * 管理画面「AIが使用するブロック」の選択で候補を絞る。
+     *
+     * 🚨 2026-08-27 まで、この設定は生成経路で一度も読まれていなかった（#1121）。
+     *    画面でチェックを変えても生成結果が変わらない＝設定が効いていない状態だった。
+     *    （唯一の読み手 get_block_definitions() は生成の本線から呼ばれていない）
+     *
+     * 絞らない場合が2つある。どちらも「生成そのものが止まる」ほうが害が大きいため:
+     *   ① 設定が空 … 一度も選んでいない状態。既定は全部オフなので、これを
+     *      「1つも使わせない」と解釈すると初期状態で生成できなくなる
+     *   ② 絞った結果が空 … 選んだブロックが purpose.json の候補と1つも重ならない場合
+     *
+     * @param array $names purpose.json から集めたブロック名（wdl/fv-1 の形）
+     * @return array
+     */
+    private static function filter_by_enabled_blocks( $names ) {
+        if ( empty( $names ) || ! class_exists( 'LW_AI_Generator_Block_Settings' ) ) {
+            return $names;
+        }
+
+        $enabled = LW_AI_Generator_Block_Settings::get_enabled_block_slugs();
+        if ( empty( $enabled ) || ! is_array( $enabled ) ) {
+            return $names;   // ① 一度も選んでいない
+        }
+
+        // ⚠️ 設定は slug（fv-1）、候補はブロック名（wdl/fv-1）。そのままでは突き合わない
+        $allowed = array();
+        foreach ( LW_AI_Generator_Block_Settings::get_all_blocks() as $block ) {
+            if ( empty( $block['slug'] ) || empty( $block['name'] ) ) {
+                continue;
+            }
+            if ( in_array( $block['slug'], $enabled, true ) ) {
+                $allowed[] = $block['name'];
+            }
+        }
+
+        $filtered = array_values( array_intersect( $names, $allowed ) );
+        if ( empty( $filtered ) ) {
+            error_log( '[LW AI] 「AIが使用するブロック」の選択が用途別の候補と1つも重ならないため、絞り込みを適用しませんでした' );
+            return $names;   // ② 重なりゼロ
+        }
+
+        return $filtered;
     }
 
     /**
@@ -2630,6 +2753,9 @@ PROMPT;
         // 直接ブロックでもテンプレートデフォルト値をクリア（AIがプレースホルダーをコピーする場合がある）
         $blocks = self::clear_template_defaults( $blocks );
 
+        // AI が WordPress 標準の入れ物で自作したときに外す（#1120）
+        $blocks = self::unwrap_core_containers( $blocks );
+
         // filterColorの不透明度をキャップ（背景画像が見えなくなるのを防止）
         $blocks = self::cap_filter_opacity( $blocks );
 
@@ -2864,7 +2990,20 @@ CONSTRAINTS;
                 $blocks_guide .= "{$priority}. ブロック名: `{$block_name}` — {$description}\n";
                 $priority++;
             }
-            $blocks_guide .= "\n**★絶対禁止★**: 上記リストに**ない**ブロック（例: lw-bg-1, lw-step-2, paid-block-content-3 等）は使わないでください。\n";
+            $allowed_names = implode( ' / ', array_keys( $purpose_info['blocks'] ) );
+            $blocks_guide .= "\n**★絶対禁止★**: 上記リストに**ない**ブロックは使わないでください。\n";
+            $blocks_guide .= "`blockName` に書いてよいのは次のどれか**だけ**です: {$allowed_names}\n";
+            // 🚨 2026-08-26 に staff セクションで実際に起きた（#1120）:
+            //    候補5つを渡しているのに core/columns + paid-block-image-1 を自前で組み立てた。
+            //    従来の禁止文は LiteWord のブロック名しか例示しておらず、
+            //    AI が core/* を「レイアウトの土台」とみなして候補の枠外だと解釈していた。
+            $blocks_guide .= "\n**★WordPress標準ブロックの使用も禁止★**\n";
+            $blocks_guide .= "`core/columns` `core/group` `core/image` `core/heading` `core/paragraph` など "
+                . "`core/` で始まるブロックは**一切使わないでください**。\n";
+            $blocks_guide .= "複数カラムの並びや、写真＋名前＋紹介文のカードは、上のリストのブロックが"
+                . "**最初から中に持っています**。標準ブロックを組み合わせて自作する必要はありません。\n";
+            $blocks_guide .= "リストのブロックだけでは表現しきれない場合も、**最も近いものを1つ選んでください**"
+                . "（自作するとテーマのデザインから外れます）。\n";
         }
 
         $purpose_label = isset( $purpose_info['label'] ) ? $purpose_info['label'] : $section_type;
@@ -6120,9 +6259,30 @@ PROMPT;
                 if ( ! empty( $image_jobs ) ) {
                     $job_urls    = array_keys( $image_jobs );
                     $job_prompts = array_values( $image_jobs );
+
+                    // 🔒 枚数の歯止め（1リクエスト上限／1日上限）。ここは1回3枚までだが
+                    //    日次の枠を消費していなかったため、繰り返せば無制限に叩けた。
+                    //    ⚠ 上限超過はエラーにしない。置換せず picsum のURLを残す＝従来の生成失敗と同じ状態。
+                    //    ⚠ 関数が無い環境（部分デプロイ等）では絞らず従来どおり動かす。
+                    $wanted  = count( $job_prompts );
+                    $allowed = function_exists( 'lw_ai_system_reserve_image_slots' )
+                        ? lw_ai_system_reserve_image_slots( $wanted )
+                        : $wanted;
+                    if ( $allowed < $wanted ) {
+                        self::debug_log( '[LW MyParts Gemini] ステップ3: 枚数上限のため ' . ( $wanted - $allowed ) . '枚をスキップ' );
+                        $job_urls    = array_slice( $job_urls, 0, $allowed );
+                        $job_prompts = array_slice( $job_prompts, 0, $allowed );
+                    }
+                    if ( empty( $job_prompts ) ) {
+                        $generated_urls = array();
+                        $job_urls       = array();
+                    }
+
                     self::debug_log( '[LW MyParts Gemini] ステップ3: ' . count( $job_prompts ) . '枚を並列生成...' );
 
-                    $generated_urls = self::generate_images_batch( $job_prompts );
+                    if ( ! empty( $job_prompts ) ) {
+                        $generated_urls = self::generate_images_batch( $job_prompts );
+                    }
 
                     foreach ( $job_urls as $i => $full_url ) {
                         $g = isset( $generated_urls[ $i ] ) ? $generated_urls[ $i ] : null;

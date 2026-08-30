@@ -1,0 +1,66 @@
+{
+  "title": "お問い合わせ（2つの入口・無料相談と資料請求）",
+  "description": "【型C：写真が主役】画面いっぱいの帯を左右に割って、「いますぐ相談したい方」と「まず資料で検討したい方」の2つの入口を並べます。ページの一番下や、料金・サービスを読み終えたところに置いてください。行き先が1つのCTA（お問い合わせCTA）で止まってしまう、まだ迷っている方を受けるためのものです。下に「3つのお約束」の枠を付けて、問い合わせる前の不安を先に消しています。🚨 リンク先は仮に /contact/ と /document/ を入れてあります。実際のページのURLに変更してください（空にすると押してもページの先頭に戻るだけになります）。🚨 お約束の3行は自社で必ず守れる内容に書き換えてください。",
+  "blocks": [
+    {
+      "name": "wdl/paid-block-cta-4",
+      "attributes": {
+        "mainTitle1": "無料で相談する",
+        "subTitle1": "CONSULTATION",
+        "desc1": "30分ほどお話をうかがい、進め方と費用の目安をお伝えします。オンラインでも承ります。",
+        "btnText1": "相談を申し込む",
+        "linkUrl1": "/contact/",
+        "backgroundImage1": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/choice_01.webp",
+        "filterColor1": "var(--color-main)",
+        "filterOpacity1": 70,
+        "bgColor1": "#ffffff",
+        "textColor1": "var(--color-main)",
+        "mainTitle2": "資料を受け取る",
+        "subTitle2": "DOCUMENT",
+        "desc2": "サービスの内容と料金の目安をまとめた資料をお送りします。検討を始めたばかりの方へ。",
+        "btnText2": "資料を請求する",
+        "linkUrl2": "/document/",
+        "backgroundImage2": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/choice_02.webp",
+        "filterColor2": "#333f4a",
+        "filterOpacity2": 65,
+        "bgColor2": "#ffffff",
+        "textColor2": "#333f4a"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お問い合わせの前に、3つのお約束です。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-4",
+      "attributes": {
+        "contents": [
+          {
+            "text": "ご相談だけでも構いません。無理な勧誘はいたしません"
+          },
+          {
+            "text": "お見積もりは無料。着手前に金額をご確認いただきます"
+          },
+          {
+            "text": "お問い合わせは24時間受付。翌営業日までにご返信します"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

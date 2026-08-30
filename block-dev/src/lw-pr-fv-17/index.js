@@ -43,6 +43,8 @@ registerBlockType(metadata.name, {
 			filterBackgroundColor,
 			filterOpacity,
 			textColor,
+			breadcrumbColorPc,
+			breadcrumbColorSp,
 			minHeightPc,
 			minHeightTb,
 			minHeightSp,
@@ -352,6 +354,26 @@ registerBlockType(metadata.name, {
 							value={ textColor }
 							onChange={ color => setAttributes( { textColor: color } ) }
 						/>
+					</PanelBody>
+
+					{/* パンくずリストの色 */}
+					<PanelBody title="パンくずリストの色" initialOpen={ false }>
+						<p>PC</p>
+						<ColorPalette
+							value={ breadcrumbColorPc }
+							onChange={ color => setAttributes( { breadcrumbColorPc: color || '' } ) }
+						/>
+						<p>スマートフォン</p>
+						<ColorPalette
+							value={ breadcrumbColorSp }
+							onChange={ color => setAttributes( { breadcrumbColorSp: color || '' } ) }
+						/>
+						<p style={ { marginTop: "12px", fontSize: "12px", lineHeight: 1.7, color: "#757575" } }>
+							空のままなら、今までどおりサイトカラーで表示されます。<br />
+							PCではパンくずが写真の上に重なるので、暗い写真のときは明るい色にしてください。<br />
+							⚠️ スマホではパンくずが写真の外（下）に出ます。PCとスマホは連動しないので、スマホ側も変えたいときは別に指定してください。<br />
+							なお「HOME」だけになるページでは、パンくず自体が表示されません。
+						</p>
 					</PanelBody>
 
 					{/* 高さ設定 */}

@@ -39,7 +39,7 @@
 		},
 		"comment3ImageUrl": {
 			"type": "string",
-			"default": "https://placehold.co/240x240/e8e8e8/999999?text=Image"
+			"default": "https://lite-word.com/sample_img/women/6_2.webp"
 		},
 		"comment3ImageId": {
 			"type": "number",

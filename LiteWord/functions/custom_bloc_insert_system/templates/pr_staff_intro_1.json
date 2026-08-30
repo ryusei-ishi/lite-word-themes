@@ -63,7 +63,9 @@
         "textMain": "担当者を指名して相談する",
         "textSub": "＼ ご指名の追加料金はいただきません ／",
         "btnUrl": "",
-        "btnAlign": "center"
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
       },
       "innerBlocks": []
     },

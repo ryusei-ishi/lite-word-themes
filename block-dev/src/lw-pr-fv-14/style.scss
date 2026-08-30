@@ -194,6 +194,29 @@
         @media (max-width: 600px) {
             padding-top: 48px;
         }
+        // 🚨 本文がヘッダー（ロゴ・ナビ）に重ならないようにする（2026-08-26 追加）。
+        //    本文は position:absolute なので FV の高さを押し広げない。高さが足りないと
+        //    中央寄せの本文が上へはみ出してロゴに重なる（実測: 393px幅で34px / 360・320px幅で47px）。
+        //    上下から同じ量だけ削るので、**収まっているときの中心は従来と1pxも変わらない**。
+        //    収まらないときだけ上端＝ヘッダーの下で止めて下へあふれさせる（safe center）。
+        .fv_inner {
+            top: 192px; // 親のpadding-top 64 + ヘッダー 112 + 余裕 16
+            height: calc(100% - 384px);
+            align-content: center; // safe 未対応ブラウザ用のフォールバック
+            align-content: safe center;
+            @media (max-width: 1200px) {
+                top: 184px; // 56 + 112 + 16
+                height: calc(100% - 368px);
+            }
+            @media (max-width: 1100px) {
+                top: 176px; // 48 + 112 + 16
+                height: calc(100% - 352px);
+            }
+            @media (max-width: 600px) {
+                top: 144px; // 48 + 80 + 16
+                height: calc(100% - 288px);
+            }
+        }
     }
     .fv_inner {
         position: absolute;

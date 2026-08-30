@@ -21,6 +21,314 @@ import { minHeightPcClassOptionArr, minHeightTbClassOptionArr, minHeightSpClassO
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS_CTA2 = { url: 'cta2Url', type: 'cta2LinkType', page: 'cta2PageId', category: 'cta2CategoryId' };
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS_CTA1 = { url: 'cta1Url', type: 'cta1LinkType', page: 'cta1PageId', category: 'cta1CategoryId' };
+
+
+/* =============================================================== *
+ *  FV のインライン JS（save から使う）
+ *
+ *  🚨 legacy=true のときは 2026-08-27 以前と **1文字も違わない** 文字列を返すこと。
+ *     1文字でも変わると、その版で保存された既存ページが編集画面で
+ *     「このブロックには問題が含まれています」になる（deprecated が一致しなくなるため）。
+ * =============================================================== */
+const buildFv12Script = ( { videoSpeed }, legacy ) => {
+
+	/* 自分のブロックの中だけを見るための下ごしらえ（新版のみ）。
+	   document.currentScript は同期実行中しか取れないので、必ず ready() の外で掴む。 */
+	const setup = legacy ? '' : `
+var _me = document.currentScript;
+var _root = _me ? _me.closest('.paid-block-fv-12') : null;`;
+
+	/* 🚨 旧版は document.querySelectorAll('.lazy-video') とページ全体を拾っていたため、
+	   同じページに別の動画ブロック（fv-7 / lw-bg-1 / lw-pr-fv-13〜16）があると
+	   その動画まで display:block・再生速度・自動再生を触っていた。 */
+	const pick = legacy
+		? `  document.querySelectorAll('.lazy-video').forEach(v=>{`
+		: `  var _scope = _root ? _root : document;
+  var _sel = _root ? '.lazy-video' : '.paid-block-fv-12 .lazy-video';
+  _scope.querySelectorAll(_sel).forEach(v=>{`;
+
+	return `
+(() => {
+'use strict';${setup}
+const ready = () => {
+
+  /* ---- ロゴリンクの設定 ---- */
+  document.querySelectorAll('.logo a[data-home-url]').forEach(link => {
+    if(!link.href || link.href === '' || link.href === window.location.href + '#') {
+      // MyThemeSettingsまたはwindow.locationからホームURLを取得
+      if(window.MyThemeSettings && window.MyThemeSettings.home_Url) {
+        link.href = window.MyThemeSettings.home_Url;
+      } else {
+        link.href = window.location.origin;
+      }
+    }
+  });
+
+  /* ---- NEWS ---- */
+  document.querySelectorAll('.fv-12_news_list').forEach(list=>{
+    const src=list.dataset.sourceType,ids=(list.dataset.postIds||'').trim();
+    const cnt=parseInt(list.dataset.postCount,10)||4;
+    
+    // REST APIのエンドポイントを構築
+    let endpoint = '';
+    
+    // 方法1: wpApiSettingsを使用
+    if(window.wpApiSettings && window.wpApiSettings.root) {
+      const base = window.wpApiSettings.root;
+      endpoint = (src==='ids'&&ids) ? 
+        base + 'wp/v2/posts?include=' + ids + '&_embed' :
+        base + 'wp/v2/posts?per_page=' + cnt + '&_embed';
+    }
+    // 方法2: MyThemeSettingsを使用
+    else if(window.MyThemeSettings && window.MyThemeSettings.home_Url) {
+      endpoint = (src==='ids'&&ids) ? 
+        window.MyThemeSettings.home_Url + '/wp-json/wp/v2/posts?include=' + ids + '&_embed' :
+        window.MyThemeSettings.home_Url + '/wp-json/wp/v2/posts?per_page=' + cnt + '&_embed';
+    }
+    // 方法3: 相対パスを使用（最終手段）
+    else {
+      endpoint = (src==='ids'&&ids) ? 
+        '/wp-json/wp/v2/posts?include=' + ids + '&_embed' :
+        '/wp-json/wp/v2/posts?per_page=' + cnt + '&_embed';
+    }
+
+    console.log('NEWS API Endpoint:', endpoint);
+
+    // 投稿データを取得してHTMLを生成
+    fetch(endpoint)
+      .then(response => {
+        if (!response.ok) throw new Error('Network response was not ok');
+        return response.json();
+      })
+      .then(posts => {
+        const ul = list.querySelector('ul');
+        ul.innerHTML = ''; // 既存の内容をクリア
+        
+        // 各投稿をli要素として追加
+        posts.forEach((post, index) => {
+          const date = new Date(post.date);
+          const formattedDate = date.getFullYear() + '.' + 
+                               String(date.getMonth() + 1).padStart(2, '0') + '.' + 
+                               String(date.getDate()).padStart(2, '0');
+          
+          const li = document.createElement('li');
+          li.dataset.newsNo = index + 1;
+          if(index === 0) li.classList.add('active');
+          
+          li.innerHTML = '<a href="' + post.link + '">' +
+                        '<span class="date">' + formattedDate + '</span>' +
+                        '<span class="title">' + post.title.rendered + '</span>' +
+                        '</a>';
+          
+          ul.appendChild(li);
+        });
+        
+        // ページネーション機能を設定
+        const btnPrev = list.querySelector('.prev');
+        const btnNext = list.querySelector('.next');
+        const pageText = list.querySelector('.page');
+        const items = Array.from(ul.querySelectorAll('li'));
+        const total = items.length;
+        
+        // 初期ページ表示
+        if(total > 0) {
+          pageText.textContent = '1/' + total;
+        }
+        
+        // 現在のアクティブindexを返す
+        const currentIndex = () => items.findIndex(li => li.classList.contains('active'));
+        
+        // アクティブ切り替え
+        const setActive = (i) => {
+          items.forEach(li => li.classList.remove('active'));
+          items[i].classList.add('active');
+          pageText.textContent = (i + 1) + '/' + total;
+        };
+        
+        // ← prev
+        if(btnPrev) {
+          btnPrev.addEventListener('click', e => {
+            e.preventDefault();
+            const i = (currentIndex() - 1 + total) % total;
+            setActive(i);
+          });
+        }
+        
+        // → next
+        if(btnNext) {
+          btnNext.addEventListener('click', e => {
+            e.preventDefault();
+            const i = (currentIndex() + 1) % total;
+            setActive(i);
+          });
+        }
+      })
+      .catch(error => {
+        console.error('Error fetching posts:', error);
+        const ul = list.querySelector('ul');
+        ul.innerHTML = '<li>投稿を読み込めませんでした</li>';
+      });
+  });
+
+  /* ---- video ---- */
+${pick}
+    // 動画を表示
+    v.style.display='block';
+    
+    // 再生速度を設定
+    const playbackRate = parseFloat(v.getAttribute('data-playback-rate')) || ${videoSpeed};
+    v.playbackRate = playbackRate;
+    
+    // 動画を再生する関数
+    const playVideo = () => {
+      v.play().catch(err => {
+        console.log('Video autoplay failed:', err);
+      });
+    };
+    
+    // 既にメタデータが読み込まれている場合は即座に再生
+    if(v.readyState >= 1) {
+      playVideo();
+    } else {
+      // メタデータが読み込まれたら再生
+      v.addEventListener('loadedmetadata', () => {
+        v.playbackRate = playbackRate;
+        playVideo();
+      });
+    }
+    
+    // ユーザーインタラクション後に再生を試みる（自動再生ポリシー対策）
+    document.addEventListener('click', () => {
+      if(v.paused) {
+        playVideo();
+      }
+    }, { once: true });
+  });
+};
+document.readyState==='loading'?document.addEventListener('DOMContentLoaded',ready):ready();
+})();
+`.trim();
+};
+
+/* =============================================================== *
+ *  Save の本体（deprecated からも同じものを使う）
+ * =============================================================== */
+const renderFv12Save = ( attributes, legacy ) => {
+
+		const {
+			logoText, logoUrl, logoImg, logoImgAlt, logoImgHeight,
+			cta1Text, cta1Url, cta1Enable, cta1BgColor, cta1TextColor, cta1BorderWidth, cta1BorderColor, cta1BorderRadius,
+			cta2Text, cta2Url, cta2Enable, cta2BgColor, cta2TextColor, cta2BorderWidth, cta2BorderColor, cta2BorderRadius,
+			headline, newsLabel, newsListVisible,
+			bgType, bgImg, bgImgAlt, videoUrl, videoSpeed,
+			bgFilterType, bgFilterColor, bgFilterGradient, bgFilterOpacity,
+			navMenuItems,
+			newsSourceType, newsIds, newsPostsNumber,
+			minHeightPc, minHeightTb, minHeightSp,
+		} = attributes;
+
+		const show1 = cta1Enable&&cta1Text.trim();
+		const show2 = cta2Enable&&cta2Text.trim();
+		const showWrap = show1||show2;
+
+		const blockProps = useBlockProps.save({
+			className: `paid-block-fv-12 ${minHeightPc || 'min-h-pc-100vh'} ${minHeightTb || 'min-h-tb-100vh'} ${minHeightSp || 'min-h-sp-100vh'}`
+		});
+
+		/* --- 背景フィルタースタイル --- */
+		const getBgFilterStyle = () => {
+			if (bgFilterType === 'gradient' && bgFilterGradient) {
+				return { 
+					background: bgFilterGradient,
+					opacity: bgFilterOpacity / 100
+				};
+			} else if (bgFilterColor) {
+				return { 
+					backgroundColor: `${bgFilterColor}${Math.round(bgFilterOpacity * 2.55).toString(16).padStart(2, '0')}` 
+				};
+			}
+			return {};
+		};
+
+		/* --- インライン JS --- */
+		const script = buildFv12Script( { videoSpeed }, legacy );
+
+		return (
+		<div {...blockProps}>
+			<header className="fv_in_header">
+				<h1 className="logo"><a href={logoUrl || '#'} data-home-url="">
+					{logoImg ? <img src={logoImg} alt={logoImgAlt||''} style={{height:logoImgHeight+'%',width:'auto'}}/> :
+						<RichText.Content tagName="span" value={logoText}/>}
+				</a></h1>
+				<nav className="fv_in_nav"><ul className="header_menu_pc">
+					{navMenuItems.map((item,i)=>(
+						<li key={i} className={item.children?.length > 0 ? 'has-submenu' : ''}>
+							<a href={item.url}>{item.title}</a>
+							{item.children?.length > 0 && (
+								<ul className="sub-menu">
+									{item.children.map((child,j)=>(
+										<li key={j}>
+											<a href={child.url}>{child.title}</a>
+										</li>
+									))}
+								</ul>
+							)}
+						</li>
+					))}
+				</ul></nav>
+				<div className="ham_btn drawer_nav_open"><div className="in"><div></div><div></div></div></div>
+			</header>
+
+			<div className="fv_inner">
+				<RichText.Content tagName="h2" value={headline}/>
+				{showWrap && <div className="cta_wrap">
+					{show1 && <a href={cta1Url} data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS_CTA1).linkType} data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS_CTA1).linkId} style={{
+						backgroundColor: cta1BgColor || 'transparent',
+						color: cta1TextColor || '#ffffff',
+						border: `${cta1BorderWidth || 1}px solid ${cta1BorderColor || '#ffffff'}`,
+						borderRadius: `${cta1BorderRadius || 0}px`,
+					}}>
+						<RichText.Content tagName="span" value={cta1Text}/>
+					</a>}
+					{show2 && <a href={cta2Url} data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS_CTA2).linkType} data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS_CTA2).linkId} style={{
+						backgroundColor: cta2BgColor || 'transparent',
+						color: cta2TextColor || '#ffffff',
+						border: `${cta2BorderWidth || 1}px solid ${cta2BorderColor || '#ffffff'}`,
+						borderRadius: `${cta2BorderRadius || 0}px`,
+					}}>
+						<RichText.Content tagName="span" value={cta2Text}/>
+					</a>}
+				</div>}
+			</div>
+
+			{(newsListVisible !== false) && <nav className="fv-12_news_list"
+				data-source-type={newsSourceType}
+				data-post-ids={newsIds}
+				data-post-count={newsPostsNumber}>
+				<h3><RichText.Content tagName="span" className="text" value={newsLabel}/></h3>
+				<div className="pagination"><div className="prev">←</div><div className="page">1/1</div><div className="next">→</div></div>
+				<ul></ul>
+			</nav>}
+
+			<div className="bg_filter" style={getBgFilterStyle()}></div>
+			{bgType==='image'&&bgImg && <div className="bg_image"><img src={bgImg} alt={bgImgAlt||''} loading="eager"/></div>}
+			{bgType==='video'&&videoUrl && <div className="bg_video">
+				<video autoPlay muted loop playsInline className="lazy-video" data-playback-rate={videoSpeed} preload="metadata">
+					<source src={videoUrl} type={videoUrl.endsWith('.mp4')?'video/mp4':videoUrl.endsWith('.webm')?'video/webm':videoUrl.endsWith('.mov')?'video/quicktime':'video/mp4'}/>
+				</video>
+			</div>}
+
+			{/* インライン JS */}
+			<script dangerouslySetInnerHTML={{__html:script}}/>
+		</div>);
+};
 
 /* ---------- 二重登録防止 ---------- */
 if ( wp.blocks.getBlockType( metadata.name ) ) {
@@ -37,11 +345,11 @@ registerBlockType( metadata.name, {
 	edit( { attributes, setAttributes } ){
 
 		const {
-			logoText, logoUrl, logoImg, logoImgHeight,
+			logoText, logoUrl, logoImg, logoImgAlt, logoImgHeight,
 			cta1Text, cta1Url, cta1Enable, cta1BgColor, cta1TextColor, cta1BorderWidth, cta1BorderColor, cta1BorderRadius,
 			cta2Text, cta2Url, cta2Enable, cta2BgColor, cta2TextColor, cta2BorderWidth, cta2BorderColor, cta2BorderRadius,
 			headline, newsLabel, newsListVisible,
-			bgType, bgImg, videoUrl, videoSpeed,
+			bgType, bgImg, bgImgAlt, videoUrl, videoSpeed,
 			bgFilterType, bgFilterColor, bgFilterGradient, bgFilterOpacity,
 			navMenuId, navMenuItems,
 			newsSourceType, newsIds, newsPostsNumber,
@@ -104,8 +412,8 @@ registerBlockType( metadata.name, {
 		},[newsSourceType,newsIds,newsPostsNumber]);
 
 		/* --- ハンドラ --- */
-		const onSelectBg   =m=>setAttributes({bgImg:m.url});
-		const onSelectLogo =m=>setAttributes({logoImg:m.url});
+		const onSelectBg   =m=>setAttributes({bgImg:m.url, bgImgAlt:m.alt||''});
+		const onSelectLogo =m=>setAttributes({logoImg:m.url, logoImgAlt:m.alt||''});
 		const onSelectVid  =m=>setAttributes({videoUrl:m.url});
 
 		/* --- CTA背景色変更ハンドラ --- */
@@ -182,6 +490,9 @@ registerBlockType( metadata.name, {
 						)}/>
 					{logoImg && <RangeControl label="ロゴ高さ(%)" value={logoImgHeight} onChange={v=>setAttributes({logoImgHeight:v})} min={50} max={100}/>}
 						<br/><br/>
+					<TextControl label="ロゴ画像の説明（alt）"
+						help="目の見えない方や検索エンジンに伝わる文です。ふつうは店名や会社名をそのまま書きます"
+						value={logoImgAlt||''} onChange={v=>setAttributes({logoImgAlt:v})}/>
 					<URLInput label="ロゴリンク" value={logoUrl} onChange={u=>setAttributes({logoUrl:u})}/>
 				</PanelBody>
 
@@ -192,6 +503,10 @@ registerBlockType( metadata.name, {
 					<ToggleControl label="CTA1を表示" checked={cta1Enable} onChange={v=>setAttributes({cta1Enable:v})}/>
 					<RichText tagName="div" value={cta1Text} onChange={v=>setAttributes({cta1Text:v})} placeholder="ご相談はこちら"/>
 					<URLInput label="CTA1 URL" value={cta1Url} onChange={u=>setAttributes({cta1Url:u})}/>
+					<LinkPicker
+					    link={lwLinkFromAttrs(attributes, LINK_KEYS_CTA1)}
+					    onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS_CTA1))}
+					/>
 					
 					<h4>CTA1 スタイル</h4>
 					<div style={{marginBottom:16}}>
@@ -293,6 +608,10 @@ registerBlockType( metadata.name, {
 					<ToggleControl label="CTA2を表示" checked={cta2Enable} onChange={v=>setAttributes({cta2Enable:v})}/>
 					<RichText tagName="div" value={cta2Text} onChange={v=>setAttributes({cta2Text:v})} placeholder="お問い合わせ"/>
 					<URLInput label="CTA2 URL" value={cta2Url} onChange={u=>setAttributes({cta2Url:u})}/>
+					<LinkPicker
+					    link={lwLinkFromAttrs(attributes, LINK_KEYS_CTA2)}
+					    onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS_CTA2))}
+					/>
 					
 					<h4>CTA2 スタイル</h4>
 					<div style={{marginBottom:16}}>
@@ -404,6 +723,9 @@ registerBlockType( metadata.name, {
 								<Button variant="secondary" onClick={open}>{bgImg?'変更':'画像を選択'}</Button>
 							</>
 						)}/>}
+					{bgType==='image' && <TextControl label="背景画像の説明（alt）"
+						help="目の見えない方や検索エンジンに伝わる文です。飾りの背景なら空のままで構いません"
+						value={bgImgAlt||''} onChange={v=>setAttributes({bgImgAlt:v})}/>}
 					{bgType==='video' && <>
 						<MediaUpload allowedTypes={['video']} value={videoUrl} onSelect={onSelectVid}
 							render={({open})=>(
@@ -556,7 +878,7 @@ registerBlockType( metadata.name, {
 				<header className="fv_in_header">
 					<h1 className="logo"><a href={logoUrl || '#'}>
 						{logoImg
-							? <img src={logoImg} alt="" style={{height:logoImgHeight+'%',width:'auto'}}/>
+							? <img src={logoImg} alt={logoImgAlt||''} style={{height:logoImgHeight+'%',width:'auto'}}/>
 							: <RichText tagName="span" value={logoText} onChange={v=>setAttributes({logoText:v})} placeholder="LOGO"/>}
 					</a></h1>
 					<nav className="fv_in_nav"><ul className="header_menu_pc">
@@ -637,7 +959,7 @@ registerBlockType( metadata.name, {
 				</nav>}
 
 				<div className="bg_filter" style={getBgFilterStyle()}></div>
-				{bgType==='image' && bgImg && <div className="bg_image"><img src={bgImg} alt="" loading="eager"/></div>}
+				{bgType==='image' && bgImg && <div className="bg_image"><img src={bgImg} alt={bgImgAlt||''} loading="eager"/></div>}
 				{bgType==='video' && videoUrl && <div className="bg_video">
 					<video autoPlay muted loop playsInline data-playback-rate={videoSpeed} className="lazy-video" preload="metadata">
 						<source src={videoUrl} type={videoUrl.endsWith('.mp4')?'video/mp4':videoUrl.endsWith('.webm')?'video/webm':videoUrl.endsWith('.mov')?'video/quicktime':'video/mp4'}/>
@@ -651,273 +973,18 @@ registerBlockType( metadata.name, {
  *  Save
  * =============================================================== */
 	save( { attributes } ){
-
-		const {
-			logoText, logoUrl, logoImg, logoImgHeight,
-			cta1Text, cta1Url, cta1Enable, cta1BgColor, cta1TextColor, cta1BorderWidth, cta1BorderColor, cta1BorderRadius,
-			cta2Text, cta2Url, cta2Enable, cta2BgColor, cta2TextColor, cta2BorderWidth, cta2BorderColor, cta2BorderRadius,
-			headline, newsLabel, newsListVisible,
-			bgType, bgImg, videoUrl, videoSpeed,
-			bgFilterType, bgFilterColor, bgFilterGradient, bgFilterOpacity,
-			navMenuItems,
-			newsSourceType, newsIds, newsPostsNumber,
-			minHeightPc, minHeightTb, minHeightSp,
-		} = attributes;
-
-		const show1 = cta1Enable&&cta1Text.trim();
-		const show2 = cta2Enable&&cta2Text.trim();
-		const showWrap = show1||show2;
-
-		const blockProps = useBlockProps.save({
-			className: `paid-block-fv-12 ${minHeightPc || 'min-h-pc-100vh'} ${minHeightTb || 'min-h-tb-100vh'} ${minHeightSp || 'min-h-sp-100vh'}`
-		});
-
-		/* --- 背景フィルタースタイル --- */
-		const getBgFilterStyle = () => {
-			if (bgFilterType === 'gradient' && bgFilterGradient) {
-				return { 
-					background: bgFilterGradient,
-					opacity: bgFilterOpacity / 100
-				};
-			} else if (bgFilterColor) {
-				return { 
-					backgroundColor: `${bgFilterColor}${Math.round(bgFilterOpacity * 2.55).toString(16).padStart(2, '0')}` 
-				};
-			}
-			return {};
-		};
-
-		/* --- インライン JS --- */
-		const script = `
-(() => {
-'use strict';
-const ready = () => {
-
-  /* ---- ロゴリンクの設定 ---- */
-  document.querySelectorAll('.logo a[data-home-url]').forEach(link => {
-    if(!link.href || link.href === '' || link.href === window.location.href + '#') {
-      // MyThemeSettingsまたはwindow.locationからホームURLを取得
-      if(window.MyThemeSettings && window.MyThemeSettings.home_Url) {
-        link.href = window.MyThemeSettings.home_Url;
-      } else {
-        link.href = window.location.origin;
-      }
-    }
-  });
-
-  /* ---- NEWS ---- */
-  document.querySelectorAll('.fv-12_news_list').forEach(list=>{
-    const src=list.dataset.sourceType,ids=(list.dataset.postIds||'').trim();
-    const cnt=parseInt(list.dataset.postCount,10)||4;
-    
-    // REST APIのエンドポイントを構築
-    let endpoint = '';
-    
-    // 方法1: wpApiSettingsを使用
-    if(window.wpApiSettings && window.wpApiSettings.root) {
-      const base = window.wpApiSettings.root;
-      endpoint = (src==='ids'&&ids) ? 
-        base + 'wp/v2/posts?include=' + ids + '&_embed' :
-        base + 'wp/v2/posts?per_page=' + cnt + '&_embed';
-    }
-    // 方法2: MyThemeSettingsを使用
-    else if(window.MyThemeSettings && window.MyThemeSettings.home_Url) {
-      endpoint = (src==='ids'&&ids) ? 
-        window.MyThemeSettings.home_Url + '/wp-json/wp/v2/posts?include=' + ids + '&_embed' :
-        window.MyThemeSettings.home_Url + '/wp-json/wp/v2/posts?per_page=' + cnt + '&_embed';
-    }
-    // 方法3: 相対パスを使用（最終手段）
-    else {
-      endpoint = (src==='ids'&&ids) ? 
-        '/wp-json/wp/v2/posts?include=' + ids + '&_embed' :
-        '/wp-json/wp/v2/posts?per_page=' + cnt + '&_embed';
-    }
-
-    console.log('NEWS API Endpoint:', endpoint);
-
-    // 投稿データを取得してHTMLを生成
-    fetch(endpoint)
-      .then(response => {
-        if (!response.ok) throw new Error('Network response was not ok');
-        return response.json();
-      })
-      .then(posts => {
-        const ul = list.querySelector('ul');
-        ul.innerHTML = ''; // 既存の内容をクリア
-        
-        // 各投稿をli要素として追加
-        posts.forEach((post, index) => {
-          const date = new Date(post.date);
-          const formattedDate = date.getFullYear() + '.' + 
-                               String(date.getMonth() + 1).padStart(2, '0') + '.' + 
-                               String(date.getDate()).padStart(2, '0');
-          
-          const li = document.createElement('li');
-          li.dataset.newsNo = index + 1;
-          if(index === 0) li.classList.add('active');
-          
-          li.innerHTML = '<a href="' + post.link + '">' +
-                        '<span class="date">' + formattedDate + '</span>' +
-                        '<span class="title">' + post.title.rendered + '</span>' +
-                        '</a>';
-          
-          ul.appendChild(li);
-        });
-        
-        // ページネーション機能を設定
-        const btnPrev = list.querySelector('.prev');
-        const btnNext = list.querySelector('.next');
-        const pageText = list.querySelector('.page');
-        const items = Array.from(ul.querySelectorAll('li'));
-        const total = items.length;
-        
-        // 初期ページ表示
-        if(total > 0) {
-          pageText.textContent = '1/' + total;
-        }
-        
-        // 現在のアクティブindexを返す
-        const currentIndex = () => items.findIndex(li => li.classList.contains('active'));
-        
-        // アクティブ切り替え
-        const setActive = (i) => {
-          items.forEach(li => li.classList.remove('active'));
-          items[i].classList.add('active');
-          pageText.textContent = (i + 1) + '/' + total;
-        };
-        
-        // ← prev
-        if(btnPrev) {
-          btnPrev.addEventListener('click', e => {
-            e.preventDefault();
-            const i = (currentIndex() - 1 + total) % total;
-            setActive(i);
-          });
-        }
-        
-        // → next
-        if(btnNext) {
-          btnNext.addEventListener('click', e => {
-            e.preventDefault();
-            const i = (currentIndex() + 1) % total;
-            setActive(i);
-          });
-        }
-      })
-      .catch(error => {
-        console.error('Error fetching posts:', error);
-        const ul = list.querySelector('ul');
-        ul.innerHTML = '<li>投稿を読み込めませんでした</li>';
-      });
-  });
-
-  /* ---- video ---- */
-  document.querySelectorAll('.lazy-video').forEach(v=>{
-    // 動画を表示
-    v.style.display='block';
-    
-    // 再生速度を設定
-    const playbackRate = parseFloat(v.getAttribute('data-playback-rate')) || ${videoSpeed};
-    v.playbackRate = playbackRate;
-    
-    // 動画を再生する関数
-    const playVideo = () => {
-      v.play().catch(err => {
-        console.log('Video autoplay failed:', err);
-      });
-    };
-    
-    // 既にメタデータが読み込まれている場合は即座に再生
-    if(v.readyState >= 1) {
-      playVideo();
-    } else {
-      // メタデータが読み込まれたら再生
-      v.addEventListener('loadedmetadata', () => {
-        v.playbackRate = playbackRate;
-        playVideo();
-      });
-    }
-    
-    // ユーザーインタラクション後に再生を試みる（自動再生ポリシー対策）
-    document.addEventListener('click', () => {
-      if(v.paused) {
-        playVideo();
-      }
-    }, { once: true });
-  });
-};
-document.readyState==='loading'?document.addEventListener('DOMContentLoaded',ready):ready();
-})();`.trim();
-
-		return (
-		<div {...blockProps}>
-			<header className="fv_in_header">
-				<h1 className="logo"><a href={logoUrl || '#'} data-home-url="">
-					{logoImg ? <img src={logoImg} alt="" style={{height:logoImgHeight+'%',width:'auto'}}/> :
-						<RichText.Content tagName="span" value={logoText}/>}
-				</a></h1>
-				<nav className="fv_in_nav"><ul className="header_menu_pc">
-					{navMenuItems.map((item,i)=>(
-						<li key={i} className={item.children?.length > 0 ? 'has-submenu' : ''}>
-							<a href={item.url}>{item.title}</a>
-							{item.children?.length > 0 && (
-								<ul className="sub-menu">
-									{item.children.map((child,j)=>(
-										<li key={j}>
-											<a href={child.url}>{child.title}</a>
-										</li>
-									))}
-								</ul>
-							)}
-						</li>
-					))}
-				</ul></nav>
-				<div className="ham_btn drawer_nav_open"><div className="in"><div></div><div></div></div></div>
-			</header>
-
-			<div className="fv_inner">
-				<RichText.Content tagName="h2" value={headline}/>
-				{showWrap && <div className="cta_wrap">
-					{show1 && <a href={cta1Url} style={{
-						backgroundColor: cta1BgColor || 'transparent',
-						color: cta1TextColor || '#ffffff',
-						border: `${cta1BorderWidth || 1}px solid ${cta1BorderColor || '#ffffff'}`,
-						borderRadius: `${cta1BorderRadius || 0}px`,
-					}}>
-						<RichText.Content tagName="span" value={cta1Text}/>
-					</a>}
-					{show2 && <a href={cta2Url} style={{
-						backgroundColor: cta2BgColor || 'transparent',
-						color: cta2TextColor || '#ffffff',
-						border: `${cta2BorderWidth || 1}px solid ${cta2BorderColor || '#ffffff'}`,
-						borderRadius: `${cta2BorderRadius || 0}px`,
-					}}>
-						<RichText.Content tagName="span" value={cta2Text}/>
-					</a>}
-				</div>}
-			</div>
-
-			{(newsListVisible !== false) && <nav className="fv-12_news_list"
-				data-source-type={newsSourceType}
-				data-post-ids={newsIds}
-				data-post-count={newsPostsNumber}>
-				<h3><RichText.Content tagName="span" className="text" value={newsLabel}/></h3>
-				<div className="pagination"><div className="prev">←</div><div className="page">1/1</div><div className="next">→</div></div>
-				<ul></ul>
-			</nav>}
-
-			<div className="bg_filter" style={getBgFilterStyle()}></div>
-			{bgType==='image'&&bgImg && <div className="bg_image"><img src={bgImg} alt="" loading="eager"/></div>}
-			{bgType==='video'&&videoUrl && <div className="bg_video">
-				<video autoPlay muted loop playsInline className="lazy-video" data-playback-rate={videoSpeed} preload="metadata">
-					<source src={videoUrl} type={videoUrl.endsWith('.mp4')?'video/mp4':videoUrl.endsWith('.webm')?'video/webm':videoUrl.endsWith('.mov')?'video/quicktime':'video/mp4'}/>
-				</video>
-			</div>}
-
-			{/* インライン JS */}
-			<script dangerouslySetInnerHTML={{__html:script}}/>
-		</div>);
+		return renderFv12Save( attributes, false );
 	},
+
+	/* 旧マークアップ（インラインJSがページ内の .lazy-video を全部つかんでいた版）で
+	   保存された既存ページを受け止める。2026-08-27 追加（#1170 と同じ原因）。
+	   ⚠️ 属性は1つも変えていない。変わったのは save が出すスクリプトの文字列だけ。 */
+	deprecated: [
+		{
+			attributes: metadata.attributes,
+			save: ( { attributes } ) => renderFv12Save( attributes, true ),
+		},
+	],
 });
 /* === duplicate‑check end === */
 }

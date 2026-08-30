@@ -10,11 +10,14 @@
 	"editorScript": "file:./lw-pr-table-3.js",
 	"viewScript": "file:./view.js",
 	"aiHint": {
-		"description": "料金テーブル（別デザイン）。ヘッダー+行の表形式",
-		"excludeFromAutoSelect": true,
-		"contentAttributes": [],
+		"description": "料金・診療時間などの表。ヘッダー行+行見出し+セルの表形式。セルの統合ができるので「午前/午後」のような2段の表に向く",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"headers",
+			"rows"
+		],
 		"imageAttributes": [],
-		"excludeReason": "複雑なネスト構造のテーブル。AI直接生成非推奨"
+		"notes": "headers は文字列の配列（1つ目は行見出しの上なので空文字にする）。例 [\"\",\"月\",\"火\",\"水\"]。rows は [{\"header\":\"午前\",\"cells\":[\"○\",\"○\",\"×\"]}] の形で、cells の数は headers から1引いた数に合わせる。表が本文より狭いときは tableAlign:\"center\" で中央に寄せられる（既定は \"left\"）。"
 	},
 	"supports": {
 		"anchor": true,
@@ -211,6 +214,13 @@
 		"designPattern": {
 			"type": "string",
 			"default": ""
+		},
+		"tableAlign": {
+			"type": "string",
+			"default": "left",
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"textAlignMainHead": {
 			"type": "string",

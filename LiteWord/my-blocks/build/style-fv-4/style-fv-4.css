@@ -1,6 +1,7 @@
 /*!**************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/fv-4/style.scss ***!
   \**************************************************************************************************************/
+@charset "UTF-8";
 .lw_content_wrap.page .wp-block-wdl-fv-4 {
   margin-left: calc((100% - 100vw) / 2);
   width: 100vw;
@@ -113,7 +114,7 @@
   margin-bottom: 0.1em;
   display: block;
   line-height: 1.4em;
-  font-size: 24px;
+  font-size: var(--fv4-sub-pc, 24px);
   letter-spacing: 0.05em;
   font-weight: 500;
 }
@@ -124,7 +125,7 @@
   .wp-block-wdl-fv-4 h4 .sub,
   .wp-block-wdl-fv-4 h5 .sub,
   .wp-block-wdl-fv-4 h6 .sub {
-    font-size: 18px;
+    font-size: var(--fv4-sub-tb, 18px);
   }
 }
 @container (max-width:500px) {
@@ -134,7 +135,7 @@
   .wp-block-wdl-fv-4 h4 .sub,
   .wp-block-wdl-fv-4 h5 .sub,
   .wp-block-wdl-fv-4 h6 .sub {
-    font-size: 16px;
+    font-size: var(--fv4-sub-sp, 16px);
   }
 }
 .wp-block-wdl-fv-4 h1 .sub:empty,
@@ -153,7 +154,7 @@
 .wp-block-wdl-fv-4 h6 .main {
   display: block;
   line-height: 1.4em;
-  font-size: 72px;
+  font-size: var(--fv4-main-pc, 72px);
   letter-spacing: 0.05em;
 }
 @container (max-width:980px) {
@@ -163,7 +164,7 @@
   .wp-block-wdl-fv-4 h4 .main,
   .wp-block-wdl-fv-4 h5 .main,
   .wp-block-wdl-fv-4 h6 .main {
-    font-size: 64px;
+    font-size: var(--fv4-main-tb, 64px);
   }
 }
 @container (max-width:700px) {
@@ -173,7 +174,7 @@
   .wp-block-wdl-fv-4 h4 .main,
   .wp-block-wdl-fv-4 h5 .main,
   .wp-block-wdl-fv-4 h6 .main {
-    font-size: 56px;
+    font-size: var(--fv4-main-tb, 56px);
   }
 }
 @container (max-width:500px) {
@@ -183,7 +184,11 @@
   .wp-block-wdl-fv-4 h4 .main,
   .wp-block-wdl-fv-4 h5 .main,
   .wp-block-wdl-fv-4 h6 .main {
-    font-size: 48px;
+    /* 🚨 2026-08-26: 48px だと 375px 幅の画面で1行に7文字しか入らず、
+     *   見出しが左右いっぱいに詰まって余白が消える（Ryuichi 指摘）。
+     *   利用者が選んだサイズ（--fv4-main-sp）は活かしたまま、
+     *   画面幅からも上限をかけて必ず余白が残るようにする。 */
+    font-size: min(var(--fv4-main-sp, 48px), 8.5vw);
   }
 }
 .wp-block-wdl-fv-4 h1 .main:empty,

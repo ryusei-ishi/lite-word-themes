@@ -10,8 +10,16 @@
 	"aiHint": {
 		"description": "背景画像スライダーFV。複数背景画像切替+サブタイトル+見出し+説明+CTAボタン。リッチなトップページに",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["subTitle", "mainTitle", "descriptionText", "buttonLabel"],
-		"imageAttributes": ["slides"]
+		"contentAttributes": [
+			"subTitle",
+			"mainTitle",
+			"descriptionText",
+			"buttonLabel"
+		],
+		"imageAttributes": [
+			"slides"
+		],
+		"notes": "blockId は空のままでよい（2026-08-26 にブロック側を直した。空なら読み込み時に自分で id を振って初期化する）。それ以前は空だと init-hide が外れずフロントで真っ白になっていた。 背景がスライドし、その上に固定の見出し・説明・CTAボタンが乗る。slides は3枚前後がちょうどよい。"
 	},
 	"supports": {
 		"anchor": true
@@ -26,13 +34,13 @@
 				{
 					"pcImgUrl": "https://lite-word.com/sample_img/shop/6.webp",
 					"spImgUrl": "",
-					"altText": "スライド1のalt",
+					"altText": "",
 					"linkUrl": ""
 				},
 				{
 					"pcImgUrl": "https://lite-word.com/sample_img/shop/2.webp",
 					"spImgUrl": "",
-					"altText": "スライド2のalt",
+					"altText": "",
 					"linkUrl": ""
 				}
 			]
@@ -120,6 +128,18 @@
 		"ctaLinkUrl": {
 			"type": "string",
 			"default": "#"
+		},
+		"ctaLinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"ctaPageId": {
+			"type": "number",
+			"default": 0
+		},
+		"ctaCategoryId": {
+			"type": "number",
+			"default": 0
 		},
 		"ctaOpenNewTab": {
 			"type": "boolean",

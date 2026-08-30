@@ -10,43 +10,153 @@
 	"aiHint": {
 		"description": "左テキスト+右画像の2カラムFV。CTAボタン付き。動画背景も対応。コーポレートサイトに",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["mainTitle", "description", "buttonText"],
-		"imageAttributes": ["imageUrlPc", "imageUrlSp"]
+		"contentAttributes": [
+			"mainTitle",
+			"description",
+			"buttonText"
+		],
+		"imageAttributes": [
+			"imageUrlPc",
+			"imageUrlSp"
+		],
+		"notes": "左半分が地色＋文字、右半分が写真の2カラム。左が無地なので文字が必ず読める。説明文を2〜3行しっかり置きたいときに向く。titleColor / descriptionColor は濃い色にする（左は明るい地色のため）。 ［2026-08-27 追記］左半分が bgColor の帯になる（既定は白）。見出しは左右をまたいで置かれるので、titleColor を白にするなら bgColor も暗い色にしないと左側で文字が消える。backgroundType は video / image のみで、imageUrlPc を空にすると <img src=\"\"> がそのまま出る（写真は外せない）。素材が弱いときは filterOpacity を 0.9 まで上げて塗りつぶす。"
 	},
 	"supports": {
 		"anchor": true
 	},
 	"attributes": {
-		"mainTitle": { "type": "string", "default": "くらしを楽しく、美しく" },
-		"description": { "type": "string", "default": "ここに説明文が入ります。" },
-		"backgroundType": { "type": "string", "default": "image" },
-		"videoUrl": { "type": "string", "default": "" },
-		"imageUrlPc": { "type": "string", "default": "https://images.unsplash.com/photo-1631679706909-1844bbd07221?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=1092" },
-		"imageUrlSp": { "type": "string", "default": "" },
-		"imageAlt": { "type": "string", "default": "" },
-		"filterColor": { "type": "string", "default": "#121416" },
-		"filterOpacity": { "type": "number", "default": 0.2 },
-		"videoSpeed": { "type": "number", "default": 1.0 },
-		"headingLevel": { "type": "number", "default": 2 },
-		"strokeWidth": { "type": "number", "default": 0 },
-		"strokeWidthSp": { "type": "number", "default": 0 },
-		"strokeColor": { "type": "string", "default": "#ffffff" },
-		"strokeOpacity": { "type": "number", "default": 0.6 },
-		"titleColor": { "type": "string", "default": "#000000" },
-		"titleFontWeight": { "type": "string", "default": "700" },
-		"titleFont": { "type": "string", "default": "" },
-		"descriptionColor": { "type": "string", "default": "#000000" },
-		"descriptionFontWeight": { "type": "string", "default": "600" },
-		"descriptionFont": { "type": "string", "default": "" },
-		"showButton": { "type": "boolean", "default": true },
-		"buttonText": { "type": "string", "default": "ご相談はこちら" },
-		"buttonUrl": { "type": "string", "default": "" },
-		"ctaBgColor": { "type": "string", "default": "#E95555" },
-		"ctaTextColor": { "type": "string", "default": "#ffffff" },
-		"ctaBorderRadius": { "type": "number", "default": 100 },
-		"ctaBorderWidth": { "type": "number", "default": 0 },
-		"ctaBorderColor": { "type": "string", "default": "#000000" },
-		"bgColor": { "type": "string", "default": "#ffffff" }
+		"mainTitle": {
+			"type": "string",
+			"default": "くらしを楽しく、美しく"
+		},
+		"description": {
+			"type": "string",
+			"default": "ここに説明文が入ります。"
+		},
+		"backgroundType": {
+			"type": "string",
+			"default": "image"
+		},
+		"videoUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"imageUrlPc": {
+			"type": "string",
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/sub_5.webp"
+		},
+		"imageUrlSp": {
+			"type": "string",
+			"default": ""
+		},
+		"imageAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"filterColor": {
+			"type": "string",
+			"default": "#121416"
+		},
+		"filterOpacity": {
+			"type": "number",
+			"default": 0.2
+		},
+		"videoSpeed": {
+			"type": "number",
+			"default": 1
+		},
+		"headingLevel": {
+			"type": "number",
+			"default": 2
+		},
+		"strokeWidth": {
+			"type": "number",
+			"default": 0
+		},
+		"strokeWidthSp": {
+			"type": "number",
+			"default": 0
+		},
+		"strokeColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"strokeOpacity": {
+			"type": "number",
+			"default": 0.6
+		},
+		"titleColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"titleFontWeight": {
+			"type": "string",
+			"default": "700"
+		},
+		"titleFont": {
+			"type": "string",
+			"default": ""
+		},
+		"descriptionColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"descriptionFontWeight": {
+			"type": "string",
+			"default": "600"
+		},
+		"descriptionFont": {
+			"type": "string",
+			"default": ""
+		},
+		"showButton": {
+			"type": "boolean",
+			"default": true
+		},
+		"buttonText": {
+			"type": "string",
+			"default": "ご相談はこちら"
+		},
+		"buttonUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"buttonLinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"buttonPageId": {
+			"type": "number",
+			"default": 0
+		},
+		"buttonCategoryId": {
+			"type": "number",
+			"default": 0
+		},
+		"ctaBgColor": {
+			"type": "string",
+			"default": "#E95555"
+		},
+		"ctaTextColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"ctaBorderRadius": {
+			"type": "number",
+			"default": 100
+		},
+		"ctaBorderWidth": {
+			"type": "number",
+			"default": 0
+		},
+		"ctaBorderColor": {
+			"type": "string",
+			"default": "#000000"
+		},
+		"bgColor": {
+			"type": "string",
+			"default": "#ffffff"
+		}
 	},
 	"no": 13
 }

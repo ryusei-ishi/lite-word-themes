@@ -68,6 +68,9 @@
 			"type": "string",
 			"default": "rgba(0,0,0,0.6)"
 		},
+		"captionColor": {
+			"type": "string"
+		},
 		"aspectHeightPx": {
 			"type": "number",
 			"default": 700

@@ -10,8 +10,16 @@
 	"aiHint": {
 		"description": "左テキスト+右画像FV。CTAボタン付き。動画背景対応。IT・Web・教育系に最適",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["mainTitle", "description", "buttonText"],
-		"imageAttributes": ["imageUrlPc", "imageUrlSp"]
+		"contentAttributes": [
+			"mainTitle",
+			"description",
+			"buttonText"
+		],
+		"imageAttributes": [
+			"imageUrlPc",
+			"imageUrlSp"
+		],
+		"notes": "濃い地色（bgColor）の面の中央に画像が帯のように入り、その上に見出し＋説明＋CTAが中央寄せで乗る。「左テキスト＋右画像の2カラム」ではない（2026-08-26 に実物で確認）。写真が1枚しか無くても締まって見えるので、素材が少ない業種に向く。bgColor を業種の色にすると印象が決まる。 ［2026-08-27 追記］左半分が bgColor の帯になる（既定は白）。titleColor を白にするなら bgColor も暗くする。imageUrlPc は空にできない（<img src=\"\"> が出る）。"
 	},
 	"supports": {
 		"anchor": true
@@ -35,7 +43,7 @@
 		},
 		"imageUrlPc": {
 			"type": "string",
-			"default": "https://images.unsplash.com/photo-1564078516393-cf04bd966897?ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&q=80&w=687"
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/sub_4.webp"
 		},
 		"imageUrlSp": {
 			"type": "string",
@@ -59,7 +67,7 @@
 		},
 		"videoSpeed": {
 			"type": "number",
-			"default": 1.0
+			"default": 1
 		},
 		"headingLevel": {
 			"type": "number",
@@ -116,6 +124,18 @@
 		"buttonUrl": {
 			"type": "string",
 			"default": ""
+		},
+		"buttonLinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"buttonPageId": {
+			"type": "number",
+			"default": 0
+		},
+		"buttonCategoryId": {
+			"type": "number",
+			"default": 0
 		},
 		"ctaBgColor": {
 			"type": "string",

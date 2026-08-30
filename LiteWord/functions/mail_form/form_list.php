@@ -83,6 +83,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
     </ul>
 </div>
 
+<?php
+/* 添付ファイルの棚卸し（読むだけ・削除はしない）。→ upload_inventory.php */
+if ( function_exists( 'lw_mail_form_attachment_inventory_html' ) ) {
+	echo lw_mail_form_attachment_inventory_html();
+}
+?>
+
 <script>
 document.addEventListener("DOMContentLoaded", function() {
     document.querySelectorAll(".short_code.copyable").forEach(function(element) {

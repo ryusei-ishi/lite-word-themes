@@ -177,6 +177,12 @@ class LW_AI_Generator_Block_Settings {
                     $block['imageAttributes'] = $hint['imageAttributes'];
                 }
 
+                // 使い方の注意（癖・向き不向き）。get_block_catalog() の notes になってAIのプロンプトに載る。
+                // 🚨 ここを写さないと block.json の aiHint.notes はAIに一切届かない（2026-08-26 に発見・14ブロック分が死んでいた）
+                if ( empty( $block['aiNotes'] ) && ! empty( $hint['notes'] ) ) {
+                    $block['aiNotes'] = $hint['notes'];
+                }
+
                 // 自動選択から外したいブロックの指定
                 if ( ! empty( $hint['excludeFromAutoSelect'] ) ) {
                     $block['excludeFromAutoSelect'] = true;

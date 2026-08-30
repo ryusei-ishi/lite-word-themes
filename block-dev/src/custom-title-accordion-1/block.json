@@ -11,10 +11,11 @@
 		"anchor": true
 	},
 	"aiHint": {
-		"description": "アコーディオン見出し。クリックで開閉。ステップ説明やFAQの大分類に。サブタイトル+メインタイトル",
+		"description": "押すと開く見出しだけのブロック。中身は持たず、**この見出しより後ろに置いたブロック**が開閉の対象になる。長い説明・規約・手順を畳みたいときに",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["mainTitle", "subTitle"],
-		"imageAttributes": []
+		"imageAttributes": [],
+		"notes": "🚨 InnerBlocks を持たない。中身を入れる場所が無いブロックで、save() が見出しの直後にインライン script を書き出し、表示のときに【自分より後ろの兄弟要素を、次の“同じタグ名”の見出し（headingLevel が同じもの）か .last_content に当たるまで】かき集めて隠し div に入れる。つまり **最後の見出しの後ろに置いたものは、開くまで見えなくなる**。ボタンも注釈もスペーサーも巻き込まれる。.last_content は page.php が本文のいちばん最後に1つ出すだけなので、そこまで全部飲み込む。🚨 だから使うときは【最後の項目の中身の後ろに、同じ headingLevel の見出しをもう1つ置いて終端にする】こと。それが無いと後続が消える。🚨 headingLevel を 2 にしない。ページの他のセクションの見出し（lw-pr-custom-title-15 など）も h2 なので、h2 にすると次のセクションまで飲み込む。3 以下にする。⚠️ 開閉させたい項目が Q と A の繰り返しなら、このブロックではなく lw-qa-1（contents 配列を持つFAQアコーディオン）を使うほうが安全で、書き換えも簡単。⚠️ 属性名 mainTitleColor は名前に反して subTitle の色にしか当たらない（save() で確認）。borderColor / iconColor / mainTitleColor はどれもインラインstyleに直接入るので var(--color-main) を渡してよい。項目どうしは CSS で margin-top:0 になるので間にスペーサーを入れない。"
 	},
 	"attributes": {
 		"subTitle": {

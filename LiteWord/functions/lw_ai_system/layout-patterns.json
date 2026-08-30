@@ -1,0 +1,707 @@
+{
+  "_meta": {
+    "description": "LiteWord レイアウトパターン。page-composition.json が決めた「枠の順番」に対して、各枠へどのブロックを入れるかを型（A/B/C）として持つ。順番は固定・ブロックは選べる、が原則。これにより1つのサイトの中で統一感を保ったままページごとに見た目を変えられる。",
+    "version": "1.2",
+    "lastUpdated": "2026-08-26",
+    "affectsWordPress": false,
+    "pairsWith": "functions/lw_ai_system/page-composition.json"
+  },
+  "howToUse": [
+    "1. page-composition.json で pageType を選び、sections の順に枠（slot）を並べる。",
+    "2. サイト全体で1つだけ siteConstants.presets から選ぶ。見出し・FV・CTAはサイト内で固定する（＝統一感の芯）。",
+    "3. ページごとに patterns から型を1つ選ぶ。同じ型を3ページより多く使わない。",
+    "4. 各枠のブロックは patterns[型].slotBlocks[枠] から取る。定義が無い枠は fallbackBlocks を使う。",
+    "5. 各枠の直前に siteConstants の headingBlock を1つ置く（headingBefore が false の枠を除く）。",
+    "6. マークアップは lw_get_block_sample（見本を取って差し替え）か lw_build_block（属性を渡して組ませる）で作る。絶対に手書きしない。",
+    "7. 作り終えたら rules を1つずつ機械で検査する。特に maxSameBlockPerPage と siblingPageDifference。"
+  ],
+  "siteConstants": {
+    "description": "1つのサイトの中では固定する要素。ここが揃っているから、本文の型を変えてもバラバラに見えない。ページごとに変えてはいけない。",
+    "keys": {
+      "headingBlock": "各セクションの見出しに使うブロック",
+      "fvTop": "トップページのファーストビュー",
+      "fvSub": "下層ページのファーストビュー（細めの帯）",
+      "ctaBlock": "ページ末尾のCTA",
+      "spacerBlock": "セクション間の余白",
+      "contentWidth": "本文の最大幅（ブロックごとに属性名が違う）"
+    },
+    "presets": {
+      "navy_trust": {
+        "label": "士業・信頼型",
+        "bestFor": [
+          "行政書士",
+          "司法書士",
+          "税理士",
+          "社労士",
+          "法律事務所"
+        ],
+        "headingBlock": "wdl/custom-title-2",
+        "fvTop": "wdl/fv-1",
+        "fvSub": "wdl/fv-6",
+        "ctaBlock": "wdl/cta-2",
+        "spacerBlock": "wdl/lw-space-1",
+        "colorMainHint": "#002f5f"
+      },
+      "soft_consult": {
+        "label": "相談・やわらかい型",
+        "bestFor": [
+          "カウンセリング",
+          "教室",
+          "訪問看護",
+          "介護",
+          "整体"
+        ],
+        "headingBlock": "wdl/custom-title-3",
+        "fvTop": "wdl/paid-block-fv-8",
+        "fvSub": "wdl/fv-5",
+        "ctaBlock": "wdl/cta-1",
+        "spacerBlock": "wdl/lw-space-1",
+        "colorMainHint": "#3f7d6b"
+      },
+      "visual_shop": {
+        "label": "写真主役型",
+        "bestFor": [
+          "美容室",
+          "エステ",
+          "飲食店",
+          "工務店",
+          "リフォーム"
+        ],
+        "headingBlock": "wdl/custom-title-5",
+        "fvTop": "wdl/lw-pr-fv-13",
+        "fvSub": "wdl/paid-block-fv-10",
+        "ctaBlock": "wdl/paid-block-cta-3",
+        "spacerBlock": "wdl/lw-space-1",
+        "colorMainHint": "#6f5f52"
+      }
+    },
+    "note": "fvTopはトップ用、fvSubは下層用のFVブロックを選ぶこと。用途が逆のブロックを入れると高さと余白が崩れる。",
+    "contentWidth": {
+      "value": 1040,
+      "unit": "px",
+      "description": "本文の最大幅。サイトの中で必ず同じ値にする。ブロックごとに属性名が違うので下の対応表で引く。値が0のブロックは「制限なし＝テーマの既定に従う」意味なので触らない。",
+      "attributeByBlock": {
+        "wdl/cta-1": "maxWidth",
+        "wdl/cta-2": "maxWidth",
+        "wdl/lw-comment-1": "maxWidth",
+        "wdl/lw-company-1": "maxWidth",
+        "wdl/lw-company-2": "maxWidth",
+        "wdl/lw-contact-3": "maxWidth",
+        "wdl/lw-content-8": "innerMaxWidth",
+        "wdl/lw-link-list-1": "MaxWidth",
+        "wdl/lw-list-4": "maxWidth",
+        "wdl/lw-message-1": "maxWidth",
+        "wdl/lw-pr-qa-3": "maxWidth",
+        "wdl/lw-step-1": "ulMaxWidth",
+        "wdl/lw-step-2": "ulMaxWidth",
+        "wdl/paid-block-lw-company-3": "maxWidth",
+        "wdl/paid-block-lw-step-3": "ulMaxWidth",
+        "wdl/paid-block-lw-step-4": "ulMaxWidth",
+        "wdl/paid-block-lw-step-5": "ulMaxWidth"
+      }
+    }
+  },
+  "patterns": {
+    "A": {
+      "label": "表主役型",
+      "bestFor": "許認可・要件・料金体系が複雑な業務。読み手が条件を突き合わせたいページ。",
+      "impression": "きっちりしている・調べ物がしやすい",
+      "slotBlocks": {
+        "lead": "wdl/lw-list-3",
+        "problem": "wdl/lw-list-3",
+        "services": "wdl/paid-block-content-7",
+        "reasons": "wdl/paid-block-lw-step-5",
+        "scope": "wdl/lw-pr-table-1",
+        "requirements": "wdl/lw-list-4",
+        "price": "wdl/lw-pr-table-1",
+        "flow": "wdl/paid-block-lw-step-3",
+        "documents": "wdl/lw-list-1",
+        "faq": "wdl/lw-qa-1",
+        "voice": "wdl/lw-voice-1",
+        "related": "wdl/lw-content-8",
+        "message": "wdl/lw-message-1",
+        "profile": "wdl/lw-pr-table-1",
+        "credentials": "wdl/lw-list-3",
+        "news": "wdl/lw-news-list-1",
+        "office": "wdl/lw-company-2",
+        "history": "wdl/paid-block-history-1",
+        "catalog": "wdl/paid-block-content-7",
+        "choose_help": "wdl/lw-list-3",
+        "price_policy": "wdl/solution-1",
+        "expenses": "wdl/lw-list-4",
+        "payment": "wdl/lw-list-3",
+        "overview_time": "wdl/lw-content-1",
+        "prepare": "wdl/lw-list-3",
+        "contact_methods": "wdl/lw-list-3",
+        "hours": "wdl/lw-pr-table-1",
+        "form": "wdl/lw-contact-3",
+        "after_send": "wdl/paid-block-lw-step-4",
+        "access": "wdl/lw-list-4"
+      },
+      "variants": {
+        "1": {
+          "note": "既定。slotBlocks そのまま。",
+          "slotBlocks": {}
+        },
+        "2": {
+          "note": "同じ型を同じ種別で2ページ目に使うとき。表の性格（scope＝表・price＝表）は残し、文字の枠だけ入れ替える。",
+          "slotBlocks": {
+            "lead": "wdl/lw-list-1",
+            "requirements": "wdl/lw-list-2",
+            "flow": "wdl/paid-block-lw-step-4",
+            "documents": "wdl/lw-list-3",
+            "faq": "wdl/lw-pr-qa-3"
+          }
+        },
+        "3": {
+          "note": "3ページ目。2と重ならない組み合わせにしてある。",
+          "slotBlocks": {
+            "lead": "wdl/lw-list-4",
+            "requirements": "wdl/lw-list-3",
+            "flow": "wdl/lw-step-1",
+            "documents": "wdl/lw-list-2",
+            "faq": "wdl/lw-pr-qa-3"
+          }
+        },
+        "_why": "同じ型を兄弟ページで2回以上使うときに、枠のブロックだけ差し替えて別のページに見せる。型（順番・余白・見出しの形）は変えないので統一感は保たれる。ここに書いた枠だけを slotBlocks から上書きする。",
+        "_rule": "1 は既定（slotBlocks そのまま）。2ページ目は 2、3ページ目は 3 を使う。どの組み合わせも siblingPageDifference（4枠以上違う）を満たすように作ってある。",
+        "_principle": "変えるのは写真の要らない枠（lead / requirements / documents / faq / flow）を優先する。写真の入る枠を変えると画像を作り直すことになるため。"
+      },
+      "imagesRequired": {
+        "note": "型A（表主役型）は新しい写真が要らない。表・リスト・ステップ・声はすべて画像なしのブロックで組める。",
+        "perSlot": {},
+        "forUsers": "写真が用意できない場合はこの型を選ぶ。"
+      }
+    },
+    "B": {
+      "label": "説明主役型",
+      "bestFor": "「まず相談したい」から入る業務。何をしてくれるのかを言葉で伝えたいページ。",
+      "impression": "話しかけられている・分かりやすい",
+      "slotBlocks": {
+        "lead": "wdl/lw-list-2",
+        "problem": "wdl/solution-1",
+        "services": "wdl/lw-content-8",
+        "reasons": "wdl/lw-list-4",
+        "scope": "wdl/lw-content-8",
+        "requirements": "wdl/lw-list-4",
+        "price": "wdl/lw-pr-table-1",
+        "flow": "wdl/lw-step-1",
+        "documents": "wdl/lw-pr-table-1",
+        "faq": "wdl/lw-pr-qa-3",
+        "voice": "wdl/lw-message-1",
+        "related": "wdl/paid-block-content-7",
+        "message": "wdl/lw-content-8",
+        "profile": "wdl/lw-content-1",
+        "credentials": "wdl/lw-list-4",
+        "news": "wdl/lw-post-list-1",
+        "office": "wdl/lw-company-1",
+        "history": "wdl/paid-block-history-1",
+        "catalog": "wdl/paid-block-content-7",
+        "choose_help": "wdl/solution-1",
+        "price_policy": "wdl/lw-content-1",
+        "expenses": "wdl/lw-list-2",
+        "payment": "wdl/lw-list-1",
+        "overview_time": "wdl/solution-1",
+        "prepare": "wdl/lw-pr-table-1",
+        "contact_methods": "wdl/lw-list-1",
+        "hours": "wdl/lw-list-2",
+        "form": "wdl/paid-block-contact-2",
+        "after_send": "wdl/lw-step-2",
+        "access": "wdl/lw-content-1"
+      },
+      "variants": {
+        "1": {
+          "note": "既定。slotBlocks そのまま。",
+          "slotBlocks": {}
+        },
+        "2": {
+          "note": "2ページ目。説明カード（scope＝lw-content-8）は残し、リストと流れを入れ替える。",
+          "slotBlocks": {
+            "lead": "wdl/lw-list-1",
+            "requirements": "wdl/lw-list-3",
+            "flow": "wdl/paid-block-lw-step-3",
+            "documents": "wdl/lw-list-4",
+            "faq": "wdl/lw-qa-1"
+          }
+        },
+        "3": {
+          "note": "3ページ目。2と重ならない組み合わせにしてある。",
+          "slotBlocks": {
+            "lead": "wdl/lw-list-4",
+            "requirements": "wdl/lw-list-1",
+            "flow": "wdl/paid-block-lw-step-4",
+            "documents": "wdl/lw-list-3"
+          }
+        },
+        "_why": "同じ型を兄弟ページで2回以上使うときに、枠のブロックだけ差し替えて別のページに見せる。型（順番・余白・見出しの形）は変えないので統一感は保たれる。ここに書いた枠だけを slotBlocks から上書きする。",
+        "_rule": "1 は既定（slotBlocks そのまま）。2ページ目は 2、3ページ目は 3 を使う。どの組み合わせも siblingPageDifference（4枠以上違う）を満たすように作ってある。",
+        "_principle": "変えるのは写真の要らない枠（lead / requirements / documents / faq / flow）を優先する。写真の入る枠を変えると画像を作り直すことになるため。"
+      },
+      "imagesRequired": {
+        "note": "型B（説明主役型）は関連業務のカード3枚ぶんだけ写真が要る。",
+        "perSlot": {
+          "related": 3
+        },
+        "forUsers": "業務ごとのイメージ写真が3枚あれば組める。"
+      }
+    },
+    "C": {
+      "label": "写真主役型",
+      "bestFor": "見た目・現場・人で選ばれる業務。写真が説得材料になるページ。",
+      "impression": "実物が見える・親しみがある",
+      "slotBlocks": {
+        "lead": "wdl/lw-list-1",
+        "problem": "wdl/lw-list-1",
+        "services": "wdl/paid-block-content-7",
+        "reasons": "wdl/paid-block-content-3",
+        "scope": "wdl/paid-block-content-7",
+        "requirements": "wdl/lw-list-3",
+        "price": "wdl/lw-pr-table-1",
+        "flow": "wdl/paid-block-lw-step-6",
+        "documents": "wdl/lw-list-2",
+        "faq": "wdl/lw-qa-1",
+        "voice": "wdl/paid-block-voice-2",
+        "related": "wdl/paid-block-content-7",
+        "message": "wdl/lw-content-2",
+        "profile": "wdl/profile-1",
+        "credentials": "wdl/lw-list-1",
+        "news": "wdl/lw-pr-post-list-4",
+        "office": "wdl/paid-block-lw-company-3",
+        "history": "wdl/paid-block-history-1",
+        "catalog": "wdl/paid-block-content-7",
+        "choose_help": "wdl/paid-block-content-3",
+        "price_policy": "wdl/lw-content-2",
+        "expenses": "wdl/lw-list-1",
+        "payment": "wdl/lw-list-2",
+        "overview_time": "wdl/lw-content-2",
+        "prepare": "wdl/lw-list-1",
+        "contact_methods": "wdl/lw-list-2",
+        "hours": "wdl/lw-list-1",
+        "form": "wdl/lw-contact-3",
+        "after_send": "wdl/paid-block-lw-step-6",
+        "access": "wdl/lw-content-2"
+      },
+      "variants": {
+        "1": {
+          "note": "既定。slotBlocks そのまま。",
+          "slotBlocks": {}
+        },
+        "2": {
+          "note": "2ページ目。写真の入る枠（scope・flow・voice・related）はそのままなので、写真を撮り直さなくて済む。",
+          "slotBlocks": {
+            "lead": "wdl/lw-list-4",
+            "requirements": "wdl/lw-list-1",
+            "documents": "wdl/lw-list-3",
+            "faq": "wdl/lw-pr-qa-3"
+          }
+        },
+        "3": {
+          "note": "3ページ目。写真は scope と voice だけにして、流れと関連業務は文字で見せる。型Cを3ページ使うときに、撮る枚数が増えすぎないようにするため。",
+          "slotBlocks": {
+            "lead": "wdl/lw-list-3",
+            "requirements": "wdl/lw-list-2",
+            "documents": "wdl/lw-list-4",
+            "related": "wdl/lw-content-8",
+            "flow": "wdl/paid-block-lw-step-4"
+          }
+        },
+        "_why": "同じ型を兄弟ページで2回以上使うときに、枠のブロックだけ差し替えて別のページに見せる。型（順番・余白・見出しの形）は変えないので統一感は保たれる。ここに書いた枠だけを slotBlocks から上書きする。",
+        "_rule": "1 は既定（slotBlocks そのまま）。2ページ目は 2、3ページ目は 3 を使う。どの組み合わせも siblingPageDifference（4枠以上違う）を満たすように作ってある。",
+        "_principle": "変えるのは写真の要らない枠（lead / requirements / documents / faq / flow）を優先する。写真の入る枠を変えると画像を作り直すことになるため。"
+      },
+      "imagesRequired": {
+        "note": "型C（写真主役型）は写真が要る。枠ごとの必要枚数の目安。",
+        "perSlot": {
+          "scope": 3,
+          "flow": 5,
+          "voice": "1〜3",
+          "related": 1,
+          "services": 3,
+          "catalog": 3
+        },
+        "forUsers": "サイトを作る人は、自分で撮った写真か手持ちの素材を用意する。用意できないなら型Aか型Bを選ぶ。テーマのAI画像機能（lw_ai_system）でも用意できる（プレミアム限定）。",
+        "forInternal": "社内でサンプルを量産するときはローカルの画像生成（ComfyUI・RealVisXL V5.0）で作る。これは社内の道具で、利用者は使えない。"
+      }
+    }
+  },
+  "fallbackBlocks": {
+    "description": "型に定義が無い枠。core は WordPress 標準ブロック（見出し・段落・リスト）で書くという意味。",
+    "preamble": "core:段落",
+    "terms": "core:見出し(h2)＋段落の繰り返し",
+    "revision": "core:段落",
+    "operator": "core:段落"
+  },
+  "headingBefore": {
+    "description": "true の枠は直前に siteConstants.headingBlock を1つ置く。false の枠は見出しを置かない（ブロック自身が見出しを持つか、見出しが不要）。",
+    "fv": false,
+    "cta": false,
+    "preamble": false,
+    "terms": false,
+    "revision": false,
+    "operator": false,
+    "_default": true
+  },
+  "rules": {
+    "maxSameBlockPerPage": {
+      "value": 3,
+      "why": "同じブロックが4つ以上出ると、そのページは1種類の見た目にしか見えない。2026-08-22に表4連発で作って商品として成立しなかった。"
+    },
+    "maxConsecutiveSameBlock": {
+      "value": 2,
+      "why": "見出しを挟んでも、同じ形が3つ続くと読み手は飛ばす。"
+    },
+    "siblingPageDifference": {
+      "minDifferentSlots": 4,
+      "appliesWhenBodySlotsAtLeast": 6,
+      "shortPageMinRatio": 0.6,
+      "why": "兄弟ページ（業務詳細どうしなど）が4枠以上違えば、並べたときに別のページだと分かる。ただし本文が6枠より少ないページは4枠変えようがないので、その場合は本文枠の6割以上を変える。"
+    },
+    "maxPagesPerPattern": {
+      "value": 3,
+      "scope": "同じ pageType の中で",
+      "why": "同じ型が同じ種別で4ページ以上続くと、型を分けた意味が消える。ページ種別をまたぐ数は数えない（トップと料金が同じ型でも並べて見えないため）。"
+    },
+    "requiredSlots": {
+      "value": "page-composition.json の required:true をすべて満たす",
+      "why": "料金・流れ・FAQが無いサービスページは検索でも人でも評価されない。"
+    },
+    "sampleRequired": {
+      "value": true,
+      "why": "見本マークアップ（my-blocks/block_sample_list/）が無いブロックは、属性の入り方が確かめられない。採用する前に lw_build_block で組めることを確認してから型に足す。",
+      "exceptions": [
+        "wdl/lw-space-1"
+      ],
+      "exceptionsWhy": "スペーサーは中身を持たない構造ブロックなので見本が無い。属性は pcHeight/tbHeight/spHeight の3つだけ。既定値（80/64/40）と同じ値を書くとエディタが開いた瞬間に未保存扱いになるので、既定と違う値のときだけ書く。"
+    },
+    "neverUse": {
+      "value": [
+        "wdl/shin-gas-station-01-*"
+      ],
+      "why": "特定テンプレート専用の見た目で、汎用の型に混ぜると浮く。"
+    },
+    "priceIsAlwaysTable": {
+      "value": "wdl/lw-pr-table-1",
+      "why": "料金だけは3型とも同じ表を使う。金額は比較して読むものなので、見た目より読みやすさを優先する。見本のある表ブロックが現状これ1つという事情もある（lw-pr-table-2/3は見本が無い）。"
+    },
+    "variantRequired": {
+      "value": "同じ pageType で同じ型を2ページ以上使うときは、2ページ目以降で variant を 2 → 3 と変える",
+      "why": "型が同じだと枠のブロックまで同じになり、兄弟ページが見分けられなくなる。2026-08-22 に営業許可と自動車が型Cどうしで完全に同じ構成になっていた。siblingPageDifference と maxPagesPerPattern だけでは、この食い違いを防げなかった。",
+      "how": "patterns.<型>.variants.<番号>.slotBlocks を slotBlocks に上書きしてから組み立てる"
+    }
+  },
+  "pageTypeSupport": {
+    "top": [
+      "A",
+      "B",
+      "C"
+    ],
+    "service_list": [
+      "A",
+      "B",
+      "C"
+    ],
+    "service": [
+      "A",
+      "B",
+      "C"
+    ],
+    "price": [
+      "A",
+      "B",
+      "C"
+    ],
+    "flow": [
+      "A",
+      "B",
+      "C"
+    ],
+    "about": [
+      "A",
+      "B",
+      "C"
+    ],
+    "person": [
+      "A",
+      "B",
+      "C"
+    ],
+    "contact": [
+      "A",
+      "B",
+      "C"
+    ],
+    "legal": [
+      "A"
+    ]
+  },
+  "assignmentExample": {
+    "description": "行政書士パック16ページでの型の配り方。同じ型が3ページを超えないように配り、同じ型が重なるページには variant を振る。",
+    "preset": "navy_trust",
+    "pages": {
+      "gyoseishoshi-top": {
+        "pageType": "top",
+        "pattern": "A",
+        "variant": 1
+      },
+      "gyoseishoshi-gyomu": {
+        "pageType": "service_list",
+        "pattern": "B",
+        "variant": 1
+      },
+      "gyoseishoshi-zairyu": {
+        "pageType": "service",
+        "pattern": "A",
+        "variant": 2
+      },
+      "gyoseishoshi-kensetsu": {
+        "pageType": "service",
+        "pattern": "B",
+        "variant": 2
+      },
+      "gyoseishoshi-souzoku": {
+        "pageType": "service",
+        "pattern": "C",
+        "variant": 3
+      },
+      "gyoseishoshi-setsuritsu": {
+        "pageType": "service",
+        "pattern": "A",
+        "variant": 3
+      },
+      "gyoseishoshi-sanpai": {
+        "pageType": "service",
+        "pattern": "B",
+        "variant": 1
+      },
+      "gyoseishoshi-eigyo": {
+        "pageType": "service",
+        "pattern": "C",
+        "variant": 1
+      },
+      "gyoseishoshi-hojokin": {
+        "pageType": "service",
+        "pattern": "A",
+        "variant": 1
+      },
+      "gyoseishoshi-jidosha": {
+        "pageType": "service",
+        "pattern": "C",
+        "variant": 2
+      },
+      "gyoseishoshi-ryokin": {
+        "pageType": "price",
+        "pattern": "A",
+        "variant": 1
+      },
+      "gyoseishoshi-nagare": {
+        "pageType": "flow",
+        "pattern": "C",
+        "variant": 1
+      },
+      "gyoseishoshi-about": {
+        "pageType": "about",
+        "pattern": "B",
+        "variant": 1
+      },
+      "gyoseishoshi-message": {
+        "pageType": "person",
+        "pattern": "C",
+        "variant": 1
+      },
+      "gyoseishoshi-contact": {
+        "pageType": "contact",
+        "pattern": "B",
+        "variant": 1
+      },
+      "gyoseishoshi-privacy": {
+        "pageType": "legal",
+        "pattern": "A",
+        "variant": 1
+      }
+    },
+    "note": "2026-08-22 時点で組み直したのは sanpai(B1) / eigyo(C1) / hojokin(A1) / jidosha(C2) の4ページ。zairyu・kensetsu・souzoku・setsuritsu は旧構成のままなので、組み直すときにこの variant を使う。"
+  },
+  "blocksWithOwnHeading": {
+    "description": "これらのブロックは自分で見出し(h1/h2)を描く。直前に siteConstants.headingBlock を置くと見出しが二重になるので置かない。headingBefore より優先する。",
+    "blocks": [
+      "wdl/cta-1",
+      "wdl/cta-2",
+      "wdl/custom-title-2",
+      "wdl/custom-title-3",
+      "wdl/custom-title-5",
+      "wdl/fv-1",
+      "wdl/fv-5",
+      "wdl/fv-6",
+      "wdl/lw-list-2",
+      "wdl/lw-pr-fv-13",
+      "wdl/lw-step-1",
+      "wdl/lw-voice-1",
+      "wdl/paid-block-contact-2",
+      "wdl/paid-block-cta-3",
+      "wdl/paid-block-fv-10",
+      "wdl/paid-block-fv-8",
+      "wdl/paid-block-voice-2",
+      "wdl/profile-1",
+      "wdl/lw-message-1"
+    ],
+    "note": "見出しの文言はブロック側の属性（titleText / mainTitle / title）に入れる。lw-message-1 は h3（sub＋main）を自分で描くので、直前に見出しブロックを置かない。"
+  },
+  "knownIssues": [
+    {
+      "what": "FVブロックの見出しレベルが揃っていない",
+      "detail": "fv-5 / fv-6 / paid-block-fv-10 / paid-block-fv-11 / paid-block-contact-2 は h1、paid-block-fv-8 と lw-pr-fv-13 は h2 で描く。後者を使うページには h1 が1つも無い状態になる。",
+      "workaround": "soft_consult と visual_shop のトップページを作るときは、FVの見出しを h1 にできるか確認する。できなければ preset の fvTop を h1 のブロックに替える。",
+      "foundAt": "2026-08-22"
+    },
+    {
+      "what": "カード系ブロックはほぼ全部が画像を要求する",
+      "detail": "content-3〜7 / banner-info-01〜05 / solution-1,2 / gallery系は画像必須。画像を用意できない下層ページでは中身が空のカードになる。画像を使わないカード系は lw-content-8 だけ（サブ+タイトル+説明+ボタンの3カラム）。ほかは lw-list-1/3/4・step系・表・FAQ・voice-1 が画像不要。",
+      "workaround": "写真を用意できないページでは lw-content-8 か lw-list-* を使う。C（写真主役型）は画像生成が前提。",
+      "foundAt": "2026-08-22"
+    },
+    {
+      "what": "AIが繰り返し部分を入れられないブロックがある",
+      "detail": "block.json の配列属性に source が無いブロックは、lw_build_block で中身を差し替えられない（保存HTMLを組み直す必要があるため）。該当: lw-banner-info-01〜05 / lw-gallery-01,02 / paid-block-lw-gallery-3 / paid-block-fv-9,11,12 / lw-pr-fv-14 / paid-block-content-4 / paid-block-voice-3 / paid-block-before-after-2。lw-pr-table-1 は rows は入るが headers は入らない。",
+      "workaround": "型ではこれらを使わない（2026-08-22に差し替え済み）。使いたい場合はブロックエディタで入力する。恒久対策は block.json の配列属性に source:query を付けること（テーマ側の改修・要検討）。",
+      "foundAt": "2026-08-22"
+    },
+    {
+      "what": "見本マークアップが壊れているブロックがある",
+      "detail": "lw-link-list-1 と lw-link-list-2（paid-block-link-2）は data-icon 属性の値に生の < が入っていて、属性が途中で切れる。フロントでSVGのソースがそのまま文字として表示される（2026-08-22 に実機で確認）。lw-content-5 は alt 属性に <br> が入っている（軽微）。",
+      "workaround": "この3ブロックは型で使わない。使うならブロックエディタでアイコンを入れ直す。恒久対策は見本ファイル側の修正（テーマ）。",
+      "foundAt": "2026-08-22"
+    },
+    {
+      "what": "lw-comment-1（吹き出しコメント）は代表の一言に向かない",
+      "detail": "名前が2行に折り返して読みにくく（「行政書士 白／鷺 健一」）、灰色の吹き出しだけで素っ気ない。2026-08-22 に実機で確認して型から外した。",
+      "workaround": "代表の一言は lw-message-1（メッセージ01・写真＋サブ＋見出し＋リード＋本文）を使う。トップと代表あいさつページで既に使っている見た目。",
+      "foundAt": "2026-08-22"
+    },
+    {
+      "what": "block.json の aiHint.contentAttributes が不完全なブロックがある",
+      "detail": "lw-message-1 は captionSub（代表取締役）と captionMain（山田太郎）が contentAttributes に載っていない。AIはこの2つの存在に気づけず、ダミーの氏名が残ったページを作ってしまう（2026-08-22 に実機で発見）。",
+      "workaround": "ページを作ったあと、使ったブロックの block.json の文字列の既定値が最終マークアップに残っていないかを機械で検査する（scripts の build-gyomu-page.js に実装済み）。恒久対策は aiHint の補完（テーマ）。",
+      "foundAt": "2026-08-22"
+    },
+    {
+      "what": "paid-block-voice-2 は既定の色がピンク",
+      "detail": "見本のブロックコメントに filterColor:#f3b1b1 / voiceThanksFontColor:#d77575 が入っていて、そのまま使うと士業のサイトにピンクの帯が出る（2026-08-22 Ryuichi 指摘）。",
+      "workaround": "filterColor と voiceThanksFontColor を var(--color-main) にする。",
+      "foundAt": "2026-08-22"
+    },
+    {
+      "what": "paid-block-content-3 は画面幅いっぱいに広がる設計",
+      "detail": "CSSが max-width: var(--content-3-max-w, 100vw) で、既定はフルブリード。本文1040pxのページに置くと画像が左端まで伸びて左寄りに見える（2026-08-22 Ryuichi 指摘）。",
+      "workaround": "本文幅に揃えたいページでは使わない。使うならページのカスタムCSSで --content-3-max-w を指定する。型Cの関連業務は paid-block-content-7 に変更した。",
+      "foundAt": "2026-08-22"
+    },
+    {
+      "what": "AIが選べるブロックは purpose.json が決めている（144種のうち一部しか候補に出ない）",
+      "detail": "class-gemini-api.php の get_curated_block_names() が functions/custom_bloc_insert_system/purpose.json の union を作り、get_block_catalog() をその名前だけに絞る。ここに載っていないブロックはAIから存在が見えない。2026-08-26 時点で 51/144 しか載っておらず、さらに introduction・features・solution・access・history の5用途は候補ゼロ、faq・price・calendar は候補1つだけだった（＝毎回必ず同じブロックになる構造）。93ブロックまで広げ、候補ゼロの用途を無くした。",
+      "workaround": "新しいブロックを使えるようにしたいときは purpose.json の該当用途に「★どんな業種・場面向きか。構成。」の説明つきで足す。ブロック名は block.json の name（ディレクトリ名と違うことがある。例 dir=lw-button-2 / name=wdl/lw-button-02）。実在しない名前を書くと黙って候補が減る（error_log には出る）。",
+      "foundAt": "2026-08-26"
+    },
+    {
+      "what": "block.json の aiHint.notes がAIに届いていなかった（配線漏れ）",
+      "detail": "class-block-settings.php の get_all_blocks() が aiHint から description / contentAttributes / imageAttributes / excludeFromAutoSelect は写していたが、notes だけ写していなかった。get_block_catalog() は $block['aiNotes'] を見るので、aiHint.notes に書いた注意書き（14ブロック分）はプロンプトに1文字も載っていなかった。2026-08-26 に写す処理を追加。",
+      "workaround": "ブロックの癖・向き不向きは block.json の aiHint.notes に書く。ここがAIに届く唯一の場所。このファイル（layout-patterns.json）はPHPから読まれないので、書いても製品のAIには届かない（Claude用の資料）。",
+      "foundAt": "2026-08-26"
+    },
+    {
+      "what": "lw-pr-fv-14 は高さが足りないと本文がロゴに重なる",
+      "detail": "本文（.fv_inner）が position:absolute + height:100% + align-content:center で、ヘッダーを含むFV全体の中央に置かれる。本文は絶対配置なのでFVの高さを1pxも押し広げない。実測（2026-08-26・lite-word.com/clinic-top/）では 393px幅・min-h-sp-560px で34px、360/320px幅で47px 食い込んだ。さらに min-h-*-100vh-header 系は calc(100vh - var(--header-main-height)) なので、このFVを使うページ（テーマヘッダーを非表示にする）では変数が未定義になり、calc ごと無効化されてFVが128pxに潰れる。",
+      "workaround": "minHeightSp は min-h-sp-100vh か、少なくとも min-h-sp-560px 以上。100vh-header 系は使わない。ページのヘッダー設定（header_select）は「非表示」にする（このFVが自分でロゴ・ナビを描くため）。恒久対策としてブロック側に「ヘッダーの下から本文を置く」ガードを入れる（収まっているときは1pxも動かない作り）。",
+      "foundAt": "2026-08-26"
+    },
+    {
+      "what": "purpose.json に載せると block.json の excludeFromAutoSelect が打ち消される",
+      "detail": "get_block_catalog() は $allowed_names が空のときだけ excludeFromAutoSelect を見る。purpose.json 経由（＝許可リストあり）では「呼び出し元の意思を優先」して除外指定を無視する。2026-08-26 時点で、除外を宣言しているのに purpose.json に載っているブロックが5件あった。",
+      "workaround": "除外指定のあるブロックを purpose.json に載せるときは、載せてよい理由を確かめる。AIが中身を作れるなら aiHint を直して excludeFromAutoSelect を false にする（lw-pr-table-1/3・lw-pr-calendar-1 はこの扱いにした）。作れないもの（fv-7＝動画URL、lw-pr-step-8＝テキスト属性が無い）は purpose.json から外す。",
+      "foundAt": "2026-08-26"
+    }
+  ],
+  "spacingRules": {
+    "description": "余白ブロック（lw-space-1）の入れ方。ここを間違えると、色の帯と帯のあいだに白い隙間が出て「入れ忘れ」に見える。",
+    "bandBlocks": {
+      "description": "画面いっぱいの背景（色または画像）を持つブロック。上下に自前の余白を持っているので、外から余白を足す必要がない。",
+      "blocks": [
+        "wdl/cta-2",
+        "wdl/fv-1",
+        "wdl/fv-5",
+        "wdl/fv-6",
+        "wdl/lw-list-2",
+        "wdl/lw-step-1",
+        "wdl/lw-pr-fv-13",
+        "wdl/paid-block-fv-10",
+        "wdl/paid-block-voice-2",
+        "wdl/lw-post-list-1",
+        "wdl/lw-pr-post-list-4"
+      ],
+      "howDetected": "見本マークアップに __filter / bg_image / background-image / filterBackgroundColor があるもの。実機で fv-6・lw-list-2・lw-step-1・cta-2 が帯であることを確認済み（2026-08-22）。"
+    },
+    "rules": [
+      "🚨 帯ブロックどうしが隣り合うときは、あいだに余白ブロックを入れない。白い隙間ができて分断されて見える（2026-08-22 Ryuichi 指摘）。",
+      "帯ブロックの直後に白背景のセクションが来るときは、通常の余白を入れてよい（区切りとして自然）。白背景のあとに帯が来るときも同じ。",
+      "見出しブロックとその本体のあいだは小さい余白（pc4 / tb3 / sp2）。または入れない。",
+      "セクションとセクションのあいだは pc56 / tb45 / sp28 を基準にする。大きく区切りたいところだけ pc64 / tb51 / sp32。",
+      "ページ末尾のCTAの直前は pc40 / tb32 / sp20。"
+    ],
+    "standardSpacers": {
+      "afterHeading": {
+        "pcHeight": 4,
+        "tbHeight": 3,
+        "spHeight": 2
+      },
+      "betweenSections": {
+        "pcHeight": 56,
+        "tbHeight": 45,
+        "spHeight": 28
+      },
+      "betweenSectionsLarge": {
+        "pcHeight": 64,
+        "tbHeight": 51,
+        "spHeight": 32
+      },
+      "beforeCta": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 20
+      }
+    }
+  },
+  "contentLimits": {
+    "description": "見本の作りに合わせて、文字数を守らないと崩れる項目。ページを作る前に確認する。",
+    "items": [
+      {
+        "block": "wdl/paid-block-voice-2",
+        "attr": "voices[].thanks",
+        "limit": "英字の装飾語（見本は thank you）。半角12文字まで",
+        "why": "背景の帯が無く、写真の上に斜めに直接重ねる作り。書体が Dancing Script（欧文の飾り書体）なので日本語は書体が効かず、明るい写真の上では読みにくい。長いとカードの外にはみ出す（2026-08-22 実機で確認）。"
+      },
+      {
+        "block": "wdl/lw-list-2",
+        "attr": "titleText",
+        "limit": "全角15文字まで",
+        "why": "block.json の aiHint に maxLength 15 と書かれている。"
+      },
+      {
+        "block": "wdl/lw-list-2",
+        "attr": "contents[].text",
+        "limit": "全角30文字まで",
+        "why": "同上。カード内で2行に収まる想定。"
+      },
+      {
+        "block": "wdl/lw-list-4",
+        "attr": "contents[].text",
+        "limit": "全角30文字まで",
+        "why": "同上。"
+      },
+      {
+        "block": "wdl/paid-block-content-7",
+        "attr": "contents[].ttl",
+        "limit": "全角12文字まで",
+        "why": "写真の上に白い板として重ねる作り。13文字以上で2行になり、そのカードだけ板が高くなって3枚の高さが揃わなくなる（2026-08-22 実機で確認）。"
+      }
+    ]
+  }
+}

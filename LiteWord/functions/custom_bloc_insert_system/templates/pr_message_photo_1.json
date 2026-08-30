@@ -1,0 +1,93 @@
+{
+  "title": "ごあいさつ（写真と帯で1枚に・想いを伝える）",
+  "description": "【型B：説明が主役】全幅の帯に、縦長の写真と代表の言葉を1枚にまとめた段。大きな一文＋本文＋肩書き＋お約束3つ。ごあいさつ・代表メッセージ・創業の想いに。短く済ませたいときは「ごあいさつ（代表の言葉＋プロフィール表）」のほうを選んでください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "ごあいさつ",
+        "subTitle": "MESSAGE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "どんな考えで庭をつくっているのかを、代表の言葉でお伝えします。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-message-1",
+      "attributes": {
+        "subTitle": "",
+        "mainTitle": "10年先に、ちょうど良い庭を",
+        "leadText": "植えたときがいちばん綺麗な庭は、\n三年で窮屈になります。",
+        "bodyText": "庭は、つくった日から少しずつ形が変わります。木は伸び、下草は広がり、日の当たり方も年ごとに変わっていきます。\n\nですから図面を引く前に、必ず一度お住まいを見せていただきます。何年後にどのくらいの大きさになるかを想像しながら、木を選びます。\n\n植えたその日がいちばん見栄えのする庭より、十年後に手のかからない庭のほうが、長く気に入っていただけると思っています。\n\n手入れのご相談だけでも構いません。まずは今のお庭を見せてください。",
+        "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/message_photo_01.webp",
+        "imgAlt": "植木畑に立つ造園会社の代表",
+        "captionSub": "代表",
+        "captionMain": "山田 太郎",
+        "maxWidth": 1040
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "私が大切にしている3つのことです。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-4",
+      "attributes": {
+        "contents": [
+          {
+            "text": "お見積りの前に、必ず一度お庭を見にうかがいます"
+          },
+          {
+            "text": "木を植えたあとも、一年間は無料で様子を見にきます"
+          },
+          {
+            "text": "切ってよい枝と残す枝を、その場でご説明します"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "代表に直接きいてみる",
+        "textSub": "＼ ご相談はいつでも私がうかがいます ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

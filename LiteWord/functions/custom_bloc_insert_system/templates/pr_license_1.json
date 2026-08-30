@@ -1,0 +1,111 @@
+{
+  "title": "資格・許可・加盟団体（有資格者の紹介つき）",
+  "description": "【型B：説明が主役】写真つきのひとこと＋免許・資格・加盟団体のカード3枚。不動産・士業・工務店・介護など、免許や登録がないと営業できない業種の「安心材料」の段に。番号は仮の値なので、必ずご自身のものに書き換えてください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "資格・許可・加盟団体",
+        "subTitle": "LICENSE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お取引の前に、当社がどんな免許と資格でお仕事をしているかをご覧ください。番号はすべて公になっていて、どなたでも確かめられます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-content-1",
+      "attributes": {
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/license_01.webp",
+        "imageAlt": "打ち合わせ室で図面を手にしている担当者",
+        "imagePosition": "left",
+        "title": "有資格者が、最後まで担当します",
+        "content": "お部屋のご案内から重要事項のご説明、ご契約のお手続きまで、宅地建物取引士の資格を持つ担当者が最後まで行います。\n途中で担当が変わることはありません。お聞きになりにくいことほど、遠慮なくお尋ねください。その場で分かるまでご説明します。",
+        "linkText": ""
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-content-8",
+      "attributes": {
+        "innerMaxWidth": 1040,
+        "showButton": false,
+        "contents": [
+          {
+            "sub": "LICENSE",
+            "main": "宅地建物取引業免許",
+            "text": "東京都知事（3）第000000号。5年ごとに更新しています。かっこの中の数字は更新した回数で、営業してきた年数のめやすになります。",
+            "url": "",
+            "btnText": ""
+          },
+          {
+            "sub": "STAFF",
+            "main": "宅地建物取引士 3名",
+            "text": "在籍している有資格者の人数です。ご案内から重要事項のご説明、ご契約まで、資格を持つ者が責任をもって対応します。",
+            "url": "",
+            "btnText": ""
+          },
+          {
+            "sub": "MEMBER",
+            "main": "加盟団体",
+            "text": "公益社団法人 東京都宅地建物取引業協会／公益社団法人 全国宅地建物取引業保証協会に加盟しています。",
+            "url": "",
+            "btnText": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※免許番号・登録番号・団体名は、必ずご自身のものに書き換えてください。<br>実際に取得していない資格や許可を載せることはできません。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "0px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "会社概要を見る",
+        "textSub": "＼ 会社の情報・沿革・アクセス ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "title": "沿革（会社の歩み・年表5つ）",
+  "description": "【型B：説明が主役】見出し＋歩みのひとこと＋年表（1ブロック＝1年）＋会社概要への導線。会社概要ページで「会社概要」の次に置くと1枚になります。年を増やすときは年のブロックを複製し、年と年の間にスペーサーを入れないでください（左の縦線が1本につながらなくなります）。年の欄も月の欄も幅が決まっているので、「1998年」「4月」のように短く入れてください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "沿革",
+        "subTitle": "HISTORY",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "創業から今日までに何をしてきたのか、節目になった出来事だけをまとめました。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-history-1",
+      "attributes": {
+        "yearText": "1998年",
+        "yearTag": "h3",
+        "events": [
+          {
+            "month": "4月",
+            "desc": "前身となる「〇〇工房」を〇〇市に開業。スタッフ2名でご依頼をお受けし始めました。"
+          },
+          {
+            "month": "11月",
+            "desc": "初めて法人のお客様からご依頼をいただく。以降、口コミでのご紹介が増えていきました。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-history-1",
+      "attributes": {
+        "yearText": "2005年",
+        "yearTag": "h3",
+        "events": [
+          {
+            "month": "6月",
+            "desc": "株式会社〇〇として法人化。資本金1,000万円。"
+          },
+          {
+            "month": "10月",
+            "desc": "事務所を現在地（〇〇市〇〇町）へ移転し、作業スペースを2倍に広げました。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-history-1",
+      "attributes": {
+        "yearText": "2013年",
+        "yearTag": "h3",
+        "events": [
+          {
+            "month": "3月",
+            "desc": "スタッフ10名体制に。専任の窓口担当を置き、お問い合わせに当日中にお返事できる体制を整えました。"
+          },
+          {
+            "month": "9月",
+            "desc": "〇〇部門を新設。打ち合わせから仕上げまで自社で一貫してお受けできるようになりました。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-history-1",
+      "attributes": {
+        "yearText": "2020年",
+        "yearTag": "h3",
+        "events": [
+          {
+            "month": "5月",
+            "desc": "オンラインでのご相談・お見積りを開始。遠方のお客様にも対応できるようになりました。"
+          },
+          {
+            "month": "12月",
+            "desc": "これまでのご依頼が累計1,000件を超えました。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-history-1",
+      "attributes": {
+        "yearText": "2026年",
+        "yearTag": "h3",
+        "events": [
+          {
+            "month": "4月",
+            "desc": "〇〇支店を開設。対応エリアを〇〇県全域へ広げました。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ 主な出来事のみを記載しています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "会社概要を見る",
+        "textSub": "＼ 事業内容と所在地はこちら ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

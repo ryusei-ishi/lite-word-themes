@@ -79,121 +79,128 @@ function lw_get_integrated_template_configs() {
                         ],
                         [
                             'name' => 'トップページ カメラマン系 01',
-                            'description' => '',
+                            'description' => '写真で見せる業種に。<br>お知らせ・コンセプト・写真集・ブログを1枚に並べた構成',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_2.php',
                             'public' => true,
                         ],
                         [
                             'name' => 'トップページ カメラマン系 02',
-                            'description' => '',
+                            'description' => 'カメラマン系 01 の別バージョン。<br>ヘッダーが切り替わるスライダーで、写真集も横に流れる形',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_2_2.php',
                             'public' => false,
                         ],
                         [
                             'name' => 'トップページ パターン3',
-                            'description' => '',
+                            'description' => 'いちばん短い構成。<br>中央に一言のヘッダー＋おすすめ3つ＋ブログ一覧だけ',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_3.php',
                             'public' => false,
                         ],
                           [
                             'name' => 'トップページ パターン4',
-                            'description' => '',
+                            'description' => 'エステ・サロンに。<br>動画ヘッダー＋コンセプト＋施術メニュー＋スタッフ紹介＋アクセス',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_4.php',
                             'public' => false,
                         ],
                           [
                             'name' => 'トップページ 税理士系ブログ',
-                            'description' => '',
+                            'description' => '士業・事務所に。<br>分野別の解説とブログ一覧で、記事を積んで信頼を得る形',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_5.php',
                             'public' => false,
                         ],
                         [
                             'name' => 'トップページ 美容室系1-1',
-                            'description' => '',
+                            'description' => '美容室・サロンに。<br>コンセプト＋3つの特長＋ギャラリー＋オーナーあいさつ',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_6.php',
                             'public' => false,
                         ],
                         [
                             'name' => 'トップページ 美容室系1-2',
-                            'description' => '',
+                            'description' => '美容室系1-1 のメニュー版。<br>特長のかわりに3つのメニューを並べ、問い合わせフォームまで付く',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_6_2.php',
                             'public' => false,
                         ],
                         [
                             'name' => 'トップページ ブログ系',
-                            'description' => '',
+                            'description' => '発信が中心の方に。<br>おすすめ記事と最新記事だけの、いちばん軽い構成',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_7.php',
                             'public' => false,
                         ],
                         [
                             'name' => 'トップページ カフェ系',
-                            'description' => '',
+                            'description' => 'カフェ・飲食店に。<br>大きな写真と、ランチ・カフェ・テイクアウトの写真グリッド',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_8.php',
                             'public' => false,
                         ],
                         [
                             'name' => 'トップページ 動物病院系',
-                            'description' => '',
+                            'description' => 'クリニック・動物病院に。<br>診療内容3つ＋予約の導線2本＋よくある質問＋アクセス',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_9.php',
                             'public' => false,
                         ],
                         [
                             'name' => 'トップページ インテリア系',
-                            'description' => '',
+                            'description' => '見せる商品がある業種に。<br>スタイリング例のギャラリーとスタッフ紹介が入った長めの構成',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_10.php',
                             'public' => false,
                         ],
                         [
                             'name' => 'トップページ ヘアーサロン系',
-                            'description' => '',
+                            'description' => '美容室・サロンに。<br>丸いメニューの入口＋スタイル写真＋ビフォーアフター＋ご予約',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_11.php',
                             'public' => false,
                         ],
                         [
                             'name' => 'トップページ ショップ系',
-                            'description' => '',
+                            'description' => '物販・ショップに。<br>こだわり3つ＋ベストセラー＋作り手の言葉で締める構成',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_12.php',
                             'public' => false,
                         ],
                         [
                             'name' => 'トップページ アウトドア系',
-                            'description' => '',
+                            'description' => '体験・ツアーに。<br>動画ヘッダー＋ツアー3コース＋ベストシーズン＋よくある質問',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_13.php',
                             'public' => false,
                         ],
                         [
                             'name' => 'トップページ リフォーム系',
-                            'description' => '',
+                            'description' => '工務店・リフォームに。<br>お悩み3つ＋施工事例のビフォーアフター＋料金表＋お客様の声',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_15.php',
                             'public' => false,
                         ],
                         [
                             'name' => 'トップページ 法律事務所系',
-                            'description' => '',
+                            'description' => '士業・法律事務所に。<br>相談例6つ＋選ばれる6つの理由＋対応分野＋相談の流れ',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_16.php',
                             'public' => false,
                         ],
                         [
                             'name' => 'トップページ お米農家系',
-                            'description' => '',
+                            'description' => '生産者・産直に。<br>おすすめの食べ方＋作り手の想い＋お客様の声＋購入への導線',
                             'preview_url' => '',
                             'path' => 'page_template/top/ptn_17.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => 'トップページ エステサロン系',
+                            'description' => 'エステ・サロンに。<br>美容室系1-1 と同じ組み立てを、エステの言葉と写真にした版',
+                            'preview_url' => 'https://lite-word.com/page-sample-list/sample_page_top_18/',
+                            'path' => 'page_template/top/ptn_18.php',
                             'public' => false,
                         ],
                     ]
@@ -493,7 +500,92 @@ function lw_get_integrated_template_configs() {
                 ],
                 'beauty' => [
                     'label' => '美容・エステ',
-                    'templates' => []
+                    'templates' => [
+                        [
+                            'name' => 'エステサロン メニューページ（フェイシャル）',
+                            'description' => 'エステサロンのメニューページ<b>【型C：写真が主役】</b>。<br>お悩み6つ→できること写真カード3枚→ご予約前のご確認→料金表→写真つきステップ6段→お持ちいただくもの→Q&amp;A→お客様の声（写真）→ほかのメニュー→CTA。<br>施術中の手元と仕上がりで見せる、いちばん基本の型です。',
+                            'preview_url' => 'https://lite-word.com/esthe-menu-facial/',
+                            'path' => 'page_template/esthe/menu_facial_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => 'エステサロン メニューページ（痩身・ボディ）',
+                            'description' => 'エステサロンのメニューページ<b>【型C：写真が主役／2ページ目用】</b>。<br>お悩みリスト→<b>数値の変化カード3枚</b>（見出しに「ウエスト 平均 -4.2cm」のように数字を出す）→ご予約前のご確認→料金表→写真つきステップ6段→当日のご準備→Q&amp;A→お客様の声（写真）→ほかのメニュー→CTA。<br>結果を数字で見せたいメニュー向けです。',
+                            'preview_url' => 'https://lite-word.com/esthe-menu-body/',
+                            'path' => 'page_template/esthe/menu_body_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => 'エステサロン メニューページ（脱毛）',
+                            'description' => 'エステサロンのメニューページ<b>【型A：表が主役】</b>。<br>お悩みリスト→<b>部位×回数の表</b>→ご予約前のご確認→<b>部位×コースの料金表</b>→ステップ4段→当日のご準備→Q&amp;A→お客様の声→ほかのメニュー→CTA。<br>表を2枚使うので<b>写真は2枚だけ</b>。素材が少なくても作れます。',
+                            'preview_url' => 'https://lite-word.com/esthe-menu-datsumo/',
+                            'path' => 'page_template/esthe/menu_datsumo_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => 'エステサロン メニューページ（ブライダル）',
+                            'description' => 'エステサロンのメニューページ<b>【型B：説明が主役】</b>。<br>お悩みリスト→<b>挙式日から逆算する3段</b>（6か月前／3か月前／1か月前・料金表へ飛ぶボタンつき）→ご予約前のご確認→料金表→ご相談から当日までのステップ4段→お持ちいただくもの→Q&amp;A→お受けいただいた方の声（写真）→ほかのメニュー→CTA。<br>期日から逆算して選んでもらうメニュー向けです。',
+                            'preview_url' => 'https://lite-word.com/esthe-menu-bridal/',
+                            'path' => 'page_template/esthe/menu_bridal_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => 'エステサロン メニューページ（リンパ・ヘッドスパ）',
+                            'description' => 'エステサロンのメニューページ<b>【型C：写真が主役／3ページ目用】</b>。<br>お悩みリスト→写真カード3枚→帯つきのご確認事項→料金表（所要時間つき）→ステップ3段→当日のご準備→Q&amp;A→お客様の声（写真）→ほかのメニュー（ボタンつきカード）→CTA。<br>効果より「心地よさ」で選ばれるメニュー向けです。',
+                            'preview_url' => 'https://lite-word.com/esthe-menu-lymph/',
+                            'path' => 'page_template/esthe/menu_lymph_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => 'エステサロン メニューページ（ハーブピーリング）',
+                            'description' => 'エステサロンのメニューページ<b>【型B：説明が主役／2ページ目用】</b>。<br>帯つきお悩みリスト→<b>仕組みの説明3段</b>（料金表へ飛ぶボタンつき）→ご予約前のご確認→料金表→<b>施術後5日間の経過表</b>→Q&amp;A→お受けいただいた方の声（写真）→ほかのメニュー→CTA。<br>ダウンタイムのあるメニューを、先に正直に説明する構成です。',
+                            'preview_url' => 'https://lite-word.com/esthe-menu-herb/',
+                            'path' => 'page_template/esthe/menu_herb_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => 'エステサロン メニューページ 明朝（フェイシャル）',
+                            'description' => 'エステサロンのメニューページ<b>【明朝・上品／枠1】</b>。<br>見出しはすべて<b>明朝体・中央寄せ</b>、色は<b>墨＋金</b>、余白はゴシック版の1.7倍。本文はゴシックのまま読みやすさを保っています。<br>お悩み（1列カード）→できること（縦長写真3枚）→ご予約前のご確認→料金表→当日の流れ（縦カード）→お持ちいただくもの→Q&amp;A（開閉なし）→お客様の声→ほかのメニュー→CTA（電話＋メール）。<br>落ち着いた大人向けサロン向けの、明朝パックの基本の型です。',
+                            'preview_url' => 'https://lite-word.com/esthe2-menu-facial/',
+                            'path' => 'page_template/esthe2/menu_facial_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => 'エステサロン メニューページ 明朝（痩身・ボディ）',
+                            'description' => 'エステサロンのメニューページ<b>【明朝・上品／枠2】</b>。<br>お悩み（チェック2列）→<b>数値の変化カード3枚</b>（見出しに「ウエスト 平均 -4.2cm」のように数字を出す）→ご予約前のご確認→料金表→当日の流れ（番号つき）→当日のご準備→Q&amp;A（アコーディオン）→お客様の声→ほかのメニュー→CTA。<br>枠1とは本文6枠すべてが違うので、同じサロン内の2ページ目に並べても同じ顔になりません。',
+                            'preview_url' => 'https://lite-word.com/esthe2-menu-body/',
+                            'path' => 'page_template/esthe2/menu_body_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => 'エステサロン メニューページ 明朝（脱毛）',
+                            'description' => 'エステサロンのメニューページ<b>【明朝・上品／枠3・表が2つ】</b>。<br>お悩み（番号2列）→<b>部位×回数の表</b>→ご予約前のご確認→<b>部位×コースの料金表</b>→当日の流れ（帯）→当日のご準備→Q&amp;A（アコーディオン）→お客様の声→ほかのメニュー→CTA。<br>表を2枚使うので<b>写真は2枚だけ</b>。素材が少なくても作れます。',
+                            'preview_url' => 'https://lite-word.com/esthe2-menu-datsumo/',
+                            'path' => 'page_template/esthe2/menu_datsumo_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => 'エステサロン メニューページ 明朝（ブライダル）',
+                            'description' => 'エステサロンのメニューページ<b>【明朝・上品／枠2】</b>。<br>お悩み（チェック2列）→<b>挙式日から逆算する3段</b>（6か月前／3か月前／1か月前）→ご予約前のご確認→料金表→ご相談から当日までの流れ（番号つき）→お持ちいただくもの→Q&amp;A（アコーディオン）→お受けいただいた方の声→ほかのメニュー→CTA。<br>期日から逆算して選んでもらうメニュー向けです。',
+                            'preview_url' => 'https://lite-word.com/esthe2-menu-bridal/',
+                            'path' => 'page_template/esthe2/menu_bridal_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => 'エステサロン メニューページ 明朝（リンパ・ヘッドスパ）',
+                            'description' => 'エステサロンのメニューページ<b>【明朝・上品／枠3】</b>。<br>お悩み（番号2列）→できること（縦長写真3枚）→ご予約前のご確認→料金表（所要時間つき）→当日の流れ（帯）→当日のご準備→Q&amp;A（アコーディオン）→お客様の声→ほかのメニュー→CTA。<br>効果より「心地よさ」で選ばれるメニュー向け。明朝と広い余白がいちばん効く型です。',
+                            'preview_url' => 'https://lite-word.com/esthe2-menu-lymph/',
+                            'path' => 'page_template/esthe2/menu_lymph_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => 'エステサロン メニューページ 明朝（ハーブピーリング）',
+                            'description' => 'エステサロンのメニューページ<b>【明朝・上品／枠1・説明が主役】</b>。<br>お悩み（1列カード）→<b>仕組みの説明3段</b>（画像なし・料金表へ飛ぶボタンつき）→ご予約前のご確認→料金表→<b>施術後5日間の経過表</b>→Q&amp;A（開閉なし）→お受けいただいた方の声→ほかのメニュー→CTA。<br>ダウンタイムのあるメニューを、先に正直に説明する構成です。',
+                            'preview_url' => 'https://lite-word.com/esthe2-menu-herb/',
+                            'path' => 'page_template/esthe2/menu_herb_1/index.php',
+                            'public' => false,
+                        ],
+                    ]
                 ],
                 'professional' => [
                     'label' => '士業（弁護士・税理士・行政書士）',
@@ -501,15 +593,135 @@ function lw_get_integrated_template_configs() {
                         [
                             'name' => '行政書士事務所 トップページ',
                             'description' => '許認可・相続・会社設立の相談を受ける行政書士事務所向け。<br>お悩み6つ／選ばれる6つの理由／解決事例3件／代表あいさつ／お知らせ／CTA',
-                            'preview_url' => '',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-top/',
                             'path' => 'page_template/gyoseishoshi/top_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => '行政書士事務所 取扱業務の一覧',
+                            'description' => '行政書士事務所の下層ページ。取扱業務を一覧で見せる。<br>ページ見出し／業務カード9枚（在留資格・産廃・建設業・相続・会社設立・営業許可・補助金・自動車・その他）／こんなときはご相談ください／CTA',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-gyomu/',
+                            'path' => 'page_template/gyoseishoshi/gyomu_list_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => '行政書士事務所 業務ページ（在留資格・ビザ）',
+                            'description' => '行政書士事務所の業務ページ<b>【型A：表が主役／2ページ目用】</b>。<br>番号つき対象リスト→在留資格の一覧表→帯つき注意点→料金表→ステップ→手続きの種類→Q&amp;A→お客様の声→関連業務→CTA。<br>写真を1枚も使わないので、素材が無くても作れます。',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-zairyu/',
+                            'path' => 'page_template/gyoseishoshi/gyomu_zairyu_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => '行政書士事務所 業務ページ（産業廃棄物収集運搬業許可）',
+                            'description' => '行政書士事務所の業務ページ<b>【型B：説明が主役】</b>。<br>帯つきの対象リスト→説明カード3枚→注意点→料金表→ステップ→期間の表→Q&amp;A→代表メッセージ→関連業務カード→CTA',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-sanpai/',
+                            'path' => 'page_template/gyoseishoshi/gyomu_sanpai_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => '行政書士事務所 業務ページ（建設業許可）',
+                            'description' => '行政書士事務所の業務ページ<b>【型B：説明が主役／2ページ目用】</b>。<br>番号つき対象リスト→説明カード4枚→要件→料金表→ステップ→許可後にやること→Q&amp;A→代表メッセージ→関連業務カード→CTA',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-kensetsu/',
+                            'path' => 'page_template/gyoseishoshi/gyomu_kensetsu_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => '行政書士事務所 業務ページ（相続・遺言）',
+                            'description' => '行政書士事務所の業務ページ<b>【型C：写真が主役／3ページ目用】</b>。<br>対象リスト→写真カード3枚→帯つき注意点→料金表→ステップ→遺言書の種類→Q&amp;A→お客様の声（写真）→関連業務→CTA。<br>写真は6枚だけで、流れと関連業務は文字で見せます。',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-souzoku/',
+                            'path' => 'page_template/gyoseishoshi/gyomu_souzoku_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => '行政書士事務所 業務ページ（会社設立）',
+                            'description' => '行政書士事務所の業務ページ<b>【型A：表が主役／3ページ目用】</b>。<br>対象リスト→会社の種類の表→決めておくこと→料金表→帯つきステップ→先に決めること→Q&amp;A→お客様の声→関連業務→CTA。<br>写真を1枚も使わないので、素材が無くても作れます。',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-setsuritsu/',
+                            'path' => 'page_template/gyoseishoshi/gyomu_setsuritsu_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => '行政書士事務所 業務ページ（営業許可）',
+                            'description' => '行政書士事務所の業務ページ<b>【型C：写真が主役】</b>。<br>番号つき対象リスト→写真カード3枚→注意点→料金表→写真つきステップ5段→帯つき期間リスト→Q&amp;A→お客様の声（写真）→関連業務カード→CTA',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-eigyo/',
+                            'path' => 'page_template/gyoseishoshi/gyomu_eigyo_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => '行政書士事務所 業務ページ（補助金・助成金）',
+                            'description' => '行政書士事務所の業務ページ<b>【型A：表が主役】</b>。<br>対象リスト→比較表→注意点→料金表→ステップ→期間の表→Q&amp;A→お客様の声→関連業務→CTA。<br>写真を1枚も使わないので、素材が無くても作れます。',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-hojokin/',
+                            'path' => 'page_template/gyoseishoshi/gyomu_hojokin_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => '行政書士事務所 業務ページ（自動車登録・車庫証明）',
+                            'description' => '行政書士事務所の業務ページ<b>【型C：写真が主役／2ページ目用】</b>。<br>営業許可と同じ型ですが、リスト・注意点・期間・Q&amp;Aの4か所を別のブロックに替えてあります。<br>同じ型を2ページ使うときの見本になります。',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-jidosha/',
+                            'path' => 'page_template/gyoseishoshi/gyomu_jidosha_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => '行政書士事務所 料金・費用',
+                            'description' => '行政書士事務所の料金ページ。<br>料金についてのお約束6項目／業務ごとの料金の目安（8業務）／お支払いについて／実費として別に頂くもの／CTA',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-ryokin/',
+                            'path' => 'page_template/gyoseishoshi/kyotsu_ryokin_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => '行政書士事務所 ご依頼の流れ',
+                            'description' => '行政書士事務所の流れページ。<br>5段のステップ（番号つき）／各段でお願いすること／お願いしたいこと5項目／CTA',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-nagare/',
+                            'path' => 'page_template/gyoseishoshi/kyotsu_nagare_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => '行政書士事務所 事務所概要・アクセス',
+                            'description' => '行政書士事務所の概要ページ。<br>事務所概要9項目（会社概要ブロック）／アクセスの表／ご来所の前に4項目／CTA',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-about/',
+                            'path' => 'page_template/gyoseishoshi/kyotsu_gaiyo_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => '行政書士事務所 代表あいさつ',
+                            'description' => '行政書士事務所の代表あいさつページ。<br>あいさつ文＋写真（メッセージブロック）／経歴の表／資格・対応の表／CTA',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-message/',
+                            'path' => 'page_template/gyoseishoshi/kyotsu_aisatsu_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => '行政書士事務所 お問い合わせ',
+                            'description' => '行政書士事務所のお問い合わせページ。<br>ご連絡の方法の表／お伝えいただけると早いこと5項目／メールフォーム／CTA<br>※フォームは挿入後にご自身のフォームを選び直してください',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-contact/',
+                            'path' => 'page_template/gyoseishoshi/kyotsu_contact_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => '行政書士事務所 プライバシーポリシー',
+                            'description' => '行政書士事務所の規約ページ。<br>前文＋第1条〜第9条（利用目的・第三者提供・安全管理・開示請求・守秘義務・窓口ほか）<br>※そのまま使わず、必ず内容をご確認のうえ書き換えてください',
+                            'preview_url' => 'https://lite-word.com/gyoseishoshi-privacy/',
+                            'path' => 'page_template/gyoseishoshi/kyotsu_privacy_1/index.php',
                             'public' => false,
                         ],
                     ]
                 ],
                 'medical' => [
                     'label' => '医療・クリニック',
-                    'templates' => []
+                    'templates' => [
+                        [
+                            'name' => 'クリニック トップページ',
+                            'description' => 'かかりつけ医・内科クリニック向けのトップページ<b>【型G：案内が主役】</b>。<br>ファーストビュー→<b>案内タイル4枚</b>（初めての方・診療時間・アクセス・ご予約）→当院について→診療案内カード4枚→はじめての方へ（4ステップ）→診療時間・アクセスの表→患者さんの声→お知らせ→CTA。<br>売り込みより先に「今日やっているか・どこにあるか・初めてでも大丈夫か」に答える構成です。<br>🚨 <b>このページを使うときは、ページの「ヘッダー設定」を「非表示」にしてください。</b>ファーストビューがロゴとメニューを含んでいるため、既定のままだとヘッダーが二重になります。',
+                            'preview_url' => 'https://lite-word.com/clinic-top/',
+                            'path' => 'page_template/clinic/top_1/index.php',
+                            'public' => false,
+                        ],
+                        [
+                            'name' => 'クリニック 院長紹介ページ',
+                            'description' => 'クリニックの院長紹介ページ<b>【型F：人が主役】</b>。<br>ページ見出し→<b>院長より</b>（顔写真＋本人の言葉・署名つき）→経歴・資格の表2枚→スタッフ紹介3名→院内のご案内（写真6枚）→CTA。<br>経歴を先に出すと履歴書になるので、<b>本人の言葉を先に置いています</b>。医院のほか、士業・教室・サロンなど「資格と経歴が意味を持つ」業種にも使えます。',
+                            'preview_url' => 'https://lite-word.com/clinic-doctor/',
+                            'path' => 'page_template/clinic/doctor_1/index.php',
+                            'public' => false,
+                        ],
+                    ]
                 ],
                 'school' => [
                     'label' => 'スクール・教室',
@@ -843,6 +1055,9 @@ function lw_page_template_insert_page() {
                         const isAccessible = hasSubscription || template.public !== false;
                         const isPremiumOnly = !hasSubscription && template.public === false;
                         const hasPreviewUrl = template.preview_url && template.preview_url.trim() !== '';
+                        // preview_url は「フルサイトを開く」ボタンにだけ使う。
+                        // iframe には使わない：lite-word.com は X-Frame-Options: SAMEORIGIN なので
+                        // 別ドメイン（利用者のサイト）の管理画面では真っ白になるため。
                         
                         const sectionHTML = `
                             <div class="site-section ${isPremiumOnly ? 'premium-only' : ''}" data-index="${index}">
@@ -861,10 +1076,7 @@ function lw_page_template_insert_page() {
                                                 <div class="spinner"></div>
                                                 <p>Loading...</p>
                                             </div>
-                                            ${hasPreviewUrl 
-                                                ? `<iframe data-src="${template.preview_url}" data-type="url" frameborder="0" style="display: none;"></iframe>`
-                                                : `<iframe data-path="${template.path}" data-type="render" frameborder="0" style="display: none;"></iframe>`
-                                            }
+                                            ${`<iframe data-path="${template.path}" data-type="render" frameborder="0" style="display: none;"></iframe>`}
                                         </div>
                                     </div>
                                     <div class="device-preview mobile-preview">
@@ -877,10 +1089,7 @@ function lw_page_template_insert_page() {
                                                     <div class="spinner"></div>
                                                     <p>Loading...</p>
                                                 </div>
-                                                ${hasPreviewUrl 
-                                                    ? `<iframe data-src="${template.preview_url}" data-type="url" frameborder="0" style="display: none;"></iframe>`
-                                                    : `<iframe data-path="${template.path}" data-type="render" frameborder="0" style="display: none;"></iframe>`
-                                                }
+                                                ${`<iframe data-path="${template.path}" data-type="render" frameborder="0" style="display: none;"></iframe>`}
                                             </div>
                                         </div>
                                     </div>

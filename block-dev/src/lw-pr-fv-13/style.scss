@@ -24,11 +24,11 @@
     @media (max-width: 700px) {
         height: 400px;
     }
-    @media (max-width: 500px) {
-        height: 360px;
-    }
-    @media (max-width: 420px) {
-        height: 280px;
+    /* 🚨 2026-08-26: スマホでは文章が写真の上に重なって読めなかった（Ryuichi 指摘）。
+     *   600px 以下は横並びをやめ、「文章 → 写真」の縦積みにする。
+     *   高さは中身に任せるので固定値を置かない。 */
+    @media (max-width: 600px) {
+        height: auto;
     }
     * {
         box-sizing: border-box;
@@ -52,13 +52,11 @@
             padding: 0 32px;
             padding-top: 20px;
         }
+        /* 🚨 縦積みにするので、重ね置き（absolute）をやめて普通に流す */
         @media (max-width: 600px) {
-            padding: 0 20px;
-            padding-top: 16px;
-        }
-        @media (max-width: 500px) {
-            padding: 0 12px;
-            padding-top: 12px;
+            position: static;
+            padding: 28px 20px 32px;
+            height: auto;
         }
         .ttl {
             margin: 0;
@@ -81,7 +79,8 @@
                 font-size: 36px;
             }
             @media (max-width: 700px) {
-                font-size: 28px;
+                /* 🚨 縦積みでも 28px 固定だと 375px 幅で1行11文字。画面幅からも上限をかける */
+                font-size: min(28px, 7.4vw);
                 -webkit-text-stroke-width: var(--lw-stroke-width-sp);
             }
         }
@@ -164,11 +163,19 @@
         @media (max-width: 700px) {
             width: calc(100% - 260px);
         }
+        /* 🚨 文章の下に、幅いっぱいの帯として置く。
+         *   ⚠️ 3つとも要る — <picture> は既定が inline なので display:block にしないと高さが効かない。
+         *      z-index:-2 のままだと親の背景色の裏に回って写真が消える。
+         *      ::after のフィルタを重ねるので position は relative にする。 */
         @media (max-width: 600px) {
-            width: calc(100% - 220px);
+            position: relative;
+            z-index: auto;
+            display: block;
+            width: 100%;
+            height: 240px;
         }
-        @media (max-width: 500px) {
-            width: calc(100% - 200px);
+        @media (max-width: 420px) {
+            height: 200px;
         }
         img,
         video {

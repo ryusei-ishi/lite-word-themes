@@ -10,8 +10,11 @@
 	"aiHint": {
 		"description": "カードスライダー。画像+タイトル+説明のカードが横スクロール。実績・ポートフォリオ紹介に",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["slides"],
-		"imageAttributes": []
+		"contentAttributes": [
+			"slides"
+		],
+		"imageAttributes": [],
+		"notes": "blockId は空のままでよい（2026-08-26 にブロック側を直した。空なら読み込み時に自分で id を振って初期化する）。それ以前は空だと init-hide が外れずフロントで真っ白になっていた。"
 	},
 	"supports": {
 		"anchor": true

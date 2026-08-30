@@ -1,0 +1,272 @@
+/* サイト診断ページ。既存の link-list.css に合わせてフラットに書く（管理画面用） */
+
+.lw-diagnose-wrap {
+    max-width: 1100px;
+}
+
+.lw-diagnose-controls {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 20px 0;
+    padding: 20px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+}
+
+.lw-diagnose-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    height: auto;
+    padding: 10px 18px;
+    text-align: left;
+}
+
+.lw-diagnose-button .dashicons {
+    width: 22px;
+    height: 22px;
+    font-size: 22px;
+}
+
+.lw-diagnose-button-labels {
+    display: flex;
+    flex-direction: column;
+    line-height: 1.4;
+}
+
+.lw-diagnose-button-title {
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.lw-diagnose-button-sub {
+    font-size: 11px;
+    opacity: 0.85;
+}
+
+.lw-diagnose-last {
+    color: #666;
+    font-size: 12px;
+}
+
+/* 進み具合 */
+
+.lw-diagnose-progress {
+    display: none;
+    margin: 16px 0;
+}
+
+.lw-diagnose-progress.is-active {
+    display: block;
+}
+
+.lw-diagnose-progress-bar {
+    height: 18px;
+    background: #f0f0f1;
+    border-radius: 9px;
+    overflow: hidden;
+}
+
+.lw-diagnose-progress-bar span {
+    display: block;
+    width: 0;
+    height: 100%;
+    background: #2271b1;
+    transition: width 0.2s ease;
+}
+
+/* 点数 */
+
+.lw-diagnose-score {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+    flex-wrap: wrap;
+    margin: 16px 0;
+}
+
+.lw-diagnose-score-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 140px;
+    padding: 16px;
+    background: #fff;
+    border: 2px solid #ccd0d4;
+    border-radius: 8px;
+}
+
+.lw-score-good {
+    border-color: #00a32a;
+}
+
+.lw-score-ok {
+    border-color: #2271b1;
+}
+
+.lw-score-warn {
+    border-color: #dba617;
+}
+
+.lw-score-bad {
+    border-color: #d63638;
+}
+
+.lw-diagnose-score-number {
+    font-size: 40px;
+    font-weight: 700;
+    line-height: 1;
+}
+
+.lw-diagnose-score-number small {
+    margin-left: 4px;
+    font-size: 14px;
+    font-weight: 400;
+}
+
+.lw-diagnose-score-label {
+    margin-top: 6px;
+    font-size: 12px;
+    color: #555;
+}
+
+.lw-diagnose-counts {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+}
+
+.lw-diagnose-count {
+    padding: 6px 12px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 14px;
+    font-size: 13px;
+}
+
+.lw-diagnose-count-critical strong {
+    color: #d63638;
+}
+
+.lw-diagnose-count-warning strong {
+    color: #bd8600;
+}
+
+.lw-diagnose-pages {
+    color: #666;
+    font-size: 12px;
+}
+
+.lw-diagnose-empty,
+.lw-diagnose-clean {
+    padding: 16px;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-radius: 4px;
+    color: #555;
+}
+
+/* 調べていないもの */
+
+.lw-diagnose-note {
+    margin: 16px 0;
+    padding: 12px 16px;
+    background: #fcf9e8;
+    border-left: 4px solid #dba617;
+}
+
+.lw-diagnose-note ul {
+    margin: 8px 0 0 18px;
+    list-style: disc;
+}
+
+/* 指摘一覧 */
+
+.lw-diagnose-group {
+    margin: 12px 0;
+    background: #fff;
+    border: 1px solid #ccd0d4;
+    border-left-width: 4px;
+    border-radius: 4px;
+}
+
+.lw-diagnose-critical {
+    border-left-color: #d63638;
+}
+
+.lw-diagnose-warning {
+    border-left-color: #dba617;
+}
+
+.lw-diagnose-info {
+    border-left-color: #72aee6;
+}
+
+.lw-diagnose-group summary {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 12px 16px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.lw-diagnose-badge {
+    padding: 2px 8px;
+    border-radius: 10px;
+    background: #f0f0f1;
+    font-size: 11px;
+}
+
+.lw-diagnose-critical .lw-diagnose-badge {
+    background: #fce8e8;
+    color: #a52a2b;
+}
+
+.lw-diagnose-warning .lw-diagnose-badge {
+    background: #fcf3e0;
+    color: #8a6100;
+}
+
+.lw-diagnose-group-title {
+    font-weight: 600;
+}
+
+.lw-diagnose-group-count {
+    margin-left: auto;
+    color: #666;
+    font-size: 12px;
+}
+
+.lw-diagnose-why,
+.lw-diagnose-how,
+.lw-diagnose-caveat {
+    margin: 0 16px 8px;
+    font-size: 13px;
+    line-height: 1.7;
+}
+
+.lw-diagnose-caveat {
+    color: #666;
+    font-size: 12px;
+}
+
+.lw-diagnose-table {
+    margin: 8px 0 0;
+    border: 0;
+    border-top: 1px solid #e5e5e5;
+}
+
+.lw-diagnose-page {
+    width: 34%;
+}
+
+.lw-diagnose-view {
+    margin-left: 8px;
+    font-size: 11px;
+    color: #666;
+}

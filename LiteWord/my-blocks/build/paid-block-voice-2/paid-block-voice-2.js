@@ -68,8 +68,13 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
 
     // voices 配列の要素を更新
     var updateVoice = function updateVoice(index, key, value) {
+      return updateVoiceMulti(index, _defineProperty({}, key, value));
+    };
+
+    // 画像を選び直したときに URL と alt をまとめて入れ替えるため、複数キー版を用意する
+    var updateVoiceMulti = function updateVoiceMulti(index, patch) {
       var updated = voices.map(function (item, i) {
-        return i === index ? _objectSpread(_objectSpread({}, item), {}, _defineProperty({}, key, value)) : item;
+        return i === index ? _objectSpread(_objectSpread({}, item), patch) : item;
       });
       setAttributes({
         voices: updated
@@ -278,10 +283,13 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         className: "in"
       }, item.image && /*#__PURE__*/React.createElement("img", {
         src: item.image,
-        alt: ""
+        alt: item.alt || ''
       }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
         onSelect: function onSelect(media) {
-          return updateVoice(index, 'image', media.url);
+          return updateVoiceMulti(index, {
+            image: media.url,
+            alt: media.alt || ''
+          });
         },
         allowedTypes: ['image'],
         render: function render(_ref2) {
@@ -290,6 +298,16 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
             onClick: open,
             isSecondary: true
           }, "\u753B\u50CF\u3092", item.image ? '変更' : '選択');
+        }
+      }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+        label: "\u753B\u50CF\u306E\u8AAC\u660E\uFF08alt\uFF09",
+        help: "\u76EE\u306E\u898B\u3048\u306A\u3044\u65B9\u3084\u691C\u7D22\u30A8\u30F3\u30B8\u30F3\u306B\u3001\u3053\u306E\u753B\u50CF\u304C\u4F55\u304B\u3092\u4F1D\u3048\u308B\u6587\u3067\u3059\u3002\u4F8B\uFF1A\u7B11\u9854\u3067\u3053\u3061\u3089\u3092\u898B\u308B30\u4EE3\u306E\u5973\u6027",
+        value: item.alt || '',
+        onChange: function onChange(v) {
+          return updateVoice(index, 'alt', v);
+        },
+        style: {
+          marginTop: '8px'
         }
       }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
         tagName: "span",
@@ -435,7 +453,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         className: "in"
       }, item.image && /*#__PURE__*/React.createElement("img", {
         src: item.image,
-        alt: ""
+        alt: item.alt || ''
       }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
         tagName: "span",
         className: "thanks",
@@ -1197,7 +1215,7 @@ module.exports = window["wp"]["components"];
   \*******************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-voice-2","version":"1.0.0","title":"お客様の声 2","category":"lw-voice","icon":"format-status","editorScript":"file:./paid-block-voice-2.js","aiHint":{"description":"お客様の声（写真付き）。見出し+説明+写真+名前+コメントのカード。信頼感重視のレビューに","excludeFromAutoSelect":false,"contentAttributes":["blockTitleMain","blockTitleSub","explanation","voices"],"imageAttributes":[]},"supports":{"anchor":true},"no":2,"attributes":{"blockTitleMain":{"type":"string","source":"html","selector":".ttl .main","default":"お客様の声"},"blockTitleSub":{"type":"string","source":"html","selector":".ttl .sub","default":"VOICE"},"explanation":{"type":"string","source":"html","selector":".explanation","default":"テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"},"filterColor":{"type":"string","default":"var(--color-main)"},"filterOpacity":{"type":"number","default":0.9},"voiceSubNameFont":{"type":"string","default":"Noto Sans JP"},"voiceSubNameFontWeight":{"type":"string","default":"400"},"voiceSubNameFontColor":{"type":"string","default":"var(--color-black)"},"voiceMeinNameFont":{"type":"string","default":"Noto Sans JP"},"voiceMeinNameFontWeight":{"type":"string","default":"500"},"voiceMeinNameFontColor":{"type":"string","default":"var(--color-black)"},"voiceCommentFont":{"type":"string","default":"Noto Sans JP"},"voiceCommentFontWeight":{"type":"string","default":"400"},"voiceCommentFontColor":{"type":"string","default":"var(--color-black)"},"voiceThanksFont":{"type":"string","default":"Dancing Script"},"voiceThanksFontWeight":{"type":"string","default":"400"},"voiceThanksFontColor":{"type":"string","default":"var(--color-black)"},"voices":{"type":"array","source":"query","selector":".voice_list li","default":[{"image":"https://lite-word.com/sample_img/women/1.webp","thanks":"thank you","sub":"東京都 経営者","nameBig":"やまだ","nameSmall":"さん","comment":"テキストテキストテキストテキストテキストテキストテキストテキスト"}],"query":{"image":{"type":"string","source":"attribute","selector":"img","attribute":"src"},"thanks":{"type":"string","source":"html","selector":".thanks"},"sub":{"type":"string","source":"html","selector":".sub"},"nameBig":{"type":"string","source":"html","selector":".big"},"nameSmall":{"type":"string","source":"html","selector":".small"},"comment":{"type":"string","source":"html","selector":".comment"}}}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-voice-2","version":"1.0.0","title":"お客様の声 2","category":"lw-voice","icon":"format-status","editorScript":"file:./paid-block-voice-2.js","aiHint":{"description":"お客様の声（写真付き）。見出し+説明+写真+名前+コメントのカード。信頼感重視のレビューに","excludeFromAutoSelect":false,"contentAttributes":["blockTitleMain","blockTitleSub","explanation","voices"],"imageAttributes":["voices.image"]},"supports":{"anchor":true},"no":2,"attributes":{"blockTitleMain":{"type":"string","source":"html","selector":".ttl .main","default":"お客様の声"},"blockTitleSub":{"type":"string","source":"html","selector":".ttl .sub","default":"VOICE"},"explanation":{"type":"string","source":"html","selector":".explanation","default":"テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"},"filterColor":{"type":"string","default":"var(--color-main)"},"filterOpacity":{"type":"number","default":0.9},"voiceSubNameFont":{"type":"string","default":"Noto Sans JP"},"voiceSubNameFontWeight":{"type":"string","default":"400"},"voiceSubNameFontColor":{"type":"string","default":"var(--color-black)"},"voiceMeinNameFont":{"type":"string","default":"Noto Sans JP"},"voiceMeinNameFontWeight":{"type":"string","default":"500"},"voiceMeinNameFontColor":{"type":"string","default":"var(--color-black)"},"voiceCommentFont":{"type":"string","default":"Noto Sans JP"},"voiceCommentFontWeight":{"type":"string","default":"400"},"voiceCommentFontColor":{"type":"string","default":"var(--color-black)"},"voiceThanksFont":{"type":"string","default":"Dancing Script"},"voiceThanksFontWeight":{"type":"string","default":"400"},"voiceThanksFontColor":{"type":"string","default":"var(--color-black)"},"voices":{"type":"array","source":"query","selector":".voice_list li","default":[{"image":"https://lite-word.com/sample_img/women/1.webp","thanks":"thank you","sub":"東京都 経営者","nameBig":"やまだ","nameSmall":"さん","comment":"テキストテキストテキストテキストテキストテキストテキストテキスト"}],"query":{"image":{"type":"string","source":"attribute","selector":"img","attribute":"src"},"alt":{"type":"string","source":"attribute","selector":"img","attribute":"alt","default":""},"thanks":{"type":"string","source":"html","selector":".thanks"},"sub":{"type":"string","source":"html","selector":".sub"},"nameBig":{"type":"string","source":"html","selector":".big"},"nameSmall":{"type":"string","source":"html","selector":".small"},"comment":{"type":"string","source":"html","selector":".comment"}}}}}');
 
 /***/ })
 

@@ -36,7 +36,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 
 
 
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
+var lwBlockDef = {
   edit: function edit(_ref) {
     var attributes = _ref.attributes,
       setAttributes = _ref.setAttributes;
@@ -211,7 +211,32 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
       }, tag);
     })))));
   }
-});
+};
+
+/* ------------------------------------------------------------------
+ * #1169（2026-08-27）既定値の他社CDN直リンクを自社素材に差し替えた。
+ * 既定値と同じ値はブロックコメントに書かれないので、既定値のまま使っている
+ * 既存ページは「保存HTMLは旧URL／ブロックは新しい既定値」で食い違う。
+ * 旧既定値を持った版を残して、開いて保存し直しても画像が入れ替わらないようにする。
+ * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
+ * ------------------------------------------------------------------ */
+var LW_1169_OLD = JSON.parse(JSON.stringify(_block_json__WEBPACK_IMPORTED_MODULE_5__.attributes));
+LW_1169_OLD.imgUrl["default"] = "https://placehold.jp/420x320.png";
+
+/* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
+ *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の
+ *    大多数がこれ）がどの版にも当たらなくなる。だから既存の版それぞれについて
+ *    旧既定値を持たせた双子を作って先に並べる。元の版も残す（画像を自分で差し替えた人向け）。 */
+var lwPrev1169 = lwBlockDef.deprecated || [];
+lwBlockDef.deprecated = [{
+  attributes: LW_1169_OLD,
+  save: lwBlockDef.save
+}].concat(_toConsumableArray(lwPrev1169.map(function (d) {
+  return _objectSpread(_objectSpread({}, d), {}, {
+    attributes: LW_1169_OLD
+  });
+})), _toConsumableArray(lwPrev1169));
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, lwBlockDef);
 
 /***/ }),
 
@@ -275,7 +300,7 @@ module.exports = window["wp"]["components"];
   \********************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-shop-list-1","version":"1.0.0","title":"店舗一覧用 1 shin shop pattern 01","category":"lw-content","icon":"store","editorScript":"file:./shin-gas-station-01-shop-list-1.js","aiHint":{"description":"店舗一覧。店名+詳細+タグ+画像のカード配列。多店舗案内に。ショップテンプレート用","excludeFromAutoSelect":false,"contentAttributes":["shopName","details","tags"],"imageAttributes":["imgUrl"]},"supports":{"anchor":true},"attributes":{"shopName":{"type":"string","default":"ガソリンスタンドセルフ 〇〇店"},"details":{"type":"array","default":[{"dt":"住所","dd":"福島県〇〇市〇〇〇〇町1-2-345"},{"dt":"電話番号","dd":"012-345-6789"},{"dt":"営業時間","dd":"平日8:00~20:00 / 日祝9:00~20:00"},{"dt":"定休日","dd":"水曜日"}]},"tags":{"type":"string","default":"セルフ, 軽油, 車検, 洗車, タイヤ交換・販売, マイカーリース, クレジットカードOK"},"imgUrl":{"type":"string","default":"https://placehold.jp/420x320.png"},"imgAlt":{"type":"string","default":""}},"no":15}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/shin-gas-station-01-shop-list-1","version":"1.0.0","title":"店舗一覧用 1 shin shop pattern 01","category":"lw-content","icon":"store","editorScript":"file:./shin-gas-station-01-shop-list-1.js","aiHint":{"description":"店舗一覧。店名+詳細+タグ+画像のカード配列。多店舗案内に。ショップテンプレート用","excludeFromAutoSelect":false,"contentAttributes":["shopName","details","tags"],"imageAttributes":["imgUrl"]},"supports":{"anchor":true},"attributes":{"shopName":{"type":"string","default":"ガソリンスタンドセルフ 〇〇店"},"details":{"type":"array","default":[{"dt":"住所","dd":"福島県〇〇市〇〇〇〇町1-2-345"},{"dt":"電話番号","dd":"012-345-6789"},{"dt":"営業時間","dd":"平日8:00~20:00 / 日祝9:00~20:00"},{"dt":"定休日","dd":"水曜日"}]},"tags":{"type":"string","default":"セルフ, 軽油, 車検, 洗車, タイヤ交換・販売, マイカーリース, クレジットカードOK"},"imgUrl":{"type":"string","default":"https://lite-word.com/sample_img/shin/gas_station/content_2.webp"},"imgAlt":{"type":"string","default":""}},"no":15}');
 
 /***/ })
 

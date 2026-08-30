@@ -83,8 +83,12 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
 
     /* コンテンツ更新 */
     var updateContent = function updateContent(index, key, value) {
+      return updateContentMulti(index, _defineProperty({}, key, value));
+    };
+    /* 画像を選び直したときに URL と alt をまとめて入れ替えるため、複数キー版を用意する */
+    var updateContentMulti = function updateContentMulti(index, patch) {
       var newContents = contents.map(function (content, i) {
-        return i === index ? _objectSpread(_objectSpread({}, content), {}, _defineProperty({}, key, value)) : content;
+        return i === index ? _objectSpread(_objectSpread({}, content), patch) : content;
       });
       setAttributes({
         contents: newContents
@@ -131,7 +135,10 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         }
       }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
         onSelect: function onSelect(media) {
-          return updateContent(index, 'image', media.url);
+          return updateContentMulti(index, {
+            image: media.url,
+            alt: media.alt || ''
+          });
         },
         allowedTypes: ['image'],
         value: content.image,
@@ -144,6 +151,16 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
               marginBottom: '10px'
             }
           }, "\u753B\u50CF\u3092\u9078\u629E");
+        }
+      }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+        label: "\u753B\u50CF\u306E\u8AAC\u660E\uFF08alt\uFF09",
+        help: "\u76EE\u306E\u898B\u3048\u306A\u3044\u65B9\u3084\u691C\u7D22\u30A8\u30F3\u30B8\u30F3\u306B\u3001\u3053\u306E\u753B\u50CF\u304C\u4F55\u304B\u3092\u4F1D\u3048\u308B\u6587\u3067\u3059\u3002\u98FE\u308A\u306A\u3089\u7A7A\u306E\u307E\u307E\u3067\u69CB\u3044\u307E\u305B\u3093",
+        value: content.alt || '',
+        onChange: function onChange(v) {
+          return updateContent(index, 'alt', v);
+        },
+        style: {
+          marginBottom: '10px'
         }
       }), /*#__PURE__*/React.createElement("div", {
         style: {
@@ -180,7 +197,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
         }
       }, /*#__PURE__*/React.createElement("img", {
         src: content.image || 'https://placehold.jp/cccccc/ffffff/400x400.png?text=IMAGE',
-        alt: ""
+        alt: content.alt || ''
       })), /*#__PURE__*/React.createElement("div", {
         className: "solution-1_text"
       }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
@@ -221,7 +238,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       }, /*#__PURE__*/React.createElement("img", {
         loading: "lazy",
         src: content.image || 'https://placehold.jp/cccccc/ffffff/400x400.png?text=IMAGE',
-        alt: ""
+        alt: content.alt || ''
       })), /*#__PURE__*/React.createElement("div", {
         className: "solution-1_text"
       }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
@@ -935,7 +952,7 @@ module.exports = window["wp"]["components"];
   \***********************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/solution-1","version":"1.0.0","title":"solution 01","category":"lw-content","icon":"lightbulb","aiHint":{"description":"ソリューションカード。番号+画像+テキストの繰り返し。課題解決の提案に","excludeFromAutoSelect":false,"contentAttributes":["contents"],"imageAttributes":[]},"supports":{"anchor":true},"editorScript":"file:./solution-1.js","no":1,"attributes":{"contents":{"type":"array","source":"query","selector":".solution-1_content","query":{"text":{"type":"string","source":"html","selector":".solution-1_text p"},"image":{"type":"string","source":"attribute","selector":"figure img","attribute":"src"},"borderColor":{"type":"string","source":"attribute","selector":"figure","attribute":"data-border-color"}},"default":[{"text":"何から始めたらいいか\\nわからない","image":"","borderColor":"var(--color-main)"},{"text":"作りたいけど\\n時間がない","image":"","borderColor":"var(--color-main)"},{"text":"自分で作ると\\nダサくなる…","image":"","borderColor":"var(--color-main)"}]},"fontSet":{"type":"string","default":"","source":"attribute","selector":".solution-1","attribute":"data-lw_font_set"},"fontWeight":{"type":"string","default":""}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/solution-1","version":"1.0.0","title":"solution 01","category":"lw-content","icon":"lightbulb","aiHint":{"description":"ソリューションカード。番号+画像+テキストの繰り返し。課題解決の提案に","excludeFromAutoSelect":false,"contentAttributes":["contents"],"imageAttributes":["contents.image"]},"supports":{"anchor":true},"editorScript":"file:./solution-1.js","no":1,"attributes":{"contents":{"type":"array","source":"query","selector":".solution-1_content","query":{"text":{"type":"string","source":"html","selector":".solution-1_text p"},"image":{"type":"string","source":"attribute","selector":"figure img","attribute":"src"},"alt":{"type":"string","source":"attribute","selector":"figure img","attribute":"alt","default":""},"borderColor":{"type":"string","source":"attribute","selector":"figure","attribute":"data-border-color"}},"default":[{"text":"何から始めたらいいか\\nわからない","image":"","borderColor":"var(--color-main)"},{"text":"作りたいけど\\n時間がない","image":"","borderColor":"var(--color-main)"},{"text":"自分で作ると\\nダサくなる…","image":"","borderColor":"var(--color-main)"}]},"fontSet":{"type":"string","default":"","source":"attribute","selector":".solution-1","attribute":"data-lw_font_set"},"fontWeight":{"type":"string","default":""}}}');
 
 /***/ })
 

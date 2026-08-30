@@ -16,6 +16,10 @@ import {
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS = { url: 'url', type: 'linkType', page: 'pageId', category: 'categoryId' };
 
 registerBlockType(metadata.name, {
 	edit: ({ attributes, setAttributes }) => {
@@ -53,6 +57,10 @@ registerBlockType(metadata.name, {
 								value={url}
 								onChange={(v) => setAttributes({ url: v })}
 								style={{ width: '100%' }}
+							/>
+							<LinkPicker
+							    link={lwLinkFromAttrs(attributes, LINK_KEYS)}
+							    onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}
 							/>
 						</div>
 						<ToggleControl
@@ -325,6 +333,8 @@ registerBlockType(metadata.name, {
 			<div {...blockProps}>
 				<a
 					href={url}
+					data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkType}
+					data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkId}
 					target={openInNewTab ? '_blank' : undefined}
 					rel={openInNewTab ? 'noopener noreferrer' : undefined}
 					style={{

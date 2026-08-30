@@ -1,8 +1,8 @@
 {
 	"_meta": {
 		"description": "LiteWordテーマのAI向け情報インデックス。AIキャラクターはまずこのファイルを読んで、テーマの全体像と各メタ情報の在処を把握すること。",
-		"version": "1.0",
-		"lastUpdated": "2026-03-21",
+		"version": "1.1",
+		"lastUpdated": "2026-08-22",
 		"usage": "このファイルはテーマのルートディレクトリに配置される。AIがLiteWordテーマについて理解するための入口（目次）として機能する。WordPressの動作には一切影響しない。"
 	},
 	"theme": {
@@ -66,6 +66,16 @@
 			"description": "AI画像・ページ生成システム。ブロックエディタ内でAI画像検索・ページ自動生成・テキストリライト・マイパーツAI生成が可能。Gemini API使用。",
 			"location": "functions/lw_ai_system/ai-system-ai-hints.json"
 		},
+		"pageComposition": {
+			"description": "ページ構成レギュレーション。ページ種別（トップ/業務詳細/業務一覧/料金/流れ/事務所概要/代表あいさつ/お問い合わせ/規約）ごとに「どの枠を、どの順番で置くか」を定義する。順番は構造化データ（JSON-LD）から逆算していて固定。変えてよいのは各枠に使うブロックだけ。",
+			"location": "functions/lw_ai_system/page-composition.json",
+			"notes": "🚨 ページを作る前に必ず読むこと。required:true の枠を落とさない。料金・流れ・FAQが無いサービスページは検索でも人でも評価されない。"
+		},
+		"layoutPatterns": {
+			"description": "レイアウトパターン。page-composition.json の各枠に、どのブロックを入れるかを型（A 表主役型 / B 説明主役型 / C 写真主役型）として持つ。サイト内で固定する要素（見出し・FV・CTA＝siteConstants）と、ページごとに変える本文の型を分けてある。",
+			"location": "functions/lw_ai_system/layout-patterns.json",
+			"notes": "🚨 全ページを同じ型で作らない。同じ型は同じページ種別の中で3ページまで。兄弟ページは4枠以上ブロックを変える。これを守らないと「テンプレートを買う理由」が無くなる。"
+		},
 		"brokenLinkCheck": {
 			"description": "破損リンク検出。サイト内の全リンクをスキャンし、404等の破損リンクを検出・一覧表示。管理画面「全リンク一覧」から操作。",
 			"location": "functions/lw_broken_link_check/broken-link-ai-hints.json",
@@ -95,6 +105,7 @@
 	"keyConceptsForAI": {
 		"customizerVsPageEditor": "カスタマイザーはサイト全体のデフォルト設定。ページ編集画面のメタボックスはページ単位の上書き設定。メタボックスで値を設定すると、そのページだけカスタマイザーの設定より優先される。",
 		"premiumFeatures": "LW_HAS_SUBSCRIPTION === true の場合にプレミアム機能が有効。フォント種類増加・パターン数増加・ページ独自メニュー選択・SEO機能・JSON-LD等が追加される。",
-		"settingKeyPrefix": "カスタマイザーの設定キーは theme_mod として保存（プレフィックス: {$set}_{キー名}）。ページ編集画面の設定は post_meta として保存（キー名そのまま）。"
+		"settingKeyPrefix": "カスタマイザーの設定キーは theme_mod として保存（プレフィックス: {$set}_{キー名}）。ページ編集画面の設定は post_meta として保存（キー名そのまま）。",
+		"pageComposition": "ページを作るときは pageComposition（枠の順番）と layoutPatterns（枠に入れるブロックの型）を必ずセットで読む。順番は固定・ブロックは選べる、が原則。全ページを同じ型で作ると、利用者はレイアウトを選べず新しいページを作るときの判断もできない。"
 	}
 }

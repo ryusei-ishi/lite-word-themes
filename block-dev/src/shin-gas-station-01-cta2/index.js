@@ -15,6 +15,10 @@ import {
 import { rightButtonIconSvgArr } from '../utils.js';
 
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS = { url: 'buttonUrl', type: 'buttonLinkType', page: 'buttonPageId', category: 'buttonCategoryId' };
 
 const iconSvgOptions = rightButtonIconSvgArr();
 
@@ -65,6 +69,10 @@ registerBlockType(metadata.name, {
 							label="リンク先URL"
 							value={buttonUrl}
 							onChange={onChangeButtonUrl}
+						/>
+						<LinkPicker
+						    link={lwLinkFromAttrs(attributes, LINK_KEYS)}
+						    onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}
 						/>
 						<ToggleControl
 							label="リンクを新規タブで開く"
@@ -241,6 +249,8 @@ registerBlockType(metadata.name, {
 					<a
 						className="shin-gas-station-01-cta2__button"
 						href={buttonUrl}
+						data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkType}
+						data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkId}
 						target={openInNewTab ? '_blank' : undefined}
 						rel={openInNewTab ? 'noopener noreferrer' : undefined}
 					>

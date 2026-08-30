@@ -54,7 +54,9 @@
 					"selector": ".link",
 					"attribute": "href",
 					"default": ""
-				}
+				},
+				"linkType": { "type": "string", "source": "attribute", "selector": ".link", "attribute": "data-lw-link-type" },
+				"linkId": { "type": "string", "source": "attribute", "selector": ".link", "attribute": "data-lw-link-id" }
 			},
 			"default": [
 				{

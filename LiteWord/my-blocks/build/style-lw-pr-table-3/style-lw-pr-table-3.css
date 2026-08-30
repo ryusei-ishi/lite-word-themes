@@ -206,3 +206,6 @@
     transform: translateX(12px);
   }
 }
+.lw-pr-table-3 .lw-pr-table-3__wrap.is_center {
+  justify-content: center;
+}

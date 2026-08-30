@@ -74,6 +74,7 @@ registerBlockType(metadata.name, {
 			verticalAlignMainHead, verticalAlignRowHead, verticalAlignCell,
 			mainHeadPaddingY, rowHeadPaddingY, cellPaddingY,
 			designPattern,
+			tableAlign,
 		} = attributes;
 
 		const rows = rawRows.map(normalizeRow);
@@ -670,7 +671,9 @@ registerBlockType(metadata.name, {
 			</div>
 		);
 
-		const wrapClassName = `lw-pr-table-3__wrap${gridColumns >= 3 ? ` clm_${gridColumns}` : ""}${designPattern ? ` ${designPattern}` : ""}`;
+		// 🚨 tableAlign が既定の "left" のときは、いままでと1文字も変わらない出力にする。
+		//    （約1000サイトの既存ページを「壊れています」にしないため。deprecated が要らないのはこれが理由）
+		const wrapClassName = `lw-pr-table-3__wrap${gridColumns >= 3 ? ` clm_${gridColumns}` : ""}${designPattern ? ` ${designPattern}` : ""}${tableAlign === "center" ? " is_center" : ""}`;
 
 		return (
 			<>
@@ -689,6 +692,16 @@ registerBlockType(metadata.name, {
 								{ label: "角丸（全セル）", value: "design_ptn_2" },
 							]}
 							onChange={(value) => setAttributes({ designPattern: value })}
+						/>
+						<SelectControl
+							label="表の位置"
+							value={tableAlign}
+							help="表が本文の幅より狭いときの置きどころ。既定は左寄せ（従来どおり）"
+							options={[
+								{ label: "左寄せ", value: "left" },
+								{ label: "中央寄せ", value: "center" },
+							]}
+							onChange={(value) => setAttributes({ tableAlign: value })}
 						/>
 					</PanelBody>
 					<PanelBody title="カラム幅 PC" initialOpen={false}>
@@ -1035,6 +1048,7 @@ registerBlockType(metadata.name, {
 			verticalAlignMainHead, verticalAlignRowHead, verticalAlignCell,
 			mainHeadPaddingY, rowHeadPaddingY, cellPaddingY,
 			designPattern,
+			tableAlign,
 		} = attributes;
 
 		const rows = rawRows.map(normalizeRow);
@@ -1072,7 +1086,9 @@ registerBlockType(metadata.name, {
 		cssVars["--table-3-lh-cell"] = lineHeightCell;
 
 		const blockProps = useBlockProps.save({ className: "lw-pr-table-3" });
-		const wrapClassName = `lw-pr-table-3__wrap${gridColumns >= 3 ? ` clm_${gridColumns}` : ""}${designPattern ? ` ${designPattern}` : ""}`;
+		// 🚨 tableAlign が既定の "left" のときは、いままでと1文字も変わらない出力にする。
+		//    （約1000サイトの既存ページを「壊れています」にしないため。deprecated が要らないのはこれが理由）
+		const wrapClassName = `lw-pr-table-3__wrap${gridColumns >= 3 ? ` clm_${gridColumns}` : ""}${designPattern ? ` ${designPattern}` : ""}${tableAlign === "center" ? " is_center" : ""}`;
 
 		return (
 			<div {...blockProps}>

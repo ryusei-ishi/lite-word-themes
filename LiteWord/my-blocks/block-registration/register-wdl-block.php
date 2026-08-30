@@ -382,27 +382,87 @@ function wdl_register_blocks() {
 	/* ---------- 全ブロックを取得（1箇所で定義された関数を使用） ---------- */
 	$block_files = wdl_get_all_blocks_for_registration();
 
+	/* ---------- ローカライズに渡す値は全ブロック共通。ループの外で1回だけ作る ---------- */
+	$my_theme_settings = [
+		'homeUrl'  => home_url(),
+		'themeUrl' => get_template_directory_uri(),
+		'adminUrl' => admin_url(),
+	];
+
+	/* ------------------------------------------------------------------
+	 * ディスクを叩く回数を減らすための下ごしらえ
+	 * ------------------------------------------------------------------
+	 * この関数は init で毎リクエスト走り、153個のブロックを登録する。
+	 * 以前はブロック1つにつき file_exists() を5回、さらに get_theme_file_path()
+	 * を6回（この関数も内部で file_exists() を1回打つ）呼んでいたため、
+	 * 1リクエストで 1,700回以上ディスクを触っていた（実測 file_exists だけで734回＝45ms）。
+	 *
+	 * 対策はシンプルに「ディレクトリの中身を scandir で1回読んで、存在確認は
+	 * 配列の照合で済ませる」。ブロック1つあたりディスクは1回（子テーマがあれば2回）。
+	 *
+	 * ⚠️ 結果を transient / option に保存していないのは、テーマのバージョンを上げずに
+	 *    ファイルを差し替える運用（lw-remote-manager の files/write）があるため。
+	 *    保存すると差し替えたブロックが次の更新まで認識されない。
+	 * 🚨 filemtime() は残す。CSS のキャッシュ破棄に使っており、ここを固定すると
+	 *    ファイルを直しても利用者のブラウザに古い CSS が残る。
+	 * 🚨 「使われたブロックの CSS だけ読む」設計には手を触れていない。
+	 *    登録するブロックの数・条件・render_callback は一切変えていない。
+	 * ---------------------------------------------------------------- */
+	$template_root   = get_template_directory();
+	$stylesheet_root = get_stylesheet_directory();
+	$has_child_theme = ( $stylesheet_root !== $template_root );
+
 	/* ---------- 5) 各ブロックの登録処理 ---------- */
 	foreach ( $block_files as $block_name ) {
 
-		$block_dir        = "/my-blocks/build/{$block_name}/";
-		$block_dir_path   = get_theme_file_path( "/my-blocks/build/{$block_name}" );
-		$js_file          = get_theme_file_path( "{$block_dir}{$block_name}.js" );
-		$editor_css_file  = get_theme_file_path( "{$block_dir}editor.css" );
-		$style_css_file   = get_theme_file_path( "{$block_dir}style.css" );
-		$block_json_file  = get_theme_file_path( "{$block_dir}block.json" );
+		$block_dir     = "/my-blocks/build/{$block_name}/";
+		$block_rel     = "my-blocks/build/{$block_name}";
+		$parent_dir    = "{$template_root}/{$block_rel}";
+		$child_dir     = "{$stylesheet_root}/{$block_rel}";
+
+		/* ディレクトリの中身を1回だけ読む（親・子それぞれ1回） */
+		$parent_list = @scandir( $parent_dir );
+		$parent_has  = $parent_list ? array_flip( $parent_list ) : [];
+		$child_has   = [];
+		if ( $has_child_theme ) {
+			$child_list = @scandir( $child_dir );
+			$child_has  = $child_list ? array_flip( $child_list ) : [];
+		}
+
+		if ( ! $parent_has && ! $child_has ) {
+			continue; // ブロックのディレクトリ自体が無い
+		}
+
+		/* get_theme_file_path() と同じ解決（子テーマにあれば子・無ければ親）＋同じフィルター */
+		$resolve = static function ( $file ) use ( $child_has, $child_dir, $parent_dir, $block_rel, $has_child_theme ) {
+			$path = ( $has_child_theme && isset( $child_has[ $file ] ) )
+				? "{$child_dir}/{$file}"
+				: "{$parent_dir}/{$file}";
+			return apply_filters( 'theme_file_path', $path, "{$block_rel}/{$file}" );
+		};
+		$has = static function ( $file ) use ( $child_has, $parent_has ) {
+			return isset( $child_has[ $file ] ) || isset( $parent_has[ $file ] );
+		};
+
+		$block_dir_path = ( $has_child_theme && $child_has ) ? $child_dir : $parent_dir;
+		$block_dir_path = apply_filters( 'theme_file_path', $block_dir_path, $block_rel );
 
 		/* --- JS が無ければ登録しない --- */
-		if ( ! file_exists( $js_file ) ) {
+		if ( ! $has( "{$block_name}.js" ) ) {
 			continue;
 		}
+
+		$js_file         = $resolve( "{$block_name}.js" );
+		$editor_css_file = $resolve( 'editor.css' );
+		$style_css_file  = $resolve( 'style.css' );
+		$has_style_css   = $has( 'style.css' );
 
 		/* ============================================================
 		 * block.json が存在するブロックは apiVersion 3 対応の新方式で登録
 		 * ============================================================ */
-		if ( file_exists( $block_json_file ) ) {
+		if ( $has( 'block.json' ) ) {
 			// フロント用スタイルを登録（render_callbackで使用）
-			if ( file_exists( $style_css_file ) ) {
+			if ( $has_style_css ) {
 				wp_register_style(
 					"wdl-{$block_name}-style",
 					get_theme_file_uri( "{$block_dir}style.css" ),
@@ -415,10 +475,9 @@ function wdl_register_blocks() {
 			// render_callback を追加してフロントエンドでのCSS読み込みを制御
 			$current_block_name = $block_name;
 			$current_style_file = $style_css_file;
-			$render_php_file = get_theme_file_path( "{$block_dir}render.php" );
 
 			// render.phpが存在する場合はblock.jsonのrenderに任せる（動的ブロック対応）
-			if ( file_exists( $render_php_file ) ) {
+			if ( $has( 'render.php' ) ) {
 				register_block_type( $block_dir_path );
 			} else {
 				// render.phpがない場合は従来通りrender_callbackを使用
@@ -430,16 +489,11 @@ function wdl_register_blocks() {
 			}
 
 			// ローカライズ用にスクリプトを取得して設定
-			$asset_file = get_theme_file_path( "{$block_dir}{$block_name}.asset.php" );
-			if ( file_exists( $asset_file ) ) {
+			if ( $has( "{$block_name}.asset.php" ) ) {
 				wp_localize_script(
 					"wdl-{$block_name}-editor-script",
 					'MyThemeSettings',
-					[
-						'homeUrl'  => home_url(),
-						'themeUrl' => get_template_directory_uri(),
-						'adminUrl' => admin_url(),
-					]
+					$my_theme_settings
 				);
 			}
 			continue;
@@ -450,9 +504,8 @@ function wdl_register_blocks() {
 		 * ============================================================ */
 
 		/* --- 5-1. スクリプト / アセット登録 --- */
-		$asset_file = get_theme_file_path( "{$block_dir}{$block_name}.asset.php" );
-		$asset      = file_exists( $asset_file )
-			? include( $asset_file )
+		$asset = $has( "{$block_name}.asset.php" )
+			? include( $resolve( "{$block_name}.asset.php" ) )
 			: [ 'dependencies' => [], 'version' => filemtime( $js_file ) ];
 
 		wp_register_script(
@@ -467,15 +520,11 @@ function wdl_register_blocks() {
 		wp_localize_script(
 			"wdl-{$block_name}-script",
 			'MyThemeSettings',
-			[
-				'homeUrl'  => home_url(),
-				'themeUrl' => get_template_directory_uri(),
-				'adminUrl' => admin_url(),
-			]
+			$my_theme_settings
 		);
 
 		/* --- 5-2. エディタ用スタイル（動的読み込み用に登録のみ） --- */
-		if ( file_exists( $editor_css_file ) ) {
+		if ( $has( 'editor.css' ) ) {
 			wp_register_style(
 				"wdl-{$block_name}-editor-style",
 				get_theme_file_uri( "{$block_dir}editor.css" ),
@@ -485,7 +534,7 @@ function wdl_register_blocks() {
 		}
 
 		/* --- 5-3. フロント用スタイル（動的読み込み用に登録のみ） --- */
-		if ( file_exists( $style_css_file ) ) {
+		if ( $has_style_css ) {
 			wp_register_style(
 				"wdl-{$block_name}-style",
 				get_theme_file_uri( "{$block_dir}style.css" ),
@@ -520,6 +569,8 @@ function wdl_register_blocks() {
 		}
 	}
 }
+
+
 add_action( 'init', 'wdl_register_blocks' );
 
 /**
@@ -607,3 +658,9 @@ function wdl_enqueue_editor_block_side_css() {
 	}
 }
 add_action( 'enqueue_block_assets', 'wdl_enqueue_editor_block_side_css' );
+
+/* -------------------------------------------------------------
+ * 一覧ブロックをサーバー側でも出す（検索エンジン対策）。
+ * ブロックの save() は触らず、表示のときに差し込むだけ。
+ * ----------------------------------------------------------- */
+require_once __DIR__ . '/server-render-lists.php';

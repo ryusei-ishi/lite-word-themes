@@ -12,22 +12,96 @@
 	"aiHint": {
 		"description": "画像+タイトル+説明文のカードリスト。番号バッジ付き。サービス紹介・施設案内に。ショップテンプレート用",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["contents"],
+		"contentAttributes": [
+			"contents"
+		],
 		"imageAttributes": []
 	},
 	"attributes": {
-		"fontLi": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"fontColorLi": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
-		"fontWeightLi": { "type": "string", "default": "600", "aiHint": { "skip": true } },
-		"fontLiP": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"fontColorLiP": { "type": "string", "default": "var(--color-black)", "aiHint": { "skip": true } },
-		"fontWeightLiP": { "type": "string", "default": "400", "aiHint": { "skip": true } },
-		"stepFont": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"stepFontColor": { "type": "string", "default": "#fff", "aiHint": { "skip": true } },
-		"stepFontWeight": { "type": "string", "default": "600", "aiHint": { "skip": true } },
-		"backgroundColor": { "type": "string", "default": "#FAFAFA", "aiHint": { "skip": true } },
-		"borderColor": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
-		"borderSize": { "type": "number", "default": 0, "aiHint": { "skip": true } },
+		"fontLi": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontColorLi": {
+			"type": "string",
+			"default": "var(--color-main)",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontWeightLi": {
+			"type": "string",
+			"default": "600",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontLiP": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontColorLiP": {
+			"type": "string",
+			"default": "var(--color-black)",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontWeightLiP": {
+			"type": "string",
+			"default": "400",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"stepFont": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"stepFontColor": {
+			"type": "string",
+			"default": "#fff",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"stepFontWeight": {
+			"type": "string",
+			"default": "600",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"backgroundColor": {
+			"type": "string",
+			"default": "#FAFAFA",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "var(--color-main)",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"borderSize": {
+			"type": "number",
+			"default": 0,
+			"aiHint": {
+				"skip": true
+			}
+		},
 		"contents": {
 			"type": "array",
 			"source": "query",
@@ -55,21 +129,33 @@
 					"selector": ".link",
 					"attribute": "href",
 					"default": ""
+				},
+				"linkType": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".link",
+					"attribute": "data-lw-link-type"
+				},
+				"linkId": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".link",
+					"attribute": "data-lw-link-id"
 				}
 			},
 			"default": [
 				{
-					"image": "https://cdn.pixabay.com/photo/2021/09/22/05/06/city-6645646_960_720.jpg",
+					"image": "https://lite-word.com/sample_img/shin/gas_station/content_1.webp",
 					"ttl": "タイトルタイトル",
 					"text": "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト "
 				},
 				{
-					"image": "https://cdn.pixabay.com/photo/2021/09/22/05/06/city-6645646_960_720.jpg",
+					"image": "https://lite-word.com/sample_img/shin/gas_station/content_1.webp",
 					"ttl": "タイトルタイトル",
 					"text": "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト "
 				},
 				{
-					"image": "https://cdn.pixabay.com/photo/2021/09/22/05/06/city-6645646_960_720.jpg",
+					"image": "https://lite-word.com/sample_img/shin/gas_station/content_1.webp",
 					"ttl": "タイトルタイトル",
 					"text": "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト "
 				}

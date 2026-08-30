@@ -237,3 +237,9 @@
     transform: translateX(12px);
   }
 }
+
+/* 表が本文幅より狭いときに中央へ置く（tableAlign = "center"）。
+   grid の列が固定 px なので、既定では余白が右に集まって左寄せに見える。 */
+.lw-pr-table-3 .lw-pr-table-3__wrap.is_center {
+  justify-content: center;
+}

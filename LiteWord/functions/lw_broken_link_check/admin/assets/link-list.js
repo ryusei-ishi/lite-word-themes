@@ -1,739 +1,31 @@
-<?php
-/**
- * 全リンク一覧ページ
- *
- * @package LiteWord
- *
- * ========================================
- * 開発履歴
- * ========================================
- *
- * 【2024-12-20】
- * ■ 実装完了:
- *   - リンク一覧機能の基本実装（投稿タイプ・ページ別グループ表示）
- *   - データベーステーブル（wp_lw_link_list）によるリンク情報保存
- *   - 「リンクを調べる」ボタンで全ページのaタグをスキャン
- *   - 「リンク有効性をチェック」ボタンでHTTPステータスチェック（バッチ処理）
- *   - アンカーリンク（#で始まるリンク）をソースページURLと結合してチェック対象に含める
- *   - デバッグログをdebug.logに出力する仕組み
- *   - href="#" のみのリンクに警告マーク（▲）と「無効」バッジを表示
- *   - 無効なアンカー（##, # など）も警告対象に追加
- *   - アンカーリンクの存在チェック（ページ内のid属性をスキャン時に抽出・DB保存）
- *   - ID不在のアンカーリンクに ✗ マークと「ID不在」バッジを表示
- *   - 統計に「無効#」「ID不在」カウントを追加
- *   - リンク一覧画面で直接URL編集機能（インライン編集）
- *     - 各行に「編集」ボタン追加、クリックでテキスト入力表示
- *     - 「保存」ボタンで投稿のpost_contentを直接更新（wp_update_post）
- *     - DBリンク情報も自動更新、Enter/Escapeキー対応
- *
- * 【次回やること】
- *   1. リンク有効性チェック結果をデータベースに保存する
- *      - 現在はメモリ上のみで、ページリロードで消える
- *
- * ========================================
- */
-
-if (!defined('ABSPATH')) {
-    exit;
-}
-?>
-
-<style>
-.lw-link-list-wrap {
-    max-width: 1600px;
-}
-
-.lw-link-list-controls {
-    margin: 20px 0;
-    padding: 20px;
-    background: #fff;
-    border: 1px solid #ccd0d4;
-    border-radius: 4px;
-}
-
-.lw-link-list-controls .button-primary {
-    font-size: 14px;
-    padding: 8px 20px;
-    height: auto;
-}
-
-.lw-link-list-loading {
-    display: none;
-    margin-top: 15px;
-    padding: 20px;
-    background: #f0f6fc;
-    border: 1px solid #c3c4c7;
-    border-radius: 4px;
-    text-align: center;
-}
-
-.lw-link-list-loading .spinner {
-    float: none;
-    margin: 0 10px 0 0;
-    vertical-align: middle;
-}
-
-.lw-link-list-loading-text {
-    font-size: 14px;
-    color: #333;
-}
-
-.lw-link-list-stats {
-    display: none;
-    gap: 10px;
-    margin: 20px 0;
-    flex-wrap: wrap;
-}
-
-.lw-link-list-stat {
-    background: #fff;
-    border: 1px solid #ccd0d4;
-    border-radius: 4px;
-    padding: 10px 15px;
-    text-align: center;
-    min-width: 80px;
-}
-
-.lw-link-list-stat-number {
-    display: block;
-    font-size: 20px;
-    font-weight: 700;
-    color: #333;
-}
-
-.lw-link-list-stat-label {
-    display: block;
-    font-size: 11px;
-    color: #666;
-    margin-top: 3px;
-}
-
-.lw-link-type {
-    display: inline-block;
-    padding: 2px 8px;
-    border-radius: 3px;
-    font-size: 11px;
-    font-weight: 600;
-    white-space: nowrap;
-}
-
-.lw-link-empty { background: #f8d7da; color: #721c24; }
-.lw-link-anchor { background: #e2e3e5; color: #383d41; }
-.lw-link-internal { background: #d4edda; color: #155724; }
-.lw-link-external { background: #cce5ff; color: #004085; }
-.lw-link-relative { background: #d1ecf1; color: #0c5460; }
-.lw-link-mailto { background: #fff3cd; color: #856404; }
-.lw-link-tel { background: #d4edda; color: #155724; }
-.lw-link-js { background: #f5c6cb; color: #721c24; }
-.lw-link-other { background: #e9ecef; color: #6c757d; }
-
-.lw-link-list-results {
-    display: none;
-}
-
-/* タブナビゲーション */
-.lw-link-tabs {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 0;
-    margin-bottom: 0;
-    border-bottom: 1px solid #ccd0d4;
-    background: #f6f7f7;
-    padding: 0 10px;
-}
-
-.lw-link-tab {
-    padding: 12px 20px;
-    background: transparent;
-    border: none;
-    border-bottom: 3px solid transparent;
-    cursor: pointer;
-    font-size: 14px;
-    font-weight: 500;
-    color: #50575e;
-    transition: all 0.2s;
-    margin-bottom: -1px;
-}
-
-.lw-link-tab:hover {
-    color: #2271b1;
-    background: #fff;
-}
-
-.lw-link-tab.active {
-    color: #2271b1;
-    background: #fff;
-    border-bottom-color: #2271b1;
-}
-
-.lw-link-tab-count {
-    display: inline-block;
-    background: #e0e0e0;
-    color: #50575e;
-    padding: 2px 8px;
-    border-radius: 10px;
-    font-size: 11px;
-    margin-left: 6px;
-}
-
-.lw-link-tab.active .lw-link-tab-count {
-    background: #2271b1;
-    color: #fff;
-}
-
-.lw-link-tab-content {
-    display: none;
-    background: #fff;
-    border: 1px solid #ccd0d4;
-    border-top: none;
-    padding: 20px;
-}
-
-.lw-link-tab-content.active {
-    display: block;
-}
-
-/* グループセクション */
-.lw-link-group {
-    margin-bottom: 30px;
-    background: #fff;
-    border: 1px solid #ccd0d4;
-    border-radius: 4px;
-}
-
-.lw-link-group-header {
-    padding: 15px 20px;
-    background: #f6f7f7;
-    border-bottom: 1px solid #ccd0d4;
-    cursor: pointer;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-}
-
-.lw-link-group-header:hover {
-    background: #f0f0f1;
-}
-
-.lw-link-group-title {
-    font-size: 15px;
-    font-weight: 600;
-    color: #1d2327;
-    margin: 0;
-}
-
-.lw-link-group-count {
-    font-size: 13px;
-    color: #666;
-    background: #e0e0e0;
-    padding: 2px 10px;
-    border-radius: 10px;
-}
-
-.lw-link-group-content {
-    padding: 0;
-}
-
-.lw-link-group.collapsed .lw-link-group-content {
-    display: none;
-}
-
-.lw-link-group-toggle {
-    font-size: 18px;
-    color: #666;
-    transition: transform 0.2s;
-}
-
-.lw-link-group.collapsed .lw-link-group-toggle {
-    transform: rotate(-90deg);
-}
-
-/* ページ単位のサブグループ */
-.lw-link-page {
-    border-bottom: 1px solid #e5e5e5;
-}
-
-.lw-link-page:last-child {
-    border-bottom: none;
-}
-
-.lw-link-page-header {
-    padding: 12px 20px;
-    background: #fafafa;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    cursor: pointer;
-}
-
-.lw-link-page-header:hover {
-    background: #f5f5f5;
-}
-
-.lw-link-page-title {
-    font-size: 13px;
-    font-weight: 500;
-    color: #2271b1;
-}
-
-.lw-link-page-title a {
-    text-decoration: none;
-}
-
-.lw-link-page-title a:hover {
-    text-decoration: underline;
-}
-
-.lw-link-page-count {
-    font-size: 12px;
-    color: #999;
-}
-
-.lw-link-page-links {
-    padding: 0 20px 15px;
-}
-
-.lw-link-page.collapsed .lw-link-page-links {
-    display: none;
-}
-
-/* リンクテーブル */
-.lw-link-list-table {
-    margin: 0;
-    border: none;
-    box-shadow: none;
-}
-
-.lw-link-list-table th,
-.lw-link-list-table td {
-    padding: 8px 10px;
-}
-
-.lw-link-list-table .column-href {
-    width: 40%;
-    word-break: break-all;
-}
-
-.lw-link-list-table .column-type {
-    width: 10%;
-}
-
-.lw-link-list-table .column-text {
-    width: 35%;
-}
-
-.lw-link-list-table .column-action {
-    width: 15%;
-    text-align: center;
-}
-
-.lw-href-value {
-    font-family: monospace;
-    font-size: 12px;
-    color: #333;
-    word-break: break-all;
-}
-
-.lw-href-value.empty {
-    color: #dc3232;
-    font-style: italic;
-}
-
-.lw-link-text {
-    color: #666;
-    font-size: 12px;
-}
-
-.lw-link-list-filters {
-    margin: 15px 0;
-    padding: 10px 15px;
-    background: #f6f7f7;
-    border: 1px solid #dcdcde;
-    border-radius: 4px;
-}
-
-.lw-link-list-filters label {
-    margin-right: 15px;
-    cursor: pointer;
-}
-
-.lw-link-list-filters input[type="checkbox"] {
-    margin-right: 5px;
-}
-
-.lw-link-list-search {
-    margin: 15px 0;
-}
-
-.lw-link-list-search input[type="search"] {
-    width: 300px;
-    padding: 5px 10px;
-}
-
-.lw-no-links {
-    padding: 20px;
-    color: #666;
-    font-style: italic;
-}
-
-/* リンクチェック関連 */
-.lw-link-check-controls {
-    margin-top: 15px;
-    padding-top: 15px;
-    border-top: 1px solid #dcdcde;
-}
-
-.lw-link-check-progress {
-    display: none;
-    margin-top: 15px;
-    padding: 15px;
-    background: #f0f6fc;
-    border: 1px solid #c3c4c7;
-    border-radius: 4px;
-}
-
-.lw-progress-bar-container {
-    background: #e0e0e0;
-    border-radius: 4px;
-    height: 24px;
-    overflow: hidden;
-    margin-bottom: 10px;
-}
-
-.lw-progress-bar {
-    background: linear-gradient(90deg, #2271b1, #135e96);
-    height: 100%;
-    width: 0%;
-    transition: width 0.3s ease;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: #fff;
-    font-size: 12px;
-    font-weight: 600;
-}
-
-.lw-progress-text {
-    text-align: center;
-    color: #666;
-    font-size: 13px;
-}
-
-.lw-check-results-summary {
-    display: none;
-    margin-top: 15px;
-    padding: 15px;
-    background: #fff;
-    border: 1px solid #ccd0d4;
-    border-radius: 4px;
-}
-
-.lw-check-results-summary h4 {
-    margin: 0 0 10px 0;
-    font-size: 14px;
-}
-
-.lw-check-stat {
-    display: inline-block;
-    margin-right: 20px;
-    font-size: 13px;
-}
-
-.lw-check-stat-ok { color: #46b450; }
-.lw-check-stat-redirect { color: #ffb900; }
-.lw-check-stat-error { color: #dc3232; }
-.lw-check-stat-timeout { color: #826eb4; }
-.lw-check-stat-skip { color: #999; }
-
-/* ステータスバッジ */
-.lw-link-status {
-    display: inline-block;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 10px;
-    font-weight: 600;
-    margin-left: 8px;
-}
-
-.lw-status-ok { background: #d4edda; color: #155724; }
-.lw-status-redirect { background: #fff3cd; color: #856404; }
-.lw-status-not_found { background: #f8d7da; color: #721c24; }
-.lw-status-client_error { background: #f8d7da; color: #721c24; }
-.lw-status-server_error { background: #f8d7da; color: #721c24; }
-.lw-status-timeout { background: #e2e3e5; color: #383d41; }
-.lw-status-error { background: #f8d7da; color: #721c24; }
-.lw-status-skip { background: #e9ecef; color: #6c757d; }
-.lw-status-checking { background: #cce5ff; color: #004085; }
-
-/* 警告マーク（href="#" のみのリンク用） */
-.lw-link-warning {
-    display: inline-block;
-    color: #d63638;
-    font-weight: bold;
-    margin-left: 6px;
-    cursor: help;
-}
-
-.lw-link-warning-badge {
-    display: inline-block;
-    background: #fcf0f1;
-    border: 1px solid #d63638;
-    color: #d63638;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 10px;
-    font-weight: 600;
-    margin-left: 8px;
-}
-
-/* エラーマーク（アンカーID不在用） */
-.lw-link-error {
-    display: inline-block;
-    color: #dc3232;
-    font-weight: bold;
-    margin-left: 6px;
-    cursor: help;
-}
-
-.lw-link-error-badge {
-    display: inline-block;
-    background: #f8d7da;
-    border: 1px solid #dc3232;
-    color: #dc3232;
-    padding: 2px 6px;
-    border-radius: 3px;
-    font-size: 10px;
-    font-weight: 600;
-    margin-left: 8px;
-}
-
-/* インライン編集機能 */
-.lw-edit-btn {
-    padding: 2px 8px;
-    font-size: 11px;
-    margin-left: 8px;
-    cursor: pointer;
-    background: #f0f0f1;
-    border: 1px solid #c3c4c7;
-    border-radius: 3px;
-    color: #2271b1;
-}
-
-.lw-edit-btn:hover {
-    background: #e5e5e5;
-    border-color: #999;
-}
-
-.lw-edit-form {
-    display: flex;
-    align-items: center;
-    gap: 8px;
-    flex-wrap: wrap;
-}
-
-.lw-edit-input {
-    flex: 1;
-    min-width: 200px;
-    padding: 4px 8px;
-    font-family: monospace;
-    font-size: 12px;
-    border: 1px solid #2271b1;
-    border-radius: 3px;
-}
-
-.lw-edit-input:focus {
-    outline: none;
-    border-color: #007cba;
-    box-shadow: 0 0 0 1px #007cba;
-}
-
-.lw-save-btn {
-    padding: 4px 12px;
-    font-size: 12px;
-    background: #2271b1;
-    border: 1px solid #2271b1;
-    border-radius: 3px;
-    color: #fff;
-    cursor: pointer;
-}
-
-.lw-save-btn:hover {
-    background: #135e96;
-    border-color: #135e96;
-}
-
-.lw-save-btn:disabled {
-    background: #a0a5aa;
-    border-color: #a0a5aa;
-    cursor: not-allowed;
-}
-
-.lw-cancel-btn {
-    padding: 4px 12px;
-    font-size: 12px;
-    background: #f0f0f1;
-    border: 1px solid #c3c4c7;
-    border-radius: 3px;
-    color: #50575e;
-    cursor: pointer;
-}
-
-.lw-cancel-btn:hover {
-    background: #e5e5e5;
-    border-color: #999;
-}
-
-.lw-edit-saving {
-    color: #2271b1;
-    font-size: 12px;
-}
-
-.lw-edit-success {
-    color: #46b450;
-    font-size: 12px;
-}
-
-.lw-edit-error {
-    color: #dc3232;
-    font-size: 12px;
-}
-</style>
-
-<?php
-// データベース状態を取得
-$has_data = lw_link_list_has_data();
-$last_updated = lw_link_list_get_last_updated();
-?>
-
-<!-- 開発履歴 -->
-<div style="background: #f0f0f1; border-left: 4px solid #2271b1; padding: 12px 15px; margin: 20px 0; max-width: 800px;">
-    <h3 style="margin: 0 0 10px 0; font-size: 14px; color: #1d2327;">開発履歴・TODO</h3>
-    <p style="margin: 0 0 8px 0; font-size: 13px; color: #50575e;"><strong>【2024-12-20 実装完了】</strong></p>
-    <ul style="margin: 0 0 12px 20px; padding: 0; font-size: 12px; color: #50575e;">
-        <li>リンク一覧機能（投稿タイプ・ページ別グループ表示）</li>
-        <li>データベース保存（wp_lw_link_list）</li>
-        <li>リンク有効性チェック（HTTPステータス確認・バッチ処理）</li>
-        <li>アンカーリンク対応（ソースページURL結合）</li>
-        <li style="color: #46b450;"><strong>✓ 無効なアンカー（#のみ、##など）に警告マーク（▲）と「無効」バッジを表示</strong></li>
-        <li style="color: #46b450;"><strong>✓ アンカーリンクの存在チェック（ページ内id属性をスキャン・DB保存）</strong></li>
-        <li style="color: #46b450;"><strong>✓ ID不在のアンカーに ✗ マークと「ID不在」バッジを表示</strong></li>
-        <li style="color: #46b450;"><strong>✓ 統計に「無効#」「ID不在」カウントを追加</strong></li>
-        <li style="color: #46b450;"><strong>✓ リンク一覧画面で直接URL編集機能（インライン編集、Enter/Escape対応）</strong></li>
-    </ul>
-    <p style="margin: 0 0 8px 0; font-size: 13px; color: #d63638;"><strong>【次回やること】</strong></p>
-    <ol style="margin: 0 0 0 20px; padding: 0; font-size: 12px; color: #50575e;">
-        <li>リンク有効性チェック結果をデータベースに保存する（現在はメモリ上のみ）</li>
-        <li>他のページの読込が遅くならないか確認・修正</li>
-        <li>プレミアムプランユーザーのみ利用可能にする</li>
-    </ol>
-</div>
-
-<div class="wrap lw-link-list-wrap">
-    <h1>リンク一覧</h1>
-    <p>サイト内の全ての&lt;a&gt;タグを調査し、投稿タイプ・ページ別にグループ分けして表示します。</p>
-
-
-    <!-- コントロール -->
-    <div class="lw-link-list-controls">
-        <button type="button" id="lw-start-scan" class="button button-primary" data-has-data="<?php echo $has_data ? '1' : '0'; ?>">
-            <span class="dashicons dashicons-search" style="vertical-align: middle; margin-right: 5px;"></span>
-            <span class="lw-btn-text"><?php echo $has_data ? 'リンクを再生成' : 'リンクを調べる'; ?></span>
-        </button>
-
-        <?php if ($has_data && $last_updated): ?>
-        <span id="lw-last-updated" class="lw-last-updated" style="margin-left: 15px; color: #666; font-size: 13px;">
-            最終更新: <?php echo esc_html(date_i18n('Y年n月j日 H:i', strtotime($last_updated))); ?>
-        </span>
-        <?php endif; ?>
-
-        <div id="lw-loading" class="lw-link-list-loading">
-            <span class="spinner is-active"></span>
-            <span class="lw-link-list-loading-text">リンクを調査中...</span>
-        </div>
-
-        <!-- リンク有効性チェック -->
-        <div class="lw-link-check-controls" id="lw-check-controls" style="<?php echo $has_data ? '' : 'display:none;'; ?>">
-            <button type="button" id="lw-start-check" class="button button-secondary">
-                <span class="dashicons dashicons-yes-alt" style="vertical-align: middle; margin-right: 5px;"></span>
-                <span class="lw-check-btn-text">リンク有効性をチェック</span>
-            </button>
-            <button type="button" id="lw-stop-check" class="button" style="display: none; margin-left: 10px;">
-                <span class="dashicons dashicons-no" style="vertical-align: middle; margin-right: 5px;"></span>
-                中止
-            </button>
-        </div>
-
-        <!-- プログレスバー -->
-        <div id="lw-check-progress" class="lw-link-check-progress">
-            <div class="lw-progress-bar-container">
-                <div class="lw-progress-bar" id="lw-progress-bar">0%</div>
-            </div>
-            <div class="lw-progress-text" id="lw-progress-text">準備中...</div>
-        </div>
-
-        <!-- チェック結果サマリー -->
-        <div id="lw-check-results-summary" class="lw-check-results-summary">
-            <h4>チェック結果</h4>
-            <span class="lw-check-stat lw-check-stat-ok">✓ 有効: <strong id="lw-check-ok">0</strong></span>
-            <span class="lw-check-stat lw-check-stat-redirect">⟳ リダイレクト: <strong id="lw-check-redirect">0</strong></span>
-            <span class="lw-check-stat lw-check-stat-error">✗ リンク切れ: <strong id="lw-check-error">0</strong></span>
-            <span class="lw-check-stat lw-check-stat-timeout">⏱ タイムアウト: <strong id="lw-check-timeout">0</strong></span>
-            <span class="lw-check-stat lw-check-stat-skip">○ スキップ: <strong id="lw-check-skip">0</strong></span>
-        </div>
-    </div>
-
-    <!-- 統計サマリー -->
-    <div id="lw-stats" class="lw-link-list-stats"></div>
-
-    <!-- 結果エリア -->
-    <div id="lw-results" class="lw-link-list-results">
-        <!-- フィルター -->
-        <div class="lw-link-list-filters">
-            <strong>フィルター:</strong>
-            <label><input type="checkbox" class="lw-filter" value="empty" checked> 未設定</label>
-            <label><input type="checkbox" class="lw-filter" value="anchor" checked> アンカー</label>
-            <label><input type="checkbox" class="lw-filter" value="internal" checked> 内部</label>
-            <label><input type="checkbox" class="lw-filter" value="external" checked> 外部</label>
-            <label><input type="checkbox" class="lw-filter" value="relative" checked> 相対</label>
-            <label><input type="checkbox" class="lw-filter" value="mailto" checked> メール</label>
-            <label><input type="checkbox" class="lw-filter" value="tel" checked> 電話</label>
-            <label><input type="checkbox" class="lw-filter" value="javascript" checked> JavaScript</label>
-        </div>
-
-        <!-- 検索 -->
-        <div class="lw-link-list-search">
-            <input type="search" id="lw-search" placeholder="URL / テキスト / ページ名で検索...">
-        </div>
-
-        <!-- タブナビゲーション -->
-        <div id="lw-tabs" class="lw-link-tabs"></div>
-
-        <!-- タブコンテンツ -->
-        <div id="lw-tab-contents"></div>
-
-        <p id="lw-count" style="margin-top: 10px; color: #666;"></p>
-    </div>
-
-</div>
-
-<script>
 jQuery(document).ready(function($) {
+    // PHP から渡る値は全て lwLinkList（wp_localize_script）に入っている → admin/enqueue.php
+    var cfg = window.lwLinkList || {};
+
+    // ヘッダー・フッター・メニューをまとめる、投稿タイプではない専用のタブ名。
+    // 実在する投稿タイプと衝突しないよう先頭にアンダースコアを付けてある
+    var COMMON_TYPE = '_common';
+
     var allLinks = [];
     var allPages = [];
     var groupedData = {};
-    var homeUrl = '<?php echo esc_js(home_url()); ?>';
+
+    // 画面に並ぶ行数（サイト共通のリンクは1本として数えたもの）。renderStats が入れる
+    var displayedTotal = 0;
+    var homeUrl = cfg.homeUrl || '';
     var hasDataAttr = $('#lw-start-scan').attr('data-has-data');
     var hasData = hasDataAttr === '1';
 
     // 投稿タイプのラベル
-    var postTypeLabels = <?php
-        $labels = array();
-        $post_types = get_post_types(array('public' => true), 'objects');
-        foreach ($post_types as $slug => $obj) {
-            $labels[$slug] = $obj->label;
-        }
-        echo json_encode($labels);
-    ?>;
+    var postTypeLabels = cfg.postTypeLabels || {};
+
+    /**
+     * AJAX に送る data を組み立てる。
+     * 🚨 nonce はここでしか載せない。data を手書きしないこと（付け忘れ＝403 で必ず落ちる）。
+     */
+    function lwData(action, extra) {
+        return $.extend({ action: action, nonce: cfg.nonce }, extra || {});
+    }
 
     // リンク種別を判定
     function getLinkType(href) {
@@ -826,9 +118,22 @@ jQuery(document).ready(function($) {
             };
         });
 
+        // サイト共通のリンク（ヘッダー・フッター・メニュー）は1回だけ見せる。
+        // しっかりスキャンはフッターまで拾うので、ページごとに並べると
+        // フッター20本 × 20ページ = 400行の繰り返しで本文のリンクが埋もれる。
+        var commonSeen = {};
+
         // リンク情報を追加
         allLinks.forEach(function(link) {
             if (link.source_type !== 'post') return;
+
+            if (link.scope === 'common') {
+                var key = link.href || '';
+                if (commonSeen[key]) return;
+                commonSeen[key] = true;
+                addCommonLink(link);
+                return;
+            }
 
             var postType = link.post_type || 'unknown';
             var postId = link.source_id;
@@ -837,6 +142,30 @@ jQuery(document).ready(function($) {
                 groupedData[postType].pages[postId].links.push(link);
             }
         });
+    }
+
+    // サイト共通のリンクを、専用のまとまりに1本だけ足す
+    function addCommonLink(link) {
+        if (!groupedData[COMMON_TYPE]) {
+            groupedData[COMMON_TYPE] = {
+                label: 'サイト共通',
+                pages: {}
+            };
+            groupedData[COMMON_TYPE].pages[0] = {
+                title: 'ヘッダー・フッター・メニューなど（全ページ共通）',
+                edit_link: '',
+                link_count: 0,
+                links: [],
+                ids: [],
+                // 🚨 ここは特定の1ページではないので、アンカー先の id があるかを判定できない。
+                //    判定すると全部「ID不在」になって、ありもしない不具合を出してしまう
+                skipAnchorCheck: true
+            };
+        }
+
+        var bucket = groupedData[COMMON_TYPE].pages[0];
+        bucket.links.push(link);
+        bucket.link_count = bucket.links.length;
     }
 
     // 現在のアクティブタブ
@@ -850,8 +179,9 @@ jQuery(document).ready(function($) {
         $tabsContainer.empty();
         $contentsContainer.empty();
 
-        // 投稿タイプの表示順序（固定ページ、投稿、その他カスタム投稿）
-        var typeOrder = ['page', 'post'];
+        // 表示順序（サイト共通、固定ページ、投稿、その他カスタム投稿）。
+        // サイト共通を先頭に置くのは、フッターのリンク切れが全ページに効くため
+        var typeOrder = [COMMON_TYPE, 'page', 'post'];
         var otherTypes = Object.keys(groupedData).filter(function(t) {
             return typeOrder.indexOf(t) === -1;
         }).sort(function(a, b) {
@@ -965,9 +295,9 @@ jQuery(document).ready(function($) {
                         '<span class="lw-href-value">' + escapeHtml(link.href) + '</span>' :
                         '<span class="lw-href-value empty">(空 - href未設定)</span>';
 
-                    // アンカーリンクのチェック
+                    // アンカーリンクのチェック（サイト共通のまとまりでは行わない。理由は addCommonLink）
                     var warningMark = '';
-                    if (link.href && /^#/.test(link.href)) {
+                    if (link.href && /^#/.test(link.href) && !page.skipAnchorCheck) {
                         // #を全て除去して、残りをtrimし、空なら警告
                         var anchorId = link.href.replace(/^#+/, '').trim();
                         if (anchorId === '' || /^\s*$/.test(anchorId) || /^#/.test(anchorId)) {
@@ -989,18 +319,34 @@ jQuery(document).ready(function($) {
                         escapeHtml(link.text) :
                         '<em style="color:#999;">(テキストなし)</em>';
 
-                    // 編集ボタン用のデータ属性（link_indexを追加）
-                    var linkIndex = link.link_index !== undefined ? link.link_index : 0;
+                    // 編集ボタン用のデータ属性（link_index は本文中の出現順）
+                    // link_index が -1 のリンクは、ブロックのレンダリング結果など
+                    // post_content に実体が無いもの。位置で特定できないので編集させない
+                    // （させると本文中の別のリンクを書き換えてしまう）
+                    var linkIndex = (link.link_index !== undefined && link.link_index !== null)
+                        ? link.link_index
+                        : -1;
+                    var isEditable = linkIndex >= 0;
                     var dataAttrs = 'data-post-id="' + pageId + '" ' +
                         'data-href="' + escapeHtml(link.href || '') + '" ' +
                         'data-text="' + escapeHtml(link.text || '') + '" ' +
                         'data-link-index="' + linkIndex + '"';
 
+                    var actionCell = isEditable
+                        ? '<button type="button" class="lw-edit-btn">編集</button>'
+                        : '<span class="lw-edit-na" title="ブロックが出力しているリンクのため、本文から直接は編集できません。編集画面で該当ブロックを直してください。">—</span>';
+
+                    // 何ページに出ているか。まとめた根拠が見えないと、
+                    // なぜ1行にされているのか分からない
+                    if (link.scope === 'common' && link.common_pages) {
+                        textDisplay += '<span class="lw-common-count">' + link.common_pages + ' ページに出ています</span>';
+                    }
+
                     linksHtml += '<tr class="lw-link-row" ' + dataAttrs + '>' +
                         '<td class="column-href"><span class="lw-href-display">' + hrefDisplay + warningMark + '</span></td>' +
                         '<td class="column-type">' + getTypeLabel(type) + '</td>' +
                         '<td class="column-text"><span class="lw-link-text">' + textDisplay + '</span></td>' +
-                        '<td class="column-action"><button type="button" class="lw-edit-btn">編集</button></td>' +
+                        '<td class="column-action">' + actionCell + '</td>' +
                         '</tr>';
                 });
 
@@ -1069,7 +415,9 @@ jQuery(document).ready(function($) {
             }
         });
 
-        $('#lw-count').text('表示: ' + totalVisible + ' リンク / 全 ' + allLinks.length + ' リンク');
+        // 分母は「画面に並ぶ行数」。allLinks.length はサイト共通のぶんが
+        // ページ数だけ重複しているので使わない（renderStats と同じ数え方に揃える）
+        $('#lw-count').text('表示: ' + totalVisible + ' リンク / 全 ' + displayedTotal + ' リンク');
     }
 
     // グループを描画（タブ形式）
@@ -1100,10 +448,18 @@ jQuery(document).ready(function($) {
         renderTabContent(postType);
     })
 
-    // 統計を表示（buildGroupedData後に呼ぶこと）
+    /**
+     * 統計を表示（buildGroupedData後に呼ぶこと）
+     *
+     * 🚨 数えるのは「画面に並んでいる行」と同じ単位にすること。
+     *    しっかりスキャンではヘッダー・フッターのリンクが全ページに付くので、
+     *    そのまま数えると 1本のフッターリンクが 60本に化ける
+     *    （実測で 総リンク数 534 のところが 2,468 になった）。
+     *    画面では「サイト共通」に1回だけ出しているので、数え方も1回に揃える。
+     */
     function renderStats() {
         var stats = {
-            total: allLinks.length,
+            total: 0,
             pages: allPages.length,
             empty: 0, anchor: 0, internal: 0, external: 0,
             relative: 0, mailto: 0, tel: 0, javascript: 0,
@@ -1117,12 +473,26 @@ jQuery(document).ready(function($) {
             pageIdsMap[page.post_id] = page.ids || [];
         });
 
+        var commonCounted = {};
+
         allLinks.forEach(function(link) {
+            var isCommon = link.scope === 'common';
+
+            // サイト共通のリンクは1本として数える
+            if (isCommon) {
+                var key = link.href || '';
+                if (commonCounted[key]) return;
+                commonCounted[key] = true;
+            }
+
+            stats.total++;
+
             var type = getLinkType(link.href);
             if (stats[type] !== undefined) stats[type]++;
 
-            // アンカーリンクのチェック
-            if (link.href && /^#/.test(link.href)) {
+            // アンカーリンクのチェック。
+            // サイト共通のアンカーは、どの1ページを基準に見るべきかが決まらないので数えない
+            if (link.href && /^#/.test(link.href) && !isCommon) {
                 var anchorId = link.href.replace(/^#+/, '').trim();
                 if (anchorId === '' || /^\s*$/.test(anchorId) || /^#/.test(anchorId)) {
                     // 無効なアンカー（#のみ、##など）
@@ -1136,6 +506,8 @@ jQuery(document).ready(function($) {
                 }
             }
         });
+
+        displayedTotal = stats.total;
 
         var html = '<div class="lw-link-list-stat"><span class="lw-link-list-stat-number">' + stats.pages + '</span><span class="lw-link-list-stat-label">総ページ数</span></div>' +
             '<div class="lw-link-list-stat"><span class="lw-link-list-stat-number">' + stats.total + '</span><span class="lw-link-list-stat-label">総リンク数</span></div>' +
@@ -1152,25 +524,112 @@ jQuery(document).ready(function($) {
         $('#lw-stats').html(html).css('display', 'flex');
     }
 
+    // サーバーが返したエラーを画面に出す（nonce切れ・プレミアム外はここに来る）
+    function showError(response) {
+        var message = (response && response.data && response.data.message)
+            ? response.data.message
+            : '不明なエラーが発生しました。';
+        alert(message);
+    }
+
+    /**
+     * いまの一覧が「どうやって集められたものか」を画面に出す。
+     *
+     * 🚨 これを省かないこと。
+     *    軽いスキャンとしっかりスキャンでは件数が変わる。理由が画面に無いと、
+     *    利用者は数が合わないことを不具合だと受け取る。
+     */
+    function renderScanState(data) {
+        var mode = data.scanMode === 'full' ? 'full' : 'light';
+        var errors = data.crawlErrors || [];
+        var skipped = data.skipped || 0;
+        var commonCount = data.commonCount || 0;
+
+        var badge = '';
+
+        if (mode === 'full') {
+            badge = '<span class="lw-mode-tag lw-mode-tag-full">しっかり調べた一覧</span>' +
+                '<span class="lw-mode-note">公開ページを実際に読み込んで集めました。' +
+                'ヘッダー・フッター・メニューのリンクも含まれます。';
+            if (commonCount > 0) {
+                badge += '全ページ共通のリンク ' + commonCount + ' 本は「サイト共通」にまとめてあります。';
+            }
+            badge += '</span>';
+        } else {
+            badge = '<span class="lw-mode-tag lw-mode-tag-light">軽く調べた一覧</span>' +
+                '<span class="lw-mode-note">本文のリンクを、データベースの中だけで集めました。' +
+                'ヘッダー・フッター・メニューのリンクと、ブロックが自動で作るリンクの一部は含まれません。' +
+                'すべて調べるには「しっかり調べる」を押してください。</span>';
+        }
+
+        $('#lw-scan-mode-badge').html(badge).show();
+
+        // 読めなかったページ・上限で外したページは、必ず名前を挙げて伝える
+        var notice = '';
+
+        // 時間がかかった理由を出す。出さないと「今回だけ異様に遅い」としか見えない
+        if (data.throttled) {
+            notice += '<p><strong>サーバーからアクセス制限を受けたため、間隔を空けて調べました。</strong>' +
+                'そのぶん時間がかかっています。ページはすべて読み込めています。</p>';
+        }
+
+        if (skipped > 0) {
+            notice += '<p><strong>ページ数が多いため ' + skipped + ' ページは調べていません。</strong>' +
+                '一度に巡回できるのは ' + (cfg.crawlMax || 200) + ' ページまでです。</p>';
+        }
+
+        if (errors.length > 0) {
+            notice += '<p><strong>次の ' + errors.length + ' ページは読み込めませんでした。</strong>' +
+                'この分は本文のリンクだけを載せています。</p><ul class="lw-crawl-error-list">';
+
+            errors.forEach(function(error) {
+                notice += '<li>' + escapeHtml(error.title || '(無題)') +
+                    ' — ' + escapeHtml(error.reason || '') + '</li>';
+            });
+
+            notice += '</ul>';
+        }
+
+        if (notice) {
+            $('#lw-crawl-notice').html(notice).show();
+        } else {
+            $('#lw-crawl-notice').hide().empty();
+        }
+    }
+
     // DBからデータを読み込んで表示
-    function loadFromDatabase() {
+    function loadFromDatabase(onDone) {
         $('#lw-loading').show();
         $('#lw-loading .lw-link-list-loading-text').text('データを読み込み中...');
 
         $.ajax({
-            url: ajaxurl,
+            url: cfg.ajaxUrl,
             type: 'POST',
-            data: {
-                action: 'lw_link_list_load'
-            },
+            data: lwData('lw_link_list_load'),
             success: function(response) {
-                if (response.success) {
-                    allLinks = response.data.links || [];
-                    allPages = response.data.pages || [];
-                    buildGroupedData();
-                    renderStats();
-                    renderGroups();
-                    $('#lw-results').show();
+                if (!response.success) {
+                    showError(response);
+                    return;
+                }
+
+                allLinks = response.data.links || [];
+                allPages = response.data.pages || [];
+
+                // チェック結果は DB に残してあるので、画面を開き直しても消えない
+                checkResults = response.data.checkResults || {};
+
+                // どちらの方式で採った一覧か。件数が変わる理由になるので必ず出す
+                renderScanState(response.data);
+
+                buildGroupedData();
+                renderStats();
+                renderGroups();
+                $('#lw-results').show();
+
+                if (Object.keys(checkResults).length > 0) {
+                    updateResultsSummary();
+                    updateLinkStatusInTable();
+                    $('#lw-check-results-summary').show();
                 }
             },
             error: function(xhr, status, error) {
@@ -1179,6 +638,9 @@ jQuery(document).ready(function($) {
             complete: function() {
                 $('#lw-loading').hide();
                 $('#lw-loading .lw-link-list-loading-text').text('リンクを調査中...');
+                if (typeof onDone === 'function') {
+                    onDone();
+                }
             }
         });
     }
@@ -1188,61 +650,117 @@ jQuery(document).ready(function($) {
         loadFromDatabase();
     }
 
-    // スキャン開始（新規/再生成）
+    /**
+     * スキャンを1バッチずつ進める。
+     * 全ページを1リクエストで処理すると、ページ数の多いサイトでタイムアウトするため。
+     */
+    function runScanBatch(offset, total, $btn) {
+        var shown = total > 0 ? Math.min(offset, total) + ' / ' + total : offset;
+        $('#lw-loading .lw-link-list-loading-text').text('リンクを調査中... ' + shown);
+
+        $.ajax({
+            url: cfg.ajaxUrl,
+            type: 'POST',
+            data: lwData('lw_link_list_scan_batch', { offset: offset }),
+            success: function(response) {
+                if (!response.success) {
+                    showError(response);
+                    finishScan($btn);
+                    return;
+                }
+
+                var scanned = response.data.scanned || 0;
+
+                // scanned が 0 なら必ず止める（進まないまま呼び続けないための歯止め）
+                if (response.data.done || scanned === 0) {
+                    finishScan($btn);
+                    return;
+                }
+
+                runScanBatch(offset + scanned, total, $btn);
+            },
+            error: function(xhr, status, error) {
+                console.error('AJAX Error:', status, error);
+                alert('通信エラーが発生しました。');
+                finishScan($btn);
+            }
+        });
+    }
+
+    // 軽いスキャン完了後の後始末
+    function finishScan($btn) {
+        // ボタンの文言は変えない。「もう一度○○」にすると2つの頭が揃って見分けがつかなくなる
+        $btn.data('has-data', 1);
+        afterScanCompleted();
+    }
+
+    /**
+     * 集め方（軽い / しっかり）によらず、スキャンが終わったときに毎回やること。
+     * しっかりスキャン側（link-list-crawl.js）からも呼ぶ。
+     */
+    function afterScanCompleted() {
+        loadFromDatabase(function() {
+            setScanButtonsDisabled(false);
+            $('#lw-loading').hide();
+        });
+
+        $('#lw-check-controls').show();
+
+        // 進捗バーは前回の実行の残りなので消す。
+        // 🚨 チェック結果（有効・リンク切れ）はここで消さないこと。
+        //    結果は URL を鍵に DB に持たせてあり、採り直しても同じ URL の判定は生きている。
+        //    ここで空にしても直後の loadFromDatabase が DB から読み直すので効かず、
+        //    「消しているつもりで消えていない」だけのコードになる（2026-08-22 に確認）。
+        $('#lw-check-progress').hide();
+
+        stampLastUpdated();
+    }
+
+    // 「最終更新」の表示を今の時刻にする
+    function stampLastUpdated() {
+        var now = new Date();
+        var dateStr = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日 ' +
+            ('0' + now.getHours()).slice(-2) + ':' + ('0' + now.getMinutes()).slice(-2);
+
+        if ($('#lw-last-updated').length) {
+            $('#lw-last-updated').text('最終更新: ' + dateStr);
+        } else {
+            $('.lw-scan-modes').append('<span id="lw-last-updated" class="lw-last-updated">最終更新: ' + dateStr + '</span>');
+        }
+    }
+
+    // スキャン中は両方のボタンを止める（軽いと しっかり を同時に走らせない）
+    function setScanButtonsDisabled(disabled) {
+        $('.lw-scan-button').prop('disabled', !!disabled);
+    }
+
+    // 軽いスキャン開始（新規/再生成）
     $('#lw-start-scan').on('click', function() {
         var $btn = $(this);
-        $btn.prop('disabled', true);
+        setScanButtonsDisabled(true);
         $('#lw-loading').show();
         $('#lw-loading .lw-link-list-loading-text').text('リンクを調査中...');
         $('#lw-results').hide();
         $('#lw-stats').hide();
 
         $.ajax({
-            url: ajaxurl,
+            url: cfg.ajaxUrl,
             type: 'POST',
-            data: {
-                action: 'lw_link_list_scan'
-            },
+            data: lwData('lw_link_list_scan_start'),
             success: function(response) {
-                if (response.success) {
-                    allLinks = response.data.links || [];
-                    allPages = response.data.pages || [];
-                    buildGroupedData();
-                    renderStats();
-                    renderGroups();
-                    $('#lw-results').show();
-
-                    // ボタンテキストを「再生成」に変更
-                    $btn.find('.lw-btn-text').text('リンクを再生成');
-                    $btn.data('has-data', 1);
-
-                    // チェックボタンを表示
-                    $('#lw-check-controls').show();
-
-                    // チェック結果をリセット
-                    checkResults = {};
-                    $('#lw-check-progress').hide();
-                    $('#lw-check-results-summary').hide();
-
-                    // 最終更新日時を更新
-                    var now = new Date();
-                    var dateStr = now.getFullYear() + '年' + (now.getMonth() + 1) + '月' + now.getDate() + '日 ' +
-                        ('0' + now.getHours()).slice(-2) + ':' + ('0' + now.getMinutes()).slice(-2);
-                    if ($('#lw-last-updated').length) {
-                        $('#lw-last-updated').text('最終更新: ' + dateStr);
-                    } else {
-                        $btn.after('<span id="lw-last-updated" class="lw-last-updated" style="margin-left: 15px; color: #666; font-size: 13px;">最終更新: ' + dateStr + '</span>');
-                    }
-                } else {
-                    alert('エラー: ' + (response.data.message || '不明なエラー'));
+                if (!response.success) {
+                    showError(response);
+                    setScanButtonsDisabled(false);
+                    $('#lw-loading').hide();
+                    return;
                 }
+
+                runScanBatch(0, response.data.total || 0, $btn);
             },
             error: function(xhr, status, error) {
                 console.error('AJAX Error:', status, error);
                 alert('通信エラーが発生しました。');
-            },
-            complete: function() {
-                $btn.prop('disabled', false);
+                setScanButtonsDisabled(false);
                 $('#lw-loading').hide();
             }
         });
@@ -1281,10 +799,9 @@ jQuery(document).ready(function($) {
     // リンク有効性チェック機能
     // ========================================
 
-    var checkResults = {};  // URL => 結果
+    var checkResults = {};  // URL => 結果（DB にも保存されるので画面を離れても消えない）
     var isChecking = false;
     var checkAborted = false;
-    var batchSize = 20;
 
     // ステータスラベルを取得
     function getStatusLabel(status, statusCode) {
@@ -1292,10 +809,12 @@ jQuery(document).ready(function($) {
             'ok': '有効',
             'redirect': 'リダイレクト',
             'not_found': 'リンク切れ',
+            'unverified': '確認できず',
             'client_error': 'エラー',
             'server_error': 'サーバーエラー',
             'timeout': 'タイムアウト',
             'error': '接続エラー',
+            'blocked': '送信せず',
             'skip': 'スキップ',
         };
         var label = labels[status] || status;
@@ -1318,9 +837,16 @@ jQuery(document).ready(function($) {
         $('#lw-progress-text').text('チェック中: ' + checked + ' / ' + total + ' URL');
     }
 
-    // 結果サマリー更新
+    /**
+     * 結果サマリー更新
+     *
+     * 🚨「確認できず」を「リンク切れ」に混ぜないこと。
+     *    相手が自動チェックを断っただけ（403・429・503 など）で、
+     *    ブラウザでは普通に開けるものがほとんど。混ぜると誤報になる。
+     *    lite-word.com の実測では、19件の「問題あり」のうち本当に切れていたのは2件だけだった。
+     */
     function updateResultsSummary() {
-        var stats = { ok: 0, redirect: 0, error: 0, timeout: 0, skip: 0 };
+        var stats = { ok: 0, redirect: 0, error: 0, unverified: 0, timeout: 0, skip: 0 };
 
         for (var url in checkResults) {
             var result = checkResults[url];
@@ -1328,11 +854,14 @@ jQuery(document).ready(function($) {
                 stats.ok++;
             } else if (result.status === 'redirect') {
                 stats.redirect++;
+            } else if (result.status === 'unverified') {
+                stats.unverified++;
             } else if (result.status === 'not_found' || result.status === 'client_error' || result.status === 'server_error' || result.status === 'error') {
                 stats.error++;
             } else if (result.status === 'timeout') {
                 stats.timeout++;
-            } else if (result.status === 'skip') {
+            } else if (result.status === 'skip' || result.status === 'blocked') {
+                // blocked は「安全でない宛先なので送らなかった」＝ 実際には叩いていない
                 stats.skip++;
             }
         }
@@ -1340,6 +869,7 @@ jQuery(document).ready(function($) {
         $('#lw-check-ok').text(stats.ok);
         $('#lw-check-redirect').text(stats.redirect);
         $('#lw-check-error').text(stats.error);
+        $('#lw-check-unverified').text(stats.unverified);
         $('#lw-check-timeout').text(stats.timeout);
         $('#lw-check-skip').text(stats.skip);
     }
@@ -1360,54 +890,61 @@ jQuery(document).ready(function($) {
         });
     }
 
-    // バッチチェック実行
-    function runBatchCheck(urls, index, total) {
-        if (checkAborted || index >= urls.length) {
-            // 完了
-            isChecking = false;
-            $('#lw-start-check').prop('disabled', false).find('.lw-check-btn-text').text('リンク有効性をチェック');
-            $('#lw-stop-check').hide();
-            $('#lw-progress-text').text(checkAborted ? 'チェックを中止しました' : 'チェック完了!');
-            updateResultsSummary();
-            updateLinkStatusInTable();
+    // チェック終了時の後始末
+    function finishCheck(message) {
+        isChecking = false;
+        $('#lw-start-check').prop('disabled', false).find('.lw-check-btn-text').text('リンク有効性をチェック');
+        $('#lw-stop-check').prop('disabled', false).hide();
+        $('#lw-progress-text').text(message);
+        updateResultsSummary();
+        updateLinkStatusInTable();
+    }
+
+    /**
+     * バッチチェック実行。
+     *
+     * 🚨 URL はクライアントから送らない（offset だけ）。
+     *    叩く相手はサーバーが DB から組み立てる。詳しくは ajax/check.php の冒頭。
+     */
+    function runBatchCheck(offset, total) {
+        if (checkAborted) {
+            finishCheck('チェックを中止しました');
             return;
         }
 
-        // バッチ取得
-        var batch = urls.slice(index, index + batchSize);
-
         $.ajax({
-            url: ajaxurl,
+            url: cfg.ajaxUrl,
             type: 'POST',
-            data: {
-                action: 'lw_link_list_check_batch',
-                urls: batch
-            },
+            data: lwData('lw_link_list_check_batch', { offset: offset }),
             success: function(response) {
-                if (response.success && response.data.results) {
-                    // 結果を保存
-                    response.data.results.forEach(function(result) {
-                        checkResults[result.url] = result;
-                    });
-
-                    // プログレス更新
-                    var checked = Math.min(index + batchSize, urls.length);
-                    updateProgress(checked, total);
-                    updateResultsSummary();
-
-                    // リアルタイムでテーブル更新
-                    updateLinkStatusInTable();
-
-                    // 次のバッチ
-                    runBatchCheck(urls, index + batchSize, total);
-                } else {
-                    // エラーでも次のバッチへ
-                    runBatchCheck(urls, index + batchSize, total);
+                if (!response.success) {
+                    showError(response);
+                    finishCheck('チェックを中断しました');
+                    return;
                 }
+
+                (response.data.results || []).forEach(function(result) {
+                    checkResults[result.url] = result;
+                });
+
+                var checked = response.data.checked || 0;
+                var next = offset + checked;
+
+                updateProgress(Math.min(next, total), total);
+                updateResultsSummary();
+                updateLinkStatusInTable();
+
+                // checked が 0 なら offset が進まない＝呼び続けても終わらないので必ず止める
+                if (response.data.done || checked === 0) {
+                    finishCheck('チェック完了!');
+                    return;
+                }
+
+                runBatchCheck(next, total);
             },
             error: function(xhr, status, error) {
-                // エラーでも次のバッチへ
-                runBatchCheck(urls, index + batchSize, total);
+                console.error('AJAX Error:', status, error);
+                finishCheck('通信エラーでチェックを中断しました');
             }
         });
     }
@@ -1419,48 +956,44 @@ jQuery(document).ready(function($) {
         var $btn = $(this);
         $btn.prop('disabled', true).find('.lw-check-btn-text').text('準備中...');
 
-        // チェック対象URLを取得
         $.ajax({
-            url: ajaxurl,
+            url: cfg.ajaxUrl,
             type: 'POST',
-            data: {
-                action: 'lw_link_list_get_checkable_urls'
-            },
+            data: lwData('lw_link_list_check_start'),
             success: function(response) {
-                if (response.success && response.data.urls && response.data.urls.length > 0) {
-                    var urls = response.data.urls;
-
-                    // 初期化
-                    checkResults = {};
-                    isChecking = true;
-                    checkAborted = false;
-
-                    // UI更新
-                    $btn.find('.lw-check-btn-text').text('チェック中...');
-                    $('#lw-stop-check').show();
-                    $('#lw-check-progress').show();
-                    $('#lw-check-results-summary').show();
-                    updateProgress(0, urls.length);
-
-                    // 結果サマリーリセット
-                    $('#lw-check-ok, #lw-check-redirect, #lw-check-error, #lw-check-timeout, #lw-check-skip').text('0');
-
-                    // バッチチェック開始
-                    runBatchCheck(urls, 0, urls.length);
-                } else {
-                    var debugMsg = '';
-                    if (response.data && response.data.debug) {
-                        debugMsg = '\n\nデバッグ情報:\n' +
-                            'DB内リンク数: ' + response.data.debug.links_count + '\n' +
-                            'ページ数: ' + response.data.debug.pages_count + '\n' +
-                            'チェック可能URL数: ' + response.data.debug.checkable_count + '\n' +
-                            'スキップ数: ' + response.data.debug.skipped_count;
-                    }
-                    alert('チェック対象のURLがありません。先に「リンクを調べる」を実行してください。' + debugMsg);
+                if (!response.success) {
+                    showError(response);
                     $btn.prop('disabled', false).find('.lw-check-btn-text').text('リンク有効性をチェック');
+                    return;
                 }
+
+                var total = response.data.total || 0;
+
+                if (total === 0) {
+                    alert('チェック対象のURLがありません。先に「リンクを調べる」を実行してください。');
+                    $btn.prop('disabled', false).find('.lw-check-btn-text').text('リンク有効性をチェック');
+                    return;
+                }
+
+                // 初期化
+                checkResults = {};
+                isChecking = true;
+                checkAborted = false;
+
+                // UI更新
+                $btn.find('.lw-check-btn-text').text('チェック中...');
+                $('#lw-stop-check').show();
+                $('#lw-check-progress').show();
+                $('#lw-check-results-summary').show();
+                updateProgress(0, total);
+
+                // 結果サマリーリセット
+                $('#lw-check-ok, #lw-check-redirect, #lw-check-error, #lw-check-unverified, #lw-check-timeout, #lw-check-skip').text('0');
+
+                runBatchCheck(0, total);
             },
             error: function(xhr, status, error) {
+                console.error('AJAX Error:', status, error);
                 alert('通信エラーが発生しました。');
                 $btn.prop('disabled', false).find('.lw-check-btn-text').text('リンク有効性をチェック');
             }
@@ -1542,8 +1075,11 @@ jQuery(document).ready(function($) {
         var postId = $row.data('post-id');
         var oldHref = $row.data('href') || '';
         var newHref = $input.val();
-        var linkText = $row.data('text') || '';
-        var linkIndex = $row.data('link-index') || 0;
+        // 0 を || で潰さない。未設定は「特定できない」を意味する -1 に寄せる
+        var rawIndex = $row.data('link-index');
+        var linkIndex = (rawIndex === undefined || rawIndex === null || rawIndex === '')
+            ? -1
+            : parseInt(rawIndex, 10);
 
         // 変更がない場合
         if (oldHref === newHref) {
@@ -1558,16 +1094,13 @@ jQuery(document).ready(function($) {
 
         // AJAX送信
         $.ajax({
-            url: ajaxurl,
+            url: cfg.ajaxUrl,
             type: 'POST',
-            data: {
-                action: 'lw_link_list_update_href',
+            data: lwData('lw_link_list_update_href', {
                 post_id: postId,
-                old_href: oldHref,
                 new_href: newHref,
-                link_text: linkText,
                 link_index: linkIndex
-            },
+            }),
             success: function(response) {
                 if (response.success) {
                     // 成功 - 表示を更新
@@ -1652,5 +1185,20 @@ jQuery(document).ready(function($) {
             cancelEdit($row);
         }
     });
+
+    /**
+     * しっかりスキャン（link-list-crawl.js）から使う口。
+     *
+     * 🚨 ここに載っていないものを外から触らないこと。
+     *    この closure の中身は外から見えないので、必要な関数はここに足してから使う。
+     *    ぶら下げる先を window ではなくこのオブジェクトに限っているのは、
+     *    管理画面の他のスクリプトと名前がぶつからないようにするため。
+     */
+    window.lwLinkListApi = {
+        lwData: lwData,
+        showError: showError,
+        escapeHtml: escapeHtml,
+        afterScanCompleted: afterScanCompleted,
+        setScanButtonsDisabled: setScanButtonsDisabled
+    };
 });
-</script>

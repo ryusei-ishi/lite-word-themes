@@ -139,7 +139,7 @@
 <!-- wp:columns {"verticalAlignment":"top"} -->
 <div class="wp-block-columns are-vertically-aligned-top"><!-- wp:column {"verticalAlignment":"top"} -->
 <div class="wp-block-column is-vertically-aligned-top"><!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://dummyimage.com/800x500/cccccc/000000.png&amp;text=Sample+Image" alt=""/></figure>
+<figure class="wp-block-image size-large"><img src="https://lite-word.com/sample_img/school/7.webp" alt=""/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 
@@ -153,7 +153,7 @@
 <!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://dummyimage.com/800x500/cccccc/000000.png&amp;text=Sample+Image" alt=""/></figure>
+<figure class="wp-block-image size-large"><img src="https://lite-word.com/sample_img/school/7.webp" alt=""/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 
@@ -167,7 +167,7 @@
 <!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://dummyimage.com/800x500/cccccc/000000.png&amp;text=Sample+Image" alt=""/></figure>
+<figure class="wp-block-image size-large"><img src="https://lite-word.com/sample_img/school/7.webp" alt=""/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 

@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText, MediaUpload, InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { PanelBody, Button, RadioControl, SelectControl, ColorPalette, RangeControl } from '@wordpress/components';
+import { PanelBody, Button, RadioControl, SelectControl, ColorPalette, RangeControl, TextControl } from '@wordpress/components';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
@@ -9,6 +9,58 @@ import metadata from './block.json';
 // フォントオプションを変数に定義
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
+
+/* save は deprecated からも使うので先に名前を付ける（写し間違いを防ぐため本文はひとつだけ持つ） */
+const saveComment1 = function(props) {
+    const {
+        attributes: {
+            name, title, imageUrl, imageColor, altText, commentAlignment,
+            nameFontSet, nameFontWeight, nameTextColor,
+            titleFontSet, titleFontWeight, titleTextColor, commentBgColor,
+            maxWidth
+        }
+    } = props;
+
+    const alignmentClass = commentAlignment === 'right' ? 'right' : 'left';
+
+    const blockProps = useBlockProps.save({
+        className: `lw-comment-1 ${alignmentClass}`
+    });
+
+    return (
+        <div {...blockProps}>
+            <div className="lw-comment-1__wrap" style={{ maxWidth: `${maxWidth}px` }}>
+                <div className="lw-comment-1__image">
+                    {imageUrl ? (
+                            <img src={imageUrl} alt={altText} style={{ borderColor: imageColor }} />
+                        ) : (
+                            <div className="no_image" style={{ borderColor: imageColor,color:imageColor }}>No Image</div>
+                        )}
+                    <div className="lw-comment-1__name">
+                        <RichText.Content
+                            tagName="p"
+                            className='lw-p'
+                            value={name}
+                            style={{ fontFamily: nameFontSet, fontWeight: nameFontWeight, color: nameTextColor }}
+                        />
+                    </div>
+                </div>
+                <div className="lw-comment-1__text_wrap">
+                    <div className="lw-comment-1__text">
+                        <RichText.Content
+                            tagName="p"
+                            value={title}
+                            className='lw-p'
+                            style={{ fontFamily: titleFontSet, fontWeight: titleFontWeight, color: titleTextColor }}
+                        />
+                        <div className="lw-arrow" style={{ backgroundColor: commentBgColor }}></div>
+                        <div className="lw-bg_color" style={{ backgroundColor: commentBgColor }}></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    );
+};
 
 registerBlockType(metadata.name, {
     edit: function(props) {
@@ -31,7 +83,7 @@ registerBlockType(metadata.name, {
         const onImageSelect = (media) => {
             setAttributes({
                 imageUrl: media.url,
-                altText: media.alt || '画像',
+                altText: media.alt || '',
             });
         };
 
@@ -59,6 +111,13 @@ registerBlockType(metadata.name, {
                                     </Button>
                                 </div>
                             )}
+                        />
+                        <TextControl
+                            label="画像の説明（alt）"
+                            help="目の見えない方や検索エンジンに、この画像が何かを伝える文です。例：笑顔でこちらを見る女性のイラスト"
+                            value={altText || ''}
+                            onChange={(v) => setAttributes({ altText: v })}
+                            style={{ marginTop: '10px' }}
                         />
                         <ColorPalette
                             label="画像の枠線色"
@@ -168,54 +227,16 @@ registerBlockType(metadata.name, {
             </>
         );
     },
-    save: function(props) {
-        const {
-            attributes: {
-                name, title, imageUrl, imageColor, altText, commentAlignment,
-                nameFontSet, nameFontWeight, nameTextColor,
-                titleFontSet, titleFontWeight, titleTextColor, commentBgColor,
-                maxWidth
-            }
-        } = props;
-
-        const alignmentClass = commentAlignment === 'right' ? 'right' : 'left';
-
-        const blockProps = useBlockProps.save({
-            className: `lw-comment-1 ${alignmentClass}`
-        });
-
-        return (
-            <div {...blockProps}>
-                <div className="lw-comment-1__wrap" style={{ maxWidth: `${maxWidth}px` }}>
-                    <div className="lw-comment-1__image">
-                        {imageUrl ? (
-                                <img src={imageUrl} alt={altText} style={{ borderColor: imageColor }} />
-                            ) : (
-                                <div className="no_image" style={{ borderColor: imageColor,color:imageColor }}>No Image</div>
-                            )}
-                        <div className="lw-comment-1__name">
-                            <RichText.Content
-                                tagName="p"
-                                className='lw-p'
-                                value={name}
-                                style={{ fontFamily: nameFontSet, fontWeight: nameFontWeight, color: nameTextColor }}
-                            />
-                        </div>
-                    </div>
-                    <div className="lw-comment-1__text_wrap">
-                        <div className="lw-comment-1__text">
-                            <RichText.Content
-                                tagName="p"
-                                value={title}
-                                className='lw-p'
-                                style={{ fontFamily: titleFontSet, fontWeight: titleFontWeight, color: titleTextColor }}
-                            />
-                            <div className="lw-arrow" style={{ backgroundColor: commentBgColor }}></div>
-                            <div className="lw-bg_color" style={{ backgroundColor: commentBgColor }}></div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        );
-    }
+    save: saveComment1,
+    /* 2026-08-23: altText の既定を「画像」から空に変えた。
+     * それより前に作られたページは altText を書かずに保存しているので、
+     * 新しい既定（空）で読むと alt="" になって出力が変わり「無効なコンテンツ」になる。
+     * ここで旧既定を持たせて読めるようにする。出力するHTMLは同じなので save は使い回す。
+     * ⚠️ この deprecated を消すと、449サイトの既存ページが編集画面で壊れる。 */
+    deprecated: [
+        {
+            attributes: { ...metadata.attributes, altText: { type: 'string', default: '画像' } },
+            save: saveComment1,
+        },
+    ],
 });

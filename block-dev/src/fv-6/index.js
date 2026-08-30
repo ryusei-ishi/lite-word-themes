@@ -13,6 +13,7 @@ import {
 } from '@wordpress/block-editor';
 import {
 	PanelBody,
+	TextControl,
 	Button,
 	RangeControl,
 	SelectControl,
@@ -29,7 +30,7 @@ import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
 
-registerBlockType(metadata.name, {
+const lwBlockDef = {
 	/* ----------------------------------------------------------
 	 * 編集画面
 	 * -------------------------------------------------------- */
@@ -37,6 +38,7 @@ registerBlockType(metadata.name, {
 		const {
 			backgroundImage,
 			backgroundImageSp,
+			backgroundImageAlt,
 			mainTitle,
 			subTitle,
 			filterBackgroundColor,
@@ -60,7 +62,7 @@ registerBlockType(metadata.name, {
 		}
 
 		/* 画像選択ハンドラ */
-		const onChangeBackgroundImage   = media => setAttributes( { backgroundImage: media.url } );
+		const onChangeBackgroundImage   = media => setAttributes( { backgroundImage: media.url, backgroundImageAlt: media.alt || '' } );
 		const onChangeBackgroundImageSp = media => setAttributes( { backgroundImageSp: media.url } );
 
 		const TagName = mainTitleTag || 'h1';
@@ -123,6 +125,13 @@ registerBlockType(metadata.name, {
 									<Button variant="secondary" onClick={ open }>画像を選択</Button>
 								</>
 							) }
+						/>
+						<TextControl
+							label="画像の説明（alt）"
+							help={ "目の見えない方や検索エンジンに、この画像が何かを伝える文です。例：ガラス張りのオフィスビルを見上げた外観" }
+							value={ backgroundImageAlt || '' }
+							onChange={ value => setAttributes( { backgroundImageAlt: value } ) }
+							style={ { marginTop: '16px' } }
 						/>
 					</PanelBody>
 
@@ -197,7 +206,7 @@ registerBlockType(metadata.name, {
 						</TagName>
 						<div className="inner_filter" />
 					</div>
-					<div className="bg_image">{ backgroundImage && <img src={ backgroundImage } alt="" /> }</div>
+					<div className="bg_image">{ backgroundImage && <img src={ backgroundImage } alt={ backgroundImageAlt || '' } /> }</div>
 					<div className="filter" style={ { backgroundColor: filterBackgroundColor, opacity: filterOpacity } } />
 				</div>
 			</>
@@ -211,6 +220,7 @@ registerBlockType(metadata.name, {
 		const {
 			backgroundImage,
 			backgroundImageSp,
+			backgroundImageAlt,
 			mainTitle,
 			subTitle,
 			filterBackgroundColor,
@@ -244,10 +254,33 @@ registerBlockType(metadata.name, {
 					<picture className="bg_image">
 						<source srcSet={ backgroundImageSp } media="(max-width: 800px)" />
 						<source srcSet={ backgroundImage } media="(min-width: 801px)" />
-						<img src={ backgroundImage } alt="" loading="eager" fetchpriority="high" />
+						<img src={ backgroundImage } alt={ backgroundImageAlt || '' } loading="eager" fetchpriority="high" />
 					</picture>
 				) }
 			</div>
 		);
 	},
-});
+};
+
+/* ------------------------------------------------------------------
+ * #1169（2026-08-27）既定値の他社CDN直リンクを自社素材に差し替えた。
+ * 既定値と同じ値はブロックコメントに書かれないので、既定値のまま使っている
+ * 既存ページは「保存HTMLは旧URL／ブロックは新しい既定値」で食い違う。
+ * 旧既定値を持った版を残して、開いて保存し直しても画像が入れ替わらないようにする。
+ * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
+ * ------------------------------------------------------------------ */
+const LW_1169_OLD = JSON.parse( JSON.stringify( metadata.attributes ) );
+LW_1169_OLD.backgroundImage.default = "https://cdn.pixabay.com/photo/2016/11/19/15/39/architecture-1839930_1280.jpg";
+
+/* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
+ *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の
+ *    大多数がこれ）がどの版にも当たらなくなる。だから既存の版それぞれについて
+ *    旧既定値を持たせた双子を作って先に並べる。元の版も残す（画像を自分で差し替えた人向け）。 */
+const lwPrev1169 = lwBlockDef.deprecated || [];
+lwBlockDef.deprecated = [
+	{ attributes: LW_1169_OLD, save: lwBlockDef.save },
+	...lwPrev1169.map( ( d ) => ( { ...d, attributes: LW_1169_OLD } ) ),
+	...lwPrev1169,
+];
+
+registerBlockType( metadata.name, lwBlockDef );

@@ -17,6 +17,10 @@ import {
 import './editor.scss';
 import metadata from './block.json';
 import './style.scss';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS = { url: 'ctaUrl', type: 'ctaLinkType', page: 'ctaPageId', category: 'ctaCategoryId' };
 
 registerBlockType(metadata.name, {
 	/* ────────────────────────────────────────────────
@@ -147,6 +151,10 @@ registerBlockType(metadata.name, {
 								value={ ctaUrl } 
 								onChange={ onChange('ctaUrl') }
 								placeholder="https://example.com"
+							/>
+							<LinkPicker
+							    link={lwLinkFromAttrs(attributes, LINK_KEYS)}
+							    onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}
 							/>
 						</div>
 
@@ -451,6 +459,8 @@ registerBlockType(metadata.name, {
 						<a
 							className={ getButtonClasses() }
 							href={ ctaUrl }
+							data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkType}
+							data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkId}
 							style={ {
 								borderColor : ctaBorderColor,
 								borderWidth : `${ ctaBorderWidth }px`,

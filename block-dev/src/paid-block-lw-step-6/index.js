@@ -29,6 +29,7 @@ import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromItem, lwLinkToItem, lwLinkDataPropsFromItem } from '../link-picker.js';
 
 /* ──────────────────── 共通オプション ─────────────────── */
 const fontOptions       = fontOptionsArr();
@@ -67,8 +68,10 @@ registerBlockType(metadata.name, {
 		const removeContent = (i) =>
 			setAttributes({ contents: contents.filter((_, idx) => idx !== i) });
 
-		const updateContent = (i, key, val) => {
-			const arr = contents.map((item, idx) => idx === i ? { ...item, [key]: val } : item);
+		const updateContent = (i, key, val) => updateContentMulti(i, { [key]: val });
+		/* 画像を選び直したときに URL と alt をまとめて入れ替えるため、複数キー版を用意する */
+		const updateContentMulti = (i, patch) => {
+			const arr = contents.map((item, idx) => idx === i ? { ...item, ...patch } : item);
 			setAttributes({ contents: arr });
 		};
 
@@ -213,7 +216,7 @@ registerBlockType(metadata.name, {
 												>
 													<img
 														src={c.image}
-														alt=""
+														alt={c.alt || ''}
 														style={{ objectFit: imageObjectFit }}
 													/>
 												</div>
@@ -257,7 +260,7 @@ registerBlockType(metadata.name, {
 
 									{/* 画像選択 UI */}
 									<MediaUpload
-										onSelect={(m) => updateContent(i, 'image', m.url)}
+										onSelect={(m) => updateContentMulti(i, { image: m.url, alt: m.alt || '' })}
 										allowedTypes={['image']}
 										render={({ open }) => (
 											<Button onClick={open} isSecondary>
@@ -275,6 +278,17 @@ registerBlockType(metadata.name, {
 										</Button>
 									)}
 
+									{/* 画像の説明（alt） */}
+									{c.image && (
+										<TextControl
+											label="画像の説明（alt）"
+											help="目の見えない方や検索エンジンに、この画像が何かを伝える文です。例：カウンセリングを受ける女性"
+											value={c.alt || ''}
+											onChange={(v) => updateContent(i, 'alt', v)}
+											style={{ marginTop: '12px', maxWidth: '400px' }}
+										/>
+									)}
+
 									{/* URL */}
 									<TextControl
 										label="リンクURL"
@@ -282,6 +296,10 @@ registerBlockType(metadata.name, {
 										onChange={(v) => updateContent(i, 'url', v)}
 										placeholder="https://example.com/"
 										style={{ marginTop: '12px', maxWidth: '300px' }}
+									/>
+									<LinkPicker
+									    link={lwLinkFromItem(c, 'url')}
+									    onChange={(patch) => updateContentMulti(i, lwLinkToItem(patch, 'url'))}
 									/>
 
 									{/* 削除ボタン */}
@@ -329,7 +347,7 @@ registerBlockType(metadata.name, {
 					{contents.map((c, i) => {
 						const numText = c.number ? c.number : `${i + 1}`;
 						const Tag   = c.url ? 'a' : 'div';
-						const props = c.url ? { href: c.url, className: 'link' } : { className: 'link' };
+						const props = c.url ? { href: c.url, 'data-lw-link-type': lwLinkDataPropsFromItem(c, 'url').linkType, 'data-lw-link-id': lwLinkDataPropsFromItem(c, 'url').linkId, className: 'link' } : { className: 'link' };
 
 						return (
 							<li
@@ -374,7 +392,7 @@ registerBlockType(metadata.name, {
 											>
 												<img
 													src={c.image}
-													alt=""
+													alt={c.alt || ''}
 													style={{ objectFit: imageObjectFit }}
 												/>
 											</div>

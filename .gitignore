@@ -15,3 +15,10 @@ LiteWord_*.zip
 LiteWord 改善前.zip
 LiteWord__/
 block-dev/src_*.zip
+
+# 作業中の退避ファイル（日付・用途サフィックス付き）
+*.bak-*
+*.before-*
+
+# 手元の走り書き（ブラウザのコンソールログ等）
+問題.txtt

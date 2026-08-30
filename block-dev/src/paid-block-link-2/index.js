@@ -23,6 +23,7 @@ import {
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromItem, lwLinkToItem, lwLinkDataPropsFromItem } from '../link-picker.js';
 
 // フォント選択肢・フォントウェイト選択肢・アイコン選択肢
 const fontOptions = fontOptionsArr();
@@ -45,6 +46,7 @@ registerBlockType(metadata.name, {
             borderColor, borderSize,
             bgFilterColor, bgFilterOpacity,
             bgImageUrl,
+            bgImageAlt,
             contents
         } = attributes;
 
@@ -67,8 +69,10 @@ registerBlockType(metadata.name, {
         };
 
         // リスト更新
-        const updateContent = (index, key, value) => {
-            const newContents = contents.map((item, i) => i === index ? { ...item, [key]: value } : item);
+        const updateContent = (index, key, value) => updateContentMulti(index, { [key]: value });
+        // 画像を選び直したときに URL と alt をまとめて入れ替えるため、複数キー版を用意する
+        const updateContentMulti = (index, patch) => {
+            const newContents = contents.map((item, i) => i === index ? { ...item, ...patch } : item);
             setAttributes({ contents: newContents });
         };
 
@@ -98,7 +102,7 @@ registerBlockType(metadata.name, {
                         <div style={{ marginBottom: '20px' }}>
                             <p style={{ fontWeight: 'bold', marginBottom: '8px' }}>📸 背景画像</p>
                             <MediaUpload
-                                onSelect={ (media) => setAttributes({ bgImageUrl: media.url }) }
+                                onSelect={ (media) => setAttributes({ bgImageUrl: media.url, bgImageAlt: media.alt || '' }) }
                                 allowedTypes={ ['image'] }
                                 render={ ({ open }) => (
                                     <Button 
@@ -109,6 +113,13 @@ registerBlockType(metadata.name, {
                                         背景画像を選択
                                     </Button>
                                 ) }
+                            />
+                            <TextControl
+                                label="背景画像の説明（alt）"
+                                help="目の見えない方や検索エンジンに、この画像が何かを伝える文です。飾りの背景なら空のままで構いません"
+                                value={ bgImageAlt || '' }
+                                onChange={ (v) => setAttributes({ bgImageAlt: v }) }
+                                style={{ marginBottom: '10px' }}
                             />
                             { bgImageUrl && (
                                 <div>
@@ -346,7 +357,7 @@ registerBlockType(metadata.name, {
                                             {/* 画像アップロード */}
                                             <MediaUpload
                                                 onSelect={ (media) => {
-                                                    updateContent(index, 'imageUrl', media.url);
+                                                    updateContentMulti(index, { imageUrl: media.url, imageAlt: media.alt || '' });
                                                 }}
                                                 allowedTypes={ ['image'] }
                                                 render={ ({ open }) => (
@@ -368,6 +379,14 @@ registerBlockType(metadata.name, {
                                             )}
                                         </div>
 
+                                        <TextControl
+                                            label="画像の説明（alt）"
+                                            help="目の見えない方や検索エンジンに、この画像が何かを伝える文です。飾りのアイコン代わりなら空のままで構いません"
+                                            value={ content.imageAlt || '' }
+                                            onChange={ (v) => updateContent(index, 'imageAlt', v) }
+                                            style={{ marginTop: '8px' }}
+                                        />
+
                                         {/* アイコン or 画像 プレビューエリア (エディター上) */}
                                         <div style={{ marginTop: '10px' }}>
                                             { content.imageUrl ? (
@@ -377,6 +396,7 @@ registerBlockType(metadata.name, {
                                                         className="selected_image"
                                                         data-img={ content.imageUrl }
                                                         src={ content.imageUrl }
+                                                        alt={ content.imageAlt || '' }
                                                     />
                                                 </div>
                                             ) : content.icon ? (
@@ -432,6 +452,10 @@ registerBlockType(metadata.name, {
                                         onChange={ (val) => updateContent(index, 'url', val) }
                                         style={{ marginTop: '12px', maxWidth: '300px' }}
                                     />
+                                    <LinkPicker
+                                        link={lwLinkFromItem(content, 'url')}
+                                        onChange={(patch) => updateContentMulti(index, lwLinkToItem(patch, 'url'))}
+                                    />
 
                                     <button
                                         className="item_remove_btn"
@@ -457,7 +481,7 @@ registerBlockType(metadata.name, {
                         }}
                     />
                     <div className="bg_image">
-                        <img src={ bgImageUrl } alt="背景画像" />
+                        <img src={ bgImageUrl } alt={ bgImageAlt || '背景画像' } />
                     </div>
                 </div>
             </>
@@ -479,6 +503,7 @@ registerBlockType(metadata.name, {
             borderColor, borderSize,
             bgFilterColor, bgFilterOpacity,
             bgImageUrl,
+            bgImageAlt,
             contents
         } = attributes;
 
@@ -520,7 +545,7 @@ registerBlockType(metadata.name, {
                             // リンクURLがあるか否かでタグを変える
                             const TagName = content.url ? 'a' : 'div';
                             const linkProps = content.url
-                                ? { href: content.url, className: 'link' }
+                                ? { href: content.url, 'data-lw-link-type': lwLinkDataPropsFromItem(content, 'url').linkType, 'data-lw-link-id': lwLinkDataPropsFromItem(content, 'url').linkId, className: 'link' }
                                 : { className: 'link' };
 
                             return (
@@ -553,7 +578,7 @@ registerBlockType(metadata.name, {
                                                         className="selected_image"
                                                         data-img={ content.imageUrl }
                                                         src={ content.imageUrl }
-                                                        alt=""
+                                                        alt={ content.imageAlt || '' }
                                                     />
                                                 </div>
                                             
@@ -603,7 +628,7 @@ registerBlockType(metadata.name, {
                     }}
                 />
                 <div className="bg_image">
-                    <img src={ bgImageUrl } alt="背景画像" />
+                    <img src={ bgImageUrl } alt={ bgImageAlt || '背景画像' } />
                 </div>
             </div>
         );

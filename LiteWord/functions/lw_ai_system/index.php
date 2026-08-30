@@ -96,12 +96,24 @@ function lw_ai_system_enqueue_block_editor_assets() {
             'isPremium'   => $is_premium,
             'premiumUrl'  => function_exists('lw_premium_info_link') ? lw_premium_info_link() : 'https://shop.lite-word.com/purchase-premium',
             'pageTypes'   => $page_types,
+            // 本日の残り回数（→ assets/js/quota-notice.js が読む）。
+            // サーバー側で計算して渡すので、エディタから問い合わせる通信は起きない。
+            'quota'       => function_exists( 'lw_ai_system_quota_summary' ) ? lw_ai_system_quota_summary() : null,
             // 遅延読み込み用スクリプトURL
             'lazyScripts' => array(
                 'blockSidebar'    => LW_AI_SYSTEM_URL . 'assets/js/block-ai-sidebar.js',
                 'textSelection'   => LW_AI_SYSTEM_URL . 'assets/js/text-selection-ai.js',
             ),
         )
+    );
+
+    // quota-notice.js（本日の残り回数をエディタに出す・#359）
+    wp_enqueue_script(
+        'lw-ai-generator-quota-notice',
+        LW_AI_SYSTEM_URL . 'assets/js/quota-notice.js',
+        array( 'lw-ai-generator-block-inserter', 'wp-data', 'wp-dom-ready' ),
+        LW_AI_SYSTEM_VERSION,
+        array( 'in_footer' => true, 'strategy' => 'defer' )
     );
 
     // admin.css（必要最小限のスタイル）

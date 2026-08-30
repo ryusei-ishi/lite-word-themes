@@ -14,7 +14,8 @@
 		"description": "コーポレート・士業向けFV。左寄せテキスト+背景色or画像。情報量が多い業種に最適",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["mainTitle", "subTitle", "description"],
-		"imageAttributes": ["backgroundImage"]
+		"imageAttributes": ["backgroundImage"],
+		"notes": "［2026-08-27 追記］フィルタは mix-blend-mode: multiply。白（#ffffff）を乗せても1ピクセルも変わらない（明るくはできない）。textAlignPc は pc_left / pc_center / pc_right の3つで、寄せを変えるだけで別のブロックのように見える。"
 	},
 	"attributes": {
 		"backgroundImage": {
@@ -86,6 +87,36 @@
 			"type": "string",
 			"default": "sp_left",
 			"aiHint": { "skip": true }
+		},
+		"mainFontSizePc": {
+			"type": "number",
+			"default": 0,
+			"aiHint": { "skip": true, "note": "メインタイトルの文字サイズ(px)・PC。0は未設定で既定の72px" }
+		},
+		"mainFontSizeTb": {
+			"type": "number",
+			"default": 0,
+			"aiHint": { "skip": true, "note": "メインタイトルの文字サイズ(px)・タブレット。0は未設定で既定の64px" }
+		},
+		"mainFontSizeSp": {
+			"type": "number",
+			"default": 0,
+			"aiHint": { "skip": true, "note": "メインタイトルの文字サイズ(px)・スマホ。0は未設定で既定の56/48px" }
+		},
+		"subFontSizePc": {
+			"type": "number",
+			"default": 0,
+			"aiHint": { "skip": true, "note": "サブタイトルの文字サイズ(px)・PC。0は未設定で既定の24px" }
+		},
+		"subFontSizeTb": {
+			"type": "number",
+			"default": 0,
+			"aiHint": { "skip": true, "note": "サブタイトルの文字サイズ(px)・タブレット。0は未設定で既定の18px" }
+		},
+		"subFontSizeSp": {
+			"type": "number",
+			"default": 0,
+			"aiHint": { "skip": true, "note": "サブタイトルの文字サイズ(px)・スマホ。0は未設定で既定の18/16px" }
 		},
 		"headingLevel": {
 			"type": "number",

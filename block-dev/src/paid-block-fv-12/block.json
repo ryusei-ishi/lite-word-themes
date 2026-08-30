@@ -10,9 +10,18 @@
 	"aiHint": {
 		"description": "全画面FV（ヘッダー回り込み）。ロゴ+ナビ+見出し+2CTA+ニュース。動画対応。ブランドサイトに",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["logoText", "headline", "cta1Text", "cta2Text", "newsLabel"],
-		"imageAttributes": ["logoImg", "bgImg"],
-		"notes": "ナビメニュー+ニュース配列あり。最も複雑なFVブロック"
+		"contentAttributes": [
+			"logoText",
+			"headline",
+			"cta1Text",
+			"cta2Text",
+			"newsLabel"
+		],
+		"imageAttributes": [
+			"logoImg",
+			"bgImg"
+		],
+		"notes": "ナビメニュー+ニュース配列あり。最も複雑なFVブロック 🚨 背景写真が明るいときは bgFilterOpacity を55以上にする（既定の30では白い見出しとCTAが背景に溶ける・実測）。🚨 このブロックはロゴ・ナビ・CTA・お知らせまで自分で描くので、ページのヘッダー設定（header_select）を「非表示」にしないとヘッダーが二重になる。newsListVisible を true にすると最新のお知らせが下部に流れる。 ［2026-08-27 追記］navMenuItems（[{title,url}] の配列）が空だとヘッダー右上が器だけ出て空欄になる。必ず入れること。サイトのWPメニューとは連動せず保存HTMLに焼き込まれる。newsListVisible を false にすると下のお知らせ欄が消える。bgFilterType を gradient にすると bgFilterGradient（CSSの linear-gradient 文字列）が効き、上は写真が見えて下だけ暗くできる。薄いフィルタ（22など）だと白い見出しが読めないので、明るい写真では45以上にする。"
 	},
 	"supports": {
 		"anchor": true
@@ -30,6 +39,15 @@
 			"type": "string",
 			"default": ""
 		},
+		"logoImgAlt": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"role": "alt",
+				"contentGuide": "ロゴ画像の説明。店名や会社名をそのまま書く",
+				"example": "カフェ そらまめ"
+			}
+		},
 		"logoImgHeight": {
 			"type": "number",
 			"default": 70
@@ -41,6 +59,18 @@
 		"cta1Url": {
 			"type": "string",
 			"default": "#"
+		},
+		"cta1LinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"cta1PageId": {
+			"type": "number",
+			"default": 0
+		},
+		"cta1CategoryId": {
+			"type": "number",
+			"default": 0
 		},
 		"cta1Enable": {
 			"type": "boolean",
@@ -85,6 +115,18 @@
 		"cta2Url": {
 			"type": "string",
 			"default": "#"
+		},
+		"cta2LinkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"cta2PageId": {
+			"type": "number",
+			"default": 0
+		},
+		"cta2CategoryId": {
+			"type": "number",
+			"default": 0
 		},
 		"cta2Enable": {
 			"type": "boolean",
@@ -141,6 +183,15 @@
 		"bgImg": {
 			"type": "string",
 			"default": "https://lite-word.com/sample_img/cafe/1.webp"
+		},
+		"bgImgAlt": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"role": "alt",
+				"contentGuide": "背景画像の説明。飾りなら空でよい",
+				"example": "木のテーブルに置かれたコーヒーカップ"
+			}
 		},
 		"videoUrl": {
 			"type": "string",

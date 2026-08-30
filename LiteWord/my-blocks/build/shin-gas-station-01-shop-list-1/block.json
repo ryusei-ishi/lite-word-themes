@@ -54,7 +54,7 @@
 		},
 		"imgUrl": {
 			"type": "string",
-			"default": "https://placehold.jp/420x320.png"
+			"default": "https://lite-word.com/sample_img/shin/gas_station/content_2.webp"
 		},
 		"imgAlt": {
 			"type": "string",

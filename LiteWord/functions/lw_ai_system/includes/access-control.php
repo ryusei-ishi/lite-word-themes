@@ -212,3 +212,72 @@ function lw_ai_system_count_dispatched_call( $dispatch_result, $request, $route,
 	return $dispatch_result;
 }
 add_filter( 'rest_dispatch_request', 'lw_ai_system_count_dispatched_call', 10, 4 );
+
+/**
+ * いま残っている回数をまとめて返す（読み取りのみ・2026-08-23 追加・IdeaVoice #124 の #359）
+ *
+ * 上限は3つあり、それぞれ別の理由で存在する。
+ *   ページ生成 … LW_AI_Session_Manager::check_daily_limit（無料3回／プレミアム15回）
+ *   AI呼び出し … lw_ai_system_check_call_quota（既定1000回／日。言い換え・誤字チェック等も含む）
+ *   画像の枚数 … lw_ai_system_image_quota_status（既定300枚／日・1リクエスト30枚）
+ *
+ * これまで**どれも画面に出ていなかった**ため、利用者は上限に当たって初めて
+ * 「本日のAI利用回数の上限に達しました」と言われる状態だった。
+ * 管理者（manage_options）はどの上限も対象外なので、限度に当たるのは
+ * 寄稿者・投稿者・編集者。つまり**管理画面の設定ページに出しても意味がない**。
+ * 出す場所はブロックエディタ（→ assets/js/quota-notice.js）。
+ *
+ * limit / remaining が -1 のものは「無制限」。
+ *
+ * @param int $user_id 省略時は現在のユーザー
+ * @return array
+ */
+function lw_ai_system_quota_summary( $user_id = 0 ) {
+
+	if ( ! $user_id ) {
+		$user_id = get_current_user_id();
+	}
+
+	$out = array(
+		'unlimited' => false,
+		'pages'     => array( 'used' => 0, 'limit' => -1, 'remaining' => -1 ),
+		'calls'     => array( 'used' => 0, 'limit' => -1, 'remaining' => -1 ),
+		'images'    => array( 'used' => 0, 'limit' => -1, 'remaining' => -1, 'perRequest' => 0 ),
+	);
+
+	/* ① ページ生成（セッション） */
+	if ( class_exists( 'LW_AI_Session_Manager' ) && method_exists( 'LW_AI_Session_Manager', 'check_daily_limit' ) ) {
+		$d = LW_AI_Session_Manager::check_daily_limit( $user_id );
+		$out['pages'] = array(
+			'used'      => isset( $d['used'] ) ? (int) $d['used'] : 0,
+			'limit'     => isset( $d['limit'] ) ? (int) $d['limit'] : -1,
+			'remaining' => isset( $d['remaining'] ) ? (int) $d['remaining'] : -1,
+		);
+	}
+
+	/* ② AI呼び出しの回数 */
+	$q = lw_ai_system_check_call_quota( $user_id );
+	$out['calls'] = array(
+		'used'      => (int) $q['used'],
+		'limit'     => (int) $q['limit'],
+		'remaining' => ( (int) $q['limit'] < 0 ) ? -1 : max( 0, (int) $q['limit'] - (int) $q['used'] ),
+	);
+
+	/* ③ 画像の枚数 */
+	if ( function_exists( 'lw_ai_system_image_quota_status' ) ) {
+		$i = lw_ai_system_image_quota_status( $user_id );
+		$out['images'] = array(
+			'used'       => (int) $i['used'],
+			'limit'      => (int) $i['limit'],
+			'remaining'  => (int) $i['remaining'],
+			'perRequest' => (int) $i['per_request'],
+		);
+	}
+
+	$out['unlimited'] = ( $out['pages']['limit'] < 0 && $out['calls']['limit'] < 0 && $out['images']['limit'] < 0 );
+
+	/* リセットは「サイトの日付が変わったとき」（各上限とも current_time('Ymd') 基準） */
+	$out['resetsAt'] = date_i18n( 'n月j日 0:00', strtotime( current_time( 'Y-m-d' ) . ' +1 day' ) );
+
+	return $out;
+}

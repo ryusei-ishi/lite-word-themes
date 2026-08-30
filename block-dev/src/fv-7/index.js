@@ -5,8 +5,12 @@ import { minHeightPcClassOptionArr, minHeightTbClassOptionArr, minHeightSpClassO
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
 
-registerBlockType(metadata.name, {
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS = { url: 'buttonUrl', type: 'buttonLinkType', page: 'buttonPageId', category: 'buttonCategoryId' };
+
+const blockConfig = {
     edit: ({ attributes, setAttributes }) => {
         const { mainTitle, subTitle, description, buttonText, buttonUrl, showButton, videoType, videoUrl, vimeoId, filterColor, filterOpacity, videoSpeed, minHeightPc, minHeightTb, minHeightSp, headingLevel } = attributes;
 
@@ -105,12 +109,18 @@ registerBlockType(metadata.name, {
                             onChange={(value) => setAttributes({ showButton: value })}
                         />
                         {showButton && (
-                            <TextControl
-                                label="リンクボタンURL"
-                                value={buttonUrl}
-                                onChange={(value) => setAttributes({ buttonUrl: value })}
-                                placeholder="リンク先のURLを入力"
-                            />
+                            <>
+                                <TextControl
+                                    label="リンクボタンURL"
+                                    value={buttonUrl}
+                                    onChange={(value) => setAttributes({ buttonUrl: value })}
+                                    placeholder="リンク先のURLを入力"
+                                />
+                                <LinkPicker
+                                    link={lwLinkFromAttrs(attributes, LINK_KEYS)}
+                                    onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}
+                                />
+                            </>
                         )}
                     </PanelBody>
                     <PanelBody title="フィルター設定">
@@ -249,7 +259,7 @@ registerBlockType(metadata.name, {
                     <RichText.Content tagName="p" className="description" value={description} />
                     {shouldShowButton && (
                         <div className="btn">
-                            <a href={buttonUrl} className="btn-text">
+                            <a href={buttonUrl} data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkType} data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkId} className="btn-text">
                                 <RichText.Content value={buttonText} />
                             </a>
                         </div>
@@ -306,4 +316,25 @@ registerBlockType(metadata.name, {
             </div>
         );
     }
+};
+
+/* 旧既定の背景動画（Pixabay の外部CDN・71.9MB）で保存されたページを拾うための deprecated。
+   既定値と同じ属性はブロックコメントに書かれない（@wordpress/blocks の getCommentAttributes）ため、
+   block.json の既定を差し替えると「動画を差し替えずに使っていたページ」の保存HTMLと食い違い、
+   検証エラー（予期しない、または無効なコンテンツ）になる。旧既定を持たせた版で受け止める。
+   ⚠️ lw-banner-info-01〜05 と違い、ここは save のマークアップが変わっていない（既定値だけの差）ので、
+      当時のコードを写さず現行の save をそのまま使い回す。写すと差が生まれて逆に危ない。 */
+const OLD_DEFAULT_VIDEO = 'https://cdn.pixabay.com/video/2023/11/19/189813-887078786_large.mp4';
+
+registerBlockType(metadata.name, {
+    ...blockConfig,
+    deprecated: [
+        {
+            attributes: {
+                ...metadata.attributes,
+                videoUrl: { ...metadata.attributes.videoUrl, default: OLD_DEFAULT_VIDEO },
+            },
+            save: blockConfig.save,
+        },
+    ],
 });

@@ -7,6 +7,10 @@ import { InspectorControls, RichText, MediaUpload, useBlockProps } from '@wordpr
 import { PanelBody, Button, ToggleControl, ColorPicker, RangeControl, TextControl, SelectControl } from '@wordpress/components';
 
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS = { url: 'buttonUrl', type: 'buttonLinkType', page: 'buttonPageId', category: 'buttonCategoryId' };
 
 registerBlockType(metadata.name, {
     edit: function (props) {
@@ -43,6 +47,10 @@ registerBlockType(metadata.name, {
                     {/* リンクの設定 */}
                     <PanelBody title="基本設定">
                         <TextControl label="リンク先URL" value={buttonUrl} onChange={onChangeButtonUrl} />
+                        <LinkPicker
+                            link={lwLinkFromAttrs(attributes, LINK_KEYS)}
+                            onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}
+                        />
                         <ToggleControl label="リンクを新規タブで開く" checked={openInNewTab} onChange={onToggleOpenInNewTab} />
                     </PanelBody>
 
@@ -156,6 +164,8 @@ registerBlockType(metadata.name, {
                         tagName="a"
                         className="shin-gas-station-01-cta__button"
                         href={buttonUrl}
+                        data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkType}
+                        data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkId}
                         target={openInNewTab ? '_blank' : undefined}
                         rel={openInNewTab ? 'noopener noreferrer' : undefined}
                         value={buttonText}

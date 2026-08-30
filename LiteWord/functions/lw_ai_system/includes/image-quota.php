@@ -125,6 +125,19 @@ function lw_ai_system_reserve_image_slots( $wanted, $user_id = 0 ) {
 }
 
 /**
+ * ループの中から1枚ぶんだけ枠を取る。
+ *
+ * 生成する枚数が事前に数えられない経路（AIの返答に含まれる items の数だけ回る等）で使う。
+ * 数が青天井になりうる場所では、1枚ごとにここを通してから発火すること。
+ *
+ * @return bool 生成してよければ true
+ */
+function lw_ai_system_reserve_one_image() {
+
+	return lw_ai_system_reserve_image_slots( 1 ) === 1;
+}
+
+/**
  * 画像枚数の残量（画面表示・デバッグ用。副作用なし）。
  *
  * @param int $user_id 省略時は現在のユーザー

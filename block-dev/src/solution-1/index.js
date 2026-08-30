@@ -8,7 +8,7 @@
  * ---------------------------------------------------------- */
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText, MediaUpload, InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { PanelBody, Button, SelectControl, ColorPalette } from '@wordpress/components';
+import { PanelBody, Button, SelectControl, ColorPalette, TextControl } from '@wordpress/components';
 import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
@@ -40,9 +40,11 @@ registerBlockType( metadata.name, {
 		};
 
 		/* コンテンツ更新 */
-		const updateContent = ( index, key, value ) => {
+		const updateContent = ( index, key, value ) => updateContentMulti( index, { [ key ]: value } );
+		/* 画像を選び直したときに URL と alt をまとめて入れ替えるため、複数キー版を用意する */
+		const updateContentMulti = ( index, patch ) => {
 			const newContents = contents.map( ( content, i ) =>
-				i === index ? { ...content, [ key ]: value } : content
+				i === index ? { ...content, ...patch } : content
 			);
 			setAttributes( { contents: newContents } );
 		};
@@ -95,7 +97,7 @@ registerBlockType( metadata.name, {
 
 							{/* 画像選択 */}
 							<MediaUpload
-								onSelect={ ( media ) => updateContent( index, 'image', media.url ) }
+								onSelect={ ( media ) => updateContentMulti( index, { image: media.url, alt: media.alt || '' } ) }
 								allowedTypes={ [ 'image' ] }
 								value={ content.image }
 								render={ ( { open } ) => (
@@ -103,6 +105,15 @@ registerBlockType( metadata.name, {
 										画像を選択
 									</Button>
 								) }
+							/>
+
+							{/* 画像の説明（alt） */}
+							<TextControl
+								label="画像の説明（alt）"
+								help="目の見えない方や検索エンジンに、この画像が何かを伝える文です。飾りなら空のままで構いません"
+								value={ content.alt || '' }
+								onChange={ ( v ) => updateContent( index, 'alt', v ) }
+								style={ { marginBottom: '10px' } }
 							/>
 
 							{/* ボーダーカラー */}
@@ -143,7 +154,7 @@ registerBlockType( metadata.name, {
 										content.image ||
 										'https://placehold.jp/cccccc/ffffff/400x400.png?text=IMAGE'
 									}
-									alt=""
+									alt={ content.alt || '' }
 								/>
 							</figure>
 							<div className="solution-1_text">
@@ -189,7 +200,7 @@ registerBlockType( metadata.name, {
 										content.image ||
 										'https://placehold.jp/cccccc/ffffff/400x400.png?text=IMAGE'
 									}
-									alt=""
+									alt={ content.alt || '' }
 								/>
 							</figure>
 							<div className="solution-1_text">

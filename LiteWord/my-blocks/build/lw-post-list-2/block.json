@@ -8,11 +8,11 @@
 	"icon": "editor-ul",
 	"editorScript": "file:./lw-post-list-2.js",
 	"aiHint": {
-		"description": "投稿一覧リスト型。横並びのサムネイル+タイトル+抜粋。コンパクトなニュース表示に",
+		"description": "3カラムのカード型の投稿一覧。サムネイル＋日付＋カテゴリ＋タイトル＋抜粋。背景に色の帯が敷かれるので、お知らせを1区画として目立たせたいときに",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["numberOfPosts", "categoryId"],
 		"imageAttributes": [],
-		"notes": "動的ブロック。DBから投稿を取得して表示"
+		"notes": "動的ブロック。表示のときに wp-json から投稿を取ってきて JS で並べるので、文章を生成する必要は無い（渡すのは numberOfPosts と categoryId だけ）。🚨 同じページにこのブロックを2つ置かないこと。save() が書き出す script が querySelector（単数）で最初の1つしか見ないので、2つ目は空のままになる。カードは3列・800px以下2列・550px以下1列なので件数は3の倍数にする。🚨 lw-post-list-1 との違いは見た目の1点だけ — こちらは catBgColor を10%の濃さで全幅の帯として敷き、カテゴリバッジも同じ色で塗りつぶす（1 は帯が無くバッジは枠線だけ）。catBgColor は background と inline style に直接入るだけなので var(--color-main) を渡してよい（既定もそれ）。自前で margin:24px 0 と padding:40px（550px以下24px）を持つので前後にスペーサーを足さない。固定ページでは画面幅いっぱいに広がる。抜粋は40字で切られる。サムネイル未設定の記事はテーマの no_image に落ちるので穴は空かない。投稿が0件のサイトでは何も出ない（エラーにはならない）。"
 	},
 	"supports": {
 		"anchor": true

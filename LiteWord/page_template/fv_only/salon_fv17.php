@@ -1,0 +1,3 @@
+<!-- wp:wdl/lw-pr-fv-17 {"mainTitle":"メニューと料金","description":"カット・カラー・トリートメントの料金です。","filterBackgroundColor":"#80545e","textColor":"#ffffff","breadcrumbColorPc":"#ffffff","breadcrumbColorSp":"#ffffff","minHeightPc":"min-h-pc-320px","minHeightTb":"min-h-tb-280px","minHeightSp":"min-h-sp-220px","bgImageLeftPc":"https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/fv17_deco3_left.webp","bgImageLeftSp":"https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/fv17_deco3_left.webp","bgImageRightPc":"https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/fv17_deco3_right.webp","bgImageRightSp":"https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/fv17_deco3_right.webp"} -->
+
+<!-- /wp:wdl/lw-pr-fv-17 -->

@@ -675,7 +675,7 @@ module.exports = window["wp"]["components"];
   \****************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-comment-2","version":"1.0.0","title":"吹き出しコメント 02（全幅・名前無し）","category":"lw-comment","icon":"format-chat","description":"吹き出しスタイルのコメントブロック。画像とテキストを配置。","aiHint":{"description":"吹き出しコメント（プレミアム）。テキスト+アバター画像。レビュー表示に","excludeFromAutoSelect":false,"contentAttributes":["comment2Text"],"imageAttributes":["comment2ImageUrl"]},"supports":{"anchor":true,"className":true},"attributes":{"comment2MaxWidth":{"type":"number","default":800},"comment2ImagePosition":{"type":"string","default":"left"},"comment2ImageUrl":{"type":"string","default":"https://placehold.co/200x200/e8e8e8/999999?text=Image"},"comment2ImageId":{"type":"number","default":0},"comment2ImageAlt":{"type":"string","default":""},"comment2ImageWidthPc":{"type":"number","default":160},"comment2ImageWidthSp":{"type":"number","default":80},"comment2ImageBdWidthPc":{"type":"number","default":2},"comment2ImageBdWidthSp":{"type":"number","default":-1},"comment2ImageBdColorPc":{"type":"string","default":"#3C7FC3"},"comment2ImageBdColorSp":{"type":"string","default":""},"comment2ImageBg":{"type":"string","default":"#ffffff"},"comment2Text":{"type":"string","default":"ここにコメントを入力"},"comment2TextColor":{"type":"string","default":"#3C7FC3"},"comment2TextBg":{"type":"string","default":"#F0FCFF"},"comment2TextMtPc":{"type":"number","default":24},"comment2TextMtSp":{"type":"number","default":8},"comment2TextFontsizePc":{"type":"number","default":17},"comment2TextFontsizeSp":{"type":"number","default":16},"comment2TextBdrPc":{"type":"number","default":12},"comment2TextBdrSp":{"type":"number","default":8},"comment2TriangleTop":{"type":"number","default":20},"comment2FontSet":{"type":"string","default":""},"comment2FontWeight":{"type":"string","default":""}},"editorScript":"file:./lw-pr-comment-2.js","no":2}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-comment-2","version":"1.0.0","title":"吹き出しコメント 02（全幅・名前無し）","category":"lw-comment","icon":"format-chat","description":"吹き出しスタイルのコメントブロック。画像とテキストを配置。","aiHint":{"description":"吹き出しコメント（全幅）。写真+コメント。本人の言葉を短く見せる。院長挨拶・スタッフの一言に","excludeFromAutoSelect":false,"contentAttributes":["comment2Text"],"imageAttributes":["comment2ImageUrl"],"notes":"名前欄を持たないので、誰の言葉かは直前の見出しか直後のプロフィールで示す。経歴表の前に置くと「履歴書」ではなく「人物」に見える。"},"supports":{"anchor":true,"className":true},"attributes":{"comment2MaxWidth":{"type":"number","default":800},"comment2ImagePosition":{"type":"string","default":"left"},"comment2ImageUrl":{"type":"string","default":"https://lite-word.com/sample_img/women/6.webp"},"comment2ImageId":{"type":"number","default":0},"comment2ImageAlt":{"type":"string","default":""},"comment2ImageWidthPc":{"type":"number","default":160},"comment2ImageWidthSp":{"type":"number","default":80},"comment2ImageBdWidthPc":{"type":"number","default":2},"comment2ImageBdWidthSp":{"type":"number","default":-1},"comment2ImageBdColorPc":{"type":"string","default":"#3C7FC3"},"comment2ImageBdColorSp":{"type":"string","default":""},"comment2ImageBg":{"type":"string","default":"#ffffff"},"comment2Text":{"type":"string","default":"ここにコメントを入力"},"comment2TextColor":{"type":"string","default":"#3C7FC3"},"comment2TextBg":{"type":"string","default":"#F0FCFF"},"comment2TextMtPc":{"type":"number","default":24},"comment2TextMtSp":{"type":"number","default":8},"comment2TextFontsizePc":{"type":"number","default":17},"comment2TextFontsizeSp":{"type":"number","default":16},"comment2TextBdrPc":{"type":"number","default":12},"comment2TextBdrSp":{"type":"number","default":8},"comment2TriangleTop":{"type":"number","default":20},"comment2FontSet":{"type":"string","default":""},"comment2FontWeight":{"type":"string","default":""}},"editorScript":"file:./lw-pr-comment-2.js","no":2}');
 
 /***/ })
 
@@ -760,6 +760,18 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./block.json */ "./src/lw-pr-comment-2/block.json");
 /* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils.js */ "./src/utils.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 /**
  * LiteWord – コメント 02
  * ------------------------------------------------------------
@@ -784,7 +796,7 @@ var positionOptions = [{
   label: "右",
   value: "right"
 }];
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_3__.name, {
+var lwBlockDef = {
   edit: function edit(_ref) {
     var attributes = _ref.attributes,
       setAttributes = _ref.setAttributes;
@@ -1272,6 +1284,31 @@ var positionOptions = [{
       }
     }))));
   }
-});
+};
+
+/* ------------------------------------------------------------------
+ * #1169（2026-08-27）既定値の他社CDN直リンクを自社素材に差し替えた。
+ * 既定値と同じ値はブロックコメントに書かれないので、既定値のまま使っている
+ * 既存ページは「保存HTMLは旧URL／ブロックは新しい既定値」で食い違う。
+ * 旧既定値を持った版を残して、開いて保存し直しても画像が入れ替わらないようにする。
+ * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
+ * ------------------------------------------------------------------ */
+var LW_1169_OLD = JSON.parse(JSON.stringify(_block_json__WEBPACK_IMPORTED_MODULE_3__.attributes));
+LW_1169_OLD.comment2ImageUrl["default"] = "https://placehold.co/200x200/e8e8e8/999999?text=Image";
+
+/* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
+ *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の
+ *    大多数がこれ）がどの版にも当たらなくなる。だから既存の版それぞれについて
+ *    旧既定値を持たせた双子を作って先に並べる。元の版も残す（画像を自分で差し替えた人向け）。 */
+var lwPrev1169 = lwBlockDef.deprecated || [];
+lwBlockDef.deprecated = [{
+  attributes: LW_1169_OLD,
+  save: lwBlockDef.save
+}].concat(_toConsumableArray(lwPrev1169.map(function (d) {
+  return _objectSpread(_objectSpread({}, d), {}, {
+    attributes: LW_1169_OLD
+  });
+})), _toConsumableArray(lwPrev1169));
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_3__.name, lwBlockDef);
 /******/ })()
 ;

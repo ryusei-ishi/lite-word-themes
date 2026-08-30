@@ -26,6 +26,7 @@ import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromItem, lwLinkToItem, lwLinkDataPropsFromItem } from '../link-picker.js';
 
 /* ---------------- フォント選択肢 ---------------- */
 const fontOptions = fontOptionsArr();
@@ -69,6 +70,11 @@ registerBlockType(metadata.name, {
 				idx === i ? { ...item, [key]: val } : item
 			);
 			setAttributes( { contents : arr } );
+		};
+
+		/* リンク設定のように複数のキーをまとめて入れ替える用 */
+		const updateContentMulti = (i, patch) => {
+			setAttributes({ contents: contents.map((it, k) => k === i ? { ...it, ...patch } : it) });
 		};
 
 		const blockProps = useBlockProps({
@@ -255,6 +261,10 @@ registerBlockType(metadata.name, {
 										value={c.buttonUrl}
 										onChange={( v ) => updateContent( i, 'buttonUrl', v )}
 									/>
+									<LinkPicker
+									    link={lwLinkFromItem(c, 'buttonUrl')}
+									    onChange={(patch) => updateContentMulti(i, lwLinkToItem(patch, 'buttonUrl'))}
+									/>
 								</div>
 							</div>
 						</div>
@@ -316,6 +326,8 @@ registerBlockType(metadata.name, {
 								{c.buttonText && (
 									<a
 										href={c.buttonUrl || '#'}
+										data-lw-link-type={lwLinkDataPropsFromItem(c, 'buttonUrl').linkType}
+										data-lw-link-id={lwLinkDataPropsFromItem(c, 'buttonUrl').linkId}
 										className="lw-content-2_btn"
 										data-bgcolor={c.buttonBgColor}
 										data-textcolor={c.buttonTextColor}

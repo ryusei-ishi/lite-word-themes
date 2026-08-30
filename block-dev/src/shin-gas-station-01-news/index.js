@@ -17,6 +17,10 @@ import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+const LINK_KEYS = { url: 'buttonUrl', type: 'buttonLinkType', page: 'buttonPageId', category: 'buttonCategoryId' };
 
 const fontOptions = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
@@ -61,6 +65,10 @@ registerBlockType(metadata.name, {
                         <URLInput
                             value={buttonUrl}
                             onChange={(url) => setAttributes({ buttonUrl: url })}
+                        />
+                        <LinkPicker
+                            link={lwLinkFromAttrs(attributes, LINK_KEYS)}
+                            onChange={(patch) => setAttributes(lwLinkToAttrs(patch, LINK_KEYS))}
                         />
                         <ToggleControl
                             label="新規タブで開く"
@@ -327,6 +335,8 @@ registerBlockType(metadata.name, {
                         <a
                             className="btn"
                             href={buttonUrl}
+                            data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkType}
+                            data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkId}
                             target={openInNewTab ? '_blank' : undefined}
                             rel={
                                 openInNewTab

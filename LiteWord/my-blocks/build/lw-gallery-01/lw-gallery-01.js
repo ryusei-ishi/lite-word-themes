@@ -19,6 +19,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-gallery-01/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./block.json */ "./src/lw-gallery-01/block.json");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
 function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
@@ -34,7 +40,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 
 
 
-(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
+var lwBlockDef = {
   edit: function edit(_ref) {
     var attributes = _ref.attributes,
       setAttributes = _ref.setAttributes;
@@ -50,9 +56,13 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       text2AlignPc = attributes.text2AlignPc,
       text2AlignSp = attributes.text2AlignSp;
     var updateItem = function updateItem(i, key, val) {
+      return updateItemMulti(i, _defineProperty({}, key, val));
+    };
+    // 画像を選び直したときに URL と alt をまとめて入れ替えるため、複数キー版を用意する
+    var updateItemMulti = function updateItemMulti(i, patch) {
       return setAttributes({
         items: items.map(function (v, n) {
-          return n === i ? _objectSpread(_objectSpread({}, v), {}, _defineProperty({}, key, val)) : v;
+          return n === i ? _objectSpread(_objectSpread({}, v), patch) : v;
         })
       });
     };
@@ -110,7 +120,10 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         key: i
       }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
         onSelect: function onSelect(m) {
-          return updateItem(i, 'imgUrl', m.url);
+          return updateItemMulti(i, {
+            imgUrl: m.url,
+            alt: m.alt || ''
+          });
         },
         allowedTypes: ['image'],
         render: function render(_ref2) {
@@ -131,6 +144,16 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
             onClick: open,
             isSecondary: true
           }, "\u753B\u50CF\u3092\u9078\u629E");
+        }
+      }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+        label: "\u753B\u50CF\u306E\u8AAC\u660E\uFF08alt\uFF09",
+        help: "\u76EE\u306E\u898B\u3048\u306A\u3044\u65B9\u3084\u691C\u7D22\u30A8\u30F3\u30B8\u30F3\u306B\u3001\u3053\u306E\u753B\u50CF\u304C\u4F55\u304B\u3092\u4F1D\u3048\u308B\u6587\u3067\u3059\u3002\u4F8B\uFF1A\u713C\u304D\u305F\u3066\u306E\u30D1\u30F3\u304C\u4E26\u3076\u6728\u306E\u68DA",
+        value: item.alt || '',
+        onChange: function onChange(v) {
+          return updateItem(i, 'alt', v);
+        },
+        style: {
+          marginTop: '12px'
         }
       }));
     }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
@@ -199,7 +222,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       }, item.imgUrl && /*#__PURE__*/React.createElement("img", {
         loading: "lazy",
         src: item.imgUrl,
-        alt: ""
+        alt: item.alt || ''
       }));
     })), showText2 && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
       tagName: "p",
@@ -249,7 +272,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         key: i
       }, item.imgUrl && /*#__PURE__*/React.createElement("img", {
         src: item.imgUrl,
-        alt: ""
+        alt: item.alt || ''
       }));
     })), showText2 && text_2 && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
       tagName: "p",
@@ -260,7 +283,34 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       }
     }));
   }
-});
+};
+
+/* ------------------------------------------------------------------
+ * #1169（2026-08-27）既定値の他社CDN直リンクを自社素材に差し替えた。
+ * 既定値と同じ値はブロックコメントに書かれないので、既定値のまま使っている
+ * 既存ページは「保存HTMLは旧URL／ブロックは新しい既定値」で食い違う。
+ * 旧既定値を持った版を残して、開いて保存し直しても画像が入れ替わらないようにする。
+ * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
+ * ------------------------------------------------------------------ */
+var LW_1169_OLD = JSON.parse(JSON.stringify(_block_json__WEBPACK_IMPORTED_MODULE_5__.attributes));
+LW_1169_OLD.items["default"][0].imgUrl = "https://picsum.photos/1000/1000?random=1";
+LW_1169_OLD.items["default"][1].imgUrl = "https://picsum.photos/1000/1000?random=2";
+LW_1169_OLD.items["default"][2].imgUrl = "https://picsum.photos/1000/1000?random=3";
+
+/* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
+ *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の
+ *    大多数がこれ）がどの版にも当たらなくなる。だから既存の版それぞれについて
+ *    旧既定値を持たせた双子を作って先に並べる。元の版も残す（画像を自分で差し替えた人向け）。 */
+var lwPrev1169 = lwBlockDef.deprecated || [];
+lwBlockDef.deprecated = [{
+  attributes: LW_1169_OLD,
+  save: lwBlockDef.save
+}].concat(_toConsumableArray(lwPrev1169.map(function (d) {
+  return _objectSpread(_objectSpread({}, d), {}, {
+    attributes: LW_1169_OLD
+  });
+})), _toConsumableArray(lwPrev1169));
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, lwBlockDef);
 
 /***/ }),
 
@@ -324,7 +374,7 @@ module.exports = window["wp"]["components"];
   \**************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-gallery-01","version":"1.0.0","title":"ギャラリー 01","category":"lw-banner","icon":"images-alt2","aiHint":{"description":"ギャラリー（テキスト付き）。画像配列+見出し2つ。作品集・施設紹介に","excludeFromAutoSelect":false,"contentAttributes":["text_1","text_2"],"imageAttributes":["items"]},"supports":{"anchor":true},"attributes":{"text_1":{"type":"string","default":"テキストテキストテキストテキスト\\nテキストテキストテキストテキストテキストテキストテキストテキスト"},"text_2":{"type":"string","default":"テキストテキストテキストテキスト\\nテキストテキストテキストテキストテキストテキストテキストテキスト"},"showText1":{"type":"boolean","default":true},"showText2":{"type":"boolean","default":true},"text1AlignPc":{"type":"string","default":"center_pc"},"text1AlignSp":{"type":"string","default":"left_sp"},"text2AlignPc":{"type":"string","default":"center_pc"},"text2AlignSp":{"type":"string","default":"left_sp"},"items":{"type":"array","default":[{"imgUrl":"https://picsum.photos/1000/1000?random=1"},{"imgUrl":"https://picsum.photos/1000/1000?random=2"},{"imgUrl":"https://picsum.photos/1000/1000?random=3"}]},"maxWidthText":{"type":"number","default":800},"maxWidth":{"type":"number","default":800}},"editorScript":"file:./lw-gallery-01.js","no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-gallery-01","version":"1.0.0","title":"ギャラリー 01","category":"lw-banner","icon":"images-alt2","aiHint":{"description":"ギャラリー（テキスト付き）。画像配列+見出し2つ。作品集・施設紹介に","excludeFromAutoSelect":false,"contentAttributes":["text_1","text_2"],"imageAttributes":["items"]},"supports":{"anchor":true},"attributes":{"text_1":{"type":"string","default":"テキストテキストテキストテキスト\\nテキストテキストテキストテキストテキストテキストテキストテキスト"},"text_2":{"type":"string","default":"テキストテキストテキストテキスト\\nテキストテキストテキストテキストテキストテキストテキストテキスト"},"showText1":{"type":"boolean","default":true},"showText2":{"type":"boolean","default":true},"text1AlignPc":{"type":"string","default":"center_pc"},"text1AlignSp":{"type":"string","default":"left_sp"},"text2AlignPc":{"type":"string","default":"center_pc"},"text2AlignSp":{"type":"string","default":"left_sp"},"items":{"type":"array","default":[{"imgUrl":"https://lite-word.com/sample_img/shop/1.webp","alt":""},{"imgUrl":"https://lite-word.com/sample_img/shop/2.webp","alt":""},{"imgUrl":"https://lite-word.com/sample_img/shop/3.webp","alt":""}]},"maxWidthText":{"type":"number","default":800},"maxWidth":{"type":"number","default":800}},"editorScript":"file:./lw-gallery-01.js","no":1}');
 
 /***/ })
 

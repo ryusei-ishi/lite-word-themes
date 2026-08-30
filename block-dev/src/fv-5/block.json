@@ -14,7 +14,8 @@
 		"description": "下層ページ用FV。中央にタイトル+説明文。色ベタ塗り背景。サービス詳細ページ向け",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["mainTitle", "description"],
-		"imageAttributes": []
+		"imageAttributes": [],
+		"notes": "［2026-08-27 追記］フィルタは mix-blend-mode: multiply。白を乗せても変わらないので「白フィルタ＋黒文字」は作れない。明るくしたいなら明るい写真を選ぶ。"
 	},
 	"attributes": {
 		"backgroundImage": {

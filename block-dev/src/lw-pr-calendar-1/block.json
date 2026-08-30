@@ -8,11 +8,14 @@
 	"icon": "grid-view",
 	"editorScript": "file:./lw-pr-calendar-1.js",
 	"aiHint": {
-		"description": "カレンダー。ヘッダー+行データのテーブル形式。営業日カレンダー表示",
-		"excludeFromAutoSelect": true,
-		"contentAttributes": [],
+		"description": "営業日・診療日カレンダー。曜日ヘッダー+時間帯ごとの○×の表",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"headItems",
+			"bodyRows"
+		],
 		"imageAttributes": [],
-		"excludeReason": "カレンダー専用形式。AI生成に不向き"
+		"notes": "headItems は [\"営業時間\",\"月\",\"火\",\"水\",\"木\",\"金\",\"土\",\"日\"] の形。bodyRows は [[\"10:00 - 14:00\",\"○\",\"○\",\"×\",...]] の形で、各行の数を headItems と同じにする。記号は ○ △ × を使う。休診・定休は × にする。"
 	},
 	"supports": {
 		"anchor": true

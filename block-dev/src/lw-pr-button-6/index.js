@@ -190,6 +190,12 @@ registerBlockType(metadata.name, {
 										/>
 									</div>
 								</div>
+								<TextControl
+									label="URL"
+									value={button.url}
+									onChange={(v) => updateButton(index, "url", v)}
+									type="url"
+								/>
 								<LinkPicker
 									link={button}
 									onChange={(patch) => updateButtonMany(index, patch)}

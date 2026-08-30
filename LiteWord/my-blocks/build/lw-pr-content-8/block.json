@@ -1,71 +1,74 @@
 {
-    "$schema":  "https://schemas.wp.org/trunk/block.json",
-    "apiVersion":  3,
-    "name":  "wdl/lw-pr-content-8",
-    "version":  "1.0.0",
-    "title":  "Content 08",
-    "category":  "lw-content",
-    "icon":  "align-pull-left",
-    "description":  "画像+コンテンツエリアブロック",
-    "aiDescription":  "左側に画像、右側にコンテンツエリアを配置した2カラムレイアウト。コンテンツエリアには任意のブロックを配置可能。",
-    "aiNotes":  "InnerBlocksでコンテンツエリアを自由に編集可能。背景色、最大幅、角丸をカスタマイズ可能。",
-    "aiHint": {
-        "description": "画像+InnerBlocksの2カラム。左に画像、右に自由コンテンツエリア。InnerBlocks使用のためAI直接生成非推奨",
-        "excludeFromAutoSelect": true,
-        "excludeReason": "InnerBlocksを使用するためAIが直接コンテンツを生成できない",
-        "contentAttributes": [],
-        "imageAttributes": ["imageUrl"]
-    },
-    "supports":  {
-                     "anchor":  true
-                 },
-    "attributes":  {
-                       "imageUrl":  {
-                                        "type":  "string",
-                                        "default":  "https://placehold.co/400x400",
-                                        "ai_description":  "左側の画像URL"
-                                    },
-                       "imageAlt":  {
-                                        "type":  "string",
-                                        "default":  "",
-                                        "ai_description":  "画像のalt属性"
-                                    },
-                       "maxWidth":  {
-                                        "type":  "number",
-                                        "default":  1040,
-                                        "ai_description":  "最大幅（px）"
-                                    },
-                       "bgColor":  {
-                                       "type":  "string",
-                                       "default":  "#f5f5f5",
-                                       "ai_description":  "背景色"
-                                   },
-                       "bdrPc":  {
-                                     "type":  "number",
-                                     "default":  10,
-                                     "ai_description":  "角丸PC（px）"
-                                 },
-                       "bdrSp":  {
-                                     "type":  "number",
-                                     "default":  10,
-                                     "ai_description":  "角丸SP（px）"
-                                 },
-                       "minHeight":  {
-                                         "type":  "number",
-                                         "default":  378,
-                                         "ai_description":  "最小の高さ（px）"
-                                     },
-                       "borderWidth": {
-                                         "type": "number",
-                                         "default": 2,
-                                         "ai_description": "枠線の太さ（px）"
-                                     },
-                       "borderColor": {
-                                         "type": "string",
-                                         "default": "var(--color-main)",
-                                         "ai_description": "枠線の色"
-                                     }
-                   },
-    "editorScript":  "file:./lw-pr-content-8.js",
-    "no":  8
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-content-8",
+	"version": "1.0.0",
+	"title": "Content 08",
+	"category": "lw-content",
+	"icon": "align-pull-left",
+	"description": "画像+コンテンツエリアブロック",
+	"aiDescription": "左側に画像、右側にコンテンツエリアを配置した2カラムレイアウト。コンテンツエリアには任意のブロックを配置可能。",
+	"aiNotes": "InnerBlocksでコンテンツエリアを自由に編集可能。背景色、最大幅、角丸をカスタマイズ可能。",
+	"aiHint": {
+		"description": "左に写真・右に自由な中身を置く横長のカード。1ブロック＝1段で、縦に積んで『治療や施術の流れ』『取り組み』を1段ずつ写真つきで説明するのに使う",
+		"excludeFromAutoSelect": true,
+		"excludeReason": "InnerBlocksを使用するためAIが直接コンテンツを生成できない。セクションテンプレート pr_flow_photo_1 から使うこと",
+		"contentAttributes": [],
+		"imageAttributes": [
+			"imageUrl"
+		],
+		"notes": "1ブロック＝1段。複数の段を作るならブロックを並べる。🚨 段と段の間は .lw-pr-content-8 + .lw-pr-content-8 { margin-top:40px } という【隣接セレクタ】で空いている。あいだにスペーサーを挟むと + が外れてカードがくっつく（paid-block-history-1 の縦線が切れるのと同じ型）。ブロック自身は上下マージンを持たない（margin:0 auto）ので、前後の余白は自分で作る。🚨 PCは grid-template-columns:38.4%/61.6%。既定の maxWidth:1040 なら写真枠は約399×374px＝ほぼ正方形の中央クロップ（2026-08-29 実測）。800px以下では縦積みに変わり、写真は元の比率のまま全幅で出る（切られない）。切れる形と切れない形の両方で成立するよう、主役は中央に置き、横幅がやや広い正方形に近い写真（800×756 くらい）を渡す。当社の制作サイト takashishika.com もこの寸法で作っている。minHeight の既定は378pxで、本文が短くてもカードはその高さのまま（右下に余白が残るのは仕様）。content_in の中は *:first-child の上マージンと *:last-child の下マージンが CSS で 0 に潰されるので、見出しと本文の間だけ気にすればよい。背景の既定は #f5f5f5 だが、takashishika.com は bgColor:#ffffff にして【白いカード＋テーマ色の枠線】で使っている。borderColor の既定は var(--color-main) なので、そのままでサイトの色に合う。"
+	},
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"imageUrl": {
+			"type": "string",
+			"default": "https://lite-word.com/sample_img/shop/5.webp",
+			"ai_description": "左側の画像URL"
+		},
+		"imageAlt": {
+			"type": "string",
+			"default": "",
+			"ai_description": "画像のalt属性"
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 1040,
+			"ai_description": "最大幅（px）"
+		},
+		"bgColor": {
+			"type": "string",
+			"default": "#f5f5f5",
+			"ai_description": "背景色"
+		},
+		"bdrPc": {
+			"type": "number",
+			"default": 10,
+			"ai_description": "角丸PC（px）"
+		},
+		"bdrSp": {
+			"type": "number",
+			"default": 10,
+			"ai_description": "角丸SP（px）"
+		},
+		"minHeight": {
+			"type": "number",
+			"default": 378,
+			"ai_description": "最小の高さ（px）"
+		},
+		"borderWidth": {
+			"type": "number",
+			"default": 2,
+			"ai_description": "枠線の太さ（px）"
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "var(--color-main)",
+			"ai_description": "枠線の色"
+		}
+	},
+	"editorScript": "file:./lw-pr-content-8.js",
+	"no": 8
 }

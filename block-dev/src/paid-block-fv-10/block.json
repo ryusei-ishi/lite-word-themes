@@ -11,7 +11,8 @@
 		"description": "下層ページ用シンプルFV。中央タイトル+背景画像+フィルター装飾。プレミアムデザイン",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["mainTitle"],
-		"imageAttributes": ["backgroundImage", "backgroundImageSp"]
+		"imageAttributes": ["backgroundImage", "backgroundImageSp"],
+		"notes": "［2026-08-27 追記］フィルタは mix-blend-mode: multiply（白は効かない）。innerFilterBg が内側の帯の色で、白＋角丸0にすると写真の上に紙を置いたような硬い見出しになる。titleFontSizeClass は font_size_l/m/s で、l は48px だがコンテナ幅980px以下では38pxに落ちる。"
 	},
 	"supports": {
 		"anchor": true

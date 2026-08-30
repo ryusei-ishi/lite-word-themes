@@ -19,6 +19,10 @@ import { useEffect } from '@wordpress/element';
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う、配列の要素の中のキー名 */
+const LINK_KEYS = { url: 'linkUrl', type: 'linkType', page: 'pageId', category: 'categoryId' };
 
 registerBlockType(metadata.name, {
     // ------------------------------------------------------------------
@@ -42,6 +46,11 @@ registerBlockType(metadata.name, {
                 i === index ? { ...slide, [key]: value } : slide
             );
             setAttributes( { slides: newSlides } );
+        };
+
+        /* リンク設定のように複数のキーをまとめて入れ替える用 */
+        const updateSlideMulti = (i, patch) => {
+            setAttributes({ slides: slides.map((it, k) => k === i ? { ...it, ...patch } : it) });
         };
 
         const addSlide = () => {
@@ -173,6 +182,10 @@ registerBlockType(metadata.name, {
                                     value={ slide.linkUrl }
                                     onChange={ (v)=>updateSlide(index,'linkUrl',v) }
                                 />
+                                <LinkPicker
+                                    link={lwLinkFromAttrs(slide, LINK_KEYS)}
+                                    onChange={(patch) => updateSlideMulti(index, lwLinkToAttrs(patch, LINK_KEYS))}
+                                />
                                 { slide.linkUrl && (
                                     <ToggleControl
                                         label="新規タブで開く"
@@ -244,9 +257,30 @@ registerBlockType(metadata.name, {
         });
 
         /* ---------- Swiper 設定文字列 --------------------------------*/
+        /* 🚨 2026-08-26: 自分の要素を "#" + blockId でしか探せなかった。
+         *   blockId が空のまま保存されたマークアップ（ページテンプレート・AI生成）だと
+         *   セレクタが "#" だけになり querySelector が例外を投げ、init-hide が外れず
+         *   フロントで高さ0＝真っ白になっていた（2026-08-26 に実測）。
+         *   🚨 blockId があるときの出力は1バイトも変えないこと（既存ページの検証が壊れる）。 */
+        const rootFinder = blockId
+            ? `    var selector = "#${ blockId } .lw-pr-content-9-swiper";`
+            : [
+                '    var _sc = document.currentScript;',
+                '    var _root = ( _sc && _sc.closest ) ? _sc.closest(".lw-pr-content-9") : null;',
+                '    if ( !_root ) _root = document.querySelector(".lw-pr-content-9:not([data-lw-init])");',
+                '    if ( !_root ) return;',
+                '    _root.setAttribute("data-lw-init","1");',
+                '    if ( !_root.id ) _root.id = "lw-pr-content-9-" + Math.random().toString(36).slice(2,10);',
+                '    var selector = "#" + _root.id + " .lw-pr-content-9-swiper";',
+              ].join(String.fromCharCode(10));
+        /* 「自分自身」を指す式。blockId が無いときは上で掴んだ _root を使う */
+        const rootRef = blockId ? `document.querySelector("#${ blockId }")` : '_root';
+        /* 色の指定も同じ理由。blockId が無いときはクラスで当てる */
+        const cssRoot = blockId ? `#${ blockId }` : '.lw-pr-content-9';
+
         const swiperConfig = `
 (function(){
-    var selector = "#${ blockId } .lw-pr-content-9-swiper";
+${ rootFinder }
     var MAX_RETRY = 30;
     var retry = 0;
 
@@ -274,7 +308,7 @@ registerBlockType(metadata.name, {
                 1200: { slidesPerView: 4, spaceBetween: 24 }
             }
         });
-        document.querySelector("#${ blockId }").classList.remove("init-hide");
+        ${ rootRef }.classList.remove("init-hide");
         return true;
     }
 
@@ -286,7 +320,7 @@ registerBlockType(metadata.name, {
     }, 150);
 
     setTimeout(function(){
-        var el = document.querySelector("#${ blockId }");
+        var el = ${ rootRef };
         if ( el ) el.classList.remove("init-hide");
     }, 5000);
 })();
@@ -316,6 +350,8 @@ registerBlockType(metadata.name, {
                                             <a
                                                 className="item"
                                                 href={ slide.linkUrl }
+                                                data-lw-link-type={lwLinkDataPropsFromAttrs(slide, LINK_KEYS).linkType}
+                                                data-lw-link-id={lwLinkDataPropsFromAttrs(slide, LINK_KEYS).linkId}
                                                 target={ slide.openNewTab ? '_blank' : undefined }
                                                 rel={ slide.openNewTab ? 'noopener noreferrer' : undefined }
                                             >
@@ -339,7 +375,7 @@ registerBlockType(metadata.name, {
 
                 {/* JS が完全にオフの環境向けフォールバック */}
                 <noscript>
-                    <style>{`#${ blockId }{opacity:1!important}`}</style>
+                    <style>{`${ cssRoot }{opacity:1!important}`}</style>
                 </noscript>
             </div>
         );

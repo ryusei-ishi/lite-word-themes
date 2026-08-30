@@ -12,7 +12,7 @@
 		"contentAttributes": [
 			"contents"
 		],
-		"imageAttributes": []
+		"imageAttributes": ["contents.image"]
 	},
 	"supports": {
 		"anchor": true
@@ -35,6 +35,13 @@
 					"source": "attribute",
 					"selector": "figure img",
 					"attribute": "src"
+				},
+				"alt": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "figure img",
+					"attribute": "alt",
+					"default": ""
 				},
 				"borderColor": {
 					"type": "string",

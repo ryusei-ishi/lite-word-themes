@@ -17,6 +17,7 @@ import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromItem, lwLinkToItem, lwLinkDataPropsFromItem } from '../link-picker.js';
 
 /* --------------------------------------------------
  * 共通オプション
@@ -68,6 +69,11 @@ registerBlockType(metadata.name, {
 		const updateContent = ( index, key, value ) => {
 			const list = contents.map( ( item, i ) => i === index ? { ...item, [ key ]: value } : item );
 			setAttributes( { contents: list } );
+		};
+
+		/* リンク設定のように複数のキーをまとめて入れ替える用 */
+		const updateContentMulti = (i, patch) => {
+			setAttributes({ contents: contents.map((it, k) => k === i ? { ...it, ...patch } : it) });
 		};
 
 		
@@ -420,6 +426,10 @@ registerBlockType(metadata.name, {
 									placeholder="https://example.com/"
 									style={ { marginTop: '12px', maxWidth: '300px' } }
 								/>
+								<LinkPicker
+								    link={lwLinkFromItem(item, 'url')}
+								    onChange={(patch) => updateContentMulti(idx, lwLinkToItem(patch, 'url'))}
+								/>
 
 								{/* ボタンテキスト入力（URLが入力されていてshowButtonがtrueの場合のみ表示） */}
 								{ item.url && showButton && (
@@ -506,7 +516,7 @@ registerBlockType(metadata.name, {
 					{ contents.map( ( item, idx ) => {
 						const LinkTag   = item.url ? 'a' : 'div';
 						const linkProps = item.url
-							? { href: item.url, className: 'link' }
+							? { href: item.url, 'data-lw-link-type': lwLinkDataPropsFromItem(item, 'url').linkType, 'data-lw-link-id': lwLinkDataPropsFromItem(item, 'url').linkId, className: 'link' }
 							: { className: 'link' };
 
 						return (

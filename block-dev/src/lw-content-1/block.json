@@ -8,10 +8,18 @@
 	"icon": "format-image",
 	"editorScript": "file:./lw-content-1.js",
 	"aiHint": {
-		"description": "画像+テキスト2カラム。左右に画像とテキスト（h3+説明+リンクボタン）。サービス紹介・強みの説明に",
+		"description": "写真＋見出し＋説明文の左右2カラム。imagePosition で写真を左右どちらにも置けるので、複数並べて交互配置にできる。サービス紹介・強みの説明・1つのことを言い切る段に",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["title", "content", "linkText", "linkUrl"],
-		"imageAttributes": ["imageUrl"]
+		"contentAttributes": [
+			"title",
+			"content",
+			"linkText",
+			"linkUrl"
+		],
+		"imageAttributes": [
+			"imageUrl"
+		],
+		"notes": "写真＝flex:2／文章＝flex:3、あいだ48px。幅1040なら写真枠は約397×347px。🚨 写真枠は aspect-ratio:16/14 の object-fit:cover。16:14（例 1120×980）で渡すとほぼ切られない。800px以下では縦積みになり、写真が全幅・同じ比率のまま出るので、切られ方はPCと変わらない。🚨 見出しは h3 32px 固定で、属性から大きさを変えられない（1080px以下で28→24→22→20と落ちる）。幅1040なら1行は約18文字で、超えると2行目に1〜2文字だけ残る。title は15字以内の言い切りにする。🚨 content は white-space:pre-wrap なので、改行文字がそのまま行分けになる（<br> は要らない）。1行は約37文字なので、段落ごとに2行ずつになるように割る。🚨 title / content / linkText は空にすると :empty { display:none } で消える。ボタンを出したくないときは linkText を空にする。linkUrl だけ空にしても文字の入った <a href=\"\"> が残り、押すとページが再読み込みされる。🚨 ボタンの既定色は var(--color-accent) で、多くのブロックが使う var(--color-main) とは別の色になる。サイトの色にそろえたいときは linkButtonBackgroundColor を var(--color-main) にする。imagePosition:\"right\" で写真が右に来る（flex-direction:row-reverse）。複数並べて交互配置にできる。自前で margin:40px 0（550px以下は32px）を持つので、前後にスペーサーを足さない。"
 	},
 	"supports": {
 		"anchor": true
@@ -19,48 +27,142 @@
 	"attributes": {
 		"imageUrl": {
 			"type": "string",
-			"default": "https://picsum.photos/1000/1000?random=1",
-			"aiHint": { "role": "image", "note": "サービス・業種に合った画像URL" }
+			"default": "https://lite-word.com/sample_img/shop/1.webp",
+			"aiHint": {
+				"role": "image",
+				"note": "サービス・業種に合った画像URL"
+			}
 		},
 		"imageAlt": {
 			"type": "string",
 			"default": "",
-			"aiHint": { "role": "alt", "contentGuide": "画像の説明", "example": "施術の様子" }
+			"aiHint": {
+				"role": "alt",
+				"contentGuide": "画像の説明",
+				"example": "施術の様子"
+			}
 		},
 		"title": {
 			"type": "string",
 			"source": "html",
 			"selector": ".lw-content-1__text h3",
 			"default": "タイトルテキスト",
-			"aiHint": { "role": "heading", "contentGuide": "h3見出し。5〜20文字", "example": "経験豊富なスタッフが対応" }
+			"aiHint": {
+				"role": "heading",
+				"contentGuide": "h3見出し。5〜20文字",
+				"example": "経験豊富なスタッフが対応"
+			}
 		},
 		"content": {
 			"type": "string",
 			"source": "html",
 			"selector": ".lw-content-1__text p",
 			"default": "テキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキスト",
-			"aiHint": { "role": "body", "contentGuide": "説明文。30〜100文字。改行可", "example": "10年以上の経験を持つプロが\nあなたの悩みに寄り添います" }
+			"aiHint": {
+				"role": "body",
+				"contentGuide": "説明文。30〜100文字。改行可",
+				"example": "10年以上の経験を持つプロが\nあなたの悩みに寄り添います"
+			}
 		},
 		"linkUrl": {
 			"type": "string",
 			"default": "",
-			"aiHint": { "role": "url", "contentGuide": "詳細ページURL。省略可" }
+			"aiHint": {
+				"role": "url",
+				"contentGuide": "詳細ページURL。省略可"
+			}
+		},
+		"linkType": {
+			"type": "string",
+			"default": "url"
+		},
+		"pageId": {
+			"type": "number",
+			"default": 0
+		},
+		"categoryId": {
+			"type": "number",
+			"default": 0
 		},
 		"linkText": {
 			"type": "string",
 			"default": "詳細はこちら",
-			"aiHint": { "role": "button", "contentGuide": "リンクテキスト。4〜10文字", "example": "詳しく見る" }
+			"aiHint": {
+				"role": "button",
+				"contentGuide": "リンクテキスト。4〜10文字",
+				"example": "詳しく見る"
+			}
 		},
-		"linkTarget": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"titleFontSet": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"titleFontWeight": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"contentFontSet": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"contentFontWeight": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"linkFontSet": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"linkFontWeight": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"imagePosition": { "type": "string", "default": "left", "aiHint": { "skip": true } },
-		"linkButtonBackgroundColor": { "type": "string", "default": "var(--color-accent)", "aiHint": { "skip": true } },
-		"linkButtonTextColor": { "type": "string", "default": "#fff", "aiHint": { "skip": true } }
+		"linkTarget": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"titleFontSet": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"titleFontWeight": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"contentFontSet": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"contentFontWeight": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"linkFontSet": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"linkFontWeight": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"imagePosition": {
+			"type": "string",
+			"default": "left",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"linkButtonBackgroundColor": {
+			"type": "string",
+			"default": "var(--color-accent)",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"linkButtonTextColor": {
+			"type": "string",
+			"default": "#fff",
+			"aiHint": {
+				"skip": true
+			}
+		}
 	},
 	"no": 1
 }

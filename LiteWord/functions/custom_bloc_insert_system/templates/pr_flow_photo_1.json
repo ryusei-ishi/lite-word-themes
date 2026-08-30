@@ -1,0 +1,349 @@
+{
+  "title": "治療・施術の流れ（写真つきカード4枚・通院の回ごと）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋写真つきの大きなカード4枚（1枚＝1回の来院）＋注釈＋予約への導線。「1回目に何をして、2回目に何をするか」を、実際の場面の写真つきで1段ずつ読ませるセクションです。クリニック・歯科・整体・治療院の「初診の流れ」に。工程名だけを並べたい場合は、番号つきの「ご利用の流れ（6ステップ）」のほうが向いています。文例は初診から定期メンテナンスまでですが、見出しと本文を書き換えればリフォームの工事の流れ・オーダー品ができるまで・入会からレッスン開始までにも使えます。⚠️ 写真はパソコンでは正方形に近い形に中央で切り取られ、スマホでは元の形のまま出ます。主役が中央にある写真（できれば 800×756 くらいの横幅がやや広い形）を選んでください。⚠️ カードとカードの間隔はブロックが自動で空けます。あいだにスペーサーを入れると詰まってしまうのでご注意ください。カードを増やすときはカードごと複製してください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "初診の流れ",
+        "subTitle": "FLOW",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "はじめてご来院いただいてから、通い終わるまでの進み方です。<br>1日でまとめて行うのではなく、回ごとに区切ってご案内しています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-content-8",
+      "attributes": {
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/flow_01.webp",
+        "imageAlt": "受付で問診票にご記入いただいているところ",
+        "bgColor": "#ffffff"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "1回目｜受付とカウンセリング",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "20px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "16px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "はじめに問診票にご記入いただき、担当がお話をうかがいます。気になっているところ、いつからか、どんなときにつらいか。ご希望があれば一緒に整理します。個室でお受けしますので、周りを気にせずお話しください。所要は20分ほどです。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "この日にその場で処置を始めることはありません。お話をうかがうだけでお帰りいただいても構いません。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "16px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-pr-content-8",
+      "attributes": {
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/flow_02.webp",
+        "imageAlt": "スタッフが話を聞きながら記録しているところ",
+        "bgColor": "#ffffff"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "1回目｜検査と、いまの状態の確認",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "20px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "16px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "必要な検査を行い、いまの状態を写真と数値で記録します。記録に残しておくと、次にお越しいただいたときに「どこがどう変わったか」を並べて確かめられます。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "強い痛みがあるときは、この日のうちに応急の処置をいたします。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "16px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "検査の内容は、症状や年齢によって変わります。何のために行う検査なのかは、その場でご説明します。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "16px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-pr-content-8",
+      "attributes": {
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/flow_03.webp",
+        "imageAlt": "施術室で状態を確認しているところ",
+        "bgColor": "#ffffff"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "2回目｜結果のご説明と、これからのご提案",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "20px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "16px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "検査の結果を、画像を一緒に見ながらご説明します。そのうえで、費用・回数・期間・気をつけていただくことを書面にしてお渡しします。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "進め方が複数あるときは、それぞれの良いところと難しいところを両方お伝えします。その場でお決めいただかなくて結構です。持ち帰ってご家族とご相談ください。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "16px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "読み返して分からないところが出てきたら、次のご来院時でもお電話でも構いません。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "16px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-pr-content-8",
+      "attributes": {
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/flow_04.webp",
+        "imageAlt": "書面とタブレットで計画を確認しているところ",
+        "bgColor": "#ffffff"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "3回目以降｜施術と、そのあとの定期メンテナンス",
+            "level": 3,
+            "style": {
+              "typography": {
+                "fontSize": "20px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "16px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "ご納得いただけたら、計画に沿って進めます。1回あたり40分ほど、間隔は週に1回が目安です。進み具合はその都度ご報告します。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "ひととおり終わったあとは、2〜3か月ごとの定期メンテナンスへ。良くなった状態を保つための、いちばん大事な段階です。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "16px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "途中で通うのが難しくなったときは、遠慮なくお申し出ください。間隔を空けるなど、続けやすい形に組み直します。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "16px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※回数と間隔は目安です。状態やご希望によって前後します。<br>お急ぎの事情があるときは、初回のカウンセリングでお伝えください。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "24px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "初診のご予約はこちら",
+        "textSub": "＼ ご相談だけでも構いません ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

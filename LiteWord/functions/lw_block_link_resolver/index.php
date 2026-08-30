@@ -24,12 +24,57 @@ if ( ! defined( 'ABSPATH' ) ) exit;
 /** リンクを引き直す対象のブロック */
 function lw_link_resolver_blocks() {
 	return apply_filters( 'lw_link_resolver_blocks', array(
-		'wdl/lw-pr-button-6',   // ボタン 06
-		'wdl/lw-pr-button-1',   // PRボタン 01
-		'wdl/lw-pr-button-2',   // PRボタン 02
-		'wdl/lw-pr-button-3',   // PRボタン 03
-		'wdl/lw-pr-button-4',   // PRボタン 04
-		'wdl/lw-pr-button-5',   // PRボタン 05
+		'wdl/cta-1',                           // CTA 01
+		'wdl/cta-2',                           // CTA 02
+		'wdl/fv-1',                            // 固定ページタイトル 01（トップ用）
+		'wdl/fv-7',                            // 固定ページタイトル 07(トップ用・動画背景)
+		'wdl/lw-banner-info-01',               // バナー 01（3カラム）
+		'wdl/lw-banner-info-02',               // バナー 02（4カラム）
+		'wdl/lw-banner-info-03',               // バナー 03（3カラム）
+		'wdl/lw-banner-info-04',               // バナー 04（2カラム2行）
+		'wdl/lw-banner-info-05',               // バナー 05（2カラム2行）
+		'wdl/lw-button-01',                    // リンクボタン 01
+		'wdl/lw-button-02',                    // リンクボタン 02
+		'wdl/lw-button-03',                    // リンクボタン 03
+		'wdl/lw-content-1',                    // Content 1
+		'wdl/lw-content-2',                    // content 02
+		'wdl/lw-content-8',                    // Content 08
+		'wdl/lw-link-list-1',                  // link list 01
+		'wdl/lw-pr-button-1',                  // PRボタン 01
+		'wdl/lw-pr-button-2',                  // PRボタン 02
+		'wdl/lw-pr-button-3',                  // PRボタン 03
+		'wdl/lw-pr-button-4',                  // PRボタン 04
+		'wdl/lw-pr-button-5',                  // PRボタン 05
+		'wdl/lw-pr-button-6',                  // ボタン 06
+		'wdl/lw-pr-content-9',                 // PR Content 9 カードスライダー
+		'wdl/lw-pr-fv-13',                     // 固定ページタイトル 13(動画背景)
+		'wdl/lw-pr-fv-14',                     // FV 14 ヘッダーまで回り込む全画背景
+		'wdl/lw-pr-fv-15',                     // 固定ページタイトル 15(動画背景)
+		'wdl/lw-pr-fv-16',                     // 固定ページタイトル 16(動画背景)
+		'wdl/lw-pr-image-0',                   // 画像 00
+		'wdl/lw-pr-image-1',                   // PR画像グリッド 01
+		'wdl/lw-pr-waku-1',                    // 枠 01
+		'wdl/paid-block-content-3',            // Content 03
+		'wdl/paid-block-content-4',            // Content 04
+		'wdl/paid-block-content-6',            // Content 06
+		'wdl/paid-block-content-7',            // Content 07
+		'wdl/paid-block-cta-4',                // CTA 04
+		'wdl/paid-block-fv-11',                // FV 11 背景画像スライダー
+		'wdl/paid-block-fv-12',                // FV 12 ヘッダーまで回り込む全画背景
+		'wdl/paid-block-fv-9',                 // FV 09 画像スライダー用ブロック
+		'wdl/paid-block-image-1',              // 画像 01
+		'wdl/paid-block-link-2',               // リンクリスト 2
+		'wdl/paid-block-lw-button-4',          // リンクボタン 04
+		'wdl/paid-block-lw-button-5',          // リンクボタン 05
+		'wdl/paid-block-lw-step-6',            // step 06
+		'wdl/shin-gas-station-01-button-01',   // リンクボタン 01 shin shop pattern 01
+		'wdl/shin-gas-station-01-cta',         // CTA 1 shin shop pattern 01
+		'wdl/shin-gas-station-01-cta2',        // CTA 2 shin shop pattern 01
+		'wdl/shin-gas-station-01-list-1',      // インフォリスト 1 shin shop pattern 01
+		'wdl/shin-gas-station-01-list-2',      // インフォリスト 2 shin shop pattern 01
+		'wdl/shin-gas-station-01-list-4',      // インフォリスト 4 shin info pattern 01
+		'wdl/shin-gas-station-01-news',        // お知らせ一覧 1 shin shop pattern 01
+		'wdl/shin-gas-station-01-post-list',   // 投稿一覧 1 shin shop pattern 01
 	) );
 }
 

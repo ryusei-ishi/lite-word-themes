@@ -55,8 +55,13 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
       className: "paid-block-solution-2 ".concat(blockId || '')
     });
     var updateItem = function updateItem(index, field, value) {
+      return updateItemMulti(index, _defineProperty({}, field, value));
+    };
+
+    /* 画像を選び直したときに URL と alt をまとめて入れ替えるため、複数キー版を用意する */
+    var updateItemMulti = function updateItemMulti(index, patch) {
       var newItems = items.map(function (item, i) {
-        return i === index ? _objectSpread(_objectSpread({}, item), {}, _defineProperty({}, field, value)) : item;
+        return i === index ? _objectSpread(_objectSpread({}, item), patch) : item;
       });
       setAttributes({
         items: newItems
@@ -137,12 +142,15 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         "data-imagesize": item.imageSize
       }, item.imgSrc && /*#__PURE__*/React.createElement("img", {
         src: item.imgSrc,
-        alt: ""
+        alt: item.alt || ''
       })), /*#__PURE__*/React.createElement("div", {
         className: "img_upload"
       }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
         onSelect: function onSelect(media) {
-          return updateItem(index, 'imgSrc', media.url);
+          return updateItemMulti(index, {
+            imgSrc: media.url,
+            alt: media.alt || ''
+          });
         },
         allowedTypes: ['image'],
         render: function render(_ref) {
@@ -160,7 +168,17 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
             }
           }, "\u753B\u50CF\u3092\u524A\u9664"));
         }
-      })), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
+      })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+        label: "\u753B\u50CF\u306E\u8AAC\u660E\uFF08alt\uFF09",
+        help: "\u76EE\u306E\u898B\u3048\u306A\u3044\u65B9\u3084\u691C\u7D22\u30A8\u30F3\u30B8\u30F3\u306B\u3001\u3053\u306E\u753B\u50CF\u304C\u4F55\u304B\u3092\u4F1D\u3048\u308B\u6587\u3067\u3059\u3002\u98FE\u308A\u306E\u30A2\u30A4\u30B3\u30F3\u306A\u3089\u7A7A\u306E\u307E\u307E\u3067\u69CB\u3044\u307E\u305B\u3093",
+        value: item.alt || '',
+        onChange: function onChange(v) {
+          return updateItem(index, 'alt', v);
+        },
+        style: {
+          marginTop: '8px'
+        }
+      }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
         tagName: "p",
         value: item.text,
         onChange: function onChange(val) {
@@ -203,7 +221,7 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
         "data-imagesize": item.imageSize
       }, item.imgSrc && /*#__PURE__*/React.createElement("img", {
         src: item.imgSrc,
-        alt: ""
+        alt: item.alt || ''
       })), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
         tagName: "p",
         value: item.text
@@ -284,7 +302,7 @@ module.exports = window["wp"]["element"];
   \**********************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-solution-2","version":"1.0.0","title":"ソリューション 02","category":"lw-content","icon":"lightbulb","aiHint":{"description":"ソリューションカード。タイトル+画像+テキストの配列。課題解決の提案に","excludeFromAutoSelect":false,"contentAttributes":["title","items"],"imageAttributes":[]},"supports":{"anchor":true},"attributes":{"blockId":{"type":"string"},"title":{"type":"string","default":"このな事が解決できます","source":"html","selector":".paid-block-solution-2_inner > .ttl"},"colorMain":{"type":"string","default":"var(--color-main)"},"items":{"type":"array","source":"query","selector":".paid-block-solution-2_inner .list li","query":{"imgSrc":{"type":"string","source":"attribute","selector":"img","attribute":"src"},"text":{"type":"string","source":"html","selector":"p"},"imageSize":{"type":"string","source":"attribute","selector":".img_wrap","attribute":"data-imagesize"}},"default":[{"imgSrc":"https://lite-word.com/sample_img/icon/people_1.svg","text":"テキストテキストテキストテキストテキス","imageSize":"icon"},{"imgSrc":"https://lite-word.com/sample_img/icon/en_5.svg","text":"テキストテキストテキストテキストテキスト","imageSize":"icon"},{"imgSrc":"https://lite-word.com/sample_img/icon/ambulance_1.svg","text":"テキストテキストテキストテキストテキスト","imageSize":"icon"}]}},"editorScript":"file:./paid-block-solution-2.js","no":2}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-solution-2","version":"1.0.0","title":"ソリューション 02","category":"lw-content","icon":"lightbulb","aiHint":{"description":"ソリューションカード。タイトル+画像+テキストの配列。課題解決の提案に","excludeFromAutoSelect":false,"contentAttributes":["title","items"],"imageAttributes":["items.imgSrc"]},"supports":{"anchor":true},"attributes":{"blockId":{"type":"string"},"title":{"type":"string","default":"このな事が解決できます","source":"html","selector":".paid-block-solution-2_inner > .ttl"},"colorMain":{"type":"string","default":"var(--color-main)"},"items":{"type":"array","source":"query","selector":".paid-block-solution-2_inner .list li","query":{"imgSrc":{"type":"string","source":"attribute","selector":"img","attribute":"src"},"alt":{"type":"string","source":"attribute","selector":"img","attribute":"alt","default":""},"text":{"type":"string","source":"html","selector":"p"},"imageSize":{"type":"string","source":"attribute","selector":".img_wrap","attribute":"data-imagesize"}},"default":[{"imgSrc":"https://lite-word.com/sample_img/icon/people_1.svg","text":"テキストテキストテキストテキストテキス","imageSize":"icon"},{"imgSrc":"https://lite-word.com/sample_img/icon/en_5.svg","text":"テキストテキストテキストテキストテキスト","imageSize":"icon"},{"imgSrc":"https://lite-word.com/sample_img/icon/ambulance_1.svg","text":"テキストテキストテキストテキストテキスト","imageSize":"icon"}]}},"editorScript":"file:./paid-block-solution-2.js","no":2}');
 
 /***/ })
 

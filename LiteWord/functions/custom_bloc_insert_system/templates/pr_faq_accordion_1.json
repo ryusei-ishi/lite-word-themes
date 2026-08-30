@@ -1,0 +1,101 @@
+{
+  "title": "よくある質問（開閉式・8問）",
+  "description": "【型B：説明が主役】見出し＋ひとこと＋押すと開く質問8件＋問い合わせボタン。質問が多くてもページが縦に伸びません。予約・持ち物・駐車場・領収書など、お店やサービスに実際によく届くご質問を集めた形です。全部読ませたい少数のご質問には「よくある質問（5件・開閉なし）」のほうが向きます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "よくある質問",
+        "subTitle": "FAQ",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "気になるご質問を押すと、答えが開きます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-qa-1",
+      "attributes": {
+        "contents": [
+          {
+            "text_q": "予約は必要ですか。",
+            "text_a": "ご予約をおすすめします。空いていれば当日でもご案内できますが、お待たせすることがあります。前日までにご連絡いただけると確実です。"
+          },
+          {
+            "text_q": "当日の持ち物はありますか。",
+            "text_a": "特にありません。ご予約の内容によって必要なものがある場合は、前日までにこちらからご連絡します。"
+          },
+          {
+            "text_q": "時間はどのくらいですか。",
+            "text_a": "内容によりますが、はじめての方はご説明の時間を含めて60分ほどみていただいています。お急ぎのご事情があれば、ご予約のときにお伝えください。"
+          },
+          {
+            "text_q": "子ども連れでも大丈夫ですか。",
+            "text_a": "大丈夫です。お子さま連れの方も多くいらっしゃいます。ベビーカーのままお入りいただけます。"
+          },
+          {
+            "text_q": "駐車場はありますか。",
+            "text_a": "ございます。満車のときは近くのコインパーキングをご案内しますので、到着前にお電話ください。"
+          },
+          {
+            "text_q": "予約の変更はできますか。",
+            "text_a": "できます。キャンセルも同じで、前日までにご連絡いただければ費用はかかりません。当日のご連絡についての決まりは、ご予約のときにご説明します。"
+          },
+          {
+            "text_q": "領収書はもらえますか。",
+            "text_a": "発行します。宛名と但し書きのご希望があれば、その場でお申し付けください。後日の発行も承ります。"
+          },
+          {
+            "text_q": "電話がつながらないのですが。",
+            "text_a": "対応中で出られないことがあります。お問い合わせフォームからご連絡いただければこちらから折り返しますので、そちらもご利用ください。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "ここに無いご質問も、遠慮なくお尋ねください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "お問い合わせはこちら",
+        "textSub": "＼ 小さな疑問でも大丈夫です ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

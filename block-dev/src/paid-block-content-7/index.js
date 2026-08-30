@@ -18,6 +18,7 @@ import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromItem, lwLinkToItem, lwLinkDataPropsFromItem } from '../link-picker.js';
 
 /* -------------------------------------------------- */
 /* 共通オプション */
@@ -53,8 +54,10 @@ registerBlockType(metadata.name, {
         /* ---- リスト操作 ---- */
         const addContent = () => setAttributes({ contents: [...contents, { text: '新しいテキスト' }] });
         const removeContent = (i) => setAttributes({ contents: contents.filter((_, idx) => idx !== i) });
-        const updateContent = (i, key, val) => {
-            const arr = contents.map((item, idx) => idx === i ? { ...item, [key]: val } : item);
+        const updateContent = (i, key, val) => updateContentMulti(i, { [key]: val });
+        /* 画像を選び直したときに URL と alt をまとめて入れ替えるため、複数キー版を用意する */
+        const updateContentMulti = (i, patch) => {
+            const arr = contents.map((item, idx) => idx === i ? { ...item, ...patch } : item);
             setAttributes({ contents: arr });
         };
 
@@ -129,7 +132,7 @@ registerBlockType(metadata.name, {
                                             borderStyle : borderSize > 0 ? 'solid' : 'none',
                                         }}
                                     >
-                                        <img src={c.image} alt="" />
+                                        <img src={c.image} alt={c.alt || ''} />
 
                                         <RichText
                                             tagName={titleTag}
@@ -153,7 +156,7 @@ registerBlockType(metadata.name, {
 
                                 {/* 画像選択 */}
                                 <MediaUpload
-                                    onSelect={(m) => updateContent(i, 'image', m.url)}
+                                    onSelect={(m) => updateContentMulti(i, { image: m.url, alt: m.alt || '' })}
                                     allowedTypes={['image']}
                                     render={({ open }) => (
                                         <Button onClick={open} isSecondary>{c.image ? '画像を変更' : '画像を選択'}</Button>
@@ -161,6 +164,17 @@ registerBlockType(metadata.name, {
                                 />
                                 {c.image && (
                                     <Button isDestructive style={{ marginLeft: '8px' }} onClick={() => updateContent(i, 'image', '')}>画像を削除</Button>
+                                )}
+
+                                {/* 画像の説明（alt） */}
+                                {c.image && (
+                                    <TextControl
+                                        label="画像の説明（alt）"
+                                        help="目の見えない方や検索エンジンに、この画像が何かを伝える文です。例：教室で問題を解く生徒"
+                                        value={c.alt || ''}
+                                        onChange={(v) => updateContent(i, 'alt', v)}
+                                        style={{ marginTop: '12px', maxWidth: '400px' }}
+                                    />
                                 )}
 
                                 {/* 説明文 */}
@@ -185,6 +199,10 @@ registerBlockType(metadata.name, {
                                     onChange={(v) => updateContent(i, 'url', v)}
                                     placeholder="https://example.com/"
                                     style={{ marginTop: '12px', maxWidth: '300px' }}
+                                />
+                                <LinkPicker
+                                    link={lwLinkFromItem(c, 'url')}
+                                    onChange={(patch) => updateContentMulti(i, lwLinkToItem(patch, 'url'))}
                                 />
 
                                 <Button className="paid-block-content-7__remove_btn" isDestructive onClick={() => removeContent(i)}>削除</Button>
@@ -223,7 +241,7 @@ registerBlockType(metadata.name, {
                 <ul className={`paid-block-content-7__inner ${columnClass}`.trim()}>
                     {contents.map((c, i) => {
                         const Tag   = c.url ? 'a' : 'div';
-                        const props = c.url ? { href: c.url, className: 'link' } : { className: 'link' };
+                        const props = c.url ? { href: c.url, 'data-lw-link-type': lwLinkDataPropsFromItem(c, 'url').linkType, 'data-lw-link-id': lwLinkDataPropsFromItem(c, 'url').linkId, className: 'link' } : { className: 'link' };
 
                         return (
                             <li key={i} className="paid-block-content-7__li">
@@ -241,7 +259,7 @@ registerBlockType(metadata.name, {
                                                     borderStyle : borderSize > 0 ? 'solid' : 'none',
                                                 }}
                                             >
-                                                <img src={c.image} alt="" />
+                                                <img src={c.image} alt={c.alt || ''} />
                                                 <RichText.Content
                                                     tagName={titleTag}
                                                     className={`ttl ${titleFontSizeClass}`}

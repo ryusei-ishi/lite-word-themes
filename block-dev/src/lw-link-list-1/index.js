@@ -30,6 +30,7 @@ import {
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromItem, lwLinkToItem, lwLinkDataPropsFromItem } from '../link-picker.js';
 
 /* ─────────────────────────  定数  ───────────────────────── */
 const fontOptions       = fontOptionsArr();
@@ -64,6 +65,11 @@ registerBlockType( metadata.name, {
 		const updateContent = ( i, key, val ) => {
 			const arr = contents.map( ( item, idx ) => idx === i ? { ...item, [ key ]: val } : item );
 			setAttributes( { contents: arr } );
+		};
+
+		/* リンク設定のように複数のキーをまとめて入れ替える用 */
+		const updateContentMulti = (i, patch) => {
+			setAttributes({ contents: contents.map((it, k) => k === i ? { ...it, ...patch } : it) });
 		};
 
 		/* 順番入れ替え関数 */
@@ -321,6 +327,10 @@ registerBlockType( metadata.name, {
 									onChange={ ( e ) => updateContent( idx, 'link', e.target.value ) }
 									placeholder="リンクを入力"
 								/>
+								<LinkPicker
+								    link={lwLinkFromItem(content, 'link')}
+								    onChange={(patch) => updateContentMulti(idx, lwLinkToItem(patch, 'link'))}
+								/>
 
 								<SelectControl
 									label="アイコンの選択"
@@ -374,6 +384,8 @@ registerBlockType( metadata.name, {
 						<li className="lw-link-list-1__li" key={ idx }>
 							<a
 								href={ content.link }
+								data-lw-link-type={lwLinkDataPropsFromItem(content, 'link').linkType}
+								data-lw-link-id={lwLinkDataPropsFromItem(content, 'link').linkId}
 								className="lw-link-list-1__link"
 								style={ { borderRadius: `${ ListBorderRadius }px`, border: `${ ListBorderSize }px solid ${ colorLiBorder }` } }
 								target="_blank"

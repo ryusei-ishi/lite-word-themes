@@ -14,6 +14,10 @@ import { useEffect } from '@wordpress/element';
 
 import './style.scss';
 import metadata from './block.json';
+import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+
+/* リンク先の指定（共通部品）で使う、配列の要素の中のキー名 */
+const LINK_KEYS = { url: 'linkUrl', type: 'linkType', page: 'pageId', category: 'categoryId' };
 
 registerBlockType( metadata.name, {
 
@@ -45,6 +49,11 @@ registerBlockType( metadata.name, {
                 i === index ? { ...img, [ key ]: value } : img
             );
             setAttributes( { images: next } );
+        };
+
+        /* リンク設定のように複数のキーをまとめて入れ替える用 */
+        const updateImageMulti = (i, patch) => {
+            setAttributes({ images: images.map((it, k) => k === i ? { ...it, ...patch } : it) });
         };
 
         const addImage = () => {
@@ -255,6 +264,10 @@ registerBlockType( metadata.name, {
                                     value={ img.linkUrl }
                                     onChange={ ( v ) => updateImage( index, 'linkUrl', v ) }
                                 />
+                                <LinkPicker
+                                    link={lwLinkFromAttrs(img, LINK_KEYS)}
+                                    onChange={(patch) => updateImageMulti(index, lwLinkToAttrs(patch, LINK_KEYS))}
+                                />
 
                                 <Button
                                     isDestructive
@@ -345,7 +358,7 @@ registerBlockType( metadata.name, {
                         return (
                             <div className="lw-pr-image-1__item" key={ i }>
                                 { img.linkUrl ? (
-                                    <a href={ img.linkUrl } target="_blank" rel="noopener noreferrer">
+                                    <a href={ img.linkUrl } data-lw-link-type={lwLinkDataPropsFromAttrs(img, LINK_KEYS).linkType} data-lw-link-id={lwLinkDataPropsFromAttrs(img, LINK_KEYS).linkId} target="_blank" rel="noopener noreferrer">
                                         { imgTag }
                                     </a>
                                 ) : imgTag }

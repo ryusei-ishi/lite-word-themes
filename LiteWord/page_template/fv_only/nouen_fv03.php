@@ -1,0 +1,3 @@
+<!-- wp:wdl/fv-3 {"imagePc":"https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/nouen_1.webp","imageSp":"https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/nouen_1.webp","altText":"朝の畑"} -->
+<div class="wp-block-wdl-fv-3 fv-3"><h1><picture class="image"><source srcSet="https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/nouen_1.webp" media="(max-width: 800px)"/><source srcSet="https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/nouen_1.webp" media="(min-width: 801px)"/><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/nouen_1.webp" alt="朝の畑" loading="eager" fetchpriority="high"/></picture></h1></div>
+<!-- /wp:wdl/fv-3 -->

@@ -12,7 +12,10 @@
 		"excludeFromAutoSelect": true,
 		"excludeReason": "テキスト属性がほぼなく画像URLの配列のみ。AI生成に不向き",
 		"contentAttributes": [],
-		"imageAttributes": ["slides"]
+		"imageAttributes": [
+			"slides"
+		],
+		"notes": "blockId は空のままでよい（2026-08-26 にブロック側を直した。空なら読み込み時に自分で id を振って初期化する）。それ以前は空だと init-hide が外れずフロントで真っ白になっていた。 このブロックは画像だけのスライダーで文字を持たない。見出しを出したいときは paid-block-fv-11 を使う。"
 	},
 	"supports": {
 		"anchor": true
@@ -27,13 +30,13 @@
 				{
 					"pcImgUrl": "https://lite-word.com/sample_img/slide/1.webp",
 					"spImgUrl": "",
-					"altText": "スライド1のalt",
+					"altText": "",
 					"linkUrl": ""
 				},
 				{
 					"pcImgUrl": "https://lite-word.com/sample_img/slide/2.webp",
 					"spImgUrl": "",
-					"altText": "スライド2のalt",
+					"altText": "",
 					"linkUrl": ""
 				}
 			]
