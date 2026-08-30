@@ -26,6 +26,9 @@
 	/** `:red[…]` を拾う。中身に `]` は入れられない（入れ子は受け付けない） */
 	var RE = /:([a-z]+)\[([^\]]*)\]/g;
 
+	/** 中身をそのまま見せるブロック。ここは変換しない */
+	var SKIP_BLOCKS = [ 'core/code', 'core/preformatted', 'core/html' ];
+
 	/**
 	 * 文字列1つぶんを変換する
 	 *
@@ -33,10 +36,20 @@
 	 * @return {string}
 	 */
 	function apply( text ) {
-		return String( text ).replace( RE, function ( whole, name, inner ) {
-			var tpl = FORMATS[ name ];
-			return tpl ? tpl.replace( '$1', inner ) : whole;
-		} );
+		// 🚨 <code> の中は変換しない。記事の中で「:red[…] と書きます」と
+		//    説明するとき、その説明文まで色が付いてしまうため。
+		return String( text )
+			.split( /(<code[\s\S]*?<\/code>)/i )
+			.map( function ( part ) {
+				if ( /^<code/i.test( part ) ) {
+					return part;
+				}
+				return part.replace( RE, function ( whole, name, inner ) {
+					var tpl = FORMATS[ name ];
+					return tpl ? tpl.replace( '$1', inner ) : whole;
+				} );
+			} )
+			.join( '' );
 	}
 
 	/**
@@ -97,6 +110,10 @@
 	function applyToBlocks( blocks ) {
 		( blocks || [] ).forEach( function ( b ) {
 			if ( ! b || ! b.attributes ) {
+				return;
+			}
+			// 🚨 コードを見せるためのブロックには触らない
+			if ( SKIP_BLOCKS.indexOf( b.name ) !== -1 ) {
 				return;
 			}
 			Object.keys( b.attributes ).forEach( function ( k ) {
