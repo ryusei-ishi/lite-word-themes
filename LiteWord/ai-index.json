@@ -92,9 +92,19 @@
 		"dashboard": {
 			"description": "ダッシュボードトップ＋カスタムブロック挿入UI。サイト制作ウィザード・ページツリー・タスク管理・SEOチェック・ブロック挿入パネル。",
 			"location": "functions/dashboard_top/dashboard-ai-hints.json"
+		},
+		"markdownPaste": {
+			"description": "マークダウンを貼って記事にする機能。投稿・固定ページの編集画面にサイドバー「マークダウンを貼る」を出し、フロントマターと拡張記法（:::）を LiteWord のブロックに変換する。変換はすべてブラウザ内で完結する。",
+			"location": "functions/lw_markdown_paste/",
+			"notes": "🚨 サーバーへ完成HTMLを送らないのは、KSES が <picture>/<svg>/<iframe> を削りバックスラッシュが1段剥がれるため（skills/sample-page-factory/SKILL.md の5つの罠）。素のマークダウンは WordPress 同梱の変換器 wp.blocks.pasteHandler に渡すので、記法の解釈がエディタの貼り付けと必ず一致する。記法を増やすときは directives.js の KNOWN と blocks.js の HANDLERS と skills/blog-writer/SKILL.md の3つを必ず同時に直す。"
 		}
 	},
 	"skills": {
+		"blogWriter": {
+			"description": "LiteWord のブログ記事をマークダウンで書くための書式。フロントマター（title/category/slug/description/tags/eyecatch）＋標準マークダウン＋7つの拡張記法（:::box / :::check / :::steps / :::qa / :::voice / :::button / :::cta）。この形で書いた文章を投稿編集画面の「マークダウンを貼る」に貼ると、LiteWord のブロックに変換されて記事がほぼ完成する。",
+			"location": "skills/blog-writer/SKILL.md",
+			"notes": "🚨 利用者が ChatGPT / Claude にそのまま渡す想定の配布物。カテゴリー・タグ・アイキャッチは「無ければ作らない」仕様。書式を変えるときは functions/lw_markdown_paste/ の変換側と必ず両方直すこと。"
+		},
 		"samplePageFactory": {
 			"description": "AI（MCP / REST API / Claude in Chrome）から LiteWord のページを作る手順書。既存ページを雛形にテキストと画像を差し替えて量産する。業種別サンプルページ・実案件のページ制作の両方で使う。",
 			"location": "skills/sample-page-factory/SKILL.md",

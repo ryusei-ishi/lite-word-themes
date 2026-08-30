@@ -2658,7 +2658,7 @@ post_style
 .wp-block-post-content .wp-block-table,
 .lw_custom_block_content .wp-block-table {
   max-width: 100%;
-  overflow: scroll;
+  overflow-x: auto;
   border-bottom: none;
   letter-spacing: 0;
   line-height: 1.4em;

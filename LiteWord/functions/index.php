@@ -116,6 +116,10 @@ if ( is_admin() || ( defined( 'WP_CLI' ) && WP_CLI ) ) {
 if ( is_admin() ) {
     get_template_part('./functions/lw_broken_link_check/index');
 }
+// マークダウンを貼って記事にする（投稿・固定ページの編集画面のみ）
+if ( is_admin() ) {
+    get_template_part('./functions/lw_markdown_paste/index');
+}
 $notification_paid_features = Lw_theme_mod_set("notification_paid_features", "on");
 if($notification_paid_features == "on"){
     get_template_part('./functions/lw_template_management/lw_check_trial_popup');//無料体験
