@@ -1449,3 +1449,120 @@
     font-size: 11px;
     color: #667eea;
 }
+
+/* ===== セクションテンプレートの絞り込み（2026-08-30 追加） =====
+   ヘッダー右のキーワード入力＋その下の帯（使いどころ／使えるプラン）。
+   件数は「いま選んでいる他の条件」を反映した数なので、押しても0件のボタンは薄く出して押せなくする。 */
+.lw-sec-search {
+    width: 280px;
+    max-width: 40vw;
+    padding: 7px 12px;
+    border: 1px solid #d3d9e3;
+    border-radius: 18px;
+    background: #fff;
+    font-size: 13px;
+    line-height: 1.4;
+    color: #1e3a5f;
+    box-shadow: none;
+}
+
+.lw-sec-search:focus {
+    border-color: #667eea;
+    outline: 2px solid rgba(102, 126, 234, 0.25);
+    outline-offset: 0;
+}
+
+.lw-sec-search::placeholder {
+    color: #9aa4b5;
+}
+
+.lw-sec-filter {
+    padding: 12px 24px 14px;
+    background: #fff;
+    border-bottom: 1px solid #e0e6ed;
+    flex-shrink: 0;
+}
+
+.lw-sec-filter-row {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 8px;
+}
+
+.lw-sec-filter-row + .lw-sec-filter-row {
+    margin-top: 8px;
+}
+
+.lw-sec-filter-label {
+    min-width: 82px;
+    font-size: 12px;
+    font-weight: 700;
+    color: #7a869a;
+}
+
+.lw-sec-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    padding: 5px 12px;
+    background: #f2f4f8;
+    border: 1px solid #e0e6ed;
+    border-radius: 16px;
+    color: #40506b;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1.4;
+    cursor: pointer;
+    transition: background 0.15s, color 0.15s, border-color 0.15s;
+}
+
+.lw-sec-chip:hover {
+    background: #e7ebf5;
+    color: #1e3a5f;
+}
+
+.lw-sec-chip.is-on {
+    background: #667eea;
+    border-color: #667eea;
+    color: #fff;
+}
+
+.lw-sec-chip.is-empty {
+    opacity: 0.4;
+    cursor: default;
+}
+
+.lw-sec-chip em {
+    font-style: normal;
+    font-size: 11px;
+    font-weight: 700;
+    color: inherit;
+    opacity: 0.75;
+}
+
+.lw-sec-clear {
+    margin-left: auto;
+    padding: 5px 10px;
+    background: none;
+    border: none;
+    color: #667eea;
+    font-size: 12.5px;
+    font-weight: 600;
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+.lw-sec-clear:hover {
+    color: #1e3a5f;
+}
+
+@media (max-width: 900px) {
+    .lw-sec-search {
+        width: 200px;
+    }
+
+    .lw-sec-filter-label {
+        min-width: 100%;
+    }
+}

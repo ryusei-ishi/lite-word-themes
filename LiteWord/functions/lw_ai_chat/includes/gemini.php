@@ -173,10 +173,47 @@ function lw_ai_chat_build_gemini_contents($history, $question) {
  */
 function lw_ai_chat_get_category_config($category) {
     $categories = [
+
+        'blog' => [
+
+            'label' => 'ブログ・記事',
+
+            'expert' => 'ブログ（投稿）の設定・デザインの専門家',
+
+            'slugs' => [
+
+                'use-case-blog',
+
+                'single-post-settings',
+
+                'archive-settings',
+
+                'category-settings',
+
+                'post-editor',
+
+                'posts-news',
+
+                'colors-fonts',
+
+                'blog-writing',
+
+                'posts-vs-pages',
+
+                'categories-tags',
+
+                'featured-image',
+
+                'draft-schedule',
+
+            ],
+
+        ],
         'design' => [
             'label' => 'デザイン・見た目',
             'expert' => 'デザイン・レイアウトの専門家',
             'slugs' => [
+                'header',
                 'header-overview', 'header-pattern', 'header-logo', 'header-menu',
                 'header-cta', 'header-phone-cta', 'header-sticky', 'header-info-bar',
                 'header-pickup-menu', 'header-page-override', 'footer-settings',
@@ -188,7 +225,7 @@ function lw_ai_chat_get_category_config($category) {
             'expert' => 'ブロック操作・ページ構築の専門家',
             'slugs' => [
                 'getting-started-block', 'blocks-reference', 'firstview',
-                'buttons-cta', 'lists', 'posts-news', 'content-media',
+                'buttons-cta', 'lists', 'posts-news', 'content',
                 'company-profile', 'other-blocks', 'heading-table-utility',
                 'common-sidebar', 'inline-styling', 'use-case-top-page', 'use-case-lp',
             ],
@@ -197,9 +234,10 @@ function lw_ai_chat_get_category_config($category) {
             'label' => '設定・機能',
             'expert' => 'サイト設定・拡張機能の専門家',
             'slugs' => [
+                'permalink-settings',
                 'seo', 'analytics', 'mail-form', 'my-parts', 'toggle-settings',
                 'redirect', 'membership', 'countdown', 'code-injection', 'code-page',
-                'page-editor', 'post-editor', 'ai-page-generator',
+                'page-editor', 'post-editor', 'ai-system', 'single-post-settings',
                 'category-settings', 'widgets', 'custom-widgets', 'page-templates',
                 'page-template-popup', 'archive-settings',
             ],
@@ -208,6 +246,7 @@ function lw_ai_chat_get_category_config($category) {
             'label' => 'はじめて・基本',
             'expert' => '初心者ガイドの専門家',
             'slugs' => [
+                'dashboard', 'ai-chat',
                 'getting-started', 'plans', 'activation', 'update-guide',
                 'troubleshooting', 'customization', 'user-profile',
             ],
@@ -392,6 +431,7 @@ function lw_ai_chat_build_system_prompt($manual_content) {
 - /manual/user-profile/ — ユーザープロフィール管理
 - /manual/use-case-top-page/ — トップページの作り方ガイド
 - /manual/use-case-lp/ — LPの作り方ガイド
+- /manual/use-case-blog/ — ブログページの作り方ガイド
 - /manual/permalink-settings/ — パーマリンク設定
 - /manual/responsive-guide/ — レスポンシブ表示ガイド
 

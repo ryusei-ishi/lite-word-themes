@@ -1,0 +1,245 @@
+{
+  "_note": "セクションテンプレートの分類と、題名が入っていない旧テンプレの日本語名。正本は scripts/section-templates/gallery/meta.js。build-theme-meta.js で書き出す",
+  "groups": [
+    {
+      "key": "intro",
+      "name": "つかみ・共感",
+      "note": "ページの上のほうで「自分のことだ」と思ってもらう段"
+    },
+    {
+      "key": "service",
+      "name": "サービス・商品",
+      "note": "何を売っているか・どんな見た目かを見せる段"
+    },
+    {
+      "key": "price",
+      "name": "料金・メニュー",
+      "note": "いくらかかるかを迷わせずに出す段"
+    },
+    {
+      "key": "trust",
+      "name": "安心材料",
+      "note": "声・Q&A・人・流れ。決める前の不安を消す段"
+    },
+    {
+      "key": "info",
+      "name": "店舗・会社の情報",
+      "note": "概要・営業時間・場所・対応エリア・採用"
+    },
+    {
+      "key": "contact",
+      "name": "お問い合わせ",
+      "note": "受け皿と、そこへ送る導線"
+    },
+    {
+      "key": "old",
+      "name": "前からあるテンプレート",
+      "note": "今回の作り直しより前からあるもの。題名も説明文もまだ入っていない"
+    }
+  ],
+  "map": {
+    "content_1": {
+      "cat": "old",
+      "label": "画像と文章の2カラム（見出し・本文・ボタン）"
+    },
+    "news_1": {
+      "cat": "old",
+      "label": "見出し＋お知らせ一覧"
+    },
+    "pr_access_map_1": {
+      "cat": "info"
+    },
+    "pr_area_1": {
+      "cat": "info"
+    },
+    "pr_before_after_1": {
+      "cat": "service"
+    },
+    "pr_business_hours_1": {
+      "cat": "info"
+    },
+    "pr_campaign_1": {
+      "cat": "price"
+    },
+    "pr_company_1": {
+      "cat": "info"
+    },
+    "pr_concept_1": {
+      "cat": "intro"
+    },
+    "pr_contact_form_1": {
+      "cat": "contact"
+    },
+    "pr_content_1": {
+      "cat": "old",
+      "label": "見出し＋ステップ6"
+    },
+    "pr_content_2": {
+      "cat": "old",
+      "label": "帯背景＋説明文＋画像と文章の2カラム"
+    },
+    "pr_cta_choice_1": {
+      "cat": "contact"
+    },
+    "pr_cta_contact_1": {
+      "cat": "contact"
+    },
+    "pr_faq_1": {
+      "cat": "trust"
+    },
+    "pr_faq_accordion_1": {
+      "cat": "trust"
+    },
+    "pr_first_visit_1": {
+      "cat": "trust"
+    },
+    "pr_first_visit_2": {
+      "cat": "trust"
+    },
+    "pr_first_visit_3": {
+      "cat": "trust"
+    },
+    "pr_flow_photo_1": {
+      "cat": "trust"
+    },
+    "pr_flow_step_1": {
+      "cat": "trust"
+    },
+    "pr_for_you_1": {
+      "cat": "intro"
+    },
+    "pr_fv_1": {
+      "cat": "old",
+      "label": "帯の大見出し＋ボタン（ページの冒頭に）"
+    },
+    "pr_gallery_1": {
+      "cat": "service"
+    },
+    "pr_gallery_slider_1": {
+      "cat": "service"
+    },
+    "pr_guide_1": {
+      "cat": "trust"
+    },
+    "pr_history_1": {
+      "cat": "info"
+    },
+    "pr_license_1": {
+      "cat": "trust"
+    },
+    "pr_menu_price_1": {
+      "cat": "price"
+    },
+    "pr_message_1": {
+      "cat": "intro"
+    },
+    "pr_message_photo_1": {
+      "cat": "intro"
+    },
+    "pr_news_1": {
+      "cat": "info"
+    },
+    "pr_payment_1": {
+      "cat": "price"
+    },
+    "pr_price_plan_1": {
+      "cat": "price"
+    },
+    "pr_privacy_1": {
+      "cat": "info"
+    },
+    "pr_reason_1": {
+      "cat": "intro"
+    },
+    "pr_recruit_1": {
+      "cat": "info"
+    },
+    "pr_service_intro_1": {
+      "cat": "service"
+    },
+    "pr_service_nav_1": {
+      "cat": "service"
+    },
+    "pr_service_slider_1": {
+      "cat": "service"
+    },
+    "pr_sns_links_1": {
+      "cat": "contact"
+    },
+    "pr_staff_1": {
+      "cat": "old",
+      "label": "帯背景＋スタッフ3人（写真と紹介文）"
+    },
+    "pr_staff_intro_1": {
+      "cat": "trust"
+    },
+    "pr_title_content_1": {
+      "cat": "old",
+      "label": "見出し＋内容カード3件"
+    },
+    "pr_title_history_1": {
+      "cat": "old",
+      "label": "見出し＋沿革3件"
+    },
+    "pr_title_list_1": {
+      "cat": "old",
+      "label": "見出し＋リスト（型3）"
+    },
+    "pr_title_list_2": {
+      "cat": "old",
+      "label": "見出し＋リスト（型1）"
+    },
+    "pr_title_list_4": {
+      "cat": "old",
+      "label": "見出し＋リスト（型4）"
+    },
+    "pr_title_p_1": {
+      "cat": "old",
+      "label": "見出し＋本文だけ"
+    },
+    "pr_title_p_content_image_text_1": {
+      "cat": "old",
+      "label": "見出し＋画像と文章1件"
+    },
+    "pr_title_p_img_1": {
+      "cat": "old",
+      "label": "見出し＋画像ギャラリー"
+    },
+    "pr_title_p_img_2": {
+      "cat": "old",
+      "label": "見出し＋お悩み解決（solution）"
+    },
+    "pr_title_step_1": {
+      "cat": "old",
+      "label": "見出し＋ステップ2"
+    },
+    "pr_title_step_2": {
+      "cat": "old",
+      "label": "見出し＋ステップ8（画像つき）"
+    },
+    "pr_title_table_map_1": {
+      "cat": "old",
+      "label": "見出し＋会社概要の表＋地図"
+    },
+    "pr_voice_1": {
+      "cat": "old",
+      "label": "帯背景＋お客様の声3件"
+    },
+    "pr_voice_card_1": {
+      "cat": "trust"
+    },
+    "pr_voice_comment_1": {
+      "cat": "trust"
+    },
+    "pr_works_grid_1": {
+      "cat": "service"
+    },
+    "pr_worry_1": {
+      "cat": "intro"
+    },
+    "qa_1": {
+      "cat": "old",
+      "label": "帯背景＋よくある質問＋ボタン"
+    }
+  }
+}

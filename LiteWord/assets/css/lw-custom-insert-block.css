@@ -6,7 +6,8 @@
 #lw-heading-insert-block,
 #lw-set-pattern-insert-block {
   position: fixed;
-  top: 70px;
+  /* 管理バーの高さ + エディタヘッダー64px + 4px。管理バーが無い環境では 0+68px で合う（2026-08-30） */
+  top: calc(var(--wp-admin--admin-bar--height, 0px) + 68px);
   left: 165px;
   z-index: 99999;
   padding: 4px 16px 4px 12px;

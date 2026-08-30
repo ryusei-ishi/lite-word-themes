@@ -276,6 +276,111 @@ class LW_Custom_Block_Insert_System {
     }
 
     /**
+     * ブロックID => 区分（block=無料 / pr_block=プレミアム / paid_block=買切り）の対応表
+     *
+     * 正本は lw_block_arr()（custom_post/lw_block_arr.php）。
+     * 1リクエストに1回だけ作る（配列の組み立てと get_option が走るため）。
+     */
+    private function get_block_tier_map() {
+        static $map = null;
+        if (null !== $map) {
+            return $map;
+        }
+        $map = array();
+        if (function_exists('lw_block_arr')) {
+            foreach (lw_block_arr() as $block) {
+                if (isset($block['id'], $block['type'])) {
+                    $map[$block['id']] = $block['type'];
+                }
+            }
+        }
+        return $map;
+    }
+
+    /**
+     * ブロック1つが「無料プランのまま使えるか」
+     *
+     * 判定は2段。
+     *   ① lw_block_arr() に載っていれば type が 'block' のときだけ無料
+     *   ② 載っていなければ名前で当てる（paid-block-* と lw-pr-* は無料ではない）
+     * WordPress 本体のブロック（core/*）は常に無料。
+     */
+    private function is_free_block($name) {
+        if (!is_string($name) || '' === $name) {
+            return true;
+        }
+        if (0 === strpos($name, 'core/')) {
+            return true;
+        }
+        $id = preg_replace('#^wdl/#', '', $name);
+
+        $map = $this->get_block_tier_map();
+        if (isset($map[$id])) {
+            return 'block' === $map[$id];
+        }
+
+        if (0 === strpos($id, 'paid-block-')) {
+            return false;
+        }
+        if (0 === strpos($id, 'lw-pr-')) {
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * テンプレートの中のブロック名を innerBlocks まで全部集める
+     *
+     * 🚨 extract_block_names() は一覧表示用で **トップレベルしか見ない**。
+     *    プランの判定に使うと、囲みの中のプレミアムブロックを見落とす。
+     */
+    private function collect_block_names_recursive($data, &$names = array()) {
+        if (!is_array($data)) {
+            return $names;
+        }
+        if (isset($data['name'])) {
+            $data = array($data);
+        }
+        foreach ($data as $block) {
+            if (!is_array($block)) {
+                continue;
+            }
+            if (isset($block['name']) && is_string($block['name'])) {
+                $names[] = $block['name'];
+            }
+            if (isset($block['innerBlocks']) && is_array($block['innerBlocks'])) {
+                $this->collect_block_names_recursive($block['innerBlocks'], $names);
+            }
+        }
+        return $names;
+    }
+
+    /**
+     * セクションテンプレートの分類表を読む（templates-meta.json）
+     *
+     * 中身は groups（使いどころの束）と map（ファイル名 => cat / label）。
+     * 挿入画面の絞り込みに使う。無くても動く（分類なしで全件並ぶだけ）。
+     *
+     * 🚨 置き場は templates/ の外。中に置くと下の glob がテンプレートとして拾う。
+     */
+    private function get_templates_meta() {
+        static $meta = null;
+        if (null !== $meta) {
+            return $meta;
+        }
+        $meta = array('groups' => array(), 'map' => array());
+        $path = $this->base_path . 'templates-meta.json';
+        if (file_exists($path)) {
+            $decoded = json_decode(file_get_contents($path), true);
+            if (json_last_error() === JSON_ERROR_NONE && is_array($decoded)) {
+                $meta['groups'] = isset($decoded['groups']) && is_array($decoded['groups']) ? $decoded['groups'] : array();
+                $meta['map']    = isset($decoded['map']) && is_array($decoded['map']) ? $decoded['map'] : array();
+            }
+        }
+        return $meta;
+    }
+
+    /**
      * Get list of section templates
      */
     public function get_section_templates() {
@@ -285,6 +390,7 @@ class LW_Custom_Block_Insert_System {
             return rest_ensure_response(array());
         }
 
+        $meta  = $this->get_templates_meta();
         $files = glob($templates_dir . '*.json');
         $templates = array();
 
@@ -296,7 +402,20 @@ class LW_Custom_Block_Insert_System {
             if (json_last_error() === JSON_ERROR_NONE) {
                 // Check if new format (has 'blocks' key) or old format (array of blocks)
                 $blocks_data = isset($data['blocks']) ? $data['blocks'] : $data;
-                $title = isset($data['title']) ? $data['title'] : $this->format_template_name($filename);
+                /*
+                 * 題名の決め方は3段。
+                 *   ① テンプレJSONの title
+                 *   ② 分類表(templates-meta.json)の label ← 旧テンプレ20件はここで日本語名になる
+                 *   ③ ファイル名から機械的に作る（"Pr Title List 1"）
+                 */
+                $entry = isset($meta['map'][$filename]) ? $meta['map'][$filename] : array();
+                if (isset($data['title']) && '' !== $data['title']) {
+                    $title = $data['title'];
+                } elseif (isset($entry['label']) && '' !== $entry['label']) {
+                    $title = $entry['label'];
+                } else {
+                    $title = $this->format_template_name($filename);
+                }
                 $description = isset($data['description']) ? $data['description'] : '';
                 $preview_image = isset($data['previewImage']) ? $data['previewImage'] : '';
 
@@ -307,8 +426,54 @@ class LW_Custom_Block_Insert_System {
                     $webp_url = $this->base_url . 'templates/' . $filename . '.webp';
                 }
 
-                // pr_から始まるファイル名はプレミアム専用
-                $is_premium = strpos($filename, 'pr_') === 0;
+                /*
+                 * プランの判定は **中のブロック**で決める（2026-08-30）。
+                 *
+                 * 以前はファイル名が pr_ で始まるかどうかだけを見ていたが、それだと
+                 * 中身が無料ブロックだけのテンプレートまでプレミアム限定になっていた（実測10件）。
+                 * 1つでも無料でないブロックが入っていればプレミアム扱いにする。
+                 *
+                 * ブロックを1つも読めなかったとき（JSONが壊れている等）は、
+                 * 安全側に倒して従来どおりファイル名で決める。
+                 */
+                /* 🚨 参照渡しの引数に代入式を直接書かない（PHPの通知が出る）。必ず変数を用意して渡す */
+                $collected = array();
+                $all_block_names = $this->collect_block_names_recursive($blocks_data, $collected);
+                $not_free_blocks = array();
+                foreach (array_unique($all_block_names) as $block_name) {
+                    if (!$this->is_free_block($block_name)) {
+                        $not_free_blocks[] = preg_replace('#^wdl/#', '', $block_name);
+                    }
+                }
+                if (empty($all_block_names)) {
+                    $is_premium = strpos($filename, 'pr_') === 0;
+                } else {
+                    $is_premium = !empty($not_free_blocks);
+                }
+
+                /*
+                 * 🚨 いま無料で配っているものを取り上げない。
+                 *
+                 * content_1 は paid-block-image-1（有料）を含むので、素直に判定すると
+                 * プレミアム限定に変わってしまう。無料で配ってきた実績があるのでそのまま無料にする。
+                 * ※ 中の画像ブロックを無料のものに差し替えるまでの暫定。差し替えたらこの行を消す。
+                 */
+                $keep_free = array('content_1');
+                if ($is_premium && in_array($filename, $keep_free, true) && 0 !== strpos($filename, 'pr_')) {
+                    $is_premium = false;
+                }
+
+                /* 使いどころ（絞り込み用）。分類表に無ければ「その他」に落とす */
+                $cat = isset($entry['cat']) ? $entry['cat'] : '';
+                $cat_name = '';
+                $cat_order = 999;
+                foreach ($meta['groups'] as $i => $group) {
+                    if (isset($group['key']) && $group['key'] === $cat) {
+                        $cat_name = isset($group['name']) ? $group['name'] : '';
+                        $cat_order = $i;
+                        break;
+                    }
+                }
 
                 $template_info = array(
                     'filename' => $filename,
@@ -317,6 +482,11 @@ class LW_Custom_Block_Insert_System {
                     'previewImage' => $preview_image,
                     'previewImageUrl' => $webp_url,
                     'isPremium' => $is_premium,
+                    /* プレミアム扱いになっている理由（無料でないブロック）。無料化の検討に使う */
+                    'notFreeBlocks' => $not_free_blocks,
+                    'cat' => $cat,
+                    'catName' => $cat_name,
+                    'catOrder' => $cat_order,
                     'blockCount' => is_array($blocks_data) ? $this->count_blocks_recursive($blocks_data) : 1,
                     'blocks' => $this->extract_block_names($blocks_data),
                 );
@@ -324,6 +494,14 @@ class LW_Custom_Block_Insert_System {
                 $templates[] = $template_info;
             }
         }
+
+        /* 使いどころの順に並べる（同じ束の中は題名順）。挿入画面と見本集で並びをそろえるため */
+        usort($templates, function ($a, $b) {
+            if ($a['catOrder'] !== $b['catOrder']) {
+                return $a['catOrder'] - $b['catOrder'];
+            }
+            return strcmp($a['filename'], $b['filename']);
+        });
 
         return rest_ensure_response($templates);
     }

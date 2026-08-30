@@ -1388,6 +1388,63 @@
         var sectionLoading = _useStateSectionLoading[0];
         var setSectionLoading = _useStateSectionLoading[1];
 
+        // セクションテンプレートの絞り込み（キーワード / 使いどころ / プラン）
+        var _useSecQuery = useState('');
+        var secQuery = _useSecQuery[0];
+        var setSecQuery = _useSecQuery[1];
+
+        var _useSecCat = useState('');
+        var secCat = _useSecCat[0];
+        var setSecCat = _useSecCat[1];
+
+        var _useSecTier = useState('');
+        var secTier = _useSecTier[0];
+        var setSecTier = _useSecTier[1];
+
+        /**
+         * 1件が条件に当てはまるか。
+         * cat / tier は「空 = すべて」。q は題名・説明文・使いどころ名・ファイル名を見る。
+         */
+        function secMatch(t, q, cat, tier) {
+            if (cat && t.cat !== cat) { return false; }
+            if (tier === 'free' && t.isPremium) { return false; }
+            if (tier === 'premium' && !t.isPremium) { return false; }
+            if (q) {
+                var hay = ((t.name || '') + ' ' + (t.description || '') + ' ' + (t.catName || '') + ' ' + (t.filename || '')).toLowerCase();
+                /* 空白区切りで全部含むもの（AND） */
+                var words = q.toLowerCase().split(/\s+/).filter(Boolean);
+                for (var i = 0; i < words.length; i++) {
+                    if (hay.indexOf(words[i]) < 0) { return false; }
+                }
+            }
+            return true;
+        }
+
+        /* 使いどころのボタン。件数は「いま選んでいる他の条件」を反映した数を出す（押しても0件のボタンを見せない） */
+        var secGroups = [];
+        var secSeen = {};
+        sectionTemplates.forEach(function (t) {
+            if (!t.cat || secSeen[t.cat]) { return; }
+            secSeen[t.cat] = true;
+            secGroups.push({ key: t.cat, name: t.catName || t.cat, order: typeof t.catOrder === 'number' ? t.catOrder : 999 });
+        });
+        secGroups.sort(function (a, b) { return a.order - b.order; });
+        secGroups.forEach(function (g) {
+            g.n = sectionTemplates.filter(function (t) { return secMatch(t, secQuery, g.key, secTier); }).length;
+        });
+
+        var secTiers = [
+            { key: 'free', name: '無料でも使える' },
+            { key: 'premium', name: 'プレミアム限定' }
+        ];
+        secTiers.forEach(function (x) {
+            x.n = sectionTemplates.filter(function (t) { return secMatch(t, secQuery, secCat, x.key); }).length;
+        });
+
+        var filteredSectionTemplates = sectionTemplates.filter(function (t) {
+            return secMatch(t, secQuery, secCat, secTier);
+        });
+
         // セクションテンプレート一覧を取得
         useEffect(function () {
             if (!isOpen || mainTab !== 'templates') return;
@@ -1788,20 +1845,110 @@
                             'div',
                             { className: 'lw-template-header-left' },
                             createElement('h3', null, 'セクションテンプレート'),
-                            createElement('span', { className: 'lw-block-count' }, sectionTemplates.length + ' テンプレート')
+                            createElement(
+                                'span',
+                                { className: 'lw-block-count' },
+                                filteredSectionTemplates.length === sectionTemplates.length
+                                    ? sectionTemplates.length + ' テンプレート'
+                                    : filteredSectionTemplates.length + ' / ' + sectionTemplates.length + ' テンプレート'
+                            )
+                        ),
+                        createElement(
+                            'div',
+                            { className: 'lw-template-header-right' },
+                            createElement('input', {
+                                type: 'search',
+                                className: 'lw-sec-search',
+                                value: secQuery,
+                                placeholder: 'キーワードで探す（料金・お客様の声 など）',
+                                'aria-label': 'セクションテンプレートをキーワードで探す',
+                                onChange: function (e) { setSecQuery(e.target.value); }
+                            })
+                        )
+                    ),
+                    // 絞り込み（使いどころ / プラン）
+                    createElement(
+                        'div',
+                        { className: 'lw-sec-filter' },
+                        createElement(
+                            'div',
+                            { className: 'lw-sec-filter-row' },
+                            createElement('span', { className: 'lw-sec-filter-label' }, '使いどころ'),
+                            createElement(
+                                'button',
+                                {
+                                    type: 'button',
+                                    className: 'lw-sec-chip' + (secCat === '' ? ' is-on' : ''),
+                                    onClick: function () { setSecCat(''); }
+                                },
+                                'すべて'
+                            ),
+                            secGroups.map(function (g) {
+                                return createElement(
+                                    'button',
+                                    {
+                                        key: g.key,
+                                        type: 'button',
+                                        className: 'lw-sec-chip' + (secCat === g.key ? ' is-on' : '') + (g.n === 0 ? ' is-empty' : ''),
+                                        disabled: g.n === 0 && secCat !== g.key,
+                                        onClick: function () { setSecCat(secCat === g.key ? '' : g.key); }
+                                    },
+                                    g.name,
+                                    createElement('em', null, g.n)
+                                );
+                            })
+                        ),
+                        createElement(
+                            'div',
+                            { className: 'lw-sec-filter-row' },
+                            createElement('span', { className: 'lw-sec-filter-label' }, '使えるプラン'),
+                            createElement(
+                                'button',
+                                {
+                                    type: 'button',
+                                    className: 'lw-sec-chip' + (secTier === '' ? ' is-on' : ''),
+                                    onClick: function () { setSecTier(''); }
+                                },
+                                'すべて'
+                            ),
+                            secTiers.map(function (x) {
+                                return createElement(
+                                    'button',
+                                    {
+                                        key: x.key,
+                                        type: 'button',
+                                        className: 'lw-sec-chip' + (secTier === x.key ? ' is-on' : '') + (x.n === 0 ? ' is-empty' : ''),
+                                        disabled: x.n === 0 && secTier !== x.key,
+                                        onClick: function () { setSecTier(secTier === x.key ? '' : x.key); }
+                                    },
+                                    x.name,
+                                    createElement('em', null, x.n)
+                                );
+                            }),
+                            (secQuery || secCat || secTier)
+                                ? createElement(
+                                    'button',
+                                    {
+                                        type: 'button',
+                                        className: 'lw-sec-clear',
+                                        onClick: function () { setSecQuery(''); setSecCat(''); setSecTier(''); }
+                                    },
+                                    '絞り込みを外す'
+                                )
+                                : null
                         )
                     ),
                     // カードグリッド
                     createElement(
                         'div',
                         { className: 'lw-section-template-grid' },
-                        sectionTemplates.length === 0
+                        filteredSectionTemplates.length === 0
                             ? createElement(
                                 'div',
                                 { className: 'lw-template-placeholder' },
-                                createElement('p', null, 'テンプレートがありません')
+                                createElement('p', null, sectionTemplates.length === 0 ? 'テンプレートがありません' : '条件に合うテンプレートがありません')
                             )
-                            : sectionTemplates.map(function (template) {
+                            : filteredSectionTemplates.map(function (template) {
                                 return createElement(SectionTemplateCard, {
                                     key: template.filename,
                                     template: template,

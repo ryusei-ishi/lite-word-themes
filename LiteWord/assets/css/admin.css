@@ -2105,7 +2105,8 @@ lw_popup_block_list
 ---------------------*/
 #lw-insert-block {
   position: fixed;
-  top: 70px;
+  /* 管理バーの高さ + エディタヘッダー64px + 4px。管理バーが無い環境では 0+68px で合う（2026-08-30） */
+  top: calc(var(--wp-admin--admin-bar--height, 0px) + 68px);
   left: 4px;
   z-index: 99999;
   padding: 4px 16px 4px 12px;
@@ -2179,7 +2180,7 @@ body:has(
 .custom-font-settings-popover.is-positioned
 ) #lw-set-pattern-insert-block {
   top: auto;
-  bottom: 28px !important;
+  bottom: 37px !important;
 }
 
 .lw_popup_block_list {
@@ -2550,7 +2551,7 @@ html:has(.block-editor-block-list__block-popover.is-positioned) #lw-custom-inser
 html:has(.block-editor-block-list__block-popover.is-positioned) #lw-heading-insert-block,
 html:has(.block-editor-block-list__block-popover.is-positioned) #lw-set-pattern-insert-block {
   top: auto;
-  bottom: 32px;
+  bottom: 37px;
 }
 
 .lw-responsive-br-popover .components-popover__content,
@@ -2560,7 +2561,7 @@ html:has(.block-editor-block-list__block-popover.is-positioned) #lw-set-pattern-
 
 .lw-custom-font-settings-popover {
   position: fixed !important;
-  top: 60px !important;
+  top: calc(var(--wp-admin--admin-bar--height, 0px) + 68px) !important;
   left: 0;
   z-index: 9999999999;
   padding: 8px 0 0 8px;
@@ -2999,7 +3000,7 @@ html:has(.block-editor-block-list__block-popover.is-positioned) #lw-set-pattern-
 .lw-responsive-br-popover,
 .lw-deadline-popover {
   position: fixed !important;
-  top: 120px !important;
+  top: calc(var(--wp-admin--admin-bar--height, 0px) + 88px) !important;
   left: 8px !important;
   z-index: 9999999999;
   transform: initial !important;
@@ -3172,7 +3173,7 @@ select:focus ~ .lw-responsive-br-select .components-select-control__input::after
 /* ポップオーバー全体 */
 .lw-animation-settings-popover {
   position: fixed !important;
-  top: 60px !important;
+  top: calc(var(--wp-admin--admin-bar--height, 0px) + 68px) !important;
   left: 0;
   z-index: 9999999999;
   padding: 8px 0 0 8px;
@@ -3728,4 +3729,24 @@ select:focus ~ .lw-responsive-br-select .components-select-control__input::after
     width: 48px;
     height: 48px;
   }
+}
+/* lw-popover-fit: 低い画面でポップオーバーがフッターにはみ出すのを防ぐ（2026-08-30）
+   高い画面（714px以上）では min() が 573px を選ぶので、いままでと1pxも変わらない。 */
+@media (max-height: 713px) {
+    .lw-custom-font-settings-popover,
+    .lw-animation-settings-popover {
+        height: min(573px, calc(100vh - var(--wp-admin--admin-bar--height, 0px) - 109px)) !important;
+    }
+
+    .lw-custom-font-settings-popover .components-popover__content,
+    .lw-animation-settings-popover .components-popover__content {
+        min-height: 0;
+        height: calc(100% - 8px) !important;
+        max-height: calc(100% - 8px) !important;
+    }
+
+    /* フォント設定はここがスクロールする箱（アニメーション設定は content 自体がスクロールする） */
+    .lw-custom-font-settings-popover .lw-font-tab-content {
+        max-height: min(372px, calc(100vh - var(--wp-admin--admin-bar--height, 0px) - 310px));
+    }
 }
