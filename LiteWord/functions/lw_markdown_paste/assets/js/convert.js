@@ -60,6 +60,11 @@
 			blocks = blocks.concat( made );
 		} );
 
+		// 行内の飾り（:red[…] / :u[…] など）を最後にまとめて差し込む
+		if ( window.LWMdInlineFormat ) {
+			window.LWMdInlineFormat.applyToBlocks( blocks );
+		}
+
 		return {
 			meta: fm.meta,
 			blocks: blocks,
