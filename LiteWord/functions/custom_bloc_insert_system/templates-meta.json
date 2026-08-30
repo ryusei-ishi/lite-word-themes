@@ -42,6 +42,9 @@
       "cat": "old",
       "label": "画像と文章の2カラム（見出し・本文・ボタン）"
     },
+    "free_flow_1": {
+      "cat": "trust"
+    },
     "news_1": {
       "cat": "old",
       "label": "見出し＋お知らせ一覧"

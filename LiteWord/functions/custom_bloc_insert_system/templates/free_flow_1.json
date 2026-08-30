@@ -1,0 +1,114 @@
+{
+  "title": "ご利用の流れ（無料・5ステップ＋ご準備いただくもの）",
+  "description": "【型B：説明が主役】帯の中に縦1列のステップ5段（それぞれ所要時間と、お客様に何をしていただくかつき）＋ご準備いただくもの4件＋注釈＋相談ボタン。写真を使わないので、素材が無くてもそのまま貼れます。清掃・修理・リフォーム・出張サービスなど「訪問して作業する仕事」の文例です。**無料ブロックだけで作ってあります。**",
+  "blocks": [
+    {
+      "name": "wdl/lw-step-1",
+      "attributes": {
+        "titleText": "ご利用の流れ",
+        "bgGradient": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "contents": [
+          {
+            "title": "お問い合わせ",
+            "text": "フォームまたはお電話でご連絡ください。当日中、遅くとも翌営業日にこちらからご返信します。この時点で費用はいただきません。"
+          },
+          {
+            "title": "ご相談・現地の確認",
+            "text": "お困りごととご希望をうかがいます。内容によっては、実際に見せていただいたほうが正確なお見積りをお出しできます。30分ほどです。"
+          },
+          {
+            "title": "お見積りのご提示",
+            "text": "作業の内容と金額を書面でお出しします。3営業日以内。この場でお決めいただかなくて構いません。お断りいただいても費用はかかりません。"
+          },
+          {
+            "title": "作業当日",
+            "text": "立ち会いが必要かどうかは、事前にお打ち合わせします。作業の前と後の状態を写真に残して、あとからご確認いただけるようにします。"
+          },
+          {
+            "title": "完了のご確認とお支払い",
+            "text": "仕上がりを一緒にご確認ください。気になるところがあればその場で手直しします。お支払いはご確認のあとです。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "ご準備いただくもの",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-3",
+      "attributes": {
+        "contents": [
+          {
+            "text": "気になっている場所のお写真（お手持ちのスマホで十分です）"
+          },
+          {
+            "text": "ご希望の時期と、ご都合のよい曜日・時間帯"
+          },
+          {
+            "text": "おおよそのご予算（未定のままでも構いません）"
+          },
+          {
+            "text": "賃貸の場合は、管理会社への確認が要るかどうか"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※所要日数と時間は目安です。ご依頼の内容や時期によって前後します。<br>お急ぎのご事情がある場合は、お問い合わせのときにお書き添えください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "日程を相談してみる",
+        "btnTextSub": "＼ お見積りだけでも構いません ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}
