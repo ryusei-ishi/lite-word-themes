@@ -59,6 +59,96 @@
     var PREVIEW_MODE_SP = 'sp';
     var SP_WIDTH = 375; // スマホプレビュー幅（px）
 
+    /* ==================================================================
+     * プレビューの読み込みを軽くする道具（2026-08-31）
+     *
+     * それまでは「カード1枚ごとに同じCSSとJSONを取り直し、62枚ぶんの iframe を
+     * 一度に組み立てる」形だった。手元(MAMP)で実測すると
+     *     62枚が出そろうまで 36.0秒 ／ リクエスト 1158本
+     *     （reset/common/page/font_style の4本を各150回・ブロックCSSを438回）
+     * だったので、次の3つを足した。
+     *   ① lwFetchText / lwFetchJson … URLごとに1回だけ取る（カードをまたいで共有）
+     *   ② lwQueued …                  同時に組み立てるカードの数を絞る
+     *   ③ lwCardHeight …             測った高さを覚えて、スクロール時のガタつきを止める
+     *
+     * 🚨 ここはページ内のキャッシュ。テンプレを編集したら編集画面を読み込み直せば消える。
+     * ================================================================== */
+
+    /* ① 同じURLは1回しか取らない */
+    var lwTextCache = {};
+    function lwFetchText(url) {
+        if (!lwTextCache[url]) {
+            lwTextCache[url] = fetch(url)
+                .then(function (r) { return r.ok ? r.text() : ''; })
+                .catch(function () { return ''; });
+        }
+        return lwTextCache[url];
+    }
+
+    var lwJsonCache = {};
+    function lwFetchJson(url) {
+        if (!lwJsonCache[url]) {
+            lwJsonCache[url] = fetch(url, { headers: { 'X-WP-Nonce': lwTemplatePutTest.nonce } })
+                .then(function (r) {
+                    if (!r.ok) { throw new Error('HTTP ' + r.status); }
+                    return r.json();
+                });
+            /* 失敗したぶんは覚えない（次に開いたときやり直せるように） */
+            lwJsonCache[url].catch(function () { delete lwJsonCache[url]; });
+        }
+        return lwJsonCache[url];
+    }
+
+    /* ② 同時に組み立てるカードの数を絞る。
+     *    スクロールで一度に何枚も画面へ入ったとき、全部同時に doc.write すると
+     *    結局そこで固まるため。 */
+    var lwBuildQueue = { running: 0, max: 3, waiting: [] };
+    function lwPumpQueue() {
+        while (lwBuildQueue.running < lwBuildQueue.max && lwBuildQueue.waiting.length > 0) {
+            lwBuildQueue.waiting.shift()();
+        }
+    }
+    function lwQueued(job) {
+        return new Promise(function (resolve, reject) {
+            lwBuildQueue.waiting.push(function () {
+                lwBuildQueue.running++;
+                var done = function () { lwBuildQueue.running--; lwPumpQueue(); };
+                var p;
+                try { p = job(); } catch (e) { done(); reject(e); return; }
+                Promise.resolve(p).then(
+                    function (v) { done(); resolve(v); },
+                    function (e) { done(); reject(e); }
+                );
+            });
+            lwPumpQueue();
+        });
+    }
+
+    /* ③ カードの高さを覚える。
+     *    プレビューは「カード幅の200%で描いて0.5倍に縮める」作りなので、
+     *    段数（3列/2列/1列）が変わると高さも変わる。だから段数もキーに入れる。 */
+    var LW_CARD_HEIGHT_KEY = 'lw_sec_card_h_v1';
+    var lwCardHeight = (function () {
+        try { return JSON.parse(window.localStorage.getItem(LW_CARD_HEIGHT_KEY) || '{}') || {}; }
+        catch (e) { return {}; }
+    })();
+    var lwCardHeightTimer = null;
+    function lwCardHeightKey(filename) {
+        var w = window.innerWidth;                       /* editor.css のブレイクポイントと同じ */
+        var cols = w <= 1000 ? 1 : (w <= 1400 ? 2 : 3);
+        return filename + '@' + cols;
+    }
+    function lwRememberCardHeight(filename, h) {
+        var key = lwCardHeightKey(filename);
+        if (lwCardHeight[key] === h) { return; }
+        lwCardHeight[key] = h;
+        if (lwCardHeightTimer) { clearTimeout(lwCardHeightTimer); }
+        lwCardHeightTimer = setTimeout(function () {
+            try { window.localStorage.setItem(LW_CARD_HEIGHT_KEY, JSON.stringify(lwCardHeight)); }
+            catch (e) { /* 保存できなくても動作に影響はない */ }
+        }, 1000);
+    }
+
     // カテゴリー設定（PHPから取得）
     var categoryConfig = lwTemplatePutTest.categoryConfig || {};
 
@@ -254,12 +344,13 @@
             var fontStyleCssUrl = lwTemplatePutTest.fontStyleCssUrl;
 
             // reset.css, common.css, page.css, font_style.css, ブロックCSSを全て取得
+            // （URLごとに1回だけ取り、カードをまたいで使い回す）
             Promise.all([
-                fetch(resetCssUrl).then(function (r) { return r.ok ? r.text() : ''; }),
-                fetch(commonCssUrl).then(function (r) { return r.ok ? r.text() : ''; }),
-                fetch(pageCssUrl).then(function (r) { return r.ok ? r.text() : ''; }),
-                fetch(fontStyleCssUrl).then(function (r) { return r.ok ? r.text() : ''; }),
-                fetch(cssUrl).then(function (r) { return r.ok ? r.text() : ''; })
+                lwFetchText(resetCssUrl),
+                lwFetchText(commonCssUrl),
+                lwFetchText(pageCssUrl),
+                lwFetchText(fontStyleCssUrl),
+                lwFetchText(cssUrl)
             ])
                 .then(function (results) {
                     var resetCss = results[0];
@@ -698,11 +789,11 @@
             var cssUrl = lwTemplatePutTest.blocksBaseUrl + cssBlockSlug + '/style.css';
 
             Promise.all([
-                fetch(lwTemplatePutTest.resetCssUrl).then(function (r) { return r.ok ? r.text() : ''; }),
-                fetch(lwTemplatePutTest.commonCssUrl).then(function (r) { return r.ok ? r.text() : ''; }),
-                fetch(lwTemplatePutTest.pageCssUrl).then(function (r) { return r.ok ? r.text() : ''; }),
-                fetch(lwTemplatePutTest.fontStyleCssUrl).then(function (r) { return r.ok ? r.text() : ''; }),
-                fetch(cssUrl).then(function (r) { return r.ok ? r.text() : ''; })
+                lwFetchText(lwTemplatePutTest.resetCssUrl),
+                lwFetchText(lwTemplatePutTest.commonCssUrl),
+                lwFetchText(lwTemplatePutTest.pageCssUrl),
+                lwFetchText(lwTemplatePutTest.fontStyleCssUrl),
+                lwFetchText(cssUrl)
             ])
                 .then(function (results) {
                     setPreviewData({
@@ -943,6 +1034,7 @@
         var hasPreviewImage = template.previewImageUrl && template.previewImageUrl !== '';
 
         var iframeRef = useRef(null);
+        var cardRef = useRef(null);
         var _useState1 = useState(null);
         var previewData = _useState1[0];
         var setPreviewData = _useState1[1];
@@ -950,6 +1042,36 @@
         var _useState2 = useState(!hasPreviewImage); // 画像がある場合はローディング不要
         var loading = _useState2[0];
         var setLoading = _useState2[1];
+
+        /* 画面に入る（近づく）まで中身を作らない（2026-08-31）
+           62枚を一度に組み立てていたのをやめ、見えているぶんだけにする。
+           プレビュー画像のカードは軽いので最初から出してよい。 */
+        var _useVisible = useState(hasPreviewImage);
+        var isVisible = _useVisible[0];
+        var setIsVisible = _useVisible[1];
+
+        useEffect(function () {
+            if (hasPreviewImage) { return; }
+            var el = cardRef.current;
+            if (!el || typeof IntersectionObserver === 'undefined') {
+                setIsVisible(true);          /* 使えない環境では今までどおり全部作る */
+                return;
+            }
+            var io = new IntersectionObserver(function (entries) {
+                for (var i = 0; i < entries.length; i++) {
+                    if (entries[i].isIntersecting) {
+                        setIsVisible(true);
+                        io.disconnect();
+                        return;
+                    }
+                }
+            }, {
+                root: el.closest('.lw-section-template-grid'),
+                rootMargin: '600px 0px'      /* 画面に入る600px手前から作り始める */
+            });
+            io.observe(el);
+            return function () { io.disconnect(); };
+        }, []);
 
         // ブロックからHTMLを再帰的に生成する関数
         function generateBlockHtml(block) {
@@ -1000,14 +1122,11 @@
             if (!template || !template.filename) return;
             // プレビュー画像がある場合はiframeプレビューをスキップ
             if (hasPreviewImage) return;
+            if (!isVisible) return;          /* 画面に近づくまで何もしない（2026-08-31） */
 
-            // テンプレートデータを取得してブロックを生成
-            fetch(lwTemplatePutTest.restUrl + '/section-templates/' + template.filename, {
-                headers: {
-                    'X-WP-Nonce': lwTemplatePutTest.nonce
-                }
-            })
-            .then(function (res) { return res.json(); })
+            // テンプレートデータを取得してブロックを生成（同時に走る数は lwQueued が絞る）
+            lwQueued(function () {
+            return lwFetchJson(lwTemplatePutTest.restUrl + '/section-templates/' + template.filename)
             .then(function (data) {
                 // JSONからブロックを生成
                 var blocks = jsonToBlocks(data.data);
@@ -1022,20 +1141,30 @@
                     return generateBlockHtml(block);
                 }).join('');
 
-                // CSSを取得
-                Promise.all([
-                    fetch(lwTemplatePutTest.resetCssUrl).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; }),
-                    fetch(lwTemplatePutTest.commonCssUrl).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; }),
-                    fetch(lwTemplatePutTest.pageCssUrl).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; }),
-                    fetch(lwTemplatePutTest.fontStyleCssUrl).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; })
+                // CSSを取得（URLごとに1回だけ。カードをまたいで使い回す）
+                return Promise.all([
+                    lwFetchText(lwTemplatePutTest.resetCssUrl),
+                    lwFetchText(lwTemplatePutTest.commonCssUrl),
+                    lwFetchText(lwTemplatePutTest.pageCssUrl),
+                    lwFetchText(lwTemplatePutTest.fontStyleCssUrl)
                 ]).then(function (results) {
                     // テンプレート内のブロックのCSSを収集
                     var blockCssPromises = [];
                     var processedBlocks = {};
 
-                    // ブロック名からCSSディレクトリ名へのマッピング
+                    /* ブロック名とフォルダ名がズレているものの対応表。
+                       🚨 ズレているのは下の3件だけ（2026-08-31 に144件を機械で突き合わせた）。
+                          ここが抜けるとCSSが404になり、そのブロックだけ無装飾で描かれる
+                          （lw-button-02 / 03 が抜けていて free_flow_1 のボタンが素のまま出ていた）。
+                       確かめ方: my-blocks/build/<dir>/block.json の name とフォルダ名を比べる */
                     var blockSlugMap = {
-                        'lw-button-01': 'lw-button-1'
+                        'lw-button-01': 'lw-button-1',
+                        'lw-button-02': 'lw-button-2',
+                        'lw-button-03': 'lw-button-3'
+                    };
+                    /* 親のCSSに含まれていて、自分のフォルダを持たない子ブロック */
+                    var noBlockCss = {
+                        'lw-pr-qa-2-item': true
                     };
 
                     function collectBlockCss(blockList) {
@@ -1048,10 +1177,13 @@
                                 if (blockSlugMap[slug]) {
                                     slug = blockSlugMap[slug];
                                 }
-                                var cssUrl = lwTemplatePutTest.blocksBaseUrl + slug + '/style.css';
-                                blockCssPromises.push(
-                                    fetch(cssUrl).then(function (r) { return r.ok ? r.text() : ''; }).catch(function () { return ''; })
-                                );
+                                /* テーマ側にCSSが無いものは取りに行かない。
+                                   core/◯◯（WordPress標準）と上の noBlockCss がそれで、
+                                   以前はモーダルを1回開くたびに81回ぶん404を引いていた。 */
+                                if (block.name.indexOf('wdl/') === 0 && !noBlockCss[slug]) {
+                                    var cssUrl = lwTemplatePutTest.blocksBaseUrl + slug + '/style.css';
+                                    blockCssPromises.push(lwFetchText(cssUrl));
+                                }
                             }
                             if (block.innerBlocks && block.innerBlocks.length > 0) {
                                 collectBlockCss(block.innerBlocks);
@@ -1078,7 +1210,8 @@
             .catch(function (err) {
                 setLoading(false);
             });
-        }, [template.filename]);
+            });
+        }, [template.filename, isVisible]);
 
         // iframeにコンテンツを書き込む
         useEffect(function () {
@@ -1163,7 +1296,10 @@
                 var previewContainer = iframe.closest('.lw-block-card-preview');
                 if (previewContainer) {
                     // scale(0.5)なので表示サイズは50% + padding 48px
-                    previewContainer.style.height = (contentHeight * 0.5 + 48) + 'px';
+                    var cardH = contentHeight * 0.5 + 48;
+                    previewContainer.style.height = cardH + 'px';
+                    /* 次に開いたときガタつかないよう、測った高さを覚えておく（2026-08-31） */
+                    lwRememberCardHeight(template.filename, Math.round(cardH));
                 }
             }, 100);
 
@@ -1305,15 +1441,23 @@
             }
         }
 
+        /* 読み込み前でも箱の高さを決めておく（前に測った高さがあればそれを使う）。
+           これが無いと、スクロールして読み込むたびに下のカードが飛ぶ。 */
+        var previewStyle = { position: 'relative', cursor: isTemplateLocked ? 'not-allowed' : 'pointer' };
+        if (!hasPreviewImage && !previewData) {
+            var rememberedHeight = lwCardHeight[lwCardHeightKey(template.filename)];
+            if (rememberedHeight) { previewStyle.height = rememberedHeight + 'px'; }
+        }
+
         return createElement(
             'div',
-            { className: cardClassName },
+            { className: cardClassName, ref: cardRef },
             // プレビューエリア
             createElement(
                 'div',
                 {
                     className: 'lw-block-card-preview',
-                    style: { position: 'relative', cursor: isTemplateLocked ? 'not-allowed' : 'pointer' },
+                    style: previewStyle,
                     onClick: handlePreviewClick,
                     title: isTemplateLocked ? 'プレミアム限定のため利用できません' : 'クリックして挿入'
                 },
