@@ -8,10 +8,13 @@
 	"icon": "button",
 	"description": "有料リンクボタン（スタイル05）",
 	"aiHint": {
-		"description": "複数ボタン配列。電話番号+サブテキスト+アイコン。複数店舗の電話番号並列表示に",
+		"description": "電話番号のボタンを横に並べる。受話器アイコン＋大きな番号＋小さな副文（店名や受付時間）。支店・教室・営業所・サロンが複数あるときの一覧に",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["buttons"],
-		"imageAttributes": []
+		"contentAttributes": [
+			"buttons"
+		],
+		"imageAttributes": [],
+		"notes": "🚨 **ボタンの文字は CSS で `color:#fff` 固定なのに、背景 `bgColor` の既定が `var(--color-main)`。**明るいサイト色（黄 #f5b301 で 1.85:1）だと電話番号が読めない。`color-mix(in srgb, var(--color-main) 50%, #000)` のように暗くして渡す。🚨 **色は `buttons` の1件ずつに入っている。全部に入れること**（1つ忘れると1枚だけ明るくなる）。🚨 **`btnUrl` は `tel:` のあとを数字だけにする**（ハイフンを入れると発信できない端末がある）。🚨 **`selectedIcon` を省くとアイコンが消えて左に寄る。** 既定の受話器を使うなら触らない。`blockId` は書かない（編集画面が `clientId` から採番する）。⚠️ そのため手元のプレビューでは `id=\"undefined-1\"` になるが、実機では正しい値が入る。自前で `margin: 32px 0` を持つので前後にスペーサーを足さない。500px 以下は1枚あたり max-width:300px で縦に積まれるので副文は短くする。`buttons` は `[{enabled, btnText, subText, bgColor, textColor, btnUrl, openNewTab, selectedIcon}]`。"
 	},
 	"supports": {
 		"anchor": true

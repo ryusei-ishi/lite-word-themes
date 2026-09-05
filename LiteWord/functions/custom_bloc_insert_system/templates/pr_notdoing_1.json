@@ -1,0 +1,224 @@
+{
+  "title": "お受けできないこと（できない理由と、代わりにできること）",
+  "description": "【型A：表が主役】見出し＋ひとこと＋お受けできないこと6件の表（できないこと／その理由／代わりにできること）＋注釈＋「迷ったらまず聞いてください」の囲い＋お問い合わせボタン。サイトのほとんどは「できます」しか書いていないので、ここを1段置くだけで**問い合わせの質が変わり、断る手間が減ります**。🚨 断りっぱなしにしないでください。3列目の「代わりにできること」を必ず埋めてください。理由だけだと冷たく読まれ、代わりの案があると誠実に読まれます。🚨 行見出し（1列目）は**7文字まで**です。8文字目から途中で折れます。対応エリア（場所の線引き）・こんな方に向いています（合う人）・保証の対象外（契約後の話）とは役割が違うので、同じページに並べられます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "お受けできないこと",
+        "subTitle": "SCOPE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "できることばかり並べても、選ぶ材料にはならないと思っています。<br>お受けできないことを先に書いておきます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-1",
+      "attributes": {
+        "columnCount": 3,
+        "showScrollHint": true,
+        "useIndividualHeaderBg": true,
+        "cellWidth1": 180,
+        "cellWidth2": 320,
+        "cellWidth3": 320,
+        "cellWidth1Sp": 140,
+        "cellWidth2Sp": 200,
+        "cellWidth3Sp": 200,
+        "headerTextColor": "#ffffff",
+        "headerBgColor": "color-mix(in srgb, var(--color-main) 45%, #000)",
+        "headers": [
+          {
+            "text": "お受けできない理由",
+            "bgColor": "#8a8f96"
+          },
+          {
+            "text": "代わりにできること",
+            "bgColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+          }
+        ],
+        "rows": [
+          {
+            "header": "当日のご依頼",
+            "cells": [
+              {
+                "content": "材料の手配と人の確保が間に合わないため"
+              },
+              {
+                "content": "空きが出たらご連絡する順番待ちに入れます"
+              }
+            ]
+          },
+          {
+            "header": "深夜の作業",
+            "cells": [
+              {
+                "content": "近隣のご迷惑になり、安全も確保できないため"
+              },
+              {
+                "content": "朝いちばん（7時）からの作業ならお受けできます"
+              }
+            ]
+          },
+          {
+            "header": "他社の手直し",
+            "cells": [
+              {
+                "content": "前の工程が分からず、責任の切り分けができないため"
+              },
+              {
+                "content": "全部やり直す前提であればお見積りできます"
+              }
+            ]
+          },
+          {
+            "header": "無料のお試し",
+            "cells": [
+              {
+                "content": "一件ごとに材料と人の費用がかかっているため"
+              },
+              {
+                "content": "ご相談・お見積り・現地の確認までは無料です"
+              }
+            ]
+          },
+          {
+            "header": "金額だけの回答",
+            "cells": [
+              {
+                "content": "現物を見ないと出した金額が変わってしまうため"
+              },
+              {
+                "content": "似た事例の金額の幅であればその場でお伝えできます"
+              }
+            ]
+          },
+          {
+            "header": "転売目的",
+            "cells": [
+              {
+                "content": "お使いになる方に責任を持てなくなるため"
+              },
+              {
+                "content": "業者さま向けのお取引は別にご相談を承ります"
+              }
+            ]
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ここに書いてあるものでも、事情によってはお受けできることがあります。決めつけずに一度おっしゃってください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1PaddingTopSp": 20,
+        "waku1PaddingBottomSp": 20,
+        "waku1PaddingLeftSp": 16,
+        "waku1PaddingRightSp": 16,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "迷ったら、まず聞いてください",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "お受けできるかどうかは、その場でお答えします。お受けできないときも、どこに相談すればよいかまでお伝えするようにしています。当社で受けられないというだけで、世の中に方法が無いわけではありません。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "お問い合わせはこちら",
+        "textSub": "＼ 受けられるかどうかだけでもお答えします ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

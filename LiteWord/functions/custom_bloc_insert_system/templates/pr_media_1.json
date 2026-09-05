@@ -1,0 +1,263 @@
+{
+  "title": "メディア掲載・受賞歴（掲載一覧6件＋受賞・認定）",
+  "description": "【型A：表が主役】見出し＋ひとこと＋掲載された媒体の一覧6件＋受賞・認定4件＋取材のご依頼を受ける囲い＋お問い合わせボタン。お客様の声は自分で集めたもの、資格は自分で取ったものですが、ここは第三者に取り上げられた事実を並べる場所です。いちばん強い材料になります。🚨 媒体名やロゴを勝手に大きく出すと商標の使い方の問題になることがあります。ロゴを並べるより、文字で「いつ・どこに・何が」と書くほうが安全です。🚨 5年以上前の掲載しか無い場合は、このセクションを置かないほうがよいことがあります（「最近は何もないのか」と読まれるため）。資格・許可のセクション（自分が取ったもの）とは役割が違うので、同じページに両方置けます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "メディア掲載・受賞歴",
+        "subTitle": "MEDIA",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "社外の方に取り上げていただいたものをまとめています。<br>内容はいずれも掲載当時のものです。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 200,
+        "dtWidthSp": 150,
+        "defaultSpClm1": true,
+        "dlBorderColor": "#dddddd",
+        "rowBorderColor": "#dddddd",
+        "dtBorderColor": "#dddddd",
+        "dtBgColor": "#f5f7f9",
+        "fontSizePc": 17,
+        "fontSizeSp": 15,
+        "cellPaddingPc": 16,
+        "rows": [
+          {
+            "dtText": "2026年6月",
+            "ddText": "地域情報誌の特集「まちの仕事人」に、代表のインタビューが掲載されました",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "2026年2月",
+            "ddText": "テレビの朝の情報番組で、当社の取り組みが5分ほど紹介されました",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "2025年11月",
+            "ddText": "業界紙に、当社が取り組んでいる材料の使い方について寄稿しました",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "2025年7月",
+            "ddText": "市の広報誌で、地域の事業者としてご紹介いただきました",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "2025年4月",
+            "ddText": "ウェブメディアの連載に、お客様との事例が取り上げられました",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "2024年10月",
+            "ddText": "新聞の地方版に、新しく始めたサービスについて掲載されました",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "受賞・認定",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-4",
+      "attributes": {
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colClass": "clm_1",
+        "contents": [
+          {
+            "text": "2026年 ◯◯コンテスト 優秀賞（応募◯◯件のうち上位◯件）"
+          },
+          {
+            "text": "2025年 ◯◯協会 認定事業者（更新は3年ごと）"
+          },
+          {
+            "text": "2024年 ◯◯market 年間ベストショップ（お客様の投票による）"
+          },
+          {
+            "text": "2023年 ◯◯市 事業者表彰（地域への取り組みについて）"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※受賞名・回数・順位は、主催者が公表している表記に合わせてください。言い換えると、事実と違う印象を与えてしまうことがあります。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1PaddingTopSp": 20,
+        "waku1PaddingBottomSp": 20,
+        "waku1PaddingLeftSp": 16,
+        "waku1PaddingRightSp": 16,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "取材・出演のご依頼について",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "媒体の方からのご連絡もお受けしています。掲載の趣旨・媒体名・締切をお知らせいただければ、お受けできるかを2営業日以内にご返事します。写真や資料のご用意もできますので、必要なものをあわせてお知らせください。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "お問い合わせはこちら",
+        "textSub": "＼ 取材のご依頼も同じ窓口で承ります ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

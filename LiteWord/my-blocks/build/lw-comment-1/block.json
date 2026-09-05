@@ -7,7 +7,7 @@
 	"category": "lw-comment",
 	"icon": "format-chat",
 	"aiHint": {
-		"description": "吹き出しコメント。名前+タイトル+アバター画像。レビュー・感想表示に",
+		"description": "丸いアバター写真つきの吹き出しコメント1つ。左右どちらからでも出せるので、2つ以上並べて会話のように見せられる。お客様の感想・スタッフからのひとことに",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": [
 			"name",
@@ -15,7 +15,8 @@
 		],
 		"imageAttributes": [
 			"imageUrl"
-		]
+		],
+		"notes": "🚨 **吹き出しの中の文は title、アバターの下に出る名前は name**（直感と逆なので取り違えやすい）。🚨 title は white-space: pre-wrap なので**改行文字がそのまま効く**（<br> ではなく実際の改行を入れる）。🚨 アバターは **80px の丸**（600px以下72px）で object-fit: cover の**正方形切り抜き**。横長の写真をそのまま渡すと中央だけが残って顔が端に寄るので、**顔を中心にした正方形の画像**を用意する。imageUrl が空だと「no image」の枠が出るだけなので、写真が無いなら使わないほうがよい。commentAlignment（left / right）で向きが変わる。**2つを左右に振ると会話に見える**。吹き出しの幅は .lw-comment-1__wrap { max-width: 600px } で固定で、maxWidth 属性は外側の箱にしか効かない。アバターの枠線は var(--color-main) 固定（属性で変えられない）。自前で margin: 1em 0 を持つ。 🚨 **`name`（アバターの下に出る名前）はアバターと同じ80pxの幅しかない。**「村瀬 隆 ／ 大工（勤続22年）」のように肩書きまで入れると3行に折れ、3行目が切れる（2026-09-01 実測）。**name は名前だけ**にして、肩書きは吹き出し（title）の1行目に `<strong>` で置く。"
 	},
 	"supports": {
 		"anchor": true

@@ -116,6 +116,10 @@ $is_full      = ( 'full' === lw_link_list_get_scan_mode() );
             <label><input type="checkbox" class="lw-filter" value="mailto" checked> メール</label>
             <label><input type="checkbox" class="lw-filter" value="tel" checked> 電話</label>
             <label><input type="checkbox" class="lw-filter" value="javascript" checked> JavaScript</label>
+            <span class="lw-filter-sep">|</span>
+            <label title="rel に sponsored が付いたリンク（広告リンク設定・商品リンク・ランキング・文中リンクの広告の印）だけを表示します">
+                <input type="checkbox" id="lw-only-ad"> <strong>広告リンクだけ</strong>
+            </label>
         </div>
 
         <!-- 検索 -->

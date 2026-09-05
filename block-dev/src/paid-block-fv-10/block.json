@@ -10,9 +10,14 @@
 	"aiHint": {
 		"description": "下層ページ用シンプルFV。中央タイトル+背景画像+フィルター装飾。プレミアムデザイン",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["mainTitle"],
-		"imageAttributes": ["backgroundImage", "backgroundImageSp"],
-		"notes": "［2026-08-27 追記］フィルタは mix-blend-mode: multiply（白は効かない）。innerFilterBg が内側の帯の色で、白＋角丸0にすると写真の上に紙を置いたような硬い見出しになる。titleFontSizeClass は font_size_l/m/s で、l は48px だがコンテナ幅980px以下では38pxに落ちる。"
+		"contentAttributes": [
+			"mainTitle"
+		],
+		"imageAttributes": [
+			"backgroundImage",
+			"backgroundImageSp"
+		],
+		"notes": "［2026-08-27 追記］フィルタは mix-blend-mode: multiply（白は効かない）。innerFilterBg が内側の帯の色で、白＋角丸0にすると写真の上に紙を置いたような硬い見出しになる。titleFontSizeClass は font_size_l/m/s で、l は48px だがコンテナ幅980px以下では38pxに落ちる。 🚨 **下層ページの見出し帯として使える**（実テンプレでは fv-6 に偏っていた枠を分ける先）。`.filter` は **mix-blend-mode: multiply**。白は効かず、濃い色を置くと写真が真っ黒に沈む。淡い灰（#dfe3e8 など）でごく軽く締めるのがちょうどよい。🚨 `.fv-10_inner` は写真の上に置く「板」。**白い板（innerFilterBg:#ffffff）＋サイト色を暗くした文字**（textColor に color-mix(in srgb, var(--color-main) 35%, #000)）にすると、どんな写真・どんなサイト色でも必ず読める。既定の innerFilterBg は #FC99AA（ピンク）なので必ず上書きする。🚨 `titleFontSizeClass: font_size_m` は PC38px / 980px以下28px / 550px以下24px。**550px で24px なので、ページ名は8文字までにすると1行に収まる。**⚠️ 直後が h2/h3/p だと `.paid-block-fv-10 + h2 { margin-top:2.4em !important }` が効く。あいだにスペーサーを入れるとこの規則が外れるので、余白はスペーサー側の数値だけになる。"
 	},
 	"supports": {
 		"anchor": true

@@ -1,0 +1,189 @@
+{
+  "title": "スタッフの一日（採用向け・時刻つきの写真カード6枚）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋一日の6場面（写真＋時刻＋見出し＋説明）＋働き方の決まり5項目＋注釈＋応募ボタン。募集要項（条件）でも職場の雰囲気（写真）でもなく、**時間の流れ**を見せる採用向けの段です。応募をためらういちばんの理由は「実際に何をして一日が終わるのか分からない」ことなので、時刻つきで6段書くだけでその不安がほぼ消えます。面接での説明も一度で済みます。⚠️ 写真は3列に並びます。**件数は3の倍数**にしてください。⚠️ 番号の欄には時刻を入れてあります。通し番号にすると「ご利用の流れ」と見分けがつかなくなるのでおすすめしません。🚨 番号の丸は大きさが決まっているので、**入るのは「9時」「18時」のように2〜3文字まで**です。「09:00」のように長くすると、丸からはみ出して白い文字が白地に乗り、読めなくなります。⚠️ カードの見出しは**11文字まで**です。12文字目から2行に折れて、その1枚だけ下線の位置がずれます。⚠️ 写真は4:3に切り抜かれ、番号のタイルが写真の下端に重なります。**下のほうに主役がある写真は避けてください**。職場の雰囲気（空間）・募集要項（条件）とは役割が違うので、同じページに並べられます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "スタッフの一日",
+        "subTitle": "ONE DAY",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "入社1年目のスタッフの、ふつうの一日です。<br>特別な日ではなく、いちばん多い形を書きました。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "bottom": "0px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-lw-step-6",
+      "attributes": {
+        "numberBgColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "showNumber": true,
+        "contents": [
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/workplace_08.webp",
+            "number": "9時",
+            "ttl": "出社します",
+            "text": "始業は9時ですが、10分前には着いている人が多いです。前の日に書いたメモを見ながら、その日にやることを3つまで決めます。朝礼はありません。"
+          },
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/workplace_05.webp",
+            "number": "10時",
+            "ttl": "お客様とお話し",
+            "text": "お電話とメールへのお返事の時間です。慣れるまでは先輩が横についていますので、いきなり一人で受けることはありません。"
+          },
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/workplace_06.webp",
+            "number": "12時",
+            "ttl": "お昼にします",
+            "text": "12時から13時まで。お弁当の人も外に出る人もいます。休憩室にコーヒーとお茶を置いてあるので、自由に飲んでください。"
+          },
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/workplace_03.webp",
+            "number": "14時",
+            "ttl": "机に向かいます",
+            "text": "静かに手を動かす時間です。この時間は声をかけない決まりにしているので、まとまった作業はここで進みます。"
+          },
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/workplace_01.webp",
+            "number": "16時",
+            "ttl": "ふたりで見直します",
+            "text": "その日つくったものを、必ずもう一人が見ます。間違いを責める場ではないので、遠慮なく出してもらって構いません。"
+          },
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/workplace_04.webp",
+            "number": "18時",
+            "ttl": "ふりかえって終わります",
+            "text": "15分だけ集まって、その日に困ったことを出します。18時30分には片づけて帰ります。持ち帰りの仕事はありません。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 200,
+        "dtWidthSp": 150,
+        "defaultSpClm1": true,
+        "dlBorderColor": "#dddddd",
+        "rowBorderColor": "#dddddd",
+        "dtBorderColor": "#dddddd",
+        "dtBgColor": "#f5f7f9",
+        "fontSizePc": 17,
+        "fontSizeSp": 15,
+        "cellPaddingPc": 16,
+        "rows": [
+          {
+            "dtText": "勤務時間",
+            "ddText": "9:00〜18:00（休憩60分）。前後1時間はずらせます。お子さんの送り迎えで使っている人がいます",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "残業",
+            "ddText": "月に平均〇時間です。20時を過ぎる日はありません。分単位でつけて全額お支払いします",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "お休み",
+            "ddText": "土日祝と年末年始。有給は入社半年で10日。前の日に言っていただければ取れます",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "はじめの3か月",
+            "ddText": "先輩が1人つきます。同じことを何度聞いていただいても構いません。そういう期間です",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "服装",
+            "ddText": "自由です。作業のある日は動きやすい服でお願いしています。制服はありません",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ここに書いてあるのは一例です。実際の一日はご自身の目で見ていただくのがいちばん早いので、見学だけのお申し込みも受け付けています。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "応募・見学のお問い合わせ",
+        "textSub": "＼ 見学だけのお申し込みも歓迎しています ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

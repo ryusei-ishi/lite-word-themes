@@ -8,20 +8,25 @@
 	"icon": "button",
 	"description": "プレミアムリンクボタン（スタイル03）",
 	"aiHint": {
-		"description": "ダウンロードアイコン付き2段テキストボタン。資料請求やダウンロード誘導に最適",
+		"description": "ダウンロードのアイコンつき2段ボタン。上に小さい副文、下に大きい主文。資料請求・カタログのダウンロード・申込書のダウンロードに",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": [
 			"textMain",
 			"textSub",
 			"btnUrl"
 		],
-		"imageAttributes": []
+		"imageAttributes": [],
+		"notes": "🚨 **bgColor の既定 #e1a20e（オレンジ）に白い文字が載るので 2.25:1 しかない**（下限は4.5）。必ず色を指定する。color-mix(in srgb, var(--color-main) 50%, #000) にするとサイトのメインカラーに追従しつつ、どの色でも白文字が読める（黄 6.40 ／ 白に近い灰 4.67 ／ 既定色 12.08 で実測）。ホバーは 40%。🚨 **副文（textSub）の既定が「＼ テキストテキストテキスト ／」**なので必ず書き換える。textMain が大きい行、textSub が上の小さい行。iconMain は **SVGのマークアップそのもの**（Font Awesome のクラス名を入れるとその文字が画面に出る）。既定が下向き矢印のダウンロード印なので、資料配布ならそのままでよい。btnUrl にPDFのURLを入れる。1段でよいなら lw-pr-button-5、複数並べるなら lw-pr-button-6。"
 	},
 	"supports": {
 		"anchor": true,
 		"className": true
 	},
 	"attributes": {
+		"isAffiliate": {
+			"type": "boolean",
+			"default": false
+		},
 		"textSub": {
 			"type": "string",
 			"default": "＼ テキストテキストテキスト ／",
@@ -281,15 +286,24 @@
 		},
 		"btnLinkType": {
 			"type": "string",
-			"default": "url"
+			"default": "url",
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"btnPageId": {
 			"type": "number",
-			"default": 0
+			"default": 0,
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"btnCategoryId": {
 			"type": "number",
-			"default": 0
+			"default": 0,
+			"aiHint": {
+				"skip": true
+			}
 		}
 	},
 	"editorScript": "file:./lw-pr-button-3.js",

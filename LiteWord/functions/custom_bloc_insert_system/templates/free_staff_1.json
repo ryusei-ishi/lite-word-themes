@@ -1,0 +1,139 @@
+{
+  "title": "スタッフ紹介（無料・写真つきカード3枚＋吹き出し）",
+  "description": "【型C：写真が主役】見出し＋リード文＋スタッフカード3枚（横長写真＋名前＋担当とひとこと）＋吹き出しのコメント2つ＋注釈＋指名予約のボタン。予約して人に会いに行く仕事（治療院・サロン・教室・工務店）向けです。🚨 写真枠は**4:3の横長**です。正方形の写真を入れると上下が切られて頭が欠けるので、**1200×900px程度の横長**に差し替えてください。名前の欄は28pxと大きいので、長い肩書きは下の説明文のほうに書いてください。**3人ちょうどが収まりのよい枚数**です。**無料ブロックだけで作ってあります。**",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "スタッフ紹介",
+        "subTitle": "STAFF",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "当日どの者が担当するかは、ご予約のときにお選びいただけます。<br>ご指名がなければ、ご相談の内容に合わせてこちらでお決めします。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-content-2",
+      "attributes": {
+        "columnClass": "clm_3",
+        "showTitle": true,
+        "contents": [
+          {
+            "title": "佐藤 みゆき",
+            "text": "担当：受付・カウンセリング／勤続8年<br>はじめての方のお話をうかがう係です。何をどう伝えればいいか分からないときは、こちらから順番にお聞きしますのでご安心ください。",
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/clinic_staff_01.webp",
+            "buttonText": "",
+            "buttonUrl": "",
+            "buttonBgColor": "var(--color-accent)",
+            "buttonTextColor": "#ffffff"
+          },
+          {
+            "title": "田中 健一",
+            "text": "担当：施術全般／勤続14年<br>長く続いている不調のご相談を多く受けています。その日の状態を見て、無理のない範囲でご提案します。",
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/clinic_staff_02.webp",
+            "buttonText": "",
+            "buttonUrl": "",
+            "buttonBgColor": "var(--color-accent)",
+            "buttonTextColor": "#ffffff"
+          },
+          {
+            "title": "鈴木 あかり",
+            "text": "担当：施術・アフターケア／勤続3年<br>帰られたあとのセルフケアをお伝えする係です。続けられそうなものを1つか2つだけお渡ししています。",
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/clinic_staff_03.webp",
+            "buttonText": "",
+            "buttonUrl": "",
+            "buttonBgColor": "var(--color-accent)",
+            "buttonTextColor": "#ffffff"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "スタッフからひとこと",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-comment-1",
+      "attributes": {
+        "name": "佐藤",
+        "title": "お名前とご都合のよい時間だけ決まっていれば、\nあとは電話でも当日でも変えられます。\n「まだ迷っている」でお電話いただいて大丈夫です。",
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/clinic_staff_01_face.webp",
+        "altText": "佐藤の写真",
+        "commentAlignment": "left"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-comment-1",
+      "attributes": {
+        "name": "田中",
+        "title": "痛いところを我慢して受ける必要はありません。\n途中でも「今のは強い」と言ってください。\nそのほうが結果もよくなります。",
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/clinic_staff_02_face.webp",
+        "altText": "田中の写真",
+        "commentAlignment": "right"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※担当者の勤務日はお問い合わせください。ご指名の追加料金はいただきません。<br>※写真と氏名は本人の同意を得て掲載しています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "担当を指名して予約する",
+        "btnTextSub": "＼ お任せでも構いません ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

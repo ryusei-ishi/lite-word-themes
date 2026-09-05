@@ -6,6 +6,7 @@ import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
 import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+import { lwRel, AffiliateToggle } from '../affiliate-link.js';
 
 /* リンク先の指定（共通部品）で使う属性名の対応 */
 const LINK_KEYS = { url: 'btnUrl', type: 'btnLinkType', page: 'btnPageId', category: 'btnCategoryId' };
@@ -54,6 +55,10 @@ registerBlockType(metadata.name, {
                             checked={props.attributes.openNewTab}
                             onChange={(value) => setAttributes({ openNewTab: value })}
                             help="リンク先を新しいタブで開きたい場合はオンにしてください"
+                        />
+                        <AffiliateToggle
+                            checked={isAffiliate}
+                            onChange={(v) => setAttributes(v ? { isAffiliate: true, openNewTab: true } : { isAffiliate: false })}
                         />
                     </PanelBody>
 
@@ -187,7 +192,7 @@ registerBlockType(metadata.name, {
     },
 
     save: function (props) {
-        const { btnText, bgGradient, textColor, fontWeight, FontSet, btnUrl, selectedIcon, iconColor, borderWidth, borderColor } = props.attributes;
+        const { btnText, bgGradient, textColor, fontWeight, FontSet, btnUrl, selectedIcon, iconColor, borderWidth, borderColor, isAffiliate } = props.attributes;
 
         const blockProps = useBlockProps.save({
             className: 'lw-button-02'
@@ -203,6 +208,7 @@ registerBlockType(metadata.name, {
                         data-lw-link-type={lwLinkDataPropsFromAttrs(props.attributes, LINK_KEYS).linkType}
                         data-lw-link-id={lwLinkDataPropsFromAttrs(props.attributes, LINK_KEYS).linkId}
                         target={props.attributes.openNewTab ? '_blank' : '_self'} // 新しいタブで開くかどうか
+                        rel={lwRel({ affiliate: isAffiliate })}
                         style={{ color: textColor, fontWeight: fontWeight }} // テキスト色、フォント太さとフォントの適用
                         data-lw_font_set={FontSet} // フォントの適用
                     />

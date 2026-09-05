@@ -1,0 +1,113 @@
+{
+  "title": "お客様の声（無料・3件＋声から変えたこと）",
+  "description": "【型B：説明が主役】帯の中に3列のお客様の声カード3件（どんな方か・ひとこと・本文）＋「いただいた声から、変えたこと」4件＋掲載についての注釈＋体験の申し込みボタン。**写真を1枚も使わない**ので、素材が無くてもそのまま貼れます。教室・スクール・サロン・整体など「通ってもらう仕事」の文例です。**無料ブロックだけで作ってあります。**",
+  "blocks": [
+    {
+      "name": "wdl/lw-voice-1",
+      "attributes": {
+        "h2Title": "お客様の声",
+        "nameBackgroundColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "testimonials": [
+          {
+            "name": "40代・女性／通って半年",
+            "title": "続かなかった私が、半年通えています",
+            "content": "これまで何をやっても続かなかったので、また途中でやめるだろうと思っていました。都合の悪い週は振替にしていただけるので、気持ちが切れないまま半年が過ぎました。"
+          },
+          {
+            "name": "30代・男性／お仕事帰りに",
+            "title": "仕事帰りでも間に合う時間でした",
+            "content": "残業で遅くなる日が多く、通えるか不安でした。最終の時間に間に合う日を選べるので、週に一度は必ず立ち寄れています。予定の変更も連絡ひとつで済むのが助かります。"
+          },
+          {
+            "name": "60代・女性／ご紹介で",
+            "title": "何度でも聞き直せる安心感があります",
+            "content": "わからないことを何度も尋ねるのは気が引けましたが、そのたびに一から説明していただけました。同じくらいの年代の方も通われていて、それが続いている理由だと思います。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "いただいた声から、変えたこと",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-1",
+      "attributes": {
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "contents": [
+          {
+            "number": "1",
+            "text": "都合が合わない週の振替を、当日の朝までお受けできるようにしました"
+          },
+          {
+            "number": "2",
+            "text": "最終の受付時間を30分のばし、お仕事帰りでも間に合うようにしました"
+          },
+          {
+            "number": "3",
+            "text": "はじめての方は、2回目までを同じ担当がご案内するようにしました"
+          },
+          {
+            "number": "4",
+            "text": "その日にやった内容を紙でお渡しし、あとから見返せるようにしました"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※掲載しているお声は、ご本人の許可をいただいたうえで、内容を変えずに載せています。<br>感じ方には個人差があります。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "見学・体験を申し込む",
+        "btnTextSub": "＼ その場で決めなくて大丈夫です ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

@@ -1,0 +1,165 @@
+{
+  "title": "こんな場面でお使いいただけます（無料・場面別の写真タイル4枚）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋場面別の写真タイル4枚（お祝い／贈りもの／手みやげ／ふだん使い）＋ご用意にいただくお時間の目安5項目＋注釈＋ご相談ボタン。「誰に向いているか」ではなく「**いつ使うか**」で並べた段です。売り手は言い忘れ、買い手は思いつかないところなので、置くだけで選ばれ方が広がります。菓子店・花店・飲食・写真館・レンタル・清掃・整体など、同じ商品が場面ごとに違う理由で選ばれる業種に向いています。⚠️ タイルは横に4枚並びます。見出しは8文字まで、説明は20文字前後にしてください。行き先はまだ入っていません（空のままなら押せない箱として表示されます）。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "こんな場面で",
+        "subTitle": "SCENE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "同じ品でも、お使いになる場面でお選びいただくものが変わります。<br>よくいただくご相談を4つに分けました。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 24,
+        "tbHeight": 20,
+        "spHeight": 16
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-banner-info-02",
+      "attributes": {
+        "items": [
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/bake_06.webp",
+            "alt": "白い台にのせた飾りつけのケーキ",
+            "title": "お祝いの席に",
+            "description": "お誕生日・記念日・お節句に",
+            "linkUrl": "",
+            "openInNewTab": false
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/bake_04.webp",
+            "alt": "布のリボンを掛けた焼き菓子の詰め合わせ",
+            "title": "贈りものに",
+            "description": "内祝い・お返し・ご挨拶まわりに",
+            "linkUrl": "",
+            "openInNewTab": false
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/bake_01.webp",
+            "alt": "木のテーブルにのせた果物のタルト",
+            "title": "手みやげに",
+            "description": "ご訪問・差し入れ・集まりの席に",
+            "linkUrl": "",
+            "openInNewTab": false
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/bake_05.webp",
+            "alt": "リネンの布の上に置かれた丸いパン",
+            "title": "ふだんのおやつに",
+            "description": "ご家族で・おひとりの休憩に",
+            "linkUrl": "",
+            "openInNewTab": false
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "ご用意にいただくお時間の目安",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-company-2",
+      "attributes": {
+        "spFullDt": true,
+        "items": [
+          {
+            "dt": "ふだんのご購入",
+            "dd": "ご予約なしでそのままお越しください。売り切れることがありますので、確実にご入用のときはお電話をいただけると取り置きします"
+          },
+          {
+            "dt": "お祝いのご注文",
+            "dd": "3日前までにご相談ください。飾りつけ・お名前入れ・ろうそくの本数まで、当日の朝までなら変更できます"
+          },
+          {
+            "dt": "贈りもの",
+            "dd": "5日前までにご相談ください。のし・包装・手提げ袋をご用意します。お送り先が複数のときは早めにお知らせください"
+          },
+          {
+            "dt": "大口のご注文",
+            "dd": "20点を超えるときは1週間前までにご相談ください。数と受け取りの日時が決まっていれば、その場でお受けできます"
+          },
+          {
+            "dt": "直前のご相談",
+            "dd": "間に合わないときは、代わりにご用意できるものをその場でお伝えします。まずはお電話でご相談ください"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※日数はいずれも目安です。混み合う時期は早めに締め切ることがありますので、お日にちが決まった時点でご一報いただけると確実です。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "相談してみる",
+        "btnTextSub": "＼ 場面をお伝えいただければ、こちらからご提案します ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

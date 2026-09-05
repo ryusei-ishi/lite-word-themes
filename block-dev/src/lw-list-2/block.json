@@ -1,67 +1,121 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "wdl/lw-list-2",
-	"version": "1.0.0",
-	"title": "list 02",
-	"category": "lw-list",
-	"icon": "lightbulb",
-	"supports": {
-		"anchor": true
-	},
-	"aiHint": {
-		"description": "画面いっぱいに広がる色帯の中に、チェックマーク付きの白いカードが2列で並ぶ。見出しはこのブロック自身が持つ。こんなお悩み・こんな方に向いています・できることの一覧に",
-		"excludeFromAutoSelect": false,
-		"contentAttributes": ["titleText", "contents"],
-		"imageAttributes": ["backgroundImage"],
-		"notes": "contents は [{ text }] の配列。🚨 backgroundImage を必ず渡すこと。空にすると save() が background-image:url() をそのまま書き出し（空判定が無い）、空の url() はそのページ自身をもう一度取りに行くので毎表示で無駄なリクエストが1本増える。🚨 カードは2列で、750px以下で1列になる。**項目数は偶数**にすること（奇数だと最後の1枚だけが取り残される）。4件か6件が使いやすい。⚠️ text は white-space:pre-wrap なので **改行がそのまま効く**。1件を2行に割ると読みやすい（paid-block-content-7 は改行が効かず br が要る。ブロックごとに違う）。⚠️ contents[].borderColor は save() が読んでいないので書いても何も起きない。⚠️ 見出しはこのブロック自身が h2 で出す（titleText が空なら見出しごと出ない）ので、上に別の見出しブロックを重ねないこと。⚠️ 帯は全幅に広がり、自前で上下 88px / 64px の padding を持つ（450px以下は 64px / 32px）ので前後にスペーサーを足さない。⚠️ bgGradient（帯の色）・filterOpacity・colorLiSvg（チェックの色）はインラインstyleに直接入るので var(--color-main) や var(--color-accent) を渡してよい。filterOpacity の既定 0.8 は帯がほぼ単色になって写真が見えない。写真の質感を出すなら 0.7 あたりだが、**白い見出しとのコントラストが 3:1 を切らないか**を渡す写真ごとに確かめること。"
-	},
-	"attributes": {
-		"backgroundImage": { "type": "string", "default": "", "aiHint": { "role": "image", "note": "背景画像URL。省略可" } },
-		"bgGradient": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
-		"filterOpacity": { "type": "number", "default": 0.8, "aiHint": { "skip": true } },
-		"titleText": {
-			"type": "string",
-			"default": "機能紹介",
-			"aiHint": { "role": "heading", "contentGuide": "リストのタイトル。3〜15文字", "example": "こんなお悩みありませんか？" }
-		},
-		"fontLi": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"fontWeightLi": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"colorLiSvg": { "type": "string", "default": "var(--color-accent)", "aiHint": { "skip": true } },
-		"contents": {
-			"type": "array",
-			"source": "query",
-			"selector": ".lw-list-2__li",
-			"query": {
-				"text": {
-					"type": "string",
-					"source": "html",
-					"selector": ".lw-list-2__text p"
-				},
-				"borderColor": {
-					"type": "string",
-					"source": "attribute",
-					"selector": "figure",
-					"attribute": "data-border-color"
-				}
-			},
-			"default": [
-				{
-					"text": "何から始めたらいいか\nわからない",
-					"borderColor": "var(--color-main)"
-				},
-				{
-					"text": "作りたいけど\n時間がない",
-					"borderColor": "var(--color-main)"
-				},
-				{
-					"text": "自分で作ると\nダサくなる…",
-					"borderColor": "var(--color-main)"
-				}
-			],
-			"aiHint": { "role": "list", "contentGuide": "悩み・課題項目。3〜6個。各text 10〜30文字。改行可", "example": [{"text": "何から始めたらいいか\nわからない"}] }
-		}
-	},
-	"editorScript": "file:./lw-list-2.js",
-	"no": 2
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "wdl/lw-list-2",
+    "version": "1.0.0",
+    "title": "list 02",
+    "category": "lw-list",
+    "icon": "lightbulb",
+    "supports": {
+        "anchor": true
+    },
+    "aiHint": {
+        "description": "画面いっぱいに広がる色帯の中に、チェックマーク付きの白いカードが2列で並ぶ。見出しはこのブロック自身が持つ。こんなお悩み・こんな方に向いています・できることの一覧に",
+        "excludeFromAutoSelect": false,
+        "contentAttributes": [
+            "titleText",
+            "contents"
+        ],
+        "imageAttributes": [
+            "backgroundImage"
+        ],
+        "notes": "contents は [{ text }] の配列。🚨 backgroundImage を必ず渡すこと。空にすると save() が background-image:url() をそのまま書き出し（空判定が無い）、空の url() はそのページ自身をもう一度取りに行くので毎表示で無駄なリクエストが1本増える。🚨 カードは2列で、750px以下で1列になる。**項目数は偶数**にすること（奇数だと最後の1枚だけが取り残される）。4件か6件が使いやすい。⚠️ text は white-space:pre-wrap なので **改行がそのまま効く**。1件を2行に割ると読みやすい（paid-block-content-7 は改行が効かず br が要る。ブロックごとに違う）。⚠️ contents[].borderColor は save() が読んでいないので書いても何も起きない。⚠️ 見出しはこのブロック自身が h2 で出す（titleText が空なら見出しごと出ない）ので、上に別の見出しブロックを重ねないこと。⚠️ 帯は全幅に広がり、自前で上下 88px / 64px の padding を持つ（450px以下は 64px / 32px）ので前後にスペーサーを足さない。⚠️ bgGradient（帯の色）・filterOpacity・colorLiSvg（チェックの色）はインラインstyleに直接入るので var(--color-main) や var(--color-accent) を渡してよい。filterOpacity の既定 0.8 は帯がほぼ単色になって写真が見えない。写真の質感を出すなら 0.7 あたりだが、**白い見出しとのコントラストが 3:1 を切らないか**を渡す写真ごとに確かめること。 🚨 **このブロック自体が全幅の色帯**（style.css で margin-left:calc((100% - 100vw)/2) ＋ width:100vw）。lw-bg-1 で包まない（帯が二重になって色が濃く出る）。前後に別の帯が来るときはスペーサーを入れない。🚨 見出し（titleText）を内蔵しているので、上に別の見出しブロックを置かない。🚨 **colorLiSvg（チェック印）は白いカードの上に出る。**白にすると消える。既定の var(--color-accent) もテーマ側にその変数が無いサイトでは消えるので、色を明示する。"
+    },
+    "attributes": {
+        "backgroundImage": {
+            "type": "string",
+            "default": "",
+            "aiHint": {
+                "role": "image",
+                "note": "背景画像URL。省略可"
+            }
+        },
+        "bgGradient": {
+            "type": "string",
+            "default": "var(--color-main)",
+            "aiHint": {
+                "skip": true
+            }
+        },
+        "filterOpacity": {
+            "type": "number",
+            "default": 0.8,
+            "aiHint": {
+                "skip": true
+            }
+        },
+        "titleText": {
+            "type": "string",
+            "default": "機能紹介",
+            "aiHint": {
+                "role": "heading",
+                "contentGuide": "リストのタイトル。3〜15文字",
+                "example": "こんなお悩みありませんか？"
+            }
+        },
+        "fontLi": {
+            "type": "string",
+            "default": "",
+            "aiHint": {
+                "skip": true
+            }
+        },
+        "fontWeightLi": {
+            "type": "string",
+            "default": "",
+            "aiHint": {
+                "skip": true
+            }
+        },
+        "colorLiSvg": {
+            "type": "string",
+            "default": "var(--color-accent)",
+            "aiHint": {
+                "skip": true
+            }
+        },
+        "contents": {
+            "type": "array",
+            "source": "query",
+            "selector": ".lw-list-2__li",
+            "query": {
+                "text": {
+                    "type": "string",
+                    "source": "html",
+                    "selector": ".lw-list-2__text p"
+                },
+                "borderColor": {
+                    "type": "string",
+                    "source": "attribute",
+                    "selector": "figure",
+                    "attribute": "data-border-color"
+                }
+            },
+            "default": [
+                {
+                    "text": "何から始めたらいいか\nわからない",
+                    "borderColor": "var(--color-main)"
+                },
+                {
+                    "text": "作りたいけど\n時間がない",
+                    "borderColor": "var(--color-main)"
+                },
+                {
+                    "text": "自分で作ると\nダサくなる…",
+                    "borderColor": "var(--color-main)"
+                }
+            ],
+            "aiHint": {
+                "role": "list",
+                "contentGuide": "悩み・課題項目。3〜6個。各text 10〜30文字。改行可",
+                "example": [
+                    {
+                        "text": "何から始めたらいいか\nわからない"
+                    }
+                ]
+            }
+        }
+    },
+    "editorScript": "file:./lw-list-2.js",
+    "no": 2
 }

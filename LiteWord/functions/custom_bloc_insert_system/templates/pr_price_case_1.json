@@ -1,0 +1,494 @@
+{
+  "title": "お見積りの例（ケース別3例・内訳つき）",
+  "description": "【型A：表が主役】見出し＋ひとこと＋よくあるご依頼3件の合計金額と内訳＋金額が動くところの表＋見積り依頼ボタン。料金表だけでは「自分の場合はいくらか」が分かりません。実例を出すと問い合わせの前の迷いが減ります。3プラン比較（料金プラン）とは役割が違うので、同じページに両方置けます。金額・内訳はご自身の実例に置き換えてください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "お見積りの例",
+        "subTitle": "ESTIMATE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "料金表を見ても、自分の場合いくらになるのかは分かりにくいものです。<br>よくあるご依頼を3つ、内訳までそのまま載せました。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-column-1",
+      "attributes": {
+        "columnsPc": 3,
+        "columnsSp": 1,
+        "columnGapPc": 16,
+        "rowGapPc": 16,
+        "columnGapSp": 12,
+        "rowGapSp": 12
+      },
+      "innerBlocks": [
+        {
+          "name": "wdl/lw-pr-waku-1",
+          "attributes": {
+            "waku1MaxWidthPc": 420,
+            "waku1MaxWidthSp": 420,
+            "waku1PaddingTopPc": 24,
+            "waku1PaddingBottomPc": 22,
+            "waku1PaddingLeftPc": 20,
+            "waku1PaddingRightPc": 20,
+            "waku1PaddingTopSp": 20,
+            "waku1PaddingBottomSp": 18,
+            "waku1PaddingLeftSp": 16,
+            "waku1PaddingRightSp": 16,
+            "waku1BorderWidthPc": 1,
+            "waku1BorderWidthSp": 1,
+            "waku1BorderColorPc": "#dfe4ea",
+            "waku1BorderColorSp": "#dfe4ea",
+            "waku1BorderRadiusPc": [
+              8,
+              8,
+              8,
+              8
+            ],
+            "waku1BgColorPc": "#ffffff",
+            "waku1BgColorSp": "#ffffff"
+          },
+          "innerBlocks": [
+            {
+              "name": "core/paragraph",
+              "attributes": {
+                "content": "CASE 01",
+                "align": "center",
+                "style": {
+                  "typography": {
+                    "fontSize": "12px"
+                  },
+                  "color": {
+                    "text": "color-mix(in srgb, var(--color-main) 50%, #000)"
+                  },
+                  "spacing": {
+                    "margin": {
+                      "top": "0px",
+                      "bottom": "6px"
+                    }
+                  }
+                }
+              },
+              "innerBlocks": []
+            },
+            {
+              "name": "core/heading",
+              "attributes": {
+                "content": "はじめてのご依頼",
+                "level": 3,
+                "textAlign": "center",
+                "style": {
+                  "typography": {
+                    "fontSize": "17px"
+                  },
+                  "spacing": {
+                    "margin": {
+                      "top": "0px",
+                      "bottom": "10px"
+                    }
+                  }
+                }
+              },
+              "innerBlocks": []
+            },
+            {
+              "name": "core/heading",
+              "attributes": {
+                "content": "38,000<span style=\"font-size:52%;margin-left:2px;\">円</span>",
+                "level": 4,
+                "textAlign": "center",
+                "style": {
+                  "color": {
+                    "text": "color-mix(in srgb, var(--color-main) 50%, #000)"
+                  },
+                  "typography": {
+                    "fontSize": "34px"
+                  },
+                  "spacing": {
+                    "margin": {
+                      "top": "0px",
+                      "bottom": "10px"
+                    }
+                  }
+                }
+              },
+              "innerBlocks": []
+            },
+            {
+              "name": "core/paragraph",
+              "attributes": {
+                "content": "基本料金 24,000円<br>作業 2時間 8,000円<br>出張費 6,000円",
+                "align": "center",
+                "style": {
+                  "typography": {
+                    "fontSize": "13px"
+                  },
+                  "spacing": {
+                    "margin": {
+                      "top": "0px",
+                      "bottom": "0px"
+                    }
+                  }
+                }
+              },
+              "innerBlocks": []
+            }
+          ]
+        },
+        {
+          "name": "wdl/lw-pr-waku-1",
+          "attributes": {
+            "waku1MaxWidthPc": 420,
+            "waku1MaxWidthSp": 420,
+            "waku1PaddingTopPc": 24,
+            "waku1PaddingBottomPc": 22,
+            "waku1PaddingLeftPc": 20,
+            "waku1PaddingRightPc": 20,
+            "waku1PaddingTopSp": 20,
+            "waku1PaddingBottomSp": 18,
+            "waku1PaddingLeftSp": 16,
+            "waku1PaddingRightSp": 16,
+            "waku1BorderWidthPc": 1,
+            "waku1BorderWidthSp": 1,
+            "waku1BorderColorPc": "#dfe4ea",
+            "waku1BorderColorSp": "#dfe4ea",
+            "waku1BorderRadiusPc": [
+              8,
+              8,
+              8,
+              8
+            ],
+            "waku1BgColorPc": "#ffffff",
+            "waku1BgColorSp": "#ffffff"
+          },
+          "innerBlocks": [
+            {
+              "name": "core/paragraph",
+              "attributes": {
+                "content": "CASE 02",
+                "align": "center",
+                "style": {
+                  "typography": {
+                    "fontSize": "12px"
+                  },
+                  "color": {
+                    "text": "color-mix(in srgb, var(--color-main) 50%, #000)"
+                  },
+                  "spacing": {
+                    "margin": {
+                      "top": "0px",
+                      "bottom": "6px"
+                    }
+                  }
+                }
+              },
+              "innerBlocks": []
+            },
+            {
+              "name": "core/heading",
+              "attributes": {
+                "content": "いちばん多いご依頼",
+                "level": 3,
+                "textAlign": "center",
+                "style": {
+                  "typography": {
+                    "fontSize": "17px"
+                  },
+                  "spacing": {
+                    "margin": {
+                      "top": "0px",
+                      "bottom": "10px"
+                    }
+                  }
+                }
+              },
+              "innerBlocks": []
+            },
+            {
+              "name": "core/heading",
+              "attributes": {
+                "content": "86,000<span style=\"font-size:52%;margin-left:2px;\">円</span>",
+                "level": 4,
+                "textAlign": "center",
+                "style": {
+                  "color": {
+                    "text": "color-mix(in srgb, var(--color-main) 50%, #000)"
+                  },
+                  "typography": {
+                    "fontSize": "34px"
+                  },
+                  "spacing": {
+                    "margin": {
+                      "top": "0px",
+                      "bottom": "10px"
+                    }
+                  }
+                }
+              },
+              "innerBlocks": []
+            },
+            {
+              "name": "core/paragraph",
+              "attributes": {
+                "content": "基本料金 24,000円<br>作業 5時間 50,000円<br>材料費 12,000円",
+                "align": "center",
+                "style": {
+                  "typography": {
+                    "fontSize": "13px"
+                  },
+                  "spacing": {
+                    "margin": {
+                      "top": "0px",
+                      "bottom": "0px"
+                    }
+                  }
+                }
+              },
+              "innerBlocks": []
+            }
+          ]
+        },
+        {
+          "name": "wdl/lw-pr-waku-1",
+          "attributes": {
+            "waku1MaxWidthPc": 420,
+            "waku1MaxWidthSp": 420,
+            "waku1PaddingTopPc": 24,
+            "waku1PaddingBottomPc": 22,
+            "waku1PaddingLeftPc": 20,
+            "waku1PaddingRightPc": 20,
+            "waku1PaddingTopSp": 20,
+            "waku1PaddingBottomSp": 18,
+            "waku1PaddingLeftSp": 16,
+            "waku1PaddingRightSp": 16,
+            "waku1BorderWidthPc": 1,
+            "waku1BorderWidthSp": 1,
+            "waku1BorderColorPc": "#dfe4ea",
+            "waku1BorderColorSp": "#dfe4ea",
+            "waku1BorderRadiusPc": [
+              8,
+              8,
+              8,
+              8
+            ],
+            "waku1BgColorPc": "#ffffff",
+            "waku1BgColorSp": "#ffffff"
+          },
+          "innerBlocks": [
+            {
+              "name": "core/paragraph",
+              "attributes": {
+                "content": "CASE 03",
+                "align": "center",
+                "style": {
+                  "typography": {
+                    "fontSize": "12px"
+                  },
+                  "color": {
+                    "text": "color-mix(in srgb, var(--color-main) 50%, #000)"
+                  },
+                  "spacing": {
+                    "margin": {
+                      "top": "0px",
+                      "bottom": "6px"
+                    }
+                  }
+                }
+              },
+              "innerBlocks": []
+            },
+            {
+              "name": "core/heading",
+              "attributes": {
+                "content": "毎月お願いしたい方",
+                "level": 3,
+                "textAlign": "center",
+                "style": {
+                  "typography": {
+                    "fontSize": "17px"
+                  },
+                  "spacing": {
+                    "margin": {
+                      "top": "0px",
+                      "bottom": "10px"
+                    }
+                  }
+                }
+              },
+              "innerBlocks": []
+            },
+            {
+              "name": "core/heading",
+              "attributes": {
+                "content": "18,000<span style=\"font-size:52%;margin-left:2px;\">円</span>",
+                "level": 4,
+                "textAlign": "center",
+                "style": {
+                  "color": {
+                    "text": "color-mix(in srgb, var(--color-main) 50%, #000)"
+                  },
+                  "typography": {
+                    "fontSize": "34px"
+                  },
+                  "spacing": {
+                    "margin": {
+                      "top": "0px",
+                      "bottom": "10px"
+                    }
+                  }
+                }
+              },
+              "innerBlocks": []
+            },
+            {
+              "name": "core/paragraph",
+              "attributes": {
+                "content": "月あたりの目安<br>作業 2時間 ／ 月1回<br>出張費・材料費こみ",
+                "align": "center",
+                "style": {
+                  "typography": {
+                    "fontSize": "13px"
+                  },
+                  "spacing": {
+                    "margin": {
+                      "top": "0px",
+                      "bottom": "0px"
+                    }
+                  }
+                }
+              },
+              "innerBlocks": []
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 220,
+        "dtFixedSp": true,
+        "dtWidthSp": 110,
+        "dtBgColor": "#f7f9fb",
+        "dlBorderColor": "#dfe4ea",
+        "rowBorderColor": "#dfe4ea",
+        "rows": [
+          {
+            "dtText": "広さ・数量",
+            "ddText": "いちばん大きく効きます。おおよその広さ（◯畳・◯㎡）が分かるとその場で概算できます",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "作業にかかる時間",
+            "ddText": "1時間あたり 4,000円。現地を見てから時間の見込みをお伝えします",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "お急ぎのご依頼",
+            "ddText": "3日以内のご依頼は 20% 増しになります",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "出張の範囲",
+            "ddText": "市内は 6,000円。市外は距離に応じて。片道30kmを超えるときは事前にご相談",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "材料・部材",
+            "ddText": "実費をそのままいただきます。仕入れの伝票をお見せできます",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "お見積り自体",
+            "ddText": "無料です。お断りいただいても費用はかかりません",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※金額はすべて税込の目安です。現地を拝見してから正式なお見積りをお出しします。<br>※作業の途中で追加が出そうなときは、必ず手を止めてご連絡します。黙って足すことはありません。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 16,
+        "tbHeight": 12,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "無料でお見積りを取る",
+        "textSub": "＼ 写真を送るだけでも概算できます ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

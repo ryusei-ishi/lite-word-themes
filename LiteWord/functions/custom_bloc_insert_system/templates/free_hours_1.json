@@ -1,0 +1,146 @@
+{
+  "title": "営業時間・アクセス（無料・曜日ごとの時間＋店舗情報＋地図）",
+  "description": "【型A：表が主役】見出し＋リード文＋曜日ごとの営業時間の表5行＋店舗情報の表4行＋地図の置き場＋注釈。曜日で営業時間が変わる仕事（飲食・サロン・整体・教室）向けです。地図はご自身の Google マップの埋め込みコードに差し替えてください。**無料ブロックだけで作ってあります。**",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "営業時間・アクセス",
+        "subTitle": "Hours & Access",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "曜日によって受付の時間が変わります。<br>はじめての方は、お越しになる前にご確認ください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-company-1",
+      "attributes": {
+        "contents": [
+          {
+            "title": "平日",
+            "text": "10:00 〜 19:00　（最終受付 18:00）"
+          },
+          {
+            "title": "土曜",
+            "text": "10:00 〜 17:00　（最終受付 16:00）"
+          },
+          {
+            "title": "日曜・祝日",
+            "text": "10:00 〜 15:00　（ご予約の方のみ）"
+          },
+          {
+            "title": "定休日",
+            "text": "水曜日・第3火曜日"
+          },
+          {
+            "title": "年末年始",
+            "text": "12月30日 〜 1月3日はお休みします"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "店舗情報",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-company-2",
+      "attributes": {
+        "items": [
+          {
+            "dt": "店名",
+            "dd": "〇〇〇〇 △△店"
+          },
+          {
+            "dt": "住所",
+            "dd": "〒000-0000　〇〇県〇〇市〇〇町1-2-3　〇〇ビル 2F"
+          },
+          {
+            "dt": "電話",
+            "dd": "000-0000-0000"
+          },
+          {
+            "dt": "アクセス",
+            "dd": "〇〇線 △△駅 東口から徒歩5分／駐車場3台あり"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "地図",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/html",
+      "attributes": {
+        "content": "<!-- ここに Google マップの埋め込みコードを貼ってください。\n     Google マップで店舗を検索 → 共有 → 地図を埋め込む → HTMLをコピー → ここに貼り付け -->\n<div style=\"padding:48px 16px;text-align:center;background:#f2f5f8;border:1px dashed #b9c6d3;border-radius:8px;color:#5a6b7c;font-size:14px;\">ここに Google マップの埋め込みコードを貼ってください</div>"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※祝日の営業は月によって変わります。最新の予定はお知らせ欄でご確認ください。<br>お急ぎのご用件はお電話でお問い合わせください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

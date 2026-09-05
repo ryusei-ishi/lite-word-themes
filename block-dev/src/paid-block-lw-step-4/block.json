@@ -11,10 +11,13 @@
 	},
 	"editorScript": "file:./paid-block-lw-step-4.js",
 	"aiHint": {
-		"description": "番号付きカード型ステップ。メインカラー番号+タイトル+説明。サービスフローに",
+		"description": "白いカードを隙間8pxで詰めて縦に積む、番号つきのステップ。左に大きな番号、右に見出しと説明。1件あたりが短い手順を4〜6段並べるときに。お問い合わせ後の流れ・お申し込みの手順・作業の段取りに",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["contents"],
-		"imageAttributes": []
+		"contentAttributes": [
+			"contents"
+		],
+		"imageAttributes": [],
+		"notes": "🚨 **属性名 bgGradient は「背景」ではなく「カードの枠線の色」**（save() が li の borderColor にだけ渡す）。⚠️ **同じ名前が paid-block-lw-step-5 では「番号バッジの背景」**になる。ブロックごとに違う。🚨 **colorNo（番号の色）の既定が var(--color-main)。** カードは白地なので、明るいサイト色（黄 #f5b301）だと 1.85:1 になって読めない。**大きい文字でも下限は 3:1**。color-mix(in srgb, var(--color-main) 50%, #000) のように暗くして渡す。枠線も同じ色にそろえるとよい。🚨 **番号の欄は 3em 固定で、番号の文字は 2.4em**。fontSizeClass:font_size_m は 24px なので欄 72px に対し1文字 57.6px。**半角2桁（01〜99）がぎりぎり**。「当日」のような全角2文字は 115px になってはみ出す。説明文（text）は white-space: pre-wrap なので**改行文字がそのまま効く**（<br> は要らない）。見出しは titleTag（既定 h3）で 1em＝24px、説明は 0.71em＝17px。contents は [{ no, title, text }]。ulMaxWidth（既定1080）で内側の幅を決める。カードは gap 8px で詰まって並ぶので**段と段の間にスペーサーを入れない**。自前で margin: 32px 0（800px以下24px）を持つので前後にも足さない。"
 	},
 	"no": 4,
 	"attributes": {

@@ -14,7 +14,7 @@
 			"rows"
 		],
 		"imageAttributes": [],
-		"notes": "rows は [{\"dtText\":\"商号\",\"ddText\":\"株式会社〇〇\",\"pcClm1\":null,\"spClm1\":null,\"bgColor\":\"\",\"textColor\":\"\"}] の形。属性だけで完成するので InnerBlocks は要らない（2026-08-28 に実際の save() で描画して確認。それ以前ここに『InnerBlocks使用のテーブル。AI直接生成非推奨』と書いてあったのは誤りで、そのせいで候補から外れていた）。pcClm1 / spClm1 を true にするとその行だけ項目名が上・内容が下の全幅になるので、事業内容のように文が長い項目に使う。ddText には <br> が使える。dtFixedSp:true のとき、スマホの項目名は dtWidthSp の幅で折り返す（100px なら4文字まで。『許可・登録』の5文字は2行に割れた）ので項目名は短くする。"
+		"notes": "🚨 **スマホでの列の決まり方に必ず気をつける。**`dtFixedSp` を入れないと 375px でも `1fr 1fr` の2列のままで、内容が約110pxに潰れて何行にも折れる。逃げ道は2つ:①**`defaultSpClm1: true`** … 700px 以下で全部の行を縦積み（項目名が上・内容が下）にする。項目名が5文字以上あるとき・内容が長いときはこちらが読みやすい。②`dtFixedSp: true` ＋ `dtWidthSp: 100` … 2列のまま項目名の幅を固定する。**このときスマホの項目名は4文字まで**。長い行だけ `spClm1: true` で全幅にする。🚨 **このブロックは `@container` ではなく `@media (max-width:700px)` で切り替わる。**入れ物の幅を細くしただけでは確認できない。**必ず画面そのものを狭くして見る**（iframe を375pxにする等）。🚨 PC の項目名は `dtWidthPc: 200` で **8文字まで**（9文字目から2行になる）。`rows` は `[{dtText, ddText, pcClm1, spClm1, bgColor, textColor}]`。`ddText` は `<br>` が使える。自前マージンは持たないので前後のスペーサーは自分で入れる。📌 **属性だけで完成するので InnerBlocks は要らない**（2026-08-28 に実際の save() で描画して確認。それ以前ここに「InnerBlocks使用のテーブル・AI直接生成非推奨」と書いてあったのは誤りで、そのせいで候補から外れていた）。rows の実例: `[{\"dtText\":\"商号\",\"ddText\":\"株式会社〇〇\",\"pcClm1\":null,\"spClm1\":null,\"bgColor\":\"\",\"textColor\":\"\"}]`。**`pcClm1` を true にするとPCでもその行だけ全幅**（項目名が上・内容が下）になるので、事業内容のように文が長い項目に使う。"
 	},
 	"supports": {
 		"anchor": true,

@@ -23,6 +23,7 @@ function customize_set($items, $set, $sec = "", $wp_customize = "") {
                     case 'text':
                     case 'textarea':
                     case 'select':
+                    case 'icon_select':
                     case 'radio':
                     case 'range':
                     case 'date':
@@ -35,7 +36,7 @@ function customize_set($items, $set, $sec = "", $wp_customize = "") {
                     case 'time':
                         $control_type = $control[0];
                         $choices      = isset( $control[4] ) ? $control[4] : [];
-                        
+
                         // number と range の場合は追加の属性を設定可能
                         $input_attrs = [];
                         if ( in_array( $control_type, ['number', 'range'] ) ) {
@@ -44,7 +45,17 @@ function customize_set($items, $set, $sec = "", $wp_customize = "") {
                             if ( isset( $control[6] ) ) $input_attrs['max'] = $control[6];
                             if ( isset( $control[7] ) ) $input_attrs['step'] = $control[7];
                         }
-                        
+
+                        // icon_select は素の select と同じ WP_Customize_Control
+                        // （WPコアは select に input_attrs を出力しないため、クラス名では渡せない）。
+                        // IDを登録しておき、JS側は #customize-control-<ID> を目印に絵付き
+                        // ポップアップを着せ替える。
+                        if ( $control_type === 'icon_select' ) {
+                            $control_type = 'select';
+                            lw_icon_picker_control_ids( $set_in );
+                            lw_icon_picker_used_keys( array_keys( $choices ) );
+                        }
+
                         add_custom_control(
                             $wp_customize,
                             $set_in,
@@ -216,14 +227,229 @@ function footer_ptn_arr() {
     return $footer_ptn;
 }
 
-function follow_bottom_cta_arr(){
-    return $follow_bottom_cta_arr = [
-        '' => '未選択',
-        'ptn_1' => '追従CTAパターン1',
-        'ptn_2' => '追従CTAパターン2',
-        'none' => '非表示',
+// プレミアム限定の追従CTAパターン（ptn_3〜ptn_12）
+/**
+ * プレミアム限定パターンのキー→ラベル。ここが唯一の情報源。
+ * 🚨 lw_follow_bottom_cta_premium_ptns() と follow_bottom_cta_arr() が
+ *    それぞれ独立にこの10種を書いていると、将来ptn_13等を追加した際に
+ *    片方だけ更新し忘れる事故（課金バイパス／選べるのに表示されない）に直結する。
+ */
+function lw_follow_bottom_cta_premium_pattern_labels(){
+    return [
+        'ptn_3' => '追従CTAパターン3（ミニマル・フローティングピル型）',
+        'ptn_4' => '追従CTAパターン4（価格訴求・EC型）',
+        'ptn_5' => '追従CTAパターン5（営業時間・受付状況型）',
+        'ptn_6' => '追従CTAパターン6（期間限定・キャンペーン訴求型）',
+        'ptn_7' => '追従CTAパターン7（チャット風フローティング展開型）',
+        'ptn_8' => '追従CTAパターン8（左右2分割・振り分け型）',
+        'ptn_9' => '追従CTAパターン9（読了率連動・スクロールバー型）',
+        'ptn_10' => '追従CTAパターン10（信頼・実績訴求型）',
+        'ptn_11' => '追従CTAパターン11（フォーム埋め込み・リード獲得型）',
+        'ptn_12' => '追従CTAパターン12（アコーディオン開閉・多チャンネル型）',
     ];
 }
+function lw_follow_bottom_cta_premium_ptns(){
+    return array_keys(lw_follow_bottom_cta_premium_pattern_labels());
+}
+function follow_bottom_cta_arr(){
+    $follow_bottom_cta_arr = [
+        '' => '未選択',
+        'ptn_1' => '追従CTAパターン1（シンプル型）',
+        'ptn_2' => '追従CTAパターン2（士業・クリニック型）',
+    ];
+    if (defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true) {
+        $follow_bottom_cta_arr += lw_follow_bottom_cta_premium_pattern_labels();
+    }
+    $follow_bottom_cta_arr['none'] = '非表示';
+    return $follow_bottom_cta_arr;
+}
+/**
+ * 追従CTAのパターンを解決する（サイト全体設定→投稿タイプ別設定→固定ページ個別上書きの順）。
+ * templates/follow_bottom_cta/index.php と 追従CTAウィジェット（functions/widget/item/follow_bottom_cta.php）の
+ * 両方から呼ばれる共通処理（2026-09-04・ウィジェット追加時に index.php から抽出）。
+ */
+function lw_resolve_follow_bottom_cta_ptn(){
+    $ptn_switch = Lw_theme_mod_set("follow_bottom_cta_set_ptn_df","none");
+    // 🚨 固定ページ個別上書き(投稿メタ)は「そのページ・その投稿を見ているとき」だけ参照する。
+    //    is_page()/is_single() の外（検索結果・アーカイブ・404等）で参照すると、
+    //    メインクエリ先頭の投稿がたまたま個別設定を持つページだった場合に、
+    //    無関係なページの設定が漏れて適用されてしまう（2026-09-04レビューで発見）。
+    if(is_page()){
+        $ptn_switch = Lw_theme_mod_set("follow_bottom_cta_set_ptn_page", $ptn_switch);
+        $ptn_switch = Lw_put_text("follow_bottom_cta_ptn", $ptn_switch);
+    }
+    else if(is_single()){
+        $ptn_switch = Lw_theme_mod_set("follow_bottom_cta_set_ptn_post", $ptn_switch);
+        $ptn_switch = Lw_put_text("follow_bottom_cta_ptn", $ptn_switch);
+    }
+    else if(is_archive()){
+        $ptn_switch = Lw_theme_mod_set("follow_bottom_cta_set_ptn_archive", $ptn_switch);
+    }
+    return $ptn_switch;
+}
+/**
+ * 追従CTAのパターンが実際に描画してよい値かどうかを判定する。
+ * 🚨 follow_bottom_cta_ptn は固定ページ個別設定の投稿メタ経由でも書き込める
+ *    （functions/custom_post/page.php、sanitize_text_field() のみで中身は未検証）ため、
+ *    既知のパターン名以外を get_template_part() に渡すとパストラバーサルの入力になり得る
+ *    （2026-09-04セキュリティレビューで指摘）。ここで一元的にホワイトリスト検証する。
+ *
+ * @param string $ptn
+ * @return bool
+ */
+function lw_follow_bottom_cta_is_renderable($ptn){
+    if(empty($ptn) || $ptn === "none"){
+        return false;
+    }
+    if(in_array($ptn, lw_follow_bottom_cta_premium_ptns(), true) && !(defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true)){
+        return false;
+    }
+    $known_ptns = array_diff(array_keys(follow_bottom_cta_arr()), ['', 'none']);
+    if(!in_array($ptn, $known_ptns, true)){
+        return false;
+    }
+    return true;
+}
+/**
+ * 追従CTAを1リクエストにつき最大1回だけ描画する。
+ * 🚨 サイト全体設定・固定ページ個別設定・追従CTAウィジェットなど、複数の指定経路が
+ *    同時に有効でも .follow_bottom_cta が重複して出ないようにするガード（static変数）。
+ *    scroll連動の表示切替スクリプトは querySelector（単数）で1つ目しか拾わないため、
+ *    2つ以上出すと片方が永久に opacity:0 のまま残る事故になる。
+ * 描画できない値（none・空・プレミアム限定パターンでサブスク無効・未知の値）のときは
+ * 何もしない（false を返す）。
+ *
+ * @param string $ptn follow_bottom_cta_arr() のキー（例: "ptn_5", "none"）
+ * @return bool 実際に描画したら true
+ */
+function lw_render_follow_bottom_cta_once($ptn){
+    static $rendered = false;
+    if($rendered || !lw_follow_bottom_cta_is_renderable($ptn)){
+        return false;
+    }
+    get_template_part("./templates/follow_bottom_cta/{$ptn}/index");
+    ?>
+    <script>
+    'use strict';
+    {
+        // ページのスクロールイベント
+        window.addEventListener('scroll', () => {
+            const followCta = document.querySelector('.follow_bottom_cta');
+            if (!followCta) return; // .follow_bottom_ctaが存在しない場合は処理を終了
+
+            const scrollY = window.scrollY; // 現在のスクロール位置
+            const scrollHeight = document.documentElement.scrollHeight; // ページ全体の高さ
+            const clientHeight = document.documentElement.clientHeight; // ウィンドウの高さ
+
+            // トップから200px下で .true を付与
+            if (scrollY > 200) {
+                followCta.classList.add('true');
+            } else {
+                followCta.classList.remove('true');
+            }
+
+            // 一番下から100px以内で .true を削除
+            if (scrollY + clientHeight >= scrollHeight - 100) {
+                followCta.classList.remove('true');
+            }
+        });
+    }
+    </script>
+    <?php
+    $rendered = true;
+    return true;
+}
+
+/* ==========================================================
+ * サイドの追従SNSリンク（画面の左右中央に張り付くSNSフォローバー）
+ * ------------------------------------------------------------
+ * 追従CTA（follow_bottom_cta_*）と同じ設計。全パターンがプレミア限定
+ * （2026-09-04 Ryuichi指示）なので follow_bottom_cta_arr() と違い、
+ * 無料の下地パターンは無い＝非サブスクでは「非表示」以外選べない。
+ * ======================================================= */
+function lw_side_follow_sns_premium_pattern_labels(){
+    return [
+        'ptn_1' => 'サイドSNSパターン1（シンプル型）',
+        'ptn_2' => 'サイドSNSパターン2（ラベル付き型）',
+        'ptn_3' => 'サイドSNSパターン3（タブ展開型）',
+        'ptn_4' => 'サイドSNSパターン4（フローティングボタン型）',
+    ];
+}
+function lw_side_follow_sns_premium_ptns(){
+    return array_keys(lw_side_follow_sns_premium_pattern_labels());
+}
+function side_follow_sns_arr(){
+    $arr = [
+        '' => '未選択',
+    ];
+    if (defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true) {
+        $arr += lw_side_follow_sns_premium_pattern_labels();
+    }
+    $arr['none'] = '非表示';
+    return $arr;
+}
+function lw_side_follow_sns_is_renderable($ptn){
+    if(empty($ptn) || $ptn === "none"){
+        return false;
+    }
+    if(in_array($ptn, lw_side_follow_sns_premium_ptns(), true) && !(defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true)){
+        return false;
+    }
+    $known_ptns = array_diff(array_keys(side_follow_sns_arr()), ['', 'none']);
+    if(!in_array($ptn, $known_ptns, true)){
+        return false;
+    }
+    return true;
+}
+/**
+ * サイド追従SNSリンクのアイコン+リンク一覧を描画する共通処理。
+ * ctm_sns_icon_set_custom_arr() がカスタマイザーに登録するのと同じキー
+ * （{$set_id}_sns_{i}_icon / _link / _switch）を読む。アイコン未選択・
+ * リンク未入力の枠は描画しない（死んだリンクを出さないため）。
+ *
+ * @param string $set_id        例: "side_follow_sns_ptn_1_set"
+ * @param int    $number_of_items
+ * @param bool   $show_label    true でアイコンの下に短いラベルを添える（ラベル付き型用）
+ */
+function lw_side_follow_sns_render_icons($set_id, $number_of_items, $show_label = false){
+    if(Lw_theme_mod_set("{$set_id}_sns_switch", "on") === "off"){
+        return;
+    }
+    $labels = lw_side_follow_sns_short_labels();
+    for ($i = 1; $i <= $number_of_items; $i++) {
+        $icon = Lw_theme_mod_set("{$set_id}_sns_{$i}_icon", "");
+        $link = Lw_theme_mod_set("{$set_id}_sns_{$i}_link", "");
+        if(empty($icon) || $icon === "none" || empty($link)){
+            continue;
+        }
+        ?>
+        <li>
+            <a href="<?=esc_url($link)?>" <?=new_tab()?>>
+                <?php get_template_part('assets/image/icon/'.$icon); ?>
+                <?php if($show_label && !empty($labels[$icon])): ?>
+                <span class="side_follow_sns__label"><?=esc_html($labels[$icon])?></span>
+                <?php endif; ?>
+            </a>
+        </li>
+        <?php
+    }
+}
+/**
+ * サイド追従SNSリンクを1リクエストにつき最大1回だけ描画する
+ * （lw_render_follow_bottom_cta_once() と同じ二重描画ガード）。
+ */
+function lw_render_side_follow_sns_once(){
+    static $rendered = false;
+    $ptn = Lw_theme_mod_set("side_follow_sns_set_ptn_df", "none");
+    if($rendered || !lw_side_follow_sns_is_renderable($ptn)){
+        return false;
+    }
+    wp_enqueue_style('side_follow_sns_common_style', get_template_directory_uri() . '/templates/side_follow_sns/common.css', array(), css_version(), 'all');
+    get_template_part("./templates/side_follow_sns/{$ptn}/index");
+    $rendered = true;
+    return true;
+}
+
 function ctm_heading_arr(){
     $heading_arr = [
         '' => '未指定',
@@ -268,8 +494,31 @@ function ctm_sns_icon_arr(){
         'line' => 'line',
         'youtube' => 'youtube',
         'mail' => 'mail',
+        'linkedin' => 'LinkedIn',
+        'pinterest' => 'Pinterest',
+        'pocket' => 'Pocket',
+        'tumblr' => 'Tumblr',
+        'reddit' => 'Reddit',
+        'telegram' => 'Telegram',
+        'whatsapp' => 'WhatsApp',
+        'mastodon' => 'Mastodon',
+        'tiktok' => 'TikTok',
+        'hatena' => 'はてなブックマーク',
     ];
     return $sns_icon_arr;
+}
+/**
+ * サイド追従SNSリンク用の短いラベル（アイコンの下に添える表示名）。
+ * キーは ctm_sns_icon_arr() の選択肢と一致させる（ラベル型パターンで使用）。
+ */
+function lw_side_follow_sns_short_labels(){
+    return [
+        'note' => 'note', 'threads' => 'Threads', 'facebook' => 'Facebook', 'x' => 'X',
+        'instagram' => 'Instagram', 'line' => 'LINE', 'youtube' => 'YouTube', 'mail' => 'Mail',
+        'linkedin' => 'LinkedIn', 'pinterest' => 'Pinterest', 'pocket' => 'Pocket',
+        'tumblr' => 'Tumblr', 'reddit' => 'Reddit', 'telegram' => 'Telegram',
+        'whatsapp' => 'WhatsApp', 'mastodon' => 'Mastodon', 'tiktok' => 'TikTok', 'hatena' => 'はてな',
+    ];
 }
 function ctm_cta_icon_arr(){
     $sns_icon_arr = [
@@ -286,12 +535,186 @@ function ctm_cta_icon_arr(){
         'youtube' => 'YouTube',
         'doctor' => '医者',
         'user' => 'ユーザー',
+        'map' => 'マップ・アクセス',
         'turn-up'=>'アップ',
         'coins'=>'コイン',
         'comment'=>'コメント 01',
         'comments'=>'コメント 02',
         'comment-dots'=>'コメント 03',
         'message'=>'コメント 04',
+        'home' => 'ホーム',
+        'mobile' => 'スマホ',
+        'alert' => 'お知らせ（ベル）',
+        'copy' => 'コピー',
+        'tooth' => '歯科（歯）',
+        'note' => 'note',
+        'threads' => 'Threads',
+        'linkedin' => 'LinkedIn',
+        'pinterest' => 'Pinterest',
+        'pocket' => 'Pocket',
+        'tumblr' => 'Tumblr',
+        'reddit' => 'Reddit',
+        'telegram' => 'Telegram',
+        'whatsapp' => 'WhatsApp',
+        'mastodon' => 'Mastodon',
+        'tiktok' => 'TikTok',
+        'hatena' => 'はてなブックマーク',
+        'cart-shopping' => 'ショッピングカート',
+        'bag-shopping' => 'ショッピングバッグ',
+        'tags' => 'タグ',
+        'gift' => 'プレゼント',
+        'credit-card' => 'クレジットカード',
+        'money-bill-wave' => 'お金',
+        'receipt' => 'レシート',
+        'store' => '店舗',
+        'percent' => '割引・パーセント',
+        'clock' => '時計',
+        'calendar' => 'カレンダー',
+        'calendar-days' => '日程',
+        'calendar-check' => '予定確認',
+        'hourglass-half' => '砂時計',
+        'stopwatch' => 'ストップウォッチ',
+        'business-time' => '営業時間',
+        'location-dot' => '位置情報',
+        'compass' => 'コンパス',
+        'route' => 'ルート',
+        'car' => '車',
+        'car-side' => '車（横）',
+        'bus' => 'バス',
+        'train' => '電車',
+        'plane' => '飛行機',
+        'plane-departure' => '出発',
+        'ship' => '船',
+        'bicycle' => '自転車',
+        'motorcycle' => 'バイク',
+        'truck' => 'トラック',
+        'taxi' => 'タクシー',
+        'headset' => 'ヘッドセット',
+        'video' => '動画',
+        'microphone' => 'マイク',
+        'share-nodes' => 'シェア',
+        'paper-plane' => '送信',
+        'inbox' => '受信箱',
+        'rss' => 'RSS',
+        'bullhorn' => 'お知らせ・拡声器',
+        'mug-hot' => 'ホットドリンク',
+        'utensils' => '食事',
+        'pizza-slice' => 'ピザ',
+        'cake-candles' => 'ケーキ',
+        'wine-glass' => 'ワイン',
+        'bread-slice' => 'パン',
+        'ice-cream' => 'アイスクリーム',
+        'apple-whole' => 'りんご',
+        'carrot' => '野菜',
+        'heart-pulse' => '健康・脈拍',
+        'stethoscope' => '聴診器',
+        'pills' => '薬',
+        'spa' => 'スパ',
+        'hand-holding-medical' => '医療サポート',
+        'sun' => '太陽',
+        'cloud' => '雲',
+        'snowflake' => '雪',
+        'leaf' => '葉っぱ',
+        'tree' => '木',
+        'mountain' => '山',
+        'water' => '水',
+        'fire' => '炎',
+        'seedling' => '芽生え',
+        'futbol' => 'サッカー',
+        'dumbbell' => 'ダンベル',
+        'music' => '音楽',
+        'camera' => 'カメラ',
+        'book' => '本',
+        'book-open' => '開いた本',
+        'paintbrush' => '絵筆',
+        'gamepad' => 'ゲーム',
+        'palette' => 'パレット',
+        'film' => '映画',
+        'laptop' => 'パソコン',
+        'gear' => '設定・歯車',
+        'wrench' => 'レンチ',
+        'screwdriver-wrench' => '工具',
+        'code' => 'コード',
+        'database' => 'データベース',
+        'wifi' => 'Wi-Fi',
+        'server' => 'サーバー',
+        'robot' => 'ロボット',
+        'thumbs-up' => 'いいね',
+        'face-smile' => '笑顔',
+        'medal' => 'メダル',
+        'trophy' => 'トロフィー',
+        'award' => '表彰',
+        'certificate' => '認定証',
+        'crown' => '王冠',
+        'star' => '星',
+        'heart' => 'ハート',
+        'lightbulb' => 'ひらめき',
+        'lock' => '鍵（ロック）',
+        'shield' => '安全・保護',
+        'key' => '鍵',
+        'user-shield' => 'セキュリティ',
+        'file' => 'ファイル',
+        'folder' => 'フォルダ',
+        'print' => '印刷',
+        'clipboard' => 'クリップボード',
+        'pen' => 'ペン',
+        'pen-to-square' => '編集',
+        'signature' => 'サイン',
+        'building' => 'ビル',
+        'warehouse' => '倉庫',
+        'school' => '学校',
+        'hospital' => '病院',
+        'church' => '教会',
+        'industry' => '工場',
+        'gem' => '宝石',
+        'globe' => '地球',
+        'paw' => '肉球',
+        'recycle' => 'リサイクル',
+        'umbrella' => '傘',
+        'anchor' => '錨',
+        'circle-check' => 'チェック',
+        'circle-info' => '情報',
+        'triangle-exclamation' => '注意',
+        'circle-question' => '質問',
+        'flag' => '旗',
+        'bookmark' => 'ブックマーク',
+        'magnifying-glass' => '検索',
+        'filter' => '絞り込み',
+        'list' => 'リスト',
+        'thumbtack' => 'ピン留め',
+        'users' => 'グループ・複数人',
+        'child' => 'こども',
+        'person-walking' => '歩く人',
+        'handshake' => '握手',
+        'people-group' => 'グループ',
+        'chart-line' => 'グラフ（折れ線）',
+        'chart-pie' => 'グラフ（円）',
+        'piggy-bank' => '貯金箱',
+        'sack-dollar' => '資金',
+        'bolt' => 'スピード・雷',
+        'box' => '荷物・箱',
+        'truck-fast' => '配送',
+        'shirt' => 'アパレル',
+        'dog' => '犬',
+        'cat' => '猫',
+        'fish' => '魚',
+        'couch' => 'ソファ・家具',
+        'bath' => 'お風呂',
+        'scissors' => 'はさみ・カット',
+        'glasses' => 'メガネ',
+        'gauge' => 'メーター・速度',
+        'rocket' => 'ロケット・スタートアップ',
+        'puzzle-piece' => 'パズル',
+        'graduation-cap' => '卒業・教育',
+        'chalkboard' => '黒板・講義',
+        'microscope' => '顕微鏡',
+        'flask' => '実験・研究',
+        'brain' => '脳・知能',
+        'syringe' => '注射',
+        'wheelchair' => '車椅子',
+        'hand-holding-heart' => '思いやり・支援',
+        'language' => '言語・多言語',
+        'earth-americas' => '地球（世界）',
     ];
     return $sns_icon_arr;
 }
@@ -342,6 +765,223 @@ function ctm_sns_share_icon_arr() {
 		'copy'      => 'URLコピー',
 	];
 	return $sns_icon_arr;
+}
+
+/**
+ * type: 'icon_select' で登録されたコントロールの setting ID を集める
+ * レジストリ。customize_set() が登録のたびに追記し、JS側はこの一覧を
+ * 目印に #customize-control-<ID> から<select>を見つけて装飾する。
+ */
+function lw_icon_picker_control_ids( $add = null ) {
+    static $ids = [];
+    if ( $add !== null ) {
+        $ids[] = $add;
+    }
+    return $ids;
+}
+
+/**
+ * type: 'icon_select' の choices に実際に登場したキーを集めるレジストリ。
+ * SVGの読み込みをこのキーだけに絞ることで、アイコンの種類が増えても
+ * 「フォルダに存在するだけで、どの選択肢からも使われていないファイル」を
+ * 無駄に読み込まない。
+ */
+function lw_icon_picker_used_keys( $keys = null ) {
+    static $used = [];
+    if ( $keys !== null ) {
+        foreach ( $keys as $key ) {
+            if ( $key !== '' ) {
+                $used[ $key ] = true;
+            }
+        }
+    }
+    return array_keys( $used );
+}
+
+/**
+ * 「アイコン」選択欄の絵付きポップアップ用：実際に選択肢として使われている
+ * キーぶんだけ assets/image/icon/{key}.php を読み込み、key => SVGマークアップ
+ * の連想配列にする。ファイルの中身はSVGタグのみ（PHPロジックは無い）。
+ */
+function lw_icon_picker_svg_map() {
+    static $map = null;
+    if ( $map !== null ) return $map;
+    $map = [];
+    $dir = get_template_directory() . '/assets/image/icon/';
+    foreach ( lw_icon_picker_used_keys() as $key ) {
+        $file = $dir . $key . '.php';
+        if ( ! file_exists( $file ) ) continue;
+        $svg = file_get_contents( $file );
+        if ( $svg !== false && strpos( $svg, '<svg' ) !== false ) {
+            $map[ $key ] = $svg;
+        }
+    }
+    return $map;
+}
+
+/**
+ * customize_set() で type: 'icon_select' として登録された<select>を、
+ * 画面中央のポップアップ（絵付きグリッド）で選べるように装飾する。
+ * 素のWP_Customize_Control(select)はそのまま残し、見た目だけJSで着せ替える
+ * ので、保存データ・front-end表示・他の一般プルダウンには一切影響しない。
+ */
+add_action( 'customize_controls_enqueue_scripts', 'lw_icon_picker_admin_assets' );
+function lw_icon_picker_admin_assets() {
+    $svg_json = str_replace( '</', '<\/', wp_json_encode( lw_icon_picker_svg_map() ) );
+    $ids_json = wp_json_encode( lw_icon_picker_control_ids() );
+    ?>
+    <style>
+    .lw-icon-select{position:absolute!important;width:1px!important;height:1px!important;padding:0!important;margin:-1px!important;overflow:hidden!important;clip:rect(0,0,0,0)!important;white-space:nowrap!important;border:0!important;}
+    .lw_icon_trigger{display:flex;align-items:center;gap:8px;width:100%;box-sizing:border-box;margin-top:6px;padding:6px 10px;background:#fff;border:1px solid #7e8993;border-radius:4px;cursor:pointer;text-align:left;font-size:13px;color:#2c3338;}
+    .lw_icon_trigger:hover{border-color:#3582c4;}
+    .lw_icon_trigger__glyph{width:20px;height:20px;flex:0 0 auto;display:flex;align-items:center;justify-content:center;color:#2c3338;}
+    .lw_icon_trigger__glyph svg{width:18px;height:18px;fill:#2c3338;}
+    .lw_icon_trigger__label{flex:1 1 auto;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;}
+    .lw_icon_trigger__change{flex:0 0 auto;font-size:11px;color:#3582c4;}
+    #lw_icon_picker_overlay{position:fixed;inset:0;z-index:999999;display:none;align-items:center;justify-content:center;background:rgba(0,0,0,.55);padding:24px;box-sizing:border-box;}
+    #lw_icon_picker_overlay.is_open{display:flex;}
+    .lw_icon_picker__box{background:#fff;border-radius:8px;width:100%;max-width:640px;max-height:82vh;display:flex;flex-direction:column;box-shadow:0 8px 40px rgba(0,0,0,.3);}
+    .lw_icon_picker__head{display:flex;align-items:center;justify-content:space-between;padding:14px 18px;border-bottom:1px solid #dcdcde;flex:0 0 auto;}
+    .lw_icon_picker__head h3{margin:0;font-size:15px;}
+    .lw_icon_picker__close{background:none;border:none;font-size:22px;line-height:1;cursor:pointer;color:#50575e;padding:4px 8px;}
+    .lw_icon_picker__close:hover{color:#000;}
+    .lw_icon_picker__search_wrap{padding:12px 18px;border-bottom:1px solid #dcdcde;flex:0 0 auto;}
+    .lw_icon_picker__search{width:100%;box-sizing:border-box;padding:7px 10px;font-size:13px;border:1px solid #7e8993;border-radius:4px;}
+    .lw_icon_picker__search:focus{border-color:#3582c4;outline:none;box-shadow:0 0 0 1px #3582c4;}
+    .lw_icon_picker__grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(84px,1fr));gap:8px;padding:16px;overflow-y:auto;}
+    .lw_icon_picker__tile{display:flex;flex-direction:column;align-items:center;gap:6px;padding:10px 6px;border:1px solid #dcdcde;border-radius:6px;background:#fff;cursor:pointer;text-align:center;}
+    .lw_icon_picker__tile:hover{border-color:#3582c4;background:#f0f6fc;}
+    .lw_icon_picker__tile.is_selected{border-color:#3582c4;background:#e7f2fc;box-shadow:0 0 0 1px #3582c4;}
+    .lw_icon_picker__tile.is_hidden{display:none;}
+    .lw_icon_picker__tile .lw_icon_picker__glyph{width:28px;height:28px;display:flex;align-items:center;justify-content:center;color:#2c3338;}
+    .lw_icon_picker__tile .lw_icon_picker__glyph svg{width:26px;height:26px;fill:#2c3338;}
+    .lw_icon_picker__tile .lw_icon_picker__label{font-size:11px;color:#2c3338;line-height:1.3;word-break:break-word;}
+    .lw_icon_picker__empty{padding:24px;text-align:center;color:#787c82;font-size:13px;display:none;}
+    .lw_icon_picker__empty.is_visible{display:block;}
+    </style>
+    <script>
+    (function(){
+        var LW_ICON_SVGS = <?php echo $svg_json; ?>;
+        var LW_ICON_CONTROL_IDS = <?php echo $ids_json; ?>;
+
+        function escHtml(s){
+            return String(s).replace(/[&<>"']/g, function(c){
+                return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c];
+            });
+        }
+        function glyphHtml(value){ return LW_ICON_SVGS[value] || ''; }
+        function currentLabel(select){
+            var opt = select.options[select.selectedIndex];
+            return opt ? opt.textContent : '';
+        }
+        function ensureOverlay(){
+            var overlay = document.getElementById('lw_icon_picker_overlay');
+            if (overlay) return overlay;
+            overlay = document.createElement('div');
+            overlay.id = 'lw_icon_picker_overlay';
+            overlay.innerHTML =
+                '<div class="lw_icon_picker__box">' +
+                    '<div class="lw_icon_picker__head"><h3>アイコンを選択</h3><button type="button" class="lw_icon_picker__close">&times;</button></div>' +
+                    '<div class="lw_icon_picker__search_wrap"><input type="text" class="lw_icon_picker__search" placeholder="アイコンを検索…"></div>' +
+                    '<div class="lw_icon_picker__grid"></div>' +
+                    '<div class="lw_icon_picker__empty">一致するアイコンがありません</div>' +
+                '</div>';
+            document.body.appendChild(overlay);
+            overlay.addEventListener('click', function(e){ if (e.target === overlay) closePicker(); });
+            overlay.querySelector('.lw_icon_picker__close').addEventListener('click', closePicker);
+            overlay.querySelector('.lw_icon_picker__search').addEventListener('input', function(e){
+                filterTiles(overlay, e.target.value);
+            });
+            return overlay;
+        }
+        function closePicker(){
+            var overlay = document.getElementById('lw_icon_picker_overlay');
+            if (overlay) overlay.classList.remove('is_open');
+        }
+        function filterTiles(overlay, query){
+            var q = query.trim().toLowerCase();
+            var tiles = overlay.querySelectorAll('.lw_icon_picker__tile');
+            var visibleCount = 0;
+            tiles.forEach(function(tile){
+                var hit = !q || tile.dataset.search.indexOf(q) !== -1;
+                tile.classList.toggle('is_hidden', !hit);
+                if (hit) visibleCount++;
+            });
+            overlay.querySelector('.lw_icon_picker__empty').classList.toggle('is_visible', visibleCount === 0);
+        }
+        function openPicker(select){
+            var overlay = ensureOverlay();
+            var grid = overlay.querySelector('.lw_icon_picker__grid');
+            var search = overlay.querySelector('.lw_icon_picker__search');
+            grid.innerHTML = '';
+            Array.from(select.options).forEach(function(opt){
+                var svg = glyphHtml(opt.value);
+                var tile = document.createElement('button');
+                tile.type = 'button';
+                tile.className = 'lw_icon_picker__tile' + (opt.value === select.value ? ' is_selected' : '');
+                tile.dataset.search = (opt.textContent + ' ' + opt.value).toLowerCase();
+                tile.innerHTML =
+                    '<span class="lw_icon_picker__glyph">' + svg + '</span>' +
+                    '<span class="lw_icon_picker__label">' + escHtml(opt.textContent) + '</span>';
+                tile.addEventListener('click', function(){
+                    select.value = opt.value;
+                    select.dispatchEvent(new Event('change', { bubbles: true }));
+                    closePicker();
+                });
+                grid.appendChild(tile);
+            });
+            search.value = '';
+            filterTiles(overlay, '');
+            overlay.classList.add('is_open');
+            setTimeout(function(){ search.focus(); }, 0);
+        }
+        function buildTrigger(){
+            var trigger = document.createElement('button');
+            trigger.type = 'button';
+            trigger.className = 'lw_icon_trigger';
+            trigger.innerHTML =
+                '<span class="lw_icon_trigger__glyph"></span>' +
+                '<span class="lw_icon_trigger__label"></span>' +
+                '<span class="lw_icon_trigger__change">変更</span>';
+            return trigger;
+        }
+        function refreshTrigger(select, trigger){
+            trigger.querySelector('.lw_icon_trigger__glyph').innerHTML = glyphHtml(select.value);
+            trigger.querySelector('.lw_icon_trigger__label').textContent = currentLabel(select) || '未選択';
+        }
+        function enhance(select){
+            if (select.dataset.lwIconEnhanced) return;
+            select.dataset.lwIconEnhanced = '1';
+            select.classList.add('lw-icon-select');
+            select.setAttribute('tabindex', '-1');
+            // トリガーは<label>の外（次の兄弟）に置く。<select>が<label>に包まれている
+            // 場合でも、ラベルクリックが隠れたselectへ転送されないようにするため。
+            var label = select.closest('label') || select;
+            var trigger = buildTrigger();
+            label.insertAdjacentElement('afterend', trigger);
+            refreshTrigger(select, trigger);
+            trigger.addEventListener('click', function(){ openPicker(select); });
+            select.addEventListener('change', function(){ refreshTrigger(select, trigger); });
+        }
+        function scan(){
+            (LW_ICON_CONTROL_IDS || []).forEach(function(id){
+                var container = document.getElementById('customize-control-' + id);
+                var select = container ? container.querySelector('select') : null;
+                if (select) enhance(select);
+            });
+        }
+
+        document.addEventListener('keydown', function(e){ if (e.key === 'Escape') closePicker(); });
+
+        scan();
+        // customize_controls_enqueue_scripts は<head>内で出力されるため、
+        // このタイミングではdocument.bodyがまだ存在しない。documentElementなら
+        // パース開始直後から存在するので、これを監視対象にする。
+        new MutationObserver(function(){ scan(); })
+            .observe(document.documentElement, { childList: true, subtree: true });
+    })();
+    </script>
+    <?php
 }
 
 function ctm_font_family_arr(){
@@ -950,7 +1590,7 @@ if(is_customize_preview()){
             ['color', 'cta_tel_sub_text_color', '', ''],
             ['select', 'cta_tel_sub_text_font', '', '',ctm_font_family_arr()],
             ['select', 'cta_tel_sub_text_font_weight', '', '',ctm_font_weight_arr()],
-            ['select', 'cta_tel_icon_select', '', '<h3 class="ctm_ttl_ptn_2">アイコン</h3>選択してください',ctm_tel_icon_arr()],
+            ['icon_select', 'cta_tel_icon_select', '', '<h3 class="ctm_ttl_ptn_2">アイコン</h3>選択してください',ctm_tel_icon_arr()],
             ['color', 'cta_tel_icon_color', '', 'アイコンの色'],
            
         ];
@@ -1193,7 +1833,7 @@ if(is_customize_preview()){
             $item[] = ['color', 'sns_icon_color', '', 'アイコン色'];
         }
         for ($i=1; $i <= $set_arr["number_of_items"]; $i++) { 
-            $item[] = ['select', 'sns_'.$i.'_icon', '', '<h3 class="ctm_ttl_ptn_2">SNS '.$i.'</h3>アイコンの選択' , ctm_sns_icon_arr()];
+            $item[] = ['icon_select', 'sns_'.$i.'_icon', '', '<h3 class="ctm_ttl_ptn_2">SNS '.$i.'</h3>アイコンの選択' , ctm_sns_icon_arr()];
             $item[] = ['text', 'sns_'.$i.'_link', '', 'リンク（URL）'];
         }
         return $item;

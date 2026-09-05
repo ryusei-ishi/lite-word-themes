@@ -1,0 +1,173 @@
+{
+  "title": "店舗・拠点のご案内（3拠点・電話ボタン＋所在地の一覧）",
+  "description": "【型A：表が主役】見出し＋ひとこと＋拠点ごとの電話ボタン3つ＋所在地・最寄り・営業時間の一覧＋どこへ連絡すればよいかの但し書き＋お問い合わせボタン。支店・教室・サロン・営業所を複数お持ちの場合に使ってください。既存のアクセスのセクションは1か所しかない前提で作ってあります。🚨 電話番号は押すとそのままかけられます。番号を書き換えたらリンク（tel:）も直してください。🚨 詳しい地図は各拠点のページに置き、ここからは名前でリンクする形をおすすめします（地図を3つ並べるとページがとても重くなります）。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "店舗・拠点のご案内",
+        "subTitle": "LOCATIONS",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "3か所でお待ちしています。<br>ご用の拠点に直接おかけいただくと、いちばん早くご案内できます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-lw-button-5",
+      "attributes": {
+        "position": "center",
+        "gapX": 12,
+        "gapY": 12,
+        "borderRadius": 12,
+        "fontWeight": "500",
+        "buttons": [
+          {
+            "enabled": true,
+            "btnText": "03-0000-0001",
+            "subText": "本店　10:00〜19:00",
+            "bgColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+            "textColor": "#ffffff",
+            "btnUrl": "tel:0300000001",
+            "openNewTab": false,
+            "selectedIcon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"><path d=\"M280 0C408.1 0 512 103.9 512 232c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-101.6-82.4-184-184-184c-13.3 0-24-10.7-24-24s10.7-24 24-24zm8 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm-32-72c0-13.3 10.7-24 24-24c75.1 0 136 60.9 136 136c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-48.6-39.4-88-88-88c-13.3 0-24-10.7-24-24zM117.5 1.4c19.4-5.3 39.7 4.6 47.4 23.2l40 96c6.8 16.3 2.1 35.2-11.6 46.3L144 207.3c33.3 70.4 90.3 127.4 160.7 160.7L345 318.7c11.2-13.7 30-18.4 46.3-11.6l96 40c18.6 7.7 28.5 28 23.2 47.4l-24 88C481.8 499.9 466 512 448 512C200.6 512 0 311.4 0 64C0 46 12.1 30.2 29.5 25.4l88-24z\"/></svg>"
+          },
+          {
+            "enabled": true,
+            "btnText": "03-0000-0002",
+            "subText": "駅前店　11:00〜20:00",
+            "bgColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+            "textColor": "#ffffff",
+            "btnUrl": "tel:0300000002",
+            "openNewTab": false,
+            "selectedIcon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"><path d=\"M280 0C408.1 0 512 103.9 512 232c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-101.6-82.4-184-184-184c-13.3 0-24-10.7-24-24s10.7-24 24-24zm8 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm-32-72c0-13.3 10.7-24 24-24c75.1 0 136 60.9 136 136c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-48.6-39.4-88-88-88c-13.3 0-24-10.7-24-24zM117.5 1.4c19.4-5.3 39.7 4.6 47.4 23.2l40 96c6.8 16.3 2.1 35.2-11.6 46.3L144 207.3c33.3 70.4 90.3 127.4 160.7 160.7L345 318.7c11.2-13.7 30-18.4 46.3-11.6l96 40c18.6 7.7 28.5 28 23.2 47.4l-24 88C481.8 499.9 466 512 448 512C200.6 512 0 311.4 0 64C0 46 12.1 30.2 29.5 25.4l88-24z\"/></svg>"
+          },
+          {
+            "enabled": true,
+            "btnText": "03-0000-0003",
+            "subText": "北営業所　9:00〜17:00",
+            "bgColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+            "textColor": "#ffffff",
+            "btnUrl": "tel:0300000003",
+            "openNewTab": false,
+            "selectedIcon": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"><path d=\"M280 0C408.1 0 512 103.9 512 232c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-101.6-82.4-184-184-184c-13.3 0-24-10.7-24-24s10.7-24 24-24zm8 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm-32-72c0-13.3 10.7-24 24-24c75.1 0 136 60.9 136 136c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-48.6-39.4-88-88-88c-13.3 0-24-10.7-24-24zM117.5 1.4c19.4-5.3 39.7 4.6 47.4 23.2l40 96c6.8 16.3 2.1 35.2-11.6 46.3L144 207.3c33.3 70.4 90.3 127.4 160.7 160.7L345 318.7c11.2-13.7 30-18.4 46.3-11.6l96 40c18.6 7.7 28.5 28 23.2 47.4l-24 88C481.8 499.9 466 512 448 512C200.6 512 0 311.4 0 64C0 46 12.1 30.2 29.5 25.4l88-24z\"/></svg>"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "それぞれの場所と時間",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 200,
+        "dtWidthSp": 150,
+        "defaultSpClm1": true,
+        "dlBorderColor": "#dddddd",
+        "rowBorderColor": "#dddddd",
+        "dtBorderColor": "#dddddd",
+        "dtBgColor": "#f5f7f9",
+        "fontSizePc": 17,
+        "fontSizeSp": 15,
+        "cellPaddingPc": 16,
+        "rows": [
+          {
+            "dtText": "本店",
+            "ddText": "〒000-0000 ◯◯県◯◯市◯◯町1-2-3<br>◯◯線 ◯◯駅から徒歩5分／駐車場8台<br>10:00〜19:00（水曜定休）",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "駅前店",
+            "ddText": "〒000-0000 ◯◯県◯◯市◯◯1-1 ◯◯ビル2F<br>◯◯線 ◯◯駅 東口すぐ／提携駐車場あり<br>11:00〜20:00（無休）",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "北営業所",
+            "ddText": "〒000-0000 ◯◯県◯◯市◯◯町5-6-7<br>◯◯バス「◯◯」下車 徒歩3分／駐車場4台<br>9:00〜17:00（土日祝休み・お伺いのご相談はこちら）",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※どちらにご連絡いただいても構いません。担当が違う場合はこちらでお繋ぎします。はじめての方は、いちばん近い拠点にお電話いただくのがおすすめです。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "お問い合わせはこちら",
+        "textSub": "＼ どの拠点あてでも同じ窓口で承ります ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

@@ -1,0 +1,111 @@
+{
+  "title": "ブログ・お役立ち記事（無料・自動で並ぶ2列の一覧）",
+  "description": "【型B：説明が主役】見出し＋何を書いている場所かのひとこと＋投稿から自動で並ぶ記事6件（左に正方形サムネイル・右に日付とタイトルの横並び2列）＋「こんなテーマで書いています」4件＋注釈＋一覧への導線。お知らせ（pr_news_1）ではなく、検索から来た人に読ませる読み物の置き場です。⚠️ 記事は投稿（ブログ）から自動で並びます。記事がまだ1件も無いサイトではその部分が空になります。件数・カテゴリの絞り込みはブロックの設定から変えられます（2列なので件数は偶数がきれいです）。写真を1枚も使いません（サムネイルは記事のアイキャッチが入ります）。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "お役立ち記事",
+        "subTitle": "BLOG",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "選び方・お手入れ・よくあるご質問など、<br>ご相談のときによく聞かれることを記事にしています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-post-list-3",
+      "attributes": {
+        "numberOfPosts": 6,
+        "catBgColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "こんなテーマで書いています",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-4",
+      "attributes": {
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colClass": "clm_2",
+        "contents": [
+          {
+            "text": "はじめての方に多いご質問と、その答え"
+          },
+          {
+            "text": "料金の考え方と、追加費用が出る場面"
+          },
+          {
+            "text": "ご自分でできるお手入れ・長持ちさせるコツ"
+          },
+          {
+            "text": "実際にご依頼いただいた事例のご紹介"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※記事の内容は一般的な情報です。個別のご事情によって当てはまらない場合がありますので、迷われたときはお気軽にご相談ください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "記事をすべて見る",
+        "btnTextSub": "＼ 気になるテーマから読んでください ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

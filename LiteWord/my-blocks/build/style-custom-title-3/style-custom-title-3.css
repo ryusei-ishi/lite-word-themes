@@ -1,6 +1,7 @@
 /*!************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/custom-title-3/style.scss ***!
   \************************************************************************************************************************/
+@charset "UTF-8";
 .custom-title-3 {
   margin: 1em 0;
   border: none !important;
@@ -19,14 +20,17 @@
   display: block;
   font-weight: 700;
   letter-spacing: 0.1em;
-  font-size: 3em;
+  /* 🚨 既定は従来どおり（PC 3em＝60px / 600px以下 2.4em＝48px）。
+     --ct3-main-pc / --ct3-main-sp が入っているときだけそちらを使う（2026-09-01 追加）。
+     Ryuichi「スマホの時、見出しの文字が大きすぎますね」— 48px は 375px だと5文字で画面いっぱい。 */
+  font-size: var(--ct3-main-pc, 3em);
   line-height: 1.3em;
   font-family: var(--font-family-gothic);
   font-feature-settings: "palt";
 }
 @container (max-width:600px) {
   .custom-title-3 .main > span {
-    font-size: 2.4em;
+    font-size: var(--ct3-main-sp, 2.4em);
   }
 }
 .custom-title-3 .accent {

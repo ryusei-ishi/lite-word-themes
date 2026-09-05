@@ -1,0 +1,112 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-ranking-1",
+	"version": "1.0.0",
+	"title": "ランキング 01",
+	"category": "lw-content",
+	"icon": "awards",
+	"description": "「おすすめ◯選」のように、商品やサービスを順位を付けて並べるブロックです。順位の札・評価・良い点／気になる点・お店のボタンが1件ぶんずつまとまっています。",
+	"aiHint": {
+		"description": "ランキング。1位から順に、商品画像・商品名・評価・ひとこと・良い点・気になる点・複数店舗のボタンを縦に並べる。「おすすめ◯選」「人気ランキング」「比較して選ぶ」記事用。アフィリエイト（広告）リンクに対応",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"items"
+		],
+		"imageAttributes": [],
+		"notes": "✅ **1件＝`items` の1要素。** 並べた順がそのまま順位になる（1番目が1位）。件数は増減できる。✅ **URLが空のお店のボタンは出ない**ので、Amazonだけでもよい。✅ **画像が無い件は文字だけで詰めて出る**（写真の枠が空かない）。🚨 **`isAffiliate` の既定は true**（rel=\"sponsored nofollow\" と別タブ）。報酬の出ないリンクだけのときに false にする。🚨 **`showPr` の既定も true**（右上に「PR」の札）。ステマ規制（景品表示法）で要る表示なので、アフィリエイトなら消さない。🚨 **順位の根拠を本文に書くこと。** 何を・どのくらいの期間ためして決めた順位かが無いランキングは、読む人にも検索にも信用されない。🚨 **商品画像は自分で撮った写真か使用許諾のあるものだけ**（Amazon・楽天の商品画像の保存・転載は規約違反）。`items[].score` は「4.5」のような文字列で、0〜5として星の長さに使う。空なら星も数字も出ない。`items[].shops` は `[{label, url, bgColor, textColor}]`。効果を断定する言い方は薬機法で書けない（「治る」「消える」など）。",
+		"contentGuide": "1件ごとに name（商品名 10〜30文字）・comment（ひとこと 40〜90文字）・good（良い点 15〜40文字）・bad（気になる点 15〜40文字）。bad を空にしない方が読む人に信用される"
+	},
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"showPr": { "type": "boolean", "default": true },
+		"prText": { "type": "string", "default": "PR" },
+		"items": {
+			"type": "array",
+			"default": [
+				{
+					"imageUrl": "", "imageAlt": "",
+					"name": "1位の商品名を入れてください",
+					"comment": "選んだ理由をひとことで書きます。どんな人に向いているかを書くと選びやすくなります。",
+					"score": "4.8",
+					"good": "ここが良かった点を書きます",
+					"bad": "気になった点も正直に書きます",
+					"shops": [
+						{ "label": "Amazonで見る", "url": "", "bgColor": "#ff9900", "textColor": "#ffffff" },
+						{ "label": "楽天市場で見る", "url": "", "bgColor": "#bf0000", "textColor": "#ffffff" },
+						{ "label": "Yahoo!で見る", "url": "", "bgColor": "#ff0033", "textColor": "#ffffff" }
+					]
+				},
+				{
+					"imageUrl": "", "imageAlt": "",
+					"name": "2位の商品名を入れてください",
+					"comment": "選んだ理由をひとことで書きます。どんな人に向いているかを書くと選びやすくなります。",
+					"score": "4.4",
+					"good": "ここが良かった点を書きます",
+					"bad": "気になった点も正直に書きます",
+					"shops": [
+						{ "label": "Amazonで見る", "url": "", "bgColor": "#ff9900", "textColor": "#ffffff" },
+						{ "label": "楽天市場で見る", "url": "", "bgColor": "#bf0000", "textColor": "#ffffff" },
+						{ "label": "Yahoo!で見る", "url": "", "bgColor": "#ff0033", "textColor": "#ffffff" }
+					]
+				},
+				{
+					"imageUrl": "", "imageAlt": "",
+					"name": "3位の商品名を入れてください",
+					"comment": "選んだ理由をひとことで書きます。どんな人に向いているかを書くと選びやすくなります。",
+					"score": "4.1",
+					"good": "ここが良かった点を書きます",
+					"bad": "気になった点も正直に書きます",
+					"shops": [
+						{ "label": "Amazonで見る", "url": "", "bgColor": "#ff9900", "textColor": "#ffffff" },
+						{ "label": "楽天市場で見る", "url": "", "bgColor": "#bf0000", "textColor": "#ffffff" },
+						{ "label": "Yahoo!で見る", "url": "", "bgColor": "#ff0033", "textColor": "#ffffff" }
+					]
+				}
+			],
+			"aiHint": {
+				"role": "list",
+				"contentGuide": "ランキングの中身。並べた順が順位になる。各要素は name / comment / score / good / bad / imageUrl / shops"
+			}
+		},
+		"rankStyle": { "type": "string", "default": "number" },
+		"rankUnit": { "type": "string", "default": "位" },
+		"showScore": { "type": "boolean", "default": true },
+		"goodLabel": { "type": "string", "default": "ここが良い" },
+		"badLabel": { "type": "string", "default": "気になる点" },
+		"isAffiliate": { "type": "boolean", "default": true },
+		"maxWidth": { "type": "number", "default": 720 },
+		"marginTop": { "type": "number", "default": 0 },
+		"marginBottom": { "type": "number", "default": 0 },
+		"itemGap": { "type": "number", "default": 24 },
+		"boxBgColor": { "type": "string", "default": "#ffffff" },
+		"boxBorderColor": { "type": "string", "default": "#e5e5e5" },
+		"boxBorderWidth": { "type": "number", "default": 1 },
+		"borderRadius": { "type": "number", "default": 10 },
+		"imageWidth": { "type": "number", "default": 180 },
+		"imageWidthSp": { "type": "number", "default": 110 },
+		"nameColor": { "type": "string", "default": "#222222" },
+		"nameFontSize": { "type": "number", "default": 19 },
+		"nameFontSizeSp": { "type": "number", "default": 17 },
+		"commentColor": { "type": "string", "default": "#666666" },
+		"scoreColor": { "type": "string", "default": "#f0a020" },
+		"goodColor": { "type": "string", "default": "#1f7a4d" },
+		"badColor": { "type": "string", "default": "#9c5a5a" },
+		"rank1Color": { "type": "string", "default": "#c9a227" },
+		"rank2Color": { "type": "string", "default": "#98a2ad" },
+		"rank3Color": { "type": "string", "default": "#b0763c" },
+		"rankOtherColor": { "type": "string", "default": "#8a8a8a" },
+		"rankTextColor": { "type": "string", "default": "#ffffff" },
+		"prBgColor": { "type": "string", "default": "#f2f2f2" },
+		"prTextColor": { "type": "string", "default": "#8a8a8a" },
+		"buttonColumnsPc": { "type": "number", "default": 3 },
+		"buttonColumnsSp": { "type": "number", "default": 1 },
+		"buttonRadius": { "type": "number", "default": 6 },
+		"buttonFontSize": { "type": "number", "default": 15 },
+		"FontSet": { "type": "string", "default": "" }
+	},
+	"editorScript": "file:./lw-pr-ranking-1.js"
+}

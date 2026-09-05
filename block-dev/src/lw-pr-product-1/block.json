@@ -1,0 +1,196 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-product-1",
+	"version": "1.0.0",
+	"title": "商品リンク 01",
+	"category": "lw-content",
+	"icon": "cart",
+	"description": "商品を紹介して、Amazon・楽天・Yahoo!など複数のお店へのボタンを並べるブロックです。広告リンクに必要な印とPR表示が最初から入っています。",
+	"aiHint": {
+		"description": "商品リンクボックス。商品画像・商品名・ひとこと・参考価格と、Amazon/楽天/Yahoo!など複数店舗へのボタンを並べる。アフィリエイト（広告）リンク用。比較記事・レビュー記事・おすすめ紹介に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"productName",
+			"productDesc",
+			"productPrice",
+			"shops"
+		],
+		"imageAttributes": [
+			"imageUrl"
+		],
+		"notes": "✅ **URLが空のお店のボタンは出ない。** 3つ全部埋める必要はなく、Amazonだけでもよい。🚨 **`isAffiliate` の既定は true**（＝広告リンクとして rel=\"sponsored nofollow\" と別タブが付く）。報酬の出ないただの公式サイトへのリンクとして使うときだけ false にする。🚨 **`showPr` の既定も true**（左上に「PR」の札）。ステマ規制（景品表示法）で広告であることの表示が要るので、アフィリエイトなら消さないこと。🚨 **商品画像は自分で撮った写真か、使用許諾のあるものだけ。** Amazonの商品画像を保存して貼るのは規約違反（PA-APIかリンクツール経由のみ許される）。`shops` は `[{label, url, bgColor, textColor}]`。既定色は Amazon #ff9900 / 楽天 #bf0000 / Yahoo! #ff0033。`productPrice` は文字列なので「3,980円（税込）」のように単位ごと書く。価格を書いたら `priceNote`（掲載時点である旨）を消さない。"
+	},
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"showPr": {
+			"type": "boolean",
+			"default": true
+		},
+		"prText": {
+			"type": "string",
+			"default": "PR"
+		},
+		"imageUrl": {
+			"type": "string",
+			"default": ""
+		},
+		"imageAlt": {
+			"type": "string",
+			"default": ""
+		},
+		"productName": {
+			"type": "string",
+			"default": "商品名を入れてください",
+			"aiHint": {
+				"role": "heading",
+				"contentGuide": "商品名。10〜30文字。メーカー名を頭に付けると分かりやすい"
+			}
+		},
+		"productDesc": {
+			"type": "string",
+			"default": "この商品のひとこと説明を入れます。どんな人に向いているかを書くと選びやすくなります。",
+			"aiHint": {
+				"role": "text",
+				"contentGuide": "ひとこと説明。40〜90文字。誰に向くかを書く。効果を断定しない（薬機法）"
+			}
+		},
+		"productPrice": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"role": "text",
+				"contentGuide": "参考価格。単位ごと書く（例 3,980円（税込））。空なら価格の行は出ない"
+			}
+		},
+		"priceNote": {
+			"type": "string",
+			"default": "※価格は掲載時点のものです。最新の価格は各サイトでご確認ください。"
+		},
+		"shops": {
+			"type": "array",
+			"default": [
+				{
+					"label": "Amazonで見る",
+					"url": "",
+					"bgColor": "#ff9900",
+					"textColor": "#ffffff"
+				},
+				{
+					"label": "楽天市場で見る",
+					"url": "",
+					"bgColor": "#bf0000",
+					"textColor": "#ffffff"
+				},
+				{
+					"label": "Yahoo!で見る",
+					"url": "",
+					"bgColor": "#ff0033",
+					"textColor": "#ffffff"
+				}
+			],
+			"aiHint": {
+				"role": "list",
+				"contentGuide": "お店のボタン。各要素に label（8〜14文字）と url。URLが空の要素はボタンが出ない",
+				"example": [
+					{
+						"label": "Amazonで見る",
+						"url": "https://www.amazon.co.jp/dp/XXXXXXXXXX?tag=あなたのID"
+					}
+				]
+			}
+		},
+		"isAffiliate": {
+			"type": "boolean",
+			"default": true
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 720
+		},
+		"marginTop": {
+			"type": "number",
+			"default": 0
+		},
+		"marginBottom": {
+			"type": "number",
+			"default": 0
+		},
+		"boxBgColor": {
+			"type": "string",
+			"default": "#ffffff"
+		},
+		"boxBorderColor": {
+			"type": "string",
+			"default": "#e5e5e5"
+		},
+		"boxBorderWidth": {
+			"type": "number",
+			"default": 1
+		},
+		"borderRadius": {
+			"type": "number",
+			"default": 10
+		},
+		"imageWidth": {
+			"type": "number",
+			"default": 200
+		},
+		"imageWidthSp": {
+			"type": "number",
+			"default": 110
+		},
+		"nameColor": {
+			"type": "string",
+			"default": "#222222"
+		},
+		"nameFontSize": {
+			"type": "number",
+			"default": 19
+		},
+		"nameFontSizeSp": {
+			"type": "number",
+			"default": 17
+		},
+		"descColor": {
+			"type": "string",
+			"default": "#666666"
+		},
+		"priceColor": {
+			"type": "string",
+			"default": "#222222"
+		},
+		"prBgColor": {
+			"type": "string",
+			"default": "#f2f2f2"
+		},
+		"prTextColor": {
+			"type": "string",
+			"default": "#8a8a8a"
+		},
+		"buttonColumnsPc": {
+			"type": "number",
+			"default": 3
+		},
+		"buttonColumnsSp": {
+			"type": "number",
+			"default": 1
+		},
+		"buttonRadius": {
+			"type": "number",
+			"default": 6
+		},
+		"buttonFontSize": {
+			"type": "number",
+			"default": 15
+		},
+		"FontSet": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./lw-pr-product-1.js"
+}

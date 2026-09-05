@@ -1,0 +1,143 @@
+{
+  "title": "施工例・制作例（無料・3列の写真グリッド6枚）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋写真6枚（3列グリッド）＋写真の下の注記＋「写真をご覧いただくときに」4件＋ご相談ボタン。**説明文を書かずに成果を見せられる**のがこの段の値打ちです。工務店・リフォーム・造園・内装・看板・写真・デザインなど、見せられる成果物がある業種にお使いください。⚠️ 写真は3列の固定です。**枚数は3の倍数**にしてください（半端だと最後の行が空きます）。🚨 お客様の現場の写真は、必ず許可をいただいてから載せてください。表札・車のナンバー・室内の私物が写り込んでいないかも確認してください。1件ずつに見出しと説明を付けたいときは、事例カードのセクション（プレミアム）のほうが向いています。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "施工例",
+        "subTitle": "WORKS",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "これまでにお手伝いさせていただいた現場です。<br>同じようなご相談があれば、近い例をお見せできます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-gallery-01",
+      "attributes": {
+        "showText1": false,
+        "text_1": "",
+        "showText2": true,
+        "text_2": "※いずれもお客様の許可をいただいて掲載しています。写真は完成直後のもので、現在の状態とは異なる場合があります。",
+        "text2AlignPc": "center_pc",
+        "text2AlignSp": "left_sp",
+        "maxWidth": 1040,
+        "maxWidthText": 800,
+        "items": [
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/works_04.webp",
+            "alt": "白い外壁と木の扉の小さな店の外観"
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/works_01.webp",
+            "alt": "木の棚に商品が並んだ物販店の店内"
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/works_02.webp",
+            "alt": "スツールを置いた木のカウンターのカフェ"
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/works_03.webp",
+            "alt": "ベンチとサイドテーブルを置いた待合スペース"
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/gallery_01.webp",
+            "alt": "入口から見た明るい店内と左右の棚"
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/gallery_04.webp",
+            "alt": "鏡とたたんだタオルを置いた洗面コーナー"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "写真をご覧いただくときに",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-4",
+      "attributes": {
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colClass": "clm_1",
+        "contents": [
+          {
+            "text": "写真の広さ・明るさは実物と違って見えることがあります。気になる例があれば実際の寸法をお伝えします"
+          },
+          {
+            "text": "同じ仕様でも、建物の状態やお住まいの地域で費用は変わります。写真の例そのままの金額にはなりません"
+          },
+          {
+            "text": "載せていない例のほうが多くあります。ご希望に近いものをお探ししますので、遠慮なくお申しつけください"
+          },
+          {
+            "text": "掲載をお断りになるお客様もいらっしゃいます。お受けした仕事の全部が並んでいるわけではありません"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※「こういう感じにしたい」という写真をお持ちいただくのがいちばん早いです。雑誌の切り抜きでも、スマートフォンの画面でも構いません。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "近い例を見せてもらう",
+        "btnTextSub": "＼ ご希望に近い施工例をお探しします ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

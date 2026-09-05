@@ -1,0 +1,95 @@
+.follow_bottom_cta_04{
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    width: 100%;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s, visibility 0.3s;
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    height: 76px;
+    padding: 0 32px;
+    background: #fff;
+    border-top: 3px solid var(--color-main);
+    box-shadow: 0 0 16px rgba(0,0,0,0.1);
+    @media (max-width: 650px){
+        height: 64px;
+        padding: 0 14px;
+        gap: 10px;
+    }
+    &.true{
+        opacity: 1;
+        visibility: visible;
+    }
+    &__price{
+        font-size: 26px;
+        font-weight: 700;
+        color: var(--color-black, #060606);
+        white-space: nowrap;
+        font-variant-numeric: tabular-nums;
+        @media (max-width: 650px){
+            font-size: 19px;
+        }
+    }
+    &__yen{
+        font-size: 16px;
+        margin-right: 1px;
+        @media (max-width: 650px){
+            font-size: 13px;
+        }
+    }
+    &__unit{
+        font-size: 12px;
+        font-weight: 500;
+        color: #6b6b6b;
+        margin-left: 4px;
+        @media (max-width: 500px){
+            display: none;
+        }
+    }
+    &__divider{
+        width: 1px;
+        height: 32px;
+        background: #ddd;
+        @media (max-width: 500px){
+            display: none;
+        }
+    }
+    &__badge{
+        font-size: 16px;
+        font-weight: 700;
+        color: var(--color-main);
+        white-space: nowrap;
+        @media (max-width: 650px){
+            font-size: 13px;
+        }
+        @media (max-width: 500px){
+            display: none;
+        }
+    }
+    &__btn{
+        margin-left: auto;
+        height: 48px;
+        display: flex;
+        align-items: center;
+        padding: 0 24px;
+        background: var(--color-main);
+        color: #fff;
+        font-weight: 700;
+        font-size: 14px;
+        border-radius: 6px;
+        white-space: nowrap;
+        transition: opacity 0.3s;
+        &:hover{
+            opacity: 0.9;
+        }
+        @media (max-width: 650px){
+            height: 42px;
+            padding: 0 16px;
+            font-size: 12.5px;
+        }
+    }
+}

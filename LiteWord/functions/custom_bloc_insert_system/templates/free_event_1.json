@@ -1,0 +1,178 @@
+{
+  "title": "セミナー・説明会のご案内（無料・開催概要＋当日の流れ）",
+  "description": "【型B：説明が主役】見出し＋ひとこと＋写真つきの言い切り＋開催概要の表6項目＋当日の流れ4段（時刻つき）＋注釈＋お申し込みボタン。日にちを決めて人を集める段に使います（セミナー・説明会・体験会・見学会・ワークショップ・相談会）。🚨 参加する方がいちばん知りたいのは「いつ・どこで・いくら・何を持っていくか」と「当日どんなふうに進むか」の2つなので、その2つだけを表と流れで出しています。随時受け付けている体験・見学のご案内とは役割が違うので、同じサイトに両方置けます。日付は 2000年0月0日 のままにしてありますので、必ずご自身の開催日に書き換えてください。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "セミナーのご案内",
+        "subTitle": "EVENT",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "2000年0月0日に、はじめての方に向けた勉強会をひらきます。<br>お申し込みは、お名前とご連絡先だけで結構です。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-content-1",
+      "attributes": {
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/event_01.webp",
+        "imageAlt": "開始前のセミナー会場。木の机と椅子が並び、席に資料とペンが置かれている",
+        "imagePosition": "left",
+        "title": "聞いて帰るだけで結構です",
+        "content": "相続の話は、どこから手をつければよいか分かりにくいものです。ご家族が集まったときに何から話しておくとよいかを、順に沿ってお伝えします。\nむずかしい言葉は使いません。途中で入っても出ても大丈夫です。その場でご契約をおすすめすることはありませんので、聞いて帰るだけでも結構です。",
+        "linkText": ""
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "開催の概要",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-company-2",
+      "attributes": {
+        "spFullDt": true,
+        "items": [
+          {
+            "dt": "日時",
+            "dd": "2000年0月0日（土）14:00 〜 15:30<br>13:45 から受付をしています"
+          },
+          {
+            "dt": "会場",
+            "dd": "〇〇市民会館 2階 第1会議室（〇〇県〇〇市〇〇町1-2-3）<br>〇〇線 △△駅から徒歩5分／駐車場20台（無料）"
+          },
+          {
+            "dt": "定員",
+            "dd": "20名（先着順）　お子さま連れでもご参加いただけます。後ろの席を空けてあります"
+          },
+          {
+            "dt": "参加費",
+            "dd": "無料です。資料代もいただきません"
+          },
+          {
+            "dt": "持ち物",
+            "dd": "筆記用具だけお持ちください。資料は席にご用意しています"
+          },
+          {
+            "dt": "申込締切",
+            "dd": "0月0日（金）17:00　定員に達した時点で、締切前でも受付を終了します"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "当日の流れ",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-step-2",
+      "attributes": {
+        "bgGradient": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "contents": [
+          {
+            "title": "13:45　受付",
+            "text": "会場の入口でお名前をお伝えください。席は決まっていませんので、お好きな場所にお座りください。"
+          },
+          {
+            "title": "14:00　はじめに（15分）",
+            "text": "この会でお話しすることと、しないことを最初にお伝えします。ご都合が合わなければ、ここで帰られてもかまいません。"
+          },
+          {
+            "title": "14:15　本編（60分）",
+            "text": "実際にあったご相談を3つ取り上げて、どこでつまずいたのかを順にご説明します。書き込めるように、資料は余白を広くとってあります。"
+          },
+          {
+            "title": "15:15　ご質問（15分）",
+            "text": "その場で聞きにくいことは、終わったあとに個別でもうかがいます。ご希望の方だけ残っていただければ結構です。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※定員に達した時点で、締切前でも受付を終了します。<br>※やむを得ず中止する場合は、前日までにご連絡先へお知らせします。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "セミナーに申し込む",
+        "btnTextSub": "＼ お名前とご連絡先だけで申し込めます ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

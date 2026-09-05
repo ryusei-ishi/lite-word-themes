@@ -66,6 +66,12 @@ function insert_post_setting_meta_fields() {
                     <dd><?= Lw_input_select("toc_page_switch", ctm_switch_array_2()) ?></dd>
                     <dt class="left">コメント欄 ON / OFF</dt>
                     <dd><?= Lw_input_select("comment_page_switch", ctm_switch_array_2()) ?></dd>
+                    <dt class="left">PR表記（広告）</dt>
+                    <dd><?= Lw_input_select("pr_notice_page_switch", [
+                        "" => "カスタマイザー設定に従う",
+                        "on" => "この記事で表示する",
+                        "off" => "この記事では表示しない",
+                    ]) ?></dd>
                 </dl>
             </details>
         </div>
@@ -126,6 +132,7 @@ function Lw_save_post_setting_meta_fields($post_id) {
         "ttl_btm_p",
         "toc_page_switch",
         "comment_page_switch",
+        "pr_notice_page_switch",
         'color_main',
         'color_sub',
         'color_accent',

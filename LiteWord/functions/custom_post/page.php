@@ -281,6 +281,12 @@ function insert_page_setting_meta_fields() {
                         }
                         ?>
                     </dd>
+                    <dt class="left">PR表記（広告）</dt>
+                    <dd><?= Lw_input_select("pr_notice_page_switch", [
+                        "" => "カスタマイザー設定に従う",
+                        "on" => "このページで表示する",
+                        "off" => "このページでは表示しない",
+                    ]) ?></dd>
                     <dt class="left">このページへのコメント</dt>
                     <dd><?= Lw_input_textarea("page_comment","","","6") ?></dd>
                 </dl>
@@ -375,6 +381,7 @@ function Lw_save_page_setting_meta_fields( $post_id ) {
         'logo_footer_page_size_sp',
         'logo_footer_page_url',
         'follow_bottom_cta_ptn',
+        'pr_notice_page_switch',
         'color_main',
         'color_sub',
         'color_accent',

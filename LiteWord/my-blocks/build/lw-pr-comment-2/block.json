@@ -1,125 +1,125 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "wdl/lw-pr-comment-2",
-	"version": "1.0.0",
-	"title": "吹き出しコメント 02（全幅・名前無し）",
-	"category": "lw-comment",
-	"icon": "format-chat",
-	"description": "吹き出しスタイルのコメントブロック。画像とテキストを配置。",
-	"aiHint": {
-		"description": "吹き出しコメント（全幅）。写真+コメント。本人の言葉を短く見せる。院長挨拶・スタッフの一言に",
-		"excludeFromAutoSelect": false,
-		"contentAttributes": [
-			"comment2Text"
-		],
-		"imageAttributes": [
-			"comment2ImageUrl"
-		],
-		"notes": "名前欄を持たないので、誰の言葉かは直前の見出しか直後のプロフィールで示す。経歴表の前に置くと「履歴書」ではなく「人物」に見える。"
-	},
-	"supports": {
-		"anchor": true,
-		"className": true
-	},
-	"attributes": {
-		"comment2MaxWidth": {
-			"type": "number",
-			"default": 800
-		},
-		"comment2ImagePosition": {
-			"type": "string",
-			"default": "left"
-		},
-		"comment2ImageUrl": {
-			"type": "string",
-			"default": "https://lite-word.com/sample_img/women/6.webp"
-		},
-		"comment2ImageId": {
-			"type": "number",
-			"default": 0
-		},
-		"comment2ImageAlt": {
-			"type": "string",
-			"default": ""
-		},
-		"comment2ImageWidthPc": {
-			"type": "number",
-			"default": 160
-		},
-		"comment2ImageWidthSp": {
-			"type": "number",
-			"default": 80
-		},
-		"comment2ImageBdWidthPc": {
-			"type": "number",
-			"default": 2
-		},
-		"comment2ImageBdWidthSp": {
-			"type": "number",
-			"default": -1
-		},
-		"comment2ImageBdColorPc": {
-			"type": "string",
-			"default": "#3C7FC3"
-		},
-		"comment2ImageBdColorSp": {
-			"type": "string",
-			"default": ""
-		},
-		"comment2ImageBg": {
-			"type": "string",
-			"default": "#ffffff"
-		},
-		"comment2Text": {
-			"type": "string",
-			"default": "ここにコメントを入力"
-		},
-		"comment2TextColor": {
-			"type": "string",
-			"default": "#3C7FC3"
-		},
-		"comment2TextBg": {
-			"type": "string",
-			"default": "#F0FCFF"
-		},
-		"comment2TextMtPc": {
-			"type": "number",
-			"default": 24
-		},
-		"comment2TextMtSp": {
-			"type": "number",
-			"default": 8
-		},
-		"comment2TextFontsizePc": {
-			"type": "number",
-			"default": 17
-		},
-		"comment2TextFontsizeSp": {
-			"type": "number",
-			"default": 16
-		},
-		"comment2TextBdrPc": {
-			"type": "number",
-			"default": 12
-		},
-		"comment2TextBdrSp": {
-			"type": "number",
-			"default": 8
-		},
-		"comment2TriangleTop": {
-			"type": "number",
-			"default": 20
-		},
-		"comment2FontSet": {
-			"type": "string",
-			"default": ""
-		},
-		"comment2FontWeight": {
-			"type": "string",
-			"default": ""
-		}
-	},
-	"editorScript": "file:./lw-pr-comment-2.js",
-	"no": 2
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "wdl/lw-pr-comment-2",
+    "version": "1.0.0",
+    "title": "吹き出しコメント 02（全幅・名前無し）",
+    "category": "lw-comment",
+    "icon": "format-chat",
+    "description": "吹き出しスタイルのコメントブロック。画像とテキストを配置。",
+    "aiHint": {
+        "description": "吹き出しコメント（全幅）。写真+コメント。本人の言葉を短く見せる。院長挨拶・スタッフの一言に",
+        "excludeFromAutoSelect": false,
+        "contentAttributes": [
+            "comment2Text"
+        ],
+        "imageAttributes": [
+            "comment2ImageUrl"
+        ],
+        "notes": "名前欄を持たないので、誰の言葉かは直前の見出しか直後のプロフィールで示す。経歴表の前に置くと「履歴書」ではなく「人物」に見える。 🚨 **スマホでも横並びのまま**（縦積みにする CSS が無い。@container(max-width:700px) は写真の幅と余白を変えるだけ）。375px では 写真90px＋余白 で本文が約215pxしか残らず、細長い1本の帯になる。**comment2ImageWidthSp を64px程度まで小さくし、1文を短くする。**（2026-09-01 実測）🚨 既定の色は青(#3C7FC3)と水色の地(#F0FCFF)の固定値。サイトの色と関係なく出るので必ず上書きする。"
+    },
+    "supports": {
+        "anchor": true,
+        "className": true
+    },
+    "attributes": {
+        "comment2MaxWidth": {
+            "type": "number",
+            "default": 800
+        },
+        "comment2ImagePosition": {
+            "type": "string",
+            "default": "left"
+        },
+        "comment2ImageUrl": {
+            "type": "string",
+            "default": "https://lite-word.com/sample_img/women/6.webp"
+        },
+        "comment2ImageId": {
+            "type": "number",
+            "default": 0
+        },
+        "comment2ImageAlt": {
+            "type": "string",
+            "default": ""
+        },
+        "comment2ImageWidthPc": {
+            "type": "number",
+            "default": 160
+        },
+        "comment2ImageWidthSp": {
+            "type": "number",
+            "default": 80
+        },
+        "comment2ImageBdWidthPc": {
+            "type": "number",
+            "default": 2
+        },
+        "comment2ImageBdWidthSp": {
+            "type": "number",
+            "default": -1
+        },
+        "comment2ImageBdColorPc": {
+            "type": "string",
+            "default": "#3C7FC3"
+        },
+        "comment2ImageBdColorSp": {
+            "type": "string",
+            "default": ""
+        },
+        "comment2ImageBg": {
+            "type": "string",
+            "default": "#ffffff"
+        },
+        "comment2Text": {
+            "type": "string",
+            "default": "ここにコメントを入力"
+        },
+        "comment2TextColor": {
+            "type": "string",
+            "default": "#3C7FC3"
+        },
+        "comment2TextBg": {
+            "type": "string",
+            "default": "#F0FCFF"
+        },
+        "comment2TextMtPc": {
+            "type": "number",
+            "default": 24
+        },
+        "comment2TextMtSp": {
+            "type": "number",
+            "default": 8
+        },
+        "comment2TextFontsizePc": {
+            "type": "number",
+            "default": 17
+        },
+        "comment2TextFontsizeSp": {
+            "type": "number",
+            "default": 16
+        },
+        "comment2TextBdrPc": {
+            "type": "number",
+            "default": 12
+        },
+        "comment2TextBdrSp": {
+            "type": "number",
+            "default": 8
+        },
+        "comment2TriangleTop": {
+            "type": "number",
+            "default": 20
+        },
+        "comment2FontSet": {
+            "type": "string",
+            "default": ""
+        },
+        "comment2FontWeight": {
+            "type": "string",
+            "default": ""
+        }
+    },
+    "editorScript": "file:./lw-pr-comment-2.js",
+    "no": 2
 }

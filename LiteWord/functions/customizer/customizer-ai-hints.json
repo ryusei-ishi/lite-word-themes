@@ -1,497 +1,662 @@
 {
-	"_meta": {
-		"description": "LiteWordカスタマイザーのAI向けメタ情報。各設定項目の意味・用途・推奨値をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
-		"version": "1.0",
-		"lastUpdated": "2026-03-21"
-	},
-	"panels": {
-		"header_set": {
-			"title": "デザイン設定 - ヘッダー",
-			"aiDescription": "サイト上部に表示されるヘッダーの設定。ロゴ・メニュー・電話CTA・ボタンCTAなどを含む。6パターンから選択可能。",
-			"sections": {
-				"header_set_ptn_sec": {
-					"title": "パターンの選択",
-					"aiDescription": "ヘッダーのデザインパターンを選ぶ。ページ種別（全ページ共通/固定ページ/投稿ページ/アーカイブ）ごとに別パターンを指定できる。",
-					"settings": {
-						"ptn_df": {
-							"aiDescription": "全ページ共通のヘッダーパターン",
-							"options": {
-								"ptn_1": "パターン1（デフォルト）— ロゴ左+メニュー右の標準レイアウト",
-								"ptn_2": "パターン2 — ロゴ中央+メニュー下",
-								"ptn_3": "パターン3 — ロゴ左+メニュー左寄せ",
-								"ptn_4": "パターン4 — テンプレート依存（ガソリンスタンド/template_001のみ）",
-								"ptn_5": "パターン5 — ロゴ左+右側に説明テキスト+ピックアップメニュー付き",
-								"ptn_6": "パターン6 — ロゴ左+メニュー右（アンダーライン型hover）",
-								"ptn_short_code": "ショートコード — 完全カスタム",
-								"none": "非表示"
-							}
-						},
-						"ptn_page": { "aiDescription": "固定ページ専用のヘッダーパターン（未選択＝全ページ共通に従う）" },
-						"ptn_post": { "aiDescription": "投稿ページ専用のヘッダーパターン" },
-						"ptn_archive": { "aiDescription": "アーカイブページ専用のヘッダーパターン" }
-					}
-				},
-				"header_ptn_1_sec": {
-					"title": "パターン1の設定",
-					"aiDescription": "デフォルトのヘッダーパターン。上からインフォメーションバー→ロゴ+メニュー+CTA（電話・ボタン）の構成。",
-					"settingGroups": {
-						"follow_switch": {
-							"aiDescription": "ヘッダー追従（スクロール時に固定表示）の切替。on=追従する、on_pc_menu_1=PCではメニュー部分のみ追従",
-							"userGuide": "コーポレートサイトやLPでは追従ヘッダーが効果的。ブログ記事ではOFFが読みやすい。"
-						},
-						"information_bar": {
-							"aiDescription": "ヘッダー最上部に表示される横長のバー。キャンペーン告知やお知らせに使う。",
-							"settings": {
-								"switch": "表示/非表示の切替",
-								"text": "表示するテキスト",
-								"url": "リンク先URL（任意）",
-								"bg_color": "背景色",
-								"text_color": "テキスト色",
-								"font": "フォント指定"
-							},
-							"userGuide": "期間限定キャンペーンや重要なお知らせを目立たせたい時に使う。常時表示するとユーザーが慣れて効果が薄れるため、期間を決めて使うのが効果的。"
-						},
-						"logo": {
-							"aiDescription": "サイトのロゴ表示設定。画像ロゴまたはテキストロゴを選択できる。",
-							"settings": {
-								"logo_switch": "表示形式の選択（logo_img=画像/logo_text=テキスト/none=非表示）",
-								"logo_text": "テキストロゴの場合の表示テキスト",
-								"logo_text_color": "テキスト色",
-								"logo_text_font": "フォント指定",
-								"font_weight": "フォントの太さ",
-								"logo_text_size_pc/tb/sp": "文字サイズ（PC/タブレット/スマホ別）",
-								"logo_img": "画像ロゴのアップロード",
-								"logo_img_size_pc/tb/sp": "画像サイズ（PC/タブレット/スマホ別）"
-							},
-							"userGuide": "ロゴ画像がない場合はテキストロゴが使える。明朝体+大きめサイズだと高級感、ゴシック体+小さめだとカジュアルな印象になる。"
-						},
-						"menu": {
-							"aiDescription": "ヘッダーのナビゲーションメニュー。WordPressのメニュー機能と連動。",
-							"settings": {
-								"menu_select": "表示するメニューの選択",
-								"menu_font": "メニューのフォント",
-								"menu_1st_layer_text_color": "第1階層のテキスト色",
-								"menu_current_text_color": "現在のページのテキスト色",
-								"menu_current_bg_color": "現在のページの背景色",
-								"menu_1st_layer_hover_text_color": "ホバー時テキスト色",
-								"menu_1st_layer_hover_bg_color": "ホバー時背景色",
-								"menu_2st_layer_text_color": "第2階層以降のテキスト色",
-								"menu_2st_layer_bg_color": "第2階層以降の背景色",
-								"menu_2st_layer_hover_text_color": "第2階層ホバー時テキスト色",
-								"menu_2st_layer_hover_bg_color": "第2階層ホバー時背景色"
-							},
-							"userGuide": "メニューは『外観 > メニュー』で作成したものを選択する。色はサイトのカラーに合わせる。カレント色を設定すると現在のページがわかりやすくなる。"
-						},
-						"cta_tel": {
-							"aiDescription": "ヘッダーに表示する電話番号CTA。電話問い合わせを促すパーツ。",
-							"settings": {
-								"cta_tel_switch": "表示切替（ON/OFF）",
-								"cta_tel_number_text": "電話番号（半角・ハイフンあり）",
-								"cta_tel_number_color": "電話番号の色",
-								"cta_tel_number_font": "電話番号のフォント",
-								"cta_tel_number_font_weight": "電話番号の太さ",
-								"cta_tel_sub_text": "補足テキスト（例：受付時間 9:00〜18:00）",
-								"cta_tel_sub_text_color": "補足テキストの色",
-								"cta_tel_sub_text_font": "補足テキストのフォント",
-								"cta_tel_sub_text_font_weight": "補足テキストの太さ",
-								"cta_tel_icon_select": "電話アイコン（8種類から選択）",
-								"cta_tel_icon_color": "アイコンの色"
-							},
-							"userGuide": "店舗・クリニック・士業など電話問い合わせが多い業種で有効。スマホではタップで発信できる。"
-						},
-						"cta_btn_1": {
-							"aiDescription": "ヘッダーに表示するCTAボタン。お問い合わせや予約ページへの導線。",
-							"userGuide": "『お問い合わせ』『無料相談』『ご予約はこちら』などのアクションを促すボタン。目立つ色で設置すると効果的。"
-						}
-					}
-				},
-				"header_ptn_5_sec": {
-					"title": "パターン5の設定",
-					"aiDescription": "説明テキスト付きヘッダー+ピックアップメニュー付き。コーポレートサイトや複数サービスがあるサイト向け。",
-					"uniqueFeatures": {
-						"explanation_text": "ロゴ右側に表示する説明テキスト（PC/スマホ別に設定可能）",
-						"pickup_menu": {
-							"aiDescription": "ヘッダー下に表示するピックアップメニュー（4項目まで）。アイコン付きのショートカットリンク。",
-							"settings": {
-								"pickup_menu_page_switch": "表示箇所（全ページ/トップのみ/固定ページのみ等）",
-								"pickup_menu_responsive": "レスポンシブ（両方/スマホのみ/PCのみ）",
-								"pickup_menu_bg_color": "背景色",
-								"pickup_menu_N_text": "各項目のテキスト（1〜4）",
-								"pickup_menu_N_url": "各項目のリンク先URL",
-								"pickup_menu_N_icon": "各項目のアイコン"
-							},
-							"userGuide": "『初めての方へ』『料金表』『アクセス』『お問い合わせ』のような主要導線を設置するのに最適。"
-						}
-					}
-				}
-			}
-		},
-		"footer_set": {
-			"title": "デザイン設定 - フッター",
-			"aiDescription": "サイト下部に表示されるフッターの設定。4パターンから選択可能。ウィジェット・ロゴ・メニュー・SNSアイコン・コピーライトを含む。",
-			"sections": {
-				"footer_set_ptn_sec": {
-					"title": "パターンの選択",
-					"aiDescription": "フッターのデザインパターンを選ぶ。ページ種別ごとに別パターンを指定できる。",
-					"options": {
-						"ptn_1": "パターン1（デフォルト）— ウィジェット+SNSアイコン+コピーライト",
-						"ptn_2": "パターン2 — ウィジェット+ロゴ+テキスト+メニュー+SNSアイコン+コピーライト",
-						"ptn_3": "パターン3 — テンプレート依存",
-						"ptn_4": "パターン4",
-						"ptn_short_code": "ショートコード",
-						"none": "非表示"
-					}
-				},
-				"footer_ptn_1_sec": {
-					"title": "パターン1の設定",
-					"aiDescription": "シンプルなフッター。ウィジェットエリア+SNSアイコン4個+コピーライト。",
-					"settingGroups": {
-						"widget_switch": "ウィジェットエリアの表示/非表示",
-						"sns_icons": "SNSアイコン（4個まで。note/Threads/Facebook/X/Instagram/LINE/YouTube/mail）",
-						"copyright": "コピーライトテキスト・色・フォント"
-					}
-				},
-				"footer_ptn_2_sec": {
-					"title": "パターン2の設定",
-					"aiDescription": "情報量の多いフッター。ウィジェット+ロゴ+ロゴ下テキスト+メニュー+SNSアイコン+コピーライト。コーポレートサイト向け。"
-				}
-			}
-		},
-		"drawer_set": {
-			"title": "デザイン設定 - ドロワー",
-			"aiDescription": "スマホ時のハンバーガーメニュー（ドロワーメニュー）の設定。PCヘッダーのメニューがそのまま表示されるが、プレミアムプランではドロワー専用メニューを設定可能。",
-			"sections": {
-				"drawer_set_ptn_sec": {
-					"title": "パターンの選択",
-					"aiDescription": "ドロワーのデザインパターン。現在はパターン1のみ。"
-				},
-				"drawer_ptn_1_sec": {
-					"title": "パターン1の設定",
-					"aiDescription": "ドロワーの詳細設定。メニュー選択+CTAボタン。プレミアムではドロワー専用メニューを割り当て可能。",
-					"userGuide": "ドロワーメニュー内にCTAボタンを設置すると、スマホからの問い合わせ率が上がる。"
-				}
-			}
-		},
-		"follow_bottom_cta_set": {
-			"title": "ページ下の追従CTAボタン",
-			"aiDescription": "画面下部に追従表示されるCTAボタン。電話やお問い合わせへの導線。2パターンから選択。",
-			"sections": {
-				"follow_bottom_cta_set_ptn_sec": {
-					"title": "パターンの選択",
-					"aiDescription": "追従CTAのパターン選択。ページ種別ごとに指定可能。"
-				},
-				"follow_bottom_cta_ptn_1_sec": {
-					"title": "パターン1の設定",
-					"aiDescription": "シンプルな追従CTAバー。リンクボタン2つまで+レスポンシブ設定+デザイン共通設定（フォント・背景色・透明度・角丸）。",
-					"userGuide": "『電話する』と『メールで相談』の2ボタン構成が定番。スマホのみ表示にするケースが多い。"
-				},
-				"follow_bottom_cta_ptn_2_sec": {
-					"title": "パターン2の設定",
-					"aiDescription": "情報量の多い追従CTA。PC時はロゴ+ポイント4つ+電話番号+ボタン。スマホ時は2ボタン構成。士業・クリニック向け。"
-				}
-			}
-		},
-		"return_top": {
-			"title": "ページ下の追従トップに戻るボタン",
-			"aiDescription": "スクロール時に表示される『ページトップに戻る』ボタン。2パターンから選択。メインカラーのみ設定可能。"
-		},
-		"seo_set": {
-			"title": "分析関係の設定",
-			"aiDescription": "Google AnalyticsとGoogleタグマネージャーの設定。管理者アクセスの除外設定も含む。",
-			"sections": {
-				"seo_set_google_sec": {
-					"title": "Google関係",
-					"settings": {
-						"google_analytics_id": {
-							"aiDescription": "Google Analytics 4の測定ID。形式: G-XXXXXXXXX",
-							"userGuide": "Google Analyticsの管理画面 > データストリーム から取得できる。GTMを使う場合はGTM側で設定するためここは空欄でOK。"
-						},
-						"gtm_id": {
-							"aiDescription": "Googleタグマネージャーのコンテナ ID。形式: GTM-XXXXXXX",
-							"userGuide": "GA4・広告タグ・その他のタグを一元管理する場合に使う。GTMを設定している場合、GA4 IDは不要。"
-						},
-						"admin_switch": {
-							"aiDescription": "管理者・編集者がログインしている時にアクセス解析を無効にするかどうか",
-							"userGuide": "自分のアクセスをカウントしたくない場合はOFFにする。"
-						}
-					}
-				}
-			}
-		},
-		"head_set": {
-			"title": "コードの追記（head内など）",
-			"aiDescription": "HTMLのhead要素やbody要素にカスタムコードを直接追記するための設定。OGPタグ・構造化データ・外部スクリプトの埋め込みに使う。",
-			"sections": {
-				"head_set_in_before_sec": {
-					"title": "head内（前半部分）",
-					"aiDescription": "head要素の前半に挿入されるコード。metaタグやOGP設定に。"
-				},
-				"head_set_in_after_sec": {
-					"title": "head内（後半部分）",
-					"aiDescription": "head要素の後半に挿入されるコード。外部CSSやスクリプトに。"
-				},
-				"head_set_body_before_sec": {
-					"title": "body内（前半部分）",
-					"aiDescription": "body開始直後に挿入されるコード。GTMのnoscriptタグ等に。"
-				},
-				"head_set_body_after_sec": {
-					"title": "body内（後半部分）",
-					"aiDescription": "body終了直前に挿入されるコード。チャットウィジェット等に。"
-				}
-			},
-			"userGuide": "GoogleサーチコンソールのメタタグやFacebookピクセルなど、テーマが標準対応していない外部サービスのコードを貼る場所。"
-		},
-		"loading_anime_panel": {
-			"title": "ローディングアニメーション",
-			"aiDescription": "ページ読み込み時に表示されるローディングアニメの設定。無料版1種類、プレミアム版9種類。ページ種別ごとに指定可能。",
-			"userGuide": "コーポレートサイトやLPでは洗練された印象を与える。ブログではOFF推奨（表示速度の体感が遅くなるため）。"
-		},
-		"single_post": {
-			"title": "デザイン設定 - 投稿ページ",
-			"aiDescription": "ブログ記事（投稿ページ）のレイアウト・表示設定。",
-			"sections": {
-				"single_post_layout_clm_sec": {
-					"title": "カラム設定",
-					"aiDescription": "投稿ページのカラム数。1カラム/2カラム（右サイドバー）/2カラム（左サイドバー）。",
-					"userGuide": "ブログは2カラム（右サイドバー）が定番。LPや読み物系は1カラムが読みやすい。"
-				},
-				"single_post_breadcrumb_sec": {
-					"title": "パンくずリスト設定",
-					"aiDescription": "投稿ページ専用のパンくずリスト表示。パターン1/パターン2/非表示。",
-					"userGuide": "SEOに有効。パターン1は記事上部、パターン2は記事下部に表示。"
-				},
-				"single_post_layout_fv_sec": {
-					"title": "ファーストビュー設定",
-					"aiDescription": "投稿ページの冒頭表示。FVパターン選択とカテゴリー表示の切替。",
-					"settings": {
-						"fv_ptn": {
-							"aiDescription": "投稿ページのFVパターン",
-							"options": {
-								"": "パターン1（デフォルト）",
-								"fv_ptn_2": "パターン2",
-								"fv_ptn_short_code": "ショートコード — FVの代わりに、入力したショートコードの内容を表示する。選ぶとすぐ下に入力欄が現れる"
-							}
-						},
-						"fv_ptn_short_code_put": "FVに表示するショートコード（FVパターンで「ショートコード」を選んだときだけ表示される入力欄）",
-						"fv_category": "カテゴリーの表示/非表示"
-					},
-					"userGuide": "プラグインやマイパーツで作った独自の見出し・バナー等を投稿の冒頭に出したい場合は「ショートコード」を選び、すぐ下に現れる欄にショートコード（例: [my_shortcode]）を貼り付ける。入力が空なら何も表示されない。⚠️ カテゴリー編集画面で「投稿ページ：FVパターン」を選んでいるカテゴリーの記事、および記事ごとの「メインビジュアルの設定」で選んでいる記事では、そちらが優先されるためこの設定は効かない。"
-				},
-				"single_post_layout_date_sec": {
-					"title": "投稿日時・更新日時",
-					"aiDescription": "投稿日と更新日の表示設定。表示する/見た目のみ非表示/検索にも非表示の3段階。",
-					"userGuide": "更新日を表示すると『最新の情報である』とユーザーに安心感を与える。古い記事は更新日を表示した方がSEOにも有利。"
-				},
-				"single_post_layout_heading_sec": {
-					"title": "見出し設定",
-					"aiDescription": "h2/h3/h4の見出しデザイン。30種類のパターンから選択（下線・背景色・囲み線・左線など）。",
-					"userGuide": "見出しデザインはサイト全体の印象を大きく左右する。シンプルなサイトには下線系、ポップなサイトには背景色系が合う。"
-				},
-				"single_post_layout_toc_sec": {
-					"title": "目次設定",
-					"aiDescription": "記事内の自動目次生成。表示条件（h2が何個以上あるか）やパターン・タイトルを設定可能。",
-					"settings": {
-						"toc_switch": "表示/非表示",
-						"toc_ptn": "パターン選択（2種類）",
-						"toc_conditions": "出現条件（h2が2〜6個以上の時）",
-						"toc_ttl_switch": "目次タイトルの表示/非表示",
-						"toc_ttl_text": "目次タイトルのテキスト"
-					},
-					"userGuide": "長い記事には目次を表示すると読みやすくなる。条件は『h2が3つ以上』がおすすめ。"
-				},
-				"single_post_layout_share_button_sec": {
-					"title": "シェアボタンの設定",
-					"aiDescription": "記事のSNSシェアボタン。タイトル下（記事冒頭）と投稿下の2箇所に設置可能。各5個まで。",
-					"availableServices": "Facebook/X/LINE/Pocket/はてなブックマーク/LinkedIn/Reddit/Pinterest/Tumblr/Telegram/WhatsApp/Mastodon/Email/URLコピー",
-					"userGuide": "日本のブログではX・Facebook・LINE・はてなブックマークの4つが定番。"
-				}
-			}
-		},
-		"page_post": {
-			"title": "デザイン設定 - 固定ページ",
-			"aiDescription": "固定ページのレイアウト設定。最大横幅と見出しデザインを設定可能。",
-			"sections": {
-				"page_post_layout_sec": {
-					"title": "レイアウト",
-					"aiDescription": "固定ページの最大横幅設定。100%〜1440pxの範囲で8px刻み。",
-					"userGuide": "通常は1000px〜1200pxが読みやすい。LPでは100%（全幅）にすることも。"
-				},
-				"page_post_layout_heading_sec": {
-					"title": "見出し設定",
-					"aiDescription": "固定ページのh2/h3/h4のデザインパターン選択。投稿ページとは別に設定可能。"
-				}
-			}
-		},
-		"archive_page": {
-			"title": "デザイン設定 - アーカイブページ",
-			"aiDescription": "カテゴリー一覧・タグ一覧などのアーカイブページの設定。",
-			"sections": {
-				"archive_page_ptn_sec": {
-					"title": "パターンの選択",
-					"aiDescription": "アーカイブページのファーストビューと投稿一覧のパターンを設定。",
-					"settings": {
-						"fv_ptn_df": {
-							"aiDescription": "ファーストビューのパターン。パターン4はプレミアム限定。",
-							"options": {
-								"ptn_1": "パターン1（デフォルト）",
-								"ptn_2": "パターン2",
-								"ptn_3": "パターン3",
-								"ptn_4": "パターン4（プレミアム限定）",
-								"ptn_short_code": "ショートコード — ファーストビューの代わりに、入力したショートコードの内容を表示する（入力欄は「 - ショートコードの設定」セクション）"
-							}
-						},
-						"fv_df_bg_color": "ファーストビューの背景色",
-						"fv_df_text_color": "ファーストビューの文字色",
-						"fv_df_font": "フォント",
-						"fv_df_font_weight": "文字太さ",
-						"fv_df_image": "デフォルト画像（カテゴリーのアイキャッチがない場合に使用）",
-						"fv_df_image_filter_color": "画像フィルターの色",
-						"fv_df_image_filter_op": "画像フィルターの透明度",
-						"post_list_ptn_df": {
-							"aiDescription": "投稿一覧のパターン",
-							"options": {
-								"ptn_1": "パターン1（デフォルト）— カード型",
-								"ptn_2": "パターン2 — リスト型",
-								"ptn_3": "パターン3 — お知らせ一覧用（テキストのみ）",
-								"ptn_4": "パターン4",
-								"ptn_short_code": "ショートコード — 投稿一覧の代わりに、入力したショートコードの内容を表示する（入力欄は「 - ショートコードの設定」セクション）"
-							}
-						},
-						"post_list_df_image": "投稿一覧のデフォルト画像"
-					}
-				},
-				"archive_ptn_short_code_sec": {
-					"title": " - ショートコードの設定",
-					"aiDescription": "アーカイブページのファーストビュー／投稿一覧を、ショートコードの内容に差し替えるための入力欄。パターンの選択で「ショートコード」を選んだ枠だけが、ここに入力したショートコードの出力に置き換わる。入力が空なら、その枠は何も表示されない。",
-					"userGuide": "プラグインやマイパーツで作った独自の一覧・バナー等をアーカイブページに出したい場合に使う。使い方は「パターンの選択」で「ショートコード」を選び、この欄にショートコード（例: [my_shortcode]）を貼り付けるだけ。",
-					"settings": {
-						"fv_put": "ファーストビューに表示するショートコード",
-						"post_list_put": "投稿一覧に表示するショートコード"
-					}
-				}
-			}
-		}
-	},
-	"sections": {
-		"color_sec": {
-			"title": "共通設定 - カラー（色）",
-			"aiDescription": "サイト全体のカラー設定。CSS変数（--color-main等）として全ページで使用される。",
-			"settings": {
-				"main": {
-					"aiDescription": "メインカラー。サイト全体の基調色。ヘッダー・ボタン・リンクなどに使用される。",
-					"userGuide": "ブランドカラーを設定する。業種の定番色：美容=ピンク系、医療=青系、飲食=赤/オレンジ系、士業=紺系。"
-				},
-				"accent": {
-					"aiDescription": "アクセントカラー。CTAボタンやホバー時の強調色に使用される。"
-				},
-				"text": {
-					"aiDescription": "通常の文字色。本文テキストの色。",
-					"userGuide": "真っ黒（#000）よりも濃いグレー（#333）の方が読みやすい。"
-				},
-				"1": { "aiDescription": "カラー1。テーマ内で自由に使えるカスタムカラー。" },
-				"2": { "aiDescription": "カラー2。テーマ内で自由に使えるカスタムカラー。" },
-				"3": { "aiDescription": "カラー3。テーマ内で自由に使えるカスタムカラー。" },
-				"link_common": { "aiDescription": "文中のリンクテキストの色。" },
-				"link_icon_switch": { "aiDescription": "新規タブで開くリンクにアイコンを表示するかどうか。" }
-			}
-		},
-		"font_sec": {
-			"title": "共通設定 - フォント",
-			"aiDescription": "サイト全体・固定ページ・投稿ページのフォント設定。Google Fonts対応。",
-			"settingGroups": {
-				"body": {
-					"aiDescription": "サイト全体のデフォルトフォント。",
-					"settings": {
-						"body": "フォントファミリー",
-						"body_weight": "文字の太さ（100〜900）"
-					},
-					"userGuide": "日本語サイトではNoto Sans JPが最も人気。明朝体は高級感・和風に合う。"
-				},
-				"page": {
-					"aiDescription": "固定ページ専用のフォント設定。未指定ならサイト全体の設定に従う。",
-					"settings": {
-						"page": "フォントファミリー",
-						"page_weight": "文字の太さ",
-						"page_size_pc/tb/sp": "文字サイズ（PC/タブレット/スマホ別。12px〜20px）"
-					}
-				},
-				"single": {
-					"aiDescription": "投稿ページ専用のフォント設定。ブログ記事の読みやすさに直結。",
-					"settings": {
-						"single": "フォントファミリー",
-						"single_weight": "文字の太さ",
-						"single_size_pc/tb/sp": "文字サイズ（PC/タブレット/スマホ別）"
-					},
-					"userGuide": "ブログ記事は16px以上が読みやすい。スマホは15px〜16pxが標準。"
-				}
-			},
-			"availableFonts": {
-				"free": {
-					"gothic": ["ゴシック体（システムフォント）", "Noto Sans JP（おすすめ）", "Zen Kaku Gothic New", "Sawarabi Gothic", "Murecho", "IBM Plex Sans JP", "BIZ UDPGothic"],
-					"mincho": ["明朝体（システムフォント）", "Noto Serif JP", "Sawarabi Mincho"],
-					"rounded": ["M PLUS Rounded 1c", "Kosugi Maru"],
-					"english": ["Roboto", "Lato", "Montserrat", "Sora", "Josefin Sans", "Open Sans", "Raleway", "Coming Soon", "Lacquer", "Abril Fatface", "Lavishly Yours", "Sacramento", "Hurricane", "Dancing Script"]
-				},
-				"premium": {
-					"gothic": ["Zen Maru Gothic", "Dela Gothic One", "Zen Kaku Gothic Antique", "DotGothic16", "RocknRoll One"],
-					"mincho": ["Shippori Mincho", "Shippori Mincho B1", "Hina Mincho", "Zen Old Mincho", "Yuji Mai", "Yuji Syuku", "Zen Kurenaido", "Zen Antique", "New Tegomin"],
-					"design": ["WDXL Lubrifont JP N", "Kaisei Decol", "Potta One", "Hachi Maru Pop", "Rampart One", "Stick"],
-					"handwriting": ["Yusei Magic", "Klee One", "Mochiy Pop P One"]
-				}
-			}
-		},
-		"deadline_setting_sec": {
-			"title": "期限の設定（カウントダウンなど）",
-			"aiDescription": "期限日やカウントダウンを表示するショートコード機能。LP・キャンペーンページで使う。無料版3パターン、プレミアム版15パターン。",
-			"usage": "固定ページ内に <span class=\"lw_deadline_setting set_N\"></span> （Nは番号）と記述すると期限テキストが表示される。",
-			"settingsPerPattern": {
-				"set_switch_N": "ON/OFF切替",
-				"deadline_ptn_N": "期限パターン（今月末/翌月末/2ヶ月後末/手動設定/カウントダウン方式）",
-				"deadline_date_N": "手動日付（手動設定の場合のみ）",
-				"countdown_days/hours/minutes/seconds_N": "カウントダウンの日数・時間・分・秒（カウントダウン方式の場合のみ）",
-				"deadline_after_ptn_N": "期限後のアクション（テキスト表示/別ページへリダイレクト）",
-				"deadline_after_redirect_url_N": "リダイレクト先URL",
-				"deadline_after_text_N": "期限切れ時の表示テキスト（例：受付を締め切りました）"
-			},
-			"userGuide": "LPで『今月末まで特別価格』のような期限訴求に使う。カウントダウン方式はユーザーがアクセスした瞬間から計測が始まるため、個別の緊急感を演出できる。"
-		},
-		"lw_breadcrumb_sec": {
-			"title": "パンくずリスト",
-			"aiDescription": "サイト全体のパンくずリスト設定。トップページの表記（HOME/ページタイトル/カスタムテキスト）を選択可能。",
-			"userGuide": "SEOに有効な構造化データとして出力される。カスタムテキストでサイト名を表示することも可能。"
-		},
-		"lw_extensions_sec": {
-			"title": "拡張機能設定",
-			"aiDescription": "テーマの各機能モジュールのON/OFF切替。不要な機能をOFFにするとページ読み込み速度が改善する。",
-			"settings": {
-				"mail_form_switch_all": {
-					"aiDescription": "メールフォーム機能全般のON/OFF",
-					"userGuide": "Contact Form 7等の外部プラグインを使う場合はOFFにしてよい。"
-				},
-				"mail_form_thanks_mail_switch": {
-					"aiDescription": "フォーム送信後の自動返信メール機能"
-				},
-				"mail_form_reception_history_switch": {
-					"aiDescription": "フォーム受信履歴の保存機能"
-				},
-				"animation_switch": {
-					"aiDescription": "スクロールアニメーション機能のON/OFF",
-					"userGuide": "ブロックのフェードインアニメーション等を制御。"
-				},
-				"seo_functions_switch": {
-					"aiDescription": "テーマ内蔵のSEO機能のON/OFF",
-					"userGuide": "Yoast SEO等の外部プラグインを使う場合はOFFにして重複を避ける。"
-				},
-				"comment_functions_switch": {
-					"aiDescription": "投稿ページ下のコメント機能のON/OFF"
-				},
-				"profile_manager_functions_switch": {
-					"aiDescription": "ユーザープロフィール管理画面の有効化"
-				},
-				"notification_paid_features": {
-					"aiDescription": "LiteWordからの通知（有料機能案内・無料体験オファー）の表示/非表示"
-				}
-			}
-		}
-	}
+  "_meta": {
+    "description": "LiteWordカスタマイザーのAI向けメタ情報。各設定項目の意味・用途・推奨値をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+    "version": "1.0",
+    "lastUpdated": "2026-09-02"
+  },
+  "panels": {
+    "header_set": {
+      "title": "デザイン設定 - ヘッダー",
+      "aiDescription": "サイト上部に表示されるヘッダーの設定。ロゴ・メニュー・電話CTA・ボタンCTAなどを含む。6パターンから選択可能。",
+      "sections": {
+        "header_set_ptn_sec": {
+          "title": "パターンの選択",
+          "aiDescription": "ヘッダーのデザインパターンを選ぶ。ページ種別（全ページ共通/固定ページ/投稿ページ/アーカイブ）ごとに別パターンを指定できる。",
+          "settings": {
+            "ptn_df": {
+              "aiDescription": "全ページ共通のヘッダーパターン",
+              "options": {
+                "ptn_1": "パターン1（デフォルト）— ロゴ左+メニュー右の標準レイアウト",
+                "ptn_2": "パターン2 — ロゴ中央+メニュー下",
+                "ptn_3": "パターン3 — ロゴ左+メニュー左寄せ",
+                "ptn_4": "パターン4 — テンプレート依存（ガソリンスタンド/template_001のみ）",
+                "ptn_5": "パターン5 — ロゴ左+右側に説明テキスト+ピックアップメニュー付き",
+                "ptn_6": "パターン6 — ロゴ左+メニュー右（アンダーライン型hover）",
+                "ptn_short_code": "ショートコード — 完全カスタム",
+                "none": "非表示"
+              }
+            },
+            "ptn_page": {
+              "aiDescription": "固定ページ専用のヘッダーパターン（未選択＝全ページ共通に従う）"
+            },
+            "ptn_post": {
+              "aiDescription": "投稿ページ専用のヘッダーパターン"
+            },
+            "ptn_archive": {
+              "aiDescription": "アーカイブページ専用のヘッダーパターン"
+            }
+          }
+        },
+        "header_ptn_1_sec": {
+          "title": "パターン1の設定",
+          "aiDescription": "デフォルトのヘッダーパターン。上からインフォメーションバー→ロゴ+メニュー+CTA（電話・ボタン）の構成。",
+          "settingGroups": {
+            "follow_switch": {
+              "aiDescription": "ヘッダー追従（スクロール時に固定表示）の切替。on=追従する、on_pc_menu_1=PCではメニュー部分のみ追従",
+              "userGuide": "コーポレートサイトやLPでは追従ヘッダーが効果的。ブログ記事ではOFFが読みやすい。"
+            },
+            "information_bar": {
+              "aiDescription": "ヘッダー最上部に表示される横長のバー。キャンペーン告知やお知らせに使う。",
+              "settings": {
+                "switch": "表示/非表示の切替",
+                "text": "表示するテキスト",
+                "url": "リンク先URL（任意）",
+                "bg_color": "背景色",
+                "text_color": "テキスト色",
+                "font": "フォント指定"
+              },
+              "userGuide": "期間限定キャンペーンや重要なお知らせを目立たせたい時に使う。常時表示するとユーザーが慣れて効果が薄れるため、期間を決めて使うのが効果的。"
+            },
+            "logo": {
+              "aiDescription": "サイトのロゴ表示設定。画像ロゴまたはテキストロゴを選択できる。",
+              "settings": {
+                "logo_switch": "表示形式の選択（logo_img=画像/logo_text=テキスト/none=非表示）",
+                "logo_text": "テキストロゴの場合の表示テキスト",
+                "logo_text_color": "テキスト色",
+                "logo_text_font": "フォント指定",
+                "font_weight": "フォントの太さ",
+                "logo_text_size_pc/tb/sp": "文字サイズ（PC/タブレット/スマホ別）",
+                "logo_img": "画像ロゴのアップロード",
+                "logo_img_size_pc/tb/sp": "画像サイズ（PC/タブレット/スマホ別）"
+              },
+              "userGuide": "ロゴ画像がない場合はテキストロゴが使える。明朝体+大きめサイズだと高級感、ゴシック体+小さめだとカジュアルな印象になる。"
+            },
+            "menu": {
+              "aiDescription": "ヘッダーのナビゲーションメニュー。WordPressのメニュー機能と連動。",
+              "settings": {
+                "menu_select": "表示するメニューの選択",
+                "menu_font": "メニューのフォント",
+                "menu_1st_layer_text_color": "第1階層のテキスト色",
+                "menu_current_text_color": "現在のページのテキスト色",
+                "menu_current_bg_color": "現在のページの背景色",
+                "menu_1st_layer_hover_text_color": "ホバー時テキスト色",
+                "menu_1st_layer_hover_bg_color": "ホバー時背景色",
+                "menu_2st_layer_text_color": "第2階層以降のテキスト色",
+                "menu_2st_layer_bg_color": "第2階層以降の背景色",
+                "menu_2st_layer_hover_text_color": "第2階層ホバー時テキスト色",
+                "menu_2st_layer_hover_bg_color": "第2階層ホバー時背景色"
+              },
+              "userGuide": "メニューは『外観 > メニュー』で作成したものを選択する。色はサイトのカラーに合わせる。カレント色を設定すると現在のページがわかりやすくなる。"
+            },
+            "cta_tel": {
+              "aiDescription": "ヘッダーに表示する電話番号CTA。電話問い合わせを促すパーツ。",
+              "settings": {
+                "cta_tel_switch": "表示切替（ON/OFF）",
+                "cta_tel_number_text": "電話番号（半角・ハイフンあり）",
+                "cta_tel_number_color": "電話番号の色",
+                "cta_tel_number_font": "電話番号のフォント",
+                "cta_tel_number_font_weight": "電話番号の太さ",
+                "cta_tel_sub_text": "補足テキスト（例：受付時間 9:00〜18:00）",
+                "cta_tel_sub_text_color": "補足テキストの色",
+                "cta_tel_sub_text_font": "補足テキストのフォント",
+                "cta_tel_sub_text_font_weight": "補足テキストの太さ",
+                "cta_tel_icon_select": "電話アイコン（8種類から選択）",
+                "cta_tel_icon_color": "アイコンの色"
+              },
+              "userGuide": "店舗・クリニック・士業など電話問い合わせが多い業種で有効。スマホではタップで発信できる。"
+            },
+            "cta_btn_1": {
+              "aiDescription": "ヘッダーに表示するCTAボタン。お問い合わせや予約ページへの導線。",
+              "userGuide": "『お問い合わせ』『無料相談』『ご予約はこちら』などのアクションを促すボタン。目立つ色で設置すると効果的。"
+            }
+          }
+        },
+        "header_ptn_5_sec": {
+          "title": "パターン5の設定",
+          "aiDescription": "説明テキスト付きヘッダー+ピックアップメニュー付き。コーポレートサイトや複数サービスがあるサイト向け。",
+          "uniqueFeatures": {
+            "explanation_text": "ロゴ右側に表示する説明テキスト（PC/スマホ別に設定可能）",
+            "pickup_menu": {
+              "aiDescription": "ヘッダー下に表示するピックアップメニュー（4項目まで）。アイコン付きのショートカットリンク。",
+              "settings": {
+                "pickup_menu_page_switch": "表示箇所（全ページ/トップのみ/固定ページのみ等）",
+                "pickup_menu_responsive": "レスポンシブ（両方/スマホのみ/PCのみ）",
+                "pickup_menu_bg_color": "背景色",
+                "pickup_menu_N_text": "各項目のテキスト（1〜4）",
+                "pickup_menu_N_url": "各項目のリンク先URL",
+                "pickup_menu_N_icon": "各項目のアイコン"
+              },
+              "userGuide": "『初めての方へ』『料金表』『アクセス』『お問い合わせ』のような主要導線を設置するのに最適。"
+            }
+          }
+        }
+      }
+    },
+    "footer_set": {
+      "title": "デザイン設定 - フッター",
+      "aiDescription": "サイト下部に表示されるフッターの設定。4パターンから選択可能。ウィジェット・ロゴ・メニュー・SNSアイコン・コピーライトを含む。",
+      "sections": {
+        "footer_set_ptn_sec": {
+          "title": "パターンの選択",
+          "aiDescription": "フッターのデザインパターンを選ぶ。ページ種別ごとに別パターンを指定できる。",
+          "options": {
+            "ptn_1": "パターン1（デフォルト）— ウィジェット+SNSアイコン+コピーライト",
+            "ptn_2": "パターン2 — ウィジェット+ロゴ+テキスト+メニュー+SNSアイコン+コピーライト",
+            "ptn_3": "パターン3 — テンプレート依存",
+            "ptn_4": "パターン4",
+            "ptn_short_code": "ショートコード",
+            "none": "非表示"
+          }
+        },
+        "footer_ptn_1_sec": {
+          "title": "パターン1の設定",
+          "aiDescription": "シンプルなフッター。ウィジェットエリア+SNSアイコン4個+コピーライト。",
+          "settingGroups": {
+            "widget_switch": "ウィジェットエリアの表示/非表示",
+            "sns_icons": "SNSアイコン（4個まで。note/Threads/Facebook/X/Instagram/LINE/YouTube/mail）",
+            "copyright": "コピーライトテキスト・色・フォント"
+          }
+        },
+        "footer_ptn_2_sec": {
+          "title": "パターン2の設定",
+          "aiDescription": "情報量の多いフッター。ウィジェット+ロゴ+ロゴ下テキスト+メニュー+SNSアイコン+コピーライト。コーポレートサイト向け。"
+        }
+      }
+    },
+    "drawer_set": {
+      "title": "デザイン設定 - ドロワー",
+      "aiDescription": "スマホ時のハンバーガーメニュー（ドロワーメニュー）の設定。PCヘッダーのメニューがそのまま表示されるが、プレミアムプランではドロワー専用メニューを設定可能。",
+      "sections": {
+        "drawer_set_ptn_sec": {
+          "title": "パターンの選択",
+          "aiDescription": "ドロワーのデザインパターン。現在はパターン1のみ。"
+        },
+        "drawer_ptn_1_sec": {
+          "title": "パターン1の設定",
+          "aiDescription": "ドロワーの詳細設定。メニュー選択+CTAボタン。プレミアムではドロワー専用メニューを割り当て可能。",
+          "userGuide": "ドロワーメニュー内にCTAボタンを設置すると、スマホからの問い合わせ率が上がる。"
+        }
+      }
+    },
+    "follow_bottom_cta_set": {
+      "title": "ページ下の追従CTAボタン",
+      "aiDescription": "画面下部に追従表示されるCTAボタン。電話やお問い合わせへの導線。12パターンから選択（ptn_1・ptn_2は無料、ptn_3〜ptn_12はプレミアム限定）。",
+      "sections": {
+        "follow_bottom_cta_set_ptn_sec": {
+          "title": "パターンの選択",
+          "aiDescription": "追従CTAのパターン選択。ページ種別ごとに指定可能。"
+        },
+        "follow_bottom_cta_ptn_1_sec": {
+          "title": "パターン1の設定",
+          "aiDescription": "シンプルな追従CTAバー。リンクボタン2つまで+レスポンシブ設定+デザイン共通設定（フォント・背景色・透明度・角丸）。",
+          "userGuide": "『電話する』と『メールで相談』の2ボタン構成が定番。スマホのみ表示にするケースが多い。"
+        },
+        "follow_bottom_cta_ptn_2_sec": {
+          "title": "パターン2の設定",
+          "aiDescription": "情報量の多い追従CTA。PC時はロゴ+ポイント4つ+電話番号+ボタン。スマホ時は2ボタン構成。士業・クリニック向け。"
+        },
+        "follow_bottom_cta_ptn_3_sec": {
+          "title": "パターン3の設定",
+          "aiDescription": "全幅バーではなく、右下に浮く小さなピル型ボタン＋吹き出し。スマホでは円形アイコンのみに収縮。個人事業主・フリーランスのシンプルなサイト向け。"
+        },
+        "follow_bottom_cta_ptn_4_sec": {
+          "title": "パターン4の設定",
+          "aiDescription": "価格（¥980/月 等）を主役にした全幅バー。ロゴや電話番号は持たない。サブスク・オンライン講座・EC定期便向け。"
+        },
+        "follow_bottom_cta_ptn_5_sec": {
+          "title": "パターン5の設定",
+          "aiDescription": "受付状況（只今受付中/営業時間）＋電話・LINEの2ボタン。サロン・クリニック・修理受付など予約系業種向け。"
+        },
+        "follow_bottom_cta_ptn_6_sec": {
+          "title": "パターン6の設定",
+          "aiDescription": "コーナーリボン＋暖色背景で期間限定キャンペーンを訴求する全幅バー。季節キャンペーンのある店舗向け。"
+        },
+        "follow_bottom_cta_ptn_7_sec": {
+          "title": "パターン7の設定",
+          "aiDescription": "右下の円形ボタン（FAB）をタップすると、電話/LINE/メールの最大3択が上に展開するチャット風UI。何でも相談・気軽な問い合わせを増やしたい業種向け。"
+        },
+        "follow_bottom_cta_ptn_8_sec": {
+          "title": "パターン8の設定",
+          "aiDescription": "画面を左右2分割し、それぞれ別の行き先へ振り分ける全幅バー。スクール・会員サイトなど導線が2種類ある業種向け。"
+        },
+        "follow_bottom_cta_ptn_9_sec": {
+          "title": "パターン9の設定",
+          "aiDescription": "上端の細い帯が実際のスクロール位置（読了率）に連動して伸びる全幅バー。記事・オウンドメディア・コラム系サイト向け。"
+        },
+        "follow_bottom_cta_ptn_10_sec": {
+          "title": "パターン10の設定",
+          "aiDescription": "評価点・レビュー件数・利用者数を前面に出す全幅バー。比較サイト・レビューメディア・アフィリエイト向け。"
+        },
+        "follow_bottom_cta_ptn_11_sec": {
+          "title": "パターン11の設定",
+          "aiDescription": "メールアドレス入力欄を直接埋め込んだ全幅バー。送信すると通知メールが届き記録も残る（管理画面「Lwお問い合わせ」→「追従CTAリード」）。任意で設定した完了後の移動先URLへも遷移できる。資料請求・SaaSの無料トライアル向け。"
+        },
+        "follow_bottom_cta_ptn_12_sec": {
+          "title": "パターン12の設定",
+          "aiDescription": "閉じた状態はハンドル1本の全幅バー。タップすると電話/LINE/メール/地図の最大4つの連絡先が縦に展開する。不動産・クリニックなど連絡手段を複数用意したい業種向け。"
+        }
+      }
+    },
+    "return_top": {
+      "title": "ページ下の追従トップに戻るボタン",
+      "aiDescription": "スクロール時に表示される『ページトップに戻る』ボタン。2パターンから選択。メインカラーのみ設定可能。"
+    },
+    "seo_set": {
+      "title": "分析関係の設定",
+      "aiDescription": "Google AnalyticsとGoogleタグマネージャーの設定。管理者アクセスの除外設定も含む。",
+      "sections": {
+        "seo_set_google_sec": {
+          "title": "Google関係",
+          "settings": {
+            "google_analytics_id": {
+              "aiDescription": "Google Analytics 4の測定ID。形式: G-XXXXXXXXX",
+              "userGuide": "Google Analyticsの管理画面 > データストリーム から取得できる。GTMを使う場合はGTM側で設定するためここは空欄でOK。"
+            },
+            "gtm_id": {
+              "aiDescription": "Googleタグマネージャーのコンテナ ID。形式: GTM-XXXXXXX",
+              "userGuide": "GA4・広告タグ・その他のタグを一元管理する場合に使う。GTMを設定している場合、GA4 IDは不要。"
+            },
+            "admin_switch": {
+              "aiDescription": "管理者・編集者がログインしている時にアクセス解析を無効にするかどうか",
+              "userGuide": "自分のアクセスをカウントしたくない場合はOFFにする。"
+            }
+          }
+        }
+      }
+    },
+    "head_set": {
+      "title": "コードの追記（head内など）",
+      "aiDescription": "HTMLのhead要素やbody要素にカスタムコードを直接追記するための設定。OGPタグ・構造化データ・外部スクリプトの埋め込みに使う。",
+      "sections": {
+        "head_set_in_before_sec": {
+          "title": "head内（前半部分）",
+          "aiDescription": "head要素の前半に挿入されるコード。metaタグやOGP設定に。"
+        },
+        "head_set_in_after_sec": {
+          "title": "head内（後半部分）",
+          "aiDescription": "head要素の後半に挿入されるコード。外部CSSやスクリプトに。"
+        },
+        "head_set_body_before_sec": {
+          "title": "body内（前半部分）",
+          "aiDescription": "body開始直後に挿入されるコード。GTMのnoscriptタグ等に。"
+        },
+        "head_set_body_after_sec": {
+          "title": "body内（後半部分）",
+          "aiDescription": "body終了直前に挿入されるコード。チャットウィジェット等に。"
+        }
+      },
+      "userGuide": "GoogleサーチコンソールのメタタグやFacebookピクセルなど、テーマが標準対応していない外部サービスのコードを貼る場所。"
+    },
+    "loading_anime_panel": {
+      "title": "ローディングアニメーション",
+      "aiDescription": "ページ読み込み時に表示されるローディングアニメの設定。無料版1種類、プレミアム版9種類。ページ種別ごとに指定可能。",
+      "userGuide": "コーポレートサイトやLPでは洗練された印象を与える。ブログではOFF推奨（表示速度の体感が遅くなるため）。"
+    },
+    "single_post": {
+      "title": "デザイン設定 - 投稿ページ",
+      "aiDescription": "ブログ記事（投稿ページ）のレイアウト・表示設定。",
+      "sections": {
+        "single_post_layout_clm_sec": {
+          "title": "カラム設定",
+          "aiDescription": "投稿ページのカラム数。1カラム/2カラム（右サイドバー）/2カラム（左サイドバー）。",
+          "userGuide": "ブログは2カラム（右サイドバー）が定番。LPや読み物系は1カラムが読みやすい。"
+        },
+        "single_post_breadcrumb_sec": {
+          "title": "パンくずリスト設定",
+          "aiDescription": "投稿ページ専用のパンくずリスト表示。パターン1/パターン2/非表示。",
+          "userGuide": "SEOに有効。パターン1は記事上部、パターン2は記事下部に表示。"
+        },
+        "single_post_layout_fv_sec": {
+          "title": "ファーストビュー設定",
+          "aiDescription": "投稿ページの冒頭表示。FVパターン選択とカテゴリー表示の切替。",
+          "settings": {
+            "fv_ptn": {
+              "aiDescription": "投稿ページのFVパターン",
+              "options": {
+                "": "パターン1（デフォルト）",
+                "fv_ptn_2": "パターン2",
+                "fv_ptn_short_code": "ショートコード — FVの代わりに、入力したショートコードの内容を表示する。選ぶとすぐ下に入力欄が現れる"
+              }
+            },
+            "fv_ptn_short_code_put": "FVに表示するショートコード（FVパターンで「ショートコード」を選んだときだけ表示される入力欄）",
+            "fv_category": "カテゴリーの表示/非表示"
+          },
+          "userGuide": "プラグインやマイパーツで作った独自の見出し・バナー等を投稿の冒頭に出したい場合は「ショートコード」を選び、すぐ下に現れる欄にショートコード（例: [my_shortcode]）を貼り付ける。入力が空なら何も表示されない。⚠️ カテゴリー編集画面で「投稿ページ：FVパターン」を選んでいるカテゴリーの記事、および記事ごとの「メインビジュアルの設定」で選んでいる記事では、そちらが優先されるためこの設定は効かない。"
+        },
+        "single_post_layout_date_sec": {
+          "title": "投稿日時・更新日時",
+          "aiDescription": "投稿日と更新日の表示設定。表示する/見た目のみ非表示/検索にも非表示の3段階。",
+          "userGuide": "更新日を表示すると『最新の情報である』とユーザーに安心感を与える。古い記事は更新日を表示した方がSEOにも有利。"
+        },
+        "single_post_layout_heading_sec": {
+          "title": "見出し設定",
+          "aiDescription": "h2/h3/h4の見出しデザイン。30種類のパターンから選択（下線・背景色・囲み線・左線など）。",
+          "userGuide": "見出しデザインはサイト全体の印象を大きく左右する。シンプルなサイトには下線系、ポップなサイトには背景色系が合う。"
+        },
+        "single_post_layout_toc_sec": {
+          "title": "目次設定",
+          "aiDescription": "記事内の自動目次生成。表示条件（h2が何個以上あるか）やパターン・タイトルを設定可能。",
+          "settings": {
+            "toc_switch": "表示/非表示",
+            "toc_ptn": "パターン選択（2種類）",
+            "toc_conditions": "出現条件（h2が2〜6個以上の時）",
+            "toc_ttl_switch": "目次タイトルの表示/非表示",
+            "toc_ttl_text": "目次タイトルのテキスト"
+          },
+          "userGuide": "長い記事には目次を表示すると読みやすくなる。条件は『h2が3つ以上』がおすすめ。"
+        },
+        "single_post_layout_share_button_sec": {
+          "title": "シェアボタンの設定",
+          "aiDescription": "記事のSNSシェアボタン。タイトル下（記事冒頭）と投稿下の2箇所に設置可能。各5個まで。",
+          "availableServices": "Facebook/X/LINE/Pocket/はてなブックマーク/LinkedIn/Reddit/Pinterest/Tumblr/Telegram/WhatsApp/Mastodon/Email/URLコピー",
+          "userGuide": "日本のブログではX・Facebook・LINE・はてなブックマークの4つが定番。"
+        }
+      }
+    },
+    "page_post": {
+      "title": "デザイン設定 - 固定ページ",
+      "aiDescription": "固定ページのレイアウト設定。最大横幅と見出しデザインを設定可能。",
+      "sections": {
+        "page_post_layout_sec": {
+          "title": "レイアウト",
+          "aiDescription": "固定ページの最大横幅設定。100%〜1440pxの範囲で8px刻み。",
+          "userGuide": "通常は1000px〜1200pxが読みやすい。LPでは100%（全幅）にすることも。"
+        },
+        "page_post_layout_heading_sec": {
+          "title": "見出し設定",
+          "aiDescription": "固定ページのh2/h3/h4のデザインパターン選択。投稿ページとは別に設定可能。"
+        }
+      }
+    },
+    "archive_page": {
+      "title": "デザイン設定 - アーカイブページ",
+      "aiDescription": "カテゴリー一覧・タグ一覧などのアーカイブページの設定。",
+      "sections": {
+        "archive_page_ptn_sec": {
+          "title": "パターンの選択",
+          "aiDescription": "アーカイブページのファーストビューと投稿一覧のパターンを設定。",
+          "settings": {
+            "fv_ptn_df": {
+              "aiDescription": "ファーストビューのパターン。パターン4はプレミアム限定。",
+              "options": {
+                "ptn_1": "パターン1（デフォルト）",
+                "ptn_2": "パターン2",
+                "ptn_3": "パターン3",
+                "ptn_4": "パターン4（プレミアム限定）",
+                "ptn_short_code": "ショートコード — ファーストビューの代わりに、入力したショートコードの内容を表示する（入力欄は「 - ショートコードの設定」セクション）"
+              }
+            },
+            "fv_df_bg_color": "ファーストビューの背景色",
+            "fv_df_text_color": "ファーストビューの文字色",
+            "fv_df_font": "フォント",
+            "fv_df_font_weight": "文字太さ",
+            "fv_df_image": "デフォルト画像（カテゴリーのアイキャッチがない場合に使用）",
+            "fv_df_image_filter_color": "画像フィルターの色",
+            "fv_df_image_filter_op": "画像フィルターの透明度",
+            "post_list_ptn_df": {
+              "aiDescription": "投稿一覧のパターン",
+              "options": {
+                "ptn_1": "パターン1（デフォルト）— カード型",
+                "ptn_2": "パターン2 — リスト型",
+                "ptn_3": "パターン3 — お知らせ一覧用（テキストのみ）",
+                "ptn_4": "パターン4",
+                "ptn_short_code": "ショートコード — 投稿一覧の代わりに、入力したショートコードの内容を表示する（入力欄は「 - ショートコードの設定」セクション）"
+              }
+            },
+            "post_list_df_image": "投稿一覧のデフォルト画像"
+          }
+        },
+        "archive_ptn_short_code_sec": {
+          "title": " - ショートコードの設定",
+          "aiDescription": "アーカイブページのファーストビュー／投稿一覧を、ショートコードの内容に差し替えるための入力欄。パターンの選択で「ショートコード」を選んだ枠だけが、ここに入力したショートコードの出力に置き換わる。入力が空なら、その枠は何も表示されない。",
+          "userGuide": "プラグインやマイパーツで作った独自の一覧・バナー等をアーカイブページに出したい場合に使う。使い方は「パターンの選択」で「ショートコード」を選び、この欄にショートコード（例: [my_shortcode]）を貼り付けるだけ。",
+          "settings": {
+            "fv_put": "ファーストビューに表示するショートコード",
+            "post_list_put": "投稿一覧に表示するショートコード"
+          }
+        }
+      }
+    }
+  },
+  "sections": {
+    "color_sec": {
+      "title": "共通設定 - カラー（色）",
+      "aiDescription": "サイト全体のカラー設定。CSS変数（--color-main等）として全ページで使用される。",
+      "settings": {
+        "1": {
+          "aiDescription": "カラー1。テーマ内で自由に使えるカスタムカラー。"
+        },
+        "2": {
+          "aiDescription": "カラー2。テーマ内で自由に使えるカスタムカラー。"
+        },
+        "3": {
+          "aiDescription": "カラー3。テーマ内で自由に使えるカスタムカラー。"
+        },
+        "main": {
+          "aiDescription": "メインカラー。サイト全体の基調色。ヘッダー・ボタン・リンクなどに使用される。",
+          "userGuide": "ブランドカラーを設定する。業種の定番色：美容=ピンク系、医療=青系、飲食=赤/オレンジ系、士業=紺系。"
+        },
+        "accent": {
+          "aiDescription": "アクセントカラー。CTAボタンやホバー時の強調色に使用される。"
+        },
+        "text": {
+          "aiDescription": "通常の文字色。本文テキストの色。",
+          "userGuide": "真っ黒（#000）よりも濃いグレー（#333）の方が読みやすい。"
+        },
+        "link_common": {
+          "aiDescription": "文中のリンクテキストの色。"
+        },
+        "link_icon_switch": {
+          "aiDescription": "新規タブで開くリンクにアイコンを表示するかどうか。"
+        }
+      }
+    },
+    "font_sec": {
+      "title": "共通設定 - フォント",
+      "aiDescription": "サイト全体・固定ページ・投稿ページのフォント設定。Google Fonts対応。",
+      "settingGroups": {
+        "body": {
+          "aiDescription": "サイト全体のデフォルトフォント。",
+          "settings": {
+            "body": "フォントファミリー",
+            "body_weight": "文字の太さ（100〜900）"
+          },
+          "userGuide": "日本語サイトではNoto Sans JPが最も人気。明朝体は高級感・和風に合う。"
+        },
+        "page": {
+          "aiDescription": "固定ページ専用のフォント設定。未指定ならサイト全体の設定に従う。",
+          "settings": {
+            "page": "フォントファミリー",
+            "page_weight": "文字の太さ",
+            "page_size_pc/tb/sp": "文字サイズ（PC/タブレット/スマホ別。12px〜20px）"
+          }
+        },
+        "single": {
+          "aiDescription": "投稿ページ専用のフォント設定。ブログ記事の読みやすさに直結。",
+          "settings": {
+            "single": "フォントファミリー",
+            "single_weight": "文字の太さ",
+            "single_size_pc/tb/sp": "文字サイズ（PC/タブレット/スマホ別）"
+          },
+          "userGuide": "ブログ記事は16px以上が読みやすい。スマホは15px〜16pxが標準。"
+        }
+      },
+      "availableFonts": {
+        "free": {
+          "gothic": [
+            "ゴシック体（システムフォント）",
+            "Noto Sans JP（おすすめ）",
+            "Zen Kaku Gothic New",
+            "Sawarabi Gothic",
+            "Murecho",
+            "IBM Plex Sans JP",
+            "BIZ UDPGothic"
+          ],
+          "mincho": [
+            "明朝体（システムフォント）",
+            "Noto Serif JP",
+            "Sawarabi Mincho"
+          ],
+          "rounded": [
+            "M PLUS Rounded 1c",
+            "Kosugi Maru"
+          ],
+          "english": [
+            "Roboto",
+            "Lato",
+            "Montserrat",
+            "Sora",
+            "Josefin Sans",
+            "Open Sans",
+            "Raleway",
+            "Coming Soon",
+            "Lacquer",
+            "Abril Fatface",
+            "Lavishly Yours",
+            "Sacramento",
+            "Hurricane",
+            "Dancing Script"
+          ]
+        },
+        "premium": {
+          "gothic": [
+            "Zen Maru Gothic",
+            "Dela Gothic One",
+            "Zen Kaku Gothic Antique",
+            "DotGothic16",
+            "RocknRoll One"
+          ],
+          "mincho": [
+            "Shippori Mincho",
+            "Shippori Mincho B1",
+            "Hina Mincho",
+            "Zen Old Mincho",
+            "Yuji Mai",
+            "Yuji Syuku",
+            "Zen Kurenaido",
+            "Zen Antique",
+            "New Tegomin"
+          ],
+          "design": [
+            "WDXL Lubrifont JP N",
+            "Kaisei Decol",
+            "Potta One",
+            "Hachi Maru Pop",
+            "Rampart One",
+            "Stick"
+          ],
+          "handwriting": [
+            "Yusei Magic",
+            "Klee One",
+            "Mochiy Pop P One"
+          ]
+        }
+      }
+    },
+    "deadline_setting_sec": {
+      "title": "期限の設定（カウントダウンなど）",
+      "aiDescription": "期限日やカウントダウンを表示するショートコード機能。LP・キャンペーンページで使う。無料版3パターン、プレミアム版15パターン。",
+      "usage": "固定ページ内に <span class=\"lw_deadline_setting set_N\"></span> （Nは番号）と記述すると期限テキストが表示される。",
+      "settingsPerPattern": {
+        "set_switch_N": "ON/OFF切替",
+        "deadline_ptn_N": "期限パターン（今月末/翌月末/2ヶ月後末/手動設定/カウントダウン方式）",
+        "deadline_date_N": "手動日付（手動設定の場合のみ）",
+        "countdown_days/hours/minutes/seconds_N": "カウントダウンの日数・時間・分・秒（カウントダウン方式の場合のみ）",
+        "deadline_after_ptn_N": "期限後のアクション（テキスト表示/別ページへリダイレクト）",
+        "deadline_after_redirect_url_N": "リダイレクト先URL",
+        "deadline_after_text_N": "期限切れ時の表示テキスト（例：受付を締め切りました）"
+      },
+      "userGuide": "LPで『今月末まで特別価格』のような期限訴求に使う。カウントダウン方式はユーザーがアクセスした瞬間から計測が始まるため、個別の緊急感を演出できる。"
+    },
+    "lw_breadcrumb_sec": {
+      "title": "パンくずリスト",
+      "aiDescription": "サイト全体のパンくずリスト設定。トップページの表記（HOME/ページタイトル/カスタムテキスト）を選択可能。",
+      "userGuide": "SEOに有効な構造化データとして出力される。カスタムテキストでサイト名を表示することも可能。"
+    },
+    "lw_extensions_sec": {
+      "title": "拡張機能設定",
+      "aiDescription": "テーマの各機能モジュールのON/OFF切替。不要な機能をOFFにするとページ読み込み速度が改善する。",
+      "settings": {
+        "mail_form_switch_all": {
+          "aiDescription": "メールフォーム機能全般のON/OFF",
+          "userGuide": "Contact Form 7等の外部プラグインを使う場合はOFFにしてよい。"
+        },
+        "mail_form_thanks_mail_switch": {
+          "aiDescription": "フォーム送信後の自動返信メール機能"
+        },
+        "mail_form_reception_history_switch": {
+          "aiDescription": "フォーム受信履歴の保存機能"
+        },
+        "animation_switch": {
+          "aiDescription": "スクロールアニメーション機能のON/OFF",
+          "userGuide": "ブロックのフェードインアニメーション等を制御。"
+        },
+        "seo_functions_switch": {
+          "aiDescription": "テーマ内蔵のSEO機能のON/OFF",
+          "userGuide": "Yoast SEO等の外部プラグインを使う場合はOFFにして重複を避ける。"
+        },
+        "comment_functions_switch": {
+          "aiDescription": "投稿ページ下のコメント機能のON/OFF"
+        },
+        "profile_manager_functions_switch": {
+          "aiDescription": "ユーザープロフィール管理画面の有効化"
+        },
+        "notification_paid_features": {
+          "aiDescription": "LiteWordからの通知（有料機能案内・無料体験オファー）の表示/非表示"
+        }
+      }
+    },
+    "lw_pr_notice_sec": {
+      "title": "PR表記（広告・アフィリエイト）",
+      "aiDescription": "アフィリエイトリンクや広告を載せるページの本文の先頭に「広告です」と分かる一文を出す設定。2023年10月からの景品表示法（いわゆるステマ規制）で、広告であることを隠して商品をすすめることが禁止されたため必要。ブロック側の「PR」の札（商品リンク 01 など）はそのブロックの中しか守れないので、文中にアフィリエイトリンクを1本でも置くページではこちらを使う。既定は「表示しない」。",
+      "userGuide": "アフィリエイトを始めるなら最初にオンにする設定。「記事ページだけ」または「すべてのページ」を選ぶと、記事の本文のいちばん上に一文が出る。記事ごとに出す・出さないを上書きできる（投稿・固定ページの編集画面の「その他の設定」→「PR表記（広告）」）。なお、この一文はページ全体の表示であって、リンクそのものの印とは別。文章の中のリンクを広告リンクにするときは、そのリンクを選んでツールバーのメガホンのボタンを押す（rel=\"sponsored nofollow\" が付く）。ボタン系のブロックと商品リンク 01・ランキング 01 は、ブロックの設定に「広告リンク（アフィリエイト）」がある。",
+      "settings": {
+        "switch": {
+          "aiDescription": "表示する場所。アフィリエイトリンクを置くページでは必ずどれかを選ぶ。「記事ページ」は投稿のほか、お知らせ・実績などのカスタム投稿も含む（固定ページだけが別扱い）",
+          "options": {
+            "off": "表示しない（既定）",
+            "post": "記事ページだけ（固定ページには出さない）— 投稿とカスタム投稿に出る",
+            "all": "すべてのページ（固定ページにも出す）— 迷ったらこちら"
+          }
+        },
+        "text": {
+          "aiDescription": "出す文言。空のままなら「※このページはプロモーション（広告）を含みます」が出る。「※広告を含みます」「PR」なども可"
+        },
+        "ptn": {
+          "aiDescription": "見た目",
+          "options": {
+            "ptn_1": "帯（背景つき）— 気づかれやすい（既定）",
+            "ptn_2": "文字だけ（控えめ）— 背景なし"
+          }
+        },
+        "bg_color": {
+          "aiDescription": "帯の背景色（ptn_1 のときだけ効く）。既定 #f2f3f5"
+        },
+        "text_color": {
+          "aiDescription": "文字の色。既定 #666666"
+        },
+        "align": {
+          "aiDescription": "文字の位置",
+          "options": {
+            "left": "左寄せ（既定）",
+            "center": "中央"
+          }
+        }
+      }
+    },
+    "seo_set_affiliate_click_sec": {
+      "title": "広告リンクのクリック計測",
+      "aiDescription": "rel=\"sponsored\" が付いたリンク（＝広告リンク）が押されたときに、Googleアナリティクスへ affiliate_click というイベントを送る設定。どのリンクが・どのお店へ何回押されたかが分かるので、並び順や文言を直す判断ができる。対象になるのは、ボタン系ブロックの「広告リンク」設定・商品リンク 01 / ランキング 01 のお店のボタン・文中リンクの書式ボタンで付けた印の全部。送るのは URL・ドメイン・リンクの文字だけで、個人を特定するものは送らない。「Google関係」のアナリティクスIDもタグマネージャーIDも空のときは、送り先が無いので何も出力しない。管理者・編集者を計測から外す設定（lw_should_track）にも従う。既定は「計測する」。",
+      "userGuide": "先に「Google関係」でアナリティクスID（G-から始まる）を入れておくこと。入っていないと何も送られない。数字はアナリティクスの「イベント」に affiliate_click という名前で出る。link_url（押されたリンク）・link_domain（お店）・link_text（リンクの文字）で内訳が見られる。出るまでに数十分かかることがある。",
+      "settings": {
+        "affiliate_click_switch": {
+          "aiDescription": "広告リンクのクリックを計測するか",
+          "options": {
+            "on": "計測する（既定）",
+            "off": "計測しない"
+          }
+        }
+      }
+    }
+  }
 }

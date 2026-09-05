@@ -1,0 +1,192 @@
+{
+  "title": "保証とアフターサポート（8項目・対象外つき）",
+  "description": "【型A：表が主役】見出し＋ひとこと＋保証の内容8項目＋対象外でも相談してほしいと書いた囲い＋相談ボタン。声や実績は「これまでの話」ですが、買う側がいちばん気にしているのは「これからの話」です。🚨 対象外をはっきり書いてください。書かないとあとで「聞いていない」になり、もめるのは事業者側です。お支払い・キャンセル規定（契約の手前の話）とは役割が違うので、同じページに両方置けます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "保証とアフターサポート",
+        "subTitle": "SUPPORT",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お渡ししたあとが本番です。<br>何をどこまでお引き受けするのか、先にはっきりさせておきます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-lw-company-3",
+      "attributes": {
+        "maxWidth": 900,
+        "fontSizeClass": "font_size_m",
+        "dtWidthClass": "dt_width_m",
+        "spFullDt": true,
+        "dtBackgroundColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "lineHeight": 1.7,
+        "contents": [
+          {
+            "term": "保証の期間",
+            "desc": "お引き渡しの日から3年間です。保証書はお引き渡しのときにお渡しします"
+          },
+          {
+            "term": "保証の対象",
+            "desc": "当社が手を入れた箇所の不具合と、使った部材の初期不良。<br>不具合が見つかった時点でご連絡ください。年数が残っていれば何度でもお受けします"
+          },
+          {
+            "term": "対象外のこと",
+            "desc": "使い方による破損、日焼けや経年による色の変化、天災によるもの、<br>当社以外が手を入れたあとの不具合。ここははっきり線を引かせてください"
+          },
+          {
+            "term": "かかる費用",
+            "desc": "保証の範囲内であれば、出張費・部品代・作業費とも無料です"
+          },
+          {
+            "term": "お申し出",
+            "desc": "お電話かメールで承ります。気になる箇所の写真を1枚送っていただけると、持っていく道具が決まるので早く済みます"
+          },
+          {
+            "term": "うかがう日",
+            "desc": "ご連絡から3営業日以内にお伺いします。水まわりなど生活に差し支えるものは、その日のうちに動きます"
+          },
+          {
+            "term": "定期の点検",
+            "desc": "1年目と3年目に、こちらからご連絡して無料で点検にうかがいます。ご不要のときは遠慮なくお断りください"
+          },
+          {
+            "term": "期間のあと",
+            "desc": "保証が切れたあとも同じ窓口で承ります。そのときは実費のお見積りをお出ししてからの作業になります"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※保証の内容は、ご依頼の内容によって変わることがあります。お見積りのときに、その工事の保証がどうなるかを書面でお渡しします。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1PaddingTopSp": 20,
+        "waku1PaddingBottomSp": 20,
+        "waku1PaddingLeftSp": 16,
+        "waku1PaddingRightSp": 16,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "対象外かどうか分からないときも、まずご連絡ください",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "見てみないと分からないことがほとんどです。対象外だと思って我慢されているうちに大きくなってしまうほうが、結局どちらにとっても損になります。判断はこちらでしますので、気になった時点でご連絡ください。見るだけなら費用はかかりません。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "保証について聞いてみる",
+        "textSub": "＼ 見るだけなら費用はかかりません ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

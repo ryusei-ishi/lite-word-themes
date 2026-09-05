@@ -1,0 +1,133 @@
+{
+  "title": "お役立ち記事（カードグリッド3列＋カテゴリーの案内）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋投稿から自動で並ぶカード6枚（3列）＋記事のカテゴリーと、どんな方向けかの表4項目＋記事一覧への導線。ブログのトップや、サービスページの下に置く読み物の入口です。写真は記事のアイキャッチが自動で入るので、こちらで用意するものはありません。⚠️ 記事は投稿（ブログ）から自動で並びます。記事がまだ1件も無いサイトではその部分が空になります。⚠️ カテゴリーで絞り込むときは、実在するカテゴリーIDを入れてください。存在しないIDを入れると「投稿を読み込めませんでした」と出ます（空なら全カテゴリーです）。件数は列数の倍数（3・6・9）にすると格子がそろいます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "お役立ち記事",
+        "subTitle": "COLUMN",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "ご相談のときによく聞かれることを、記事にまとめています。<br>お問い合わせの前に、気になるものだけ読んでいただければ十分です。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-post-list-4",
+      "attributes": {
+        "numberOfPosts": 6,
+        "columns": 3,
+        "categoryId": "",
+        "catBgColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "記事のカテゴリー",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 200,
+        "dtWidthSp": 150,
+        "defaultSpClm1": true,
+        "dlBorderColor": "#dddddd",
+        "rowBorderColor": "#dddddd",
+        "dtBorderColor": "#dddddd",
+        "dtBgColor": "#f5f7f9",
+        "fontSizePc": 17,
+        "fontSizeSp": 15,
+        "cellPaddingPc": 16,
+        "rows": [
+          {
+            "dtText": "はじめての方へ",
+            "ddText": "ご相談の前に知っておいていただきたいこと。用語の意味や、よくある勘違いをまとめています",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "料金・費用の話",
+            "ddText": "何にいくらかかるのか、追加費用が出るのはどんなときか。他社さんと比べるときの見方も書いています",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "自分でできること",
+            "ddText": "ご依頼いただかなくてもご自分でできるお手入れや、長持ちさせるコツをそのまま公開しています",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "ご依頼の事例",
+            "ddText": "実際にお受けしたご依頼を、お客様の許可をいただいたうえで書いています（個人が分かる情報は出していません）",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "記事をすべて見る",
+        "textSub": "＼ 気になるテーマから読んでください ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

@@ -1,55 +1,56 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "wdl/profile-1",
-	"version": "1.0.0",
-	"title": "プロフィール 01",
-	"category": "lw-content",
-	"icon": "id",
-	"editorScript": "file:./profile-1.js",
-	"aiHint": {
-		"description": "プロフィール。タイトル+画像+本文。代表紹介・スタッフ紹介に",
-		"excludeFromAutoSelect": false,
-		"contentAttributes": [
-			"profileTitle",
-			"content"
-		],
-		"imageAttributes": [
-			"imageUrl"
-		]
-	},
-	"supports": {
-		"anchor": true
-	},
-	"no": 1,
-	"attributes": {
-		"imageUrl": {
-			"type": "string",
-			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/photo_1.webp"
-		},
-		"altText": {
-			"type": "string",
-			"default": "プロフィール画像"
-		},
-		"profileTitle": {
-			"type": "string",
-			"default": "PROFILE"
-		},
-		"content": {
-			"type": "string",
-			"default": "名前：東京太郎\n生年月日：1990年1月1日\n出身地：東京都\n趣味：読書、映画鑑賞、旅行"
-		},
-		"backgroundColor": {
-			"type": "string",
-			"default": "#ebebeb"
-		},
-		"titleColor": {
-			"type": "string",
-			"default": "#000000"
-		},
-		"contentColor": {
-			"type": "string",
-			"default": "#000000"
-		}
-	}
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "wdl/profile-1",
+    "version": "1.0.0",
+    "title": "プロフィール 01",
+    "category": "lw-content",
+    "icon": "id",
+    "editorScript": "file:./profile-1.js",
+    "aiHint": {
+        "description": "プロフィール。タイトル+画像+本文。代表紹介・スタッフ紹介に",
+        "excludeFromAutoSelect": false,
+        "contentAttributes": [
+            "profileTitle",
+            "content"
+        ],
+        "imageAttributes": [
+            "imageUrl"
+        ],
+        "notes": "🚨 **全幅の地色を敷く**（backgroundColor）。前後に別の帯が来るときはあいだにスペーサーを入れない（白い隙間が「入れ忘れ」に見える）。🚨 content は **\n で区切った1本の文字列**（<br> ではない）。1行1項目で「担当：…」のように書く。🚨 写真は**正方形**で用意する（丸く切り抜かれる。900×900px程度）。複数人を並べるときは地色を1枚おきに変えると続きものに見える。"
+    },
+    "supports": {
+        "anchor": true
+    },
+    "no": 1,
+    "attributes": {
+        "imageUrl": {
+            "type": "string",
+            "default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/photo_1.webp"
+        },
+        "altText": {
+            "type": "string",
+            "default": "プロフィール画像"
+        },
+        "profileTitle": {
+            "type": "string",
+            "default": "PROFILE"
+        },
+        "content": {
+            "type": "string",
+            "default": "名前：東京太郎\n生年月日：1990年1月1日\n出身地：東京都\n趣味：読書、映画鑑賞、旅行"
+        },
+        "backgroundColor": {
+            "type": "string",
+            "default": "#ebebeb"
+        },
+        "titleColor": {
+            "type": "string",
+            "default": "#000000"
+        },
+        "contentColor": {
+            "type": "string",
+            "default": "#000000"
+        }
+    }
 }

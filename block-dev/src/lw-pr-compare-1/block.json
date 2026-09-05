@@ -1,0 +1,104 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-compare-1",
+	"version": "1.0.0",
+	"title": "条件チェックリスト 01",
+	"category": "lw-list",
+	"icon": "editor-ul",
+	"description": "2つの分類（よくある条件／見落としやすい条件 など）を、上下2段の全幅チェックリストで見せるブロックです。写真は使いません。",
+	"aiDescription": "「よくある条件／見落としやすい条件」「知っておきたいこと／注意すること」のように、2つの対になる分類を上下2段のチェックリストで見せるブロック。各段は丸バッジ＋見出しのあと、項目を1行=1本の全幅バーで縦に並べる（横並びの箱でも、写真付きリストでもない）。lw-pr-goodbad-1（左右2箱）やlw-pr-list-5/8（リスト+写真）とは見た目が重ならないよう、あえて縦積み・全幅の行カード形式にしている。",
+	"aiNotes": "2026-09-04新設。背景: リスト+写真の構成（lw-pr-list-5/8）がRyuichiに『よくある型でダサい』『文字も見にくくガタガタ』と指摘され、写真を使わない新パターンとして作成。設計判断: ①左右2箱（lw-pr-goodbad-1と同じ絵）は同一ページ内で使うと重複して見えるため避け、上下2段×全幅1列の行カードにした。②項目を狭い列に割ると行の折り返しが増えて読みにくい（ガタガタに見える）ため、各項目は必ず全幅1本の行にする。③行の左端に色付きの縦バー+丸バッジを揃えて置くことで、テキストの折り返し行数が項目ごとに違っても左端は綺麗に揃う。",
+	"aiHint": {
+		"description": "上下2段の全幅チェックリスト。写真なし。各段は丸バッジ＋見出しのあと、項目を1行=1本の横長カードで縦に並べる。よくある/見落としがち、知っておきたい/注意する、のような2区分の説明に",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"firstLabel",
+			"firstItems",
+			"secondLabel",
+			"secondItems"
+		],
+		"imageAttributes": [],
+		"notes": "firstMark/secondMarkは絵文字ではなく○△✓!のような1〜2文字の記号にする。項目（firstItems/secondItems）は文字列の配列で、1要素=1行のフルワイド行カードとして描画される（2列に割った内部レイアウトは持たない。2026-09-04にRyuichi指摘のガタガタ対策）。1項目は20〜50文字程度が読みやすい。件数は上下で違っていてよい（3〜6件推奨）。"
+	},
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"firstLabel": {
+			"type": "string",
+			"default": "よくある条件",
+			"ai_description": "1段目（上）の見出し"
+		},
+		"firstMark": {
+			"type": "string",
+			"default": "○",
+			"ai_description": "1段目の丸バッジの中の文字（1〜2文字）"
+		},
+		"firstItems": {
+			"type": "array",
+			"default": [
+				"テキストテキストテキストテキスト",
+				"テキストテキストテキストテキスト",
+				"テキストテキストテキストテキスト"
+			],
+			"ai_description": "1段目の項目（1要素=1行のフルワイド行カード）"
+		},
+		"firstColor": {
+			"type": "string",
+			"default": "var(--color-main)",
+			"ai_description": "1段目のバッジ・見出し・行の左アクセント色"
+		},
+		"secondLabel": {
+			"type": "string",
+			"default": "見落としやすい条件",
+			"ai_description": "2段目（下）の見出し"
+		},
+		"secondMark": {
+			"type": "string",
+			"default": "△",
+			"ai_description": "2段目の丸バッジの中の文字（1〜2文字）"
+		},
+		"secondItems": {
+			"type": "array",
+			"default": [
+				"テキストテキストテキストテキスト",
+				"テキストテキストテキストテキスト",
+				"テキストテキストテキストテキスト"
+			],
+			"ai_description": "2段目の項目（1要素=1行のフルワイド行カード）"
+		},
+		"secondColor": {
+			"type": "string",
+			"default": "#7a2e3a",
+			"ai_description": "2段目のバッジ・見出し・行の左アクセント色"
+		},
+		"rowBgColor": {
+			"type": "string",
+			"default": "#faf7ef",
+			"ai_description": "行カードの背景色（上下共通）"
+		},
+		"textColor": {
+			"type": "string",
+			"default": "#1f2733",
+			"ai_description": "項目本文の文字色"
+		},
+		"maxWidth": {
+			"type": "number",
+			"default": 1040,
+			"ai_description": "ブロック全体の最大幅(px)"
+		},
+		"marginTop": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "ブロック上の余白(px)"
+		},
+		"marginBottom": {
+			"type": "number",
+			"default": 0,
+			"ai_description": "ブロック下の余白(px)"
+		}
+	},
+	"editorScript": "file:./lw-pr-compare-1.js",
+	"no": 200
+}

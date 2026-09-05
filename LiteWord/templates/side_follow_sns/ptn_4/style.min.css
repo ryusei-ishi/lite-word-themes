@@ -1,0 +1,28 @@
+.side_follow_sns_ptn_4 {
+  padding: 0 10px;
+}
+.side_follow_sns_ptn_4 .sns_links ul li a {
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  box-shadow: 0 3px 10px rgba(0, 0, 0, 0.25);
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+.side_follow_sns_ptn_4 .sns_links ul li a:hover {
+  transform: scale(1.1);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, 0.3);
+}
+.side_follow_sns_ptn_4 .sns_links ul li a svg {
+  width: 18px;
+  height: 18px;
+}
+@media (max-width: 600px) {
+  .side_follow_sns_ptn_4 .sns_links ul li a {
+    width: 36px;
+    height: 36px;
+  }
+  .side_follow_sns_ptn_4 .sns_links ul li a svg {
+    width: 15px;
+    height: 15px;
+  }
+}

@@ -1,0 +1,136 @@
+{
+  "title": "サービス紹介（無料・正方形の写真3枚＋料金の目安）",
+  "description": "【型C：写真が主役】見出し＋リード文＋正方形の写真バナー3枚（できることを3つに分けて）＋料金の目安の表4行＋注釈＋見積りのボタン。写真の上に白い文字が中央で乗るので、**差し替えるときは中央が明るすぎない写真**にしてください。カードの飛び先は空にしてあります（押しても何も起きません）。それぞれの詳細ページのURLを入れてお使いください。文例は革もののリペア工房ですが、修理・オーダー・メンテナンスを扱う仕事ならそのまま使えます。**無料ブロックだけで作ってあります。**",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "サービス",
+        "subTitle": "Service",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お預かりして直す、一からお作りする、使いながら整える。<br>長く使い続けるための3つのお手伝いをしています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-banner-info-03",
+      "attributes": {
+        "items": [
+          {
+            "title": "お直し・修理",
+            "description": "ほつれ・すり切れ・金具の交換。他店でお求めのものも承ります。",
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/atelier_01.webp",
+            "alt": "作業台で革の鞄の持ち手を縫い直している手元",
+            "linkUrl": "",
+            "openInNewTab": false
+          },
+          {
+            "title": "オーダーメイド",
+            "description": "用途と手の大きさに合わせて、革と形からご相談します。",
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/atelier_02.webp",
+            "alt": "作業台に並べた革見本・生地見本・型紙とスケッチ",
+            "linkUrl": "",
+            "openInNewTab": false
+          },
+          {
+            "title": "お手入れ・点検",
+            "description": "クリームでの手入れと、縫い目と金具の点検。30分ほどです。",
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/atelier_03.webp",
+            "alt": "仕上がった革の品を布で磨いている手元と道具",
+            "linkUrl": "",
+            "openInNewTab": false
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "料金の目安",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-company-1",
+      "attributes": {
+        "contents": [
+          {
+            "title": "お直し・修理",
+            "text": "3,300円〜　／　お預かり 5〜10日"
+          },
+          {
+            "title": "オーダー",
+            "text": "22,000円〜　／　ご相談から約1か月"
+          },
+          {
+            "title": "お手入れ",
+            "text": "1,650円〜　／　その場で30分ほど"
+          },
+          {
+            "title": "送料・出張",
+            "text": "宅配は往復1,100円。市内はお伺いします（無料）"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※金額は税込の目安です。傷みの程度によって変わります。<br>気になるところを写真でお送りいただければ、概算をお返しします。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "写真で見積りを頼む",
+        "btnTextSub": "＼ 概算は3営業日でお返しします ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

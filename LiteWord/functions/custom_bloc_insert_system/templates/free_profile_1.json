@@ -1,0 +1,93 @@
+{
+  "title": "代表のごあいさつ（無料・丸い写真1枚＋大事にしていること）",
+  "description": "【型B：説明が主役】全幅の帯に丸い顔写真1枚とあいさつ文＋「大事にしていること」4件＋注釈＋相談ボタン。1人でやっている仕事向けの、いちばん素朴な自己紹介です。写真は**正方形・胸から上・正面**のものに差し替えてください（200pxの丸に切り抜かれます）。見出しは帯のブロック自身が持っているので、上に別の見出しを重ねないでください。**無料ブロックだけで作ってあります。**",
+  "blocks": [
+    {
+      "name": "wdl/profile-1",
+      "attributes": {
+        "profileTitle": "ごあいさつ",
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/profile_01.webp",
+        "altText": "代表の顔写真",
+        "content": "はじめまして。このページをご覧いただき、ありがとうございます。\n\nもともとは自分自身が困っていた側でした。どこに相談すればいいのか分からず、聞いても専門用語ばかりで、結局そのままにしてしまった。\nそのときに「聞きやすい人がいれば違ったのに」と思ったのが、この仕事を始めたきっかけです。\n\n大きな会社ではないので、最初から最後まで私がうかがいます。\n分からないことは、何度でも聞いてください。\n\n代表　〇〇 〇〇"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "大事にしていること",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-3",
+      "attributes": {
+        "contents": [
+          {
+            "text": "専門用語を使わずに説明します"
+          },
+          {
+            "text": "必要のないものはおすすめしません"
+          },
+          {
+            "text": "費用は着手の前に書面でお出しします"
+          },
+          {
+            "text": "終わったあとも相談を受け付けます"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ご相談は無料です。話を聞くだけで終わっていただいても構いません。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "まず話してみる",
+        "btnTextSub": "＼ 売り込みはしません ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

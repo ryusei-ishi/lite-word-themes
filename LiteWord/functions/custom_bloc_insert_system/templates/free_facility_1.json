@@ -1,0 +1,139 @@
+{
+  "title": "設備・院内のご紹介（無料・名前つきの写真タイル4枚）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋設備の写真タイル4枚（施術スペース／シャンプー台／待合／取り扱い品）＋ご来店前に知っておいていただきたいこと4件＋注釈＋ご予約ボタン。写真を並べるだけのギャラリーと違い、**1枚ずつに名前と一言が付きます**。お客様が本当に知りたいのは「きれいかどうか」ではなく「個室か・段差はあるか・どこで待つのか」なので、行く前の不安を減らすのはこちらの形です。サロン・クリニック・整体・スタジオ・教室・工房など、来ていただく業種に向いています。⚠️ 写真は横長に切り取られます。名前は10文字、説明は24文字くらいまでにしてください。⚠️ このブロックは画像の代替テキストを設定できません（ブロック側の仕様です）。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "設備のご紹介",
+        "subTitle": "FACILITY",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お越しになる前に、どんな場所かをご覧ください。<br>気になるところは、ご予約のときにお尋ねいただけます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-banner-info-05",
+      "attributes": {
+        "items": [
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/salon_01.webp",
+            "title": "施術スペース",
+            "description": "大きな鏡の前でゆったりお過ごしいただけます",
+            "linkUrl": "",
+            "openInNewTab": false
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/salon_03.webp",
+            "title": "シャンプー台",
+            "description": "明るさを落とした静かな場所にあります",
+            "linkUrl": "",
+            "openInNewTab": false
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/salon_05.webp",
+            "title": "待合スペース",
+            "description": "窓ぎわのベンチでお待ちいただけます",
+            "linkUrl": "",
+            "openInNewTab": false
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/salon_06.webp",
+            "title": "取り扱い品",
+            "description": "お使いのものをそのままお持ち帰りいただけます",
+            "linkUrl": "",
+            "openInNewTab": false
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "ご来店前に知っておいていただきたいこと",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-4",
+      "attributes": {
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colClass": "clm_1",
+        "contents": [
+          {
+            "text": "入口に段差が1段あります。手すりが付いています。ご希望があれば外までお迎えにまいります"
+          },
+          {
+            "text": "施術スペースは仕切りで分かれています。完全な個室をご希望のときはご予約のときにお知らせください"
+          },
+          {
+            "text": "お子さま連れでお越しいただけます。待合にベビーカーを置ける場所があります"
+          },
+          {
+            "text": "お荷物はお預かりします。貴重品はお手元に置いていただくようお願いしています"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※写真は実際の店内です。設備は入れ替わることがありますので、必ずご覧になりたいものがあるときは、ご予約のときにお尋ねください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "ご予約はこちら",
+        "btnTextSub": "＼ 気になるところは事前にお答えします ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

@@ -4,6 +4,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
 get_template_part('./functions/widget/item/author');
 get_template_part('./functions/widget/item/my_parts');
 get_template_part('./functions/widget/item/shortcode');
+get_template_part('./functions/widget/item/follow_bottom_cta');
 // ウィジェットエリアの登録
 function liteword_register_sidebar() {
     register_sidebar( array(

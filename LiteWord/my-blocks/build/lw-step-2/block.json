@@ -11,10 +11,13 @@
 	},
 	"editorScript": "file:./lw-step-2.js",
 	"aiHint": {
-		"description": "カード型ステップ。ボーダー付きカード+番号+見出し+説明の繰り返し。サービス手順に",
+		"description": "白いカードを縦に積むステップ。色帯の見出し＋説明文で、カードとカードのあいだに矢印が入る。ご利用の流れ・選考の流れ・お申し込みの手順に",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["contents"],
-		"imageAttributes": []
+		"contentAttributes": [
+			"contents"
+		],
+		"imageAttributes": [],
+		"notes": "🚨🚨 **bgGradient は名前に反して2か所に効く**。save() が li の borderColor と、**見出し h3 の background** の両方に入れている。h3 の文字色は CSS で #fff 固定なので、**既定の var(--color-main) のままだと明るいサイト色で見出しが読めなくなる**（黄 #f5b301 で 1.85:1・下限は4.5）。→ color-mix(in srgb, var(--color-main) 50%, #000) のように**暗くしてから渡す**（50%なら 黄 6.40 ／ 白に近い灰 4.67 ／ 既定色 12.08 で通る）。color-mix() が効かないブラウザでも CSS 側に background: var(--color-main) が残るので色が消えることはない。カードの幅は ulMaxWidth（既定800）。カード間は grid の gap 12px ＋ li + li { margin-top: 32px } で、**2件目から番号アイコン（矢印）が出る**。見出しは20px（550px以下18px／370px以下16px）。自前で margin: 32px 0（800px以下24px）を持つので前後にスペーサーを足さない。contents は [{ title, text }]。既定の中身が採用フロー（応募／書類選考／面接／最終選考／内定）なので、採用ページにそのまま使える。"
 	},
 	"no": 2,
 	"attributes": {

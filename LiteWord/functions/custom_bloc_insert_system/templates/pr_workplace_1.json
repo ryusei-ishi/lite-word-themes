@@ -1,0 +1,207 @@
+{
+  "title": "職場の雰囲気（採用向け・写真8枚＋数字で見る職場）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋左にメッセージ・右に職場の写真8枚＋数字で見る職場6項目の表＋応募ボタン。募集要項だけの採用ページには応募が来ません。条件ではなく「どんな人が、どんな空気で働いているか」を見せるためのセクションです。🚨 写真は正方形（1辺1000px以上）でご用意ください。横長を入れると左右が切られます。🚨 顔がはっきり写ったものより、後ろ姿・手元・引きの構図のほうが長く使えます。募集要項のセクション（条件の話）とは役割が違うので、採用ページに両方置いてください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "わたしたちの職場",
+        "subTitle": "OUR WORKPLACE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "条件だけでは分からないところを、写真でお見せします。<br>ここで働く人が、ふだんどう過ごしているかです。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-content-4",
+      "attributes": {
+        "mainTitle": "ふだんの一日",
+        "subTitle": "A DAY WITH US",
+        "bottomText": "朝は各自のペースで始まります。打ち合わせは立ったまま10分で終わることが多く、手が空いている人が自然に手伝う形です。分からないことは、その場で聞ける距離にいます。",
+        "ctaText": "募集要項を見る",
+        "ctaUrl": "#",
+        "ctaLinkType": "url",
+        "mainTitleColor": "#333333",
+        "highlightColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "ctaBorderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "ctaTextColor": "#333333",
+        "ctaBorderWidth": 2,
+        "ctaBorderRadius": 4,
+        "imageRadius": 4,
+        "images": [
+          {
+            "url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/workplace_01.webp",
+            "alt": "立ったまま画面を一緒に見ている二人"
+          },
+          {
+            "url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/workplace_02.webp",
+            "alt": "ホワイトボードに図を書いている手元"
+          },
+          {
+            "url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/workplace_03.webp",
+            "alt": "机の上のノートパソコンとノート"
+          },
+          {
+            "url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/workplace_04.webp",
+            "alt": "低いテーブルを囲んだ短い打ち合わせ"
+          },
+          {
+            "url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/workplace_05.webp",
+            "alt": "ヘッドセットで話しているところ"
+          },
+          {
+            "url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/workplace_06.webp",
+            "alt": "給湯コーナーでお茶をいれているところ"
+          },
+          {
+            "url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/workplace_07.webp",
+            "alt": "紙を見ながら笑っている二人"
+          },
+          {
+            "url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/workplace_08.webp",
+            "alt": "玄関に並んだ靴とヘルメット"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "数字で見る職場",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 200,
+        "dtWidthSp": 150,
+        "defaultSpClm1": true,
+        "dlBorderColor": "#dddddd",
+        "rowBorderColor": "#dddddd",
+        "dtBorderColor": "#dddddd",
+        "dtBgColor": "#f5f7f9",
+        "fontSizePc": 17,
+        "fontSizeSp": 15,
+        "cellPaddingPc": 16,
+        "rows": [
+          {
+            "dtText": "はたらく人",
+            "ddText": "12名（正社員9名・パート3名）。20代から60代まで在籍しています",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "平均の残業",
+            "ddText": "月8時間ほどです。締めの時期だけ少し増えます",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "休みの取り方",
+            "ddText": "前日までに一言いただければ取れます。理由をうかがうことはしていません",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "入社後の3ヶ月",
+            "ddText": "先輩が1人つきます。ひとりで現場に出るのはご本人が「もう大丈夫」と言ってからです",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "つづけた年数",
+            "ddText": "平均7年です。いちばん長い人で18年目になります",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "未経験の割合",
+            "ddText": "いまいる12名のうち7名が別の仕事からの転職です",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※数字は毎年見直して書き換えてください。古いまま置いておくと、入ってから「話が違う」となり、いちばん困るのはご本人です。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "募集要項を見る",
+        "textSub": "＼ 見学だけのご連絡でもかまいません ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

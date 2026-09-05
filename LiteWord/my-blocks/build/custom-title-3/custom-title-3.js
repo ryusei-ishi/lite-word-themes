@@ -32,7 +32,9 @@ __webpack_require__.r(__webpack_exports__);
       subTitle = attributes.subTitle,
       textAlignment = attributes.textAlignment,
       accentColor = attributes.accentColor,
-      headingLevel = attributes.headingLevel;
+      headingLevel = attributes.headingLevel,
+      mainFontSizePc = attributes.mainFontSizePc,
+      mainFontSizeSp = attributes.mainFontSizeSp;
     var onChangeMainTitle = function onChangeMainTitle(value) {
       setAttributes({
         mainTitle: value
@@ -60,9 +62,20 @@ __webpack_require__.r(__webpack_exports__);
     };
     var alignmentClass = textAlignment === 'right' ? 'right' : textAlignment === 'center' ? 'center' : 'left';
     var TagName = "h".concat(headingLevel);
-    var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
+
+    /* 🚨 0 のときは style を1つも出さない（既定のままなら出力が変わらないようにするため） */
+    var sizeStyle = {};
+    if (mainFontSizePc) {
+      sizeStyle['--ct3-main-pc'] = mainFontSizePc + 'px';
+    }
+    if (mainFontSizeSp) {
+      sizeStyle['--ct3-main-sp'] = mainFontSizeSp + 'px';
+    }
+    var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)(Object.assign({
       className: "custom-title-3 ".concat(alignmentClass)
-    });
+    }, Object.keys(sizeStyle).length ? {
+      style: sizeStyle
+    } : {}));
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, [1, 2, 3, 4, 5].map(function (level) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
         key: level,
@@ -91,6 +104,33 @@ __webpack_require__.r(__webpack_exports__);
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: accentColor,
       onChange: onChangeAccentColor
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u6587\u5B57\u30B5\u30A4\u30BA",
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u30E1\u30A4\u30F3\u30BF\u30A4\u30C8\u30EB\uFF08PC\uFF09",
+      help: "0 \u306E\u307E\u307E\u306A\u3089\u65E2\u5B9A\u306E 60px\u3002\u65E5\u672C\u8A9E\u3067\u9577\u3044\u898B\u51FA\u3057\u306E\u3068\u304D\u306F\u5C0F\u3055\u304F\u3057\u307E\u3059",
+      value: mainFontSizePc,
+      onChange: function onChange(v) {
+        return setAttributes({
+          mainFontSizePc: v === undefined ? 0 : v
+        });
+      },
+      min: 0,
+      max: 96,
+      allowReset: true
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u30E1\u30A4\u30F3\u30BF\u30A4\u30C8\u30EB\uFF08\u30B9\u30DE\u30DB\uFF09",
+      help: "0 \u306E\u307E\u307E\u306A\u3089\u65E2\u5B9A\u306E 48px\u3002375px \u3067\u306F 5\u6587\u5B57\u3067\u753B\u9762\u3044\u3063\u3071\u3044\u306B\u306A\u308B\u306E\u3067\u3001\u65E5\u672C\u8A9E\u306A\u3089 28\u301C32px \u3092\u76EE\u5B89\u306B",
+      value: mainFontSizeSp,
+      onChange: function onChange(v) {
+        return setAttributes({
+          mainFontSizeSp: v === undefined ? 0 : v
+        });
+      },
+      min: 0,
+      max: 72,
+      allowReset: true
     }))), /*#__PURE__*/React.createElement(TagName, blockProps, /*#__PURE__*/React.createElement("div", {
       className: "main"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
@@ -118,12 +158,27 @@ __webpack_require__.r(__webpack_exports__);
       subTitle = attributes.subTitle,
       textAlignment = attributes.textAlignment,
       accentColor = attributes.accentColor,
-      headingLevel = attributes.headingLevel;
+      headingLevel = attributes.headingLevel,
+      mainFontSizePc = attributes.mainFontSizePc,
+      mainFontSizeSp = attributes.mainFontSizeSp;
     var alignmentClass = textAlignment === 'right' ? 'right' : textAlignment === 'center' ? 'center' : 'left';
     var TagName = "h".concat(headingLevel);
-    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+
+    /* 🚨🚨 **0（既定）のときは style 属性を1つも書き出さない。**
+       こうしておけば、いま貼られているページのマークアップと1文字も変わらないので
+       deprecated を書かなくてよい（block-change-safety.md の型）。 */
+    var sizeStyle = {};
+    if (mainFontSizePc) {
+      sizeStyle['--ct3-main-pc'] = mainFontSizePc + 'px';
+    }
+    if (mainFontSizeSp) {
+      sizeStyle['--ct3-main-sp'] = mainFontSizeSp + 'px';
+    }
+    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save(Object.assign({
       className: "custom-title-3 ".concat(alignmentClass)
-    });
+    }, Object.keys(sizeStyle).length ? {
+      style: sizeStyle
+    } : {}));
     return /*#__PURE__*/React.createElement(TagName, blockProps, /*#__PURE__*/React.createElement("div", {
       className: "main"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
@@ -205,7 +260,7 @@ module.exports = window["wp"]["components"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-3","version":"1.0.0","title":"見出しタイトル 03","category":"lw-heading","icon":"editor-textcolor","description":"メインタイトルとサブタイトルを表示する見出しブロック（アクセントカラー付き）","supports":{"anchor":true},"aiHint":{"description":"アクセントカラー付き見出し。メインタイトル+サブタイトル。左寄せ対応。装飾的な見出しに","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":[]},"attributes":{"mainTitle":{"type":"string","default":"CONTENT","aiHint":{"role":"heading","contentGuide":"セクション見出し（英語 or 日本語）。3〜15文字","example":"ABOUT US"}},"subTitle":{"type":"string","default":"テキストテキストテキストテキスト<br>テキストテキキストテキスト","aiHint":{"role":"subheading","contentGuide":"補足説明テキスト。20〜50文字。改行可","example":"お客様に選ばれ続ける理由を<br>ご紹介します"}},"textAlignment":{"type":"string","default":"left","aiHint":{"skip":true}},"accentColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}}},"editorScript":"file:./custom-title-3.js","no":3}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-3","version":"1.0.0","title":"見出しタイトル 03","category":"lw-heading","icon":"editor-textcolor","description":"メインタイトルとサブタイトルを表示する見出しブロック（アクセントカラー付き）","supports":{"anchor":true},"aiHint":{"description":"アクセントカラー付き見出し。メインタイトル+サブタイトル。左寄せ対応。装飾的な見出しに","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":[]},"attributes":{"mainTitle":{"type":"string","default":"CONTENT","aiHint":{"role":"heading","contentGuide":"セクション見出し（英語 or 日本語）。3〜15文字","example":"ABOUT US"}},"subTitle":{"type":"string","default":"テキストテキストテキストテキスト<br>テキストテキキストテキスト","aiHint":{"role":"subheading","contentGuide":"補足説明テキスト。20〜50文字。改行可","example":"お客様に選ばれ続ける理由を<br>ご紹介します"}},"textAlignment":{"type":"string","default":"left","aiHint":{"skip":true}},"accentColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}},"mainFontSizePc":{"type":"number","default":0,"aiHint":{"role":"size","contentGuide":"主題の文字の大きさ（PC・px）。0 なら既定の 60px"}},"mainFontSizeSp":{"type":"number","default":0,"aiHint":{"role":"size","contentGuide":"主題の文字の大きさ（スマホ・px）。0 なら既定の 48px。🚨 既定の 48px は 375px だと5文字で画面いっぱいになる。日本語の見出しは 28〜32px にする"}}},"editorScript":"file:./custom-title-3.js","no":3}');
 
 /***/ })
 

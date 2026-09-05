@@ -1,0 +1,331 @@
+{
+  "title": "回数券・月額のご案内（回数券の比較表＋月額の決まり）",
+  "description": "【型A：表が主役】見出し＋ひとこと＋回数券の比較表（5回／10回／20回）＋月額でのご利用の決まり5項目＋注釈＋「使い切れなかったときは」の囲い＋お問い合わせボタン。料金のセクションはどれも「1回いくら」の売り方ですが、ここは**前払い（回数券）と継続（月額）**の売り方です。通う商売（整体・美容・教室・清掃・保守）では、ここが書けるかどうかで1人あたりの売上が大きく変わりますし、書いていないと「まとめて買うと安いのか」を毎回聞かれます。🚨 有効期限と「使い切れなかったとき」を必ず書いてください。回数券でもめるのは値段ではなく**期限切れ**です。先に書いてあれば起きません。🚨 前払いを受けるときは、返金の条件を書面でもお渡しください。⚠️ 回数券の表は**スマホでは横にスクロールします**（このブロックの仕様です）。「スクロールできます」という案内が自動で出るので、そのままお使いいただけます。券の種類を4つ以上にすると、その分だけ横に長くなります。プラン比較（何ができるか）・お支払い方法とは役割が違うので、同じページに並べられます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "回数券・月額のご案内",
+        "subTitle": "TICKET",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "続けてお使いになる方には、まとめてのお求めがお得です。<br>無理におすすめはしませんので、合いそうなものだけお選びください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "回数券",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-3",
+      "attributes": {
+        "columnCount": 4,
+        "headers": [
+          "",
+          "5回券",
+          "10回券",
+          "20回券"
+        ],
+        "colWidthPc": [
+          200,
+          200,
+          200,
+          200
+        ],
+        "colWidthSp": [
+          110,
+          96,
+          96,
+          96
+        ],
+        "mainHeadBgColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "mainHeadTextColor": "#ffffff",
+        "rowHeadBgColor": "color-mix(in srgb, var(--color-main) 45%, #000)",
+        "rowHeadTextColor": "#ffffff",
+        "tableAlign": "center",
+        "rows": [
+          {
+            "header": "料金",
+            "cells": [
+              "¥24,000",
+              "¥45,000",
+              "¥84,000"
+            ]
+          },
+          {
+            "header": "1回あたり",
+            "cells": [
+              "¥4,800",
+              "¥4,500",
+              "¥4,200"
+            ]
+          },
+          {
+            "header": "通常より",
+            "cells": [
+              "4%お得",
+              "10%お得",
+              "16%お得"
+            ]
+          },
+          {
+            "header": "有効期限",
+            "cells": [
+              "4か月",
+              "8か月",
+              "16か月"
+            ]
+          },
+          {
+            "header": "ご家族共用",
+            "cells": [
+              "×",
+              "○",
+              "○"
+            ]
+          },
+          {
+            "header": "ご予約優先",
+            "cells": [
+              "×",
+              "○",
+              "○"
+            ]
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "月額でのご利用",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 200,
+        "dtWidthSp": 150,
+        "defaultSpClm1": true,
+        "dlBorderColor": "#dddddd",
+        "rowBorderColor": "#dddddd",
+        "dtBorderColor": "#dddddd",
+        "dtBgColor": "#f5f7f9",
+        "fontSizePc": 17,
+        "fontSizeSp": 15,
+        "cellPaddingPc": 16,
+        "rows": [
+          {
+            "dtText": "月額",
+            "ddText": "¥9,800（月2回まで）／¥16,800（月4回まで）。使わなかった月ぶんの繰り越しはありません",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "お支払い",
+            "ddText": "毎月〇日に口座から引き落とします。カードでのお支払いもお選びいただけます",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "お休み",
+            "ddText": "月ごとにお休みできます。前の月の〇日までにお申し出いただければ、その月はいただきません",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "やめるとき",
+            "ddText": "いつでもおやめいただけます。当月末で止める場合は、その月の〇日までにお申し出ください。違約金はありません",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "回数券との併用",
+            "ddText": "できます。月の回数を超えた分に回数券をお使いいただけます",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※金額はすべて税込みの例です。実際の金額と回数に書き換えてください。※前払いをお受けするときは、返金の条件を書面でもお渡しすることをおすすめします。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1PaddingTopSp": 20,
+        "waku1PaddingBottomSp": 20,
+        "waku1PaddingLeftSp": 16,
+        "waku1PaddingRightSp": 16,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "使い切れなかったときは",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "期限が切れそうなときは、こちらから1か月前にご連絡します。お仕事やご病気などのご事情があれば、期限を延ばすご相談に応じます。どうしても使い切れないときは、残った回数分を未使用分の金額でお返しします（手数料はいただきません）。「買ったのに損をした」という形にはしませんので、安心してお選びください。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "お問い合わせはこちら",
+        "textSub": "＼ どれが得かは、通う回数からお試算します ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

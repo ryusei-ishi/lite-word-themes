@@ -13,7 +13,8 @@
 		"contentAttributes": [],
 		"imageAttributes": [
 			"image"
-		]
+		],
+		"notes": "🚨 **`aspectRatioW` / `aspectRatioH` の既定は 600x400（＝3:2）。**写真の比率と合わせないと `objectFit: cover` で上下（または左右）が切られる。`maxWidthPc: 0` は「制限なし」の意味。本文の幅にそろえるなら 760 前後を入れる。`image` は URL の**文字列**（配列でもオブジェクトでもない）。`alt` は別の属性。✅ 文字を持たないブロックなので色の罠は無い。⚠️ 画面や看板の文字が写り込んだ写真は避ける（中の文字が古くなる／別サービスに見える）。"
 	},
 	"supports": {
 		"anchor": true

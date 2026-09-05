@@ -577,13 +577,21 @@ class LW_Custom_Block_Insert_System {
         }
 
         // Generate block markup for do_blocks
-        $block_markup = $this->json_to_block_markup($data);
+        // 🚨 セクションテンプレのJSONは { file, title, description, blocks: [...] } の形。
+        //    ここで $data をそのまま渡すと、title（ただの文字列）までブロックとして扱われ、
+        //    render_single_block_markup() の $block['name'] で
+        //    「Cannot access offset of type string on string」で**必ず落ちる**（HTTP 500）。
+        //    2026-09-01 に117件すべてで500になることを実測。**blocks を渡す。**
+        //    （いまのところ画面からは呼ばれていない経路だが、AI向けの手引きには載っている）
+        $blocks_for_markup = isset($data['blocks']) && is_array($data['blocks']) ? $data['blocks'] : $data;
+        $block_markup = $this->json_to_block_markup($blocks_for_markup);
 
         // Use do_blocks to render
         $rendered_html = do_blocks($block_markup);
 
         // Collect CSS files needed
-        $css_files = $this->collect_block_css($data);
+        // 🚨 こちらも同じ。$data をそのまま渡すと title の文字列を辿って落ちる（2026-09-01）
+        $css_files = $this->collect_block_css($blocks_for_markup);
 
         return rest_ensure_response(array(
             'filename' => $filename,

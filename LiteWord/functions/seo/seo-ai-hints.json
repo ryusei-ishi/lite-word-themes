@@ -2,7 +2,7 @@
 	"_meta": {
 		"description": "LiteWord SEO機能のAI向けメタ情報。各設定項目の意味・用途・推奨値をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
 		"version": "1.0",
-		"lastUpdated": "2026-03-21"
+		"lastUpdated": "2026-09-02"
 	},
 	"adminMenuLocation": {
 		"parentMenu": "Lw SEO設定",
@@ -53,17 +53,31 @@
 					"lw_front_title_main": {
 						"aiDescription": "メイン部分（デフォルト: サイトタイトル）",
 						"type": "select",
-						"options": ["none", "site_title", "catchphrase"]
+						"options": [
+							"none",
+							"site_title",
+							"catchphrase"
+						]
 					},
 					"lw_front_title_sep": {
 						"aiDescription": "区切り文字（デフォルト: -）",
 						"type": "select",
-						"options": ["|", "・", "｜", "／", "-"]
+						"options": [
+							"|",
+							"・",
+							"｜",
+							"／",
+							"-"
+						]
 					},
 					"lw_front_title_sub": {
 						"aiDescription": "サブ部分（デフォルト: キャッチフレーズ）",
 						"type": "select",
-						"options": ["none", "site_title", "catchphrase"]
+						"options": [
+							"none",
+							"site_title",
+							"catchphrase"
+						]
 					}
 				},
 				"userGuide": "通常は「サイトタイトル - キャッチフレーズ」の形式がおすすめ。"
@@ -73,12 +87,24 @@
 				"optionKeys": {
 					"lw_post_title_main": {
 						"aiDescription": "メイン部分（デフォルト: 投稿タイトル）",
-						"options": ["post_title", "none", "site_title", "catchphrase"]
+						"options": [
+							"post_title",
+							"none",
+							"site_title",
+							"catchphrase"
+						]
 					},
-					"lw_post_title_sep": { "aiDescription": "区切り文字（デフォルト: -）" },
+					"lw_post_title_sep": {
+						"aiDescription": "区切り文字（デフォルト: -）"
+					},
 					"lw_post_title_sub": {
 						"aiDescription": "サブ部分（デフォルト: サイトタイトル）",
-						"options": ["none", "site_title", "catchphrase", "post_title"]
+						"options": [
+							"none",
+							"site_title",
+							"catchphrase",
+							"post_title"
+						]
 					}
 				},
 				"userGuide": "通常は「投稿タイトル - サイトタイトル」が一般的。"
@@ -86,9 +112,15 @@
 			"staticPage": {
 				"aiDescription": "固定ページのtitleタグ設定。",
 				"optionKeys": {
-					"lw_page_title_main": { "aiDescription": "メイン部分（デフォルト: 固定ページタイトル）" },
-					"lw_page_title_sep": { "aiDescription": "区切り文字（デフォルト: |）" },
-					"lw_page_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+					"lw_page_title_main": {
+						"aiDescription": "メイン部分（デフォルト: 固定ページタイトル）"
+					},
+					"lw_page_title_sep": {
+						"aiDescription": "区切り文字（デフォルト: |）"
+					},
+					"lw_page_title_sub": {
+						"aiDescription": "サブ部分（デフォルト: サイトタイトル）"
+					}
 				},
 				"premiumFeature": {
 					"page_title_display": {
@@ -105,65 +137,113 @@
 			"categoryArchive": {
 				"aiDescription": "カテゴリーアーカイブページのtitleタグ設定。",
 				"optionKeys": {
-					"lw_cat_archive_title_main": { "aiDescription": "メイン部分（デフォルト: カテゴリ名）" },
-					"lw_cat_archive_title_sep": { "aiDescription": "区切り文字" },
-					"lw_cat_archive_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+					"lw_cat_archive_title_main": {
+						"aiDescription": "メイン部分（デフォルト: カテゴリ名）"
+					},
+					"lw_cat_archive_title_sep": {
+						"aiDescription": "区切り文字"
+					},
+					"lw_cat_archive_title_sub": {
+						"aiDescription": "サブ部分（デフォルト: サイトタイトル）"
+					}
 				}
 			},
 			"tagArchive": {
 				"aiDescription": "タグアーカイブページのtitleタグ設定。",
 				"optionKeys": {
-					"lw_tag_archive_title_main": { "aiDescription": "メイン部分（デフォルト: タグ名）" },
-					"lw_tag_archive_title_sep": { "aiDescription": "区切り文字" },
-					"lw_tag_archive_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+					"lw_tag_archive_title_main": {
+						"aiDescription": "メイン部分（デフォルト: タグ名）"
+					},
+					"lw_tag_archive_title_sep": {
+						"aiDescription": "区切り文字"
+					},
+					"lw_tag_archive_title_sub": {
+						"aiDescription": "サブ部分（デフォルト: サイトタイトル）"
+					}
 				}
 			},
 			"otherArchive": {
 				"aiDescription": "その他のアーカイブページ（一般的なアーカイブ）のtitleタグ設定。",
 				"optionKeys": {
-					"lw_other_archive_title_main": { "aiDescription": "メイン部分（デフォルト: アーカイブタイトル）" },
-					"lw_other_archive_title_sep": { "aiDescription": "区切り文字" },
-					"lw_other_archive_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+					"lw_other_archive_title_main": {
+						"aiDescription": "メイン部分（デフォルト: アーカイブタイトル）"
+					},
+					"lw_other_archive_title_sep": {
+						"aiDescription": "区切り文字"
+					},
+					"lw_other_archive_title_sub": {
+						"aiDescription": "サブ部分（デフォルト: サイトタイトル）"
+					}
 				}
 			},
 			"authorArchive": {
 				"aiDescription": "著者アーカイブページのtitleタグ設定。",
 				"optionKeys": {
-					"lw_author_archive_title_main": { "aiDescription": "メイン部分（デフォルト: 著者名）" },
-					"lw_author_archive_title_sep": { "aiDescription": "区切り文字" },
-					"lw_author_archive_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+					"lw_author_archive_title_main": {
+						"aiDescription": "メイン部分（デフォルト: 著者名）"
+					},
+					"lw_author_archive_title_sep": {
+						"aiDescription": "区切り文字"
+					},
+					"lw_author_archive_title_sub": {
+						"aiDescription": "サブ部分（デフォルト: サイトタイトル）"
+					}
 				}
 			},
 			"dateArchive": {
 				"aiDescription": "日付アーカイブページのtitleタグ設定。",
 				"optionKeys": {
-					"lw_date_archive_title_main": { "aiDescription": "メイン部分（デフォルト: 日付アーカイブ）" },
-					"lw_date_archive_title_sep": { "aiDescription": "区切り文字" },
-					"lw_date_archive_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+					"lw_date_archive_title_main": {
+						"aiDescription": "メイン部分（デフォルト: 日付アーカイブ）"
+					},
+					"lw_date_archive_title_sep": {
+						"aiDescription": "区切り文字"
+					},
+					"lw_date_archive_title_sub": {
+						"aiDescription": "サブ部分（デフォルト: サイトタイトル）"
+					}
 				}
 			},
 			"cptArchive": {
 				"aiDescription": "カスタム投稿タイプアーカイブページのtitleタグ設定。",
 				"optionKeys": {
-					"lw_cpt_archive_title_main": { "aiDescription": "メイン部分（デフォルト: カスタム投稿タイプ名）" },
-					"lw_cpt_archive_title_sep": { "aiDescription": "区切り文字" },
-					"lw_cpt_archive_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+					"lw_cpt_archive_title_main": {
+						"aiDescription": "メイン部分（デフォルト: カスタム投稿タイプ名）"
+					},
+					"lw_cpt_archive_title_sep": {
+						"aiDescription": "区切り文字"
+					},
+					"lw_cpt_archive_title_sub": {
+						"aiDescription": "サブ部分（デフォルト: サイトタイトル）"
+					}
 				}
 			},
 			"searchPage": {
 				"aiDescription": "サイト内検索結果ページのtitleタグ設定。",
 				"optionKeys": {
-					"lw_search_title_main": { "aiDescription": "メイン部分（デフォルト: 検索結果ページ用テキスト）" },
-					"lw_search_title_sep": { "aiDescription": "区切り文字" },
-					"lw_search_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+					"lw_search_title_main": {
+						"aiDescription": "メイン部分（デフォルト: 検索結果ページ用テキスト）"
+					},
+					"lw_search_title_sep": {
+						"aiDescription": "区切り文字"
+					},
+					"lw_search_title_sub": {
+						"aiDescription": "サブ部分（デフォルト: サイトタイトル）"
+					}
 				}
 			},
 			"notFoundPage": {
 				"aiDescription": "404エラーページのtitleタグ設定。",
 				"optionKeys": {
-					"lw_404_title_main": { "aiDescription": "メイン部分（デフォルト: 404: ページが見つかりませんでした）" },
-					"lw_404_title_sep": { "aiDescription": "区切り文字" },
-					"lw_404_title_sub": { "aiDescription": "サブ部分（デフォルト: サイトタイトル）" }
+					"lw_404_title_main": {
+						"aiDescription": "メイン部分（デフォルト: 404: ページが見つかりませんでした）"
+					},
+					"lw_404_title_sep": {
+						"aiDescription": "区切り文字"
+					},
+					"lw_404_title_sub": {
+						"aiDescription": "サブ部分（デフォルト: サイトタイトル）"
+					}
 				}
 			}
 		}
@@ -402,43 +482,77 @@
 			"exclude": {
 				"aiDescription": "サイトマップからの除外設定。",
 				"settings": {
-					"post_formats": { "aiDescription": "除外する投稿フォーマット" },
-					"post_types": { "aiDescription": "除外する投稿タイプ" },
-					"exclude_media": { "aiDescription": "メディア（添付ファイル）を除外するか（デフォルト: true）" },
-					"exclude_password": { "aiDescription": "パスワード保護ページを除外するか（デフォルト: true）" }
+					"post_formats": {
+						"aiDescription": "除外する投稿フォーマット"
+					},
+					"post_types": {
+						"aiDescription": "除外する投稿タイプ"
+					},
+					"exclude_media": {
+						"aiDescription": "メディア（添付ファイル）を除外するか（デフォルト: true）"
+					},
+					"exclude_password": {
+						"aiDescription": "パスワード保護ページを除外するか（デフォルト: true）"
+					}
 				}
 			},
 			"images": {
 				"aiDescription": "画像サイトマップの設定。",
 				"settings": {
-					"include_images": { "aiDescription": "画像をサイトマップに含めるか（デフォルト: true）" },
-					"include_featured": { "aiDescription": "アイキャッチ画像を含めるか（デフォルト: true）" },
-					"include_captions": { "aiDescription": "画像キャプションを含めるか（デフォルト: true）" }
+					"include_images": {
+						"aiDescription": "画像をサイトマップに含めるか（デフォルト: true）"
+					},
+					"include_featured": {
+						"aiDescription": "アイキャッチ画像を含めるか（デフォルト: true）"
+					},
+					"include_captions": {
+						"aiDescription": "画像キャプションを含めるか（デフォルト: true）"
+					}
 				}
 			},
 			"ping": {
 				"aiDescription": "検索エンジンへのPing通知設定。",
 				"settings": {
-					"google_ping": { "aiDescription": "Googleへのping送信（デフォルト: true）" },
-					"bing_ping": { "aiDescription": "Bingへのping送信（デフォルト: true）" },
-					"auto_ping": { "aiDescription": "自動Ping送信（デフォルト: true）" },
-					"ping_on_publish": { "aiDescription": "投稿公開時の自動Ping送信（デフォルト: true）" }
+					"google_ping": {
+						"aiDescription": "Googleへのping送信（デフォルト: true）"
+					},
+					"bing_ping": {
+						"aiDescription": "Bingへのping送信（デフォルト: true）"
+					},
+					"auto_ping": {
+						"aiDescription": "自動Ping送信（デフォルト: true）"
+					},
+					"ping_on_publish": {
+						"aiDescription": "投稿公開時の自動Ping送信（デフォルト: true）"
+					}
 				}
 			},
 			"cache": {
 				"aiDescription": "サイトマップキャッシュの設定。",
 				"settings": {
-					"enable_cache": { "aiDescription": "キャッシュを有効にするか（デフォルト: true）" },
-					"cache_lifetime": { "aiDescription": "キャッシュ有効期間（秒、デフォルト: 86400=24時間）" },
-					"auto_regenerate": { "aiDescription": "投稿公開時にキャッシュを自動再生成するか（デフォルト: true）" }
+					"enable_cache": {
+						"aiDescription": "キャッシュを有効にするか（デフォルト: true）"
+					},
+					"cache_lifetime": {
+						"aiDescription": "キャッシュ有効期間（秒、デフォルト: 86400=24時間）"
+					},
+					"auto_regenerate": {
+						"aiDescription": "投稿公開時にキャッシュを自動再生成するか（デフォルト: true）"
+					}
 				}
 			},
 			"advanced": {
 				"aiDescription": "サイトマップの高度な設定。",
 				"settings": {
-					"add_to_robots": { "aiDescription": "robots.txtにサイトマップURLを追加するか（デフォルト: true）" },
-					"enable_xsl": { "aiDescription": "XSLスタイルシートを有効にするか（デフォルト: true）。人間が見やすい形式で表示。" },
-					"include_lastmod": { "aiDescription": "最終更新日をサイトマップに含めるか（デフォルト: true）" }
+					"add_to_robots": {
+						"aiDescription": "robots.txtにサイトマップURLを追加するか（デフォルト: true）"
+					},
+					"enable_xsl": {
+						"aiDescription": "XSLスタイルシートを有効にするか（デフォルト: true）。人間が見やすい形式で表示。"
+					},
+					"include_lastmod": {
+						"aiDescription": "最終更新日をサイトマップに含めるか（デフォルト: true）"
+					}
 				}
 			}
 		},
@@ -486,7 +600,11 @@
 			},
 			"disallowed_paths": {
 				"aiDescription": "AIクローラーに対する除外パス。",
-				"defaults": ["/wp-admin/", "/wp-includes/", "/wp-content/uploads/"]
+				"defaults": [
+					"/wp-admin/",
+					"/wp-includes/",
+					"/wp-content/uploads/"
+				]
 			},
 			"crawl_delay": {
 				"aiDescription": "クロール遅延（秒、デフォルト: 1）",
@@ -531,7 +649,12 @@
 				"aiDescription": "カテゴリーへのリダイレクト。termmetaに旧URLを登録。"
 			}
 		},
-		"excludedContexts": ["管理画面", "Ajax", "Cron", "プレビュー"]
+		"excludedContexts": [
+			"管理画面",
+			"Ajax",
+			"Cron",
+			"プレビュー"
+		]
 	},
 	"jsonLdSettings": {
 		"aiDescription": "JSON-LD構造化データの自動生成機能。ページ種別に応じたschema.orgの構造化データをwp_headで出力する。noindexページ・管理画面・404ページでは出力されない。",
@@ -545,12 +668,19 @@
 					{
 						"@type": "WebSite",
 						"aiDescription": "サイト情報とSearchAction（サイト内検索のリッチリザルト用）。",
-						"includedFields": ["name", "url", "potentialAction（SearchAction）"]
+						"includedFields": [
+							"name",
+							"url",
+							"potentialAction（SearchAction）"
+						]
 					},
 					{
 						"@type": "Organization",
 						"aiDescription": "組織情報。サイト名とURLを出力。",
-						"includedFields": ["name", "url"]
+						"includedFields": [
+							"name",
+							"url"
+						]
 					}
 				]
 			},
@@ -584,23 +714,41 @@
 			"categoryArchive": {
 				"@type": "CollectionPage",
 				"aiDescription": "カテゴリーアーカイブのCollectionPage構造化データ。パンくずリスト付き。",
-				"includedFields": ["name", "description（カテゴリー説明文）", "url", "breadcrumb"]
+				"includedFields": [
+					"name",
+					"description（カテゴリー説明文）",
+					"url",
+					"breadcrumb"
+				]
 			},
 			"tagArchive": {
 				"@type": "CollectionPage",
 				"aiDescription": "タグアーカイブのCollectionPage構造化データ。パンくずリスト付き。",
-				"includedFields": ["name", "description（タグ説明文）", "url", "breadcrumb"]
+				"includedFields": [
+					"name",
+					"description（タグ説明文）",
+					"url",
+					"breadcrumb"
+				]
 			},
 			"authorArchive": {
 				"@type": "ProfilePage",
 				"aiDescription": "著者アーカイブのProfilePage構造化データ。表示名がログイン名と異なる場合のみ出力される。",
-				"includedFields": ["name", "description", "url", "mainEntity（Person型）"],
+				"includedFields": [
+					"name",
+					"description",
+					"url",
+					"mainEntity（Person型）"
+				],
 				"securityNote": "ログイン名と同一の表示名の場合は出力しない。"
 			},
 			"searchResults": {
 				"@type": "SearchResultsPage",
 				"aiDescription": "サイト内検索結果ページの構造化データ。",
-				"includedFields": ["name（検索結果: {クエリ}）", "url"]
+				"includedFields": [
+					"name（検索結果: {クエリ}）",
+					"url"
+				]
 			}
 		},
 		"customJsonLd": {
@@ -661,5 +809,27 @@
 			"noindexページのサイトマップ自動除外",
 			"音声読み上げガイド"
 		]
+	},
+	"affiliateClickTracking": {
+		"aiDescription": "広告リンク（rel に sponsored が付いた a タグ）が押されたときに affiliate_click イベントを送る。2026-09-02 追加。無料で使える。対象は rel~=\"sponsored\" だけで、ふつうのリンクは一切見ない。",
+		"userGuide": "どの商品リンクが押されているかをアクセス解析で見られるようになる。リンクに印を付けるのは記事の本文で、リンクを選んでツールバーの📣メガホン「広告リンク（アフィリエイト）」を押す。印が付いていないリンクは計測されない。",
+		"sourceFile": "affiliate_click.php",
+		"settings": {
+			"seo_set_affiliate_click_switch": {
+				"aiDescription": "広告リンクのクリック計測を出すかどうか。",
+				"type": "select",
+				"storageMethod": "theme_mod（カスタマイザー）",
+				"userGuide": "アナリティクスIDかタグマネージャーIDのどちらかが入っていないと、押しても送り先がないので何も起きない。"
+			}
+		},
+		"sendTarget": {
+			"aiDescription": "送り先はサーバー側で決める。seo_set_google_analytics_id が入っていれば gtag、入っていなければ dataLayer（タグマネージャー）。",
+			"notes": "🚨 ブラウザ側で「gtag があれば gtag」と分岐してはいけない。タグマネージャー経由で GA4 を入れていると window.gtag が後から生えることがあり、押した時刻によって送り先が変わってしまう（2026-09-02 に直した）。"
+		},
+		"event": {
+			"name": "affiliate_click",
+			"params": "link_url / link_domain / link_text"
+		},
+		"related": "アフィリエイト向けの機能一式は ai-index.json の aiResources.affiliate。利用者向けの説明は https://lite-word.com/manual/analytics/ と /manual/affiliate-links/。"
 	}
 }

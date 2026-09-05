@@ -8,10 +8,19 @@
 	"icon": "format-gallery",
 	"editorScript": "file:./paid-block-content-4.js",
 	"aiHint": {
-		"description": "画像グリッド+テキスト。メインタイトル+サブ+説明+CTAボタン+画像8枚グリッド。ギャラリー型コンテンツに",
+		"description": "左に見出し＋サブ＋説明文＋ボタン、右に写真8枚の格子。説明と写真をセットで見せたいとき（職場の様子・制作の工程・施設の一日）に使う",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["mainTitle", "subTitle", "bottomText", "ctaText", "ctaUrl"],
-		"imageAttributes": ["images"]
+		"contentAttributes": [
+			"mainTitle",
+			"subTitle",
+			"bottomText",
+			"ctaText",
+			"ctaUrl"
+		],
+		"imageAttributes": [
+			"images"
+		],
+		"notes": "🚨 **写真枠は正方形（`aspect-ratio: 1`）。** 横長を入れると左右が切られて主役が枠の外に出る。1辺1000px以上の正方形で用意する。🚨 **`highlightColor`（サブの文字色）の既定が `#0AA8C9` という固定の水色。**サイトの色と関係なく水色が出るので必ず上書きする。`color-mix(in srgb, var(--color-main) 50%, #000)` にすればページのメインカラーに追従する。🚨 **`ctaBorderColor` はボタンの枠線の色であると同時に、ホバーしたときの背景にもなる**（`.btn_bg` の background にそのまま入る）。ホバー時の文字は `color:#fff !important` で固定なので、明るい色を入れると押した瞬間に文字が消える。50% より明るくしない。🚨 **自前で `margin: 80px 0` を持つ。前後にスペーサーを足さない**（足すと 144px あいて帯のように空く）。左の文章の欄は **300px 固定**（800px 以下で1列に落ちる）ので見出しは短く。格子は4列・780px以下3列・550px以下2列。`images` は `[{url, alt}]` で、4の倍数だと格子がそろう。`bottomText` は RichText ではないので `<br>` ではなく実際の改行を入れる。"
 	},
 	"supports": {
 		"anchor": true

@@ -1,0 +1,31 @@
+{
+  "title": "お電話とメールの窓口（無料・背景写真の帯・住所つき）",
+  "description": "【型C：写真が主役】背景写真の帯の中に、見出し＋住所とアクセス＋大きな電話番号＋メールでのお問い合わせボタン。ページのいちばん下や、各ページの締めに置く窓口の段です。電話番号は40px（スマホ32px）で出て、押すとそのまま発信できます。⚠️ このブロックは見出し（h2）を自分で持っているので、上に見出しブロックを置かないでください。⚠️ メールボタンの行き先は仮の「#」です。お問い合わせページのURLに変えてください。⚠️ 文字は白で固定です。背景写真を差し替えるときは、暗すぎない・明るすぎない写真を選んでください（この写真は覆い50%の状態で白文字とのコントラストが9.4あります）。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/cta-2",
+      "attributes": {
+        "title": "お気軽にご相談ください",
+        "addressText": "〒000-0000 ○○県○○市○○町0-0-0／○○駅から徒歩5分／駐車場3台",
+        "phoneNumber": "000-000-0000",
+        "phoneText": "（受付時間 9:00〜18:00 ／ 日曜・祝日は休み）",
+        "mailText": "メールでお問い合わせ",
+        "mailUrl": "#",
+        "mailLinkType": "url",
+        "backgroundImage": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/gallery_05.webp",
+        "buttonBackgroundColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "buttonTextColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

@@ -7,12 +7,13 @@
 	"category": "lw-banner",
 	"icon": "format-gallery",
 	"aiHint": {
-		"description": "ギャラリー（画像のみ）。画像グリッド。ポートフォリオ・施設写真に",
+		"description": "写真だけを横1列に並べて、スワイプで送るギャラリー。高さが決まっているので縦に伸びない。店内・施設・作品の写真を、ページの流れを止めずに見せたいときに",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": [],
 		"imageAttributes": [
 			"images"
-		]
+		],
+		"notes": "🚨 グリッドではない。overflow-x: scroll ＋ scroll-snap-type: x mandatory の**横スクロール**。ul に img_N（Nは枚数）クラスが付き、**枚数で ul の幅が決まる**（6枚なら150%、1000px以下200%、750px以下240%、550px以下400%）。PCでは4枚ほど見えて、残りは横に送る。🚨 ul { max-height: 200px } ＋ li { aspect-ratio: 16/10 } なので**1枚は約320×200pxと小さい**。引きの絵は何が写っているか分からなくなるので、**寄った写真**を渡す。用意する画像は16:10の横長（1200×750程度）。🚨 images は8枠まで。**空文字を残すと空の li が出る**ので、使う枚数ぶんだけ渡す。500px以下では width:100vw で画面の端まで広がる。自前で margin: 32px 0 を持つので前後にスペーサーを足さない。このブロックがページの一番上に来ると本文上の余白（.first_content）が消える。"
 	},
 	"supports": {
 		"anchor": true

@@ -560,3 +560,69 @@
     cursor: not-allowed;
     opacity: 0.8;
 }
+
+/* ============================================================
+ * テンプレートの説明（2026-09-01 Ryuichi 依頼）
+ * 説明は本文に出さず、押したときだけポップアップで見せる。
+ * 本文に出すと、説明の長いテンプレートでプレビューと「新規ページを作成」が
+ * 画面の下へ押し出され、背の低いノートPCでボタンに届かなくなるため。
+ * ============================================================ */
+.site-info .lw-desc-open {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  margin: 0 auto;
+  padding: 6px 16px;
+  border: 1px solid #d5dae2;
+  border-radius: 999px;
+  background: #fff;
+  color: #5a6472;
+  font-size: 13px;
+  line-height: 1.4;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+.site-info .lw-desc-open::before {
+  content: "ⓘ";
+  font-size: 14px;
+}
+.site-info .lw-desc-open:hover {
+  background: #667eea;
+  border-color: #667eea;
+  color: #fff;
+}
+
+/* 説明のポップアップ。既定の .lw-popup-box は 450px・中央寄せなので、
+   読ませる用に広く・左寄せにして、長い説明はこの中だけでスクロールさせる。 */
+.lw-popup-box.lw-desc {
+  max-width: 760px;
+  text-align: left;
+  padding: 32px;
+}
+.lw-popup-box.lw-desc h3 {
+  text-align: center;
+  margin-bottom: 20px;
+}
+.lw-popup-box.lw-desc .lw-desc-body {
+  max-height: 60vh;
+  overflow-y: auto;
+  margin-bottom: 25px;
+  padding-right: 8px;
+  color: #555;
+  font-size: 15px;
+  line-height: 1.9;
+  text-align: left;
+}
+.lw-popup-box.lw-desc .lw-desc-body b {
+  color: #333;
+}
+
+@media (max-width: 768px) {
+  .lw-popup-box.lw-desc {
+    padding: 24px 20px;
+  }
+  .lw-popup-box.lw-desc .lw-desc-body {
+    max-height: 55vh;
+    font-size: 14px;
+  }
+}

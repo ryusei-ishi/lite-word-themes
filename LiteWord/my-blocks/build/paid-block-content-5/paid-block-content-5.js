@@ -58,7 +58,9 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       spTitleFont = attributes.spTitleFont,
       spTitleFontWeight = attributes.spTitleFontWeight,
       pcTitleColor = attributes.pcTitleColor,
-      spTitleColor = attributes.spTitleColor;
+      spTitleColor = attributes.spTitleColor,
+      imgLabel = attributes.imgLabel,
+      spImageBottom = attributes.spImageBottom;
 
     /* ========== ハンドラ ========== */
     var setAttr = function setAttr(key) {
@@ -124,6 +126,42 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       label: "SP\u30BF\u30A4\u30C8\u30EB\u306E\u6587\u5B57\u8272",
       value: spTitleColor,
       onChange: setAttr('spTitleColor')
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u753B\u50CF\u306E\u898B\u305B\u65B9",
+      initialOpen: true
+    }, /*#__PURE__*/React.createElement(TextControl, {
+      label: "\u753B\u50CF\u306E\u4E0A\u306B\u51FA\u3059\u30E9\u30D9\u30EB",
+      help: "\u540D\u524D\u3084\u80A9\u66F8\u304D\u306A\u3069\u3002\u7A7A\u306A\u3089\u51FA\u307E\u305B\u3093\u3002",
+      value: imgLabel,
+      onChange: setAttr('imgLabel'),
+      placeholder: "\u4F8B\uFF09\u4EE3\u8868\u3000\u5C71\u7530 \u592A\u90CE"
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+      label: "\u30B9\u30DE\u30DB\u306E\u3068\u304D\u3001\u753B\u50CF\u3092\u30C6\u30AD\u30B9\u30C8\u306E\u4E0B\u306B\u7F6E\u304F",
+      help: "\u4E0A\u306B\u5225\u306E\u5199\u771F\u304C\u3042\u308B\u5834\u5408\u306B\u3001\u5199\u771F\u304C2\u679A\u7D9A\u3044\u3066\u898B\u3048\u308B\u306E\u3092\u907F\u3051\u3089\u308C\u307E\u3059\u3002",
+      checked: !!spImageBottom,
+      onChange: function onChange(v) {
+        return setAttributes({
+          spImageBottom: !!v
+        });
+      }
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u753B\u50CF\u306E\u898B\u305B\u65B9",
+      initialOpen: true
+    }, /*#__PURE__*/React.createElement(TextControl, {
+      label: "\u753B\u50CF\u306E\u4E0A\u306B\u51FA\u3059\u30E9\u30D9\u30EB",
+      help: "\u540D\u524D\u3084\u80A9\u66F8\u304D\u306A\u3069\u3002\u7A7A\u306A\u3089\u51FA\u307E\u305B\u3093\u3002",
+      value: imgLabel,
+      onChange: setAttr('imgLabel'),
+      placeholder: "\u4F8B\uFF09\u4EE3\u8868\u3000\u5C71\u7530 \u592A\u90CE"
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+      label: "\u30B9\u30DE\u30DB\u306E\u3068\u304D\u3001\u753B\u50CF\u3092\u30C6\u30AD\u30B9\u30C8\u306E\u4E0B\u306B\u7F6E\u304F",
+      help: "\u4E0A\u306B\u5225\u306E\u5199\u771F\u304C\u3042\u308B\u5834\u5408\u306B\u3001\u5199\u771F\u304C2\u679A\u7D9A\u3044\u3066\u898B\u3048\u308B\u306E\u3092\u907F\u3051\u3089\u308C\u307E\u3059\u3002",
+      checked: !!spImageBottom,
+      onChange: function onChange(v) {
+        return setAttributes({
+          spImageBottom: !!v
+        });
+      }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: "\u753B\u50CF\u3084\u30EC\u30A4\u30A2\u30A6\u30C8",
       initialOpen: true
@@ -304,7 +342,9 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       spTitleFont = attributes.spTitleFont,
       spTitleFontWeight = attributes.spTitleFontWeight,
       pcTitleColor = attributes.pcTitleColor,
-      spTitleColor = attributes.spTitleColor;
+      spTitleColor = attributes.spTitleColor,
+      imgLabel = attributes.imgLabel,
+      spImageBottom = attributes.spImageBottom;
 
     /* 代入ロジック */
     var finalSpImage = spImage || pcImage;
@@ -318,7 +358,9 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       maxWidth: "".concat(contsMaxWidth, "px")
     };
     var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-      className: 'paid-block-content-5'
+      /* 🚨 既定（false）のときは 'paid-block-content-5' のまま＝**出力は1文字も変わらない**。
+         既存ページ（top/ptn_8 ほか）が「ブロックに問題があります」にならないための形。 */
+      className: 'paid-block-content-5' + (spImageBottom ? ' is_sp_img_bottom' : '')
     });
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
       className: "conts",
@@ -345,6 +387,11 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       "data-lw_font_set": spTitleFont,
       dangerouslySetInnerHTML: {
         __html: finalSpTitle
+      }
+    }), imgLabel && /*#__PURE__*/React.createElement("span", {
+      className: "img_label",
+      dangerouslySetInnerHTML: {
+        __html: imgLabel
       }
     })), /*#__PURE__*/React.createElement("div", {
       className: "cont"
@@ -1067,7 +1114,7 @@ module.exports = window["wp"]["components"];
   \*********************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-content-5","version":"1.0.0","title":"Content 05","category":"lw-content","icon":"format-image","editorScript":"file:./paid-block-content-5.js","aiHint":{"description":"フルワイド画像+テキストオーバーレイ。大きな背景画像の上にタイトル+説明文。インパクト重視の紹介セクションに","excludeFromAutoSelect":false,"contentAttributes":["pcTitle","pcBody"],"imageAttributes":["pcImage"]},"supports":{"anchor":true},"attributes":{"pcImage":{"type":"string","default":"https://lite-word.com/sample_img/women/7.webp"},"spImage":{"type":"string","default":""},"imgAlt":{"type":"string","default":""},"pcTitle":{"type":"string","default":"PC用タイトルのサンプルテキスト"},"spTitle":{"type":"string","default":""},"pcBody":{"type":"string","default":"テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト入力できます。テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"},"textColumns":{"type":"string","default":"2"},"headingLevel":{"type":"number","default":2},"verticalCenter":{"type":"boolean","default":false},"aspectRatioHeight":{"type":"number","default":650},"contsMaxWidth":{"type":"number","default":1200},"spTitleFont":{"type":"string","default":""},"spTitleFontWeight":{"type":"string","default":"500"},"pcTitleColor":{"type":"string","default":""},"spTitleColor":{"type":"string","default":""}},"no":5}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-content-5","version":"1.0.0","title":"Content 05","category":"lw-content","icon":"format-image","editorScript":"file:./paid-block-content-5.js","aiHint":{"description":"左に縦長の写真、右に大きな見出しと2段組の本文を置く帯。300字くらいの文章を読ませたいときに。コンセプト・想い・私たちについて・こだわりの説明に","excludeFromAutoSelect":false,"contentAttributes":["pcTitle","pcBody"],"imageAttributes":["pcImage"],"notes":"🚨 PCとスマホで組みが全く変わる。800px超は grid で 左に縦長の写真（aspect-ratio 500/650・幅380px）＋右に48pxの大見出しと2段組の本文。800px以下は縦積みになり写真が padding-top:70% の横長にクロップされ、500px以下でさらに写真へ黒50%のフィルタがかかって、その上に白抜きの見出しが乗る（右側の見出しは display:none）。だから中央に主役があって上下を切られても成立する写真を渡すこと。🚨 見出しのHTMLは2つ出る（写真の中と本文側）が、CSSで出し分けているだけで画面には片方しか出ない。壊れていない。spTitle / spImage を空にすると pcTitle / pcImage がそのまま使われる。スマホの見出しは写真に重なるので、長いと写真を覆う。短いコピーにするか spTitle を別に書く。headingLevel は数値（2 = h2）で、文字列 h2 ではない。textColumns:2 は980px以下で CSS が columns:unset !important で1段に戻すので、スマホでは自動で1段になる。自前で margin:64px 0 を持つので前後にスペーサーを足さない。固定ページでは画面幅いっぱいに広がる。"},"supports":{"anchor":true},"attributes":{"pcImage":{"type":"string","default":"https://lite-word.com/sample_img/women/7.webp"},"spImage":{"type":"string","default":""},"imgAlt":{"type":"string","default":""},"pcTitle":{"type":"string","default":"PC用タイトルのサンプルテキスト"},"spTitle":{"type":"string","default":""},"pcBody":{"type":"string","default":"テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト入力できます。テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"},"textColumns":{"type":"string","default":"2"},"headingLevel":{"type":"number","default":2},"verticalCenter":{"type":"boolean","default":false},"aspectRatioHeight":{"type":"number","default":650},"contsMaxWidth":{"type":"number","default":1200},"spTitleFont":{"type":"string","default":""},"spTitleFontWeight":{"type":"string","default":"500"},"pcTitleColor":{"type":"string","default":""},"spTitleColor":{"type":"string","default":""},"imgLabel":{"type":"string","default":""},"spImageBottom":{"type":"boolean","default":false}},"no":5}');
 
 /***/ })
 

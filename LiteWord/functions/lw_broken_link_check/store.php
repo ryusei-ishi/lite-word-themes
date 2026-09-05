@@ -272,6 +272,9 @@ function lw_link_list_save_pages( $pages ) {
                 'text'         => isset( $link['text'] ) ? $link['text'] : '',
                 'source_field' => isset( $link['source_field'] ) ? $link['source_field'] : 'post_content',
                 'link_index'   => isset( $link['link_index'] ) ? (int) $link['link_index'] : 0,
+                // 広告リンク（rel に sponsored）。1文字ぶんなので保存してよい。
+                // 古い記録にはこの項目が無いが、その場合は「広告でない」として扱われるだけ。
+                'is_ad'        => ! empty( $link['is_ad'] ) ? 1 : 0,
             );
         }
 

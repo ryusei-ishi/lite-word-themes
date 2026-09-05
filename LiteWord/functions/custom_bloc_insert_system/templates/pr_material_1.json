@@ -1,0 +1,175 @@
+{
+  "title": "素材と道具へのこだわり（左右交互の3段＋産地の表）",
+  "description": "【型B：説明が主役】見出し＋ひとこと＋左右交互の3段（材料／道具／仕上げ）＋使っている材料の一覧5件＋注釈＋お問い合わせボタン。「何をするか」ではなく**「何で作っているか」**を書く段です。材料で値段が変わる商売（飲食・菓子・工房・建築・美容）では、高い理由を説明できるのはここだけで、**書かなければ「高い店」で終わります**。🚨 こだわりを並べただけにしないでください。1段ごとに**「だからお客様にとって何が違うか」**で締めると読まれます。⚠️ 写真は4:3に切り抜かれます。主役が中央にあるものをお使いください。⚠️ 英字のサブ見出しはサイトの色で表示されます。**日本語の本文をそこに入れないでください**（明るい色のサイトだと読みにくくなります）。サービス紹介（何をするか）・コンセプト（想い）とは役割が違うので、同じページに並べられます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "素材と道具へのこだわり",
+        "subTitle": "MATERIAL",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "できあがったものは同じように見えても、<br>何を使って作ったかで、持ちがまるで違います。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-content-3",
+      "attributes": {
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/atelier_02.webp",
+        "imageAlt": "作業台に広げた革と布の見本と型紙",
+        "titleSub": "MATERIAL",
+        "title": "材料は、見て触って選びます",
+        "content": "仕入れ先をひとつに決めず、そのつど現物を見てから選んでいます。\n同じ等級と書かれていても、実際に触ると厚みも張りも違います。\nそのぶん手間はかかりますが、届いてから「思っていたのと違う」ということが無くなりました。\nお客様にとっては、写真でご覧になったものがそのまま届く、ということです。",
+        "imagePosition": "left",
+        "maxWidth": 1040
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-content-3",
+      "attributes": {
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/atelier_01.webp",
+        "imageAlt": "作業台で鞄の持ち手を手縫いしている職人の手元",
+        "titleSub": "TOOL",
+        "title": "道具は、直しながら使います",
+        "content": "道具は買い替えるより、研いで直して使うほうが手になじみます。\n毎朝いちばんに刃を研ぐところから始めるので、切り口が毛羽立ちません。\n機械で一気に仕上げれば早いのですが、力の加減が効かない場所だけは手で通しています。\nお客様にとっては、縫い目がほどけにくい、ということです。",
+        "imagePosition": "right",
+        "maxWidth": 1040
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-content-3",
+      "attributes": {
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/atelier_03.webp",
+        "imageAlt": "仕上がったものを柔らかい布で磨いている職人の手元",
+        "titleSub": "FINISH",
+        "title": "仕上げに、いちばん時間をかけます",
+        "content": "見えるところより、見えないところに時間をかけます。\n内側の始末・角の処理・金具のあたりは、あとから直せない場所です。\nお渡しの前に一度お預かりし、丸一日置いてからもう一度見ています。\nお客様にとっては、使い始めてから気になるところが出にくい、ということです。",
+        "imagePosition": "left",
+        "maxWidth": 1040
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 200,
+        "dtWidthSp": 150,
+        "defaultSpClm1": true,
+        "dlBorderColor": "#dddddd",
+        "rowBorderColor": "#dddddd",
+        "dtBorderColor": "#dddddd",
+        "dtBgColor": "#f5f7f9",
+        "fontSizePc": 17,
+        "fontSizeSp": 15,
+        "cellPaddingPc": 16,
+        "rows": [
+          {
+            "dtText": "主な材料",
+            "ddText": "〇〇産の△△を使っています。年に2回、産地に足を運んで選んでいます",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "副資材",
+            "ddText": "糸・金具・接着剤まで国産のものにそろえています。メーカー名はお尋ねいただければお伝えします",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "仕入れの時期",
+            "ddText": "年に2回まとめて仕入れます。そのため色や風合いに年ごとの差が出ます",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "在庫の考え方",
+            "ddText": "作り置きをしません。ご注文をいただいてから裁ちますので、お待たせしますが劣化がありません",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "使わないもの",
+            "ddText": "安く仕上がる合成の材料は使っていません。ご予算に合わせたご提案が必要なときは、別の作り方をご提案します",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※材料は実際にお使いのものに書き換えてください。産地・等級・メーカーは、聞かれたときに答えられる範囲だけを書くのが安全です。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "お問い合わせはこちら",
+        "textSub": "＼ 材料の現物をお見せしながらご説明できます ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

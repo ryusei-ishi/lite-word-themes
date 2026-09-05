@@ -1,0 +1,274 @@
+{
+  "title": "無料体験・見学のご案内（当日の中身＋選べる3つの入口）",
+  "description": "【型A：表が主役】見出し＋ひとこと＋体験当日の中身6項目の表＋体験の種類を選ぶボタン3つ＋「見学だけでも大丈夫」の囲い＋申し込みボタン。いきなり申し込むのは重い、というお客様の最初の一歩を受けるためのセクションです。教室・ジム・サロン・塾・介護施設・工房のように、体験や見学が入口になる業種に向いています。🚨 いちばん知りたいのは「何を持っていけばいいか」「いくらかかるか」「勧誘されないか」の3つです。表の中身は必ずご自身の内容に置き換えてください。無料相談・資料請求のセクション（話を聞く方向）とは役割が違うので、同じページに両方置けます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "無料体験・見学のご案内",
+        "subTitle": "TRIAL",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "はじめての方は、まず一度お試しください。<br>当日にどんなことをするのか、先にお伝えしておきます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 200,
+        "dtWidthSp": 150,
+        "defaultSpClm1": true,
+        "dlBorderColor": "#dddddd",
+        "rowBorderColor": "#dddddd",
+        "dtBorderColor": "#dddddd",
+        "dtBgColor": "#f5f7f9",
+        "fontSizePc": 17,
+        "fontSizeSp": 15,
+        "cellPaddingPc": 16,
+        "rows": [
+          {
+            "dtText": "かかる時間",
+            "ddText": "およそ60分です。はじめのご説明が10分、体験が40分、そのあとご質問を10分ほどお受けします",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "費用",
+            "ddText": "無料です。当日にお支払いいただくものはありません",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "持ちもの",
+            "ddText": "動きやすい服装でお越しください。<br>お着替えとタオルはこちらでご用意しています",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "体験の中身",
+            "ddText": "実際のご利用と同じ内容です。見せるためだけの特別なことはしません",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "ご予約",
+            "ddText": "お申し込みから3営業日以内にご連絡し、日時を決めます。<br>前日までのご連絡であればキャンセル料はかかりません",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "そのあと",
+            "ddText": "その場でお返事をいただく必要はありません。一度お持ち帰りいただいて、決めてからご連絡ください",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "どの形で受けるか選べます",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-6",
+      "attributes": {
+        "button6Buttons": [
+          {
+            "text": "個別で体験する",
+            "linkType": "url",
+            "url": "",
+            "isBlank": false
+          },
+          {
+            "text": "みんなで体験する",
+            "linkType": "url",
+            "url": "",
+            "isBlank": false
+          },
+          {
+            "text": "見学だけする",
+            "linkType": "url",
+            "url": "",
+            "isBlank": false
+          }
+        ],
+        "button6ColumnsPc": 3,
+        "button6ColumnsSp": 1,
+        "button6MaxWidthPc": 860,
+        "button6BorderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "button6ArrowColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "button6ShowArrow": true,
+        "button6TextColor": "#000000",
+        "button6BgColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1PaddingTopSp": 20,
+        "waku1PaddingBottomSp": 20,
+        "waku1PaddingLeftSp": 16,
+        "waku1PaddingRightSp": 16,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "見るだけで帰っていただいて大丈夫です",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "体験のあとに勧誘のご連絡をすることはありません。こちらから次にご連絡するのは、お客様から「お願いします」とおっしゃっていただいたときだけです。合わなかったと感じられたら、そのままお帰りください。それで気まずくなることはありません。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※体験の日程はご予約が必要です。ご希望の曜日と時間帯をいくつかお知らせいただけると、ご案内が早くなります。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "体験・見学を申し込む",
+        "textSub": "＼ その場で決めていただかなくて大丈夫です ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

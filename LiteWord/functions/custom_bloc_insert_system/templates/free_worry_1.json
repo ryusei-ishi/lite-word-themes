@@ -1,0 +1,72 @@
+{
+  "title": "こんなことで困っていませんか（無料・帯の中にチェック6件）",
+  "description": "【型B：説明が主役】全幅の色帯の中に、よくある困りごとを2列のチェックカードで6件。帯の下に受けの一文と相談ボタン。ページの上のほうに置いて、悩みから相談につなげる導入に。見出しは帯のブロック自身が持っているので、上に別の見出しを重ねないでください。背景写真は色帯が濃くかかるのでほとんど見えません（雰囲気だけの役目です）。**無料ブロックだけで作ってあります。**",
+  "blocks": [
+    {
+      "name": "wdl/lw-list-2",
+      "attributes": {
+        "titleText": "こんなことで困っていませんか",
+        "backgroundImage": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/worry_bg_01.webp",
+        "contents": [
+          {
+            "text": "何から始めればいいか\nわからない"
+          },
+          {
+            "text": "前に相談したけれど\n話が難しかった"
+          },
+          {
+            "text": "費用がいくらかかるのか\n見当がつかない"
+          },
+          {
+            "text": "忙しくて、平日の昼間に\n時間が取れない"
+          },
+          {
+            "text": "自分のような小さな相談でも\nいいのか迷っている"
+          },
+          {
+            "text": "一度おまかせしたら\n断りにくいのではと不安"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "ひとつでも当てはまったら、まずは話を聞かせてください。<br>その場でお答えできることも多く、無理におすすめすることはありません。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "話を聞いてもらう",
+        "btnTextSub": "＼ 相談だけで終わっても大丈夫 ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

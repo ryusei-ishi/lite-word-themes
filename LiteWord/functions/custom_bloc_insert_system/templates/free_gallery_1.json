@@ -1,0 +1,123 @@
+{
+  "title": "店内・施設のご紹介（無料・横スクロールの写真6枚）",
+  "description": "【型C：写真が主役】見出し＋リード文＋横スクロールの写真6枚＋「見ていただきたいところ」6件＋注釈＋見学のボタン。**写真は横1列に並んでスワイプで送ります。**高さが決まっているので縦に長くならず、ページの途中に挟んでも流れを止めません。写真は**16:10の横長・寄りの絵**（1200×750px程度）に差し替えてください。1枚が約320×200pxで表示されるので、引きの写真は何が写っているか分からなくなります。枚数は8枚まで増やせます。**無料ブロックだけで作ってあります。**",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "店内のご紹介",
+        "subTitle": "GALLERY",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "はじめての方が「どんなところだろう」と気になる場所を6枚だけ選びました。<br>横にスワイプするとすべてご覧いただけます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-gallery-02",
+      "attributes": {
+        "images": [
+          "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/salon_01.webp",
+          "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/salon_03.webp",
+          "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/salon_02.webp",
+          "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/salon_05.webp",
+          "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/salon_04.webp",
+          "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/salon_06.webp"
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "見ていただきたいところ",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-4",
+      "attributes": {
+        "colClass": "clm_2",
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "contents": [
+          {
+            "text": "席と席のあいだが広い"
+          },
+          {
+            "text": "お手洗いは男女別です"
+          },
+          {
+            "text": "道具は毎回消毒します"
+          },
+          {
+            "text": "ベビーカーのまま入れます"
+          },
+          {
+            "text": "お待ち用の席が別にあります"
+          },
+          {
+            "text": "駐車場が3台分あります"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※写真は撮影時のものです。季節や時間帯によって見え方が変わります。<br>※ご来店前に中をご覧になりたい方は、お気軽にお声かけください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "見学のご予約",
+        "btnTextSub": "＼ 中を見るだけでも大丈夫です ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

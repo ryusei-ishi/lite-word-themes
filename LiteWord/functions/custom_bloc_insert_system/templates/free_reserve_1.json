@@ -1,0 +1,143 @@
+{
+  "title": "ご予約・お申し込みの方法（無料・写真ゼロ・3つの入口）",
+  "description": "【型A：表が主役】見出し＋ひとこと＋3つの手段の比べ方の表（受付時間／向いている方／お返事の早さ）＋入口のボタン3つ（お電話・予約フォーム・LINE）＋注釈。用件ではなく**手段**で入口を分ける段です。電話が苦手な方・営業時間に電話できない方・文字で残したい方は、入口が1つしかないとそのまま帰ってしまうので、並べるだけで取りこぼしが減ります。🚨 ボタンだけを3つ並べないでください。上の表があるから自分で選べます。🚨 使わない手段のボタンは削除してください（LINEをやっていないのに置くと問い合わせが来ます）。電話番号・フォームのURL・LINEのURLを必ず書き換えてください（未設定のボタンは押しても何も起きません）。このセクション自体がボタンの段なので、下にもうひとつボタンを置かないでください。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "ご予約・お申し込み",
+        "subTitle": "RESERVATION",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "やりやすい方法をお選びください。<br>どの方法でも、承る内容は同じです。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-company-2",
+      "attributes": {
+        "spFullDt": true,
+        "items": [
+          {
+            "dt": "お電話",
+            "dd": "平日 9:00〜18:00／土 9:00〜13:00。その場で日時を決めたい方・急ぎの方に向いています。出られないときは折り返しますので、番号を残してください"
+          },
+          {
+            "dt": "予約フォーム",
+            "dd": "24時間受け付けています。日中にお電話できない方・希望を書いて残しておきたい方に。翌営業日の午前中までにこちらからご返事します"
+          },
+          {
+            "dt": "LINE",
+            "dd": "24時間受け付けています。写真を送って相談したい方・文字でやり取りしたい方に。営業時間内であれば、だいたい1時間以内にご返事します"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "やりやすい方法をお選びください",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-01",
+      "attributes": {
+        "buttonText": "お電話でご予約　000-000-0000",
+        "url": "tel:0000000000",
+        "maxWidth": 320,
+        "borderRadius": 4,
+        "backgroundColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "textColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-01",
+      "attributes": {
+        "buttonText": "予約フォームから申し込む",
+        "url": "#",
+        "maxWidth": 320,
+        "borderRadius": 4,
+        "backgroundColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "textColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-01",
+      "attributes": {
+        "buttonText": "LINEで相談する",
+        "url": "#",
+        "maxWidth": 320,
+        "borderRadius": 4,
+        "backgroundColor": "#ffffff",
+        "textColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "borderWidth": 2,
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ご予約なしでもお受けできますが、お待ちいただくことがあります。お時間が決まっている方は、ご予約をおすすめしています。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "24px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

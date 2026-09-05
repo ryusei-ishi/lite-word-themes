@@ -103,6 +103,7 @@ function wdl_get_premium_blocks() {
 		"lw-pr-list-5",
 		"lw-pr-list-6",
 		"lw-pr-list-7",
+		"lw-pr-list-8",
 		"lw-pr-content-8",
 		"lw-pr-content-9",
 		"lw-pr-column-1",
@@ -116,6 +117,10 @@ function wdl_get_premium_blocks() {
 		"lw-pr-border-1",
 		"lw-pr-before-after-3",
 		"lw-pr-post-list-4",
+		"lw-pr-product-1",
+		"lw-pr-ranking-1",
+		"lw-pr-goodbad-1",
+		"lw-pr-compare-1",
 	];
 }
 

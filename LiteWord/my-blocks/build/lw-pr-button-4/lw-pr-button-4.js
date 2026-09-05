@@ -2,6 +2,95 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/affiliate-link.js":
+/*!*******************************!*\
+  !*** ./src/affiliate-link.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AffiliateToggle: () => (/* binding */ AffiliateToggle),
+/* harmony export */   LW_AFFILIATE_REL: () => (/* binding */ LW_AFFILIATE_REL),
+/* harmony export */   lwRel: () => (/* binding */ lwRel)
+/* harmony export */ });
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * LiteWord – アフィリエイトリンク（共通部品）
+ * ------------------------------------------------------------
+ *  Amazon・楽天などの広告リンクに、検索エンジン向けの印
+ *  rel="sponsored nofollow" を付けるための共通部品。
+ *
+ *  なぜ要るか
+ *  ・Google は「報酬が発生するリンクには rel="sponsored"（または nofollow）を付ける」
+ *    ことを求めている。付けずに広告リンクを大量に置くと、リンクを売っているサイトと
+ *    区別が付かず、検索順位を落とされることがある。
+ *  ・ステマ規制（景品表示法・2023年10月〜）で必要なのは「広告である」という
+ *    画面上の表示。rel はそれとは別（検索エンジン向け）なので、両方いる。
+ *
+ *  🚨 設計の前提（ここを崩すと既存ページが壊れる）
+ *  ・約1000サイトに配るテーマなので、**既定値（オフ）のときの save の出力は
+ *    1バイトも変えない**。lwRel() はオフのとき undefined を返し、React は
+ *    属性ごと出力しない ＝ 今まで保存された HTML と完全に一致する。
+ *    ＝ deprecated を書かなくてよい（reference/block-change-safety.md §0）。
+ *  ・別タブの rel="noopener noreferrer" を今まで出していたブロックは、
+ *    lwRel({ newTab, affiliate }) の形で呼ぶ。オフなら従来と同じ文字列になる。
+ *  ・別タブでも rel を出していなかったブロック（lw-button-2 / 3）は
+ *    lwRel({ affiliate }) だけを渡す。newTab を混ぜると出力が変わってしまう。
+ */
+
+
+
+/** 広告リンクに付ける rel の中身 */
+var LW_AFFILIATE_REL = 'sponsored nofollow';
+
+/**
+ * a タグの rel を組み立てる。
+ * 付けるものが何も無ければ undefined（＝属性そのものを出さない）。
+ *
+ * @param {Object}  opt
+ * @param {boolean} opt.newTab    別タブで開く（従来どおり noopener noreferrer）
+ * @param {boolean} opt.affiliate 広告リンク（sponsored nofollow）
+ * @return {string|undefined} rel の値
+ */
+function lwRel() {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+    _ref$newTab = _ref.newTab,
+    newTab = _ref$newTab === void 0 ? false : _ref$newTab,
+    _ref$affiliate = _ref.affiliate,
+    affiliate = _ref$affiliate === void 0 ? false : _ref$affiliate;
+  var parts = [];
+  if (newTab) {
+    parts.push('noopener noreferrer');
+  }
+  if (affiliate) {
+    parts.push(LW_AFFILIATE_REL);
+  }
+  return parts.length ? parts.join(' ') : undefined;
+}
+
+/**
+ * 編集画面のトグル。
+ * 「新しいタブで開く」のすぐ下に置く。
+ *
+ * @param {Object}   props
+ * @param {boolean}  props.checked
+ * @param {Function} props.onChange
+ */
+function AffiliateToggle(_ref2) {
+  var checked = _ref2.checked,
+    onChange = _ref2.onChange;
+  return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ToggleControl, {
+    label: "\u5E83\u544A\u30EA\u30F3\u30AF\uFF08\u30A2\u30D5\u30A3\u30EA\u30A8\u30A4\u30C8\uFF09",
+    checked: !!checked,
+    onChange: onChange,
+    help: "Amazon\u30FB\u697D\u5929\u306A\u3069\u306E\u3001\u6210\u679C\u5831\u916C\u304C\u767A\u751F\u3059\u308B\u30EA\u30F3\u30AF\u306E\u3068\u304D\u306B\u30AA\u30F3\u306B\u3057\u307E\u3059\u3002\u691C\u7D22\u30A8\u30F3\u30B8\u30F3\u306B\u5E83\u544A\u3060\u3068\u4F1D\u3048\u308B\u5370\u304C\u4ED8\u304D\u307E\u3059\uFF08rel=\"sponsored nofollow\"\uFF09\u3002\u30AA\u30F3\u306B\u3059\u308B\u3068\u65B0\u3057\u3044\u30BF\u30D6\u3067\u958B\u304F\u8A2D\u5B9A\u3082\u4E00\u7DD2\u306B\u5165\u308A\u307E\u3059\u3002"
+  });
+}
+
+/***/ }),
+
 /***/ "./src/link-picker.js":
 /*!****************************!*\
   !*** ./src/link-picker.js ***!
@@ -382,6 +471,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-pr-button-4/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/lw-pr-button-4/block.json");
 /* harmony import */ var _link_picker_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../link-picker.js */ "./src/link-picker.js");
+/* harmony import */ var _affiliate_link_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../affiliate-link.js */ "./src/affiliate-link.js");
+
 
 
 
@@ -490,6 +581,16 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
         });
       },
       help: "\u30EA\u30F3\u30AF\u5148\u3092\u65B0\u3057\u3044\u30BF\u30D6\u3067\u958B\u304D\u305F\u3044\u5834\u5408\u306F\u30AA\u30F3\u306B\u3057\u3066\u304F\u3060\u3055\u3044"
+    }), /*#__PURE__*/React.createElement(_affiliate_link_js__WEBPACK_IMPORTED_MODULE_8__.AffiliateToggle, {
+      checked: isAffiliate,
+      onChange: function onChange(v) {
+        return setAttributes(v ? {
+          isAffiliate: true,
+          openNewTab: true
+        } : {
+          isAffiliate: false
+        });
+      }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: "\u914D\u7F6E\u8A2D\u5B9A",
       initialOpen: false
@@ -1071,6 +1172,7 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
       textSub = attributes.textSub,
       btnUrl = attributes.btnUrl,
       openNewTab = attributes.openNewTab,
+      isAffiliate = attributes.isAffiliate,
       btnAlign = attributes.btnAlign,
       btnAlignSp = attributes.btnAlignSp,
       bgColor = attributes.bgColor,
@@ -1120,7 +1222,10 @@ var bgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.ButtonBackgroundOption
       "data-lw-link-type": (0,_link_picker_js__WEBPACK_IMPORTED_MODULE_7__.lwLinkPropsFromAttrs)(attributes, LINK_KEYS).linkType,
       "data-lw-link-id": (0,_link_picker_js__WEBPACK_IMPORTED_MODULE_7__.lwLinkPropsFromAttrs)(attributes, LINK_KEYS).linkId,
       target: openNewTab ? '_blank' : undefined,
-      rel: openNewTab ? 'noopener noreferrer' : undefined,
+      rel: (0,_affiliate_link_js__WEBPACK_IMPORTED_MODULE_8__.lwRel)({
+        newTab: openNewTab,
+        affiliate: isAffiliate
+      }),
       className: "lw_btn_a ".concat(shakeAnimation ? "lw_btn_shake_".concat(shakeIntensity) : ''),
       style: {
         '--hover-bg': bgColorHover,
@@ -1893,7 +1998,7 @@ module.exports = window["wp"]["data"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-button-4","version":"1.0.0","title":"PRボタン 04","category":"lw-button","icon":"phone","description":"電話番号用プレミアムボタン","aiHint":{"description":"電話番号ボタン。電話アイコン+電話番号+受付時間。店舗系業種のCTAに","excludeFromAutoSelect":false,"contentAttributes":["textMain","textSub","btnUrl"],"imageAttributes":[],"notes":"textMainは電話番号、btnUrlはtel:形式。IT・EC系には不向き"},"supports":{"anchor":true,"className":true},"attributes":{"textMain":{"type":"string","default":"0120-000-000","aiHint":{"role":"phone","contentGuide":"電話番号。ハイフン付き","example":"03-0000-0000"}},"textSub":{"type":"string","default":"受付時間 9:00〜18:00（土日祝除く）","aiHint":{"role":"body","contentGuide":"受付時間・休業日","example":"受付時間 10:00〜19:00（水曜定休）"}},"btnUrl":{"type":"string","default":"tel:0120000000","aiHint":{"role":"url","contentGuide":"tel:電話番号（ハイフンなし）","example":"tel:0300000000"}},"openNewTab":{"type":"boolean","default":false,"aiHint":{"skip":true}},"btnAlign":{"type":"string","default":"center","aiHint":{"skip":true}},"btnAlignSp":{"type":"string","default":"default","aiHint":{"skip":true}},"bgColor":{"type":"string","default":"#09488c","aiHint":{"skip":true}},"bgColorHover":{"type":"string","default":"#063366","aiHint":{"skip":true}},"textColorMain":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"textColorSub":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"borderWidth":{"type":"number","default":0,"aiHint":{"skip":true}},"borderColor":{"type":"string","default":"#000000","aiHint":{"skip":true}},"borderRadius":{"type":"number","default":2,"aiHint":{"skip":true}},"iconMain":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z\\"/></svg>","aiHint":{"skip":true}},"iconMainColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"iconMainSize":{"type":"number","default":32,"aiHint":{"skip":true}},"iconMainMarginRight":{"type":"number","default":8,"aiHint":{"skip":true}},"iconMainMarginLeft":{"type":"number","default":-8,"aiHint":{"skip":true}},"FontSet":{"type":"string","default":"","aiHint":{"skip":true}},"fontWeightMain":{"type":"string","default":"500","aiHint":{"skip":true}},"fontWeightSub":{"type":"string","default":"500","aiHint":{"skip":true}},"fontSizeMain":{"type":"number","default":28,"aiHint":{"skip":true}},"fontSizeMainSp":{"type":"number","default":18,"aiHint":{"skip":true}},"fontSizeSub":{"type":"number","default":14,"aiHint":{"skip":true}},"letterSpacing":{"type":"number","default":0.05,"aiHint":{"skip":true}},"maxWidth":{"type":"number","default":580,"aiHint":{"skip":true}},"maxWidthSp":{"type":"number","default":480,"aiHint":{"skip":true}},"paddingY":{"type":"number","default":1.2,"aiHint":{"skip":true}},"paddingX":{"type":"number","default":1.5,"aiHint":{"skip":true}},"transitionDuration":{"type":"number","default":0.3,"aiHint":{"skip":true}},"shakeAnimation":{"type":"boolean","default":false,"aiHint":{"skip":true}},"shakeInterval":{"type":"number","default":3,"aiHint":{"skip":true}},"shakeIntensity":{"type":"string","default":"normal","aiHint":{"skip":true}},"shadowX":{"type":"number","default":0,"aiHint":{"skip":true}},"shadowY":{"type":"number","default":0,"aiHint":{"skip":true}},"shadowBlur":{"type":"number","default":6,"aiHint":{"skip":true}},"shadowOpacity":{"type":"number","default":0.2,"aiHint":{"skip":true}},"btnLinkType":{"type":"string","default":"url"},"btnPageId":{"type":"number","default":0},"btnCategoryId":{"type":"number","default":0}},"editorScript":"file:./lw-pr-button-4.js","no":4}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-button-4","version":"1.0.0","title":"PRボタン 04","category":"lw-button","icon":"phone","description":"電話番号用プレミアムボタン","aiHint":{"description":"電話番号ボタン。電話アイコン+電話番号+受付時間。店舗系業種のCTAに","excludeFromAutoSelect":false,"contentAttributes":["textMain","textSub","btnUrl"],"imageAttributes":[],"notes":"textMainは電話番号、btnUrlはtel:形式。IT・EC系には不向き"},"supports":{"anchor":true,"className":true},"attributes":{"isAffiliate":{"type":"boolean","default":false},"textMain":{"type":"string","default":"0120-000-000","aiHint":{"role":"phone","contentGuide":"電話番号。ハイフン付き","example":"03-0000-0000"}},"textSub":{"type":"string","default":"受付時間 9:00〜18:00（土日祝除く）","aiHint":{"role":"body","contentGuide":"受付時間・休業日","example":"受付時間 10:00〜19:00（水曜定休）"}},"btnUrl":{"type":"string","default":"tel:0120000000","aiHint":{"role":"url","contentGuide":"tel:電話番号（ハイフンなし）","example":"tel:0300000000"}},"openNewTab":{"type":"boolean","default":false,"aiHint":{"skip":true}},"btnAlign":{"type":"string","default":"center","aiHint":{"skip":true}},"btnAlignSp":{"type":"string","default":"default","aiHint":{"skip":true}},"bgColor":{"type":"string","default":"#09488c","aiHint":{"skip":true}},"bgColorHover":{"type":"string","default":"#063366","aiHint":{"skip":true}},"textColorMain":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"textColorSub":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"borderWidth":{"type":"number","default":0,"aiHint":{"skip":true}},"borderColor":{"type":"string","default":"#000000","aiHint":{"skip":true}},"borderRadius":{"type":"number","default":2,"aiHint":{"skip":true}},"iconMain":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z\\"/></svg>","aiHint":{"skip":true}},"iconMainColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"iconMainSize":{"type":"number","default":32,"aiHint":{"skip":true}},"iconMainMarginRight":{"type":"number","default":8,"aiHint":{"skip":true}},"iconMainMarginLeft":{"type":"number","default":-8,"aiHint":{"skip":true}},"FontSet":{"type":"string","default":"","aiHint":{"skip":true}},"fontWeightMain":{"type":"string","default":"500","aiHint":{"skip":true}},"fontWeightSub":{"type":"string","default":"500","aiHint":{"skip":true}},"fontSizeMain":{"type":"number","default":28,"aiHint":{"skip":true}},"fontSizeMainSp":{"type":"number","default":18,"aiHint":{"skip":true}},"fontSizeSub":{"type":"number","default":14,"aiHint":{"skip":true}},"letterSpacing":{"type":"number","default":0.05,"aiHint":{"skip":true}},"maxWidth":{"type":"number","default":580,"aiHint":{"skip":true}},"maxWidthSp":{"type":"number","default":480,"aiHint":{"skip":true}},"paddingY":{"type":"number","default":1.2,"aiHint":{"skip":true}},"paddingX":{"type":"number","default":1.5,"aiHint":{"skip":true}},"transitionDuration":{"type":"number","default":0.3,"aiHint":{"skip":true}},"shakeAnimation":{"type":"boolean","default":false,"aiHint":{"skip":true}},"shakeInterval":{"type":"number","default":3,"aiHint":{"skip":true}},"shakeIntensity":{"type":"string","default":"normal","aiHint":{"skip":true}},"shadowX":{"type":"number","default":0,"aiHint":{"skip":true}},"shadowY":{"type":"number","default":0,"aiHint":{"skip":true}},"shadowBlur":{"type":"number","default":6,"aiHint":{"skip":true}},"shadowOpacity":{"type":"number","default":0.2,"aiHint":{"skip":true}},"btnLinkType":{"type":"string","default":"url","aiHint":{"skip":true}},"btnPageId":{"type":"number","default":0,"aiHint":{"skip":true}},"btnCategoryId":{"type":"number","default":0,"aiHint":{"skip":true}}},"editorScript":"file:./lw-pr-button-4.js","no":4}');
 
 /***/ })
 

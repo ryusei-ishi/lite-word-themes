@@ -1,0 +1,144 @@
+{
+  "title": "動かして見比べるビフォーアフター（重ねて比較）",
+  "description": "【型C：写真が主役】見出し＋使い方のひとこと＋重ねて比べるスライダー＋この事例の中身の表＋注釈＋相談ボタン。まん中の線を左右に動かすと、同じ位置のまま前と後を見比べられます。清掃・塗装・原状回復のように背景が変わらない仕事では、2枚並べるより伝わります。🚨 写真は必ず同じ画角で撮った2枚にしてください。ずれていると線を動かすたびに絵が飛びます。左右に並べて見せたいときは「ビフォーアフター（回数と期間つき）」のほうを使ってください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "動かして見比べる",
+        "subTitle": "BEFORE / AFTER",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "まん中の丸い印を左右に動かすと、同じ位置のまま前と後を見比べられます。<br>スマートフォンでは、指でなぞってください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-before-after-2",
+      "attributes": {
+        "beforeLabel": "BEFORE",
+        "afterLabel": "AFTER",
+        "labelColorBefore": "rgba(51, 51, 51, 0.82)",
+        "labelColorAfter": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "maxWidth": 800,
+        "aspectRatioH": 853,
+        "items": [
+          {
+            "imgUrl": "https://lite-word.com/sample_img/before_after/1_1.webp"
+          },
+          {
+            "imgUrl": "https://lite-word.com/sample_img/before_after/1_2.webp"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 200,
+        "dtFixedSp": true,
+        "dtWidthSp": 100,
+        "dtBgColor": "#f7f9fb",
+        "dlBorderColor": "#dfe4ea",
+        "rowBorderColor": "#dfe4ea",
+        "rows": [
+          {
+            "dtText": "この方の場合",
+            "ddText": "30代・女性。もともと運動の習慣はありませんでした",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "かかった期間",
+            "ddText": "約4か月",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "通った回数",
+            "ddText": "全8回（2週間に1回のペース）",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "やったこと",
+            "ddText": "ご自宅でできる範囲の内容に絞りました。食事を大きく変えたり、器具を買っていただいたりはしていません",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "費用の目安",
+            "ddText": "1回 8,000円 × 8回。回数券をお使いいただくと 56,000円です",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "そのあと",
+            "ddText": "3か月ごとに一度、様子を見せていただいています",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※写真はイメージです。効果や仕上がりには個人差があり、必要な回数・期間にも幅があります。<br>カウンセリングのときに、その方に合わせた見通しをお伝えします。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 16,
+        "tbHeight": 12,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "自分の場合を聞いてみる",
+        "textSub": "＼ 写真を1枚見せていただければ十分です ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

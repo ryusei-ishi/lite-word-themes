@@ -72,9 +72,14 @@ function lw_ai_chat_get_allowed_settings() {
         'follow_bottom_cta_set_ptn_df'        => ['type' => 'theme_mod', 'label' => '追従CTAパターン'],
         'loading_anime_ptn_df'                => ['type' => 'theme_mod', 'label' => 'ローディングパターン'],
 
+        // PR表記（広告・アフィリエイト / ステマ規制）
+        'lw_pr_notice_switch'                 => ['type' => 'theme_mod', 'label' => 'PR表記の表示'],
+        'lw_pr_notice_text'                   => ['type' => 'theme_mod', 'label' => 'PR表記の文言'],
+
         // Google Analytics（theme_mod）
         'seo_set_google_analytics_id'         => ['type' => 'theme_mod', 'label' => 'Google Analytics ID'],
         'seo_set_gtm_id'                      => ['type' => 'theme_mod', 'label' => 'Google Tag Manager ID'],
+        'seo_set_affiliate_click_switch'      => ['type' => 'theme_mod', 'label' => '広告リンクのクリック計測'],
     ];
 }
 
@@ -161,10 +166,17 @@ function lw_ai_chat_get_site_settings() {
     $settings['follow_cta'] = ['pattern_default' => get_theme_mod('follow_bottom_cta_set_ptn_df', '')];
     $settings['loading']    = ['pattern_default' => get_theme_mod('loading_anime_ptn_df', '')];
 
+    // PR表記（広告・アフィリエイト）
+    $settings['pr_notice'] = [
+        'switch' => get_theme_mod('lw_pr_notice_switch', 'off'),
+        'text'   => get_theme_mod('lw_pr_notice_text', ''),
+    ];
+
     // Google Analytics
     $settings['analytics'] = [
         'ga_id'  => get_theme_mod('seo_set_google_analytics_id', ''),
         'gtm_id' => get_theme_mod('seo_set_gtm_id', ''),
+        'affiliate_click' => get_theme_mod('seo_set_affiliate_click_switch', 'on'),
     ];
 
     // カスタマイザー直リンク
@@ -181,6 +193,7 @@ function lw_ai_chat_get_site_settings() {
         'loading'      => $base . '?autofocus[section]=loading_anime_sec',
         'extensions'   => $base . '?autofocus[section]=lw_extensions_sec',
         'analytics'    => $base . '?autofocus[section]=seo_set_google_sec',
+        'pr_notice'    => $base . '?autofocus[section]=lw_pr_notice_sec',
     ];
 
     return $settings;

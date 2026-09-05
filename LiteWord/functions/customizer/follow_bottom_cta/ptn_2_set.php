@@ -7,7 +7,12 @@ function follow_bottom_cta_ptn_2_set_custom( $wp_customize ) {
     // 設定
     $set_ttl = ' - パターン２の設定'; // セクションタイトル
     $sec = 'follow_bottom_cta_ptn_2_sec'; // セクションID
-    $wp_customize->add_section($sec, ['title' => $set_ttl, 'panel' => $panel]);
+    $wp_customize->add_section($sec, [
+        'title' => $set_ttl,
+        'panel' => $panel,
+        'description' => lw_follow_bottom_cta_preview_description('ptn_2'),
+        'description_hidden' => false,
+    ]);
     $items = [];
     $items[] =  [
         ["text" , "logo_text","",'<h2 class="ctm_ttl_ptn_1">PC時のデザイン設定</h2><h3 class="ctm_ttl_ptn_2">ロゴ部分 1</h3>テキストの場合'],

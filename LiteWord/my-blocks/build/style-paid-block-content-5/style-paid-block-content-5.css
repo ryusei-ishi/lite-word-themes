@@ -1,6 +1,7 @@
 /*!******************************************************************************************************************************!*\
   !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/paid-block-content-5/style.scss ***!
   \******************************************************************************************************************************/
+@charset "UTF-8";
 .lw_content_wrap.page .paid-block-content-5 {
   margin-left: calc((100% - 100vw) / 2);
   width: 100vw;
@@ -239,5 +240,67 @@
 @container (max-width: 500px) {
   .paid-block-content-5 .conts .cont .in p {
     line-height: 2em;
+  }
+}
+
+/* ============================================================
+ * 2026-09-01 追加（Ryuichi 提案）
+ *  ① .img_label        … 画像の上に出す名前ラベル
+ *  ② .is_sp_img_bottom … スマホのとき画像をテキストの下へ
+ * どちらも **既定では何も起きない**（属性が空 / false なら出力にクラスも要素も出ない）。
+ * ============================================================ */
+.paid-block-content-5 {
+  /* スマホのときだけ、画像をテキストの下へ回す。
+     🚨 500px以下では本来「写真の上に白抜きの見出し」を出す作りなので、
+        画像を下に回すときは **見出しを通常の位置（テキスト側）に戻す**。
+        戻さないと、テキストだけが見出し無しで始まってしまう。 */
+}
+.paid-block-content-5 .conts .image {
+  /* 画像の上に置く名前ラベル。写真の左下に敷く小さな帯 */
+}
+.paid-block-content-5 .conts .image .img_label {
+  position: absolute;
+  left: 0;
+  bottom: 24px;
+  z-index: 25;
+  padding: 8px 20px 8px 16px;
+  background: var(--color-img-label, rgba(0, 0, 0, 0.62));
+  color: #fff;
+  font-size: 15px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  border-radius: 0 4px 4px 0;
+}
+@container (max-width: 800px) {
+  .paid-block-content-5 .conts .image .img_label {
+    bottom: 16px;
+    font-size: 14px;
+  }
+}
+@container (max-width: 800px) {
+  .paid-block-content-5.is_sp_img_bottom .conts {
+    display: flex;
+    flex-direction: column;
+  }
+  .paid-block-content-5.is_sp_img_bottom .conts .image {
+    order: 2;
+  }
+  .paid-block-content-5.is_sp_img_bottom .conts .cont {
+    order: 1;
+  }
+}
+@container (max-width: 500px) {
+  .paid-block-content-5.is_sp_img_bottom .conts .image {
+    /* 写真を暗くする膜と、その上の白抜き見出しは要らなくなる */
+  }
+  .paid-block-content-5.is_sp_img_bottom .conts .image::after {
+    opacity: 0;
+  }
+  .paid-block-content-5.is_sp_img_bottom .conts .image .ttl {
+    display: none;
+  }
+  .paid-block-content-5.is_sp_img_bottom .conts .cont h1.ttl, .paid-block-content-5.is_sp_img_bottom .conts .cont h2.ttl, .paid-block-content-5.is_sp_img_bottom .conts .cont h3.ttl, .paid-block-content-5.is_sp_img_bottom .conts .cont h4.ttl {
+    display: block;
+    font-size: 26px;
   }
 }

@@ -179,3 +179,60 @@
     }
   }
 }
+
+/* ============================================================
+ * 2026-09-01 追加（Ryuichi 提案）
+ *  ① .img_label        … 画像の上に出す名前ラベル
+ *  ② .is_sp_img_bottom … スマホのとき画像をテキストの下へ
+ * どちらも **既定では何も起きない**（属性が空 / false なら出力にクラスも要素も出ない）。
+ * ============================================================ */
+.paid-block-content-5 {
+  .conts .image {
+    /* 画像の上に置く名前ラベル。写真の左下に敷く小さな帯 */
+    .img_label {
+      position: absolute;
+      left: 0;
+      bottom: 24px;
+      z-index: 25;
+      padding: 8px 20px 8px 16px;
+      background: var(--color-img-label, rgba(0, 0, 0, 0.62));
+      color: #fff;
+      font-size: 15px;
+      line-height: 1.4;
+      letter-spacing: 0.04em;
+      border-radius: 0 4px 4px 0;
+      @container (max-width: 800px) {
+        bottom: 16px;
+        font-size: 14px;
+      }
+    }
+  }
+
+  /* スマホのときだけ、画像をテキストの下へ回す。
+     🚨 500px以下では本来「写真の上に白抜きの見出し」を出す作りなので、
+        画像を下に回すときは **見出しを通常の位置（テキスト側）に戻す**。
+        戻さないと、テキストだけが見出し無しで始まってしまう。 */
+  &.is_sp_img_bottom {
+    @container (max-width: 800px) {
+      .conts {
+        display: flex;
+        flex-direction: column;
+        .image { order: 2; }
+        .cont  { order: 1; }
+      }
+    }
+    @container (max-width: 500px) {
+      .conts .image {
+        /* 写真を暗くする膜と、その上の白抜き見出しは要らなくなる */
+        &::after { opacity: 0; }
+        .ttl { display: none; }
+      }
+      .conts .cont {
+        h1.ttl, h2.ttl, h3.ttl, h4.ttl {
+          display: block;
+          font-size: 26px;
+        }
+      }
+    }
+  }
+}

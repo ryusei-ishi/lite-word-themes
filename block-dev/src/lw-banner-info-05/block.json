@@ -12,7 +12,11 @@
 		"contentAttributes": [
 			"items"
 		],
-		"imageAttributes": []
+		"imageAttributes": [],
+		"notes": [
+			"🚨 写真枠の比率は **1 / 0.55 の横長**。1000×550 前後で作れば切られない。",
+			"🚨 maxWidth を指定すると**全幅ではなくなる**（既定は全幅の帯）。幅を絞ったときは、前後にスペーサーを置くのが正しい。"
+		]
 	},
 	"supports": {
 		"anchor": true

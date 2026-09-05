@@ -1,0 +1,154 @@
+{
+  "title": "送ったあとどうなるか（お問い合わせ後の流れ4段）",
+  "description": "【型B：説明が主役】見出し＋ためらいに触れるひとこと＋問い合わせ後の流れ4段＋よくあるご心配に答える囲い＋問い合わせボタン。問い合わせをためらう理由は値段よりも「しつこく営業されそう」です。送ったあとに何が起きるかを先に書くと、フォームの手前で止まっている人が動けます。ご利用の流れ（契約後の工程）とは役割が違うので、同じページに両方置けます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "送ったあと、どうなりますか",
+        "subTitle": "AFTER CONTACT",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "問い合わせたら、しつこく営業されるのでは——と思われるのは当然です。<br>送っていただいたあとに何が起きるか、先に全部書いておきます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-lw-step-4",
+      "attributes": {
+        "ulMaxWidth": 900,
+        "fontSizeClass": "font_size_m",
+        "bgGradient": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorNo": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "titleTag": "h3",
+        "contents": [
+          {
+            "no": "01",
+            "title": "その日のうちに受付のメールが届きます",
+            "text": "自動でお送りします。30分たっても届かないときは、迷惑メールに入っていることが多いのでご確認ください。\nそれでも見つからないときは、お電話をいただければこちらから折り返します。"
+          },
+          {
+            "no": "02",
+            "title": "2営業日以内に担当からご連絡します",
+            "text": "担当する者から一度ご連絡します。お電話・メールのどちらがよいか、ご都合のよい時間帯があればフォームに書いておいてください。そのとおりにします。"
+          },
+          {
+            "no": "03",
+            "title": "お困りごとをうかがいます",
+            "text": "いまの状況と、いつまでに何をしたいかをお聞きします。その場でお決めいただく必要はありません。\n「まだ調べている途中」でかまいませんし、他社さんと比べている段階でも大丈夫です。"
+          },
+          {
+            "no": "04",
+            "title": "お見積りをお送りします",
+            "text": "内訳の分かる形でお出しします。ご返事がないときに、こちらから何度も追いかけることはしません。\n気が変わったらいつでもご連絡ください。お見積りはそのまま取っておきます。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1PaddingTopSp": 20,
+        "waku1PaddingBottomSp": 20,
+        "waku1PaddingLeftSp": 16,
+        "waku1PaddingRightSp": 16,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "よくいただくご心配",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "お断りいただいても費用はかかりませんし、そのあとにご連絡することもありません。いただいたお名前・ご連絡先は、このご相談のためだけに使います。営業のリストに載せたり、他社にお渡ししたりすることはありません。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "問い合わせてみる",
+        "textSub": "＼ 決めていない段階で大丈夫です ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

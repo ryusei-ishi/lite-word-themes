@@ -11,7 +11,11 @@
 		"excludeFromAutoSelect": true,
 		"contentAttributes": [],
 		"imageAttributes": [],
-		"excludeReason": "フォームブロック。テキスト生成不要"
+		"excludeReason": "フォームブロック。テキスト生成不要",
+		"notes": [
+			"🚨 見出しも背景も持たない**素のフォームだけ**が出る。見出しが要るときは custom-title 系を上に置く。背景写真の帯ごと欲しいときは paid-block-contact-2。",
+			"🚨 送信ボタンの中の矢印（svg）の大きさは、ブロックの style.css ではなく**`functions/mail_form/put_style/ptn_1.css`** が決めている（`form_put.php` がフォーム出力時に enqueue する）。このCSSを読まない環境（自作のプレビューなど）では矢印が1000px超まで膨らむ。実サイトでは正常。"
+		]
 	},
 	"supports": {
 		"anchor": true

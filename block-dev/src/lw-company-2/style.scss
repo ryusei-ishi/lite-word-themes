@@ -4,24 +4,6 @@
   dl {
     margin: 0 auto;
     border: 1px solid #ccc;
-    &.sp_clm_1,
-    &.dt_sp_full {
-      .company-profile-item {
-        @container (max-width:700px) {
-          grid-template-columns: 1fr;
-        }
-        dt {
-          @container (max-width:700px) {
-            text-align: left;
-          }
-        }
-        dd {
-          @container (max-width:700px) {
-            padding: 1.2em 1em;
-          }
-        }
-      }
-    }
     .company-profile-item {
       position: relative;
       display: grid;
@@ -30,7 +12,11 @@
       @container (max-width:700px) {
         grid-template-columns: 128px calc(100% - 128px);
       }
-      @container (max-width:700px) {
+      // 🚨 2026-08-31: ここは元々 700px と書かれていて上のブロックと重複しており、
+      //    112px が必ず勝って 128px の段が死んでいた（Ryuichi 承認のうえ 500px に直した）。
+      //    これで dt_width_l（220→198→174）・dt_width_s（140→128→112）と同じ
+      //    「3段のはしご」になる: dt_width_m は 180 → 128（700px以下）→ 112（500px以下）。
+      @container (max-width:500px) {
         grid-template-columns: 112px calc(100% - 112px);
       }
       &.dt_width_l {
@@ -100,9 +86,30 @@
         height: calc(100% - 4px);
       }
     }
+
+    // 🚨 スマホで1列に積む指定（spFullDt）は、必ず .company-profile-item の「後」に書くこと。
+    //    .sp_clm_1 側も .dt_width_l 側も詳細度が (0,3,1) で同じなので、先に書くと
+    //    後ろの .dt_width_l / .dt_width_s に grid-template-columns を打ち消され、
+    //    スマホでも2列のまま残って内容が細い列に押し込まれる。
+    //    2026-08-31 まで実際にそうなっていた（同じ系統の lw-company-1 と
+    //    paid-block-lw-company-3 は元から後ろに書いてあり、この問題は無い）。
+    &.sp_clm_1,
+    &.dt_sp_full {
+      .company-profile-item {
+        @container (max-width:700px) {
+          grid-template-columns: 1fr;
+        }
+        dt {
+          @container (max-width:700px) {
+            text-align: left;
+          }
+        }
+        dd {
+          @container (max-width:700px) {
+            padding: 1.2em 1em;
+          }
+        }
+      }
+    }
   }
 }
-
-
-
-

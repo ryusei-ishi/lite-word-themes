@@ -1,0 +1,195 @@
+{
+  "title": "LINE公式アカウントのご案内（無料・色帯・写真ゼロ）",
+  "description": "【型B：説明が主役】見出し＋ひとこと＋色の帯の中に「登録するとできること」4件＋配信のきまり5項目の表＋注釈＋友だち追加ボタン。LINE公式アカウント・メールマガジン・ニュースレターなど、「ひとつのチャネルに登録してもらう」段に使います。🚨 登録されない理由はほとんど「何が届くか分からない」「やめ方が分からない」の2つなので、その2つを先に出す作りにしてあります。QRコードは入っていません。ご自身のものを画像ブロックで置いてください。帯の色はページのメインカラーに自動で追従します。写真を1枚も使いません。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "LINE公式アカウント",
+        "subTitle": "LINE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "ご予約の変更も、仕上がりのお知らせも、LINEがいちばん早くお届けできます。<br>登録は無料で、いつでもご自分で解除できます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-bg-1",
+      "attributes": {
+        "backgroundType": "image",
+        "imagePc": "",
+        "imageSp": "",
+        "isFullWidth": false,
+        "maxWidth": 1040,
+        "minHeightPc": "min-h-pc-150px",
+        "minHeightTb": "min-h-tb-160px",
+        "minHeightSp": "min-h-sp-160px",
+        "innerPaddingTopPc": 48,
+        "innerPaddingBottomPc": 48,
+        "innerPaddingLeftPc": 64,
+        "innerPaddingRightPc": 64,
+        "innerPaddingTopTb": 40,
+        "innerPaddingBottomTb": 40,
+        "innerPaddingTopSp": 32,
+        "innerPaddingBottomSp": 32,
+        "innerPaddingLeftSp": 16,
+        "innerPaddingRightSp": 16,
+        "filterTypePc": "solid",
+        "filterColorPc": "var(--color-main)",
+        "opacityPc": 0.08,
+        "filterTypeTb": "solid",
+        "filterColorTb": "var(--color-main)",
+        "opacityTb": 0.08,
+        "filterTypeSp": "solid",
+        "filterColorSp": "var(--color-main)",
+        "opacitySp": 0.08
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "ご登録いただくと、こんなことができます",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "20px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "24px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "wdl/lw-list-4",
+          "attributes": {
+            "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+            "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+            "colClass": "clm_1",
+            "contents": [
+              {
+                "text": "仕上がったその日に、お知らせが届きます。お店にお電話いただかなくても分かります"
+              },
+              {
+                "text": "集配のご依頼が、メッセージ1通で終わります。ご希望の日と時間帯をお送りください"
+              },
+              {
+                "text": "シミや傷みは、写真を送っていただければ落とせるかどうかお答えします"
+              },
+              {
+                "text": "お預かり中の品と、お渡し予定日をいつでも確認していただけます"
+              }
+            ]
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "配信について",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-company-2",
+      "attributes": {
+        "spFullDt": true,
+        "items": [
+          {
+            "dt": "配信の回数",
+            "dd": "月に2回までです。それ以上は配信しませんので、通知が多くて困ることはありません"
+          },
+          {
+            "dt": "届く内容",
+            "dd": "お預かりした品の仕上がりのお知らせと、季節のお手入れのご案内です。<br>売り込みのメッセージはお送りしません"
+          },
+          {
+            "dt": "費用",
+            "dd": "無料です。通信料だけお客様のご負担になります"
+          },
+          {
+            "dt": "解除の方法",
+            "dd": "トーク画面右上のメニューから「ブロック」を選ぶだけで止まります。<br>お店にご連絡いただく必要はありませんし、解除された方が分かることもありません"
+          },
+          {
+            "dt": "個別のご相談",
+            "dd": "いただいたメッセージは、店長が直接読んで返信します。<br>自動の返事ではありません（営業時間内に順にお返しします）"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※上の内容は、必ずご自身のアカウントの運用に書き換えてください。<br>※友だち追加のQRコードは入っていません。画像ブロックでご自身のものを置いてください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "友だち追加する",
+        "btnTextSub": "＼ 登録は無料・いつでも解除できます ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

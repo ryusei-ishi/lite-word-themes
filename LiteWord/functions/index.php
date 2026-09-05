@@ -25,9 +25,26 @@ function Lw_theme_mod_set($key,$df=""){//カスタマイザー出力用関数
     return $result;
 }
 
-// カスタマイザー設定が更新された時にキャッシュをクリア
+/**
+ * カスタマイザーを保存したときにキャッシュを捨てる。
+ *
+ * 🚨 キーを1つずつ並べる方式では追いつかない。
+ *    Lw_theme_mod_set() が実際に使うキーは248種あり、しかも
+ *    "{$set_id}_logo_text" のように実行時に組み立てるものが多い（＝先に列挙できない）。
+ *    2026-09-02 に数えたところ、下の一覧に載っていたのは29種だけで、
+ *    残り219種は保存しても最大1時間ふるいまま返っていた。
+ *    （Redis などの永続オブジェクトキャッシュを入れているサイトでだけ起きる。
+ *     素の WordPress はリクエストごとに消えるので手元では気づけない）
+ *    → まずグループごと消す。対応していない環境だけ下の一覧で落とす。
+ */
 function lw_clear_theme_mods_cache() {
-    // カスタマイザーで使用されるキーのキャッシュを削除
+    if ( function_exists( 'wp_cache_supports' ) && wp_cache_supports( 'flush_group' ) ) {
+        wp_cache_flush_group( 'lw_theme_mods' );
+        lw_clear_css_transients();
+        return;
+    }
+
+    // グループごと消せない環境向けの保険（代表的なキーだけ）
     $common_theme_mod_keys = [
         'color_main', 'color_sub', 'color_accent',
         'color_background', 'color_text',
@@ -43,7 +60,9 @@ function lw_clear_theme_mods_cache() {
         'lw_extensions_seo_functions_switch',
         'lw_extensions_mail_form_switch_all',
         'lw_extensions_comment_functions_switch',
-        'notification_paid_features'
+        'notification_paid_features',
+        'lw_pr_notice_switch', 'lw_pr_notice_text', 'lw_pr_notice_ptn',
+        'lw_pr_notice_bg_color', 'lw_pr_notice_text_color', 'lw_pr_notice_align'
     ];
 
     foreach ($common_theme_mod_keys as $key) {
@@ -141,6 +160,7 @@ if($lw_seo_functions === "on" && LW_EXPANSION_BASE){
     }
 }
 get_template_part('./functions/seo/google');//Google アクセス解析系
+get_template_part('./functions/seo/affiliate_click');//広告リンクのクリック計測
 if(defined( 'LW_HAS_SUBSCRIPTION' ) && LW_HAS_SUBSCRIPTION === true){
     get_template_part('./functions/json-ld/index');//JSON-LD（管理画面でもプレビュー表示のため読み込む）
 }
@@ -149,6 +169,8 @@ $mail_form_switch_all = Lw_theme_mod_set("lw_extensions_mail_form_switch_all", "
 if($mail_form_switch_all === "on"){
     get_template_part('./functions/mail_form/index');
 }
+//追従CTA(ptn_11)のメール登録受付。mail_formのON/OFFに関係なく通知メールが届くよう独立させている
+get_template_part('./functions/follow_bottom_cta_lead/index');
 $lw_comment_functions = Lw_theme_mod_set("lw_extensions_comment_functions_switch", "off");
 if($lw_comment_functions === "on" && LW_EXPANSION_BASE){
     get_template_part('./functions/comment/index');//コメント機能

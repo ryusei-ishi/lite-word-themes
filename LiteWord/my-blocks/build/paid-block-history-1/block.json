@@ -14,7 +14,8 @@
 			"yearText",
 			"events"
 		],
-		"imageAttributes": []
+		"imageAttributes": [],
+		"notes": "🚨 **colorYear は「文字色」だけ。年の札は CSS で `background: var(--color-main); color:#fff` の塗りつぶしになっている**ので、サイトの主色と同じ色を colorYear に渡すと**紺地に紺**のようになって年が消える（2026-09-03 に格安SIMのテンプレで実際に踏んだ）。**基本は colorYear を渡さない**（既定の白文字ならサイト色が何色でも読める）。地の色を変えたいときは yearBgColor のほう。✅ 1ブロック＝1年。events は [{month, desc}] で、月は「6月」のように単位ごと入れる。複数年を並べるならこのブロックを年の数だけ置く。✅ 沿革だけでなく「3か月使ってみた記録」のような**短い期間の時系列**にも使える（月ごとの出来事を並べる形）。"
 	},
 	"supports": {
 		"anchor": true

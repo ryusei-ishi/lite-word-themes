@@ -17,6 +17,10 @@
 		"imageAttributes": []
 	},
 	"attributes": {
+		"isAffiliate": {
+			"type": "boolean",
+			"default": false
+		},
 		"btnText": {
 			"type": "string",
 			"default": "詳細はこちら",

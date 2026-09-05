@@ -1,0 +1,215 @@
+{
+  "title": "資料ダウンロード（中身の一覧＋ダウンロードボタン）",
+  "description": "【型B：説明が主役】見出し＋ひとこと＋資料に載っていること6項目＋ダウンロードのボタン＋そのあと営業しないと書いた囲い＋相談ボタン。まだ人と話したくない段階の人が、黙って持ち帰れる入口です。ボタンのリンク先にPDFのURLを入れてください。メールアドレスと引き換えにしたいときは、リンク先を問い合わせページにして、副文の「入力は要りません」を書き換えてください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "資料ダウンロード",
+        "subTitle": "DOCUMENT",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "まだ問い合わせるほどではない、という段階の方へ。<br>サービスの内容と料金をまとめた資料を、そのままご覧いただけます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "資料に載っていること",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-4",
+      "attributes": {
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colClass": "clm_2",
+        "contents": [
+          {
+            "text": "サービスの全体像と進め方"
+          },
+          {
+            "text": "料金表と作業の範囲"
+          },
+          {
+            "text": "完了までの日数の目安"
+          },
+          {
+            "text": "よくあるご質問と答え"
+          },
+          {
+            "text": "ご依頼3件の実例と費用"
+          },
+          {
+            "text": "お申し込みの手順"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-3",
+      "attributes": {
+        "textSub": "＼ メールアドレスの入力は要りません ／",
+        "textMain": "資料をダウンロード（PDF）",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "bgColorHover": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "maxWidth": 580
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※PDF形式・約2.4MBです。スマートフォンでもそのままご覧いただけます。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1PaddingTopSp": 20,
+        "waku1PaddingBottomSp": 20,
+        "waku1PaddingLeftSp": 16,
+        "waku1PaddingRightSp": 16,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "ダウンロードしたあと、こちらから連絡はしません",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "読んでいただくためだけの資料です。ダウンロードをきっかけに営業の連絡をすることはありません。読んだうえで気になるところがあれば、そのときに聞いてください。資料に書いていないことのほうが多いので、遠慮なくどうぞ。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "資料に無いことを聞く",
+        "textSub": "＼ 読んだあとでかまいません ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

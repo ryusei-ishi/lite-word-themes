@@ -13,28 +13,78 @@
 	"aiHint": {
 		"description": "2段テキストボタン。上に小さい補足テキスト+下に大きいメインテキスト+アイコン。メール問い合わせ等に",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["btnTextMain", "btnTextSub", "btnUrl"],
-		"imageAttributes": []
+		"contentAttributes": [
+			"btnTextMain",
+			"btnTextSub",
+			"btnUrl"
+		],
+		"imageAttributes": [],
+		"notes": [
+			"🚨 **btnUrl を空にすると `href=\"\"` がそのまま出力される。**押すとページが再読み込みされるだけになる（lw-pr-button-2 は空を `#` に落とすが、こちらは生の値を書くだけ）。必ず飛び先を入れること。",
+			"🚨 上の補足文（`.text_sub`）の帯は **背景 #fff が CSS で固定**されていて属性では変えられない。textSubColor を白にすると文字が消える。14px（500px以下12px）。メインは 20px（同18px）で、左に封筒のアイコンが付く。",
+			"🚨 濃い色の帯の上に置くときは、bgGradient を **#ffffff** にして textMainColor / iconColor / textSubColor を暗くする。帯と同系色のままだとボタンが背景に溶けて押せるものに見えない。",
+			"🚨 自前で `margin: 2em 0`（上下32px）を持つので、前後にスペーサーを足すと空きすぎる。",
+			"🚨 **`selectedIcon` の既定は封筒**（お問い合わせ用）。外部サイトへ飛ばす広告リンクや資料ダウンロードに封筒は合わないので差し替える。選べるアイコンはこのブロックのエディタバンドル `build/lw-button-3/lw-button-3.js` の `var icon_*` にあり（arrow_up_right＝外部リンク / link / download / chevron_right など41種）、**SVGのマークアップそのものを `selectedIcon` に渡す**。手で書き起こさずバンドルから取り出すこと（2026-09-03）。✅ `isAffiliate: true` にすると rel=\"sponsored nofollow\" ＋別タブになる。アフィリエイトのボタンに向く。"
+		]
 	},
 	"attributes": {
+		"isAffiliate": {
+			"type": "boolean",
+			"default": false
+		},
 		"btnTextSub": {
 			"type": "string",
 			"default": "お気軽にお問い合わせください",
-			"aiHint": { "role": "subheading", "contentGuide": "補足テキスト（小さい文字）。10〜20文字", "example": "まずはお気軽にご相談ください" }
+			"aiHint": {
+				"role": "subheading",
+				"contentGuide": "補足テキスト（小さい文字）。10〜20文字",
+				"example": "まずはお気軽にご相談ください"
+			}
 		},
 		"btnTextMain": {
 			"type": "string",
 			"default": "資料ダウンロードはこちら",
-			"aiHint": { "role": "button", "contentGuide": "メインボタンテキスト。5〜15文字", "example": "無料資料ダウンロード" }
+			"aiHint": {
+				"role": "button",
+				"contentGuide": "メインボタンテキスト。5〜15文字",
+				"example": "無料資料ダウンロード"
+			}
 		},
-		"bgGradient": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"textSubColor": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
-		"textMainColor": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } },
-		"fontWeight": { "type": "string", "default": "500", "aiHint": { "skip": true } },
+		"bgGradient": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"textSubColor": {
+			"type": "string",
+			"default": "var(--color-main)",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"textMainColor": {
+			"type": "string",
+			"default": "#ffffff",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"fontWeight": {
+			"type": "string",
+			"default": "500",
+			"aiHint": {
+				"skip": true
+			}
+		},
 		"btnUrl": {
 			"type": "string",
 			"default": "",
-			"aiHint": { "role": "url", "contentGuide": "遷移先URL" }
+			"aiHint": {
+				"role": "url",
+				"contentGuide": "遷移先URL"
+			}
 		},
 		"btnLinkType": {
 			"type": "string",
@@ -48,14 +98,34 @@
 			"type": "number",
 			"default": 0
 		},
-		"openNewTab": { "type": "boolean", "default": false, "aiHint": { "skip": true } },
-		"FontSet": { "type": "string", "default": "", "aiHint": { "skip": true } },
+		"openNewTab": {
+			"type": "boolean",
+			"default": false,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"FontSet": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
 		"selectedIcon": {
 			"type": "string",
 			"default": "<svg xmlns=\"http://www.w3.org/2000/svg\" viewBox=\"0 0 512 512\"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d=\"M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z\"/></svg>",
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		},
-		"iconColor": { "type": "string", "default": "#ffffff", "aiHint": { "skip": true } }
+		"iconColor": {
+			"type": "string",
+			"default": "#ffffff",
+			"aiHint": {
+				"skip": true
+			}
+		}
 	},
 	"editorScript": "file:./lw-button-3.js",
 	"no": 3

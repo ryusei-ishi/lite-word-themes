@@ -42,16 +42,16 @@ function header_ptn_5_set_custom( $wp_customize ) {
         ["color", "pickup_menu_bg_color", "", "背景色"],
         ['text', "pickup_menu_1_text", '', "<h3 class='ctm_ttl_ptn_2'>項目 1</h3>テキスト"],
         ['text', "pickup_menu_1_url", '', "リンク先URL"],
-        ['select', "pickup_menu_1_icon", '', 'アイコン', ctm_cta_icon_arr()],
+        ['icon_select', "pickup_menu_1_icon", '', 'アイコン', ctm_cta_icon_arr()],
         ['text', "pickup_menu_2_text", '', "<h3 class='ctm_ttl_ptn_2'>項目 2</h3>テキスト"],
         ['text', "pickup_menu_2_url", '', "リンク先URL"],
-        ['select', "pickup_menu_2_icon", '', 'アイコン', ctm_cta_icon_arr()],
+        ['icon_select', "pickup_menu_2_icon", '', 'アイコン', ctm_cta_icon_arr()],
         ['text', "pickup_menu_3_text", '', "<h3 class='ctm_ttl_ptn_2'>項目 3</h3>テキスト"],
         ['text', "pickup_menu_3_url", '', "リンク先URL"],
-        ['select', "pickup_menu_3_icon", '', 'アイコン', ctm_cta_icon_arr()],
+        ['icon_select', "pickup_menu_3_icon", '', 'アイコン', ctm_cta_icon_arr()],
         ['text', "pickup_menu_4_text", '', "<h3 class='ctm_ttl_ptn_2'>項目 4</h3>テキスト"],
         ['text', "pickup_menu_4_url", '', "リンク先URL"],
-        ['select', "pickup_menu_4_icon", '', 'アイコン', ctm_cta_icon_arr()],
+        ['icon_select', "pickup_menu_4_icon", '', 'アイコン', ctm_cta_icon_arr()],
     ];
     
     customize_set($items, $set, $sec, $wp_customize);    

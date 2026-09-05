@@ -1,0 +1,162 @@
+{
+  "title": "アクセス・道順（無料・写真ゼロ・駅からの歩き方）",
+  "description": "【型B：説明が主役】見出し＋ひとこと＋駅からの道順4段（番号つき）＋お車・バス・自転車などの行き方の表5項目＋注釈＋電話への導線。地図では分からない「駅を出てからどっちへ歩くか」を文章で伝える段です。地図は入れていないので、営業時間や地図のセクション（アクセス・店舗情報）と同じページに並べても内容が重複しません。写真も地図画像も1枚も使わないので、素材が無い状態でそのまま貼れます。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "アクセス・道順",
+        "subTitle": "ACCESS",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "△△駅の東口から、まっすぐ歩いて5分ほどです。<br>目印になるものを順にご案内します。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "△△駅 東口からの道順（徒歩5分）",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-1",
+      "attributes": {
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "contents": [
+          {
+            "number": "1",
+            "text": "東口の改札を出て、正面の階段を降ります（エレベーターは右手にあります）"
+          },
+          {
+            "number": "2",
+            "text": "降りたら左へ。コンビニを左に見ながら大通りに沿って進みます"
+          },
+          {
+            "number": "3",
+            "text": "2つ目の信号「〇〇二丁目」を渡らずに右へ曲がります"
+          },
+          {
+            "number": "4",
+            "text": "30mほど先、1階が白い外壁のビルの2階です（1階は花屋さんです）"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "そのほかの行き方",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-company-2",
+      "attributes": {
+        "spFullDt": true,
+        "items": [
+          {
+            "dt": "お車でお越しの方",
+            "dd": "〇〇インターから約10分。カーナビは「〇〇県〇〇市〇〇町1-2-3」でご検索ください"
+          },
+          {
+            "dt": "駐車場",
+            "dd": "建物の裏に3台ぶんございます（1〜3番）。満車のときは、30m先のコインパーキングをご利用ください。駐車券をお預かりします"
+          },
+          {
+            "dt": "バスでお越しの方",
+            "dd": "〇〇駅前から△△行きに乗り「〇〇二丁目」で下車、徒歩1分。日中は15分おきに出ています"
+          },
+          {
+            "dt": "自転車・駐輪場",
+            "dd": "建物の脇に駐輪スペースがあります。屋根はありませんのでご了承ください"
+          },
+          {
+            "dt": "バリアフリー",
+            "dd": "エレベーターがございます。段差はありません。ご来店前にお知らせいただければ入口までお迎えにあがります"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※工事などで道順が変わっていることがあります。分かりにくいときは、無理に探さずそのままお電話ください。近くまでお迎えにあがります。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "場所を電話で聞く",
+        "btnTextSub": "＼ 近くまで来ていたらそのままどうぞ ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

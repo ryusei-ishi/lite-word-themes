@@ -41,6 +41,17 @@ jQuery(document).ready(function($) {
         return 'other';
     }
 
+    // 広告リンク（アフィリエイト）かどうか。
+    // スキャン時に rel を見て立てた印。古い記録には無いので、その場合は false。
+    function isAdLink(link) {
+        return !!(link && link.is_ad);
+    }
+
+    // 広告リンクの目印
+    function getAdLabel(link) {
+        return isAdLink(link) ? '<span class="lw-link-type lw-link-ad">広告</span>' : '';
+    }
+
     // 種別ラベルを取得
     function getTypeLabel(type) {
         var labels = {
@@ -58,9 +69,24 @@ jQuery(document).ready(function($) {
     }
 
     // HTMLエスケープ
+    //
+    // 🚨 $('<div>').text(t).html() を使わないこと。
+    //    これはテキストノードとしての書き出しなので & < > しか変換せず、
+    //    ダブルクォートがそのまま残る。この関数の戻り値は
+    //    data-href="..." や value="..." の**属性の中**でも使っているので、
+    //    リンクのテキストに " が入っていると属性から抜け出して
+    //    好きな属性（onmouseover など）を足せてしまう。
+    //    リンクの文字列は記事の本文から拾ってくる＝投稿できる人なら誰でも
+    //    仕込めるので、管理者の画面で動く JavaScript になる。
+    //    2026-09-02、jsdom で実際に抜けられることを確かめて直した。
     function escapeHtml(text) {
-        if (!text) return '';
-        return $('<div>').text(text).html();
+        if (text === null || text === undefined || text === '') return '';
+        return String(text)
+            .replace(/&/g, '&amp;')
+            .replace(/</g, '&lt;')
+            .replace(/>/g, '&gt;')
+            .replace(/"/g, '&quot;')
+            .replace(/'/g, '&#39;');
     }
 
     // フィルター条件を取得
@@ -83,6 +109,9 @@ jQuery(document).ready(function($) {
 
         // 種別フィルター
         if (activeFilters.indexOf(type) === -1) return false;
+
+        // 広告リンクだけに絞る
+        if ($('#lw-only-ad').is(':checked') && !isAdLink(link)) return false;
 
         // 検索
         if (searchQuery) {
@@ -344,7 +373,7 @@ jQuery(document).ready(function($) {
 
                     linksHtml += '<tr class="lw-link-row" ' + dataAttrs + '>' +
                         '<td class="column-href"><span class="lw-href-display">' + hrefDisplay + warningMark + '</span></td>' +
-                        '<td class="column-type">' + getTypeLabel(type) + '</td>' +
+                        '<td class="column-type">' + getTypeLabel(type) + getAdLabel(link) + '</td>' +
                         '<td class="column-text"><span class="lw-link-text">' + textDisplay + '</span></td>' +
                         '<td class="column-action">' + actionCell + '</td>' +
                         '</tr>';
@@ -779,6 +808,16 @@ jQuery(document).ready(function($) {
 
     // フィルター変更（現在のタブのみ再描画）
     $('.lw-filter').on('change', function() {
+        if (activeTab) {
+            renderTabContent(activeTab);
+        }
+    });
+
+    // 「広告リンクだけ」の絞り込み
+    // 🚨 このチェックボックスに .lw-filter を付けて上にまとめないこと。
+    //    getActiveFilters() が値を集めるので、種別の一覧に "on" が混ざる。
+    //    絞り込みの中身は matchesFilter() が直接読んでいる。ここは再描画のきっかけだけ。
+    $('#lw-only-ad').on('change', function() {
         if (activeTab) {
             renderTabContent(activeTab);
         }

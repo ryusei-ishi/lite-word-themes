@@ -25,6 +25,7 @@ import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
 import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+import { lwRel, AffiliateToggle } from '../affiliate-link.js';
 
 /* リンク先の指定（共通部品）で使う、配列の要素の中のキー名 */
 const LINK_KEYS = { url: 'btnUrl', type: 'linkType', page: 'pageId', category: 'categoryId' };
@@ -204,6 +205,10 @@ registerBlockType(metadata.name, {
 											checked={btn.openNewTab}
 											onChange={v=>updateBtn(i,'openNewTab',v)}
 											help="リンク先を新しいタブで開きたい場合はオンにしてください"
+										/>
+										<AffiliateToggle
+											checked={btn.isAffiliate}
+											onChange={v => updateBtnMulti(i, v ? { isAffiliate: true, openNewTab: true } : { isAffiliate: false })}
 										/>
 									</div>
 
@@ -428,7 +433,7 @@ registerBlockType(metadata.name, {
 								data-lw-link-type={lwLinkDataPropsFromAttrs(btn, LINK_KEYS).linkType}
 								data-lw-link-id={lwLinkDataPropsFromAttrs(btn, LINK_KEYS).linkId}
 								target={btn.openNewTab ? '_blank':undefined}
-								rel={btn.openNewTab ? 'noopener noreferrer':undefined}
+								rel={lwRel({ newTab: btn.openNewTab, affiliate: btn.isAffiliate })}
 								style={{color:btn.textColor,fontWeight, textDecoration: 'none'}}
 								data-lw_font_set={FontSet}>
 								{btn.iconVisible && btn.selectedIcon && (

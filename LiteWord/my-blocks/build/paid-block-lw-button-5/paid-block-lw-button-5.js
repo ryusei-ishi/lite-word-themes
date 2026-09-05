@@ -2,6 +2,95 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/affiliate-link.js":
+/*!*******************************!*\
+  !*** ./src/affiliate-link.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AffiliateToggle: () => (/* binding */ AffiliateToggle),
+/* harmony export */   LW_AFFILIATE_REL: () => (/* binding */ LW_AFFILIATE_REL),
+/* harmony export */   lwRel: () => (/* binding */ lwRel)
+/* harmony export */ });
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * LiteWord – アフィリエイトリンク（共通部品）
+ * ------------------------------------------------------------
+ *  Amazon・楽天などの広告リンクに、検索エンジン向けの印
+ *  rel="sponsored nofollow" を付けるための共通部品。
+ *
+ *  なぜ要るか
+ *  ・Google は「報酬が発生するリンクには rel="sponsored"（または nofollow）を付ける」
+ *    ことを求めている。付けずに広告リンクを大量に置くと、リンクを売っているサイトと
+ *    区別が付かず、検索順位を落とされることがある。
+ *  ・ステマ規制（景品表示法・2023年10月〜）で必要なのは「広告である」という
+ *    画面上の表示。rel はそれとは別（検索エンジン向け）なので、両方いる。
+ *
+ *  🚨 設計の前提（ここを崩すと既存ページが壊れる）
+ *  ・約1000サイトに配るテーマなので、**既定値（オフ）のときの save の出力は
+ *    1バイトも変えない**。lwRel() はオフのとき undefined を返し、React は
+ *    属性ごと出力しない ＝ 今まで保存された HTML と完全に一致する。
+ *    ＝ deprecated を書かなくてよい（reference/block-change-safety.md §0）。
+ *  ・別タブの rel="noopener noreferrer" を今まで出していたブロックは、
+ *    lwRel({ newTab, affiliate }) の形で呼ぶ。オフなら従来と同じ文字列になる。
+ *  ・別タブでも rel を出していなかったブロック（lw-button-2 / 3）は
+ *    lwRel({ affiliate }) だけを渡す。newTab を混ぜると出力が変わってしまう。
+ */
+
+
+
+/** 広告リンクに付ける rel の中身 */
+var LW_AFFILIATE_REL = 'sponsored nofollow';
+
+/**
+ * a タグの rel を組み立てる。
+ * 付けるものが何も無ければ undefined（＝属性そのものを出さない）。
+ *
+ * @param {Object}  opt
+ * @param {boolean} opt.newTab    別タブで開く（従来どおり noopener noreferrer）
+ * @param {boolean} opt.affiliate 広告リンク（sponsored nofollow）
+ * @return {string|undefined} rel の値
+ */
+function lwRel() {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+    _ref$newTab = _ref.newTab,
+    newTab = _ref$newTab === void 0 ? false : _ref$newTab,
+    _ref$affiliate = _ref.affiliate,
+    affiliate = _ref$affiliate === void 0 ? false : _ref$affiliate;
+  var parts = [];
+  if (newTab) {
+    parts.push('noopener noreferrer');
+  }
+  if (affiliate) {
+    parts.push(LW_AFFILIATE_REL);
+  }
+  return parts.length ? parts.join(' ') : undefined;
+}
+
+/**
+ * 編集画面のトグル。
+ * 「新しいタブで開く」のすぐ下に置く。
+ *
+ * @param {Object}   props
+ * @param {boolean}  props.checked
+ * @param {Function} props.onChange
+ */
+function AffiliateToggle(_ref2) {
+  var checked = _ref2.checked,
+    onChange = _ref2.onChange;
+  return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ToggleControl, {
+    label: "\u5E83\u544A\u30EA\u30F3\u30AF\uFF08\u30A2\u30D5\u30A3\u30EA\u30A8\u30A4\u30C8\uFF09",
+    checked: !!checked,
+    onChange: onChange,
+    help: "Amazon\u30FB\u697D\u5929\u306A\u3069\u306E\u3001\u6210\u679C\u5831\u916C\u304C\u767A\u751F\u3059\u308B\u30EA\u30F3\u30AF\u306E\u3068\u304D\u306B\u30AA\u30F3\u306B\u3057\u307E\u3059\u3002\u691C\u7D22\u30A8\u30F3\u30B8\u30F3\u306B\u5E83\u544A\u3060\u3068\u4F1D\u3048\u308B\u5370\u304C\u4ED8\u304D\u307E\u3059\uFF08rel=\"sponsored nofollow\"\uFF09\u3002\u30AA\u30F3\u306B\u3059\u308B\u3068\u65B0\u3057\u3044\u30BF\u30D6\u3067\u958B\u304F\u8A2D\u5B9A\u3082\u4E00\u7DD2\u306B\u5165\u308A\u307E\u3059\u3002"
+  });
+}
+
+/***/ }),
+
 /***/ "./src/link-picker.js":
 /*!****************************!*\
   !*** ./src/link-picker.js ***!
@@ -382,6 +471,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/paid-block-lw-button-5/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/paid-block-lw-button-5/block.json");
 /* harmony import */ var _link_picker_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../link-picker.js */ "./src/link-picker.js");
+/* harmony import */ var _affiliate_link_js__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../affiliate-link.js */ "./src/affiliate-link.js");
 function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
 function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
 function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
@@ -397,6 +487,7 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 /* ==============================================================
  * LiteWord – Paid Block  Button 05（outer border / gap / 共通角丸 / icon color 対応版）
  * ============================================================== */
+
 
 
 
@@ -631,6 +722,16 @@ var defaultBtn = function defaultBtn() {
           return updateBtn(i, 'openNewTab', v);
         },
         help: "\u30EA\u30F3\u30AF\u5148\u3092\u65B0\u3057\u3044\u30BF\u30D6\u3067\u958B\u304D\u305F\u3044\u5834\u5408\u306F\u30AA\u30F3\u306B\u3057\u3066\u304F\u3060\u3055\u3044"
+      }), /*#__PURE__*/React.createElement(_affiliate_link_js__WEBPACK_IMPORTED_MODULE_8__.AffiliateToggle, {
+        checked: btn.isAffiliate,
+        onChange: function onChange(v) {
+          return updateBtnMulti(i, v ? {
+            isAffiliate: true,
+            openNewTab: true
+          } : {
+            isAffiliate: false
+          });
+        }
       })), /*#__PURE__*/React.createElement("div", {
         style: {
           border: '1px solid #e0e0e0',
@@ -899,7 +1000,10 @@ var defaultBtn = function defaultBtn() {
         "data-lw-link-type": (0,_link_picker_js__WEBPACK_IMPORTED_MODULE_7__.lwLinkDataPropsFromAttrs)(btn, LINK_KEYS).linkType,
         "data-lw-link-id": (0,_link_picker_js__WEBPACK_IMPORTED_MODULE_7__.lwLinkDataPropsFromAttrs)(btn, LINK_KEYS).linkId,
         target: btn.openNewTab ? '_blank' : undefined,
-        rel: btn.openNewTab ? 'noopener noreferrer' : undefined,
+        rel: (0,_affiliate_link_js__WEBPACK_IMPORTED_MODULE_8__.lwRel)({
+          newTab: btn.openNewTab,
+          affiliate: btn.isAffiliate
+        }),
         style: {
           color: btn.textColor,
           fontWeight: fontWeight,
@@ -1661,7 +1765,7 @@ module.exports = window["wp"]["data"];
   \***********************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-lw-button-5","version":"1.0.0","title":"リンクボタン 05","category":"lw-button","icon":"button","description":"有料リンクボタン（スタイル05）","aiHint":{"description":"複数ボタン配列。電話番号+サブテキスト+アイコン。複数店舗の電話番号並列表示に","excludeFromAutoSelect":false,"contentAttributes":["buttons"],"imageAttributes":[]},"supports":{"anchor":true},"attributes":{"blockId":{"type":"string","aiHint":{"skip":true}},"fontWeight":{"type":"string","default":"400","aiHint":{"skip":true}},"FontSet":{"type":"string","default":"","aiHint":{"skip":true}},"position":{"type":"string","default":"center","aiHint":{"skip":true}},"gapX":{"type":"number","default":12,"aiHint":{"skip":true}},"gapY":{"type":"number","default":12,"aiHint":{"skip":true}},"borderRadius":{"type":"number","default":12,"aiHint":{"skip":true}},"buttons":{"type":"array","default":[{"enabled":true,"btnText":"03-0000-0000","subText":"受付時間 10:00～17:00","bgColor":"var(--color-main)","textColor":"#ffffff","btnUrl":"","openNewTab":false,"selectedIcon":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M280 0C408.1 0 512 103.9 512 232c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-101.6-82.4-184-184-184c-13.3 0-24-10.7-24-24s10.7-24 24-24zm8 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm-32-72c0-13.3 10.7-24 24-24c75.1 0 136 60.9 136 136c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-48.6-39.4-88-88-88c-13.3 0-24-10.7-24-24zM117.5 1.4c19.4-5.3 39.7 4.6 47.4 23.2l40 96c6.8 16.3 2.1 35.2-11.6 46.3L144 207.3c33.3 70.4 90.3 127.4 160.7 160.7L345 318.7c11.2-13.7 30-18.4 46.3-11.6l96 40c18.6 7.7 28.5 28 23.2 47.4l-24 88C481.8 499.9 466 512 448 512C200.6 512 0 311.4 0 64C0 46 12.1 30.2 29.5 25.4l88-24z\\"/></svg>","iconVisible":true,"iconWidth":34,"iconColor":"#ffffff","outerBorderWidth":0,"outerBorderColor":"var(--color-main)","borderWidth":1,"borderColor":"#ffffff"},{"enabled":true,"btnText":"03-0000-0000","subText":"受付時間 10:00～17:00","bgColor":"var(--color-main)","textColor":"#ffffff","btnUrl":"","openNewTab":false,"selectedIcon":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M280 0C408.1 0 512 103.9 512 232c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-101.6-82.4-184-184-184c-13.3 0-24-10.7-24-24s10.7-24 24-24zm8 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm-32-72c0-13.3 10.7-24 24-24c75.1 0 136 60.9 136 136c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-48.6-39.4-88-88-88c-13.3 0-24-10.7-24-24zM117.5 1.4c19.4-5.3 39.7 4.6 47.4 23.2l40 96c6.8 16.3 2.1 35.2-11.6 46.3L144 207.3c33.3 70.4 90.3 127.4 160.7 160.7L345 318.7c11.2-13.7 30-18.4 46.3-11.6l96 40c18.6 7.7 28.5 28 23.2 47.4l-24 88C481.8 499.9 466 512 448 512C200.6 512 0 311.4 0 64C0 46 12.1 30.2 29.5 25.4l88-24z\\"/></svg>","iconVisible":true,"iconWidth":34,"iconColor":"#ffffff","outerBorderWidth":0,"outerBorderColor":"var(--color-main)","borderWidth":1,"borderColor":"#ffffff"},{"enabled":true,"btnText":"03-0000-0000","subText":"受付時間 10:00～17:00","bgColor":"var(--color-main)","textColor":"#ffffff","btnUrl":"","openNewTab":false,"selectedIcon":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M280 0C408.1 0 512 103.9 512 232c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-101.6-82.4-184-184-184c-13.3 0-24-10.7-24-24s10.7-24 24-24zm8 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm-32-72c0-13.3 10.7-24 24-24c75.1 0 136 60.9 136 136c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-48.6-39.4-88-88-88c-13.3 0-24-10.7-24-24zM117.5 1.4c19.4-5.3 39.7 4.6 47.4 23.2l40 96c6.8 16.3 2.1 35.2-11.6 46.3L144 207.3c33.3 70.4 90.3 127.4 160.7 160.7L345 318.7c11.2-13.7 30-18.4 46.3-11.6l96 40c18.6 7.7 28.5 28 23.2 47.4l-24 88C481.8 499.9 466 512 448 512C200.6 512 0 311.4 0 64C0 46 12.1 30.2 29.5 25.4l88-24z\\"/></svg>","iconVisible":true,"iconWidth":34,"iconColor":"#ffffff","outerBorderWidth":0,"outerBorderColor":"var(--color-main)","borderWidth":1,"borderColor":"#ffffff"}]}},"editorScript":"file:./paid-block-lw-button-5.js","no":5}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-lw-button-5","version":"1.0.0","title":"リンクボタン 05","category":"lw-button","icon":"button","description":"有料リンクボタン（スタイル05）","aiHint":{"description":"電話番号のボタンを横に並べる。受話器アイコン＋大きな番号＋小さな副文（店名や受付時間）。支店・教室・営業所・サロンが複数あるときの一覧に","excludeFromAutoSelect":false,"contentAttributes":["buttons"],"imageAttributes":[],"notes":"🚨 **ボタンの文字は CSS で `color:#fff` 固定なのに、背景 `bgColor` の既定が `var(--color-main)`。**明るいサイト色（黄 #f5b301 で 1.85:1）だと電話番号が読めない。`color-mix(in srgb, var(--color-main) 50%, #000)` のように暗くして渡す。🚨 **色は `buttons` の1件ずつに入っている。全部に入れること**（1つ忘れると1枚だけ明るくなる）。🚨 **`btnUrl` は `tel:` のあとを数字だけにする**（ハイフンを入れると発信できない端末がある）。🚨 **`selectedIcon` を省くとアイコンが消えて左に寄る。** 既定の受話器を使うなら触らない。`blockId` は書かない（編集画面が `clientId` から採番する）。⚠️ そのため手元のプレビューでは `id=\\"undefined-1\\"` になるが、実機では正しい値が入る。自前で `margin: 32px 0` を持つので前後にスペーサーを足さない。500px 以下は1枚あたり max-width:300px で縦に積まれるので副文は短くする。`buttons` は `[{enabled, btnText, subText, bgColor, textColor, btnUrl, openNewTab, selectedIcon}]`。"},"supports":{"anchor":true},"attributes":{"blockId":{"type":"string","aiHint":{"skip":true}},"fontWeight":{"type":"string","default":"400","aiHint":{"skip":true}},"FontSet":{"type":"string","default":"","aiHint":{"skip":true}},"position":{"type":"string","default":"center","aiHint":{"skip":true}},"gapX":{"type":"number","default":12,"aiHint":{"skip":true}},"gapY":{"type":"number","default":12,"aiHint":{"skip":true}},"borderRadius":{"type":"number","default":12,"aiHint":{"skip":true}},"buttons":{"type":"array","default":[{"enabled":true,"btnText":"03-0000-0000","subText":"受付時間 10:00～17:00","bgColor":"var(--color-main)","textColor":"#ffffff","btnUrl":"","openNewTab":false,"selectedIcon":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M280 0C408.1 0 512 103.9 512 232c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-101.6-82.4-184-184-184c-13.3 0-24-10.7-24-24s10.7-24 24-24zm8 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm-32-72c0-13.3 10.7-24 24-24c75.1 0 136 60.9 136 136c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-48.6-39.4-88-88-88c-13.3 0-24-10.7-24-24zM117.5 1.4c19.4-5.3 39.7 4.6 47.4 23.2l40 96c6.8 16.3 2.1 35.2-11.6 46.3L144 207.3c33.3 70.4 90.3 127.4 160.7 160.7L345 318.7c11.2-13.7 30-18.4 46.3-11.6l96 40c18.6 7.7 28.5 28 23.2 47.4l-24 88C481.8 499.9 466 512 448 512C200.6 512 0 311.4 0 64C0 46 12.1 30.2 29.5 25.4l88-24z\\"/></svg>","iconVisible":true,"iconWidth":34,"iconColor":"#ffffff","outerBorderWidth":0,"outerBorderColor":"var(--color-main)","borderWidth":1,"borderColor":"#ffffff"},{"enabled":true,"btnText":"03-0000-0000","subText":"受付時間 10:00～17:00","bgColor":"var(--color-main)","textColor":"#ffffff","btnUrl":"","openNewTab":false,"selectedIcon":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M280 0C408.1 0 512 103.9 512 232c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-101.6-82.4-184-184-184c-13.3 0-24-10.7-24-24s10.7-24 24-24zm8 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm-32-72c0-13.3 10.7-24 24-24c75.1 0 136 60.9 136 136c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-48.6-39.4-88-88-88c-13.3 0-24-10.7-24-24zM117.5 1.4c19.4-5.3 39.7 4.6 47.4 23.2l40 96c6.8 16.3 2.1 35.2-11.6 46.3L144 207.3c33.3 70.4 90.3 127.4 160.7 160.7L345 318.7c11.2-13.7 30-18.4 46.3-11.6l96 40c18.6 7.7 28.5 28 23.2 47.4l-24 88C481.8 499.9 466 512 448 512C200.6 512 0 311.4 0 64C0 46 12.1 30.2 29.5 25.4l88-24z\\"/></svg>","iconVisible":true,"iconWidth":34,"iconColor":"#ffffff","outerBorderWidth":0,"outerBorderColor":"var(--color-main)","borderWidth":1,"borderColor":"#ffffff"},{"enabled":true,"btnText":"03-0000-0000","subText":"受付時間 10:00～17:00","bgColor":"var(--color-main)","textColor":"#ffffff","btnUrl":"","openNewTab":false,"selectedIcon":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M280 0C408.1 0 512 103.9 512 232c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-101.6-82.4-184-184-184c-13.3 0-24-10.7-24-24s10.7-24 24-24zm8 192a32 32 0 1 1 0 64 32 32 0 1 1 0-64zm-32-72c0-13.3 10.7-24 24-24c75.1 0 136 60.9 136 136c0 13.3-10.7 24-24 24s-24-10.7-24-24c0-48.6-39.4-88-88-88c-13.3 0-24-10.7-24-24zM117.5 1.4c19.4-5.3 39.7 4.6 47.4 23.2l40 96c6.8 16.3 2.1 35.2-11.6 46.3L144 207.3c33.3 70.4 90.3 127.4 160.7 160.7L345 318.7c11.2-13.7 30-18.4 46.3-11.6l96 40c18.6 7.7 28.5 28 23.2 47.4l-24 88C481.8 499.9 466 512 448 512C200.6 512 0 311.4 0 64C0 46 12.1 30.2 29.5 25.4l88-24z\\"/></svg>","iconVisible":true,"iconWidth":34,"iconColor":"#ffffff","outerBorderWidth":0,"outerBorderColor":"var(--color-main)","borderWidth":1,"borderColor":"#ffffff"}]}},"editorScript":"file:./paid-block-lw-button-5.js","no":5}');
 
 /***/ })
 

@@ -1,295 +1,295 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "wdl/lw-pr-table-1",
-	"version": "1.0.1",
-	"title": "テーブル 01（価格表など）",
-	"category": "lw-table",
-	"icon": "editor-table",
-	"editorScript": "file:./lw-pr-table-1.js",
-	"viewScript": "file:./view.js",
-	"aiHint": {
-		"description": "料金表・比較表。ヘッダー+行の表形式。プラン比較に",
-		"excludeFromAutoSelect": false,
-		"contentAttributes": [
-			"headers",
-			"rows"
-		],
-		"imageAttributes": [],
-		"notes": "headers は [{\"text\":\"ベーシック\"}] の形。rows は [{\"header\":\"月額料金\",\"cells\":[{\"content\":\"3,000円\"}]}] の形で、cells の数は headers の数に合わせる。セルの統合はできないので、統合が要るときは lw-pr-table-3 を使う。"
-	},
-	"supports": {
-		"anchor": true,
-		"className": true
-	},
-	"attributes": {
-		"columnCount": {
-			"type": "number",
-			"default": 4
-		},
-		"hideTableHeader": {
-			"type": "boolean",
-			"default": false
-		},
-		"cellWidth1": {
-			"type": "number",
-			"default": 200
-		},
-		"cellWidth2": {
-			"type": "number",
-			"default": 200
-		},
-		"cellWidth3": {
-			"type": "number",
-			"default": 200
-		},
-		"cellWidth4": {
-			"type": "number",
-			"default": 200
-		},
-		"cellWidth5": {
-			"type": "number",
-			"default": 200
-		},
-		"cellWidth6": {
-			"type": "number",
-			"default": 200
-		},
-		"cellWidth7": {
-			"type": "number",
-			"default": 200
-		},
-		"cellWidth8": {
-			"type": "number",
-			"default": 200
-		},
-		"cellWidth1Sp": {
-			"type": "number",
-			"default": 160
-		},
-		"cellWidth2Sp": {
-			"type": "number",
-			"default": 160
-		},
-		"cellWidth3Sp": {
-			"type": "number",
-			"default": 160
-		},
-		"cellWidth4Sp": {
-			"type": "number",
-			"default": 160
-		},
-		"cellWidth5Sp": {
-			"type": "number",
-			"default": 160
-		},
-		"cellWidth6Sp": {
-			"type": "number",
-			"default": 160
-		},
-		"cellWidth7Sp": {
-			"type": "number",
-			"default": 160
-		},
-		"cellWidth8Sp": {
-			"type": "number",
-			"default": 160
-		},
-		"radiusSize": {
-			"type": "number",
-			"default": 12
-		},
-		"headerBgColor": {
-			"type": "string",
-			"default": "var(--color-main)"
-		},
-		"headerTextColor": {
-			"type": "string",
-			"default": "#ffffff"
-		},
-		"useIndividualHeaderBg": {
-			"type": "boolean",
-			"default": false
-		},
-		"cellBgColor": {
-			"type": "string",
-			"default": "#ffffff"
-		},
-		"cellTextColor": {
-			"type": "string",
-			"default": "#333333"
-		},
-		"shadowColor": {
-			"type": "string",
-			"default": "rgba(37, 37, 37, 0.3)"
-		},
-		"fontFamilyHeader": {
-			"type": "string",
-			"default": ""
-		},
-		"fontWeightHeader": {
-			"type": "string",
-			"default": "600"
-		},
-		"fontSizeHeader": {
-			"type": "number",
-			"default": 17
-		},
-		"fontSizeHeaderSp": {
-			"type": "number",
-			"default": 16
-		},
-		"lineHeightHeader": {
-			"type": "number",
-			"default": 1.5
-		},
-		"fontFamilyRowHeader": {
-			"type": "string",
-			"default": ""
-		},
-		"fontWeightRowHeader": {
-			"type": "string",
-			"default": "600"
-		},
-		"fontSizeRowHeader": {
-			"type": "number",
-			"default": 17
-		},
-		"fontSizeRowHeaderSp": {
-			"type": "number",
-			"default": 16
-		},
-		"lineHeightRowHeader": {
-			"type": "number",
-			"default": 1.6
-		},
-		"fontFamilyCell": {
-			"type": "string",
-			"default": ""
-		},
-		"fontWeightCell": {
-			"type": "string",
-			"default": "400"
-		},
-		"fontSizeCell": {
-			"type": "number",
-			"default": 17
-		},
-		"fontSizeCellSp": {
-			"type": "number",
-			"default": 16
-		},
-		"lineHeightCell": {
-			"type": "number",
-			"default": 1.6
-		},
-		"showScrollHint": {
-			"type": "boolean",
-			"default": false
-		},
-		"gapSize": {
-			"type": "number",
-			"default": 3
-		},
-		"rowCellPosition": {
-			"type": "string"
-		},
-		"rowHeadPosition": {
-			"type": "string"
-		},
-		"maxWidthOffPc": {
-			"type": "boolean"
-		},
-		"headers": {
-			"type": "array",
-			"default": [
-				{
-					"text": "ベーシック",
-					"bgColor": ""
-				},
-				{
-					"text": "スタンダード",
-					"bgColor": ""
-				},
-				{
-					"text": "プレミアム",
-					"bgColor": ""
-				}
-			]
-		},
-		"rows": {
-			"type": "array",
-			"source": "query",
-			"selector": ".lw_table_row",
-			"query": {
-				"header": {
-					"type": "string",
-					"source": "html",
-					"selector": ".row_head .text"
-				},
-				"cellAlign": {
-					"type": "string",
-					"source": "attribute",
-					"attribute": "data-cell-align"
-				},
-				"cells": {
-					"type": "array",
-					"source": "query",
-					"selector": ".cell:not(.row_head)",
-					"query": {
-						"content": {
-							"type": "string",
-							"source": "html",
-							"selector": ".text"
-						}
-					}
-				}
-			},
-			"default": [
-				{
-					"header": "月額料金",
-					"cells": [
-						{
-							"content": "¥3,000"
-						},
-						{
-							"content": "¥5,000"
-						},
-						{
-							"content": "¥10,000"
-						}
-					]
-				},
-				{
-					"header": "ストレージ容量",
-					"cells": [
-						{
-							"content": "10GB"
-						},
-						{
-							"content": "50GB"
-						},
-						{
-							"content": "無制限"
-						}
-					]
-				},
-				{
-					"header": "メールサポート",
-					"cells": [
-						{
-							"content": "〇"
-						},
-						{
-							"content": "〇"
-						},
-						{
-							"content": "〇"
-						}
-					]
-				}
-			]
-		}
-	},
-	"no": 1
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "wdl/lw-pr-table-1",
+    "version": "1.0.1",
+    "title": "テーブル 01（価格表など）",
+    "category": "lw-table",
+    "icon": "editor-table",
+    "editorScript": "file:./lw-pr-table-1.js",
+    "viewScript": "file:./view.js",
+    "aiHint": {
+        "description": "料金表・比較表。表頭＋行見出し＋セルの表。プランの比較、他のやり方との違いの見比べに",
+        "excludeFromAutoSelect": false,
+        "contentAttributes": [
+            "headers",
+            "rows"
+        ],
+        "imageAttributes": [],
+        "notes": "headers は [{\"text\":\"ベーシック\"}] の形。rows は [{\"header\":\"月額料金\",\"cells\":[{\"content\":\"3,000円\"}]}] の形で、cells の数は headers の数に合わせる。セルの統合はできないので、統合が要るときは lw-pr-table-3 を使う。 🚨 **headerBgColor は「表頭の既定色」だけでなく、左の行見出し（row_head）の背景にもなる**（save() が row_head に headerBgColor と headerTextColor を直に入れている）。useIndividualHeaderBg: true にして headers[i].bgColor で表頭を1列ずつ塗っても、headerBgColor を省くと**行見出しだけ既定の var(--color-main) のまま残る**。🚨 **headerTextColor の既定は #ffffff**。明るいサイト色（黄 #f5b301）に白文字だと 1.85:1 で読めない。headerBgColor には color-mix(in srgb, var(--color-main) 50%, #000) のように**暗くした色**を渡す。⚠️ columnCount は**行見出しを含めた列数**（項目／当社／他 なら 3）。cellWidth1〜8 と cellWidth1Sp〜8Sp で列幅を決める。375px では**行見出しは7文字まで**（cellWidth1Sp:140 で左右24pxの余白を引いた場合）。800px 以下は横スクロールになるので showScrollHint: true で指の案内を出す。見出し・行見出し・セルは RichText なので HTML が使える（<small> は reset.css に潰されるので小さい添え字は span に inline style で書く）。 🚨🚨 **headers に「左の行見出しの列」を入れない。** columnCount は行見出しを**含めた**列数（例4）だが、headers はそれを引いた数（例3）。4つ書くと1列ずつずれて、金額が「回数」の下に並ぶ。属性としては正しいJSONなのでどの検算にも引っかからない（2026-09-01 に実際に踏んだ。絵を見て気づいた）。🚨 左の行見出しは cellWidth1（既定200px・17px）で**11文字まで**。「大人のピアノ（ゆっくり）」は2行になる。"
+    },
+    "supports": {
+        "anchor": true,
+        "className": true
+    },
+    "attributes": {
+        "columnCount": {
+            "type": "number",
+            "default": 4
+        },
+        "hideTableHeader": {
+            "type": "boolean",
+            "default": false
+        },
+        "cellWidth1": {
+            "type": "number",
+            "default": 200
+        },
+        "cellWidth2": {
+            "type": "number",
+            "default": 200
+        },
+        "cellWidth3": {
+            "type": "number",
+            "default": 200
+        },
+        "cellWidth4": {
+            "type": "number",
+            "default": 200
+        },
+        "cellWidth5": {
+            "type": "number",
+            "default": 200
+        },
+        "cellWidth6": {
+            "type": "number",
+            "default": 200
+        },
+        "cellWidth7": {
+            "type": "number",
+            "default": 200
+        },
+        "cellWidth8": {
+            "type": "number",
+            "default": 200
+        },
+        "cellWidth1Sp": {
+            "type": "number",
+            "default": 160
+        },
+        "cellWidth2Sp": {
+            "type": "number",
+            "default": 160
+        },
+        "cellWidth3Sp": {
+            "type": "number",
+            "default": 160
+        },
+        "cellWidth4Sp": {
+            "type": "number",
+            "default": 160
+        },
+        "cellWidth5Sp": {
+            "type": "number",
+            "default": 160
+        },
+        "cellWidth6Sp": {
+            "type": "number",
+            "default": 160
+        },
+        "cellWidth7Sp": {
+            "type": "number",
+            "default": 160
+        },
+        "cellWidth8Sp": {
+            "type": "number",
+            "default": 160
+        },
+        "radiusSize": {
+            "type": "number",
+            "default": 12
+        },
+        "headerBgColor": {
+            "type": "string",
+            "default": "var(--color-main)"
+        },
+        "headerTextColor": {
+            "type": "string",
+            "default": "#ffffff"
+        },
+        "useIndividualHeaderBg": {
+            "type": "boolean",
+            "default": false
+        },
+        "cellBgColor": {
+            "type": "string",
+            "default": "#ffffff"
+        },
+        "cellTextColor": {
+            "type": "string",
+            "default": "#333333"
+        },
+        "shadowColor": {
+            "type": "string",
+            "default": "rgba(37, 37, 37, 0.3)"
+        },
+        "fontFamilyHeader": {
+            "type": "string",
+            "default": ""
+        },
+        "fontWeightHeader": {
+            "type": "string",
+            "default": "600"
+        },
+        "fontSizeHeader": {
+            "type": "number",
+            "default": 17
+        },
+        "fontSizeHeaderSp": {
+            "type": "number",
+            "default": 16
+        },
+        "lineHeightHeader": {
+            "type": "number",
+            "default": 1.5
+        },
+        "fontFamilyRowHeader": {
+            "type": "string",
+            "default": ""
+        },
+        "fontWeightRowHeader": {
+            "type": "string",
+            "default": "600"
+        },
+        "fontSizeRowHeader": {
+            "type": "number",
+            "default": 17
+        },
+        "fontSizeRowHeaderSp": {
+            "type": "number",
+            "default": 16
+        },
+        "lineHeightRowHeader": {
+            "type": "number",
+            "default": 1.6
+        },
+        "fontFamilyCell": {
+            "type": "string",
+            "default": ""
+        },
+        "fontWeightCell": {
+            "type": "string",
+            "default": "400"
+        },
+        "fontSizeCell": {
+            "type": "number",
+            "default": 17
+        },
+        "fontSizeCellSp": {
+            "type": "number",
+            "default": 16
+        },
+        "lineHeightCell": {
+            "type": "number",
+            "default": 1.6
+        },
+        "showScrollHint": {
+            "type": "boolean",
+            "default": false
+        },
+        "gapSize": {
+            "type": "number",
+            "default": 3
+        },
+        "rowCellPosition": {
+            "type": "string"
+        },
+        "rowHeadPosition": {
+            "type": "string"
+        },
+        "maxWidthOffPc": {
+            "type": "boolean"
+        },
+        "headers": {
+            "type": "array",
+            "default": [
+                {
+                    "text": "ベーシック",
+                    "bgColor": ""
+                },
+                {
+                    "text": "スタンダード",
+                    "bgColor": ""
+                },
+                {
+                    "text": "プレミアム",
+                    "bgColor": ""
+                }
+            ]
+        },
+        "rows": {
+            "type": "array",
+            "source": "query",
+            "selector": ".lw_table_row",
+            "query": {
+                "header": {
+                    "type": "string",
+                    "source": "html",
+                    "selector": ".row_head .text"
+                },
+                "cellAlign": {
+                    "type": "string",
+                    "source": "attribute",
+                    "attribute": "data-cell-align"
+                },
+                "cells": {
+                    "type": "array",
+                    "source": "query",
+                    "selector": ".cell:not(.row_head)",
+                    "query": {
+                        "content": {
+                            "type": "string",
+                            "source": "html",
+                            "selector": ".text"
+                        }
+                    }
+                }
+            },
+            "default": [
+                {
+                    "header": "月額料金",
+                    "cells": [
+                        {
+                            "content": "¥3,000"
+                        },
+                        {
+                            "content": "¥5,000"
+                        },
+                        {
+                            "content": "¥10,000"
+                        }
+                    ]
+                },
+                {
+                    "header": "ストレージ容量",
+                    "cells": [
+                        {
+                            "content": "10GB"
+                        },
+                        {
+                            "content": "50GB"
+                        },
+                        {
+                            "content": "無制限"
+                        }
+                    ]
+                },
+                {
+                    "header": "メールサポート",
+                    "cells": [
+                        {
+                            "content": "〇"
+                        },
+                        {
+                            "content": "〇"
+                        },
+                        {
+                            "content": "〇"
+                        }
+                    ]
+                }
+            ]
+        }
+    },
+    "no": 1
 }

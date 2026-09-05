@@ -8,7 +8,7 @@
 	"icon": "images-alt2",
 	"editorScript": "file:./paid-block-before-after-2.js",
 	"aiHint": {
-		"description": "ビフォーアフターカード配列。複数の比較を並列表示",
+		"description": "写真2枚を重ねて、まん中の線を左右に動かして見比べるスライダー。同じ場所が変わったことを1枚で見せられるので、清掃・塗装・原状回復・お手入れの前後に。2枚を左右に並べたいときは lw-pr-before-after-3 のほうを使う",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": [
 			"beforeLabel",
@@ -16,7 +16,8 @@
 		],
 		"imageAttributes": [
 			"items"
-		]
+		],
+		"notes": "🚨 **1組（前後2枚）だけのスライダー**。説明に「配列」とあるが並列表示はできない。items[0] が前、items[1] が後で、**3枚目以降は読まれない**。事例を増やしたいときはブロックを複製する。🚨 **同じ画角で撮った2枚でないと成立しない**。重ねて左右に切り替える作りなので、画角がずれていると線を動かすたびに絵が飛ぶ。文章から作った生成画像は同じシードでも数%ずれるので使えない。🚨 **ラベルの文字は CSS で color:#fff 固定**。labelColorBefore / labelColorAfter の既定は半透明の赤 rgba(209,77,77,.85) と緑 rgba(77,209,77,.85) で、**写真の明るい所に載ると読めない**。前は無彩色の濃いグレー rgba(51,51,51,0.82)、後は color-mix(in srgb, var(--color-main) 40%, #000) のように**十分に暗い色**を渡す。🚨 **aspectRatioH は「幅1280に対する高さ」**として使われる（aspect-ratio: 1280 / <値>）。写真が 1536x1024（3:2）なら **853**。合わせないと上下が切れる。⚠️ .this_wrap の max-width は CSS で **800px 固定**。maxWidth 属性を大きくしても広がらない。⚠️ alt は \"Before\" \"After\" の固定文字で、属性から変えられない。save() がインラインの <script> を書き出して線のドラッグを動かす。querySelectorAll の forEach なので**同じページに2つ置いても両方動く**。自前で margin: 40px 0（800px以下32・600px以下16）を持つので前後にスペーサーを足さない。"
 	},
 	"supports": {
 		"anchor": true

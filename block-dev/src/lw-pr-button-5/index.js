@@ -22,6 +22,7 @@ import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
 import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkPropsFromAttrs } from '../link-picker.js';
+import { lwRel, AffiliateToggle } from '../affiliate-link.js';
 
 /* リンク先の指定（共通部品）で使う属性名の対応 */
 const LINK_KEYS = { url: 'btnUrl', type: 'btnLinkType', page: 'btnPageId', category: 'btnCategoryId' };
@@ -86,6 +87,10 @@ registerBlockType(metadata.name, {
                             checked={openNewTab}
                             onChange={(value) => setAttributes({ openNewTab: value })}
                             help="リンク先を新しいタブで開きたい場合はオンにしてください"
+                        />
+                        <AffiliateToggle
+                            checked={isAffiliate}
+                            onChange={(v) => setAttributes(v ? { isAffiliate: true, openNewTab: true } : { isAffiliate: false })}
                         />
                     </PanelBody>
 
@@ -450,7 +455,7 @@ registerBlockType(metadata.name, {
     save: (props) => {
         const { attributes } = props;
         const {
-            textMain, btnUrl, openNewTab,
+            textMain, btnUrl, openNewTab, isAffiliate,
             btnAlign, btnAlignSp,
             bgColor, bgColorHover,
             textColorMain,
@@ -482,7 +487,7 @@ registerBlockType(metadata.name, {
                         data-lw-link-type={lwLinkPropsFromAttrs(attributes, LINK_KEYS).linkType}
                         data-lw-link-id={lwLinkPropsFromAttrs(attributes, LINK_KEYS).linkId}
                         target={openNewTab ? '_blank' : undefined}
-                        rel={openNewTab ? 'noopener noreferrer' : undefined}
+                        rel={lwRel({ newTab: openNewTab, affiliate: isAffiliate })}
                         className={`lw_btn_a ${shakeAnimation ? `lw_btn_shake_${shakeIntensity}` : ''}`}
                         style={{
                             '--hover-bg': bgColorHover,

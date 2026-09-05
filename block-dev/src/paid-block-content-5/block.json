@@ -10,9 +10,15 @@
 	"aiHint": {
 		"description": "左に縦長の写真、右に大きな見出しと2段組の本文を置く帯。300字くらいの文章を読ませたいときに。コンセプト・想い・私たちについて・こだわりの説明に",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["pcTitle", "pcBody"],
-		"imageAttributes": ["pcImage"],
-		"notes": "🚨 PCとスマホで組みが全く変わる。800px超は grid で 左に縦長の写真（aspect-ratio 500/650・幅380px）＋右に48pxの大見出しと2段組の本文。800px以下は縦積みになり写真が padding-top:70% の横長にクロップされ、500px以下でさらに写真へ黒50%のフィルタがかかって、その上に白抜きの見出しが乗る（右側の見出しは display:none）。だから中央に主役があって上下を切られても成立する写真を渡すこと。🚨 見出しのHTMLは2つ出る（写真の中と本文側）が、CSSで出し分けているだけで画面には片方しか出ない。壊れていない。spTitle / spImage を空にすると pcTitle / pcImage がそのまま使われる。スマホの見出しは写真に重なるので、長いと写真を覆う。短いコピーにするか spTitle を別に書く。headingLevel は数値（2 = h2）で、文字列 h2 ではない。textColumns:2 は980px以下で CSS が columns:unset !important で1段に戻すので、スマホでは自動で1段になる。自前で margin:64px 0 を持つので前後にスペーサーを足さない。固定ページでは画面幅いっぱいに広がる。"
+		"contentAttributes": [
+			"pcTitle",
+			"pcBody",
+			"imgLabel"
+		],
+		"imageAttributes": [
+			"pcImage"
+		],
+		"notes": "🚨 PCとスマホで組みが全く変わる。800px超は grid で 左に縦長の写真（aspect-ratio 500/650・幅380px）＋右に48pxの大見出しと2段組の本文。800px以下は縦積みになり写真が padding-top:70% の横長にクロップされ、500px以下でさらに写真へ黒50%のフィルタがかかって、その上に白抜きの見出しが乗る（右側の見出しは display:none）。だから中央に主役があって上下を切られても成立する写真を渡すこと。🚨 見出しのHTMLは2つ出る（写真の中と本文側）が、CSSで出し分けているだけで画面には片方しか出ない。壊れていない。spTitle / spImage を空にすると pcTitle / pcImage がそのまま使われる。スマホの見出しは写真に重なるので、長いと写真を覆う。短いコピーにするか spTitle を別に書く。headingLevel は数値（2 = h2）で、文字列 h2 ではない。textColumns:2 は980px以下で CSS が columns:unset !important で1段に戻すので、スマホでは自動で1段になる。自前で margin:64px 0 を持つので前後にスペーサーを足さない。固定ページでは画面幅いっぱいに広がる。 imgLabel を入れると写真の左下に色帯のラベルが出る（代表の名前・肩書き・撮影場所など。空なら要素ごと出ない）。署名を本文の末尾に混ぜると読み物の続きに見えて立たないので、顔写真と結びつけたいときはこちらを使う。spImageBottom を true にすると、800px以下で写真がテキストの下に回る。このブロックの上に別の全幅の写真（下層ページのFVなど）があるとき、スマホで写真が2枚続いて見えるのを避けられる。true のときは500px以下でも写真の黒膜と白抜き見出しは出ず、見出しはテキスト側に残る（spTitle は使われない）。どちらも既定（空 / false）なら出力は従来と1文字も変わらないので、既存ページには影響しない。"
 	},
 	"supports": {
 		"anchor": true
@@ -77,6 +83,14 @@
 		"spTitleColor": {
 			"type": "string",
 			"default": ""
+		},
+		"imgLabel": {
+			"type": "string",
+			"default": ""
+		},
+		"spImageBottom": {
+			"type": "boolean",
+			"default": false
 		}
 	},
 	"no": 5

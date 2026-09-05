@@ -1,0 +1,188 @@
+{
+  "title": "オンライン相談・遠方の方へ（写真＋当日の進め方6項目）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋様子がわかる写真1枚＋オンラインでの進め方6項目の表＋できないことの但し書き＋申し込みボタン。「遠いから無理だろう」とあきらめている方に、来なくても進められることを伝えるセクションです。士業・コンサル・設計・オンライン教室のように、お客様が全国にいる商売に向いています。🚨 パソコンが苦手な方がいちばん不安なのは「つなぎ方が分からない」ことです。難しい言葉を使わず、こちらが何をするかまで書いてください。対応エリアのセクション（行ける範囲の線引き）とは役割が違うので、同じページに両方置けます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "オンラインでのご相談",
+        "subTitle": "ONLINE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お近くの方でなくてもお引き受けしています。<br>パソコンやスマホの画面ごしに、対面と同じようにお話しできます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-image-0",
+      "attributes": {
+        "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/online_01.webp",
+        "alt": "ノートパソコンの画面ごしに打ち合わせをしている様子",
+        "maxWidthPc": 760,
+        "aspectRatioW": 600,
+        "aspectRatioH": 400,
+        "imgBorderRadiusPc": 8,
+        "imgBorderRadiusTb": 8,
+        "imgBorderRadiusSp": 6,
+        "alignPc": "center",
+        "objectFitPc": "cover"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "当日の進め方",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 200,
+        "dtWidthSp": 150,
+        "defaultSpClm1": true,
+        "dlBorderColor": "#dddddd",
+        "rowBorderColor": "#dddddd",
+        "dtBorderColor": "#dddddd",
+        "dtBgColor": "#f5f7f9",
+        "fontSizePc": 17,
+        "fontSizeSp": 15,
+        "cellPaddingPc": 16,
+        "rows": [
+          {
+            "dtText": "使うもの",
+            "ddText": "パソコン、タブレット、スマートフォンのどれでも大丈夫です。<br>カメラと音が使えれば、それ以外に用意していただくものはありません",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "つなぎ方",
+            "ddText": "こちらから、押すだけでつながるリンクをメールでお送りします。<br>アプリを入れたり、会員登録をしていただく必要はありません",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "うまくいかない時",
+            "ddText": "つながらないときは、お電話に切り替えてそのまま進めます。<br>ご希望があれば、前日に5分だけつなぐ練習もできます",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "かかる時間",
+            "ddText": "初回はおよそ45分です。2回目からは30分ほどで終わることが多いです",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "費用",
+            "ddText": "初回のご相談は無料です。2回目からの費用は、ご相談の内容が決まった時点でお見積りします",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "資料のやりとり",
+            "ddText": "メールに添付していただくか、画面を見せていただければそのまま拝見します。<br>郵送をご希望の場合はご住所をお知らせください",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※現地を見なければ判断できないご相談（採寸・状態の確認など）は、オンラインでのお話のあとに一度おうかがいします。その場合の交通費は事前にお伝えします。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "オンラインで相談する",
+        "textSub": "＼ 初回のご相談は無料です ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

@@ -224,6 +224,7 @@ function lw_ai_chat_get_category_config($category) {
             'label' => 'ブロック・ページ作成',
             'expert' => 'ブロック操作・ページ構築の専門家',
             'slugs' => [
+			'affiliate-links',
                 'getting-started-block', 'blocks-reference', 'firstview',
                 'buttons-cta', 'lists', 'posts-news', 'content',
                 'company-profile', 'other-blocks', 'heading-table-utility',
@@ -234,6 +235,9 @@ function lw_ai_chat_get_category_config($category) {
             'label' => '設定・機能',
             'expert' => 'サイト設定・拡張機能の専門家',
             'slugs' => [
+			'affiliate-links',
+			'pr-notice',
+			'link-check',
                 'permalink-settings',
                 'seo', 'analytics', 'mail-form', 'my-parts', 'toggle-settings',
                 'redirect', 'membership', 'countdown', 'code-injection', 'code-page',
@@ -254,7 +258,8 @@ function lw_ai_chat_get_category_config($category) {
         'general' => [
             'label' => 'その他・WordPress全般',
             'expert' => '',
-            'slugs' => [],
+            'slugs' => [
+			'affiliate-links',],
             'prompt' => "あなたはLiteWordテーマのAIアシスタント（猫ロボットキャラクター）です。\n"
                 . "語尾の最後の1文だけ「にゃ」で締めてください。全文をにゃにゃ言わないこと。\n"
                 . "WordPress、Web制作、SEO、マーケティングなど幅広い質問に答えてください。\n"

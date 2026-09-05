@@ -23,6 +23,7 @@ import {
 import metadata from "./block.json";
 import { fontOptionsArr, fontWeightOptionsArr } from "../utils.js";
 import { LinkPicker, lwLinkProps } from "../link-picker.js";
+import { lwRel, AffiliateToggle } from "../affiliate-link.js";
 
 /* フォントオプション */
 const fontOptions = fontOptionsArr();
@@ -204,6 +205,10 @@ registerBlockType(metadata.name, {
 									label="新しいタブで開く"
 									checked={button.isBlank}
 									onChange={(v) => updateButton(index, "isBlank", v)}
+								/>
+								<AffiliateToggle
+									checked={button.isAffiliate}
+									onChange={(v) => updateButtonMany(index, v ? { isAffiliate: true, isBlank: true } : { isAffiliate: false })}
 								/>
 							</div>
 						))}
@@ -636,7 +641,7 @@ registerBlockType(metadata.name, {
 							href={lp.href}
 							className="lw-pr-button-6__item"
 							target={button.isBlank ? "_blank" : undefined}
-							rel={button.isBlank ? "noopener noreferrer" : undefined}
+							rel={lwRel({ newTab: button.isBlank, affiliate: button.isAffiliate })}
 							data-lw-link-type={lp.linkType}
 							data-lw-link-id={lp.linkId}
 						>

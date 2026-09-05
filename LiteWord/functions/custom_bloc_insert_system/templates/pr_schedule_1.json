@@ -1,0 +1,178 @@
+{
+  "title": "1年のご案内（月ごとの予定6件）",
+  "description": "【型B：説明が主役】見出し＋ひとこと＋月ごとの予定6件＋空いている時期と混み合う時期を書いた囲い＋相談ボタン。季節で仕事の中身が変わる商売（清掃・造園・工事・教室・士業・美容）に向きます。いつ頼めばいいかが分かると、閑散期に前倒しでご予約が入ります。🚨 月の札は全角3文字まで。「1〜2月」のように月をまたぐ書き方ははみ出します。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "1年のご案内",
+        "subTitle": "YEARLY SCHEDULE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "季節によって、やることも混み具合も変わります。<br>1年の流れと、ご予約の取りやすい時期をまとめました。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-lw-step-5",
+      "attributes": {
+        "ulMaxWidth": 900,
+        "fontSizeClass": "font_size_m",
+        "bgGradient": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "titleTag": "h3",
+        "contents": [
+          {
+            "no": "3月",
+            "title": "新年度に向けての見直し",
+            "text": "4月からの体制が決まる時期です。年度をまたぐご依頼は、この月にお声がけいただくと余裕をもって取りかかれます。\n見積りだけ先に取っておく、という使い方もできます。"
+          },
+          {
+            "no": "5月",
+            "title": "連休のあとがいちばん空いています",
+            "text": "一年で最もご予約が取りやすい時期です。急がない作業をこの時期に回していただけると、こちらも丁寧に見られますし、日程も選び放題です。"
+          },
+          {
+            "no": "7月",
+            "title": "夏に向けた点検（混み合います）",
+            "text": "暑くなってからのご依頼が集中します。7月に入ると2〜3週間お待たせすることがあるので、気になっているところがあれば6月のうちにご連絡ください。"
+          },
+          {
+            "no": "9月",
+            "title": "夏のあとの手当て",
+            "text": "夏のあいだの傷みが表に出てくる時期です。放っておくと冬に大きくなるものが多いので、一度見せていただくのをおすすめしています。"
+          },
+          {
+            "no": "11月",
+            "title": "年内に終わらせたいご依頼の締切",
+            "text": "年内のお引き渡しをご希望の場合は、11月上旬までにお申し込みください。\nそれ以降は、ご相談のうえ年明けの日程をお取りします。"
+          },
+          {
+            "no": "12月",
+            "title": "年末年始のお休み",
+            "text": "12月29日から1月4日までお休みをいただきます。この期間のご連絡は1月5日から順にお返事します。お急ぎのご用件は、留守番電話にお名前をお残しください。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※月はあくまで目安です。地域やお住まいの状況によって前後します。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1PaddingTopSp": 20,
+        "waku1PaddingBottomSp": 20,
+        "waku1PaddingLeftSp": 16,
+        "waku1PaddingRightSp": 16,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "急がないご依頼こそ、空いている時期にどうぞ",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "混んでいる時期は、どうしても日程の選択肢が少なくなります。「いつでもいい」というご依頼を空いている月に回していただけると、ご希望の日を選べますし、同じ作業でもゆっくり見られます。いま空いている日は、お電話でもメールでもすぐお答えします。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "空いている日を聞く",
+        "textSub": "＼ 日程だけのお問い合わせでも大丈夫です ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

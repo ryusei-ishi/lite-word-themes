@@ -11,10 +11,13 @@
 	},
 	"editorScript": "file:./paid-block-lw-step-5.js",
 	"aiHint": {
-		"description": "影付きカード型ステップ。番号は月表記も可。ボーダー+シャドウ。タイムライン表示に",
+		"description": "影のついた白いカードを縦に積むステップ。左のバッジに番号でも月でも入れられるので、年間の予定・季節ごとの案内・タイムラインに向く。番号として使うなら paid-block-lw-step-4 と同じ形",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["contents"],
-		"imageAttributes": []
+		"contentAttributes": [
+			"contents"
+		],
+		"imageAttributes": [],
+		"notes": "🚨 **属性名 bgGradient は「番号バッジの背景」**（save() が .lw-step__li_no の background に渡す）。⚠️ **同じ名前が paid-block-lw-step-4 と lw-pr-step-8 では「枠線の色」**。ブロックごとに違う。🚨 **バッジの文字は CSS で color:#fff 固定**で、bgGradient の既定は var(--color-main)。明るいサイト色（黄 #f5b301）だと 1.85:1 で読めない。color-mix(in srgb, var(--color-main) 50%, #000) のように暗くして渡す。🚨 **バッジの欄は 3.5em（font_size_m の24pxで84px）、中の文字は 0.8em＝19.2px。**左右に 0.3em ずつの余白があるので入るのは**全角3文字まで**（「10月」＝70pxで収まる）。「1〜2月」は4文字＝88pxで**はみ出す**ので、月をまたぐ書き方をしない。borderWidth の既定は 0（枠線なし・影だけ）。影は shadowBlur / shadowColor / shadowAlpha で作る。説明文は white-space: pre-wrap なので改行文字がそのまま効く。contents は [{ no, title, text }]。カードは gap 8px で詰まるので段の間にスペーサーを入れない。自前で margin: 32px 0 を持つので前後にも足さない。"
 	},
 	"no": 5,
 	"attributes": {

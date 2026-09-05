@@ -13,46 +13,167 @@
 	"aiHint": {
 		"description": "画像付き見出し。左右にアイコン画像を配置可能。メイン+サブタイトル+下線装飾",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["mainTitle", "subTitle"],
-		"imageAttributes": ["leftImage", "rightImage"]
+		"contentAttributes": [
+			"mainTitle",
+			"subTitle"
+		],
+		"imageAttributes": [
+			"leftImage",
+			"rightImage"
+		],
+		"notes": [
+			"🚨 leftImage の既定は `lite-word.com/sample_img/icon/pc_1.png`（パソコンのアイコン）。業種に関係ない絵が全ページの見出しに出てしまうので、使わないときは**空文字を渡して消す**（空なら img タグごと出ない。2026-09-02 実測）。rightImage も同じ。",
+			"🚨 sizeClass の実測値（style.css）: size_l = PC 40px / 800px以下 32px / 500px以下 26px、size_m（既定）= 32 / 26 / 22、size_s = 28 / 22 / 20。**スマホでも大きくなりすぎない**ので、custom-title-3（600px以下で48px固定）のような「スマホで見出しが画面いっぱい」問題は起きない。",
+			"🚨 mainTitleColor は名前に反して **subTitle（上の小さい文字）と下線 `.bd`** の色にしか当たらない（save() で確認）。メインの文字色は変えられない。lw-pr-custom-title-11〜14 と違って「テーマと同名のCSS変数」に入れる作りではないので、`var(--color-main)` をそのまま渡してよい（自己参照で消える事故は起きない）。"
+		]
 	},
 	"attributes": {
 		"subTitle": {
 			"type": "string",
 			"default": "製品紹介",
-			"aiHint": { "role": "subheading", "contentGuide": "日本語の補足タイトル。3〜10文字", "example": "ギャラリー" }
+			"aiHint": {
+				"role": "subheading",
+				"contentGuide": "日本語の補足タイトル。3〜10文字",
+				"example": "ギャラリー"
+			}
 		},
 		"mainTitle": {
 			"type": "string",
 			"default": "PRODUCTS",
-			"aiHint": { "role": "heading", "contentGuide": "英語のメインタイトル。大文字推奨", "example": "GALLERY" }
+			"aiHint": {
+				"role": "heading",
+				"contentGuide": "英語のメインタイトル。大文字推奨",
+				"example": "GALLERY"
+			}
 		},
-		"headingLevel": { "type": "number", "default": 2, "aiHint": { "skip": true } },
-		"mainTitleColor": { "type": "string", "default": "var(--color-main)", "aiHint": { "skip": true } },
-		"sizeClass": { "type": "string", "default": "size_m", "aiHint": { "skip": true } },
+		"headingLevel": {
+			"type": "number",
+			"default": 2,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"mainTitleColor": {
+			"type": "string",
+			"default": "var(--color-main)",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"sizeClass": {
+			"type": "string",
+			"default": "size_m",
+			"aiHint": {
+				"skip": true
+			}
+		},
 		"leftImage": {
 			"type": "string",
 			"default": "https://lite-word.com/sample_img/icon/pc_1.png",
-			"aiHint": { "role": "image", "note": "左側アイコン画像URL" }
+			"aiHint": {
+				"role": "image",
+				"note": "左側アイコン画像URL"
+			}
 		},
 		"rightImage": {
 			"type": "string",
 			"default": "",
-			"aiHint": { "role": "image", "note": "右側アイコン画像URL。省略可" }
+			"aiHint": {
+				"role": "image",
+				"note": "右側アイコン画像URL。省略可"
+			}
 		},
-		"leftImageAlt": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"rightImageAlt": { "type": "string", "default": "", "aiHint": { "skip": true } },
-		"leftHeightEm": { "type": "number", "default": 1.5, "aiHint": { "skip": true } },
-		"rightHeightEm": { "type": "number", "default": 1.5, "aiHint": { "skip": true } },
-		"leftMarginEm": { "type": "number", "default": 0.4, "aiHint": { "skip": true } },
-		"rightMarginEm": { "type": "number", "default": 0.4, "aiHint": { "skip": true } },
-		"positionClass": { "type": "string", "default": "position_center", "aiHint": { "skip": true } },
-		"hideSubTitle": { "type": "string", "default": "off", "aiHint": { "skip": true } },
-		"hideMainTitle": { "type": "string", "default": "off", "aiHint": { "skip": true } },
-		"bdThickness": { "type": "number", "default": 2, "aiHint": { "skip": true } },
-		"bdMarginTopEm": { "type": "number", "default": 0.1, "aiHint": { "skip": true } },
-		"bdDisplay": { "type": "string", "default": "on", "aiHint": { "skip": true } },
-		"ttlFullWidth": { "type": "string", "default": "off", "aiHint": { "skip": true } }
+		"leftImageAlt": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"rightImageAlt": {
+			"type": "string",
+			"default": "",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"leftHeightEm": {
+			"type": "number",
+			"default": 1.5,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"rightHeightEm": {
+			"type": "number",
+			"default": 1.5,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"leftMarginEm": {
+			"type": "number",
+			"default": 0.4,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"rightMarginEm": {
+			"type": "number",
+			"default": 0.4,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"positionClass": {
+			"type": "string",
+			"default": "position_center",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"hideSubTitle": {
+			"type": "string",
+			"default": "off",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"hideMainTitle": {
+			"type": "string",
+			"default": "off",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"bdThickness": {
+			"type": "number",
+			"default": 2,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"bdMarginTopEm": {
+			"type": "number",
+			"default": 0.1,
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"bdDisplay": {
+			"type": "string",
+			"default": "on",
+			"aiHint": {
+				"skip": true
+			}
+		},
+		"ttlFullWidth": {
+			"type": "string",
+			"default": "off",
+			"aiHint": {
+				"skip": true
+			}
+		}
 	},
 	"editorScript": "file:./paid-block-custom-title-10.js",
 	"no": 10

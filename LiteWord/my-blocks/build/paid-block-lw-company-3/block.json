@@ -7,10 +7,13 @@
 	"category": "lw-table",
 	"icon": "building",
 	"aiHint": {
-		"description": "会社概要テーブル（カラー装飾dt）。メインカラー背景の項目名+内容。モダンなデザイン",
+		"description": "項目名に色が付く定義リスト。左の色タイルが矢印の形で内容側に食い込むデザイン。会社概要のほか、保証の内容・仕様・規定のように「項目と説明」を並べたいところ全般に使える",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["contents"],
-		"imageAttributes": []
+		"contentAttributes": [
+			"contents"
+		],
+		"imageAttributes": [],
+		"notes": "🚨 **項目名（dt）の文字は CSS で color:#fff 固定**で、dtBackgroundColor の既定は var(--color-main)。明るいサイト色（黄 #f5b301）だと 1.85:1 で読めない。color-mix(in srgb, var(--color-main) 50%, #000) のように暗くして渡す。borderColor（内容側の枠線）も同じ色にそろえるとよい。🚨 **項目名の幅は dtWidthClass で決まる。既定 dt_width_m は 10em。**fontSizeClass:font_size_m は 17px なので 170px。左右 1em の余白を引くと**項目名は8文字まで**。長いときは dt_width_l（12em）にするか、言い方を短くする。🚨 **spFullDt: true を入れると 600px 以下で「項目名が上・内容が下」の縦積みになる。**入れないとスマホでも 170px の列が残り、内容が細長い1列に押し込まれる。**基本は入れる**。contents は **[{ term, desc }]**（title / text ではないので取り違えやすい）。desc は RichText なので <br> が使える。fontSizeClass は font_size_s / m / l の3つ。"
 	},
 	"supports": {
 		"anchor": true

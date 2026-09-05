@@ -10,11 +10,18 @@
 	"aiDescription": "お問い合わせや資料請求などのアクションを促すセクション。背景画像とオーバーレイで視覚的にインパクトを与え、ボタンでユーザーを誘導する。ページの最後や重要なポイントに配置する。",
 	"aiNotes": "h2見出しは内部に含まれるため、直前にcustom-title系ブロックを配置しない。buttonUrlは必須。",
 	"aiHint": {
-		"description": "汎用CTA。背景画像+フィルター+h2見出し+説明文+ボタン1つ。問い合わせ・予約誘導に最適",
+		"description": "画面いっぱいの背景写真の帯に、見出し・説明文・ボタン1つ。見出しから背景まで全部が1ブロックに入っているので直す場所が1か所で済む。ページの締めのお問い合わせ導線に",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["title", "text", "buttonText", "buttonUrl"],
-		"imageAttributes": ["imageUrl"],
-		"notes": "h2見出し内包のため直前にcustom-title系を配置しない。buttonUrlは必須"
+		"contentAttributes": [
+			"title",
+			"text",
+			"buttonText",
+			"buttonUrl"
+		],
+		"imageAttributes": [
+			"imageUrl"
+		],
+		"notes": "🚨 **h2 見出しをブロック自身が持っている**ので、直前に custom-title 系の見出しを置かない（h2 が2つ続く）。🚨 buttonUrl を空にすると href=\"\" が出て、押すとページが再読み込みされる。**必ず # か実際のURLを入れる**。🚨 **ボタンの文字は CSS で color:#fff 固定**（属性で変えられない）。buttonBackgroundColor の既定は var(--color-main) なので、**明るいサイト色だと白い文字が読めなくなる**（黄 #f5b301 で 1.85:1）。→ color-mix(in srgb, var(--color-main) 50%, #000) のように暗くして渡す（効かないブラウザでも CSS の var(--color-accent) に落ちるだけで透明にはならない）。🚨🚨 **filterColor は必ず半透明にする。不透明な色を渡すと本番のページで背景写真が完全に隠れ、のっぺりした色の板になる。** save() は `<div style=\"background-color:<filterColor>; … z-index:1\">` を出し、CSS が mix-blend-mode: multiply を当てる作りだが、**本番のページでは乗算が写真に乗らず、色がそのまま板として出る**（2026-08-31 に本番で確認。マークアップも読み込むCSSも祖先の計算値も手元のプレビューと一致していたのに絵だけが違い、原因は未特定）。半透明にしておけば、乗算が効いても効かなくても写真が見える。書き方の例: `color-mix(in srgb, color-mix(in srgb, var(--color-main) 45%, #000) 62%, transparent)`（サイト色を45%まで暗くしたものを62%の濃さで置く）。⚠️ 背景写真つきのブロックは**手元のプレビューだけで判断しない**。必ず本番の見え方を確かめる。🚨 背景写真は**中央が中間〜暗めの横長**を選ぶ（中央に窓や白壁のような明るい面が来ると、乗算しても白い文字が読みにくい）。固定ページでは全幅（width:100vw）になり、中身は max-width: 800px で中央。maxWidth に数値を入れると全幅をやめられる（0＝全幅）。ページの一番下に置くと本文下の余白が消えてフッターにぴったり付く（:has(+ .last_content)）。途中に置くときは後ろにスペーサーを1つ足す。 🚨 背景写真は `object-fit: cover`。**375pxの画面では元画像の中央54%しか出ない**（1600px幅なら x367〜1233）。中央にのっぺりした面を置くと、スマホで写真が消えたように見える。**中央に、それだけ見て何の店か分かるものを置く**こと。"
 	},
 	"supports": {
 		"anchor": true

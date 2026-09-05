@@ -17,6 +17,10 @@
 		"imageAttributes": []
 	},
 	"attributes": {
+		"isAffiliate": {
+			"type": "boolean",
+			"default": false
+		},
 		"buttonText": {
 			"type": "string",
 			"source": "html",

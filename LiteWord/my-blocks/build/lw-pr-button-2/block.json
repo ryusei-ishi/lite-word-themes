@@ -22,6 +22,10 @@
 		"className": true
 	},
 	"attributes": {
+		"isAffiliate": {
+			"type": "boolean",
+			"default": false
+		},
 		"textSub": {
 			"type": "string",
 			"default": "＼ テキストテキストテキスト ／",
@@ -267,15 +271,24 @@
 		},
 		"btnLinkType": {
 			"type": "string",
-			"default": "url"
+			"default": "url",
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"btnPageId": {
 			"type": "number",
-			"default": 0
+			"default": 0,
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"btnCategoryId": {
 			"type": "number",
-			"default": 0
+			"default": 0,
+			"aiHint": {
+				"skip": true
+			}
 		}
 	},
 	"editorScript": "file:./lw-pr-button-2.js",

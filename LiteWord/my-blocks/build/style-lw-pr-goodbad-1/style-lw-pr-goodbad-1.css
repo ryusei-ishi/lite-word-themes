@@ -1,0 +1,86 @@
+/*!*************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/lw-pr-goodbad-1/style.scss ***!
+  \*************************************************************************************************************************/
+@charset "UTF-8";
+/* メリット・デメリット 01（wdl/lw-pr-goodbad-1）
+ * ------------------------------------------------------------
+ * 🚨 列数は CSS変数ではなくクラス（.is-side / .is-stack）で切り替える。
+ *    数値の変数を style で渡すと React が px を付けて grid が丸ごと無効になるため。
+ */
+.lw-pr-goodbad-1 {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: var(--gb1-max-width, 720px);
+  /* 🚨 @media は「幅を決めている側」の中に置くこと。
+     土台に書くと .is-side（詳細度が上）に負けて、スマホでも2列のままになる。
+     2026-09-02 に実際そうなった。マークアップの検算では出ない・絵を見て気づいた。 */
+}
+.lw-pr-goodbad-1 .lw-pr-goodbad-1__cols {
+  display: grid;
+  gap: 16px;
+  align-items: start;
+  grid-template-columns: 1fr;
+}
+@media (max-width: 750px) {
+  .lw-pr-goodbad-1 .lw-pr-goodbad-1__cols {
+    gap: 12px;
+  }
+}
+.lw-pr-goodbad-1.is-side .lw-pr-goodbad-1__cols {
+  grid-template-columns: 1fr 1fr;
+}
+@media (max-width: 750px) {
+  .lw-pr-goodbad-1.is-side .lw-pr-goodbad-1__cols {
+    grid-template-columns: 1fr;
+  }
+}
+.lw-pr-goodbad-1.is-stack .lw-pr-goodbad-1__cols {
+  grid-template-columns: 1fr;
+}
+.lw-pr-goodbad-1 .lw-pr-goodbad-1__col {
+  padding: 18px 18px 20px;
+  border-style: solid;
+  border-width: var(--gb1-border-w, 1px);
+  border-radius: var(--gb1-radius, 10px);
+}
+@media (max-width: 750px) {
+  .lw-pr-goodbad-1 .lw-pr-goodbad-1__col {
+    padding: 14px 14px 16px;
+  }
+}
+.lw-pr-goodbad-1 .lw-pr-goodbad-1__title {
+  margin: 0 0 10px;
+  font-size: var(--gb1-title-size, 17px);
+  font-weight: bold;
+  line-height: 1.5em;
+}
+.lw-pr-goodbad-1 .lw-pr-goodbad-1__list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  font-size: var(--gb1-size, 15px);
+  line-height: 1.75em;
+}
+@media (max-width: 750px) {
+  .lw-pr-goodbad-1 .lw-pr-goodbad-1__list {
+    font-size: var(--gb1-size-sp, 14px);
+  }
+}
+.lw-pr-goodbad-1 .lw-pr-goodbad-1__list li {
+  display: flex;
+  gap: 7px;
+  align-items: flex-start;
+  margin: 0 0 7px;
+  padding: 0;
+}
+.lw-pr-goodbad-1 .lw-pr-goodbad-1__list li:last-child {
+  margin-bottom: 0;
+}
+.lw-pr-goodbad-1 .lw-pr-goodbad-1__mark {
+  flex: 0 0 auto;
+  font-weight: bold;
+}
+.lw-pr-goodbad-1 .lw-pr-goodbad-1__text {
+  flex: 1 1 auto;
+  min-width: 0;
+}

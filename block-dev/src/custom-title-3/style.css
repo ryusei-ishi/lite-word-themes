@@ -20,7 +20,7 @@
   display: block;
   font-weight: 700;
   letter-spacing: 0.1em;
-  font-size: 3em;
+  font-size: var(--ct3-main-pc, 3em);
   line-height: 1.3em;
   font-family: var(--font-family-gothic);
   font-feature-settings: "palt";
@@ -28,7 +28,7 @@
 
 @container (max-width:600px) {
   .custom-title-3 .main > span {
-    font-size: 2.4em;
+    font-size: var(--ct3-main-sp, 2.4em);
   }
 }
 

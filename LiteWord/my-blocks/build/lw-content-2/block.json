@@ -8,10 +8,13 @@
 	"icon": "lightbulb",
 	"editorScript": "file:./lw-content-2.js",
 	"aiHint": {
-		"description": "カード型コンテンツ。画像+タイトル+説明+ボタンのカード配列。3カラムグリッド。サービス紹介・メニュー一覧に",
+		"description": "写真＋見出し＋説明文のカードが3列に並ぶ。写真がカードの上いっぱいに出るので、人やお店の雰囲気を見せたいときに。サービス紹介・スタッフ紹介・メニュー一覧に",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["contents"],
-		"imageAttributes": []
+		"contentAttributes": [
+			"contents"
+		],
+		"imageAttributes": [],
+		"notes": "🚨🚨 **showTitle の既定は false。true にしないと contents[].title が1文字も出ない**（save が showTitle && <h3 class=\"ttl\"> なので丸ごと消える）。属性名が「セクションの見出しを出すか」に見えるが、**カード1枚ずつの見出し**のこと。見出しを書いたのに出ない、はこれが原因。🚨 写真枠は aspect-ratio: 16/12（**4:3の横長**）＋ object-fit: cover。**正方形の写真を渡すと上下25%が切られて人物の頭が欠ける**。渡す画像は1200×900程度の横長にする（比率は imageHeight で決まる。幅1600固定なので既定1200＝4:3、1600にすると正方形）。🚨 見出しは**写真より上**に出る（save の並びが h3 → figure → 本文）。28px・中央寄せで、属性から大きさを変えられないので**長い肩書きを見出しに入れない**（2行になって崩れる）。🚨 img の alt は「solution image 1」のような**固定文字**で属性から変えられない（save がハードコード）。🚨 .lw-content-2_content は**ボタンの有無にかかわらず padding-bottom: 64px** を持つ（ボタンが absolute で入る場所）。ボタンを出さないとカードの下に64pxの空きが残る。ボタンの既定色は var(--color-accent)（--color-main ではない）。列は columnClass（clm_2 / clm_3 / clm_4・既定 clm_3）。800px以下で2列、500px以下で1列。**3枚が収まりがよい**。自前で margin: 40px 0 24px を持つので前後にスペーサーを足さない。"
 	},
 	"supports": {
 		"anchor": true

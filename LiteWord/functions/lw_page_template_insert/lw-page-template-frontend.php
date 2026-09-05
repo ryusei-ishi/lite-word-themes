@@ -24,6 +24,27 @@ function lw_maybe_register_premium_blocks_for_preview() {
     // プレビュー中はブロック二重登録のNotice表示を抑制
     @ini_set('display_errors', '0');
 
+    /**
+     * 🚨 表示だけでなく **debug.log への記録も** 止める（2026-09-01 Ryuichi 依頼）
+     *
+     * ここは init:5 で先にプレミアムブロックを登録する。そのあと init:10 の
+     * wdl_register_blocks() が同じものをもう一度登録するので、WordPress が
+     * 「ブロックタイプ『wdl/…』はすでに登録されています」を1回のプレビューにつき
+     * **90件** 吐く。**これは意図した二重登録で害は無い**（あとの登録は無視されるだけ）が、
+     * debug.log が埋まって本当のエラーが見えなくなる。
+     *
+     * ⚠️ 上の @ini_set('display_errors','0') は**画面に出さない**だけで、
+     *    _doing_it_wrong は E_USER_NOTICE を投げるので**ログには残り続けていた**。
+     *    WordPress が用意している doing_it_wrong_trigger_error フィルタで、
+     *    **このプレビュー要求の・この1種類だけ**を止める。
+     */
+    add_filter('doing_it_wrong_trigger_error', function ($trigger, $function_name) {
+        if ('WP_Block_Type_Registry::register' === $function_name) {
+            return false;
+        }
+        return $trigger;
+    }, 10, 2);
+
     // 管理バーを非表示
     add_filter('show_admin_bar', '__return_false');
 

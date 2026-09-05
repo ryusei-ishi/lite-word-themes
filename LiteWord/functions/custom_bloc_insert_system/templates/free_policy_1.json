@@ -1,0 +1,283 @@
+{
+  "title": "プライバシーポリシー（無料・押すと開く8項目）",
+  "description": "【型B：説明が主役】見出し＋リード文＋押すと開く8項目（取得する情報・使いみち・第三者提供・安全管理・Cookie・開示や削除の求め・法令の順守・改定）＋お問い合わせ窓口＋制定日。**閉じた状態で置かれるので1画面に収まり**、各項目の上には「ひとことで言うと」が出ます。〇〇（事業者名・住所・連絡先）と制定日を必ず書き換えてください。🚨 中身は一般的なひな形です。Cookieを使っていない・アクセス解析を入れていないなど、**実態と合っているかを必ずご自身で確認**してから公開してください。🚨 最後の「お問い合わせ窓口」の見出しは、開閉のしくみの終端を兼ねています。**消すとそれ以降が表示されなくなる**ので、消さずに中身だけ書き換えてください。**無料ブロックだけで作ってあります。**",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "プライバシーポリシー",
+        "subTitle": "PRIVACY POLICY",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "〇〇〇〇（以下「当社」）は、お客様からお預かりした個人情報を次のとおり取り扱います。読みたい項目を押すと開きます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "あつめる情報",
+        "mainTitle": "第1条　取得する個人情報",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お問い合わせ・ご予約・お申し込みのときに、お名前、メールアドレス、電話番号、ご住所、お問い合わせの内容をお預かりします。<br>これらはすべて、お客様ご自身に入力していただいたものだけです。当社がお客様に断りなく、他の場所から情報を集めることはありません。",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "なにに使うか",
+        "mainTitle": "第2条　利用の目的",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お預かりした情報は、次のためだけに使います。<br>・お問い合わせやご予約へのお返事<br>・ご依頼いただいたサービスの提供と、そのご連絡<br>・お見積り、ご請求、領収書の発行<br>・ご案内をご希望いただいた方へのお知らせの送付<br>上記以外の目的で使うことはありません。あとから別の目的で使う必要が出たときは、そのつど改めてお伺いします。",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "人に渡さない",
+        "mainTitle": "第3条　第三者への提供",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お客様の同意なしに、個人情報を他の会社や人に渡すことはありません。<br>ただし、法令にもとづいて求められた場合と、お客様ご本人や周りの方の生命・身体を守るために急いで必要な場合は例外です。<br>なお、配送や決済など、サービスの提供に必要な範囲で外部に委託することがあります。その場合は、委託先にも同じ水準の管理を求め、当社が責任をもって監督します。",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "どう守るか",
+        "mainTitle": "第4条　安全管理",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お預かりした情報が漏れたり、なくなったり、書き換えられたりしないように、必要な対策をとります。<br>・個人情報を扱える人を限る<br>・保管している機器と保管場所に鍵をかける<br>・通信は暗号化（SSL）する<br>万一、漏えいが起きたときは、速やかにお客様へお知らせし、必要に応じて監督官庁へ報告します。",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "サイトの記録",
+        "mainTitle": "第5条　Cookie（クッキー）とアクセス解析",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "当サイトでは、使いやすさの改善のために Cookie を使うことがあります。<br>Cookie にお名前や連絡先は含まれません。ブラウザの設定でいつでも無効にできます（一部の機能が使えなくなることがあります）。<br>※アクセス解析ツールをお使いの場合は、ここにツール名と、そのツールのプライバシーポリシーへのリンクを書き足してください。",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "見せて・消して",
+        "mainTitle": "第6条　開示・訂正・削除のお求め",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "ご自身の個人情報について、「見せてほしい」「間違いを直してほしい」「使うのをやめてほしい」「消してほしい」とお申し出いただけます。<br>下のお問い合わせ窓口までご連絡ください。ご本人であることを確認したうえで、合理的な期間内に対応します。手数料はいただきません。",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "法律を守る",
+        "mainTitle": "第7条　法令の順守",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "当社は、個人情報の保護に関する法律その他の関係法令・ガイドラインを守ります。<br>取り扱いの方法は定期的に見直し、必要に応じて改めます。",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "変えるときは",
+        "mainTitle": "第8条　本ポリシーの変更",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "内容を変えるときは、変更後のものをこのページに掲載します。<br>掲載した時点から、変更後のものが適用されます。大きな変更のときは、ページの上部でお知らせします。",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "お問い合わせ窓口",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "40px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "個人情報の取り扱いについてのお問い合わせは、こちらまでお願いします。<br>〇〇〇〇　個人情報お問い合わせ窓口<br>〒000-0000　〇〇県〇〇市〇〇町1-2-3<br>メール：info@example.com　／　電話：000-0000-0000（平日 10:00〜17:00）"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "制定日：20〇〇年〇月〇日　／　最終改定日：20〇〇年〇月〇日",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

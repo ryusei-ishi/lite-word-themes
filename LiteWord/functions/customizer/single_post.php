@@ -150,17 +150,17 @@ function single_post_custom( $wp_customize ) {
     $items = [
         [
             ['radio', 'title_btm_switch', '','<h2 class="ctm_ttl_ptn_1">タイトル下（記事冒頭）</h2>',  ctm_switch_array_2()],
-            ['select', 'title_btm_sns_1', '','<h3 class="ctm_ttl_ptn_2">シェア先の選択</h3>',  ctm_sns_share_icon_arr()],
-            ['select', 'title_btm_sns_2', '','',  ctm_sns_share_icon_arr()],
-            ['select', 'title_btm_sns_3', '','',  ctm_sns_share_icon_arr()],
-            ['select', 'title_btm_sns_4', '','',  ctm_sns_share_icon_arr()],
-            ['select', 'title_btm_sns_5', '','',  ctm_sns_share_icon_arr()],
+            ['icon_select', 'title_btm_sns_1', '','<h3 class="ctm_ttl_ptn_2">シェア先の選択</h3>',  ctm_sns_share_icon_arr()],
+            ['icon_select', 'title_btm_sns_2', '','',  ctm_sns_share_icon_arr()],
+            ['icon_select', 'title_btm_sns_3', '','',  ctm_sns_share_icon_arr()],
+            ['icon_select', 'title_btm_sns_4', '','',  ctm_sns_share_icon_arr()],
+            ['icon_select', 'title_btm_sns_5', '','',  ctm_sns_share_icon_arr()],
             ['radio', 'post_btm_switch', '','<br><br><h2 class="ctm_ttl_ptn_1">投稿下</h2>',  ctm_switch_array_2()],
-            ['select', 'post_btm_sns_1', '','<h3 class="ctm_ttl_ptn_2">シェア先の選択</h3>',  ctm_sns_share_icon_arr()],
-            ['select', 'post_btm_sns_2', '','',  ctm_sns_share_icon_arr()],
-            ['select', 'post_btm_sns_3', '','',  ctm_sns_share_icon_arr()],
-            ['select', 'post_btm_sns_4', '','',  ctm_sns_share_icon_arr()],
-            ['select', 'post_btm_sns_5', '','',  ctm_sns_share_icon_arr()],
+            ['icon_select', 'post_btm_sns_1', '','<h3 class="ctm_ttl_ptn_2">シェア先の選択</h3>',  ctm_sns_share_icon_arr()],
+            ['icon_select', 'post_btm_sns_2', '','',  ctm_sns_share_icon_arr()],
+            ['icon_select', 'post_btm_sns_3', '','',  ctm_sns_share_icon_arr()],
+            ['icon_select', 'post_btm_sns_4', '','',  ctm_sns_share_icon_arr()],
+            ['icon_select', 'post_btm_sns_5', '','',  ctm_sns_share_icon_arr()],
           
         ]
     ];

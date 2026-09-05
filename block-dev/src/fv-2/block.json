@@ -13,64 +13,91 @@
 	"aiHint": {
 		"description": "下層ページ用FV。中央にタイトルのみ。シンプルで軽量。色ベタ塗り背景",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["title"],
-		"imageAttributes": []
+		"contentAttributes": [
+			"title"
+		],
+		"imageAttributes": [],
+		"notes": "🚨 **写真なしで「色だけの帯」にできる唯一のFV**（2026-09-03 実測）。`backgroundImage` を空にすると `<img>` ごと出力されず、`filter` の色だけが残る。`filterOpacity: 1` ＋ `filterBackgroundColor` に色コードを入れると単色の下層帯になる。⚠️ lw-pr-fv-13 / -15 / -16 は同じことができない（画像を空にすると `<img src=\"\">` がそのまま出る）。🚨 `h1AfterColor` の**既定は #ef5d68（赤）**。見出しの下に出る短い線の色なので、濃い地色や落ち着いた配色では必ず上書きする（既定のままだと赤い線が浮く）。✅ タイトルは地に直接描かれるので `textColor` を白にしてよい（fv-6 は白い箱の中なので白にすると消える）。✅ `filterBackgroundColor` の既定は var(--color-main) なので、サイト色に追従させたいならそのままでよい。"
 	},
 	"attributes": {
 		"backgroundImage": {
 			"type": "string",
 			"default": "",
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"backgroundImageSp": {
 			"type": "string",
 			"default": "",
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"filterBackgroundColor": {
 			"type": "string",
 			"default": "var(--color-main)",
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"filterOpacity": {
 			"type": "number",
 			"default": 0.9,
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"h1AfterColor": {
 			"type": "string",
 			"default": "#ef5d68",
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"textColor": {
 			"type": "string",
 			"default": "#fff",
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"title": {
 			"type": "string",
 			"default": "タイトル",
-			"aiHint": { "role": "heading", "contentGuide": "ページタイトル。3〜15文字", "example": "サービス紹介" }
+			"aiHint": {
+				"role": "heading",
+				"contentGuide": "ページタイトル。3〜15文字",
+				"example": "サービス紹介"
+			}
 		},
 		"minHeightPc": {
 			"type": "string",
 			"default": "min-h-pc-320px",
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"minHeightTb": {
 			"type": "string",
 			"default": "min-h-tb-280px",
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"minHeightSp": {
 			"type": "string",
 			"default": "min-h-sp-220px",
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"headingLevel": {
 			"type": "number",
 			"default": 1,
-			"aiHint": { "skip": true }
+			"aiHint": {
+				"skip": true
+			}
 		}
 	},
 	"no": 2

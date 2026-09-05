@@ -1,0 +1,110 @@
+{
+  "title": "下層ページのご案内（無料・子ページを自動で並べる）",
+  "description": "【型B：説明が主役】見出し＋この下に何があるかのひとこと＋固定ページのカード6枚（写真＋タイトル＋抜粋40字・3列）＋「迷ったら」の目安4件＋注釈＋相談ボタン。サービスや料金の親ページの下に貼ると、その下にぶら下がっている子ページが自動で並びます。ページを増やしても書き直しが要りません。⚠️ 既定は「このページの子ページ」を並べる設定です。子ページを持たないページに貼ると「該当するページがありません。」と出ます。別の親ページのものを並べたいときは、ブロックの設定で親ページIDを指定してください。写真は各ページのアイキャッチ画像が入ります（未設定のページは共通の画像になります）。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "くわしいご案内",
+        "subTitle": "MENU",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "それぞれのページに、内容と料金のめやすをまとめています。<br>気になるものからご覧ください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-page-list-1",
+      "attributes": {
+        "numberOfPages": 6,
+        "parentPageId": 0,
+        "showExcerpt": true
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "どれを選べばいいか迷ったら",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-3",
+      "attributes": {
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "contents": [
+          {
+            "text": "はじめての方は、いちばん上のページからご覧ください"
+          },
+          {
+            "text": "お急ぎのご事情があるときは、先にお電話ください"
+          },
+          {
+            "text": "料金だけ先に知りたいときは、料金のページへ"
+          },
+          {
+            "text": "当てはまるものが無いときは、そのままご相談ください"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ページに書いていない内容でもお受けできることがあります。まずはご相談ください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "迷ったので相談したい",
+        "btnTextSub": "＼ どのページか分からなくて大丈夫です ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

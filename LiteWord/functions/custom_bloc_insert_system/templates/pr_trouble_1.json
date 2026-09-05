@@ -1,0 +1,169 @@
+{
+  "title": "困ったときは（症状と、先に試していただけること6件）",
+  "description": "【型B：説明が主役】見出し＋ひとこと＋症状と対処6件（開閉なし）＋注釈＋「それでも直らないときは」の囲い＋お問い合わせボタン。よくある質問は「買う前」の疑問に答える段ですが、ここは**買ったあと・使い始めたあとに困った人**のための段です。置いておくと、ちょっとした不具合が全部電話になるのを防げますし、「壊れた＝この店は駄目だ」という早合点も減ります。🚨 いきなり「お電話ください」にしないでください。**ご自身で試せることを先に書く**のがこの段の値打ちです。🚨 危険をともなう作業（電気・ガス・高所）を「ご自身で」と書かないでください。その場合は触らずに連絡してほしいと書くのが正解です。保証の範囲（どこまで無償か）のセクションとは役割が違うので、同じページに両方置けます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "困ったときは",
+        "subTitle": "TROUBLE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お使いのなかで多いご相談と、<br>ご連絡いただく前に試していただけることをまとめました。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-qa-3",
+      "attributes": {
+        "maxWidth": 900,
+        "contents": [
+          {
+            "text_q": "動かなくなりました。",
+            "text_a": "まず電源を入れ直してみてください。差し込みが緩んでいることがいちばん多い原因です。それでも動かないときは、無理に何度も入れ直さずにご連絡ください。通電したまま繰り返すと、直せたはずのものが直せなくなることがあります。"
+          },
+          {
+            "text_q": "音が大きくなった気がします。",
+            "text_a": "据えている場所が水平かどうかを見てください。少しの傾きでも音が変わります。水平にしても変わらないときは、内部の部品が緩んでいる可能性がありますので、使用を止めてご連絡ください。"
+          },
+          {
+            "text_q": "思っていた色と違います。",
+            "text_a": "同じ材料でも、仕入れの時期で色みが変わります。光の下で見ると、また違って見えることもあります。一度、昼の自然光の下でご覧ください。それでも気になるときは、お渡しから〇日以内であれば作り直しをご相談いただけます。"
+          },
+          {
+            "text_q": "汚れが落ちません。",
+            "text_a": "まずは水を含ませた柔らかい布で、こすらずに押さえるように拭いてください。市販の洗剤は表面を傷めることがあるので、お使いになる前にご相談ください。ご連絡いただければ、その汚れに合う落とし方をお伝えします。"
+          },
+          {
+            "text_q": "部品が足りない気がします。",
+            "text_a": "お渡しのときの一覧表と見比べてください。足りないものがあれば、その日のうちにお送りします。送料はいただきません。一覧表を無くされた場合も、お名前が分かればこちらで調べられます。"
+          },
+          {
+            "text_q": "使い方を忘れてしまいました。",
+            "text_a": "何度でもお聞きください。お電話でもご来店でも構いません。ご希望があれば、もう一度お伺いしてご説明します（〇か月以内は無料です）。「こんなことを聞いていいのか」と思われるようなことこそ、お聞きください。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ここに書いた内容は例です。実際の症状に合わせて書き換えてください。電気・ガス・高所など危険をともなうものは、「ご自身で」と書かずに「触らずにご連絡ください」と書くのが正解です。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1PaddingTopSp": 20,
+        "waku1PaddingBottomSp": 20,
+        "waku1PaddingLeftSp": 16,
+        "waku1PaddingRightSp": 16,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "それでも直らないときは",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "お電話（000-000-0000／平日9:00〜18:00）かメールでご連絡ください。お名前と、いつお渡ししたものかが分かると早く調べられます。症状の写真を1枚送っていただけると、伺う前に部品を用意して行けるので、一度で終わることが多くなります。保証の期間内かどうかは、こちらで調べますのでお気になさらないでください。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "お問い合わせはこちら",
+        "textSub": "＼ 写真を1枚送っていただけると早く直せます ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

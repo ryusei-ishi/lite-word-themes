@@ -1,0 +1,135 @@
+{
+  "title": "よくある質問（無料・開閉式6問＋来店前のご確認）",
+  "description": "【型B：説明が主役】見出し＋リード文＋押すと開くQ&A6問＋「ご来店の前に確認していただきたいこと」4件＋注釈＋相談ボタン。予約・支払い・キャンセル・持ち物など、実店舗でよく聞かれることを文例にしています。質問文は14文字までにするとスマホで2行に割れません。**無料ブロックだけで作ってあります。**",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "よくある質問",
+        "subTitle": "FAQ",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お問い合わせの前に、よくいただくご質問をまとめました。<br>質問をクリックすると答えが開きます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-qa-1",
+      "attributes": {
+        "contents": [
+          {
+            "text_q": "予約は必要ですか",
+            "text_a": "ご予約の方を優先してご案内しています。当日でも空きがあればお受けできますので、まずはお電話かフォームでご確認ください。"
+          },
+          {
+            "text_q": "支払い方法は",
+            "text_a": "現金のほか、クレジットカードと各種QRコード決済がお使いいただけます。お支払いは施術やお渡しのあとで結構です。"
+          },
+          {
+            "text_q": "キャンセルしたい",
+            "text_a": "前日までのご連絡は費用がかかりません。当日のキャンセルは、次の方のご案内があるため、ご一報だけいただけると助かります。"
+          },
+          {
+            "text_q": "何を持っていけば",
+            "text_a": "手ぶらでお越しいただけます。お手持ちのもので気になる点があれば、一緒にお持ちいただくとその場でご相談できます。"
+          },
+          {
+            "text_q": "駐車場はあります",
+            "text_a": "建物の裏手に3台分ございます。満車のときは近くのコインパーキングをご案内しますので、お着きになったらお電話ください。"
+          },
+          {
+            "text_q": "子ども連れでも",
+            "text_a": "お子さま連れでご利用いただけます。ベビーカーのまま入れる入口があり、おむつ替えの台もご用意しています。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "ご来店の前に、ひとつだけ",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-4",
+      "attributes": {
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colClass": "clm_2",
+        "contents": [
+          {
+            "text": "ご予約のお時間の5分前を目安にお越しください"
+          },
+          {
+            "text": "遅れそうなときは、分かった時点でお電話ください"
+          },
+          {
+            "text": "駐車場が満車のときは近くの駐車場をご案内します"
+          },
+          {
+            "text": "当日の体調がすぐれないときは遠慮なくご連絡ください"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ここに無いご質問は、お気軽にお問い合わせください。<br>いただいたご質問は、このページに追記していきます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "質問してみる",
+        "btnTextSub": "＼ どんな小さなことでも ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

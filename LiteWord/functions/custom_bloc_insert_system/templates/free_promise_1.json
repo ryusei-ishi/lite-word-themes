@@ -1,0 +1,171 @@
+{
+  "title": "お客様へのお約束（無料・写真ゼロ・守れなかったときの扱いつき）",
+  "description": "【型B：説明が主役】見出し＋ひとこと＋6つのお約束（番号つき2列）＋「守れなかったときはこうします」4件＋注釈＋ご相談ボタン。選ばれる理由（こちらの強み）とは主語が逆で、**こちらが負う約束**を並べる段です。🚨 このセクションの肝は後半です。約束だけを並べると綺麗ごとで終わりますが、**守れなかったときの扱いが書いてあって初めて約束になります**。後半を消して使わないでください。🚨 書いた以上は守れるものだけを残してください。守れない約束は書かないほうが強いです。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "お客様へのお約束",
+        "subTitle": "PROMISE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "できることを大きく言うより、<br>必ず守れることだけをお約束します。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "6つのお約束",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-1",
+      "attributes": {
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "contents": [
+          {
+            "number": "1",
+            "text": "お見積りは項目ごとに出します。「一式」でまとめてお出しすることはしません"
+          },
+          {
+            "number": "2",
+            "text": "金額が変わるときは、作業に入る前に必ずお伝えして、進めるかをお決めいただきます"
+          },
+          {
+            "number": "3",
+            "text": "ご連絡は当日中にお返しします。すぐに答えが出せないときも、いつ答えられるかをお伝えします"
+          },
+          {
+            "number": "4",
+            "text": "できないことは、できないとお伝えします。無理にお受けして遅れるほうがご迷惑になるためです"
+          },
+          {
+            "number": "5",
+            "text": "ご相談だけで終わっても費用はいただきません。お断りの理由をうかがうこともしません"
+          },
+          {
+            "number": "6",
+            "text": "お預かりしたものは、お渡しできる状態にしてからご連絡します。途中経過だけの報告はしません"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "守れなかったときはこうします",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-3",
+      "attributes": {
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "contents": [
+          {
+            "text": "こちらの手違いで直しが出たぶんは、費用をいただきません"
+          },
+          {
+            "text": "お約束の日に間に合わないと分かった時点で、その日のうちにご連絡します"
+          },
+          {
+            "text": "ご納得いただけないときは、代金の全部または一部をお返しします"
+          },
+          {
+            "text": "同じことが起きないように何を変えたかを、あとから書面でお伝えします"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ここに書いてあることは、当社の判断ではなくお客様のご判断で使っていただけます。「約束と違う」と思われたときは、遠慮なくその場でおっしゃってください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "相談してみる",
+        "btnTextSub": "＼ 約束できるかどうかも、その場でお答えします ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generatedAt": "2026-08-23T10:53:31.864Z",
+  "generatedAt": "2026-09-04T03:19:24.517Z",
   "blocks": [
     "br-on-none",
     "cta-1",
@@ -22,6 +22,7 @@
     "fv-5",
     "fv-6",
     "fv-7",
+    "lw-affiliate-link",
     "lw-banner-info-01",
     "lw-banner-info-02",
     "lw-banner-info-03",
@@ -65,6 +66,7 @@
     "lw-pr-column-1",
     "lw-pr-comment-2",
     "lw-pr-comment-3",
+    "lw-pr-compare-1",
     "lw-pr-content-8",
     "lw-pr-content-9",
     "lw-pr-custom-title-11",
@@ -77,14 +79,18 @@
     "lw-pr-fv-15",
     "lw-pr-fv-16",
     "lw-pr-fv-17",
+    "lw-pr-goodbad-1",
     "lw-pr-image-0",
     "lw-pr-image-1",
     "lw-pr-list-5",
     "lw-pr-list-6",
     "lw-pr-list-7",
+    "lw-pr-list-8",
     "lw-pr-post-list-4",
+    "lw-pr-product-1",
     "lw-pr-qa-2",
     "lw-pr-qa-3",
+    "lw-pr-ranking-1",
     "lw-pr-step-7",
     "lw-pr-step-8",
     "lw-pr-table-1",
@@ -151,5 +157,5 @@
     "shin-gas-station-01-step-1",
     "solution-1"
   ],
-  "totalBlocks": 148
+  "totalBlocks": 154
 }

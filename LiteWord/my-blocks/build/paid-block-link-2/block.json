@@ -17,6 +17,12 @@
 		],
 		"imageAttributes": [
 			"bgImageUrl"
+		],
+		"notes": [
+			"🚨 **自分で見出し（h2）を持っている**（mainTitle / subTitle / mainExplanation）。上に別の見出しブロックを置くと二重になる。",
+			"🚨 contents の icon と imageUrl は**両方とも空でよい**。空なら文字だけのカードになる（2026-09-02 実測）。短い言葉（「借りる」「買う」「売る」など）で選ばせたいときは、絵を足さないほうが大きく見えて読みやすい。",
+			"🚨 titleBdColor の既定は #da5959（赤）。背景に暗いフィルタが乗るので、白か明るい色にしないと見えない。",
+			"🚨 **背景写真を全幅に敷く帯**。前後が同じく全幅の帯（FV など）なら、あいだにスペーサーを置かない。"
 		]
 	},
 	"supports": {
@@ -144,8 +150,18 @@
 					"attribute": "alt",
 					"default": ""
 				},
-				"linkType": { "type": "string", "source": "attribute", "selector": ".link", "attribute": "data-lw-link-type" },
-				"linkId": { "type": "string", "source": "attribute", "selector": ".link", "attribute": "data-lw-link-id" }
+				"linkType": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".link",
+					"attribute": "data-lw-link-type"
+				},
+				"linkId": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".link",
+					"attribute": "data-lw-link-id"
+				}
 			},
 			"default": [
 				{

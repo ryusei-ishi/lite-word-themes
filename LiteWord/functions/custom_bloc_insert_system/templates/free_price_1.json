@@ -1,0 +1,135 @@
+{
+  "title": "料金・メニュー（無料・品目6つの表＋含まれるもの）",
+  "description": "【型A：表が主役】見出し＋リード文＋メニューと価格の表6行＋「料金に含まれるもの」4件＋注釈＋見積りのボタン。写真もプラン比較も使わない素朴な一覧なので、品目が多い仕事にも向きます。項目名は7文字までにするとスマホで折り返しません。**無料ブロックだけで作ってあります。**",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "料金・メニュー",
+        "subTitle": "Price",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "よくご依頼いただくものを載せています。<br>ここに無いものもお受けできますので、お気軽におたずねください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-company-1",
+      "attributes": {
+        "contents": [
+          {
+            "title": "はじめて",
+            "text": "3,300円　／　60分　（カウンセリング込み）"
+          },
+          {
+            "title": "基本",
+            "text": "5,500円　／　60分"
+          },
+          {
+            "title": "しっかり",
+            "text": "8,800円　／　90分"
+          },
+          {
+            "title": "部分ケア",
+            "text": "2,200円　／　30分"
+          },
+          {
+            "title": "回数券",
+            "text": "5回 25,000円　（有効期限6か月）"
+          },
+          {
+            "title": "出張",
+            "text": "基本料金＋2,200円　（市内は無料）"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "料金に含まれるもの",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-4",
+      "attributes": {
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colClass": "clm_2",
+        "contents": [
+          {
+            "text": "はじめのカウンセリング（15分ほど）"
+          },
+          {
+            "text": "当日のご相談・アドバイス"
+          },
+          {
+            "text": "次回のご提案（無理におすすめしません）"
+          },
+          {
+            "text": "施術後のご自宅でのケアの説明"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※表示はすべて税込です。<br>お子さま連れ・ご高齢の方の付き添いなど、追加の費用はいただきません。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "見積りを相談する",
+        "btnTextSub": "＼ おおよその金額をお伝えします ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

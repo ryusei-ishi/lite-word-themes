@@ -10,9 +10,15 @@
 	"aiHint": {
 		"description": "固定ページ一覧カード。サムネイル+タイトル+抜粋。サービスページ一覧・子ページナビに",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["numberOfPages"],
+		"contentAttributes": [
+			"numberOfPages"
+		],
 		"imageAttributes": [],
-		"notes": "動的ブロック。DBから固定ページを取得。親ページID指定可能"
+		"notes": [
+			"動的ブロック。DBから固定ページを取得。親ページID指定可能",
+			"🚨 **PHP ではなくフロントの JavaScript が中身を作る**（block.json に render が無く、save() が入れ物と script を書き出す）。保存されたマークアップが空に見えるのが正しい姿。",
+			"🚨 parentPageId で親ページを指定する。**該当する子ページが1枚も無いと「該当するページがありません。」と表示される**（不具合ではない）。テンプレートに入れるときは「物件ごとに固定ページを作り、親をこのページにしてください」まで利用者に伝えること。指定しないと親を持たないページが並ぶ。"
+		]
 	},
 	"supports": {
 		"anchor": true

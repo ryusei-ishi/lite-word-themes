@@ -1,0 +1,140 @@
+{
+  "title": "よくいただくご相談（無料・丸い写真3枚）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋丸い写真つきのご相談3件＋「こんなご相談でも大丈夫です」4件＋注釈＋ご相談ボタン。困りごと（気持ち）でも対象者（誰か）でもなく、**実際に来ているご相談の中身**を並べる段です。小さな事業でいちばん多い取りこぼしは「こんなことを相談していいのか分からない」で帰られることなので、実例を3つ置くだけで「うちも同じだ」と分かってもらえます。⚠️ 写真は正円に切り抜かれます。**正方形の画像**をお使いください。⚠️ 文章は改行がそのまま反映されます。1行12〜16文字で2行に収めると、3枚の高さがそろいます。⚠️ 顔写真は避けたほうが無難です（「この人は誰？」となって使いにくくなります）。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "よくいただくご相談",
+        "subTitle": "INQUIRY",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "実際にお受けしているご相談です。<br>こんなことを聞いていいのかな、というものばかりです。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "bottom": "0px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/solution-1",
+      "attributes": {
+        "contents": [
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/intro_02.webp",
+            "text": "書類が合っているか\n見てほしい",
+            "borderColor": "var(--color-main)"
+          },
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/intro_01.webp",
+            "text": "やり方を一度\n教えてほしい",
+            "borderColor": "var(--color-main)"
+          },
+          {
+            "image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/intro_03.webp",
+            "text": "これで進めていいか\n相談したい",
+            "borderColor": "var(--color-main)"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "こんなご相談でも大丈夫です",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-3",
+      "attributes": {
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "contents": [
+          {
+            "text": "まだ何も決まっていない、ふわっとした段階"
+          },
+          {
+            "text": "他でお願いしたものについてのご相談"
+          },
+          {
+            "text": "ご予算がはっきりしていないご相談"
+          },
+          {
+            "text": "結局お願いしないかもしれないご相談"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ご相談だけで終わっても費用はいただきません。お断りの理由をおうかがいすることもありませんので、気軽にお声がけください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "相談してみる",
+        "btnTextSub": "＼ 何から話せばいいか分からなくても大丈夫です ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

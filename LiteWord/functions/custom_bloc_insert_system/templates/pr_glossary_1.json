@@ -1,0 +1,188 @@
+{
+  "title": "よく使う言葉のご説明（用語8語・写真ゼロ）",
+  "description": "【型B：説明が主役】見出し＋ひとこと＋よく使う言葉8語の説明＋注釈＋「分からない言葉があったら」の囲い＋お問い合わせボタン。よくある質問は「手続きの疑問」に答える段ですが、ここは**言葉そのものが分からない人**のための段です。見積書の「一式」、医療の「自費」、士業の「顧問」のような言葉は、聞き返すのが恥ずかしくて質問にもならないので、FAQには現れません。🚨 辞書の写しにしないでください。意味だけでなく**「お客様にとって何が変わるか」**まで書くと読まれます。🚨 項目名（左のタイル）は**8文字まで**です。長い言葉は言い換えてください。よくある質問のセクションとは役割が違うので、同じページに両方置けます。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "よく使う言葉のご説明",
+        "subTitle": "GLOSSARY",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "ご案内の中で、つい使ってしまう言葉をまとめました。<br>ここに無い言葉が出てきたら、そのつど聞いてください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-lw-company-3",
+      "attributes": {
+        "dtBackgroundColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "spFullDt": true,
+        "contents": [
+          {
+            "term": "お見積り",
+            "desc": "お受けする前にお出しする金額の予定です。この金額を超えることはありません。<br>超えそうになったときは、作業に入る前に必ずご相談します。"
+          },
+          {
+            "term": "一式",
+            "desc": "細かい作業をひとまとめにした書き方です。<br>当社では原則として使いません。何にいくらかかっているか分からなくなり、あとで比べられなくなるためです。"
+          },
+          {
+            "term": "諸経費",
+            "desc": "駐車場代・ごみの処分費・書類の郵送代など、作業そのもの以外にかかる実費です。<br>お見積りの時点で内訳をお出しします。あとから足すことはしません。"
+          },
+          {
+            "term": "着手金",
+            "desc": "お受けするときに先にいただく費用です。材料の手配に使います。<br>当社は〇円を超えるご依頼のときだけいただいています。お受けできなかったときは全額お返しします。"
+          },
+          {
+            "term": "納期",
+            "desc": "お渡しできる日です。<br>「〇日ごろ」ではなく日にちでお約束します。間に合わないと分かった時点で、その日のうちにご連絡します。"
+          },
+          {
+            "term": "検収",
+            "desc": "お渡ししたものをご確認いただくことです。<br>ご確認のうえで問題がなければ、そこで作業が完了になります。ご確認の期間は〇日間としています。"
+          },
+          {
+            "term": "保証期間",
+            "desc": "お渡しのあと、無償で直す期間です。<br>当社は〇か月です。お使いになった上での不具合が対象で、故意の破損や消耗は含みません。"
+          },
+          {
+            "term": "スポット",
+            "desc": "契約を結ばずに、そのつどお受けする形です。<br>毎月決まった作業がある方は「顧問」のほうがお安くなることが多いので、どちらが得かは無料でお試算します。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※ここに書いた意味は当社での使い方です。同じ言葉でも会社によって指す範囲が違うことがありますので、他社さまのお見積りと比べるときはご注意ください。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1PaddingTopSp": 20,
+        "waku1PaddingBottomSp": 20,
+        "waku1PaddingLeftSp": 16,
+        "waku1PaddingRightSp": 16,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "分からない言葉が出てきたら",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "その場で「それはどういう意味ですか」とおっしゃってください。説明が足りていないのはこちらの落ち度で、聞き返していただいたほうが、あとの行き違いがなくなります。お電話でもメールでも、言葉の意味だけのお問い合わせで構いません。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "お問い合わせはこちら",
+        "textSub": "＼ 言葉の意味だけのご質問でも大丈夫です ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

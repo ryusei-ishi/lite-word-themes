@@ -17,6 +17,7 @@ import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
 import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
+import { lwRel, AffiliateToggle } from '../affiliate-link.js';
 
 /* リンク先の指定（共通部品）で使う属性名の対応 */
 const LINK_KEYS = { url: 'url', type: 'linkType', page: 'pageId', category: 'categoryId' };
@@ -67,6 +68,10 @@ registerBlockType(metadata.name, {
 							label="新しいタブで開く"
 							checked={openInNewTab}
 							onChange={() => setAttributes({ openInNewTab: !openInNewTab })}
+						/>
+						<AffiliateToggle
+							checked={attributes.isAffiliate}
+							onChange={(v) => setAttributes(v ? { isAffiliate: true, openInNewTab: true } : { isAffiliate: false })}
 						/>
 					</PanelBody>
 
@@ -309,7 +314,7 @@ registerBlockType(metadata.name, {
 
 	save: ({ attributes }) => {
 		const {
-			buttonText, url, openInNewTab,
+			buttonText, url, openInNewTab, isAffiliate,
 			fontSize, maxWidth, maxWidthSp,
 			backgroundColor, textColor,
 			paddingSize, innerPaddingSize,
@@ -336,7 +341,7 @@ registerBlockType(metadata.name, {
 					data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkType}
 					data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS).linkId}
 					target={openInNewTab ? '_blank' : undefined}
-					rel={openInNewTab ? 'noopener noreferrer' : undefined}
+					rel={lwRel({ newTab: openInNewTab, affiliate: isAffiliate })}
 					style={{
 						maxWidth: `${maxWidth}px`,
 						fontSize: `${fontSize}%`,

@@ -1,0 +1,143 @@
+{
+  "title": "よく見られているページ（無料・写真タイル4枚）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋写真の正方形タイル4枚（はじめての方へ／料金／よくあるご質問／アクセス）＋「それでも分からないときは」4件＋注釈＋相談ボタン。トップページの真ん中あたりに置いて、訪問者を知りたいページへ先に飛ばすための段です。サービス別ではなく目的別に並べてあるので、ページ数の少ないサイトでも埋まります。⚠️ タイルは正方形に切り取られます。中央に主役がある写真を選んでください。行き先はまだ入っていません。ブロックの設定から各ページのURLを入れると押せるようになります（空のままなら押せない箱として表示されます）。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "よく見られているページ",
+        "subTitle": "GUIDE",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "はじめての方からよくいただくご質問を、<br>4つのページにまとめています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-banner-info-04",
+      "attributes": {
+        "items": [
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/service_01.webp",
+            "alt": "テーブルでご相談を伺っているところ",
+            "title": "はじめての方へ",
+            "description": "ご相談から当日までの流れをご案内します",
+            "linkUrl": "",
+            "openInNewTab": false
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/pay_01.webp",
+            "alt": "受付カウンターに置かれたお会計のトレー",
+            "title": "料金について",
+            "description": "料金の考え方と、追加費用が出る場面",
+            "linkUrl": "",
+            "openInNewTab": false
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/menu_06.webp",
+            "alt": "テーブルをはさんで話しているふたりの手元",
+            "title": "よくあるご質問",
+            "description": "ご相談の前に多いご質問と、その答え",
+            "linkUrl": "",
+            "openInNewTab": false
+          },
+          {
+            "imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/works_03.webp",
+            "alt": "明るい待合スペースのベンチと観葉植物",
+            "title": "アクセス・営業時間",
+            "description": "道順・駐車場・お休みの日のご案内",
+            "linkUrl": "",
+            "openInNewTab": false
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "それでも分からないことがあったら",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-4",
+      "attributes": {
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colClass": "clm_2",
+        "contents": [
+          {
+            "text": "お電話でそのままご質問いただけます"
+          },
+          {
+            "text": "メールでのご相談は24時間受け付けています"
+          },
+          {
+            "text": "ご相談だけで終わっても費用はかかりません"
+          },
+          {
+            "text": "お名前を出さずにご相談いただいても構いません"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※内容によってはお答えに数日いただくことがあります。お急ぎのときは、その旨を書き添えてください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "相談してみる",
+        "btnTextSub": "＼ どのページを見ればいいか分からなくても大丈夫です ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

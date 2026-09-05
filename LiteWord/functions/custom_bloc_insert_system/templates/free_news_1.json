@@ -1,0 +1,112 @@
+{
+  "title": "お知らせ・新着情報（無料・自動で並ぶ3列カード＋色帯）",
+  "description": "【型C：写真が主役】見出し＋ひとこと＋投稿が自動で並ぶ3列カード6件（背景に色の帯）＋「お知らせに書くとよいこと」4件＋注釈＋一覧へのボタン。トップページの真ん中に置く「お知らせ区画」です。背景に薄い色の帯が敷かれるので、前後のセクションと切り分けて見せられます。中身は投稿から自動で入るので、文章を書く必要はありません（アイキャッチ画像も投稿のものが出ます）。🚨 このブロックは**同じページに2つ置けません**（2つ目が空のままになります）。同じページにお知らせを2か所置きたいときは、片方を別のお知らせセクションにしてください。🚨 件数は3の倍数にしてください（3列なので、半端だと最後の行が欠けて見えます）。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "お知らせ",
+        "subTitle": "NEWS",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "休業のご案内・料金の改定・新しいサービスのお知らせなど、<br>大事なことはこちらでお伝えしています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-post-list-2",
+      "attributes": {
+        "numberOfPosts": 6,
+        "categoryId": "",
+        "catBgColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "お知らせに書くとよいこと",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-4",
+      "attributes": {
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colClass": "clm_2",
+        "contents": [
+          {
+            "text": "年末年始・お盆・臨時のお休み"
+          },
+          {
+            "text": "料金や営業時間が変わるとき"
+          },
+          {
+            "text": "新しいサービスや商品を始めたとき"
+          },
+          {
+            "text": "受賞・掲載など、外から見て嬉しい出来事"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※お知らせが1件も無いと、この場所には何も出ません。公開前に1件だけでも投稿しておくと、空のまま見えることを防げます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "お知らせをすべて見る",
+        "btnTextSub": "＼ 過去のお知らせもこちらからご覧いただけます ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

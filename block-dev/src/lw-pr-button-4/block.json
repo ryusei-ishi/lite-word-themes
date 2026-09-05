@@ -23,6 +23,10 @@
 		"className": true
 	},
 	"attributes": {
+		"isAffiliate": {
+			"type": "boolean",
+			"default": false
+		},
 		"textMain": {
 			"type": "string",
 			"default": "0120-000-000",
@@ -290,15 +294,24 @@
 		},
 		"btnLinkType": {
 			"type": "string",
-			"default": "url"
+			"default": "url",
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"btnPageId": {
 			"type": "number",
-			"default": 0
+			"default": 0,
+			"aiHint": {
+				"skip": true
+			}
 		},
 		"btnCategoryId": {
 			"type": "number",
-			"default": 0
+			"default": 0,
+			"aiHint": {
+				"skip": true
+			}
 		}
 	},
 	"editorScript": "file:./lw-pr-button-4.js",

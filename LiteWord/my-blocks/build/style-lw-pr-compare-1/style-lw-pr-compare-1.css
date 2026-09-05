@@ -1,0 +1,88 @@
+/*!*************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/lw-pr-compare-1/style.scss ***!
+  \*************************************************************************************************************************/
+@charset "UTF-8";
+/* 条件チェックリスト 01（wdl/lw-pr-compare-1）
+ * ------------------------------------------------------------
+ * 🚨 項目は必ず全幅1本の行として描画する（狭い列に割らない）。
+ *    折り返し行数が項目ごとに違っても、左端のバー+バッジで揃って見える。
+ */
+.lw-pr-compare-1 {
+  margin-right: auto;
+  margin-left: auto;
+  max-width: var(--cmp1-max-width, 1040px);
+}
+.lw-pr-compare-1 .lw-pr-compare-1__tier {
+  margin-bottom: 32px;
+}
+.lw-pr-compare-1 .lw-pr-compare-1__tier:last-child {
+  margin-bottom: 0;
+}
+.lw-pr-compare-1 .lw-pr-compare-1__tier-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+.lw-pr-compare-1 .lw-pr-compare-1__badge {
+  flex: 0 0 auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  color: #fff;
+  font-size: 18px;
+  font-weight: bold;
+  line-height: 1;
+}
+@media (max-width: 750px) {
+  .lw-pr-compare-1 .lw-pr-compare-1__badge {
+    width: 34px;
+    height: 34px;
+    font-size: 16px;
+  }
+}
+.lw-pr-compare-1 .lw-pr-compare-1__tier-title {
+  margin: 0;
+  font-size: 19px;
+  font-weight: bold;
+  line-height: 1.5em;
+}
+@media (max-width: 750px) {
+  .lw-pr-compare-1 .lw-pr-compare-1__tier-title {
+    font-size: 17px;
+  }
+}
+.lw-pr-compare-1 .lw-pr-compare-1__rows {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lw-pr-compare-1 .lw-pr-compare-1__row {
+  border-left-width: 4px;
+  border-left-style: solid;
+  border-radius: 6px;
+  padding: 16px 20px;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.05);
+}
+@media (max-width: 750px) {
+  .lw-pr-compare-1 .lw-pr-compare-1__row {
+    padding: 13px 16px;
+  }
+}
+.lw-pr-compare-1 .lw-pr-compare-1__row-text {
+  display: block;
+  font-size: 16px;
+  line-height: 1.85em;
+}
+@media (max-width: 750px) {
+  .lw-pr-compare-1 .lw-pr-compare-1__row-text {
+    font-size: 15px;
+    line-height: 1.8em;
+  }
+}

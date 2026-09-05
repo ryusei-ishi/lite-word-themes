@@ -14,7 +14,8 @@
 		"excludeFromAutoSelect": true,
 		"contentAttributes": [],
 		"imageAttributes": [],
-		"excludeReason": "InnerBlocksコンテナ。AI直接生成非推奨"
+		"excludeReason": "InnerBlocksコンテナ。AI直接生成非推奨",
+		"notes": "中身を自由に入れられる「箱を並べる器」。1〜3列（`columnsPc` / `columnsSp`）で、箱ごとに地色・枠線・角丸・内側の余白を付けられる。決まった形のブロックが無いもの（「選ぶときの物差し4つ」「向いている人／向いていない人」「注意書きの帯」など）を組むときに使う。🚨 **`itemBgNone` の既定は true**（2026-09-03 実測）。地色を敷くには `itemBgNone: false` にしてから`itemBgTypePc: \"solid\"` ＋ `itemBgColorPc` を渡す。false にしないと `--column-1-item-bg-pc: transparent` のまま出る。🚨 スマホは `columnsSp` で決める（既定 2）。写真つきの箱を入れるなら 375px で1枠200px以上を確保するため 1 にする。🚨 箱の中に `core/list` を入れない（描画ハーネスが未対応・テーマの reset.css が点と字下げを消す）。箇条書きは `・` ＋ `<br>` の1段落で組む。"
 	},
 	"supports": {
 		"anchor": true,

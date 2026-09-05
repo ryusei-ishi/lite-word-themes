@@ -1,48 +1,82 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "wdl/custom-title-3",
-	"version": "1.0.0",
-	"title": "見出しタイトル 03",
-	"category": "lw-heading",
-	"icon": "editor-textcolor",
-	"description": "メインタイトルとサブタイトルを表示する見出しブロック（アクセントカラー付き）",
-	"supports": {
-		"anchor": true
-	},
-	"aiHint": {
-		"description": "アクセントカラー付き見出し。メインタイトル+サブタイトル。左寄せ対応。装飾的な見出しに",
-		"excludeFromAutoSelect": false,
-		"contentAttributes": ["mainTitle", "subTitle"],
-		"imageAttributes": []
-	},
-	"attributes": {
-		"mainTitle": {
-			"type": "string",
-			"default": "CONTENT",
-			"aiHint": { "role": "heading", "contentGuide": "セクション見出し（英語 or 日本語）。3〜15文字", "example": "ABOUT US" }
-		},
-		"subTitle": {
-			"type": "string",
-			"default": "テキストテキストテキストテキスト<br>テキストテキキストテキスト",
-			"aiHint": { "role": "subheading", "contentGuide": "補足説明テキスト。20〜50文字。改行可", "example": "お客様に選ばれ続ける理由を<br>ご紹介します" }
-		},
-		"textAlignment": {
-			"type": "string",
-			"default": "left",
-			"aiHint": { "skip": true }
-		},
-		"accentColor": {
-			"type": "string",
-			"default": "var(--color-main)",
-			"aiHint": { "skip": true }
-		},
-		"headingLevel": {
-			"type": "number",
-			"default": 2,
-			"aiHint": { "skip": true }
-		}
-	},
-	"editorScript": "file:./custom-title-3.js",
-	"no": 3
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "wdl/custom-title-3",
+    "version": "1.0.0",
+    "title": "見出しタイトル 03",
+    "category": "lw-heading",
+    "icon": "editor-textcolor",
+    "description": "メインタイトルとサブタイトルを表示する見出しブロック（アクセントカラー付き）",
+    "supports": {
+        "anchor": true
+    },
+    "aiHint": {
+        "description": "アクセントカラー付き見出し。メインタイトル+サブタイトル。左寄せ対応。装飾的な見出しに",
+        "excludeFromAutoSelect": false,
+        "contentAttributes": [
+            "mainTitle",
+            "subTitle"
+        ],
+        "imageAttributes": [],
+        "notes": "見た目は「大きな主題 → 色の棒 → 説明文」。主題は 3em（PC 60px）、600px以下で 2.4em（48px）。🚨 **48px は 375px だと5文字で画面いっぱい**になる（327pxしかない）。日本語の見出しには大きすぎるので、2026-09-01 に `mainFontSizePc` / `mainFontSizeSp`（px・0なら既定のまま）を足した。**スマホは 28〜32px にする。**（Ryuichi 指摘「スマホの時、見出しの文字が大きすぎますね」）🚨 主題は短く（2〜6文字）。説明は subTitle 側に書く。✅ accentColor には `var(--color-main)` を渡してよい（lw-pr-custom-title-11〜14 と違い、テーマと同名のCSS変数に入れる作りではないので自己参照にならない）。"
+    },
+    "attributes": {
+        "mainTitle": {
+            "type": "string",
+            "default": "CONTENT",
+            "aiHint": {
+                "role": "heading",
+                "contentGuide": "セクション見出し（英語 or 日本語）。3〜15文字",
+                "example": "ABOUT US"
+            }
+        },
+        "subTitle": {
+            "type": "string",
+            "default": "テキストテキストテキストテキスト<br>テキストテキキストテキスト",
+            "aiHint": {
+                "role": "subheading",
+                "contentGuide": "補足説明テキスト。20〜50文字。改行可",
+                "example": "お客様に選ばれ続ける理由を<br>ご紹介します"
+            }
+        },
+        "textAlignment": {
+            "type": "string",
+            "default": "left",
+            "aiHint": {
+                "skip": true
+            }
+        },
+        "accentColor": {
+            "type": "string",
+            "default": "var(--color-main)",
+            "aiHint": {
+                "skip": true
+            }
+        },
+        "headingLevel": {
+            "type": "number",
+            "default": 2,
+            "aiHint": {
+                "skip": true
+            }
+        },
+        "mainFontSizePc": {
+            "type": "number",
+            "default": 0,
+            "aiHint": {
+                "role": "size",
+                "contentGuide": "主題の文字の大きさ（PC・px）。0 なら既定の 60px"
+            }
+        },
+        "mainFontSizeSp": {
+            "type": "number",
+            "default": 0,
+            "aiHint": {
+                "role": "size",
+                "contentGuide": "主題の文字の大きさ（スマホ・px）。0 なら既定の 48px。🚨 既定の 48px は 375px だと5文字で画面いっぱいになる。日本語の見出しは 28〜32px にする"
+            }
+        }
+    },
+    "editorScript": "file:./custom-title-3.js",
+    "no": 3
 }

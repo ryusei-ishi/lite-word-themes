@@ -1,0 +1,20 @@
+/*!**************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/lw-pr-product-1/editor.scss ***!
+  \**************************************************************************************************************************/
+@charset "UTF-8";
+/* 編集画面だけの見た目（保存されるHTMLには出ない） */
+.lw-pr-product-1 .lw-pr-product-1__imgpick {
+  display: block;
+  width: 100%;
+  padding: 24px 8px;
+  font-size: 12px;
+  line-height: 1.6;
+  color: #757575;
+  background: #f5f5f5;
+  border: 1px dashed #c7c7c7;
+  border-radius: 6px;
+  cursor: pointer;
+}
+.lw-pr-product-1 .lw-pr-product-1__shop {
+  cursor: default;
+}

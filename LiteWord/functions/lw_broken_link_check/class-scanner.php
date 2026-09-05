@@ -195,10 +195,18 @@ class LW_Broken_Link_Check_Scanner {
             // 元のHTMLタグを保存
             $full_tag = $dom->saveHTML($anchor);
 
+            // 広告リンク（アフィリエイト）かどうか。
+            // rel に sponsored が入っているものだけを広告として扱う。
+            // ボタン系ブロックの「広告リンク」設定・商品リンク 01・ランキング 01・
+            // 文中リンクの書式ボタン、どれも同じ印が付くのでこれ1つで拾える。
+            $rel   = $anchor->hasAttribute('rel') ? strtolower($anchor->getAttribute('rel')) : '';
+            $is_ad = in_array('sponsored', preg_split('/\s+/', trim($rel), -1, PREG_SPLIT_NO_EMPTY), true) ? 1 : 0;
+
             $links[] = array(
                 'href'       => $href,
                 'text'       => self::trim_text($text, 100),
                 'full_tag'   => $full_tag,
+                'is_ad'      => $is_ad,
                 'link_index' => $link_index, // コンテンツ内での出現順（0始まり）
             );
 

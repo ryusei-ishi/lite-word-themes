@@ -1,0 +1,160 @@
+{
+  "title": "追加料金・オプションについて（無料・写真ゼロ）",
+  "description": "【型A：表が主役】見出し＋ひとこと＋追加になる場面と金額の表5項目＋「これは追加になりません」とお約束する4件＋注釈＋見積りボタン。料金表（料金・メニュー）とセットで料金ページに置く段です。「増える話」と「増えない話」を並べてあるので、不安をあおるだけになりません。小さなトラブルはほとんどここで起きるので、先に書いておくほど問い合わせが楽になります。写真を1枚も使いません。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "追加料金について",
+        "subTitle": "OPTION",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "あとから「聞いていない」となるのがいちばん困りますので、<br>追加の費用がかかる場面を先に書いておきます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "追加になるのはこんなときです",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-company-2",
+      "attributes": {
+        "spFullDt": true,
+        "items": [
+          {
+            "dt": "お急ぎのご依頼",
+            "dd": "3日以内にお受けする場合は20%増しになります。ご相談の時点でその旨をお伝えし、通常の日程でよいかどうかを必ずお選びいただきます"
+          },
+          {
+            "dt": "出張の距離",
+            "dd": "市内は基本料金に含まれます。市外は片道10kmごとに1,500円。片道30kmを超えるときは、お受けする前にお見積りをお出しします"
+          },
+          {
+            "dt": "材料・部材",
+            "dd": "実費をそのままいただきます。仕入れの伝票をお見せできます。当社で利益を乗せることはしていません"
+          },
+          {
+            "dt": "時間の延長",
+            "dd": "30分ごとに2,000円。延びそうなときは、延ばすかどうかをその場でおうかがいしてから続けます"
+          },
+          {
+            "dt": "休日・夜間",
+            "dd": "日曜・祝日と18時以降は30%増しになります。平日の日中にずらせるご依頼は、そちらをおすすめしています"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "これは追加になりません",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-4",
+      "attributes": {
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colClass": "clm_1",
+        "contents": [
+          {
+            "text": "お見積り・現地の確認・ご相談は、何度でも無料です。お断りいただいても費用はかかりません"
+          },
+          {
+            "text": "作業のあとに出たごみの持ち帰りは、基本料金に含まれています"
+          },
+          {
+            "text": "当社の見込み違いで時間が延びたぶんは、いただきません"
+          },
+          {
+            "text": "お渡ししたあとのご質問は、期限を決めずに無料でお受けします"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※追加になりそうなときは、その場で必ず金額をお伝えし、進めるかどうかをお決めいただいてから続けます。黙って足すことはありません。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "見積りをお願いする",
+        "btnTextSub": "＼ 追加が出そうかどうかも先にお伝えします ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

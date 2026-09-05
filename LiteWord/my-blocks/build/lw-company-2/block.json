@@ -7,10 +7,13 @@
 	"category": "lw-table",
 	"icon": "building",
 	"aiHint": {
-		"description": "会社概要テーブル（背景色付きdt）。項目名+内容の定義リスト。不動産・士業の会社情報に",
+		"description": "項目名に薄い背景が付く定義リストの表。会社概要のほか、店舗情報・募集要項・特定商取引法に基づく表記のように「項目と内容」を並べたいところ全般に使える",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["items"],
-		"imageAttributes": []
+		"contentAttributes": [
+			"items"
+		],
+		"imageAttributes": [],
+		"notes": "🚨 **`spFullDt: true` は必ず入れる。** 700px 以下で「項目名が上・内容が下」の縦積みになり、スマホで読めるようになる。入れないと項目名の列が 112px に固定され、内容が細い列に押し込まれて何行にも折れる。📌 **`dtWidthClass` はどれを選んでも `spFullDt` が効く（2026-08-31 に直した）。**それ以前のテーマでは `dt_width_l` / `dt_width_s` を選ぶと CSS の詳細度が同点で後勝ちになり、縦積みが打ち消されてスマホでも2列のまま残っていた。🚨 **項目名の幅は `dt_width_m`（既定）で 180px、`dt_width_l` で 220px、`dt_width_s` で 140px。**左右1emの余白を引くと、既定では **項目名は8文字まで**。長い項目名は言い換える（「商品代金以外の費用」→「代金以外の費用」）。`items` は **[{dt, dd}]**（`lw-company-1` の `contents` とはキーが違うので取り違えやすい）。dd は RichText なので `<br>` が使える。✅ 色の罠は無い（dt背景 #f0f0f0・文字 #000・枠 #ccc の無彩色が既定なので、そのままでよい）。自前で `margin: 2em auto` を持つので前後にスペーサーを足さない。📌 **項目名の列幅は入れ物の幅で3段に変わる**（2026-08-31 に既定の段を直した）: `dt_width_m`（既定）180px → 700px以下 128px → 500px以下 112px ／ `dt_width_l` 220 → 800以下 198 → 500以下 174 ／ `dt_width_s` 140 → 800以下 128 → 500以下 112。⚠️ 切り替えは `@media` ではなく **`@container`（入れ物の幅）**なので、画面幅ではなく本文カラムの幅で決まる。`spFullDt: true` を入れておけば 700px 以下は縦積みになるので、この幅の話は効かなくなる。"
 	},
 	"supports": {
 		"anchor": true

@@ -1,0 +1,38 @@
+{
+  "title": "お問い合わせへの導線（無料・背景写真の帯＋ボタン1つ）",
+  "description": "【型B：説明が主役】画面いっぱいの背景写真の帯に、見出し・ひとこと・ボタン1つ。ページの途中や一番下に置く「締め」の段です。**1ブロックで出来ている**ので、直すところはブロックの設定パネル1か所だけです。🚨 このブロックは見出し（h2）を自分で持っています。**上に別の見出しを重ねないでください。**🚨 ボタンのリンク先は必ずお問い合わせページに設定してください（初期値は「#」です）。背景写真は**横長で、中央に写っているものが主役**のものにしてください。スマホでは**中央あたりしか表示されません**（左右は切り落とされます）。また、白い壁や窓のような明るい面が中央に来ると白い文字が読めなくなるので、**全体が中くらいの明るさ**の写真を選んでください。ページの一番下に置いてフッターにぴったり付けたいときは、下のスペーサーブロックを削除してください。**無料ブロックだけで作ってあります。**",
+  "blocks": [
+    {
+      "name": "wdl/cta-1",
+      "attributes": {
+        "headingLevel": 2,
+        "title": "どこに相談すればいいか<br>分からない、で構いません",
+        "text": "いま困っていることを、そのままの言葉で聞かせてください。順番に整理して、やるべきこととやらなくていいことをお伝えします。ご相談だけで終わっていただいても、費用はいただきません。",
+        "buttonText": "相談してみる",
+        "buttonUrl": "#",
+        "buttonLinkType": "url",
+        "openInNewTab": false,
+        "imageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/salon_cta_bg_02.webp",
+        "imageAlt": "店内の様子",
+        "filterColor": "color-mix(in srgb, color-mix(in srgb, var(--color-main) 45%, #000) 62%, transparent)",
+        "buttonBackgroundColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "buttonBorderColor": "#ffffff",
+        "buttonBorderSize": 1,
+        "buttonMaxWidth": 280,
+        "pcTextAlign": "center",
+        "mobileTextAlign": "center",
+        "maxWidth": 0
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

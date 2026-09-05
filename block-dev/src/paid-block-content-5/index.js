@@ -41,6 +41,7 @@ registerBlockType(metadata.name, {
             contsMaxWidth,
             spTitleFont, spTitleFontWeight,
             pcTitleColor, spTitleColor,
+            imgLabel, spImageBottom,
         } = attributes;
 
         /* ========== ハンドラ ========== */
@@ -119,6 +120,46 @@ registerBlockType(metadata.name, {
                             label="SPタイトルの文字色"
                             value={ spTitleColor }
                             onChange={ setAttr('spTitleColor') }
+                        />
+                    </PanelBody>
+
+                    {/* ▶ 画像の見せ方（2026-09-01 追加）
+                        ・ラベル … 写真の上に名前や肩書きを出す小さな帯
+                        ・スマホで画像を下に … 上に別の写真（FVなど）が来るときに、
+                          写真が2枚続いて見えるのを避ける */}
+                    <PanelBody title="画像の見せ方" initialOpen>
+                        <TextControl
+                            label="画像の上に出すラベル"
+                            help="名前や肩書きなど。空なら出ません。"
+                            value={ imgLabel }
+                            onChange={ setAttr('imgLabel') }
+                            placeholder="例）代表　山田 太郎"
+                        />
+                        <ToggleControl
+                            label="スマホのとき、画像をテキストの下に置く"
+                            help="上に別の写真がある場合に、写真が2枚続いて見えるのを避けられます。"
+                            checked={ !! spImageBottom }
+                            onChange={ (v)=>setAttributes({ spImageBottom: !! v }) }
+                        />
+                    </PanelBody>
+
+                    {/* ▶ 画像の見せ方（2026-09-01 追加）
+                        ・ラベル … 写真の上に名前や肩書きを出す小さな帯
+                        ・スマホで画像を下に … 上に別の写真（FVなど）が来るときに、
+                          写真が2枚続いて見えるのを避ける */}
+                    <PanelBody title="画像の見せ方" initialOpen>
+                        <TextControl
+                            label="画像の上に出すラベル"
+                            help="名前や肩書きなど。空なら出ません。"
+                            value={ imgLabel }
+                            onChange={ setAttr('imgLabel') }
+                            placeholder="例）代表　山田 太郎"
+                        />
+                        <ToggleControl
+                            label="スマホのとき、画像をテキストの下に置く"
+                            help="上に別の写真がある場合に、写真が2枚続いて見えるのを避けられます。"
+                            checked={ !! spImageBottom }
+                            onChange={ (v)=>setAttributes({ spImageBottom: !! v }) }
                         />
                     </PanelBody>
 
@@ -282,6 +323,7 @@ registerBlockType(metadata.name, {
             contsMaxWidth,
             spTitleFont, spTitleFontWeight,
             pcTitleColor, spTitleColor,
+            imgLabel, spImageBottom,
         } = attributes;
 
         /* 代入ロジック */
@@ -295,7 +337,9 @@ registerBlockType(metadata.name, {
             : { maxWidth: `${contsMaxWidth}px` };
 
         const blockProps = useBlockProps.save({
-            className: 'paid-block-content-5',
+            /* 🚨 既定（false）のときは 'paid-block-content-5' のまま＝**出力は1文字も変わらない**。
+               既存ページ（top/ptn_8 ほか）が「ブロックに問題があります」にならないための形。 */
+            className: 'paid-block-content-5' + ( spImageBottom ? ' is_sp_img_bottom' : '' ),
         });
 
         return (
@@ -323,6 +367,12 @@ registerBlockType(metadata.name, {
                                 style={{ fontWeight: spTitleFontWeight, color: spTitleColor }}
                                 data-lw_font_set={ spTitleFont }
                                 dangerouslySetInnerHTML={{ __html: finalSpTitle }}
+                            />
+                        )}
+                        { imgLabel && (
+                            <span
+                                className="img_label"
+                                dangerouslySetInnerHTML={{ __html: imgLabel }}
                             />
                         )}
                     </figure>

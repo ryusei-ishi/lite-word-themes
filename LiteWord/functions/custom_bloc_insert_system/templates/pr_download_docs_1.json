@@ -1,0 +1,283 @@
+{
+  "title": "各種書類のダウンロード（書類の一覧＋ダウンロードボタン3つ）",
+  "description": "【型A：表が主役】見出し＋ひとこと＋書類の一覧5件（どんなときに使うか）＋ダウンロードボタン3つ＋注釈＋「印刷できない方へ」の囲い＋お問い合わせボタン。**すでにお付き合いのあるお客様が、手続きの書類を取りに来る場所**です。申込書・同意書・料金表を置いておくだけで、「送ってください」と言われるたびに探して添付する往復が丸ごと消えます。🚨 ボタンだけを並べないでください。上の表があるから、どれを落とせばいいか分かります。🚨 ボタンのリンク先にPDFのURLを入れてください（未設定のボタンは押しても何も起きません）。🚨 書類は最新のものに差し替えてください。古い様式で提出されると差し戻しになります。営業資料を1つ持ち帰らせる「資料ダウンロード」のセクションとは読み手が違うので、別のページに置くことをおすすめします。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "各種書類のダウンロード",
+        "subTitle": "DOWNLOAD",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お手続きに使う書類です。印刷してご記入のうえ、<br>ご来店・郵送・メールのいずれかでお出しください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 200,
+        "dtWidthSp": 150,
+        "defaultSpClm1": true,
+        "dlBorderColor": "#dddddd",
+        "rowBorderColor": "#dddddd",
+        "dtBorderColor": "#dddddd",
+        "dtBgColor": "#f5f7f9",
+        "fontSizePc": 17,
+        "fontSizeSp": 15,
+        "cellPaddingPc": 16,
+        "rows": [
+          {
+            "dtText": "お申し込み書",
+            "ddText": "はじめてご利用になるときに1枚。ご記入は表面だけで結構です。押印は不要です",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "同意書",
+            "ddText": "お申し込み書と一緒にお出しください。未成年の方は保護者さまのご署名が必要です",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "料金表",
+            "ddText": "ご検討の段階でお使いください。2026年〇月からの金額です。それより前の版は無効です",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "変更のお届け",
+            "ddText": "ご住所・お電話番号・お支払い方法が変わったときに。変更の1週間前までにお出しください",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "解約のお申し出",
+            "ddText": "ご利用をやめるときに。当月末で止める場合は、その月の〇日までにお出しください",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "よく使う書類はこちらから",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-5",
+      "attributes": {
+        "textMain": "お申し込み書（PDF）",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "bgColorHover": "color-mix(in srgb, var(--color-main) 40%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 12,
+        "tbHeight": 12,
+        "spHeight": 12
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-5",
+      "attributes": {
+        "textMain": "同意書（PDF）",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "bgColorHover": "color-mix(in srgb, var(--color-main) 40%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 12,
+        "tbHeight": 12,
+        "spHeight": 12
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-5",
+      "attributes": {
+        "textMain": "料金表（PDF）",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "bgColorHover": "color-mix(in srgb, var(--color-main) 40%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※PDFをご覧いただくにはAdobe Acrobat Readerなどの閲覧ソフトが必要です。開けないときはご連絡ください。別の形式でお送りします。",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1PaddingTopSp": 20,
+        "waku1PaddingBottomSp": 20,
+        "waku1PaddingLeftSp": 16,
+        "waku1PaddingRightSp": 16,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "印刷できない方へ",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "ご自宅にプリンターが無い方には、書類を郵送します。お電話かメールで、お名前・ご住所・必要な書類の名前をお知らせください。当日中に発送します（送料はいただきません）。店頭にも同じものをご用意していますので、お越しの際にお声がけいただいても結構です。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "お問い合わせはこちら",
+        "textSub": "＼ 書類の書き方もお電話でご案内します ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

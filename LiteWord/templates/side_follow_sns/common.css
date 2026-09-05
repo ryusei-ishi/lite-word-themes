@@ -1,0 +1,48 @@
+.side_follow_sns {
+  position: fixed;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 800;
+  max-height: 80vh;
+}
+.side_follow_sns.pos-left {
+  left: 0;
+}
+.side_follow_sns.pos-right {
+  right: 0;
+}
+.side_follow_sns .sns_links ul {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.side_follow_sns .sns_links ul li {
+  list-style: none;
+}
+.side_follow_sns .sns_links ul li a {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+}
+.side_follow_sns .sns_links ul li a svg {
+  width: 20px;
+  height: 20px;
+  flex-shrink: 0;
+}
+@media (max-width: 600px) {
+  .side_follow_sns .sns_links ul li a svg {
+    width: 16px;
+    height: 16px;
+  }
+}
+/* レスポンシブ表示切替（追従CTAと同じ命名・同じブレークポイント） */
+@media (min-width: 1081px) {
+  .lw_side_sns_sp_only { display: none !important; }
+}
+@media (max-width: 1080px) {
+  .lw_side_sns_pc_only { display: none !important; }
+}

@@ -13,7 +13,8 @@
 		"contentAttributes": [
 			"button6Buttons"
 		],
-		"imageAttributes": []
+		"imageAttributes": [],
+		"notes": "✅ **`url` が空でも `href=\"#\"` に落ちる**（`lw-button-03` と違って安全）。🚨 **枠線 `button6BorderColor` と矢印 `button6ArrowColor` の既定が `var(--color-main)`。**背景は白・文字は黒なので読めなくなりはしないが、明るいサイト色だと**枠線が消えてボタンに見えない**。`color-mix(in srgb, var(--color-main) 50%, #000)` にする。`button6Buttons` は `[{text, linkType, url, isBlank}]`（`textMain` ではない）。3つ以上並べるなら `button6ColumnsPc` を明示する（既定は2）。スマホは1列のままにするのが読みやすい。矢印を出すなら `button6ShowArrow: true`。"
 	},
 	"supports": {
 		"anchor": true,
@@ -25,30 +26,25 @@
 			"default": [
 				{
 					"text": "リンクテキスト",
-					"linkType": "url",
 					"url": "",
 					"isBlank": false
 				},
 				{
 					"text": "リンクテキスト",
-					"linkType": "url",
 					"url": "",
 					"isBlank": false
 				}
 			],
 			"aiHint": {
 				"role": "list",
-				"contentGuide": "ボタン配列。各要素に text(4〜15文字) とリンク先を設定。2〜4個。リンク先は linkType で決める: \"url\"=url に直接URL / \"page\"=pageId に固定ページのID / \"category\"=categoryId にカテゴリーID。linkType を省略した場合は \"url\" として扱われる。",
+				"contentGuide": "ボタン配列。各要素に text(4〜15文字) と url を設定。2〜4個",
 				"example": [
 					{
 						"text": "サービス紹介",
-						"linkType": "url",
 						"url": "/service/"
 					},
 					{
 						"text": "料金プラン",
-						"linkType": "page",
-						"pageId": 12,
 						"url": "/pricing/"
 					}
 				]

@@ -1,0 +1,151 @@
+@charset "UTF-8";
+
+/*
+ * List 08（lw-pr-list-8）
+ * List 05（lw-pr-list-5）との違いはここだけ：画像を object-fit:cover でリスト側の
+ * 高さいっぱいに敷き詰める。List 05 は img が幅基準の縦横比のまま表示されるため、
+ * リスト側のほうが背が高いとき画像の下に空白ができていた（2026-09-04・Ryuichi指摘）。
+ * 🚨 スマホ幅（799px以下・1列積み）では「高さを合わせる相手」が無くなるので、
+ *    heightがautoの親に対してimgをheight:100%にすると潰れて0pxになる。
+ *    その幅だけ元の縦横比表示（height:auto）に戻す。
+ */
+.lw-pr-list-8 {
+  container-type: inline-size;
+  margin: 24px 0;
+}
+
+.lw-pr-list-8 * {
+  box-sizing: border-box;
+}
+
+.lw-pr-list-8.columns-1 .list_items_inner > ul {
+  max-width: 100%;
+  min-width: 0;
+}
+
+.lw-pr-list-8 .lw-pr-list-8_wrap {
+  margin: 0 auto;
+  max-width: 800px;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  font-size: 18px;
+}
+
+@container (max-width: 1200px) {
+  .lw-pr-list-8 .lw-pr-list-8_wrap {
+    font-size: 17px;
+  }
+}
+
+@container (max-width: 1000px) {
+  .lw-pr-list-8 .lw-pr-list-8_wrap {
+    font-size: 16px;
+  }
+}
+
+@container (max-width: 799px) {
+  .lw-pr-list-8 .lw-pr-list-8_wrap {
+    font-size: 17px;
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+@container (max-width: 600px) {
+  .lw-pr-list-8 .lw-pr-list-8_wrap {
+    font-size: 16px;
+  }
+}
+
+.lw-pr-list-8 .lw-pr-list-8_wrap .list_items {
+  display: flex;
+  align-items: center;
+  background: var(--list_items_bg_color, #f7f7f7);
+}
+
+.lw-pr-list-8 .lw-pr-list-8_wrap .list_items .list_items_inner {
+  padding: 24px;
+  min-width: 100%;
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+}
+
+@container (max-width: 500px) {
+  .lw-pr-list-8 .lw-pr-list-8_wrap .list_items .list_items_inner {
+    padding: 20px;
+  }
+}
+
+.lw-pr-list-8 .lw-pr-list-8_wrap .list_items .list_items_inner > ul {
+  min-width: 40%;
+  display: grid;
+  gap: 0.3em;
+}
+
+@container (max-width: 500px) {
+  .lw-pr-list-8 .lw-pr-list-8_wrap .list_items .list_items_inner > ul {
+    min-width: 45%;
+  }
+}
+
+.lw-pr-list-8 .lw-pr-list-8_wrap .list_items .list_items_inner > ul:has(+ ul) {
+  max-width: 50%;
+}
+
+.lw-pr-list-8 .lw-pr-list-8_wrap .list_items .list_items_inner > ul > li {
+  position: relative;
+  padding-left: 1.2em;
+  color: var(--list_items_color, var(--color-main));
+  line-height: 1.8em;
+}
+
+.lw-pr-list-8 .lw-pr-list-8_wrap .list_items .list_items_inner > ul > li::before {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "・";
+}
+
+.lw-pr-list-8 .lw-pr-list-8_wrap .list_items .list_items_inner > ul > li.list-item-add {
+  padding-left: 0;
+}
+
+.lw-pr-list-8 .lw-pr-list-8_wrap .list_items .list_items_inner > ul > li.list-item-add::before {
+  display: none;
+}
+
+/* 🚨 ここが List 05 との差分。.image を flex にして img を高さいっぱいに伸ばし、
+   object-fit:cover でトリミングする（下に空白を残さない）。 */
+.lw-pr-list-8 .lw-pr-list-8_wrap .image {
+  display: flex;
+  min-height: 0;
+}
+
+.lw-pr-list-8 .lw-pr-list-8_wrap .image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* スマホは1列積みになり「高さを合わせる相手」が無くなるため、通常の縦横比表示に戻す */
+@container (max-width: 799px) {
+  .lw-pr-list-8 .lw-pr-list-8_wrap .image img {
+    height: auto;
+    object-fit: initial;
+  }
+}
+
+.lw-pr-list-8 .list-item-remove {
+  position: absolute;
+  top: 7px;
+  right: -15px;
+  padding: 0;
+  padding-bottom: 1px;
+  height: 14px;
+  width: 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 0;
+}

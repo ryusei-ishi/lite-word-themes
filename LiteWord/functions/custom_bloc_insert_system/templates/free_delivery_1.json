@@ -1,0 +1,207 @@
+{
+  "title": "配送・送料・お届けについて（無料・梱包の写真3枚）",
+  "description": "【型A：表が主役】見出し＋ひとこと＋梱包の様子の写真3枚（大小のモザイク）＋送料とお届け日数の表6項目＋「こんなときは」4件＋注釈＋お問い合わせボタン。品物を送る商売（工房・食品・花・古書・リペア・産直）の通販ページに置く段です。🚨 買う前にいちばん気にされるのは「送料はいくらか」「いつ届くか」「どんな状態で届くか」の3つなので、その3つだけに絞ってあります。法律で書かなければならない項目は「特定商取引法に基づく表記」のセクションが別にありますので、両方置いてください。金額と日数は例です。必ずご自身の条件に書き換えてください。写真は3枚とも差し替えられます（1枚目だけ大きく出ます）。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "配送とお届け",
+        "subTitle": "DELIVERY",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "送料と、お届けまでの日数をまとめました。<br>割れやすいうつわですので、包み方も写真でご覧いただけます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-image-2",
+      "attributes": {
+        "maxWidthPx": 800,
+        "alignClass": "center",
+        "items": [
+          {
+            "imgSrc": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/ship_01.webp",
+            "altText": "木の作業台の上で、クラフト箱に薄紙を折り入れているところ",
+            "text": "ひとつずつ手で包みます",
+            "fColor": "#000000",
+            "fOpac": 0.22,
+            "fBlend": "normal"
+          },
+          {
+            "imgSrc": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/ship_02.webp",
+            "altText": "薄紙と緩衝材でくるまれた品物が箱に収まっている",
+            "text": "二重の緩衝材",
+            "fColor": "#000000",
+            "fOpac": 0.22,
+            "fBlend": "normal"
+          },
+          {
+            "imgSrc": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/ship_03.webp",
+            "altText": "リボンをかけたクラフト箱と、無地のカード",
+            "text": "無料の包装",
+            "fColor": "#000000",
+            "fOpac": 0.22,
+            "fBlend": "normal"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "送料とお届けの日数",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-company-2",
+      "attributes": {
+        "spFullDt": true,
+        "items": [
+          {
+            "dt": "送料",
+            "dd": "全国一律 800円（北海道・沖縄・離島は 1,300円）"
+          },
+          {
+            "dt": "送料無料",
+            "dd": "10,000円以上お買い上げで無料になります。あと少しで無料になるときは、買い物かごの画面でお知らせします"
+          },
+          {
+            "dt": "お届け日数",
+            "dd": "ご入金の確認から2〜4日でお届けします。<br>北海道・沖縄・離島は5〜7日いただきます"
+          },
+          {
+            "dt": "時間の指定",
+            "dd": "午前中／14〜16時／16〜18時／18〜20時／19〜21時からお選びいただけます。ご注文の備考欄にお書きください"
+          },
+          {
+            "dt": "配送業者",
+            "dd": "ヤマト運輸の宅急便でお送りします。発送しましたらお問い合わせ番号をメールでお知らせします"
+          },
+          {
+            "dt": "梱包",
+            "dd": "一点ずつ薄紙で包み、緩衝材を入れた箱でお送りします。包装紙とカードは無料です（ご注文の備考欄にご希望をお書きください）"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "こんなときは",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-4",
+      "attributes": {
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colClass": "clm_1",
+        "contents": [
+          {
+            "text": "ご不在で持ち帰りになった場合は、配送業者の不在票から再配達をご依頼ください"
+          },
+          {
+            "text": "割れて届いた場合は、箱と品物をそのままにして3日以内にご連絡ください。送り直しの送料はいただきません"
+          },
+          {
+            "text": "住所を間違えて注文された場合は、発送前ならお直しできます。発送後は転送の実費をご負担いただきます"
+          },
+          {
+            "text": "海外への発送も承っています。国と品数で送料が変わりますので、先にお問い合わせください"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※金額・日数・配送業者は例です。必ずご自身の条件に書き換えてください。<br>※法律で表示が必要な項目は「特定商取引法に基づく表記」のセクションに書いてください。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "配送について問い合わせる",
+        "btnTextSub": "＼ まとめ買い・海外発送もご相談ください ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

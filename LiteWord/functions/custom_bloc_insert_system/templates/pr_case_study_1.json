@@ -1,0 +1,160 @@
+{
+  "title": "導入事例（1件を深く・課題から結果まで）",
+  "description": "【型B：説明が主役】見出し＋ひとこと＋お客様の概要の表4項目＋「課題 → ご提案 → 結果」の3段＋同じ悩みの方への導線。写真を1枚も使いません。お客様の声（感想）とは別で、こちらは当社が何をしたかが主語になります。BtoB・士業・制作業・設備業のように、決めるまでに時間がかかる商売で効きます。事例を増やすときは「課題→ご提案→結果」のブロックを複製してください（自動で間隔があきます）。⚠️ 段の番号は半角2桁（01・02・03）にしてください。全角2文字にすると枠からはみ出します。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "導入事例",
+        "subTitle": "CASE STUDY",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "実際にご依頼いただいた1件を、はじめから終わりまでそのまま書きました。<br>同じような状況の方の参考になれば幸いです。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-2",
+      "attributes": {
+        "dtFixedPc": true,
+        "dtWidthPc": 200,
+        "dtWidthSp": 150,
+        "defaultSpClm1": true,
+        "dlBorderColor": "#dddddd",
+        "rowBorderColor": "#dddddd",
+        "dtBorderColor": "#dddddd",
+        "dtBgColor": "#f5f7f9",
+        "fontSizePc": 17,
+        "fontSizeSp": 15,
+        "cellPaddingPc": 16,
+        "rows": [
+          {
+            "dtText": "ご依頼主",
+            "ddText": "〇〇県〇〇市／製造業／従業員18名",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "ご依頼の時期",
+            "ddText": "2025年10月にご相談、11月から着手、2026年1月に完了",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "ご担当",
+            "ddText": "総務のご担当者さま（ほかのお仕事と兼任）",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          },
+          {
+            "dtText": "ご依頼のきっかけ",
+            "ddText": "前にお願いしていた会社さんと連絡が取りづらくなり、何がどうなっているのか分からなくなってしまった",
+            "pcClm1": null,
+            "spClm1": null,
+            "bgColor": "",
+            "textColor": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "ご相談から結果まで",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/paid-block-lw-step-4",
+      "attributes": {
+        "ulMaxWidth": 900,
+        "fontSizeClass": "font_size_m",
+        "bgGradient": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorNo": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "titleTag": "h3",
+        "contents": [
+          {
+            "no": "01",
+            "title": "はじめにうかがった困りごと",
+            "text": "ご担当の方が本業と兼任で、何がどこまで進んでいるのか分からない状態でした。\n「今の状況を整理してほしい」というのが最初のご依頼で、作り直すかどうかもまだ決めていない段階でした。"
+          },
+          {
+            "no": "02",
+            "title": "こちらからご提案したこと",
+            "text": "まず2週間かけて現状をすべて書き出し、そのまま使えるもの・作り直すものに分けてお渡ししました。\nいきなり全部を作り直すのではなく、いちばん困っている1か所から手を付けることをご提案し、費用も工程ごとに分けてお出ししました。"
+          },
+          {
+            "no": "03",
+            "title": "3か月後にどう変わったか",
+            "text": "ご担当の方が毎月使っていた手作業の時間が、月におよそ12時間ぶん減りました。\n「どこに何があるか分かるようになったので、人に頼めるようになった」とのお言葉をいただき、いまは毎月の保守だけをお受けしています。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "似た状況なので相談したい",
+        "textSub": "＼ 整理するだけのご依頼も承ります ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

@@ -1,0 +1,149 @@
+{
+  "title": "採用情報（無料・募集要項の表＋選考の流れ4段）",
+  "description": "【型A：表が主役】見出し＋リード文＋募集要項の表9行＋選考の流れ4段＋注釈＋応募ボタン。未経験可の募集を想定した文面です。給与は仮の値（000,000円）にしてあるので、必ず書き換えてください。職種を増やすときは、この表をもう1つ増やすのではなく、**職種ごとにページを分ける**ほうが応募者は迷いません。**無料ブロックだけで作ってあります。**",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "採用情報",
+        "subTitle": "RECRUIT",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "いっしょに働いてくださる方を探しています。<br>経験よりも、分からないことを分からないと言えるかどうかを見ています。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-company-2",
+      "attributes": {
+        "items": [
+          {
+            "dt": "職種",
+            "dd": "〇〇〇〇スタッフ（未経験の方も応募できます）"
+          },
+          {
+            "dt": "雇用形態",
+            "dd": "正社員　※試用期間3か月（期間中も条件は変わりません）"
+          },
+          {
+            "dt": "仕事内容",
+            "dd": "ご来店されたお客様の対応と、〇〇の作業をお願いします。最初の3か月は先輩と2人1組で動くので、1人で任されることはありません。"
+          },
+          {
+            "dt": "応募資格",
+            "dd": "学歴・年齢は問いません。普通自動車免許（AT可）をお持ちの方。"
+          },
+          {
+            "dt": "勤務地",
+            "dd": "〇〇県〇〇市〇〇町1-2-3（〇〇線 △△駅から徒歩5分）"
+          },
+          {
+            "dt": "勤務時間",
+            "dd": "9:00 〜 18:00（実働8時間・休憩60分）　残業は月平均10時間程度"
+          },
+          {
+            "dt": "給与",
+            "dd": "月給 000,000円 〜 000,000円　※経験と前職の給与を見て決めます"
+          },
+          {
+            "dt": "休日休暇",
+            "dd": "週休2日制（シフト制）／年末年始／夏季休暇／有給休暇"
+          },
+          {
+            "dt": "待遇",
+            "dd": "各種社会保険完備／交通費支給（月30,000円まで）／制服貸与／研修あり"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "選考の流れ",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-step-2",
+      "attributes": {
+        "bgGradient": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "contents": [
+          {
+            "title": "① ご応募",
+            "text": "下のボタンからご連絡ください。履歴書はこの時点では要りません。お名前とご連絡先だけで結構です。"
+          },
+          {
+            "title": "② ご連絡",
+            "text": "3日以内に、こちらからお電話またはメールでご連絡します。ご都合のよい面接日を一緒に決めます。"
+          },
+          {
+            "title": "③ 面接",
+            "text": "1回だけです。30分ほど、お互いに聞きたいことを聞く時間にしています。当日は普段の服装でお越しください。"
+          },
+          {
+            "title": "④ 結果のご連絡",
+            "text": "面接から1週間以内に、採否にかかわらず必ずご連絡します。お預かりした書類は責任をもって処分します。"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※募集を終えている場合があります。最新の状況はお問い合わせください。<br>※お預かりした個人情報は採用選考のためだけに使い、他の目的には使いません。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "応募・見学のお問い合わせ",
+        "btnTextSub": "＼ 職場を見るだけでも歓迎します ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

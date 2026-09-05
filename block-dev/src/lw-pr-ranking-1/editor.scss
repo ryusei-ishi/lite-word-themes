@@ -1,0 +1,23 @@
+/* ランキング 01 — 編集画面だけで使うもの（本番には出ない） */
+.lw-pr-ranking-1 {
+	.lw-pr-ranking-1__ed-order {
+		display: flex;
+		gap: 6px;
+		margin-bottom: 12px;
+	}
+
+	.lw-pr-ranking-1__ed-shop {
+		margin-top: 10px;
+		padding-top: 10px;
+		border-top: 1px dashed #ddd;
+	}
+
+	.lw-pr-ranking-1__ed-add {
+		margin-top: 12px;
+	}
+
+	/* 編集中はボタンを押せないので、リンクではなく見た目だけ出している */
+	.lw-pr-ranking-1__shop {
+		cursor: default;
+	}
+}

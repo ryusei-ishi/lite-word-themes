@@ -13,45 +13,152 @@
 	"aiHint": {
 		"description": "画像+番号付きステップ。画像+タイトル+説明のカード配列。ビジュアル重視の手順紹介に",
 		"excludeFromAutoSelect": false,
-		"contentAttributes": ["contents"],
-		"imageAttributes": ["contents.image"]
+		"contentAttributes": [
+			"contents"
+		],
+		"imageAttributes": [
+			"contents.image"
+		],
+		"notes": "🚨 **番号の丸（number）に入るのは2文字まで。**「3日以内」「1週間」を入れたら丸からはみ出して「以内」「間」が外に落ちた（2026-09-01 実測）。**丸は 01 / 02 / 03 のような2文字にして、時期や条件は本文の頭に `<strong>` で置く。**🚨 `numberBgColor` の既定は var(--color-main)。番号の文字は #fff 固定なので、明るいサイト色だと読めない。color-mix(in srgb, var(--color-main) 50%, #000) にする。🚨 contents のキーは **image / number / ttl / text**（title ではない）。⚠️ 写真は3列に並ぶので**件数は3の倍数**にする。"
 	},
 	"no": 6,
 	"attributes": {
-		"fontLi": { "type": "string", "default": "" },
-		"fontColorLi": { "type": "string", "default": "" },
-		"fontWeightLi": { "type": "string", "default": "600" },
-		"titleFontSizeClass": { "type": "string", "default": "font_size_m" },
-		"fontLiP": { "type": "string", "default": "" },
-		"fontColorLiP": { "type": "string", "default": "var(--color-black)" },
-		"fontWeightLiP": { "type": "string", "default": "400" },
-		"textFontSizeClass": { "type": "string", "default": "font_size_m" },
-		"borderColor": { "type": "string", "default": "var(--color-main)" },
-		"borderSize": { "type": "number", "default": 0 },
-		"imageBorderRadius": { "type": "number", "default": 0 },
-		"imageObjectFit": { "type": "string", "default": "cover" },
-		"imageAspectH": { "type": "number", "default": 300 },
-		"titleTag": { "type": "string", "default": "h3" },
-		"titleBorderColor": { "type": "string", "default": "var(--color-main)" },
-		"titleBorderSize": { "type": "number", "default": 2 },
-		"numberBgColor": { "type": "string", "default": "var(--color-main)" },
-		"showNumber": { "type": "boolean", "default": true },
-		"liBorderColor": { "type": "string", "default": "#ccc" },
-		"liBorderSize": { "type": "number", "default": 1 },
-		"liBorderRadius": { "type": "number", "default": 0 },
+		"fontLi": {
+			"type": "string",
+			"default": ""
+		},
+		"fontColorLi": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightLi": {
+			"type": "string",
+			"default": "600"
+		},
+		"titleFontSizeClass": {
+			"type": "string",
+			"default": "font_size_m"
+		},
+		"fontLiP": {
+			"type": "string",
+			"default": ""
+		},
+		"fontColorLiP": {
+			"type": "string",
+			"default": "var(--color-black)"
+		},
+		"fontWeightLiP": {
+			"type": "string",
+			"default": "400"
+		},
+		"textFontSizeClass": {
+			"type": "string",
+			"default": "font_size_m"
+		},
+		"borderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"borderSize": {
+			"type": "number",
+			"default": 0
+		},
+		"imageBorderRadius": {
+			"type": "number",
+			"default": 0
+		},
+		"imageObjectFit": {
+			"type": "string",
+			"default": "cover"
+		},
+		"imageAspectH": {
+			"type": "number",
+			"default": 300
+		},
+		"titleTag": {
+			"type": "string",
+			"default": "h3"
+		},
+		"titleBorderColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"titleBorderSize": {
+			"type": "number",
+			"default": 2
+		},
+		"numberBgColor": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"showNumber": {
+			"type": "boolean",
+			"default": true
+		},
+		"liBorderColor": {
+			"type": "string",
+			"default": "#ccc"
+		},
+		"liBorderSize": {
+			"type": "number",
+			"default": 1
+		},
+		"liBorderRadius": {
+			"type": "number",
+			"default": 0
+		},
 		"contents": {
 			"type": "array",
 			"source": "query",
 			"selector": ".paid-block-lw-step-6__li",
 			"query": {
-				"image": { "type": "string", "source": "attribute", "selector": "img", "attribute": "src" },
-				"alt": { "type": "string", "source": "attribute", "selector": "img", "attribute": "alt", "default": "" },
-				"ttl": { "type": "string", "source": "html", "selector": ".ttl" },
-				"text": { "type": "string", "source": "html", "selector": ".paid-block-lw-step-6__text" },
-				"url": { "type": "string", "source": "attribute", "selector": ".link", "attribute": "href", "default": "" },
-				"number": { "type": "string", "source": "text", "selector": ".number > span" },
-				"linkType": { "type": "string", "source": "attribute", "selector": ".link", "attribute": "data-lw-link-type" },
-				"linkId": { "type": "string", "source": "attribute", "selector": ".link", "attribute": "data-lw-link-id" }
+				"image": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "img",
+					"attribute": "src"
+				},
+				"alt": {
+					"type": "string",
+					"source": "attribute",
+					"selector": "img",
+					"attribute": "alt",
+					"default": ""
+				},
+				"ttl": {
+					"type": "string",
+					"source": "html",
+					"selector": ".ttl"
+				},
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": ".paid-block-lw-step-6__text"
+				},
+				"url": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".link",
+					"attribute": "href",
+					"default": ""
+				},
+				"number": {
+					"type": "string",
+					"source": "text",
+					"selector": ".number > span"
+				},
+				"linkType": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".link",
+					"attribute": "data-lw-link-type"
+				},
+				"linkId": {
+					"type": "string",
+					"source": "attribute",
+					"selector": ".link",
+					"attribute": "data-lw-link-id"
+				}
 			},
 			"default": [
 				{

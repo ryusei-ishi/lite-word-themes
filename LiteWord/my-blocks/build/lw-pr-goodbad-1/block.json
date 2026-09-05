@@ -1,0 +1,68 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-goodbad-1",
+	"version": "1.0.0",
+	"title": "メリット・デメリット 01",
+	"category": "lw-list",
+	"icon": "editor-ol",
+	"description": "良い点と気になる点を左右に並べて見せるブロックです。レビュー記事や比較記事で「正直に書いている」ことが伝わります。",
+	"aiHint": {
+		"description": "メリットとデメリットを左右2つの箱に分けて並べる。レビュー記事・比較記事・商品紹介で、良い点と気になる点を対で見せるときに使う。スマホでは自動で縦に積む",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"goodTitle",
+			"goodItems",
+			"badTitle",
+			"badItems"
+		],
+		"imageAttributes": [],
+		"notes": "✅ **`goodItems` と `badItems` は文字列の配列**（1要素＝1行）。件数は左右で違っていてよい。✅ 空の行は出ない。✅ スマホ（750px以下）では自動で縦に積むので、`layout` を触らなくてよい。🚨 **デメリットを空にしないこと。** 良いことしか書いていないページは読む人にすぐ分かる。このブロックは「気になる点も書いてある」ことを見せるためにある。デメリットを書けないなら、このブロックを使う意味がない。🚨 効果を断定する言い方は薬機法・景品表示法で書けない（「治る」「必ず痩せる」など）。体験の形（「私の場合は〜でした」）にする。1行は15〜40文字が読みやすい。",
+		"contentGuide": "goodItems は3〜5行、badItems は2〜4行が読みやすい。デメリットは「致命的ではないが正直な点」を書くと信用される"
+	},
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"goodTitle": { "type": "string", "default": "ここが良い" },
+		"badTitle": { "type": "string", "default": "気になる点" },
+		"goodItems": {
+			"type": "array",
+			"default": [
+				"良かった点を書いてください",
+				"使ってみて助かった点",
+				"ほかと比べて優れている点"
+			],
+			"aiHint": { "role": "list", "contentGuide": "良い点。1行15〜40文字。3〜5行" }
+		},
+		"badItems": {
+			"type": "array",
+			"default": [
+				"気になった点を正直に書いてください",
+				"人によっては合わないかもしれない点"
+			],
+			"aiHint": { "role": "list", "contentGuide": "気になる点。1行15〜40文字。2〜4行。空にしない" }
+		},
+		"goodMark": { "type": "string", "default": "○" },
+		"badMark": { "type": "string", "default": "△" },
+		"layout": { "type": "string", "default": "side" },
+		"maxWidth": { "type": "number", "default": 720 },
+		"marginTop": { "type": "number", "default": 0 },
+		"marginBottom": { "type": "number", "default": 0 },
+		"borderRadius": { "type": "number", "default": 10 },
+		"borderWidth": { "type": "number", "default": 1 },
+		"fontSize": { "type": "number", "default": 15 },
+		"fontSizeSp": { "type": "number", "default": 14 },
+		"titleFontSize": { "type": "number", "default": 17 },
+		"goodBgColor": { "type": "string", "default": "#f2f8f4" },
+		"goodBorderColor": { "type": "string", "default": "#cfe4d6" },
+		"goodTitleColor": { "type": "string", "default": "#1f7a4d" },
+		"badBgColor": { "type": "string", "default": "#fbf5f4" },
+		"badBorderColor": { "type": "string", "default": "#e8d5d2" },
+		"badTitleColor": { "type": "string", "default": "#9c5a5a" },
+		"textColor": { "type": "string", "default": "#444444" },
+		"FontSet": { "type": "string", "default": "" }
+	},
+	"editorScript": "file:./lw-pr-goodbad-1.js"
+}

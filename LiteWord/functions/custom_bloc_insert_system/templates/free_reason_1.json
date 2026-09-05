@@ -1,0 +1,133 @@
+{
+  "title": "選ばれる理由（無料・写真ゼロ・カード3枚）",
+  "description": "【型B：説明が主役】見出し＋リード文＋理由カード3枚（英字バッジ＋見出し＋説明文）＋「こんなご相談も承ります」4件＋注釈＋相談ボタン。**写真を1枚も使わない**ので、素材が無くてもそのまま貼れます。「困っていませんか」の次、サービス紹介の前に置く段です。理由は3つとも、できることの自慢ではなく**お客様に対する約束の形**で書いてあります。**無料ブロックだけで作ってあります。**",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "選ばれる理由",
+        "subTitle": "REASON",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お店やサービスはたくさんあります。<br>そのなかで、当店が大事にしていることを3つだけお伝えします。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-content-8",
+      "attributes": {
+        "innerMaxWidth": 1040,
+        "showButton": false,
+        "mainAlign": "center",
+        "contents": [
+          {
+            "sub": "REASON 01",
+            "main": "担当が最後まで変わらない",
+            "text": "窓口が途中で変わらないので、同じ説明を何度もしていただく必要がありません。やむを得ず担当が代わるときは、引き継ぎを終えてからご連絡します。",
+            "url": "",
+            "btnText": ""
+          },
+          {
+            "sub": "REASON 02",
+            "main": "見積りは内訳まで出す",
+            "text": "「一式」でまとめず、何にいくらかかるのかを1行ずつ書いてお渡しします。追加の費用が出そうなときは、作業を止めて先にご相談します。",
+            "url": "",
+            "btnText": ""
+          },
+          {
+            "sub": "REASON 03",
+            "main": "終わってからも相談できる",
+            "text": "お渡ししたあとのちょっとした質問に、期限を決めずにお答えします。使い方が分からなくなったときも、そのままご連絡ください。",
+            "url": "",
+            "btnText": ""
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "こんなご相談も承ります",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-3",
+      "attributes": {
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "contents": [
+          {
+            "text": "他店で断られてしまった内容"
+          },
+          {
+            "text": "予算がまだ決まっていない段階のご相談"
+          },
+          {
+            "text": "お急ぎで対応してほしいご依頼"
+          },
+          {
+            "text": "一部分だけお願いしたいご依頼"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※内容によってはお受けできない場合があります。そのときは理由をお伝えし、できる範囲で別のご提案をいたします。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-button-03",
+      "attributes": {
+        "btnTextMain": "まずは相談してみる",
+        "btnTextSub": "＼ 相談だけで終わっても構いません ／",
+        "btnUrl": "#",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "textSubColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "textMainColor": "#ffffff"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 48,
+        "tbHeight": 32,
+        "spHeight": 8
+      },
+      "innerBlocks": []
+    }
+  ]
+}

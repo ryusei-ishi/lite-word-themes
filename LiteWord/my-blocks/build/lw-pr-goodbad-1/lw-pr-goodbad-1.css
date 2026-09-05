@@ -1,0 +1,14 @@
+/*!**************************************************************************************************************************!*\
+  !*** css ./node_modules/css-loader/dist/cjs.js!./node_modules/sass-loader/dist/cjs.js!./src/lw-pr-goodbad-1/editor.scss ***!
+  \**************************************************************************************************************************/
+@charset "UTF-8";
+/* メリット・デメリット 01 — 編集画面だけで使うもの */
+.lw-pr-goodbad-1 .lw-pr-goodbad-1__ed-del {
+  flex: 0 0 auto;
+  min-width: 24px;
+  height: 24px;
+  padding: 0;
+}
+.lw-pr-goodbad-1 .lw-pr-goodbad-1__ed-add {
+  margin-top: 10px;
+}

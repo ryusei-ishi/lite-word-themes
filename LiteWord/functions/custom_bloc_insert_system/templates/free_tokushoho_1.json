@@ -1,0 +1,191 @@
+{
+  "title": "特定商取引法に基づく表記（無料・13項目のひな形）",
+  "description": "【型A：表が主役】見出し＋なぜ必要かのひとこと＋表示すべき13項目の表＋返品・交換の条件4件＋注釈。インターネットで物やサービスを売るなら、法律で表示が義務づけられているページです。決済代行の審査でも必ず見られます。🚨 中身はひな形です。かならずご自身の内容に置き換えてください。🚨 返品の条件（返品特約）を書いていないと、法定の8日間の返品が適用されます。定期購入・サブスクを売る場合は「解約の方法」など項目を足してください（2022年6月の法改正）。住所・電話番号を出したくない場合の扱いは消費者庁の案内をご確認ください。**無料ブロックだけで作ってあります。**",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "特定商取引法に基づく表記",
+        "subTitle": "LEGAL",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "インターネットで商品やサービスを販売するときに、<br>法律で表示することが決められている内容です。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-company-2",
+      "attributes": {
+        "maxWidth": 900,
+        "fontSizeClass": "font_size_m",
+        "dtWidthClass": "dt_width_m",
+        "spFullDt": true,
+        "lineHeight": 1.7,
+        "items": [
+          {
+            "dt": "販売事業者",
+            "dtPlaceholder": "販売事業者",
+            "dd": "〇〇〇〇（屋号をお持ちの場合は屋号もあわせて記載してください）",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "運営責任者",
+            "dtPlaceholder": "運営責任者",
+            "dd": "〇〇 〇〇",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "所在地",
+            "dtPlaceholder": "所在地",
+            "dd": "〒000-0000　〇〇県〇〇市〇〇町1-2-3",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "電話番号",
+            "dtPlaceholder": "電話番号",
+            "dd": "000-0000-0000<br>受付時間 10:00〜18:00（土日祝を除く）",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "メールアドレス",
+            "dtPlaceholder": "メールアドレス",
+            "dd": "info@example.com",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "販売価格",
+            "dtPlaceholder": "販売価格",
+            "dd": "各商品・サービスのご案内ページに表示しています。<br>表示価格はすべて税込です。",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "代金以外の費用",
+            "dtPlaceholder": "代金以外の費用",
+            "dd": "送料 全国一律 000円（0,000円以上のお買い上げで無料）。<br>お振込みの場合の振込手数料はお客様のご負担となります。",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "お支払い方法",
+            "dtPlaceholder": "お支払い方法",
+            "dd": "クレジットカード／銀行振込／コンビニ払い",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "お支払い時期",
+            "dtPlaceholder": "お支払い時期",
+            "dd": "クレジットカードはご注文時に決済されます。<br>お振込み・コンビニ払いはご注文から7日以内にお願いします。",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "引渡しの時期",
+            "dtPlaceholder": "引渡しの時期",
+            "dd": "ご入金の確認から3営業日以内に発送します。<br>サービスの場合は、お申し込み時にお伝えする日程で提供します。",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "返品・交換",
+            "dtPlaceholder": "返品・交換",
+            "dd": "商品に不良があった場合のみお受けします。詳しくは下の欄をご覧ください。",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "動作環境",
+            "dtPlaceholder": "動作環境",
+            "dd": "デジタル商品をお求めの場合は、ご購入前に対応環境をご確認ください。<br>（当てはまらない場合はこの行を削除してください）",
+            "ddPlaceholder": "内容"
+          },
+          {
+            "dt": "表現について",
+            "dtPlaceholder": "表現について",
+            "dd": "本ページに記載した効果や結果には個人差があります。<br>効果を保証するものではありません。",
+            "ddPlaceholder": "内容"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "返品・交換について",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "16px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-list-4",
+      "attributes": {
+        "borderColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colorLiSvg": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "colClass": "clm_1",
+        "contents": [
+          {
+            "text": "商品に不良があった場合は、お届けから8日以内にご連絡ください"
+          },
+          {
+            "text": "不良品の返送にかかる送料は当方が負担します"
+          },
+          {
+            "text": "お客様のご都合による返品・交換はお受けしておりません"
+          },
+          {
+            "text": "デジタル商品は、ご購入後の返品をお受けできません"
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※このページの内容はひな形です。かならずご自身の販売内容に合わせて書き換えてください。<br>※返品の条件を書いていない場合、法律により、お届けから8日間はお客様のご都合でも返品を受ける決まりになります。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

@@ -240,4 +240,57 @@
   .paid-block-content-5 .conts .cont .in p {
     line-height: 2em;
   }
-}/*# sourceMappingURL=style.css.map */
+}
+/* ============================================================
+ * 2026-09-01 追加（Ryuichi 提案）
+ *  .img_label        … 画像の上に出す名前ラベル（属性 imgLabel が空なら要素ごと出ない）
+ *  .is_sp_img_bottom … スマホのとき画像をテキストの下へ（属性 spImageBottom が false なら付かない）
+ * どちらも既定では出力に出ないので、既存ページの見た目は1ミリも変わらない。
+ * ============================================================ */
+.paid-block-content-5 .conts .image .img_label {
+  position: absolute;
+  left: 0;
+  bottom: 24px;
+  z-index: 25;
+  padding: 8px 20px 8px 16px;
+  background: var(--color-img-label, rgba(0, 0, 0, 0.62));
+  color: #fff;
+  font-size: 15px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  border-radius: 0 4px 4px 0;
+}
+@container (max-width: 800px) {
+  .paid-block-content-5 .conts .image .img_label {
+    bottom: 16px;
+    font-size: 14px;
+  }
+}
+@container (max-width: 800px) {
+  .paid-block-content-5.is_sp_img_bottom .conts {
+    display: flex;
+    flex-direction: column;
+  }
+  .paid-block-content-5.is_sp_img_bottom .conts .image {
+    order: 2;
+  }
+  .paid-block-content-5.is_sp_img_bottom .conts .cont {
+    order: 1;
+  }
+}
+@container (max-width: 500px) {
+  .paid-block-content-5.is_sp_img_bottom .conts .image::after {
+    opacity: 0;
+  }
+  .paid-block-content-5.is_sp_img_bottom .conts .image .ttl {
+    display: none;
+  }
+  .paid-block-content-5.is_sp_img_bottom .conts .cont h1.ttl,
+  .paid-block-content-5.is_sp_img_bottom .conts .cont h2.ttl,
+  .paid-block-content-5.is_sp_img_bottom .conts .cont h3.ttl,
+  .paid-block-content-5.is_sp_img_bottom .conts .cont h4.ttl {
+    display: block;
+    font-size: 26px;
+  }
+}
+/*# sourceMappingURL=style.css.map */

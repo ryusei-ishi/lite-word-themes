@@ -1,0 +1,298 @@
+{
+  "title": "ご利用規約（無料・押すと開く8条）",
+  "description": "【型B：説明が主役】見出し＋リード文＋押すと開く8条（規約の適用・お申し込みの成立・料金とお支払い・キャンセルと変更・禁止事項・免責・個人情報・規約の変更）＋お問い合わせ窓口＋制定日。**閉じた状態で置かれるので1画面に収まり**、各条の上には「ひとことで言うと」が出ます。プライバシーポリシー（個人情報の扱い）とは役割が違うので、同じサイトに両方置いてください。〇〇（事業者名・連絡先）と制定日、日数や割合を必ず書き換えてください。🚨 中身は一般的なひな形です。**ご自身の商売の実態と合っているか必ず確認**してから公開してください。とくにキャンセル料の割合と、いつから発生するかは業種によってまったく違います。🚨 最後の「この規約についてのお問い合わせ」の見出しは、開閉のしくみの終端を兼ねています。**消すとそれ以降が表示されなくなる**ので、消さずに中身だけ書き換えてください。無料ブロックだけで作ってあります。",
+  "blocks": [
+    {
+      "name": "wdl/custom-title-1",
+      "attributes": {
+        "mainTitle": "ご利用規約",
+        "subTitle": "TERMS",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "〇〇〇〇（以下「当社」）のサービスをご利用いただくにあたっての決まりです。<br>読みたい項目を押すと開きます。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "どこまでが対象か",
+        "mainTitle": "第1条　規約の適用",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "この規約は、当社が提供するすべてのサービスについて、当社とお客様との間に適用されます。<br>当社がサービスごとに別の決まり（個別の案内・見積書・注文書など）を定めているときは、そちらが優先します。この規約は、そこに書かれていないことを補うものです。",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "いつ契約になるか",
+        "mainTitle": "第2条　お申し込みと成立",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お客様からのお申し込みに対して、当社が承諾のご連絡（メール・書面・口頭のいずれか）をしたときに、ご契約が成立します。<br>お申し込みをいただいた時点ではまだ成立していません。次のときは、お申し込みをお断りすることがあります。その場合も理由をお伝えし、費用はいただきません。<br>・ご希望の日程で当社の手が空いていないとき<br>・お伺いした内容では当社の技術・設備で対応できないとき<br>・過去にお支払いが確認できていないとき",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "お金のこと",
+        "mainTitle": "第3条　料金とお支払い",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "料金は、お申し込みの前にお出しするお見積りのとおりです。お見積りに無い作業が必要になったときは、進める前に必ずご相談し、お客様のご承諾をいただいてから着手します。<br>お支払いは、〇〇（例：作業完了後の当月末締め・翌月末までのお振込）でお願いします。振込手数料はお客様のご負担でお願いしています。<br>お支払いが遅れた場合、年〇％の遅延損害金を申し受けることがあります。",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "やめるとき",
+        "mainTitle": "第4条　キャンセルと変更",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "ご契約後のキャンセル・日程の変更は、次のとおりお願いします。<br>・〇日前まで … 無料<br>・〇日前〜前日 … 料金の〇％<br>・当日 … 料金の〇％<br>すでに材料の手配や外部への発注が済んでいるときは、上記にかかわらず実費をご負担いただくことがあります。当社の都合でお受けできなくなったときは、いただいた費用を全額お返しします。",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "しないでほしいこと",
+        "mainTitle": "第5条　禁止事項",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "サービスのご利用にあたって、次のことはご遠慮ください。<br>・法令や公序良俗に反する行為<br>・当社や第三者の権利（著作権・商標・肖像など）を侵害する行為<br>・当社の従業員に対する暴言・脅迫・つきまとい<br>・当社がお渡しした資料やデータを、許可なく他へ転載・転売すること<br>・虚偽の情報をお伝えすること<br>これらに当たると当社が判断したときは、サービスのご提供をお断りし、ご契約を解除することがあります。",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "できないこと",
+        "mainTitle": "第6条　免責",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "当社は、サービスの提供にあたって十分に注意を尽くしますが、次のことについては責任を負いかねます。<br>・お客様からお伝えいただいた情報が誤っていたことにより生じた損害<br>・天災・停電・通信障害・法令の改正など、当社の力の及ばない事由による遅れや中止<br>・お客様がご自身で行った操作・変更によって生じた不具合<br>また、当社が負う賠償の額は、当該サービスについてお客様からお支払いいただいた金額を上限とします。ただし、当社に故意または重大な過失があったときはこの限りではありません。",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "あずかった情報",
+        "mainTitle": "第7条　個人情報の取り扱い",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "お預かりした個人情報は、別に定めるプライバシーポリシーにしたがって取り扱います。<br>また、業務の中で知ったお客様の情報（内容・図面・写真・データなど）は、お客様の許可なく外部に出しません。実績としてサイトや資料に掲載したいときは、そのつど許可をいただきます。",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/custom-title-accordion-1",
+      "attributes": {
+        "subTitle": "あとから変わること",
+        "mainTitle": "第8条　規約の変更と準拠法",
+        "headingLevel": 3,
+        "mainTitleColor": "color-mix(in srgb, var(--color-main) 40%, #000)",
+        "iconColor": "color-mix(in srgb, var(--color-main) 50%, #000)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "この規約は、必要に応じて変更することがあります。変更したときは、このページでお知らせします。変更のあとにサービスをご利用いただいた場合は、変更後の規約にご同意いただいたものとします。<br>この規約は日本法にしたがって解釈します。万一もめごとになったときは、〇〇地方裁判所を第一審の専属的合意管轄裁判所とします。",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "12px",
+              "bottom": "20px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/heading",
+      "attributes": {
+        "content": "この規約についてのお問い合わせ",
+        "level": 3,
+        "style": {
+          "typography": {
+            "fontSize": "18px"
+          },
+          "spacing": {
+            "margin": {
+              "top": "40px",
+              "bottom": "12px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "〇〇〇〇<br>〒000-0000　○○県○○市○○町0-0-0<br>電話：000-000-0000（平日 9:00〜18:00）<br>メール：info@example.com",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "0px",
+              "bottom": "0px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "制定日：2026年〇月〇日／最終改定：2026年〇月〇日",
+        "align": "center",
+        "style": {
+          "spacing": {
+            "margin": {
+              "top": "32px"
+            }
+          }
+        }
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

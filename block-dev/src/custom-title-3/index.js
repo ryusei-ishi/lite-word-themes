@@ -1,6 +1,6 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText, InspectorControls, BlockControls, ColorPalette, useBlockProps } from '@wordpress/block-editor';
-import { PanelBody, RadioControl, ToolbarGroup, ToolbarButton } from '@wordpress/components';
+import { PanelBody, RadioControl, RangeControl, ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import './style.scss';
 import './editor.scss';
 
@@ -9,7 +9,8 @@ import metadata from './block.json';
 registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
-        const { mainTitle, subTitle, textAlignment, accentColor, headingLevel } = attributes;
+        const { mainTitle, subTitle, textAlignment, accentColor, headingLevel,
+            mainFontSizePc, mainFontSizeSp } = attributes;
 
         const onChangeMainTitle = (value) => {
             setAttributes({ mainTitle: value });
@@ -34,9 +35,15 @@ registerBlockType(metadata.name, {
         const alignmentClass = textAlignment === 'right' ? 'right' : textAlignment === 'center' ? 'center' : 'left';
         const TagName = `h${headingLevel}`;
 
-        const blockProps = useBlockProps({
-            className: `custom-title-3 ${alignmentClass}`,
-        });
+        /* 🚨 0 のときは style を1つも出さない（既定のままなら出力が変わらないようにするため） */
+        const sizeStyle = {};
+        if (mainFontSizePc) { sizeStyle['--ct3-main-pc'] = mainFontSizePc + 'px'; }
+        if (mainFontSizeSp) { sizeStyle['--ct3-main-sp'] = mainFontSizeSp + 'px'; }
+
+        const blockProps = useBlockProps(Object.assign(
+            { className: `custom-title-3 ${alignmentClass}` },
+            Object.keys(sizeStyle).length ? { style: sizeStyle } : {}
+        ));
 
         return (
             <>
@@ -71,6 +78,26 @@ registerBlockType(metadata.name, {
                             onChange={onChangeAccentColor}
                         />
                     </PanelBody>
+                    <PanelBody title="文字サイズ" initialOpen={false}>
+                        <RangeControl
+                            label="メインタイトル（PC）"
+                            help="0 のままなら既定の 60px。日本語で長い見出しのときは小さくします"
+                            value={mainFontSizePc}
+                            onChange={(v) => setAttributes({ mainFontSizePc: v === undefined ? 0 : v })}
+                            min={0}
+                            max={96}
+                            allowReset
+                        />
+                        <RangeControl
+                            label="メインタイトル（スマホ）"
+                            help="0 のままなら既定の 48px。375px では 5文字で画面いっぱいになるので、日本語なら 28〜32px を目安に"
+                            value={mainFontSizeSp}
+                            onChange={(v) => setAttributes({ mainFontSizeSp: v === undefined ? 0 : v })}
+                            min={0}
+                            max={72}
+                            allowReset
+                        />
+                    </PanelBody>
                 </InspectorControls>
                 <TagName {...blockProps}>
                     <div className="main">
@@ -96,14 +123,23 @@ registerBlockType(metadata.name, {
     },
     save: function (props) {
         const { attributes } = props;
-        const { mainTitle, subTitle, textAlignment, accentColor, headingLevel } = attributes;
+        const { mainTitle, subTitle, textAlignment, accentColor, headingLevel,
+            mainFontSizePc, mainFontSizeSp } = attributes;
 
         const alignmentClass = textAlignment === 'right' ? 'right' : textAlignment === 'center' ? 'center' : 'left';
         const TagName = `h${headingLevel}`;
 
-        const blockProps = useBlockProps.save({
-            className: `custom-title-3 ${alignmentClass}`,
-        });
+        /* 🚨🚨 **0（既定）のときは style 属性を1つも書き出さない。**
+           こうしておけば、いま貼られているページのマークアップと1文字も変わらないので
+           deprecated を書かなくてよい（block-change-safety.md の型）。 */
+        const sizeStyle = {};
+        if (mainFontSizePc) { sizeStyle['--ct3-main-pc'] = mainFontSizePc + 'px'; }
+        if (mainFontSizeSp) { sizeStyle['--ct3-main-sp'] = mainFontSizeSp + 'px'; }
+
+        const blockProps = useBlockProps.save(Object.assign(
+            { className: `custom-title-3 ${alignmentClass}` },
+            Object.keys(sizeStyle).length ? { style: sizeStyle } : {}
+        ));
 
         return (
             <TagName {...blockProps}>

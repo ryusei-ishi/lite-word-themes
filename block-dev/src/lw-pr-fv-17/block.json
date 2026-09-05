@@ -1,155 +1,155 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 3,
-	"name": "wdl/lw-pr-fv-17",
-	"version": "1.0.0",
-	"title": "固定ページタイトル 17（下層用）",
-	"category": "lw-firstview",
-	"icon": "cover-image",
-	"description": "下層ページ用のコンパクトなファーストビュー",
-	"aiDescription": "下層ページ用のコンパクトなファーストビュー。英語のメインタイトルと短い説明文のみのシンプル構成。ポートフォリオ、実績一覧、ギャラリーなどビジュアル重視のページに最適。",
-	"aiNotes": "このブロックはh1タグを使用。タイトルは英語表記が基本（例：PORTFOLIO、WORKS）。説明文は短めに設定。背景色のみのシンプルデザイン。",
-	"aiHint": {
-		"description": "下層ページの見出し帯。中央にページ名、その左右に飾りを添えられる。会社概要・料金・メニューなど、下の階層のページの先頭に置く",
-		"excludeFromAutoSelect": false,
-		"contentAttributes": [
-			"mainTitle",
-			"description"
-		],
-		"imageAttributes": [
-			"backgroundImage",
-			"bgImageLeftPc",
-			"bgImageRightPc"
-		],
-		"notes": "🚨 bgImageLeftPc / bgImageRightPc は【写真ではなく、背景が透明な装飾イラストを置く場所】。葉っぱ・水彩のドットのような飾りを左右の端に添える作り。写真を入れると帯の左右に四角い写真が貼り付いたようになる。実際の制作サイトの下層19ページはすべて次の1通りだった — 背景＝帯とほぼ同じ比率（5:1前後）の淡い紙のテクスチャ／左右＝透過のイラスト／3枚とも不透明1。🚨 背景に16:9の写真を入れないこと。帯は横長（6:1前後）なので cover で中央の細い帯だけに切られ、寄りの写真だと何が写っているか分からなくなる。写真を使いたいときは帯の比率に合わせて用意する。🚨 色フィルタ（filterBackgroundColor）は背景画像の【下】にあるので、背景画像が不透明だと完全に隠れて見えない。濃くしたいときは filterOpacity ではなく bgImageOpacityPc を下げる（写真を薄くすると下の色が透ける）。背景画像を空にすれば、色だけの帯になる（素材が無いときの最小構成）。🚨 文字色は地に合わせる。淡い紙の地なら濃い色（#333 など）、色だけの濃い帯なら白。パンくずは色を指定しないとリンクの青のままなので、breadcrumbColorPc / breadcrumbColorSp を必ず指定する（PCとSPは独立していて、SPではパンくずが帯の外に出る）。フロントページではパンくずが HOME だけになるため描画しない作りになっている。左右は片方だけでもよい（空にすれば出ない）。"
-	},
-	"render": "file:./render.php",
-	"editorScript": "file:./lw-pr-fv-17.js",
-	"style": "file:./style.css",
-	"supports": {
-		"anchor": true
-	},
-	"attributes": {
-		"backgroundImage": {
-			"type": "string",
-			"default": "",
-			"ai_description": "PC用背景画像の生成プロンプト（英語）。空の場合はfilterBackgroundColorのみ表示。通常は空のままでOK"
-		},
-		"backgroundImageSp": {
-			"type": "string",
-			"default": "",
-			"ai_description": "スマホ用背景画像。通常は空のままでOK"
-		},
-		"mainTitle": {
-			"type": "string",
-			"default": "PORTFOLIO",
-			"ai_description": "メインタイトル（英語推奨）。5～15文字の英語。例：「PORTFOLIO」「WORKS」「GALLERY」「CASE STUDY」"
-		},
-		"description": {
-			"type": "string",
-			"default": "テキストを入力してください。",
-			"ai_description": "説明文。15～40文字程度で簡潔に。例：「これまでの実績をご紹介します」「制作事例をご覧ください」"
-		},
-		"filterBackgroundColor": {
-			"type": "string",
-			"default": "var(--color-main)",
-			"ai_description": "画像よりz-indexが下にある、背景の色です。var(--color-main)を使用してサイトカラーと統一"
-		},
-		"filterOpacity": {
-			"type": "number",
-			"default": 0.95,
-			"ai_description": "オーバーレイの不透明度（0-1）。0.95でほぼ背景色のみ表示"
-		},
-		"textColor": {
-			"type": "string",
-			"default": "#fff",
-			"ai_description": "テキストの文字色。背景が濃い場合は#fff（白）を維持"
-		},
-		"breadcrumbColorPc": {
-			"type": "string",
-			"default": "",
-			"ai_description": "パンくずリストの色（PC）。空なら従来どおりサイトカラー。PCではパンくずがFVの写真の上に重なるので、暗い写真のときは #fff など明るい色にする"
-		},
-		"breadcrumbColorSp": {
-			"type": "string",
-			"default": "",
-			"ai_description": "パンくずリストの色（スマホ）。空ならPCの指定を使う。⚠️ スマホではパンくずがFVの外（下）に出るので、PCで白にした場合はここを暗い色にしないと読めなくなる"
-		},
-		"minHeightPc": {
-			"type": "string",
-			"default": "min-h-pc-280px",
-			"ai_description": "PC表示時の最小高さ。コンパクトなデザインのため低めに設定"
-		},
-		"minHeightTb": {
-			"type": "string",
-			"default": "min-h-tb-220px",
-			"ai_description": "タブレット表示時の最小高さ。通常はデフォルト値を維持"
-		},
-		"minHeightSp": {
-			"type": "string",
-			"default": "min-h-sp-180px",
-			"ai_description": "スマホ表示時の最小高さ。通常はデフォルト値を維持"
-		},
-		"mainTitleTag": {
-			"type": "string",
-			"default": "h1",
-			"ai_description": "タイトルのHTMLタグ。下層ページのメインタイトルなので通常は'h1'を維持"
-		},
-		"bgImageLeftPc": {
-			"type": "string",
-			"default": "",
-			"ai_description": "左側背景画像（PC用）。装飾的な背景画像を配置"
-		},
-		"bgImageLeftSp": {
-			"type": "string",
-			"default": "",
-			"ai_description": "左側背景画像（スマホ用）。レスポンシブ対応用"
-		},
-		"bgImageRightPc": {
-			"type": "string",
-			"default": "",
-			"ai_description": "右側背景画像（PC用）。装飾的な背景画像を配置"
-		},
-		"bgImageRightSp": {
-			"type": "string",
-			"default": "",
-			"ai_description": "右側背景画像（スマホ用）。レスポンシブ対応用"
-		},
-		"bgImageOpacityPc": {
-			"type": "number",
-			"default": 1,
-			"ai_description": "メイン背景画像の透明度（PC用）。0〜1"
-		},
-		"bgImageOpacitySp": {
-			"type": "number",
-			"default": 1,
-			"ai_description": "メイン背景画像の透明度（スマホ用）。0〜1"
-		},
-		"bgImageLeftOpacityPc": {
-			"type": "number",
-			"default": 1,
-			"ai_description": "左側背景画像の透明度（PC用）。0〜1"
-		},
-		"bgImageLeftOpacitySp": {
-			"type": "number",
-			"default": 1,
-			"ai_description": "左側背景画像の透明度（スマホ用）。0〜1"
-		},
-		"bgImageRightOpacityPc": {
-			"type": "number",
-			"default": 1,
-			"ai_description": "右側背景画像の透明度（PC用）。0〜1"
-		},
-		"bgImageRightOpacitySp": {
-			"type": "number",
-			"default": 1,
-			"ai_description": "右側背景画像の透明度（スマホ用）。0〜1"
-		},
-		"marginBottomZero": {
-			"type": "boolean",
-			"default": false,
-			"ai_description": "margin-bottomを0にする。パンくずリストによる自動マージン調整を無効化"
-		}
-	},
-	"no": 5
+    "$schema": "https://schemas.wp.org/trunk/block.json",
+    "apiVersion": 3,
+    "name": "wdl/lw-pr-fv-17",
+    "version": "1.0.0",
+    "title": "固定ページタイトル 17（下層用）",
+    "category": "lw-firstview",
+    "icon": "cover-image",
+    "description": "下層ページ用のコンパクトなファーストビュー",
+    "aiDescription": "下層ページ用のコンパクトなファーストビュー。英語のメインタイトルと短い説明文のみのシンプル構成。ポートフォリオ、実績一覧、ギャラリーなどビジュアル重視のページに最適。",
+    "aiNotes": "このブロックはh1タグを使用。タイトルは英語表記が基本（例：PORTFOLIO、WORKS）。説明文は短めに設定。背景色のみのシンプルデザイン。",
+    "aiHint": {
+        "description": "下層ページの見出し帯。中央にページ名、その左右に飾りを添えられる。会社概要・料金・メニューなど、下の階層のページの先頭に置く",
+        "excludeFromAutoSelect": false,
+        "contentAttributes": [
+            "mainTitle",
+            "description"
+        ],
+        "imageAttributes": [
+            "backgroundImage",
+            "bgImageLeftPc",
+            "bgImageRightPc"
+        ],
+        "notes": "🚨 bgImageLeftPc / bgImageRightPc は【写真ではなく、背景が透明な装飾イラストを置く場所】。葉っぱ・水彩のドットのような飾りを左右の端に添える作り。写真を入れると帯の左右に四角い写真が貼り付いたようになる。実際の制作サイトの下層19ページはすべて次の1通りだった — 背景＝帯とほぼ同じ比率（5:1前後）の淡い紙のテクスチャ／左右＝透過のイラスト／3枚とも不透明1。🚨 背景に16:9の写真を入れないこと。帯は横長（6:1前後）なので cover で中央の細い帯だけに切られ、寄りの写真だと何が写っているか分からなくなる。写真を使いたいときは帯の比率に合わせて用意する。🚨 色フィルタ（filterBackgroundColor）は背景画像の【下】にあるので、背景画像が不透明だと完全に隠れて見えない。濃くしたいときは filterOpacity ではなく bgImageOpacityPc を下げる（写真を薄くすると下の色が透ける）。背景画像を空にすれば、色だけの帯になる（素材が無いときの最小構成）。🚨 文字色は地に合わせる。淡い紙の地なら濃い色（#333 など）、色だけの濃い帯なら白。パンくずは色を指定しないとリンクの青のままなので、breadcrumbColorPc / breadcrumbColorSp を必ず指定する（PCとSPは独立していて、SPではパンくずが帯の外に出る）。フロントページではパンくずが HOME だけになるため描画しない作りになっている。左右は片方だけでもよい（空にすれば出ない）。 🚨 **動的ブロック**（block.json の render: file:./render.php）。save() は null を返し、マークアップは `<!-- wp:wdl/lw-pr-fv-17 … /-->` の1行だけ。中身は表示のときに PHP が作る。→ ブロックHTMLをそのまま貼った**静止プレビューには何も出ない**。確認するときは WordPress を通す（do_blocks）。「帯が消えた」と誤診しないこと（2026-09-01）。"
+    },
+    "render": "file:./render.php",
+    "editorScript": "file:./lw-pr-fv-17.js",
+    "style": "file:./style.css",
+    "supports": {
+        "anchor": true
+    },
+    "attributes": {
+        "backgroundImage": {
+            "type": "string",
+            "default": "",
+            "ai_description": "PC用背景画像の生成プロンプト（英語）。空の場合はfilterBackgroundColorのみ表示。通常は空のままでOK"
+        },
+        "backgroundImageSp": {
+            "type": "string",
+            "default": "",
+            "ai_description": "スマホ用背景画像。通常は空のままでOK"
+        },
+        "mainTitle": {
+            "type": "string",
+            "default": "PORTFOLIO",
+            "ai_description": "メインタイトル（英語推奨）。5～15文字の英語。例：「PORTFOLIO」「WORKS」「GALLERY」「CASE STUDY」"
+        },
+        "description": {
+            "type": "string",
+            "default": "テキストを入力してください。",
+            "ai_description": "説明文。15～40文字程度で簡潔に。例：「これまでの実績をご紹介します」「制作事例をご覧ください」"
+        },
+        "filterBackgroundColor": {
+            "type": "string",
+            "default": "var(--color-main)",
+            "ai_description": "画像よりz-indexが下にある、背景の色です。var(--color-main)を使用してサイトカラーと統一"
+        },
+        "filterOpacity": {
+            "type": "number",
+            "default": 0.95,
+            "ai_description": "オーバーレイの不透明度（0-1）。0.95でほぼ背景色のみ表示"
+        },
+        "textColor": {
+            "type": "string",
+            "default": "#fff",
+            "ai_description": "テキストの文字色。背景が濃い場合は#fff（白）を維持"
+        },
+        "breadcrumbColorPc": {
+            "type": "string",
+            "default": "",
+            "ai_description": "パンくずリストの色（PC）。空なら従来どおりサイトカラー。PCではパンくずがFVの写真の上に重なるので、暗い写真のときは #fff など明るい色にする"
+        },
+        "breadcrumbColorSp": {
+            "type": "string",
+            "default": "",
+            "ai_description": "パンくずリストの色（スマホ）。空ならPCの指定を使う。⚠️ スマホではパンくずがFVの外（下）に出るので、PCで白にした場合はここを暗い色にしないと読めなくなる"
+        },
+        "minHeightPc": {
+            "type": "string",
+            "default": "min-h-pc-280px",
+            "ai_description": "PC表示時の最小高さ。コンパクトなデザインのため低めに設定"
+        },
+        "minHeightTb": {
+            "type": "string",
+            "default": "min-h-tb-220px",
+            "ai_description": "タブレット表示時の最小高さ。通常はデフォルト値を維持"
+        },
+        "minHeightSp": {
+            "type": "string",
+            "default": "min-h-sp-180px",
+            "ai_description": "スマホ表示時の最小高さ。通常はデフォルト値を維持"
+        },
+        "mainTitleTag": {
+            "type": "string",
+            "default": "h1",
+            "ai_description": "タイトルのHTMLタグ。下層ページのメインタイトルなので通常は'h1'を維持"
+        },
+        "bgImageLeftPc": {
+            "type": "string",
+            "default": "",
+            "ai_description": "左側背景画像（PC用）。装飾的な背景画像を配置"
+        },
+        "bgImageLeftSp": {
+            "type": "string",
+            "default": "",
+            "ai_description": "左側背景画像（スマホ用）。レスポンシブ対応用"
+        },
+        "bgImageRightPc": {
+            "type": "string",
+            "default": "",
+            "ai_description": "右側背景画像（PC用）。装飾的な背景画像を配置"
+        },
+        "bgImageRightSp": {
+            "type": "string",
+            "default": "",
+            "ai_description": "右側背景画像（スマホ用）。レスポンシブ対応用"
+        },
+        "bgImageOpacityPc": {
+            "type": "number",
+            "default": 1,
+            "ai_description": "メイン背景画像の透明度（PC用）。0〜1"
+        },
+        "bgImageOpacitySp": {
+            "type": "number",
+            "default": 1,
+            "ai_description": "メイン背景画像の透明度（スマホ用）。0〜1"
+        },
+        "bgImageLeftOpacityPc": {
+            "type": "number",
+            "default": 1,
+            "ai_description": "左側背景画像の透明度（PC用）。0〜1"
+        },
+        "bgImageLeftOpacitySp": {
+            "type": "number",
+            "default": 1,
+            "ai_description": "左側背景画像の透明度（スマホ用）。0〜1"
+        },
+        "bgImageRightOpacityPc": {
+            "type": "number",
+            "default": 1,
+            "ai_description": "右側背景画像の透明度（PC用）。0〜1"
+        },
+        "bgImageRightOpacitySp": {
+            "type": "number",
+            "default": 1,
+            "ai_description": "右側背景画像の透明度（スマホ用）。0〜1"
+        },
+        "marginBottomZero": {
+            "type": "boolean",
+            "default": false,
+            "ai_description": "margin-bottomを0にする。パンくずリストによる自動マージン調整を無効化"
+        }
+    },
+    "no": 5
 }

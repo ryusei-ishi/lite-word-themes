@@ -1,0 +1,224 @@
+{
+  "title": "他の選び方との違い（見比べる表・6項目）",
+  "description": "【型A：表が主役】見出し＋見比べ方のひとこと＋「当社／一般的なやり方」の比較表6項目＋表に出ないことを書く囲い＋相談ボタン。読み手は必ず他と比べるので、比べる土俵をこちらから出すと迷いが減ります。🚨 他社名は書かず「一般的な◯◯」のままにしてください。比較広告は①事実であること②その事実を裏づけられること③引用が公正であることが要ります（景品表示法）。確認できないことは書かないでください。",
+  "blocks": [
+    {
+      "name": "wdl/lw-pr-custom-title-15",
+      "attributes": {
+        "mainTitle": "他の選び方との違い",
+        "subTitle": "COMPARISON",
+        "headingLevel": 2
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "どこに頼んでも同じに見えて、進め方はけっこう違います。<br>選ぶときに見ていただきたい6つを、横に並べました。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-table-1",
+      "attributes": {
+        "columnCount": 3,
+        "showScrollHint": true,
+        "useIndividualHeaderBg": true,
+        "cellWidth1": 200,
+        "cellWidth2": 300,
+        "cellWidth3": 300,
+        "cellWidth1Sp": 140,
+        "cellWidth2Sp": 185,
+        "cellWidth3Sp": 185,
+        "headerTextColor": "#ffffff",
+        "headerBgColor": "color-mix(in srgb, var(--color-main) 50%, #000)",
+        "headers": [
+          {
+            "text": "当社",
+            "bgColor": "color-mix(in srgb, var(--color-main) 40%, #000)"
+          },
+          {
+            "text": "一般的なやり方",
+            "bgColor": "#8ba2b8"
+          }
+        ],
+        "rows": [
+          {
+            "header": "最初のご相談",
+            "cells": [
+              {
+                "content": "<span style=\"font-weight:700\">○</span> 無料・60分ほど"
+              },
+              {
+                "content": "<span style=\"color:#9a9a9a;font-weight:700\">△</span> 時間が短い／有料のことも"
+              }
+            ]
+          },
+          {
+            "header": "お見積り",
+            "cells": [
+              {
+                "content": "<span style=\"font-weight:700\">○</span> 項目ごとに内訳を出す"
+              },
+              {
+                "content": "<span style=\"color:#9a9a9a;font-weight:700\">△</span> 「一式」でまとめて出る"
+              }
+            ]
+          },
+          {
+            "header": "ご担当",
+            "cells": [
+              {
+                "content": "<span style=\"font-weight:700\">○</span> 最初から最後まで同じ担当"
+              },
+              {
+                "content": "<span style=\"color:#9a9a9a;font-weight:700\">△</span> 工程ごとに担当が替わる"
+              }
+            ]
+          },
+          {
+            "header": "追加の費用",
+            "cells": [
+              {
+                "content": "<span style=\"font-weight:700\">○</span> 作業の前に必ずご確認"
+              },
+              {
+                "content": "<span style=\"color:#9a9a9a;font-weight:700\">△</span> 終わってから請求に出る"
+              }
+            ]
+          },
+          {
+            "header": "ご連絡の方法",
+            "cells": [
+              {
+                "content": "<span style=\"font-weight:700\">○</span> 電話・メール・チャット"
+              },
+              {
+                "content": "<span style=\"color:#9a9a9a;font-weight:700\">△</span> 電話だけのことが多い"
+              }
+            ]
+          },
+          {
+            "header": "お渡しのあと",
+            "cells": [
+              {
+                "content": "<span style=\"font-weight:700\">○</span> 3か月は無償で手直し"
+              },
+              {
+                "content": "<span style=\"color:#9a9a9a;font-weight:700\">△</span> そのつど見積もり"
+              }
+            ]
+          }
+        ]
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "core/paragraph",
+      "attributes": {
+        "content": "※比較は当社調べです。すべての同業がこの表のとおりというわけではありません。<br>※料金や条件は、ご依頼の内容によって変わることがあります。",
+        "align": "center"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-waku-1",
+      "attributes": {
+        "waku1MaxWidthPc": 760,
+        "waku1PaddingTopPc": 28,
+        "waku1PaddingBottomPc": 28,
+        "waku1PaddingLeftPc": 32,
+        "waku1PaddingRightPc": 32,
+        "waku1PaddingTopSp": 20,
+        "waku1PaddingBottomSp": 20,
+        "waku1PaddingLeftSp": 16,
+        "waku1PaddingRightSp": 16,
+        "waku1BorderWidthPc": 1,
+        "waku1BorderRadiusPc": [
+          8,
+          8,
+          8,
+          8
+        ],
+        "waku1BgColorPc": "#f7f9fb"
+      },
+      "innerBlocks": [
+        {
+          "name": "core/heading",
+          "attributes": {
+            "content": "表では比べられないこと",
+            "level": 3,
+            "textAlign": "center",
+            "style": {
+              "typography": {
+                "fontSize": "18px"
+              },
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "8px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        },
+        {
+          "name": "core/paragraph",
+          "attributes": {
+            "content": "相性や、聞きたいことを聞ける空気は、表にすると消えてしまいます。気になるところがあれば、比べている途中の段階でかまいませんので一度お話しさせてください。その場でお断りいただいて結構です。",
+            "style": {
+              "spacing": {
+                "margin": {
+                  "top": "0px",
+                  "bottom": "0px"
+                }
+              }
+            }
+          },
+          "innerBlocks": []
+        }
+      ]
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 40,
+        "tbHeight": 32,
+        "spHeight": 24
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-pr-button-2",
+      "attributes": {
+        "textMain": "話だけ聞いてみる",
+        "textSub": "＼ 比べている途中でも大丈夫です ／",
+        "btnUrl": "",
+        "btnAlign": "center",
+        "bgGradient": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 60%, #000) 0%, color-mix(in srgb, var(--color-main) 40%, #000) 100%)",
+        "bgGradientHover": "linear-gradient(135deg, color-mix(in srgb, var(--color-main) 48%, #000) 0%, color-mix(in srgb, var(--color-main) 32%, #000) 100%)"
+      },
+      "innerBlocks": []
+    },
+    {
+      "name": "wdl/lw-space-1",
+      "attributes": {
+        "pcHeight": 80,
+        "tbHeight": 64,
+        "spHeight": 40
+      },
+      "innerBlocks": []
+    }
+  ]
+}

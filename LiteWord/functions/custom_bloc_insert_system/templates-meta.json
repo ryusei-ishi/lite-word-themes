@@ -42,8 +42,104 @@
       "cat": "old",
       "label": "画像と文章の2カラム（見出し・本文・ボタン）"
     },
+    "free_access_route_1": {
+      "cat": "info"
+    },
+    "free_banner_nav_1": {
+      "cat": "intro"
+    },
+    "free_blog_1": {
+      "cat": "info"
+    },
+    "free_contact_1": {
+      "cat": "contact"
+    },
+    "free_cta_1": {
+      "cat": "contact"
+    },
+    "free_cta_tel_1": {
+      "cat": "contact"
+    },
+    "free_delivery_1": {
+      "cat": "price"
+    },
+    "free_event_1": {
+      "cat": "contact"
+    },
+    "free_facility_1": {
+      "cat": "service"
+    },
+    "free_faq_1": {
+      "cat": "trust"
+    },
     "free_flow_1": {
       "cat": "trust"
+    },
+    "free_gallery_1": {
+      "cat": "service"
+    },
+    "free_hours_1": {
+      "cat": "info"
+    },
+    "free_inquiry_1": {
+      "cat": "intro"
+    },
+    "free_line_1": {
+      "cat": "contact"
+    },
+    "free_news_1": {
+      "cat": "info"
+    },
+    "free_pagenav_1": {
+      "cat": "service"
+    },
+    "free_policy_1": {
+      "cat": "info"
+    },
+    "free_price_1": {
+      "cat": "price"
+    },
+    "free_price_option_1": {
+      "cat": "price"
+    },
+    "free_profile_1": {
+      "cat": "trust"
+    },
+    "free_promise_1": {
+      "cat": "intro"
+    },
+    "free_reason_1": {
+      "cat": "intro"
+    },
+    "free_recruit_1": {
+      "cat": "info"
+    },
+    "free_reserve_1": {
+      "cat": "contact"
+    },
+    "free_scene_1": {
+      "cat": "service"
+    },
+    "free_service_1": {
+      "cat": "service"
+    },
+    "free_staff_1": {
+      "cat": "trust"
+    },
+    "free_terms_1": {
+      "cat": "info"
+    },
+    "free_tokushoho_1": {
+      "cat": "info"
+    },
+    "free_voice_1": {
+      "cat": "trust"
+    },
+    "free_works_1": {
+      "cat": "service"
+    },
+    "free_worry_1": {
+      "cat": "intro"
     },
     "news_1": {
       "cat": "old",
@@ -58,17 +154,32 @@
     "pr_before_after_1": {
       "cat": "service"
     },
+    "pr_before_after_2": {
+      "cat": "service"
+    },
+    "pr_blog_cards_1": {
+      "cat": "info"
+    },
     "pr_business_hours_1": {
       "cat": "info"
     },
     "pr_campaign_1": {
       "cat": "price"
     },
+    "pr_case_study_1": {
+      "cat": "trust"
+    },
     "pr_company_1": {
       "cat": "info"
     },
+    "pr_compare_1": {
+      "cat": "intro"
+    },
     "pr_concept_1": {
       "cat": "intro"
+    },
+    "pr_contact_after_1": {
+      "cat": "contact"
     },
     "pr_contact_form_1": {
       "cat": "contact"
@@ -85,6 +196,12 @@
       "cat": "contact"
     },
     "pr_cta_contact_1": {
+      "cat": "contact"
+    },
+    "pr_download_1": {
+      "cat": "contact"
+    },
+    "pr_download_docs_1": {
       "cat": "contact"
     },
     "pr_faq_1": {
@@ -121,6 +238,9 @@
     "pr_gallery_slider_1": {
       "cat": "service"
     },
+    "pr_glossary_1": {
+      "cat": "trust"
+    },
     "pr_guide_1": {
       "cat": "trust"
     },
@@ -128,6 +248,12 @@
       "cat": "info"
     },
     "pr_license_1": {
+      "cat": "trust"
+    },
+    "pr_material_1": {
+      "cat": "service"
+    },
+    "pr_media_1": {
       "cat": "trust"
     },
     "pr_menu_price_1": {
@@ -142,7 +268,19 @@
     "pr_news_1": {
       "cat": "info"
     },
+    "pr_notdoing_1": {
+      "cat": "trust"
+    },
+    "pr_oneday_1": {
+      "cat": "trust"
+    },
+    "pr_online_1": {
+      "cat": "service"
+    },
     "pr_payment_1": {
+      "cat": "price"
+    },
+    "pr_price_case_1": {
       "cat": "price"
     },
     "pr_price_plan_1": {
@@ -157,6 +295,12 @@
     "pr_recruit_1": {
       "cat": "info"
     },
+    "pr_safety_1": {
+      "cat": "trust"
+    },
+    "pr_schedule_1": {
+      "cat": "info"
+    },
     "pr_service_intro_1": {
       "cat": "service"
     },
@@ -165,6 +309,9 @@
     },
     "pr_service_slider_1": {
       "cat": "service"
+    },
+    "pr_shops_1": {
+      "cat": "info"
     },
     "pr_sns_links_1": {
       "cat": "contact"
@@ -175,6 +322,15 @@
     },
     "pr_staff_intro_1": {
       "cat": "trust"
+    },
+    "pr_support_1": {
+      "cat": "trust"
+    },
+    "pr_survey_1": {
+      "cat": "trust"
+    },
+    "pr_ticket_1": {
+      "cat": "price"
     },
     "pr_title_content_1": {
       "cat": "old",
@@ -224,6 +380,12 @@
       "cat": "old",
       "label": "見出し＋会社概要の表＋地図"
     },
+    "pr_trial_1": {
+      "cat": "contact"
+    },
+    "pr_trouble_1": {
+      "cat": "trust"
+    },
     "pr_voice_1": {
       "cat": "old",
       "label": "帯背景＋お客様の声3件"
@@ -232,6 +394,9 @@
       "cat": "trust"
     },
     "pr_voice_comment_1": {
+      "cat": "trust"
+    },
+    "pr_workplace_1": {
       "cat": "trust"
     },
     "pr_works_grid_1": {

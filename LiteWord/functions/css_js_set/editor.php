@@ -288,6 +288,22 @@ function add_gutenberg_editor_scripts( $hook ) {
         css_version(),
         true
     );
+    /* ---------- 広告リンク（アフィリエイト）の書式ボタン ---------- */
+    wp_enqueue_script(
+        'lw-affiliate-link-script',
+        get_template_directory_uri() . '/my-blocks/build/lw-affiliate-link/lw-affiliate-link.js',
+        [ 'wp-rich-text', 'wp-block-editor', 'wp-element', 'wp-components' ],
+        css_version(),
+        true
+    );
+    /* 印を付けたリンクを編集画面で見て分かるようにする。
+       rel は属性セレクタで拾えるので、書式を別に持たなくてもよい。 */
+    wp_add_inline_style(
+        'editor_style',
+        '.editor-styles-wrapper a[rel~="sponsored"]{text-decoration-style:dotted;}'
+        . '.editor-styles-wrapper a[rel~="sponsored"]::after{content:"PR";margin-left:.3em;padding:0 .35em;border-radius:3px;background:#e8eaf0;color:#5a6070;font-size:.7em;vertical-align:.15em;letter-spacing:.04em;}'
+    );
+
     wp_enqueue_script(
         'block-background-controls',
         get_template_directory_uri() . '/assets/js/block-background-controls.js',

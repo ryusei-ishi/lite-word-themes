@@ -15,7 +15,8 @@
 		],
 		"imageAttributes": [
 			"image"
-		]
+		],
+		"notes": "🚨 **`centerBlock: true` を lw-pr-column-1（グリッド）の中で使わない。**true だと save() が margin-left:auto / margin-right:auto を書き出す。CSS Grid では「インライン方向に auto マージンを持つアイテムは justify-self:stretch が効かず、fit-content の幅になる」ため、写真も名前板も position:absolute のこのブロックは**幅がほぼ0になり、直径30pxほどの丸に潰れる**（2026-09-01 実測。見た目だけでは原因が分からない壊れ方）。列に並べるときは既定（false）のままにする。🚨 **名前板（name_plate）は写真の左下に重なる**（bottom:20px / left:20px）。主役が写真の下半分にある写真を渡すと、名前板で隠れて何の写真か分からなくなる。**主役は上か右に置く。**🚨 `showLinkNext`（右下の丸い矢印）はリンク先があるときだけ true にする。空のまま出すと押しても何も起きない。🚨 `namePlateColor` の既定は var(--color-main)。名前板の文字は白なので、明るいサイト色だと読めない。color-mix(in srgb, var(--color-main) 50%, #000) のように暗くして渡す。写真枠は aspectRatioW/H（既定 400x340）。渡す写真の比率と合わせれば切られない。🚨 **名前板は既定で出る（showNamePlate の既定が true）。**人物写真ではない普通の写真をそのまま置くと、左下に「主任 大阪 京子」のようなサンプルの肩書きと名前が出たままになる（2026-09-02 に実際に配りかけた）。人物紹介以外では必ず `showNamePlate: false` を入れること。"
 	},
 	"supports": {
 		"anchor": true

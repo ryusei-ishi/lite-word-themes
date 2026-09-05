@@ -1,336 +1,344 @@
 {
-  "_meta": {
-    "description": "LiteWordリンク一覧・破損リンク検出機能のAI向けメタ情報。各機能の意味・用途・仕組みをAIが理解するためのファイル。WordPressの動作には一切影響しない。",
-    "version": "2.3.0",
-    "lastUpdated": "2026-08-22",
-    "updated": "2026-08-22",
-    "deployedTo": "lite-word.com（2026-08-22）。配布ZIPには未反映"
-  },
-  "feature": {
-    "title": "リンク一覧・破損リンク検出",
-    "aiDescription": "サイト内の全ページ（投稿・固定ページ）に含まれるaタグを自動スキャンし、リンク切れや無効なアンカーを検出する管理画面機能。管理メニュー「リンク一覧」からアクセスする。利用には manage_options 権限に加えて有効な契約（LW_HAS_SUBSCRIPTION）が必要＝プレミアム限定。",
-    "userGuide": "サイトの品質管理に使う機能。リンク切れはSEOに悪影響を与えるため、定期的にチェックすることが推奨される。特にサイトリニューアルやページ削除の後に実行すると効果的。",
-    "availability": {
-      "aiDescription": "無料プランでは管理メニュー自体が表示されず、AJAXも403で拒否される。判定は lw_link_list_can_use()。LW_HAS_SUBSCRIPTION は 有料 / sub_pre_set / 14日試用 のいずれかで true になるため、試用期間中のユーザーは利用できる。",
-      "filter": "lw_link_list_can_use（booleanを返すフィルタで可否を差し替えられる）"
-    }
-  },
-  "files": {
-    "aiDescription": "2026-08-22 に1ファイル1,656行のモノリス（admin-page-all-links.php）を解体した。同ファイルはもう存在しない。同日、リンクの集め方を2通り（軽い＝DB内完結 / しっかり＝公開URLを巡回）にして切り替えられるようにした。",
-    "index.php": "定数定義・各ファイルの読み込み・管理メニュー登録のみ",
-    "guard.php": "権限まわりの唯一の入口。lw_link_list_can_use() と lw_link_list_verify_ajax()",
-    "store.php": "wp_lw_link_list（ページごとのリンク一覧）の読み書き",
-    "results-store.php": "wp_lw_link_check_results（HTTPチェック結果）の読み書き",
-    "class-scanner.php": "aタグとid属性の抽出（DOMDocument）",
-    "class-checker.php": "HTTPステータス判定",
-    "ajax/scan.php": "スキャン開始・スキャン1バッチ・読み込み",
-    "ajax/check.php": "チェック開始・チェック1バッチ＋チェック対象URLの組み立て",
-    "ajax/edit.php": "リンクURLのインライン編集",
-    "admin/page.php": "管理画面のHTML",
-    "admin/enqueue.php": "CSS/JSの登録と wp_localize_script（PHP→JSの唯一の受け渡し口）",
-    "admin/assets/link-list.css": "管理画面のスタイル",
-    "admin/assets/link-list.js": "管理画面の挙動",
-    "scan-state.php": "いまの一覧をどちらの方式で採ったか、読めなかったページ、上限で外したページ数、サイト共通リンクの判定結果を持つ。すべて option（autoload:false）。🚨 テーブルに列を足していないのは dbDelta の ALTER TABLE を避けるため。",
-    "class-crawler.php": "しっかりスキャン。公開URLを wp_safe_remote_get で取得してDOMからリンクを抽出する。ヘッダー・フッター・メニューまで拾える。本文のリンクだけは post_content から採る（link_index を保つため）。",
-    "ajax/crawl.php": "巡回の開始・1バッチ・締め（共通リンクの割り出し）",
-    "admin/assets/link-list-crawl.js": "しっかりスキャンの画面側。link-list.js の closure には入れないので window.lwLinkListApi 経由で関数をもらう。"
-  },
-  "database": {
-    "wp_lw_link_list": {
-      "aiDescription": "スキャン結果を保存するカスタムテーブル。1行=1ページ。投稿IDごとにリンク情報（JSON）、ページ内のid属性一覧（JSON）、リンク数を保存する。スキャン開始時にTRUNCATEし、以降はバッチごとに REPLACE で積む。",
-      "columns": {
-        "id": "自動採番ID",
-        "post_id": "投稿ID（UNIQUE）",
-        "post_type": "投稿タイプ（page/post等）",
-        "post_title": "投稿タイトル",
-        "links_json": "ページ内の全aタグ情報をJSON配列で保存（href, text, source_field, link_index）",
-        "ids_json": "ページ内の全id属性値をJSON配列で保存（アンカーリンクの存在チェック用）",
-        "link_count": "リンク数",
-        "created_at": "作成日時",
-        "updated_at": "更新日時"
-      }
-    },
-    "wp_lw_link_check_results": {
-      "aiDescription": "リンク有効性チェックの結果。1行=1URL（同じURLが複数ページから貼られていても1行）。2026-08-22 に追加。それ以前は結果がブラウザのメモリにしか無く、画面を離れると消えていた。",
-      "columns": {
-        "id": "自動採番ID",
-        "url_hash": "md5(url)。URLは長すぎてUNIQUEキーに使えないためハッシュを鍵にする",
-        "url": "チェックしたURL",
-        "status": "ok / redirect / not_found / client_error / server_error / timeout / error / blocked / skip",
-        "status_code": "HTTPステータスコード",
-        "redirect_url": "リダイレクト先（3xxのとき）",
-        "message": "補足メッセージ",
-        "checked_at": "チェック日時"
-      }
-    },
-    "versionGuard": {
-      "aiDescription": "🚨 テーブル作成関数は必ず get_option() のバージョンガードを通してから dbDelta() を呼ぶ。ガードが無いと、整数型の表示幅や文字セットの申告差で dbDelta が毎回 ALTER TABLE を発行し続け、InnoDBのメタデータロックでサイト全体が遅くなる。2026-08-20 に mail_form/reception_history.php が同じ罠で lite-word.com を 774ms まで落としている。",
-      "options": {
-        "lw_link_list_db_ver": "wp_lw_link_list の定義バージョン（autoload:on）",
-        "lw_link_check_db_ver": "wp_lw_link_check_results の定義バージョン（autoload:on）"
-      }
-    },
-    "options": {
-      "aiDescription": "🚨 これらは列ではなく option。dbDelta の ALTER TABLE を避けるためテーブルに列を足していない（2026-08-20 に mail_form/reception_history.php の dbDelta が lite-word.com を774msまで落とした前例）。すべて autoload:false。",
-      "lw_link_list_scan_mode": "'light' または 'full'",
-      "lw_link_list_crawl_errors": "巡回で読めなかったページの配列（post_id / title / url / reason）。最大20件",
-      "lw_link_list_skipped": "上限で対象から外したページ数",
-      "lw_link_list_common_links": "サイト共通と判定した href => 出現ページ数",
-      "lw_link_list_db_ver": "wp_lw_link_list の定義バージョン（dbDelta のガード）",
-      "lw_link_check_db_ver": "wp_lw_link_check_results の定義バージョン（同上）",
-      "lw_link_list_was_throttled": "巡回中にアクセス制限（429）を受けたか。遅くなった理由を画面に出すために持つ",
-      "lw_link_check_blocked_hosts": "（transient・10分）確認を断られたホスト名。同じ相手に頼み続けないための打ち切りリスト",
-      "lw_link_list_crawl_throttled": "（transient・10分）巡回中に429を食らったか。次のバッチに間隔を広げさせる",
-      "lw_link_check_self_throttled": "（transient・10分）自分のサイトに429を返されたか。自サイト向けの間隔を広げるために持つ（打ち切りではない）"
-    }
-  },
-  "components": {
-    "scanner": {
-      "class": "LW_Broken_Link_Check_Scanner",
-      "file": "class-scanner.php",
-      "aiDescription": "公開ページからaタグとid属性を抽出するスキャナー。DOMDocumentを使用してネストされたHTML構造を正確にパースする。生コンテンツとフィルター適用後のコンテンツ両方からリンクを抽出し、重複を排除する。",
-      "methods": {
-        "count_scannable_posts": {
-          "aiDescription": "スキャン対象（公開済み・publicな投稿タイプ）の総件数。進捗表示に使う。"
-        },
-        "scan_batch": {
-          "aiDescription": "offset から limit 件だけスキャンして、ページ情報の配列を返す。各要素は post_id / post_type / post_title / ids / links を持つ。",
-          "userGuide": "🚨 全件を一度に読まないこと。以前は posts_per_page => -1 で全投稿をメモリに載せ、1投稿あたり the_content を2回適用していた。the_content は他プラグインのフック・ショートコード・外部API呼び出しまで巻き込むため、ページ数の多いサイトではメモリ枯渇かタイムアウトで落ちる。"
-        },
-        "scan_post": {
-          "aiDescription": "投稿1件をスキャンする。the_content の適用は1回だけで、id抽出とリンク抽出に使い回す。"
-        },
-        "extract_all_a_tags": {
-          "aiDescription": "HTML文字列からDOMDocumentで全aタグを抽出。href属性値、テキスト内容（SVG/アイコン除外）、元のHTMLタグ、コンテンツ内での出現順（link_index）を返す。"
-        },
-        "extract_all_ids": {
-          "aiDescription": "HTML文字列から全id属性値を正規表現で抽出。アンカーリンクの存在チェックに使用する。"
-        },
-        "trim_text": {
-          "aiDescription": "リンクテキストの省略。mb_strimwidth() は mbstring 拡張が必要で、共用サーバーでは無効なことがある。無い場合は WordPress の _mb_substr()（compat.php・mbstringが無くてもUTF-8を壊さない）へ落とす。php -l では検出できない種類の落ち方をするので、mb_* を直接呼ばないこと。"
-        }
-      },
-      "editableFlag": {
-        "aiDescription": "🚨 リンクには2種類ある。source_field='post_content'（link_index >= 0）は本文に直接書かれているもので、link_index が本文中の出現順と一致するためインライン編集で特定できる。source_field='post_content (filtered)'（link_index = -1）はブロックのレンダリング結果など、本文には存在しないもの。位置で特定できないので編集を受け付けない（受け付けると本文中の別のリンクを書き換えてしまう）。2026-08-22 以前は link_index が保存されておらず、常に 0 として扱われていたため、インライン編集がページ内の最初のリンクを書き換えていた。"
-      },
-      "dedup": {
-        "aiDescription": "🚨 生コンテンツと the_content 後の重複判定は href だけで行う。テキストを鍵にしてはいけない。the_content() は呼ぶたびに出力が揺れ、同じ投稿を続けて通しただけで 18,030 → 18,290 → 18,205 バイトと変わる（動的ブロックが『1ページに1回だけ出す』類の状態を内部に持つため）。a タグの数は変わらないのに、テキストや空白の入り方だけが変わる。テキストを鍵にすると同じリンクが実行のたびに別物と判定され、スキャン件数が 408〜530 とぶれた（2026-08-22 に判明・修正）。",
-        "remainingLimitation": "href 判定に直しても、管理画面（admin-ajax）からのスキャンは、動的ブロックがフロントで出力するリンクを数件取りこぼす（実測 412 対 408・本文由来 406 は完全一致）。これは the_content を管理画面のコンテキストで走らせている以上どうしても残る差。完全に合わせるなら、フロントのURLを wp_safe_remote_get で取得して解析する設計に変える必要がある（未実施・要判断）。"
-      }
-    },
-    "checker": {
-      "class": "LW_Broken_Link_Check_Checker",
-      "file": "class-checker.php",
-      "aiDescription": "URLにHTTPリクエストを送信してリンクの有効性をチェックするクラス。まずHEADリクエストを試み、失敗した場合はGETにフォールバックする。タイムアウトは10秒。第三者サイトの証明書エラーで誤判定しないよう sslverify は意図的に false。",
-      "ssrfProtection": {
-        "aiDescription": "🚨 送信前に wp_http_validate_url() で宛先を検証し、wp_safe_remote_head / wp_safe_remote_get を使う（二重防御）。127.0.0.0/8・10.0.0.0/8・172.16.0.0/12・192.168.0.0/16 に加えて 169.254.0.0/16（クラウドのメタデータendpoint）・0.0.0.0/8・CGNAT・マルチキャストまで拒否され、ポートも80/443/8080に限られる。自サイトのホストは同一ホスト判定で例外扱いされるため、ローカル開発（localhost）や社内サーバーでも自サイトのリンクは検査できる。",
-        "whyNotMessageMatch": "拒否されたときのWP_Errorは http_request_failed ＋ 翻訳済みメッセージ（日本語環境では『有効な URL ではありません。』）で返るため、英語の文字列マッチでは判別できない。必ず wp_http_validate_url() を事前に呼んで判定すること。"
-      },
-      "statusTypes": {
-        "ok": "有効（200系）",
-        "redirect": "リダイレクト（300系）— redirect_urlも返す",
-        "not_found": "リンク切れ（404）",
-        "client_error": "クライアントエラー（400系、404以外）",
-        "server_error": "サーバーエラー（500系）",
-        "timeout": "タイムアウト（10秒超過）",
-        "error": "接続エラー（DNS解決失敗等）",
-        "blocked": "安全でない宛先のため送信しなかった（SSRFガード）",
-        "skip": "チェック対象外（mailto/tel/javascript/data/空URL）"
-      },
-      "userGuide": "バッチ処理で最大20件ずつチェックする。外部サイトへのリクエストを送るため、大量チェック時はサーバー負荷に注意。自動巡回（WP-Cron）は行わない方針（2026-08-22 Ryuichi 判断）。実行は管理画面のボタンを押したときだけ。",
-      "statusPolicy": {
-        "aiDescription": "🚨「リンク切れ」と「確認できず」を必ず分けること。混ぜると誤報になる。2026-08-22 に lite-word.com（244URL）で実測したところ、「問題あり」95件のうち本当に切れていたのは2件だけで、残り93件は相手が自動チェックを断っていただけだった。",
-        "not_found": "404 と 410 のみ。「そのページはもう無い」と言い切れるコード",
-        "unverified": "401 / 403 / 405 / 406 / 429 / 451 / 503 / 999。相手が自動チェックを断っているだけで、ブラウザでは開けることがほとんど。画面では黄色の「確認できず」として別に数える",
-        "client_error": "その他の 4xx",
-        "server_error": "503 以外の 5xx"
-      },
-      "headThenGet": "HEAD が 403 / 405 / 406 / 501 / 999 を返したら GET で確かめ直す。HEAD だけ弾いて GET は返すサーバーは多く、やらないと「HEADが403だったのでリンク切れ」という誤報になる。",
-      "perHostBackoff": "🚨 同じ相手に何度も頼みに行かないこと。一度 429 で断られたホストは、その回の残りをまとめて「確認できず」にする（transient lw_link_check_blocked_hosts・10分）。lite-word.com には youtu.be へのリンクが85本あり、1本ごとに待ってやり直していたらチェック全体が 134秒 → 384秒 になった。ホスト単位で打ち切ってからは 91秒。",
-      "delay": "LW_LINK_LIST_CHECK_DELAY_MS（既定200ms）を1本ごとに空ける。",
-      "retry429": "429 は Retry-After を見て待ち、GET で1回だけやり直す（上限 LW_LINK_LIST_CRAWL_RETRY_MAX_SEC 秒）。",
-      "selfHostNeverBlocked": "🚨 自分のサイトだけはホスト単位で打ち切らないこと（block_host が is_own_url を先に見る）。打ち切ると内部リンクが丸ごと unverified に化けて、本当のリンク切れが隠れる。2026-08-22 に lite-word.com で実際に起きた（内部126本が全部429で確認できずになり、下書きページへのリンク切れが1件も見えなくなった）。代わりに transient lw_link_check_self_throttled を立て、自サイト向けの間隔だけ 200ms → LW_LINK_LIST_CRAWL_SLOW_DELAY_MS（1200ms）に広げて最後まで確かめきる。",
-      "redirectPolicy": "🚨 'redirection' => 5 で転送を追っているので、status_code は最終結果しか映さない。最終URL（$response[\"http_response\"]->get_response_object()->url）と見比べないと転送に気づけず、画面の「リダイレクト」欄が永久に0になる。⚠️ ただし出すのは自サイト内の転送だけ。外部の転送（youtu.be の短縮URL・言語振り分け・トラッキング付与）は相手の都合でこちらでは直せず、実測では243URL中115件が転送になって黄色が意味を失った。見た目だけの差（末尾スラッシュ・http→https・#以降・%エンコードの大小文字）は同じ場所とみなす。自サイト内の転送は「自分のリンクが古い」という直せる合図になる（lite-word.com では14本が /manual/ 配下への転送だった）。"
-    },
-    "crawler": {
-      "aiDescription": "LW_Link_List_Crawler（class-crawler.php）。公開URLを取りに行く側。",
-      "preflightFirst": "🚨 crawl_start はトップページ1本で疎通を確かめてから lw_link_list_begin_scan()（TRUNCATE）を呼ぶ。逆にすると、巡回できないサイトでは前に採れていた一覧まで失う。2026-08-22 に実機で確認済み（60行が60行のまま残る）。",
-      "ssrf": "is_own_url() で home_url と同じホストのみ許可し、さらに wp_safe_remote_get を使う（二重）。クライアントからURLは受け取らない（パーマリンクからサーバーが組み立てる）。",
-      "errorMessages": "🚨 WP_Error のメッセージは翻訳される。判定はエラーコード（http_request_failed 等）で行い、英語の文字列一致に頼らない。",
-      "partialResult": "取得に失敗したページも、本文から採れるぶんは残す。失敗は option に積んで画面に一覧で出す。黙って軽い方に落とさない。",
-      "timeBudget": "1リクエストで TIME_BUDGET(20秒) を超えたら、ページが残っていても打ち切って次のリクエストに回す。",
-      "rateLimit": "🚨 自分のサイトを短時間に何度も取りに行くと 429 で弾かれる。実測（lite-word.com 175ページ）: 間隔なし → 5ページを取りこぼし。LW_LINK_LIST_CRAWL_DELAY_MS（250ms）を空けると取りこぼし0で87秒。429 を食らったら Retry-After を見て1回やり直し、以後は LW_LINK_LIST_CRAWL_SLOW_DELAY_MS（1200ms）に広げる（transient で次のバッチへ申し送る）。遅くなった理由は option lw_link_list_was_throttled に残して画面に出す。"
-    },
-    "adminUi": {
-      "scanButtonLabels": "🚨 2つのボタンは、違いを先頭に出すこと。「もう一度調べる」「もう一度しっかり調べる」だと頭の4文字が揃い、Ryuichi から「同じことを言っているのでどっちが何をするのかが分からない」と指摘された（2026-08-22）。正: 「ページを開いて全部調べる」/「本文だけ調べる」。ボタンの中に小さく理由を添える（ヘッダー・フッターを含むか／どれくらい時間がかかるか）。スキャン後に文言を書き換えないこと（必ず頭が揃う）。推奨するほう＝しっかり側を button-primary にする。"
-    }
-  },
-  "ajaxEndpoints": {
-    "_security": {
-      "aiDescription": "🚨 全エンドポイントが先頭で lw_link_list_verify_ajax() を呼ぶ。順番は nonce（LW_LINK_LIST_NONCE_ACTION）→ manage_options → 契約状態。2026-07-24 のセキュリティ監査で『再有効化するなら nonce＋SSRF先ホスト検証を先に入れること』と条件が付いていた。nonce が無いと、管理者がログイン中に罠サイトを踏んだだけで lw_link_list_update_href が投稿本文のリンク先を書き換えられる。",
-      "nonceAction": "lw_link_list_ajax",
-      "nonceParam": "nonce（JS側は lwData() が必ず載せる。$.ajax の data を手書きしないこと）"
-    },
-    "lw_link_list_scan_start": {
-      "aiDescription": "スキャンを開始する。総件数を返し、wp_lw_link_list を空にする。",
-      "method": "POST",
-      "returns": "total / batchSize"
-    },
-    "lw_link_list_scan_batch": {
-      "aiDescription": "offset から LW_LINK_LIST_SCAN_BATCH 件をスキャンして保存する。",
-      "method": "POST",
-      "params": {
-        "offset": "開始位置（整数）"
-      },
-      "returns": "scanned / saved / offset / done"
-    },
-    "lw_link_list_load": {
-      "aiDescription": "DBに保存済みのリンク情報とチェック結果を返す（再スキャン不要）。checkResults を含むため、画面を開き直してもチェック結果が残る。",
-      "method": "POST",
-      "returns": "{links, pages, total, checkResults, checkSummary, lastUpdated, scanMode, crawlErrors, skipped, commonCount}"
-    },
-    "lw_link_list_check_start": {
-      "aiDescription": "チェックを開始する。対象URL数を返し、前回の結果を捨てる。",
-      "method": "POST",
-      "returns": "total / batchSize"
-    },
-    "lw_link_list_check_batch": {
-      "aiDescription": "offset から LW_LINK_LIST_CHECK_BATCH 件をチェックして結果を保存する。🚨 クライアントからURLを受け取らない。叩く相手は必ずサーバー側が lw_link_list_build_checkable_urls() でDBから組み立てる（以前は $_POST['urls'] をそのまま叩いていた＝SSRF）。",
-      "method": "POST",
-      "params": {
-        "offset": "開始位置（整数）"
-      },
-      "returns": "results / checked / offset / total / done"
-    },
-    "lw_link_list_update_href": {
-      "aiDescription": "投稿のpost_content内の特定aタグのhref属性を書き換える。link_index（本文中の出現順）で対象を特定する。link_index が -1（＝ブロックのレンダリング結果）のものは拒否する。javascript: / data: / vbscript: スキームも拒否。wp_update_post には wp_slash() を通した本文を渡す（通さないとバックスラッシュが1段消える）。",
-      "method": "POST",
-      "params": {
-        "post_id": "投稿ID",
-        "new_href": "変更後のURL",
-        "link_index": "本文中での出現順（0始まり。-1は編集不可）"
-      },
-      "returns": "message / new_href / links / ids"
-    },
-    "_removed": {
-      "aiDescription": "2026-08-22 に廃止したエンドポイント。どこからも呼ばれておらず、攻撃面を減らすために削除した。",
-      "lw_link_list_status": "DBにデータがあるか返すだけ。PHP側で直接判定するようになったため不要",
-      "lw_link_list_debug_log": "JSからdebug.logに書き込むデバッグ用。ユーザー入力をログに流す口だったため削除",
-      "lw_link_list_get_checkable_urls": "チェック対象URLをクライアントに渡していた。lw_link_list_check_start に統合（URLはクライアントに渡さない）",
-      "lw_link_list_scan": "全件を1リクエストでスキャンしていた。scan_start + scan_batch に分割"
-    },
-    "lw_link_list_crawl_start": {
-      "action": "wp_ajax_lw_link_list_crawl_start",
-      "params": "nonce",
-      "returns": "success:{total, skipped, batchSize} / 疎通できないときは success:false + {message, reason, fallback}",
-      "note": "🚨 疎通できないときは HTTP 200 で success:false を返す（権限エラーの403と区別するため）。このときDBは触っていない。"
-    },
-    "lw_link_list_crawl_batch": {
-      "action": "wp_ajax_lw_link_list_crawl_batch",
-      "params": "nonce, offset",
-      "returns": "{crawled, failed, offset, done}",
-      "note": "crawled が 0 のときもクライアント側で必ず止めること（進まないまま呼び続けない歯止め）。"
-    },
-    "lw_link_list_crawl_finish": {
-      "action": "wp_ajax_lw_link_list_crawl_finish",
-      "params": "nonce",
-      "returns": "{common, errors}",
-      "note": "全ページ集め終わってからでないと共通リンクを判定できないので、締めで1回だけ呼ぶ。"
-    }
-  },
-  "skipConditions": {
-    "aiDescription": "以下のURLタイプはリンクチェックの対象外としてスキップされる。",
-    "types": [
-      "空のURL",
-      "mailto: で始まるURL",
-      "tel: で始まるURL",
-      "javascript: で始まるURL",
-      "data: で始まるURL",
-      "# のみのアンカーリンク（ただし警告バッジは表示）"
-    ],
-    "anchorHandling": "#で始まるアンカーリンクは、そのリンクが置かれているページのURLと結合してからチェックする。ページ内のid属性一覧（ids_json）と突き合わせて、飛び先が存在しないアンカーには「ID不在」バッジを出す。"
-  },
-  "scanModes": {
-    "aiDescription": "リンクの集め方は2通りある（2026-08-22 Ryuichi 判断）。どちらで採ったかは option lw_link_list_scan_mode に入っていて、AJAX lw_link_list_load の scanMode で返る。件数が変わる理由になるので、画面には必ずどちらか出している。",
-    "light": {
-      "label": "リンクを調べる（軽い）",
-      "how": "class-scanner.php。post_content と apply_filters(the_content) の出力から集める。HTTPを使わない",
-      "covers": "本文のリンク（編集できる）＋ the_content で出るぶん",
-      "missing": "ヘッダー・フッター・メニュー。動的ブロックが出すリンクの一部（実測で 412 対 408 の4件差）",
-      "cost": "1秒未満（60ページで実測）"
-    },
-    "full": {
-      "label": "しっかり調べる",
-      "how": "class-crawler.php。公開URLを wp_safe_remote_get で取得してDOMから集める",
-      "covers": "訪問者が見るHTMLそのもの。ヘッダー・フッター・メニューを含む",
-      "missing": "Basic認証・メンテナンス中のサイトでは取得できない（黙って軽い方に落とさず画面に理由を出す）",
-      "cost": "60ページで約31秒（1ページ3件ずつ・21リクエスト）",
-      "limits": "既定200ページまで（フィルター lw_link_list_crawl_max）。外したぶんは option lw_link_list_skipped に入れて画面に出す"
-    },
-    "measured2026_08_22": {
-      "site": "ローカル SAMPLE（60ページ）",
-      "light": {
-        "total": 412,
-        "body": 406
-      },
-      "full": {
-        "totalRows": 2468,
-        "displayedRows": 534,
-        "body": 406,
-        "common": 43,
-        "pageOnly": 85
-      },
-      "note": "本文由来の406件は両方式で完全に一致する。しっかり側の総数が大きいのは、ヘッダー・フッターが全ページに付くため。"
-    },
-    "measured2026_08_22_production": {
-      "site": "lite-word.com（175ページ・WordPress 7.1 / PHP 8.3.30）",
-      "light": {
-        "pages": 175,
-        "links": 783,
-        "body": 653,
-        "seconds": 0.5
-      },
-      "full": {
-        "pages": 175,
-        "rows": 3255,
-        "displayedRows": 915,
-        "body": 653,
-        "pageOnly": 246,
-        "common": 16,
-        "seconds": 87,
-        "requests": 59,
-        "failed": 0
-      },
-      "check": {
-        "urls": 243,
-        "ok": 219,
-        "redirect": 14,
-        "unverified": 10,
-        "notFound": 0,
-        "seconds": 104,
-        "note": "2026-08-22 20:40。リンク切れ2件を直したあとの最終形。転送14件はすべて自サイト内（旧URL → /manual/ 配下）"
-      },
-      "foundOnProduction": [
-        "https://lite-word.com/?page_id=12 が105ページで404（投稿ID 12 が下書きのまま。リンクテキストは「ホーム」）",
-        "https://lite-word.com/page-sample-list/sample_page_top_14/ が投稿#4002の本文で404"
-      ],
-      "note": "本文由来の653件はローカルと同じく両方式で完全に一致。dbDelta の ALTER TABLE は20回×2呼んで0本。",
-      "fixedOnProduction": [
-        "?page_id=12（105ページのフッター「ホーム」）… メニュー項目 #240 が下書きの固定ページ #12 を指していた → サイトのトップへ向けた",
-        "page-sample-list/sample_page_top_14/ … #3841「トップサンプル：クッキング」が下書き（トップサンプル20本中これ1本だけ）→ 公開済みのカフェ #3043 へ差し替え"
-      ]
-    }
-  },
-  "linkScope": {
-    "aiDescription": "lw_link_list_get_from_db() が各リンクに付ける区分。store.php の lw_link_list_link_scope() が決める。",
-    "body": "本文にある（link_index >= 0）。一覧からリンク先を書き換えられる",
-    "page": "そのページ固有だが本文の外（動的ブロックの出力など）。link_index = -1 で編集できない",
-    "common": "ヘッダー・フッター・メニュー。全ページの LW_LINK_LIST_COMMON_RATIO（既定0.3）以上、かつ LW_LINK_LIST_COMMON_MIN_HITS（既定3）ページ以上に出ている本文外のリンク。画面では投稿タイプではない専用タブ「サイト共通」に1回だけ出し、何ページに出ているかを添える。🚨 0.6 では厳しすぎた（2026-08-22 lite-word.com 実測）。175ページのサイトでフッターの利用規約・プライバシーポリシー・特商法がちょうど100ページ＝57%のため漏れ、600行以上の繰り返しが残った。実データでは 20〜99ページに出るURLが1本も無く、10%〜50%のどこでも結果が同じだったので、真ん中の 0.3 にしてある。",
-    "countingRule": "🚨 統計を出すときは common を1本として数えること（renderStats / updateTabCount と揃える）。allLinks.length をそのまま使うと実測で 534 のところが 2,468 になる。"
-  },
-  "testing": {
-    "harnessMustMatchHandler": "🚨 検証用スクリプトは本物のAJAXハンドラと同じ手順にすること。2026-08-22、check_start で reset_blocked_hosts() を呼ばない検証スクリプトのせいで、前回の打ち切りリストが10分残り、次の回が1本もリクエストせずに全部「確認できず」を返した。速く終わるので気づきにくく、コードの不具合と誤診しかけた。",
-    "localHomeUrl": "ローカルの home_url() は localhost なので、is_own_url を使う分岐はそのままでは試せない。add_filter('home_url', fn() => 'https://本番ドメイン/') を入れてから確かめる。",
-    "dontHammer": "🚨 短時間に何度も通すと自分のサイトから429を返される。巡回175ページ＋チェック243本を15分に4回流したら本当に止められた。検証は間を空ける。"
-  }
+	"_meta": {
+		"description": "LiteWordリンク一覧・破損リンク検出機能のAI向けメタ情報。各機能の意味・用途・仕組みをAIが理解するためのファイル。WordPressの動作には一切影響しない。",
+		"version": "2.3.0",
+		"lastUpdated": "2026-09-02",
+		"updated": "2026-09-02",
+		"deployedTo": "lite-word.com（2026-09-02）。配布ZIPには未反映"
+	},
+	"feature": {
+		"title": "リンク一覧・破損リンク検出",
+		"aiDescription": "サイト内の全ページ（投稿・固定ページ）に含まれるaタグを自動スキャンし、リンク切れや無効なアンカーを検出する管理画面機能。管理メニュー「リンク一覧」からアクセスする。利用には manage_options 権限に加えて有効な契約（LW_HAS_SUBSCRIPTION）が必要＝プレミアム限定。",
+		"userGuide": "サイトの品質管理に使う機能。リンク切れはSEOに悪影響を与えるため、定期的にチェックすることが推奨される。特にサイトリニューアルやページ削除の後に実行すると効果的。",
+		"availability": {
+			"aiDescription": "無料プランでは管理メニュー自体が表示されず、AJAXも403で拒否される。判定は lw_link_list_can_use()。LW_HAS_SUBSCRIPTION は 有料 / sub_pre_set / 14日試用 のいずれかで true になるため、試用期間中のユーザーは利用できる。",
+			"filter": "lw_link_list_can_use（booleanを返すフィルタで可否を差し替えられる）"
+		},
+		"adFilter": {
+			"aiDescription": "一覧の上にある「広告リンクだけ」のチェックボックス。rel 属性に sponsored を含む a タグだけに絞り込む（2026-09-02 追加）。判定は保存済みの rel 文字列を見るだけで、リンク先には行かない。",
+			"userGuide": "アフィリエイトリンクの棚卸しに使う。広告リンクが切れていると収益が落ちるうえ、リンク切れは検索エンジンの評価も下げるので、広告を貼っているサイトでは月に一度ここだけ見ておくとよい。印（rel=\"sponsored nofollow\"）は、記事の本文でリンクを選び、ツールバーの📣メガホン「広告リンク（アフィリエイト）」で付ける。",
+			"notes": "🚨 このチェックボックスに class=\"lw-filter\" を付けないこと。絞り込みを集める getActiveFilters() が値 \"on\" を拾ってしまい、他の絞り込みが壊れる。専用の change ハンドラで renderTabContent を呼び直している（admin/assets/link-list.js）。"
+		},
+		"related": {
+			"aiDescription": "アフィリエイト向けの機能一式は ai-index.json の aiResources.affiliate にまとまっている。利用者向けの説明は https://lite-word.com/manual/link-check/ と /manual/affiliate-links/。"
+		}
+	},
+	"files": {
+		"aiDescription": "2026-08-22 に1ファイル1,656行のモノリス（admin-page-all-links.php）を解体した。同ファイルはもう存在しない。同日、リンクの集め方を2通り（軽い＝DB内完結 / しっかり＝公開URLを巡回）にして切り替えられるようにした。",
+		"index.php": "定数定義・各ファイルの読み込み・管理メニュー登録のみ",
+		"guard.php": "権限まわりの唯一の入口。lw_link_list_can_use() と lw_link_list_verify_ajax()",
+		"store.php": "wp_lw_link_list（ページごとのリンク一覧）の読み書き",
+		"results-store.php": "wp_lw_link_check_results（HTTPチェック結果）の読み書き",
+		"class-scanner.php": "aタグとid属性の抽出（DOMDocument）",
+		"class-checker.php": "HTTPステータス判定",
+		"ajax/scan.php": "スキャン開始・スキャン1バッチ・読み込み",
+		"ajax/check.php": "チェック開始・チェック1バッチ＋チェック対象URLの組み立て",
+		"ajax/edit.php": "リンクURLのインライン編集",
+		"admin/page.php": "管理画面のHTML",
+		"admin/enqueue.php": "CSS/JSの登録と wp_localize_script（PHP→JSの唯一の受け渡し口）",
+		"admin/assets/link-list.css": "管理画面のスタイル",
+		"admin/assets/link-list.js": "管理画面の挙動",
+		"scan-state.php": "いまの一覧をどちらの方式で採ったか、読めなかったページ、上限で外したページ数、サイト共通リンクの判定結果を持つ。すべて option（autoload:false）。🚨 テーブルに列を足していないのは dbDelta の ALTER TABLE を避けるため。",
+		"class-crawler.php": "しっかりスキャン。公開URLを wp_safe_remote_get で取得してDOMからリンクを抽出する。ヘッダー・フッター・メニューまで拾える。本文のリンクだけは post_content から採る（link_index を保つため）。",
+		"ajax/crawl.php": "巡回の開始・1バッチ・締め（共通リンクの割り出し）",
+		"admin/assets/link-list-crawl.js": "しっかりスキャンの画面側。link-list.js の closure には入れないので window.lwLinkListApi 経由で関数をもらう。"
+	},
+	"database": {
+		"wp_lw_link_list": {
+			"aiDescription": "スキャン結果を保存するカスタムテーブル。1行=1ページ。投稿IDごとにリンク情報（JSON）、ページ内のid属性一覧（JSON）、リンク数を保存する。スキャン開始時にTRUNCATEし、以降はバッチごとに REPLACE で積む。",
+			"columns": {
+				"id": "自動採番ID",
+				"post_id": "投稿ID（UNIQUE）",
+				"post_type": "投稿タイプ（page/post等）",
+				"post_title": "投稿タイトル",
+				"links_json": "ページ内の全aタグ情報をJSON配列で保存（href, text, source_field, link_index）",
+				"ids_json": "ページ内の全id属性値をJSON配列で保存（アンカーリンクの存在チェック用）",
+				"link_count": "リンク数",
+				"created_at": "作成日時",
+				"updated_at": "更新日時"
+			}
+		},
+		"wp_lw_link_check_results": {
+			"aiDescription": "リンク有効性チェックの結果。1行=1URL（同じURLが複数ページから貼られていても1行）。2026-08-22 に追加。それ以前は結果がブラウザのメモリにしか無く、画面を離れると消えていた。",
+			"columns": {
+				"id": "自動採番ID",
+				"url_hash": "md5(url)。URLは長すぎてUNIQUEキーに使えないためハッシュを鍵にする",
+				"url": "チェックしたURL",
+				"status": "ok / redirect / not_found / client_error / server_error / timeout / error / blocked / skip",
+				"status_code": "HTTPステータスコード",
+				"redirect_url": "リダイレクト先（3xxのとき）",
+				"message": "補足メッセージ",
+				"checked_at": "チェック日時"
+			}
+		},
+		"versionGuard": {
+			"aiDescription": "🚨 テーブル作成関数は必ず get_option() のバージョンガードを通してから dbDelta() を呼ぶ。ガードが無いと、整数型の表示幅や文字セットの申告差で dbDelta が毎回 ALTER TABLE を発行し続け、InnoDBのメタデータロックでサイト全体が遅くなる。2026-08-20 に mail_form/reception_history.php が同じ罠で lite-word.com を 774ms まで落としている。",
+			"options": {
+				"lw_link_list_db_ver": "wp_lw_link_list の定義バージョン（autoload:on）",
+				"lw_link_check_db_ver": "wp_lw_link_check_results の定義バージョン（autoload:on）"
+			}
+		},
+		"options": {
+			"aiDescription": "🚨 これらは列ではなく option。dbDelta の ALTER TABLE を避けるためテーブルに列を足していない（2026-08-20 に mail_form/reception_history.php の dbDelta が lite-word.com を774msまで落とした前例）。すべて autoload:false。",
+			"lw_link_list_scan_mode": "'light' または 'full'",
+			"lw_link_list_crawl_errors": "巡回で読めなかったページの配列（post_id / title / url / reason）。最大20件",
+			"lw_link_list_skipped": "上限で対象から外したページ数",
+			"lw_link_list_common_links": "サイト共通と判定した href => 出現ページ数",
+			"lw_link_list_db_ver": "wp_lw_link_list の定義バージョン（dbDelta のガード）",
+			"lw_link_check_db_ver": "wp_lw_link_check_results の定義バージョン（同上）",
+			"lw_link_list_was_throttled": "巡回中にアクセス制限（429）を受けたか。遅くなった理由を画面に出すために持つ",
+			"lw_link_check_blocked_hosts": "（transient・10分）確認を断られたホスト名。同じ相手に頼み続けないための打ち切りリスト",
+			"lw_link_list_crawl_throttled": "（transient・10分）巡回中に429を食らったか。次のバッチに間隔を広げさせる",
+			"lw_link_check_self_throttled": "（transient・10分）自分のサイトに429を返されたか。自サイト向けの間隔を広げるために持つ（打ち切りではない）"
+		}
+	},
+	"components": {
+		"scanner": {
+			"class": "LW_Broken_Link_Check_Scanner",
+			"file": "class-scanner.php",
+			"aiDescription": "公開ページからaタグとid属性を抽出するスキャナー。DOMDocumentを使用してネストされたHTML構造を正確にパースする。生コンテンツとフィルター適用後のコンテンツ両方からリンクを抽出し、重複を排除する。",
+			"methods": {
+				"count_scannable_posts": {
+					"aiDescription": "スキャン対象（公開済み・publicな投稿タイプ）の総件数。進捗表示に使う。"
+				},
+				"scan_batch": {
+					"aiDescription": "offset から limit 件だけスキャンして、ページ情報の配列を返す。各要素は post_id / post_type / post_title / ids / links を持つ。",
+					"userGuide": "🚨 全件を一度に読まないこと。以前は posts_per_page => -1 で全投稿をメモリに載せ、1投稿あたり the_content を2回適用していた。the_content は他プラグインのフック・ショートコード・外部API呼び出しまで巻き込むため、ページ数の多いサイトではメモリ枯渇かタイムアウトで落ちる。"
+				},
+				"scan_post": {
+					"aiDescription": "投稿1件をスキャンする。the_content の適用は1回だけで、id抽出とリンク抽出に使い回す。"
+				},
+				"extract_all_a_tags": {
+					"aiDescription": "HTML文字列からDOMDocumentで全aタグを抽出。href属性値、テキスト内容（SVG/アイコン除外）、元のHTMLタグ、コンテンツ内での出現順（link_index）を返す。"
+				},
+				"extract_all_ids": {
+					"aiDescription": "HTML文字列から全id属性値を正規表現で抽出。アンカーリンクの存在チェックに使用する。"
+				},
+				"trim_text": {
+					"aiDescription": "リンクテキストの省略。mb_strimwidth() は mbstring 拡張が必要で、共用サーバーでは無効なことがある。無い場合は WordPress の _mb_substr()（compat.php・mbstringが無くてもUTF-8を壊さない）へ落とす。php -l では検出できない種類の落ち方をするので、mb_* を直接呼ばないこと。"
+				}
+			},
+			"editableFlag": {
+				"aiDescription": "🚨 リンクには2種類ある。source_field='post_content'（link_index >= 0）は本文に直接書かれているもので、link_index が本文中の出現順と一致するためインライン編集で特定できる。source_field='post_content (filtered)'（link_index = -1）はブロックのレンダリング結果など、本文には存在しないもの。位置で特定できないので編集を受け付けない（受け付けると本文中の別のリンクを書き換えてしまう）。2026-08-22 以前は link_index が保存されておらず、常に 0 として扱われていたため、インライン編集がページ内の最初のリンクを書き換えていた。"
+			},
+			"dedup": {
+				"aiDescription": "🚨 生コンテンツと the_content 後の重複判定は href だけで行う。テキストを鍵にしてはいけない。the_content() は呼ぶたびに出力が揺れ、同じ投稿を続けて通しただけで 18,030 → 18,290 → 18,205 バイトと変わる（動的ブロックが『1ページに1回だけ出す』類の状態を内部に持つため）。a タグの数は変わらないのに、テキストや空白の入り方だけが変わる。テキストを鍵にすると同じリンクが実行のたびに別物と判定され、スキャン件数が 408〜530 とぶれた（2026-08-22 に判明・修正）。",
+				"remainingLimitation": "href 判定に直しても、管理画面（admin-ajax）からのスキャンは、動的ブロックがフロントで出力するリンクを数件取りこぼす（実測 412 対 408・本文由来 406 は完全一致）。これは the_content を管理画面のコンテキストで走らせている以上どうしても残る差。完全に合わせるなら、フロントのURLを wp_safe_remote_get で取得して解析する設計に変える必要がある（未実施・要判断）。"
+			}
+		},
+		"checker": {
+			"class": "LW_Broken_Link_Check_Checker",
+			"file": "class-checker.php",
+			"aiDescription": "URLにHTTPリクエストを送信してリンクの有効性をチェックするクラス。まずHEADリクエストを試み、失敗した場合はGETにフォールバックする。タイムアウトは10秒。第三者サイトの証明書エラーで誤判定しないよう sslverify は意図的に false。",
+			"ssrfProtection": {
+				"aiDescription": "🚨 送信前に wp_http_validate_url() で宛先を検証し、wp_safe_remote_head / wp_safe_remote_get を使う（二重防御）。127.0.0.0/8・10.0.0.0/8・172.16.0.0/12・192.168.0.0/16 に加えて 169.254.0.0/16（クラウドのメタデータendpoint）・0.0.0.0/8・CGNAT・マルチキャストまで拒否され、ポートも80/443/8080に限られる。自サイトのホストは同一ホスト判定で例外扱いされるため、ローカル開発（localhost）や社内サーバーでも自サイトのリンクは検査できる。",
+				"whyNotMessageMatch": "拒否されたときのWP_Errorは http_request_failed ＋ 翻訳済みメッセージ（日本語環境では『有効な URL ではありません。』）で返るため、英語の文字列マッチでは判別できない。必ず wp_http_validate_url() を事前に呼んで判定すること。"
+			},
+			"statusTypes": {
+				"ok": "有効（200系）",
+				"redirect": "リダイレクト（300系）— redirect_urlも返す",
+				"not_found": "リンク切れ（404）",
+				"client_error": "クライアントエラー（400系、404以外）",
+				"server_error": "サーバーエラー（500系）",
+				"timeout": "タイムアウト（10秒超過）",
+				"error": "接続エラー（DNS解決失敗等）",
+				"blocked": "安全でない宛先のため送信しなかった（SSRFガード）",
+				"skip": "チェック対象外（mailto/tel/javascript/data/空URL）"
+			},
+			"userGuide": "バッチ処理で最大20件ずつチェックする。外部サイトへのリクエストを送るため、大量チェック時はサーバー負荷に注意。自動巡回（WP-Cron）は行わない方針（2026-08-22 Ryuichi 判断）。実行は管理画面のボタンを押したときだけ。",
+			"statusPolicy": {
+				"aiDescription": "🚨「リンク切れ」と「確認できず」を必ず分けること。混ぜると誤報になる。2026-08-22 に lite-word.com（244URL）で実測したところ、「問題あり」95件のうち本当に切れていたのは2件だけで、残り93件は相手が自動チェックを断っていただけだった。",
+				"not_found": "404 と 410 のみ。「そのページはもう無い」と言い切れるコード",
+				"unverified": "401 / 403 / 405 / 406 / 429 / 451 / 503 / 999。相手が自動チェックを断っているだけで、ブラウザでは開けることがほとんど。画面では黄色の「確認できず」として別に数える",
+				"client_error": "その他の 4xx",
+				"server_error": "503 以外の 5xx"
+			},
+			"headThenGet": "HEAD が 403 / 405 / 406 / 501 / 999 を返したら GET で確かめ直す。HEAD だけ弾いて GET は返すサーバーは多く、やらないと「HEADが403だったのでリンク切れ」という誤報になる。",
+			"perHostBackoff": "🚨 同じ相手に何度も頼みに行かないこと。一度 429 で断られたホストは、その回の残りをまとめて「確認できず」にする（transient lw_link_check_blocked_hosts・10分）。lite-word.com には youtu.be へのリンクが85本あり、1本ごとに待ってやり直していたらチェック全体が 134秒 → 384秒 になった。ホスト単位で打ち切ってからは 91秒。",
+			"delay": "LW_LINK_LIST_CHECK_DELAY_MS（既定200ms）を1本ごとに空ける。",
+			"retry429": "429 は Retry-After を見て待ち、GET で1回だけやり直す（上限 LW_LINK_LIST_CRAWL_RETRY_MAX_SEC 秒）。",
+			"selfHostNeverBlocked": "🚨 自分のサイトだけはホスト単位で打ち切らないこと（block_host が is_own_url を先に見る）。打ち切ると内部リンクが丸ごと unverified に化けて、本当のリンク切れが隠れる。2026-08-22 に lite-word.com で実際に起きた（内部126本が全部429で確認できずになり、下書きページへのリンク切れが1件も見えなくなった）。代わりに transient lw_link_check_self_throttled を立て、自サイト向けの間隔だけ 200ms → LW_LINK_LIST_CRAWL_SLOW_DELAY_MS（1200ms）に広げて最後まで確かめきる。",
+			"redirectPolicy": "🚨 'redirection' => 5 で転送を追っているので、status_code は最終結果しか映さない。最終URL（$response[\"http_response\"]->get_response_object()->url）と見比べないと転送に気づけず、画面の「リダイレクト」欄が永久に0になる。⚠️ ただし出すのは自サイト内の転送だけ。外部の転送（youtu.be の短縮URL・言語振り分け・トラッキング付与）は相手の都合でこちらでは直せず、実測では243URL中115件が転送になって黄色が意味を失った。見た目だけの差（末尾スラッシュ・http→https・#以降・%エンコードの大小文字）は同じ場所とみなす。自サイト内の転送は「自分のリンクが古い」という直せる合図になる（lite-word.com では14本が /manual/ 配下への転送だった）。"
+		},
+		"crawler": {
+			"aiDescription": "LW_Link_List_Crawler（class-crawler.php）。公開URLを取りに行く側。",
+			"preflightFirst": "🚨 crawl_start はトップページ1本で疎通を確かめてから lw_link_list_begin_scan()（TRUNCATE）を呼ぶ。逆にすると、巡回できないサイトでは前に採れていた一覧まで失う。2026-08-22 に実機で確認済み（60行が60行のまま残る）。",
+			"ssrf": "is_own_url() で home_url と同じホストのみ許可し、さらに wp_safe_remote_get を使う（二重）。クライアントからURLは受け取らない（パーマリンクからサーバーが組み立てる）。",
+			"errorMessages": "🚨 WP_Error のメッセージは翻訳される。判定はエラーコード（http_request_failed 等）で行い、英語の文字列一致に頼らない。",
+			"partialResult": "取得に失敗したページも、本文から採れるぶんは残す。失敗は option に積んで画面に一覧で出す。黙って軽い方に落とさない。",
+			"timeBudget": "1リクエストで TIME_BUDGET(20秒) を超えたら、ページが残っていても打ち切って次のリクエストに回す。",
+			"rateLimit": "🚨 自分のサイトを短時間に何度も取りに行くと 429 で弾かれる。実測（lite-word.com 175ページ）: 間隔なし → 5ページを取りこぼし。LW_LINK_LIST_CRAWL_DELAY_MS（250ms）を空けると取りこぼし0で87秒。429 を食らったら Retry-After を見て1回やり直し、以後は LW_LINK_LIST_CRAWL_SLOW_DELAY_MS（1200ms）に広げる（transient で次のバッチへ申し送る）。遅くなった理由は option lw_link_list_was_throttled に残して画面に出す。"
+		},
+		"adminUi": {
+			"scanButtonLabels": "🚨 2つのボタンは、違いを先頭に出すこと。「もう一度調べる」「もう一度しっかり調べる」だと頭の4文字が揃い、Ryuichi から「同じことを言っているのでどっちが何をするのかが分からない」と指摘された（2026-08-22）。正: 「ページを開いて全部調べる」/「本文だけ調べる」。ボタンの中に小さく理由を添える（ヘッダー・フッターを含むか／どれくらい時間がかかるか）。スキャン後に文言を書き換えないこと（必ず頭が揃う）。推奨するほう＝しっかり側を button-primary にする。"
+		}
+	},
+	"ajaxEndpoints": {
+		"_security": {
+			"aiDescription": "🚨 全エンドポイントが先頭で lw_link_list_verify_ajax() を呼ぶ。順番は nonce（LW_LINK_LIST_NONCE_ACTION）→ manage_options → 契約状態。2026-07-24 のセキュリティ監査で『再有効化するなら nonce＋SSRF先ホスト検証を先に入れること』と条件が付いていた。nonce が無いと、管理者がログイン中に罠サイトを踏んだだけで lw_link_list_update_href が投稿本文のリンク先を書き換えられる。",
+			"nonceAction": "lw_link_list_ajax",
+			"nonceParam": "nonce（JS側は lwData() が必ず載せる。$.ajax の data を手書きしないこと）"
+		},
+		"lw_link_list_scan_start": {
+			"aiDescription": "スキャンを開始する。総件数を返し、wp_lw_link_list を空にする。",
+			"method": "POST",
+			"returns": "total / batchSize"
+		},
+		"lw_link_list_scan_batch": {
+			"aiDescription": "offset から LW_LINK_LIST_SCAN_BATCH 件をスキャンして保存する。",
+			"method": "POST",
+			"params": {
+				"offset": "開始位置（整数）"
+			},
+			"returns": "scanned / saved / offset / done"
+		},
+		"lw_link_list_load": {
+			"aiDescription": "DBに保存済みのリンク情報とチェック結果を返す（再スキャン不要）。checkResults を含むため、画面を開き直してもチェック結果が残る。",
+			"method": "POST",
+			"returns": "{links, pages, total, checkResults, checkSummary, lastUpdated, scanMode, crawlErrors, skipped, commonCount}"
+		},
+		"lw_link_list_check_start": {
+			"aiDescription": "チェックを開始する。対象URL数を返し、前回の結果を捨てる。",
+			"method": "POST",
+			"returns": "total / batchSize"
+		},
+		"lw_link_list_check_batch": {
+			"aiDescription": "offset から LW_LINK_LIST_CHECK_BATCH 件をチェックして結果を保存する。🚨 クライアントからURLを受け取らない。叩く相手は必ずサーバー側が lw_link_list_build_checkable_urls() でDBから組み立てる（以前は $_POST['urls'] をそのまま叩いていた＝SSRF）。",
+			"method": "POST",
+			"params": {
+				"offset": "開始位置（整数）"
+			},
+			"returns": "results / checked / offset / total / done"
+		},
+		"lw_link_list_update_href": {
+			"aiDescription": "投稿のpost_content内の特定aタグのhref属性を書き換える。link_index（本文中の出現順）で対象を特定する。link_index が -1（＝ブロックのレンダリング結果）のものは拒否する。javascript: / data: / vbscript: スキームも拒否。wp_update_post には wp_slash() を通した本文を渡す（通さないとバックスラッシュが1段消える）。",
+			"method": "POST",
+			"params": {
+				"post_id": "投稿ID",
+				"new_href": "変更後のURL",
+				"link_index": "本文中での出現順（0始まり。-1は編集不可）"
+			},
+			"returns": "message / new_href / links / ids"
+		},
+		"_removed": {
+			"aiDescription": "2026-08-22 に廃止したエンドポイント。どこからも呼ばれておらず、攻撃面を減らすために削除した。",
+			"lw_link_list_status": "DBにデータがあるか返すだけ。PHP側で直接判定するようになったため不要",
+			"lw_link_list_debug_log": "JSからdebug.logに書き込むデバッグ用。ユーザー入力をログに流す口だったため削除",
+			"lw_link_list_get_checkable_urls": "チェック対象URLをクライアントに渡していた。lw_link_list_check_start に統合（URLはクライアントに渡さない）",
+			"lw_link_list_scan": "全件を1リクエストでスキャンしていた。scan_start + scan_batch に分割"
+		},
+		"lw_link_list_crawl_start": {
+			"action": "wp_ajax_lw_link_list_crawl_start",
+			"params": "nonce",
+			"returns": "success:{total, skipped, batchSize} / 疎通できないときは success:false + {message, reason, fallback}",
+			"note": "🚨 疎通できないときは HTTP 200 で success:false を返す（権限エラーの403と区別するため）。このときDBは触っていない。"
+		},
+		"lw_link_list_crawl_batch": {
+			"action": "wp_ajax_lw_link_list_crawl_batch",
+			"params": "nonce, offset",
+			"returns": "{crawled, failed, offset, done}",
+			"note": "crawled が 0 のときもクライアント側で必ず止めること（進まないまま呼び続けない歯止め）。"
+		},
+		"lw_link_list_crawl_finish": {
+			"action": "wp_ajax_lw_link_list_crawl_finish",
+			"params": "nonce",
+			"returns": "{common, errors}",
+			"note": "全ページ集め終わってからでないと共通リンクを判定できないので、締めで1回だけ呼ぶ。"
+		}
+	},
+	"skipConditions": {
+		"aiDescription": "以下のURLタイプはリンクチェックの対象外としてスキップされる。",
+		"types": [
+			"空のURL",
+			"mailto: で始まるURL",
+			"tel: で始まるURL",
+			"javascript: で始まるURL",
+			"data: で始まるURL",
+			"# のみのアンカーリンク（ただし警告バッジは表示）"
+		],
+		"anchorHandling": "#で始まるアンカーリンクは、そのリンクが置かれているページのURLと結合してからチェックする。ページ内のid属性一覧（ids_json）と突き合わせて、飛び先が存在しないアンカーには「ID不在」バッジを出す。"
+	},
+	"scanModes": {
+		"aiDescription": "リンクの集め方は2通りある（2026-08-22 Ryuichi 判断）。どちらで採ったかは option lw_link_list_scan_mode に入っていて、AJAX lw_link_list_load の scanMode で返る。件数が変わる理由になるので、画面には必ずどちらか出している。",
+		"light": {
+			"label": "リンクを調べる（軽い）",
+			"how": "class-scanner.php。post_content と apply_filters(the_content) の出力から集める。HTTPを使わない",
+			"covers": "本文のリンク（編集できる）＋ the_content で出るぶん",
+			"missing": "ヘッダー・フッター・メニュー。動的ブロックが出すリンクの一部（実測で 412 対 408 の4件差）",
+			"cost": "1秒未満（60ページで実測）"
+		},
+		"full": {
+			"label": "しっかり調べる",
+			"how": "class-crawler.php。公開URLを wp_safe_remote_get で取得してDOMから集める",
+			"covers": "訪問者が見るHTMLそのもの。ヘッダー・フッター・メニューを含む",
+			"missing": "Basic認証・メンテナンス中のサイトでは取得できない（黙って軽い方に落とさず画面に理由を出す）",
+			"cost": "60ページで約31秒（1ページ3件ずつ・21リクエスト）",
+			"limits": "既定200ページまで（フィルター lw_link_list_crawl_max）。外したぶんは option lw_link_list_skipped に入れて画面に出す"
+		},
+		"measured2026_08_22": {
+			"site": "ローカル SAMPLE（60ページ）",
+			"light": {
+				"total": 412,
+				"body": 406
+			},
+			"full": {
+				"totalRows": 2468,
+				"displayedRows": 534,
+				"body": 406,
+				"common": 43,
+				"pageOnly": 85
+			},
+			"note": "本文由来の406件は両方式で完全に一致する。しっかり側の総数が大きいのは、ヘッダー・フッターが全ページに付くため。"
+		},
+		"measured2026_08_22_production": {
+			"site": "lite-word.com（175ページ・WordPress 7.1 / PHP 8.3.30）",
+			"light": {
+				"pages": 175,
+				"links": 783,
+				"body": 653,
+				"seconds": 0.5
+			},
+			"full": {
+				"pages": 175,
+				"rows": 3255,
+				"displayedRows": 915,
+				"body": 653,
+				"pageOnly": 246,
+				"common": 16,
+				"seconds": 87,
+				"requests": 59,
+				"failed": 0
+			},
+			"check": {
+				"urls": 243,
+				"ok": 219,
+				"redirect": 14,
+				"unverified": 10,
+				"notFound": 0,
+				"seconds": 104,
+				"note": "2026-08-22 20:40。リンク切れ2件を直したあとの最終形。転送14件はすべて自サイト内（旧URL → /manual/ 配下）"
+			},
+			"foundOnProduction": [
+				"https://lite-word.com/?page_id=12 が105ページで404（投稿ID 12 が下書きのまま。リンクテキストは「ホーム」）",
+				"https://lite-word.com/page-sample-list/sample_page_top_14/ が投稿#4002の本文で404"
+			],
+			"note": "本文由来の653件はローカルと同じく両方式で完全に一致。dbDelta の ALTER TABLE は20回×2呼んで0本。",
+			"fixedOnProduction": [
+				"?page_id=12（105ページのフッター「ホーム」）… メニュー項目 #240 が下書きの固定ページ #12 を指していた → サイトのトップへ向けた",
+				"page-sample-list/sample_page_top_14/ … #3841「トップサンプル：クッキング」が下書き（トップサンプル20本中これ1本だけ）→ 公開済みのカフェ #3043 へ差し替え"
+			]
+		}
+	},
+	"linkScope": {
+		"aiDescription": "lw_link_list_get_from_db() が各リンクに付ける区分。store.php の lw_link_list_link_scope() が決める。",
+		"body": "本文にある（link_index >= 0）。一覧からリンク先を書き換えられる",
+		"page": "そのページ固有だが本文の外（動的ブロックの出力など）。link_index = -1 で編集できない",
+		"common": "ヘッダー・フッター・メニュー。全ページの LW_LINK_LIST_COMMON_RATIO（既定0.3）以上、かつ LW_LINK_LIST_COMMON_MIN_HITS（既定3）ページ以上に出ている本文外のリンク。画面では投稿タイプではない専用タブ「サイト共通」に1回だけ出し、何ページに出ているかを添える。🚨 0.6 では厳しすぎた（2026-08-22 lite-word.com 実測）。175ページのサイトでフッターの利用規約・プライバシーポリシー・特商法がちょうど100ページ＝57%のため漏れ、600行以上の繰り返しが残った。実データでは 20〜99ページに出るURLが1本も無く、10%〜50%のどこでも結果が同じだったので、真ん中の 0.3 にしてある。",
+		"countingRule": "🚨 統計を出すときは common を1本として数えること（renderStats / updateTabCount と揃える）。allLinks.length をそのまま使うと実測で 534 のところが 2,468 になる。"
+	},
+	"testing": {
+		"harnessMustMatchHandler": "🚨 検証用スクリプトは本物のAJAXハンドラと同じ手順にすること。2026-08-22、check_start で reset_blocked_hosts() を呼ばない検証スクリプトのせいで、前回の打ち切りリストが10分残り、次の回が1本もリクエストせずに全部「確認できず」を返した。速く終わるので気づきにくく、コードの不具合と誤診しかけた。",
+		"localHomeUrl": "ローカルの home_url() は localhost なので、is_own_url を使う分岐はそのままでは試せない。add_filter('home_url', fn() => 'https://本番ドメイン/') を入れてから確かめる。",
+		"dontHammer": "🚨 短時間に何度も通すと自分のサイトから429を返される。巡回175ページ＋チェック243本を15分に4回流したら本当に止められた。検証は間を空ける。"
+	}
 }

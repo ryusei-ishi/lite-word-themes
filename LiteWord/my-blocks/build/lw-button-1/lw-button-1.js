@@ -2,6 +2,95 @@
 /******/ 	"use strict";
 /******/ 	var __webpack_modules__ = ({
 
+/***/ "./src/affiliate-link.js":
+/*!*******************************!*\
+  !*** ./src/affiliate-link.js ***!
+  \*******************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   AffiliateToggle: () => (/* binding */ AffiliateToggle),
+/* harmony export */   LW_AFFILIATE_REL: () => (/* binding */ LW_AFFILIATE_REL),
+/* harmony export */   lwRel: () => (/* binding */ lwRel)
+/* harmony export */ });
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/**
+ * LiteWord – アフィリエイトリンク（共通部品）
+ * ------------------------------------------------------------
+ *  Amazon・楽天などの広告リンクに、検索エンジン向けの印
+ *  rel="sponsored nofollow" を付けるための共通部品。
+ *
+ *  なぜ要るか
+ *  ・Google は「報酬が発生するリンクには rel="sponsored"（または nofollow）を付ける」
+ *    ことを求めている。付けずに広告リンクを大量に置くと、リンクを売っているサイトと
+ *    区別が付かず、検索順位を落とされることがある。
+ *  ・ステマ規制（景品表示法・2023年10月〜）で必要なのは「広告である」という
+ *    画面上の表示。rel はそれとは別（検索エンジン向け）なので、両方いる。
+ *
+ *  🚨 設計の前提（ここを崩すと既存ページが壊れる）
+ *  ・約1000サイトに配るテーマなので、**既定値（オフ）のときの save の出力は
+ *    1バイトも変えない**。lwRel() はオフのとき undefined を返し、React は
+ *    属性ごと出力しない ＝ 今まで保存された HTML と完全に一致する。
+ *    ＝ deprecated を書かなくてよい（reference/block-change-safety.md §0）。
+ *  ・別タブの rel="noopener noreferrer" を今まで出していたブロックは、
+ *    lwRel({ newTab, affiliate }) の形で呼ぶ。オフなら従来と同じ文字列になる。
+ *  ・別タブでも rel を出していなかったブロック（lw-button-2 / 3）は
+ *    lwRel({ affiliate }) だけを渡す。newTab を混ぜると出力が変わってしまう。
+ */
+
+
+
+/** 広告リンクに付ける rel の中身 */
+var LW_AFFILIATE_REL = 'sponsored nofollow';
+
+/**
+ * a タグの rel を組み立てる。
+ * 付けるものが何も無ければ undefined（＝属性そのものを出さない）。
+ *
+ * @param {Object}  opt
+ * @param {boolean} opt.newTab    別タブで開く（従来どおり noopener noreferrer）
+ * @param {boolean} opt.affiliate 広告リンク（sponsored nofollow）
+ * @return {string|undefined} rel の値
+ */
+function lwRel() {
+  var _ref = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : {},
+    _ref$newTab = _ref.newTab,
+    newTab = _ref$newTab === void 0 ? false : _ref$newTab,
+    _ref$affiliate = _ref.affiliate,
+    affiliate = _ref$affiliate === void 0 ? false : _ref$affiliate;
+  var parts = [];
+  if (newTab) {
+    parts.push('noopener noreferrer');
+  }
+  if (affiliate) {
+    parts.push(LW_AFFILIATE_REL);
+  }
+  return parts.length ? parts.join(' ') : undefined;
+}
+
+/**
+ * 編集画面のトグル。
+ * 「新しいタブで開く」のすぐ下に置く。
+ *
+ * @param {Object}   props
+ * @param {boolean}  props.checked
+ * @param {Function} props.onChange
+ */
+function AffiliateToggle(_ref2) {
+  var checked = _ref2.checked,
+    onChange = _ref2.onChange;
+  return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ToggleControl, {
+    label: "\u5E83\u544A\u30EA\u30F3\u30AF\uFF08\u30A2\u30D5\u30A3\u30EA\u30A8\u30A4\u30C8\uFF09",
+    checked: !!checked,
+    onChange: onChange,
+    help: "Amazon\u30FB\u697D\u5929\u306A\u3069\u306E\u3001\u6210\u679C\u5831\u916C\u304C\u767A\u751F\u3059\u308B\u30EA\u30F3\u30AF\u306E\u3068\u304D\u306B\u30AA\u30F3\u306B\u3057\u307E\u3059\u3002\u691C\u7D22\u30A8\u30F3\u30B8\u30F3\u306B\u5E83\u544A\u3060\u3068\u4F1D\u3048\u308B\u5370\u304C\u4ED8\u304D\u307E\u3059\uFF08rel=\"sponsored nofollow\"\uFF09\u3002\u30AA\u30F3\u306B\u3059\u308B\u3068\u65B0\u3057\u3044\u30BF\u30D6\u3067\u958B\u304F\u8A2D\u5B9A\u3082\u4E00\u7DD2\u306B\u5165\u308A\u307E\u3059\u3002"
+  });
+}
+
+/***/ }),
+
 /***/ "./src/link-picker.js":
 /*!****************************!*\
   !*** ./src/link-picker.js ***!
@@ -381,6 +470,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-button-1/editor.scss");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./block.json */ "./src/lw-button-1/block.json");
 /* harmony import */ var _link_picker_js__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../link-picker.js */ "./src/link-picker.js");
+/* harmony import */ var _affiliate_link_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../affiliate-link.js */ "./src/affiliate-link.js");
+
 
 
 
@@ -460,6 +551,16 @@ var LINK_KEYS = {
       onChange: function onChange() {
         return setAttributes({
           openInNewTab: !openInNewTab
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_affiliate_link_js__WEBPACK_IMPORTED_MODULE_7__.AffiliateToggle, {
+      checked: attributes.isAffiliate,
+      onChange: function onChange(v) {
+        return setAttributes(v ? {
+          isAffiliate: true,
+          openInNewTab: true
+        } : {
+          isAffiliate: false
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
@@ -791,6 +892,7 @@ var LINK_KEYS = {
     var buttonText = attributes.buttonText,
       url = attributes.url,
       openInNewTab = attributes.openInNewTab,
+      isAffiliate = attributes.isAffiliate,
       fontSize = attributes.fontSize,
       maxWidth = attributes.maxWidth,
       maxWidthSp = attributes.maxWidthSp,
@@ -819,7 +921,10 @@ var LINK_KEYS = {
       "data-lw-link-type": (0,_link_picker_js__WEBPACK_IMPORTED_MODULE_6__.lwLinkDataPropsFromAttrs)(attributes, LINK_KEYS).linkType,
       "data-lw-link-id": (0,_link_picker_js__WEBPACK_IMPORTED_MODULE_6__.lwLinkDataPropsFromAttrs)(attributes, LINK_KEYS).linkId,
       target: openInNewTab ? '_blank' : undefined,
-      rel: openInNewTab ? 'noopener noreferrer' : undefined,
+      rel: (0,_affiliate_link_js__WEBPACK_IMPORTED_MODULE_7__.lwRel)({
+        newTab: openInNewTab,
+        affiliate: isAffiliate
+      }),
       style: {
         maxWidth: "".concat(maxWidth, "px"),
         fontSize: "".concat(fontSize, "%"),
@@ -922,7 +1027,7 @@ module.exports = window["wp"]["data"];
   \************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-button-01","version":"1.0.0","title":"リンクボタン 01","category":"lw-button","icon":"button","description":"カスタマイズ可能なリンクボタン","supports":{"anchor":true},"aiHint":{"description":"基本リンクボタン。テキスト+URL。サイズ・色・角丸を細かくカスタマイズ可能","excludeFromAutoSelect":false,"contentAttributes":["buttonText","url"],"imageAttributes":[]},"attributes":{"buttonText":{"type":"string","source":"html","selector":"a","default":"詳細はこちら","aiHint":{"role":"button","contentGuide":"動詞形。4〜10文字","example":"詳細を見る"}},"url":{"type":"string","source":"attribute","selector":"a","attribute":"href","default":"","aiHint":{"role":"url","contentGuide":"遷移先URL。#contact や /about/ 等"}},"linkType":{"type":"string","default":"url"},"pageId":{"type":"number","default":0},"categoryId":{"type":"number","default":0},"openInNewTab":{"type":"boolean","default":false,"aiHint":{"skip":true}},"fontSize":{"type":"number","default":100,"aiHint":{"skip":true}},"maxWidth":{"type":"number","default":240,"aiHint":{"skip":true}},"maxWidthSp":{"type":"number","default":null,"aiHint":{"skip":true}},"backgroundColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"textColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"paddingSize":{"type":"string","default":"M","aiHint":{"skip":true}},"innerPaddingSize":{"type":"string","default":"M","aiHint":{"skip":true}},"marginTop":{"type":"number","default":10,"aiHint":{"skip":true}},"marginBottom":{"type":"number","default":10,"aiHint":{"skip":true}},"alignment":{"type":"string","default":"center","aiHint":{"skip":true}},"alignmentSp":{"type":"string","default":"center","aiHint":{"skip":true}},"borderRadius":{"type":"number","default":0,"aiHint":{"skip":true}},"borderWidth":{"type":"number","default":0,"aiHint":{"skip":true}},"borderColor":{"type":"string","default":"#000000","aiHint":{"skip":true}}},"editorScript":"file:./lw-button-1.js","no":1}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-button-01","version":"1.0.0","title":"リンクボタン 01","category":"lw-button","icon":"button","description":"カスタマイズ可能なリンクボタン","supports":{"anchor":true},"aiHint":{"description":"基本リンクボタン。テキスト+URL。サイズ・色・角丸を細かくカスタマイズ可能","excludeFromAutoSelect":false,"contentAttributes":["buttonText","url"],"imageAttributes":[]},"attributes":{"isAffiliate":{"type":"boolean","default":false},"buttonText":{"type":"string","source":"html","selector":"a","default":"詳細はこちら","aiHint":{"role":"button","contentGuide":"動詞形。4〜10文字","example":"詳細を見る"}},"url":{"type":"string","source":"attribute","selector":"a","attribute":"href","default":"","aiHint":{"role":"url","contentGuide":"遷移先URL。#contact や /about/ 等"}},"linkType":{"type":"string","default":"url"},"pageId":{"type":"number","default":0},"categoryId":{"type":"number","default":0},"openInNewTab":{"type":"boolean","default":false,"aiHint":{"skip":true}},"fontSize":{"type":"number","default":100,"aiHint":{"skip":true}},"maxWidth":{"type":"number","default":240,"aiHint":{"skip":true}},"maxWidthSp":{"type":"number","default":null,"aiHint":{"skip":true}},"backgroundColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"textColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"paddingSize":{"type":"string","default":"M","aiHint":{"skip":true}},"innerPaddingSize":{"type":"string","default":"M","aiHint":{"skip":true}},"marginTop":{"type":"number","default":10,"aiHint":{"skip":true}},"marginBottom":{"type":"number","default":10,"aiHint":{"skip":true}},"alignment":{"type":"string","default":"center","aiHint":{"skip":true}},"alignmentSp":{"type":"string","default":"center","aiHint":{"skip":true}},"borderRadius":{"type":"number","default":0,"aiHint":{"skip":true}},"borderWidth":{"type":"number","default":0,"aiHint":{"skip":true}},"borderColor":{"type":"string","default":"#000000","aiHint":{"skip":true}}},"editorScript":"file:./lw-button-1.js","no":1}');
 
 /***/ })
 

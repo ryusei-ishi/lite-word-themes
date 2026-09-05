@@ -7,13 +7,18 @@ function follow_bottom_cta_ptn_1_set_custom( $wp_customize ) {
     // 設定
     $set_ttl = ' - パターン１の設定'; // セクションタイトル
     $sec = 'follow_bottom_cta_ptn_1_sec'; // セクションID
-    $wp_customize->add_section($sec, ['title' => $set_ttl, 'panel' => $panel]);
+    $wp_customize->add_section($sec, [
+        'title' => $set_ttl,
+        'panel' => $panel,
+        'description' => lw_follow_bottom_cta_preview_description('ptn_1'),
+        'description_hidden' => false,
+    ]);
     $items = [];
     for ($i = 1; $i <= 2; $i++) { 
         $items[] = [
             ['radio', "{$i}_switch", '', '<h2 class="ctm_ttl_ptn_1">リンクボタン'.$i.'つ目の設定</h2>', ctm_switch_array_2()],
             ['text', "{$i}_text", "", '表示テキスト'],
-            ['select', "{$i}_icon", "", 'アイコン', ctm_cta_icon_arr()],
+            ['icon_select', "{$i}_icon", "", 'アイコン', ctm_cta_icon_arr()],
             ['text', "{$i}_link", "", 'リンク先URL'],
             ['color', "{$i}_color_bg", "", '背景色'],
             ['color', "{$i}_color_text", "", '文字の色'],
