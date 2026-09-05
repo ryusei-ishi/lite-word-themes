@@ -105,8 +105,8 @@ function lw_get_seo_check_items() {
                     'description' => 'アクセス解析ツール。ウィザードのステップ16で設定できます。'
                 ),
                 'core_web_vitals' => array(
-                    'label' => 'ページ表示速度の最適化',
-                    'description' => 'Core Web Vitals（LCP、FID、CLS）のスコアを改善しましょう。'
+                    'label' => 'ページ表示速度の最適化（Core Web Vitals）',
+                    'description' => 'LCP2.5秒以下・INP200ms以下・CLS0.1以下が目安です。旧指標のFIDは廃止され、2024年からINPに置き換わっています。'
                 ),
                 'mobile_friendly' => array(
                     'label' => 'モバイルフレンドリー対応',
@@ -114,7 +114,7 @@ function lw_get_seo_check_items() {
                 ),
                 'structured_data' => array(
                     'label' => '構造化データ（JSON-LD）の実装',
-                    'description' => 'リッチスニペット表示に必要。LiteWordのSEO機能で基本対応済みです。'
+                    'description' => 'リッチリザルト表示やAIによる内容理解に有効です。LiteWordのSEO機能で基本対応済みです。'
                 ),
                 'canonical' => array(
                     'label' => 'canonical URLの設定',
@@ -123,6 +123,33 @@ function lw_get_seo_check_items() {
                 'error_404' => array(
                     'label' => '404エラーページのカスタマイズ',
                     'description' => 'ユーザーが迷子にならないよう、適切な404ページを用意しましょう。'
+                ),
+            )
+        ),
+        'ai_search' => array(
+            'title' => 'AI検索対応（生成AI・AI Overview対策）',
+            'icon' => 'dashicons-lightbulb',
+            'description' => 'ChatGPTやGoogleのAI Overviewなど、生成AIによる検索・要約への対応です。重要性が急速に高まっている分野です。',
+            'items' => array(
+                'ai_crawler_access' => array(
+                    'label' => 'AIクローラーのアクセス許可確認',
+                    'description' => 'robots.txtでAIクローラー（GPTBot・Google-Extended・PerplexityBot等）を意図せずブロックしていないか確認しましょう。役割は同じではなく、例えばGoogle-Extendedのブロックは主にAIモデルの学習利用を止めるだけで、通常のGoogle検索やAI Overviewの表示には影響しません。'
+                ),
+                'eeat_signals' => array(
+                    'label' => 'E-E-A-T（経験・専門性・権威性・信頼性）の強化',
+                    'description' => '運営者情報・執筆者情報・実績を明記しましょう。AIも検索エンジンも「誰が書いているか」を重視する傾向が強まっています。'
+                ),
+                'direct_answer' => array(
+                    'label' => '結論ファーストの文章構成',
+                    'description' => '各ページ・記事の冒頭で結論を40〜60文字程度で要約しましょう。AI検索は要点を先に示すページを引用しやすい傾向があります。'
+                ),
+                'faq_howto_schema' => array(
+                    'label' => 'FAQ・HowTo構造化データの実装',
+                    'description' => 'よくある質問はFAQPage、手順説明はHowToスキーマでマークアップすると、内容がAIに理解されやすくなります。Google検索のリッチリザルト表示は2023年以降縮小・廃止が進んでいるため、狙いはAI検索対応中心と考えましょう。'
+                ),
+                'content_freshness' => array(
+                    'label' => 'コンテンツの鮮度維持（定期的な更新）',
+                    'description' => '古い情報のまま放置しないようにしましょう。四半期に一度は主要ページの内容を見直し、更新日を明記しましょう。'
                 ),
             )
         ),
@@ -231,6 +258,33 @@ function lw_get_seo_check_items() {
                 'low_quality' => array(
                     'label' => '低品質ページの整理',
                     'description' => '内容の薄いページは統合または削除を検討しましょう。'
+                ),
+            )
+        ),
+        'local_seo' => array(
+            'title' => 'ローカルSEO・MEO対策',
+            'icon' => 'dashicons-location-alt',
+            'description' => '実店舗や地域密着で集客する場合に重要な、Googleマップ検索での上位表示対策です。',
+            'items' => array(
+                'gbp_registration' => array(
+                    'label' => 'Googleビジネスプロフィールの登録・最適化',
+                    'description' => '店舗名・カテゴリ・写真・営業時間を充実させましょう。地域名＋業種で検索された時の表示に直結します。'
+                ),
+                'nap_consistency' => array(
+                    'label' => '店舗名・住所・電話番号（NAP）の表記統一',
+                    'description' => 'サイト・Googleビジネスプロフィール・SNS・掲載媒体で表記を完全に一致させましょう。表記ゆれは評価を下げる要因になります。'
+                ),
+                'business_hours' => array(
+                    'label' => '営業時間・定休日の正確な設定',
+                    'description' => '実際と異なる営業時間はユーザー体験を損ない、Googleからの評価にも影響します。変更時は速やかに反映しましょう。'
+                ),
+                'local_business_schema' => array(
+                    'label' => 'LocalBusiness構造化データの実装',
+                    'description' => '住所・電話番号・営業時間をマークアップすることで、地図検索やナレッジパネルに表示されやすくなります。'
+                ),
+                'review_response' => array(
+                    'label' => '口コミへの返信・管理体制',
+                    'description' => 'Googleの口コミには誠実に返信しましょう。返信率・評価の高さはローカル検索のランキング要因の一つです。'
                 ),
             )
         ),
