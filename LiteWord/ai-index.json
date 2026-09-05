@@ -1,8 +1,8 @@
 {
 	"_meta": {
 		"description": "LiteWordテーマのAI向け情報インデックス。AIキャラクターはまずこのファイルを読んで、テーマの全体像と各メタ情報の在処を把握すること。",
-		"version": "1.1",
-		"lastUpdated": "2026-08-22",
+		"version": "1.3",
+		"lastUpdated": "2026-09-05",
 		"usage": "このファイルはテーマのルートディレクトリに配置される。AIがLiteWordテーマについて理解するための入口（目次）として機能する。WordPressの動作には一切影響しない。"
 	},
 	"theme": {
@@ -12,10 +12,10 @@
 	},
 	"aiResources": {
 		"blocks": {
-			"description": "カスタムブロック142個のメタ情報。各ブロックの用途・入力項目・推奨値をaiHintフィールドに記載。",
+			"description": "カスタムブロック147個のメタ情報。各ブロックの用途・入力項目・推奨値をaiHintフィールドに記載。",
 			"location": "my-blocks/build/*/block.json",
 			"field": "aiHint",
-			"count": 142,
+			"count": 147,
 			"notes": "ブロックレベルのaiHint（description, contentAttributes, imageAttributes）と、属性レベルのaiHint（role, contentGuide, example, skip）がある。"
 		},
 		"customizer": {
@@ -59,8 +59,9 @@
 			"location": "functions/user_data/user-profile-ai-hints.json"
 		},
 		"aiChat": {
-			"description": "AIチャットボット。マニュアルページやダッシュボードで質問できるAIアシスタント（猫ロボットキャラクター）。カテゴリ別質問・音声入力・チャット履歴対応。",
-			"location": "functions/lw_ai_chat/ai-chat-ai-hints.json"
+			"description": "AIチャットボット。管理画面のどこからでも呼び出せるAIアシスタント（猫ロボットキャラクター）。ダッシュボードは「AIに相談する」大型ボタン、それ以外の管理画面は右下のフローティングボタン（FAB）から開く。カテゴリ別質問・音声入力・チャット履歴対応。",
+			"location": "functions/lw_ai_chat/ai-chat-ai-hints.json",
+			"notes": "回答の根拠にするマニュアルは lite-word.com の /manual/ ページ（REST /wp-json/lw-manual/v1/manual-content・1時間キャッシュ）。テーマ内蔵の文章マニュアルは廃止済みで、これとは無関係（→ videoManual）。"
 		},
 		"aiSystem": {
 			"description": "AI画像・ページ生成システム。ブロックエディタ内でAI画像検索・ページ自動生成・テキストリライト・マイパーツAI生成が可能。Gemini API使用。",
@@ -77,9 +78,9 @@
 			"notes": "🚨 全ページを同じ型で作らない。同じ型は同じページ種別の中で3ページまで。兄弟ページは4枠以上ブロックを変える。これを守らないと「テンプレートを買う理由」が無くなる。"
 		},
 		"brokenLinkCheck": {
-			"description": "破損リンク検出。サイト内の全リンクをスキャンし、404等の破損リンクを検出・一覧表示。管理画面「全リンク一覧」から操作。",
+			"description": "リンク一覧・破損リンク検出。サイト内の全リンクをスキャンし、404等の破損リンクを検出・一覧表示する。**広告リンク（rel に sponsored を含むもの）だけに絞る**チェックボックスがある。管理画面「リンク一覧」から操作。プレミアム限定。",
 			"location": "functions/lw_broken_link_check/broken-link-ai-hints.json",
-			"status": "未完成 — 機能自体が開発途中のため、マニュアル対象外"
+			"manual": "https://lite-word.com/manual/link-check/"
 		},
 		"pageWizard": {
 			"description": "ページ設定ウィザード。固定ページ新規作成時に自動表示されるポップアップ。タイトル・スラッグをまとめて設定。",
@@ -87,21 +88,45 @@
 		},
 		"pageTemplateInsert": {
 			"description": "ページテンプレート一括作成。テーマ内蔵テンプレートから複数ページを一括生成。サンプルページ・セールス系・業種別等のカテゴリ。",
-			"location": "functions/lw_page_template_insert/page-template-ai-hints.json"
+			"location": "functions/lw_page_template_insert/page-template-ai-hints.json",
+			"notes": " 業種セット（サイトまるごと）は8業種54ページ: 士業16 / 美容・エステ12（通常6＋明朝6）/ 医療2 / 建築・工務店6 / スクール・教室6 / 不動産6 / アフィリエイト・比較6。lite-word.com に全ページのデモがあり、登録簿の preview_url がその行き先になっている（空にすると一覧からカードが消える）。"
 		},
 		"dashboard": {
-			"description": "ダッシュボードトップ＋カスタムブロック挿入UI。サイト制作ウィザード・ページツリー・タスク管理・SEOチェック・ブロック挿入パネル。",
+			"description": "ダッシュボードトップ＋カスタムブロック挿入UI。サイト制作ウィザード・タスク管理・SEOセルフチェック・お知らせ・ブロック挿入パネル。サイドバーから「サイト構造」「動画マニュアル」など各機能へのリンクを出す。",
 			"location": "functions/dashboard_top/dashboard-ai-hints.json"
+		},
+		"siteStructure": {
+			"description": "サイト構造。固定ページ・投稿・カテゴリーの親子関係を、パン・ズームできる無限キャンバス上にマインドマップ風で表示する専用ページ（管理画面「ダッシュボード」配下・admin.php?page=lw-site-structure・権限 edit_pages）。ノードはドラッグで自由に置けて位置が保存される／別ノードに重ねると親子関係の変更を予約し「変更を保存」で確定／空いたキャンバスを右クリックするとその場に新規固定ページ（下書き）を作成／選んだノードは右パネルでタイトル・スラッグ・ステータスの変更とトップページ設定ができる。",
+			"location": "functions/dashboard_top/dashboard-ai-hints.json",
+			"section": "components.siteStructure",
+			"notes": "🚨 2026-09-05 に旧「ページツリー」（ダッシュボード上のモーダル・components/page-tree/）を全面リニューアルして置き換えた。旧実装のファイル・モーダル・nonce（lw_page_tree_nonce）はもう存在しないので、page-tree を前提に答えないこと。実装の詳細と踏んだ罠は dashboard-ai-hints.json の components.siteStructure を読む。"
+		},
+		"videoManual": {
+			"description": "動画マニュアル。テーマ内蔵の文章マニュアル（旧 contents.php ＋ pages/*.php・13ページ）は 2026-09-05 に廃止し、学習アプリ『クロラボ』の「LiteWordの使い方」（メニュー18・全67レッスン）へ移設した。テーマに残るのは移設を伝えてリンクへ送る案内ページ1枚だけ（管理画面「動画マニュアル」・admin.php?page=lw-manual-viewer・権限 manage_options）。",
+			"location": "functions/manual/manual-link.php",
+			"externalUrl": "https://app.kurosuta.supologe.com/menu/18",
+			"notes": "⚠️ 視聴にはクロラボへの登録が必要（登録も動画も無料）。／メニューのスラッグ lw-manual-viewer は5箇所から参照されているので変えない（参照元の一覧は manual-link.php の冒頭コメント）。／別物の「マニュアル」（edit.php?post_type=lw_manual＝納品用のカスタム投稿タイプ）とは無関係。／AIチャットが根拠にするマニュアルもこれではなく lite-word.com の /manual/ ページ。"
 		},
 		"markdownPaste": {
 			"description": "マークダウンを貼って記事にする機能。投稿・固定ページの編集画面にサイドバー「マークダウンを貼る」を出し、フロントマターと拡張記法（:::）を LiteWord のブロックに変換する。変換はすべてブラウザ内で完結する。",
 			"location": "functions/lw_markdown_paste/",
 			"notes": "🚨 サーバーへ完成HTMLを送らないのは、KSES が <picture>/<svg>/<iframe> を削りバックスラッシュが1段剥がれるため（skills/sample-page-factory/SKILL.md の5つの罠）。素のマークダウンは WordPress 同梱の変換器 wp.blocks.pasteHandler に渡すので、記法の解釈がエディタの貼り付けと必ず一致する。記法を増やすときは directives.js の KNOWN と blocks.js の HANDLERS と skills/blog-writer/SKILL.md の3つを必ず同時に直す。"
+		},
+		"affiliate": {
+			"description": "アフィリエイト（広告リンク）向けの機能一式。①PR表記の帯（ステマ規制対応・無料） ②文中リンクに広告の印を付ける書式ボタン（無料） ③広告リンクのクリック計測（無料） ④商品リンク01 ⑤ランキング01 ⑥メリデメ01（④〜⑥はプレミアム）。",
+			"locations": {
+				"PR表記": "functions/customizer/pr_notice.php ＋ templates/pr_notice/index.php（カスタマイザー「PR表記」）",
+				"書式ボタン": "block-dev/src/lw-affiliate-link/（RichText の format。rel=\"sponsored nofollow\" を付け外しする）",
+				"クリック計測": "functions/seo/affiliate_click.php（GA4 が設定済みなら gtag、無ければ計測しない）",
+				"ブロック3種": "my-blocks/build/lw-pr-product-1 / lw-pr-ranking-1 / lw-pr-goodbad-1"
+			},
+			"manual": "https://lite-word.com/manual/affiliate-links/",
+			"notes": "🚨 マークダウン貼り付け（lw_markdown_paste）には rel を付ける記法が無い。AIが書いた記事のリンクは印が付かないので、貼り付けたあとに書式ボタンで付ける。記事の書き方は skills/blog-writer/SKILL.md の4章が正本。"
 		}
 	},
 	"skills": {
 		"blogWriter": {
-			"description": "LiteWord のブログ記事をマークダウンで書くための書式。フロントマター（title/category/slug/description/tags/eyecatch）＋標準マークダウン＋7つの拡張記法（:::box / :::check / :::steps / :::qa / :::voice / :::button / :::cta）。この形で書いた文章を投稿編集画面の「マークダウンを貼る」に貼ると、LiteWord のブロックに変換されて記事がほぼ完成する。",
+			"description": "LiteWord のブログ記事をマークダウンで書くための書式。フロントマター（title/category/slug/description/tags/eyecatch）＋標準マークダウン＋7つの拡張記法（:::box / :::check / :::steps / :::qa / :::voice / :::button / :::cta）。この形で書いた文章を投稿編集画面の「マークダウンを貼る」に貼ると、LiteWord のブロックに変換されて記事がほぼ完成する。 4章に「商品を紹介する記事・アフィリエイト記事を書くとき」がある（PR表記を手書きしない・広告の印は貼り付け後・効果を言い切らない・順位の根拠を書く）。",
 			"location": "skills/blog-writer/SKILL.md",
 			"notes": "🚨 利用者が ChatGPT / Claude にそのまま渡す想定の配布物。カテゴリー・タグ・アイキャッチは「無ければ作らない」仕様。書式を変えるときは functions/lw_markdown_paste/ の変換側と必ず両方直すこと。"
 		},

@@ -2,7 +2,7 @@
 	"_meta": {
 		"description": "LiteWordダッシュボードトップ画面とカスタムブロック挿入UIのAI向けメタ情報。管理画面で最初に目にする画面の構成・機能・コンポーネントをAIが理解するためのファイル。WordPressの動作には一切影響しない。",
 		"version": "1.0",
-		"lastUpdated": "2026-03-21"
+		"lastUpdated": "2026-09-05"
 	},
 	"feature": {
 		"title": "ダッシュボードトップ・カスタムブロック挿入UI",
@@ -16,15 +16,15 @@
 			"aiDescription": "左側のサイドバー。各機能へのアクセスボタンを縦に配置。",
 			"buttons": [
 				{
-					"id": "lw-page-tree-trigger",
 					"label": "サイト構造",
 					"icon": "dashicons-networking",
-					"aiDescription": "固定ページのツリー構造をマインドマップ風に表示するモーダルを開く。"
+					"aiDescription": "固定ページ・投稿・カテゴリーの構造を、パン・ズームできる無限キャンバス上にマインドマップ風で表示する専用ページを開く（モーダルではなくダッシュボード配下の独立ページ。詳細は components.siteStructure を参照）。",
+					"link": "admin.php?page=lw-site-structure"
 				},
 				{
-					"label": "旧）操作マニュアル",
-					"icon": "dashicons-book-alt",
-					"aiDescription": "テーマ内蔵の操作マニュアルビューアーへのリンク。",
+					"label": "動画マニュアル",
+					"icon": "dashicons-video-alt3",
+					"aiDescription": "動画マニュアルの案内ページを開く。テーマ内蔵の文章マニュアル（13ページ）は廃止され、動画マニュアルは学習アプリ『クロラボ』(https://app.kurosuta.supologe.com/menu/18) に移設された。この画面は移設を伝えてクロラボへ送るだけの1枚で、リンクは新しいタブで開く。視聴にはクロラボへの登録（無料）が必要だが、動画そのものは無料。",
 					"link": "admin.php?page=lw-manual-viewer"
 				},
 				{
@@ -89,29 +89,40 @@
 			"dataStorage": "wp_options テーブルの lw_wizard_status キーに各ステップの完了状態（ok）とコメント（comment）を保存。",
 			"userGuide": "サイト制作の順番がわからない初心者向けのガイド機能。ステップ順に進めることで、必要な設定を漏れなく行える。"
 		},
-		"pageTree": {
-			"title": "固定ページツリー（サイト構造）",
-			"file": "components/page-tree/page-tree.php",
-			"aiDescription": "固定ページの親子関係をマインドマップ風に放射状に表示するモーダル。トップページを中心に配置し、直線で接続する。ドラッグ&ドロップで親子関係を変更可能。固定ページ・投稿・下書きのフィルタリング、ズーム操作（Ctrl+ホイール対応）、トップページ未設定時の警告表示と設定UI。",
+		"siteStructure": {
+			"title": "サイト構造",
+			"file": "components/site-structure/site-structure.php",
+			"aiDescription": "固定ページ・投稿・カテゴリーの親子関係を、パン・ズームできる無限キャンバス上にマインドマップ風で表示する、ダッシュボード（index.php）配下の専用ページ（スラッグ lw-site-structure）。旧実装（components/page-tree/ のモーダル）を全面リニューアルしたもの。ノードはドラッグで自由に動かせて位置が保存され（再読込してもツリー配置に戻らない）、別ノードへドロップすると親子関係の変更を予約し「変更を保存」ボタンで確定する（位置の保存とは別経路・即時反映）。空いたキャンバス上を右クリックすると、その場に新規固定ページ（下書き）を作成できる。ノードを選択すると画面右側にスライドインする編集パネルでタイトル・スラッグ・ステータスの変更やトップページ設定ができる。",
 			"features": [
-				"放射状マインドマップ表示",
-				"ドラッグ&ドロップで親子関係変更",
-				"固定ページ/投稿/下書きフィルター",
-				"ズームイン・アウト・リセット（Ctrl+ホイール対応）",
-				"トップページ未設定警告と設定UI"
+				"パン・ズーム無限キャンバス（背景ドラッグでパン、Ctrl+ホイールでズーム。ズームはカーソル位置基準）",
+				"ノードのドラッグで自由配置（座標はpostmeta/termmetaに保存され、次回表示時も保持される）",
+				"ノードを他ノードへドロップして親子関係を変更予約（「変更を保存」で確定、「キャンセル」で破棄）",
+				"「自動整列」ボタンで全ノードの自由配置座標をクリアし、ツリー自動レイアウトに戻す",
+				"空いたキャンバス上を右クリックして新規固定ページを作成（デスクトップの右クリックのみ。タッチ端末の長押し相当は未実装）",
+				"ノード選択で右サイドパネルが開閉し、タイトル・スラッグ・ステータス編集とトップページ設定が可能",
+				"固定ページ/投稿/下書きのフィルタートグル",
+				"トップページ未設定時の警告バナーとその場での設定UI"
 			],
-			"dependencies": ["jquery", "jquery-ui-draggable", "jquery-ui-droppable", "jquery-ui-sortable"],
-			"ajaxAction": "lw_get_pages_data",
-			"userGuide": "サイト全体の構造を視覚的に確認できる。ページの階層が深すぎないか、孤立したページがないかをチェックするのに有用。"
+			"dependencies": [
+				"jquery"
+			],
+			"ajaxEndpoints": {
+				"lw_get_site_structure": "固定ページ・投稿・カテゴリー一覧＋保存済み座標の取得（画面表示時に呼ばれる主要な読み取りアクション）",
+				"lw_save_structure_changes": "親子付け替えの一括保存（循環参照は拒否）",
+				"lw_update_node_details": "ノードのタイトル・スラッグ・ステータスを更新",
+				"lw_save_node_position": "ノードの自由配置座標(x,y)を保存、または clear 指定でクリアしてツリー配置に戻す",
+				"lw_create_page_from_map": "空いた場所への右クリックから新規固定ページ（下書き）を作成"
+			},
+			"userGuide": "サイト全体のページ構造を視覚的に確認・整理できる。ノードをドラッグして好きな位置に配置でき、親子関係も他ノードへドロップして変更できる（「変更を保存」ボタンを押すまで確定しない）。空いた場所を右クリックすればその場で新しいページを作成できる。"
 		},
 		"newsWidget": {
 			"title": "お知らせウィジェット",
 			"file": "components/news-widget/news-widget.php",
-			"aiDescription": "LiteWordからのお知らせを表示するウィジェット。公式サイト・お問い合わせ・マニュアルへのリンクボタン付き。お知らせデータは lw_dashboard_news_items フィルターでカスタマイズ可能。",
+			"aiDescription": "LiteWordからのお知らせを表示するウィジェット。公式サイト・お問い合わせ・動画マニュアル（クロラボへの案内ページ）へのリンクボタン付き。お知らせデータは lw_dashboard_news_items フィルターでカスタマイズ可能。",
 			"links": {
 				"officialSite": "https://lite-word.com/",
 				"contact": "https://lite-word.com/cf/",
-				"manual": "admin.php?page=lw-manual-viewer"
+				"videoManual": "admin.php?page=lw-manual-viewer"
 			}
 		},
 		"instructions": {
@@ -157,7 +168,12 @@
 			},
 			"imageUpload": {
 				"aiDescription": "指示に画像を添付可能。JPEG/PNG/GIF/WebP対応、最大5MB。wp-content/uploads/lw-instructions/ に保存。.htaccessで直接アクセスを制限。",
-				"allowedTypes": ["image/jpeg", "image/png", "image/gif", "image/webp"],
+				"allowedTypes": [
+					"image/jpeg",
+					"image/png",
+					"image/gif",
+					"image/webp"
+				],
 				"maxSize": "5MB",
 				"storagePath": "wp-content/uploads/lw-instructions/"
 			},
@@ -166,7 +182,7 @@
 		"seoCheck": {
 			"title": "SEOセルフチェック",
 			"file": "components/seo-check/seo-check.php",
-			"aiDescription": "SEO対策の実施状況をチェックリスト形式で自己評価する機能。カテゴリ別（ドメイン・サーバー関連、WordPress初期設定、技術的SEO等）にチェック項目を定義し、ユーザーメタデータに保存する。進捗率をサイドバーのバッジに表示。",
+			"aiDescription": "SEO対策の実施状況をチェックリスト形式で自己評価する機能。カテゴリ別（ドメイン・サーバー関連、WordPress初期設定、技術的SEO、AI検索対応、ローカルSEO・MEO対策等）にチェック項目を定義し、ユーザーメタデータに保存する。進捗率をサイドバーのバッジに表示。",
 			"categories": {
 				"domain_server": {
 					"title": "ドメイン・サーバー関連",
@@ -196,18 +212,66 @@
 		"blockCategories": {
 			"aiDescription": "カスタムブロックは以下のカテゴリに分類される。カテゴリ設定はblock_category_set.phpで定義。",
 			"order": [
-				{ "slug": "lw-heading", "name": "見出し", "sortOrder": 1 },
-				{ "slug": "lw-list", "name": "リスト", "sortOrder": 2 },
-				{ "slug": "lw-box", "name": "ボックス", "sortOrder": 3 },
-				{ "slug": "lw-button", "name": "ボタン", "sortOrder": 4 },
-				{ "slug": "lw-banner", "name": "バナー", "sortOrder": 5 },
-				{ "slug": "lw-cta", "name": "CTA", "sortOrder": 6 },
-				{ "slug": "lw-faq", "name": "FAQ", "sortOrder": 7 },
-				{ "slug": "lw-table", "name": "テーブル", "sortOrder": 8 },
-				{ "slug": "lw-step", "name": "ステップ", "sortOrder": 9 },
-				{ "slug": "lw-profile", "name": "プロフィール", "sortOrder": 10 },
-				{ "slug": "lw-firstview", "name": "ファーストビュー", "sortOrder": 11 },
-				{ "slug": "lw-parts", "name": "パーツ", "sortOrder": 12 }
+				{
+					"slug": "lw-heading",
+					"name": "見出し",
+					"sortOrder": 1
+				},
+				{
+					"slug": "lw-list",
+					"name": "リスト",
+					"sortOrder": 2
+				},
+				{
+					"slug": "lw-box",
+					"name": "ボックス",
+					"sortOrder": 3
+				},
+				{
+					"slug": "lw-button",
+					"name": "ボタン",
+					"sortOrder": 4
+				},
+				{
+					"slug": "lw-banner",
+					"name": "バナー",
+					"sortOrder": 5
+				},
+				{
+					"slug": "lw-cta",
+					"name": "CTA",
+					"sortOrder": 6
+				},
+				{
+					"slug": "lw-faq",
+					"name": "FAQ",
+					"sortOrder": 7
+				},
+				{
+					"slug": "lw-table",
+					"name": "テーブル",
+					"sortOrder": 8
+				},
+				{
+					"slug": "lw-step",
+					"name": "ステップ",
+					"sortOrder": 9
+				},
+				{
+					"slug": "lw-profile",
+					"name": "プロフィール",
+					"sortOrder": 10
+				},
+				{
+					"slug": "lw-firstview",
+					"name": "ファーストビュー",
+					"sortOrder": 11
+				},
+				{
+					"slug": "lw-parts",
+					"name": "パーツ",
+					"sortOrder": 12
+				}
 			]
 		},
 		"blockTypes": {
@@ -220,7 +284,10 @@
 			},
 			"premium": {
 				"aiDescription": "プレミアムプラン限定ブロック。スラッグがshin-gas-station-またはlw-pr-で始まるブロック。サブスクリプション契約またはトライアル中に使用可能。",
-				"slugPrefixes": ["shin-gas-station-", "lw-pr-"]
+				"slugPrefixes": [
+					"shin-gas-station-",
+					"lw-pr-"
+				]
 			}
 		},
 		"restApiEndpoints": {
@@ -279,7 +346,16 @@
 		"editorAssets": {
 			"js": "custom_bloc_insert_system/assets/js/editor.js",
 			"css": "custom_bloc_insert_system/assets/css/editor.css",
-			"dependencies": ["wp-plugins", "wp-edit-post", "wp-editor", "wp-element", "wp-components", "wp-data", "wp-blocks", "wp-dom-ready"],
+			"dependencies": [
+				"wp-plugins",
+				"wp-edit-post",
+				"wp-editor",
+				"wp-element",
+				"wp-components",
+				"wp-data",
+				"wp-blocks",
+				"wp-dom-ready"
+			],
 			"aiDescription": "ブロックエディタに読み込まれるJSとCSS。JSはReactコンポーネントとしてサイドバーパネルを構築する。"
 		},
 		"userGuide": "ブロックエディタの右サイドバーにLiteWord専用のブロック挿入パネルが表示される。WordPress標準のブロック挿入UIとは別に、プレビュー画像付きでブロックを選択できる。セクションテンプレートを使えば、複数ブロックの組み合わせを一度に挿入可能。"
