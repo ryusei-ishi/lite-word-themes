@@ -1536,6 +1536,16 @@
                 InstructionsModal.addInstruction();
             });
 
+            // ステータス選択変更時に担当者欄の表示切替（新規追加フォーム）
+            $('#lw-add-instruction-status').on('change', function() {
+                if ($(this).val() === 'check-requested') {
+                    $('#lw-add-assigned-to-group').show();
+                } else {
+                    $('#lw-add-assigned-to-group').hide();
+                    $('#lw-add-assigned-to').val('');
+                }
+            });
+
             // 返信画像選択
             $('#lw-reply-image').on('change', function() {
                 const file = this.files[0];
@@ -1639,6 +1649,7 @@
             $('#lw-instruction-image-clear').hide();
             $('#lw-add-instruction-status').val('not-started');
             $('#lw-add-assigned-to').val('');
+            $('#lw-add-assigned-to-group').hide();
 
             Modal.open('lw-instructions-modal');
             InstructionsModal.loadInstructions(pageId);
@@ -1712,7 +1723,7 @@
                             '<div class="lw-reply-text">' + InstructionsModal.escapeHtml(reply.content) + '</div>' +
                             replyImageHtml +
                             '<div class="lw-reply-meta">' +
-                                '<span class="lw-reply-author"><span class="dashicons dashicons-admin-users"></span>' + (reply.author_name || '不明') + '</span>' +
+                                '<span class="lw-reply-author"><span class="dashicons dashicons-admin-users"></span>' + InstructionsModal.escapeHtml(reply.author_name || '不明') + '</span>' +
                                 '<span class="lw-reply-date"><span class="dashicons dashicons-clock"></span>' + InstructionsModal.formatDate(reply.created_at) + '</span>' +
                             '</div>' +
                         '</div>' +
@@ -1727,7 +1738,7 @@
             // 担当者表示
             let assignedHtml = '';
             if (inst.assigned_to && inst.assigned_name) {
-                assignedHtml = '<span class="lw-instruction-assigned"><span class="dashicons dashicons-businessman"></span>' + inst.assigned_name + '</span>';
+                assignedHtml = '<span class="lw-instruction-assigned"><span class="dashicons dashicons-businessman"></span>' + InstructionsModal.escapeHtml(inst.assigned_name) + '</span>';
             }
 
             // リンクボタン
@@ -1736,7 +1747,7 @@
                 linkBtnHtml = '<a href="' + InstructionsModal.escapeAttr(inst.link_url) + '" target="_blank" class="lw-instruction-action-btn lw-instruction-link-btn" title="リンクを開く"><span class="dashicons dashicons-external"></span></a>';
             }
 
-            return '<li class="lw-instruction-item" data-id="' + inst.id + '" data-content="' + InstructionsModal.escapeAttr(inst.content) + '" data-image-url="' + (inst.image_url || '') + '" data-assigned-to="' + (inst.assigned_to || '') + '" data-link-url="' + (inst.link_url || '') + '">' +
+            return '<li class="lw-instruction-item" data-id="' + inst.id + '" data-content="' + InstructionsModal.escapeAttr(inst.content) + '" data-image-url="' + (inst.image_url || '') + '" data-assigned-to="' + (inst.assigned_to || '') + '" data-link-url="' + InstructionsModal.escapeAttr(inst.link_url || '') + '">' +
                 '<div class="lw-instruction-main">' +
                     '<span class="lw-instruction-drag"><span class="dashicons dashicons-menu"></span></span>' +
                     '<div class="lw-instruction-content">' +
@@ -1745,7 +1756,7 @@
                         '<div class="lw-instruction-meta">' +
                             '<span class="lw-instruction-status ' + statusInfo.class + '" title="クリックでステータス変更">' + statusInfo.text + '</span>' +
                             assignedHtml +
-                            '<span class="lw-instruction-author"><span class="dashicons dashicons-admin-users"></span>' + (inst.author_name || '不明') + '</span>' +
+                            '<span class="lw-instruction-author"><span class="dashicons dashicons-admin-users"></span>' + InstructionsModal.escapeHtml(inst.author_name || '不明') + '</span>' +
                             '<span class="lw-instruction-date"><span class="dashicons dashicons-clock"></span>' + InstructionsModal.formatDate(inst.created_at) + '</span>' +
                         '</div>' +
                     '</div>' +
@@ -1849,9 +1860,20 @@
             Modal.open('lw-status-change-modal');
         },
 
+        // 担当者セレクトに選択肢を反映（先頭の「選択してください」は残す）
+        populateAssignedToSelect: function(selector, users) {
+            const $select = $(selector);
+            $select.find('option:not(:first)').remove();
+            users.forEach(function(user) {
+                $select.append('<option value="' + user.id + '">' + InstructionsModal.escapeHtml(user.name) + '</option>');
+            });
+        },
+
         loadEditors: function(callback) {
-            // キャッシュがあれば使う
+            // キャッシュがあれば使う（他フォームが先に読み込んでいてもこのセレクトには反映されていないため、
+            // キャッシュヒット時も必ず populateAssignedToSelect を呼ぶ）
             if (InstructionsModal.editorsCache) {
+                InstructionsModal.populateAssignedToSelect('#lw-inst-assigned-to-select', InstructionsModal.editorsCache);
                 if (callback) callback();
                 return;
             }
@@ -1866,11 +1888,7 @@
                 success: function(response) {
                     if (response.success) {
                         InstructionsModal.editorsCache = response.data.users;
-                        const $select = $('#lw-inst-assigned-to-select');
-                        $select.find('option:not(:first)').remove();
-                        response.data.users.forEach(function(user) {
-                            $select.append('<option value="' + user.id + '">' + user.name + '</option>');
-                        });
+                        InstructionsModal.populateAssignedToSelect('#lw-inst-assigned-to-select', response.data.users);
                     }
                     if (callback) callback();
                 }
@@ -1880,11 +1898,7 @@
         loadEditorsForAdd: function() {
             // キャッシュがあれば使う
             if (InstructionsModal.editorsCache) {
-                const $select = $('#lw-add-assigned-to');
-                $select.find('option:not(:first)').remove();
-                InstructionsModal.editorsCache.forEach(function(user) {
-                    $select.append('<option value="' + user.id + '">' + user.name + '</option>');
-                });
+                InstructionsModal.populateAssignedToSelect('#lw-add-assigned-to', InstructionsModal.editorsCache);
                 return;
             }
 
@@ -1898,11 +1912,7 @@
                 success: function(response) {
                     if (response.success) {
                         InstructionsModal.editorsCache = response.data.users;
-                        const $select = $('#lw-add-assigned-to');
-                        $select.find('option:not(:first)').remove();
-                        response.data.users.forEach(function(user) {
-                            $select.append('<option value="' + user.id + '">' + user.name + '</option>');
-                        });
+                        InstructionsModal.populateAssignedToSelect('#lw-add-assigned-to', response.data.users);
                     }
                 }
             });
@@ -1948,7 +1958,7 @@
                             // 担当者表示を更新
                             let $assigned = InstructionsModal.currentStatusItem.find('.lw-instruction-assigned');
                             if (status === 'check-requested' && assignedTo) {
-                                const userName = $('#lw-assigned-to-select option:selected').text();
+                                const userName = InstructionsModal.escapeHtml($('#lw-inst-assigned-to-select option:selected').text());
                                 if ($assigned.length === 0) {
                                     InstructionsModal.currentStatusItem.find('.lw-instruction-meta .lw-instruction-status').after(
                                         '<span class="lw-instruction-assigned"><span class="dashicons dashicons-businessman"></span>' + userName + '</span>'
@@ -3029,6 +3039,16 @@
                 TaskList.saveNewInstruction();
             });
 
+            // ステータス選択変更時に担当者欄の表示切替
+            $('#lw-tasklist-new-status').on('change', function() {
+                if ($(this).val() === 'check-requested') {
+                    $('#lw-tasklist-new-assigned-group').show();
+                } else {
+                    $('#lw-tasklist-new-assigned-group').hide();
+                    $('#lw-tasklist-new-assigned').val('');
+                }
+            });
+
             // 初期ロード（バッジ用）
             TaskList.loadBadgeCount();
         },
@@ -3048,6 +3068,7 @@
             $('#lw-tasklist-new-image-name').text('');
             $('#lw-tasklist-new-status').val('not-started');
             $('#lw-tasklist-new-assigned').val('');
+            $('#lw-tasklist-new-assigned-group').hide();
             $('#lw-custom-title').val('');
             $('#lw-tasklist-new-link-url').val('');
 

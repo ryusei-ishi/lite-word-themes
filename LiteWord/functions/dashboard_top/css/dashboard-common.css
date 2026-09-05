@@ -1244,7 +1244,7 @@
     justify-content: flex-end;
     gap: 10px;
     padding: 15px 25px;
-    border-top: 1px solid var(--lw-border-color);
+    border-top: 1px solid var(--lw-border);
     background: #f7fafc;
 }
 
@@ -2272,7 +2272,8 @@
 .lw-instruction-meta {
     display: flex;
     align-items: center;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 6px 12px;
     font-size: 11px;
     color: var(--lw-text-light);
 }
@@ -2281,12 +2282,14 @@
     display: flex;
     align-items: center;
     gap: 4px;
+    white-space: nowrap;
 }
 
 .lw-instruction-date {
     display: flex;
     align-items: center;
     gap: 4px;
+    white-space: nowrap;
 }
 
 /* 指示ステータス */
@@ -2298,6 +2301,7 @@
     cursor: pointer;
     transition: all 0.2s;
     user-select: none;
+    white-space: nowrap;
 }
 
 .lw-instruction-status:hover {
@@ -2425,7 +2429,15 @@
     color: var(--lw-text-light);
     display: flex;
     align-items: center;
-    gap: 10px;
+    flex-wrap: wrap;
+    gap: 6px 10px;
+}
+
+.lw-reply-meta > span {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    white-space: nowrap;
 }
 
 .lw-reply-actions {
@@ -2480,6 +2492,12 @@
    依頼一覧（TaskList）
    ======================================== */
 
+/* 依頼一覧ポップアップは項目数が多くなりやすいため、共通の.lw-wizard-popup-mdより広く取る */
+#lw-tasklist-modal .lw-wizard-popup {
+    width: 860px;
+    max-width: 92vw;
+}
+
 /* サイドバー依頼一覧バッジ */
 .lw-tasklist-badge {
     position: absolute;
@@ -2506,9 +2524,10 @@
     display: flex;
     align-items: flex-start;
     justify-content: space-between;
+    flex-wrap: wrap;
     gap: 16px;
     margin-bottom: 16px;
-    border-bottom: 1px solid var(--lw-border-color);
+    border-bottom: 1px solid var(--lw-border);
     padding-bottom: 12px;
 }
 
@@ -2517,6 +2536,14 @@
     display: flex;
     gap: 8px;
     flex-wrap: wrap;
+    flex: 1 1 auto;
+    min-width: 0;
+}
+
+/* 新規追加ボタン: 幅が狭くても文字が折り返さないようにする */
+#lw-tasklist-add-btn {
+    flex-shrink: 0;
+    white-space: nowrap;
 }
 
 .lw-tasklist-tab {
@@ -2525,11 +2552,11 @@
     gap: 6px;
     padding: 8px 16px;
     background: #f7fafc;
-    border: 1px solid var(--lw-border-color);
+    border: 1px solid var(--lw-border);
     border-radius: 20px;
     cursor: pointer;
     font-size: 13px;
-    color: var(--lw-text-color);
+    color: var(--lw-text);
     transition: all 0.2s;
 }
 
@@ -2538,9 +2565,9 @@
 }
 
 .lw-tasklist-tab.active {
-    background: var(--lw-primary-color);
+    background: var(--lw-primary);
     color: #fff;
-    border-color: var(--lw-primary-color);
+    border-color: var(--lw-primary);
 }
 
 .lw-tasklist-tab .dashicons {
@@ -2590,7 +2617,7 @@
 /* ページグループ */
 .lw-tasklist-group {
     margin-bottom: 16px;
-    border: 1px solid var(--lw-border-color);
+    border: 1px solid var(--lw-border);
     border-radius: 8px;
     overflow: hidden;
 }
@@ -2601,7 +2628,7 @@
     gap: 8px;
     padding: 10px 14px;
     background: #f7fafc;
-    border-bottom: 1px solid var(--lw-border-color);
+    border-bottom: 1px solid var(--lw-border);
 }
 
 .lw-tasklist-group-header .dashicons {
@@ -2614,7 +2641,7 @@
 .lw-tasklist-page-title {
     flex: 1;
     font-weight: 600;
-    color: var(--lw-text-color);
+    color: var(--lw-text);
     font-size: 13px;
 }
 
@@ -2684,7 +2711,7 @@
 
 .lw-tasklist-item-text {
     font-size: 13px;
-    color: var(--lw-text-color);
+    color: var(--lw-text);
     line-height: 1.5;
     margin-bottom: 6px;
     white-space: nowrap;
@@ -2695,7 +2722,8 @@
 .lw-tasklist-item-meta {
     display: flex;
     align-items: center;
-    gap: 12px;
+    flex-wrap: wrap;
+    gap: 6px 12px;
     font-size: 11px;
     color: var(--lw-text-light);
 }
@@ -2707,6 +2735,7 @@
     display: inline-flex;
     align-items: center;
     gap: 4px;
+    white-space: nowrap;
 }
 
 .lw-tasklist-assigned {
@@ -2741,7 +2770,7 @@
 
 .lw-tasklist-item:hover .lw-tasklist-item-action {
     background: #edf2f7;
-    color: var(--lw-primary-color);
+    color: var(--lw-primary);
 }
 
 /* リンクボタン */
@@ -2801,11 +2830,11 @@
     gap: 8px;
     padding: 12px 16px;
     background: #f7fafc;
-    border: 2px solid var(--lw-border-color);
+    border: 2px solid var(--lw-border);
     border-radius: 8px;
     cursor: pointer;
     font-size: 13px;
-    color: var(--lw-text-color);
+    color: var(--lw-text);
     transition: all 0.2s;
 }
 
@@ -2816,8 +2845,8 @@
 
 .lw-target-type-option input:checked + .lw-target-type-label {
     background: #ebf8ff;
-    border-color: var(--lw-primary-color);
-    color: var(--lw-primary-color);
+    border-color: var(--lw-primary);
+    color: var(--lw-primary);
 }
 
 .lw-target-type-label .dashicons {
@@ -2849,7 +2878,7 @@
 
 /* ターゲットリストコンテナ */
 .lw-target-list-container {
-    border: 1px solid var(--lw-border-color);
+    border: 1px solid var(--lw-border);
     border-radius: 6px;
     max-height: 200px;
     overflow-y: auto;
@@ -2879,7 +2908,7 @@
 .lw-target-title {
     display: block;
     font-size: 13px;
-    color: var(--lw-text-color);
+    color: var(--lw-text);
 }
 
 .lw-target-parent {
@@ -2912,20 +2941,20 @@
     gap: 8px;
     padding: 10px 14px;
     background: #ebf8ff;
-    border: 1px solid var(--lw-primary-color);
+    border: 1px solid var(--lw-primary);
     border-radius: 6px;
     margin-top: 8px;
 }
 
 .lw-target-selected .dashicons-yes-alt {
-    color: var(--lw-primary-color);
+    color: var(--lw-primary);
 }
 
 #lw-target-selected-title {
     flex: 1;
     font-size: 13px;
     font-weight: 500;
-    color: var(--lw-text-color);
+    color: var(--lw-text);
 }
 
 .lw-target-clear {
@@ -3134,6 +3163,7 @@
     border-radius: 4px;
     font-size: 12px;
     font-weight: 500;
+    white-space: nowrap;
 }
 
 .lw-instruction-assigned .dashicons {

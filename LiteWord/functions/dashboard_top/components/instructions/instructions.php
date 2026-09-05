@@ -41,7 +41,7 @@ function lw_create_instructions_table() {
 
     $sql = "CREATE TABLE IF NOT EXISTS $table_name (
         id bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT,
-        page_id bigint(20) UNSIGNED NOT NULL,
+        page_id bigint(20) NOT NULL,
         parent_id bigint(20) UNSIGNED DEFAULT NULL,
         content text NOT NULL,
         image_path varchar(255) DEFAULT NULL,
@@ -65,7 +65,7 @@ function lw_create_instructions_table() {
     dbDelta($sql);
 
     // バージョン保存
-    update_option('lw_instructions_db_version', '1.3');
+    update_option('lw_instructions_db_version', '1.4');
 }
 
 /**
@@ -104,6 +104,29 @@ function lw_maybe_upgrade_instructions_table() {
             $wpdb->query("ALTER TABLE $table_name ADD COLUMN link_url varchar(500) DEFAULT NULL AFTER custom_title");
         }
         update_option('lw_instructions_db_version', '1.3');
+        $db_version = '1.3';
+    }
+
+    // v1.4: 「自分で入力」の依頼(page_id=0)が全て同じpage_idを共有していたため、
+    // 依頼一覧から開くと他の「自分で入力」依頼のコメントまで混ざって表示されていた不具合を修正。
+    // 既存データは自分自身のIDを負数にして一意なpage_idへ振り直す（実ページIDは常に正数なので衝突しない）。
+    // page_idはUNSIGNEDだったため、まず符号付きに変更してから負数を書き込む。
+    // ALTER TABLEは他のリクエストとのロック競合等で失敗することがあるため、
+    // 成功を確認できるまではバージョンを更新しない（次のadmin_initで再試行させる）。
+    if (version_compare($db_version, '1.4', '<')) {
+        $column = $wpdb->get_row("SHOW COLUMNS FROM $table_name LIKE 'page_id'");
+        $is_unsigned = $column && stripos($column->Type, 'unsigned') !== false;
+
+        if ($is_unsigned) {
+            $altered = $wpdb->query("ALTER TABLE $table_name MODIFY COLUMN page_id bigint(20) NOT NULL");
+        } else {
+            $altered = true; // 既に符号付きなら変更不要
+        }
+
+        if ($altered !== false) {
+            $wpdb->query("UPDATE $table_name SET page_id = -id WHERE page_id = 0 AND parent_id IS NULL");
+            update_option('lw_instructions_db_version', '1.4');
+        }
     }
 }
 
@@ -274,7 +297,23 @@ function lw_add_instruction($page_id, $content, $image_path = null, $parent_id =
     );
 
     if ($result) {
-        return $wpdb->insert_id;
+        $new_id = $wpdb->insert_id;
+
+        // 「自分で入力」の依頼はpage_id=0で保存される。0のままだと全ての「自分で入力」依頼が
+        // 同じpage_idを共有してしまい、一覧から開いた時に他の依頼のコメントと混ざって表示される
+        // （wp_lw_instructionsはpage_id単位でスレッドをまとめる設計のため）。
+        // 自分自身のIDを負数にして一意なpage_idへ差し替え、依頼ごとに独立したスレッドにする。
+        if (empty($page_id) && empty($parent_id)) {
+            $wpdb->update(
+                $table_name,
+                array('page_id' => -$new_id),
+                array('id' => $new_id),
+                array('%d'),
+                array('%d')
+            );
+        }
+
+        return $new_id;
     }
     return false;
 }
@@ -455,17 +494,20 @@ function lw_ajax_add_instruction() {
         $status = 'not-started';
     }
 
-    // page_idが0の場合はcustom_titleが必須
-    if ($page_id === 0 && empty($custom_title)) {
+    // 担当者はチェック依頼の時だけ意味を持つ（ステータス変更時の仕様と合わせる）
+    if ($status !== 'check-requested') {
+        $assigned_to = null;
+    }
+
+    // 新規の「自分で入力」依頼（トップレベル・page_id=0）にはタイトルが必須。
+    // 返信（parent_idあり）はcustom_titleを送らない仕様のため対象外にする
+    // （これが無いと、自分で入力した依頼への返信が常に「タイトルを入力してください」で弾かれてしまう）。
+    if ($page_id === 0 && empty($parent_id) && empty($custom_title)) {
         wp_send_json_error('タイトルを入力してください');
     }
 
-    if ($page_id === 0 && empty($content)) {
+    if (empty($content)) {
         wp_send_json_error('依頼内容を入力してください');
-    }
-
-    if ($page_id > 0 && empty($content)) {
-        wp_send_json_error('必須項目が入力されていません');
     }
 
     // 画像アップロード処理
