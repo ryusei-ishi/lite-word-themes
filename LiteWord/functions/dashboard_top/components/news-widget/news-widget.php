@@ -47,8 +47,8 @@ function lw_dashboard_news_widget() {
                 お問い合わせ
             </a>
             <a href="<?php echo admin_url('admin.php?page=lw-manual-viewer'); ?>" class="lw-btn">
-                <span class="dashicons dashicons-book-alt"></span>
-                マニュアル
+                <span class="dashicons dashicons-video-alt3"></span>
+                動画マニュアル
             </a>
         </div>
     </div>
@@ -61,7 +61,7 @@ function lw_get_dashboard_news() {
         array(
             'date' => '2024.12.03',
             'title' => 'LiteWordをご利用いただきありがとうございます',
-            'excerpt' => '旧）操作マニュアルをご確認の上、サイト制作をお楽しみください。',
+            'excerpt' => '使い方は「動画マニュアル」からご覧いただけます。サイト制作をお楽しみください。',
             'url' => ''
         ),
     );

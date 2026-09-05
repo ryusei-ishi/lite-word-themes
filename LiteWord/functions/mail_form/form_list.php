@@ -28,7 +28,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['action']) && $_POST['
 ?>
 <div class="none_plugin_message"></div>
 <div class="lw_mail_form_set_wrap reset">
-<?=lw_mail_set_header("LiteWord専用 問合せフォームの制作", "link" , "解説動画" , admin_url()."admin.php?page=lw-manual-viewer&manual_page=contact-form" ,"")?>
+<?php // 動画マニュアルはクロラボへ移設済み。manual_page= の直リンク先はもう無いので付けない（案内ページへ送る） ?>
+<?=lw_mail_set_header("LiteWord専用 問合せフォームの制作", "link" , "解説動画" , admin_url()."admin.php?page=lw-manual-viewer" ,"")?>
     <ul class="lw_mail_form_list">
         <?php 
             $form_no = 10;

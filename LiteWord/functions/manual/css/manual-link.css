@@ -1,0 +1,208 @@
+/**
+ * LiteWord 動画マニュアル案内ページ（クロラボへのリンク1枚）
+ */
+
+:root {
+    --lw-primary-dark: #1e3a5f;
+    --lw-primary: #2d5a87;
+    --lw-primary-light: #3a7bd5;
+    --lw-text-dark: #2d3748;
+    --lw-text: #4a5568;
+    --lw-text-light: #718096;
+    --lw-border: #e2e8f0;
+    --lw-bg-light: #f8fafc;
+    --lw-radius: 16px;
+    --lw-radius-xs: 8px;
+    --lw-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+}
+
+.lw-manual-wrap {
+    margin: 24px 20px 0 2px;
+}
+
+.lw-manual-card {
+    padding: 40px;
+
+    max-width: 720px;
+
+    background: #fff;
+    border: 1px solid var(--lw-border);
+
+    border-radius: var(--lw-radius);
+    box-shadow: var(--lw-shadow);
+
+    @media screen and (max-width: 782px) {
+        padding: 24px;
+    }
+}
+
+.lw-manual-eyebrow {
+    margin: 0 0 12px;
+
+    display: flex;
+    align-items: center;
+    gap: 6px;
+
+    color: var(--lw-primary-light);
+
+    font-size: 13px;
+    font-weight: 600;
+
+    /* dashicons は width / height / font-size を3つ揃える（揃えないとグリフが上にズレる） */
+    .dashicons {
+        width: 18px;
+        height: 18px;
+
+        font-size: 18px;
+    }
+}
+
+.lw-manual-title {
+    margin: 0 0 18px;
+    padding: 0;
+
+    color: var(--lw-text-dark);
+
+    font-size: 24px;
+    font-weight: 700;
+    line-height: 1.5;
+
+    @media screen and (max-width: 782px) {
+        font-size: 20px;
+    }
+}
+
+.lw-manual-lead {
+    margin: 0 0 24px;
+
+    color: var(--lw-text);
+
+    font-size: 15px;
+    line-height: 1.9;
+
+    strong {
+        color: var(--lw-text-dark);
+    }
+}
+
+.lw-manual-steps {
+    margin: 0 0 32px;
+    padding: 20px 24px;
+
+    background: var(--lw-bg-light);
+    border: 1px solid var(--lw-border);
+
+    border-radius: var(--lw-radius-xs);
+
+    li {
+        margin: 0 0 10px 0;
+        padding-left: 26px;
+
+        position: relative;
+
+        color: var(--lw-text);
+
+        font-size: 14px;
+        line-height: 1.7;
+
+        &:last-child {
+            margin-bottom: 0;
+        }
+
+        /* reset で list-style が消えるテーマなので、点は自前で置く */
+        &::before {
+            position: absolute;
+            top: 9px;
+            left: 8px;
+
+            width: 6px;
+            height: 6px;
+
+            display: block;
+
+            background: var(--lw-primary-light);
+
+            border-radius: 50%;
+            content: '';
+        }
+    }
+}
+
+.lw-manual-btn {
+    padding: 16px 32px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+
+    background: linear-gradient(135deg, var(--lw-primary-dark) 0%, var(--lw-primary) 50%, var(--lw-primary-light) 100%);
+    color: #fff;
+
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+
+    border-radius: 999px;
+    box-shadow: 0 6px 20px rgba(45, 90, 135, 0.3);
+    transition: all 0.3s ease;
+
+    &:hover,
+    &:focus {
+        color: #fff;
+        box-shadow: 0 10px 28px rgba(45, 90, 135, 0.42);
+        transform: translateY(-2px);
+    }
+
+    .dashicons {
+        width: 18px;
+        height: 18px;
+
+        font-size: 18px;
+    }
+}
+
+.lw-manual-note {
+    margin: 24px 0 0;
+    padding: 14px 16px;
+
+    display: flex;
+    align-items: flex-start;
+    gap: 8px;
+
+    background: #fff8e1;
+    border: 1px solid #f0d98c;
+    color: #8a6d1a;
+
+    font-size: 13px;
+    line-height: 1.8;
+
+    border-radius: var(--lw-radius-xs);
+
+    .dashicons {
+        width: 16px;
+        height: 16px;
+
+        flex-shrink: 0;
+
+        font-size: 16px;
+    }
+
+    /* 文字はこの1つの塊にまとめる（地の文と <strong> を直接 flex の下に置くと gap で分断される） */
+    .lw-manual-note-text {
+        flex: 1;
+    }
+
+    /* 日本語はどこでも折り返るので、割れると読みにくい語だけ切れないようにする */
+    .lw-manual-nobreak {
+        white-space: nowrap;
+    }
+}
+
+.lw-manual-sub {
+    margin: 16px 0 0;
+
+    color: var(--lw-text-light);
+
+    font-size: 12px;
+    line-height: 1.8;
+}

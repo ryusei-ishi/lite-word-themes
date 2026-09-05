@@ -1,4 +1,4 @@
 <?php
 if ( !defined( 'ABSPATH' ) ) exit;
-get_template_part('./functions/manual/info');
-get_template_part('./functions/manual/contents');
+// 動画マニュアルはクロラボへ移設済み。ここはその案内ページ1枚だけを読み込む。
+get_template_part('./functions/manual/manual-link');
