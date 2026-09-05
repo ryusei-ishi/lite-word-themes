@@ -1,0 +1,110 @@
+/**
+ * LiteWord サイト構造ページ — ノード編集の右サイドパネル
+ */
+
+.lw-ss-panel {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+
+    width: 300px;
+
+    background: #fff;
+    border-left: 1px solid var(--lw-border);
+
+    box-shadow: var(--lw-shadow-hover);
+    transform: translateX(100%);
+    transition: transform 0.25s ease;
+
+    &.is-open {
+        transform: translateX(0);
+    }
+}
+
+.lw-ss-panel-header {
+    padding: 14px 18px;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    background: var(--lw-bg-light);
+    border-bottom: 1px solid var(--lw-border);
+    color: var(--lw-text-dark);
+
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.lw-ss-panel-close {
+    width: 28px;
+    height: 28px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: transparent;
+    border: none;
+    color: var(--lw-text-light);
+
+    border-radius: 50%;
+    cursor: pointer;
+
+    &:hover {
+        background: var(--lw-border);
+    }
+}
+
+.lw-ss-panel-body {
+    padding: 18px;
+}
+
+.lw-ss-panel-field {
+    margin-bottom: 14px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+
+    label {
+        color: var(--lw-text);
+        font-size: 12px;
+        font-weight: 600;
+    }
+
+    input,
+    select {
+        padding: 8px 10px;
+
+        width: 100%;
+
+        border: 1px solid var(--lw-border);
+        color: var(--lw-text-dark);
+
+        font-size: 13px;
+
+        border-radius: var(--lw-radius-xs);
+    }
+}
+
+.lw-ss-panel-actions {
+    margin-top: 18px;
+
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+
+    .lw-ss-btn {
+        background: var(--lw-bg-light);
+        border-color: var(--lw-border);
+        color: var(--lw-text-dark);
+
+        &.lw-ss-btn-primary {
+            background: var(--lw-primary);
+            border-color: var(--lw-primary);
+            color: #fff;
+        }
+    }
+}

@@ -5,10 +5,10 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * LiteWord ダッシュボードカスタマイズ
  *
  * コンポーネント構成:
- * - components/news-widget/  : お知らせウィジェット
- * - components/page-tree/    : 固定ページツリー（ポップアップ表示）
- * - css/                     : 共通CSS
- * - js/                      : 共通JS
+ * - components/news-widget/     : お知らせウィジェット
+ * - components/site-structure/  : サイト構造（ダッシュボード配下の専用ページ。旧page-treeモーダルの後継）
+ * - css/                        : 共通CSS
+ * - js/                         : 共通JS
  */
 
 define('LW_DASHBOARD_PATH', get_template_directory() . '/functions/dashboard_top/');
@@ -16,7 +16,7 @@ define('LW_DASHBOARD_URL', get_template_directory_uri() . '/functions/dashboard_
 
 // コンポーネント読み込み
 require_once LW_DASHBOARD_PATH . 'components/news-widget/news-widget.php';
-require_once LW_DASHBOARD_PATH . 'components/page-tree/page-tree.php';
+require_once LW_DASHBOARD_PATH . 'components/site-structure/site-structure.php';
 require_once LW_DASHBOARD_PATH . 'components/instructions/instructions.php';
 require_once LW_DASHBOARD_PATH . 'components/seo-check/seo-check.php';
 
@@ -51,14 +51,6 @@ function lw_dashboard_enqueue_assets($hook) {
         filemtime(LW_DASHBOARD_PATH . 'css/dashboard-common.css')
     );
 
-    // ページツリーCSS
-    wp_enqueue_style(
-        'lw-page-tree',
-        LW_DASHBOARD_URL . 'components/page-tree/page-tree.css',
-        array('lw-dashboard-common'),
-        filemtime(LW_DASHBOARD_PATH . 'components/page-tree/page-tree.css')
-    );
-
     // お知らせウィジェットCSS
     wp_enqueue_style(
         'lw-news-widget',
@@ -66,22 +58,6 @@ function lw_dashboard_enqueue_assets($hook) {
         array('lw-dashboard-common'),
         filemtime(LW_DASHBOARD_PATH . 'components/news-widget/news-widget.css')
     );
-
-    // ページツリーJS
-    wp_enqueue_script(
-        'lw-page-tree',
-        LW_DASHBOARD_URL . 'components/page-tree/page-tree.js',
-        array('jquery', 'jquery-ui-draggable', 'jquery-ui-droppable', 'jquery-ui-sortable'),
-        filemtime(LW_DASHBOARD_PATH . 'components/page-tree/page-tree.js'),
-        true
-    );
-
-    // JSに渡すデータ
-    wp_localize_script('lw-page-tree', 'lwPageTree', array(
-        'ajaxUrl' => admin_url('admin-ajax.php'),
-        'nonce' => wp_create_nonce('lw_page_tree_nonce'),
-        'editUrl' => admin_url('post.php?post=%d&action=edit')
-    ));
 
     // ウィザードJS
     wp_enqueue_script(
@@ -157,14 +133,16 @@ function lw_dashboard_sidebar_and_modals() {
         <div class="lw-sidebar-inner">
 
             <!-- サイト構造ボタン -->
-            <button type="button" class="lw-sidebar-btn" id="lw-page-tree-trigger">
+            <a href="<?php echo admin_url('admin.php?page=' . LW_SITE_STRUCTURE_MENU_SLUG); ?>" class="lw-sidebar-btn lw-sidebar-link">
                 <span class="dashicons dashicons-networking"></span>
                 <span class="lw-sidebar-btn-text">サイト構造</span>
-            </button>
-            <!-- マニュアルリンク -->
+            </a>
+            <!-- 動画マニュアル（クロラボへの案内ページ。実体は functions/manual/manual-link.php）
+                 スラッグは定数にせず文字列で持つ。manual/ は functions/index.php でこのファイルより
+                 後に読まれるため、定数にすると読み込み順が変わった瞬間に未定義定数で落ちる。 -->
             <a href="<?php echo admin_url('admin.php?page=lw-manual-viewer'); ?>" class="lw-sidebar-btn lw-sidebar-link">
-                <span class="dashicons dashicons-book-alt"></span>
-                <span class="lw-sidebar-btn-text">旧）操作マニュアル</span>
+                <span class="dashicons dashicons-video-alt3"></span>
+                <span class="lw-sidebar-btn-text">動画マニュアル</span>
             </a>
             <!-- 依頼一覧ボタン（プレミアム限定） -->
             <?php $is_premium = defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true; ?>
@@ -1084,7 +1062,7 @@ function lw_dashboard_sidebar_and_modals() {
                             <option value="check-requested">チェック依頼</option>
                         </select>
                     </div>
-                    <div class="lw-form-group" id="lw-tasklist-new-assigned-group">
+                    <div class="lw-form-group" id="lw-tasklist-new-assigned-group" style="display: none;">
                         <label for="lw-tasklist-new-assigned">担当者</label>
                         <select id="lw-tasklist-new-assigned" class="lw-form-select">
                             <option value="">選択してください</option>
@@ -1638,7 +1616,7 @@ function lw_dashboard_sidebar_and_modals() {
                                     <option value="completed">完了</option>
                                 </select>
                             </div>
-                            <div class="lw-instruction-add-status-item" id="lw-add-assigned-to-group">
+                            <div class="lw-instruction-add-status-item" id="lw-add-assigned-to-group" style="display: none;">
                                 <label for="lw-add-assigned-to">担当者</label>
                                 <select id="lw-add-assigned-to" class="lw-form-select lw-form-select-sm">
                                     <option value="">選択してください</option>
@@ -2222,8 +2200,6 @@ function lw_dashboard_sidebar_and_modals() {
             </div>
         </div>
     </div>
-
-    <?php lw_render_page_tree_modal(); ?>
 
     <?php
     // トライアル開始モーダル（ボタンが表示されている場合のみ）
@@ -2924,9 +2900,9 @@ function lw_ajax_update_page_info() {
 // Ajax: トップページを設定
 add_action('wp_ajax_lw_set_front_page', 'lw_ajax_set_front_page');
 function lw_ajax_set_front_page() {
-    // wizard または page_tree どちらのnonceでも受け付ける
+    // wizard または サイト構造ページ どちらのnonceでも受け付ける
     $nonce = isset($_POST['nonce']) ? sanitize_text_field($_POST['nonce']) : '';
-    if (!wp_verify_nonce($nonce, 'lw_wizard_nonce') && !wp_verify_nonce($nonce, 'lw_page_tree_nonce')) {
+    if (!wp_verify_nonce($nonce, 'lw_wizard_nonce') && !wp_verify_nonce($nonce, LW_SITE_STRUCTURE_NONCE_ACTION)) {
         wp_send_json_error('セキュリティチェックに失敗しました');
     }
 

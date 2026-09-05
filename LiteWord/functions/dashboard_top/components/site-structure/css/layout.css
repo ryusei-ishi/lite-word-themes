@@ -1,0 +1,325 @@
+/**
+ * LiteWord サイト構造ページ — 全体シェル・ツールバー
+ */
+
+:root {
+    --lw-primary-dark: #1e3a5f;
+    --lw-primary: #2d5a87;
+    --lw-primary-light: #3a7bd5;
+    --lw-accent: #00d2ff;
+    --lw-text-dark: #2d3748;
+    --lw-text: #4a5568;
+    --lw-text-light: #718096;
+    --lw-border: #e2e8f0;
+    --lw-bg-light: #f8fafc;
+    --lw-bg-blue-light: #f0f7ff;
+    --lw-radius: 16px;
+    --lw-radius-sm: 10px;
+    --lw-radius-xs: 8px;
+    --lw-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+    --lw-shadow-hover: 0 12px 40px rgba(0, 0, 0, 0.15);
+    --lw-transition: all 0.3s ease;
+}
+
+/* ===== WPの既定余白を外し、アプリが画面いっぱいに使えるようにする ===== */
+
+/* 🚨 WP本体の左パディングを外す。管理メニューとアプリの間に白い縦帯が出るのを防ぐ
+   （2026-09-05 Ryuichi 指摘）。#wpcontent の padding-left は PC 20px・782px以下 10px。
+   同じ値を負マージンで打ち消すのではなく 0 にしているのは、WP側が数値や分岐を変えても
+   追随できるようにするため。このCSSはサイト構造ページでしか読み込まれないので他画面に影響しない。 */
+#wpcontent {
+    padding-left: 0;
+}
+
+.lw-ss-wrap {
+    margin: 0;
+    padding: 0;
+}
+
+.lw-ss-app {
+    position: relative;
+
+    width: 100%;
+    height: calc(100vh - 32px);
+    min-height: 480px;
+
+    display: flex;
+    flex-direction: column;
+
+    background: var(--lw-bg-light);
+    border: 1px solid var(--lw-border);
+
+    /* 枠線の左右1pxずつが width:100% に足されて横スクロールバーが出るのを防ぐ */
+    box-sizing: border-box;
+    overflow: hidden;
+
+    @media screen and (max-width: 782px) {
+        height: calc(100vh - 46px);
+    }
+}
+
+/* ===== ツールバー ===== */
+.lw-ss-toolbar {
+    position: relative;
+
+    padding: 12px 20px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
+
+    background: linear-gradient(135deg, var(--lw-primary-dark) 0%, var(--lw-primary) 50%, var(--lw-primary-light) 100%);
+    color: #fff;
+}
+
+.lw-ss-title {
+    margin: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 10px;
+
+    color: #fff;
+    font-size: 18px;
+    font-weight: 600;
+
+    .dashicons {
+        width: 22px;
+        height: 22px;
+        font-size: 22px;
+    }
+}
+
+.lw-ss-toolbar-group {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+}
+
+.lw-ss-filters {
+    .lw-ss-filter-btn {
+        padding: 6px 12px;
+
+        display: flex;
+        align-items: center;
+        gap: 6px;
+
+        background: rgba(255, 255, 255, 0.12);
+        border: 1px solid transparent;
+        color: rgba(255, 255, 255, 0.6);
+
+        font-size: 12px;
+
+        border-radius: 20px;
+        cursor: pointer;
+        transition: var(--lw-transition);
+
+        &.active {
+            background: #fff;
+            color: var(--lw-primary-dark);
+        }
+
+        .dashicons {
+            width: 16px;
+            height: 16px;
+            font-size: 16px;
+        }
+    }
+
+    @media screen and (max-width: 960px) {
+        .lw-ss-filter-label {
+            display: none;
+        }
+    }
+}
+
+.lw-ss-zoom {
+    padding: 4px 8px;
+
+    background: rgba(255, 255, 255, 0.12);
+
+    border-radius: 20px;
+
+    button {
+        width: 26px;
+        height: 26px;
+
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        background: transparent;
+        border: none;
+        color: #fff;
+
+        border-radius: 50%;
+        cursor: pointer;
+
+        &:hover {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        /* width / height / font-size は3つ揃えて指定する（揃えないとグリフが上にズレる） */
+        .dashicons {
+            width: 16px;
+            height: 16px;
+
+            font-size: 16px;
+        }
+    }
+
+    #lw-ss-zoom-level {
+        min-width: 42px;
+
+        font-size: 12px;
+        text-align: center;
+    }
+}
+
+.lw-ss-btn {
+    padding: 7px 14px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    background: rgba(255, 255, 255, 0.12);
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    color: #fff;
+
+    font-size: 12px;
+    text-decoration: none;
+
+    border-radius: 20px;
+    cursor: pointer;
+    transition: var(--lw-transition);
+
+    &:hover {
+        background: rgba(255, 255, 255, 0.22);
+        color: #fff;
+    }
+
+    &.lw-ss-btn-primary {
+        background: #fff;
+        border-color: #fff;
+        color: var(--lw-primary-dark);
+
+        &:hover {
+            background: var(--lw-bg-blue-light);
+        }
+    }
+
+    /* width / height / font-size は3つ揃えて指定する（揃えないとグリフが上にズレる） */
+    .dashicons {
+        width: 16px;
+        height: 16px;
+
+        font-size: 16px;
+    }
+}
+
+.lw-ss-save-group {
+    display: none;
+
+    &.is-visible {
+        display: flex;
+    }
+}
+
+.lw-ss-zoom-hint {
+    margin-left: auto;
+
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 11px;
+
+    @media screen and (max-width: 1200px) {
+        display: none;
+    }
+}
+
+/* ===== トップページ未設定バナー ===== */
+.lw-ss-front-warning {
+    padding: 10px 20px;
+
+    display: none;
+    align-items: center;
+    gap: 10px;
+    flex-shrink: 0;
+
+    background: #fff8e1;
+    border-bottom: 1px solid #f0d98c;
+    color: #8a6d1a;
+
+    font-size: 13px;
+
+    &.is-visible {
+        display: flex;
+    }
+
+    select {
+        padding: 4px 8px;
+    }
+}
+
+.lw-ss-help-icon {
+    position: relative;
+
+    display: inline-flex;
+    cursor: pointer;
+
+    .lw-ss-help-tooltip {
+        position: absolute;
+        top: 24px;
+        left: 0;
+        z-index: 20;
+
+        width: 280px;
+        padding: 14px;
+
+        display: none;
+
+        background: #fff;
+        border: 1px solid var(--lw-border);
+        color: var(--lw-text);
+
+        font-size: 12px;
+        line-height: 1.6;
+
+        border-radius: var(--lw-radius-xs);
+        box-shadow: var(--lw-shadow);
+    }
+
+    &.active .lw-ss-help-tooltip {
+        display: block;
+    }
+}
+
+/* ===== 通知トースト ===== */
+.lw-ss-notice {
+    position: absolute;
+    top: 100%;
+    right: 20px;
+
+    margin-top: 8px;
+    padding: 8px 16px;
+
+    background: var(--lw-text-dark);
+    color: #fff;
+
+    font-size: 12px;
+
+    border-radius: var(--lw-radius-xs);
+    box-shadow: var(--lw-shadow);
+    opacity: 1;
+    transition: opacity 0.3s ease;
+
+    &.lw-ss-notice-error {
+        background: #c0392b;
+    }
+
+    &.is-leaving {
+        opacity: 0;
+    }
+}

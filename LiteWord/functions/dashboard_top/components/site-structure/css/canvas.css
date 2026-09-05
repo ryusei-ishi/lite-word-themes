@@ -1,0 +1,305 @@
+/**
+ * LiteWord サイト構造ページ — キャンバス・ノード・接続線
+ */
+
+/* ===== ビューポート（パン・ズームの窓） ===== */
+.lw-ss-viewport {
+    position: relative;
+
+    flex: 1;
+
+    background:
+        radial-gradient(circle, var(--lw-border) 1px, transparent 1px);
+    background-size: 24px 24px;
+
+    overflow: hidden;
+    cursor: grab;
+    touch-action: none;
+
+    &.is-panning {
+        cursor: grabbing;
+    }
+}
+
+.lw-ss-canvas {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 1px;
+    height: 1px;
+
+    transform-origin: 0 0;
+}
+
+.lw-ss-connections {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 1px;
+    height: 1px;
+
+    overflow: visible;
+    pointer-events: none;
+}
+
+.lw-ss-connection {
+    fill: none;
+    stroke: var(--lw-border);
+    stroke-width: 2px;
+
+    &.line-category {
+        stroke: #b794f4;
+    }
+
+    &.line-post {
+        stroke: #90cdf4;
+    }
+}
+
+/* ===== ノード ===== */
+.lw-ss-node {
+    position: absolute;
+
+    padding: 10px 14px;
+    width: 200px;
+
+    background: #fff;
+    border: 2px solid var(--lw-border);
+    color: var(--lw-text-dark);
+
+    border-radius: var(--lw-radius-sm);
+    box-shadow: var(--lw-shadow);
+    cursor: grab;
+    user-select: none;
+    touch-action: none;
+
+    &.is-front {
+        border-color: var(--lw-primary);
+        cursor: default;
+    }
+
+    &.is-posts-page {
+        border-color: #b794f4;
+    }
+
+    &.is-latest-posts {
+        border-style: dashed;
+        cursor: default;
+    }
+
+    &.is-selected {
+        border-color: var(--lw-accent);
+        box-shadow: 0 0 0 3px rgba(0, 210, 255, 0.25), var(--lw-shadow);
+    }
+
+    &.is-dragging {
+        z-index: 50;
+
+        box-shadow: var(--lw-shadow-hover);
+        cursor: grabbing;
+    }
+
+    &.is-drop-target {
+        border-color: #38a169;
+        background: #f0fff4;
+    }
+
+    &.status-draft {
+        border-style: dashed;
+        opacity: 0.75;
+    }
+
+    &.status-private,
+    &.status-pending {
+        opacity: 0.6;
+    }
+}
+
+.lw-ss-node-inner {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.lw-ss-node-title {
+    font-size: 13px;
+    font-weight: 600;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.lw-ss-node-slug {
+    color: var(--lw-text-light);
+    font-size: 11px;
+
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+}
+
+.lw-ss-node-status {
+    color: var(--lw-text-light);
+    font-size: 10px;
+}
+
+.lw-ss-node-count {
+    color: var(--lw-text-light);
+    font-size: 10px;
+}
+
+.lw-ss-badge {
+    position: absolute;
+    top: -9px;
+    left: 10px;
+
+    padding: 1px 8px;
+
+    background: var(--lw-primary);
+    color: #fff;
+
+    font-size: 10px;
+    font-weight: 700;
+
+    border-radius: 10px;
+
+    &.lw-ss-badge-latest {
+        background: var(--lw-text-light);
+    }
+
+    &.lw-ss-badge-posts {
+        background: #b794f4;
+    }
+
+    &.lw-ss-badge-category {
+        background: #9f7aea;
+    }
+
+    &.lw-ss-badge-post {
+        background: #4299e1;
+    }
+}
+
+.lw-ss-node-toggle {
+    position: absolute;
+    top: 50%;
+    right: -12px;
+
+    width: 24px;
+    height: 24px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: #fff;
+    border: 1px solid var(--lw-border);
+    color: var(--lw-text);
+
+    border-radius: 50%;
+    cursor: pointer;
+    transform: translateY(-50%);
+
+    /* 🚨 dashicons は width / height / font-size の3つを必ず揃えて指定する。
+       font-size だけ小さくすると箱は既定の20pxのまま残り、字は行の上端に置かれるため
+       グリフが (20 - font-size) / 2 px ぶん上にズレる（2026-09-05 Ryuichi 指摘の原因）。
+       3つを揃えると 箱＝行＝グリフ の高さが一致し、flexの中央寄せだけで真ん中に来る。 */
+    .dashicons {
+        width: 14px;
+        height: 14px;
+
+        font-size: 14px;
+    }
+
+    &:hover {
+        background: var(--lw-bg-blue-light);
+    }
+}
+
+/* ===== 新規ページ作成フォーム（右クリックで出す簡易フォーム） ===== */
+.lw-ss-create-form {
+    position: absolute;
+    z-index: 100;
+
+    width: 260px;
+    padding: 14px;
+
+    display: none;
+
+    background: #fff;
+    border: 1px solid var(--lw-border);
+
+    border-radius: var(--lw-radius-xs);
+    box-shadow: var(--lw-shadow-hover);
+
+    &.is-open {
+        display: block;
+    }
+}
+
+.lw-ss-create-form-row {
+    margin-bottom: 10px;
+
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+
+    label {
+        color: var(--lw-text);
+        font-size: 11px;
+    }
+
+    input,
+    select {
+        padding: 6px 8px;
+
+        border: 1px solid var(--lw-border);
+
+        font-size: 13px;
+
+        border-radius: var(--lw-radius-xs);
+    }
+}
+
+.lw-ss-create-form-actions {
+    display: flex;
+    gap: 8px;
+
+    .lw-ss-btn {
+        background: var(--lw-bg-light);
+        border-color: var(--lw-border);
+        color: var(--lw-text-dark);
+
+        &.lw-ss-btn-primary {
+            background: var(--lw-primary);
+            border-color: var(--lw-primary);
+            color: #fff;
+        }
+    }
+}
+
+/* ===== 読み込み中 ===== */
+.lw-ss-loading {
+    position: absolute;
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    gap: 10px;
+
+    background: rgba(248, 250, 252, 0.8);
+    color: var(--lw-text);
+
+    &.is-visible {
+        display: flex;
+    }
+}
