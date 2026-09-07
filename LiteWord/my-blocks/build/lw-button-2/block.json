@@ -11,6 +11,7 @@
 		"anchor": true
 	},
 	"aiHint": {
+    "notes": "🚨🚨 **このブロックの登録名はディレクトリ名と違う。**ディレクトリは lw-button-2 だが、block.json の name は **wdl/lw-button-02**（ゼロ埋め）。lw-button-1／lw-button-3 も同じで、163ブロックのうち食い違うのはこの3つだけ（2026-09-07 実測）。`wdl/lw-button-2` と書くと、貼った瞬間に「ブロックが壊れています」になる。",
 		"description": "アイコン付きリンクボタン。テキスト+矢印アイコン+URL。グラデーション背景対応",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["btnText", "btnUrl"],
