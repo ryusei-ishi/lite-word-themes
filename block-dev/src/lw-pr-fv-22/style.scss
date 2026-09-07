@@ -1,0 +1,244 @@
+/* FV 22 リード獲得（選んで進む入口）
+   ------------------------------------------------------------------
+   上＝見出しと説明／下＝「あてはまるものを選ぶ」入口カード。
+   淡い地色に濃い文字。18〜21 が濃い面なので、並べても見分けがつく。
+   🚨 高さのクラス（min-h-*）は .fv22_inner に付く。 */
+
+/* 固定ページの中で全幅に広げる（FVなので画面いっぱいに置く） */
+.lw_content_wrap.page {
+    .lw-pr-fv-22 {
+        margin-left: calc((100% - 100vw) / 2);
+        width: 100vw;
+    }
+    &:has(.first_content + .lw-pr-fv-22) {
+        .first_content {
+            display: none;
+        }
+    }
+}
+
+.lw-pr-fv-22 {
+    position: relative;
+    z-index: 10;
+    padding: 58px 30px;
+    max-width: 100vw;
+    background: var(--fv22-bg, #f3f0e9);
+
+    @media (max-width: 1000px) {
+        padding: 46px 24px;
+    }
+    @media (max-width: 700px) {
+        padding: 34px 18px 38px;
+    }
+
+    /* 背景を写真にしたときだけ出る層 */
+    .bg_filter {
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: 1;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        picture,
+        img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .bg_filter_inner {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: 2;
+            width: 100%;
+            height: 100%;
+            background: var(--fv22-filter-color, #f3f0e9);
+            opacity: var(--fv22-filter-opacity, 0.88);
+        }
+    }
+
+    .fv22_inner {
+        position: relative;
+        z-index: 3;
+        margin: 0 auto;
+        width: 100%;
+        max-width: var(--fv22-max-width, 1080px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    /* ── 見出しまわり ───────────────────────────── */
+    .lead {
+        text-align: center;
+    }
+
+    .eyebrow {
+        margin: 0 0 14px;
+        color: var(--fv22-eyebrow-color, #2e6b52);
+        font-size: 14px;
+        font-weight: 700;
+        letter-spacing: 0.1em;
+        line-height: 1.6;
+        @media (max-width: 700px) {
+            margin-bottom: 10px;
+            font-size: 13px;
+        }
+    }
+
+    .main_ttl {
+        margin: 0 0 16px;
+        color: var(--fv22-title-color, #2b2a26);
+        font-size: var(--fv22-title-size-pc, 42px);
+        font-weight: var(--fv22-title-weight, 700);
+        line-height: 1.36;
+        @media (max-width: 700px) {
+            margin-bottom: 12px;
+            font-size: var(--fv22-title-size-sp, 28px);
+        }
+    }
+
+    .description {
+        margin: 0 auto;
+        max-width: 720px;
+        color: var(--fv22-description-color, #4c4740);
+        font-size: 16px;
+        line-height: 1.9;
+        @media (max-width: 700px) {
+            font-size: 15px;
+            text-align: left;
+        }
+    }
+
+    /* ── 選択肢のカード ─────────────────────────── */
+    .choice_list {
+        margin-top: 34px;
+        padding-top: 12px;   /* 札がカードの上にはみ出すぶんの逃がし */
+        display: grid;
+        grid-template-columns: repeat(var(--fv22-cols-pc, 3), 1fr);
+        gap: 16px;
+        @media (max-width: 900px) {
+            grid-template-columns: repeat(2, 1fr);
+        }
+        @media (max-width: 700px) {
+            margin-top: 26px;
+            grid-template-columns: repeat(var(--fv22-cols-sp, 1), 1fr);
+            gap: 12px;
+        }
+    }
+
+    .choice {
+        position: relative;
+        padding: 22px 44px 22px 22px;
+        border: 1px solid var(--fv22-card-border, #ddd6c8);
+        border-radius: var(--fv22-card-radius, 8px);
+        background: var(--fv22-card-bg, #fff);
+        display: flex;
+        flex-direction: column;
+        gap: 7px;
+        text-decoration: none;
+        box-shadow: 0 1px 2px rgba(0, 0, 0, 0.04);
+        transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
+
+        /* 札を付けた1枚だけ枠を主色にして、どれから見ればよいかを示す */
+        &:has(.c_badge) {
+            border-color: var(--fv22-card-arrow, #2e6b52);
+        }
+
+        /* 右端の「>」。文字ではなく線で描くので読み上げに乗らない */
+        &::after {
+            position: absolute;
+            top: 50%;
+            right: 20px;
+            width: 9px;
+            height: 9px;
+            border-top: 2px solid var(--fv22-card-arrow, #2e6b52);
+            border-right: 2px solid var(--fv22-card-arrow, #2e6b52);
+            content: '';
+            transform: translateY(-50%) rotate(45deg);
+        }
+
+        &:hover {
+            border-color: var(--fv22-card-arrow, #2e6b52);
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.08);
+            transform: translateY(-2px);
+        }
+
+        @media (max-width: 700px) {
+            padding: 18px 40px 18px 18px;
+            min-height: 88px;   /* 指で押せる大きさを確保する */
+            justify-content: center;
+        }
+    }
+
+    .c_badge {
+        position: absolute;
+        top: -11px;
+        left: 18px;
+        padding: 3px 10px;
+        border-radius: 999px;
+        background: var(--fv22-badge-bg, #2e6b52);
+        color: var(--fv22-badge-text, #fff);
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.04em;
+        line-height: 1.6;
+        white-space: nowrap;
+    }
+
+    .c_num {
+        color: var(--fv22-card-num, #2e6b52);
+        font-size: 13px;
+        font-weight: 700;
+        letter-spacing: 0.14em;
+        line-height: 1;
+    }
+
+    .c_body {
+        display: flex;
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .c_ttl {
+        color: var(--fv22-card-title, #2b2a26);
+        font-size: 18px;
+        font-weight: 700;
+        line-height: 1.5;
+        @media (max-width: 700px) {
+            font-size: 17px;
+        }
+    }
+
+    .c_sub {
+        color: var(--fv22-card-sub, #6a635a);
+        font-size: 13px;
+        line-height: 1.75;
+    }
+
+    /* ── いちばん下の1行 ────────────────────────── */
+    .note {
+        margin: 22px 0 0;
+        color: var(--fv22-note-color, #4c4740);
+        font-size: 14px;
+        line-height: 1.9;
+        text-align: center;
+        @media (max-width: 700px) {
+            margin-top: 18px;
+            font-size: 13px;
+        }
+        .note_link {
+            margin-left: 8px;
+            color: var(--fv22-note-link, #2e6b52);
+            font-weight: 700;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            @media (max-width: 700px) {
+                margin-left: 0;
+                display: block;
+            }
+        }
+    }
+}

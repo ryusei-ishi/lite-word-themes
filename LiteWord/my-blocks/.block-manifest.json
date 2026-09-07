@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generatedAt": "2026-09-07T05:28:01.147Z",
+  "generatedAt": "2026-09-07T08:03:38.693Z",
   "blocks": [
     "br-on-none",
     "cta-1",
@@ -83,6 +83,8 @@
     "lw-pr-fv-19",
     "lw-pr-fv-20",
     "lw-pr-fv-21",
+    "lw-pr-fv-22",
+    "lw-pr-fv-23",
     "lw-pr-goodbad-1",
     "lw-pr-image-0",
     "lw-pr-image-1",
@@ -164,5 +166,5 @@
     "shin-gas-station-01-step-1",
     "solution-1"
   ],
-  "totalBlocks": 161
+  "totalBlocks": 163
 }

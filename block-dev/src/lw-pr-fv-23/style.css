@@ -1,0 +1,292 @@
+@charset "UTF-8";
+/* FV 23 リード獲得（QRコードで登録）
+   ------------------------------------------------------------------
+   左＝登録するとできること＋大きな登録ボタン／右＝白いカードにQRコード。
+   パソコンの人はQRを読み、スマホの人はボタンを押す。
+   🚨 高さのクラス（min-h-*）は .fv23_inner に付く。 */
+/* 固定ページの中で全幅に広げる（FVなので画面いっぱいに置く） */
+.lw_content_wrap.page .lw-pr-fv-23 {
+  margin-left: calc((100% - 100vw) / 2);
+  width: 100vw;
+}
+.lw_content_wrap.page:has(.first_content + .lw-pr-fv-23) .first_content {
+  display: none;
+}
+
+.lw-pr-fv-23 {
+  position: relative;
+  z-index: 10;
+  padding: 56px 30px;
+  max-width: 100vw;
+  background: var(--fv23-bg, #1c4532);
+  /* 背景を写真にしたときだけ出る層 */
+  /* ── 左：言い分 ─────────────────────────────── */
+  /* ── 右：QRコードのカード ───────────────────── */
+  /* QRコードだけが無いとき（アカウント名だけのカード）は上の余白を詰める */
+  /* スマホでは自分の画面のQRを読み取れないので、既定では隠す */
+}
+@media (max-width: 1000px) {
+  .lw-pr-fv-23 {
+    padding: 46px 24px;
+  }
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-23 {
+    padding: 34px 18px 38px;
+  }
+}
+.lw-pr-fv-23 .bg_filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.lw-pr-fv-23 .bg_filter picture,
+.lw-pr-fv-23 .bg_filter img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.lw-pr-fv-23 .bg_filter .bg_filter_inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: var(--fv23-filter-color, #1c4532);
+  opacity: var(--fv23-filter-opacity, 0.88);
+}
+.lw-pr-fv-23 .fv23_inner {
+  position: relative;
+  z-index: 3;
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--fv23-max-width, 1120px);
+  display: grid;
+  grid-template-columns: 1fr var(--fv23-card-width, 340px);
+  gap: 52px;
+  align-items: center;
+}
+@media (max-width: 1100px) {
+  .lw-pr-fv-23 .fv23_inner {
+    gap: 34px;
+  }
+}
+@media (max-width: 900px) {
+  .lw-pr-fv-23 .fv23_inner {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+}
+.lw-pr-fv-23 .eyebrow {
+  margin: 0 0 14px;
+  color: var(--fv23-eyebrow-color, #9fd9b8);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  line-height: 1.6;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-23 .eyebrow {
+    margin-bottom: 10px;
+    font-size: 13px;
+  }
+}
+.lw-pr-fv-23 .main_ttl {
+  margin: 0 0 16px;
+  color: var(--fv23-title-color, #fff);
+  font-size: var(--fv23-title-size-pc, 40px);
+  font-weight: var(--fv23-title-weight, 700);
+  line-height: 1.36;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-23 .main_ttl {
+    margin-bottom: 12px;
+    font-size: var(--fv23-title-size-sp, 27px);
+  }
+}
+.lw-pr-fv-23 .description {
+  margin: 0 0 24px;
+  color: var(--fv23-description-color, #d5e7dc);
+  font-size: 16px;
+  line-height: 1.9;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-23 .description {
+    margin-bottom: 20px;
+    font-size: 15px;
+  }
+}
+.lw-pr-fv-23 .benefit_list {
+  margin: 0 0 28px;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 11px;
+  /* チェック印。<em> を使うとテーマの蛍光ペンが当たるので <i> にしてある */
+}
+.lw-pr-fv-23 .benefit_list li {
+  padding: 0;
+  color: var(--fv23-benefit-color, #eaf4ee);
+  font-size: 15px;
+  line-height: 1.7;
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+}
+.lw-pr-fv-23 .benefit_list li::before {
+  content: none; /* テーマ側の点を消す */
+}
+.lw-pr-fv-23 .benefit_list i {
+  margin-top: 2px;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%;
+  background: var(--fv23-benefit-mark-bg, #9fd9b8);
+  color: var(--fv23-benefit-mark, #1c4532);
+  font-size: 12px;
+  font-style: normal;
+  font-weight: 700;
+  line-height: 20px;
+  text-align: center;
+  flex-shrink: 0;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-23 .benefit_list {
+    margin-bottom: 22px;
+    gap: 9px;
+  }
+  .lw-pr-fv-23 .benefit_list li {
+    font-size: 14px;
+  }
+}
+.lw-pr-fv-23 .cta_btn {
+  padding: 17px 34px;
+  min-width: 280px;
+  border-radius: var(--fv23-cta-radius, 8px);
+  background: var(--fv23-cta-bg, #fff);
+  color: var(--fv23-cta-text, #0d5c36);
+  font-size: 18px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.2);
+}
+.lw-pr-fv-23 .cta_btn small {
+  margin-top: 3px;
+  display: block;
+  color: var(--fv23-cta-sub, #2f6b4d);
+  font-size: 11px;
+  font-weight: 400;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-23 .cta_btn {
+    padding: 16px 20px;
+    display: block;
+    font-size: 17px;
+  }
+}
+.lw-pr-fv-23 .note {
+  margin: 14px 0 0;
+  color: var(--fv23-note-color, #b8d3c4);
+  font-size: 13px;
+  line-height: 1.8;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-23 .note {
+    font-size: 12px;
+  }
+}
+.lw-pr-fv-23 .join_card {
+  padding: 26px 22px 22px;
+  border: 1px solid var(--fv23-card-border, #d7e4dc);
+  border-radius: var(--fv23-card-radius, 12px);
+  background: var(--fv23-card-bg, #fff);
+  color: var(--fv23-card-text, #3a4640);
+  text-align: center;
+}
+@media (max-width: 900px) {
+  .lw-pr-fv-23 .join_card {
+    margin: 0 auto;
+    width: 100%;
+    max-width: var(--fv23-card-width, 340px);
+  }
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-23 .join_card {
+    padding: 20px 18px 18px;
+  }
+}
+.lw-pr-fv-23 .qr_box {
+  margin: 0 auto;
+  width: var(--fv23-qr-size, 180px);
+  max-width: 100%;
+  display: block;
+}
+.lw-pr-fv-23 .qr_box img {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+.lw-pr-fv-23 .qr_caption {
+  margin: 12px 0 0;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.lw-pr-fv-23 .account {
+  margin: 14px 0 0;
+  padding-top: 12px;
+  border-top: 1px solid var(--fv23-card-border, #d7e4dc);
+  font-size: 15px;
+  font-weight: 700;
+  line-height: 1.6;
+  word-break: break-all;
+}
+.lw-pr-fv-23 .account b {
+  margin-right: 8px;
+  padding: 2px 8px;
+  border-radius: 4px;
+  background: var(--fv23-card-text, #3a4640);
+  color: var(--fv23-card-bg, #fff);
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  display: inline-block;
+  vertical-align: 2px;
+}
+.lw-pr-fv-23 .join_card > .account:first-child {
+  margin-top: 0;
+  padding-top: 0;
+  border-top: 0;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-23.qr_off_sp {
+    /* QRが消えるので、アカウント行の上の区切り線も消す */
+    /* QRもアカウント名も無いなら、白い箱だけが残らないように消す */
+  }
+  .lw-pr-fv-23.qr_off_sp .qr_box,
+  .lw-pr-fv-23.qr_off_sp .qr_caption {
+    display: none;
+  }
+  .lw-pr-fv-23.qr_off_sp .join_card {
+    padding: 14px 18px;
+  }
+  .lw-pr-fv-23.qr_off_sp .account {
+    margin-top: 0;
+    padding-top: 0;
+    border-top: 0;
+  }
+  .lw-pr-fv-23.qr_off_sp .join_card:not(:has(.account)) {
+    display: none;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

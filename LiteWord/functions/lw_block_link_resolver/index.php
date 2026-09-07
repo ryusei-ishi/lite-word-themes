@@ -55,6 +55,8 @@ function lw_link_resolver_blocks() {
 		'wdl/lw-pr-fv-19',                     // FV 19 リード獲得（電話とフォームの二択）
 		'wdl/lw-pr-fv-20',                     // FV 20 リード獲得（実績の数字つき）
 		'wdl/lw-pr-fv-21',                     // FV 21 リード獲得（もらえる物と締切）
+		'wdl/lw-pr-fv-22',                     // FV 22 リード獲得（選んで進む入口）
+		'wdl/lw-pr-fv-23',                     // FV 23 リード獲得（QRコードで登録）
 		'wdl/lw-pr-image-0',                   // 画像 00
 		'wdl/lw-pr-image-1',                   // PR画像グリッド 01
 		'wdl/lw-pr-waku-1',                    // 枠 01

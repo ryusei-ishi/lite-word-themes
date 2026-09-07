@@ -1,0 +1,25 @@
+@import '../editor-height';
+
+.wp-block {
+    &:has(> .lw-pr-fv-23) {
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+}
+
+/* 編集画面だけ：QRコードの画像がまだ入っていないことを見せる。
+   表(save)には出さない（お客様のページに点線の箱を残さないため）。 */
+.lw-pr-fv-23 .qr_box.is_empty {
+    padding: 0 10px;
+    height: var(--fv23-qr-size, 180px);
+    border: 2px dashed #b7c8bf;
+    border-radius: 6px;
+    color: #6a7d73;
+    font-size: 12px;
+    line-height: 1.6;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+}

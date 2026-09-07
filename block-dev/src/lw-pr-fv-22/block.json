@@ -1,0 +1,94 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-fv-22",
+	"version": "1.0.0",
+	"title": "FV 22 リード獲得（選んで進む入口）",
+	"category": "lw-firstview",
+	"icon": "list-view",
+	"editorScript": "file:./lw-pr-fv-22.js",
+	"aiHint": {
+		"description": "リード獲得ページ専用のFV。見出しの下に「あてはまるものを選ぶだけ」の入口カードを2〜4枚ならべ、1枚ずつ別のページへ飛ばせる。いきなり申し込ませず、まず選ばせるので最初の一歩が軽い。淡い地色に濃い文字なので、他のリード獲得FVが暗い面なのに対して明るく見える。お悩み別の入口・診断・見積りの種類分け・お問い合わせの振り分けに使う",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"eyebrow",
+			"mainTitle",
+			"description",
+			"choiceItems",
+			"noteText",
+			"noteLinkText"
+		],
+		"imageAttributes": [
+			"imageUrlPc",
+			"imageUrlSp"
+		],
+		"notes": [
+			"choiceItems は { num, title, sub, badge, url, linkType, linkId } の並び。title が選択肢の言葉、sub はその下の一言、badge は「いちばん多いご相談」のような小さな札（空なら出ない）。2〜4枚が読みやすい。",
+			"🚨 選択肢は「利用者の言葉」で書く。「外壁塗装」ではなく「外壁の色を塗り替えたい」。自分の商品名を並べると選べない。",
+			"num は 01・02 のような通し番号。番号が要らないときは showNum を false にすると、その分だけ文字が大きく見える。",
+			"columnsPc は既定 3。選択肢が4枚のときは 2 にすると1枚あたりが広くなって読みやすい。columnsSp は既定 1（スマホで横に2枚並べると文が折り返して読めない）。",
+			"飛び先は url に直接書くほか、LinkPicker で固定ページを選べる。ページを選ぶと後からスラッグを変えてもリンクが古くならない。",
+			"背景は既定で「色」。写真にしたいときは backgroundType を image にして imageUrlPc を入れる。そのときは文字の色（titleColor / descriptionColor）を明るい色に変えること（既定は濃い文字なので写真の上では読めない）。",
+			"noteText は「どれか分からない方は…」の1行。選べなかった人の逃げ道になるので、消さずに残すほうが問い合わせは増える。",
+			"🚨 自分から全幅になる背景ブロック。次の段も全幅の帯なら、あいだにスペーサーを置かない。"
+		]
+	},
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"backgroundType": { "type": "string", "default": "color" },
+		"bgColor": { "type": "string", "default": "#f3f0e9" },
+		"imageUrlPc": { "type": "string", "default": "" },
+		"imageUrlSp": { "type": "string", "default": "" },
+		"imageAlt": { "type": "string", "default": "" },
+		"filterColor": { "type": "string", "default": "#f3f0e9" },
+		"filterOpacity": { "type": "number", "default": 0.88 },
+		"minHeightPc": { "type": "string", "default": "min-h-pc-560px" },
+		"minHeightTb": { "type": "string", "default": "min-h-tb-480px" },
+		"minHeightSp": { "type": "string", "default": "" },
+		"maxWidth": { "type": "number", "default": 1080 },
+		"showEyebrow": { "type": "boolean", "default": true },
+		"eyebrow": { "type": "string", "default": "選ぶだけ・30秒" },
+		"eyebrowColor": { "type": "string", "default": "#2e6b52" },
+		"headingLevel": { "type": "number", "default": 1 },
+		"mainTitle": { "type": "string", "default": "いちばん近いのは<br>どれですか？" },
+		"titleColor": { "type": "string", "default": "#2b2a26" },
+		"titleFontWeight": { "type": "string", "default": "700" },
+		"titleFont": { "type": "string", "default": "" },
+		"titleFontSizePc": { "type": "number", "default": 42 },
+		"titleFontSizeSp": { "type": "number", "default": 28 },
+		"description": { "type": "string", "default": "選んでいただくと、そのご相談に合ったご案内へ進みます。ご相談は無料で、その場でお断りいただけます。" },
+		"descriptionColor": { "type": "string", "default": "#4c4740" },
+		"showNum": { "type": "boolean", "default": true },
+		"choiceItems": {
+			"type": "array",
+			"default": [
+				{ "num": "01", "title": "はじめて相談します", "sub": "何から決めればよいかを、一緒に整理します", "badge": "いちばん多いご相談", "url": "", "linkType": "url", "linkId": "" },
+				{ "num": "02", "title": "見積りがほしい", "sub": "現地を見てから、金額の根拠までお渡しします", "badge": "", "url": "", "linkType": "url", "linkId": "" },
+				{ "num": "03", "title": "いまの見積りと比べたい", "sub": "お手元の書類を見ながらご説明します", "badge": "", "url": "", "linkType": "url", "linkId": "" }
+			]
+		},
+		"columnsPc": { "type": "number", "default": 3 },
+		"columnsSp": { "type": "number", "default": 1 },
+		"cardBgColor": { "type": "string", "default": "#ffffff" },
+		"cardBorderColor": { "type": "string", "default": "#ddd6c8" },
+		"cardTitleColor": { "type": "string", "default": "#2b2a26" },
+		"cardSubColor": { "type": "string", "default": "#6a635a" },
+		"cardNumColor": { "type": "string", "default": "#2e6b52" },
+		"cardArrowColor": { "type": "string", "default": "#2e6b52" },
+		"cardBadgeBgColor": { "type": "string", "default": "#2e6b52" },
+		"cardBadgeTextColor": { "type": "string", "default": "#ffffff" },
+		"cardBorderRadius": { "type": "number", "default": 8 },
+		"showNote": { "type": "boolean", "default": true },
+		"noteText": { "type": "string", "default": "どれか分からないときは、そのままご相談ください。" },
+		"noteLinkText": { "type": "string", "default": "とりあえず話を聞いてみる" },
+		"noteColor": { "type": "string", "default": "#4c4740" },
+		"noteLinkColor": { "type": "string", "default": "#2e6b52" },
+		"noteUrl": { "type": "string", "default": "" },
+		"noteLinkType": { "type": "string", "default": "url" },
+		"notePageId": { "type": "number", "default": 0 },
+		"noteCategoryId": { "type": "number", "default": 0 }
+	},
+	"no": 22
+}

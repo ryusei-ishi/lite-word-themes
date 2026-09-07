@@ -102,6 +102,8 @@ function wdl_get_premium_blocks() {
 		"lw-pr-fv-19",
 		"lw-pr-fv-20",
 		"lw-pr-fv-21",
+		"lw-pr-fv-22",
+		"lw-pr-fv-23",
 		"lw-pr-step-7",
 		"lw-pr-step-8",
 		"lw-pr-list-5",
