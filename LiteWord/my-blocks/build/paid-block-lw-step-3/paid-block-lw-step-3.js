@@ -43,6 +43,33 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 var fontOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontOptionsArr)();
 var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOptionsArr)();
 
+/**
+ * STEP番号の「列の幅」と「文字の大きさ」をブロック本体の CSS 変数として出す。
+ * ------------------------------------------------------------
+ * 🚨 **0 のときは何も出さない。** 既定値のままなら save() の出力が
+ *    これまでと1文字も変わらないので、既存ページが「問題が含まれています」にならない。
+ *    （新しい属性を足すときの決まり → reference/block-change-safety.md）
+ * 🚨 値は必ず**単位つきの文字列**で渡す。数値のまま渡すと WordPress の書き出しが
+ *    カスタムプロパティにも px を足してしまい（`--step3-no-w:3.2px`）、無効値になる。
+ *
+ * なぜ要るか（2026-09-07 Ryuichi 指摘）:
+ *   番号の列は 2.4em 固定・番号の文字は 1.4em 固定で「01」「02」の2桁専用だった。
+ *   「10時」「STEP1」のような3文字以上を入れると、タイルからはみ出して
+ *   右の白地の見出しに重なる。**スマホではさらに崩れる。**
+ */
+var noStyle = function noStyle(_ref) {
+  var noWidthEm = _ref.noWidthEm,
+    noFontSizeEm = _ref.noFontSizeEm;
+  var style = {};
+  if (noWidthEm) {
+    style['--step3-no-w'] = "".concat(noWidthEm, "em");
+  }
+  if (noFontSizeEm) {
+    style['--step3-no-fs'] = "".concat(noFontSizeEm, "em");
+  }
+  return Object.keys(style).length ? style : undefined;
+};
+
 /* ----------------------------------------------------------
  * ブロック登録
  * -------------------------------------------------------- */
@@ -51,15 +78,17 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
   /* ======================================================
    * 1) エディタ
    * ==================================================== */
-  edit: function edit(_ref) {
-    var attributes = _ref.attributes,
-      setAttributes = _ref.setAttributes;
+  edit: function edit(_ref2) {
+    var attributes = _ref2.attributes,
+      setAttributes = _ref2.setAttributes;
     var bgGradient = attributes.bgGradient,
       ulMaxWidth = attributes.ulMaxWidth,
       fontSizeClass = attributes.fontSizeClass,
       fontNo = attributes.fontNo,
       fontWeightNo = attributes.fontWeightNo,
       colorNo = attributes.colorNo,
+      noWidthEm = attributes.noWidthEm,
+      noFontSizeEm = attributes.noFontSizeEm,
       titleTag = attributes.titleTag,
       fontH3 = attributes.fontH3,
       fontWeightH3 = attributes.fontWeightH3,
@@ -96,7 +125,8 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       });
     };
     var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
-      className: "paid-block-lw-step-3 ".concat(fontSizeClass)
+      className: "paid-block-lw-step-3 ".concat(fontSizeClass),
+      style: noStyle(attributes)
     });
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u5168\u4F53",
@@ -165,6 +195,30 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
           colorNo: c
         });
       }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u756A\u53F7\u306E\u5217\u306E\u5E45",
+      value: noWidthEm,
+      onChange: function onChange(v) {
+        return setAttributes({
+          noWidthEm: v
+        });
+      },
+      min: 0,
+      max: 6,
+      step: 0.1,
+      help: "0 \u3067\u304A\u307E\u304B\u305B\uFF082.4\uFF09\u3002\u300C01\u300D\u300C02\u300D\u306E2\u6841\u306A\u3089\u305D\u306E\u307E\u307E\u3067\u5927\u4E08\u592B\u3067\u3059\u3002\u300C10\u6642\u300D\u300CSTEP1\u300D\u306E\u3088\u3046\u306B3\u6587\u5B57\u4EE5\u4E0A\u5165\u308C\u308B\u3068\u304D\u306F 3.2 \u524D\u5F8C\u307E\u3067\u5E83\u3052\u3066\u304F\u3060\u3055\u3044\u3002"
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u756A\u53F7\u306E\u6587\u5B57\u306E\u5927\u304D\u3055",
+      value: noFontSizeEm,
+      onChange: function onChange(v) {
+        return setAttributes({
+          noFontSizeEm: v
+        });
+      },
+      min: 0,
+      max: 2.5,
+      step: 0.05,
+      help: "0 \u3067\u304A\u307E\u304B\u305B\uFF081.4\uFF09\u3002\u6587\u5B57\u3060\u3051\u5C0F\u3055\u304F\u3057\u3066\u3082\u5217\u306F\u72ED\u3044\u307E\u307E\u306A\u306E\u3067\u3001\u4E0A\u306E\u300C\u5217\u306E\u5E45\u300D\u3068\u4E00\u7DD2\u306B\u8ABF\u6574\u3057\u3066\u304F\u3060\u3055\u3044\u3002"
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: "\u30BF\u30A4\u30C8\u30EB\u306E\u66F8\u5F0F",
       initialOpen: false
@@ -311,14 +365,16 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
   /* ======================================================
    * 2) フロント出力
    * ==================================================== */
-  save: function save(_ref2) {
-    var attributes = _ref2.attributes;
+  save: function save(_ref3) {
+    var attributes = _ref3.attributes;
     var bgGradient = attributes.bgGradient,
       ulMaxWidth = attributes.ulMaxWidth,
       fontSizeClass = attributes.fontSizeClass,
       fontNo = attributes.fontNo,
       fontWeightNo = attributes.fontWeightNo,
       colorNo = attributes.colorNo,
+      noWidthEm = attributes.noWidthEm,
+      noFontSizeEm = attributes.noFontSizeEm,
       titleTag = attributes.titleTag,
       fontH3 = attributes.fontH3,
       fontWeightH3 = attributes.fontWeightH3,
@@ -332,7 +388,8 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
       return str.trim() !== '';
     };
     var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-      className: "paid-block-lw-step-3 ".concat(fontSizeClass)
+      className: "paid-block-lw-step-3 ".concat(fontSizeClass),
+      style: noStyle(attributes)
     });
     return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("ul", {
       className: "lw-step-2__inner",
@@ -382,8 +439,8 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
   deprecated: [{
     apiVersion: _block_json__WEBPACK_IMPORTED_MODULE_6__.apiVersion,
     attributes: _block_json__WEBPACK_IMPORTED_MODULE_6__.attributes,
-    save: function save(_ref3) {
-      var attributes = _ref3.attributes;
+    save: function save(_ref4) {
+      var attributes = _ref4.attributes;
       var bgGradient = attributes.bgGradient,
         ulMaxWidth = attributes.ulMaxWidth,
         fontSizeClass = attributes.fontSizeClass,
@@ -1151,7 +1208,7 @@ module.exports = window["wp"]["components"];
   \*********************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-lw-step-3","version":"1.0.0","title":"step 03","category":"lw-step","icon":"lightbulb","supports":{"anchor":true},"editorScript":"file:./paid-block-lw-step-3.js","aiHint":{"description":"番号付き縦型ステップ。01形式番号+タイトル+説明。背景色付き。採用フロー・手順に","excludeFromAutoSelect":false,"contentAttributes":["contents"],"imageAttributes":[]},"no":3,"attributes":{"bgGradient":{"type":"string","default":"var(--color-main)"},"ulMaxWidth":{"type":"number","default":1080},"fontSizeClass":{"type":"string","default":"font_size_m"},"fontNo":{"type":"string","default":"Murecho"},"fontWeightNo":{"type":"string","default":"600"},"colorNo":{"type":"string","default":""},"titleTag":{"type":"string","default":"h3"},"fontH3":{"type":"string","default":""},"fontWeightH3":{"type":"string","default":""},"colorH3":{"type":"string","default":""},"fontP":{"type":"string","default":""},"fontWeightP":{"type":"string","default":""},"colorP":{"type":"string","default":""},"contents":{"type":"array","source":"query","selector":".lw-step-2__li","query":{"no":{"type":"string","source":"html","selector":".lw-step-2__li_no"},"title":{"type":"string","source":"html","selector":".lw-step-2__li_title"},"text":{"type":"string","source":"html","selector":".lw-step-2__li_text"}},"default":[{"no":"01","title":"応募","text":"応募フォームより必要事項を入力し、送信してください。応募内容を確認し、追って担当者よりご連絡いたします。"},{"no":"02","title":"書類選考","text":"ご応募いただいた内容をもとに、書類選考を行います。結果は1週間以内にメールにてお知らせいたします。"},{"no":"03","title":"面接","text":"書類選考に通過された方には、担当者による面接を実施します。面接日時はご相談の上、決定いたします。"}]}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-lw-step-3","version":"1.0.0","title":"step 03","category":"lw-step","icon":"lightbulb","supports":{"anchor":true},"editorScript":"file:./paid-block-lw-step-3.js","aiHint":{"description":"行型の番号つきステップ。左にサイト色の番号タイル、右に見出しと説明。段数が多い手続き（5段以上）でも縦に積めて読みやすい。ご利用までの流れ・申し込みの手順・採用フローに","excludeFromAutoSelect":false,"contentAttributes":["contents"],"imageAttributes":[],"notes":"1ブロックで全段を持つ（contents 配列）。lw-pr-step-8 の「1ブロック＝1段」とは逆なので、段を増やすときはブロックを足すのではなく contents を足す。見た目は**行型** — 左にサイト色の番号タイル、右に白地の見出しと説明。1行ずつ横に長いので、**段数が多い手続き（5段以上）でも縦に積めて読みやすい**。丸番号を3列に並べる lw-pr-step-7 とは向きが違う。🚨 bgGradient は名前と違って「背景のグラデーション」ではない。save() が **li の border-color** と **番号タイルの background** の2か所に同じ値を書く。既定が var(--color-main) なので**ページのメインカラーに自動で追従する。色は指定しなくてよい**。🚨 文字の大きさは fontSizeClass（font_size_s / m / l）**1つで全部決まる**。見出しは 1em、説明は 0.71em の相対値なので、見出しだけ小さくすることはできない。font_size_m なら PC で 見出し24px・説明17px、800px以下 22/15.6、**550px以下 18/12.8**。🚨 スマホで説明が 12.8px まで落ちるので、**1段の説明は60字まで**にする。🚨 番号の列は 2.4em 固定（font_size_m の PC で約58px）。**「01」「02」の2桁向け**で、「STEP1」のような文字を入れると溢れる。説明は white-space: pre-wrap なので改行がそのまま効く（br は要らない）。contents は [{ no, title, text }] の3つだけ。**写真は入らない**（写真つきの流れにしたいなら lw-pr-content-8）。titleTag の既定は h3。セクション見出し（h2）の下に置くならそのままでよい。ulMaxWidth（既定1080）で内側の幅を決める。自前で margin: 32px 0（800px以下は 24px）を持つので、前後にスペーサーを足さない。🚨 **番号の列は既定 2.4em・番号の文字は 1.4em で、「01」「02」の2桁向け**。「10時」「STEP1」のような3文字以上を入れると、タイルからはみ出して右の白地に重なる（2026-09-07 Ryuichi 指摘）。→ **noWidthEm（列の幅）と noFontSizeEm（番号の文字）で変えられる**（サイドバー「STEP番号の書式」）。どちらも **0 のときは従来のまま**で、save() の出力も1文字も変わらない。3文字入れるなら noWidthEm 3.2 / noFontSizeEm 0.95 あたりが目安。⚠️ 文字だけ小さくしても列幅は変わらないので、**必ず2つセットで**調整すること。"},"no":3,"attributes":{"bgGradient":{"type":"string","default":"var(--color-main)"},"ulMaxWidth":{"type":"number","default":1080},"fontSizeClass":{"type":"string","default":"font_size_m"},"fontNo":{"type":"string","default":"Murecho"},"fontWeightNo":{"type":"string","default":"600"},"colorNo":{"type":"string","default":""},"noWidthEm":{"type":"number","default":0},"noFontSizeEm":{"type":"number","default":0},"titleTag":{"type":"string","default":"h3"},"fontH3":{"type":"string","default":""},"fontWeightH3":{"type":"string","default":""},"colorH3":{"type":"string","default":""},"fontP":{"type":"string","default":""},"fontWeightP":{"type":"string","default":""},"colorP":{"type":"string","default":""},"contents":{"type":"array","source":"query","selector":".lw-step-2__li","query":{"no":{"type":"string","source":"html","selector":".lw-step-2__li_no"},"title":{"type":"string","source":"html","selector":".lw-step-2__li_title"},"text":{"type":"string","source":"html","selector":".lw-step-2__li_text"}},"default":[{"no":"01","title":"応募","text":"応募フォームより必要事項を入力し、送信してください。応募内容を確認し、追って担当者よりご連絡いたします。"},{"no":"02","title":"書類選考","text":"ご応募いただいた内容をもとに、書類選考を行います。結果は1週間以内にメールにてお知らせいたします。"},{"no":"03","title":"面接","text":"書類選考に通過された方には、担当者による面接を実施します。面接日時はご相談の上、決定いたします。"}]}}}');
 
 /***/ })
 

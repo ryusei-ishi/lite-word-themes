@@ -1,6 +1,6 @@
 {
   "version": "1.0",
-  "generatedAt": "2026-09-04T03:19:24.517Z",
+  "generatedAt": "2026-09-07T05:28:01.147Z",
   "blocks": [
     "br-on-none",
     "cta-1",
@@ -79,6 +79,10 @@
     "lw-pr-fv-15",
     "lw-pr-fv-16",
     "lw-pr-fv-17",
+    "lw-pr-fv-18",
+    "lw-pr-fv-19",
+    "lw-pr-fv-20",
+    "lw-pr-fv-21",
     "lw-pr-goodbad-1",
     "lw-pr-image-0",
     "lw-pr-image-1",
@@ -90,6 +94,9 @@
     "lw-pr-product-1",
     "lw-pr-qa-2",
     "lw-pr-qa-3",
+    "lw-pr-qa-4",
+    "lw-pr-qa-5",
+    "lw-pr-qa-6",
     "lw-pr-ranking-1",
     "lw-pr-step-7",
     "lw-pr-step-8",
@@ -157,5 +164,5 @@
     "shin-gas-station-01-step-1",
     "solution-1"
   ],
-  "totalBlocks": 154
+  "totalBlocks": 161
 }

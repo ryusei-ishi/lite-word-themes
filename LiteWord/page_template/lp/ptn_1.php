@@ -11,7 +11,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">その願いを叶える鍵は、あなたが働くのではなく、 **「お金に働いてもらう仕組み」**を持つことにあります。</p>
+<p class="has-text-align-center">その願いを叶える鍵は、あなたが働くのではなく、<strong>「お金に働いてもらう仕組み」</strong>を持つことにあります。</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"center"} -->

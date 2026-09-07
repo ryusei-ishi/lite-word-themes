@@ -62,8 +62,28 @@
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:40px"></div><div class="tb" style="height:32px"></div><div class="sp" style="height:24px"></div></div>
 <!-- /wp:wdl/lw-space-1 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">相性はあります。3ヶ月通ってみて「合わない」と感じたら、受付か、言いにくければメールでお知らせください。理由は聞きません。<br>別の講師の空いている枠をご案内します。講師を変えても、月謝もこれまでの進み具合も変わりません。<br>実際に、これまで9人の方が講師を変えて、そのまま続けていらっしゃいます。</p>
+<p class="has-text-align-center">相性はあります。合わないまま続けるより、変えていただくほうがずっと良いです。</p>
 <!-- /wp:paragraph -->
+<!-- wp:wdl/lw-space-1 {"pcHeight":40,"tbHeight":32,"spHeight":24} -->
+<div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:40px"></div><div class="tb" style="height:32px"></div><div class="sp" style="height:24px"></div></div>
+<!-- /wp:wdl/lw-space-1 -->
+<!-- wp:wdl/lw-pr-waku-1 {"waku1MaxWidthPc":760,"waku1PaddingTopPc":28,"waku1PaddingBottomPc":28,"waku1PaddingLeftPc":32,"waku1PaddingRightPc":32,"waku1PaddingTopSp":20,"waku1PaddingBottomSp":20,"waku1PaddingLeftSp":16,"waku1PaddingRightSp":16,"waku1BorderWidthPc":1,"waku1BorderWidthSp":1,"waku1BorderColorPc":"#e5e9ee","waku1BorderColorSp":"#e5e9ee","waku1BorderRadiusPc":[8,8,8,8],"waku1BgColorPc":"#f8f8f6"} -->
+<div class="wp-block-wdl-lw-pr-waku-1 lw-pr-waku-1" style="--waku-1-justify-content-pc:center;--waku-1-justify-content-sp:center"><div class="lw-pr-waku-1__custom_wrap" style="--waku-1-max-width-pc:760px;--waku-1-max-width-sp:760px;--waku-1-padding-pc:28px 32px 28px 32px;--waku-1-padding-sp:20px 16px 20px 16px;--waku-1-bd-width-pc:1px;--waku-1-bd-width-sp:1px;--waku-1-bd-style-pc:solid;--waku-1-bd-style-sp:solid;--waku-1-bd-color-pc:#e5e9ee;--waku-1-bd-color-sp:#e5e9ee;--waku-1-bdr-pc:8px 8px 8px 8px;--waku-1-bdr-sp:8px 8px 8px 8px;--waku-1-bg-pc:#f8f8f6;--waku-1-bg-sp:#f8f8f6;--waku-1-bg-opacity-pc:1;--waku-1-bg-opacity-sp:1;--waku-1-blend-mode-pc:normal;--waku-1-blend-mode-sp:normal;--waku-1-bg-img-pc:none;--waku-1-bg-img-sp:none;--waku-1-img-filter-pc:none;--waku-1-img-filter-sp:none;--waku-1-min-height-pc:auto;--waku-1-min-height-sp:auto;--waku-1-aspect-ratio-pc:auto;--waku-1-aspect-ratio-sp:auto"><!-- wp:heading {"level":3,"textAlign":"center","style":{"typography":{"fontSize":"18px","lineHeight":"1.6"},"spacing":{"margin":{"top":"0px","bottom":"14px"}}}} -->
+<h3 class="has-text-align-center" style="font-size:18px;line-height:1.6;margin-top:0px;margin-bottom:14px">交代のしかた</h3>
+<!-- /wp:heading -->
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"15px"},"spacing":{"margin":{"top":"0px","bottom":"0px"}}}} -->
+<p style="font-size:15px;margin-top:0px;margin-bottom:0px"><strong>お申し出</strong>　3ヶ月通ってみて「合わない」と感じたら、受付か、言いにくければメールでお知らせください。<strong>理由は聞きません。</strong></p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"15px"},"spacing":{"margin":{"top":"10px","bottom":"0px"}}}} -->
+<p style="font-size:15px;margin-top:10px;margin-bottom:0px"><strong>ご案内</strong>　別の講師の、空いている枠をご案内します。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"15px"},"spacing":{"margin":{"top":"10px","bottom":"0px"}}}} -->
+<p style="font-size:15px;margin-top:10px;margin-bottom:0px"><strong>変わらないもの</strong>　月謝も、これまでの進み具合も変わりません。振替の残りもそのままです。</p>
+<!-- /wp:paragraph -->
+<!-- wp:paragraph {"style":{"typography":{"fontSize":"15px"},"spacing":{"margin":{"top":"10px","bottom":"0px"}}}} -->
+<p style="font-size:15px;margin-top:10px;margin-bottom:0px"><strong>これまで</strong>　9人の方が講師を変えて、そのまま続けていらっしゃいます。</p>
+<!-- /wp:paragraph --></div></div>
+<!-- /wp:wdl/lw-pr-waku-1 -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":80,"tbHeight":64,"spHeight":40} -->
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:80px"></div><div class="tb" style="height:64px"></div><div class="sp" style="height:40px"></div></div>
 <!-- /wp:wdl/lw-space-1 -->

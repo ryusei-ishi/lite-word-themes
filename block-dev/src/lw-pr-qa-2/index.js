@@ -242,6 +242,7 @@ registerBlockType(metadata.name, {
 			maxWidth,
 			qImageBorderColor,
 			qTextBg,
+			qTextColor,
 			qTextFontSizePc,
 			qTextFontSizeSp,
 			aImageBorderColor,
@@ -253,6 +254,9 @@ registerBlockType(metadata.name, {
 				"--qa-2-max-w": maxWidth === 0 ? "100%" : `${maxWidth}px`,
 				"--qa-2-dt-image-bd-color": qImageBorderColor,
 				"--qa-2-dt-text-bg": qTextBg,
+				/* 🚨 空のときはキーごと出さない（undefined は書き出されない）。
+				   既定のページの保存HTMLを1文字も変えないため。 */
+				"--qa-2-dt-text-color": qTextColor || undefined,
 				"--qa-2-dt-text-fontsize-pc": `${qTextFontSizePc}px`,
 				"--qa-2-dt-text-fontsize-sp": `${qTextFontSizeSp}px`,
 				"--qa-2-dd-image-bd-color": aImageBorderColor,
@@ -298,6 +302,16 @@ registerBlockType(metadata.name, {
 						<ColorPalette
 							value={qTextBg}
 							onChange={(color) => setAttributes({ qTextBg: color || "#eaf4ff" })}
+						/>
+
+						<hr style={{ margin: "16px 0" }} />
+
+						<Heading level={4} style={{ marginBottom: "8px" }}>
+							質問の文字色
+						</Heading>
+						<ColorPalette
+							value={qTextColor}
+							onChange={(color) => setAttributes({ qTextColor: color || "" })}
 						/>
 
 						<hr style={{ margin: "16px 0" }} />
@@ -354,6 +368,7 @@ registerBlockType(metadata.name, {
 			maxWidth,
 			qImageBorderColor,
 			qTextBg,
+			qTextColor,
 			qTextFontSizePc,
 			qTextFontSizeSp,
 			aImageBorderColor,
@@ -365,6 +380,9 @@ registerBlockType(metadata.name, {
 				"--qa-2-max-w": maxWidth === 0 ? "100%" : `${maxWidth}px`,
 				"--qa-2-dt-image-bd-color": qImageBorderColor,
 				"--qa-2-dt-text-bg": qTextBg,
+				/* 🚨 空のときはキーごと出さない（undefined は書き出されない）。
+				   既定のページの保存HTMLを1文字も変えないため。 */
+				"--qa-2-dt-text-color": qTextColor || undefined,
 				"--qa-2-dt-text-fontsize-pc": `${qTextFontSizePc}px`,
 				"--qa-2-dt-text-fontsize-sp": `${qTextFontSizeSp}px`,
 				"--qa-2-dd-image-bd-color": aImageBorderColor,

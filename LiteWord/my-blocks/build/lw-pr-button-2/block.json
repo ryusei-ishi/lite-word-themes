@@ -8,6 +8,7 @@
 	"icon": "button",
 	"description": "プレミアムリンクボタン（スタイル02）",
 	"aiHint": {
+    "notes": "🚨 副文（textSub）は**ボタンの外**、つまりページやその段の地の上に出る。白い地の上で薄い色にすると読めない（2026-09-07 実測）。濃い帯の上に置くときだけ明るい色にする。🚨 背景色の属性は bgColor ではなく **bgGradient**（bgColor を渡しても効かない）。",
 		"description": "グラデーション背景の2段テキストボタン。問い合わせ・予約誘導に。振動アニメーション対応",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": [

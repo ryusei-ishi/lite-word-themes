@@ -1,0 +1,9 @@
+@import '../editor-height';
+
+.wp-block {
+    &:has(> .lw-pr-fv-20) {
+        margin: 0;
+        width: 100%;
+        max-width: 100%;
+    }
+}

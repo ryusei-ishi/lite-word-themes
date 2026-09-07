@@ -1,50 +1,54 @@
 {
-    "$schema":  "https://schemas.wp.org/trunk/block.json",
-    "apiVersion":  3,
-    "name":  "wdl/lw-pr-qa-2",
-    "version":  "1.0.0",
-    "title":  "Q\u0026A 02",
-    "category":  "lw-faq",
-    "icon":  "format-chat",
-    "description":  "Q\u0026Aブロック。質問と回答を画像付きで表示。",
-    "aiHint": {
-        "description": "Q&A（画像付き）。質問者・回答者の画像+吹き出し形式。子ブロックを並べて作るのでAI直接生成は非推奨",
-        "excludeFromAutoSelect": true,
-        "excludeReason": "子ブロック（lw-pr-qa-2-item）を並べないと中身が入らないため。テンプレート経由で使う",
-        "contentAttributes": [],
-        "imageAttributes": [],
-        "notes": "このブロックは親子構造。親（lw-pr-qa-2）は入れ物で、テキストも画像も持たない。中身は子ブロック wdl/lw-pr-qa-2-item を並べて作る。子は qImage（質問者の絵）/ qText（質問文）/ aImage（回答者の絵）/ useOneColumn を属性で持ち、回答の本文だけ子の InnerBlocks（core/paragraph）に入れる。Q&A 1件につき子1つ。⚠️ 子には独立したディレクトリが無く、親の js が親子とも registerBlockType している。build/lw-pr-qa-2-item を探しても無いので、存在しないブロックだと誤判定しないこと。⚠️ 質問文の色（青）とアイコンの寸法は CSS 固定で、属性では変えられない。⚠️ 既定の画像は placehold.jp（他社CDN）なので、テンプレートやサンプルでは必ず自前の画像URLを渡すこと。"
-    },
-    "supports":  {
-                     "anchor":  true,
-                     "className":  true
-                 },
-    "attributes":  {
-                       "maxWidth":  {
-                                        "type":  "number",
-                                        "default":  0
-                                    },
-                       "qImageBorderColor":  {
-                                                 "type":  "string",
-                                                 "default":  "#3c7fc3"
-                                             },
-                       "qTextBg":  {
-                                       "type":  "string",
-                                       "default":  "#eaf4ff"
-                                   },
-                       "qTextFontSizePc":  {
-                                               "type":  "number",
-                                               "default":  24
-                                           },
-                       "qTextFontSizeSp":  {
-                                               "type":  "number",
-                                               "default":  16
-                                           },
-                       "aImageBorderColor":  {
-                                                 "type":  "string",
-                                                 "default":  "#3c7fc3"
-                                             }
-                   },
-    "editorScript":  "file:./lw-pr-qa-2.js",
-    "no":  2
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-qa-2",
+	"version": "1.0.0",
+	"title": "Q&A 02",
+	"category": "lw-faq",
+	"icon": "format-chat",
+	"description": "Q&Aブロック。質問と回答を画像付きで表示。",
+	"aiHint": {
+		"description": "Q&A（画像付き）。質問者・回答者の画像+吹き出し形式。子ブロックを並べて作るのでAI直接生成は非推奨",
+		"excludeFromAutoSelect": true,
+		"excludeReason": "子ブロック（lw-pr-qa-2-item）を並べないと中身が入らないため。テンプレート経由で使う",
+		"contentAttributes": [],
+		"imageAttributes": [],
+		"notes": "このブロックは親子構造。親（lw-pr-qa-2）は入れ物で、テキストも画像も持たない。中身は子ブロック wdl/lw-pr-qa-2-item を並べて作る。子は qImage（質問者の絵）/ qText（質問文）/ aImage（回答者の絵）/ useOneColumn を属性で持ち、回答の本文だけ子の InnerBlocks（core/paragraph）に入れる。Q&A 1件につき子1つ。⚠️ 子には独立したディレクトリが無く、親の js が親子とも registerBlockType している。build/lw-pr-qa-2-item を探しても無いので、存在しないブロックだと誤判定しないこと。⚠️ 質問文の色（青）とアイコンの寸法は CSS 固定で、属性では変えられない。⚠️ 既定の画像は placehold.jp（他社CDN）なので、テンプレートやサンプルでは必ず自前の画像URLを渡すこと。🚨 **質問文の色は CSS に #3c7fc3 が直書き**されていて、長らく変えられなかった。この色は白地でも 4.03:1 しか出ず、**ふつうの文字サイズでは 4.5:1 に届かない**。→ 2026-09-07 に `qTextColor` を足した（空のときは従来どおり #3c7fc3）。淡い地の上に置くときは、ページの濃い色を渡してコントラストを確保すること。"
+	},
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"maxWidth": {
+			"type": "number",
+			"default": 0
+		},
+		"qImageBorderColor": {
+			"type": "string",
+			"default": "#3c7fc3"
+		},
+		"qTextBg": {
+			"type": "string",
+			"default": "#eaf4ff"
+		},
+		"qTextFontSizePc": {
+			"type": "number",
+			"default": 24
+		},
+		"qTextFontSizeSp": {
+			"type": "number",
+			"default": 16
+		},
+		"aImageBorderColor": {
+			"type": "string",
+			"default": "#3c7fc3"
+		},
+		"qTextColor": {
+			"type": "string",
+			"default": ""
+		}
+	},
+	"editorScript": "file:./lw-pr-qa-2.js",
+	"no": 2
 }

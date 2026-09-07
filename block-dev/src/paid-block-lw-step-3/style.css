@@ -1,3 +1,4 @@
+@charset "UTF-8";
 .paid-block-lw-step-3 {
   margin: 32px 0;
 }
@@ -81,19 +82,23 @@
 }
 .paid-block-lw-step-3 ul.lw-step-2__inner li.lw-step-2__li .lw-step-2__li_no {
   margin: 0;
-  width: 2.4em;
+  /* 🚨 既定は 2.4em（「01」「02」の2桁ぶん）。3文字以上を入れると溢れて
+     右の白地に重なるので、noWidthEm でここを広げられるようにした（2026-09-07）。
+     ⚠️ 変数が無いときの値は**もとの数字そのまま**。既定のページの見た目は1pxも変わらない。 */
+  width: var(--step3-no-w, 2.4em);
   height: 100%;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.4em;
+  font-size: var(--step3-no-fs, 1.4em);
   background: var(--color-main);
   color: #fff;
   text-align: center;
 }
 .paid-block-lw-step-3 ul.lw-step-2__inner li.lw-step-2__li .lw-step-2__li_in {
   padding: 1.2em 1em;
-  width: calc(100% - 3.4em);
+  /* 🚨 番号の列（既定2.4em）＋余白1em。上の変数と必ず揃える */
+  width: calc(100% - var(--step3-no-w, 2.4em) - 1em);
 }
 .paid-block-lw-step-3 ul.lw-step-2__inner li.lw-step-2__li .lw-step-2__li_in p.ttl,
 .paid-block-lw-step-3 ul.lw-step-2__inner li.lw-step-2__li .lw-step-2__li_in h2.ttl,
@@ -137,4 +142,4 @@
   width: 200px;
   font-size: 16px;
   cursor: pointer;
-}/*# sourceMappingURL=style.css.map */
+}

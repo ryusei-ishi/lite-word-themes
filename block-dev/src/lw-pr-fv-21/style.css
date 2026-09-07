@@ -1,0 +1,303 @@
+@charset "UTF-8";
+/* FV 21 リード獲得（もらえる物と締切）
+   ------------------------------------------------------------------
+   左＝無料の札・見出し・中身のリスト・ボタン／右＝現物の写真と締切の札。
+   写真の上に文字を置かないので、背景は淡い色のまま使うほうが読みやすい。 */
+.lw_content_wrap.page .lw-pr-fv-21 {
+  margin-left: calc((100% - 100vw) / 2);
+  width: 100vw;
+}
+.lw_content_wrap.page:has(.first_content + .lw-pr-fv-21) .first_content {
+  display: none;
+}
+
+.lw-pr-fv-21 {
+  position: relative;
+  z-index: 10;
+  padding: 54px 30px;
+  max-width: 100vw;
+  display: flex;
+  align-items: center;
+  background: var(--fv21-bg, #f7f1ea);
+  /* ── 左：言い分 ─────────────────────────────── */
+  /* ── 中身の箱 ───────────────────────────────── */
+  /* ── 右：現物の写真と締切の札 ───────────────── */
+}
+@media (max-width: 1000px) {
+  .lw-pr-fv-21 {
+    padding: 44px 24px;
+  }
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-21 {
+    padding: 34px 20px 38px;
+  }
+}
+.lw-pr-fv-21 .this_wrap {
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--fv21-max-width, 1140px);
+  display: grid;
+  grid-template-columns: 1fr var(--fv21-pic-width, 430px);
+  gap: 60px;
+  align-items: center;
+}
+@media (max-width: 1100px) {
+  .lw-pr-fv-21 .this_wrap {
+    gap: 40px;
+  }
+}
+@media (max-width: 900px) {
+  .lw-pr-fv-21 .this_wrap {
+    grid-template-columns: 1fr;
+    gap: 28px;
+  }
+}
+.lw-pr-fv-21.image_left .this_wrap {
+  grid-template-columns: var(--fv21-pic-width, 430px) 1fr;
+}
+@media (max-width: 900px) {
+  .lw-pr-fv-21.image_left .this_wrap {
+    grid-template-columns: 1fr;
+  }
+}
+.lw-pr-fv-21.image_left .lead_side {
+  order: 2;
+}
+.lw-pr-fv-21.image_left .pic_side {
+  order: 1;
+}
+@media (max-width: 900px) {
+  .lw-pr-fv-21.image_left .lead_side {
+    order: 1;
+  }
+  .lw-pr-fv-21.image_left .pic_side {
+    order: 2;
+  }
+}
+.lw-pr-fv-21 .free_badge {
+  margin-bottom: 18px;
+  padding: 9px 18px;
+  border-radius: 4px;
+  background: var(--fv21-free-bg, #b5642c);
+  color: var(--fv21-free-text, #fff);
+  display: inline-flex;
+  align-items: baseline;
+  gap: 8px;
+  line-height: 1.3;
+}
+.lw-pr-fv-21 .free_badge b {
+  font-size: 24px;
+  letter-spacing: 0.08em;
+}
+.lw-pr-fv-21 .free_badge span {
+  font-size: 14px;
+  font-weight: 700;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-21 .free_badge {
+    margin-bottom: 14px;
+    padding: 8px 15px;
+  }
+  .lw-pr-fv-21 .free_badge b {
+    font-size: 21px;
+  }
+  .lw-pr-fv-21 .free_badge span {
+    font-size: 13px;
+  }
+}
+.lw-pr-fv-21 .main_ttl {
+  margin: 0 0 16px;
+  color: var(--fv21-title-color, #3f2618);
+  font-size: var(--fv21-title-size-pc, 45px);
+  font-weight: var(--fv21-title-weight, 700);
+  line-height: 1.34;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-21 .main_ttl {
+    margin-bottom: 12px;
+    font-size: var(--fv21-title-size-sp, 30px);
+  }
+}
+.lw-pr-fv-21 .description {
+  margin: 0 0 26px;
+  color: var(--fv21-description-color, #5f544c);
+  font-size: 17px;
+  line-height: 1.9;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-21 .description {
+    margin-bottom: 20px;
+    font-size: 15px;
+  }
+}
+.lw-pr-fv-21 .inbox {
+  margin-bottom: 26px;
+  padding: 20px 22px 18px;
+  border: 1px solid var(--fv21-inbox-border, #e6dbd0);
+  border-radius: 10px;
+  background: var(--fv21-inbox-bg, #fff);
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-21 .inbox {
+    margin-bottom: 20px;
+    padding: 16px 16px 14px;
+  }
+}
+.lw-pr-fv-21 .inbox .inbox_ttl {
+  margin: 0 0 11px;
+  color: var(--fv21-inbox-title, #b5642c);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.5;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-21 .inbox .inbox_ttl {
+    font-size: 13px;
+  }
+}
+.lw-pr-fv-21 .inbox ul {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+.lw-pr-fv-21 .inbox li {
+  margin: 0 0 9px;
+  display: flex;
+  align-items: flex-start;
+  gap: 11px;
+  color: var(--fv21-inbox-text, #33302c);
+  font-size: 16px;
+  line-height: 1.7;
+}
+.lw-pr-fv-21 .inbox li:last-child {
+  margin-bottom: 0;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-21 .inbox li {
+    font-size: 15px;
+  }
+}
+.lw-pr-fv-21 .inbox i {
+  flex: none;
+  margin-top: 2px;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  background: var(--fv21-inbox-num-bg, #5c3d2e);
+  color: var(--fv21-inbox-num, #fff);
+  font-size: 12px;
+  font-weight: 700;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-21 .inbox i {
+    width: 22px;
+    height: 22px;
+  }
+}
+.lw-pr-fv-21 .cta_btn {
+  padding: 18px 20px;
+  max-width: var(--fv21-cta-max, 400px);
+  width: 100%;
+  border-radius: var(--fv21-cta-radius, 7px);
+  background: var(--fv21-cta-bg, #b5642c);
+  color: var(--fv21-cta-text, #fff);
+  font-size: 19px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.17);
+}
+.lw-pr-fv-21 .cta_btn small {
+  margin-top: 4px;
+  display: block;
+  color: var(--fv21-cta-sub, #ffe9d8);
+  font-size: 11px;
+  font-weight: 400;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-21 .cta_btn {
+    padding: 16px 12px;
+    max-width: none;
+    font-size: 18px;
+  }
+}
+.lw-pr-fv-21 .pic_side {
+  position: relative;
+}
+.lw-pr-fv-21 .shot {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 22px 46px rgba(63, 38, 24, 0.26);
+  transform: rotate(var(--fv21-pic-tilt, -2.4deg));
+}
+.lw-pr-fv-21 .shot img {
+  width: 100%;
+  height: var(--fv21-pic-height-pc, 330px);
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-21 .shot img {
+    height: var(--fv21-pic-height-sp, 220px);
+  }
+}
+.lw-pr-fv-21 .dl_tag {
+  position: absolute;
+  top: -20px;
+  right: -14px;
+  width: 108px;
+  height: 108px;
+  border: 2px solid #fff;
+  border-radius: 50%;
+  background: var(--fv21-tag-bg, #3f2618);
+  color: var(--fv21-tag-text, #fff);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.24);
+  /* 🚨 スマホでは写真の左上に付ける（右上だとボタンの影に重なる） */
+}
+.lw-pr-fv-21 .dl_tag .t {
+  font-size: 12px;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+.lw-pr-fv-21 .dl_tag .d {
+  font-size: 34px;
+  font-weight: 700;
+  line-height: 1.05;
+  /* 🚨 単位に <em> を使わないこと。テーマの .post_style em は蛍光ペン
+     （background:#f8f68a）になるため、数字の後ろに黄色い箱が出る。 */
+}
+.lw-pr-fv-21 .dl_tag .d .u {
+  font-size: 15px;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-21 .dl_tag {
+    top: -14px;
+    right: auto;
+    left: -6px;
+    width: 88px;
+    height: 88px;
+  }
+  .lw-pr-fv-21 .dl_tag .t {
+    font-size: 11px;
+  }
+  .lw-pr-fv-21 .dl_tag .d {
+    font-size: 27px;
+  }
+  .lw-pr-fv-21 .dl_tag .d .u {
+    font-size: 13px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

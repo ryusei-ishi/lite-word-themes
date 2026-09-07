@@ -1,0 +1,321 @@
+// エディタ内には .lw_content_wrap（コンテナ）が無く @container が効かないので、
+// ブロック自身をコンテナにしてPC/スマホの切り替えを再現する
+[data-type="wdl/lw-pr-qa-6"] {
+  container-type: inline-size;
+}
+
+.wp-block-wdl-lw-pr-qa-6,
+[data-type="wdl/lw-pr-qa-6"] {
+  position: relative;
+  z-index: 10;
+  margin: 40px auto;
+  max-width: var(--qa6-max-w, 100%);
+  width: 100%;
+  box-sizing: border-box;
+  // 🚨 既定は1カラム。view.js が .is-js を付けて初めて2カラムになる
+  display: block;
+  @container (max-width:700px) {
+    margin: 32px auto;
+  }
+  * {
+    box-sizing: border-box;
+  }
+
+  // ---------------------------------------------------------------
+  // 左の分類一覧
+  // 🚨 既定は非表示。JS が無いと押しても何も起きないため
+  // ---------------------------------------------------------------
+  .qa-6__nav {
+    display: none;
+  }
+
+  .qa-6__nav-inner {
+    // 🚨 追従はここ。親（グリッドのマス）が背を伸ばすので、その中で貼りつく。
+    //    ⚠️ このブロックを overflow:hidden の中に入れると効かなくなる
+    position: sticky;
+    top: var(--qa6-sticky-top, 100px);
+    padding: 20px 16px;
+    background: var(--qa6-nav-bg, #f7f7f7);
+  }
+
+  .qa-6__nav-title {
+    margin: 0 0 12px;
+    padding-bottom: 0.6em;
+    border-bottom: 1px solid var(--qa6-line, #e0e0e0);
+    color: #555;
+    line-height: 1.5em;
+    font-size: 13px;
+    font-weight: 600;
+  }
+
+  .qa-6__nav-list {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+  .qa-6__nav-li {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+    &::before {
+      // テーマ側の li に付く飾りを打ち消す
+      display: none;
+    }
+  }
+
+  .qa-6__nav-link {
+    margin: 0;
+    padding: 0.7em 0.6em;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 0.5em;
+    border: none;
+    border-left: 3px solid transparent;
+    background: transparent;
+    color: #444;
+    cursor: pointer;
+    text-align: left;
+    line-height: 1.5em;
+    font-size: 14px;
+    font-family: inherit;
+    font-feature-settings: "palt";
+    transition: color 0.15s, border-color 0.15s, background 0.15s;
+    &:hover {
+      color: var(--qa6-main, var(--color-main));
+    }
+    &.is-active {
+      border-left-color: var(--qa6-main, var(--color-main));
+      background: #fff;
+      color: var(--qa6-main, var(--color-main));
+      font-weight: 600;
+    }
+  }
+
+  .qa-6__nav-count {
+    flex: 0 0 auto;
+    min-width: 1.7em;
+    padding: 0.1em 0.4em;
+    border-radius: 1em;
+    background: rgba(0, 0, 0, 0.07);
+    color: #666;
+    line-height: 1.5em;
+    font-size: 11px;
+    font-weight: 400;
+    text-align: center;
+  }
+
+  // ---------------------------------------------------------------
+  // 右の中身
+  // ---------------------------------------------------------------
+  .qa-6__group {
+    // 🚨 飛んだときに見出しが固定ヘッダーに隠れないための逃げは view.js 側で計算している。
+    //    ここで scroll-margin-top を入れると二重に効いて余計に下がる
+    & + .qa-6__group {
+      margin-top: 48px;
+      @container (max-width:700px) {
+        margin-top: 36px;
+      }
+    }
+  }
+
+  h3.qa-6__group-title {
+    margin: 0 0 8px;
+    padding: 0 0 0.5em;
+    border-bottom: 2px solid var(--qa6-main, var(--color-main));
+    color: var(--qa6-main, var(--color-main));
+    // 🚨 line-height を必ず付ける。テーマの見出しは 25.6px 固定なので、
+    //    20px の見出しが2行になった瞬間に文字が重なる
+    line-height: 1.5em;
+    font-size: var(--qa6-title-size-pc, 20px);
+    font-weight: 600;
+    font-feature-settings: "palt";
+    @container (max-width:700px) {
+      font-size: var(--qa6-title-size-sp, 17px);
+    }
+  }
+
+  .qa-6__item {
+    margin: 0;
+    padding: var(--qa6-gap, 22px) 0;
+    border-bottom: 1px solid var(--qa6-line, #e0e0e0);
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    dt,
+    dd {
+      margin: 0;
+      padding: 0;
+      display: grid;
+      grid-template-columns: var(--qa6-label-w, 34px) 1fr;
+      align-items: baseline;
+    }
+    dd {
+      margin-top: calc(var(--qa6-gap, 22px) / 2);
+    }
+
+    .qa-6__mark {
+      display: block;
+      line-height: 1.6em;
+      font-size: var(--qa6-label-size-pc, 18px);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      @container (max-width:700px) {
+        font-size: var(--qa6-label-size-sp, 16px);
+      }
+    }
+    .qa-6__mark--q {
+      color: var(--qa6-q-color, var(--color-main));
+    }
+    .qa-6__mark--a {
+      color: var(--qa6-a-color, var(--color-accent));
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      line-height: 1.8em;
+      font-feature-settings: "palt";
+      a {
+        text-decoration: underline;
+        color: var(--color-link-common, #06c);
+      }
+    }
+    p.qa-6__q {
+      line-height: 1.6em;
+      font-size: var(--qa6-q-size-pc, 17px);
+      font-weight: 600;
+      @container (max-width:700px) {
+        font-size: var(--qa6-q-size-sp, 15px);
+      }
+    }
+    p.qa-6__a {
+      font-size: var(--qa6-a-size-pc, 15px);
+      @container (max-width:700px) {
+        font-size: var(--qa6-a-size-sp, 14px);
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------
+  // JS が動いたとき（view.js が .is-js を付ける）
+  // ---------------------------------------------------------------
+  &.is-js {
+    display: grid;
+    gap: 40px;
+    /* 🚨 align-items: start を書かないこと（2026-09-07 に実測で気づいた）。
+       書くと左のマスが**中身の高さに縮む**ので、その中の .qa-6__nav-inner が
+       貼りつく余地を失い、position:sticky が effectively 効かなくなる。
+       既定の stretch のまま＝マスが行の高さいっぱいに伸びる、が正しい。 */
+
+    .qa-6__nav {
+      display: block;
+    }
+
+    // スマホでは分類を上の横並びにする。
+    // 縦のままだと、質問を読む前に一覧で1画面ぶん埋まってしまう
+    @container (max-width:900px) {
+      display: block;
+
+      .qa-6__nav-inner {
+        position: static;
+        padding: 12px;
+      }
+      .qa-6__nav-list {
+        display: flex;
+        flex-wrap: nowrap;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 6px;
+        &::-webkit-scrollbar {
+          display: none;
+        }
+      }
+      .qa-6__nav-li {
+        flex: 0 0 auto;
+      }
+      .qa-6__nav-link {
+        width: auto;
+        padding: 0.5em 0.9em;
+        border-left: none;
+        border-radius: 999px;
+        background: #fff;
+        white-space: nowrap;
+        &.is-active {
+          background: var(--qa6-main, var(--color-main));
+          color: #fff;
+        }
+        .qa-6__nav-count {
+          background: rgba(0, 0, 0, 0.07);
+        }
+        // 🚨 白を重ねると白文字が 3.7:1 まで落ちる（11px は 4.5 が要る）。黒を重ねて暗くする。
+        &.is-active .qa-6__nav-count {
+          background: rgba(0, 0, 0, 0.25);
+          color: #fff;
+        }
+      }
+      .qa-6__main {
+        margin-top: 28px;
+      }
+    }
+  }
+
+  &.qa-6--nav-left.is-js {
+    grid-template-columns: var(--qa6-nav-w, 240px) 1fr;
+    @container (max-width:900px) {
+      grid-template-columns: 1fr;
+    }
+  }
+  &.qa-6--nav-right.is-js {
+    grid-template-columns: 1fr var(--qa6-nav-w, 240px);
+    .qa-6__nav {
+      order: 2;
+    }
+    .qa-6__main {
+      order: 1;
+    }
+    @container (max-width:900px) {
+      grid-template-columns: 1fr;
+      .qa-6__nav {
+        order: 0;
+      }
+      .qa-6__main {
+        order: 0;
+      }
+    }
+  }
+}
+
+// ---- ここから下はエディタ専用（操作ボタン）。save() には出力されない ----
+[data-type="wdl/lw-pr-qa-6"] {
+  .qa-6__group-tools {
+    margin-bottom: 12px;
+    padding: 10px 12px;
+    border: 1px dashed #c3c4c7;
+    border-radius: 4px;
+    background: #fbfbfc;
+  }
+  .qa-6__group-buttons {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .qa-6__tools {
+    margin-top: 8px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+  .qa-6__add {
+    margin-top: 20px;
+    display: flex;
+    justify-content: center;
+  }
+  .qa-6__add--group {
+    margin-top: 40px;
+  }
+}

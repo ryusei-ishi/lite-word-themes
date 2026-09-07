@@ -22,6 +22,9 @@
 <!-- wp:paragraph {"align":"center"} -->
 <p class="has-text-align-center">毎朝、空室の状況を確かめてから更新しています。</p>
 <!-- /wp:paragraph -->
+<!-- wp:paragraph {"align":"center"} -->
+<p class="has-text-align-center">※ ここに出るのは、このページの<strong>子ページ</strong>です。<span class="lw-br on_500px"></span>物件ごとに固定ページを作り、「ページ属性」の親をこのページにしてください。<span class="lw-br on_500px"></span>子ページがまだ無いあいだは「該当するページがありません。」と出ます（不具合ではありません）。</p>
+<!-- /wp:paragraph -->
 <!-- wp:wdl/lw-page-list-1 {"numberOfPages":6,"parentPageId":0,"orderOption":"date_desc","showExcerpt":true,"showDate":false,"imagePattern":"ptn_1","catBgColor":"color-mix(in srgb, var(--color-main) 50%, #000)"} -->
 <div class="wp-block-wdl-lw-page-list-1"><div class="filter" style="background:color-mix(in srgb, var(--color-main) 50%, #000)"></div><div id="lw-page-list-" class="lw_page-list-1" data-number="6" data-parent="0" data-order="date_desc" data-target="_self" data-filter="" data-img-pattern="ptn_1" data-date-visible="0" data-ex-visible="1" data-date-font="Noto Sans JP" data-date-font-weight="400" data-title-font="Noto Sans JP" data-title-font-weight="500" data-ex-font="Noto Sans JP" data-ex-font-weight="400" data-cat-bg-color="color-mix(in srgb, var(--color-main) 50%, #000)"></div><script>
 /* =========================================================
@@ -129,9 +132,6 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 				</script></div>
 <!-- /wp:wdl/lw-page-list-1 -->
-<!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">※ ここに出ているのは、このページの<strong>子ページ</strong>です。<span class="lw-br on_500px"></span>物件ごとに固定ページを作り、「ページ属性」の親をこのページにしてください。</p>
-<!-- /wp:paragraph -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":80,"tbHeight":64,"spHeight":40} -->
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:80px"></div><div class="tb" style="height:64px"></div><div class="sp" style="height:40px"></div></div>
 <!-- /wp:wdl/lw-space-1 -->
@@ -172,7 +172,7 @@ document.addEventListener('DOMContentLoaded', () => {
 <p style="font-size:15px;margin-top:10px;margin-bottom:0px"><strong>どこからどこまで</strong>　物件の敷地の入口から、駅の一番近い出入口までです。ホームまでの時間は入りません。地下駅では3〜5分の差が出ます。</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"style":{"typography":{"fontSize":"15px"},"spacing":{"margin":{"top":"10px","bottom":"0px"}}}} -->
-<p style="font-size:15px;margin-top:10px;margin-bottom:0px"><strong>確かめ方</strong>　気になる物件は、**平日の朝の同じ時間に一度歩いてみる**ことをお勧めしています。ご希望があれば、その時間に合わせてご案内します。</p>
+<p style="font-size:15px;margin-top:10px;margin-bottom:0px"><strong>確かめ方</strong>　気になる物件は、<b>平日の朝の同じ時間に一度歩いてみる</b>ことをお勧めしています。ご希望があれば、その時間に合わせてご案内します。</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:wdl/lw-pr-waku-1 -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":80,"tbHeight":64,"spHeight":40} -->

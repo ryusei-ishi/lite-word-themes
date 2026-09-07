@@ -48,7 +48,7 @@
                         margin: 0;
                         padding: 20px 24px;
                         margin: 0;
-                        color: #3c7fc3;
+                        color: var(--qa-2-dt-text-color, #3c7fc3);
                         font-size: var(--qa-2-dt-text-fontsize-pc, 24px);
                         @container (max-width:700px) {
                             padding-left: 24px;

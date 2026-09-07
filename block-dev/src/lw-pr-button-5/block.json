@@ -9,6 +9,7 @@
 	"description": "ダウンロード用プレミアムボタン",
 	"aiHint": {
 		"description": "ダウンロードボタン（1段テキスト）。ダウンロードアイコン+テキスト。コンパクトなCTAに",
+		"notes": "🚨 **既定の bgColor #e1a20e は白文字に対して 2.24:1 しかない**（本文の下限は 4.5:1・2026-09-06 実測）。必ずサイトの色で濃いものに差し替える。btnUrl を空にすると href が空になり、押してもページが再読み込みされるだけになる。 🚨 **paddingX / paddingY の単位は px ではなく em**（CSS は padding: 0.6em 1.2em）。px のつもりで 46 のような値を渡すと 46em になり、ボタンが画面より広がって**文字が1文字ずつの縦書きに潰れる**（2026-09-07 に実際に起きた）。幅は既定のままが安全。🚨 このブロックは maxWidth を持たない。**背景の帯（lw-bg-1 など）の中に置くと幅が決まらず崩れる**ので、帯の中には maxWidth を持つボタン（paid-block-lw-button-4 / lw-pr-button-1 / -2 / -3）を使う。",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": [
 			"textMain",

@@ -1,0 +1,401 @@
+// エディタ内には .lw_content_wrap（コンテナ）が無く @container が効かないので、
+// ブロック自身をコンテナにしてPC/スマホの切り替えを再現する
+[data-type="wdl/lw-pr-qa-5"] {
+  container-type: inline-size;
+}
+
+.wp-block-wdl-lw-pr-qa-5,
+[data-type="wdl/lw-pr-qa-5"] {
+  position: relative;
+  z-index: 10;
+  margin: 40px auto;
+  max-width: var(--qa5-max-w, 100%);
+  width: 100%;
+  box-sizing: border-box;
+  @container (max-width:700px) {
+    margin: 32px auto;
+  }
+  * {
+    box-sizing: border-box;
+  }
+
+  // ---------------------------------------------------------------
+  // 検索窓
+  // 🚨 既定は非表示。view.js が .is-js を付けて初めて出す。
+  //    JS が動かない環境で「打っても何も起きない検索窓」を見せないため。
+  // ---------------------------------------------------------------
+  .qa-5__search {
+    display: none;
+    padding: 20px;
+    background: var(--qa5-search-bg, #f6f6f6);
+    @container (max-width:700px) {
+      padding: 16px;
+    }
+  }
+
+  .qa-5__field {
+    position: relative;
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid var(--qa5-line, #e0e0e0);
+  }
+
+  .qa-5__field-icon {
+    position: absolute;
+    left: 14px;
+    width: 17px;
+    height: 17px;
+    fill: var(--qa5-main, var(--color-main));
+    pointer-events: none;
+  }
+
+  /* 🚨 セレクタを1つ深くして `.qa-5__field` を挟むこと（2026-09-07・Ryuichi 指摘で発覚）。
+     テーマの `page.css` に **`.post_style input[type="text"] { padding: 0.6em 0.8em }`**（詳細度 0,2,1）
+     があり、`.wp-block-wdl-lw-pr-qa-5 .qa-5__input`（0,2,0）では**負ける**。
+     負けると padding が 44px → 13.6px になり、**虫めがねの絵の下に文字が潜り込む**
+     （「知りたい言葉を…」の「知」が消えて見えた）。
+     ⚠️ `!important` は使わない。利用者が上書きできなくなるため。深くするだけで足りる。
+     ⚠️ 同じ理由で、テーマの中に input を置くブロックは全部これを踏む。 */
+  .qa-5__field .qa-5__input {
+    margin: 0;
+    padding: 0 44px;
+    height: 56px;
+    width: 100%;
+    border: none;
+    outline: none;
+    background: transparent;
+    color: inherit;
+    line-height: 1.5em;
+    font-size: 16px; // 🚨 16px 未満にしない。iOS が入力時に画面を勝手に拡大する
+    font-family: inherit;
+    @container (max-width:700px) {
+      height: 52px;
+      padding: 0 40px;
+    }
+    &::placeholder {
+      color: #999;
+    }
+  }
+
+  .qa-5__clear {
+    position: absolute;
+    right: 8px;
+    width: 32px;
+    height: 32px;
+    display: none;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    border: none;
+    border-radius: 50%;
+    background: #eee;
+    color: #555;
+    cursor: pointer;
+    line-height: 1;
+    font-size: 18px;
+    &.is-shown {
+      display: flex;
+    }
+    &:hover {
+      background: #e0e0e0;
+    }
+  }
+
+  .qa-5__hints {
+    margin-top: 12px;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 6px;
+  }
+  .qa-5__hints-label {
+    margin-right: 2px;
+    color: #5f5f5f; // 🚨 #777 は白地で 4.48:1、薄い地の上では 4.1:1 で基準割れ
+    line-height: 1.6em;
+    font-size: 12px;
+  }
+  .qa-5__hint {
+    margin: 0;
+    padding: 0.35em 0.9em;
+    border: 1px solid var(--qa5-line, #e0e0e0);
+    border-radius: 999px;
+    background: #fff;
+    color: #444;
+    cursor: pointer;
+    line-height: 1.6em;
+    font-size: 13px;
+    font-family: inherit;
+    font-feature-settings: "palt";
+    &:hover {
+      border-color: var(--qa5-main, var(--color-main));
+      color: var(--qa5-main, var(--color-main));
+    }
+  }
+
+  // ---------------------------------------------------------------
+  // 件数
+  // ---------------------------------------------------------------
+  .qa-5__count {
+    display: none;
+    margin: 16px 0 0;
+    color: #5f5f5f; // 🚨 #777 は白地で 4.48:1、薄い地の上では 4.1:1 で基準割れ
+    line-height: 1.6em;
+    font-size: 13px;
+  }
+  .qa-5__count-shown {
+    color: var(--qa5-main, var(--color-main));
+    font-size: 1.3em;
+    font-weight: 600;
+  }
+  .qa-5__count-unit {
+    margin-left: 0.15em;
+  }
+
+  // ---------------------------------------------------------------
+  // 質問と回答
+  // ---------------------------------------------------------------
+  .qa-5__list {
+    margin-top: 16px;
+  }
+
+  .qa-5__item {
+    border-bottom: 1px solid var(--qa5-line, #e0e0e0);
+    &:first-child {
+      border-top: 1px solid var(--qa5-line, #e0e0e0);
+    }
+  }
+
+  // 🚨 save() では button、エディタでは div。どちらでも同じ見た目になるよう両方をここで整える
+  .qa-5__q {
+    margin: 0;
+    padding: var(--qa5-gap, 20px) 0;
+    width: 100%;
+    display: grid;
+    grid-template-columns: var(--qa5-label-w, 34px) 1fr 24px;
+    align-items: baseline;
+    gap: 0;
+    border: none;
+    background: transparent;
+    color: inherit;
+    text-align: left;
+    font-family: inherit;
+    line-height: 1.6em;
+    font-size: var(--qa5-q-size-pc, 17px);
+    font-weight: 600;
+    font-feature-settings: "palt";
+    @container (max-width:700px) {
+      font-size: var(--qa5-q-size-sp, 15px);
+    }
+  }
+
+  .qa-5__toggle {
+    position: relative;
+    display: block;
+    width: 14px;
+    height: 14px;
+    justify-self: end;
+    align-self: center;
+    // ＋ の形。開くと横線だけになって − に見える
+    &::before,
+    &::after {
+      position: absolute;
+      top: 50%;
+      left: 0;
+      content: "";
+      display: block;
+      width: 14px;
+      height: 2px;
+      background: var(--qa5-main, var(--color-main));
+      transition: transform 0.2s;
+    }
+    &::after {
+      transform: rotate(90deg);
+    }
+  }
+
+  .qa-5__a {
+    display: grid;
+    grid-template-rows: 1fr; // 既定は開いた状態（JS 無しでも読める）
+    transition: grid-template-rows 0.25s ease;
+  }
+  .qa-5__a-inner {
+    overflow: hidden;
+    display: grid;
+    grid-template-columns: var(--qa5-label-w, 34px) 1fr;
+    align-items: baseline;
+    padding-bottom: var(--qa5-gap, 20px);
+  }
+
+  .qa-5__mark {
+    display: block;
+    line-height: 1.6em;
+    font-size: var(--qa5-label-size-pc, 18px);
+    font-weight: 400;
+    letter-spacing: 0.02em;
+    white-space: nowrap;
+    @container (max-width:700px) {
+      font-size: var(--qa5-label-size-sp, 16px);
+    }
+  }
+  .qa-5__mark--q {
+    color: var(--qa5-q-color, var(--color-main));
+  }
+  .qa-5__mark--a {
+    color: var(--qa5-a-color, var(--color-accent));
+  }
+
+  .qa-5__q-text {
+    display: block;
+  }
+
+  p.qa-5__a-text {
+    margin: 0;
+    padding: 0;
+    line-height: 1.8em;
+    font-size: var(--qa5-a-size-pc, 15px);
+    font-feature-settings: "palt";
+    @container (max-width:700px) {
+      font-size: var(--qa5-a-size-sp, 14px);
+    }
+    a {
+      text-decoration: underline;
+      color: var(--color-link-common, #06c);
+    }
+  }
+
+  // ---------------------------------------------------------------
+  // 見つからなかったとき
+  // ---------------------------------------------------------------
+  .qa-5__empty {
+    display: none;
+    margin-top: 24px;
+    padding: 32px 24px;
+    border: 1px dashed var(--qa5-line, #e0e0e0);
+    text-align: center;
+    &.is-shown {
+      display: block;
+    }
+  }
+  .qa-5__empty-text {
+    margin: 0;
+    line-height: 1.8em;
+    font-size: 15px;
+    @container (max-width:700px) {
+      font-size: 14px;
+      text-align: left;
+    }
+  }
+  .qa-5__empty-link {
+    margin-top: 16px;
+    padding: 0 1.6em;
+    height: 52px;
+    min-width: 240px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: var(--qa5-main, var(--color-main));
+    color: #fff;
+    line-height: 1.4em;
+    font-size: 15px;
+    text-decoration: none;
+    @container (max-width:700px) {
+      width: 100%;
+      min-width: 0;
+    }
+    &:hover {
+      opacity: 0.85;
+    }
+  }
+
+  // ---------------------------------------------------------------
+  // JS が動いたとき（view.js が .is-js を付ける）
+  // ---------------------------------------------------------------
+  &.is-js {
+    .qa-5__search {
+      display: block;
+    }
+    .qa-5__count {
+      display: block;
+    }
+    .qa-5__item.is-hidden {
+      display: none;
+    }
+    // 隠れた項目の次に来たものが「1つめ」になるので、上の線を引き直す
+    .qa-5__item.is-hidden + .qa-5__item {
+      border-top: 1px solid var(--qa5-line, #e0e0e0);
+    }
+  }
+
+  // 押すと開く形のときだけ畳む。「はじめから全部開く」形は畳まない
+  &.qa-5--accordion.is-js {
+    .qa-5__q {
+      cursor: pointer;
+      &:hover .qa-5__q-text {
+        color: var(--qa5-main, var(--color-main));
+      }
+    }
+    .qa-5__a {
+      grid-template-rows: 0fr;
+    }
+    /* 🚨 padding は 0fr で潰れない。閉じているのに 20px の窓が残り、
+       そこから答えの1行目の上半分が覗いてしまう（2026-09-07 に絵で見て気づいた）。
+       閉じているあいだは padding も 0 にする。 */
+    .qa-5__a-inner {
+      padding-bottom: 0;
+      transition: padding-bottom 0.25s ease;
+    }
+    .qa-5__item.is-open .qa-5__a {
+      grid-template-rows: 1fr;
+    }
+    .qa-5__item.is-open .qa-5__a-inner {
+      padding-bottom: var(--qa5-gap, 20px);
+    }
+    .qa-5__item.is-open .qa-5__toggle::after {
+      transform: rotate(0deg);
+    }
+  }
+
+  // 「はじめから全部開く」形では ＋ のしるしを出さない
+  &.qa-5--open {
+    .qa-5__toggle {
+      display: none;
+    }
+    .qa-5__q {
+      grid-template-columns: var(--qa5-label-w, 34px) 1fr;
+    }
+  }
+}
+
+// ---- ここから下はエディタ専用。save() には出力されない ----
+[data-type="wdl/lw-pr-qa-5"] {
+  .qa-5__input {
+    // エディタでは触れないようにしてある（disabled）ので、そう見せる
+    cursor: default;
+  }
+  .qa-5__tools {
+    margin: 0 0 16px;
+    padding: 10px 12px;
+    border: 1px dashed #c3c4c7;
+    border-radius: 4px;
+    background: #fbfbfc;
+  }
+  .qa-5__tool-buttons {
+    margin-top: 8px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+  .qa-5__add {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+  }
+  .qa-5__empty-preview {
+    margin-top: 24px;
+    padding: 12px;
+    border: 1px dashed #c3c4c7;
+    border-radius: 4px;
+    background: #fbfbfc;
+  }
+}

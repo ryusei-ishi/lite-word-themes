@@ -127,10 +127,14 @@ function lw_render_mail_form($form_data, $form_set_no) {
 	}
     //cssの読み込み
     wp_enqueue_style('Lw_put_form_style_ptn_1', get_template_directory_uri() . '/functions/mail_form/put_style/ptn_1.css', array(), css_version(), 'all');
+    /* 🚨 $form_set_no はショートコード [lw_mail_form_select id='N'] の属性そのまま。
+       sanitize_text_field() はダブルクォートを落とさないので、HTML属性に出すときは
+       必ず esc_attr() を通す。（2026-09-07 の複数AIレビューで、下の <form id> と
+       同意欄の for / id の3箇所だけ抜けているのが見つかった） */
     $form_id = 'lw_mail_form_' . $form_set_no;
     $current_post_id = get_the_ID() ?: 0; 
     ?>
-    <form class="lw_mail_form" id="<?=$form_id?>" enctype="multipart/form-data" method="post">
+    <form class="lw_mail_form" id="<?php echo esc_attr( $form_id ); ?>" enctype="multipart/form-data" method="post">
         <?php wp_nonce_field('lw_mail_form_nonce', 'lw_mail_nonce'); ?>
         <input type="hidden" name="lw_mail_form_set_no" value="<?php echo esc_attr($form_set_no); ?>">
         <input type="hidden" name="lw_current_post_id" value="<?= $current_post_id?>">
@@ -305,10 +309,10 @@ foreach ( $form_data as $idx => $field ) :
                     <?php
                         if($consent_type !== "type_text"):
                     ?>
-                    <p><a href="<?=$consent_url?>" <?=new_tab()?>><?=$consent_label?></a>についてご同意の上、お問い合わせください。</p>
+                    <p><a href="<?= esc_url( $consent_url ) ?>" <?=new_tab()?>><?=$consent_label?></a>についてご同意の上、お問い合わせください。</p>
                     <?php endif; ?>
-                    <label for="lw_consent_<?=$form_set_no?>">
-                        <input type="checkbox" id="lw_consent_<?=$form_set_no?>" value="1" required>
+                    <label for="lw_consent_<?php echo esc_attr( $form_set_no ); ?>">
+                        <input type="checkbox" id="lw_consent_<?php echo esc_attr( $form_set_no ); ?>" value="1" required>
                         <span><?=$consent_label?>に同意する</span>
                     </label>
                 </div>

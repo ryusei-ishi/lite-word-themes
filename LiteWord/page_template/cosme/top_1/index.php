@@ -78,7 +78,7 @@
 <!-- /wp:wdl/lw-pr-qa-2-item -->
 <!-- wp:wdl/lw-pr-qa-2-item {"qImage":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/qa_q_03.webp","qText":"口コミはどこまで信じていいですか。","aImage":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/qa_a_03.webp"} -->
 <div class="wp-block-wdl-lw-pr-qa-2-item lw-pr-qa-2__wrap__inner"><dt class="lw-pr-qa-2__q_wrap"><div class="lw-pr-qa-2__q_image"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/qa_q_03.webp" alt=""/></div><div class="lw-pr-qa-2__q_text"><p class="text">口コミはどこまで信じていいですか。</p></div></dt><dd class="lw-pr-qa-2__a_wrap"><div class="lw-pr-qa-2__a_text"><!-- wp:paragraph -->
-<p>数はあてになりますが、1件ずつの感想は肌質でまるで変わります。★の数より、**自分と同じ肌質の人が何と言っているか**を探すほうが早いです。</p>
+<p>数はあてになりますが、1件ずつの感想は肌質でまるで変わります。★の数より、<b>自分と同じ肌質の人が何と言っているか</b>を探すほうが早いです。</p>
 <!-- /wp:paragraph --></div><div class="lw-pr-qa-2__a_image"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/qa_a_03.webp" alt=""/></div></dd></div>
 <!-- /wp:wdl/lw-pr-qa-2-item -->
 <!-- wp:wdl/lw-pr-qa-2-item {"qImage":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/qa_q_03.webp","qText":"サンプルだけで決めていいですか。","aImage":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/qa_a_03.webp"} -->
@@ -225,7 +225,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
 もともとは肌が弱く、合わないものを買っては捨てる、を何年もくり返していました。「誰かが実際に使った話」がいちばん知りたかったのに、検索して出てくるのは同じような紹介文ばかりで、結局どれも試すしかありませんでした。
 
-だからこのサイトでは、**自分で買って、使ってから**書いています。合わなかったものは合わなかったと書きます。広告は入っていますが、それで順位を変えることはしません。
+だからこのサイトでは、<b>自分で買って、使ってから</b>書いています。合わなかったものは合わなかったと書きます。広告は入っていますが、それで順位を変えることはしません。
 
 〇〇 〇〇（2019年〜）</p><a href="" class="lw-content-1__text_br_button" style="background-color:var(--color-accent);color:#fff" data-lw_font_set=""></a></div></div></div>
 <!-- /wp:wdl/lw-content-1 --></div></div>

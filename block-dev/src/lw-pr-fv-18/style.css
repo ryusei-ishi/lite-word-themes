@@ -1,0 +1,363 @@
+@charset "UTF-8";
+/* FV 18 リード獲得（フォーム一体型）
+   ------------------------------------------------------------------
+   左＝言い分（札・見出し・説明・約束）／右＝そのまま送れるフォーム。
+   フォームの中身はテーマ側（functions/mail_form/put_style/ptn_1.css）が
+   作るので、ここでは「狭い箱に収まる形」に詰め直している。 */
+/* 固定ページの中で全幅に広げる（FVなので画面いっぱいに置く） */
+.lw_content_wrap.page .lw-pr-fv-18 {
+  margin-left: calc((100% - 100vw) / 2);
+  width: 100vw;
+}
+.lw_content_wrap.page:has(.first_content + .lw-pr-fv-18) .first_content {
+  display: none;
+}
+
+.lw-pr-fv-18 {
+  position: relative;
+  z-index: 10;
+  padding: 56px 30px;
+  max-width: 100vw;
+  display: flex;
+  align-items: center;
+  background: var(--fv18-bg, #0f3350);
+  /* 背景（写真＋その上に重ねる色） */
+  /* フォームを左に置く指定 */
+  /* ── 左：言い分 ─────────────────────────────── */
+  /* ── 右：フォームの箱 ───────────────────────── */
+}
+@media (max-width: 1000px) {
+  .lw-pr-fv-18 {
+    padding: 44px 24px;
+  }
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-18 {
+    padding: 34px 20px 38px;
+  }
+}
+.lw-pr-fv-18 .bg_filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.lw-pr-fv-18 .bg_filter picture,
+.lw-pr-fv-18 .bg_filter img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.lw-pr-fv-18 .bg_filter .bg_filter_inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: var(--fv18-filter-color, #0f3350);
+  opacity: var(--fv18-filter-opacity, 0.86);
+}
+.lw-pr-fv-18 .this_wrap {
+  position: relative;
+  z-index: 3;
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--fv18-max-width, 1180px);
+  display: grid;
+  grid-template-columns: 1fr var(--fv18-form-width, 396px);
+  gap: 56px;
+  align-items: center;
+}
+@media (max-width: 1100px) {
+  .lw-pr-fv-18 .this_wrap {
+    gap: 36px;
+  }
+}
+@media (max-width: 900px) {
+  .lw-pr-fv-18 .this_wrap {
+    grid-template-columns: 1fr;
+    gap: 26px;
+  }
+}
+.lw-pr-fv-18.form_left .this_wrap {
+  grid-template-columns: var(--fv18-form-width, 396px) 1fr;
+}
+@media (max-width: 900px) {
+  .lw-pr-fv-18.form_left .this_wrap {
+    grid-template-columns: 1fr;
+  }
+}
+.lw-pr-fv-18.form_left .lead_side {
+  order: 2;
+}
+.lw-pr-fv-18.form_left .form_side {
+  order: 1;
+}
+@media (max-width: 900px) {
+  .lw-pr-fv-18.form_left .form_side {
+    order: 2;
+  }
+}
+@media (max-width: 900px) {
+  .lw-pr-fv-18.form_left .lead_side {
+    order: 1;
+  }
+}
+.lw-pr-fv-18 .offer_badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 9px;
+  padding: 7px 15px;
+  border-radius: 4px;
+  background: var(--fv18-badge-bg, #c8622e);
+  color: var(--fv18-badge-text, #fff);
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  line-height: 1.4;
+}
+.lw-pr-fv-18 .offer_badge b {
+  font-size: 19px;
+  letter-spacing: 0.06em;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-18 .offer_badge {
+    font-size: 13px;
+  }
+  .lw-pr-fv-18 .offer_badge b {
+    font-size: 17px;
+  }
+}
+.lw-pr-fv-18 .main_ttl {
+  margin: 20px 0 18px;
+  color: var(--fv18-title-color, #fff);
+  font-size: var(--fv18-title-size-pc, 46px);
+  font-weight: var(--fv18-title-weight, 700);
+  line-height: 1.34;
+  letter-spacing: 0.01em;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-18 .main_ttl {
+    margin: 16px 0 14px;
+    font-size: var(--fv18-title-size-sp, 30px);
+  }
+}
+.lw-pr-fv-18 .description {
+  margin: 0 0 26px;
+  color: var(--fv18-description-color, #cfdce8);
+  font-size: 17px;
+  line-height: 1.9;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-18 .description {
+    margin-bottom: 20px;
+    font-size: 15px;
+  }
+}
+.lw-pr-fv-18 .tick_list {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px 22px;
+}
+.lw-pr-fv-18 .tick_list li {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  color: var(--fv18-tick-color, #fff);
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 1.5;
+}
+.lw-pr-fv-18 .tick_list i {
+  flex: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: var(--fv18-tick-mark-bg, #c8622e);
+  color: var(--fv18-tick-mark-color, #fff);
+  font-size: 12px;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-18 .tick_list {
+    gap: 10px 14px;
+  }
+  .lw-pr-fv-18 .tick_list li {
+    font-size: 14px;
+  }
+  .lw-pr-fv-18 .tick_list i {
+    width: 20px;
+    height: 20px;
+  }
+}
+.lw-pr-fv-18 .form_card {
+  padding: 26px 26px 24px;
+  border-radius: 12px;
+  background: var(--fv18-card-bg, #fff);
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.28);
+  /* フォームを使わないときのボタン */
+  /* ── 中に入るテーマ側フォームを、狭い箱に収まる形へ詰め直す ──
+     🚨 テーマの既定は「項目名320px｜入力欄」の横並び・余白64pxで、
+        そのままだと箱からはみ出す。ここで縦積み＋余白を詰める。 */
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-18 .form_card {
+    padding: 22px 20px 20px;
+  }
+}
+.lw-pr-fv-18 .form_card .card_ttl {
+  margin: 0 0 4px;
+  color: var(--fv18-card-title-color, #1b4a6b);
+  font-size: 18px;
+  font-weight: 700;
+  text-align: center;
+  line-height: 1.5;
+}
+.lw-pr-fv-18 .form_card .card_sub {
+  margin: 0 0 16px;
+  color: var(--fv18-card-sub-color, #7b848c);
+  font-size: 12px;
+  text-align: center;
+  line-height: 1.6;
+}
+.lw-pr-fv-18 .form_card .card_note {
+  margin: 11px 0 0;
+  color: var(--fv18-card-note-color, #8a939b);
+  font-size: 11px;
+  text-align: center;
+  line-height: 1.7;
+}
+.lw-pr-fv-18 .form_card .cta_btn {
+  margin-top: 4px;
+  padding: 15px 12px;
+  width: 100%;
+  border-radius: var(--fv18-cta-radius, 6px);
+  background: var(--fv18-cta-bg, #c8622e);
+  color: var(--fv18-cta-text, #fff);
+  font-size: 17px;
+  font-weight: 700;
+  line-height: 1.4;
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  box-shadow: 0 4px 0 rgba(0, 0, 0, 0.16);
+}
+.lw-pr-fv-18 .form_card .cta_btn small {
+  margin-top: 3px;
+  display: block;
+  font-size: 11px;
+  font-weight: 400;
+  opacity: 0.92;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form {
+  margin: 0;
+  /* 本文用の段落余白（.post_style p）がフォームの中にも効いてしまうので、
+     まず全部落としてから必要な分だけ足し直す */
+}
+.lw-pr-fv-18 .form_card .lw_mail_form p {
+  margin: 0;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .form_group {
+  grid-template-columns: 1fr;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .form_group + .form_group {
+  margin-top: 12px;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .form_group .label_in {
+  padding-right: 0;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .form_group .label_in label {
+  padding-top: 0;
+  margin-bottom: 5px;
+  font-size: 12px;
+  font-weight: 700;
+  line-height: 1.6;
+  justify-content: flex-start;
+  gap: 7px;
+  /* 🚨 `:not(.is-optional)` を外さないこと。
+     テーマ側は `.required` を主色、`.required.is-optional`（任意）を
+     #ddd + 黒文字で塗り分けている。ここで `.required` だけを指定すると
+     **クラス2つ分の重みで「任意」まで濃い色に塗ってしまい**、
+     黒文字が乗って 1.6:1 になる（2026-09-07 に実測して見つけた）。 */
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .form_group .label_in label .required:not(.is-optional) {
+  margin-top: 0;
+  padding: 2px 6px;
+  background: var(--fv18-required-bg, #c8622e);
+  font-size: 10px;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .form_group .label_in label .required.is-optional {
+  margin-top: 0;
+  padding: 2px 6px;
+  font-size: 10px;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .form_group .form_in input[type=text],
+.lw-pr-fv-18 .form_card .lw_mail_form .form_group .form_in input[type=email],
+.lw-pr-fv-18 .form_card .lw_mail_form .form_group .form_in input[type=tel],
+.lw-pr-fv-18 .form_card .lw_mail_form .form_group .form_in input[type=number],
+.lw-pr-fv-18 .form_card .lw_mail_form .form_group .form_in input[type=date],
+.lw-pr-fv-18 .form_card .lw_mail_form .form_group .form_in select {
+  height: 44px;
+  font-size: 14px;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .form_group .form_in textarea {
+  min-height: 76px;
+  font-size: 14px;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .form_group .form_in .supplement_text {
+  margin: 3px 0 0;
+  font-size: 11px;
+  line-height: 1.6;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .consent_set {
+  margin-top: 14px;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .consent_set .consent_check_wrap p {
+  margin: 0 0 6px;
+  font-size: 12px;
+  line-height: 1.7;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .consent_set .consent_check_wrap label {
+  font-size: 12px;
+  line-height: 1.6;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .consent_set .consent_check_wrap label span {
+  font-size: 12px;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .consent_set .consent_text_wrap {
+  margin-bottom: 8px;
+  padding: 14px;
+  height: 110px;
+  font-size: 12px;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .submit_wrap {
+  margin-top: 14px;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .submit_wrap button {
+  padding: 0 16px;
+  width: 100%;
+  min-width: 0;
+  height: 56px;
+  border-radius: var(--fv18-cta-radius, 6px);
+  background: var(--fv18-submit-bg, #c8622e);
+  color: var(--fv18-submit-text, #fff);
+  font-size: 17px;
+  font-weight: 700;
+}
+.lw-pr-fv-18 .form_card .lw_mail_form .submit_wrap button svg {
+  fill: var(--fv18-submit-text, #fff);
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -15,7 +15,7 @@
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["mainTitle", "subTitle"],
 		"imageAttributes": [],
-			"notes": "colorMain（12 は colorSub も）は `--color-main` という **テーマと同名の CSS変数** として書き出される。ここに `var(--color-main)` を渡すと `--color-main:var(--color-main)` という自己参照になり、変数ごと無効化されて**背景の帯が透明になり、白文字だけが残って見出しが消える**（2026-08-27 に実際に踏んだ）。サイトのテーマ色に合わせたいときも渡さず、色を指定しない（既定 #0a71c0）か、実際の色コードを入れる。"
+			"notes": "colorMain（12 は colorSub も）は `--color-main` という **テーマと同名の CSS変数** として書き出される。ここに `var(--color-main)` を渡すと `--color-main:var(--color-main)` という自己参照になり、変数ごと無効化されて**背景の帯が透明になり、白文字だけが残って見出しが消える**（2026-08-27 に実際に踏んだ）。サイトのテーマ色に合わせたいときも渡さず、色を指定しない（既定 #0a71c0）か、実際の色コードを入れる。 🚨 **サブタイトル（英字）も帯の中に入る。** colorSubText に濃い色を渡すと帯に沈んで読めなくなる（濃い色を濃い帯に置くと 1.7:1 前後・2026-09-06 に 11 で実測）。帯より明るい色にする。"
 		},
 	"attributes": {
 		"mainTitle": {

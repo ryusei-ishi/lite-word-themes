@@ -21,7 +21,7 @@
 			"logoImg",
 			"bgImg"
 		],
-		"notes": "ナビメニュー+ニュース配列あり。最も複雑なFVブロック 🚨 背景写真が明るいときは bgFilterOpacity を55以上にする（既定の30では白い見出しとCTAが背景に溶ける・実測）。🚨 このブロックはロゴ・ナビ・CTA・お知らせまで自分で描くので、ページのヘッダー設定（header_select）を「非表示」にしないとヘッダーが二重になる。newsListVisible を true にすると最新のお知らせが下部に流れる。 ［2026-08-27 追記］navMenuItems（[{title,url}] の配列）が空だとヘッダー右上が器だけ出て空欄になる。必ず入れること。サイトのWPメニューとは連動せず保存HTMLに焼き込まれる。newsListVisible を false にすると下のお知らせ欄が消える。bgFilterType を gradient にすると bgFilterGradient（CSSの linear-gradient 文字列）が効き、上は写真が見えて下だけ暗くできる。薄いフィルタ（22など）だと白い見出しが読めないので、明るい写真では45以上にする。"
+		"notes": "ナビメニュー+ニュース配列あり。最も複雑なFVブロック 🚨 背景写真が明るいときは bgFilterOpacity を55以上にする（既定の30では白い見出しとCTAが背景に溶ける・実測）。🚨 このブロックはロゴ・ナビ・CTA・お知らせまで自分で描くので、ページのヘッダー設定（header_select）を「非表示」にしないとヘッダーが二重になる。newsListVisible を true にすると最新のお知らせが下部に流れる。 ［2026-08-27 追記］navMenuItems（[{title,url}] の配列）が空だとヘッダー右上が器だけ出て空欄になる。必ず入れること。サイトのWPメニューとは連動せず保存HTMLに焼き込まれる。newsListVisible を false にすると下のお知らせ欄が消える。bgFilterType を gradient にすると bgFilterGradient（CSSの linear-gradient 文字列）が効き、上は写真が見えて下だけ暗くできる。薄いフィルタ（22など）だと白い見出しが読めないので、明るい写真では45以上にする。 🚨 min-h を 100vh にすると、**管理画面の一覧や確認シートのように iframe で見る場所では iframe の高さがそのまま vh になり、ページ全体が1枚の写真の柱に見える**（2026-09-07 実測）。実機の見え方はほぼ同じなので、720px 前後の固定値を入れておくほうが安全。"
 	},
 	"supports": {
 		"anchor": true

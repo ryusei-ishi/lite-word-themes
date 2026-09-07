@@ -17,36 +17,107 @@
 			"contents"
 		],
 		"imageAttributes": [],
-		"notes": "1ブロックで全段を持つ（contents 配列）。lw-pr-step-8 の「1ブロック＝1段」とは逆なので、段を増やすときはブロックを足すのではなく contents を足す。見た目は**行型** — 左にサイト色の番号タイル、右に白地の見出しと説明。1行ずつ横に長いので、**段数が多い手続き（5段以上）でも縦に積めて読みやすい**。丸番号を3列に並べる lw-pr-step-7 とは向きが違う。🚨 bgGradient は名前と違って「背景のグラデーション」ではない。save() が **li の border-color** と **番号タイルの background** の2か所に同じ値を書く。既定が var(--color-main) なので**ページのメインカラーに自動で追従する。色は指定しなくてよい**。🚨 文字の大きさは fontSizeClass（font_size_s / m / l）**1つで全部決まる**。見出しは 1em、説明は 0.71em の相対値なので、見出しだけ小さくすることはできない。font_size_m なら PC で 見出し24px・説明17px、800px以下 22/15.6、**550px以下 18/12.8**。🚨 スマホで説明が 12.8px まで落ちるので、**1段の説明は60字まで**にする。🚨 番号の列は 2.4em 固定（font_size_m の PC で約58px）。**「01」「02」の2桁向け**で、「STEP1」のような文字を入れると溢れる。説明は white-space: pre-wrap なので改行がそのまま効く（br は要らない）。contents は [{ no, title, text }] の3つだけ。**写真は入らない**（写真つきの流れにしたいなら lw-pr-content-8）。titleTag の既定は h3。セクション見出し（h2）の下に置くならそのままでよい。ulMaxWidth（既定1080）で内側の幅を決める。自前で margin: 32px 0（800px以下は 24px）を持つので、前後にスペーサーを足さない。"
+		"notes": "1ブロックで全段を持つ（contents 配列）。lw-pr-step-8 の「1ブロック＝1段」とは逆なので、段を増やすときはブロックを足すのではなく contents を足す。見た目は**行型** — 左にサイト色の番号タイル、右に白地の見出しと説明。1行ずつ横に長いので、**段数が多い手続き（5段以上）でも縦に積めて読みやすい**。丸番号を3列に並べる lw-pr-step-7 とは向きが違う。🚨 bgGradient は名前と違って「背景のグラデーション」ではない。save() が **li の border-color** と **番号タイルの background** の2か所に同じ値を書く。既定が var(--color-main) なので**ページのメインカラーに自動で追従する。色は指定しなくてよい**。🚨 文字の大きさは fontSizeClass（font_size_s / m / l）**1つで全部決まる**。見出しは 1em、説明は 0.71em の相対値なので、見出しだけ小さくすることはできない。font_size_m なら PC で 見出し24px・説明17px、800px以下 22/15.6、**550px以下 18/12.8**。🚨 スマホで説明が 12.8px まで落ちるので、**1段の説明は60字まで**にする。🚨 番号の列は 2.4em 固定（font_size_m の PC で約58px）。**「01」「02」の2桁向け**で、「STEP1」のような文字を入れると溢れる。説明は white-space: pre-wrap なので改行がそのまま効く（br は要らない）。contents は [{ no, title, text }] の3つだけ。**写真は入らない**（写真つきの流れにしたいなら lw-pr-content-8）。titleTag の既定は h3。セクション見出し（h2）の下に置くならそのままでよい。ulMaxWidth（既定1080）で内側の幅を決める。自前で margin: 32px 0（800px以下は 24px）を持つので、前後にスペーサーを足さない。🚨 **番号の列は既定 2.4em・番号の文字は 1.4em で、「01」「02」の2桁向け**。「10時」「STEP1」のような3文字以上を入れると、タイルからはみ出して右の白地に重なる（2026-09-07 Ryuichi 指摘）。→ **noWidthEm（列の幅）と noFontSizeEm（番号の文字）で変えられる**（サイドバー「STEP番号の書式」）。どちらも **0 のときは従来のまま**で、save() の出力も1文字も変わらない。3文字入れるなら noWidthEm 3.2 / noFontSizeEm 0.95 あたりが目安。⚠️ 文字だけ小さくしても列幅は変わらないので、**必ず2つセットで**調整すること。"
 	},
 	"no": 3,
 	"attributes": {
-		"bgGradient": { "type": "string", "default": "var(--color-main)" },
-		"ulMaxWidth": { "type": "number", "default": 1080 },
-		"fontSizeClass": { "type": "string", "default": "font_size_m" },
-		"fontNo": { "type": "string", "default": "Murecho" },
-		"fontWeightNo": { "type": "string", "default": "600" },
-		"colorNo": { "type": "string", "default": "" },
-		"titleTag": { "type": "string", "default": "h3" },
-		"fontH3": { "type": "string", "default": "" },
-		"fontWeightH3": { "type": "string", "default": "" },
-		"colorH3": { "type": "string", "default": "" },
-		"fontP": { "type": "string", "default": "" },
-		"fontWeightP": { "type": "string", "default": "" },
-		"colorP": { "type": "string", "default": "" },
+		"bgGradient": {
+			"type": "string",
+			"default": "var(--color-main)"
+		},
+		"ulMaxWidth": {
+			"type": "number",
+			"default": 1080
+		},
+		"fontSizeClass": {
+			"type": "string",
+			"default": "font_size_m"
+		},
+		"fontNo": {
+			"type": "string",
+			"default": "Murecho"
+		},
+		"fontWeightNo": {
+			"type": "string",
+			"default": "600"
+		},
+		"colorNo": {
+			"type": "string",
+			"default": ""
+		},
+		"noWidthEm": {
+			"type": "number",
+			"default": 0
+		},
+		"noFontSizeEm": {
+			"type": "number",
+			"default": 0
+		},
+		"titleTag": {
+			"type": "string",
+			"default": "h3"
+		},
+		"fontH3": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightH3": {
+			"type": "string",
+			"default": ""
+		},
+		"colorH3": {
+			"type": "string",
+			"default": ""
+		},
+		"fontP": {
+			"type": "string",
+			"default": ""
+		},
+		"fontWeightP": {
+			"type": "string",
+			"default": ""
+		},
+		"colorP": {
+			"type": "string",
+			"default": ""
+		},
 		"contents": {
 			"type": "array",
 			"source": "query",
 			"selector": ".lw-step-2__li",
 			"query": {
-				"no": { "type": "string", "source": "html", "selector": ".lw-step-2__li_no" },
-				"title": { "type": "string", "source": "html", "selector": ".lw-step-2__li_title" },
-				"text": { "type": "string", "source": "html", "selector": ".lw-step-2__li_text" }
+				"no": {
+					"type": "string",
+					"source": "html",
+					"selector": ".lw-step-2__li_no"
+				},
+				"title": {
+					"type": "string",
+					"source": "html",
+					"selector": ".lw-step-2__li_title"
+				},
+				"text": {
+					"type": "string",
+					"source": "html",
+					"selector": ".lw-step-2__li_text"
+				}
 			},
 			"default": [
-				{ "no": "01", "title": "応募", "text": "応募フォームより必要事項を入力し、送信してください。応募内容を確認し、追って担当者よりご連絡いたします。" },
-				{ "no": "02", "title": "書類選考", "text": "ご応募いただいた内容をもとに、書類選考を行います。結果は1週間以内にメールにてお知らせいたします。" },
-				{ "no": "03", "title": "面接", "text": "書類選考に通過された方には、担当者による面接を実施します。面接日時はご相談の上、決定いたします。" }
+				{
+					"no": "01",
+					"title": "応募",
+					"text": "応募フォームより必要事項を入力し、送信してください。応募内容を確認し、追って担当者よりご連絡いたします。"
+				},
+				{
+					"no": "02",
+					"title": "書類選考",
+					"text": "ご応募いただいた内容をもとに、書類選考を行います。結果は1週間以内にメールにてお知らせいたします。"
+				},
+				{
+					"no": "03",
+					"title": "面接",
+					"text": "書類選考に通過された方には、担当者による面接を実施します。面接日時はご相談の上、決定いたします。"
+				}
 			]
 		}
 	}

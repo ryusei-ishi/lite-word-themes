@@ -1,0 +1,75 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-qa-4",
+	"version": "1.0.0",
+	"title": "よくある質問 04（タブで分ける）",
+	"category": "lw-faq",
+	"icon": "category",
+	"description": "上のタブで分類を切り替えるよくある質問。押した分類の質問だけが下に出ます。質問が多くてもページが長くなりません。",
+	"aiHint": {
+		"description": "よくある質問（タブ切替）。上に分類のタブを並べ、押すとその分類の質問だけ出る。分類が3〜6個あり、合計15件以上あるFAQに向く",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["groups"],
+		"imageAttributes": [],
+		"notes": "groups は [{ label, items:[{ text_q, text_a }] }] の入れ子配列。label が分類名（タブの文字）。⚠️ タブの文字は全角6字までにする。375px でタブが2行に折れると分類の切れ目が分からなくなる（横スクロールで逃がしてあるが、短いほうが読みやすい）。⚠️ 分類は3〜6個。2個ならタブにする意味が無く lw-qa-1 で足りる。7個を超えると横スクロールが長くなるので lw-pr-qa-6（左に分類が追従する2カラム）にする。🚨 JS が動かない環境では全部の分類がそのまま縦に出る（分類名は panel-title として出る）。壊れない作りなので心配しなくてよい。⚠️ showCount を true にするとタブに件数が出る。件数は save() のときに数えた固定値ではなく items.length なので、質問を足せば自動で変わる。"
+	},
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"maxWidth": { "type": "number", "default": 0 },
+		"tabStyle": { "type": "string", "default": "pill" },
+		"tabAlign": { "type": "string", "default": "center" },
+		"showCount": { "type": "boolean", "default": true },
+		"mainColor": { "type": "string", "default": "var(--color-main)" },
+		"tabBg": { "type": "string", "default": "#f0f0f0" },
+		"tabTextColor": { "type": "string", "default": "#444444" },
+		"activeTextColor": { "type": "string", "default": "#ffffff" },
+		"lineColor": { "type": "string", "default": "#e0e0e0" },
+		"itemGap": { "type": "number", "default": 24 },
+		"labelStyle": { "type": "string", "default": "plain" },
+		"labelWidth": { "type": "number", "default": 34 },
+		"qLabelColor": { "type": "string", "default": "var(--color-main)" },
+		"aLabelColor": { "type": "string", "default": "var(--color-accent)" },
+		"labelFont": { "type": "string", "default": "Roboto" },
+		"labelFontWeight": { "type": "string", "default": "" },
+		"labelFontSizePc": { "type": "number", "default": 18 },
+		"labelFontSizeSp": { "type": "number", "default": 16 },
+		"textFont": { "type": "string", "default": "" },
+		"qFontSizePc": { "type": "number", "default": 17 },
+		"qFontSizeSp": { "type": "number", "default": 15 },
+		"aFontSizePc": { "type": "number", "default": 15 },
+		"aFontSizeSp": { "type": "number", "default": 14 },
+		"schemaOutput": { "type": "boolean", "default": true },
+		"groups": {
+			"type": "array",
+			"default": [
+				{
+					"label": "はじめての方",
+					"items": [
+						{ "text_q": "予約は必要ですか？", "text_a": "ご予約なしでもお受けしています。ただし土曜は埋まりやすいので、お電話いただけると確実です。" },
+						{ "text_q": "はじめてでも大丈夫？", "text_a": "はじめての方が半分以上です。当日は10分ほどお話をうかがってから始めます。" }
+					]
+				},
+				{
+					"label": "料金・お支払い",
+					"items": [
+						{ "text_q": "追加料金はかかりますか？", "text_a": "表示している金額のほかにいただくものはありません。" },
+						{ "text_q": "カードは使えますか？", "text_a": "現金のほか、各種クレジットカードと電子マネーがお使いいただけます。" }
+					]
+				},
+				{
+					"label": "ご予約・変更",
+					"items": [
+						{ "text_q": "当日でも変更できますか？", "text_a": "前日までにご連絡いただければ、料金はかかりません。" }
+					]
+				}
+			]
+		}
+	},
+	"editorScript": "file:./lw-pr-qa-4.js",
+	"viewScript": "file:./view.js",
+	"no": 4
+}

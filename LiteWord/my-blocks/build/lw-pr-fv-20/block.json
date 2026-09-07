@@ -1,0 +1,87 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-fv-20",
+	"version": "1.0.0",
+	"title": "FV 20 リード獲得（実績の数字つき）",
+	"category": "lw-firstview",
+	"icon": "chart-bar",
+	"editorScript": "file:./lw-pr-fv-20.js",
+	"aiHint": {
+		"description": "リード獲得ページ専用のFV。左に色の面（見出し・説明・CTA）、右に写真、その真下に実績の数字を2〜5個ならべた帯が付く。CTAのすぐ近くに信頼の証が来るので、はじめて来た人でも押しやすい。自己診断・無料見積り・無料トライアル・キャンペーンに使う",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": [
+			"eyebrow",
+			"mainTitle",
+			"description",
+			"buttonText",
+			"buttonSub",
+			"statsItems"
+		],
+		"imageAttributes": [
+			"imageUrlPc",
+			"imageUrlSp"
+		],
+		"notes": [
+			"statsItems は { num, unit, label } の並び。num は数字だけ（12,480）、unit は単位（人・%・分・円）、label はその下の説明。2〜5個が読みやすく、4個が収まりがよい。空にすると帯ごと消える。",
+			"🚨 数字は必ず本当の数字を入れる。作った数字を置かない。実績が無いなら showStats を false にして帯ごと消す。",
+			"statsColumnsSp（スマホの列数）は既定 2。数字が長い（12,480 など）ときは 1 にする。",
+			"imageSide を left にすると写真が左・文章が右になる。同じ型を2ページ続けて使うときに変えると印象が変わる。",
+			"上段の高さは minHeightPc/Tb/Sp で決める。数字の帯はその外側に付くので、指定した高さ＋帯の分だけ縦に伸びる。",
+			"🚨 自分から全幅になる背景ブロック。次の段も全幅の帯なら、あいだにスペーサーを置かない。"
+		]
+	},
+	"supports": {
+		"anchor": true
+	},
+	"attributes": {
+		"panelBgColor": { "type": "string", "default": "#7a3340" },
+		"imageUrlPc": { "type": "string", "default": "https://lite-word.com/sample_img/background/6.webp" },
+		"imageUrlSp": { "type": "string", "default": "" },
+		"imageAlt": { "type": "string", "default": "" },
+		"imageSide": { "type": "string", "default": "right" },
+		"minHeightPc": { "type": "string", "default": "min-h-pc-440px" },
+		"minHeightTb": { "type": "string", "default": "min-h-tb-360px" },
+		"minHeightSp": { "type": "string", "default": "" },
+		"maxWidth": { "type": "number", "default": 600 },
+		"showEyebrow": { "type": "boolean", "default": true },
+		"eyebrow": { "type": "string", "default": "10の質問に答えるだけ" },
+		"eyebrowColor": { "type": "string", "default": "#e9bfc6" },
+		"headingLevel": { "type": "number", "default": 1 },
+		"mainTitle": { "type": "string", "default": "いまのやり方、<br>3分で点検できます" },
+		"titleColor": { "type": "string", "default": "#ffffff" },
+		"titleFontWeight": { "type": "string", "default": "700" },
+		"titleFont": { "type": "string", "default": "" },
+		"titleFontSizePc": { "type": "number", "default": 44 },
+		"titleFontSizeSp": { "type": "number", "default": 29 },
+		"description": { "type": "string", "default": "結果はその場に出ます。メールアドレスの登録も営業のご連絡もありません。" },
+		"descriptionColor": { "type": "string", "default": "#efd8dc" },
+		"buttonText": { "type": "string", "default": "無料で診断をはじめる" },
+		"buttonSub": { "type": "string", "default": "全10問・3分・登録不要" },
+		"buttonUrl": { "type": "string", "default": "" },
+		"buttonLinkType": { "type": "string", "default": "url" },
+		"buttonPageId": { "type": "number", "default": 0 },
+		"buttonCategoryId": { "type": "number", "default": 0 },
+		"ctaBgColor": { "type": "string", "default": "#ffffff" },
+		"ctaTextColor": { "type": "string", "default": "#5a222d" },
+		"ctaSubColor": { "type": "string", "default": "#7a3340" },
+		"ctaBorderRadius": { "type": "number", "default": 6 },
+		"showStats": { "type": "boolean", "default": true },
+		"statsItems": {
+			"type": "array",
+			"default": [
+				{ "num": "12,480", "unit": "人", "label": "これまでの診断数" },
+				{ "num": "98", "unit": "%", "label": "「役に立った」の声" },
+				{ "num": "3", "unit": "分", "label": "終わるまでの時間" },
+				{ "num": "0", "unit": "円", "label": "最後まで無料" }
+			]
+		},
+		"statsBgColor": { "type": "string", "default": "#5a222d" },
+		"statsNumColor": { "type": "string", "default": "#ffffff" },
+		"statsUnitColor": { "type": "string", "default": "#c9903c" },
+		"statsLabelColor": { "type": "string", "default": "#e0c2c8" },
+		"statsTopLineColor": { "type": "string", "default": "#c9903c" },
+		"statsColumnsSp": { "type": "number", "default": 2 }
+	},
+	"no": 20
+}

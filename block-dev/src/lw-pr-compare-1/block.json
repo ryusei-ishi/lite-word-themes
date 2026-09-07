@@ -19,7 +19,7 @@
 			"secondItems"
 		],
 		"imageAttributes": [],
-		"notes": "firstMark/secondMarkは絵文字ではなく○△✓!のような1〜2文字の記号にする。項目（firstItems/secondItems）は文字列の配列で、1要素=1行のフルワイド行カードとして描画される（2列に割った内部レイアウトは持たない。2026-09-04にRyuichi指摘のガタガタ対策）。1項目は20〜50文字程度が読みやすい。件数は上下で違っていてよい（3〜6件推奨）。"
+		"notes": "firstMark/secondMarkは絵文字ではなく○△✓!のような1〜2文字の記号にする。項目（firstItems/secondItems）は文字列の配列で、1要素=1行のフルワイド行カードとして描画される（2列に割った内部レイアウトは持たない。2026-09-04にRyuichi指摘のガタガタ対策）。1項目は20〜50文字程度が読みやすい。件数は上下で違っていてよい（3〜6件推奨）。 🚨 **firstColor / secondColor の既定は var(--color-main)。** 2区分を色で見分けさせるブロックなので、両方に実際の色を渡す（例: 本題＝サイト色 ／ 注意＝えんじ）。rowBgColor の既定はクリーム #faf7ef なので、寒色系のサイトでは白か地色に合わせて変える。"
 	},
 	"supports": {
 		"anchor": true

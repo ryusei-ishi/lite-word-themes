@@ -1,0 +1,80 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-qa-5",
+	"version": "1.0.0",
+	"title": "よくある質問 05（検索して探す）",
+	"category": "lw-faq",
+	"icon": "search",
+	"description": "検索窓つきのよくある質問。言葉を入れるとその場で絞り込みます。見つからなかったときの行き先も出せます。質問が15件以上あるページに向きます。",
+	"aiHint": {
+		"description": "よくある質問（検索して探す）。上に検索窓があり、打つとその場で絞り込む。よく検索される言葉のボタンつき。0件のときは問い合わせ先を出す。質問が15件以上あるFAQに向く",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["items", "hints", "noResultText"],
+		"imageAttributes": [],
+		"notes": "items は [{ text_q, text_a, keywords }] の配列。keywords は**表示されない検索用の言葉**（空白区切り）。「駐車場」の質問に「車 パーキング とめる」を入れておくと、その語でも当たる。⚠️ 検索はひらがな・カタカナ・全角半角・大文字小文字を同じものとして扱う（view.js が正規化する）。漢字とかなの違いは吸収しないので、かなで探されそうな語は keywords に入れること。🚨 検索窓・件数・「見つかりません」は JS が動いたときだけ出る。JS 無しでは全部の質問が開いた状態で縦に並ぶだけなので壊れない。⚠️ hints（よく検索される言葉）は3〜5個。多いと2行になって窮屈になる。⚠️ noResultLinkUrl を空のままにするとリンクは出ない（文章だけ出る）。⚠️ 検索を使うのは質問が15件以上あるときだけ。5件しか無いページに検索窓を置くと、かえって探させることになる。"
+	},
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"maxWidth": { "type": "number", "default": 860 },
+		"openMode": { "type": "string", "default": "accordion" },
+		"placeholder": { "type": "string", "default": "キーワードで探す（例：駐車場）" },
+		"hintLabel": { "type": "string", "default": "よく検索される言葉" },
+		"hints": { "type": "array", "default": ["駐車場", "キャンセル", "支払い", "子ども"] },
+		"showCount": { "type": "boolean", "default": true },
+		"noResultText": {
+			"type": "string",
+			"default": "その言葉では見つかりませんでした。別の言い方でお試しいただくか、直接おたずねください。"
+		},
+		"noResultLinkText": { "type": "string", "default": "お問い合わせはこちら" },
+		"noResultLinkUrl": { "type": "string", "default": "" },
+		"mainColor": { "type": "string", "default": "var(--color-main)" },
+		"searchBg": { "type": "string", "default": "#f6f6f6" },
+		"lineColor": { "type": "string", "default": "#e0e0e0" },
+		"itemGap": { "type": "number", "default": 20 },
+		"labelWidth": { "type": "number", "default": 34 },
+		"qLabelColor": { "type": "string", "default": "var(--color-main)" },
+		"aLabelColor": { "type": "string", "default": "var(--color-accent)" },
+		"labelFont": { "type": "string", "default": "Roboto" },
+		"labelFontWeight": { "type": "string", "default": "" },
+		"labelFontSizePc": { "type": "number", "default": 18 },
+		"labelFontSizeSp": { "type": "number", "default": 16 },
+		"textFont": { "type": "string", "default": "" },
+		"qFontSizePc": { "type": "number", "default": 17 },
+		"qFontSizeSp": { "type": "number", "default": 15 },
+		"aFontSizePc": { "type": "number", "default": 15 },
+		"aFontSizeSp": { "type": "number", "default": 14 },
+		"schemaOutput": { "type": "boolean", "default": true },
+		"items": {
+			"type": "array",
+			"default": [
+				{
+					"text_q": "駐車場はありますか？",
+					"text_a": "建物の裏に3台ぶんございます。満車のときは近くのコインパーキングをご案内します。",
+					"keywords": "車 パーキング とめる"
+				},
+				{
+					"text_q": "支払い方法を教えてください",
+					"text_a": "現金のほか、各種クレジットカードと電子マネーがお使いいただけます。",
+					"keywords": "カード 現金 電子マネー"
+				},
+				{
+					"text_q": "キャンセル料はかかりますか？",
+					"text_a": "前日までのご連絡なら無料です。当日のお取り消しは半額をいただいております。",
+					"keywords": "取り消し 変更 キャンセル料"
+				},
+				{
+					"text_q": "子どもを連れて行っても大丈夫ですか？",
+					"text_a": "はい。お子さま連れの方も多くいらっしゃいます。ベビーカーのまま入っていただけます。",
+					"keywords": "こども 子連れ ベビーカー 赤ちゃん"
+				}
+			]
+		}
+	},
+	"editorScript": "file:./lw-pr-qa-5.js",
+	"viewScript": "file:./view.js",
+	"no": 5
+}

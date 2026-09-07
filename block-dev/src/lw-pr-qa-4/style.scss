@@ -1,0 +1,271 @@
+// エディタ内には .lw_content_wrap（コンテナ）が無く @container が効かないので、
+// ブロック自身をコンテナにしてPC/スマホの切り替えを再現する
+[data-type="wdl/lw-pr-qa-4"] {
+  container-type: inline-size;
+}
+
+.wp-block-wdl-lw-pr-qa-4,
+[data-type="wdl/lw-pr-qa-4"] {
+  position: relative;
+  z-index: 10;
+  margin: 40px auto;
+  max-width: var(--qa4-max-w, 100%);
+  width: 100%;
+  box-sizing: border-box;
+  @container (max-width:700px) {
+    margin: 32px auto;
+  }
+  * {
+    box-sizing: border-box;
+  }
+
+  // ---------------------------------------------------------------
+  // タブ
+  // 🚨 既定は非表示。view.js が .is-js を付けて初めて出す。
+  //    JS が動かない環境で「押せないタブ」を見せないため。
+  // ---------------------------------------------------------------
+  .qa-4__tabs {
+    display: none;
+    gap: 8px;
+    flex-wrap: wrap;
+    // スマホでは折り返さず横スクロールにする。
+    // 折り返すと分類の切れ目が分からなくなるため
+    @container (max-width:700px) {
+      flex-wrap: nowrap;
+      overflow-x: auto;
+      -webkit-overflow-scrolling: touch;
+      scrollbar-width: none;
+      // 端で切れて見えるように、はみ出しぶんの余白を作る
+      margin-left: -4px;
+      margin-right: -4px;
+      padding: 0 4px 4px;
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+  }
+
+  .qa-4__tab {
+    margin: 0;
+    padding: 0 1.1em;
+    height: 46px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.45em;
+    flex: 0 0 auto;
+    border: none;
+    cursor: pointer;
+    background: var(--qa4-tab-bg, #f0f0f0);
+    color: var(--qa4-tab-color, #444);
+    line-height: 1.4em;
+    font-size: 15px;
+    font-feature-settings: "palt";
+    transition: background 0.15s, color 0.15s;
+    @container (max-width:700px) {
+      height: 42px;
+      padding: 0 0.9em;
+      font-size: 14px;
+    }
+    &:hover {
+      opacity: 0.85;
+    }
+    &.is-active {
+      background: var(--qa4-main, var(--color-main));
+      color: var(--qa4-tab-active-color, #fff);
+    }
+  }
+
+  .qa-4__tab-count {
+    display: inline-block;
+    min-width: 1.6em;
+    padding: 0.1em 0.35em;
+    border-radius: 1em;
+    background: rgba(0, 0, 0, 0.08);
+    line-height: 1.5em;
+    font-size: 0.75em;
+    text-align: center;
+  }
+  // 🚨 白を重ねると地色が明るくなり、白文字が 3.1:1 まで落ちる（11px は 4.5 が要る）。
+  //    黒を重ねて暗くする（主色 #1f7a8c で 6.9:1）。
+  .qa-4__tab.is-active .qa-4__tab-count {
+    background: rgba(0, 0, 0, 0.25);
+  }
+
+  // ---- タブの形 3種 ----
+  &.qa-4--pill .qa-4__tab {
+    border-radius: 999px;
+  }
+  &.qa-4--box .qa-4__tab {
+    border-radius: 4px;
+  }
+  &.qa-4--underline {
+    .qa-4__tabs {
+      gap: 0;
+      border-bottom: 1px solid var(--qa4-line, #e0e0e0);
+    }
+    .qa-4__tab {
+      background: transparent;
+      border-bottom: 3px solid transparent;
+      // 下線だけの形は「札」に見せないので、地色の設定は使わない
+      &.is-active {
+        background: transparent;
+        color: var(--qa4-main, var(--color-main));
+        border-bottom-color: var(--qa4-main, var(--color-main));
+      }
+      .qa-4__tab-count {
+        background: rgba(0, 0, 0, 0.08);
+      }
+    }
+  }
+
+  // ---- タブの寄せ ----
+  &.qa-4--align-center .qa-4__tabs {
+    justify-content: center;
+    @container (max-width:700px) {
+      // 横スクロールのときは中央寄せにすると先頭が隠れるので左から
+      justify-content: flex-start;
+    }
+  }
+  &.qa-4--align-left .qa-4__tabs {
+    justify-content: flex-start;
+  }
+
+  // ---------------------------------------------------------------
+  // 中身
+  // ---------------------------------------------------------------
+  .qa-4__panels {
+    margin-top: 0;
+  }
+
+  // JS が動かないときだけ出る分類の見出し
+  .qa-4__panel-title {
+    margin: 32px 0 16px;
+    padding-bottom: 0.5em;
+    border-bottom: 2px solid var(--qa4-main, var(--color-main));
+    color: var(--qa4-main, var(--color-main));
+    line-height: 1.5em;
+    font-size: 18px;
+    font-weight: 600;
+  }
+  .qa-4__panel:first-child .qa-4__panel-title {
+    margin-top: 0;
+  }
+
+  .qa-4__item {
+    margin: 0;
+    padding: var(--qa4-gap, 24px) 0;
+    border-bottom: 1px solid var(--qa4-line, #e0e0e0);
+    &:last-of-type {
+      border-bottom: none;
+    }
+
+    dt,
+    dd {
+      margin: 0;
+      padding: 0;
+      display: grid;
+      // ラベル幅を固定しているので、Q と A の本文の頭が必ず揃う
+      grid-template-columns: var(--qa4-label-w, 34px) 1fr;
+      align-items: baseline;
+    }
+    // 質問と回答の間隔。項目どうしの間隔の半分にして、Q と A のまとまりを保つ
+    dd {
+      margin-top: calc(var(--qa4-gap, 24px) / 2);
+    }
+
+    .qa-4__mark {
+      display: block;
+      line-height: 1.6em;
+      font-size: var(--qa4-label-size-pc, 18px);
+      letter-spacing: 0.02em;
+      white-space: nowrap;
+      @container (max-width:700px) {
+        font-size: var(--qa4-label-size-sp, 16px);
+      }
+    }
+    .qa-4__mark--q {
+      color: var(--qa4-q-color, var(--color-main));
+    }
+    .qa-4__mark--a {
+      color: var(--qa4-a-color, var(--color-accent));
+    }
+
+    p {
+      margin: 0;
+      padding: 0;
+      line-height: 1.8em;
+      font-feature-settings: "palt";
+      a {
+        text-decoration: underline;
+        color: var(--color-link-common, #06c);
+      }
+    }
+    p.qa-4__q {
+      line-height: 1.6em;
+      font-size: var(--qa4-q-size-pc, 17px);
+      font-weight: 600;
+      @container (max-width:700px) {
+        font-size: var(--qa4-q-size-sp, 15px);
+      }
+    }
+    p.qa-4__a {
+      font-size: var(--qa4-a-size-pc, 15px);
+      @container (max-width:700px) {
+        font-size: var(--qa4-a-size-sp, 14px);
+      }
+    }
+  }
+
+  // ---------------------------------------------------------------
+  // JS が動いたとき（view.js が .is-js を付ける）
+  // ---------------------------------------------------------------
+  &.is-js {
+    .qa-4__tabs {
+      display: flex;
+    }
+    .qa-4__panel-title {
+      display: none;
+    }
+    .qa-4__panels {
+      margin-top: 32px;
+      @container (max-width:700px) {
+        margin-top: 24px;
+      }
+    }
+    .qa-4__panel {
+      display: none;
+      &.is-active {
+        display: block;
+      }
+    }
+  }
+}
+
+// ---- ここから下はエディタ専用（操作ボタン）。save() には出力されない ----
+[data-type="wdl/lw-pr-qa-4"] {
+  .qa-4__group-tools {
+    margin-top: 16px;
+    padding: 12px 16px;
+    border: 1px dashed #c3c4c7;
+    border-radius: 4px;
+    background: #fbfbfc;
+  }
+  .qa-4__group-buttons {
+    margin-top: 8px;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 4px;
+  }
+  .qa-4__tools {
+    margin-top: 8px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 4px;
+  }
+  .qa-4__add {
+    margin-top: 24px;
+    display: flex;
+    justify-content: center;
+  }
+}

@@ -13,6 +13,7 @@
 		"imageAttributes": [],
 		"excludeReason": "フォームブロック。テキスト生成不要",
 		"notes": [
+			"🚨 **色の属性（buttonBgColor / requiredBgColor / labelColor など11個）は、いまどれも効いていない**（2026-09-07 実測）。このブロックの style.css がその値を1つも使っておらず、送信ボタンと必須バッジはテーマの functions/mail_form/put_style/ptn_1.css が **サイト色 var(--color-main)** で塗る。明るいサイト色だと白文字が 3.9:1 になるが、テンプレート側では直せない。直すならブロックのCSSを足す必要があるが、既定値が #007cba（青）なので**そのまま足すと既存サイトのボタンの色が変わる**。先に既定値を var(--color-main) 相当にしてからでないと出せない。",
 			"🚨 見出しも背景も持たない**素のフォームだけ**が出る。見出しが要るときは custom-title 系を上に置く。背景写真の帯ごと欲しいときは paid-block-contact-2。",
 			"🚨 送信ボタンの中の矢印（svg）の大きさは、ブロックの style.css ではなく**`functions/mail_form/put_style/ptn_1.css`** が決めている（`form_put.php` がフォーム出力時に enqueue する）。このCSSを読まない環境（自作のプレビューなど）では矢印が1000px超まで膨らむ。実サイトでは正常。"
 		]

@@ -1,0 +1,285 @@
+@charset "UTF-8";
+/* FV 19 リード獲得（電話とフォームの二択）
+   ------------------------------------------------------------------
+   電話とフォームを同じ大きさで並べ、それぞれに受付時間・所要時間を添える。
+   🚨 電話は tel: リンク（<a>）で書き出す。パソコンでも押せる。
+      押させたくないときは編集画面の「電話番号を発信リンクにする」を切る（<span> になる）。 */
+.lw_content_wrap.page .lw-pr-fv-19 {
+  margin-left: calc((100% - 100vw) / 2);
+  width: 100vw;
+}
+.lw_content_wrap.page:has(.first_content + .lw-pr-fv-19) .first_content {
+  display: none;
+}
+
+.lw-pr-fv-19 {
+  position: relative;
+  z-index: 10;
+  padding: 60px 30px;
+  max-width: 100vw;
+  display: flex;
+  align-items: center;
+  background: var(--fv19-bg, #0a4653);
+  /* 肩ラベル（左右に斜めの線） */
+  /* ── 二択のボタン ───────────────────────────── */
+  /* ── 安心の一言 ─────────────────────────────── */
+}
+@media (max-width: 1000px) {
+  .lw-pr-fv-19 {
+    padding: 48px 24px;
+  }
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-19 {
+    padding: 38px 20px 40px;
+  }
+}
+.lw-pr-fv-19 .bg_filter {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+}
+.lw-pr-fv-19 .bg_filter picture,
+.lw-pr-fv-19 .bg_filter img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+.lw-pr-fv-19 .bg_filter .bg_filter_inner {
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: 2;
+  width: 100%;
+  height: 100%;
+  background: var(--fv19-filter-color, #0a4653);
+  opacity: var(--fv19-filter-opacity, 0.82);
+}
+.lw-pr-fv-19 .this_wrap {
+  position: relative;
+  z-index: 3;
+  margin: 0 auto;
+  width: 100%;
+  max-width: var(--fv19-max-width, 1000px);
+  text-align: center;
+}
+.lw-pr-fv-19.align_left .this_wrap {
+  text-align: left;
+}
+.lw-pr-fv-19.align_left .this_wrap .two_cta,
+.lw-pr-fv-19.align_left .this_wrap .safe_list {
+  justify-content: flex-start;
+}
+.lw-pr-fv-19.align_left .this_wrap .eyebrow {
+  margin-left: 0;
+}
+.lw-pr-fv-19 .eyebrow {
+  position: relative;
+  margin-bottom: 16px;
+  padding: 0 26px;
+  display: inline-block;
+  color: var(--fv19-eyebrow-color, #a9e2ea);
+  font-size: 16px;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  line-height: 1.6;
+  /* 🚨 飾りの斜線は **background ではなく border で引く**。
+     コントラストの自動検査は「文字の祖先にある position:absolute で
+     不透明な背景を持つ疑似要素」を“文字の後ろの色”とみなすので、
+     この線を background で塗ると**文字色と同じ色を背景として拾い、1:1 と誤報する**
+     （2026-09-07 に実測。currentColor をやめても変わらず、原因は background そのものだった）。
+     border なら backgroundColor は透明のままで、見た目は同じ。 */
+}
+.lw-pr-fv-19 .eyebrow::before, .lw-pr-fv-19 .eyebrow::after {
+  content: "";
+  position: absolute;
+  top: 50%;
+  width: 18px;
+  height: 0;
+  border-top: 1.5px solid var(--fv19-eyebrow-color, #a9e2ea);
+}
+.lw-pr-fv-19 .eyebrow::before {
+  left: 0;
+  transform: rotate(66deg);
+}
+.lw-pr-fv-19 .eyebrow::after {
+  right: 0;
+  transform: rotate(-66deg);
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-19 .eyebrow {
+    margin-bottom: 12px;
+    padding: 0 22px;
+    font-size: 14px;
+  }
+  .lw-pr-fv-19 .eyebrow::before, .lw-pr-fv-19 .eyebrow::after {
+    width: 14px;
+    height: 0;
+  }
+}
+.lw-pr-fv-19 .main_ttl {
+  margin: 0 0 18px;
+  color: var(--fv19-title-color, #fff);
+  font-size: var(--fv19-title-size-pc, 46px);
+  font-weight: var(--fv19-title-weight, 700);
+  line-height: 1.36;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-19 .main_ttl {
+    margin-bottom: 14px;
+    font-size: var(--fv19-title-size-sp, 29px);
+  }
+}
+.lw-pr-fv-19 .description {
+  margin: 0 0 34px;
+  color: var(--fv19-description-color, #cfe8ec);
+  font-size: 17px;
+  line-height: 1.9;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-19 .description {
+    margin-bottom: 24px;
+    font-size: 15px;
+  }
+}
+.lw-pr-fv-19 .two_cta {
+  display: flex;
+  justify-content: center;
+  align-items: stretch;
+  gap: 20px;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-19 .two_cta {
+    flex-direction: column;
+    gap: 12px;
+  }
+}
+.lw-pr-fv-19.cta_first .two_cta {
+  flex-direction: row-reverse;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-19.cta_first .two_cta {
+    flex-direction: column-reverse;
+  }
+}
+.lw-pr-fv-19 .cta_box {
+  flex: 1;
+  max-width: 330px;
+  padding: 19px 16px;
+  border-radius: var(--fv19-cta-radius, 9px);
+  text-align: center;
+  text-decoration: none;
+  display: block;
+  /* 🚨 ここに `pointer-events: none`（パソコンでは押せなくする）を戻さないこと。
+     あれはポインタのヒットテストだけを止めるので、Tab でフォーカスは当たり、
+     Enter では発信が起きる。「マウスでは押せないのにキーボードでは押せる」という
+     逆の状態になっていた（2026-09-07 の複数AIレビューで検出）。
+     パソコンで押させたくないときは、CSS ではなく編集画面の
+     「電話番号を発信リンクにする」を切る（<a> ではなく <span> で書き出される）。 */
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-19 .cta_box {
+    max-width: none;
+    padding: 16px 14px;
+  }
+}
+.lw-pr-fv-19 .cta_box .k {
+  margin-bottom: 5px;
+  display: block;
+  font-size: 12px;
+  font-weight: 700;
+  letter-spacing: 0.05em;
+  line-height: 1.5;
+}
+.lw-pr-fv-19 .cta_box .m {
+  display: block;
+  font-size: 27px;
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: 0.01em;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-19 .cta_box .m {
+    font-size: 25px;
+  }
+}
+.lw-pr-fv-19 .cta_box .s {
+  margin-top: 6px;
+  display: block;
+  font-size: 13px;
+  line-height: 1.6;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-19 .cta_box .s {
+    font-size: 12px;
+  }
+}
+.lw-pr-fv-19 .cta_box.tel {
+  background: var(--fv19-tel-bg, #fff);
+  color: var(--fv19-tel-text, #0a4653);
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.2);
+}
+.lw-pr-fv-19 .cta_box.tel .k {
+  color: var(--fv19-tel-text, #0a4653);
+}
+.lw-pr-fv-19 .cta_box.tel .s {
+  color: var(--fv19-tel-sub, #5d6b70);
+}
+.lw-pr-fv-19 .cta_box.form {
+  background: var(--fv19-cta-bg, #e8913a);
+  color: var(--fv19-cta-text, #fff);
+  box-shadow: 0 5px 0 rgba(0, 0, 0, 0.22);
+}
+.lw-pr-fv-19 .cta_box.form .k {
+  color: var(--fv19-cta-text, #fff);
+}
+.lw-pr-fv-19 .cta_box.form .s {
+  color: var(--fv19-cta-sub, #fff2df);
+}
+.lw-pr-fv-19 .safe_list {
+  margin: 30px 0 0;
+  padding: 0;
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px 30px;
+}
+.lw-pr-fv-19 .safe_list li {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: 7px;
+  color: var(--fv19-safe-color, #bfe0e6);
+  font-size: 14px;
+  line-height: 1.6;
+}
+.lw-pr-fv-19 .safe_list i {
+  flex: none;
+  width: 17px;
+  height: 17px;
+  border-radius: 50%;
+  border: 1.5px solid var(--fv19-safe-mark, #7fc4d0);
+  color: var(--fv19-safe-mark, #7fc4d0);
+  font-size: 10px;
+  font-style: normal;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+@media (max-width: 700px) {
+  .lw-pr-fv-19 .safe_list {
+    margin-top: 22px;
+    gap: 9px 16px;
+  }
+  .lw-pr-fv-19 .safe_list li {
+    font-size: 13px;
+  }
+}
+
+/*# sourceMappingURL=style.css.map */

@@ -8,6 +8,7 @@
 	"icon": "images-alt2",
 	"aiHint": {
 		"description": "画像バナー2カラム2行。4枚のバナーを2x2グリッド配置。太字タイトル。サービスメニュー一覧に",
+		"notes": "🚨 **filterOpacity の既定 0.45 では白い見出しが読めない。** 写真のいちばん明るい部分をまっ白と仮定して測ると、濃い色のフィルタでも 0.45 で 2.60:1 ／ 0.52 で 3.11:1 しかない。**0.68 で 4.90:1** になるので 0.68 以上にする（2026-09-06 実測）。items は [{title, description, imgUrl, alt, linkUrl, openInNewTab}] の形。2×2の格子なので**4件そろえる**（3件だと右下が空く）。",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": [
 			"items"

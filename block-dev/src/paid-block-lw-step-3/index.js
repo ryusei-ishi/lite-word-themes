@@ -21,6 +21,27 @@ import metadata from './block.json';
 const fontOptions       = fontOptionsArr();
 const fontWeightOptions = fontWeightOptionsArr();
 
+/**
+ * STEP番号の「列の幅」と「文字の大きさ」をブロック本体の CSS 変数として出す。
+ * ------------------------------------------------------------
+ * 🚨 **0 のときは何も出さない。** 既定値のままなら save() の出力が
+ *    これまでと1文字も変わらないので、既存ページが「問題が含まれています」にならない。
+ *    （新しい属性を足すときの決まり → reference/block-change-safety.md）
+ * 🚨 値は必ず**単位つきの文字列**で渡す。数値のまま渡すと WordPress の書き出しが
+ *    カスタムプロパティにも px を足してしまい（`--step3-no-w:3.2px`）、無効値になる。
+ *
+ * なぜ要るか（2026-09-07 Ryuichi 指摘）:
+ *   番号の列は 2.4em 固定・番号の文字は 1.4em 固定で「01」「02」の2桁専用だった。
+ *   「10時」「STEP1」のような3文字以上を入れると、タイルからはみ出して
+ *   右の白地の見出しに重なる。**スマホではさらに崩れる。**
+ */
+const noStyle = ({ noWidthEm, noFontSizeEm }) => {
+	const style = {};
+	if (noWidthEm)    { style['--step3-no-w']  = `${noWidthEm}em`; }
+	if (noFontSizeEm) { style['--step3-no-fs'] = `${noFontSizeEm}em`; }
+	return Object.keys(style).length ? style : undefined;
+};
+
 /* ----------------------------------------------------------
  * ブロック登録
  * -------------------------------------------------------- */
@@ -35,6 +56,7 @@ registerBlockType(metadata.name, {
 			bgGradient, ulMaxWidth,
 			fontSizeClass,
 			fontNo, fontWeightNo, colorNo,
+			noWidthEm, noFontSizeEm,
 			titleTag,
 			fontH3, fontWeightH3, colorH3,
 			fontP,  fontWeightP,  colorP,
@@ -59,7 +81,8 @@ registerBlockType(metadata.name, {
 
 		
         const blockProps = useBlockProps({
-            className: `paid-block-lw-step-3 ${fontSizeClass}`
+            className: `paid-block-lw-step-3 ${fontSizeClass}`,
+            style: noStyle(attributes),
         });
 
         return (
@@ -110,6 +133,24 @@ registerBlockType(metadata.name, {
 						<ColorPalette
 							value={colorNo}
 							onChange={(c) => setAttributes({ colorNo: c })}
+						/>
+						<RangeControl
+							label="番号の列の幅"
+							value={noWidthEm}
+							onChange={(v) => setAttributes({ noWidthEm: v })}
+							min={0}
+							max={6}
+							step={0.1}
+							help="0 でおまかせ（2.4）。「01」「02」の2桁ならそのままで大丈夫です。「10時」「STEP1」のように3文字以上入れるときは 3.2 前後まで広げてください。"
+						/>
+						<RangeControl
+							label="番号の文字の大きさ"
+							value={noFontSizeEm}
+							onChange={(v) => setAttributes({ noFontSizeEm: v })}
+							min={0}
+							max={2.5}
+							step={0.05}
+							help="0 でおまかせ（1.4）。文字だけ小さくしても列は狭いままなので、上の「列の幅」と一緒に調整してください。"
 						/>
 					</PanelBody>
 
@@ -250,6 +291,7 @@ registerBlockType(metadata.name, {
 			bgGradient, ulMaxWidth,
 			fontSizeClass,
 			fontNo, fontWeightNo, colorNo,
+			noWidthEm, noFontSizeEm,
 			titleTag,
 			fontH3, fontWeightH3, colorH3,
 			fontP,  fontWeightP,  colorP,
@@ -259,7 +301,8 @@ registerBlockType(metadata.name, {
 		const hasContent = (str='') => str.trim() !== '';
 
 		const blockProps = useBlockProps.save({
-			className: `paid-block-lw-step-3 ${fontSizeClass}`
+			className: `paid-block-lw-step-3 ${fontSizeClass}`,
+			style: noStyle(attributes),
 		});
 
 		return (

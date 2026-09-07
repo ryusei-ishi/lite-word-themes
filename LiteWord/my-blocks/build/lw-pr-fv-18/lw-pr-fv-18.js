@@ -1,0 +1,2190 @@
+/******/ (() => { // webpackBootstrap
+/******/ 	"use strict";
+/******/ 	var __webpack_modules__ = ({
+
+/***/ "./src/link-picker.js":
+/*!****************************!*\
+  !*** ./src/link-picker.js ***!
+  \****************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   LinkPicker: () => (/* binding */ LinkPicker),
+/* harmony export */   linkTypeOptions: () => (/* binding */ linkTypeOptions),
+/* harmony export */   lwLinkDataProps: () => (/* binding */ lwLinkDataProps),
+/* harmony export */   lwLinkDataPropsFromAttrs: () => (/* binding */ lwLinkDataPropsFromAttrs),
+/* harmony export */   lwLinkDataPropsFromItem: () => (/* binding */ lwLinkDataPropsFromItem),
+/* harmony export */   lwLinkFromAttrs: () => (/* binding */ lwLinkFromAttrs),
+/* harmony export */   lwLinkFromItem: () => (/* binding */ lwLinkFromItem),
+/* harmony export */   lwLinkProps: () => (/* binding */ lwLinkProps),
+/* harmony export */   lwLinkPropsFromAttrs: () => (/* binding */ lwLinkPropsFromAttrs),
+/* harmony export */   lwLinkPropsFromItem: () => (/* binding */ lwLinkPropsFromItem),
+/* harmony export */   lwLinkToAttrs: () => (/* binding */ lwLinkToAttrs),
+/* harmony export */   lwLinkToItem: () => (/* binding */ lwLinkToItem),
+/* harmony export */   lwLinkType: () => (/* binding */ lwLinkType)
+/* harmony export */ });
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/data */ "@wordpress/data");
+/* harmony import */ var _wordpress_data__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_data__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/compose */ "@wordpress/compose");
+/* harmony import */ var _wordpress_compose__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__);
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+/**
+ * LiteWord – リンク先の指定（共通部品）
+ * ------------------------------------------------------------
+ *  URL の直接入力に加えて、固定ページ・カテゴリーを一覧から選べるようにする。
+ *  一覧は打ち込んだ文字で絞り込める（ページ数が多いサイト向け）。
+ *
+ *  🚨 見た目の約束（2026-08-23 Ryuichi 判断・B案）
+ *  ・ブロックが元から持っているアドレス入力欄（URLInput / TextControl）は残す。
+ *    この部品はその「下に足すだけ」で、URL の入力欄は自分では出さない。
+ *    ＝ 今まで使ってきた人の編集画面が変わらない。
+ *  ・固定ページ／カテゴリーを選ぶと、上のアドレス欄が自動で埋まる（同じ属性を書くため）。
+ *    入力欄が2つ並んで見えるので、説明文でそのことを必ず伝える（helpText）。
+ *
+ *  🚨 設計の前提（ここを崩すと既存ページが壊れる）
+ *  ・ブロックは静的ブロックのまま。save の出力は変えない。
+ *    リンク種別が "url"（＝既存のボタン全部）のときは lwLinkProps が
+ *    data 属性を undefined で返すので、React が属性ごと出力しない。
+ *    ＝ 保存されるHTMLは今までと1バイトも変わらない。
+ *  ・固定ページ / カテゴリーを選んだときだけ data-lw-link-type / data-lw-link-id が付く。
+ *    実際のURLはフロントで render_block フィルタが引き直す
+ *    （functions/lw_block_link_resolver/index.php）。
+ *    そのため、あとでスラッグを変えてもリンクは古くならない。
+ *  ・href には選んだ時点のURLを焼いておく。フィルタが効かない場面でも飛べるようにするため。
+ *
+ *  🚨 一覧の取り方
+ *  ・全件取得（per_page:-1）はしない。固定ページが数百ある納品先で編集画面が固まるため。
+ *    打った文字をサーバーへ渡して検索し、上限 LIST_LIMIT 件だけ受け取る。
+ *  ・入力のたびに叩かないよう useDebouncedInput で待つ。
+ *  ・すでに選んである項目は、検索結果に含まれなくても名前が出るように単独で引く。
+ *
+ *  使い方（ブロック側）
+ *    import { LinkPicker, lwLinkProps } from "../link-picker.js";
+ *    edit: 既存のURL入力欄はそのまま。その下に
+ *          <LinkPicker link={button} onChange={(patch) => updateButtonMany(index, patch)} />
+ *    save: const lp = lwLinkProps(button);
+ *          <a href={lp.href} data-lw-link-type={lp.linkType} data-lw-link-id={lp.linkId}>
+ *
+ *  属性の持ち方は3通りある。どれも同じ LinkPicker を使う。
+ *    ① 平たい属性        btnUrl / btnLinkType / btnPageId / btnCategoryId
+ *                        → lwLinkFromAttrs / lwLinkToAttrs / lwLinkPropsFromAttrs
+ *    ② 配列（query 無し） 要素に {url, linkType, pageId, categoryId} を持てる
+ *                        → そのまま lwLinkProps
+ *    ③ 配列（query あり） 要素の中身は HTML から読み直されるので、
+ *                        linkType / linkId を data 属性から source する
+ *                        → lwLinkFromItem / lwLinkToItem / lwLinkPropsFromItem
+ * ----------------------------------------------------------- */
+
+
+
+
+/** 一度に出す候補の数 */
+var LIST_LIMIT = 50;
+
+/** リンク種別 */
+var linkTypeOptions = [{
+  label: "URLを直接入力",
+  value: "url"
+}, {
+  label: "固定ページから選ぶ",
+  value: "page"
+}, {
+  label: "カテゴリーから選ぶ",
+  value: "category"
+}];
+
+/** 既存データ（linkType を持たないもの）は URL 指定として扱う */
+function lwLinkType(link) {
+  return link && link.linkType ? link.linkType : "url";
+}
+
+/**
+ * save で <a> に渡す値を作る。
+ * URL 指定のときは data 属性を undefined にして、従来どおりの出力に保つ。
+ */
+function lwLinkProps(link) {
+  var type = lwLinkType(link);
+  var href = link && link.url || "#";
+  if (type === "page" && link && link.pageId) {
+    return {
+      href: href,
+      linkType: "page",
+      linkId: String(link.pageId)
+    };
+  }
+  if (type === "category" && link && link.categoryId) {
+    return {
+      href: href,
+      linkType: "category",
+      linkId: String(link.categoryId)
+    };
+  }
+  return {
+    href: href,
+    linkType: undefined,
+    linkId: undefined
+  };
+}
+
+/**
+ * save で <a> に足す data 属性だけを作る。
+ * href は今まで書いてあった式のまま残すために、あえて返さない。
+ *
+ * 🚨 なぜ href を触らないのか
+ *   ブロックによって href の式が違う（`{url}` / `{url || '#'}` / `{ url ? url : undefined }`）。
+ *   lwLinkProps の href（`url || "#"`）に寄せると、URL が空のブロックで
+ *   href="" が href="#" に変わり、既存ページが「無効なコンテンツ」になる。
+ *   足すのは undefined になりうる data 属性だけにして、保存済みHTMLを1バイトも変えない。
+ */
+function lwLinkDataProps(link) {
+  var p = lwLinkProps(link);
+  return {
+    linkType: p.linkType,
+    linkId: p.linkId
+  };
+}
+
+/** 平たい属性版 */
+function lwLinkDataPropsFromAttrs(attributes, keys) {
+  return lwLinkDataProps(lwLinkFromAttrs(attributes, keys));
+}
+
+/** 配列（query 付き）の要素版 */
+function lwLinkDataPropsFromItem(item) {
+  var urlKey = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "url";
+  return lwLinkDataProps(lwLinkFromItem(item, urlKey));
+}
+
+/** 編集画面のリンク設定UI */
+function LinkPicker(_ref) {
+  var link = _ref.link,
+    _onChange = _ref.onChange,
+    _ref$label = _ref.label,
+    label = _ref$label === void 0 ? "リンク先の指定方法" : _ref$label;
+  var type = lwLinkType(link);
+  var isPage = type === "page";
+  var isCategory = type === "category";
+  var selectedId = isPage ? link && link.pageId || 0 : isCategory ? link && link.categoryId || 0 : 0;
+
+  /* 打ち込んだ文字。debounced のほうだけをサーバーへ渡す */
+  var _useDebouncedInput = (0,_wordpress_compose__WEBPACK_IMPORTED_MODULE_2__.useDebouncedInput)(""),
+    _useDebouncedInput2 = _slicedToArray(_useDebouncedInput, 3),
+    search = _useDebouncedInput2[0],
+    setSearch = _useDebouncedInput2[1],
+    debouncedSearch = _useDebouncedInput2[2];
+  var _useSelect = (0,_wordpress_data__WEBPACK_IMPORTED_MODULE_1__.useSelect)(function (select) {
+      var core = select("core");
+      if (!isPage && !isCategory) return {
+        records: [],
+        selected: null,
+        isLoading: false
+      };
+      var kind = isPage ? "postType" : "taxonomy";
+      var name = isPage ? "page" : "category";
+      var query = isPage ? {
+        per_page: LIST_LIMIT,
+        status: "publish",
+        orderby: "title",
+        order: "asc",
+        _fields: "id,title,link"
+      } : {
+        per_page: LIST_LIMIT,
+        orderby: "name",
+        order: "asc",
+        _fields: "id,name,link,count"
+      };
+      if (debouncedSearch) query.search = debouncedSearch;
+      return {
+        records: core.getEntityRecords(kind, name, query),
+        /* 選択済みの項目は検索結果に入らないことがあるので単独で引く */
+        selected: selectedId ? core.getEntityRecord(kind, name, selectedId) : null,
+        isLoading: !core.hasFinishedResolution("getEntityRecords", [kind, name, query])
+      };
+    }, [isPage, isCategory, debouncedSearch, selectedId]),
+    records = _useSelect.records,
+    selected = _useSelect.selected,
+    isLoading = _useSelect.isLoading;
+  var labelOf = function labelOf(r) {
+    if (!r) return "";
+    if (isPage) return r.title && (r.title.rendered || r.title) || "(無題)";
+    return r.name + "（" + (r.count !== undefined ? r.count + "件" : "") + "）";
+  };
+  var list = records || [];
+  var options = list.map(function (r) {
+    return {
+      label: labelOf(r) + "  #" + r.id,
+      value: String(r.id)
+    };
+  });
+  /* 選択済みが候補に無ければ先頭に足す（名前が消えないように） */
+  if (selectedId && selected && !options.some(function (o) {
+    return o.value === String(selectedId);
+  })) {
+    options.unshift({
+      label: labelOf(selected) + "  #" + selected.id,
+      value: String(selectedId)
+    });
+  }
+  var pick = function pick(v) {
+    var id = v ? Number(v) : 0;
+    var hit = list.find(function (r) {
+      return String(r.id) === String(v);
+    }) || (selected && String(selected.id) === String(v) ? selected : null);
+    var url = hit && hit.link ? hit.link : "";
+    _onChange(isPage ? {
+      pageId: id,
+      url: url
+    } : {
+      categoryId: id,
+      url: url
+    });
+  };
+  var listHelp = isLoading ? "読み込み中…" : list.length >= LIST_LIMIT ? "上位 " + LIST_LIMIT + " 件を表示しています。見つからないときは名前を打ち込んで絞り込んでください。" : debouncedSearch && list.length === 0 ? "見つかりませんでした。" : "名前の一部を打ち込むと絞り込めます。";
+  return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.SelectControl, {
+    label: label,
+    value: type,
+    options: linkTypeOptions,
+    onChange: function onChange(v) {
+      return _onChange({
+        linkType: v
+      });
+    },
+    help: helpText(type)
+  }), (isPage || isCategory) && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_0__.ComboboxControl, {
+    label: isPage ? "固定ページ" : "カテゴリー",
+    value: selectedId ? String(selectedId) : null,
+    options: options,
+    onChange: pick,
+    onFilterValueChange: setSearch,
+    help: listHelp,
+    allowReset: true
+  }));
+}
+
+/** 種別ごとの説明文 */
+function helpText(type) {
+  if (type === "page") return "下で固定ページを選ぶと、上のアドレス欄が自動で埋まります。あとでスラッグを変えてもリンクは追従します。";
+  if (type === "category") return "下でカテゴリーを選ぶと、上のアドレス欄が自動で埋まります。";
+  return "上のアドレス欄に入力したURLへリンクします。サイト内のページを選びたいときは種別を変えてください。";
+}
+
+/* ──────────────────────────────────────────────────────────
+ * 平たい属性のブロック用のつなぎ
+ *   ボタン06 は配列の中に {linkType,url,pageId,categoryId} を持つが、
+ *   ほとんどのブロックは btnUrl / buttonUrl のように属性が平たく並んでいる。
+ *   その両方で同じ LinkPicker を使えるようにするための変換。
+ *
+ *   keys の例: { url: "btnUrl", type: "btnLinkType", page: "btnPageId", category: "btnCategoryId" }
+ * ────────────────────────────────────────────────────────── */
+
+/** 平たい属性 → LinkPicker が受け取る形 */
+function lwLinkFromAttrs(attributes, keys) {
+  return {
+    linkType: attributes[keys.type],
+    url: attributes[keys.url],
+    pageId: attributes[keys.page],
+    categoryId: attributes[keys.category]
+  };
+}
+
+/** LinkPicker が返す差分 → 平たい属性名に直す */
+function lwLinkToAttrs(patch, keys) {
+  var out = {};
+  if ("linkType" in patch) out[keys.type] = patch.linkType;
+  if ("url" in patch) out[keys.url] = patch.url;
+  if ("pageId" in patch) out[keys.page] = patch.pageId;
+  if ("categoryId" in patch) out[keys.category] = patch.categoryId;
+  return out;
+}
+
+/** 平たい属性から save 用の値を作る（lwLinkProps の平たい版） */
+function lwLinkPropsFromAttrs(attributes, keys) {
+  return lwLinkProps(lwLinkFromAttrs(attributes, keys));
+}
+
+/* ──────────────────────────────────────────────────────────
+ * query 付きの配列（＝要素の中身を保存済みHTMLから読み直すブロック）用のつなぎ
+ *
+ *   query 付きの配列は、コメントJSONに書かれず HTML から復元される。
+ *   そのため linkType / pageId / categoryId も HTML に置き場所が要る。
+ *   save が出す data 属性をそのまま読み場所として使う。
+ *
+ *   block.json（query の中）に足す2つ:
+ *     "linkType": { "type":"string", "source":"attribute", "selector":"a", "attribute":"data-lw-link-type" }
+ *     "linkId":   { "type":"string", "source":"attribute", "selector":"a", "attribute":"data-lw-link-id" }
+ *
+ *   URL 指定のときは save が data 属性を出さない → 読み戻すと undefined → "url" 扱い。
+ *   ＝ いま保存されている全ページの HTML は1バイトも変わらない。
+ * ────────────────────────────────────────────────────────── */
+
+/**
+ * 配列の要素（URL / linkType / linkId）→ LinkPicker が受け取る形
+ * urlKey … 要素側のURLの持ち名（ブロックによって url / buttonUrl / link と違う）
+ */
+function lwLinkFromItem(item) {
+  var urlKey = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "url";
+  var type = lwLinkType(item);
+  var id = item && item.linkId ? Number(item.linkId) : 0;
+  return {
+    linkType: type,
+    url: item && item[urlKey] || "",
+    pageId: type === "page" ? id : 0,
+    categoryId: type === "category" ? id : 0
+  };
+}
+
+/** LinkPicker が返す差分 → 配列の要素に入れる形（linkId は文字列で持つ） */
+function lwLinkToItem(patch) {
+  var urlKey = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "url";
+  var out = {};
+  if ("url" in patch) out[urlKey] = patch.url;
+  if ("linkType" in patch) {
+    out.linkType = patch.linkType;
+    /* 種別を変えたら前の選択は消す（別の種別のIDが残ると解決先がずれる） */
+    if (patch.linkType === "url") out.linkId = undefined;
+  }
+  if ("pageId" in patch) out.linkId = patch.pageId ? String(patch.pageId) : undefined;
+  if ("categoryId" in patch) out.linkId = patch.categoryId ? String(patch.categoryId) : undefined;
+  return out;
+}
+
+/** 配列の要素から save 用の値を作る */
+function lwLinkPropsFromItem(item) {
+  var urlKey = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : "url";
+  return lwLinkProps(lwLinkFromItem(item, urlKey));
+}
+
+/***/ }),
+
+/***/ "./src/lw-pr-fv-18/index.js":
+/*!**********************************!*\
+  !*** ./src/lw-pr-fv-18/index.js ***!
+  \**********************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/blocks */ "@wordpress/blocks");
+/* harmony import */ var _wordpress_blocks__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @wordpress/block-editor */ "@wordpress/block-editor");
+/* harmony import */ var _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @wordpress/components */ "@wordpress/components");
+/* harmony import */ var _wordpress_components__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../utils.js */ "./src/utils.js");
+/* harmony import */ var _style_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./style.scss */ "./src/lw-pr-fv-18/style.scss");
+/* harmony import */ var _editor_scss__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./editor.scss */ "./src/lw-pr-fv-18/editor.scss");
+/* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./block.json */ "./src/lw-pr-fv-18/block.json");
+/* harmony import */ var _link_picker_js__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../link-picker.js */ "./src/link-picker.js");
+function _typeof(o) { "@babel/helpers - typeof"; return _typeof = "function" == typeof Symbol && "symbol" == typeof Symbol.iterator ? function (o) { return typeof o; } : function (o) { return o && "function" == typeof Symbol && o.constructor === Symbol && o !== Symbol.prototype ? "symbol" : typeof o; }, _typeof(o); }
+function _slicedToArray(r, e) { return _arrayWithHoles(r) || _iterableToArrayLimit(r, e) || _unsupportedIterableToArray(r, e) || _nonIterableRest(); }
+function _nonIterableRest() { throw new TypeError("Invalid attempt to destructure non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _iterableToArrayLimit(r, l) { var t = null == r ? null : "undefined" != typeof Symbol && r[Symbol.iterator] || r["@@iterator"]; if (null != t) { var e, n, i, u, a = [], f = !0, o = !1; try { if (i = (t = t.call(r)).next, 0 === l) { if (Object(t) !== t) return; f = !1; } else for (; !(f = (e = i.call(t)).done) && (a.push(e.value), a.length !== l); f = !0); } catch (r) { o = !0, n = r; } finally { try { if (!f && null != t["return"] && (u = t["return"](), Object(u) !== u)) return; } finally { if (o) throw n; } } return a; } }
+function _arrayWithHoles(r) { if (Array.isArray(r)) return r; }
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+function ownKeys(e, r) { var t = Object.keys(e); if (Object.getOwnPropertySymbols) { var o = Object.getOwnPropertySymbols(e); r && (o = o.filter(function (r) { return Object.getOwnPropertyDescriptor(e, r).enumerable; })), t.push.apply(t, o); } return t; }
+function _objectSpread(e) { for (var r = 1; r < arguments.length; r++) { var t = null != arguments[r] ? arguments[r] : {}; r % 2 ? ownKeys(Object(t), !0).forEach(function (r) { _defineProperty(e, r, t[r]); }) : Object.getOwnPropertyDescriptors ? Object.defineProperties(e, Object.getOwnPropertyDescriptors(t)) : ownKeys(Object(t)).forEach(function (r) { Object.defineProperty(e, r, Object.getOwnPropertyDescriptor(t, r)); }); } return e; }
+function _defineProperty(e, r, t) { return (r = _toPropertyKey(r)) in e ? Object.defineProperty(e, r, { value: t, enumerable: !0, configurable: !0, writable: !0 }) : e[r] = t, e; }
+function _toPropertyKey(t) { var i = _toPrimitive(t, "string"); return "symbol" == _typeof(i) ? i : i + ""; }
+function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e = t[Symbol.toPrimitive]; if (void 0 !== e) { var i = e.call(t, r || "default"); if ("object" != _typeof(i)) return i; throw new TypeError("@@toPrimitive must return a primitive value."); } return ("string" === r ? String : Number)(t); }
+/**
+ * FV 18 リード獲得（フォーム一体型）
+ * ------------------------------------------------------------------
+ * 左に「何がもらえるか」、右に「そのまま送れるフォーム」を置くFV。
+ * これまでのFVは見出しを置く器しか無く、リード獲得ページでは
+ * FVの下にCTAの帯を継ぎ足して補っていた（＝つぎはぎに見える原因）。
+ * このブロックは FVの中で送信まで終わるので、その継ぎ足しが要らない。
+ *
+ * 🚨 formId（管理画面のフォームセット番号）を入れるとフォームが出る。
+ *    空なら代わりに CTAボタン が出る。両方は出ない。
+ * 🚨 送信ボタンと必須バッジは、テーマのフォームCSSがサイト色で塗ってしまうので、
+ *    このブロックの中だけ CSS変数で上書きしている（submitBgColor / requiredBgColor）。
+ */
+
+
+
+
+
+
+
+
+
+/* リンク先の指定（共通部品）で使う属性名の対応 */
+var LINK_KEYS = {
+  url: 'buttonUrl',
+  type: 'buttonLinkType',
+  page: 'buttonPageId',
+  category: 'buttonCategoryId'
+};
+
+/* 見た目に関わる値をまとめて CSS 変数にする（edit と save で必ず同じものを使う） */
+/* 🚨 CSS変数の値は必ず「文字列」で渡す。数値のまま渡すと WordPress 6.8 以下の書き出しが
+   カスタムプロパティにも px を足し（--fv20-stats-cols:4px / --fv18-filter-opacity:0.86px）、
+   その宣言ごと無効になる。→ repeat(4px,1fr) が none に落ちて数字の帯が1列に潰れる／
+   opacity が初期値 1 に戻って写真が幕で塗り潰される。var() のフォールバックは効かない
+   （変数は「定義されている」ため）。WordPress 6.9 以降は除外されるので手元では再現しない。
+   🚨 `?? 既定値` も外さない。RangeControl は数値欄を空にすると undefined を渡すので、
+   ガードが無いと `undefinedpx` が保存され、grid が none に落ちて PC でも1カラムに潰れる。
+   （2026-09-07 の複数AIレビューで検出。手元の WordPress 11本で挙動を実測した） */
+var styleVars = function styleVars(a) {
+  var _a$maxWidth, _a$formWidth, _a$filterOpacity, _a$titleFontSizePc, _a$titleFontSizeSp, _a$ctaBorderRadius;
+  return {
+    '--fv18-max-width': "".concat((_a$maxWidth = a.maxWidth) !== null && _a$maxWidth !== void 0 ? _a$maxWidth : 1180, "px"),
+    '--fv18-form-width': "".concat((_a$formWidth = a.formWidth) !== null && _a$formWidth !== void 0 ? _a$formWidth : 396, "px"),
+    '--fv18-bg': a.bgColor,
+    '--fv18-filter-color': a.filterColor,
+    '--fv18-filter-opacity': String((_a$filterOpacity = a.filterOpacity) !== null && _a$filterOpacity !== void 0 ? _a$filterOpacity : 0.86),
+    '--fv18-badge-bg': a.badgeBgColor,
+    '--fv18-badge-text': a.badgeTextColor,
+    '--fv18-title-color': a.titleColor,
+    '--fv18-title-weight': a.titleFontWeight,
+    '--fv18-title-size-pc': "".concat((_a$titleFontSizePc = a.titleFontSizePc) !== null && _a$titleFontSizePc !== void 0 ? _a$titleFontSizePc : 46, "px"),
+    '--fv18-title-size-sp': "".concat((_a$titleFontSizeSp = a.titleFontSizeSp) !== null && _a$titleFontSizeSp !== void 0 ? _a$titleFontSizeSp : 30, "px"),
+    '--fv18-description-color': a.descriptionColor,
+    '--fv18-tick-color': a.tickTextColor,
+    '--fv18-tick-mark-bg': a.tickMarkBgColor,
+    '--fv18-tick-mark-color': a.tickMarkColor,
+    '--fv18-card-bg': a.cardBgColor,
+    '--fv18-card-title-color': a.cardTitleColor,
+    '--fv18-card-sub-color': a.cardSubColor,
+    '--fv18-card-note-color': a.cardNoteColor,
+    '--fv18-submit-bg': a.submitBgColor,
+    '--fv18-submit-text': a.submitTextColor,
+    '--fv18-required-bg': a.requiredBgColor,
+    '--fv18-cta-bg': a.ctaBgColor,
+    '--fv18-cta-text': a.ctaTextColor,
+    '--fv18-cta-radius': "".concat((_a$ctaBorderRadius = a.ctaBorderRadius) !== null && _a$ctaBorderRadius !== void 0 ? _a$ctaBorderRadius : 6, "px")
+  };
+};
+var rootClass = function rootClass(a) {
+  return ['lw-pr-fv-18', a.minHeightPc, a.minHeightTb, a.minHeightSp, a.formSide === 'left' ? 'form_left' : 'form_right'].filter(Boolean).join(' ');
+};
+var lwBlockDef = {
+  edit: function edit(_ref) {
+    var attributes = _ref.attributes,
+      setAttributes = _ref.setAttributes;
+    var backgroundType = attributes.backgroundType,
+      imageUrlPc = attributes.imageUrlPc,
+      imageUrlSp = attributes.imageUrlSp,
+      imageAlt = attributes.imageAlt,
+      bgColor = attributes.bgColor,
+      filterColor = attributes.filterColor,
+      filterOpacity = attributes.filterOpacity,
+      minHeightPc = attributes.minHeightPc,
+      minHeightTb = attributes.minHeightTb,
+      minHeightSp = attributes.minHeightSp,
+      maxWidth = attributes.maxWidth,
+      formSide = attributes.formSide,
+      formWidth = attributes.formWidth,
+      showBadge = attributes.showBadge,
+      badgeLabel = attributes.badgeLabel,
+      badgeText = attributes.badgeText,
+      badgeBgColor = attributes.badgeBgColor,
+      badgeTextColor = attributes.badgeTextColor,
+      headingLevel = attributes.headingLevel,
+      mainTitle = attributes.mainTitle,
+      titleColor = attributes.titleColor,
+      titleFontWeight = attributes.titleFontWeight,
+      titleFont = attributes.titleFont,
+      titleFontSizePc = attributes.titleFontSizePc,
+      titleFontSizeSp = attributes.titleFontSizeSp,
+      description = attributes.description,
+      descriptionColor = attributes.descriptionColor,
+      showTicks = attributes.showTicks,
+      _attributes$tickItems = attributes.tickItems,
+      tickItems = _attributes$tickItems === void 0 ? [] : _attributes$tickItems,
+      tickTextColor = attributes.tickTextColor,
+      tickMarkBgColor = attributes.tickMarkBgColor,
+      tickMarkColor = attributes.tickMarkColor,
+      cardBgColor = attributes.cardBgColor,
+      cardTitle = attributes.cardTitle,
+      cardTitleColor = attributes.cardTitleColor,
+      cardSubText = attributes.cardSubText,
+      cardSubColor = attributes.cardSubColor,
+      formId = attributes.formId,
+      submitBgColor = attributes.submitBgColor,
+      submitTextColor = attributes.submitTextColor,
+      requiredBgColor = attributes.requiredBgColor,
+      cardNote = attributes.cardNote,
+      cardNoteColor = attributes.cardNoteColor,
+      buttonText = attributes.buttonText,
+      buttonSub = attributes.buttonSub,
+      buttonUrl = attributes.buttonUrl,
+      ctaBgColor = attributes.ctaBgColor,
+      ctaTextColor = attributes.ctaTextColor,
+      ctaBorderRadius = attributes.ctaBorderRadius;
+    var HeadingTag = "h".concat(headingLevel);
+    /* 🚨 フォームセット番号は「数字だけ」に落としてから使う。
+       ① テーマ側 functions/mail_form/form_put.php は、この値を <form id="…"> と
+          <label for="lw_consent_…"> にそのまま入れる。絞るのはここの責任。
+       ② ' や ] が混じるとショートコードが途中で割れて、FVの真ん中に "] という文字が残る。
+       （2026-09-07 の複数AIレビューで検出） */
+    var formNo = String(formId !== null && formId !== void 0 ? formId : '').replace(/[^0-9]/g, '');
+    var hasForm = formNo !== '';
+    var updateTick = function updateTick(index, value) {
+      return setAttributes({
+        tickItems: tickItems.map(function (it, i) {
+          return i === index ? _objectSpread(_objectSpread({}, it), {}, {
+            text: value
+          }) : it;
+        })
+      });
+    };
+    var addTick = function addTick() {
+      return setAttributes({
+        tickItems: [].concat(_toConsumableArray(tickItems), [{
+          text: '新しい約束'
+        }])
+      });
+    };
+    var removeTick = function removeTick(index) {
+      return setAttributes({
+        tickItems: tickItems.filter(function (_, i) {
+          return i !== index;
+        })
+      });
+    };
+    var moveTick = function moveTick(index, dir) {
+      var to = index + dir;
+      if (to < 0 || to >= tickItems.length) return;
+      var next = _toConsumableArray(tickItems);
+      var _next$splice = next.splice(index, 1),
+        _next$splice2 = _slicedToArray(_next$splice, 1),
+        m = _next$splice2[0];
+      next.splice(to, 0, m);
+      setAttributes({
+        tickItems: next
+      });
+    };
+    var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
+      className: rootClass(attributes),
+      style: styleVars(attributes)
+    });
+    return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u30EC\u30A4\u30A2\u30A6\u30C8\u8A2D\u5B9A",
+      initialOpen: true
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: "\u30D5\u30A9\u30FC\u30E0\u3092\u7F6E\u304F\u5074",
+      value: formSide,
+      options: [{
+        label: '右（おすすめ）',
+        value: 'right'
+      }, {
+        label: '左',
+        value: 'left'
+      }],
+      onChange: function onChange(v) {
+        return setAttributes({
+          formSide: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u5168\u4F53\u306E\u6700\u5927\u6A2A\u5E45",
+      value: maxWidth,
+      onChange: function onChange(v) {
+        return setAttributes({
+          maxWidth: v
+        });
+      },
+      min: 900,
+      max: 1400,
+      step: 20
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u30D5\u30A9\u30FC\u30E0\u5074\u306E\u5E45",
+      value: formWidth,
+      onChange: function onChange(v) {
+        return setAttributes({
+          formWidth: v
+        });
+      },
+      min: 320,
+      max: 520,
+      step: 4
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: "\u9AD8\u3055\uFF08\u30D1\u30BD\u30B3\u30F3\uFF09",
+      value: minHeightPc,
+      options: (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.minHeightPcClassOptionArr)(),
+      onChange: function onChange(v) {
+        return setAttributes({
+          minHeightPc: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: "\u9AD8\u3055\uFF08\u30BF\u30D6\u30EC\u30C3\u30C8\uFF09",
+      value: minHeightTb,
+      options: (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.minHeightTbClassOptionArr)(),
+      onChange: function onChange(v) {
+        return setAttributes({
+          minHeightTb: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: "\u9AD8\u3055\uFF08\u30B9\u30DE\u30DB\uFF09",
+      value: minHeightSp,
+      options: (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.minHeightSpClassOptionArr)(),
+      onChange: function onChange(v) {
+        return setAttributes({
+          minHeightSp: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: "\u898B\u51FA\u3057\u306E\u968E\u5C64",
+      value: headingLevel,
+      options: [{
+        label: 'H1',
+        value: 1
+      }, {
+        label: 'H2',
+        value: 2
+      }, {
+        label: 'H3',
+        value: 3
+      }],
+      onChange: function onChange(v) {
+        return setAttributes({
+          headingLevel: Number(v)
+        });
+      }
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u80CC\u666F",
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: "\u80CC\u666F\u306E\u7A2E\u985E",
+      value: backgroundType,
+      options: [{
+        label: '画像',
+        value: 'image'
+      }, {
+        label: '色だけ',
+        value: 'color'
+      }],
+      onChange: function onChange(v) {
+        return setAttributes({
+          backgroundType: v
+        });
+      }
+    }), backgroundType === 'image' && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u30D1\u30BD\u30B3\u30F3\u7528\u306E\u80CC\u666F\u753B\u50CF"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
+      onSelect: function onSelect(m) {
+        return setAttributes({
+          imageUrlPc: m.url
+        });
+      },
+      allowedTypes: ['image'],
+      render: function render(_ref2) {
+        var open = _ref2.open;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          onClick: open,
+          variant: "secondary"
+        }, "\u753B\u50CF\u3092\u9078\u3076");
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: "\u753B\u50CF\u306EURL\uFF08\u30D1\u30BD\u30B3\u30F3\uFF09",
+      value: imageUrlPc,
+      onChange: function onChange(v) {
+        return setAttributes({
+          imageUrlPc: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u30B9\u30DE\u30DB\u7528\u306E\u80CC\u666F\u753B\u50CF\uFF08\u7A7A\u306A\u3089\u30D1\u30BD\u30B3\u30F3\u7528\u3092\u4F7F\u3046\uFF09"), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.MediaUpload, {
+      onSelect: function onSelect(m) {
+        return setAttributes({
+          imageUrlSp: m.url
+        });
+      },
+      allowedTypes: ['image'],
+      render: function render(_ref3) {
+        var open = _ref3.open;
+        return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+          onClick: open,
+          variant: "secondary"
+        }, "\u753B\u50CF\u3092\u9078\u3076");
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: "\u753B\u50CF\u306EURL\uFF08\u30B9\u30DE\u30DB\uFF09",
+      value: imageUrlSp,
+      onChange: function onChange(v) {
+        return setAttributes({
+          imageUrlSp: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: "\u753B\u50CF\u306E\u8AAC\u660E\uFF08alt\uFF09",
+      value: imageAlt,
+      onChange: function onChange(v) {
+        return setAttributes({
+          imageAlt: v
+        });
+      }
+    })), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '16px 0 4px'
+      }
+    }, backgroundType === 'image' ? '写真に重ねる色' : '背景の色'), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: backgroundType === 'image' ? filterColor : bgColor,
+      onChange: function onChange(v) {
+        return setAttributes(backgroundType === 'image' ? {
+          filterColor: v
+        } : {
+          bgColor: v
+        });
+      }
+    }), backgroundType === 'image' && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u91CD\u306D\u308B\u8272\u306E\u6FC3\u3055",
+      value: filterOpacity,
+      onChange: function onChange(v) {
+        return setAttributes({
+          filterOpacity: v
+        });
+      },
+      min: 0,
+      max: 1,
+      step: 0.01
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u30AA\u30D5\u30A1\u30FC\u306E\u672D\uFF08\u7121\u6599\u306A\u3069\uFF09",
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+      label: "\u672D\u3092\u51FA\u3059",
+      checked: showBadge,
+      onChange: function onChange(v) {
+        return setAttributes({
+          showBadge: v
+        });
+      }
+    }), showBadge && /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: "\u5927\u304D\u304F\u51FA\u3059\u8A00\u8449",
+      value: badgeLabel,
+      onChange: function onChange(v) {
+        return setAttributes({
+          badgeLabel: v
+        });
+      },
+      help: "\u300C\u7121\u6599\u300D\u300C\u5148\u774050\u540D\u300D\u306A\u30692\u301C4\u6587\u5B57"
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: "\u6DFB\u3048\u308B\u4E00\u6587",
+      value: badgeText,
+      onChange: function onChange(v) {
+        return setAttributes({
+          badgeText: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u672D\u306E\u80CC\u666F\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: badgeBgColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          badgeBgColor: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u672D\u306E\u6587\u5B57\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: badgeTextColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          badgeTextColor: v
+        });
+      }
+    }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u898B\u51FA\u3057\u30FB\u8AAC\u660E\u6587",
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u898B\u51FA\u3057\u306E\u5927\u304D\u3055\uFF08\u30D1\u30BD\u30B3\u30F3\uFF09",
+      value: titleFontSizePc,
+      onChange: function onChange(v) {
+        return setAttributes({
+          titleFontSizePc: v
+        });
+      },
+      min: 24,
+      max: 64,
+      step: 1
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u898B\u51FA\u3057\u306E\u5927\u304D\u3055\uFF08\u30B9\u30DE\u30DB\uFF09",
+      value: titleFontSizeSp,
+      onChange: function onChange(v) {
+        return setAttributes({
+          titleFontSizeSp: v
+        });
+      },
+      min: 18,
+      max: 40,
+      step: 1
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: "\u898B\u51FA\u3057\u306E\u592A\u3055",
+      value: titleFontWeight,
+      options: (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOptionsArr)(),
+      onChange: function onChange(v) {
+        return setAttributes({
+          titleFontWeight: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: "\u898B\u51FA\u3057\u306E\u66F8\u4F53",
+      value: titleFont,
+      options: (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontOptionsArr)(),
+      onChange: function onChange(v) {
+        return setAttributes({
+          titleFont: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u898B\u51FA\u3057\u306E\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: titleColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          titleColor: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u8AAC\u660E\u6587\u306E\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: descriptionColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          descriptionColor: v
+        });
+      }
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u7D04\u675F\u306E\u4E26\u3073\uFF08\u30C1\u30A7\u30C3\u30AF\u5370\uFF09",
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToggleControl, {
+      label: "\u7D04\u675F\u3092\u4E26\u3079\u308B",
+      checked: showTicks,
+      onChange: function onChange(v) {
+        return setAttributes({
+          showTicks: v
+        });
+      }
+    }), showTicks && /*#__PURE__*/React.createElement(React.Fragment, null, tickItems.map(function (it, i) {
+      return /*#__PURE__*/React.createElement("div", {
+        key: i,
+        style: {
+          borderTop: '1px solid #e0e0e0',
+          paddingTop: 10,
+          marginTop: 10
+        }
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+        label: "".concat(i + 1, "\u3064\u3081"),
+        value: it.text,
+        onChange: function onChange(v) {
+          return updateTick(i, v);
+        }
+      }), /*#__PURE__*/React.createElement("div", {
+        style: {
+          display: 'flex',
+          gap: 6
+        }
+      }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        variant: "secondary",
+        onClick: function onClick() {
+          return moveTick(i, -1);
+        },
+        disabled: i === 0
+      }, "\u2191"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        variant: "secondary",
+        onClick: function onClick() {
+          return moveTick(i, 1);
+        },
+        disabled: i === tickItems.length - 1
+      }, "\u2193"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+        isDestructive: true,
+        onClick: function onClick() {
+          return removeTick(i);
+        }
+      }, "\u524A\u9664")));
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.Button, {
+      variant: "primary",
+      onClick: addTick,
+      style: {
+        marginTop: 12
+      }
+    }, "\u7D04\u675F\u3092\u8FFD\u52A0"), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '16px 0 4px'
+      }
+    }, "\u6587\u5B57\u306E\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: tickTextColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          tickTextColor: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u30C1\u30A7\u30C3\u30AF\u5370\u306E\u80CC\u666F\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: tickMarkBgColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          tickMarkBgColor: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u30C1\u30A7\u30C3\u30AF\u5370\u306E\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: tickMarkColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          tickMarkColor: v
+        });
+      }
+    }))), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u30D5\u30A9\u30FC\u30E0\u306E\u7BB1",
+      initialOpen: true
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: "\u30D5\u30A9\u30FC\u30E0\u30BB\u30C3\u30C8\u306E\u756A\u53F7",
+      value: formId,
+      onChange: function onChange(v) {
+        return setAttributes({
+          formId: v
+        });
+      },
+      help: "\u7BA1\u7406\u753B\u9762\u300C\u30E1\u30FC\u30EB\u30D5\u30A9\u30FC\u30E0\u300D\u306E\u4E00\u89A7\u306B\u51FA\u3066\u3044\u308B\u756A\u53F7\u3002\u7A7A\u306B\u3059\u308B\u3068\u30D5\u30A9\u30FC\u30E0\u306E\u4EE3\u308F\u308A\u306B\u30DC\u30BF\u30F3\u304C\u51FA\u307E\u3059\u3002"
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: "\u7BB1\u306E\u898B\u51FA\u3057",
+      value: cardTitle,
+      onChange: function onChange(v) {
+        return setAttributes({
+          cardTitle: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: "\u898B\u51FA\u3057\u306E\u4E0B\u306E\u4E00\u884C",
+      value: cardSubText,
+      onChange: function onChange(v) {
+        return setAttributes({
+          cardSubText: v
+        });
+      },
+      help: "\u300C\u5165\u529B\u306F30\u79D2\u307B\u3069\u300D\u306A\u3069\u3001\u304B\u304B\u308B\u6642\u9593\u3092\u66F8\u304F\u3068\u62BC\u3055\u308C\u3084\u3059\u304F\u306A\u308A\u307E\u3059\u3002"
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextareaControl, {
+      label: "\u7BB1\u306E\u3044\u3061\u3070\u3093\u4E0B\u306E\u6CE8\u8A18",
+      value: cardNote,
+      onChange: function onChange(v) {
+        return setAttributes({
+          cardNote: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u7BB1\u306E\u80CC\u666F\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: cardBgColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          cardBgColor: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u7BB1\u306E\u898B\u51FA\u3057\u306E\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: cardTitleColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          cardTitleColor: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u898B\u51FA\u3057\u306E\u4E0B\u306E\u4E00\u884C\u306E\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: cardSubColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          cardSubColor: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u6CE8\u8A18\u306E\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: cardNoteColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          cardNoteColor: v
+        });
+      }
+    })), hasForm && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u30D5\u30A9\u30FC\u30E0\u306E\u4E2D\u306E\u8272",
+      initialOpen: false
+    }, /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '0 0 4px'
+      }
+    }, "\u9001\u4FE1\u30DC\u30BF\u30F3\u306E\u80CC\u666F\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: submitBgColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          submitBgColor: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u9001\u4FE1\u30DC\u30BF\u30F3\u306E\u6587\u5B57\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: submitTextColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          submitTextColor: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u300C\u5FC5\u9808\u300D\u306E\u672D\u306E\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: requiredBgColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          requiredBgColor: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        marginTop: 12,
+        fontSize: 12,
+        color: '#666'
+      }
+    }, "\u3075\u3060\u3093\u30D5\u30A9\u30FC\u30E0\u306F\u30B5\u30A4\u30C8\u306E\u4E3B\u8272\u3067\u5857\u3089\u308C\u307E\u3059\u304C\u3001\u3053\u306E\u30D6\u30ED\u30C3\u30AF\u306E\u4E2D\u3060\u3051\u3053\u3053\u3067\u6C7A\u3081\u3089\u308C\u307E\u3059\u3002")), !hasForm && /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u30DC\u30BF\u30F3\uFF08\u30D5\u30A9\u30FC\u30E0\u3092\u4F7F\u308F\u306A\u3044\u3068\u304D\uFF09",
+      initialOpen: true
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: "\u30DC\u30BF\u30F3\u306E\u6587\u5B57",
+      value: buttonText,
+      onChange: function onChange(v) {
+        return setAttributes({
+          buttonText: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: "\u30DC\u30BF\u30F3\u306E\u4E0B\u306E\u5C0F\u3055\u3044\u6587\u5B57",
+      value: buttonSub,
+      onChange: function onChange(v) {
+        return setAttributes({
+          buttonSub: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
+      label: "\u30EA\u30F3\u30AF\u5148\u306EURL",
+      value: buttonUrl,
+      onChange: function onChange(v) {
+        return setAttributes({
+          buttonUrl: v
+        });
+      },
+      placeholder: "#form \u306A\u3069"
+    }), /*#__PURE__*/React.createElement(_link_picker_js__WEBPACK_IMPORTED_MODULE_7__.LinkPicker, {
+      link: (0,_link_picker_js__WEBPACK_IMPORTED_MODULE_7__.lwLinkFromAttrs)(attributes, LINK_KEYS),
+      onChange: function onChange(patch) {
+        return setAttributes((0,_link_picker_js__WEBPACK_IMPORTED_MODULE_7__.lwLinkToAttrs)(patch, LINK_KEYS));
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u30DC\u30BF\u30F3\u306E\u80CC\u666F\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: ctaBgColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          ctaBgColor: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement("p", {
+      style: {
+        margin: '12px 0 4px'
+      }
+    }, "\u30DC\u30BF\u30F3\u306E\u6587\u5B57\u8272"), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ColorPalette, {
+      value: ctaTextColor,
+      onChange: function onChange(v) {
+        return setAttributes({
+          ctaTextColor: v
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RangeControl, {
+      label: "\u89D2\u306E\u4E38\u307F",
+      value: ctaBorderRadius,
+      onChange: function onChange(v) {
+        return setAttributes({
+          ctaBorderRadius: v
+        });
+      },
+      min: 0,
+      max: 40,
+      step: 1
+    }))), /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
+      className: "bg_filter"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "bg_filter_inner"
+    }), backgroundType === 'image' && imageUrlPc && /*#__PURE__*/React.createElement("img", {
+      src: imageUrlPc,
+      alt: imageAlt
+    })), /*#__PURE__*/React.createElement("div", {
+      className: "this_wrap"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "lead_side"
+    }, showBadge && (badgeLabel || badgeText) && /*#__PURE__*/React.createElement("span", {
+      className: "offer_badge"
+    }, badgeLabel && /*#__PURE__*/React.createElement("b", null, badgeLabel), badgeText && /*#__PURE__*/React.createElement("span", null, badgeText)), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
+      tagName: HeadingTag,
+      className: "main_ttl",
+      "data-lw_font_set": titleFont,
+      value: mainTitle,
+      onChange: function onChange(v) {
+        return setAttributes({
+          mainTitle: v
+        });
+      },
+      placeholder: "\u3053\u3053\u306B\u898B\u51FA\u3057"
+    }), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText, {
+      tagName: "p",
+      className: "description",
+      value: description,
+      onChange: function onChange(v) {
+        return setAttributes({
+          description: v
+        });
+      },
+      placeholder: "\u3053\u3053\u306B\u8AAC\u660E\u6587"
+    }), showTicks && tickItems.length > 0 && /*#__PURE__*/React.createElement("ul", {
+      className: "tick_list"
+    }, tickItems.map(function (it, i) {
+      return /*#__PURE__*/React.createElement("li", {
+        key: i
+      }, /*#__PURE__*/React.createElement("i", null, "\u2713"), /*#__PURE__*/React.createElement("span", null, it.text));
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "form_side"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "form_card"
+    }, cardTitle && /*#__PURE__*/React.createElement("p", {
+      className: "card_ttl"
+    }, cardTitle), cardSubText && /*#__PURE__*/React.createElement("p", {
+      className: "card_sub"
+    }, cardSubText), hasForm ? /*#__PURE__*/React.createElement("p", {
+      className: "form_placeholder"
+    }, "\u30D5\u30A9\u30FC\u30E0\u30BB\u30C3\u30C8 ", formNo, " \u756A\u304C\u3053\u3053\u306B\u5165\u308A\u307E\u3059", /*#__PURE__*/React.createElement("br", null), /*#__PURE__*/React.createElement("small", null, "\uFF08\u8868\u793A\u306F\u516C\u958B\u30DA\u30FC\u30B8\u3067\u78BA\u8A8D\u3057\u3066\u304F\u3060\u3055\u3044\uFF09")) : /*#__PURE__*/React.createElement("span", {
+      className: "cta_btn"
+    }, buttonText, buttonSub && /*#__PURE__*/React.createElement("small", null, buttonSub)), cardNote && /*#__PURE__*/React.createElement("p", {
+      className: "card_note"
+    }, cardNote))))));
+  },
+  save: function save(_ref4) {
+    var attributes = _ref4.attributes;
+    var backgroundType = attributes.backgroundType,
+      imageUrlPc = attributes.imageUrlPc,
+      imageUrlSp = attributes.imageUrlSp,
+      imageAlt = attributes.imageAlt,
+      showBadge = attributes.showBadge,
+      badgeLabel = attributes.badgeLabel,
+      badgeText = attributes.badgeText,
+      headingLevel = attributes.headingLevel,
+      mainTitle = attributes.mainTitle,
+      titleFont = attributes.titleFont,
+      description = attributes.description,
+      showTicks = attributes.showTicks,
+      _attributes$tickItems2 = attributes.tickItems,
+      tickItems = _attributes$tickItems2 === void 0 ? [] : _attributes$tickItems2,
+      cardTitle = attributes.cardTitle,
+      cardSubText = attributes.cardSubText,
+      formId = attributes.formId,
+      cardNote = attributes.cardNote,
+      buttonText = attributes.buttonText,
+      buttonSub = attributes.buttonSub,
+      buttonUrl = attributes.buttonUrl;
+    var HeadingTag = "h".concat(headingLevel);
+    /* 🚨 フォームセット番号は「数字だけ」に落としてから使う。
+       ① テーマ側 functions/mail_form/form_put.php は、この値を <form id="…"> と
+          <label for="lw_consent_…"> にそのまま入れる。絞るのはここの責任。
+       ② ' や ] が混じるとショートコードが途中で割れて、FVの真ん中に "] という文字が残る。
+       （2026-09-07 の複数AIレビューで検出） */
+    var formNo = String(formId !== null && formId !== void 0 ? formId : '').replace(/[^0-9]/g, '');
+    var hasForm = formNo !== '';
+    var linkData = (0,_link_picker_js__WEBPACK_IMPORTED_MODULE_7__.lwLinkDataPropsFromAttrs)(attributes, LINK_KEYS);
+    var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
+      className: rootClass(attributes),
+      style: styleVars(attributes)
+    });
+    return /*#__PURE__*/React.createElement("div", blockProps, /*#__PURE__*/React.createElement("div", {
+      className: "bg_filter"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "bg_filter_inner"
+    }), backgroundType === 'image' && imageUrlPc && /*#__PURE__*/React.createElement("picture", null, /*#__PURE__*/React.createElement("source", {
+      srcSet: imageUrlSp || imageUrlPc,
+      media: "(max-width: 800px)"
+    }), /*#__PURE__*/React.createElement("source", {
+      srcSet: imageUrlPc,
+      media: "(min-width: 801px)"
+    }), /*#__PURE__*/React.createElement("img", {
+      src: imageUrlPc,
+      alt: imageAlt
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "this_wrap"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "lead_side"
+    }, showBadge && (badgeLabel || badgeText) && /*#__PURE__*/React.createElement("span", {
+      className: "offer_badge"
+    }, badgeLabel && /*#__PURE__*/React.createElement("b", null, badgeLabel), badgeText && /*#__PURE__*/React.createElement("span", null, badgeText)), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+      tagName: HeadingTag,
+      className: "main_ttl",
+      "data-lw_font_set": titleFont,
+      value: mainTitle
+    }), description && /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
+      tagName: "p",
+      className: "description",
+      value: description
+    }), showTicks && tickItems.length > 0 && /*#__PURE__*/React.createElement("ul", {
+      className: "tick_list"
+    }, tickItems.map(function (it, i) {
+      return /*#__PURE__*/React.createElement("li", {
+        key: i
+      }, /*#__PURE__*/React.createElement("i", null, "\u2713"), /*#__PURE__*/React.createElement("span", null, it.text));
+    }))), /*#__PURE__*/React.createElement("div", {
+      className: "form_side"
+    }, /*#__PURE__*/React.createElement("div", {
+      className: "form_card"
+    }, cardTitle && /*#__PURE__*/React.createElement("p", {
+      className: "card_ttl"
+    }, cardTitle), cardSubText && /*#__PURE__*/React.createElement("p", {
+      className: "card_sub"
+    }, cardSubText), hasForm ? "[lw_mail_form_select id='".concat(formNo, "']") : buttonText && /*#__PURE__*/React.createElement("a", {
+      className: "cta_btn",
+      href: buttonUrl,
+      "data-lw-link-type": linkData.linkType,
+      "data-lw-link-id": linkData.linkId
+    }, buttonText, buttonSub && /*#__PURE__*/React.createElement("small", null, buttonSub)), cardNote && /*#__PURE__*/React.createElement("p", {
+      className: "card_note"
+    }, cardNote)))));
+  }
+};
+(0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_6__.name, lwBlockDef);
+
+/***/ }),
+
+/***/ "./src/utils.js":
+/*!**********************!*\
+  !*** ./src/utils.js ***!
+  \**********************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+/* harmony export */ __webpack_require__.d(__webpack_exports__, {
+/* harmony export */   ButtonBackgroundOptionsArr: () => (/* binding */ ButtonBackgroundOptionsArr),
+/* harmony export */   fontOptionsArr: () => (/* binding */ fontOptionsArr),
+/* harmony export */   fontWeightClassOptionArr: () => (/* binding */ fontWeightClassOptionArr),
+/* harmony export */   fontWeightOptionsArr: () => (/* binding */ fontWeightOptionsArr),
+/* harmony export */   leftButtonIconSvgArr: () => (/* binding */ leftButtonIconSvgArr),
+/* harmony export */   minHeightPcClassOptionArr: () => (/* binding */ minHeightPcClassOptionArr),
+/* harmony export */   minHeightSpClassOptionArr: () => (/* binding */ minHeightSpClassOptionArr),
+/* harmony export */   minHeightTbClassOptionArr: () => (/* binding */ minHeightTbClassOptionArr),
+/* harmony export */   rightButtonIconSvgArr: () => (/* binding */ rightButtonIconSvgArr),
+/* harmony export */   serviceInfoIconSvgArr: () => (/* binding */ serviceInfoIconSvgArr)
+/* harmony export */ });
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
+//高さ調整の関数 ---------------------
+
+// 共通のヘッダーオフセット値
+var HEADER_OFFSETS = [0, 20, 40, 60, 80, 100];
+
+// デバイスごとの高さの値を定義
+var HEIGHT_VALUES = {
+  pc: [768, 720, 680, 640, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140],
+  tb: [768, 600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140],
+  sp: [600, 580, 560, 540, 520, 500, 480, 460, 440, 420, 400, 380, 360, 340, 320, 300, 280, 260, 240, 220, 200, 180, 160, 140]
+};
+
+// 汎用的な高さオプション生成関数
+function generateHeightOptions(device) {
+  var includeHeader = arguments.length > 1 && arguments[1] !== undefined ? arguments[1] : true;
+  var prefix = "min-h-".concat(device);
+  var heightValues = HEIGHT_VALUES[device];
+
+  // 基本オプション
+  var baseOptions = [{
+    label: '未選択',
+    value: ''
+  }, {
+    label: '画面の高さ',
+    value: "".concat(prefix, "-100vh")
+  }];
+
+  // 数値高さオプション（タイプミスも修正: 520px の大文字Pを小文字に）
+  var numericOptions = heightValues.map(function (value) {
+    return {
+      label: "".concat(value, "px"),
+      value: "".concat(prefix, "-").concat(value, "px")
+    };
+  });
+
+  // ヘッダーなしの場合
+  if (!includeHeader) {
+    return [].concat(baseOptions, _toConsumableArray(numericOptions));
+  }
+
+  // ヘッダー関連オプション
+  var headerOptions = HEADER_OFFSETS.map(function (offset) {
+    return {
+      label: offset === 0 ? '画面の高さ - ヘッダーの高さ' : "\u753B\u9762\u306E\u9AD8\u3055 - \u30D8\u30C3\u30C0\u30FC\u306E\u9AD8\u3055 - ".concat(offset, "px"),
+      value: offset === 0 ? "".concat(prefix, "-100vh-header") : "".concat(prefix, "-100vh-header-").concat(offset)
+    };
+  });
+  return [].concat(baseOptions, _toConsumableArray(headerOptions), _toConsumableArray(numericOptions));
+}
+
+// PC用高さオプション
+function minHeightPcClassOptionArr() {
+  var $ptn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+  return generateHeightOptions('pc', $ptn !== "none_header");
+}
+
+// タブレット用高さオプション
+function minHeightTbClassOptionArr() {
+  var $ptn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+  return generateHeightOptions('tb', $ptn !== "none_header");
+}
+
+// スマートフォン用高さオプション
+function minHeightSpClassOptionArr() {
+  var $ptn = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : "";
+  return generateHeightOptions('sp', $ptn !== "none_header");
+}
+// 使用例：
+// const pcOptions = minHeightPcClassOptionArr();              // ヘッダーオプション含む
+// const pcOptionsNoHeader = minHeightPcClassOptionArr("none_header"); // ヘッダーオプションなし
+// const tbOptions = minHeightTbClassOptionArr();              // ヘッダーオプション含む
+// const spOptions = minHeightSpClassOptionArr("none_header"); // ヘッダーオプションなし
+
+//フォント系 ---------------------
+// フォントオプションを変数に定義
+function fontOptionsArr() {
+  return [{
+    label: '未選択',
+    value: ''
+  }, {
+    label: '明朝体',
+    value: 'mincho'
+  }, {
+    label: 'ゴシック',
+    value: 'gothic'
+  }, {
+    label: 'Noto Sans JP',
+    value: 'Noto Sans JP'
+  }, {
+    label: 'Noto Serif JP',
+    value: 'Noto Serif JP'
+  }, {
+    label: 'M PLUS Rounded 1c',
+    value: 'M PLUS Rounded 1c'
+  }, {
+    label: 'Kosugi Maru',
+    value: 'Kosugi Maru'
+  }, {
+    label: 'Sawarabi Mincho',
+    value: 'Sawarabi Mincho'
+  }, {
+    label: 'Sawarabi Gothic',
+    value: 'Sawarabi Gothic'
+  }, {
+    label: 'Murecho',
+    value: 'Murecho'
+  }, {
+    label: 'IBM Plex Sans JP',
+    value: 'IBM Plex Sans JP'
+  }, {
+    label: 'BIZ UDPGothic',
+    value: 'BIZ UDPGothic'
+  }, {
+    label: 'Roboto',
+    value: 'Roboto'
+  }, {
+    label: 'sora',
+    value: 'sora'
+  }, {
+    label: 'Lato',
+    value: 'Lato'
+  }, {
+    label: 'Josefin Sans',
+    value: 'Josefin Sans'
+  }];
+}
+// フォント太さオプションを変数に定義
+function fontWeightOptionsArr() {
+  return [{
+    label: '未選択',
+    value: ''
+  }, {
+    label: '100 (Thin)',
+    value: '100'
+  }, {
+    label: '300 (Light)',
+    value: '300'
+  }, {
+    label: '400 (Normal)',
+    value: '400'
+  }, {
+    label: '500 (Medium)',
+    value: '500'
+  }, {
+    label: '600 (Semi-Bold)',
+    value: '600'
+  }, {
+    label: '700 (Bold)',
+    value: '700'
+  }, {
+    label: '800 (Extra-Bold)',
+    value: '800'
+  }, {
+    label: '900 (Black)',
+    value: '900'
+  }];
+}
+// フォント太さオプションを変数に定義
+function fontWeightClassOptionArr() {
+  return [{
+    label: '100 (Thin)',
+    value: 'font-weight-100'
+  }, {
+    label: '200 (Extra Light)',
+    value: 'font-weight-200'
+  }, {
+    label: '300 (Light)',
+    value: 'font-weight-300'
+  }, {
+    label: '400 (Normal)',
+    value: 'font-weight-400'
+  }, {
+    label: '500 (Medium)',
+    value: 'font-weight-500'
+  }, {
+    label: '600 (Semi Bold)',
+    value: 'font-weight-600'
+  }, {
+    label: '700 (Bold)',
+    value: 'font-weight-700'
+  }, {
+    label: '800 (Extra Bold)',
+    value: 'font-weight-800'
+  }, {
+    label: '900 (Black)',
+    value: 'font-weight-900'
+  }];
+}
+// 背景オプションを変数に定義
+function ButtonBackgroundOptionsArr() {
+  return [{
+    label: '未選択',
+    value: ''
+  }, {
+    label: 'メインカラー',
+    value: 'var(--color-main)'
+  }, {
+    label: 'アクセントカラー',
+    value: 'var(--color-accent)'
+  }, {
+    label: 'エメラルドグリーン',
+    value: 'linear-gradient(90deg, rgba(0,186,157,1) 0%, rgba(16,201,151,1) 33%, rgba(16,201,151,1) 69%, rgba(0,186,157,1) 100%)'
+  }, {
+    label: '紫とピンク',
+    value: 'linear-gradient(90deg, rgba(125,57,242,1) 0%, rgba(153,102,255,1) 33%, rgba(153,102,255,1) 69%, rgba(125,57,242,1) 100%)'
+  }, {
+    label: '青とシアン',
+    value: 'linear-gradient(90deg, rgba(0,132,255,1) 0%, rgba(0,184,255,1) 33%, rgba(0,184,255,1) 69%, rgba(0,132,255,1) 100%)'
+  }, {
+    label: '濃い青とシアン',
+    value: 'linear-gradient(90deg, rgba(0,85,200,1) 0%, rgba(0,120,200,1) 33%, rgba(0,120,200,1) 69%, rgba(0,85,200,1) 100%)'
+  }, {
+    label: 'オレンジと赤',
+    value: 'linear-gradient(90deg, rgba(255,94,0,1) 0%, rgba(255,140,0,1) 33%, rgba(255,140,0,1) 69%, rgba(255,94,0,1) 100%)'
+  }, {
+    label: 'グリーンとライム',
+    value: 'linear-gradient(90deg, rgba(34,177,76,1) 0%, rgba(102,255,0,1) 33%, rgba(102,255,0,1) 69%, rgba(34,177,76,1) 100%)'
+  }, {
+    label: 'ピンクとマゼンタ',
+    value: 'linear-gradient(90deg, rgba(255,20,147,1) 0%, rgba(255,105,180,1) 33%, rgba(255,105,180,1) 69%, rgba(255,20,147,1) 100%)'
+  }, {
+    label: '黄色とオレンジ',
+    value: 'linear-gradient(90deg, rgba(255,223,0,1) 0%, rgba(255,165,0,1) 33%, rgba(255,165,0,1) 69%, rgba(255,223,0,1) 100%)'
+  }, {
+    label: 'ネイビーと青',
+    value: 'linear-gradient(90deg, rgba(0,0,128,1) 0%, rgba(0,0,255,1) 33%, rgba(0,0,255,1) 69%, rgba(0,0,128,1) 100%)'
+  }, {
+    label: 'ライムグリーンとエメラルド',
+    value: 'linear-gradient(90deg, rgba(0,255,127,1) 0%, rgba(0,255,191,1) 33%, rgba(0,255,191,1) 69%, rgba(0,255,127,1) 100%)'
+  }, {
+    label: 'ターコイズとシアン',
+    value: 'linear-gradient(90deg, rgba(64,224,208,1) 0%, rgba(72,209,204,1) 33%, rgba(72,209,204,1) 69%, rgba(64,224,208,1) 100%)'
+  },
+  //左右
+  {
+    label: '青と黄色（左右）',
+    value: 'linear-gradient(90deg, #00C6FF, #F8FF00)'
+  }, {
+    label: '紫とピンク（左右）',
+    value: 'linear-gradient(90deg, #7F00FF, #E100FF)'
+  }, {
+    label: '赤とオレンジ（左右）',
+    value: 'linear-gradient(90deg, #FF512F, #DD2476)'
+  }, {
+    label: '青と水色（左右）',
+    value: 'linear-gradient(90deg, #2193b0, #6dd5ed)'
+  }, {
+    label: '緑とライムグリーン（左右）',
+    value: 'linear-gradient(90deg, #00b09b, #96c93d)'
+  }, {
+    label: 'ピンクと黄色（左右）',
+    value: 'linear-gradient(90deg, #ff758c, #fdd365)'
+  }, {
+    label: 'ネオンブルーとパープル（左右）',
+    value: 'linear-gradient(90deg, #00f260, #0575e6)'
+  }, {
+    label: 'オレンジとピンク（左右）',
+    value: 'linear-gradient(90deg, #ff9966, #ff5e62)'
+  }, {
+    label: 'ゴールドとブラウン（左右）',
+    value: 'linear-gradient(90deg, #f1c40f, #e67e22)'
+  }, {
+    label: 'イエローとグリーン（左右）',
+    value: 'linear-gradient(90deg, #fdfc47, #24fe41)'
+  },
+  //浮き出し
+  {
+    label: 'エメラルドグリーン浮き出し',
+    value: 'linear-gradient( to bottom, #00f0d0 0%, #00b894 50%, #006b52 100%)'
+  }, {
+    label: 'ピンク浮き出し',
+    value: 'linear-gradient( to bottom, #ff758c 0%, #ff7eb3 50%, #ff4e50 100%)'
+  }, {
+    label: '紫浮き出し',
+    value: 'linear-gradient( to bottom, #654ea3 0%, #8b6fa9 50%, #483D8B 100%)'
+  }, {
+    label: 'ライトブルー浮き出し',
+    value: 'linear-gradient( to bottom, #89f7fe 0%, #66a6ff 50%, #0066ff 100%)'
+  }, {
+    label: 'グリーン浮き出し',
+    value: 'linear-gradient( to bottom, #9be15d 0%, #00e3ae 50%, #006b3f 100%)'
+  }, {
+    label: 'オレンジ浮き出し',
+    value: 'linear-gradient( to bottom, #fc4a1a 0%, #f7b733 50%, #d35400 100%)'
+  }, {
+    label: 'ネオンブルー浮き出し',
+    value: 'linear-gradient( to bottom, #43e97b 0%, #38f9d7 50%, #2c82c9 100%)'
+  }, {
+    label: 'ゴールド浮き出し',
+    value: 'linear-gradient( to bottom, #f1c40f 0%, #e67e22 50%, #d35400 100%)'
+  }, {
+    label: 'ライムグリーン浮き出し',
+    value: 'linear-gradient( to bottom, #00f260 0%, #0575e6 50%, #004d40 100%)'
+  }, {
+    label: 'レッド浮き出し',
+    value: 'linear-gradient( to bottom, #ff5858 0%, #f09819 50%, #d32f2f 100%)'
+  }];
+}
+
+// SVG アイコンを変数に格納
+var icon_chevron_right = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5 12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256 73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5 45.3 0l192 192z"/></svg>';
+var icon_arrow_down = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M169.4 470.6c12.5 12.5 32.8 12.5 45.3 0l160-160c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L224 370.8 224 64c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 306.7L54.6 265.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l160 160z"/></svg>';
+var icon_arrow_up = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M214.6 41.4c-12.5-12.5-32.8-12.5-45.3 0l-160 160c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L160 141.2 160 448c0 17.7 14.3 32 32 32s32-14.3 32-32l0-306.7L329.4 246.6c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3l-160-160z"/></svg>';
+var icon_arrow_left = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M9.4 233.4c-12.5 12.5-12.5 32.8 0 45.3l160 160c12.5 12.5 32.8 12.5 45.3 0s12.5-32.8 0-45.3L109.2 288 416 288c17.7 0 32-14.3 32-32s-14.3-32-32-32l-306.7 0L214.6 118.6c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0l-160 160z"/></svg>';
+var icon_arrow_right = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M438.6 278.6c12.5-12.5 12.5-32.8 0-45.3l-160-160c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3L338.8 224 32 224c-17.7 0-32 14.3-32 32s14.3 32 32 32l306.7 0L233.4 393.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0l160-160z"/></svg>';
+var icon_link = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M579.8 267.7c56.5-56.5 56.5-148 0-204.5c-50-50-128.8-56.5-186.3-15.4l-1.6 1.1c-14.4 10.3-17.7 30.3-7.4 44.6s30.3 17.7 44.6 7.4l1.6-1.1c32.1-22.9 76-19.3 103.8 8.6c31.5 31.5 31.5 82.5 0 114L422.3 334.8c-31.5 31.5-82.5 31.5-114 0c-27.9-27.9-31.5-71.8-8.6-103.8l1.1-1.6c10.3-14.4 6.9-34.4-7.4-44.6s-34.4-6.9-44.6 7.4l-1.1 1.6C206.5 251.2 213 330 263 380c56.5 56.5 148 56.5 204.5 0L579.8 267.7zM60.2 244.3c-56.5 56.5-56.5 148 0 204.5c50 50 128.8 56.5 186.3 15.4l1.6-1.1c14.4-10.3 17.7-30.3 7.4-44.6s-30.3-17.7-44.6-7.4l-1.6 1.1c-32.1 22.9-76 19.3-103.8-8.6C74 372 74 321 105.5 289.5L217.7 177.2c31.5-31.5 82.5-31.5 114 0c27.9 27.9 31.5 71.8 8.6 103.9l-1.1 1.6c-10.3 14.4-6.9 34.4 7.4 44.6s34.4 6.9 44.6-7.4l1.1-1.6C433.5 260.8 427 182 377 132c-56.5-56.5-148-56.5-204.5 0L60.2 244.3z"/></svg>';
+var icon_arrow_up_right = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M320 0c-17.7 0-32 14.3-32 32s14.3 32 32 32l82.7 0L201.4 265.4c-12.5 12.5-12.5 32.8 0 45.3s32.8 12.5 45.3 0L448 109.3l0 82.7c0 17.7 14.3 32 32 32s32-14.3 32-32l0-160c0-17.7-14.3-32-32-32L320 0zM80 32C35.8 32 0 67.8 0 112L0 432c0 44.2 35.8 80 80 80l320 0c44.2 0 80-35.8 80-80l0-112c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 112c0 8.8-7.2 16-16 16L80 448c-8.8 0-16-7.2-16-16l0-320c0-8.8 7.2-16 16-16l112 0c17.7 0 32-14.3 32-32s-14.3-32-32-32L80 32z"/></svg>';
+var icon_circle_chevron_right_bg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M0 256a256 256 0 1 0 512 0A256 256 0 1 0 0 256zM241 377c-9.4 9.4-24.6 9.4-33.9 0s-9.4-24.6 0-33.9l87-87-87-87c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0L345 239c9.4 9.4 9.4 24.6 0 33.9L241 377z"/></svg>';
+var icon_circle_check = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 48a208 208 0 1 1 0 416 208 208 0 1 1 0-416zm0 464A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209c9.4-9.4 9.4-24.6 0-33.9s-24.6-9.4-33.9 0l-111 111-47-47c-9.4-9.4-24.6-9.4-33.9 0s-9.4 24.6 0 33.9l64 64c9.4 9.4 24.6 9.4 33.9 0L369 209z"/></svg>';
+var icon_circle_check_bg = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M256 512A256 256 0 1 0 256 0a256 256 0 1 0 0 512zM369 209L241 337c-9.4 9.4-24.6 9.4-33.9 0l-64-64c-9.4-9.4-9.4-24.6 0-33.9s24.6-9.4 33.9 0l47 47L335 175c9.4-9.4 24.6-9.4 33.9 0s9.4 24.6 0 33.9z"/></svg>';
+var icon_download = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M288 32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 242.7-73.4-73.4c-12.5-12.5-32.8-12.5-45.3 0s-12.5 32.8 0 45.3l128 128c12.5 12.5 32.8 12.5 45.3 0l128-128c12.5-12.5 12.5-32.8 0-45.3s-32.8-12.5-45.3 0L288 274.7 288 32zM64 352c-35.3 0-64 28.7-64 64l0 32c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-32c0-35.3-28.7-64-64-64l-101.5 0-45.3 45.3c-25 25-65.5 25-90.5 0L165.5 352 64 352zm368 56a24 24 0 1 1 0 48 24 24 0 1 1 0-48z"/></svg>';
+var icon_tel_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M164.9 24.6c-7.7-18.6-28-28.5-47.4-23.2l-88 24C12.1 30.2 0 46 0 64C0 311.4 200.6 512 448 512c18 0 33.8-12.1 38.6-29.5l24-88c5.3-19.4-4.6-39.7-23.2-47.4l-96-40c-16.3-6.8-35.2-2.1-46.3 11.6L304.7 368C234.3 334.7 177.3 277.7 144 207.3L193.3 167c13.7-11.2 18.4-30 11.6-46.3l-40-96z"/></svg>';
+var icon_tel_2 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96L0 416c0 35.3 28.7 64 64 64l320 0c35.3 0 64-28.7 64-64l0-320c0-35.3-28.7-64-64-64L64 32zm90.7 96.7c9.7-2.6 19.9 2.3 23.7 11.6l20 48c3.4 8.2 1 17.6-5.8 23.2L168 231.7c16.6 35.2 45.1 63.7 80.3 80.3l20.2-24.7c5.6-6.8 15-9.2 23.2-5.8l48 20c9.3 3.9 14.2 14 11.6 23.7l-12 44C336.9 378 329 384 320 384C196.3 384 96 283.7 96 160c0-9 6-16.9 14.7-19.3l44-12z"/></svg>';
+var icon_tel_3 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M16 64C16 28.7 44.7 0 80 0L304 0c35.3 0 64 28.7 64 64l0 384c0 35.3-28.7 64-64 64L80 512c-35.3 0-64-28.7-64-64L16 64zM144 448c0 8.8 7.2 16 16 16l64 0c8.8 0 16-7.2 16-16s-7.2-16-16-16l-64 0c-8.8 0-16 7.2-16 16zM304 64L80 64l0 320 224 0 0-320z"/></svg>';
+var icon_tel_4 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M256 48C141.1 48 48 141.1 48 256l0 40c0 13.3-10.7 24-24 24s-24-10.7-24-24l0-40C0 114.6 114.6 0 256 0S512 114.6 512 256l0 144.1c0 48.6-39.4 88-88.1 88L313.6 488c-8.3 14.3-23.8 24-41.6 24l-32 0c-26.5 0-48-21.5-48-48s21.5-48 48-48l32 0c17.8 0 33.3 9.7 41.6 24l110.4 .1c22.1 0 40-17.9 40-40L464 256c0-114.9-93.1-208-208-208zM144 208l16 0c17.7 0 32 14.3 32 32l0 112c0 17.7-14.3 32-32 32l-16 0c-35.3 0-64-28.7-64-64l0-48c0-35.3 28.7-64 64-64zm224 0c35.3 0 64 28.7 64 64l0 48c0 35.3-28.7 64-64 64l-16 0c-17.7 0-32-14.3-32-32l0-112c0-17.7 14.3-32 32-32l16 0z"/></svg>';
+var icon_tel_5 = '<svg xmlns="http://www.w3.org/2000/svg" width="35.933" height="35.931" viewBox="0 0 35.933 35.931"><g transform="translate(0.001 -0.012)"><path d="M22.191,146.619a1.163,1.163,0,0,0-1.551-.083L18.454,148.3a1.161,1.161,0,0,1-1.478-.016,30.492,30.492,0,0,1-7.224-7.224,1.161,1.161,0,0,1-.016-1.478L11.5,137.4a1.162,1.162,0,0,0-.083-1.551l-4.184-4.184a1.165,1.165,0,0,0-1.57-.068L.414,136a1.16,1.16,0,0,0-.276,1.439s.705,1.441,1.361,2.543a52.052,52.052,0,0,0,16.555,16.555c1.1.655,2.542,1.362,2.542,1.362a1.163,1.163,0,0,0,1.438-.278l4.409-5.248a1.164,1.164,0,0,0-.068-1.569Z" transform="translate(0 -122.094)"/><path d="M248.832,164.2l1.742-.276a9.24,9.24,0,0,0-7.66-7.66l-.277,1.741a7.478,7.478,0,0,1,6.195,6.195Z" transform="translate(-225.61 -145.289)"/><path d="M278.825,5.715a20.25,20.25,0,0,0-11.192-5.7l-.274,1.742a18.566,18.566,0,0,1,15.426,15.426l1.743-.275A20.255,20.255,0,0,0,278.825,5.715Z" transform="translate(-248.597)"/><path d="M255.285,78.054l-.274,1.744a12.995,12.995,0,0,1,10.813,10.813l1.743-.275a14.76,14.76,0,0,0-12.282-12.282Z" transform="translate(-237.115 -72.565)"/></g></svg>';
+var icon_mail_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z"/></svg>';
+var icon_mail_2 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M48 64C21.5 64 0 85.5 0 112c0 15.1 7.1 29.3 19.2 38.4L236.8 313.6c11.4 8.5 27 8.5 38.4 0L492.8 150.4c12.1-9.1 19.2-23.3 19.2-38.4c0-26.5-21.5-48-48-48L48 64zM0 176L0 384c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-208L294.4 339.2c-22.8 17.1-54 17.1-76.8 0L0 176z"/></svg>';
+var icon_mail_3 = '<svg xmlns="http://www.w3.org/2000/svg" width="27.93" height="21" viewBox="0 0 27.93 21"><path  d="M449.525,176.452l-3.6-3.744,3.6-3.107Z" transform="translate(-421.595 -163.813)"/><path  d="M3.609,172.707,0,176.456V169.6Z" transform="translate(0 -163.813)"/><path  d="M27.93,260.483v3.448a1.511,1.511,0,0,1-1.51,1.51H1.51A1.51,1.51,0,0,1,0,263.93v-3.448l5.4-5.6,6.166,5.311a3.8,3.8,0,0,0,4.8,0l6.162-5.311Z" transform="translate(0 -244.44)"/><path  d="M27.93,65.025v1.51L14.759,77.881a1.285,1.285,0,0,1-1.588,0L0,66.535v-1.51a1.507,1.507,0,0,1,1.51-1.506H26.42A1.507,1.507,0,0,1,27.93,65.025Z" transform="translate(0 -63.519)"/></svg>';
+var icon_pdf_1 = '<svg xmlns="http://www.w3.org/2000/svg" width="30.272" height="37.206" viewBox="0 0 30.272 37.206"><g  transform="translate(-47.706)"><path data-name="パス 17" d="M71.738,0H58.418l-.677.677-9.358,9.359-.677.677V30.964a6.249,6.249,0,0,0,6.242,6.242h17.79a6.249,6.249,0,0,0,6.241-6.242V6.242A6.248,6.248,0,0,0,71.738,0Zm3.93,30.964a3.93,3.93,0,0,1-3.93,3.931H53.948a3.93,3.93,0,0,1-3.931-3.931V11.67H56.1a3.276,3.276,0,0,0,3.276-3.275V2.311H71.738a3.93,3.93,0,0,1,3.93,3.931Z" /><path data-name="パス 18" d="M137.436,252.785h-2.073a.593.593,0,0,0-.631.641v5.36a.726.726,0,1,0,1.45,0v-1.628a.053.053,0,0,1,.06-.059h1.194a2.164,2.164,0,1,0,0-4.313Zm-.089,3.06h-1.105a.053.053,0,0,1-.06-.059V254.1a.053.053,0,0,1,.06-.059h1.105a.906.906,0,1,1,0,1.806Z" transform="translate(-80.702 -234.416)" /><path data-name="パス 19" d="M221.857,252.785h-1.589a.593.593,0,0,0-.631.641v5.439a.585.585,0,0,0,.631.632h1.589c1.431,0,2.32-.454,2.675-1.55a8.344,8.344,0,0,0,0-3.613C224.177,253.239,223.288,252.785,221.857,252.785Zm1.284,4.659c-.168.533-.651.76-1.323.76h-.671a.053.053,0,0,1-.06-.059v-4.007a.053.053,0,0,1,.06-.059h.671c.672,0,1.155.227,1.323.76a7.268,7.268,0,0,1,0,2.606Z" transform="translate(-159.438 -234.416)" /><path data-name="パス 20" d="M311.544,252.785h-3.256a.594.594,0,0,0-.632.641v5.36a.727.727,0,1,0,1.451,0v-1.915a.052.052,0,0,1,.059-.059h1.9a.624.624,0,1,0,0-1.244h-1.9a.052.052,0,0,1-.059-.059V254.1a.052.052,0,0,1,.059-.059h2.379a.628.628,0,1,0,0-1.253Z" transform="translate(-241.06 -234.416)" /></g></svg>';
+var icon_home_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M575.8 255.5c0 18-15 32.1-32 32.1l-32 0 .7 160.2c0 2.7-.2 5.4-.5 8.1l0 16.2c0 22.1-17.9 40-40 40l-16 0c-1.1 0-2.2 0-3.3-.1c-1.4 .1-2.8 .1-4.2 .1L416 512l-24 0c-22.1 0-40-17.9-40-40l0-24 0-64c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32 14.3-32 32l0 64 0 24c0 22.1-17.9 40-40 40l-24 0-31.9 0c-1.5 0-3-.1-4.5-.2c-1.2 .1-2.4 .2-3.6 .2l-16 0c-22.1 0-40-17.9-40-40l0-112c0-.9 0-1.9 .1-2.8l0-69.7-32 0c-18 0-32-14-32-32.1c0-9 3-17 10-24L266.4 8c7-7 15-8 22-8s15 2 21 7L564.8 231.5c8 7 12 15 11 24z"/></svg>';
+var icon_calendar_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M96 32l0 32L48 64C21.5 64 0 85.5 0 112l0 48 448 0 0-48c0-26.5-21.5-48-48-48l-48 0 0-32c0-17.7-14.3-32-32-32s-32 14.3-32 32l0 32L160 64l0-32c0-17.7-14.3-32-32-32S96 14.3 96 32zM448 192L0 192 0 464c0 26.5 21.5 48 48 48l352 0c26.5 0 48-21.5 48-48l0-272z"/></svg>';
+var icon_book = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M96 0C43 0 0 43 0 96L0 416c0 53 43 96 96 96l288 0 32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l0-64c17.7 0 32-14.3 32-32l0-320c0-17.7-14.3-32-32-32L384 0 96 0zm0 384l256 0 0 64L96 448c-17.7 0-32-14.3-32-32s14.3-32 32-32zm32-240c0-8.8 7.2-16 16-16l192 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-192 0c-8.8 0-16-7.2-16-16zm16 48l192 0c8.8 0 16 7.2 16 16s-7.2 16-16 16l-192 0c-8.8 0-16-7.2-16-16s7.2-16 16-16z"/></svg>';
+//sns アイコン
+var icon_youtube = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 576 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M549.7 124.1c-6.3-23.7-24.8-42.3-48.3-48.6C458.8 64 288 64 288 64S117.2 64 74.6 75.5c-23.5 6.3-42 24.9-48.3 48.6-11.4 42.9-11.4 132.3-11.4 132.3s0 89.4 11.4 132.3c6.3 23.7 24.8 41.5 48.3 47.8C117.2 448 288 448 288 448s170.8 0 213.4-11.5c23.5-6.3 42-24.2 48.3-47.8 11.4-42.9 11.4-132.3 11.4-132.3s0-89.4-11.4-132.3zm-317.5 213.5V175.2l142.7 81.2-142.7 81.2z"/></svg>';
+var icon_line_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M311 196.8v81.3c0 2.1-1.6 3.7-3.7 3.7h-13c-1.3 0-2.4-.7-3-1.5l-37.3-50.3v48.2c0 2.1-1.6 3.7-3.7 3.7h-13c-2.1 0-3.7-1.6-3.7-3.7V196.9c0-2.1 1.6-3.7 3.7-3.7h12.9c1.1 0 2.4 .6 3 1.6l37.3 50.3V196.9c0-2.1 1.6-3.7 3.7-3.7h13c2.1-.1 3.8 1.6 3.8 3.5zm-93.7-3.7h-13c-2.1 0-3.7 1.6-3.7 3.7v81.3c0 2.1 1.6 3.7 3.7 3.7h13c2.1 0 3.7-1.6 3.7-3.7V196.8c0-1.9-1.6-3.7-3.7-3.7zm-31.4 68.1H150.3V196.8c0-2.1-1.6-3.7-3.7-3.7h-13c-2.1 0-3.7 1.6-3.7 3.7v81.3c0 1 .3 1.8 1 2.5c.7 .6 1.5 1 2.5 1h52.2c2.1 0 3.7-1.6 3.7-3.7v-13c0-1.9-1.6-3.7-3.5-3.7zm193.7-68.1H327.3c-1.9 0-3.7 1.6-3.7 3.7v81.3c0 1.9 1.6 3.7 3.7 3.7h52.2c2.1 0 3.7-1.6 3.7-3.7V265c0-2.1-1.6-3.7-3.7-3.7H344V247.7h35.5c2.1 0 3.7-1.6 3.7-3.7V230.9c0-2.1-1.6-3.7-3.7-3.7H344V213.5h35.5c2.1 0 3.7-1.6 3.7-3.7v-13c-.1-1.9-1.7-3.7-3.7-3.7zM512 93.4V419.4c-.1 51.2-42.1 92.7-93.4 92.6H92.6C41.4 511.9-.1 469.8 0 418.6V92.6C.1 41.4 42.2-.1 93.4 0H419.4c51.2 .1 92.7 42.1 92.6 93.4zM441.6 233.5c0-83.4-83.7-151.3-186.4-151.3s-186.4 67.9-186.4 151.3c0 74.7 66.3 137.4 155.9 149.3c21.8 4.7 19.3 12.7 14.4 42.1c-.8 4.7-3.8 18.4 16.1 10.1s107.3-63.2 146.5-108.2c27-29.7 39.9-59.8 39.9-93.1z"/></svg>';
+var icon_instagram_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M224.1 141c-63.6 0-114.9 51.3-114.9 114.9s51.3 114.9 114.9 114.9S339 319.5 339 255.9 287.7 141 224.1 141zm0 189.6c-41.1 0-74.7-33.5-74.7-74.7s33.5-74.7 74.7-74.7 74.7 33.5 74.7 74.7-33.6 74.7-74.7 74.7zm146.4-194.3c0 14.9-12 26.8-26.8 26.8-14.9 0-26.8-12-26.8-26.8s12-26.8 26.8-26.8 26.8 12 26.8 26.8zm76.1 27.2c-1.7-35.9-9.9-67.7-36.2-93.9-26.2-26.2-58-34.4-93.9-36.2-37-2.1-147.9-2.1-184.9 0-35.8 1.7-67.6 9.9-93.9 36.1s-34.4 58-36.2 93.9c-2.1 37-2.1 147.9 0 184.9 1.7 35.9 9.9 67.7 36.2 93.9s58 34.4 93.9 36.2c37 2.1 147.9 2.1 184.9 0 35.9-1.7 67.7-9.9 93.9-36.2 26.2-26.2 34.4-58 36.2-93.9 2.1-37 2.1-147.8 0-184.8zM398.8 388c-7.8 19.6-22.9 34.7-42.6 42.6-29.5 11.7-99.5 9-132.1 9s-102.7 2.6-132.1-9c-19.6-7.8-34.7-22.9-42.6-42.6-11.7-29.5-9-99.5-9-132.1s-2.6-102.7 9-132.1c7.8-19.6 22.9-34.7 42.6-42.6 29.5-11.7 99.5-9 132.1-9s102.7-2.6 132.1 9c19.6 7.8 34.7 22.9 42.6 42.6 11.7 29.5 9 99.5 9 132.1s2.7 102.7-9 132.1z"/></svg>';
+var icon_x_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M389.2 48h70.6L305.6 224.2 487 464H345L233.7 318.6 106.5 464H35.8L200.7 275.5 26.8 48H172.4L272.9 180.9 389.2 48zM364.4 421.8h39.1L151.1 88h-42L364.4 421.8z"/></svg>';
+var icon_twitter_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M459.4 151.7c.3 4.5 .3 9.1 .3 13.6 0 138.7-105.6 298.6-298.6 298.6-59.5 0-114.7-17.2-161.1-47.1 8.4 1 16.6 1.3 25.3 1.3 49.1 0 94.2-16.6 130.3-44.8-46.1-1-84.8-31.2-98.1-72.8 6.5 1 13 1.6 19.8 1.6 9.4 0 18.8-1.3 27.6-3.6-48.1-9.7-84.1-52-84.1-103v-1.3c14 7.8 30.2 12.7 47.4 13.3-28.3-18.8-46.8-51-46.8-87.4 0-19.5 5.2-37.4 14.3-53 51.7 63.7 129.3 105.3 216.4 109.8-1.6-7.8-2.6-15.9-2.6-24 0-57.8 46.8-104.9 104.9-104.9 30.2 0 57.5 12.7 76.7 33.1 23.7-4.5 46.5-13.3 66.6-25.3-7.8 24.4-24.4 44.8-46.1 57.8 21.1-2.3 41.6-8.1 60.4-16.2-14.3 20.8-32.2 39.3-52.6 54.3z"/></svg>';
+var icon_twitter_2 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM351.3 199.3v0c0 86.7-66 186.6-186.6 186.6c-37.2 0-71.7-10.8-100.7-29.4c5.3 .6 10.4 .8 15.8 .8c30.7 0 58.9-10.4 81.4-28c-28.8-.6-53-19.5-61.3-45.5c10.1 1.5 19.2 1.5 29.6-1.2c-30-6.1-52.5-32.5-52.5-64.4v-.8c8.7 4.9 18.9 7.9 29.6 8.3c-9-6-16.4-14.1-21.5-23.6s-7.8-20.2-7.7-31c0-12.2 3.2-23.4 8.9-33.1c32.3 39.8 80.8 65.8 135.2 68.6c-9.3-44.5 24-80.6 64-80.6c18.9 0 35.9 7.9 47.9 20.7c14.8-2.8 29-8.3 41.6-15.8c-4.9 15.2-15.2 28-28.8 36.1c13.2-1.4 26-5.1 37.8-10.2c-8.9 13.1-20.1 24.7-32.9 34c.2 2.8 .2 5.7 .2 8.5z"/></svg>';
+var icon_threads_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M331.5 235.7c2.2 .9 4.2 1.9 6.3 2.8c29.2 14.1 50.6 35.2 61.8 61.4c15.7 36.5 17.2 95.8-30.3 143.2c-36.2 36.2-80.3 52.5-142.6 53h-.3c-70.2-.5-124.1-24.1-160.4-70.2c-32.3-41-48.9-98.1-49.5-169.6V256v-.2C17 184.3 33.6 127.2 65.9 86.2C102.2 40.1 156.2 16.5 226.4 16h.3c70.3 .5 124.9 24 162.3 69.9c18.4 22.7 32 50 40.6 81.7l-40.4 10.8c-7.1-25.8-17.8-47.8-32.2-65.4c-29.2-35.8-73-54.2-130.5-54.6c-57 .5-100.1 18.8-128.2 54.4C72.1 146.1 58.5 194.3 58 256c.5 61.7 14.1 109.9 40.3 143.3c28 35.6 71.2 53.9 128.2 54.4c51.4-.4 85.4-12.6 113.7-40.9c32.3-32.2 31.7-71.8 21.4-95.9c-6.1-14.2-17.1-26-31.9-34.9c-3.7 26.9-11.8 48.3-24.7 64.8c-17.1 21.8-41.4 33.6-72.7 35.3c-23.6 1.3-46.3-4.4-63.9-16c-20.8-13.8-33-34.8-34.3-59.3c-2.5-48.3 35.7-83 95.2-86.4c21.1-1.2 40.9-.3 59.2 2.8c-2.4-14.8-7.3-26.6-14.6-35.2c-10-11.7-25.6-17.7-46.2-17.8H227c-16.6 0-39 4.6-53.3 26.3l-34.4-23.6c19.2-29.1 50.3-45.1 87.8-45.1h.8c62.6 .4 99.9 39.5 103.7 107.7l-.2 .2zm-156 68.8c1.3 25.1 28.4 36.8 54.6 35.3c25.6-1.4 54.6-11.4 59.5-73.2c-13.2-2.9-27.8-4.4-43.4-4.4c-4.8 0-9.6 .1-14.4 .4c-42.9 2.4-57.2 23.2-56.2 41.8l-.1 .1z"/></svg>';
+var icon_threads_2 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M64 32C28.7 32 0 60.7 0 96V416c0 35.3 28.7 64 64 64H384c35.3 0 64-28.7 64-64V96c0-35.3-28.7-64-64-64H64zM294.2 244.3c19.5 9.3 33.7 23.5 41.2 40.9c10.4 24.3 11.4 63.9-20.2 95.4c-24.2 24.1-53.5 35-95.1 35.3h-.2c-46.8-.3-82.8-16.1-106.9-46.8C91.5 341.8 80.4 303.7 80 256v-.1-.1c.4-47.7 11.5-85.7 33-113.1c24.2-30.7 60.2-46.5 106.9-46.8h.2c46.9 .3 83.3 16 108.2 46.6c12.3 15.1 21.3 33.3 27 54.4l-26.9 7.2c-4.7-17.2-11.9-31.9-21.4-43.6c-19.4-23.9-48.7-36.1-87-36.4c-38 .3-66.8 12.5-85.5 36.2c-17.5 22.3-26.6 54.4-26.9 95.5c.3 41.1 9.4 73.3 26.9 95.5c18.7 23.8 47.4 36 85.5 36.2c34.3-.3 56.9-8.4 75.8-27.3c21.5-21.5 21.1-47.9 14.2-64c-4-9.4-11.4-17.3-21.3-23.3c-2.4 18-7.9 32.2-16.5 43.2c-11.4 14.5-27.7 22.4-48.4 23.5c-15.7 .9-30.8-2.9-42.6-10.7c-13.9-9.2-22-23.2-22.9-39.5c-1.7-32.2 23.8-55.3 63.5-57.6c14.1-.8 27.3-.2 39.5 1.9c-1.6-9.9-4.9-17.7-9.8-23.4c-6.7-7.8-17.1-11.8-30.8-11.9h-.4c-11 0-26 3.1-35.6 17.6l-23-15.8c12.8-19.4 33.6-30.1 58.5-30.1h.6c41.8 .3 66.6 26.3 69.1 71.8c1.4 .6 2.8 1.2 4.2 1.9l.1 .5zm-71.8 67.5c17-.9 36.4-7.6 39.7-48.8c-8.8-1.9-18.6-2.9-29-2.9c-3.2 0-6.4 .1-9.6 .3c-28.6 1.6-38.1 15.5-37.4 27.9c.9 16.7 19 24.5 36.4 23.6l-.1-.1z"/></svg>';
+var icon_facebook_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M80 299.3V512H196V299.3h86.5l18-97.8H196V166.9c0-51.7 20.3-71.5 72.7-71.5c16.3 0 29.4 .4 37 1.2V7.9C291.4 4 256.4 0 236.2 0C129.3 0 80 50.5 80 159.4v42.1H14v97.8H80z"/></svg>';
+var icon_facebook_2 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M512 256C512 114.6 397.4 0 256 0S0 114.6 0 256C0 376 82.7 476.8 194.2 504.5V334.2H141.4V256h52.8V222.3c0-87.1 39.4-127.5 125-127.5c16.2 0 44.2 3.2 55.7 6.4V172c-6-.6-16.5-1-29.6-1c-42 0-58.2 15.9-58.2 57.2V256h83.6l-14.4 78.2H287V510.1C413.8 494.8 512 386.9 512 256h0z"/></svg>';
+var icon_tiktok_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M448 209.9a210.1 210.1 0 0 1 -122.8-39.3V349.4A162.6 162.6 0 1 1 185 188.3V278.2a74.6 74.6 0 1 0 52.2 71.2V0l88 0a121.2 121.2 0 0 0 1.9 22.2h0A122.2 122.2 0 0 0 381 102.4a121.4 121.4 0 0 0 67 20.1z"/></svg>';
+var icon_pinterest_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 496 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M496 256c0 137-111 248-248 248-25.6 0-50.2-3.9-73.4-11.1 10.1-16.5 25.2-43.5 30.8-65 3-11.6 15.4-59 15.4-59 8.1 15.4 31.7 28.5 56.8 28.5 74.8 0 128.7-68.8 128.7-154.3 0-81.9-66.9-143.2-152.9-143.2-107 0-163.9 71.8-163.9 150.1 0 36.4 19.4 81.7 50.3 96.1 4.7 2.2 7.2 1.2 8.3-3.3 .8-3.4 5-20.3 6.9-28.1 .6-2.5 .3-4.7-1.7-7.1-10.1-12.5-18.3-35.3-18.3-56.6 0-54.7 41.4-107.6 112-107.6 60.9 0 103.6 41.5 103.6 100.9 0 67.1-33.9 113.6-78 113.6-24.3 0-42.6-20.1-36.7-44.8 7-29.5 20.5-61.3 20.5-82.6 0-19-10.2-34.9-31.4-34.9-24.9 0-44.9 25.7-44.9 60.2 0 22 7.4 36.8 7.4 36.8s-24.5 103.8-29 123.2c-5 21.4-3 51.6-.9 71.2C65.4 450.9 0 361.1 0 256 0 119 111 8 248 8s248 111 248 248z"/></svg>';
+//その他（サービス用）
+var icon_file_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 384 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M0 64C0 28.7 28.7 0 64 0L224 0l0 128c0 17.7 14.3 32 32 32l128 0 0 288c0 35.3-28.7 64-64 64L64 512c-35.3 0-64-28.7-64-64L0 64zm384 64l-128 0L256 0 384 128z"/></svg>';
+var icon_men = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 448 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M224 256A128 128 0 1 0 224 0a128 128 0 1 0 0 256zm-45.7 48C79.8 304 0 383.8 0 482.3C0 498.7 13.3 512 29.7 512l388.6 0c16.4 0 29.7-13.3 29.7-29.7C448 383.8 368.2 304 269.7 304l-91.4 0z"/></svg>';
+var icon_truck_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M48 0C21.5 0 0 21.5 0 48L0 368c0 26.5 21.5 48 48 48l16 0c0 53 43 96 96 96s96-43 96-96l128 0c0 53 43 96 96 96s96-43 96-96l32 0c17.7 0 32-14.3 32-32s-14.3-32-32-32l0-64 0-32 0-18.7c0-17-6.7-33.3-18.7-45.3L512 114.7c-12-12-28.3-18.7-45.3-18.7L416 96l0-48c0-26.5-21.5-48-48-48L48 0zM416 160l50.7 0L544 237.3l0 18.7-128 0 0-96zM112 416a48 48 0 1 1 96 0 48 48 0 1 1 -96 0zm368-48a48 48 0 1 1 0 96 48 48 0 1 1 0-96z"/></svg>';
+var icon_photo_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M149.1 64.8L138.7 96 64 96C28.7 96 0 124.7 0 160L0 416c0 35.3 28.7 64 64 64l384 0c35.3 0 64-28.7 64-64l0-256c0-35.3-28.7-64-64-64l-74.7 0L362.9 64.8C356.4 45.2 338.1 32 317.4 32L194.6 32c-20.7 0-39 13.2-45.5 32.8zM256 192a96 96 0 1 1 0 192 96 96 0 1 1 0-192z"/></svg>';
+var icon_crown_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 640 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M372.2 52c0 20.9-12.4 39-30.2 47.2L448 192l104.4-20.9c-5.3-7.7-8.4-17.1-8.4-27.1c0-26.5 21.5-48 48-48s48 21.5 48 48c0 26-20.6 47.1-46.4 48L481 442.3c-10.3 23-33.2 37.7-58.4 37.7l-205.2 0c-25.2 0-48-14.8-58.4-37.7L46.4 192C20.6 191.1 0 170 0 144c0-26.5 21.5-48 48-48s48 21.5 48 48c0 10.1-3.1 19.4-8.4 27.1L192 192 298.1 99.1c-17.7-8.3-30-26.3-30-47.1c0-28.7 23.3-52 52-52s52 23.3 52 52z"/></svg>';
+var icon_search_1 = '<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.7.2 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2025 Fonticons, Inc.--><path d="M416 208c0 45.9-14.9 88.3-40 122.7L502.6 457.4c12.5 12.5 12.5 32.8 0 45.3s-32.8 12.5-45.3 0L330.7 376c-34.4 25.2-76.8 40-122.7 40C93.1 416 0 322.9 0 208S93.1 0 208 0S416 93.1 416 208zM208 352a144 144 0 1 0 0-288 144 144 0 1 0 0 288z"/></svg>';
+
+// アイコンオプションを定義する関数
+function rightButtonIconSvgArr() {
+  return [{
+    label: '未選択',
+    value: ''
+  }, {
+    label: 'カレント（右）',
+    value: icon_chevron_right
+  },
+  // { label: '矢印（下）', value: icon_arrow_down },
+  // { label: '矢印（上）', value: icon_arrow_up },
+  // { label: '矢印（左）', value: icon_arrow_left },
+  {
+    label: '矢印（右）',
+    value: icon_arrow_right
+  }, {
+    label: 'リンク',
+    value: icon_link
+  }, {
+    label: 'メール 1',
+    value: icon_mail_1
+  }, {
+    label: 'メール 2',
+    value: icon_mail_2
+  }, {
+    label: 'メール 3',
+    value: icon_mail_3
+  }, {
+    label: '電話 1',
+    value: icon_tel_1
+  }, {
+    label: '電話 2',
+    value: icon_tel_2
+  }, {
+    label: '電話 3',
+    value: icon_tel_5
+  }, {
+    label: '電話（スマホ）',
+    value: icon_tel_3
+  }, {
+    label: '電話(オペレーター)',
+    value: icon_tel_4
+  }, {
+    label: 'PDF 1',
+    value: icon_pdf_1
+  }, {
+    label: 'LINE 1',
+    value: icon_line_1
+  }, {
+    label: '四角矢印（右上）',
+    value: icon_arrow_up_right
+  }, {
+    label: '丸矢印（右・塗潰し）',
+    value: icon_circle_chevron_right_bg
+  }, {
+    label: '丸チェック',
+    value: icon_circle_check
+  }, {
+    label: '丸チェック（塗潰し）',
+    value: icon_circle_check_bg
+  }, {
+    label: 'ダウンロード',
+    value: icon_download
+  }];
+}
+
+// アイコンオプションを定義する関数
+function leftButtonIconSvgArr() {
+  return [{
+    label: '未選択',
+    value: ''
+  },
+  // { label: 'カレント（右）', value: icon_chevron_right },
+  // { label: '矢印（下）', value: icon_arrow_down },
+  // { label: '矢印（上）', value: icon_arrow_up },
+  {
+    label: '矢印（左）',
+    value: icon_arrow_left
+  }, {
+    label: '矢印（右）',
+    value: icon_arrow_right
+  }, {
+    label: '電話 1',
+    value: icon_tel_1
+  }, {
+    label: '電話 2',
+    value: icon_tel_2
+  }, {
+    label: '電話 3',
+    value: icon_tel_5
+  }, {
+    label: '電話（スマホ）',
+    value: icon_tel_3
+  }, {
+    label: '電話(オペレーター)',
+    value: icon_tel_4
+  }, {
+    label: 'PDF 1',
+    value: icon_pdf_1
+  }, {
+    label: 'リンク',
+    value: icon_link
+  }, {
+    label: 'メール 1',
+    value: icon_mail_1
+  }, {
+    label: 'メール 2',
+    value: icon_mail_2
+  }, {
+    label: 'メール 3',
+    value: icon_mail_3
+  }, {
+    label: 'LINE 1',
+    value: icon_line_1
+  }, {
+    label: '四角矢印（右上）',
+    value: icon_arrow_up_right
+  }, {
+    label: '丸矢印（右・塗潰し）',
+    value: icon_circle_chevron_right_bg
+  }, {
+    label: '丸チェック',
+    value: icon_circle_check
+  }, {
+    label: '丸チェック（塗潰し）',
+    value: icon_circle_check_bg
+  }, {
+    label: 'ダウンロード',
+    value: icon_download
+  }, {
+    label: 'カレンダー',
+    value: icon_calendar_1
+  }, {
+    label: 'book',
+    value: icon_book
+  }, {
+    label: 'Instagram 1',
+    value: icon_instagram_1
+  }, {
+    label: 'ホームページ 1',
+    value: icon_home_1
+  }, {
+    label: 'YouTube 1',
+    value: icon_youtube
+  }, {
+    label: 'Threads 1',
+    value: icon_threads_1
+  }, {
+    label: 'Threads 2',
+    value: icon_threads_2
+  }, {
+    label: 'X 1',
+    value: icon_x_1
+  }, {
+    label: 'Twitter 1',
+    value: icon_twitter_1
+  }, {
+    label: 'Twitter 2',
+    value: icon_twitter_2
+  }, {
+    label: 'Facebook 1',
+    value: icon_facebook_1
+  }, {
+    label: 'Facebook 2',
+    value: icon_facebook_2
+  }, {
+    label: 'TikTok 1',
+    value: icon_tiktok_1
+  }, {
+    label: 'Pinterest 1',
+    value: icon_pinterest_1
+  }];
+}
+
+//サービス紹介やインフォメーション用
+function serviceInfoIconSvgArr() {
+  return [{
+    label: 'アイコンの選択',
+    value: ''
+  }, {
+    label: 'ホーム',
+    value: icon_home_1
+  }, {
+    label: 'カレンダー',
+    value: icon_calendar_1
+  }, {
+    label: 'book',
+    value: icon_book
+  }, {
+    label: '人',
+    value: icon_men
+  }, {
+    label: 'ファイル 1',
+    value: icon_file_1
+  }, {
+    label: 'トラック 1',
+    value: icon_truck_1
+  }, {
+    label: 'カメラ 1',
+    value: icon_photo_1
+  }, {
+    label: '王冠 1',
+    value: icon_crown_1
+  }, {
+    label: '虫眼鏡 1',
+    value: icon_search_1
+  }, {
+    label: 'ダウンロード',
+    value: icon_download
+  }, {
+    label: 'Instagram 1',
+    value: icon_instagram_1
+  }, {
+    label: 'YouTube 1',
+    value: icon_youtube
+  }, {
+    label: 'X 1',
+    value: icon_x_1
+  }, {
+    label: 'Twitter 1',
+    value: icon_twitter_1
+  }, {
+    label: 'Twitter 2',
+    value: icon_twitter_2
+  }, {
+    label: 'Facebook 1',
+    value: icon_facebook_1
+  }, {
+    label: 'Facebook 2',
+    value: icon_facebook_2
+  }, {
+    label: 'TikTok 1',
+    value: icon_tiktok_1
+  }, {
+    label: 'Pinterest 1',
+    value: icon_pinterest_1
+  }, {
+    label: 'メール 1',
+    value: icon_mail_1
+  }, {
+    label: 'メール 2',
+    value: icon_mail_2
+  }, {
+    label: 'メール 3',
+    value: icon_mail_3
+  }, {
+    label: '電話 1',
+    value: icon_tel_1
+  }, {
+    label: '電話 2',
+    value: icon_tel_2
+  }, {
+    label: '電話 3',
+    value: icon_tel_5
+  }, {
+    label: '電話（スマホ）',
+    value: icon_tel_3
+  }, {
+    label: '電話(オペレーター)',
+    value: icon_tel_4
+  }, {
+    label: 'LINE 1',
+    value: icon_line_1
+  }];
+}
+
+/***/ }),
+
+/***/ "./src/lw-pr-fv-18/editor.scss":
+/*!*************************************!*\
+  !*** ./src/lw-pr-fv-18/editor.scss ***!
+  \*************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "./src/lw-pr-fv-18/style.scss":
+/*!************************************!*\
+  !*** ./src/lw-pr-fv-18/style.scss ***!
+  \************************************/
+/***/ ((__unused_webpack_module, __webpack_exports__, __webpack_require__) => {
+
+__webpack_require__.r(__webpack_exports__);
+// extracted by mini-css-extract-plugin
+
+
+/***/ }),
+
+/***/ "@wordpress/block-editor":
+/*!*************************************!*\
+  !*** external ["wp","blockEditor"] ***!
+  \*************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blockEditor"];
+
+/***/ }),
+
+/***/ "@wordpress/blocks":
+/*!********************************!*\
+  !*** external ["wp","blocks"] ***!
+  \********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["blocks"];
+
+/***/ }),
+
+/***/ "@wordpress/components":
+/*!************************************!*\
+  !*** external ["wp","components"] ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["components"];
+
+/***/ }),
+
+/***/ "@wordpress/compose":
+/*!*********************************!*\
+  !*** external ["wp","compose"] ***!
+  \*********************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["compose"];
+
+/***/ }),
+
+/***/ "@wordpress/data":
+/*!******************************!*\
+  !*** external ["wp","data"] ***!
+  \******************************/
+/***/ ((module) => {
+
+module.exports = window["wp"]["data"];
+
+/***/ }),
+
+/***/ "./src/lw-pr-fv-18/block.json":
+/*!************************************!*\
+  !*** ./src/lw-pr-fv-18/block.json ***!
+  \************************************/
+/***/ ((module) => {
+
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/lw-pr-fv-18","version":"1.0.0","title":"FV 18 リード獲得（フォーム一体型）","category":"lw-firstview","icon":"feedback","editorScript":"file:./lw-pr-fv-18.js","aiHint":{"description":"リード獲得ページ専用のFV。左に見出し・説明・約束の3点、右にお問合せフォームがそのまま入る。FVの中で送信まで終わるので、下にCTAの帯を足さなくてよい。無料見積り・資料請求・無料相談・無料トライアルのページに使う","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","description","badgeLabel","badgeText","tickItems","cardTitle","cardSubText","cardNote","buttonText","buttonSub"],"imageAttributes":["imageUrlPc","imageUrlSp"],"notes":["🚨 FVに入れるフォームは**3項目まで**にする。項目が増えるとFVが縦に伸びて、下の段が画面から出る（実測：3項目＋同意欄でパソコン約790px）。入力項目を1つ減らすごとに完了率が約2%上がるという調査もあるので、短いほうが結果もよい。項目は管理画面「メールフォーム」のフォームセット側で減らす。","🚨 formId に管理画面のフォームセット番号（[lw_mail_form_select id=\'N\'] の N）を入れると、FVの右側に本物のフォームが出る。空にすると代わりにCTAボタン（buttonText）が出る。どちらか一方しか出ない。🚨 0 を入れてはいけない。0 はフォーム扱いになり、箱の中に「フォームセットのIDが指定されていません。」というエラー文だけが出る（ボタンも出ない）。出さないときは必ず空にする。","🚨 submitBgColor / requiredBgColor を持っている。テーマのフォームCSS（functions/mail_form/put_style/ptn_1.css）は送信ボタンと必須バッジをサイト色 var(--color-main) で塗るが、このブロックの中だけは属性で上書きできる。明るいサイト色でも白文字が読める色を入れること。","フォームの中の見た目（項目名を上に出す・余白を詰める）はこのブロックのCSSが担当している。フォームセット側の設定は触らない。","tickItems は「見積無料」「最短翌日」のような短い約束を並べる帯。3つが読みやすい。空にすると帯ごと消える。","🚨 自分から全幅になる背景ブロック。次の段も全幅の帯なら、あいだにスペーサーを置かない。","formSide を left にすると左右が入れ替わる。同じ見た目のページが2枚並ぶときに使う。"]},"supports":{"anchor":true},"attributes":{"backgroundType":{"type":"string","default":"image"},"imageUrlPc":{"type":"string","default":"https://lite-word.com/sample_img/background/6.webp"},"imageUrlSp":{"type":"string","default":""},"imageAlt":{"type":"string","default":""},"bgColor":{"type":"string","default":"#0f3350"},"filterColor":{"type":"string","default":"#0f3350"},"filterOpacity":{"type":"number","default":0.86},"minHeightPc":{"type":"string","default":"min-h-pc-560px"},"minHeightTb":{"type":"string","default":"min-h-tb-480px"},"minHeightSp":{"type":"string","default":""},"maxWidth":{"type":"number","default":1180},"formSide":{"type":"string","default":"right"},"formWidth":{"type":"number","default":396},"showBadge":{"type":"boolean","default":true},"badgeLabel":{"type":"string","default":"無料"},"badgeText":{"type":"string","default":"現地調査もお見積りも0円"},"badgeBgColor":{"type":"string","default":"#c8622e"},"badgeTextColor":{"type":"string","default":"#ffffff"},"headingLevel":{"type":"number","default":1},"mainTitle":{"type":"string","default":"外まわりの<br>お見積り"},"titleColor":{"type":"string","default":"#ffffff"},"titleFontWeight":{"type":"string","default":"700"},"titleFont":{"type":"string","default":""},"titleFontSizePc":{"type":"number","default":46},"titleFontSizeSp":{"type":"number","default":30},"description":{"type":"string","default":"築15年を過ぎたお住まいへ。現地を見てから、金額の根拠までお渡しします。お断りのご連絡も要りません。"},"descriptionColor":{"type":"string","default":"#cfdce8"},"showTicks":{"type":"boolean","default":true},"tickItems":{"type":"array","default":[{"text":"最短翌日にお伺い"},{"text":"他社と比べて結構です"},{"text":"しつこい営業なし"}]},"tickTextColor":{"type":"string","default":"#ffffff"},"tickMarkBgColor":{"type":"string","default":"#c8622e"},"tickMarkColor":{"type":"string","default":"#ffffff"},"cardBgColor":{"type":"string","default":"#ffffff"},"cardTitle":{"type":"string","default":"この場でご依頼"},"cardTitleColor":{"type":"string","default":"#1b4a6b"},"cardSubText":{"type":"string","default":"入力は30秒ほど・24時間受付"},"cardSubColor":{"type":"string","default":"#7b848c"},"formId":{"type":"string","default":""},"submitBgColor":{"type":"string","default":"#c8622e"},"submitTextColor":{"type":"string","default":"#ffffff"},"requiredBgColor":{"type":"string","default":"#c8622e"},"cardNote":{"type":"string","default":"ご記入いただいた内容は見積り以外に使いません"},"cardNoteColor":{"type":"string","default":"#8a939b"},"buttonText":{"type":"string","default":"無料で見積りを頼む"},"buttonSub":{"type":"string","default":"送信後、当日か翌営業日にご連絡します"},"buttonUrl":{"type":"string","default":""},"buttonLinkType":{"type":"string","default":"url"},"buttonPageId":{"type":"number","default":0},"buttonCategoryId":{"type":"number","default":0},"ctaBgColor":{"type":"string","default":"#c8622e"},"ctaTextColor":{"type":"string","default":"#ffffff"},"ctaBorderRadius":{"type":"number","default":6}}}');
+
+/***/ })
+
+/******/ 	});
+/************************************************************************/
+/******/ 	// The module cache
+/******/ 	var __webpack_module_cache__ = {};
+/******/ 	
+/******/ 	// The require function
+/******/ 	function __webpack_require__(moduleId) {
+/******/ 		// Check if module is in cache
+/******/ 		var cachedModule = __webpack_module_cache__[moduleId];
+/******/ 		if (cachedModule !== undefined) {
+/******/ 			return cachedModule.exports;
+/******/ 		}
+/******/ 		// Create a new module (and put it into the cache)
+/******/ 		var module = __webpack_module_cache__[moduleId] = {
+/******/ 			// no module.id needed
+/******/ 			// no module.loaded needed
+/******/ 			exports: {}
+/******/ 		};
+/******/ 	
+/******/ 		// Execute the module function
+/******/ 		__webpack_modules__[moduleId](module, module.exports, __webpack_require__);
+/******/ 	
+/******/ 		// Return the exports of the module
+/******/ 		return module.exports;
+/******/ 	}
+/******/ 	
+/******/ 	// expose the modules object (__webpack_modules__)
+/******/ 	__webpack_require__.m = __webpack_modules__;
+/******/ 	
+/************************************************************************/
+/******/ 	/* webpack/runtime/chunk loaded */
+/******/ 	(() => {
+/******/ 		var deferred = [];
+/******/ 		__webpack_require__.O = (result, chunkIds, fn, priority) => {
+/******/ 			if(chunkIds) {
+/******/ 				priority = priority || 0;
+/******/ 				for(var i = deferred.length; i > 0 && deferred[i - 1][2] > priority; i--) deferred[i] = deferred[i - 1];
+/******/ 				deferred[i] = [chunkIds, fn, priority];
+/******/ 				return;
+/******/ 			}
+/******/ 			var notFulfilled = Infinity;
+/******/ 			for (var i = 0; i < deferred.length; i++) {
+/******/ 				var chunkIds = deferred[i][0];
+/******/ 				var fn = deferred[i][1];
+/******/ 				var priority = deferred[i][2];
+/******/ 				var fulfilled = true;
+/******/ 				for (var j = 0; j < chunkIds.length; j++) {
+/******/ 					if ((priority & 1 === 0 || notFulfilled >= priority) && Object.keys(__webpack_require__.O).every((key) => (__webpack_require__.O[key](chunkIds[j])))) {
+/******/ 						chunkIds.splice(j--, 1);
+/******/ 					} else {
+/******/ 						fulfilled = false;
+/******/ 						if(priority < notFulfilled) notFulfilled = priority;
+/******/ 					}
+/******/ 				}
+/******/ 				if(fulfilled) {
+/******/ 					deferred.splice(i--, 1)
+/******/ 					var r = fn();
+/******/ 					if (r !== undefined) result = r;
+/******/ 				}
+/******/ 			}
+/******/ 			return result;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/compat get default export */
+/******/ 	(() => {
+/******/ 		// getDefaultExport function for compatibility with non-harmony modules
+/******/ 		__webpack_require__.n = (module) => {
+/******/ 			var getter = module && module.__esModule ?
+/******/ 				() => (module['default']) :
+/******/ 				() => (module);
+/******/ 			__webpack_require__.d(getter, { a: getter });
+/******/ 			return getter;
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/define property getters */
+/******/ 	(() => {
+/******/ 		// define getter functions for harmony exports
+/******/ 		__webpack_require__.d = (exports, definition) => {
+/******/ 			for(var key in definition) {
+/******/ 				if(__webpack_require__.o(definition, key) && !__webpack_require__.o(exports, key)) {
+/******/ 					Object.defineProperty(exports, key, { enumerable: true, get: definition[key] });
+/******/ 				}
+/******/ 			}
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/hasOwnProperty shorthand */
+/******/ 	(() => {
+/******/ 		__webpack_require__.o = (obj, prop) => (Object.prototype.hasOwnProperty.call(obj, prop))
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/make namespace object */
+/******/ 	(() => {
+/******/ 		// define __esModule on exports
+/******/ 		__webpack_require__.r = (exports) => {
+/******/ 			if(typeof Symbol !== 'undefined' && Symbol.toStringTag) {
+/******/ 				Object.defineProperty(exports, Symbol.toStringTag, { value: 'Module' });
+/******/ 			}
+/******/ 			Object.defineProperty(exports, '__esModule', { value: true });
+/******/ 		};
+/******/ 	})();
+/******/ 	
+/******/ 	/* webpack/runtime/jsonp chunk loading */
+/******/ 	(() => {
+/******/ 		// no baseURI
+/******/ 		
+/******/ 		// object to store loaded and loading chunks
+/******/ 		// undefined = chunk not loaded, null = chunk preloaded/prefetched
+/******/ 		// [resolve, reject, Promise] = chunk loading, 0 = chunk loaded
+/******/ 		var installedChunks = {
+/******/ 			"lw-pr-fv-18": 0,
+/******/ 			"./style-lw-pr-fv-18": 0
+/******/ 		};
+/******/ 		
+/******/ 		// no chunk on demand loading
+/******/ 		
+/******/ 		// no prefetching
+/******/ 		
+/******/ 		// no preloaded
+/******/ 		
+/******/ 		// no HMR
+/******/ 		
+/******/ 		// no HMR manifest
+/******/ 		
+/******/ 		__webpack_require__.O.j = (chunkId) => (installedChunks[chunkId] === 0);
+/******/ 		
+/******/ 		// install a JSONP callback for chunk loading
+/******/ 		var webpackJsonpCallback = (parentChunkLoadingFunction, data) => {
+/******/ 			var chunkIds = data[0];
+/******/ 			var moreModules = data[1];
+/******/ 			var runtime = data[2];
+/******/ 			// add "moreModules" to the modules object,
+/******/ 			// then flag all "chunkIds" as loaded and fire callback
+/******/ 			var moduleId, chunkId, i = 0;
+/******/ 			if(chunkIds.some((id) => (installedChunks[id] !== 0))) {
+/******/ 				for(moduleId in moreModules) {
+/******/ 					if(__webpack_require__.o(moreModules, moduleId)) {
+/******/ 						__webpack_require__.m[moduleId] = moreModules[moduleId];
+/******/ 					}
+/******/ 				}
+/******/ 				if(runtime) var result = runtime(__webpack_require__);
+/******/ 			}
+/******/ 			if(parentChunkLoadingFunction) parentChunkLoadingFunction(data);
+/******/ 			for(;i < chunkIds.length; i++) {
+/******/ 				chunkId = chunkIds[i];
+/******/ 				if(__webpack_require__.o(installedChunks, chunkId) && installedChunks[chunkId]) {
+/******/ 					installedChunks[chunkId][0]();
+/******/ 				}
+/******/ 				installedChunks[chunkId] = 0;
+/******/ 			}
+/******/ 			return __webpack_require__.O(result);
+/******/ 		}
+/******/ 		
+/******/ 		var chunkLoadingGlobal = self["webpackChunkblock_dev"] = self["webpackChunkblock_dev"] || [];
+/******/ 		chunkLoadingGlobal.forEach(webpackJsonpCallback.bind(null, 0));
+/******/ 		chunkLoadingGlobal.push = webpackJsonpCallback.bind(null, chunkLoadingGlobal.push.bind(chunkLoadingGlobal));
+/******/ 	})();
+/******/ 	
+/************************************************************************/
+/******/ 	
+/******/ 	// startup
+/******/ 	// Load entry module and return exports
+/******/ 	// This entry module depends on other loaded chunks and execution need to be delayed
+/******/ 	var __webpack_exports__ = __webpack_require__.O(undefined, ["./style-lw-pr-fv-18"], () => (__webpack_require__("./src/lw-pr-fv-18/index.js")))
+/******/ 	__webpack_exports__ = __webpack_require__.O(__webpack_exports__);
+/******/ 	
+/******/ })()
+;

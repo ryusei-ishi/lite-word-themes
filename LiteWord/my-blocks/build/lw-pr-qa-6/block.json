@@ -1,0 +1,83 @@
+{
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 3,
+	"name": "wdl/lw-pr-qa-6",
+	"version": "1.0.0",
+	"title": "よくある質問 06（左に分類・2カラム）",
+	"category": "lw-faq",
+	"icon": "align-pull-left",
+	"description": "左に分類の一覧がスクロールしてもついてくる2カラムのよくある質問。質問は右に全部並びます。いま何の分類を読んでいるかが常に分かります。",
+	"aiHint": {
+		"description": "よくある質問（2カラム・左に分類が追従）。左の分類一覧がスクロールに追従し、いま読んでいる分類が光る。右に質問が分類ごとに全部並ぶ。分類が5個以上ある大きめのFAQに向く",
+		"excludeFromAutoSelect": false,
+		"contentAttributes": ["groups"],
+		"imageAttributes": [],
+		"notes": "groups は [{ label, items:[{ text_q, text_a }] }] の入れ子配列（lw-pr-qa-4 と同じ形なので入れ替えやすい）。⚠️ 分類は4〜8個。3個以下なら2カラムにする意味が薄く lw-pr-qa-4（タブ）で足りる。🚨 左の一覧は JS が動いたときだけ出る（view.js が .is-js を付ける）。JS 無しでは分類の見出しつき1カラムになるだけで壊れない。🚨 見出し（h3）に id を書かない作りにしてある。同じテンプレを2ページに貼っても id が重複しないよう、飛び先は data-qa6-group の番号で JS が探している。⚠️ 追従は position:sticky。**このブロックを overflow:hidden の中に入れると効かなくなる**（lw-bg-1 の帯の中は大丈夫だが、独自CSSで囲うときは注意）。⚠️ 飛んだときの止まる位置は、固定ヘッダーの高さを view.js が測って避けている。stickyTop はそれとは別で、左の一覧が画面上端から何px下で止まるかの設定。"
+	},
+	"supports": {
+		"anchor": true,
+		"className": true
+	},
+	"attributes": {
+		"maxWidth": { "type": "number", "default": 1100 },
+		"navWidth": { "type": "number", "default": 240 },
+		"navPosition": { "type": "string", "default": "left" },
+		"stickyTop": { "type": "number", "default": 100 },
+		"showCount": { "type": "boolean", "default": true },
+		"navTitle": { "type": "string", "default": "" },
+		"mainColor": { "type": "string", "default": "var(--color-main)" },
+		"navBg": { "type": "string", "default": "#f7f7f7" },
+		"lineColor": { "type": "string", "default": "#e0e0e0" },
+		"itemGap": { "type": "number", "default": 22 },
+		"labelStyle": { "type": "string", "default": "plain" },
+		"labelWidth": { "type": "number", "default": 34 },
+		"qLabelColor": { "type": "string", "default": "var(--color-main)" },
+		"aLabelColor": { "type": "string", "default": "var(--color-accent)" },
+		"groupTitleSizePc": { "type": "number", "default": 20 },
+		"groupTitleSizeSp": { "type": "number", "default": 17 },
+		"labelFont": { "type": "string", "default": "Roboto" },
+		"labelFontWeight": { "type": "string", "default": "" },
+		"labelFontSizePc": { "type": "number", "default": 18 },
+		"labelFontSizeSp": { "type": "number", "default": 16 },
+		"textFont": { "type": "string", "default": "" },
+		"qFontSizePc": { "type": "number", "default": 17 },
+		"qFontSizeSp": { "type": "number", "default": 15 },
+		"aFontSizePc": { "type": "number", "default": 15 },
+		"aFontSizeSp": { "type": "number", "default": 14 },
+		"schemaOutput": { "type": "boolean", "default": true },
+		"groups": {
+			"type": "array",
+			"default": [
+				{
+					"label": "はじめての方",
+					"items": [
+						{ "text_q": "予約は必要ですか？", "text_a": "ご予約なしでもお受けしています。土曜は埋まりやすいので、お電話いただけると確実です。" },
+						{ "text_q": "はじめてでも大丈夫ですか？", "text_a": "はじめての方が半分以上です。当日は10分ほどお話をうかがってから始めます。" }
+					]
+				},
+				{
+					"label": "料金・お支払い",
+					"items": [
+						{ "text_q": "追加料金はかかりますか？", "text_a": "表示している金額のほかにいただくものはありません。" },
+						{ "text_q": "カードは使えますか？", "text_a": "現金のほか、各種クレジットカードと電子マネーがお使いいただけます。" }
+					]
+				},
+				{
+					"label": "ご予約・変更",
+					"items": [
+						{ "text_q": "当日でも変更できますか？", "text_a": "前日までにご連絡いただければ、料金はかかりません。" }
+					]
+				},
+				{
+					"label": "アクセス",
+					"items": [
+						{ "text_q": "駐車場はありますか？", "text_a": "建物の裏に3台ぶんございます。満車のときは近くのコインパーキングをご案内します。" }
+					]
+				}
+			]
+		}
+	},
+	"editorScript": "file:./lw-pr-qa-6.js",
+	"viewScript": "file:./view.js",
+	"no": 6
+}

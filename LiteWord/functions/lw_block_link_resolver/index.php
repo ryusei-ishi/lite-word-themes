@@ -51,6 +51,10 @@ function lw_link_resolver_blocks() {
 		'wdl/lw-pr-fv-14',                     // FV 14 ヘッダーまで回り込む全画背景
 		'wdl/lw-pr-fv-15',                     // 固定ページタイトル 15(動画背景)
 		'wdl/lw-pr-fv-16',                     // 固定ページタイトル 16(動画背景)
+		'wdl/lw-pr-fv-18',                     // FV 18 リード獲得（フォーム一体型）
+		'wdl/lw-pr-fv-19',                     // FV 19 リード獲得（電話とフォームの二択）
+		'wdl/lw-pr-fv-20',                     // FV 20 リード獲得（実績の数字つき）
+		'wdl/lw-pr-fv-21',                     // FV 21 リード獲得（もらえる物と締切）
 		'wdl/lw-pr-image-0',                   // 画像 00
 		'wdl/lw-pr-image-1',                   // PR画像グリッド 01
 		'wdl/lw-pr-waku-1',                    // 枠 01
