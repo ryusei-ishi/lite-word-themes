@@ -33,32 +33,32 @@
 				{
 					"imgUrl": "",
 					"altText": "",
-					"title": "タイトルテキスト",
-					"description": "説明テキストが入ります。ここに任意のテキストを入れてください。",
+					"title": "はじめての方へ",
+					"description": "初めての方にも分かるように、流れをご説明します。",
 					"linkUrl": "",
 					"openNewTab": false
 				},
 				{
 					"imgUrl": "",
 					"altText": "",
-					"title": "タイトルテキスト",
-					"description": "説明テキストが入ります。ここに任意のテキストを入れてください。",
+					"title": "ご相談の流れ",
+					"description": "お一人おひとりの目的にあわせてご提案します。",
 					"linkUrl": "",
 					"openNewTab": false
 				},
 				{
 					"imgUrl": "",
 					"altText": "",
-					"title": "タイトルテキスト",
-					"description": "説明テキストが入ります。ここに任意のテキストを入れてください。",
+					"title": "料金のご案内",
+					"description": "かかる費用は、始める前にすべてお伝えします。",
 					"linkUrl": "",
 					"openNewTab": false
 				},
 				{
 					"imgUrl": "",
 					"altText": "",
-					"title": "タイトルテキスト",
-					"description": "説明テキストが入ります。ここに任意のテキストを入れてください。",
+					"title": "見学のご案内",
+					"description": "見学だけでもお気軽にお立ち寄りください。",
 					"linkUrl": "",
 					"openNewTab": false
 				}

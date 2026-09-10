@@ -32,7 +32,7 @@
         },
         "subTitle": {
             "type": "string",
-            "default": "テキストテキストテキストテキスト<br>テキストテキキストテキスト",
+            "default": "はじめての方にも分かるように<br>ひとつずつご説明します",
             "aiHint": {
                 "role": "subheading",
                 "contentGuide": "補足説明テキスト。20〜50文字。改行可",

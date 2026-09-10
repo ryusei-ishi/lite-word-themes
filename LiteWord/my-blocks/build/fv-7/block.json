@@ -30,7 +30,7 @@
 		},
 		"description": {
 			"type": "string",
-			"default": "テキストテキストテキストテキストテキストテキスト",
+			"default": "はじめての方にも分かりやすく。あなたのペースで進められます",
 			"aiHint": { "role": "body", "contentGuide": "サービスの価値を1〜2文で。20〜50文字", "example": "私たちの映像制作で、あなたのビジネスを次のステージへ" }
 		},
 		"buttonText": {

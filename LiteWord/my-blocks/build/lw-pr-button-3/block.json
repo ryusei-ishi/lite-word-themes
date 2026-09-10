@@ -16,7 +16,7 @@
 			"btnUrl"
 		],
 		"imageAttributes": [],
-		"notes": "🚨 **bgColor の既定 #e1a20e（オレンジ）に白い文字が載るので 2.25:1 しかない**（下限は4.5）。必ず色を指定する。color-mix(in srgb, var(--color-main) 50%, #000) にするとサイトのメインカラーに追従しつつ、どの色でも白文字が読める（黄 6.40 ／ 白に近い灰 4.67 ／ 既定色 12.08 で実測）。ホバーは 40%。🚨 **副文（textSub）の既定が「＼ テキストテキストテキスト ／」**なので必ず書き換える。textMain が大きい行、textSub が上の小さい行。iconMain は **SVGのマークアップそのもの**（Font Awesome のクラス名を入れるとその文字が画面に出る）。既定が下向き矢印のダウンロード印なので、資料配布ならそのままでよい。btnUrl にPDFのURLを入れる。1段でよいなら lw-pr-button-5、複数並べるなら lw-pr-button-6。"
+		"notes": "🚨 **bgColor の既定 #e1a20e（オレンジ）に白い文字が載るので 2.25:1 しかない**（下限は4.5）。必ず色を指定する。color-mix(in srgb, var(--color-main) 50%, #000) にするとサイトのメインカラーに追従しつつ、どの色でも白文字が読める（黄 6.40 ／ 白に近い灰 4.67 ／ 既定色 12.08 で実測）。ホバーは 40%。🚨 **副文（textSub）はボタンの上に出る短い一言**なので、案件に合わせて書き換える。textMain が大きい行、textSub が上の小さい行。iconMain は **SVGのマークアップそのもの**（Font Awesome のクラス名を入れるとその文字が画面に出る）。既定が下向き矢印のダウンロード印なので、資料配布ならそのままでよい。btnUrl にPDFのURLを入れる。1段でよいなら lw-pr-button-5、複数並べるなら lw-pr-button-6。"
 	},
 	"supports": {
 		"anchor": true,
@@ -29,7 +29,7 @@
 		},
 		"textSub": {
 			"type": "string",
-			"default": "＼ テキストテキストテキスト ／",
+			"default": "＼ 無料でダウンロード ／",
 			"aiHint": {
 				"role": "subheading",
 				"contentGuide": "補足テキスト。＼ ／で囲む",

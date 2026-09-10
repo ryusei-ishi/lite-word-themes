@@ -29,7 +29,7 @@
 		},
 		"textSub": {
 			"type": "string",
-			"default": "＼ テキストテキストテキスト ／",
+			"default": "＼ 24時間受付中 ／",
 			"aiHint": {
 				"role": "subheading",
 				"contentGuide": "補足テキスト。＼ ／で囲む。10〜20文字",

@@ -32,7 +32,7 @@
 	"attributes": {
 		"mainTitle": {
 			"type": "string",
-			"default": "メインタイトル<br>メインタイトルタイトル"
+			"default": "はじめての方も、<br>ここから始められます"
 		},
 		"description": {
 			"type": "string",

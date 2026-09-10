@@ -38,7 +38,7 @@
         },
         "content": {
             "type": "string",
-            "default": "名前：東京太郎\n生年月日：1990年1月1日\n出身地：東京都\n趣味：読書、映画鑑賞、旅行"
+            "default": "名前：山田 太郎\n生年月日：1990年1月1日\n出身地：東京都\n趣味：読書、映画鑑賞、旅行"
         },
         "backgroundColor": {
             "type": "string",

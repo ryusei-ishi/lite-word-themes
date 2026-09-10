@@ -53,32 +53,32 @@
 			"type": "array",
 			"default": [
 				{
-					"title": "タイトルタイトル",
-					"description": "説明テキスト説明テ",
+					"title": "はじめての方へ",
+					"description": "初めての方はこちら",
 					"imgUrl": "https://lite-word.com/sample_img/shop/1.webp",
 					"alt": "",
 					"linkUrl": "",
 					"openInNewTab": false
 				},
 				{
-					"title": "タイトルタイトル",
-					"description": "説明テキスト説明テ",
+					"title": "サービス",
+					"description": "メニュー一覧",
 					"imgUrl": "https://lite-word.com/sample_img/shop/2.webp",
 					"alt": "",
 					"linkUrl": "",
 					"openInNewTab": false
 				},
 				{
-					"title": "タイトルタイトル",
-					"description": "説明テキスト説明テ",
+					"title": "料金のご案内",
+					"description": "費用の目安です",
 					"imgUrl": "https://lite-word.com/sample_img/shop/3.webp",
 					"alt": "",
 					"linkUrl": "",
 					"openInNewTab": false
 				},
 				{
-					"title": "タイトルタイトル",
-					"description": "説明テキスト説明テ",
+					"title": "アクセス",
+					"description": "場所と行き方",
 					"imgUrl": "https://lite-word.com/sample_img/shop/4.webp",
 					"alt": "",
 					"linkUrl": "",

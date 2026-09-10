@@ -28,7 +28,7 @@
 		},
 		"textSub": {
 			"type": "string",
-			"default": "＼ テキストテキストテキスト ／",
+			"default": "＼ まずはお気軽にご相談ください ／",
 			"aiHint": {
 				"role": "subheading",
 				"contentGuide": "補足テキスト（小さい文字）。＼ ／で囲む。10〜20文字",

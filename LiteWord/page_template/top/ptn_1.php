@@ -51,7 +51,7 @@
 <!-- /wp:wdl/lw-space-1 -->
 
 <!-- wp:wdl/cta-1 {"filterColor":"#0541618f"} -->
-<div class="wp-block-wdl-cta-1"><div class="cta-1__inner"><h2 class="cta-1__title heading_style_reset">無料ダウンロード</h2><p class="cta-1__text">テキストテキストテキストテキストテキストテキス<br>トテキストテキストテキストテキストテキストテキスト</p><a class="cta-1__button" href="#" style="background-color:var(--color-main);border-color:#fff;border-width:1px;border-style:solid;max-width:240px">ダウンロードはこちら</a></div><div class="cta-1__image"><img src="https://lite-word.com/wp-content/uploads/2024/09/1.webp" alt="" loading="lazy"/><div style="background-color:#0541618f;position:absolute;top:0;left:0;right:0;bottom:0;z-index:1"></div></div></div>
+<div class="wp-block-wdl-cta-1"><div class="cta-1__inner"><h2 class="cta-1__title heading_style_reset">無料ダウンロード</h2><p class="cta-1__text">無料でダウンロードして、まずは使い心地をお確かめください。<br>インストールしたその日から、ページ作りを始められます。</p><a class="cta-1__button" href="#" style="background-color:var(--color-main);border-color:#fff;border-width:1px;border-style:solid;max-width:240px">ダウンロードはこちら</a></div><div class="cta-1__image"><img src="https://lite-word.com/wp-content/uploads/2024/09/1.webp" alt="" loading="lazy"/><div style="background-color:#0541618f;position:absolute;top:0;left:0;right:0;bottom:0;z-index:1"></div></div></div>
 <!-- /wp:wdl/cta-1 -->
 
 <!-- wp:wdl/lw-space-1 {"pcHeight":40,"tbHeight":32,"spHeight":24} -->

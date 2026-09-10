@@ -57,7 +57,7 @@
 			"type": "string",
 			"source": "html",
 			"selector": ".lw-content-1__text p",
-			"default": "テキストテキストテキストテキスト\nテキストテキストテキストテキストテキストテキスト",
+			"default": "小さくはじめて、続けられる形に。\nお客様の事情にあわせて、無理のない進め方をご提案します。",
 			"aiHint": {
 				"role": "body",
 				"contentGuide": "説明文。30〜100文字。改行可",
