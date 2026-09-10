@@ -148,26 +148,26 @@
 				{
 					"imageUrl": "",
 					"label": "",
-					"title": "タイトル1",
-					"description": "説明文を入力してください。"
+					"title": "まずはご相談",
+					"description": "いま困っていることを、そのままの言葉でお聞かせください。"
 				},
 				{
 					"imageUrl": "",
 					"label": "",
-					"title": "タイトル2",
-					"description": "説明文を入力してください。"
+					"title": "お見積り",
+					"description": "必要な作業と費用を、着手する前にすべてお伝えします。"
 				},
 				{
 					"imageUrl": "",
 					"label": "",
-					"title": "タイトル3",
-					"description": "説明文を入力してください。"
+					"title": "制作・作業",
+					"description": "途中経過もご報告しながら進めます。ご要望はいつでも。"
 				},
 				{
 					"imageUrl": "",
 					"label": "",
-					"title": "タイトル4",
-					"description": "説明文を入力してください。"
+					"title": "お引き渡し",
+					"description": "お渡しして終わりではなく、その後のご相談も承ります。"
 				}
 			]
 		}

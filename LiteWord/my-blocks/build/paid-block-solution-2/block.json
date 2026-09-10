@@ -66,17 +66,17 @@
 			"default": [
 				{
 					"imgSrc": "https://lite-word.com/sample_img/icon/people_1.svg",
-					"text": "テキストテキストテキストテキストテキス",
+					"text": "ひとりの担当が最後まで",
 					"imageSize": "icon"
 				},
 				{
 					"imgSrc": "https://lite-word.com/sample_img/icon/en_5.svg",
-					"text": "テキストテキストテキストテキストテキスト",
+					"text": "費用は先にお見積りで",
 					"imageSize": "icon"
 				},
 				{
 					"imgSrc": "https://lite-word.com/sample_img/icon/ambulance_1.svg",
-					"text": "テキストテキストテキストテキストテキスト",
+					"text": "お急ぎのご相談にも対応",
 					"imageSize": "icon"
 				}
 			]

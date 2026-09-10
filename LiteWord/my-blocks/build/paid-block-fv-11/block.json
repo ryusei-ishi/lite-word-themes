@@ -115,7 +115,7 @@
 		},
 		"mainTitle": {
 			"type": "string",
-			"default": "メインタイトル"
+			"default": "あなたのペースで、はじめられます"
 		},
 		"descriptionText": {
 			"type": "string",

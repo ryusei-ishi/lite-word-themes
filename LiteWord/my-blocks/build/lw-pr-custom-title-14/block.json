@@ -20,12 +20,12 @@
 	"attributes": {
 		"mainTitle": {
 			"type": "string",
-			"default": "カスタムタイトルカスタムタイトル",
+			"default": "カスタムタイトル",
 			"aiHint": { "role": "heading", "contentGuide": "セクション見出し。3〜20文字", "example": "よくあるご質問" }
 		},
 		"subTitle": {
 			"type": "string",
-			"default": "サブタイトルサブタイトル",
+			"default": "サブタイトル",
 			"aiHint": { "role": "subheading", "contentGuide": "英語表記 or 補足テキスト", "example": "FAQ" }
 		},
 		"headingLevel": {

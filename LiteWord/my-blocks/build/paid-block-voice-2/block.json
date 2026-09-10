@@ -35,7 +35,7 @@
 			"type": "string",
 			"source": "html",
 			"selector": ".explanation",
-			"default": "テキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキストテキスト"
+			"default": "実際にご利用いただいたお客様から、感想をいただきました。"
 		},
 		"filterColor": {
 			"type": "string",
@@ -104,7 +104,7 @@
 					"sub": "東京都 経営者",
 					"nameBig": "やまだ",
 					"nameSmall": "さん",
-					"comment": "テキストテキストテキストテキストテキストテキストテキストテキスト"
+					"comment": "はじめてで不安でしたが、ていねいに教えていただけました。"
 				}
 			],
 			"query": {
