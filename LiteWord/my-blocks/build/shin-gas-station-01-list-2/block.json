@@ -27,7 +27,7 @@
 			"source": "attribute",
 			"selector": ".bg_image img",
 			"attribute": "src",
-			"default": "https://lite-word.com/sample_img/shop/4.webp"
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/4.webp"
 		},
 		"filterColor": {
 			"type": "string",
@@ -51,7 +51,7 @@
 			"selector": "li.item",
 			"default": [
 				{
-					"itemImage": "https://lite-word.com/sample_img/shop/1.webp",
+					"itemImage": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/1.webp",
 					"no": "01",
 					"sub": "Greeting",
 					"main": "代表あいさつ",
@@ -60,7 +60,7 @@
 					"url": ""
 				},
 				{
-					"itemImage": "https://lite-word.com/sample_img/shop/2.webp",
+					"itemImage": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/2.webp",
 					"no": "02",
 					"sub": "Overview & History",
 					"main": "会社概要・沿革",
@@ -69,7 +69,7 @@
 					"url": ""
 				},
 				{
-					"itemImage": "https://lite-word.com/sample_img/shop/3.webp",
+					"itemImage": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/3.webp",
 					"no": "03",
 					"sub": "Office Infomation",
 					"main": "事業所案内",

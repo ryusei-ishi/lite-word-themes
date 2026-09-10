@@ -6,8 +6,8 @@
       "name": "wdl/lw-bg-1",
       "attributes": {
         "backgroundType": "image",
-        "imagePc": "https://lite-word.com/sample_img/background/2.webp",
-        "imageSp": "https://lite-word.com/sample_img/background/2.webp",
+        "imagePc": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/background/2.webp",
+        "imageSp": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/background/2.webp",
         "isFullWidth": true,
         "minHeightPc": "min-h-pc-360px",
         "minHeightTb": "min-h-tb-340px",

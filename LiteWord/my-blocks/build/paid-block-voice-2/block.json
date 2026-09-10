@@ -99,7 +99,7 @@
 			"selector": ".voice_list li",
 			"default": [
 				{
-					"image": "https://lite-word.com/sample_img/women/1.webp",
+					"image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/women/1.webp",
 					"thanks": "thank you",
 					"sub": "東京都 経営者",
 					"nameBig": "やまだ",

@@ -121,17 +121,17 @@
 			},
 			"default": [
 				{
-					"image": "https://lite-word.com/sample_img/school/9.webp",
+					"image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/school/9.webp",
 					"ttl": "難関校合格実績",
 					"text": "〇〇中学、××高校など、難関校への高い合格実績が自慢です。経験豊富なプロ講師陣が、志望校合格まで徹底的にサポートします。"
 				},
 				{
-					"image": "https://lite-word.com/sample_img/school/5.webp",
+					"image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/school/5.webp",
 					"ttl": "合格への最短ルート",
 					"text": "長年の指導ノウハウを結集したオリジナル教材とカリキュラムで、基礎から応用まで無駄なく効率的に学力を伸ばし、合格へと導きます。"
 				},
 				{
-					"image": "https://lite-word.com/sample_img/school/3.webp",
+					"image": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/school/3.webp",
 					"ttl": "自習室完備＆質問OK",
 					"text": "静かで集中できる自習室を完備しています。わからないことはいつでも講師に質問可能。学習相談や進路指導も充実、安心して学習に専念できます。"
 				}

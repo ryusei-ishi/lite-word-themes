@@ -101,7 +101,7 @@
 		},
 		"bgImageUrl": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/forest/1.webp"
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/forest/1.webp"
 		},
 		"bgImageAlt": {
 			"type": "string",

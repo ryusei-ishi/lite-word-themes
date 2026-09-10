@@ -1,3 +1,3 @@
 <!-- wp:wdl/paid-block-content-6 -->
-<div class="wp-block-wdl-paid-block-content-6 paid-block-content-6"><div class="this_wrap left_img"><div class="image"><figure><img src="https://lite-word.com/sample_img/women/7.webp" alt=""/></figure></div><div class="cont"><p>はじめての方にも分かるように、ひとつずつご説明します。いま何が必要で、何は後まわしでよいのかを整理するところから始めましょう。ご相談は無料です。まだ検討をはじめたばかりの段階でも構いません。お話をうかがったうえで、必要なものだけをご案内します。</p><a class="btn" href="#" style="border-radius:0px">Learn More</a></div></div></div>
+<div class="wp-block-wdl-paid-block-content-6 paid-block-content-6"><div class="this_wrap left_img"><div class="image"><figure><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/women/7.webp" alt=""/></figure></div><div class="cont"><p>はじめての方にも分かるように、ひとつずつご説明します。いま何が必要で、何は後まわしでよいのかを整理するところから始めましょう。ご相談は無料です。まだ検討をはじめたばかりの段階でも構いません。お話をうかがったうえで、必要なものだけをご案内します。</p><a class="btn" href="#" style="border-radius:0px">Learn More</a></div></div></div>
 <!-- /wp:wdl/paid-block-content-6 -->

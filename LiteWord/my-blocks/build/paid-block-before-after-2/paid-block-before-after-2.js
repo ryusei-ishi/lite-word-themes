@@ -39,10 +39,10 @@ function _toPrimitive(t, r) { if ("object" != _typeof(t) || !t) return t; var e 
 var getDefaultItems = function getDefaultItems() {
   return [{
     // Before画像
-    imgUrl: 'https://lite-word.com/sample_img/women/6_2.webp'
+    imgUrl: 'https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/women/6_2.webp'
   }, {
     // After画像
-    imgUrl: 'https://lite-word.com/sample_img/women/6.webp'
+    imgUrl: 'https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/women/6.webp'
   }];
 };
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
@@ -397,7 +397,7 @@ module.exports = window["wp"]["components"];
   \**************************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-before-after-2","version":"1.0.0","title":"ビフォーアフター 02","category":"lw-voice","icon":"images-alt2","editorScript":"file:./paid-block-before-after-2.js","aiHint":{"description":"ビフォーアフターカード配列。複数の比較を並列表示","excludeFromAutoSelect":false,"contentAttributes":["beforeLabel","afterLabel"],"imageAttributes":["items"]},"supports":{"anchor":true},"no":2,"attributes":{"beforeLabel":{"type":"string","default":"before"},"afterLabel":{"type":"string","default":"after"},"labelColorBefore":{"type":"string","default":"rgba(209, 77, 77, 0.85)"},"labelColorAfter":{"type":"string","default":"rgba(77, 209, 77, 0.85)"},"maxWidth":{"type":"number","default":1280},"aspectRatioH":{"type":"number","default":800},"items":{"type":"array","default":[{"imgUrl":"https://lite-word.com/sample_img/women/6_2.webp"},{"imgUrl":"https://lite-word.com/sample_img/women/6.webp"}]}}}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-before-after-2","version":"1.0.0","title":"ビフォーアフター 02","category":"lw-voice","icon":"images-alt2","editorScript":"file:./paid-block-before-after-2.js","aiHint":{"description":"ビフォーアフターカード配列。複数の比較を並列表示","excludeFromAutoSelect":false,"contentAttributes":["beforeLabel","afterLabel"],"imageAttributes":["items"]},"supports":{"anchor":true},"no":2,"attributes":{"beforeLabel":{"type":"string","default":"before"},"afterLabel":{"type":"string","default":"after"},"labelColorBefore":{"type":"string","default":"rgba(209, 77, 77, 0.85)"},"labelColorAfter":{"type":"string","default":"rgba(77, 209, 77, 0.85)"},"maxWidth":{"type":"number","default":1280},"aspectRatioH":{"type":"number","default":800},"items":{"type":"array","default":[{"imgUrl":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/women/6_2.webp"},{"imgUrl":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/women/6.webp"}]}}}');
 
 /***/ })
 

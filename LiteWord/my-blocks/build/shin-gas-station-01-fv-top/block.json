@@ -27,7 +27,7 @@
 	"attributes": {
 		"backgroundImage": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/shin/gas_station/bg_1.webp"
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shin/gas_station/bg_1.webp"
 		},
 		"backgroundImageSp": {
 			"type": "string",

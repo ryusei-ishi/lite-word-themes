@@ -26,7 +26,7 @@
 	"attributes": {
 		"image": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/shop/7.webp"
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/7.webp"
 		},
 		"alt": {
 			"type": "string",

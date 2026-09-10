@@ -27,7 +27,7 @@
 	"attributes": {
 		"imageUrl": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/shop/1.webp",
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/1.webp",
 			"aiHint": {
 				"role": "image",
 				"note": "サービス・業種に合った画像URL"

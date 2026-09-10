@@ -1,5 +1,5 @@
-<!-- wp:wdl/paid-block-fv-8 {"backgroundImagePc":"https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/AdobeStock_481168418-scaled.webp","mainTitle":"不用品をどこよりも\u003cbr\u003e\u003cmark style=\u0022background-color:rgba(0, 0, 0, 0);color:#c83839\u0022 class=\u0022has-inline-color\u0022\u003e高価買取り\u003c/mark\u003e","leadText":"ただいま初回限定キャンペーン実施中！ \u003cbr\u003e見積もり無料・年中無休で安心サポート！"} -->
-<div class="wp-block-wdl-paid-block-fv-8 paid-block-fv-8"><div class="paid-block-fv-8_inner" data-lw_font_set="Noto Sans JP"><div class="text_in"><h2 class="ttl"><span class="sub">出張・持込み買取可能！</span><span class="main">不用品をどこよりも<br><mark style="background-color:rgba(0, 0, 0, 0);color:#c83839" class="has-inline-color">高価買取り</mark></span></h2><p class="lead">ただいま初回限定キャンペーン実施中！ <br>見積もり無料・年中無休で安心サポート！</p><div class="btm_text pc"><ul class="list"><li><span>最短<br />即日</span></li><li><span>年中<br />無休</span></li><li><span>実績<br />多数</span></li></ul><p>水回りの小さなお悩みから大掛かりな修理まですべてお任せください！</p></div></div><div class="image"><picture><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/AdobeStock_481168418-scaled.webp" alt="背景画像" loading="eager" fetchpriority="high"/></picture><div class="point"><svg class="star" xmlns="http://www.w3.org/2000/svg" width="30.468" height="23.697" viewBox="0 0 30.468 23.697"><path id="crown-solid" d="M16.345,35.914a2.116,2.116,0,1,0-2.222,0l-3.031,6.062a1.694,1.694,0,0,1-2.571.566L3.808,38.771a2.116,2.116,0,1,0-1.693.846h.037l2.417,13.3A3.387,3.387,0,0,0,7.9,55.7H22.565A3.39,3.39,0,0,0,25.9,52.915l2.417-13.3h.037a2.116,2.116,0,1,0-1.693-.846l-4.713,3.771a1.694,1.694,0,0,1-2.571-.566Z" transform="translate(0 -32)" fill="#f39b1b"></path></svg><p><span>お客様満足度</span><span><b>98</b><span>点</span></span></p><div class="btm"><svg xmlns="http://www.w3.org/2000/svg" width="13.673" height="13.259" viewBox="0 0 13.673 13.259"><path id="star-solid" d="M31.724.466a.83.83,0,0,0-1.491,0L28.568,3.892l-3.718.549a.829.829,0,0,0-.461,1.409l2.7,2.67-.637,3.773a.831.831,0,0,0,1.209.87l3.322-1.774L34.3,13.162a.831.831,0,0,0,1.209-.87l-.64-3.773,2.7-2.67a.829.829,0,0,0-.461-1.409l-3.721-.549Z" transform="translate(-24.144)" fill="#f39b1b"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="13.673" height="13.259" viewBox="0 0 13.673 13.259"><path id="star-solid" d="M31.724.466a.83.83,0,0,0-1.491,0L28.568,3.892l-3.718.549a.829.829,0,0,0-.461,1.409l2.7,2.67-.637,3.773a.831.831,0,0,0,1.209.87l3.322-1.774L34.3,13.162a.831.831,0,0,0,1.209-.87l-.64-3.773,2.7-2.67a.829.829,0,0,0-.461-1.409l-3.721-.549Z" transform="translate(-24.144)" fill="#f39b1b"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="13.673" height="13.259" viewBox="0 0 13.673 13.259"><path id="star-solid" d="M31.724.466a.83.83,0,0,0-1.491,0L28.568,3.892l-3.718.549a.829.829,0,0,0-.461,1.409l2.7,2.67-.637,3.773a.831.831,0,0,0,1.209.87l3.322-1.774L34.3,13.162a.831.831,0,0,0,1.209-.87l-.64-3.773,2.7-2.67a.829.829,0,0,0-.461-1.409l-3.721-.549Z" transform="translate(-24.144)" fill="#f39b1b"></path></svg></div></div></div></div><div class="btm_text sp"><ul class="list"><li><span>最短<br />即日</span></li><li><span>年中<br />無休</span></li><li><span>実績<br />多数</span></li></ul><p>水回りの小さなお悩みから大掛かりな修理まですべてお任せください！</p></div></div>
+<!-- wp:wdl/paid-block-fv-8 {"backgroundImagePc":"https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/AdobeStock_481168418-scaled.webp","mainTitle":"不用品をどこよりも\u003cbr\u003e\u003cmark style=\u0022background-color:rgba(0, 0, 0, 0);color:#c83839\u0022 class=\u0022has-inline-color\u0022\u003e高価買取り\u003c/mark\u003e","leadText":"ただいま初回限定キャンペーン実施中！ \u003cbr\u003e見積もり無料・年中無休で安心サポート！"} -->
+<div class="wp-block-wdl-paid-block-fv-8 paid-block-fv-8"><div class="paid-block-fv-8_inner" data-lw_font_set="Noto Sans JP"><div class="text_in"><h2 class="ttl"><span class="sub">出張・持込み買取可能！</span><span class="main">不用品をどこよりも<br><mark style="background-color:rgba(0, 0, 0, 0);color:#c83839" class="has-inline-color">高価買取り</mark></span></h2><p class="lead">ただいま初回限定キャンペーン実施中！ <br>見積もり無料・年中無休で安心サポート！</p><div class="btm_text pc"><ul class="list"><li><span>最短<br />即日</span></li><li><span>年中<br />無休</span></li><li><span>実績<br />多数</span></li></ul><p>水回りの小さなお悩みから大掛かりな修理まですべてお任せください！</p></div></div><div class="image"><picture><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/AdobeStock_481168418-scaled.webp" alt="背景画像" loading="eager" fetchpriority="high"/></picture><div class="point"><svg class="star" xmlns="http://www.w3.org/2000/svg" width="30.468" height="23.697" viewBox="0 0 30.468 23.697"><path id="crown-solid" d="M16.345,35.914a2.116,2.116,0,1,0-2.222,0l-3.031,6.062a1.694,1.694,0,0,1-2.571.566L3.808,38.771a2.116,2.116,0,1,0-1.693.846h.037l2.417,13.3A3.387,3.387,0,0,0,7.9,55.7H22.565A3.39,3.39,0,0,0,25.9,52.915l2.417-13.3h.037a2.116,2.116,0,1,0-1.693-.846l-4.713,3.771a1.694,1.694,0,0,1-2.571-.566Z" transform="translate(0 -32)" fill="#f39b1b"></path></svg><p><span>お客様満足度</span><span><b>98</b><span>点</span></span></p><div class="btm"><svg xmlns="http://www.w3.org/2000/svg" width="13.673" height="13.259" viewBox="0 0 13.673 13.259"><path id="star-solid" d="M31.724.466a.83.83,0,0,0-1.491,0L28.568,3.892l-3.718.549a.829.829,0,0,0-.461,1.409l2.7,2.67-.637,3.773a.831.831,0,0,0,1.209.87l3.322-1.774L34.3,13.162a.831.831,0,0,0,1.209-.87l-.64-3.773,2.7-2.67a.829.829,0,0,0-.461-1.409l-3.721-.549Z" transform="translate(-24.144)" fill="#f39b1b"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="13.673" height="13.259" viewBox="0 0 13.673 13.259"><path id="star-solid" d="M31.724.466a.83.83,0,0,0-1.491,0L28.568,3.892l-3.718.549a.829.829,0,0,0-.461,1.409l2.7,2.67-.637,3.773a.831.831,0,0,0,1.209.87l3.322-1.774L34.3,13.162a.831.831,0,0,0,1.209-.87l-.64-3.773,2.7-2.67a.829.829,0,0,0-.461-1.409l-3.721-.549Z" transform="translate(-24.144)" fill="#f39b1b"></path></svg><svg xmlns="http://www.w3.org/2000/svg" width="13.673" height="13.259" viewBox="0 0 13.673 13.259"><path id="star-solid" d="M31.724.466a.83.83,0,0,0-1.491,0L28.568,3.892l-3.718.549a.829.829,0,0,0-.461,1.409l2.7,2.67-.637,3.773a.831.831,0,0,0,1.209.87l3.322-1.774L34.3,13.162a.831.831,0,0,0,1.209-.87l-.64-3.773,2.7-2.67a.829.829,0,0,0-.461-1.409l-3.721-.549Z" transform="translate(-24.144)" fill="#f39b1b"></path></svg></div></div></div></div><div class="btm_text sp"><ul class="list"><li><span>最短<br />即日</span></li><li><span>年中<br />無休</span></li><li><span>実績<br />多数</span></li></ul><p>水回りの小さなお悩みから大掛かりな修理まですべてお任せください！</p></div></div>
 <!-- /wp:wdl/paid-block-fv-8 -->
 
 <!-- wp:wdl/lw-space-1 {"pcHeight":40,"tbHeight":32,"spHeight":8} -->
@@ -7,11 +7,11 @@
 <!-- /wp:wdl/lw-space-1 -->
 
 <!-- wp:image {"id":28,"sizeSlug":"full","linkDestination":"none","align":"center"} -->
-<figure class="wp-block-image aligncenter size-full"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/banner.png" alt="" class="wp-image-28"/></figure>
+<figure class="wp-block-image aligncenter size-full"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/banner.png" alt="" class="wp-image-28"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:wdl/paid-block-solution-2 {"blockId":"paid-block-solution-2-1e802843"} -->
-<div class="wp-block-wdl-paid-block-solution-2 paid-block-solution-2 paid-block-solution-2-1e802843"><div class="paid-block-solution-2_inner" style="border-color:var(--color-main)"><h2 class="ttl" style="background:var(--color-main)">〇〇県内で不用品高価買取り実施中！</h2><ul class="list"><li><div class="img_wrap icon_image" data-imagesize="icon"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/icon_060130.svg" alt=""/></div><p>出張で不用品を<br>買取りしてほしい！</p></li><li><div class="img_wrap icon_image" data-imagesize="icon"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/icon_065240.svg" alt=""/></div><p>出張で買取りしてほしい！</p></li><li><div class="img_wrap icon_image" data-imagesize="icon"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/icon_046060.svg" alt=""/></div><p>不用品がたくさんありすぎて<br>困っている…。</p></li></ul></div><style>
+<div class="wp-block-wdl-paid-block-solution-2 paid-block-solution-2 paid-block-solution-2-1e802843"><div class="paid-block-solution-2_inner" style="border-color:var(--color-main)"><h2 class="ttl" style="background:var(--color-main)">〇〇県内で不用品高価買取り実施中！</h2><ul class="list"><li><div class="img_wrap icon_image" data-imagesize="icon"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/icon_060130.svg" alt=""/></div><p>出張で不用品を<br>買取りしてほしい！</p></li><li><div class="img_wrap icon_image" data-imagesize="icon"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/icon_065240.svg" alt=""/></div><p>出張で買取りしてほしい！</p></li><li><div class="img_wrap icon_image" data-imagesize="icon"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/icon_046060.svg" alt=""/></div><p>不用品がたくさんありすぎて<br>困っている…。</p></li></ul></div><style>
                         .paid-block-solution-2-1e802843 .paid-block-solution-2_inner ul.list li + li:before {
                             background: var(--color-main);
                         }
@@ -43,11 +43,11 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":205,"sizeSlug":"full","linkDestination":"none","align":"center","className":"lw_pc_only"} -->
-<figure class="wp-block-image aligncenter size-full lw_pc_only"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/contact_pc.gif" alt="" class="wp-image-205"/></figure>
+<figure class="wp-block-image aligncenter size-full lw_pc_only"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/contact_pc.gif" alt="" class="wp-image-205"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:image {"id":50,"sizeSlug":"full","linkDestination":"none","align":"center","className":"lw_sp_only"} -->
-<figure class="wp-block-image aligncenter size-full lw_sp_only"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/contact_sp.gif" alt="" class="wp-image-50"/></figure>
+<figure class="wp-block-image aligncenter size-full lw_sp_only"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/contact_sp.gif" alt="" class="wp-image-50"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph {"align":"center"} -->
@@ -111,11 +111,11 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":205,"width":"790px","height":"auto","sizeSlug":"full","linkDestination":"none","align":"center","className":"lw_pc_only"} -->
-<figure class="wp-block-image aligncenter size-full is-resized lw_pc_only"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/contact_pc.gif" alt="" class="wp-image-205" style="width:790px;height:auto"/></figure>
+<figure class="wp-block-image aligncenter size-full is-resized lw_pc_only"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/contact_pc.gif" alt="" class="wp-image-205" style="width:790px;height:auto"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:image {"id":50,"sizeSlug":"full","linkDestination":"none","align":"center","className":"lw_sp_only"} -->
-<figure class="wp-block-image aligncenter size-full lw_sp_only"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/contact_sp.gif" alt="" class="wp-image-50"/></figure>
+<figure class="wp-block-image aligncenter size-full lw_sp_only"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/contact_sp.gif" alt="" class="wp-image-50"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph {"align":"center"} -->
@@ -133,7 +133,7 @@
 <!-- wp:columns {"verticalAlignment":"top"} -->
 <div class="wp-block-columns are-vertically-aligned-top"><!-- wp:column {"verticalAlignment":"top"} -->
 <div class="wp-block-column is-vertically-aligned-top"><!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://lite-word.com/sample_img/school/7.webp" alt=""/></figure>
+<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/school/7.webp" alt=""/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 
@@ -147,7 +147,7 @@
 <!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://lite-word.com/sample_img/school/7.webp" alt=""/></figure>
+<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/school/7.webp" alt=""/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 
@@ -161,7 +161,7 @@
 <!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://lite-word.com/sample_img/school/7.webp" alt=""/></figure>
+<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/school/7.webp" alt=""/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 
@@ -281,7 +281,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":100,"sizeSlug":"full","linkDestination":"none","align":"center"} -->
-<figure class="wp-block-image aligncenter size-full"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/tasya-chigai.jpg" alt="〇〇リサイクルと他サービスとの違い" class="wp-image-100"/></figure>
+<figure class="wp-block-image aligncenter size-full"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/tasya-chigai.jpg" alt="〇〇リサイクルと他サービスとの違い" class="wp-image-100"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -293,7 +293,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:image {"id":104,"sizeSlug":"full","linkDestination":"none","align":"center"} -->
-<figure class="wp-block-image aligncenter size-full"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/otoku.jpg" alt="お得に処分するポイント！" class="wp-image-104"/></figure>
+<figure class="wp-block-image aligncenter size-full"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/otoku.jpg" alt="お得に処分するポイント！" class="wp-image-104"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -345,7 +345,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":113,"sizeSlug":"large","linkDestination":"none","align":"center"} -->
-<figure class="wp-block-image aligncenter size-large"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/ID359029-1024x723.jpg" alt="長年ため込んだ本や衣類などを処分してほしいとご相談いただきました。" class="wp-image-113"/></figure>
+<figure class="wp-block-image aligncenter size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/ID359029-1024x723.jpg" alt="長年ため込んだ本や衣類などを処分してほしいとご相談いただきました。" class="wp-image-113"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -353,7 +353,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":118,"sizeSlug":"large","linkDestination":"none","align":"center"} -->
-<figure class="wp-block-image aligncenter size-large"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/ID410329-1024x660.jpg" alt="実家の離れにある不用品の処分と片付け作業をご希望いただきました。" class="wp-image-118"/></figure>
+<figure class="wp-block-image aligncenter size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/ID410329-1024x660.jpg" alt="実家の離れにある不用品の処分と片付け作業をご希望いただきました。" class="wp-image-118"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -361,7 +361,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":121,"sizeSlug":"large","linkDestination":"none","align":"center"} -->
-<figure class="wp-block-image aligncenter size-large"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/ID416949-1024x660.jpg" alt="引っ越しで大量の不用品が出てしまい、お困りのお客様からのご依頼。" class="wp-image-121"/></figure>
+<figure class="wp-block-image aligncenter size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/ID416949-1024x660.jpg" alt="引っ越しで大量の不用品が出てしまい、お困りのお客様からのご依頼。" class="wp-image-121"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -369,7 +369,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":125,"sizeSlug":"large","linkDestination":"none","align":"center"} -->
-<figure class="wp-block-image aligncenter size-large"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/ID381908-1024x660.jpg" alt="長年使用していた家具やCDなどの整理でご相談いただきました。" class="wp-image-125"/></figure>
+<figure class="wp-block-image aligncenter size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/ID381908-1024x660.jpg" alt="長年使用していた家具やCDなどの整理でご相談いただきました。" class="wp-image-125"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -377,7 +377,7 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":128,"sizeSlug":"large","linkDestination":"none","align":"center"} -->
-<figure class="wp-block-image aligncenter size-large"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/ID420793-1024x660.jpg" alt="部屋の片付けと不用品処分をご希望のお客様からのご依頼。" class="wp-image-128"/></figure>
+<figure class="wp-block-image aligncenter size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/ID420793-1024x660.jpg" alt="部屋の片付けと不用品処分をご希望のお客様からのご依頼。" class="wp-image-128"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -423,7 +423,7 @@
 <!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"id":135,"width":"331px","height":"auto","sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large is-resized"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/shiga-map-728x1024.gif" alt="対応エリア地図" class="wp-image-135" style="width:331px;height:auto"/></figure>
+<figure class="wp-block-image size-large is-resized"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/shiga-map-728x1024.gif" alt="対応エリア地図" class="wp-image-135" style="width:331px;height:auto"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 
@@ -451,11 +451,11 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":205,"sizeSlug":"full","linkDestination":"none","align":"center","className":"lw_pc_only"} -->
-<figure class="wp-block-image aligncenter size-full lw_pc_only"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/contact_pc.gif" alt="" class="wp-image-205"/></figure>
+<figure class="wp-block-image aligncenter size-full lw_pc_only"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/contact_pc.gif" alt="" class="wp-image-205"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:image {"id":50,"sizeSlug":"full","linkDestination":"none","align":"center","className":"lw_sp_only"} -->
-<figure class="wp-block-image aligncenter size-full lw_sp_only"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/contact_sp.gif" alt="" class="wp-image-50"/></figure>
+<figure class="wp-block-image aligncenter size-full lw_sp_only"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/contact_sp.gif" alt="" class="wp-image-50"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph {"align":"center"} -->
@@ -581,7 +581,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:image {"id":164,"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/trj-auction-1024x768.jpg" alt="" class="wp-image-164"/></figure>
+<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/trj-auction-1024x768.jpg" alt="" class="wp-image-164"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph -->
@@ -609,11 +609,11 @@
 <!-- /wp:paragraph -->
 
 <!-- wp:image {"id":205,"sizeSlug":"full","linkDestination":"none","align":"center","className":"lw_pc_only"} -->
-<figure class="wp-block-image aligncenter size-full lw_pc_only"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/contact_pc.gif" alt="" class="wp-image-205"/></figure>
+<figure class="wp-block-image aligncenter size-full lw_pc_only"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/contact_pc.gif" alt="" class="wp-image-205"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:image {"id":50,"sizeSlug":"full","linkDestination":"none","align":"center","className":"lw_sp_only"} -->
-<figure class="wp-block-image aligncenter size-full lw_sp_only"><img src="https://xs772828.xsrv.jp/demo_07/wp-content/uploads/2025/03/contact_sp.gif" alt="" class="wp-image-50"/></figure>
+<figure class="wp-block-image aligncenter size-full lw_sp_only"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/demo/contact_sp.gif" alt="" class="wp-image-50"/></figure>
 <!-- /wp:image -->
 
 <!-- wp:paragraph {"align":"center"} -->

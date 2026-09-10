@@ -40,7 +40,7 @@
 		},
 		"imgUrl": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/women/2.webp"
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/women/2.webp"
 		},
 		"imgAlt": {
 			"type": "string",

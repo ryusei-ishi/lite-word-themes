@@ -22,8 +22,8 @@
     {
       "name": "wdl/lw-pr-before-after-3",
       "attributes": {
-        "beforeImageUrl": "https://lite-word.com/sample_img/before_after/1_1.webp",
-        "afterImageUrl": "https://lite-word.com/sample_img/before_after/1_2.webp",
+        "beforeImageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/before_after/1_1.webp",
+        "afterImageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/before_after/1_2.webp",
         "beforeText": "Before",
         "afterText": "After",
         "beforeDescription": "30代女性・施術前",

@@ -36,7 +36,7 @@
 	},
 	"attributes": {
 		"panelBgColor": { "type": "string", "default": "#7a3340" },
-		"imageUrlPc": { "type": "string", "default": "https://lite-word.com/sample_img/background/6.webp" },
+		"imageUrlPc": { "type": "string", "default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/background/6.webp" },
 		"imageUrlSp": { "type": "string", "default": "" },
 		"imageAlt": { "type": "string", "default": "" },
 		"imageSide": { "type": "string", "default": "right" },

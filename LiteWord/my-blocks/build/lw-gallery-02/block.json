@@ -22,11 +22,11 @@
 		"images": {
 			"type": "array",
 			"default": [
-				"https://lite-word.com/sample_img/shop/1.webp",
-				"https://lite-word.com/sample_img/shop/2.webp",
-				"https://lite-word.com/sample_img/shop/3.webp",
-				"https://lite-word.com/sample_img/shop/4.webp",
-				"https://lite-word.com/sample_img/shop/5.webp",
+				"https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/1.webp",
+				"https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/2.webp",
+				"https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/3.webp",
+				"https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/4.webp",
+				"https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/5.webp",
 				"",
 				"",
 				""

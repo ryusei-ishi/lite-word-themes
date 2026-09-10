@@ -25,7 +25,7 @@
 	"attributes": {
 		"imageUrl": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/shop/5.webp",
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/5.webp",
 			"ai_description": "左側の画像URL"
 		},
 		"imageAlt": {

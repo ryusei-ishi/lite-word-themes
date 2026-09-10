@@ -6,7 +6,7 @@
       "name": "wdl/lw-list-2",
       "attributes": {
         "titleText": "こんな方に向いています",
-        "backgroundImage": "https://lite-word.com/sample_img/background/5.webp",
+        "backgroundImage": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/background/5.webp",
         "bgGradient": "var(--color-main)",
         "filterOpacity": 0.7,
         "colorLiSvg": "var(--color-accent)",

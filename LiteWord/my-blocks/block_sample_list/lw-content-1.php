@@ -1,4 +1,4 @@
 <!-- wp:wdl/lw-content-1 -->
-<div class="wp-block-wdl-lw-content-1 lw-content-1 left"><div class="lw-content-1__inner"><div class="lw-content-1__image"><img loading="lazy" src="https://lite-word.com/sample_img/shop/1.webp" alt=""/></div><div class="lw-content-1__text"><h3 class="lw_title" style="font-weight:" data-lw_font_set="">タイトルテキスト</h3><p class="lw_p" style="font-weight:;white-space:pre-wrap" data-lw_font_set="">小さくはじめて、続けられる形に。
+<div class="wp-block-wdl-lw-content-1 lw-content-1 left"><div class="lw-content-1__inner"><div class="lw-content-1__image"><img loading="lazy" src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/1.webp" alt=""/></div><div class="lw-content-1__text"><h3 class="lw_title" style="font-weight:" data-lw_font_set="">タイトルテキスト</h3><p class="lw_p" style="font-weight:;white-space:pre-wrap" data-lw_font_set="">小さくはじめて、続けられる形に。
 お客様の事情にあわせて、無理のない進め方をご提案します。</p><a href="" class="lw-content-1__text_br_button" style="font-weight:;background-color:var(--color-accent);color:#fff" data-lw_font_set="">詳細はこちら</a></div></div></div>
 <!-- /wp:wdl/lw-content-1 -->

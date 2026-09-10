@@ -32,13 +32,13 @@
 			"type": "array",
 			"default": [
 				{
-					"pcImgUrl": "https://lite-word.com/sample_img/shop/6.webp",
+					"pcImgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/6.webp",
 					"spImgUrl": "",
 					"altText": "",
 					"linkUrl": ""
 				},
 				{
-					"pcImgUrl": "https://lite-word.com/sample_img/shop/2.webp",
+					"pcImgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/2.webp",
 					"spImgUrl": "",
 					"altText": "",
 					"linkUrl": ""

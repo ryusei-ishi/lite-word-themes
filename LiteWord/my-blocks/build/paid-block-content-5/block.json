@@ -26,7 +26,7 @@
 	"attributes": {
 		"pcImage": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/women/7.webp"
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/women/7.webp"
 		},
 		"spImage": {
 			"type": "string",

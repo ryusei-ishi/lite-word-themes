@@ -231,7 +231,7 @@ var lwBlockDef = {
  * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
  * ------------------------------------------------------------------ */
 var LW_1169_OLD = JSON.parse(JSON.stringify(_block_json__WEBPACK_IMPORTED_MODULE_6__.attributes));
-LW_1169_OLD.imageUrl["default"] = "https://cdn.pixabay.com/photo/2020/06/30/10/05/photographer-5355840_1280.jpg";
+LW_1169_OLD.imageUrl["default"] = "https://liteword-assets.bigi-ishikawa.workers.dev/t/px/photographer-5355840_1280.jpg";
 
 /* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
  *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の

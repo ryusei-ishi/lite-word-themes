@@ -10,7 +10,7 @@
         "mainTitleLevel": "h2",
         "description": "ご相談・お見積りは無料です。<br>1営業日以内にご返信します。",
         "formId": 9,
-        "bgImageUrl": "https://lite-word.com/sample_img/background/6.webp",
+        "bgImageUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/background/6.webp",
         "maxWidth": "800px"
       },
       "innerBlocks": []

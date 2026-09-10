@@ -57,15 +57,15 @@
 			"type": "array",
 			"default": [
 				{
-					"imgUrl": "https://lite-word.com/sample_img/shop/1.webp",
+					"imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/1.webp",
 					"alt": ""
 				},
 				{
-					"imgUrl": "https://lite-word.com/sample_img/shop/2.webp",
+					"imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/2.webp",
 					"alt": ""
 				},
 				{
-					"imgUrl": "https://lite-word.com/sample_img/shop/3.webp",
+					"imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/3.webp",
 					"alt": ""
 				}
 			]

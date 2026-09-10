@@ -22,27 +22,27 @@
 			"type": "array",
 			"default": [
 				{
-					"url": "https://lite-word.com/sample_img/shop/1.webp",
+					"url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/1.webp",
 					"alt": "ギャラリー画像1",
 					"caption": ""
 				},
 				{
-					"url": "https://lite-word.com/sample_img/shop/2.webp",
+					"url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/2.webp",
 					"alt": "ギャラリー画像2",
 					"caption": ""
 				},
 				{
-					"url": "https://lite-word.com/sample_img/shop/3.webp",
+					"url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/3.webp",
 					"alt": "ギャラリー画像3",
 					"caption": ""
 				},
 				{
-					"url": "https://lite-word.com/sample_img/shop/4.webp",
+					"url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/4.webp",
 					"alt": "ギャラリー画像4",
 					"caption": ""
 				},
 				{
-					"url": "https://lite-word.com/sample_img/shop/5.webp",
+					"url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/5.webp",
 					"alt": "ギャラリー画像5",
 					"caption": ""
 				}

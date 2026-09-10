@@ -28,13 +28,13 @@
 			"type": "array",
 			"default": [
 				{
-					"pcImgUrl": "https://lite-word.com/sample_img/slide/1.webp",
+					"pcImgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/slide/1.webp",
 					"spImgUrl": "",
 					"altText": "",
 					"linkUrl": ""
 				},
 				{
-					"pcImgUrl": "https://lite-word.com/sample_img/slide/2.webp",
+					"pcImgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/slide/2.webp",
 					"spImgUrl": "",
 					"altText": "",
 					"linkUrl": ""

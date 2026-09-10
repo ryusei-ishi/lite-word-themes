@@ -98,35 +98,35 @@
 			"type": "array",
 			"default": [
 				{
-					"url": "https://lite-word.com/sample_img/shop/1.webp",
+					"url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/1.webp",
 					"alt": ""
 				},
 				{
-					"url": "https://lite-word.com/sample_img/shop/2.webp",
+					"url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/2.webp",
 					"alt": ""
 				},
 				{
-					"url": "https://lite-word.com/sample_img/shop/3.webp",
+					"url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/3.webp",
 					"alt": ""
 				},
 				{
-					"url": "https://lite-word.com/sample_img/shop/4.webp",
+					"url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/4.webp",
 					"alt": ""
 				},
 				{
-					"url": "https://lite-word.com/sample_img/shop/5.webp",
+					"url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/5.webp",
 					"alt": ""
 				},
 				{
-					"url": "https://lite-word.com/sample_img/women/1.webp",
+					"url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/women/1.webp",
 					"alt": ""
 				},
 				{
-					"url": "https://lite-word.com/sample_img/women/2.webp",
+					"url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/women/2.webp",
 					"alt": ""
 				},
 				{
-					"url": "https://lite-word.com/sample_img/women/4.webp",
+					"url": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/women/4.webp",
 					"alt": ""
 				}
 			]

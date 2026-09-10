@@ -47,7 +47,7 @@
 		"maxWidth": { "type": "number", "default": 1140 },
 		"imageSide": { "type": "string", "default": "right" },
 		"imageColWidth": { "type": "number", "default": 430 },
-		"imageUrl": { "type": "string", "default": "https://lite-word.com/sample_img/background/6.webp" },
+		"imageUrl": { "type": "string", "default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/background/6.webp" },
 		"imageAlt": { "type": "string", "default": "" },
 		"imageTilt": { "type": "number", "default": -2.4 },
 		"imageHeightPc": { "type": "number", "default": 330 },

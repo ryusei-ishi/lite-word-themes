@@ -19,7 +19,7 @@
 	"attributes": {
 		"imageUrl": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/shop/2.webp"
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/2.webp"
 		},
 		"imageAlt": {
 			"type": "string",

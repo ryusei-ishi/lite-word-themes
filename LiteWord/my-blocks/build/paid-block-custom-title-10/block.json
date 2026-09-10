@@ -69,7 +69,7 @@
 		},
 		"leftImage": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/icon/pc_1.png",
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/icon/pc_1.png",
 			"aiHint": {
 				"role": "image",
 				"note": "左側アイコン画像URL"

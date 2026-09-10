@@ -1,5 +1,5 @@
-<!-- wp:wdl/fv-5 {"backgroundImage":"https://lite-word.com/wp-content/uploads/2025/07/LiteWord_sample_kidsclinic1.png","mainTitle":"アクセス","description":"JRひかり駅 徒歩2分｜提携駐車場あり","filterBackgroundColor":"#abb8c3","filterOpacity":0.2,"textColor":"#ffffff"} -->
-<div class="wp-block-wdl-fv-5 fv-5 min-h-pc-280px min-h-tb-220px min-h-sp-180px"><div class="fv-5_inner"><h1 class="ttl" style="color:#ffffff"><span class="main" style="color:#ffffff">アクセス</span></h1><p class="description" style="color:#ffffff">JRひかり駅 徒歩2分｜提携駐車場あり</p></div><div class="filter" style="background-color:#abb8c3;opacity:0.2"></div><picture class="bg_image"><source srcset="" media="(max-width: 800px)"/><source srcset="https://lite-word.com/wp-content/uploads/2025/07/LiteWord_sample_kidsclinic1.png" media="(min-width: 801px)"/><img src="https://lite-word.com/wp-content/uploads/2025/07/LiteWord_sample_kidsclinic1.png" alt="背景画像" loading="eager" fetchpriority="high"/></picture></div>
+<!-- wp:wdl/fv-5 {"backgroundImage":"https://liteword-assets.bigi-ishikawa.workers.dev/t/up/LiteWord_sample_kidsclinic1.png","mainTitle":"アクセス","description":"JRひかり駅 徒歩2分｜提携駐車場あり","filterBackgroundColor":"#abb8c3","filterOpacity":0.2,"textColor":"#ffffff"} -->
+<div class="wp-block-wdl-fv-5 fv-5 min-h-pc-280px min-h-tb-220px min-h-sp-180px"><div class="fv-5_inner"><h1 class="ttl" style="color:#ffffff"><span class="main" style="color:#ffffff">アクセス</span></h1><p class="description" style="color:#ffffff">JRひかり駅 徒歩2分｜提携駐車場あり</p></div><div class="filter" style="background-color:#abb8c3;opacity:0.2"></div><picture class="bg_image"><source srcset="" media="(max-width: 800px)"/><source srcset="https://liteword-assets.bigi-ishikawa.workers.dev/t/up/LiteWord_sample_kidsclinic1.png" media="(min-width: 801px)"/><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/up/LiteWord_sample_kidsclinic1.png" alt="背景画像" loading="eager" fetchpriority="high"/></picture></div>
 <!-- /wp:wdl/fv-5 -->
 
 <!-- wp:wdl/lw-space-1 -->
@@ -23,7 +23,7 @@
 
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"id":11561,"width":"352px","height":"auto","sizeSlug":"full","linkDestination":"none","align":"center","className":"is-style-default","borderRadiusPc":"borderRadius_pc_0"} -->
-<figure class="wp-block-image aligncenter size-full is-resized is-style-default borderRadius_pc_0"><img src="https://lite-word.com/wp-content/uploads/2025/07/LiteWord_sample_kidsclinic2.png" alt="" class="wp-image-11561" style="width:352px;height:auto"/></figure>
+<figure class="wp-block-image aligncenter size-full is-resized is-style-default borderRadius_pc_0"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/up/LiteWord_sample_kidsclinic2.png" alt="" class="wp-image-11561" style="width:352px;height:auto"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
@@ -61,7 +61,7 @@
 
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"id":11567,"sizeSlug":"full","linkDestination":"none","className":"is-style-rounded"} -->
-<figure class="wp-block-image size-full is-style-rounded"><img src="https://lite-word.com/wp-content/uploads/2025/07/LiteWord_sample_kidsclinic3.png" alt="" class="wp-image-11567"/></figure>
+<figure class="wp-block-image size-full is-style-rounded"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/up/LiteWord_sample_kidsclinic3.png" alt="" class="wp-image-11567"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
@@ -75,7 +75,7 @@
 
 <!-- wp:column -->
 <div class="wp-block-column"><!-- wp:image {"id":11567,"sizeSlug":"full","linkDestination":"none","className":"is-style-rounded"} -->
-<figure class="wp-block-image size-full is-style-rounded"><img src="https://lite-word.com/wp-content/uploads/2025/07/LiteWord_sample_kidsclinic3.png" alt="" class="wp-image-11567"/></figure>
+<figure class="wp-block-image size-full is-style-rounded"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/up/LiteWord_sample_kidsclinic3.png" alt="" class="wp-image-11567"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
@@ -140,6 +140,6 @@
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:40px"></div><div class="tb" style="height:32px"></div><div class="sp" style="height:20px"></div></div>
 <!-- /wp:wdl/lw-space-1 -->
 
-<!-- wp:wdl/cta-2 {"phoneNumber":"03-000-000","backgroundImage":"https://lite-word.com/wp-content/uploads/2025/07/LiteWord_sample_kidsclinic5.png","filterColor":"rgba(0, 0, 0, 0.31)","className":"cta-2"} -->
-<div class="wp-block-wdl-cta-2  cta-2"><div class="cta-2" style="background-image:url(https://lite-word.com/wp-content/uploads/2025/07/LiteWord_sample_kidsclinic5.png)"><div class="cta-2__wrap"><h2 class="title">診察のお問い合わせ</h2><p class="address">〒110-0000 東京都渋谷区／<span class="lw-br on_600px"></span>TEL. 03-000-0000／FAX. 03-000-000</p><nav><a href="tel:03-000-000" class="tel" data-lw_font_set="Roboto"><div class="no"><div class="small">TEL:</div><div class="big">03-000-000</div></div><p class="tel_text">（受付時間／9:00～19:00 水曜、土曜午後、日祝休業）</p></a><a href="mailto:info@example.com" class="mail" style="background-color:#0073aa;color:#ffffff"><div class="icon" style="fill:#ffffff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z"/></svg></div><div class="mail_text">WEB予約はこちら</div></a></nav></div><div class="bg_filter" style="background-color:rgba(0, 0, 0, 0.31)"></div></div></div>
+<!-- wp:wdl/cta-2 {"phoneNumber":"03-000-000","backgroundImage":"https://liteword-assets.bigi-ishikawa.workers.dev/t/up/LiteWord_sample_kidsclinic5.png","filterColor":"rgba(0, 0, 0, 0.31)","className":"cta-2"} -->
+<div class="wp-block-wdl-cta-2  cta-2"><div class="cta-2" style="background-image:url(https://liteword-assets.bigi-ishikawa.workers.dev/t/up/LiteWord_sample_kidsclinic5.png)"><div class="cta-2__wrap"><h2 class="title">診察のお問い合わせ</h2><p class="address">〒110-0000 東京都渋谷区／<span class="lw-br on_600px"></span>TEL. 03-000-0000／FAX. 03-000-000</p><nav><a href="tel:03-000-000" class="tel" data-lw_font_set="Roboto"><div class="no"><div class="small">TEL:</div><div class="big">03-000-000</div></div><p class="tel_text">（受付時間／9:00～19:00 水曜、土曜午後、日祝休業）</p></a><a href="mailto:info@example.com" class="mail" style="background-color:#0073aa;color:#ffffff"><div class="icon" style="fill:#ffffff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z"/></svg></div><div class="mail_text">WEB予約はこちら</div></a></nav></div><div class="bg_filter" style="background-color:rgba(0, 0, 0, 0.31)"></div></div></div>
 <!-- /wp:wdl/cta-2 -->

@@ -40,7 +40,7 @@
 	},
 	"attributes": {
 		"backgroundType": { "type": "string", "default": "image" },
-		"imageUrlPc": { "type": "string", "default": "https://lite-word.com/sample_img/background/6.webp" },
+		"imageUrlPc": { "type": "string", "default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/background/6.webp" },
 		"imageUrlSp": { "type": "string", "default": "" },
 		"imageAlt": { "type": "string", "default": "" },
 		"bgColor": { "type": "string", "default": "#0a4653" },

@@ -33,7 +33,7 @@
         },
         "comment2ImageUrl": {
             "type": "string",
-            "default": "https://lite-word.com/sample_img/women/6.webp"
+            "default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/women/6.webp"
         },
         "comment2ImageId": {
             "type": "number",

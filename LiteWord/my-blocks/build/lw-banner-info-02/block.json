@@ -50,7 +50,7 @@
 				{
 					"title": "はじめての方へ",
 					"description": "初めてご利用になる方は、まずこちらをご覧ください",
-					"imgUrl": "https://lite-word.com/sample_img/shop/1.webp",
+					"imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/1.webp",
 					"alt": "",
 					"linkUrl": "",
 					"openInNewTab": false
@@ -58,7 +58,7 @@
 				{
 					"title": "サービス",
 					"description": "ご用意しているメニューを一覧でご紹介します",
-					"imgUrl": "https://lite-word.com/sample_img/shop/2.webp",
+					"imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/2.webp",
 					"alt": "",
 					"linkUrl": "",
 					"openInNewTab": false
@@ -66,7 +66,7 @@
 				{
 					"title": "料金のご案内",
 					"description": "かかる費用とお支払い方法をまとめています",
-					"imgUrl": "https://lite-word.com/sample_img/shop/3.webp",
+					"imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/3.webp",
 					"alt": "",
 					"linkUrl": "",
 					"openInNewTab": false
@@ -74,7 +74,7 @@
 				{
 					"title": "アクセス",
 					"description": "場所と行き方、駐車場のご案内はこちら",
-					"imgUrl": "https://lite-word.com/sample_img/shop/4.webp",
+					"imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/4.webp",
 					"alt": "",
 					"linkUrl": "",
 					"openInNewTab": false

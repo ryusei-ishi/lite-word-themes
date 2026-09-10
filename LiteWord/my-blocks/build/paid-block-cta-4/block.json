@@ -48,7 +48,7 @@
 		},
 		"backgroundImage1": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/shop/1.webp"
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/1.webp"
 		},
 		"filterColor1": {
 			"type": "string",
@@ -100,7 +100,7 @@
 		},
 		"backgroundImage2": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/shop/5.webp"
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/5.webp"
 		},
 		"filterColor2": {
 			"type": "string",

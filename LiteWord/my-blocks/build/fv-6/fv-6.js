@@ -352,7 +352,7 @@ var lwBlockDef = {
  * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
  * ------------------------------------------------------------------ */
 var LW_1169_OLD = JSON.parse(JSON.stringify(_block_json__WEBPACK_IMPORTED_MODULE_7__.attributes));
-LW_1169_OLD.backgroundImage["default"] = "https://cdn.pixabay.com/photo/2016/11/19/15/39/architecture-1839930_1280.jpg";
+LW_1169_OLD.backgroundImage["default"] = "https://liteword-assets.bigi-ishikawa.workers.dev/t/px/architecture-1839930_1280.jpg";
 
 /* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
  *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の

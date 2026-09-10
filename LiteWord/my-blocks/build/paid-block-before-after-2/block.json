@@ -52,10 +52,10 @@
 			"type": "array",
 			"default": [
 				{
-					"imgUrl": "https://lite-word.com/sample_img/women/6_2.webp"
+					"imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/women/6_2.webp"
 				},
 				{
-					"imgUrl": "https://lite-word.com/sample_img/women/6.webp"
+					"imgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/women/6.webp"
 				}
 			]
 		}

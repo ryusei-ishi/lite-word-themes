@@ -933,12 +933,12 @@ var saveBlockFv9 = function saveBlockFv9(_ref) {
     attributes: _objectSpread(_objectSpread({}, _block_json__WEBPACK_IMPORTED_MODULE_6__.attributes), {}, {
       slides: _objectSpread(_objectSpread({}, _block_json__WEBPACK_IMPORTED_MODULE_6__.attributes.slides), {}, {
         "default": [{
-          "pcImgUrl": "https://lite-word.com/sample_img/slide/1.webp",
+          "pcImgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/slide/1.webp",
           "spImgUrl": "",
           "altText": "スライド1のalt",
           "linkUrl": ""
         }, {
-          "pcImgUrl": "https://lite-word.com/sample_img/slide/2.webp",
+          "pcImgUrl": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/slide/2.webp",
           "spImgUrl": "",
           "altText": "スライド2のalt",
           "linkUrl": ""
@@ -1041,7 +1041,7 @@ module.exports = window["wp"]["element"];
   \****************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-fv-9","version":"1.0.0","title":"FV 09 画像スライダー用ブロック","category":"lw-firstview","icon":"images-alt2","editorScript":"file:./paid-block-fv-9.js","aiHint":{"description":"画像スライダーFV。複数画像を自動切替。テキストなし。ビジュアル重視のトップページに","excludeFromAutoSelect":true,"excludeReason":"テキスト属性がほぼなく画像URLの配列のみ。AI生成に不向き","contentAttributes":[],"imageAttributes":["slides"],"notes":"🚨 blockId に一意の文字列（例 \\"paid-block-fv-9-20260826-01\\"）を必ず入れる。空のままだと外側の div に id が付かず、スライダーの初期化セレクタ（#blockId）が一致しないため init-hide クラスが外れず、フロントで高さ0の真っ白になる（2026-08-26 に実機で確認）。 このブロックは画像だけのスライダーで文字を持たない。見出しを出したいときは paid-block-fv-11 を使う。"},"supports":{"anchor":true},"attributes":{"blockId":{"type":"string"},"slides":{"type":"array","default":[{"pcImgUrl":"https://lite-word.com/sample_img/slide/1.webp","spImgUrl":"","altText":"","linkUrl":""},{"pcImgUrl":"https://lite-word.com/sample_img/slide/2.webp","spImgUrl":"","altText":"","linkUrl":""}]},"layoutType":{"type":"string","default":"full"},"maxWidth":{"type":"number","default":1200},"autoplayDelay":{"type":"number","default":3000},"sliderEffect":{"type":"string","default":"fade"},"crossFade":{"type":"boolean","default":true},"loop":{"type":"boolean","default":true},"disableOnInteraction":{"type":"boolean","default":false},"showPagination":{"type":"boolean","default":true},"paginationClickable":{"type":"boolean","default":true},"showNavigation":{"type":"boolean","default":true},"sliderSpeed":{"type":"number","default":1000},"paginationColor":{"type":"string","default":"#ffffff"},"nextButtonColor":{"type":"string","default":"#ffffff"}},"no":9}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/paid-block-fv-9","version":"1.0.0","title":"FV 09 画像スライダー用ブロック","category":"lw-firstview","icon":"images-alt2","editorScript":"file:./paid-block-fv-9.js","aiHint":{"description":"画像スライダーFV。複数画像を自動切替。テキストなし。ビジュアル重視のトップページに","excludeFromAutoSelect":true,"excludeReason":"テキスト属性がほぼなく画像URLの配列のみ。AI生成に不向き","contentAttributes":[],"imageAttributes":["slides"],"notes":"🚨 blockId に一意の文字列（例 \\"paid-block-fv-9-20260826-01\\"）を必ず入れる。空のままだと外側の div に id が付かず、スライダーの初期化セレクタ（#blockId）が一致しないため init-hide クラスが外れず、フロントで高さ0の真っ白になる（2026-08-26 に実機で確認）。 このブロックは画像だけのスライダーで文字を持たない。見出しを出したいときは paid-block-fv-11 を使う。"},"supports":{"anchor":true},"attributes":{"blockId":{"type":"string"},"slides":{"type":"array","default":[{"pcImgUrl":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/slide/1.webp","spImgUrl":"","altText":"","linkUrl":""},{"pcImgUrl":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/slide/2.webp","spImgUrl":"","altText":"","linkUrl":""}]},"layoutType":{"type":"string","default":"full"},"maxWidth":{"type":"number","default":1200},"autoplayDelay":{"type":"number","default":3000},"sliderEffect":{"type":"string","default":"fade"},"crossFade":{"type":"boolean","default":true},"loop":{"type":"boolean","default":true},"disableOnInteraction":{"type":"boolean","default":false},"showPagination":{"type":"boolean","default":true},"paginationClickable":{"type":"boolean","default":true},"showNavigation":{"type":"boolean","default":true},"sliderSpeed":{"type":"number","default":1000},"paginationColor":{"type":"string","default":"#ffffff"},"nextButtonColor":{"type":"string","default":"#ffffff"}},"no":9}');
 
 /***/ })
 

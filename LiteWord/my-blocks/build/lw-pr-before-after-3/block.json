@@ -27,7 +27,7 @@
 	"attributes": {
 		"beforeImageUrl": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/before_after/1_1.webp"
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/before_after/1_1.webp"
 		},
 		"beforeImageAlt": {
 			"type": "string",
@@ -43,7 +43,7 @@
 		},
 		"afterImageUrl": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/before_after/1_2.webp"
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/before_after/1_2.webp"
 		},
 		"afterImageAlt": {
 			"type": "string",

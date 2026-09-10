@@ -1,5 +1,5 @@
-<!-- wp:wdl/fv-2 {"backgroundImage":"http://lite-word.com/wp-content/uploads/2024/09/office.jpeg","filterBackgroundColor":"#082842","filterOpacity":0.78,"title":"\u003cspan data-lw_font_set=\u0022Noto Serif JP\u0022 class=\u0022custom-font-settings custom-font-settings\u0022\u003eCOMPANY\u003c/span\u003e"} -->
-<div class="wp-block-wdl-fv-2 fv-2 min-h-pc-320px min-h-tb-280px min-h-sp-220px"><h1 style="color:#fff"><span data-lw_font_set="Noto Serif JP" class="custom-font-settings custom-font-settings">COMPANY</span></h1><div class="filter" style="background-color:#082842;opacity:0.78"></div><picture class="bg_image"><source srcset="" media="(max-width: 800px)"/><source srcset="http://lite-word.com/wp-content/uploads/2024/09/office.jpeg" media="(min-width: 801px)"/><img src="http://lite-word.com/wp-content/uploads/2024/09/office.jpeg" alt="背景画像" loading="eager" fetchpriority="high"/></picture><style>
+<!-- wp:wdl/fv-2 {"backgroundImage":"https://liteword-assets.bigi-ishikawa.workers.dev/t/up/office.jpeg","filterBackgroundColor":"#082842","filterOpacity":0.78,"title":"\u003cspan data-lw_font_set=\u0022Noto Serif JP\u0022 class=\u0022custom-font-settings custom-font-settings\u0022\u003eCOMPANY\u003c/span\u003e"} -->
+<div class="wp-block-wdl-fv-2 fv-2 min-h-pc-320px min-h-tb-280px min-h-sp-220px"><h1 style="color:#fff"><span data-lw_font_set="Noto Serif JP" class="custom-font-settings custom-font-settings">COMPANY</span></h1><div class="filter" style="background-color:#082842;opacity:0.78"></div><picture class="bg_image"><source srcset="" media="(max-width: 800px)"/><source srcset="https://liteword-assets.bigi-ishikawa.workers.dev/t/up/office.jpeg" media="(min-width: 801px)"/><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/up/office.jpeg" alt="背景画像" loading="eager" fetchpriority="high"/></picture><style>
                         .fv-2 h1:after {
                             background: #ef5d68;
                         }
@@ -17,7 +17,7 @@
 <!-- wp:columns -->
 <div class="wp-block-columns"><!-- wp:column {"width":"33.33%"} -->
 <div class="wp-block-column" style="flex-basis:33.33%"><!-- wp:image {"id":151,"aspectRatio":"1","scale":"cover","sizeSlug":"full","linkDestination":"none","align":"center"} -->
-<figure class="wp-block-image aligncenter size-full"><img src="http://lite-word.com/wp-content/uploads/2024/09/AdobeStock_530490145-1.jpeg" alt="" class="wp-image-151" style="aspect-ratio:1;object-fit:cover"/></figure>
+<figure class="wp-block-image aligncenter size-full"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/up/AdobeStock_530490145-1.jpeg" alt="" class="wp-image-151" style="aspect-ratio:1;object-fit:cover"/></figure>
 <!-- /wp:image --></div>
 <!-- /wp:column -->
 

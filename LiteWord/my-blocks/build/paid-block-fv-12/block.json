@@ -182,7 +182,7 @@
 		},
 		"bgImg": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/cafe/1.webp"
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/cafe/1.webp"
 		},
 		"bgImgAlt": {
 			"type": "string",

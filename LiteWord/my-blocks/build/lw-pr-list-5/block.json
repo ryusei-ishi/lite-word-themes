@@ -44,7 +44,7 @@
 		},
 		"imageUrl": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/slide/1.webp",
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/slide/1.webp",
 			"ai_description": "画像URL"
 		},
 		"imageAlt": {

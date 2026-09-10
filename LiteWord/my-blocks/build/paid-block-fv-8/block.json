@@ -31,7 +31,7 @@
 	"attributes": {
 		"backgroundImagePc": {
 			"type": "string",
-			"default": "https://lite-word.com/sample_img/reception/man_1.webp"
+			"default": "https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/reception/man_1.webp"
 		},
 		"backgroundImageSp": {
 			"type": "string",
