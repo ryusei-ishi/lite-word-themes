@@ -1,11 +1,11 @@
 <!-- wp:wdl/fv-7 -->
-<div class="wp-block-wdl-fv-7 fv-7"><div class="fv-7__inner"><h1 class="title"><div class="sub">初心者のためのWordPressテーマ</div><div class="main">LiteWord</div></h1><p class="description">テキストテキストテキストテキストテキストテキスト</p><div class="btn"><a href="" class="btn-text">詳細はこちら</a></div></div><div class="bg_image"><video autoplay muted loop playsinline data-playback-rate="1" class="lazy-video" style="display:none"><source src="https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/v/fv7_default.mp4" type="video/mp4"/></video><div class="filter" style="background-color:#000000;opacity:0.5"></div></div><script>
-                        document.addEventListener('DOMContentLoaded', function() {
-                            const video = document.querySelector('.fv-7 .lazy-video');
-                            if (video) {
-                                video.style.display = 'block';
-                                video.playbackRate = video.getAttribute('data-playback-rate');
-                            }
-                        });
-                        </script></div>
+<div class="wp-block-wdl-fv-7 fv-7"><div class="fv-7__inner"><h1 class="title"><div class="sub">初心者のためのWordPressテーマ</div><div class="main">LiteWord</div></h1><p class="description">はじめての方にも分かりやすく。あなたのペースで進められます</p><div class="btn"><a href="" class="btn-text">詳細はこちら</a></div></div><div class="bg_image"><video autoplay muted loop playsinline data-playback-rate="1" class="lazy-video" style="display:none"><source src="https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/v/fv7_default.mp4" type="video/mp4"/></video><div class="filter" style="background-color:#000000;opacity:0.5"></div><script>
+                                    document.addEventListener('DOMContentLoaded', function() {
+                                        const video = document.querySelector('.fv-7 .lazy-video');
+                                        if (video) {
+                                            video.style.display = 'block';
+                                            video.playbackRate = video.getAttribute('data-playback-rate');
+                                        }
+                                    });
+                                    </script></div></div>
 <!-- /wp:wdl/fv-7 -->
