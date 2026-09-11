@@ -1,5 +1,5 @@
 {
-    "version": "2.3.1",
-    "changelog": "表示速度に関する改善を行いました。お手数ですが更新をお願いいたします。",
-    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.3.1/LiteWord.zip"
+    "version": "2.5.0",
+    "changelog": "編集画面でボタンなどのブロックが使えなくなっていた不具合を直しました。あわせて、リード獲得のファーストビューとよくある質問の追加、SEOセルフチェックの新しい2項目、サイト構造ページの作り直しが入っています。お手数ですが更新をお願いいたします。",
+    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.5.0/LiteWord.zip"
 }
