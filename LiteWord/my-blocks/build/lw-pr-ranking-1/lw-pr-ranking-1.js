@@ -271,7 +271,7 @@ var EMPTY_ITEM = {
       title: "\u8868\u793A\u306E\u8A2D\u5B9A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_affiliate_link_js__WEBPACK_IMPORTED_MODULE_4__.AffiliateToggle, {
-      checked: isAffiliate,
+      checked: attributes.isAffiliate,
       onChange: function onChange(v) {
         return setAttributes({
           isAffiliate: v

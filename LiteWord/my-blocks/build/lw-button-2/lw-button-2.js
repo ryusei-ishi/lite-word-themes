@@ -551,7 +551,7 @@ var iconSvgOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.rightButtonIconSv
       },
       help: "\u30EA\u30F3\u30AF\u5148\u3092\u65B0\u3057\u3044\u30BF\u30D6\u3067\u958B\u304D\u305F\u3044\u5834\u5408\u306F\u30AA\u30F3\u306B\u3057\u3066\u304F\u3060\u3055\u3044"
     }), /*#__PURE__*/React.createElement(_affiliate_link_js__WEBPACK_IMPORTED_MODULE_8__.AffiliateToggle, {
-      checked: isAffiliate,
+      checked: attributes.isAffiliate,
       onChange: function onChange(v) {
         return setAttributes(v ? {
           isAffiliate: true,

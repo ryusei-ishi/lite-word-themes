@@ -129,7 +129,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: "\u753B\u50CF\u306E\u898B\u305B\u65B9",
       initialOpen: true
-    }, /*#__PURE__*/React.createElement(TextControl, {
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
       label: "\u753B\u50CF\u306E\u4E0A\u306B\u51FA\u3059\u30E9\u30D9\u30EB",
       help: "\u540D\u524D\u3084\u80A9\u66F8\u304D\u306A\u3069\u3002\u7A7A\u306A\u3089\u51FA\u307E\u305B\u3093\u3002",
       value: imgLabel,
@@ -147,7 +147,7 @@ var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontWeightOpti
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: "\u753B\u50CF\u306E\u898B\u305B\u65B9",
       initialOpen: true
-    }, /*#__PURE__*/React.createElement(TextControl, {
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.TextControl, {
       label: "\u753B\u50CF\u306E\u4E0A\u306B\u51FA\u3059\u30E9\u30D9\u30EB",
       help: "\u540D\u524D\u3084\u80A9\u66F8\u304D\u306A\u3069\u3002\u7A7A\u306A\u3089\u51FA\u307E\u305B\u3093\u3002",
       value: imgLabel,

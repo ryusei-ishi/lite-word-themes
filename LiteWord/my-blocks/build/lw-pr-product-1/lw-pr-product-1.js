@@ -450,7 +450,7 @@ function boxStyle(a) {
       title: "\u5E83\u544A\u3068\u3057\u3066\u306E\u8868\u793A",
       initialOpen: true
     }, /*#__PURE__*/React.createElement(_affiliate_link_js__WEBPACK_IMPORTED_MODULE_7__.AffiliateToggle, {
-      checked: isAffiliate,
+      checked: attributes.isAffiliate,
       onChange: function onChange(v) {
         return setAttributes({
           isAffiliate: v
