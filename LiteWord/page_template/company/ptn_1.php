@@ -23,15 +23,15 @@
 
 <!-- wp:column {"width":"66.66%"} -->
 <div class="wp-block-column" style="flex-basis:66.66%"><!-- wp:paragraph -->
-<p class="">このたびは株式会社〇〇不動産のホームページをご覧いただき、誠にありがとうございます。当社は〇〇年の創業以来、〇〇エリアに根ざした不動産会社として、住まい探しから売却のご相談まで、地域のみなさまのお手伝いをしてまいりました。</p>
+<p class="">このたびは株式会社〇〇のホームページをご覧いただき、誠にありがとうございます。当社は〇〇年の創業以来、〇〇エリアのみなさまに支えられながら、いただいたご依頼の一つひとつに向き合ってまいりました。</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph -->
-<p class="">不動産のご契約は、人生で何度もあるものではありません。だからこそ当社は、お客様が納得されるまでご説明し、疑問を残したまま話を進めないことを何より大切にしています。<br>これからも〇〇の街とともに歩み、次の世代にも安心して住み継いでいただける住まいをご提案してまいります。まずはお気軽にご相談ください。</p>
+<p class="">わたしたちが何より大切にしているのは、お客様が納得されるまでご説明することです。分からないまま話を進めない、できないことは正直にお伝えする。小さな会社だからこそ、そこだけは崩さずにやってきました。<br>これからも〇〇の街とともに歩み、地域のみなさまのお役に立てるよう努めてまいります。気になることがありましたら、まずはお気軽にご相談ください。</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:paragraph {"align":"right"} -->
-<p class="has-text-align-right">株式会社〇〇不動産<br>代表取締役　山田 太郎</p>
+<p class="has-text-align-right">株式会社〇〇<br>代表取締役　山田 太郎</p>
 <!-- /wp:paragraph --></div>
 <!-- /wp:column --></div>
 <!-- /wp:columns -->
@@ -45,7 +45,7 @@
 <!-- /wp:wdl/custom-title-1 -->
 
 <!-- wp:wdl/lw-company-2 -->
-<div class="wp-block-wdl-lw-company-2 font_size_m" style="border-color:#cccccc"><dl class="" style="border-color:#cccccc;max-width:1080px;line-height:1.6"><div class="company-profile-item font_size_m dt_width_m" style="border-color:#cccccc"><dt style="background-color:#f0f0f0;color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">会社名</dt><dd style="color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">株式会社〇〇不動産</dd></div><div class="company-profile-item font_size_m dt_width_m" style="border-color:#cccccc"><dt style="background-color:#f0f0f0;color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">所在地</dt><dd style="color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">東京都〇〇区〇〇町1-1-1</dd></div><div class="company-profile-item font_size_m dt_width_m" style="border-color:#cccccc"><dt style="background-color:#f0f0f0;color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">電話番号</dt><dd style="color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">03-1234-5678</dd></div><div class="company-profile-item font_size_m dt_width_m" style="border-color:#cccccc"><dt style="background-color:#f0f0f0;color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">設立</dt><dd style="color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">2020年1月1日</dd></div></dl></div>
+<div class="wp-block-wdl-lw-company-2 font_size_m" style="border-color:#cccccc"><dl class="" style="border-color:#cccccc;max-width:1080px;line-height:1.6"><div class="company-profile-item font_size_m dt_width_m" style="border-color:#cccccc"><dt style="background-color:#f0f0f0;color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">会社名</dt><dd style="color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">株式会社〇〇</dd></div><div class="company-profile-item font_size_m dt_width_m" style="border-color:#cccccc"><dt style="background-color:#f0f0f0;color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">所在地</dt><dd style="color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">〒123-4567 東京都新宿区〇〇1-2-3 〇〇ビル5階</dd></div><div class="company-profile-item font_size_m dt_width_m" style="border-color:#cccccc"><dt style="background-color:#f0f0f0;color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">電話番号</dt><dd style="color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">03-1234-5678</dd></div><div class="company-profile-item font_size_m dt_width_m" style="border-color:#cccccc"><dt style="background-color:#f0f0f0;color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">設立</dt><dd style="color:#000000;font-weight:;line-height:1.6" data-lw_font_set="">2020年1月1日</dd></div></dl></div>
 <!-- /wp:wdl/lw-company-2 -->
 
 <!-- wp:html -->
