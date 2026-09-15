@@ -8,13 +8,13 @@
 <h2 class="wp-block-wdl-lw-pr-custom-title-15 lw-pr-custom-title-15" style="--custom-title-sub-margin-top-pc:0.2em;--custom-title-sub-margin-top-sp:0.2em;--title-15-after-color:var(--color-main);--title-15-after-mt-pc:1em;--title-15-after-mt-sp:0.8em;--title-15-after-h-pc:4px;--title-15-after-h-sp:4px;--title-15-after-w-pc:50px;--title-15-after-w-sp:50px;--title-15-font-size_pc:16px;--title-15-font-size_sp:16px"><span class="main">仕上がりを見る</span><span class="sub">GALLERY</span></h2>
 <!-- /wp:wdl/lw-pr-custom-title-15 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">細かいところを集めました。<br>横にスワイプすると<span class="lw-br on_500px"></span>すべてご覧いただけます。</p>
+<p class="has-text-align-center">細かいところを集めました。<br>横にスワイプすると<span class="lw-br on_500px">​</span>すべてご覧いただけます。</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/lw-gallery-02 {"images":["https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_gal_01.webp","https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_gal_03.webp","https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_gal_02.webp","https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_gal_05.webp","https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_gal_04.webp","https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_gal_06.webp"]} -->
 <div class="wp-block-wdl-lw-gallery-02"><div class="lw-gallery-02"><ul class="img_6"><li><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_gal_01.webp" alt="ギャラリー画像 1"/></li><li><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_gal_03.webp" alt="ギャラリー画像 2"/></li><li><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_gal_02.webp" alt="ギャラリー画像 3"/></li><li><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_gal_05.webp" alt="ギャラリー画像 4"/></li><li><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_gal_04.webp" alt="ギャラリー画像 5"/></li><li><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_gal_06.webp" alt="ギャラリー画像 6"/></li></ul></div></div>
 <!-- /wp:wdl/lw-gallery-02 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">※ すべて当社が手がけたお住まいです。<span class="lw-br on_500px"></span>お客様の許可をいただいたものだけを載せています。</p>
+<p class="has-text-align-center">※ すべて当社が手がけたお住まいです。<span class="lw-br on_500px">​</span>お客様の許可をいただいたものだけを載せています。</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":80,"tbHeight":64,"spHeight":40} -->
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:80px"></div><div class="tb" style="height:64px"></div><div class="sp" style="height:40px"></div></div>
@@ -24,7 +24,7 @@
 <h2 class="wp-block-wdl-lw-pr-custom-title-15 lw-pr-custom-title-15" style="--custom-title-sub-margin-top-pc:0.2em;--custom-title-sub-margin-top-sp:0.2em;--title-15-after-color:var(--color-main);--title-15-after-mt-pc:1em;--title-15-after-mt-sp:0.8em;--title-15-after-h-pc:4px;--title-15-after-h-sp:4px;--title-15-after-w-pc:50px;--title-15-after-w-sp:50px;--title-15-font-size_pc:16px;--title-15-font-size_sp:16px"><span class="main">最近の3件</span><span class="sub">CASE</span></h2>
 <!-- /wp:wdl/lw-pr-custom-title-15 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">工事の内容も規模も違う3件です。<br>「うちに近いのはどれか」で<span class="lw-br on_500px"></span>見ていただくと分かりやすいと思います。</p>
+<p class="has-text-align-center">工事の内容も規模も違う3件です。<br>「うちに近いのはどれか」で<span class="lw-br on_500px">​</span>見ていただくと分かりやすいと思います。</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":40,"tbHeight":32,"spHeight":24} -->
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:40px"></div><div class="tb" style="height:32px"></div><div class="sp" style="height:24px"></div></div>
@@ -41,7 +41,7 @@
 <!-- /wp:wdl/paid-block-image-1 --></div></div>
 <!-- /wp:wdl/lw-pr-column-1 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">※ 金額は「費用の目安」のページに、<span class="lw-br on_500px"></span>工事ごとの幅で載せています。</p>
+<p class="has-text-align-center">※ 金額は「費用の目安」のページに、<span class="lw-br on_500px">​</span>工事ごとの幅で載せています。</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:wdl/lw-bg-1 -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":80,"tbHeight":64,"spHeight":40} -->
@@ -51,7 +51,7 @@
 <h2 class="wp-block-wdl-lw-pr-custom-title-15 lw-pr-custom-title-15" style="--custom-title-sub-margin-top-pc:0.2em;--custom-title-sub-margin-top-sp:0.2em;--title-15-after-color:var(--color-main);--title-15-after-mt-pc:1em;--title-15-after-mt-sp:0.8em;--title-15-after-h-pc:4px;--title-15-after-h-sp:4px;--title-15-after-w-pc:50px;--title-15-after-w-sp:50px;--title-15-font-size_pc:16px;--title-15-font-size_sp:16px"><span class="main">ある1件の話</span><span class="sub">CASE STUDY</span></h2>
 <!-- /wp:wdl/lw-pr-custom-title-15 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">いちばん上の1件を、<span class="lw-br on_500px"></span>はじめから終わりまで書きました。</p>
+<p class="has-text-align-center">いちばん上の1件を、<span class="lw-br on_500px">​</span>はじめから終わりまで書きました。</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":40,"tbHeight":32,"spHeight":24} -->
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:40px"></div><div class="tb" style="height:32px"></div><div class="sp" style="height:24px"></div></div>
@@ -76,7 +76,7 @@
 <p style="font-size:15px;margin-top:10px;margin-bottom:0px"><strong>やったこと</strong>　居間と和室のあいだの間仕切りを撤去（構造は柱を1本残して補強）。床を無垢のオークに張り替え、壁は漆喰。窓は内窓を2か所。</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"style":{"typography":{"fontSize":"15px"},"spacing":{"margin":{"top":"10px","bottom":"0px"}}}} -->
-<p style="font-size:15px;margin-top:10px;margin-bottom:0px"><strong>やらなかった事</strong>　2階の洋室2部屋。<span class="lw-br on_500px"></span>傷んでおらず、今やる理由が無かったためです。</p>
+<p style="font-size:15px;margin-top:10px;margin-bottom:0px"><strong>やらなかった事</strong>　2階の洋室2部屋。<span class="lw-br on_500px">​</span>傷んでおらず、今やる理由が無かったためです。</p>
 <!-- /wp:paragraph -->
 <!-- wp:paragraph {"style":{"typography":{"fontSize":"15px"},"spacing":{"margin":{"top":"10px","bottom":"0px"}}}} -->
 <p style="font-size:15px;margin-top:10px;margin-bottom:0px"><strong>工期</strong>　3週間（お住まいのまま。水まわりが止まった日はありません）</p>
@@ -89,7 +89,7 @@
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:40px"></div><div class="tb" style="height:32px"></div><div class="sp" style="height:24px"></div></div>
 <!-- /wp:wdl/lw-space-1 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">「寒いのを我慢していたけれど、<span class="lw-br on_500px"></span>和室を無くしていいと言われたのが意外でした。<span class="lw-br on_500px"></span>減らす提案をされたのは初めてです。」<span class="lw-br on_500px"></span>——　50代・ご夫婦</p>
+<p class="has-text-align-center">「寒いのを我慢していたけれど、<span class="lw-br on_500px">​</span>和室を無くしていいと言われたのが意外でした。<span class="lw-br on_500px">​</span>減らす提案をされたのは初めてです。」<span class="lw-br on_500px">​</span>——　50代・ご夫婦</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":80,"tbHeight":64,"spHeight":40} -->
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:80px"></div><div class="tb" style="height:64px"></div><div class="sp" style="height:40px"></div></div>
@@ -98,7 +98,7 @@
 <h2 class="wp-block-wdl-lw-pr-custom-title-15 lw-pr-custom-title-15" style="--custom-title-sub-margin-top-pc:0.2em;--custom-title-sub-margin-top-sp:0.2em;--title-15-after-color:var(--color-main);--title-15-after-mt-pc:1em;--title-15-after-mt-sp:0.8em;--title-15-after-h-pc:4px;--title-15-after-h-sp:4px;--title-15-after-w-pc:50px;--title-15-after-w-sp:50px;--title-15-font-size_pc:16px;--title-15-font-size_sp:16px"><span class="main">写真の見かた</span><span class="sub">HOW TO SEE</span></h2>
 <!-- /wp:wdl/lw-pr-custom-title-15 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">施工例を見比べるときに、<span class="lw-br on_500px"></span>見ておくと外れにくい3つです。</p>
+<p class="has-text-align-center">施工例を見比べるときに、<span class="lw-br on_500px">​</span>見ておくと外れにくい3つです。</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":40,"tbHeight":32,"spHeight":24} -->
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:40px"></div><div class="tb" style="height:32px"></div><div class="sp" style="height:24px"></div></div>
@@ -111,10 +111,10 @@
 <!-- /wp:wdl/lw-space-1 -->
 <!-- wp:wdl/lw-bg-1 {"backgroundType":"image","imagePc":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_cta_bg.webp","imageSp":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_cta_bg.webp","isFullWidth":true,"minHeightPc":"min-h-pc-360px","minHeightTb":"min-h-tb-340px","minHeightSp":"min-h-sp-320px","filterTypePc":"solid","filterColorPc":"var(--color-main)","opacityPc":0.6} -->
 <div class="wp-block-wdl-lw-bg-1 lw-bg-1 min-h-pc-360px min-h-tb-340px min-h-sp-320px bg_all" style="--lw-bg-color-filter-pc:var(--color-main);--lw-bg-opacity-pc:0.6;--lw-bg-color-filter-tb:var(--color-main);--lw-bg-opacity-tb:0.5;--lw-bg-color-filter-sp:var(--color-main);--lw-bg-opacity-sp:0.5;--lw-bg-position-pc:50% 50%;--lw-bg-position-sp:50% 50%;--lw-bg-wrap-centering-pc:center;--lw-bg-wrap-align-pc:center;--lw-bg-wrap-centering-tb:center;--lw-bg-wrap-align-tb:center;--lw-bg-wrap-centering-sp:center;--lw-bg-wrap-align-sp:center"><div class="lw-bg-1-wrap" style="--lw-bg-padding-top-pc:80px;--lw-bg-padding-bottom-pc:80px;--lw-bg-padding-left-pc:80px;--lw-bg-padding-right-pc:80px;--lw-bg-padding-top-tb:48px;--lw-bg-padding-bottom-tb:48px;--lw-bg-padding-left-tb:48px;--lw-bg-padding-right-tb:48px;--lw-bg-padding-top-sp:24px;--lw-bg-padding-bottom-sp:24px;--lw-bg-padding-left-sp:24px;--lw-bg-padding-right-sp:24px;--lw-bg-max-width:1120px"><!-- wp:heading {"level":2,"textAlign":"center","style":{"color":{"text":"#ffffff"},"typography":{"fontSize":"28px","lineHeight":"1.4"}}} -->
-<h2 class="has-text-align-center has-text-color" style="color:#ffffff;font-size:28px;line-height:1.4">似た工事の例を<span class="lw-br on_500px"></span>お持ちします</h2>
+<h2 class="has-text-align-center has-text-color" style="color:#ffffff;font-size:28px;line-height:1.4">似た工事の例を<span class="lw-br on_500px">​</span>お持ちします</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"align":"center","style":{"color":{"text":"#ffffff"},"typography":{"fontSize":"16px"}}} -->
-<p class="has-text-align-center has-text-color" style="color:#ffffff;font-size:16px">ご相談のときに、お住まいに近い施工例をお持ちします。<span class="lw-br on_500px"></span>金額と工期の入った実物の見積書もお見せできますので、<span class="lw-br on_500px"></span>遠慮なくお申し付けください。</p>
+<p class="has-text-align-center has-text-color" style="color:#ffffff;font-size:16px">ご相談のときに、お住まいに近い施工例をお持ちします。<span class="lw-br on_500px">​</span>金額と工期の入った実物の見積書もお見せできますので、<span class="lw-br on_500px">​</span>遠慮なくお申し付けください。</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/lw-pr-button-2 {"textSub":"＼ 調査・お見積りは無料 ／","textMain":"無料で現地を見てもらう","btnUrl":"","btnAlign":"center","textColorSub":"#ffffff","textColorMain":"color-mix(in srgb, var(--color-main) 40%, #000)","bgGradient":"linear-gradient(135deg, #ffffff 0%, #f2f4f7 100%)","bgGradientHover":"linear-gradient(135deg, #f2f4f7 0%, #e6eaef 100%)"} -->
 <div class="wp-block-wdl-lw-pr-button-2 lw-pr-button-2 center"><div class="wrap_btn"><span class="text_sub" style="margin-bottom:6px;color:#ffffff;font-size:16px;font-weight:500" data-lw_font_set="">＼ 調査・お見積りは無料 ／</span><a href="#" class="lw_btn_a " style="padding:1.2em 1em;max-width:340px;background:linear-gradient(135deg, #ffffff 0%, #f2f4f7 100%);border-radius:64px;box-shadow:0px 0px 6px rgba(0, 0, 0, 0.2);--hover-bg:linear-gradient(135deg, #f2f4f7 0%, #e6eaef 100%);--transition-duration:0.3s;--shake-interval:3s;--max-width-sp:300px;--font-size-main-sp:18px"><span class="text_main" style="font-size:20px;font-weight:500;color:color-mix(in srgb, var(--color-main) 40%, #000)" data-lw_font_set="">無料で現地を見てもらう</span></a></div></div>

@@ -47,7 +47,7 @@
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:16px"></div><div class="tb" style="height:16px"></div><div class="sp" style="height:12px"></div></div>
 <!-- /wp:wdl/lw-space-1 -->
 <!-- wp:paragraph {"align":"center","style":{"spacing":{"margin":{"top":"28px","bottom":"0px"}}}} -->
-<p class="has-text-align-center" style="margin-top:28px;margin-bottom:0px">左が出した直後、右が10秒のばしたあとです。<span class="lw-br on_500px"></span>バーを動かすと見比べられます。</p>
+<p class="has-text-align-center" style="margin-top:28px;margin-bottom:0px">左が出した直後、右が10秒のばしたあとです。<span class="lw-br on_500px">​</span>バーを動かすと見比べられます。</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/paid-block-before-after-2 {"beforeLabel":"のばす前","afterLabel":"のばした後","labelColorBefore":"rgba(90, 75, 82, 0.82)","labelColorAfter":"#e07fa4","maxWidth":700,"aspectRatioH":1000,"items":[{"imgUrl":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/cs_ba_before.webp"},{"imgUrl":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/cs_ba_after.webp"}]} -->
 <div class="wp-block-wdl-paid-block-before-after-2 paid-block-before-after-2"><div class="this_wrap" style="max-width:700px"><p class="label" style="background:rgba(90, 75, 82, 0.82)">のばす前</p><p class="label right" style="background:#e07fa4">のばした後</p><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/cs_ba_after.webp" class="before-image" alt="Before" style="aspect-ratio:1280 / 1000"/><div class="after-wrapper"><div class="after-inner"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/cs_ba_before.webp" class="after-image" alt="After" style="aspect-ratio:1280 / 1000"/></div></div><div class="slider-line"><div class="slider-circle"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5  12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256  73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5  45.3 0l192 192z"></path></svg><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 512"><path d="M310.6 233.4c12.5 12.5 12.5 32.8 0 45.3l-192 192c-12.5  12.5-32.8 12.5-45.3 0s-12.5-32.8 0-45.3L242.7 256  73.4 86.6c-12.5-12.5-12.5-32.8 0-45.3s32.8-12.5  45.3 0l192 192z"></path></svg></div></div></div><script>
@@ -93,7 +93,7 @@
                         </script></div>
 <!-- /wp:wdl/paid-block-before-after-2 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">※ 同じ日・同じ場所・同じ明るさで撮っています。<span class="lw-br on_500px"></span>写真の加工はしていません。</p>
+<p class="has-text-align-center">※ 同じ日・同じ場所・同じ明るさで撮っています。<span class="lw-br on_500px">​</span>写真の加工はしていません。</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:wdl/lw-bg-1 -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":80,"tbHeight":64,"spHeight":40} -->
@@ -189,7 +189,7 @@
 <!-- /wp:wdl/lw-space-1 -->
 <!-- wp:wdl/lw-bg-1 {"backgroundType":"image","imagePc":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/cs_cta_bg.webp","imageSp":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/cs_cta_bg.webp","isFullWidth":true,"minHeightPc":"min-h-pc-360px","minHeightTb":"min-h-tb-340px","minHeightSp":"min-h-sp-320px","filterTypePc":"solid","filterColorPc":"#e07fa4","opacityPc":0.78} -->
 <div class="wp-block-wdl-lw-bg-1 lw-bg-1 min-h-pc-360px min-h-tb-340px min-h-sp-320px bg_all" style="--lw-bg-color-filter-pc:#e07fa4;--lw-bg-opacity-pc:0.78;--lw-bg-color-filter-tb:#e07fa4;--lw-bg-opacity-tb:0.5;--lw-bg-color-filter-sp:#e07fa4;--lw-bg-opacity-sp:0.5;--lw-bg-position-pc:50% 50%;--lw-bg-position-sp:50% 50%;--lw-bg-wrap-centering-pc:center;--lw-bg-wrap-align-pc:center;--lw-bg-wrap-centering-tb:center;--lw-bg-wrap-align-tb:center;--lw-bg-wrap-centering-sp:center;--lw-bg-wrap-align-sp:center"><div class="lw-bg-1-wrap" style="--lw-bg-padding-top-pc:80px;--lw-bg-padding-bottom-pc:80px;--lw-bg-padding-left-pc:80px;--lw-bg-padding-right-pc:80px;--lw-bg-padding-top-tb:48px;--lw-bg-padding-bottom-tb:48px;--lw-bg-padding-left-tb:48px;--lw-bg-padding-right-tb:48px;--lw-bg-padding-top-sp:24px;--lw-bg-padding-bottom-sp:24px;--lw-bg-padding-left-sp:24px;--lw-bg-padding-right-sp:24px;--lw-bg-max-width:1120px"><!-- wp:heading {"level":2,"textAlign":"center","style":{"color":{"text":"#ffffff"},"typography":{"fontSize":"28px","lineHeight":"1.4"}}} -->
-<h2 class="has-text-align-center has-text-color" style="color:#ffffff;font-size:28px;line-height:1.4">合わなかったら、<span class="lw-br on_500px"></span>1回でやめられます</h2>
+<h2 class="has-text-align-center has-text-color" style="color:#ffffff;font-size:28px;line-height:1.4">合わなかったら、<span class="lw-br on_500px">​</span>1回でやめられます</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"align":"center","style":{"color":{"text":"#ffffff"},"typography":{"fontSize":"16px"}}} -->
 <p class="has-text-align-center has-text-color" style="color:#ffffff;font-size:16px">私も一度やめて、また戻ってきました。<br>縛りのないものから試すのが、いちばん損の少ない始め方だと思っています。</p>

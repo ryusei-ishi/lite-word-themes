@@ -8,7 +8,7 @@
 <h2 class="wp-block-wdl-lw-pr-custom-title-15 lw-pr-custom-title-15" style="--custom-title-sub-margin-top-pc:0.2em;--custom-title-sub-margin-top-sp:0.2em;--title-15-after-color:var(--color-main);--title-15-after-mt-pc:1em;--title-15-after-mt-sp:0.8em;--title-15-after-h-pc:4px;--title-15-after-h-sp:4px;--title-15-after-w-pc:50px;--title-15-after-w-sp:50px;--title-15-font-size_pc:16px;--title-15-font-size_sp:16px"><span class="main">ごあいさつ</span><span class="sub">MESSAGE</span></h2>
 <!-- /wp:wdl/lw-pr-custom-title-15 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">二代目の代表です。<span class="lw-br on_500px"></span>何を大事にしているかを<span class="lw-br on_500px"></span>先にお伝えします。</p>
+<p class="has-text-align-center">二代目の代表です。<span class="lw-br on_500px">​</span>何を大事にしているかを<span class="lw-br on_500px">​</span>先にお伝えします。</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":40,"tbHeight":32,"spHeight":24} -->
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:40px"></div><div class="tb" style="height:32px"></div><div class="sp" style="height:24px"></div></div>
@@ -23,7 +23,7 @@
 <h2 class="wp-block-wdl-lw-pr-custom-title-15 lw-pr-custom-title-15" style="--custom-title-sub-margin-top-pc:0.2em;--custom-title-sub-margin-top-sp:0.2em;--title-15-after-color:var(--color-main);--title-15-after-mt-pc:1em;--title-15-after-mt-sp:0.8em;--title-15-after-h-pc:4px;--title-15-after-h-sp:4px;--title-15-after-w-pc:50px;--title-15-after-w-sp:50px;--title-15-font-size_pc:16px;--title-15-font-size_sp:16px"><span class="main">会社のこと</span><span class="sub">COMPANY</span></h2>
 <!-- /wp:wdl/lw-pr-custom-title-15 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">小さな会社です。<span class="lw-br on_500px"></span>職人はすべて自社の社員で、<span class="lw-br on_500px"></span>下請けに丸投げはしません。</p>
+<p class="has-text-align-center">小さな会社です。<span class="lw-br on_500px">​</span>職人はすべて自社の社員で、<span class="lw-br on_500px">​</span>下請けに丸投げはしません。</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":40,"tbHeight":32,"spHeight":24} -->
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:40px"></div><div class="tb" style="height:32px"></div><div class="sp" style="height:24px"></div></div>
@@ -39,7 +39,7 @@
 <h2 class="wp-block-wdl-lw-pr-custom-title-15 lw-pr-custom-title-15" style="--custom-title-sub-margin-top-pc:0.2em;--custom-title-sub-margin-top-sp:0.2em;--title-15-after-color:var(--color-main);--title-15-after-mt-pc:1em;--title-15-after-mt-sp:0.8em;--title-15-after-h-pc:4px;--title-15-after-h-sp:4px;--title-15-after-w-pc:50px;--title-15-after-w-sp:50px;--title-15-font-size_pc:16px;--title-15-font-size_sp:16px"><span class="main">会社の歩み</span><span class="sub">HISTORY</span></h2>
 <!-- /wp:wdl/lw-pr-custom-title-15 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">節目になった出来事だけを<span class="lw-br on_500px"></span>まとめました。</p>
+<p class="has-text-align-center">節目になった出来事だけを<span class="lw-br on_500px">​</span>まとめました。</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":40,"tbHeight":32,"spHeight":24} -->
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:40px"></div><div class="tb" style="height:32px"></div><div class="sp" style="height:24px"></div></div>
@@ -60,7 +60,7 @@
 <div class="wp-block-wdl-paid-block-history-1 paid-block-history-1"><div class="history__year" aria-labelledby="y2024"><div class="history__point" style="background:#ffffff;border-color:var(--color-main)"></div><h3 class="history__year-heading" data-lw_font_set="">2024年</h3><dl class="history__events"><div class="history__events_row"><dt class="history__dt"><time datetime="4" data-lw_font_set="">4月</time></dt><dd class="history__dd" data-lw_font_set="">お引き渡し後の点検を1か月・1年・3年の3回に増やしました。1年目だけでは見えないものがあると分かったためです。</dd></div></dl></div></div>
 <!-- /wp:wdl/paid-block-history-1 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">※ これまでにお預かりした工事は約1,800件です。<span class="lw-br on_500px"></span>そのうち半分以上が、以前に工事をさせていただいたお客様からのご依頼です。</p>
+<p class="has-text-align-center">※ これまでにお預かりした工事は約1,800件です。<span class="lw-br on_500px">​</span>そのうち半分以上が、以前に工事をさせていただいたお客様からのご依頼です。</p>
 <!-- /wp:paragraph --></div></div>
 <!-- /wp:wdl/lw-bg-1 -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":80,"tbHeight":64,"spHeight":40} -->
@@ -70,7 +70,7 @@
 <h2 class="wp-block-wdl-lw-pr-custom-title-15 lw-pr-custom-title-15" style="--custom-title-sub-margin-top-pc:0.2em;--custom-title-sub-margin-top-sp:0.2em;--title-15-after-color:var(--color-main);--title-15-after-mt-pc:1em;--title-15-after-mt-sp:0.8em;--title-15-after-h-pc:4px;--title-15-after-h-sp:4px;--title-15-after-w-pc:50px;--title-15-after-w-sp:50px;--title-15-font-size_pc:16px;--title-15-font-size_sp:16px"><span class="main">現場に来る人</span><span class="sub">STAFF</span></h2>
 <!-- /wp:wdl/lw-pr-custom-title-15 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">お住まいに伺うのは、<span class="lw-br on_500px"></span>いつも<span class="lw-br on_500px"></span>この顔ぶれです。<br>工事のたびに<span class="lw-br on_500px"></span>人が変わることはありません。</p>
+<p class="has-text-align-center">お住まいに伺うのは、<span class="lw-br on_500px">​</span>いつも<span class="lw-br on_500px">​</span>この顔ぶれです。<br>工事のたびに<span class="lw-br on_500px">​</span>人が変わることはありません。</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":40,"tbHeight":32,"spHeight":24} -->
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:40px"></div><div class="tb" style="height:32px"></div><div class="sp" style="height:24px"></div></div>
@@ -94,7 +94,7 @@
 工事のあとの点検のご連絡も私からいたします。</p><div class="lw-arrow" style="background-color:#eeeeee"></div><div class="lw-bg_color" style="background-color:#eeeeee"></div></div></div></div></div>
 <!-- /wp:wdl/lw-comment-1 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">※ 電気・水道・板金は、<span class="lw-br on_500px"></span>20年以上いっしょにやっている専門の職人に来てもらいます。<span class="lw-br on_500px"></span>こちらも毎回同じ顔ぶれです。</p>
+<p class="has-text-align-center">※ 電気・水道・板金は、<span class="lw-br on_500px">​</span>20年以上いっしょにやっている専門の職人に来てもらいます。<span class="lw-br on_500px">​</span>こちらも毎回同じ顔ぶれです。</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":80,"tbHeight":64,"spHeight":40} -->
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:80px"></div><div class="tb" style="height:64px"></div><div class="sp" style="height:40px"></div></div>
@@ -103,7 +103,7 @@
 <h2 class="wp-block-wdl-lw-pr-custom-title-15 lw-pr-custom-title-15" style="--custom-title-sub-margin-top-pc:0.2em;--custom-title-sub-margin-top-sp:0.2em;--title-15-after-color:var(--color-main);--title-15-after-mt-pc:1em;--title-15-after-mt-sp:0.8em;--title-15-after-h-pc:4px;--title-15-after-h-sp:4px;--title-15-after-w-pc:50px;--title-15-after-w-sp:50px;--title-15-font-size_pc:16px;--title-15-font-size_sp:16px"><span class="main">資格と許可</span><span class="sub">LICENSE</span></h2>
 <!-- /wp:wdl/lw-pr-custom-title-15 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">社内にある資格です。<span class="lw-br on_500px"></span>外注せずに社内で完結できる範囲がこれで決まります。</p>
+<p class="has-text-align-center">社内にある資格です。<span class="lw-br on_500px">​</span>外注せずに社内で完結できる範囲がこれで決まります。</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":40,"tbHeight":32,"spHeight":24} -->
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:40px"></div><div class="tb" style="height:32px"></div><div class="sp" style="height:24px"></div></div>
@@ -142,7 +142,7 @@
 <h2 class="wp-block-wdl-lw-pr-custom-title-15 lw-pr-custom-title-15" style="--custom-title-sub-margin-top-pc:0.2em;--custom-title-sub-margin-top-sp:0.2em;--title-15-after-color:var(--color-main);--title-15-after-mt-pc:1em;--title-15-after-mt-sp:0.8em;--title-15-after-h-pc:4px;--title-15-after-h-sp:4px;--title-15-after-w-pc:50px;--title-15-after-w-sp:50px;--title-15-font-size_pc:16px;--title-15-font-size_sp:16px"><span class="main">会社の場所</span><span class="sub">ACCESS</span></h2>
 <!-- /wp:wdl/lw-pr-custom-title-15 -->
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">作業場もこの場所にあります。<br>材料の実物をご覧になりたいときは、<span class="lw-br on_500px"></span>いつでもお寄りください。</p>
+<p class="has-text-align-center">作業場もこの場所にあります。<br>材料の実物をご覧になりたいときは、<span class="lw-br on_500px">​</span>いつでもお寄りください。</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/lw-space-1 {"pcHeight":40,"tbHeight":32,"spHeight":24} -->
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:40px"></div><div class="tb" style="height:32px"></div><div class="sp" style="height:24px"></div></div>
@@ -170,10 +170,10 @@
 <!-- /wp:wdl/lw-bg-1 -->
 <!-- wp:wdl/lw-bg-1 {"backgroundType":"image","imagePc":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_cta_bg.webp","imageSp":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sec/km_cta_bg.webp","isFullWidth":true,"minHeightPc":"min-h-pc-360px","minHeightTb":"min-h-tb-340px","minHeightSp":"min-h-sp-320px","filterTypePc":"solid","filterColorPc":"var(--color-main)","opacityPc":0.6} -->
 <div class="wp-block-wdl-lw-bg-1 lw-bg-1 min-h-pc-360px min-h-tb-340px min-h-sp-320px bg_all" style="--lw-bg-color-filter-pc:var(--color-main);--lw-bg-opacity-pc:0.6;--lw-bg-color-filter-tb:var(--color-main);--lw-bg-opacity-tb:0.5;--lw-bg-color-filter-sp:var(--color-main);--lw-bg-opacity-sp:0.5;--lw-bg-position-pc:50% 50%;--lw-bg-position-sp:50% 50%;--lw-bg-wrap-centering-pc:center;--lw-bg-wrap-align-pc:center;--lw-bg-wrap-centering-tb:center;--lw-bg-wrap-align-tb:center;--lw-bg-wrap-centering-sp:center;--lw-bg-wrap-align-sp:center"><div class="lw-bg-1-wrap" style="--lw-bg-padding-top-pc:80px;--lw-bg-padding-bottom-pc:80px;--lw-bg-padding-left-pc:80px;--lw-bg-padding-right-pc:80px;--lw-bg-padding-top-tb:48px;--lw-bg-padding-bottom-tb:48px;--lw-bg-padding-left-tb:48px;--lw-bg-padding-right-tb:48px;--lw-bg-padding-top-sp:24px;--lw-bg-padding-bottom-sp:24px;--lw-bg-padding-left-sp:24px;--lw-bg-padding-right-sp:24px;--lw-bg-max-width:1120px"><!-- wp:heading {"level":2,"textAlign":"center","style":{"color":{"text":"#ffffff"},"typography":{"fontSize":"28px","lineHeight":"1.4"}}} -->
-<h2 class="has-text-align-center has-text-color" style="color:#ffffff;font-size:28px;line-height:1.4">会いに来て<span class="lw-br on_500px"></span>いただいても構いません</h2>
+<h2 class="has-text-align-center has-text-color" style="color:#ffffff;font-size:28px;line-height:1.4">会いに来て<span class="lw-br on_500px">​</span>いただいても構いません</h2>
 <!-- /wp:heading -->
 <!-- wp:paragraph {"align":"center","style":{"color":{"text":"#ffffff"},"typography":{"fontSize":"16px"}}} -->
-<p class="has-text-align-center has-text-color" style="color:#ffffff;font-size:16px">事務所と作業場は同じ場所にあります。<span class="lw-br on_500px"></span>木材や建具の実物を見てから決めたいという方は、<span class="lw-br on_500px"></span>お電話のうえお寄りください。</p>
+<p class="has-text-align-center has-text-color" style="color:#ffffff;font-size:16px">事務所と作業場は同じ場所にあります。<span class="lw-br on_500px">​</span>木材や建具の実物を見てから決めたいという方は、<span class="lw-br on_500px">​</span>お電話のうえお寄りください。</p>
 <!-- /wp:paragraph -->
 <!-- wp:wdl/lw-pr-button-2 {"textSub":"＼ 調査・お見積りは無料 ／","textMain":"無料で現地を見てもらう","btnUrl":"","btnAlign":"center","textColorSub":"#ffffff","textColorMain":"color-mix(in srgb, var(--color-main) 40%, #000)","bgGradient":"linear-gradient(135deg, #ffffff 0%, #f2f4f7 100%)","bgGradientHover":"linear-gradient(135deg, #f2f4f7 0%, #e6eaef 100%)"} -->
 <div class="wp-block-wdl-lw-pr-button-2 lw-pr-button-2 center"><div class="wrap_btn"><span class="text_sub" style="margin-bottom:6px;color:#ffffff;font-size:16px;font-weight:500" data-lw_font_set="">＼ 調査・お見積りは無料 ／</span><a href="#" class="lw_btn_a " style="padding:1.2em 1em;max-width:340px;background:linear-gradient(135deg, #ffffff 0%, #f2f4f7 100%);border-radius:64px;box-shadow:0px 0px 6px rgba(0, 0, 0, 0.2);--hover-bg:linear-gradient(135deg, #f2f4f7 0%, #e6eaef 100%);--transition-duration:0.3s;--shake-interval:3s;--max-width-sp:300px;--font-size-main-sp:18px"><span class="text_main" style="font-size:20px;font-weight:500;color:color-mix(in srgb, var(--color-main) 40%, #000)" data-lw_font_set="">無料で現地を見てもらう</span></a></div></div>

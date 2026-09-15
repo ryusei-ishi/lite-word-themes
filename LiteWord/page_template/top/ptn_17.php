@@ -15,7 +15,7 @@
 <!-- /wp:wdl/lw-space-1 -->
 
 <!-- wp:wdl/custom-title-5 {"subTitle":"自然の恵みと、てまひまをかけたお米づくりで、\u003cspan class=\u0022lw-br on_600px\u0022\u003e\u003c/span\u003e毎日のごはんが楽しみに。","mainTitle":"\u003cspan data-lw_font_set=\u0022Sawarabi Mincho\u0022 class=\u0022custom-font-settings custom-font-settings\u0022\u003eつばめのお米とは？\u003c/span\u003e"} -->
-<h2 class="wp-block-wdl-custom-title-5 custom-title-5" style="border-color:var(--color-main)"><span class="sub" style="color:var(--color-main)">自然の恵みと、てまひまをかけたお米づくりで、<span class="lw-br on_600px"></span>毎日のごはんが楽しみに。</span><span class="main"><span data-lw_font_set="Sawarabi Mincho" class="custom-font-settings custom-font-settings">つばめのお米とは？</span></span></h2>
+<h2 class="wp-block-wdl-custom-title-5 custom-title-5" style="border-color:var(--color-main)"><span class="sub" style="color:var(--color-main)">自然の恵みと、てまひまをかけたお米づくりで、<span class="lw-br on_600px">​</span>毎日のごはんが楽しみに。</span><span class="main"><span data-lw_font_set="Sawarabi Mincho" class="custom-font-settings custom-font-settings">つばめのお米とは？</span></span></h2>
 <!-- /wp:wdl/custom-title-5 -->
 
 <!-- wp:paragraph -->
@@ -43,7 +43,7 @@
 <!-- /wp:wdl/lw-space-1 -->
 
 <!-- wp:wdl/custom-title-5 {"subTitle":"阿蘇の清らかな湧水と、自然に寄り添うお米づくり。","mainTitle":"\u003cspan class=\u0022custom-font-settings custom-font-settings\u0022 data-lw_font_set=\u0022Sawarabi Mincho\u0022\u003e阿蘇の恵みと\u003c/span\u003e\u003cspan class=\u0022lw-br on_600px\u0022\u003e\u003c/span\u003e\u003cspan class=\u0022custom-font-settings custom-font-settings\u0022 data-lw_font_set=\u0022Sawarabi Mincho\u0022\u003eやさしい手仕事\u003c/span\u003e"} -->
-<h2 class="wp-block-wdl-custom-title-5 custom-title-5" style="border-color:var(--color-main)"><span class="sub" style="color:var(--color-main)">阿蘇の清らかな湧水と、自然に寄り添うお米づくり。</span><span class="main"><span class="custom-font-settings custom-font-settings" data-lw_font_set="Sawarabi Mincho">阿蘇の恵みと</span><span class="lw-br on_600px"></span><span class="custom-font-settings custom-font-settings" data-lw_font_set="Sawarabi Mincho">やさしい手仕事</span></span></h2>
+<h2 class="wp-block-wdl-custom-title-5 custom-title-5" style="border-color:var(--color-main)"><span class="sub" style="color:var(--color-main)">阿蘇の清らかな湧水と、自然に寄り添うお米づくり。</span><span class="main"><span class="custom-font-settings custom-font-settings" data-lw_font_set="Sawarabi Mincho">阿蘇の恵みと</span><span class="lw-br on_600px">​</span><span class="custom-font-settings custom-font-settings" data-lw_font_set="Sawarabi Mincho">やさしい手仕事</span></span></h2>
 <!-- /wp:wdl/custom-title-5 -->
 
 <!-- wp:paragraph -->
@@ -88,7 +88,7 @@
 <!-- /wp:heading -->
 
 <!-- wp:paragraph {"align":"center"} -->
-<p class="has-text-align-center">安心・安全なお米を、農家から直接ご家庭へ。<br>ご注文は、オンラインショップから<span class="lw-br on_600px"></span>24時間いつでもどうぞ。</p>
+<p class="has-text-align-center">安心・安全なお米を、農家から直接ご家庭へ。<br>ご注文は、オンラインショップから<span class="lw-br on_600px">​</span>24時間いつでもどうぞ。</p>
 <!-- /wp:paragraph -->
 
 <!-- wp:wdl/paid-block-lw-button-4 {"blockId":"lwbtn-91d4da2e"} -->
@@ -181,5 +181,5 @@
 <!-- /wp:wdl/lw-space-1 -->
 
 <!-- wp:wdl/cta-2 {"phoneNumber":"0967-00-1234","backgroundImage":"https://liteword-assets.bigi-ishikawa.workers.dev/t/up/Lite-Word_sample_licefarm11.png","className":"cta-2"} -->
-<div class="wp-block-wdl-cta-2  cta-2"><div class="cta-2" style="background-image:url(https://liteword-assets.bigi-ishikawa.workers.dev/t/up/Lite-Word_sample_licefarm11.png)"><div class="cta-2__wrap"><h2 class="title"><span data-lw_font_set="Sawarabi Mincho" class="custom-font-settings custom-font-settings">お問合せこちら</span></h2><p class="address">〒869-0000 熊本県阿蘇市1234-1／<span class="lw-br on_600px"></span>TEL. 0967-00-1234／FAX. 0967-00-12344</p><nav><a href="tel:0967-00-1234" class="tel" data-lw_font_set="Roboto"><div class="no"><div class="small">TEL:</div><div class="big">0967-00-1234</div></div><p class="tel_text">（受付時間／9:00～17:00 第2・第4土曜、日祝休業）</p></a><a href="mailto:info@example.com" class="mail" style="background-color:#0073aa;color:#ffffff"><div class="icon" style="fill:#ffffff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z"/></svg></div><div class="mail_text">メールでお問い合わせ</div></a></nav></div><div class="bg_filter" style="background-color:rgba(0, 0, 0, 0.5)"></div></div></div>
+<div class="wp-block-wdl-cta-2  cta-2"><div class="cta-2" style="background-image:url(https://liteword-assets.bigi-ishikawa.workers.dev/t/up/Lite-Word_sample_licefarm11.png)"><div class="cta-2__wrap"><h2 class="title"><span data-lw_font_set="Sawarabi Mincho" class="custom-font-settings custom-font-settings">お問合せこちら</span></h2><p class="address">〒869-0000 熊本県阿蘇市1234-1／<span class="lw-br on_600px">​</span>TEL. 0967-00-1234／FAX. 0967-00-12344</p><nav><a href="tel:0967-00-1234" class="tel" data-lw_font_set="Roboto"><div class="no"><div class="small">TEL:</div><div class="big">0967-00-1234</div></div><p class="tel_text">（受付時間／9:00～17:00 第2・第4土曜、日祝休業）</p></a><a href="mailto:info@example.com" class="mail" style="background-color:#0073aa;color:#ffffff"><div class="icon" style="fill:#ffffff"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z"/></svg></div><div class="mail_text">メールでお問い合わせ</div></a></nav></div><div class="bg_filter" style="background-color:rgba(0, 0, 0, 0.5)"></div></div></div>
 <!-- /wp:wdl/cta-2 -->
