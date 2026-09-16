@@ -1,5 +1,5 @@
 {
-    "version": "2.5.0",
-    "changelog": "編集画面でボタンなどのブロックが使えなくなっていた不具合を直しました。あわせて、リード獲得のファーストビューとよくある質問の追加、SEOセルフチェックの新しい2項目、サイト構造ページの作り直しが入っています。お手数ですが更新をお願いいたします。",
-    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.5.0/LiteWord.zip"
+    "version": "2.5.1",
+    "changelog": "お問い合わせフォームのサンクスメールで、本文の改行が保存されず1行につながってしまう不具合を直しました。あわせて、同意チェックボックスの表示のずれも直しています。更新前に保存したサンクスメールの本文は改行が消えているため、更新後に本文を入力し直して保存してください。お手数ですが更新をお願いいたします。",
+    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.5.1/LiteWord.zip"
 }
