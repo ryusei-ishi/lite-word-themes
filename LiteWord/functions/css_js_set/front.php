@@ -46,16 +46,21 @@ function add_files() {
             if(empty($header_ptn_set)){
                 $header_ptn_set = Lw_theme_mod_set("header_set_ptn_page", $header_set_ptn_df);
             }
-            wp_enqueue_style('style_header', get_template_directory_uri() . '/assets/css/header/'.$header_ptn_set.'/style.min.css', array(), css_version(), 'all');
         }
         else if(is_single()){
-            wp_enqueue_style('style_header', get_template_directory_uri() . '/assets/css/header/'.Lw_theme_mod_set("header_set_ptn_post", $header_set_ptn_df).'/style.min.css', array(), css_version(), 'all');
+            $header_ptn_set = Lw_theme_mod_set("header_set_ptn_post", $header_set_ptn_df);
         }
         else if(is_archive()){
-            wp_enqueue_style('style_header', get_template_directory_uri() . '/assets/css/header/'.Lw_theme_mod_set("header_set_ptn_archive", $header_set_ptn_df).'/style.min.css', array(), css_version(), 'all');
+            $header_ptn_set = Lw_theme_mod_set("header_set_ptn_archive", $header_set_ptn_df);
         }
         else{
-            wp_enqueue_style('style_header', get_template_directory_uri() . '/assets/css/header/'.$header_set_ptn_df.'/style.min.css', array(), css_version(), 'all');
+            $header_ptn_set = $header_set_ptn_df;
+        }
+        // 🐛 ヘッダーを「ショートコード」（ptn_short_code）にすると assets/css/header/ptn_short_code/ が無く、
+        //    毎ページ 404 を読みに行っていた。ファイルがあるパターンだけ読み込む
+        $header_css_path = '/assets/css/header/'.$header_ptn_set.'/style.min.css';
+        if(file_exists(get_template_directory() . $header_css_path)){
+            wp_enqueue_style('style_header', get_template_directory_uri() . $header_css_path, array(), css_version(), 'all');
         }
         wp_enqueue_style('style_header_sub_menu', get_template_directory_uri() . '/assets/css/header/sub_menu/style.min.css', array(), css_version(), 'all');
         // インラインCSSでCSS変数を適用
