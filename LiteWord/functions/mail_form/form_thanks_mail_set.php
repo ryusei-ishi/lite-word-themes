@@ -57,7 +57,17 @@ $form_set_no = sanitize_text_field($args);
                         </dd>
                         <dt>本文</dt>
                         <dd>
-                            <?=Lw_opt_text("form_send_thanks_{$i}_{$form_set_no}_body","textarea","","","10","[your_name] 様\n".get_bloginfo('name')."にお問い合わせいただきありがとうございます。\n担当より通常 2〜3 営業日以内にご返信いたします。\n\n※ 本メールは自動送信です。\n内容に心当たりがない場合は破棄していただければ幸いです。\n\n")?>
+                            <?php
+                            /* サンクスメール本文は共通の Lw_opt_text を通さない。
+                               あちらは sanitize_text_field() なので改行が半角スペースに潰れる（2026-09-16） */
+                            $lw_thanks_body_key = "form_send_thanks_{$i}_{$form_set_no}_body";
+                            $lw_thanks_body_df  = "[your_name] 様\n".get_bloginfo('name')."にお問い合わせいただきありがとうございます。\n担当より通常 2〜3 営業日以内にご返信いたします。\n\n※ 本メールは自動送信です。\n内容に心当たりがない場合は破棄していただければ幸いです。\n\n";
+                            if ( isset( $_POST[ $lw_thanks_body_key ] ) ) {
+                                update_option( $lw_thanks_body_key, sanitize_textarea_field( $_POST[ $lw_thanks_body_key ] ) );
+                            }
+                            $lw_thanks_body_val = get_option( $lw_thanks_body_key, $lw_thanks_body_df );
+                            ?>
+                            <textarea name="<?= esc_attr( $lw_thanks_body_key ) ?>" cols="30" rows="10"><?= esc_textarea( $lw_thanks_body_val ) ?></textarea>
                             <p>
                                 送信者に送信されるメールの本文を設定します。
                             </p>
