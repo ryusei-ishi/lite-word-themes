@@ -320,7 +320,9 @@ function lw_server_card_page_list_1( $attrs ) {
         $ex_html = '';
 
         if ( $show_ex ) {
-            $text = wp_strip_all_tags( get_the_excerpt( $page ) );
+            // 会員限定のページは抜粋を出さない（REST も空を返し、JS は空の <p> を出す）→ lw_server_list_excerpt()
+            $restricted = function_exists( 'lw_get_allowed_roles_for_post' ) && lw_get_allowed_roles_for_post( $page->ID );
+            $text = $restricted ? '' : wp_strip_all_tags( get_the_excerpt( $page ) );
             $text = ( '' !== trim( $text ) ) ? _mb_substr( $text, 0, 40 ) . '…' : '';
             $ex_html = '<p style="font-weight:' . esc_attr( $ex_w ) . ';" data-lw_font_set="' . esc_attr( $ex_font ) . '">' . esc_html( $text ) . '</p>';
         }

@@ -265,6 +265,55 @@ function lw_check_view_permission( array $allowed_roles ) {
 	return array_intersect( $user->roles, $allowed_roles ) ? '' : 'denied';
 }
 
+/**
+ * 投稿を開いたときに制限がかかるカテゴリーの ID（親からの継承・適用範囲 single を踏まえる）
+ *
+ * ユーザーによらない。REST のメディア一覧などで「制限がかかりうる記事」を SQL で絞るのに使う。
+ *
+ * @return int[]
+ */
+function lw_membership_restricted_category_ids() {
+	static $memo = null;
+	if ( $memo !== null ) {
+		return $memo;
+	}
+
+	// fields=all で取る（ids だと term のキャッシュが作られず、親をたどるたびに1件ずつ読みに行く）
+	$terms = get_terms( [ 'taxonomy' => 'category', 'hide_empty' => false, 'update_term_meta_cache' => true ] );
+	if ( is_wp_error( $terms ) || ! $terms ) {
+		return $memo = [];
+	}
+	$ids = wp_list_pluck( $terms, 'term_id' );
+
+	$memo = [];
+	foreach ( $ids as $id ) {
+		if ( lw_get_effective_term_roles( $id, 'single' ) ) {
+			$memo[] = (int) $id;
+		}
+	}
+	return $memo;
+}
+
+/**
+ * 今のユーザーがこの投稿・固定ページの本文を見てよいか（ページ表示と同じ判定）
+ *
+ * REST API・RSS・一覧の抜粋・関連記事など、ページ以外の経路で本文を出す前に使う。
+ * 会員限定の対象は投稿と固定ページだけ（restrict_front.php と同じ）なので、
+ * それ以外の投稿タイプは常に true。
+ *
+ * @param int|WP_Post $post
+ * @return bool
+ */
+function lw_membership_can_view_post( $post ) {
+
+	$post = get_post( $post );
+	if ( ! $post || ! in_array( $post->post_type, [ 'post', 'page' ], true ) ) {
+		return true;
+	}
+
+	return lw_check_view_permission( lw_get_allowed_roles_for_post( $post->ID ) ) === '';
+}
+
 /* ---------------------------------------------------------------
  * キャッシュのバージョン
  *

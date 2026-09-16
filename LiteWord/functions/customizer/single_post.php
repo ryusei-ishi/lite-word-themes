@@ -161,8 +161,30 @@ function single_post_custom( $wp_customize ) {
             ['icon_select', 'post_btm_sns_3', '','',  ctm_sns_share_icon_arr()],
             ['icon_select', 'post_btm_sns_4', '','',  ctm_sns_share_icon_arr()],
             ['icon_select', 'post_btm_sns_5', '','',  ctm_sns_share_icon_arr()],
-          
+
         ]
     ];
-    customize_set($items, $set, $sec, $wp_customize);  
+    customize_set($items, $set, $sec, $wp_customize);
+
+    // -----------------------
+    // 関連記事（templates/post_list_related/1/）
+    // -----------------------
+    $set_ttl = '関連記事'; // セクションタイトル
+    $sec = 'single_post_related_sec'; // セクションID
+    $set = 'single_post_related'; // 入力ID
+    $wp_customize->add_section($sec, ['title' => $set_ttl, 'panel' => $panel]);
+    // コントロール
+    // ⚠️ 空（未選択）＝サイト全体。設定を触っていないサイトの出方を変えないため、既定は今までの動きにしてある
+    $items = [
+        [
+            ['radio', 'fill', '', '同じカテゴリーの記事が6件に足りないとき、どこから補うか<br><small>「同じ親カテゴリーの中だけ」は、記事のカテゴリーのいちばん上の親と、その下の子カテゴリーの記事から補います。</small>',
+                [
+                    ''       => 'サイト全体から補う',
+                    'parent' => '同じ親カテゴリーの中だけ',
+                    'none'   => '補わない',
+                ],
+            ],
+        ]
+    ];
+    customize_set($items, $set, $sec, $wp_customize);
 }

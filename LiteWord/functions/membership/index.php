@@ -19,6 +19,8 @@ if(is_admin()){
     get_template_part('./functions/membership/roles_admin/index');
 }else{
     get_template_part('./functions/membership/restrict_front');
+    // REST API・RSS・メディア一覧からの本文の流出止め（ページ以外の経路）
+    get_template_part('./functions/membership/restrict_api');
     // ログイン画面の差し替えとログイン失敗時の処理（wp-login.php でも読み込まれる）
     get_template_part('./functions/membership/login_handler');
 }

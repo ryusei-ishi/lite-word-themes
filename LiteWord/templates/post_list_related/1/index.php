@@ -5,49 +5,12 @@ if ( !defined( 'ABSPATH' ) ) exit;
 $css_version = function_exists('css_version') ? css_version() : wp_get_theme()->get('Version');
 wp_enqueue_style('post_list_related_1_style', get_template_directory_uri() . '/templates/post_list_related/1/style.min.css', array(), $css_version, 'all');
 
-$current_post_id = get_the_ID();
-$current_categories = wp_get_post_categories($current_post_id);
+// ①同じカテゴリー → ②足りない分を補う、の集め方と会員限定の除外は query.php
+require_once __DIR__ . '/query.php';
 
 /* 出したい本数 */
 $related_want = 6;
-$related_ids  = array();
-
-/* ① 同じカテゴリーからランダムに集める（従来どおり） */
-if ($current_categories) {
-    $related_ids = get_posts(array(
-        'post_type' => 'post',
-        'post_status' => 'publish',
-        'posts_per_page' => $related_want,
-        'post__not_in' => array($current_post_id),
-        'category__in' => $current_categories,
-        'orderby' => 'rand',
-        'fields' => 'ids',
-        'no_found_rows' => true, // ページネーション不要なら追加でパフォーマンス向上
-        'update_post_meta_cache' => false,
-        'update_post_term_cache' => false
-    ));
-}
-
-/*
- * ② 足りない分をサイト全体からランダムに拾って埋める。
- *    同じカテゴリーに自分しかいない記事や、カテゴリーが付いていない記事では
- *    ①だけだと関連記事が1本も出ず、その記事からどこへも進めなくなるため。
- *    新着順だとどの記事でも同じ最新6本ばかりが並ぶので、①と同じく rand にする。
- */
-if (count($related_ids) < $related_want) {
-    $related_fill = get_posts(array(
-        'post_type' => 'post',
-        'post_status' => 'publish',
-        'posts_per_page' => $related_want - count($related_ids),
-        'post__not_in' => array_merge(array($current_post_id), $related_ids),
-        'orderby' => 'rand',
-        'fields' => 'ids',
-        'no_found_rows' => true,
-        'update_post_meta_cache' => false,
-        'update_post_term_cache' => false
-    ));
-    $related_ids = array_merge($related_ids, $related_fill);
-}
+$related_ids  = lw_related_post_ids(get_the_ID(), $related_want);
 
 if ($related_ids) {
     $related_posts = new WP_Query(array(

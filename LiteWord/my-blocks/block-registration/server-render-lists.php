@@ -206,8 +206,20 @@ function lw_server_list_get_posts( $attrs ) {
         'no_found_rows'       => true,
     );
 
-    if ( '' !== $category && is_numeric( $category ) ) {
-        $args['cat'] = (int) $category;
+    // JS はカテゴリIDをそのまま REST の categories= に渡すので、`1,5` のカンマ区切りでも絞り込める。
+    // 🐛 以前は is_numeric() のときだけ `cat` を付けていたため、カンマ区切りだと絞り込みが丸ごと外れ、
+    //    会員限定の記事の題名まで HTML に出ていた（2026-09-16 幌北ゆりかご）。
+    // REST の categories= は子カテゴリーを含めないので、`cat`（子を含める）ではなく category__in を使う。
+    // 数字でないもの・0 は捨て、1つも残らなければ今までどおり全カテゴリー。
+    $category_ids = array();
+    foreach ( explode( ',', $category ) as $piece ) {
+        $piece = trim( $piece );
+        if ( preg_match( '/^\d+$/', $piece ) && (int) $piece > 0 ) {   // ctype 拡張を切ったサーバーでも動くように
+            $category_ids[] = (int) $piece;
+        }
+    }
+    if ( $category_ids ) {
+        $args['category__in'] = array_values( array_unique( $category_ids ) );
     }
 
     return get_posts( $args );
@@ -258,6 +270,13 @@ function lw_server_list_category( $post, $fallback = 'カテゴリーなし' ) {
  * @return string
  */
 function lw_server_list_excerpt( $post, $tail = '...' ) {
+    // 🚨 会員限定の記事は抜粋を出さない。JS が読む REST は未ログイン扱い（ノンス無しの fetch）で
+    //    抜粋が空になり「本文がありません」と出るので、ログインしている人に対しても同じにそろえる。
+    //    （functions/membership/restrict_api.php。会員限定の機能が無いサイトでは関数が無い）
+    if ( function_exists( 'lw_get_allowed_roles_for_post' ) && lw_get_allowed_roles_for_post( $post->ID ) ) {
+        return '本文がありません';
+    }
+
     $text = wp_strip_all_tags( get_the_excerpt( $post ) );
 
     if ( '' === trim( $text ) ) {

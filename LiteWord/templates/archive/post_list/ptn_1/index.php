@@ -64,8 +64,12 @@ wp_enqueue_style('post_list_ptn_1_style', get_template_directory_uri() . '/templ
                         </h2>
                         <p>
                             <?php
+                            // 会員限定の記事は、見る権限の無い人に抜粋（＝本文の冒頭）を出さない
+                            if (function_exists('lw_membership_can_view_post') && !lw_membership_can_view_post(get_the_ID())) {
+                                // 何も出さない
+                            }
                             // 抜粋を50文字程度に制限
-                            if (mb_strlen(get_the_excerpt(), 'UTF-8') > 50) {
+                            else if (mb_strlen(get_the_excerpt(), 'UTF-8') > 50) {
                                 $excerpt = mb_substr(get_the_excerpt(), 0, 50);
                                 echo esc_html($excerpt) . '...';
                             } else {

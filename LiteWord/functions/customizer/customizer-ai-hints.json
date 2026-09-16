@@ -2,7 +2,7 @@
   "_meta": {
     "description": "LiteWordカスタマイザーのAI向けメタ情報。各設定項目の意味・用途・推奨値をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
     "version": "1.0",
-    "lastUpdated": "2026-09-02"
+    "lastUpdated": "2026-09-16"
   },
   "panels": {
     "header_set": {
@@ -350,6 +350,21 @@
           "aiDescription": "記事のSNSシェアボタン。タイトル下（記事冒頭）と投稿下の2箇所に設置可能。各5個まで。",
           "availableServices": "Facebook/X/LINE/Pocket/はてなブックマーク/LinkedIn/Reddit/Pinterest/Tumblr/Telegram/WhatsApp/Mastodon/Email/URLコピー",
           "userGuide": "日本のブログではX・Facebook・LINE・はてなブックマークの4つが定番。"
+        },
+        "single_post_related_sec": {
+          "title": "関連記事",
+          "aiDescription": "投稿ページ下部の関連記事（6件）の集め方。まず同じカテゴリーの記事からランダムに選び、6件に足りない分をどこから補うかを選ぶ。会員限定の記事は、見る権限の無い人にはどの設定でも出ない。",
+          "settings": {
+            "fill": {
+              "aiDescription": "足りない分をどこから補うか",
+              "options": {
+                "": "サイト全体から補う（デフォルト・今までの動き）",
+                "parent": "同じ親カテゴリーの中だけ — 記事のカテゴリーのいちばん上の親と、その下の子カテゴリーの記事から補う",
+                "none": "補わない — 同じカテゴリーの記事だけを出す（6件に満たなければ少ないまま）"
+              }
+            }
+          },
+          "userGuide": "お知らせとブログ、会員向けと一般向けのように、カテゴリーで区分を分けているサイトで「別の区分の記事が関連記事に混ざる」ときは「同じ親カテゴリーの中だけ」を選ぶ。記事数が少ないサイトで関連記事を必ず6件出したいときは既定のまま。"
         }
       }
     },

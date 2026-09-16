@@ -14,9 +14,10 @@ if ( !defined( 'ABSPATH' ) ) exit;
  *   ① 投稿・固定ページ … 投稿個別の設定。空なら所属カテゴリーの設定（roles.php）
  *   ② カテゴリー一覧ページ … そのカテゴリーの設定（無ければ親から継ぐ）
  *
- * ⚠️ 一覧（アーカイブ・検索・新着ブロック・RSS）からの除外は行っていない。
+ * ⚠️ 一覧（アーカイブ・検索・新着ブロック・RSS）からの除外は行っていない（Ryuichi 判断で見送り）。
  *    会員限定の記事もタイトルとサムネイルは一覧に出る（開くとログイン画面）。
- *    REST API から本文が読める穴も未対応。どちらも既知・Ryuichi 判断で見送り。
+ *    ページ以外の経路（REST API・RSS・メディア一覧）で本文が出ないようにするのは restrict_api.php。
+ *    一覧の抜粋・関連記事は、それぞれのテンプレートが lw_membership_can_view_post() で見ている。
  *    → doc/specs/membership-restriction.md
  */
 add_action( 'template_redirect', 'lw_protect_view_by_role' );
