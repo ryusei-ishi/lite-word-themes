@@ -38,26 +38,30 @@ $pr_align      = ( Lw_theme_mod_set( 'lw_pr_notice_align', 'left' ) === 'center'
 <style>
 /* 🚨 .post_style p に margin を上書きされるので、詳細度をそろえる（!important は使わない） */
 .post_style .lw_pr_notice {
-  margin: 0 0 24px;
-  padding: 0;
-  font-size: 13px;
-  line-height: 1.6em;
-  text-align: <?= esc_attr( $pr_align ) ?>;
-  color: <?= esc_attr( $pr_text_color ) ?>;
-  @media (max-width: 750px) {
-    margin-bottom: 20px;
-    font-size: 12px;
-  }
-  &.ptn_1 {
+    margin: 0 0 24px;
+    padding: 0;
+    font-size: 13px;
+    line-height: 1.6em;
+    text-align: <?= esc_attr( $pr_align ) ?>;
+    color: <?= esc_attr( $pr_text_color ) ?>;
+}
+@media (max-width: 750px) {
+    .post_style .lw_pr_notice {
+        margin-bottom: 20px;
+        font-size: 12px;
+    }
+}
+.post_style .lw_pr_notice.ptn_1 {
     padding: 8px 14px;
     border-radius: 4px;
     background: <?= esc_attr( $pr_bg_color ) ?>;
-    @media (max-width: 750px) {
-      padding: 7px 12px;
+}
+@media (max-width: 750px) {
+    .post_style .lw_pr_notice.ptn_1 {
+        padding: 7px 12px;
     }
-  }
-  &.ptn_2 {
-    opacity: .8;
-  }
+}
+.post_style .lw_pr_notice.ptn_2 {
+    opacity: 0.8;
 }
 </style>

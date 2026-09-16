@@ -1657,38 +1657,32 @@ function Lw_cta_tel_set($item = []) {
                 </a>
             </div>
             <style>
-                .cta_tel_set.ptn_1 {
-                    a{
-                        .tel_in{
-                            display: flex;
-                            align-items: center;
-                            font-size:32px;
-                            .icon{
-                                margin-right: 0.3em;
-                                height: 0.95em;
-                                svg{
-                                    height: 100%;
-                                    width: auto;
-                                    fill: <?=$cta_tel_icon_color?>;
-                                }
-                            } 
-                            .tel_number{
-                                color: <?=$cta_tel_number_color?>;
-                                line-height: 1;
-                                font-weight: <?=$cta_tel_number_font_weight?>;
-                                white-space: nowrap;
-
-                            }
-                        }
-                        .tel_sub_text{
-                            color: <?=$cta_tel_sub_text_color?>;
-                            font-weight: <?=$cta_tel_sub_text_font_weight?>;
-                            white-space: nowrap;
-                            margin-top: 0.2em;
-                            line-height: 1.5;
-                        }
-
-                    }
+                .cta_tel_set.ptn_1 a .tel_in {
+                    display: flex;
+                    align-items: center;
+                    font-size: 32px;
+                }
+                .cta_tel_set.ptn_1 a .tel_in .icon {
+                    margin-right: 0.3em;
+                    height: 0.95em;
+                }
+                .cta_tel_set.ptn_1 a .tel_in .icon svg {
+                    height: 100%;
+                    width: auto;
+                    fill: <?=$cta_tel_icon_color?>;
+                }
+                .cta_tel_set.ptn_1 a .tel_in .tel_number {
+                    color: <?=$cta_tel_number_color?>;
+                    line-height: 1;
+                    font-weight: <?=$cta_tel_number_font_weight?>;
+                    white-space: nowrap;
+                }
+                .cta_tel_set.ptn_1 a .tel_sub_text {
+                    color: <?=$cta_tel_sub_text_color?>;
+                    font-weight: <?=$cta_tel_sub_text_font_weight?>;
+                    white-space: nowrap;
+                    margin-top: 0.2em;
+                    line-height: 1.5;
                 }
             </style>
         </div>

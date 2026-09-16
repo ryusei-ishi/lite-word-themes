@@ -22,40 +22,44 @@ if($switch == "on"):
   justify-content: center;
   align-items: center;
   align-content: center;
-  gap:8px;
+  gap: 8px;
   line-height: 1.4em;
   background: <?=$bg_color?>;
   color: #fff;
-  @media (max-width: 750px) {
+}
+@media (max-width: 750px) {
+  #LwCookieConsent {
     padding: 12px 8px;
-    
-  }
-  .in_text{
-    max-width: calc(100% - 80px);
-    font-size: 16px;
-    @media (max-width: 750px) {
-      font-size: 14px;
-    }
-    @media (max-width: 420px) {
-      font-size: 12px;
-    }
-  }
-  #LwAcceptCookies{
-    width: 72px;
-    height: 30px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    white-space: nowrap;
-    &:hover{
-      opacity: 0.8;
-    }
   }
 }
-
+#LwCookieConsent .in_text {
+  max-width: calc(100% - 80px);
+  font-size: 16px;
+}
+@media (max-width: 750px) {
+  #LwCookieConsent .in_text {
+    font-size: 14px;
+  }
+}
+@media (max-width: 420px) {
+  #LwCookieConsent .in_text {
+    font-size: 12px;
+  }
+}
+#LwCookieConsent #LwAcceptCookies {
+  width: 72px;
+  height: 30px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  border-radius: 2px;
+  cursor: pointer;
+  white-space: nowrap;
+}
+#LwCookieConsent #LwAcceptCookies:hover {
+  opacity: 0.8;
+}
 </style>
 <script>
 document.addEventListener('DOMContentLoaded', function() {

@@ -64,13 +64,10 @@
 })();
 </script>
 <style>
-    body:has(#wpadminbar){
-        .lw_follow_menu{
-            &.active{
-                top: 32px; /* wpadminbarの高さを考慮 */
-           }
-        }
-    }
+body:has(#wpadminbar) .lw_follow_menu.active {
+    top: 32px; /* wpadminbarの高さを考慮 */
+}
+
 .lw_follow_menu {
     position: fixed;
     top: -64px;
@@ -81,57 +78,53 @@
     box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
     visibility: hidden;
     opacity: 0;
-    transition:
-        top 0.6s,
-        visibility 0.6s,
-        opacity 0.6s;
-    @media (max-width: 1080px) {
+    transition: top 0.6s, visibility 0.6s, opacity 0.6s;
+}
+@media (max-width: 1080px) {
+    .lw_follow_menu {
         display: none;
     }
-    &.active {
-        top: 0;
-        visibility: visible;
-        opacity: 1;
-    }
-    > div > ul {
-        display: flex;
-        justify-content: center;
-        > li {
-            position: relative;
-            > a {
-                position: relative;
-                padding: 0 24px;
-                height: 64px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                color: #000;
-                font-size: 16px;
-                line-height: 1.4em;
-                font-feature-settings: "palt";
-                white-space: nowrap;
-                &::after {
-                    position: absolute;
-                    bottom: 0;
-                    left: 2px;
-                    right: 0;
-                    margin: auto;
-                    width: 0;
-                    height: 4px;
-                    content: "";
-                    display: block;
-                    background: var(--color-yellow);
-                    transition: all 0.3s;
-                }
-                &:hover {
-                    &::after {
-                        width: calc(100% - 44px);
-                        opacity: 1;
-                    }
-                }
-            }
-        }
-    }
 }
-
+.lw_follow_menu.active {
+    top: 0;
+    visibility: visible;
+    opacity: 1;
+}
+.lw_follow_menu > div > ul {
+    display: flex;
+    justify-content: center;
+}
+.lw_follow_menu > div > ul > li {
+    position: relative;
+}
+.lw_follow_menu > div > ul > li > a {
+    position: relative;
+    padding: 0 24px;
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #000;
+    font-size: 16px;
+    line-height: 1.4em;
+    font-feature-settings: "palt";
+    white-space: nowrap;
+}
+.lw_follow_menu > div > ul > li > a::after {
+    position: absolute;
+    bottom: 0;
+    left: 2px;
+    right: 0;
+    margin: auto;
+    width: 0;
+    height: 4px;
+    content: "";
+    display: block;
+    background: var(--color-yellow);
+    transition: all 0.3s;
+}
+.lw_follow_menu > div > ul > li > a:hover::after {
+    width: calc(100% - 44px);
+    opacity: 1;
+}
 </style>

@@ -63,14 +63,14 @@ function Lw_heading_design_style($h_ptn="h_ptn_1",$class_set=".post_style.single
                     $class{
                         padding-bottom: 0.4em;
                         color: #111;
-                        &:after{
-                            margin-top:0.8em;
-                            height: 4px;
-                            width: 1.6em;
-                            display: block;
-                            content: '';
-                            background: var(--color-main);
-                        }
+                    }
+                    $class_after{
+                        margin-top:0.8em;
+                        height: 4px;
+                        width: 1.6em;
+                        display: block;
+                        content: '';
+                        background: var(--color-main);
                     }
                 </style>
             ";

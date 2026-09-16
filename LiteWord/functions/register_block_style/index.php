@@ -356,30 +356,34 @@ register_block_style(
         'label'        => '余白なし',
         'inline_style' => '
             .is-style-image_w_100_sp_none:not(.block-editor-block-list__block){
-              
-                    margin: 0  -40px !important;
-                    width: calc(100% + 80px);
-                    max-width: initial !important;
-                    @container (max-width: 800px) {
-                        margin: 0  -32px !important;
-                        width: calc(100% + 64px);
-                    }
-                    @media (max-width: 700px) {
-                        margin: 0 !important;
-                        margin-left: calc((100% - 100vw) / 2) !important;
-                        width: 100vw;
-                    }
-                    + .last_content{
-                        display: none;
-                    }
-                
+                margin: 0  -40px !important;
+                width: calc(100% + 80px);
+                max-width: initial !important;
             }
+            @container (max-width: 800px) {
+                .is-style-image_w_100_sp_none:not(.block-editor-block-list__block){
+                    margin: 0  -32px !important;
+                    width: calc(100% + 64px);
+                }
+            }
+            @media (max-width: 700px) {
+                .is-style-image_w_100_sp_none:not(.block-editor-block-list__block){
+                    margin: 0 !important;
+                    margin-left: calc((100% - 100vw) / 2) !important;
+                    width: 100vw;
+                }
+            }
+            .is-style-image_w_100_sp_none:not(.block-editor-block-list__block) + .last_content{
+                display: none;
+            }
+            /* ⚠️ 「..」はセレクタとして壊れていて、ブラウザは下の2つのルールを丸ごと読み飛ばす（以前から）。
+                  直すと編集画面の見た目が変わるので、入れ子を外すときも壊れたまま残した（issue-log 2026-09-16） */
             .is-style-image_w_100_sp_none..block-editor-block-list__block{
                 width: 100% !important;
                 max-width: 100% !important;
-                .components-resizable-box__container{
-                    max-width: 100% !important;
-                }
+            }
+            .is-style-image_w_100_sp_none..block-editor-block-list__block .components-resizable-box__container{
+                max-width: 100% !important;
             }
             .is-style-image_w_100_sp_none img{
                 margin: 0 auto ;
@@ -712,20 +716,20 @@ register_block_style(
             .is-style-list_ptn_01{
                 position: relative;
                 font-size: 1.417em;
-                 @media (max-width: 600px){
+            }
+            @media (max-width: 600px){
+                .is-style-list_ptn_01{
                     font-size: 1.2em;
                 }
             }
             .is-style-list_ptn_01 li{
                 list-style-type: disc !important;
-                + li{
-                    margin-top: 0.5em;
-                }
-                    ul{
-                        li{
-                            list-style-type: circle !important;
-                        }
-                    }
+            }
+            .is-style-list_ptn_01 li + li{
+                margin-top: 0.5em;
+            }
+            .is-style-list_ptn_01 li ul li{
+                list-style-type: circle !important;
             }
             .is-style-list_ptn_01 li::marker {
                 color: var(--color-main); 

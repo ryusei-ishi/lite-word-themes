@@ -101,10 +101,6 @@
   box-shadow: 0 0 8px rgba(0, 0, 0, 0.05);
 }
 
-.wp-block-wdl-lw-page-list-1 .lw_page-list-1 ul.page-list-1__wrap li a .in, [data-type="wdl/lw-page-list-1"] .lw_page-list-1 ul.page-list-1__wrap li a .in {
-  @container (max-width:800px) {}
-}
-
 .wp-block-wdl-lw-page-list-1 .lw_page-list-1 ul.page-list-1__wrap li a .in .data, [data-type="wdl/lw-page-list-1"] .lw_page-list-1 ul.page-list-1__wrap li a .in .data {
   margin-top: 16px;
   display: flex;
