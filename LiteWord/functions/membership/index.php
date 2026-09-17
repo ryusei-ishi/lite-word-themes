@@ -11,6 +11,9 @@ get_template_part('./functions/membership/register/index');
 // ⚠️ 管理バーはフロント・締め出しは管理画面で効くので、is_admin() の外で読み込む
 get_template_part('./functions/membership/lock_admin');
 
+// 会員限定の記事に入れた写真・PDF のファイルを守る（既定 OFF・保存の検知が管理画面／REST の両方で要る）
+get_template_part('./functions/membership/protect_files/index');
+
 if(is_admin()){
     get_template_part('./functions/membership/restrict_admin');
     // カテゴリー単位の設定（カテゴリー編集画面・一覧の列）
