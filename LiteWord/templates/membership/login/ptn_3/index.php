@@ -18,12 +18,21 @@ $lw_ttl      = function_exists( 'lw_membership_title_tag' ) ? lw_membership_titl
         <div class="side">
             <div class="icon" aria-hidden="true">
                 <svg viewBox="0 0 24 24" width="28" height="28" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
-                    <rect x="3" y="11" width="18" height="10" rx="2"></rect>
-                    <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    <?php if ( $lw_reason === 'paused' ) : /* 一時停止中は時計 */ ?>
+                        <circle cx="12" cy="12" r="9"></circle>
+                        <path d="M12 7v5l3 2"></path>
+                    <?php else : ?>
+                        <rect x="3" y="11" width="18" height="10" rx="2"></rect>
+                        <path d="M7 11V7a5 5 0 0 1 10 0v4"></path>
+                    <?php endif; ?>
                 </svg>
             </div>
 
-            <?php if ( $lw_reason === 'denied' ) : ?>
+            <?php if ( $lw_reason === 'paused' ) : ?>
+                <?php /* 一時停止中（見出しと文言はカスタマイザー。functions/membership/pause.php） */ ?>
+                <<?php echo $lw_ttl; ?> class="title"><?php echo lw_membership_pause_title(); ?></<?php echo $lw_ttl; ?>>
+                <p class="lead"><?php echo lw_membership_pause_message(); ?></p>
+            <?php elseif ( $lw_reason === 'denied' ) : ?>
                 <<?php echo $lw_ttl; ?> class="title">このページは閲覧できません</<?php echo $lw_ttl; ?>>
                 <p class="lead">
                     現在ログイン中のアカウントには、このページを閲覧する権限がありません。<br>
@@ -36,7 +45,13 @@ $lw_ttl      = function_exists( 'lw_membership_title_tag' ) ? lw_membership_titl
         </div>
 
         <div class="main">
-            <?php if ( $lw_reason === 'denied' ) : ?>
+            <?php if ( $lw_reason === 'paused' ) : ?>
+
+                <div class="actions">
+                    <a class="submit" href="<?php echo esc_url( home_url( '/' ) ); ?>">トップページへ戻る</a>
+                </div>
+
+            <?php elseif ( $lw_reason === 'denied' ) : ?>
 
                 <div class="actions">
                     <a class="submit" href="<?php echo esc_url( wp_logout_url( $lw_page_url ) ); ?>">別のアカウントでログインする</a>

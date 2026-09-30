@@ -78,6 +78,17 @@
     font-size: 13px;
   }
 }
+.lw_member_login.ptn_1 .lead a {
+  color: var(--member-accent);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.3s ease;
+}
+@media (hover: hover) {
+  .lw_member_login.ptn_1 .lead a:hover {
+    opacity: 0.6;
+  }
+}
 .lw_member_login.ptn_1 .error {
   margin-top: 20px;
   padding: 12px 16px;

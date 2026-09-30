@@ -243,8 +243,11 @@ function lw_get_allowed_roles_for_post( $post_id ) {
 /**
  * 今のユーザーがこの閲覧権限を満たすか
  *
+ * 一時停止中（pause.php）は、見られない人の理由が 'paused' になる。
+ * 「管理者だけ」のときは、見る権限のある会員も 'paused'（ページ以外の経路もここで止まる）。
+ *
  * @param array $allowed_roles 空配列なら誰でも閲覧可
- * @return string ''＝閲覧可 ／ 'login'＝未ログイン ／ 'denied'＝ログイン済みだが権限不足
+ * @return string ''＝閲覧可 ／ 'login'＝未ログイン ／ 'denied'＝ログイン済みだが権限不足 ／ 'paused'＝一時停止中
  */
 function lw_check_view_permission( array $allowed_roles ) {
 
@@ -252,17 +255,27 @@ function lw_check_view_permission( array $allowed_roles ) {
 		return '';
 	}
 
-	// 管理者は常に閲覧可
+	// 管理者は常に閲覧可（一時停止中も）
 	if ( current_user_can( 'administrator' ) ) {
 		return '';
 	}
 
+	// 一時停止中 … 「管理者だけ」なら、ログインしている会員もここで止める
+	$pause = function_exists( 'lw_membership_pause_mode' ) ? lw_membership_pause_mode() : '';
+	if ( $pause === 'all' ) {
+		return 'paused';
+	}
+
+	// 「ログイン画面だけ差し替える」ときは、見られない人に出す画面だけが停止中のものになる
 	if ( ! is_user_logged_in() ) {
-		return 'login';
+		return $pause === 'login' ? 'paused' : 'login';
 	}
 
 	$user = wp_get_current_user();
-	return array_intersect( $user->roles, $allowed_roles ) ? '' : 'denied';
+	if ( array_intersect( $user->roles, $allowed_roles ) ) {
+		return '';
+	}
+	return $pause === 'login' ? 'paused' : 'denied';
 }
 
 /**

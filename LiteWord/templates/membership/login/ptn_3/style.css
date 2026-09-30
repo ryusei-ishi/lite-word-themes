@@ -103,6 +103,17 @@
     font-size: 13px;
   }
 }
+.lw_member_login.ptn_3 .lead a {
+  color: #fff;
+  text-decoration: underline;
+  text-underline-offset: 3px;
+  transition: opacity 0.3s ease;
+}
+@media (hover: hover) {
+  .lw_member_login.ptn_3 .lead a:hover {
+    opacity: 0.6;
+  }
+}
 .lw_member_login.ptn_3 .main {
   padding: 48px 40px;
   display: flex;

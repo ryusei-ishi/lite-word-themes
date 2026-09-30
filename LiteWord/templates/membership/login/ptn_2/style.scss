@@ -52,6 +52,18 @@
         @media (max-width: 600px) {
             font-size: 13px;
         }
+        // 一時停止中の文言に入れたリンク（functions/membership/pause.php で <a> を許可している）
+        a{
+            color: var(--member-accent);
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: opacity 0.3s ease;
+            @media (hover: hover) {
+                &:hover{
+                    opacity: 0.6;
+                }
+            }
+        }
     }
     .error{
         margin-top: 24px;

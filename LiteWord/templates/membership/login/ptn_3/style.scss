@@ -88,6 +88,19 @@
         @media (max-width: 600px) {
             font-size: 13px;
         }
+        // 一時停止中の文言に入れたリンク（functions/membership/pause.php で <a> を許可している）
+        // 左の面はアクセントカラーの地なので、リンクも白で出す
+        a{
+            color: #fff;
+            text-decoration: underline;
+            text-underline-offset: 3px;
+            transition: opacity 0.3s ease;
+            @media (hover: hover) {
+                &:hover{
+                    opacity: 0.6;
+                }
+            }
+        }
     }
     // 右（スマホでは下）
     .main{

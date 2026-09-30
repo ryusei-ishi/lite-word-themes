@@ -4,6 +4,9 @@ if ( !defined( 'ABSPATH' ) ) exit;
 // 閲覧権限の取得・判定（管理画面／フロントの両方で使う）
 get_template_part('./functions/membership/roles');
 
+// 会員限定ページの一時停止（サービス開始前など）。判定は roles.php の lw_check_view_permission() から呼ばれる
+get_template_part('./functions/membership/pause');
+
 // 会員登録（ショートコード [lw_member_register]）。中で管理画面／フロントを分けている
 get_template_part('./functions/membership/register/index');
 

@@ -9,6 +9,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  *
  * @param string|null $reason 'login'  … 未ログイン。ログインフォームを出す
  *                            'denied' … ログイン済みだが権限が足りない。理由を出す
+ *                            'paused' … 一時停止中。停止中の見出し・文言を出す（pause.php）
  *                            null     … 現在の状態を取得するだけ
  * @return string 現在の状態（''＝制限なし）
  */
