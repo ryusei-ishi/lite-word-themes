@@ -103,9 +103,9 @@
                 return;
             }
 
-            // フォーマットチェック
-            if (apiKey.indexOf('AIza') !== 0) {
-                this.showMessage('error', 'APIキーの形式が正しくありません。「AIza」で始まるキーを入力してください。');
+            // フォーマットチェック（Google AI Studio で 2026年5月28日以降に作ったキーは「AQ.」、それより前のキーは「AIza」で始まる）
+            if (apiKey.indexOf('AQ.') !== 0 && apiKey.indexOf('AIza') !== 0) {
+                this.showMessage('error', 'APIキーの形式が正しくありません。「AQ.」または「AIza」で始まるキーを入力してください。');
                 return;
             }
 

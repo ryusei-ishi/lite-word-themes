@@ -32,8 +32,14 @@ class LW_AI_Generator_Gemini_API {
 
     /**
      * Gemini API エンドポイント（高速処理用）
+     *
+     * 🚨 2026-10-02 に gemini-2.5-flash → gemini-3.5-flash へ変えた。
+     *    Google は 2.5 のモデルを「過去に使ったことのある利用者」に限るようにしたため
+     *    （https://ai.google.dev/gemini-api/docs/deprecations）、新しくキーを作った人は 2.5 で止まる。
+     *    使っているのは optimize_block / process_auto_highlight / process_auto_highlight_multi /
+     *    generate_text / check_typo / review_and_fix_content の6つ（利用量の記録のモデル名も同じにしてある）。
      */
-    const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent';
+    const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
 
     /**
      * Gemini API エンドポイント（高品質ページ生成用 - 2.5 Flash）
@@ -3445,7 +3451,7 @@ RULES;
         // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
         $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-            LW_AI_Generator_Usage_Tracker::log_usage( 'optimize', 'gemini-2.5-flash', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'optimize', 'gemini-3.5-flash', $input_tokens, $output_tokens, 0 );
         }
 
         // JSONを抽出
@@ -4928,7 +4934,7 @@ PROMPT;
         // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
         $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-            LW_AI_Generator_Usage_Tracker::log_usage( 'auto_highlight', 'gemini-2.5-flash', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'auto_highlight', 'gemini-3.5-flash', $input_tokens, $output_tokens, 0 );
         }
 
         // JSONを抽出してパース
@@ -4987,6 +4993,14 @@ PROMPT;
             ),
         );
 
+        // 返すのは短い JSON だけなので思考は不要（思考オフ）。
+        // 思考を止めないと上限 500 のうち約480を思考が使い、JSON が途中で切れて読めなかった
+        // （2.5-flash の頃から。finishReason=MAX_TOKENS・2026-10-02 に確認）。
+        $thinking_config = self::build_thinking_config( 'gemini-3.5-flash', 0 );
+        if ( null !== $thinking_config ) {
+            $request_body['generationConfig']['thinkingConfig'] = $thinking_config;
+        }
+
         $response = wp_remote_post(
             self::API_ENDPOINT . '?key=' . $api_key,
             array(
@@ -5028,7 +5042,7 @@ PROMPT;
         // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
         $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-            LW_AI_Generator_Usage_Tracker::log_usage( 'auto_highlight_multi', 'gemini-2.5-flash', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'auto_highlight_multi', 'gemini-3.5-flash', $input_tokens, $output_tokens, 0 );
         }
 
         // JSONを抽出してパース
@@ -5150,7 +5164,7 @@ PROMPT;
         // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
         $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-            LW_AI_Generator_Usage_Tracker::log_usage( 'generate_text', 'gemini-2.5-flash', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'generate_text', 'gemini-3.5-flash', $input_tokens, $output_tokens, 0 );
         }
 
         // テキストのみを返す（余分な説明は削除）
@@ -5695,7 +5709,7 @@ PROMPT;
             $output_tokens = isset( $data['usageMetadata']['candidatesTokenCount'] ) ? $data['usageMetadata']['candidatesTokenCount'] : 0;
             // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
             $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
-            LW_AI_Generator_Usage_Tracker::log_usage( 'typo_check', 'gemini-2.5-flash', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'typo_check', 'gemini-3.5-flash', $input_tokens, $output_tokens, 0 );
         }
 
         return $results_with_client_id;
@@ -7650,7 +7664,7 @@ PROMPT;
         // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
         $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-            LW_AI_Generator_Usage_Tracker::log_usage( 'content_review', 'gemini-2.5-flash', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'content_review', 'gemini-3.5-flash', $input_tokens, $output_tokens, 0 );
         }
 
         // 修正を元のブロック配列に適用

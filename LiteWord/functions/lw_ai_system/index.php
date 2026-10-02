@@ -13,7 +13,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // 定数定義
-define( 'LW_AI_SYSTEM_VERSION', '1.0.75' );
+define( 'LW_AI_SYSTEM_VERSION', '1.0.76' );
 define( 'LW_AI_SYSTEM_DIR', get_template_directory() . '/functions/lw_ai_system/' );
 define( 'LW_AI_SYSTEM_URL', get_template_directory_uri() . '/functions/lw_ai_system/' );
 

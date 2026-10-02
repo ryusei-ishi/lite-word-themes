@@ -497,7 +497,7 @@ img{max-width:100%;height:auto;display:block}
       <div style="font-size:.9rem;margin:14px 0 4px">コピーしたキーを下に貼り付けるにゃ！</div>
 
       <div class="lw-api-input-wrap">
-        <input type="text" class="lw-api-input" id="api-key-input" placeholder="AIza..." autocomplete="off" spellcheck="false">
+        <input type="text" class="lw-api-input" id="api-key-input" placeholder="AQ. または AIza から始まるキー" autocomplete="off" spellcheck="false">
       </div>
       <div class="lw-security-note">&#x1F512; AES-256暗号化で安全に保存されます</div>
 
@@ -658,8 +658,9 @@ img{max-width:100%;height:auto;display:block}
       showResult(result, 'error', 'APIキーを入力してください');
       return;
     }
-    if (key.indexOf('AIza') !== 0) {
-      showResult(result, 'error', '「AIza」で始まるキーを入力してください');
+    // Google AI Studio で 2026年5月28日以降に作ったキーは「AQ.」、それより前のキーは「AIza」で始まる
+    if (key.indexOf('AQ.') !== 0 && key.indexOf('AIza') !== 0) {
+      showResult(result, 'error', '「AQ.」または「AIza」で始まるキーを入力してください');
       return;
     }
 
