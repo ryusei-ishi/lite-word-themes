@@ -1,5 +1,5 @@
 {
-    "version": "2.5.1",
-    "changelog": "お問い合わせフォームのサンクスメールで、本文の改行が保存されず1行につながってしまう不具合を直しました。あわせて、同意チェックボックスの表示のずれも直しています。更新前に保存したサンクスメールの本文は改行が消えているため、更新後に本文を入力し直して保存してください。お手数ですが更新をお願いいたします。",
-    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.5.1/LiteWord.zip"
+    "version": "2.5.2",
+    "changelog": "AI の設定で「AQ.」から始まる Gemini の API キー（2026年5月28日以降に Google AI Studio で作ったキー）が入れられなかった不具合を直しました。あわせて、編集画面の AI 機能が使うモデルを gemini-3.5-flash に変え、新しく API キーを作った方でも動くようにしています。文字を選んで使う「自動マーカー」が失敗しやすかった不具合も直しました。お手数ですが更新をお願いいたします。",
+    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.5.2/LiteWord.zip"
 }
