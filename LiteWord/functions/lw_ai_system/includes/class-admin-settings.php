@@ -326,7 +326,12 @@ class LW_AI_Generator_Admin_Settings {
      * APIキーをテスト
      */
     public static function test_api_key( $api_key ) {
-        $endpoint = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=' . $api_key;
+        // AI 機能（高速処理用）と同じモデルで試す。2.5 系は新しく始めた人には使えないので
+        // 決め打ちの gemini-2.5-flash をやめた（2026-10-02・class-gemini-api.php の API_ENDPOINT）
+        $model_endpoint = class_exists( 'LW_AI_Generator_Gemini_API' )
+            ? LW_AI_Generator_Gemini_API::API_ENDPOINT
+            : 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
+        $endpoint = $model_endpoint . '?key=' . $api_key;
 
         $response = wp_remote_post( $endpoint, array(
             'timeout' => 15,
@@ -456,9 +461,10 @@ class LW_AI_Generator_Admin_Settings {
         }
 
         // フォーマットチェック
-        if ( strpos( $api_key, 'AIza' ) !== 0 ) {
+        // Google AI Studio で 2026年5月28日以降に作ったキーは「AQ.」（auth キー）、それより前のキーは「AIza」（standard キー）で始まる
+        if ( strpos( $api_key, 'AQ.' ) !== 0 && strpos( $api_key, 'AIza' ) !== 0 ) {
             wp_send_json_error( array(
-                'message' => 'APIキーの形式が正しくありません。「AIza」で始まるキーを入力してください。',
+                'message' => 'APIキーの形式が正しくありません。「AQ.」または「AIza」で始まるキーを入力してください。',
             ) );
         }
 
@@ -676,7 +682,7 @@ class LW_AI_Generator_Admin_Settings {
                             type="password"
                             id="lw_ai_api_key_input"
                             class="lw-ai-form-input"
-                            placeholder="AIza... から始まるAPIキーを入力"
+                            placeholder="AQ. または AIza から始まるAPIキーを入力"
                             autocomplete="off"
                         />
                         <p class="lw-ai-form-help">
@@ -725,7 +731,7 @@ class LW_AI_Generator_Admin_Settings {
                             <strong>原因：</strong>APIキーが無効化されているか、入力ミスの可能性があります。<br>
                             <strong>解決方法：</strong>
                             <ol>
-                                <li>APIキーが<code>AIza</code>で始まっているか確認してください</li>
+                                <li>APIキーが<code>AQ.</code>または<code>AIza</code>で始まっているか確認してください</li>
                                 <li>キーの前後に余分なスペースがないか確認してください</li>
                                 <li>Google AI Studioで新しいキーを作成してください</li>
                             </ol>
