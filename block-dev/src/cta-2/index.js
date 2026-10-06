@@ -1,11 +1,13 @@
 /**
  * CTA 02
  * ★ apiVersion 3 対応（2025-12-07）
+ * ★ 電話番号のフォントを選べるようにした（2026-10-06・fontNumber）。
+ *   既定は今までの直書きと同じ "Roboto"。保存済みのページの HTML と一致するので検証エラーは出ない。
  */
 import { registerBlockType } from '@wordpress/blocks';
 import { InspectorControls, RichText, MediaUpload, useBlockProps } from '@wordpress/block-editor';
 import { PanelBody, Button, ColorPicker, TextControl, SelectControl, RangeControl } from '@wordpress/components';
-import { leftButtonIconSvgArr } from '../utils.js';
+import { leftButtonIconSvgArr, fontOptionsArr } from '../utils.js';
 
 import metadata from './block.json';
 import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
@@ -21,7 +23,7 @@ const lwBlockDef = {
         const { attributes, setAttributes } = props;
         const {
             title, addressText, phoneText, phoneNumber, mailText,
-            mailUrl, backgroundImage, filterColor, buttonBackgroundColor, buttonTextColor, selectedIcon, maxWidth
+            mailUrl, backgroundImage, filterColor, buttonBackgroundColor, buttonTextColor, selectedIcon, maxWidth, fontNumber
         } = attributes;
 
         const onSelectBackgroundImage = (media) => setAttributes({ backgroundImage: media.url });
@@ -75,6 +77,13 @@ const lwBlockDef = {
                     {/* 電話番号 */}
                     <PanelBody title="電話番号設定">
                         <TextControl label="電話番号" value={phoneNumber} onChange={(value) => setAttributes({ phoneNumber: value })} />
+                        <SelectControl
+                            label="電話番号のフォント"
+                            help="「未選択」にすると、サイト全体のフォント設定に合わせます。"
+                            value={fontNumber}
+                            options={fontOptionsArr()}
+                            onChange={(value) => setAttributes({ fontNumber: value })}
+                        />
                     </PanelBody>
                     {/* リンクボタンの設定 */}
                     <PanelBody title="テキスト設定">
@@ -150,7 +159,7 @@ const lwBlockDef = {
                         />
                         <nav>
                             <a className="tel">
-                                <div className="no" data-lw_font_set="Roboto">
+                                <div className="no" data-lw_font_set={fontNumber}>
                                     <div className="small">TEL:</div>
                                     <div className="big">{phoneNumber}</div>
                                 </div>
@@ -189,7 +198,7 @@ const lwBlockDef = {
         const { attributes } = props;
         const {
             title, addressText, phoneText, phoneNumber, mailText,
-            mailUrl, backgroundImage, filterColor, buttonBackgroundColor, buttonTextColor, selectedIcon, maxWidth
+            mailUrl, backgroundImage, filterColor, buttonBackgroundColor, buttonTextColor, selectedIcon, maxWidth, fontNumber
         } = attributes;
 
         // useBlockProps.save() で apiVersion 3 対応
@@ -213,7 +222,7 @@ const lwBlockDef = {
                             value={addressText}
                         />
                         <nav>
-                            <a href={`tel:${phoneNumber}`} className="tel" data-lw_font_set="Roboto">
+                            <a href={`tel:${phoneNumber}`} className="tel" data-lw_font_set={fontNumber}>
                                 <div className="no">
                                     <div className="small">TEL:</div>
                                     <div className="big">{phoneNumber}</div>
@@ -256,7 +265,7 @@ const lwBlockDef = {
  * 🚨 save は現行と同じ関数をそのまま渡す（マークアップは変えていない）。
  * ------------------------------------------------------------------ */
 const LW_1169_OLD = JSON.parse( JSON.stringify( metadata.attributes ) );
-LW_1169_OLD.backgroundImage.default = "https://cdn.pixabay.com/photo/2022/03/27/12/46/china-7094961_960_720.jpg";
+LW_1169_OLD.backgroundImage.default = "https://liteword-assets.bigi-ishikawa.workers.dev/t/px/china-7094961_960_720.jpg";
 
 /* 🚨 すでにある deprecated は attributes: metadata.attributes を使っている＝新しい既定値を指す。
  *    そのままだと「古い save ＋ 古い既定値」で保存されたページ（サンプル画像のまま使っている人の

@@ -2,10 +2,14 @@
    LiteWord – FV 08 ブロック（wdl/paid-block-fv-8）
    2025-04-19 改訂: メインタイトル改行 ON/OFF 機能を追加
    2025-04-25 追記 : ポイント表示 ON/OFF 機能を追加（showPoint）
+   2026-10-06 追記 : ブロック全体のフォントを選べるようにした（fontSet）。
+                     既定は今までの直書きと同じ "Noto Sans JP"。保存済みのページの HTML と
+                     一致するので検証エラーは出ない。「未選択」でページのフォントを受け継ぐ。
 ---------------------------------------------------------- */
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText, MediaUpload, InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { PanelBody, Button, ToggleControl } from '@wordpress/components';
+import { PanelBody, Button, ToggleControl, SelectControl } from '@wordpress/components';
+import { fontOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
@@ -19,7 +23,7 @@ registerBlockType(metadata.name, {
 			mainTitle, subTitle, leadText,
 			listItem_1, listItem_2, listItem_3,
 			PointText_1, PointText_2, PointText_3,
-			bottomText, noLineBreakMain, showPoint
+			bottomText, noLineBreakMain, showPoint, fontSet
 		} = attributes;
 
 		const blockProps = useBlockProps({
@@ -81,6 +85,13 @@ registerBlockType(metadata.name, {
 							checked={noLineBreakMain}
 							onChange={() => setAttributes({ noLineBreakMain: !noLineBreakMain })}
 						/>
+						<SelectControl
+							label="フォント（ブロック全体）"
+							help="「未選択」にすると、サイト全体のフォント設定に合わせます。"
+							value={fontSet}
+							options={fontOptionsArr()}
+							onChange={(v) => setAttributes({ fontSet: v })}
+						/>
 					</PanelBody>
 
 					{/* ========= ポイント表示設定 ========= */}
@@ -95,7 +106,7 @@ registerBlockType(metadata.name, {
 
 				{/* ================== ビジュアル ================== */}
 				<div {...blockProps}>
-					<div className="paid-block-fv-8_inner" data-lw_font_set="Noto Sans JP">
+					<div className="paid-block-fv-8_inner" data-lw_font_set={fontSet}>
 						<div className="text_in">
 							<h2 className="ttl">
 								<RichText
@@ -192,7 +203,7 @@ registerBlockType(metadata.name, {
 			mainTitle, subTitle, leadText,
 			listItem_1, listItem_2, listItem_3,
 			PointText_1, PointText_2, PointText_3,
-			bottomText, noLineBreakMain, showPoint
+			bottomText, noLineBreakMain, showPoint, fontSet
 		} = props.attributes;
 
 		const blockProps = useBlockProps.save({
@@ -201,7 +212,7 @@ registerBlockType(metadata.name, {
 
 		return (
 			<div {...blockProps}>
-				<div className="paid-block-fv-8_inner" data-lw_font_set="Noto Sans JP">
+				<div className="paid-block-fv-8_inner" data-lw_font_set={fontSet}>
 					<div className="text_in">
 						<h2 className="ttl">
 							<RichText.Content tagName="span" className="sub" value={subTitle} />

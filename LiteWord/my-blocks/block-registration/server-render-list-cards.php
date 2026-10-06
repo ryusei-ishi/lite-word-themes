@@ -35,13 +35,13 @@ function lw_server_card_post_list_1( $attrs ) {
     }
 
     $cat_bg     = lw_server_list_attr( $attrs, 'catBgColor', 'var(--color-main)' );
-    $cat_font   = lw_server_list_attr( $attrs, 'catFont', 'Noto Sans JP' );
+    $cat_font   = lw_server_list_font( $attrs, 'catFont', 'Noto Sans JP' );
     $cat_w      = lw_server_list_attr( $attrs, 'catFontWeight', '400' );
-    $date_font  = lw_server_list_attr( $attrs, 'dateFont', 'Noto Sans JP' );
+    $date_font  = lw_server_list_font( $attrs, 'dateFont', 'Noto Sans JP' );
     $date_w     = lw_server_list_attr( $attrs, 'dateFontWeight', '400' );
-    $title_font = lw_server_list_attr( $attrs, 'titleFont', 'Noto Sans JP' );
+    $title_font = lw_server_list_font( $attrs, 'titleFont', 'Noto Sans JP' );
     $title_w    = lw_server_list_attr( $attrs, 'titleFontWeight', '500' );
-    $p_font     = lw_server_list_attr( $attrs, 'pFont', 'Noto Sans JP' );
+    $p_font     = lw_server_list_font( $attrs, 'pFont', 'Noto Sans JP' );
     $p_w        = lw_server_list_attr( $attrs, 'pFontWeight', '400' );
 
     $html = '<ul class="post-list-1__wrap">';
@@ -79,13 +79,13 @@ function lw_server_card_post_list_2_3( $attrs, $wrap_class, $with_excerpt ) {
     }
 
     $cat_bg     = lw_server_list_attr( $attrs, 'catBgColor', 'var(--color-main)' );
-    $cat_font   = lw_server_list_attr( $attrs, 'catFont', 'Noto Sans JP' );
+    $cat_font   = lw_server_list_font( $attrs, 'catFont', 'Noto Sans JP' );
     $cat_w      = lw_server_list_attr( $attrs, 'catFontWeight', '400' );
-    $date_font  = lw_server_list_attr( $attrs, 'dateFont', 'Noto Sans JP' );
+    $date_font  = lw_server_list_font( $attrs, 'dateFont', 'Noto Sans JP' );
     $date_w     = lw_server_list_attr( $attrs, 'dateFontWeight', '400' );
-    $title_font = lw_server_list_attr( $attrs, 'titleFont', 'Noto Sans JP' );
+    $title_font = lw_server_list_font( $attrs, 'titleFont', 'Noto Sans JP' );
     $title_w    = lw_server_list_attr( $attrs, 'titleFontWeight', '500' );
-    $p_font     = lw_server_list_attr( $attrs, 'pFont', 'Noto Sans JP' );
+    $p_font     = lw_server_list_font( $attrs, 'pFont', 'Noto Sans JP' );
     $p_w        = lw_server_list_attr( $attrs, 'pFontWeight', '400' );
 
     $html = '<ul class="' . esc_attr( $wrap_class ) . '">';
@@ -145,11 +145,11 @@ function lw_server_card_news_list_1( $attrs ) {
     }
 
     $cat_bg     = lw_server_list_attr( $attrs, 'catBgColor', 'var(--color-main)' );
-    $cat_font   = lw_server_list_attr( $attrs, 'catFont', 'Noto Sans JP' );
+    $cat_font   = lw_server_list_font( $attrs, 'catFont', 'Noto Sans JP' );
     $cat_w      = lw_server_list_attr( $attrs, 'catFontWeight', '400' );
-    $date_font  = lw_server_list_attr( $attrs, 'dateFont', 'Noto Sans JP' );
+    $date_font  = lw_server_list_font( $attrs, 'dateFont', 'Noto Sans JP' );
     $date_w     = lw_server_list_attr( $attrs, 'dateFontWeight', '400' );
-    $title_font = lw_server_list_attr( $attrs, 'titleFont', 'Noto Sans JP' );
+    $title_font = lw_server_list_font( $attrs, 'titleFont', 'Noto Sans JP' );
     $title_w    = lw_server_list_attr( $attrs, 'titleFontWeight', '500' );
 
     $html = '<ul class="news-list-1__wrap">';
@@ -262,11 +262,11 @@ function lw_server_card_page_list_1( $attrs ) {
     $show_date = ! empty( $attrs['showDate'] );
     $show_ex   = ! isset( $attrs['showExcerpt'] ) || $attrs['showExcerpt'];
 
-    $date_font  = lw_server_list_attr( $attrs, 'dateFont', 'Noto Sans JP' );
+    $date_font  = lw_server_list_font( $attrs, 'dateFont', 'Noto Sans JP' );
     $date_w     = lw_server_list_attr( $attrs, 'dateFontWeight', '400' );
-    $title_font = lw_server_list_attr( $attrs, 'titleFont', 'Noto Sans JP' );
+    $title_font = lw_server_list_font( $attrs, 'titleFont', 'Noto Sans JP' );
     $title_w    = lw_server_list_attr( $attrs, 'titleFontWeight', '500' );
-    $ex_font    = lw_server_list_attr( $attrs, 'exFont', 'Noto Sans JP' );
+    $ex_font    = lw_server_list_font( $attrs, 'exFont', 'Noto Sans JP' );
     $ex_w       = lw_server_list_attr( $attrs, 'exFontWeight', '400' );
 
     // 親の指定が無ければ、いま表示しているページの子を出す（JS は body の page-id-N を見ている）

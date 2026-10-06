@@ -88,9 +88,12 @@ switch ($logo_url_type) {
          // 電話番号
          $tel = Lw_theme_mod_set("follow_bottom_cta_ptn_2_set_tel","");
          $tel_color = Lw_theme_mod_set("follow_bottom_cta_ptn_2_set_tel_color","");
+         // フォント（2026-10-06 追加）。未設定は今までどおり Lato。'inherit' のときだけ属性を出さない
+         $tel_font = Lw_theme_mod_set("follow_bottom_cta_ptn_2_set_tel_font_family","Lato");
+         $tel_font_attr = ($tel_font === 'inherit') ? '' : ' data-lw_font_set="' . esc_attr($tel_font) . '"';
          if(!empty($tel)):
       ?>
-      <a href="tel:<?=$tel?>" class="tel" style="color:<?=$tel_color?>" data-lw_font_set="Lato"><?=$tel?></a>
+      <a href="tel:<?=$tel?>" class="tel" style="color:<?=$tel_color?>"<?=$tel_font_attr?>><?=$tel?></a>
       <?php endif;?>
       <?php 
          // ボタン部分
@@ -124,6 +127,9 @@ switch ($logo_url_type) {
    <div class="sp">
       <ul>
          <?php 
+            // ボタン１・２共通のフォント（2026-10-06 追加）。未設定は今までどおり Lato。'inherit' のときだけ属性を出さない
+            $sp_btn_font = Lw_theme_mod_set("follow_bottom_cta_ptn_2_set_sp_btn_font_family","Lato");
+            $sp_btn_font_attr = ($sp_btn_font === 'inherit') ? '' : ' data-lw_font_set="' . esc_attr($sp_btn_font) . '"';
             for ($i=1; $i <= 2; $i++) :
             $sp_btn_text_sub = Lw_theme_mod_set("follow_bottom_cta_ptn_2_set_sp_btn_{$i}_text_sub","テキストテキスト");
             $sp_btn_text_main = Lw_theme_mod_set("follow_bottom_cta_ptn_2_set_sp_btn_{$i}_text_main","LINE無料相談");
@@ -133,7 +139,7 @@ switch ($logo_url_type) {
             if(!empty($sp_btn_text_sub) || !empty($sp_btn_text_main)):
          ?>
          <li>
-            <a href="<?=$sp_btn_url?>" data-lw_font_set="Lato" style="background:<?=$sp_btn_color_bg?>; border-radius: <?=$sp_btn_border_radius?>px <?=$sp_btn_border_radius?>px 0 0;">
+            <a href="<?=$sp_btn_url?>"<?=$sp_btn_font_attr?> style="background:<?=$sp_btn_color_bg?>; border-radius: <?=$sp_btn_border_radius?>px <?=$sp_btn_border_radius?>px 0 0;">
                <div class="sub"><?=$sp_btn_text_sub?></div>
                <div class="main"><?=$sp_btn_text_main?></div>
             </a>

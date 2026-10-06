@@ -80,6 +80,10 @@
 		"hasImageShadow": {
 			"type": "boolean",
 			"default": false
+		},
+		"fontLabel": {
+			"type": "string",
+			"default": "Montserrat"
 		}
 	},
 	"no": 3

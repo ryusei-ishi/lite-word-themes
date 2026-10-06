@@ -226,6 +226,25 @@ function lw_server_list_attr( $attrs, $key, $default ) {
 }
 
 /**
+ * フォントの属性を読む（2026-10-06）。
+ *
+ * lw_server_list_attr() は空の値も既定値に戻すが、フォントは「未選択（空）」に意味がある。
+ * ブロックの JS は data-*-font の値をそのまま data-lw_font_set に入れるので、空なら空のまま
+ * （＝ページのフォントを受け継ぎ、font.js は何も読み込まない）。
+ * 空を既定値（Noto Sans JP）に戻すと、右パネルで「未選択」にしてもページを開いた時点の HTML に
+ * Noto Sans JP が入り、font.js が読み込んでしまう。JS と同じく「属性が無いときだけ既定値」にする。
+ * 属性が無い＝既定値のまま（既定値はブロックのコメントに書かれない）なので、今までの表示は変わらない。
+ *
+ * @param array  $attrs   ブロックの属性。
+ * @param string $key     属性名。
+ * @param string $default 既定値（block.json と同じ）。
+ * @return string
+ */
+function lw_server_list_font( $attrs, $key, $default ) {
+    return ( isset( $attrs[ $key ] ) && is_scalar( $attrs[ $key ] ) ) ? (string) $attrs[ $key ] : $default;
+}
+
+/**
  * サムネイル（無ければテーマの no_image。JS と同じ）。
  *
  * @param WP_Post $post 対象。

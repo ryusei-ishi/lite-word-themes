@@ -1,9 +1,15 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { InspectorControls, MediaUpload, RichText, useBlockProps } from '@wordpress/block-editor';
-import { PanelBody, Button, TextControl, ColorPalette, RangeControl, ToggleControl } from '@wordpress/components';
+import { PanelBody, Button, TextControl, ColorPalette, RangeControl, ToggleControl, SelectControl } from '@wordpress/components';
+import { fontOptionsArr } from '../utils.js';
 import './style.scss';
 import './editor.scss';
 import metadata from './block.json';
+
+/* ラベル（Before / After）のフォント（2026-10-06・fontLabel）。
+ * 既定は今までの直書きと同じ "Montserrat"。保存済みのページの HTML と一致するので検証エラーは出ない。
+ * 共通の選択肢（fontOptionsArr）に Montserrat が無いので、このブロックだけ末尾に足す。 */
+const labelFontOptions = [...fontOptionsArr(), { label: 'Montserrat', value: 'Montserrat' }];
 
 registerBlockType(metadata.name, {
     edit: (props) => {
@@ -21,6 +27,7 @@ registerBlockType(metadata.name, {
             maxWidth,
             aspectRatioHeight,
             hasImageShadow,
+            fontLabel,
         } = attributes;
 
         const blockProps = useBlockProps({
@@ -135,6 +142,13 @@ registerBlockType(metadata.name, {
                             checked={hasImageShadow}
                             onChange={(value) => setAttributes({ hasImageShadow: value })}
                         />
+                        <SelectControl
+                            label="ラベル（Before / After）のフォント"
+                            help="「未選択」にすると、サイト全体のフォント設定に合わせます。"
+                            value={fontLabel}
+                            options={labelFontOptions}
+                            onChange={(value) => setAttributes({ fontLabel: value })}
+                        />
                     </PanelBody>
                 </InspectorControls>
 
@@ -150,7 +164,7 @@ registerBlockType(metadata.name, {
                                     value={beforeText}
                                     onChange={(value) => setAttributes({ beforeText: value })}
                                     placeholder="Before"
-                                    data-lw_font_set="Montserrat"
+                                    data-lw_font_set={fontLabel}
                                 />
                             </div>
                         </div>
@@ -165,7 +179,7 @@ registerBlockType(metadata.name, {
                                     value={afterText}
                                     onChange={(value) => setAttributes({ afterText: value })}
                                     placeholder="After"
-                                    data-lw_font_set="Montserrat"
+                                    data-lw_font_set={fontLabel}
                                 />
                             </div>
                         </div>
@@ -190,6 +204,7 @@ registerBlockType(metadata.name, {
             maxWidth,
             aspectRatioHeight,
             hasImageShadow,
+            fontLabel,
         } = attributes;
 
         const blockProps = useBlockProps.save({
@@ -204,7 +219,7 @@ registerBlockType(metadata.name, {
                             src={beforeImageUrl}
                             alt={beforeImageAlt}
                         />
-                        <div className="text" style={{ backgroundColor: beforeTextBgColor }} data-lw_font_set="Montserrat">
+                        <div className="text" style={{ backgroundColor: beforeTextBgColor }} data-lw_font_set={fontLabel}>
                             <RichText.Content value={beforeText} />
                         </div>
                     </div>
@@ -214,7 +229,7 @@ registerBlockType(metadata.name, {
                             src={afterImageUrl}
                             alt={afterImageAlt}
                         />
-                        <div className="text" style={{ backgroundColor: afterTextBgColor }} data-lw_font_set="Montserrat">
+                        <div className="text" style={{ backgroundColor: afterTextBgColor }} data-lw_font_set={fontLabel}>
                             <RichText.Content value={afterText} />
                         </div>
                     </div>

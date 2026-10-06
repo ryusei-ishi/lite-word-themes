@@ -772,6 +772,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _utils_js__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../utils.js */ "./src/utils.js");
 /* harmony import */ var _block_json__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./block.json */ "./src/paid-block-cta-3/block.json");
+function _toConsumableArray(r) { return _arrayWithoutHoles(r) || _iterableToArray(r) || _unsupportedIterableToArray(r) || _nonIterableSpread(); }
+function _nonIterableSpread() { throw new TypeError("Invalid attempt to spread non-iterable instance.\nIn order to be iterable, non-array objects must have a [Symbol.iterator]() method."); }
+function _unsupportedIterableToArray(r, a) { if (r) { if ("string" == typeof r) return _arrayLikeToArray(r, a); var t = {}.toString.call(r).slice(8, -1); return "Object" === t && r.constructor && (t = r.constructor.name), "Map" === t || "Set" === t ? Array.from(r) : "Arguments" === t || /^(?:Ui|I)nt(?:8|16|32)(?:Clamped)?Array$/.test(t) ? _arrayLikeToArray(r, a) : void 0; } }
+function _iterableToArray(r) { if ("undefined" != typeof Symbol && null != r[Symbol.iterator] || null != r["@@iterator"]) return Array.from(r); }
+function _arrayWithoutHoles(r) { if (Array.isArray(r)) return _arrayLikeToArray(r); }
+function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length); for (var e = 0, n = Array(a); e < a; e++) n[e] = r[e]; return n; }
 /**
  * CTA 03
  * ★ apiVersion 3 対応（2025-12-07）
@@ -784,7 +790,13 @@ __webpack_require__.r(__webpack_exports__);
 
 
 // フォントオプションを変数に定義
-var fontOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontOptionsArr)();
+// 🚨 電話番号の既定値は "Montserrat" なのに、共通の選択肢（fontOptionsArr）に Montserrat が無い（2026-10-06 判明）。
+//    無いと欄には「未選択」と出るのに中身は Montserrat のままで、「未選択」を選び直しても変わらない。
+//    このブロックだけ末尾に足す（共通の utils.js は触らない）。
+var fontOptions = [].concat(_toConsumableArray((0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontOptionsArr)()), [{
+  label: 'Montserrat',
+  value: 'Montserrat'
+}]);
 // フォント太さオプションを変数に定義
 var fontWeightOptions = (0,_utils_js__WEBPACK_IMPORTED_MODULE_4__.fontWeightOptionsArr)();
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {

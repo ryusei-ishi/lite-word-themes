@@ -1057,7 +1057,7 @@ module.exports = window["wp"]["data"];
   \******************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/cta-2","version":"1.0.0","title":"CTA 02","category":"lw-cta","icon":"megaphone","description":"電話番号・メールボタン付きCTAブロック","aiHint":{"description":"電話+メールCTA。背景画像+h2見出し+住所+電話番号+メールボタン。店舗系業種に最適","excludeFromAutoSelect":false,"contentAttributes":["title","addressText","phoneText","phoneNumber","mailText","mailUrl"],"imageAttributes":["backgroundImage"],"notes":"電話とメールの2つの導線を1つの帯にまとめるCTA。メールボタンのアイコンは文字色に追随する（buttonTextColor を変えるとアイコンも変わる）。"},"supports":{"anchor":true},"attributes":{"title":{"type":"string","source":"html","selector":"h2","default":"お問合せはこちら","aiHint":{"role":"heading","contentGuide":"お問い合わせ誘導のh2見出し。5〜15文字","example":"お気軽にご連絡ください"}},"addressText":{"type":"string","source":"html","selector":".address","default":"〒110-0000 東京都豊島区池袋0-0-0／TEL. 042-000-0000／FAX. 042-000-0001","aiHint":{"role":"body","contentGuide":"住所+電話+FAX。実際の情報を入力してもらう想定","example":"〒000-0000 東京都渋谷区○○1-2-3／TEL. 03-0000-0000"}},"phoneText":{"type":"string","source":"html","selector":".tel_text","default":"（受付時間／9:00～17:00 第2・第4土曜、日祝休業）","aiHint":{"role":"body","contentGuide":"受付時間・休業日。業種に合わせる","example":"（受付時間／10:00～19:00 水曜定休）"}},"phoneNumber":{"type":"string","default":"042-000-0000","aiHint":{"role":"phone","contentGuide":"電話番号。ハイフン付き","example":"03-0000-0000"}},"mailText":{"type":"string","source":"html","selector":".mail_text","default":"メールでお問い合わせ","aiHint":{"role":"button","contentGuide":"メールボタンラベル。5〜15文字","example":"メールで予約する"}},"mailUrl":{"type":"string","default":"mailto:info@example.com","aiHint":{"role":"url","contentGuide":"mailto:形式 or お問い合わせページURL"}},"mailLinkType":{"type":"string","default":"url"},"mailPageId":{"type":"number","default":0},"mailCategoryId":{"type":"number","default":0},"backgroundImage":{"type":"string","default":"https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/sub_2.webp","aiHint":{"role":"image","note":"背景画像URL。画像生成時に設定"}},"filterColor":{"type":"string","default":"rgba(0, 0, 0, 0.5)","aiHint":{"skip":true}},"buttonBackgroundColor":{"type":"string","default":"#0073aa","aiHint":{"skip":true}},"buttonTextColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"selectedIcon":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z\\"/></svg>","aiHint":{"skip":true}},"maxWidth":{"type":"number","default":0,"aiHint":{"skip":true}}},"editorScript":"file:./cta-2.js","no":2}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/cta-2","version":"1.0.0","title":"CTA 02","category":"lw-cta","icon":"megaphone","description":"電話番号・メールボタン付きCTAブロック","aiHint":{"description":"電話+メールCTA。背景画像+h2見出し+住所+電話番号+メールボタン。店舗系業種に最適","excludeFromAutoSelect":false,"contentAttributes":["title","addressText","phoneText","phoneNumber","mailText","mailUrl"],"imageAttributes":["backgroundImage"],"notes":"電話とメールの2つの導線を1つの帯にまとめるCTA。メールボタンのアイコンは文字色に追随する（buttonTextColor を変えるとアイコンも変わる）。"},"supports":{"anchor":true},"attributes":{"title":{"type":"string","source":"html","selector":"h2","default":"お問合せはこちら","aiHint":{"role":"heading","contentGuide":"お問い合わせ誘導のh2見出し。5〜15文字","example":"お気軽にご連絡ください"}},"addressText":{"type":"string","source":"html","selector":".address","default":"〒110-0000 東京都豊島区池袋0-0-0／TEL. 042-000-0000／FAX. 042-000-0001","aiHint":{"role":"body","contentGuide":"住所+電話+FAX。実際の情報を入力してもらう想定","example":"〒000-0000 東京都渋谷区○○1-2-3／TEL. 03-0000-0000"}},"phoneText":{"type":"string","source":"html","selector":".tel_text","default":"（受付時間／9:00～17:00 第2・第4土曜、日祝休業）","aiHint":{"role":"body","contentGuide":"受付時間・休業日。業種に合わせる","example":"（受付時間／10:00～19:00 水曜定休）"}},"phoneNumber":{"type":"string","default":"042-000-0000","aiHint":{"role":"phone","contentGuide":"電話番号。ハイフン付き","example":"03-0000-0000"}},"mailText":{"type":"string","source":"html","selector":".mail_text","default":"メールでお問い合わせ","aiHint":{"role":"button","contentGuide":"メールボタンラベル。5〜15文字","example":"メールで予約する"}},"mailUrl":{"type":"string","default":"mailto:info@example.com","aiHint":{"role":"url","contentGuide":"mailto:形式 or お問い合わせページURL"}},"mailLinkType":{"type":"string","default":"url"},"mailPageId":{"type":"number","default":0},"mailCategoryId":{"type":"number","default":0},"backgroundImage":{"type":"string","default":"https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/sub_2.webp","aiHint":{"role":"image","note":"背景画像URL。画像生成時に設定"}},"filterColor":{"type":"string","default":"rgba(0, 0, 0, 0.5)","aiHint":{"skip":true}},"buttonBackgroundColor":{"type":"string","default":"#0073aa","aiHint":{"skip":true}},"buttonTextColor":{"type":"string","default":"#ffffff","aiHint":{"skip":true}},"selectedIcon":{"type":"string","default":"<svg xmlns=\\"http://www.w3.org/2000/svg\\" viewBox=\\"0 0 512 512\\"><path d=\\"M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z\\"/></svg>","aiHint":{"skip":true}},"maxWidth":{"type":"number","default":0,"aiHint":{"skip":true}},"fontNumber":{"type":"string","default":"Roboto","aiHint":{"skip":true}}},"editorScript":"file:./cta-2.js","no":2}');
 
 /***/ })
 
@@ -1158,6 +1158,8 @@ function _arrayLikeToArray(r, a) { (null == a || a > r.length) && (a = r.length)
 /**
  * CTA 02
  * ★ apiVersion 3 対応（2025-12-07）
+ * ★ 電話番号のフォントを選べるようにした（2026-10-06・fontNumber）。
+ *   既定は今までの直書きと同じ "Roboto"。保存済みのページの HTML と一致するので検証エラーは出ない。
  */
 
 
@@ -1191,7 +1193,8 @@ var lwBlockDef = {
       buttonBackgroundColor = attributes.buttonBackgroundColor,
       buttonTextColor = attributes.buttonTextColor,
       selectedIcon = attributes.selectedIcon,
-      maxWidth = attributes.maxWidth;
+      maxWidth = attributes.maxWidth,
+      fontNumber = attributes.fontNumber;
     var onSelectBackgroundImage = function onSelectBackgroundImage(media) {
       return setAttributes({
         backgroundImage: media.url
@@ -1268,6 +1271,16 @@ var lwBlockDef = {
       onChange: function onChange(value) {
         return setAttributes({
           phoneNumber: value
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.SelectControl, {
+      label: "\u96FB\u8A71\u756A\u53F7\u306E\u30D5\u30A9\u30F3\u30C8",
+      help: "\u300C\u672A\u9078\u629E\u300D\u306B\u3059\u308B\u3068\u3001\u30B5\u30A4\u30C8\u5168\u4F53\u306E\u30D5\u30A9\u30F3\u30C8\u8A2D\u5B9A\u306B\u5408\u308F\u305B\u307E\u3059\u3002",
+      value: fontNumber,
+      options: (0,_utils_js__WEBPACK_IMPORTED_MODULE_3__.fontOptionsArr)(),
+      onChange: function onChange(value) {
+        return setAttributes({
+          fontNumber: value
         });
       }
     })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
@@ -1361,7 +1374,7 @@ var lwBlockDef = {
       className: "tel"
     }, /*#__PURE__*/React.createElement("div", {
       className: "no",
-      "data-lw_font_set": "Roboto"
+      "data-lw_font_set": fontNumber
     }, /*#__PURE__*/React.createElement("div", {
       className: "small"
     }, "TEL:"), /*#__PURE__*/React.createElement("div", {
@@ -1421,7 +1434,8 @@ var lwBlockDef = {
       buttonBackgroundColor = attributes.buttonBackgroundColor,
       buttonTextColor = attributes.buttonTextColor,
       selectedIcon = attributes.selectedIcon,
-      maxWidth = attributes.maxWidth;
+      maxWidth = attributes.maxWidth,
+      fontNumber = attributes.fontNumber;
 
     // useBlockProps.save() で apiVersion 3 対応
     var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
@@ -1448,7 +1462,7 @@ var lwBlockDef = {
     }), /*#__PURE__*/React.createElement("nav", null, /*#__PURE__*/React.createElement("a", {
       href: "tel:".concat(phoneNumber),
       className: "tel",
-      "data-lw_font_set": "Roboto"
+      "data-lw_font_set": fontNumber
     }, /*#__PURE__*/React.createElement("div", {
       className: "no"
     }, /*#__PURE__*/React.createElement("div", {

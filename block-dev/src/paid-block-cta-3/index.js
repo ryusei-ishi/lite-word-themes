@@ -22,7 +22,10 @@ import { fontOptionsArr, fontWeightOptionsArr } from '../utils.js';
 import metadata from './block.json';
 
 // フォントオプションを変数に定義
-const fontOptions = fontOptionsArr();
+// 🚨 電話番号の既定値は "Montserrat" なのに、共通の選択肢（fontOptionsArr）に Montserrat が無い（2026-10-06 判明）。
+//    無いと欄には「未選択」と出るのに中身は Montserrat のままで、「未選択」を選び直しても変わらない。
+//    このブロックだけ末尾に足す（共通の utils.js は触らない）。
+const fontOptions = [...fontOptionsArr(), { label: 'Montserrat', value: 'Montserrat' }];
 // フォント太さオプションを変数に定義
 const fontWeightOptions = fontWeightOptionsArr();
 

@@ -142,6 +142,13 @@
 			"aiHint": {
 				"skip": true
 			}
+		},
+		"fontNumber": {
+			"type": "string",
+			"default": "Roboto",
+			"aiHint": {
+				"skip": true
+			}
 		}
 	},
 	"editorScript": "file:./cta-2.js",
