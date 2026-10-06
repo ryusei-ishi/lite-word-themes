@@ -16,7 +16,9 @@ switch ($logo_url_type) {
          global $wp;
          $url = home_url(add_query_arg(array(), $wp->request));
       }
-      $logo_url = "href='$url'";
+      // 🚨 esc_url を通す（2026-10-06）。$wp->request はアクセスされた URL そのもので、
+      //    ' を含む URL を開かれると href='…' の外へ抜けられた（反射型 XSS）。
+      $logo_url = "href='" . esc_url($url) . "'";
       break;
    case 'no_link':
       $logo_tag = "div";
