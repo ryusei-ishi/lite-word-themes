@@ -19,10 +19,22 @@ get_template_part('templates/drawer/index');
         <div class="main_content">
             <section class="post_content">
                 <div class="post_style page <?=$page_content_shadow?>">
+                    <?php
+                        // 会員用のログアウト（会員限定ページをログインして見ているときだけ・本文の上）
+                        if ( function_exists( 'lw_membership_logout_box' ) ) {
+                            lw_membership_logout_box( 'top' );
+                        }
+                    ?>
                     <div class="first_content"></div>
                     <?php get_template_part( 'templates/pr_notice/index' ); ?>
                     <?php the_content()?>
                     <div class="last_content"></div>
+                    <?php
+                        // 会員用のログアウト（本文の下）。.last_content より後ろに置く
+                        if ( function_exists( 'lw_membership_logout_box' ) ) {
+                            lw_membership_logout_box( 'bottom' );
+                        }
+                    ?>
                 </div>
             </section>
         </div>

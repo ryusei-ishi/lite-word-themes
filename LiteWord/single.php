@@ -49,6 +49,12 @@ get_template_part('templates/drawer/index');
                 ?>
 
                 <div class="post_style single" itemprop="articleBody">
+                    <?php
+                        // 会員用のログアウト（会員限定ページをログインして見ているときだけ・本文の上）
+                        if ( function_exists( 'lw_membership_logout_box' ) ) {
+                            lw_membership_logout_box( 'top' );
+                        }
+                    ?>
                     <?php 
                         // 固定ページではない場合
                         if(!is_page()){
@@ -60,6 +66,12 @@ get_template_part('templates/drawer/index');
                     <?php get_template_part( 'templates/pr_notice/index' ); ?>
                     <?php the_content()?>
                     <div class="last_content"></div>
+                    <?php
+                        // 会員用のログアウト（本文の下）。.last_content より後ろに置く（本文と .last_content の並びで決まる余白を崩さない）
+                        if ( function_exists( 'lw_membership_logout_box' ) ) {
+                            lw_membership_logout_box( 'bottom' );
+                        }
+                    ?>
                     <?php if ( is_active_sidebar( 'post_padding_bottom' ) ) : ?>
                         <aside>
                             <div class="post_padding_bottom">

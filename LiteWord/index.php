@@ -7,9 +7,21 @@ get_template_part('templates/drawer/index');
 ?>
 <main>
     <?php get_template_part('templates/archive/fv/index'); ?>
+    <?php
+        // 会員用のログアウト（会員限定のカテゴリー一覧をログインして見ているときだけ・一覧の上）
+        if ( function_exists( 'lw_membership_logout_box' ) ) {
+            lw_membership_logout_box( 'top' );
+        }
+    ?>
     <?php get_template_part('templates/archive/cat_common_content/index'); ?>
     <?php get_template_part('templates/archive/body/index'); ?>
     <?php get_template_part('templates/archive/post_list/index'); ?>
+    <?php
+        // 会員用のログアウト（一覧の下）
+        if ( function_exists( 'lw_membership_logout_box' ) ) {
+            lw_membership_logout_box( 'bottom' );
+        }
+    ?>
 </main>
 <?php
     // category_bottom_widget_area_all は常に表示

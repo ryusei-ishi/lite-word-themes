@@ -7,12 +7,19 @@ if ( !defined( 'ABSPATH' ) ) exit;
  *   ・ログイン画面のデザイン（templates/membership/login/ptn_*）
  *   ・一時停止（ログイン画面の代わりに停止中の見出し・文言を出す。functions/membership/pause.php）
  *   ・投稿のタイトル部分（FV）を残すか
+ *   ・会員用のログアウト（会員限定ページの中・メニュー・文言・ログアウト後のページ。functions/membership/logout/）
  *   ・会員登録（受け付けるか・デザイン・付ける権限・入力項目）
  * 投稿ごとの上書きは「観覧権限」メタボックス（functions/membership/restrict_admin.php）。
  *
  * 閲覧権限そのものの設定は投稿サイドバーとカテゴリー編集画面。
  * 仕様 → sl_management/knowledge/products/liteword/doc/specs/membership-restriction.md
+ *
+ * 項目が増えてきたので、まとまりごとの並べ方は functions/customizer/membership/ に分けていく
+ * （まずは会員用のログアウトから。一時停止・会員登録も、次に触るときに移す）。
  * =============================================================== */
+
+// 会員用のログアウトの項目（lw_membership_logout_customizer_items()）
+get_template_part( './functions/customizer/membership/logout' );
 
 add_action( 'customize_register', 'lw_membership_customizer' );
 function lw_membership_customizer( $wp_customize ) {
@@ -62,6 +69,10 @@ function lw_membership_customizer( $wp_customize ) {
                 . '（メールアドレス・パスワードの変更）も開けなくなります。',
                 ctm_switch_array( '入れる（既定）' ),
             ],
+        ],
+        // ログインしている人にだけ「ログアウト」を出す（会員限定ページの中・メニュー）
+        lw_membership_logout_customizer_items(),
+        [
             [
                 'select',
                 'protect_files',
@@ -163,7 +174,7 @@ function lw_membership_register_customizer_items() {
             'register_page',
             '■ 会員登録ページ',
             'ショートコードを貼った固定ページを選んでください。<br>'
-            . 'ログイン画面に「新規登録はこちら」のリンクが出るようになります。',
+            . 'ログイン画面に「はじめての方はこちら（会員登録）」のリンクが出るようになります（「会員登録を受け付ける」がONのときだけ）。',
             lw_member_register_page_choices(),
         ],
         [

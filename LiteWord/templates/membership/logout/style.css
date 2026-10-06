@@ -1,0 +1,76 @@
+/* 🚨 このファイルは style.scss から書き出したもの。直すときは style.scss を直す */
+.lw_member_logout {
+    --member-accent: var(--color-main, #2f6fed);
+    --member-muted: #6b7280;
+    --member-border: #dcdfe4;
+    box-sizing: border-box;
+}
+.lw_member_logout * {
+    box-sizing: border-box;
+}
+.lw_member_logout.type_top {
+    padding-bottom: 16px;
+}
+.lw_member_logout.type_top .wrap {
+    border-bottom: 1px solid var(--member-border);
+}
+.lw_member_logout.type_bottom {
+    padding-top: 16px;
+}
+.lw_member_logout.type_bottom .wrap {
+    border-top: 1px solid var(--member-border);
+}
+.lw_member_logout.type_wide {
+    margin-right: auto;
+    margin-left: auto;
+    width: calc(100% - 48px);
+    max-width: 1080px;
+}
+@media (max-width: 700px) {
+    .lw_member_logout.type_wide {
+        width: calc(100% - 32px);
+    }
+}
+.lw_member_logout .wrap {
+    padding: 20px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 8px 16px;
+}
+.lw_member_logout .text {
+    color: var(--member-muted);
+    font-size: 14px;
+    line-height: 1.6em;
+    letter-spacing: 0.04em;
+}
+.lw_member_logout .btn {
+    padding: 8px 20px;
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    color: var(--member-accent);
+    background: #fff;
+    font-size: 14px;
+    font-weight: 700;
+    line-height: 1.6em;
+    letter-spacing: 0.08em;
+    text-decoration: none;
+    border: 1px solid var(--member-accent);
+    border-radius: 999px;
+    transition: color 0.3s, background-color 0.3s;
+}
+@media (hover: hover) {
+    .lw_member_logout .btn:hover {
+        color: #fff;
+        background: var(--member-accent);
+    }
+}
+.lw_member_logout .btn:focus-visible {
+    outline: 2px solid var(--member-accent);
+    outline-offset: 2px;
+}
+.lw_member_logout .btn svg {
+    flex-shrink: 0;
+}

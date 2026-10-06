@@ -1486,6 +1486,7 @@ function Lw_header_menu_put($item = []){
             'container_class' => '', // クラス名を無効化
             'fallback_cb' => false,
             'items_wrap' => '<ul data-lw_font_set="'.$menu_font.'" class="header_menu_pc">%3$s</ul>', // 自分で定義した `ul` タグを使用
+            'lw_menu_area' => $location, // どのメニューかの目印（`menu` を選ぶと theme_location が空になるため。会員用のログアウトが使う）
         ))
     );
     
@@ -1570,6 +1571,7 @@ function Lw_follow_menu_put($item = []){
                 'container_class' => '', // クラス名を無効化
                 'fallback_cb' => false,
                 'items_wrap' => '<ul class="header_menu_pc">%3$s</ul>', // 自分で定義した `ul` タグを使用
+                'lw_menu_area' => $location, // どのメニューかの目印（会員用のログアウトが使う）
             ))
         );
         echo "</nav>";

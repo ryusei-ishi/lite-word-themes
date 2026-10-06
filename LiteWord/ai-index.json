@@ -1,8 +1,8 @@
 {
 	"_meta": {
 		"description": "LiteWordテーマのAI向け情報インデックス。AIキャラクターはまずこのファイルを読んで、テーマの全体像と各メタ情報の在処を把握すること。",
-		"version": "1.3",
-		"lastUpdated": "2026-09-05",
+		"version": "1.4",
+		"lastUpdated": "2026-10-06",
 		"usage": "このファイルはテーマのルートディレクトリに配置される。AIがLiteWordテーマについて理解するための入口（目次）として機能する。WordPressの動作には一切影響しない。"
 	},
 	"theme": {
@@ -19,7 +19,7 @@
 			"notes": "ブロックレベルのaiHint（description, contentAttributes, imageAttributes）と、属性レベルのaiHint（role, contentGuide, example, skip）がある。"
 		},
 		"customizer": {
-			"description": "カスタマイザー（外観 > カスタマイズ）の全設定。パネル13個・セクション30+・設定キー35個のaiDescription・userGuideを記載。",
+			"description": "カスタマイザー（外観 > カスタマイズ）の全設定。パネル・セクション・設定キーごとの aiDescription・userGuide を記載（会員限定ページ設定 sections.lw_membership_sec を含む）。",
 			"location": "functions/customizer/customizer-ai-hints.json"
 		},
 		"pageEditor": {
@@ -57,6 +57,12 @@
 		"userProfile": {
 			"description": "ユーザープロフィール拡張。SNS連絡先追加・カスタムプロフィール画像・プロフィール管理画面（プレミアム）。",
 			"location": "functions/user_data/user-profile-ai-hints.json"
+		},
+		"membership": {
+			"description": "会員限定ページ（閲覧権限）。投稿・固定ページ・カテゴリーを、選んだ権限（ロール）の人だけに見せ、権限の無い人にはログイン画面を出す。サイト全体の設定（ログイン画面のデザイン・一時停止・会員を管理画面に入れない・会員用のログアウト〔会員限定ページの中・メニュー〕・写真PDFを守る・会員登録）はカスタマイザー「会員限定ページ設定」。",
+			"location": "functions/customizer/customizer-ai-hints.json",
+			"section": "sections.lw_membership_sec",
+			"notes": "どのページを会員限定にするかはカスタマイザーではなく、投稿・固定ページの編集画面の「観覧権限」とカテゴリーの編集画面で決める。会員用のログアウトは、ログインしている人にだけ出る（ログインしていない人の HTML には出ない）。"
 		},
 		"aiChat": {
 			"description": "AIチャットボット。管理画面のどこからでも呼び出せるAIアシスタント（猫ロボットキャラクター）。ダッシュボードは「AIに相談する」大型ボタン、それ以外の管理画面は右下のフローティングボタン（FAB）から開く。カテゴリ別質問・音声入力・チャット履歴対応。",

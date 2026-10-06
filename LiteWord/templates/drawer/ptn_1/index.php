@@ -56,6 +56,7 @@
                     'container' => false,
                     'fallback_cb' => false,
                     'items_wrap' => '<ul data-lw_font_set="'.$menu_font.'" class="menu_sp">%3$s</ul>',
+                    'lw_menu_area' => $location, // どのメニューかの目印（`menu` を選ぶと theme_location が空になるため。会員用のログアウトが使う）
                     )
             ); ?>
             <?php Lw_cta_btn_1_set([

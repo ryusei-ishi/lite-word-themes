@@ -24,14 +24,8 @@ add_action( 'template_redirect', 'lw_protect_view_by_role' );
 function lw_protect_view_by_role() {
 
 	/* ---------- 適用対象を絞り、適用する閲覧権限を決める ---------- */
-	if ( is_singular( [ 'post', 'page' ] ) ) {
-		$allowed_roles = lw_get_allowed_roles_for_post( get_queried_object_id() );
-
-	} elseif ( is_category() ) {
-		// 適用範囲が「投稿だけ」のカテゴリーは、一覧ページを制限しない
-		$allowed_roles = lw_get_effective_term_roles( get_queried_object_id(), 'archive' );
-
-	} else {
+	$allowed_roles = lw_membership_queried_allowed_roles();
+	if ( $allowed_roles === false ) {
 		return;
 	}
 
@@ -41,4 +35,30 @@ function lw_protect_view_by_role() {
 	if ( $reason !== '' ) {
 		lw_membership_block( $reason );
 	}
+}
+
+/**
+ * いま開いているページに適用する閲覧権限
+ *
+ * 会員用のログアウト（functions/membership/logout/box.php）も、ボタンを出すかの判定に使う。
+ * 守る側と出す側で「どのページが会員限定か」を食い違わせないため、ここ1か所で決める。
+ *
+ * 🚨 対象外の目印は false（null にしない）。lw_get_allowed_roles_for_post() はキャッシュの値をそのまま返すので、
+ *    壊れたキャッシュが null を返したとき「対象外」と取り違えて素通しにしないため。
+ *    配列以外が来たら、切り出す前と同じく lw_check_view_permission()（array 型）で止まる。
+ *
+ * @return array|false 対象外のページなら false。対象でも制限が無ければ空配列
+ */
+function lw_membership_queried_allowed_roles() {
+
+	if ( is_singular( [ 'post', 'page' ] ) ) {
+		return lw_get_allowed_roles_for_post( get_queried_object_id() );
+	}
+
+	if ( is_category() ) {
+		// 適用範囲が「投稿だけ」のカテゴリーは、一覧ページを制限しない
+		return lw_get_effective_term_roles( get_queried_object_id(), 'archive' );
+	}
+
+	return false;
 }
