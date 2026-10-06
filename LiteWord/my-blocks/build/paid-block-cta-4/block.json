@@ -125,6 +125,10 @@
 		"maxWidth": {
 			"type": "number",
 			"default": 0
+		},
+		"fontTitle": {
+			"type": "string",
+			"default": "Lato"
 		}
 	},
 	"editorScript": "file:./paid-block-cta-4.js",

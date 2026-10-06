@@ -1,6 +1,9 @@
 /**
  * CTA 04
  * ★ apiVersion 3 対応（2025-12-07）
+ * ★ 見出しのフォントを選べるようにした（2026-10-06・fontTitle）。
+ *   既定は今までの直書きと同じ "Lato"。保存済みのページの HTML と一致するので検証エラーは出ない。
+ *   付く場所は今までどおり（CTA1 は h2、CTA2 は .main）。
  */
 import { registerBlockType } from '@wordpress/blocks';
 import {
@@ -15,8 +18,10 @@ import {
     ColorPalette,
     RangeControl,
     TextControl,
+    SelectControl,
 } from '@wordpress/components';
 import { Fragment } from '@wordpress/element';
+import { fontOptionsArr } from '../utils.js';
 
 import metadata from './block.json';
 import { LinkPicker, lwLinkFromAttrs, lwLinkToAttrs, lwLinkDataPropsFromAttrs } from '../link-picker.js';
@@ -63,6 +68,9 @@ registerBlockType(metadata.name, {
 
             // --- 最大横幅 ---
             maxWidth,
+
+            // --- 見出しのフォント ---
+            fontTitle,
         } = attributes;
 
         // === 画像変更ハンドラ ===
@@ -137,6 +145,16 @@ registerBlockType(metadata.name, {
                                 このブロックの使い方はこちら
                             </Button>
                         </div>
+                    </PanelBody>
+                    {/* ---- フォント設定（CTA1・CTA2 の見出し共通） ---- */}
+                    <PanelBody title="フォント設定" initialOpen={false}>
+                        <SelectControl
+                            label="見出しのフォント（CTA1・CTA2 共通）"
+                            help="「未選択」にすると、サイト全体のフォント設定に合わせます。"
+                            value={fontTitle}
+                            options={fontOptionsArr()}
+                            onChange={(value) => setAttributes({ fontTitle: value })}
+                        />
                     </PanelBody>
                     {/* ---- CTA1設定 ---- */}
                     <PanelBody title="CTA1設定" initialOpen={true}>
@@ -306,7 +324,7 @@ registerBlockType(metadata.name, {
                         {/* ==== CTA1 ==== */}
                         <li>
                             <div className="a">
-                                <h2 className="ttl parts_page_ttl_main" data-lw_font_set="Lato">
+                                <h2 className="ttl parts_page_ttl_main" data-lw_font_set={fontTitle}>
                                     <div className="main">
                                         <RichText
                                             value={mainTitle1}
@@ -383,7 +401,7 @@ registerBlockType(metadata.name, {
                         {/* ==== CTA2 ==== */}
                         <li>
                             <div className="a">
-                                <h2 className="ttl parts_page_ttl_main" data-lw_font_set="Lato">
+                                <h2 className="ttl parts_page_ttl_main" data-lw_font_set={fontTitle}>
                                     <div className="main">
                                         <RichText
                                             value={mainTitle2}
@@ -497,6 +515,9 @@ registerBlockType(metadata.name, {
 
             // 最大横幅
             maxWidth,
+
+            // 見出しのフォント
+            fontTitle,
         } = attributes;
 
         // useBlockProps.save() で apiVersion 3 対応
@@ -511,7 +532,7 @@ registerBlockType(metadata.name, {
                     {/* ==== CTA1 ==== */}
                     <li>
                         <a href={linkUrl1 || '#'} data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS_1).linkType} data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS_1).linkId}>
-                            <h2 className="ttl parts_page_ttl_main" data-lw_font_set="Lato">
+                            <h2 className="ttl parts_page_ttl_main" data-lw_font_set={fontTitle}>
                                 <div className="main">
                                     <RichText.Content value={mainTitle1} />
                                 </div>
@@ -563,7 +584,7 @@ registerBlockType(metadata.name, {
                     <li>
                         <a href={linkUrl2 || '#'} data-lw-link-type={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS_2).linkType} data-lw-link-id={lwLinkDataPropsFromAttrs(attributes, LINK_KEYS_2).linkId}>
                             <h2 className="ttl parts_page_ttl_main">
-                                <div className="main" data-lw_font_set="Lato">
+                                <div className="main" data-lw_font_set={fontTitle}>
                                     <RichText.Content value={mainTitle2} />
                                 </div>
                                 <div className="sub">
