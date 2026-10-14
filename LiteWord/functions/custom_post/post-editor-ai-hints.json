@@ -1,8 +1,8 @@
 {
 	"_meta": {
 		"description": "LiteWord投稿編集画面のメタボックス「入力フォーム」および「その他の設定」のAI向けメタ情報。各設定項目の意味・用途・推奨値をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
-		"version": "1.0",
-		"lastUpdated": "2026-03-21",
+		"version": "1.1",
+		"lastUpdated": "2026-10-14",
 		"sourceFiles": [
 			"functions/custom_post/post.php",
 			"functions/custom_post/common.php",
@@ -245,7 +245,7 @@
 						"metaKey": "seo_301_redirect_url",
 						"inputType": "text",
 						"placeholder": "https://example.com/page",
-						"aiDescription": "301リダイレクトの元URL。ここに指定したURLにアクセスすると、この投稿に301リダイレクトされる。",
+						"aiDescription": "301リダイレクトの元URL。ここに指定したURLにアクセスすると、この投稿に301リダイレクトされる。https:// から始まるURLでも /old-page のようなパスだけでもよく、カンマ区切りで複数指定可能。? 無しで登録した旧URLは、後ろに ?〜 が付いたアクセスも転送し、? 以降を転送先に引き継ぐ（そのURLが404のときだけ）。詳しくは functions/seo/seo-ai-hints.json の seo_301_redirect_url と redirectSettings。",
 						"userGuide": "記事のURLを変更した場合に旧URLからのアクセスを転送する。クイック編集からも設定可能。"
 					}
 				},

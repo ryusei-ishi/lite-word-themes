@@ -1,8 +1,8 @@
 {
 	"_meta": {
 		"description": "LiteWordカテゴリーカスタマイズ機能のAI向けメタ情報。カテゴリー編集画面の拡張フィールド・並び順・301リダイレクト・共通設定をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
-		"version": "1.0",
-		"lastUpdated": "2026-03-21"
+		"version": "1.1",
+		"lastUpdated": "2026-10-14"
 	},
 	"overview": {
 		"aiDescription": "WordPressのカテゴリー編集画面を拡張し、並び順・SEO設定・レイアウト制御・アイキャッチ画像・301リダイレクト・目次制御・カテゴリーページ本文など多数の機能を追加する。また、全カテゴリー共通のFV下コンテンツを一括設定する管理画面も提供する。",
@@ -54,7 +54,7 @@
 			"metaKey": "category_redirect_from_url",
 			"type": "url",
 			"placeholder": "http://example.com/old-category",
-			"technicalDetail": "template_redirectフックで処理。ホスト名+パスを正規化して比較。無限ループ防止あり。管理画面・Ajax・Cron・プレビューでは無効。",
+			"technicalDetail": "template_redirectフックで処理（functions/301_redirect.php）。ホスト名+パスを正規化して比較（? 以降を含む形→? の前だけの形の順）。? 無しで登録した旧URLは、後ろに ?〜 が付いたアクセスも転送し、? 以降を転送先に引き継ぐ（そのURLが404のときだけ。WordPress が使う ?p= などは外す）。欄は URL 形式なので https:// から書く（パスだけは入れられない）。複数書くときはカンマのあとに空白を入れない。無限ループ防止あり。管理画面・Ajax・Cron・プレビューでは無効。",
 			"userGuide": "サイト内の旧URLを入力すると、そのURLにアクセスしたユーザーを現在のカテゴリーページに301リダイレクトする。SEOの評価を引き継ぐために使う。"
 		},
 		"category_toc_switch": {
@@ -167,7 +167,7 @@
 			"aiDescription": "カテゴリーの並び順はterms_clausesフィルターでSQLレベルで制御。category_sort_orderメタ値をLEFT JOINして、未設定は999として扱い、名前のアルファベット順でセカンダリソート。管理画面のみ適用（is_admin()チェック付き）。"
 		},
 		"redirectMechanism": {
-			"aiDescription": "template_redirectフックで301リダイレクト処理。URL正規化（スキーム除去・末尾スラッシュ除去・小文字化）してDB内の旧URLと比較。該当カテゴリーが見つかればwp_redirect()で301転送。無限ループ防止・管理画面除外あり。"
+			"aiDescription": "functions/301_redirect.php が template_redirect フックで301リダイレクト処理。URL正規化（スキーム除去・末尾スラッシュ除去・小文字化）してDB内の旧URLと比較（? 以降を含む形→? の前だけの形の順）。該当カテゴリーが見つかればwp_redirect()で301転送（? の前だけで一致したときは ? 以降を引き継ぐ）。無限ループ防止・管理画面除外あり。照合の詳細は functions/seo/seo-ai-hints.json の redirectSettings。"
 		},
 		"saveFields": {
 			"aiDescription": "edited_categoryアクションで全フィールドを一括保存。各フィールドに適切なサニタイズ関数を適用（sanitize_text_field/absint/esc_url_raw/wp_kses_post等）。noindexはチェックボックスのため、未チェック時はdelete_term_metaで削除。"

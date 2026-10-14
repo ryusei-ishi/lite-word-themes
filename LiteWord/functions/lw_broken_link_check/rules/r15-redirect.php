@@ -10,6 +10,8 @@
  *   R15 🟡 内部リンクが旧URLを指している … 毎回リダイレクトが挟まって遅くなる
  *   R16 🔴 旧URLとして「いま公開している別のページのURL」が登録されている
  *           … そのページが開けなくなる。設定した本人はまず気づかない
+ *           （パスだけ＝/old-page の登録は info。301_redirect.php はパスだけの登録を
+ *             404 のアクセスでしか使わないので、公開中のページは開けなくならない）
  *
  * @package LiteWord
  */
@@ -20,11 +22,17 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 /**
  * 301 の比較用にURLをそろえる（301_redirect.php と同じやり方にする）。
+ * 301_redirect.php が読み込まれていればその関数を使う。下は SEO 機能を切っているサイト用の写し
+ * （lw_site_rule_redirect_key() が、ここで作ったキーと 301 側の候補を混ぜて比べるため、形を必ずそろえる）。
  *
  * @param string $url URL。
  * @return string
  */
 function lw_site_rule_normalize_url( $url ) {
+    if ( function_exists( 'lw_301_normalize_url' ) ) {
+        return lw_301_normalize_url( $url );
+    }
+
     $url = untrailingslashit( trim( (string) $url ) );
     $url = preg_replace( '#^https?://#i', '', $url );
 
@@ -59,9 +67,13 @@ function lw_site_rule_redirect( $ledger ) {
     foreach ( $rows as $row ) {
         $post_id  = (int) $row['post_id'];
         $conflict = array();
+        $shadowed = array(); // パスだけの登録が公開中の別のページと同じ（転送は 404 のときだけなので、今は効かない）
         $self     = false;
 
-        $own = lw_site_rule_normalize_url( get_permalink( $post_id ) );
+        $permalink = (string) get_permalink( $post_id );
+        $own       = lw_site_rule_normalize_url( $permalink );
+        // パスだけ（/old-page）で登録した旧URLと比べる用
+        $own_path  = lw_site_rule_normalize_url( (string) wp_parse_url( $permalink, PHP_URL_PATH ) );
 
         foreach ( explode( ',', (string) $row['meta_value'] ) as $url ) {
             $key = lw_site_rule_normalize_url( $url );
@@ -70,7 +82,7 @@ function lw_site_rule_redirect( $ledger ) {
                 continue;
             }
 
-            if ( $key === $own ) {
+            if ( $key === $own || $key === $own_path ) {
                 $self = true;
                 continue;
             }
@@ -79,11 +91,18 @@ function lw_site_rule_redirect( $ledger ) {
             $target = LW_Site_Url_Index::resolve( trim( $url ) );
 
             if ( null !== $target && 'publish' === $target['status'] && $target['post_id'] !== $post_id ) {
-                $conflict[] = array(
+                $item = array(
                     'url'       => trim( $url ),
                     'target_id' => $target['post_id'],
                     'title'     => $target['title'],
                 );
+
+                // パスだけの登録は、公開中のページには効かない（301_redirect.php は 404 のアクセスでしか使わない）
+                if ( lw_site_rule_is_path_only( $url ) ) {
+                    $shadowed[] = $item;
+                } else {
+                    $conflict[] = $item;
+                }
             }
 
             $old[ $key ] = $post_id;
@@ -98,6 +117,17 @@ function lw_site_rule_redirect( $ledger ) {
                 array(
                     'count'     => count( $conflict ),
                     'conflicts' => array_slice( $conflict, 0, 10 ),
+                )
+            );
+        } elseif ( $shadowed ) {
+            $issues[] = lw_site_issue_make(
+                $post_id,
+                'R16',
+                'info',
+                sprintf( '転送元に「%s」と同じパスが登録されています。公開中のページは転送しないので今は効いていません（そのページを非公開にすると転送が始まります）', $shadowed[0]['title'] ),
+                array(
+                    'count'    => count( $shadowed ),
+                    'shadowed' => array_slice( $shadowed, 0, 10 ),
                 )
             );
         } elseif ( $self ) {
@@ -125,9 +155,9 @@ function lw_site_rule_redirect( $ledger ) {
             continue;
         }
 
-        $key = lw_site_rule_normalize_url( lw_site_rule_absolute_url( $href ) );
+        $key = lw_site_rule_redirect_key( $href, $old );
 
-        if ( ! isset( $old[ $key ] ) ) {
+        if ( '' === $key ) {
             continue;
         }
 
@@ -164,7 +194,19 @@ function lw_site_rule_redirect( $ledger ) {
 }
 
 /**
- * ルート相対のリンクを絶対URLにする（301 の比較は絶対URLで登録されているため）。
+ * 旧URLの登録が、パスだけ（/old-page）の形か（// で始まる形は除く）。
+ *
+ * @param string $url 登録された旧URL（1件）。
+ * @return bool
+ */
+function lw_site_rule_is_path_only( $url ) {
+    $url = trim( (string) $url );
+
+    return '/' === substr( $url, 0, 1 ) && '//' !== substr( $url, 0, 2 );
+}
+
+/**
+ * ルート相対のリンクを絶対URLにする（301 の照合はドメイン付きの形から候補を作るため）。
  *
  * @param string $href リンク先。
  * @return string
@@ -175,4 +217,71 @@ function lw_site_rule_absolute_url( $href ) {
     }
 
     return home_url( '/' === substr( $href, 0, 1 ) ? $href : '/' . $href );
+}
+
+/**
+ * リンク先が、転送の登録（旧URL）のどれに当たるか。
+ * 301_redirect.php が読み込まれていれば、実際の転送と同じ順（? の有無・パスだけの登録）で引く。
+ *
+ * @param string $href リンク先。
+ * @param array  $old  正規化した旧URL => 登録しているページID。
+ * @return string 当たった旧URL（正規化したもの）。当たらなければ空文字。
+ */
+function lw_site_rule_redirect_key( $href, $old ) {
+    $absolute = lw_site_rule_absolute_url( $href );
+
+    // SEO 機能を切っているサイトでは 301_redirect.php が読み込まれない。
+    // そのときは 2026-10-13 までと同じ比べ方に戻す（転送そのものは動かないが、
+    // R15 は前から登録だけを見て知らせていた。その動きはここでは変えない）
+    if ( ! function_exists( 'lw_301_request_candidates' ) ) {
+        $key = lw_site_rule_normalize_url( $absolute );
+
+        return isset( $old[ $key ] ) ? $key : '';
+    }
+
+    $parts = wp_parse_url( $absolute );
+
+    if ( ! is_array( $parts ) ) {
+        return '';
+    }
+
+    $host = isset( $parts['host'] ) ? $parts['host'] : '';
+
+    if ( '' !== $host && isset( $parts['port'] ) ) {
+        $host .= ':' . $parts['port'];
+    }
+
+    $uri = ( isset( $parts['path'] ) ? $parts['path'] : '/' )
+        . ( isset( $parts['query'] ) ? '?' . $parts['query'] : '' );
+
+    static $home_path = null;
+
+    if ( null === $home_path ) {
+        $home_path = (string) wp_parse_url( home_url( '/' ), PHP_URL_PATH );
+    }
+
+    $live = null; // リンク先が公開中の投稿・固定ページか（要るときだけ引く）
+
+    foreach ( lw_301_request_candidates( $host, $uri, $home_path ) as $candidate ) {
+        if ( ! isset( $old[ $candidate['key'] ] ) ) {
+            continue;
+        }
+
+        // ? の前だけ・パスだけの形は、実際の転送では 404 のアクセスでしか使わない。
+        // 公開中のページを指すリンクは転送されないので、指摘しない
+        if ( $candidate['only_404'] ) {
+            if ( null === $live ) {
+                $target = LW_Site_Url_Index::resolve( $absolute );
+                $live   = ( null !== $target && 'publish' === $target['status'] );
+            }
+
+            if ( $live ) {
+                continue;
+            }
+        }
+
+        return $candidate['key'];
+    }
+
+    return '';
 }
