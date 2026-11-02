@@ -31,7 +31,9 @@ function lw_cache_rest_api_response($response, $handler, $request) {
     }
     
     // キャッシュキーを生成
-    $cache_key = 'rest_api_' . md5($route . serialize($request->get_params()));
+    // （2026-11-02 の点検 T9・T12）利用者ごとに分ける。キャッシュは権限の確認より前（rest_pre_dispatch）で返すため、
+    // 分けないと、編集者が取った中身（下書きのパーツ・テンプレート）が別の人や未ログインの人にそのまま返りうる。
+    $cache_key = 'rest_api_' . md5($route . serialize($request->get_params()) . '|u' . get_current_user_id());
     
     // レスポンスデータを取得
     if ($response instanceof WP_REST_Response) {
@@ -76,8 +78,8 @@ function lw_return_cached_response($result, $server, $request) {
         return $result;
     }
     
-    // キャッシュキーを生成
-    $cache_key = 'rest_api_' . md5($route . serialize($request->get_params()));
+    // キャッシュキーを生成（利用者ごと。書く側の lw_cache_rest_api_response と同じ形。2026-11-02 の点検 T9・T12）
+    $cache_key = 'rest_api_' . md5($route . serialize($request->get_params()) . '|u' . get_current_user_id());
     
     // キャッシュを確認
     $cached = get_transient($cache_key);

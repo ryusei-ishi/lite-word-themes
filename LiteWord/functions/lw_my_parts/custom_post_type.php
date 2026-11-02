@@ -168,6 +168,25 @@ function lw_render_my_parts_metabox() {
 }
 
 /* ==========================================================
+ * REST でマイパーツの中身（HTML・CSS）を返してよいか（2026-11-02 の点検 T9）
+ * ----------------------------------------------------------
+ * 未ログインでも /wp-json/wp/v2/lw_my_parts から custom_html・custom_css が取れていたため、
+ * 編集画面を使える人にだけ返す（それ以外は空文字）。
+ * - そのパーツを編集できる人（管理者・編集者・自分のパーツ）は今までどおり。
+ * - 公開済みのパーツは、投稿を書ける人（edit_posts）にも返す。ブロックエディターの
+ *   「マイパーツ」ブロックがプレビューに使うため（公開済みはショートコードで埋めれば表示もできる）。
+ * ======================================================= */
+function lw_my_parts_rest_can_see_code( $post_id ) {
+	if ( current_user_can( 'edit_post', $post_id ) ) {
+		return true;
+	}
+	$pto = get_post_type_object( 'lw_my_parts' );
+	return $pto
+		&& 'publish' === get_post_status( $post_id )
+		&& current_user_can( $pto->cap->edit_posts );
+}
+
+/* ==========================================================
  * REST APIにマイパーツのメタデータを追加
  * ======================================================= */
 add_action( 'rest_api_init', 'lw_register_my_parts_meta_fields' );
@@ -183,9 +202,12 @@ function lw_register_my_parts_meta_fields() {
 		),
 	));
 	
-	// カスタムHTML
+	// カスタムHTML（編集画面を使える人にだけ返す。2026-11-02 の点検 T9）
 	register_rest_field( 'lw_my_parts', 'custom_html', array(
 		'get_callback' => function( $object ) {
+			if ( ! lw_my_parts_rest_can_see_code( $object['id'] ) ) {
+				return '';
+			}
 			return get_post_meta( $object['id'], '_lw_custom_html', true );
 		},
 		'schema' => array(
@@ -194,9 +216,12 @@ function lw_register_my_parts_meta_fields() {
 		),
 	));
 	
-	// カスタムCSS
+	// カスタムCSS（編集画面を使える人にだけ返す。2026-11-02 の点検 T9）
 	register_rest_field( 'lw_my_parts', 'custom_css', array(
 		'get_callback' => function( $object ) {
+			if ( ! lw_my_parts_rest_can_see_code( $object['id'] ) ) {
+				return '';
+			}
 			return get_post_meta( $object['id'], '_lw_custom_css', true );
 		},
 		'schema' => array(
@@ -221,6 +246,8 @@ function lw_register_my_parts_meta_fields() {
 		'get_callback' => function( $object ) {
 			$post = get_post( $object['id'] );
 			if ( ! $post ) return '';
+			// HTML・CSS が入るので custom_html と同じ人にだけ返す（2026-11-02 の点検 T9）
+			if ( ! lw_my_parts_rest_can_see_code( $post->ID ) ) return '';
 
 			$editor_mode = get_post_meta( $post->ID, '_lw_editor_mode', true );
 			if ( 'code' === $editor_mode ) {

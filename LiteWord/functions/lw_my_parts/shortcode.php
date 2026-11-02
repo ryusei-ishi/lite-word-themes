@@ -19,6 +19,40 @@ if ( ! isset( $lw_my_parts_scripts ) ) {
 }
 
 /**
+ * 公開済みでないマイパーツを出してよいか（2026-11-02 の点検 T9）
+ *
+ * 寄稿者が下書きのプレビューに [my_parts_content id="…"] を置くと、他人の下書き・非公開・
+ * ゴミ箱のパーツ（HTML・CSS・JS）まで読めていたため。
+ * - 公開済みは今までどおり誰にでも出す。
+ * - それ以外は、閲覧者が読める（read_post）か、ショートコードを置いた投稿の書き手が読めるときだけ出す。
+ *   置いた人でも見るのは、管理者が下書きのパーツを公開ページに埋める使い方
+ *   （show_draft の既定は true・ブロックの一覧も下書きを出す）を今までどおり動かすため。
+ * - 本文の外（ウィジェット・カスタマイザーのショートコード欄）は管理者しか置けないので今までどおり出す。
+ *
+ * @param WP_Post      $parts_post  マイパーツ
+ * @param WP_Post|null $placer_post ショートコードを置いた投稿。null なら本文の中かどうかから求める
+ * @return bool
+ */
+function lw_my_parts_can_render( $parts_post, $placer_post = null ) {
+	if ( 'publish' === $parts_post->post_status ) {
+		return true;
+	}
+	if ( current_user_can( 'read_post', $parts_post->ID ) ) {
+		return true;
+	}
+	if ( null === $placer_post ) {
+		if ( ! doing_filter( 'the_content' ) ) {
+			return true; // 本文の外（ウィジェットなど）
+		}
+		$placer_post = get_post();
+		if ( ! $placer_post ) {
+			return true; // 投稿に紐づかない本文（カテゴリーの説明など）は管理画面の担当者が書くもの
+		}
+	}
+	return user_can( (int) $placer_post->post_author, 'read_post', $parts_post->ID );
+}
+
+/**
  * ★ ページ読み込み前にマイパーツのショートコードをスキャンしてCSS/JSを事前取得
  */
 add_action( 'wp', 'lw_preload_my_parts_assets' );
@@ -55,6 +89,11 @@ function lw_preload_my_parts_assets() {
 
 			$parts_post = get_post( $parts_id );
 			if ( ! $parts_post || 'lw_my_parts' !== $parts_post->post_type ) {
+				continue;
+			}
+
+			// 出してよいパーツだけ CSS・JS を先に取る（2026-11-02 の点検 T9。置いた人＝この投稿の書き手で見る）
+			if ( ! lw_my_parts_can_render( $parts_post, $post ) ) {
 				continue;
 			}
 
@@ -153,6 +192,11 @@ function lw_shortcode_my_parts_content( $atts ) {
 
 	// ドラフトを一般公開したくない場合はここで制御
 	if ( 'draft' === $post->post_status && 'true' !== $atts['show_draft'] ) {
+		return '';
+	}
+
+	// 他人の下書き・非公開・ゴミ箱のパーツは出さない（2026-11-02 の点検 T9）
+	if ( ! lw_my_parts_can_render( $post ) ) {
 		return '';
 	}
 

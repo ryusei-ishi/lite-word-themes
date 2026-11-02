@@ -257,22 +257,32 @@ class LW_Custom_Block_Insert_System {
 
         $css_url = get_template_directory_uri() . '/my-blocks/build/' . $block_slug . '/style.css';
         $css_path = get_template_directory() . '/my-blocks/build/' . $block_slug . '/style.css';
+        // （2026-11-02 の点検 I16）フォルダ名が英数字・-・_ のときだけファイルを読む（../ で build の外の style.css を読ませない）
+        $is_safe_slug = (bool) preg_match('/^[A-Za-z0-9_-]+$/', (string) $block_slug);
         $debug['cssPath'] = $css_path;
-        $debug['cssExists'] = file_exists($css_path);
+        $debug['cssExists'] = $is_safe_slug && file_exists($css_path);
 
         $css_content = '';
-        if (file_exists($css_path)) {
+        if ($is_safe_slug && file_exists($css_path)) {
             $css_content = file_get_contents($css_path);
             $debug['cssLength'] = strlen($css_content);
         }
 
-        return rest_ensure_response(array(
+        $response = array(
             'html' => $rendered,
             'cssUrl' => $css_url,
             'cssContent' => $css_content,
             'blockSlug' => $block_slug,
-            'debug' => $debug,
-        ));
+        );
+
+        // （2026-11-02 の点検 I16）debug にはサーバーの絶対パスや登録情報が入るので、寄稿者などには返さない。
+        // WP_DEBUG が有効で、サイトを管理できる人（manage_options）のときだけ付ける。
+        // テーマの画面（assets/js/editor.js）はこの debug を読んでいない
+        if (defined('WP_DEBUG') && WP_DEBUG && current_user_can('manage_options')) {
+            $response['debug'] = $debug;
+        }
+
+        return rest_ensure_response($response);
     }
 
     /**

@@ -2,12 +2,16 @@
 if ( ! defined( 'ABSPATH' ) ) exit;
 add_action('admin_post_lw_save_full_templates', 'lw_save_full_templates_to_db');
 function lw_save_full_templates_to_db() {
-    // TODO: 送信元を特定してからnonce検証を追加
-    // check_admin_referer('lw_save_templates_action', '_wpnonce');
-
     if (!current_user_can('administrator')) {
         wp_die('アクセス権限がありません。');
     }
+
+    // （2026-11-02 の点検 T12）nonce を確かめる（TODO のままだった分）。
+    // 送信元を探したが、テーマにもショップ（LiteWord_SHOP）にも、この admin-post（lw_save_full_templates）へ
+    // purchases を送る画面は無かった（ショップの thanks-template-pay.php は /save_template/ へ template_ids を送る古い作り）。
+    // nonce の無い POST は、ほかのサイトから管理者に送らせたものと区別できないので止める。
+    // 送る画面を作るときは、そのフォームに wp_nonce_field( 'lw_save_templates_action' ) を入れること。
+    check_admin_referer('lw_save_templates_action');
 
     if (!isset($_POST['purchases'])) {
         wp_die('データがありません。');

@@ -1,8 +1,8 @@
 {
 	"_meta": {
 		"description": "LiteWord AI画像・ページ生成システムのAI向けメタ情報。機能・設定・制限事項をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
-		"version": "1.0",
-		"lastUpdated": "2026-03-21"
+		"version": "1.1",
+		"lastUpdated": "2026-11-02"
 	},
 	"overview": {
 		"aiDescription": "LiteWordテーマに統合されたAI生成システム。ブロックエディタ内でAIによるレイアウト自動生成、AI画像検索、ブロック単位のAIアシスタント、テキスト選択AIなどを提供。Gemini APIとImagen APIを使用。プレミアムプラン限定機能。",
@@ -13,6 +13,7 @@
 		"aiPageGeneration": {
 			"aiDescription": "AIが業種・用途に合わせてページ全体を自動生成する機能。ヒアリング→構成案→セクション単位のブロック生成の3ステップ。セッションベースでDB永続化されるため、中断しても復帰可能。",
 			"isPremium": true,
+			"pageCreatePermission": "チャットからの一括ページ生成（POST /lw-ai-generator/v1/generate-page）は最後に固定ページの下書きを作るため、固定ページを編集できる権限（edit_pages＝管理者・編集者）が必要。寄稿者・投稿者には 403（step: permission）を返す。投稿の編集画面の AI 機能はこれまでどおり edit_posts で使える。",
 			"workflow": {
 				"step1_interview": {
 					"aiDescription": "業種名を入力すると、AIがヒアリング質問を自動生成。サンプル回答の自動生成も可能。",

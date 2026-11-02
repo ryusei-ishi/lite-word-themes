@@ -11,11 +11,11 @@ $GLOBALS['custom_endpoints'] = [
         'slug'    => 'template_activate_start',
         'custom_file' => get_template_directory() .'/functions/template_activate_start.php'
     ],
-    [
-        'title'   => 'テンプレートの保存',
-        'slug'    => 'save_template',
-        'custom_file' => get_template_directory() .'/functions/save_template.php'
-    ],
+    // （2026-11-02 の点検 I17）「テンプレートの保存」（slug: save_template → functions/save_template.php）を外した。
+    // save_template.php は functions/index.php で毎回読み込み済みなので、ここでもう一度 include すると
+    // lw_save_full_templates_to_db() の二重定義で致命的エラーになり、URL に save_template を含めるだけで
+    // 未ログインでも 500 にできた。今の save_template.php は admin-post の受け口を登録するだけで画面を出さないため、
+    // この入口で読む意味も無い（/save_template/ はふつうの WordPress の表示＝多くは 404 になる）。
 ];
 
 add_action('template_redirect', 'custom_template_redirect');

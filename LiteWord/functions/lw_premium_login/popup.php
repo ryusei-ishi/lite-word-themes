@@ -793,7 +793,16 @@ function lw_shop_login_popup_html() {
 						.then(function(res) { return res.json(); })
 						.then(function(data) {
 							if (data.success && data.display_name) {
-								userInfoText.innerHTML = '<strong>' + data.display_name + '</strong> 様は <strong>' + data.registered_date + '</strong> に登録し、LiteWordのご利用を開始されています。';
+								// （2026-11-02 の点検 T10）ショップから来た名前と日付は文字として入れる（HTML として読ませない）
+								var nameEl = document.createElement('strong');
+								nameEl.textContent = String(data.display_name);
+								var dateEl = document.createElement('strong');
+								dateEl.textContent = (data.registered_date == null) ? '' : String(data.registered_date);
+								userInfoText.textContent = '';
+								userInfoText.appendChild(nameEl);
+								userInfoText.appendChild(document.createTextNode(' 様は '));
+								userInfoText.appendChild(dateEl);
+								userInfoText.appendChild(document.createTextNode(' に登録し、LiteWordのご利用を開始されています。'));
 								userInfoText.style.display = 'block';
 								userInfoLoaded = true;
 							}

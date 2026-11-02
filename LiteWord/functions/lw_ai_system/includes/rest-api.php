@@ -1045,7 +1045,8 @@ function lw_ai_system_generate_section( WP_REST_Request $request ) {
     error_log( '[LW AI Section] selectedPart: ' . ( $selected_part ?: '(未指定)' ) );
     error_log( '[LW AI Section] selectedPartType: ' . ( $selected_part_type ?: '(未指定)' ) );
     error_log( '[LW AI Section] businessType: ' . ( $business_type ?: '(未指定)' ) );
-    error_log( '[LW AI Section] sectionText(先頭200文字): ' . mb_substr( $section_text, 0, 200 ) );
+    // （2026-11-02 の点検 T11）利用者が書いた本文はログに残さない。長さだけ
+    error_log( '[LW AI Section] sectionText: ' . mb_strlen( (string) $section_text ) . '文字' );
     error_log( '========================================' );
 
     // リトライ回数（JSONパースエラー時に再試行）
@@ -1422,7 +1423,8 @@ function lw_ai_system_myparts_generate( WP_REST_Request $request ) {
     // プレビューモード: 画像分析のみ実行
     if ( $preview_only ) {
         error_log( '[LW MyParts API] ========== プレビューモード開始 ==========' );
-        error_log( '[LW MyParts API] プロンプト: ' . mb_substr( $prompt, 0, 100 ) );
+        // （2026-11-02 の点検 T11）プロンプトの中身はログに残さない。長さだけ
+        error_log( '[LW MyParts API] プロンプト: ' . mb_strlen( (string) $prompt ) . '文字' );
 
         if ( empty( $prompt ) ) {
             return new WP_REST_Response( array( 'success' => false, 'message' => 'プロンプトが空です' ), 400 );
@@ -1476,7 +1478,8 @@ function lw_ai_system_myparts_generate( WP_REST_Request $request ) {
     // 通常の生成モード
     error_log( '[LW MyParts API] ========== 処理開始 ==========' );
 
-    error_log( '[LW MyParts API] プロンプト: ' . mb_substr( $prompt, 0, 100 ) );
+    // （2026-11-02 の点検 T11）プロンプトの中身はログに残さない。長さだけ
+    error_log( '[LW MyParts API] プロンプト: ' . mb_strlen( (string) $prompt ) . '文字' );
     error_log( '[LW MyParts API] パーツタイプ: ' . $parts_type . ', 番号: ' . $parts_number );
     error_log( '[LW MyParts API] モデル: ' . $model );
     error_log( '[LW MyParts API] 参考画像: ' . ( ! empty( $reference_image ) ? 'あり (' . strlen( $reference_image ) . 'bytes)' : 'なし' ) );
@@ -1979,6 +1982,19 @@ function lw_ai_system_review_content( WP_REST_Request $request ) {
  * ========================================================= */
 
 function lw_ai_generate_page( WP_REST_Request $request ) {
+    // ── 固定ページを作れる人だけ（2026-11-02 の点検 I18）
+    // この経路は最後に固定ページ（post_type=page）の下書きを作るので、edit_pages を求める。
+    // 寄稿者・投稿者（edit_posts だけ）が固定ページを作れていたため。投稿の編集画面の AI 機能は今までどおり。
+    // permission_callback は lw_ai_system_can_generate のまま（回数を数える目印なので変えない・CLAUDE.md の設計判断4）。
+    // Gemini を呼ぶ前・日次上限を数える前に断る。
+    if ( ! current_user_can( 'edit_pages' ) ) {
+        return new WP_REST_Response( array(
+            'success' => false,
+            'step'    => 'permission',
+            'message' => '固定ページを作る権限が無いため、ページを生成できません（管理者・編集者が使えます）。',
+        ), 403 );
+    }
+
     @set_time_limit( 600 ); // 10分
 
     // ── Step 0: レート制限チェック

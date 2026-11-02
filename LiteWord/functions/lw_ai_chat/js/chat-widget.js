@@ -672,7 +672,8 @@
       }
       var bubble = document.createElement('div');
       bubble.className = 'lw-ai-msg ' + (item.isUser ? 'lw-ai-msg-user' : 'lw-ai-msg-ai');
-      bubble.innerHTML = (item.text || '').replace(/\n/g, '<br>');
+      // （2026-11-02 の点検 T10）履歴の文は先に文字参照にしてから改行だけ <br> にする（中の HTML を動かさない）
+      bubble.innerHTML = escapeHtmlAll(item.text || '').replace(/\n/g, '<br>');
       row.appendChild(bubble);
       wrap.appendChild(row);
     });
@@ -782,6 +783,17 @@
     return d.innerHTML;
   }
 
+  // （2026-11-02 の点検 T10）引用符まで文字参照にする版。
+  // AI の回答はこのあとリンクの href="…" に入るので、" と ' もそのままにしない。
+  function escapeHtmlAll(t) {
+    return String(t == null ? '' : t)
+      .replace(/&/g, '&amp;')
+      .replace(/</g, '&lt;')
+      .replace(/>/g, '&gt;')
+      .replace(/"/g, '&quot;')
+      .replace(/'/g, '&#39;');
+  }
+
   function addMessage(text, isUser) {
     var msgs = document.getElementById('lw-ai-chat-messages');
     if (!msgs) return;
@@ -798,14 +810,18 @@
     if (isUser) {
       html += escapeHtml(text);
     } else {
-      var c = text;
+      // （2026-11-02 の点検 T10）AI の回答・履歴は先に全部文字参照にし、そのあと決まった書式
+      // （**太字**・[文字](https://…)・[文字](/…)・番号と点の箇条書き・改行・裸の URL）だけをタグに置き換える。
+      // 以前は回答をそのまま innerHTML に入れていたので、回答に入った <img onerror> などが動いた。
+      var c = escapeHtmlAll(text);
       c = c.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
       c = c.replace(/\[(.+?)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
       c = c.replace(/\[(.+?)\]\((\/[^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
       c = c.replace(/^(\d+)\.\s/gm, '<br>$1. ');
       c = c.replace(/^[\-\*]\s/gm, '<br>• ');
       c = c.replace(/\n/g, '<br>');
-      c = c.replace(/(?<!")(?<!')(https?:\/\/[^\s<,)]+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
+      // 文字参照にした引用符（&quot; &#39;）の直後と、そこで URL を切る（前は " ' の直後を除いていた）
+      c = c.replace(/(?<!")(?<!')(?<!&quot;)(?<!&#39;)(https?:\/\/(?:(?!&quot;|&#39;)[^\s<,)])+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
       html += c;
     }
 

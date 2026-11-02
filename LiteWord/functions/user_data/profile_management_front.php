@@ -16,12 +16,38 @@ if ( ! defined( 'LW_PM_OPTION_KEY' ) ) {
 }
 
 /* =============================================================
+ * 自分以外の user_id を出してよいか（2026-11-02 の点検 T8）
+ * -------------------------------------------------------------
+ * 寄稿者が下書きのプレビューに [lw_profile_info user_id="1"] を置くと、
+ * 管理者などのプロフィールの項目を読めていたため。
+ * 本文（the_content）の中では、そのショートコードを置いた投稿の書き手が
+ * ユーザーを編集できる人（edit_users）かで決める。閲覧者の権限で決めないのは、
+ * 管理者が作った「会員紹介」ページなどを、ふつうの閲覧者にも今までどおり見せるため。
+ * 本文の外（ウィジェット・カスタマイザーのショートコード欄）は管理者しか置けないので今までどおり出す。
+ * =========================================================== */
+function lw_pm_can_show_other_user_profile() {
+	if ( ! doing_filter( 'the_content' ) ) {
+		return true;
+	}
+	$post = get_post();
+	if ( ! $post ) {
+		return true; // 投稿に紐づかない本文（カテゴリーの説明など）は管理画面の担当者が書くもの
+	}
+	return user_can( (int) $post->post_author, 'edit_users' );
+}
+
+/* =============================================================
  * フロント表示ショートコード
  * =========================================================== */
 add_shortcode( 'lw_profile_info', function ( $atts ) {
 
 	$atts = shortcode_atts( [ 'user_id' => get_current_user_id() ], $atts );
 	$uid  = intval( $atts['user_id'] ); if ( ! $uid ) return '';
+
+	// 自分以外のプロフィールは、置いた人に権限があるときだけ出す（2026-11-02 の点検 T8）
+	if ( $uid !== get_current_user_id() && ! lw_pm_can_show_other_user_profile() ) {
+		return '';
+	}
 
 	$fields = get_option( LW_PM_OPTION_KEY, [] ); if ( ! $fields ) return '';
 

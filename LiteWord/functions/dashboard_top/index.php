@@ -77,7 +77,10 @@ function lw_dashboard_enqueue_assets($hook) {
     wp_localize_script('lw-wizard', 'lwWizard', array(
         'ajaxUrl' => admin_url('admin-ajax.php'),
         'adminUrl' => admin_url(),
-        'nonce' => wp_create_nonce('lw_wizard_nonce'),
+        // （2026-11-02 の点検 T15）購読者にもダッシュボードの nonce を渡していた。
+        // 投稿を書ける人（edit_posts）にだけ渡す。寄稿者・投稿者の動きは今までどおり。
+        // 渡さない人には空文字（lwWizard を読む JS が止まらないよう、項目自体は残す）
+        'nonce' => current_user_can('edit_posts') ? wp_create_nonce('lw_wizard_nonce') : '',
         'isPremium' => defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true,
         'isActivated' => $is_activated,
         'activateUrl' => admin_url('admin.php?page=lw_template_management'),
@@ -1861,32 +1864,8 @@ function lw_dashboard_sidebar_and_modals() {
     <!-- セキュリティプラグイン選択ポップアップ -->
     <?php
     // プラグインの状態を取得
-    $security_plugins = array(
-        'cloudsecure-wp-security' => array(
-            'name' => 'CloudSecure WP Security',
-            'slug' => 'cloudsecure-wp-security',
-            'file' => 'cloudsecure-wp-security/cloudsecure-wp.php',
-            'desc' => '国産の高機能セキュリティプラグイン。ログイン保護、WAF機能、不正アクセス防止に加え、2段階認証の設定も可能です。総合的なセキュリティ対策におすすめです。',
-            'recommended' => true,
-            'note' => '※一部のレンタルサーバー（特にWAF機能が標準搭載されているサーバー）では、機能が競合する場合があります。導入後に不具合が発生した場合は、サーバー側のWAF設定を確認するか、別のプラグインをお試しください。'
-        ),
-        'siteguard' => array(
-            'name' => 'SiteGuard WP Plugin',
-            'slug' => 'siteguard',
-            'file' => 'siteguard/siteguard.php',
-            'desc' => '日本製のセキュリティプラグイン。ログインページのURL変更、画像認証、ログインロックなど、不正ログイン対策に特化しています。',
-            'recommended' => false,
-            'note' => '※ログインURLが変更されるため、変更後のURLを必ずメモしておいてください。'
-        ),
-        'all-in-one-wp-security-and-firewall' => array(
-            'name' => 'All In One WP Security',
-            'slug' => 'all-in-one-wp-security-and-firewall',
-            'file' => 'all-in-one-wp-security-and-firewall/wp-security.php',
-            'desc' => '総合的なセキュリティプラグイン。ファイアウォール、ログイン保護、データベースセキュリティなど幅広い機能を備えています。',
-            'recommended' => false,
-            'note' => '※設定項目が多いため、初心者の方は基本設定のみの利用をおすすめします。'
-        )
-    );
+    // 一覧は lw_dashboard_security_plugins() にまとめた（状態を返す Ajax と同じ一覧を使うため。2026-11-02 の点検 T15）
+    $security_plugins = lw_dashboard_security_plugins();
 
     // 各プラグインの状態をチェック
     include_once(ABSPATH . 'wp-admin/includes/plugin.php');
@@ -3076,12 +3055,59 @@ function lw_ajax_activate_security_plugin() {
     ));
 }
 
+/**
+ * ダッシュボードで案内するセキュリティプラグインの一覧
+ *
+ * 選択ポップアップ（lw_dashboard_sidebar_and_modals）と、状態を返す Ajax（lw_ajax_get_security_plugin_status）の両方が使う。
+ * 2026-11-02 の点検 T15 で、ポップアップの中にあった配列をここへ移した（中身は同じ）。
+ *
+ * @return array
+ */
+function lw_dashboard_security_plugins() {
+    return array(
+        'cloudsecure-wp-security' => array(
+            'name' => 'CloudSecure WP Security',
+            'slug' => 'cloudsecure-wp-security',
+            'file' => 'cloudsecure-wp-security/cloudsecure-wp.php',
+            'desc' => '国産の高機能セキュリティプラグイン。ログイン保護、WAF機能、不正アクセス防止に加え、2段階認証の設定も可能です。総合的なセキュリティ対策におすすめです。',
+            'recommended' => true,
+            'note' => '※一部のレンタルサーバー（特にWAF機能が標準搭載されているサーバー）では、機能が競合する場合があります。導入後に不具合が発生した場合は、サーバー側のWAF設定を確認するか、別のプラグインをお試しください。'
+        ),
+        'siteguard' => array(
+            'name' => 'SiteGuard WP Plugin',
+            'slug' => 'siteguard',
+            'file' => 'siteguard/siteguard.php',
+            'desc' => '日本製のセキュリティプラグイン。ログインページのURL変更、画像認証、ログインロックなど、不正ログイン対策に特化しています。',
+            'recommended' => false,
+            'note' => '※ログインURLが変更されるため、変更後のURLを必ずメモしておいてください。'
+        ),
+        'all-in-one-wp-security-and-firewall' => array(
+            'name' => 'All In One WP Security',
+            'slug' => 'all-in-one-wp-security-and-firewall',
+            'file' => 'all-in-one-wp-security-and-firewall/wp-security.php',
+            'desc' => '総合的なセキュリティプラグイン。ファイアウォール、ログイン保護、データベースセキュリティなど幅広い機能を備えています。',
+            'recommended' => false,
+            'note' => '※設定項目が多いため、初心者の方は基本設定のみの利用をおすすめします。'
+        )
+    );
+}
+
 // セキュリティプラグインの状態取得
 add_action('wp_ajax_lw_get_security_plugin_status', 'lw_ajax_get_security_plugin_status');
 function lw_ajax_get_security_plugin_status() {
     check_ajax_referer('lw_wizard_nonce', 'nonce');
 
-    $plugin_file = sanitize_text_field($_POST['plugin_file']);
+    // （2026-11-02 の点検 T15）権限の確認が無く、plugin_file に ../ を入れるとサーバーのファイルの有無が分かった。
+    // プラグインを有効化できる人だけにし、名前は上の一覧にあるものだけを受け付ける
+    if (!current_user_can('activate_plugins')) {
+        wp_send_json_error('権限がありません', 403);
+    }
+
+    $plugin_file = isset($_POST['plugin_file']) ? sanitize_text_field(wp_unslash($_POST['plugin_file'])) : '';
+    $allowed_files = wp_list_pluck(lw_dashboard_security_plugins(), 'file');
+    if (!in_array($plugin_file, $allowed_files, true)) {
+        wp_send_json_error('このプラグインの状態は確認できません', 400);
+    }
     
     include_once(ABSPATH . 'wp-admin/includes/plugin.php');
 

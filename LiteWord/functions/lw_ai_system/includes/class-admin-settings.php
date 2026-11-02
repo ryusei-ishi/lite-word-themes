@@ -58,11 +58,26 @@ class LW_AI_Generator_Admin_Settings {
      */
     public static function register_setup_wizard_route() {
         add_rewrite_rule( '^lw-ai-setup/?$', 'index.php?lw_ai_setup=1', 'top' );
+
         // ルールが未登録なら1回だけflush
-        $rules = get_option( 'rewrite_rules' );
-        if ( ! isset( $rules['^lw-ai-setup/?$'] ) ) {
-            flush_rewrite_rules( false );
+        // （2026-11-02 の点検 I20）パーマリンクが「基本」のサイトは rewrite_rules が空のままなので、
+        // 「ルールが無ければ flush」だと毎回のアクセスで flush が走っていた。
+        // ・基本のサイトはリライト自体を使わない（/?lw_ai_setup=1 で開ける）ので flush しない
+        // ・それ以外は、ルールが無いときに「この版で1回だけ」flush する（印を残し、何かがルールを消し続けても毎回は走らせない）
+        //   ルールを変えたら下の $ver の値を上げると、もう1回だけ flush される
+        if ( '' === (string) get_option( 'permalink_structure' ) ) {
+            return;
         }
+        $rules = get_option( 'rewrite_rules' );
+        if ( is_array( $rules ) && isset( $rules['^lw-ai-setup/?$'] ) ) {
+            return;
+        }
+        $ver = 'lw-ai-setup-1';
+        if ( get_option( 'lw_ai_setup_rewrite_flushed' ) === $ver ) {
+            return;
+        }
+        update_option( 'lw_ai_setup_rewrite_flushed', $ver, false );
+        flush_rewrite_rules( false );
     }
 
     public static function setup_wizard_query_vars( $vars ) {

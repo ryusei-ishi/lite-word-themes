@@ -572,14 +572,52 @@ class LW_AI_Generator_Gemini_API {
     }
 
     /**
+     * 名前がファイル名に使える形か（英数字・-・_ だけ）（2026-11-02 の点検 T13）
+     *
+     * テンプレート名・ブロック名は AI の返事（useTemplate）やリクエスト（selectedPart）から来るので、
+     * そのままファイルの場所に足すと ../ で決まったフォルダの外を読めてしまう。
+     * 今あるテンプレート（117本）・ブロックのフォルダ（288個）はすべてこの形に収まっている。
+     *
+     * @param mixed $name
+     * @return bool
+     */
+    private static function is_safe_file_slug( $name ) {
+        return is_string( $name ) && 1 === preg_match( '/^[A-Za-z0-9_-]+$/', $name );
+    }
+
+    /**
+     * テンプレート名から JSON の場所を出す。決まったフォルダの中にあるときだけ（2026-11-02 の点検 T13）
+     *
+     * @param mixed $template_name テンプレート名（拡張子なし）
+     * @return string|null 実在するファイルの場所。名前が正しくない・無い・フォルダの外なら null
+     */
+    private static function template_json_path( $template_name ) {
+        if ( ! self::is_safe_file_slug( $template_name ) ) {
+            return null;
+        }
+        $dir  = get_template_directory() . '/functions/custom_bloc_insert_system/templates';
+        $path = $dir . '/' . $template_name . '.json';
+        if ( ! file_exists( $path ) ) {
+            return null;
+        }
+        $real_dir  = realpath( $dir );
+        $real_path = realpath( $path );
+        if ( false === $real_dir || false === $real_path || 0 !== strpos( $real_path, $real_dir . DIRECTORY_SEPARATOR ) ) {
+            return null;
+        }
+        return $real_path;
+    }
+
+    /**
      * テンプレートJSONファイルを読み込む
      *
      * @param string $template_name テンプレート名（拡張子なし）
      * @return array|null テンプレートデータ
      */
     private static function load_template( $template_name, $skip_clear_defaults = false ) {
-        $template_path = get_template_directory() . '/functions/custom_bloc_insert_system/templates/' . $template_name . '.json';
-        if ( ! file_exists( $template_path ) ) {
+        // 名前を確かめてから場所を作る（2026-11-02 の点検 T13）
+        $template_path = self::template_json_path( $template_name );
+        if ( null === $template_path ) {
             return null;
         }
 
@@ -4391,7 +4429,12 @@ PROMPT;
      */
     public static function get_block_ui_info( $block_name ) {
         // ブロック名からディレクトリ名を取得（wdl/cta-1 → cta-1）
-        $block_slug = str_replace( 'wdl/', '', $block_name );
+        $block_slug = str_replace( 'wdl/', '', (string) $block_name );
+
+        // （2026-11-02 の点検 T13）英数字・-・_ でなければ読まない（../ で build の外の .js を読ませない）
+        if ( ! self::is_safe_file_slug( $block_slug ) ) {
+            return array();
+        }
 
         // JSファイルのパスを構築
         $js_path = get_template_directory() . '/my-blocks/build/' . $block_slug . '/' . $block_slug . '.js';
@@ -6643,12 +6686,16 @@ PROMPT;
      */
     public static function get_block_attributes_from_json( $block_name ) {
         // ブロック名からフォルダ名を取得（wdl/lw-pr-fv-13 -> lw-pr-fv-13）
-        $folder_name = str_replace( 'wdl/', '', $block_name );
+        $folder_name = str_replace( 'wdl/', '', (string) $block_name );
 
         // block.jsonのパスを構築
-        $block_json_path = get_template_directory() . '/my-blocks/build/' . $folder_name . '/block.json';
+        // （2026-11-02 の点検 T13）フォルダ名が英数字・-・_ でなければ場所を作らない（../ で build の外へ出ないように）。
+        // そのときは下の「名前で引き直す」（block.json の name と完全一致するものだけ）に任せる
+        $block_json_path = self::is_safe_file_slug( $folder_name )
+            ? get_template_directory() . '/my-blocks/build/' . $folder_name . '/block.json'
+            : '';
 
-        if ( ! file_exists( $block_json_path ) ) {
+        if ( '' === $block_json_path || ! file_exists( $block_json_path ) ) {
             // ⚠️ フォルダ名とブロック名が食い違うブロックがある
             //    （wdl/lw-button-01 → フォルダは lw-button-1。02・03 も同じ）。
             //    その場合だけ、全 block.json から名前で引き直す。
@@ -6750,10 +6797,16 @@ PROMPT;
      * @return array|null テンプレート構造情報
      */
     public static function get_template_text_fields( $template_name ) {
-        $template_path = get_template_directory() . '/functions/custom_bloc_insert_system/templates/' . $template_name . '.json';
+        // 名前を確かめてから場所を作る（2026-11-02 の点検 T13）。
+        // 正しくない名前はログに出さない（リクエストから来た文字をそのまま書かないため）
+        if ( ! self::is_safe_file_slug( $template_name ) ) {
+            error_log( '[LW AI] Template name rejected (使えない文字を含む)' );
+            return null;
+        }
+        $template_path = self::template_json_path( $template_name );
 
-        if ( ! file_exists( $template_path ) ) {
-            error_log( '[LW AI] Template not found: ' . $template_path );
+        if ( null === $template_path ) {
+            error_log( '[LW AI] Template not found: ' . $template_name );
             return null;
         }
 

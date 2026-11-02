@@ -320,11 +320,54 @@ function lw_handle_template_preview_page() {
     exit;
 }
 
+/**
+ * 登録簿で public が true のテンプレートか（2026-11-02 の点検 T12）
+ *
+ * 登録簿（lw_get_integrated_template_configs）は管理画面側のファイルにあり、REST のときは
+ * 読み込まれていないので、要るときだけ読む（中身は関数の定義と、REST では動かないフックの登録だけ）。
+ * 判定は「新規ページを作成」（lw_create_page_from_template）と同じ形：パスが完全に一致して public が true。
+ *
+ * @param string $template_path
+ * @return bool
+ */
+function lw_page_template_is_public($template_path) {
+    if (!function_exists('lw_get_integrated_template_configs')) {
+        require_once __DIR__ . '/lw-page-template-admin.php';
+    }
+    if (!function_exists('lw_get_integrated_template_configs')) {
+        return false;
+    }
+    foreach (lw_get_integrated_template_configs() as $category) {
+        if (empty($category['items']) || !is_array($category['items'])) {
+            continue;
+        }
+        foreach ($category['items'] as $item) {
+            if (empty($item['templates']) || !is_array($item['templates'])) {
+                continue;
+            }
+            foreach ($item['templates'] as $template) {
+                if (isset($template['path']) && $template['path'] === $template_path) {
+                    return isset($template['public']) && $template['public'] === true;
+                }
+            }
+        }
+    }
+    return false;
+}
+
 function lw_get_template_content($request) {
     $template_path = $request->get_param('template_path');
     
     if (empty($template_path)) {
         return new WP_Error('missing_path', 'テンプレートパスが指定されていません', array('status' => 400));
+    }
+
+    // （2026-11-02 の点検 T12）プレミアム未契約のサイトでは、公開（public=true）のテンプレートだけ返す。
+    // 契約を見ずにプレミアムのテンプレートの中身を返していたため（「新規ページを作成」の側は前から止めていた）。
+    // 無料のテンプレートと、契約中（14日試用を含む）のサイトは今までどおり。
+    $has_subscription = defined('LW_HAS_SUBSCRIPTION') ? LW_HAS_SUBSCRIPTION : false;
+    if (!$has_subscription && !lw_page_template_is_public((string) $template_path)) {
+        return new WP_Error('lw_template_premium_required', 'このテンプレートはプレミアムプラン限定です', array('status' => 403));
     }
     
     $template_path = str_replace('..', '', $template_path);

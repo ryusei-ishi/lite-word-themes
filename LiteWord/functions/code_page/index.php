@@ -165,6 +165,11 @@ function lw_code_page_render_editor($post) {
     $html_content = get_post_meta($post->ID, '_lw_code_page_html', true);
     $css_content  = get_post_meta($post->ID, '_lw_code_page_css', true);
     ?>
+    <?php if (!current_user_can('unfiltered_html')) : // 2026-11-02 の点検 T14（保存側 lw_code_page_save_meta と同じ判定） ?>
+    <div class="notice notice-warning inline" style="margin: 0 0 12px;">
+        <p>この権限ではHTML・CSSを保存できません（保存してもHTML・CSSは前の内容のままです。タイトルとURLは保存されます）。HTMLをそのまま公開できる権限（unfiltered_html）を持つ管理者に編集を依頼してください。</p>
+    </div>
+    <?php endif; ?>
     <div class="lw-code-page-editor-wrap">
         <!-- タブナビゲーション -->
         <div class="lw-code-tabs">
@@ -361,13 +366,20 @@ function lw_code_page_save_meta($post_id) {
         return;
     }
 
+    // （2026-11-02 の点検 T14）HTML・CSS はそのまま公開ページに出すので、unfiltered_html を持つ人だけ保存する。
+    // 持たない人（マルチサイトのサイト管理者、DISALLOW_UNFILTERED_HTML のサイト、権限を変えたロールなど）の
+    // HTML・CSS は保存せず、前の内容を残す（タイトルとスラッグは保存する）。
+    // 本文と同じ wp_kses_post に通す形にしないのは、DOCTYPE から書く作りなので <html> <head> <style> などが
+    // 消えてページが壊れるため。持たない人には編集画面に案内を出す（lw_code_page_render_editor）。
+    $can_raw = current_user_can('unfiltered_html');
+
     // HTML（サニタイズなし - 完全なHTMLを許可）
-    if (isset($_POST['lw_code_page_html'])) {
+    if ($can_raw && isset($_POST['lw_code_page_html'])) {
         update_post_meta($post_id, '_lw_code_page_html', wp_unslash($_POST['lw_code_page_html']));
     }
 
     // CSS
-    if (isset($_POST['lw_code_page_css'])) {
+    if ($can_raw && isset($_POST['lw_code_page_css'])) {
         update_post_meta($post_id, '_lw_code_page_css', wp_unslash($_POST['lw_code_page_css']));
     }
 
