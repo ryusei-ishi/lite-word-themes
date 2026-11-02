@@ -29,14 +29,8 @@
 			"location": "Lwマイパーツ > パーツカテゴリー"
 		},
 		"apiCacheManager": {
-			"title": "APIキャッシュ管理",
-			"aiDescription": "マイパーツとテンプレートのREST APIレスポンスキャッシュを管理する画面。キャッシュ数の確認と一括クリアが可能。",
-			"location": "Lwマイパーツ > APIキャッシュ",
-			"cacheSettings": {
-				"myParts": "12時間キャッシュ",
-				"template": "24時間キャッシュ",
-				"autoClear": "マイパーツを更新すると自動的にキャッシュがクリアされる"
-			}
+			"title": "APIキャッシュ管理（2.6.1 で廃止）",
+			"aiDescription": "2.6.0 まであった REST の返事のキャッシュ（transient rest_api_*）と、その管理画面は 2.6.1 でやめた。当たりが無く（書く側と読む側で鍵が違った）、未ログインでも行を増やせたため。残っている rest_api_* は誰も読まず、期限が来れば WordPress が消す。"
 		}
 	},
 	"editorModes": {
@@ -126,10 +120,11 @@
 		}
 	},
 	"technicalDetails": {
-		"accessControl": "マイパーツの単一ページは管理者のみアクセス可能。それ以外のユーザーには404を返す。プレビューは編集権限があれば可能。",
+		"accessControl": "マイパーツの単一ページは管理者のみアクセス可能。それ以外のユーザーには404を返す。プレビューは編集権限があれば可能。マイパーツを含む表側の一覧・フィード・検索（?post_type=lw_my_parts など）も管理者以外は404（2.6.1〜）。",
 		"sitemapExclusion": "WordPressコアXMLサイトマップとYoast SEOサイトマップの両方から除外される。",
 		"restApi": {
 			"route": "/wp/v2/lw_my_parts",
+			"readAccess": "一覧・1件とも、投稿を書ける人（edit_posts）だけが読める。未ログインは401、購読者などは403（2.6.1〜・rest_access.php の LW_My_Parts_REST_Controller）。パーツカテゴリー /wp/v2/lw_parts_cat も同じ。",
 			"registeredFields": [
 				"editor_mode（エディタモード）",
 				"custom_html（カスタムHTML）",

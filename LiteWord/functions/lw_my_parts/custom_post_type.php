@@ -33,6 +33,8 @@ function lw_register_my_parts_post_type() {
 		'menu_position'       => 20,
 		'menu_icon'           => 'dashicons-layout',
 		'show_in_rest'        => true,  // Gutenberg 対応
+		// REST で読めるのは投稿を書ける人だけ（rest_access.php・2026-11-02 再点検 R5）
+		'rest_controller_class' => 'LW_My_Parts_REST_Controller',
 		'capability_type'     => 'post',
 		'map_meta_cap'        => true,
 		'publicly_queryable'  => true,  // プレビュー有効化（管理者のみ）
@@ -46,11 +48,17 @@ function lw_register_my_parts_post_type() {
 
 /* ==========================================================
  * 1-2. ★ 管理者のみプレビュー可能にする
+ * ----------------------------------------------------------
+ * プレビューのために publicly_queryable を true にしているので、
+ * 1件の表示だけでなく ?post_type=lw_my_parts の一覧・フィード（/feed/?post_type=lw_my_parts）・
+ * 検索からも本文が読めていた（2026-11-02 再点検 R5）。マイパーツを含む表側の問い合わせは全部止める。
  * ======================================================= */
 add_action( 'template_redirect', 'lw_my_parts_access_control' );
 function lw_my_parts_access_control() {
-	// マイパーツの単一ページ表示時のみチェック
-	if ( ! is_singular( 'lw_my_parts' ) ) {
+	// マイパーツの1件の表示か、マイパーツを含む一覧・フィード・検索か
+	$is_single = is_singular( 'lw_my_parts' );
+	$is_list   = ! $is_single && in_array( 'lw_my_parts', (array) get_query_var( 'post_type' ), true );
+	if ( ! $is_single && ! $is_list ) {
 		return;
 	}
 
@@ -59,8 +67,8 @@ function lw_my_parts_access_control() {
 		return;
 	}
 
-	// プレビュー時で編集権限がある場合は許可
-	if ( is_preview() && current_user_can( 'edit_post', get_the_ID() ) ) {
+	// プレビュー時で編集権限がある場合は許可（1件の表示だけ）
+	if ( $is_single && is_preview() && current_user_can( 'edit_post', get_the_ID() ) ) {
 		return;
 	}
 
@@ -118,6 +126,8 @@ function lw_register_parts_category_taxonomy() {
 		'show_ui'            => true,   // 管理画面に表示
 		'show_admin_column'  => true,   // 一覧画面に列追加
 		'show_in_rest'       => true,   // Gutenberg 用
+		// REST で読めるのは投稿を書ける人だけ（rest_access.php・2026-11-02 再点検 R5）
+		'rest_controller_class' => 'LW_Parts_Cat_REST_Controller',
 		'show_in_quick_edit' => true,
 		'show_tagcloud'      => false,
 		'show_in_nav_menus'  => false,

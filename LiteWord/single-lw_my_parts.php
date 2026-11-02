@@ -9,7 +9,9 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 
 // 管理者のみアクセス可能（既にcustom_post_type.phpで制御されているが念のため）
-if ( ! current_user_can( 'administrator' ) && ! is_preview() ) {
+// プレビューは、そのパーツを編集できる人だけ（custom_post_type.php の lw_my_parts_access_control() と同じ判定。
+// 前は is_preview() だけを見ていたので、?preview=true を付ければ誰でも通れた。2026-11-02 再点検 R5）
+if ( ! current_user_can( 'administrator' ) && ! ( is_preview() && current_user_can( 'edit_post', get_queried_object_id() ) ) ) {
     wp_die( 'このページにはアクセスできません。' );
 }
 get_header(); ?>
