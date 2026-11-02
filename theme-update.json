@@ -1,6 +1,6 @@
 {
-    "version": "2.6.0",
-    "changelog": "セキュリティを強化しました（管理画面の設定の保存、お問い合わせの自動返信、テーマの更新の確認 ほか）。お問い合わせの自動返信は、入力されたメールアドレス1件にだけ送るようになり、短い時間に何度も送られたときは止まるようになりました。あわせて、会員用のログアウト、会員限定ページの一時停止、会員限定の記事の画像の保護を足し、Google Fonts を設定で外せるようにしました。旧URLの転送も直しています。更新をおすすめします。",
-    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.6.0/LiteWord.zip",
-    "sha256": "ff9313c3f71b182251017e461a4868e082b4cc6cd32a8294e82b3876b8c91728"
+    "version": "2.6.1",
+    "changelog": "セキュリティを強化しました（投稿の設定、会員限定の記事、マイパーツ ほか）。投稿の編集画面の「カスタムフィールド」には、テーマの設定（SEO・色・FV など）が出なくなりました。テーマの設定は今までどおり各設定欄から変えられます。あわせて「マイパーツ > APIキャッシュ」の画面をなくしました。更新をおすすめします。",
+    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.6.1/LiteWord.zip",
+    "sha256": "3b295f0a33e5b7403ef5214729a4a5e9325781e99c7f6f7b2c096236c407bdfd"
 }
