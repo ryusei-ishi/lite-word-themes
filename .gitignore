@@ -8,6 +8,9 @@ nul
 # 編集前の退避ファイル
 *.bak
 *.orig
+# （2026-11-02 の点検 I19）wizard.js.backup のような退避ファイルと、Dreamweaver の同期メモ（_notes/dwsync.xml）が配布物に入っていた
+*.backup
+_notes/
 
 # 配布・退避用の zip
 # ⚠️ リリース成果物の LiteWord.zip は既に追跡済みなので、この指定の影響を受けない
