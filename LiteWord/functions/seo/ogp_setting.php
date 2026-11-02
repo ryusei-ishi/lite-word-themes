@@ -16,12 +16,18 @@ wp_enqueue_style(
 /* ---------- メディアライブラリ用スクリプト ---------- */
 wp_enqueue_media();
 
-/* ---------- OGP画像の保存処理 ---------- */
-if ( isset( $_POST['lw_og_default_image'] ) ) {
-	update_option( 'lw_og_default_image', sanitize_url( $_POST['lw_og_default_image'] ) );
-}
-if ( isset( $_POST['lw_front_og_image'] ) ) {
-	update_option( 'lw_front_og_image', sanitize_url( $_POST['lw_front_og_image'] ) );
+/* ---------- OGP画像の保存処理 ----------
+ * 本物の設定画面から・管理者のときだけ保存する（2026-11-02 再点検 R8）。
+ * 2.6.0 までは nonce を見ていなかったため、罠のページから SNS に出る画像を差し替えられた。
+ * nonce の欄は同じフォームの Lw_opt_select / Lw_opt_text が出している（settings_save_guard.php）。
+ * URL は http・https だけを受け付ける（空＝「削除」はそのまま空で保存する）。 */
+foreach ( array( 'lw_og_default_image', 'lw_front_og_image' ) as $lw_og_field ) {
+	if ( isset( $_POST[ $lw_og_field ] ) && lw_settings_save_allowed() ) {
+		$lw_og_posted = lw_settings_posted_string( $lw_og_field );
+		if ( null !== $lw_og_posted ) {
+			update_option( $lw_og_field, lw_settings_sanitize_url( $lw_og_posted ) );
+		}
+	}
 }
 ?>
 

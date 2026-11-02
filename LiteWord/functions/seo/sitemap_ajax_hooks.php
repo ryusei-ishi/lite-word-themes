@@ -6,12 +6,26 @@
 
 if ( ! defined( 'ABSPATH' ) ) exit;
 
-add_action( 'wp_ajax_lw_save_noindex', function() {
-    if ( ! wp_verify_nonce( $_POST['nonce'], 'lw_sitemap_control' ) ) {
-        wp_send_json_error( 'Nonce verification failed' );
-        return;
+/**
+ * サイトマップ設定の Ajax を受けてよいか（nonce と権限）
+ *
+ * 2.6.0 までは nonce だけを見ていて、権限を見ていなかった（2026-11-02 再点検）。
+ * nonce は管理者だけが開ける「サイトマップ設定」の画面でしか作らないが、nonce は権限の代わりにならないので
+ * 画面と同じ manage_options も確かめる。通らなければここで止める（wp_send_json_error は終了する）。
+ */
+function lw_sitemap_ajax_guard() {
+    $nonce = isset( $_POST['nonce'] ) && is_string( $_POST['nonce'] ) ? sanitize_text_field( wp_unslash( $_POST['nonce'] ) ) : '';
+    if ( ! wp_verify_nonce( $nonce, 'lw_sitemap_control' ) ) {
+        wp_send_json_error( 'Nonce verification failed' );   // 返し方は今までどおり（画面の JS が見ている形を変えない）
     }
-    
+    if ( ! current_user_can( 'manage_options' ) ) {
+        wp_send_json_error( '権限がありません。', 403 );
+    }
+}
+
+add_action( 'wp_ajax_lw_save_noindex', function() {
+    lw_sitemap_ajax_guard();
+
     $type = sanitize_text_field( $_POST['type'] );
     $id = intval( $_POST['id'] );
     $noindex = $_POST['noindex'] === 'true';
@@ -77,10 +91,8 @@ add_action( 'publish_post', function( $post_id ) {
 
 // llms.txtプレビュー用Ajax処理
 add_action('wp_ajax_lw_preview_llms_txt', function() {
-    if (!wp_verify_nonce($_POST['nonce'], 'lw_sitemap_control')) {
-        wp_send_json_error('Nonce verification failed');
-    }
-    
+    lw_sitemap_ajax_guard();
+
     $settings = $_POST['settings'];
     $content = LW_Sitemap_Settings::generate_llms_txt_preview($settings);
     
@@ -89,10 +101,8 @@ add_action('wp_ajax_lw_preview_llms_txt', function() {
 
 // llms.txt生成Ajax処理
 add_action('wp_ajax_lw_generate_llms_txt', function() {
-    if (!wp_verify_nonce($_POST['nonce'], 'lw_sitemap_control')) {
-        wp_send_json_error('Nonce verification failed');
-    }
-    
+    lw_sitemap_ajax_guard();
+
     $settings = $_POST['settings'];
     $result = LW_Sitemap_Settings::generate_llms_txt_from_settings($settings);
     

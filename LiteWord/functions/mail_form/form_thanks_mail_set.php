@@ -62,8 +62,15 @@ $form_set_no = sanitize_text_field($args);
                                あちらは sanitize_text_field() なので改行が半角スペースに潰れる（2026-09-16） */
                             $lw_thanks_body_key = "form_send_thanks_{$i}_{$form_set_no}_body";
                             $lw_thanks_body_df  = "[your_name] 様\n".get_bloginfo('name')."にお問い合わせいただきありがとうございます。\n担当より通常 2〜3 営業日以内にご返信いたします。\n\n※ 本メールは自動送信です。\n内容に心当たりがない場合は破棄していただければ幸いです。\n\n";
-                            if ( isset( $_POST[ $lw_thanks_body_key ] ) ) {
-                                update_option( $lw_thanks_body_key, sanitize_textarea_field( $_POST[ $lw_thanks_body_key ] ) );
+                            /* 保存は本物の設定画面から・管理者のときだけ（2026-11-02 再点検 R4）。
+                               2.6.0 までは nonce も権限も見ていなかったため、罠のページから自動返信の本文を書き換えられた。
+                               nonce の欄は同じフォームの Lw_opt_select / Lw_opt_text が出している（settings_save_guard.php）。
+                               lw_settings_posted_string() はスラッシュを外す（前は ' や " の前に \ が付いて保存されていた） */
+                            if ( isset( $_POST[ $lw_thanks_body_key ] ) && lw_settings_save_allowed() ) {
+                                $lw_thanks_body_posted = lw_settings_posted_string( $lw_thanks_body_key );
+                                if ( null !== $lw_thanks_body_posted ) {
+                                    update_option( $lw_thanks_body_key, sanitize_textarea_field( $lw_thanks_body_posted ) );
+                                }
                             }
                             $lw_thanks_body_val = get_option( $lw_thanks_body_key, $lw_thanks_body_df );
                             ?>
