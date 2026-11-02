@@ -309,11 +309,11 @@ foreach ( $form_data as $idx => $field ) :
                     <?php
                         if($consent_type !== "type_text"):
                     ?>
-                    <p><a href="<?= esc_url( $consent_url ) ?>" <?=new_tab()?>><?=$consent_label?></a>についてご同意の上、お問い合わせください。</p>
+                    <p><a href="<?= esc_url( $consent_url ) ?>" <?=new_tab()?>><?= esc_html( $consent_label ) ?></a>についてご同意の上、お問い合わせください。</p>
                     <?php endif; ?>
                     <label for="lw_consent_<?php echo esc_attr( $form_set_no ); ?>">
                         <input type="checkbox" id="lw_consent_<?php echo esc_attr( $form_set_no ); ?>" value="1" required>
-                        <span><?=$consent_label?>に同意する</span>
+                        <span><?= esc_html( $consent_label ) ?>に同意する</span>
                     </label>
                 </div>
             </div>
@@ -335,6 +335,8 @@ foreach ( $form_data as $idx => $field ) :
     <?php 
 		// サンクスページの設定がある場合はリダイレクト
 		$thanks_url = get_option("form_thanks_page_set_{$form_set_no}_thanks_page_url", '');
+		// http・https とサイト内のパスだけ（javascript: などは飛ばない）。保存の側でも同じ確かめをしている（settings_save_guard.php）
+		$thanks_url = esc_url_raw( (string) $thanks_url, array( 'http', 'https' ) );
 		if (!empty($thanks_url)): ?>
 		<script>
 			document.addEventListener('DOMContentLoaded', function () {

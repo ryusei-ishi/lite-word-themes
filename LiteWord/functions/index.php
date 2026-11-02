@@ -105,6 +105,7 @@ get_template_part('./functions/menu');//ナビゲーションメニュー
 get_template_part('./functions/widget/index');//ウィジェット
 get_template_part('./functions/disable-emoji');//絵文字を有効にする
 get_template_part('./functions/user_data/index');//ユーザー設定
+get_template_part('./functions/settings_save_guard');//設定画面の保存の確かめ（nonce と権限。Lw_theme_mod_* / Lw_opt_* が使う）
 get_template_part('./functions/customizer/index');//カスタマイザー
 get_template_part('./functions/css_js_set/index');//CSSとJS読み込み
 get_template_part('./functions/title_put');//fvタイトルなどの情報取得

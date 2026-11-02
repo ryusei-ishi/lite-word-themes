@@ -29,10 +29,20 @@ if(is_admin()){
 
         // ────────────────────────
         // 2) 更新された時の処理
+        //    🚨 本物の設定画面から・管理者のときだけ（functions/settings_save_guard.php）。
+        //    2026-11-02 までは送り元を確かめておらず、罠のページから通知先などを書き換えられた。
+        //    名前が _url で終わる欄（サンクスページ・同意欄のリンク先）は http・https だけを受け付ける。
         // ────────────────────────
-        if ( isset( $_POST[ $opt_name ] ) ) {
-            $opt_val = sanitize_text_field( $_POST[ $opt_name ] );
-            update_option( $opt_name, $opt_val );
+        if ( isset( $_POST[ $opt_name ] ) && lw_settings_save_allowed() ) {
+            $posted = lw_settings_posted_string( $opt_name );
+            if ( null !== $posted ) {
+                if ( 'url' === $input_type || lw_settings_is_url_field( $opt_name ) ) {
+                    $opt_val = lw_settings_sanitize_url( $posted );
+                } else {
+                    $opt_val = sanitize_text_field( $posted );
+                }
+                update_option( $opt_name, $opt_val );
+            }
         }
 
         // ────────────────────────
@@ -42,40 +52,43 @@ if(is_admin()){
         $esc_name = esc_attr( $opt_name );
         $esc_ph   = esc_attr( $placeholder );
         $esc_cls  = esc_attr( $class );
+        $esc_rows = esc_attr( $rows );
+
+        lw_settings_nonce_field();
 
         switch ( $input_type ) {
             case 'text':
                 echo "<input type='text' name='{$esc_name}' value='{$esc_val}' placeholder='{$esc_ph}' class='{$esc_cls}'>";
                 break;
             case 'textarea':
-                echo "<textarea name='{$esc_name}' cols='30' rows='{$rows}' placeholder='{$esc_ph}' class='{$esc_cls}'>" . esc_textarea( $opt_val ) . "</textarea>";
+                echo "<textarea name='{$esc_name}' cols='30' rows='{$esc_rows}' placeholder='{$esc_ph}' class='{$esc_cls}'>" . esc_textarea( $opt_val ) . "</textarea>";
                 break;
             case 'color':
                 echo "<input type='color' name='{$esc_name}' value='{$esc_val}' class='{$esc_cls}'>";
                 break;
             case 'number':
-                echo "<input type='number' name='$opt_name' value='$opt_val' placeholder='$placeholder' class='$class'>";
+                echo "<input type='number' name='{$esc_name}' value='{$esc_val}' placeholder='{$esc_ph}' class='{$esc_cls}'>";
                 break;
             case 'email':
-                echo "<input type='email' name='$opt_name' value='$opt_val' placeholder='$placeholder' class='$class'>";
+                echo "<input type='email' name='{$esc_name}' value='{$esc_val}' placeholder='{$esc_ph}' class='{$esc_cls}'>";
                 break;
             case 'tel':
-                echo "<input type='tel' name='$opt_name' value='$opt_val' placeholder='$placeholder' class='$class'>";
+                echo "<input type='tel' name='{$esc_name}' value='{$esc_val}' placeholder='{$esc_ph}' class='{$esc_cls}'>";
                 break;
             case 'url':
-                echo "<input type='url' name='$opt_name' value='$opt_val' placeholder='$placeholder' class='$class'>";
+                echo "<input type='url' name='{$esc_name}' value='{$esc_val}' placeholder='{$esc_ph}' class='{$esc_cls}'>";
                 break;
             case 'password':
-                echo "<input type='password' name='$opt_name' value='$opt_val' placeholder='$placeholder' class='$class'>";
+                echo "<input type='password' name='{$esc_name}' value='{$esc_val}' placeholder='{$esc_ph}' class='{$esc_cls}'>";
                 break;
             case 'hidden':
-                echo "<input type='hidden' name='$opt_name' value='$opt_val' class='$class'>";
+                echo "<input type='hidden' name='{$esc_name}' value='{$esc_val}' class='{$esc_cls}'>";
                 break;
             case 'range':
                 if ( $opt_val == "50" ) {
-                    $opt_val = "";
+                    $esc_val = "";
                 }
-                echo "<input type='range' name='$opt_name' value='$opt_val' class='$class'>";
+                echo "<input type='range' name='{$esc_name}' value='{$esc_val}' class='{$esc_cls}'>";
                 break;
         }
     }
@@ -87,10 +100,15 @@ if(is_admin()){
         /* ---------- 1) 現在値を取得 ---------- */
         $opt_val = get_option( $opt_name, '' );
 
-        /* ---------- 2) フォーム送信があった場合に更新 ---------- */
-        if ( isset( $_POST[ $opt_name ] ) ) {
-            $opt_val = sanitize_text_field( $_POST[ $opt_name ] );
-            update_option( $opt_name, $opt_val );
+        /* ---------- 2) フォーム送信があった場合に更新 ----------
+         * 本物の設定画面から・管理者のときだけ（settings_save_guard.php）。選択肢にある値か「未選択」だけを受け付ける */
+        if ( ! is_array( $options ) ) $options = [];
+        if ( isset( $_POST[ $opt_name ] ) && lw_settings_save_allowed() ) {
+            $posted = lw_settings_posted_string( $opt_name );
+            if ( null !== $posted && ( '' === $posted || array_key_exists( $posted, $options ) ) ) {
+                $opt_val = $posted;
+                update_option( $opt_name, $opt_val );
+            }
         }
 
         /* ---------- 3) 未保存なら $df をキーに変換して採用 ---------- */
@@ -107,6 +125,7 @@ if(is_admin()){
         /* ---------- 4) <select> 出力 ---------- */
         if ( ! is_array( $options ) ) $options = [];
 
+        lw_settings_nonce_field();
         $html  = '<select name="' . esc_attr( $opt_name ) . '" class="' . esc_attr( $class ) . '">' . "\n";
         $placeholder_text = $placeholder ?: $df;
         $html .= '  <option value=""' . ( $selected === '' ? ' selected' : '' ) . '>'
@@ -127,10 +146,13 @@ if(is_admin()){
         // 初期化
         $opt_val = get_option($opt_name); // 既に保存してある値があれば取得
         
-        // 更新された時の処理
-        if (isset($_POST[$opt_name])) {
-            $opt_val = wp_kses_post($_POST[$opt_name]); // ここで不要な属性を除去
-            update_option($opt_name, $opt_val);
+        // 更新された時の処理（本物の設定画面から・管理者のときだけ。settings_save_guard.php）
+        if (isset($_POST[$opt_name]) && lw_settings_save_allowed()) {
+            $posted = lw_settings_posted_string($opt_name);
+            if ($posted !== null) {
+                $opt_val = wp_kses_post($posted); // ここで不要な属性を除去
+                update_option($opt_name, $opt_val);
+            }
         }
     
         // デフォルト設定（クラシックエディタ用）
@@ -146,6 +168,7 @@ if(is_admin()){
         $settings = wp_parse_args($settings, $default_settings);
     
         // WordPressのエディタを表示
+        lw_settings_nonce_field();
         wp_editor($opt_val, $opt_name, $settings);
     }
     

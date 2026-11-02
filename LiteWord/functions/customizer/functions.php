@@ -1961,103 +1961,135 @@ function Lw_copyright_1_set($set_arr = []) {
  * カスタマイザーのデータを出し入れするための関数
 * ------------------------------------------------- */
 if(is_admin()){
+    /*
+     * 🚨 保存は lw_settings_save_allowed()（functions/settings_save_guard.php）を通ったときだけ。
+     *    本物の設定画面の nonce と、管理者の権限を確かめる。2026-11-02 までは確かめておらず、
+     *    罠のページから GTM の ID などを書き換えられた（なりすまし送信）。
+     *    値を画面に出すときは必ずエスケープする（属性は esc_attr・textarea は esc_textarea）。
+     */
     function Lw_theme_mod_text($mod_name = "", $input_type = "text", $df = "", $placeholder = "", $class = "", $rows = "10") {
         // 初期化
         $mod_val = Lw_theme_mod_set($mod_name, $df); // デフォルト値を指定
 
-        // 更新された時の処理
-        if (isset($_POST[$mod_name])) {
-            // POST されたデータを取得
-            $mod_val = $_POST[$mod_name];
-            // POST された値を $mod_name に保存 (テーマモディファイとして保存)
-            set_theme_mod($mod_name, $mod_val);
+        // 更新された時の処理（本物の画面から・管理者のときだけ）
+        if (isset($_POST[$mod_name]) && lw_settings_save_allowed()) {
+            $posted = lw_settings_posted_string($mod_name);
+            if ($posted !== null) {
+                if ($input_type === 'url' || lw_settings_is_url_field($mod_name)) {
+                    $mod_val = lw_settings_sanitize_url($posted);
+                } elseif ($input_type === 'textarea') {
+                    $mod_val = sanitize_textarea_field($posted);
+                } else {
+                    $mod_val = sanitize_text_field($posted);
+                }
+                // POST された値を $mod_name に保存 (テーマモディファイとして保存)
+                set_theme_mod($mod_name, $mod_val);
+                wp_cache_delete('lw_theme_mod_' . $mod_name, 'lw_theme_mods');
+            }
         }
+
+        $name_attr  = esc_attr($mod_name);
+        $val_attr   = esc_attr($mod_val);
+        $ph_attr    = esc_attr($placeholder);
+        $class_attr = esc_attr($class);
+        $rows_attr  = esc_attr($rows);
+
+        lw_settings_nonce_field();
 
         // 入力タイプに応じたHTMLを出力
         switch ($input_type) {
             case 'text':
-                echo "<input type='text' name='$mod_name' value='$mod_val' placeholder='$placeholder' class='$class'>";
+                echo "<input type='text' name='{$name_attr}' value='{$val_attr}' placeholder='{$ph_attr}' class='{$class_attr}'>";
                 break;
             case 'textarea':
-                echo "<textarea name='$mod_name' cols='30' rows='$rows' placeholder='$placeholder' class='$class'>$mod_val</textarea>";
+                echo "<textarea name='{$name_attr}' cols='30' rows='{$rows_attr}' placeholder='{$ph_attr}' class='{$class_attr}'>" . esc_textarea($mod_val) . "</textarea>";
                 break;
             case 'color':
-                echo "<input type='color' name='$mod_name' value='$mod_val' class='$class'>";
+                echo "<input type='color' name='{$name_attr}' value='{$val_attr}' class='{$class_attr}'>";
                 break;
             case 'number':
-                echo "<input type='number' name='$mod_name' value='$mod_val' placeholder='$placeholder' class='$class'>";
+                echo "<input type='number' name='{$name_attr}' value='{$val_attr}' placeholder='{$ph_attr}' class='{$class_attr}'>";
                 break;
             case 'email':
-                echo "<input type='email' name='$mod_name' value='$mod_val' placeholder='$placeholder' class='$class'>";
+                echo "<input type='email' name='{$name_attr}' value='{$val_attr}' placeholder='{$ph_attr}' class='{$class_attr}'>";
                 break;
             case 'tel':
-                echo "<input type='tel' name='$mod_name' value='$mod_val' placeholder='$placeholder' class='$class'>";
+                echo "<input type='tel' name='{$name_attr}' value='{$val_attr}' placeholder='{$ph_attr}' class='{$class_attr}'>";
                 break;
             case 'url':
-                echo "<input type='url' name='$mod_name' value='$mod_val' placeholder='$placeholder' class='$class'>";
+                echo "<input type='url' name='{$name_attr}' value='{$val_attr}' placeholder='{$ph_attr}' class='{$class_attr}'>";
                 break;
             case 'password':
-                echo "<input type='password' name='$mod_name' value='$mod_val' placeholder='$placeholder' class='$class'>";
+                echo "<input type='password' name='{$name_attr}' value='{$val_attr}' placeholder='{$ph_attr}' class='{$class_attr}'>";
                 break;
             case 'hidden':
-                echo "<input type='hidden' name='$mod_name' value='$mod_val' class='$class'>";
+                echo "<input type='hidden' name='{$name_attr}' value='{$val_attr}' class='{$class_attr}'>";
                 break;
             case 'range':
                 if ($mod_val == "50") {
-                    $mod_val = "";
+                    $val_attr = "";
                 }
-                echo "<input type='range' name='$mod_name' value='$mod_val' class='$class'>";
+                echo "<input type='range' name='{$name_attr}' value='{$val_attr}' class='{$class_attr}'>";
                 break;
         }
     }
     function Lw_theme_mod_select($mod_name = "", $options = array(), $df = "", $placeholder = "", $class = "") {
         // 初期化
         $mod_val = Lw_theme_mod_set($mod_name, $df); // デフォルト値を指定
+        $options = is_array($options) ? $options : array();
 
-        // 更新された時の処理
-        if (isset($_POST[$mod_name])) {
-            // POST されたデータを取得
-            $mod_val = $_POST[$mod_name];
-            // POST された値を $mod_name に保存 (テーマモディファイとして保存)
-            set_theme_mod($mod_name, $mod_val);
+        // 更新された時の処理（本物の画面から・管理者のときだけ。選択肢にある値か「未選択」だけを受け付ける）
+        if (isset($_POST[$mod_name]) && lw_settings_save_allowed()) {
+            $posted = lw_settings_posted_string($mod_name);
+            if ($posted !== null && ($posted === '' || array_key_exists($posted, $options))) {
+                $mod_val = $posted;
+                // POST された値を $mod_name に保存 (テーマモディファイとして保存)
+                set_theme_mod($mod_name, $mod_val);
+                wp_cache_delete('lw_theme_mod_' . $mod_name, 'lw_theme_mods');
+            }
         }
 
-        $selected = $mod_val;
+        $selected = (string) $mod_val;
+
+        lw_settings_nonce_field();
 
         // セレクトボックスを生成
-        echo "<select name='$mod_name' class='$class' id='cus_pr_$mod_name'>";
+        echo "<select name='" . esc_attr($mod_name) . "' class='" . esc_attr($class) . "' id='cus_pr_" . esc_attr($mod_name) . "'>";
         if ($placeholder) {
-            echo "<option value=''>$placeholder</option>";
+            echo "<option value=''>" . esc_html($placeholder) . "</option>";
         } else {
             echo "<option value=''>未選択</option>";
         }
         foreach ($options as $key => $option) {
-            if ($selected == $key) {
-                echo "<option value='$key' selected>$option</option>";
-            } else {
-                echo "<option value='$key'>$option</option>";
-            }
+            $sel = ($selected === (string) $key) ? ' selected' : '';
+            echo "<option value='" . esc_attr($key) . "'{$sel}>" . esc_html($option) . "</option>";
         }
         echo "</select>";
     }
     function Lw_theme_mod_radio($mod_name = "", $options = array(), $df = "", $class = "") {
         // 初期化
         $mod_val = Lw_theme_mod_set($mod_name, $df); // デフォルト値を指定
-    
-        // 更新された時の処理
-        if (isset($_POST[$mod_name])) {
-            // POST されたデータを取得
-            $mod_val = $_POST[$mod_name];
-            // POST された値を $mod_name に保存 (テーマモディファイとして保存)
-            set_theme_mod($mod_name, $mod_val);
+        $options = is_array($options) ? $options : array();
+
+        // 更新された時の処理（本物の画面から・管理者のときだけ。選択肢にある値だけを受け付ける）
+        if (isset($_POST[$mod_name]) && lw_settings_save_allowed()) {
+            $posted = lw_settings_posted_string($mod_name);
+            if ($posted !== null && array_key_exists($posted, $options)) {
+                $mod_val = $posted;
+                // POST された値を $mod_name に保存 (テーマモディファイとして保存)
+                set_theme_mod($mod_name, $mod_val);
+                wp_cache_delete('lw_theme_mod_' . $mod_name, 'lw_theme_mods');
+            }
         }
-    
+
+        lw_settings_nonce_field();
+
         // ラジオボタンの生成
-        echo "<div class='Lw_radio-group $class' id='cus_pr_$mod_name'>";
+        echo "<div class='Lw_radio-group " . esc_attr($class) . "' id='cus_pr_" . esc_attr($mod_name) . "'>";
         foreach ($options as $key => $option) {
-            $checked = ($mod_val == $key) ? 'checked' : '';
+            $checked = ((string) $mod_val === (string) $key) ? 'checked' : '';
             echo "<label>";
-            echo "<input type='radio' name='$mod_name' value='$key' $checked>";
+            echo "<input type='radio' name='" . esc_attr($mod_name) . "' value='" . esc_attr($key) . "' $checked>";
             echo esc_html($option);
             echo "</label>";
         }
@@ -2072,16 +2104,20 @@ if(is_admin()){
     
         $img_value = get_theme_mod($mod_name, $df); // 保存された値、またはデフォルト値を取得
     
-        // 更新処理
-        if (isset($_POST[$mod_name])) {
-            // POSTデータを取得して保存
-            $img_value = sanitize_text_field($_POST[$mod_name]);
-            set_theme_mod($mod_name, $img_value);
+        // 更新処理（本物の画面から・管理者のときだけ。http・https の URL だけを受け付ける）
+        if (isset($_POST[$mod_name]) && lw_settings_save_allowed()) {
+            $posted = lw_settings_posted_string($mod_name);
+            if ($posted !== null) {
+                $img_value = lw_settings_sanitize_url($posted);
+                set_theme_mod($mod_name, $img_value);
+                wp_cache_delete('lw_theme_mod_' . $mod_name, 'lw_theme_mods');
+            }
         }
-    
+
         if (empty($btn_text)) {
             $btn_text = "メディアの選択";
         }
+        lw_settings_nonce_field();
         ?>
         <div class="costom_post_media_select">
             <?php 
