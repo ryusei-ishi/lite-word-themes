@@ -1,5 +1,6 @@
 {
-    "version": "2.5.2",
-    "changelog": "AI の設定で「AQ.」から始まる Gemini の API キー（2026年5月28日以降に Google AI Studio で作ったキー）が入れられなかった不具合を直しました。あわせて、編集画面の AI 機能が使うモデルを gemini-3.5-flash に変え、新しく API キーを作った方でも動くようにしています。文字を選んで使う「自動マーカー」が失敗しやすかった不具合も直しました。お手数ですが更新をお願いいたします。",
-    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.5.2/LiteWord.zip"
+    "version": "2.6.0",
+    "changelog": "セキュリティを強化しました（管理画面の設定の保存、お問い合わせの自動返信、テーマの更新の確認 ほか）。お問い合わせの自動返信は、入力されたメールアドレス1件にだけ送るようになり、短い時間に何度も送られたときは止まるようになりました。あわせて、会員用のログアウト、会員限定ページの一時停止、会員限定の記事の画像の保護を足し、Google Fonts を設定で外せるようにしました。旧URLの転送も直しています。更新をおすすめします。",
+    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.6.0/LiteWord.zip",
+    "sha256": "ff9313c3f71b182251017e461a4868e082b4cc6cd32a8294e82b3876b8c91728"
 }
