@@ -120,6 +120,12 @@ function Lw_save_post_setting_meta_fields($post_id) {
         return;
     }
 
+    // この入力フォームは投稿（post）だけに出している（add_meta_box の 'post'）。
+    // ほかの種類の保存では動かさない（meta_nonce は固定ページの設定と同じ名前なので、送り元だけでは区別できない）
+    if (get_post_type($post_id) !== 'post') {
+        return;
+    }
+
     $input = [
         "ttl_main",
         "ttl_sub",
@@ -147,7 +153,9 @@ function Lw_save_post_setting_meta_fields($post_id) {
     foreach ($input as $field) {
         if (isset($_POST[$field])) {
             // 改行を有効にするためにすべてのフィールドに `sanitize_textarea_field()` を適用
-            $value = sanitize_textarea_field($_POST[$field]);
+            $value = is_scalar($_POST[$field]) ? sanitize_textarea_field($_POST[$field]) : '';
+            // 形の決まっている欄は、その形だけを受け付ける（寄稿者も自分の投稿に書けるため・2026-11-02 の点検 T1）
+            $value = lw_post_setting_sanitize_value($field, $value);
 
             if ($value !== '' && $value !== null) {
                 update_post_meta($post_id, $field, $value);
@@ -162,3 +170,71 @@ function Lw_save_post_setting_meta_fields($post_id) {
 
 
 add_action('save_post', 'Lw_save_post_setting_meta_fields');
+
+/**
+ * 投稿の入力フォームの値のうち、形の決まっているものを確かめる。形に合わなければ空（＝保存しない）。
+ * 値は update_post_meta() に渡す前の、スラッシュの付いたままの文字列（update_metadata が外す）。
+ *
+ * 🚨 fv_image・fv_image_ratio は FV のテンプレートで style 属性に入る。2.5.2 までは確かめておらず、
+ *    寄稿者が自分の投稿に入れた値で、管理者がプレビューした画面に JS を仕込めた（2026-11-02 の点検 T1）。
+ *    出す側（templates/post_fv/）でもエスケープしている。両方そろって守り。
+ *
+ * @param string $field 欄の名前
+ * @param string $value sanitize_textarea_field() を通した値
+ * @return string
+ */
+function lw_post_setting_sanitize_value($field, $value) {
+    $value = (string) $value;
+    if ($value === '') {
+        return '';
+    }
+    switch ($field) {
+        case 'fv_select':
+            return preg_match('/^fv_ptn_[a-z0-9_]+$/', $value) ? $value : '';
+        case 'fv_image':
+        case 'fv_image_sp':
+            if (ctype_digit($value)) {
+                return $value; // 添付ファイルの ID
+            }
+            if (!preg_match('#^https?://#i', $value)) {
+                return ''; // メディアの選択から入るのは http(s) の URL だけ
+            }
+            return esc_url_raw($value, array('http', 'https'));
+        case 'fv_image_ratio':
+            return ($value === 'auto' || preg_match('#^\d{1,3}\s*/\s*\d{1,3}$#', $value)) ? $value : '';
+        case 'fv_filter_opacity':
+            if (!is_numeric($value)) {
+                return '';
+            }
+            return (string) max(0, min(100, (int) round((float) $value)));
+        case 'fv_filter_color':
+        case 'color_main':
+        case 'color_sub':
+        case 'color_accent':
+        case 'color_text':
+        case 'color_return_btn':
+        case 'color_1':
+        case 'color_2':
+        case 'color_3':
+            return lw_is_safe_css_color($value) ? $value : '';
+        default:
+            return $value;
+    }
+}
+
+/**
+ * CSS の色として安全か（#rgb〜#rrggbbaa・rgb()/rgba()/hsl()/hsla() の数字だけ・transparent）。
+ *
+ * @param string $value
+ * @return bool
+ */
+function lw_is_safe_css_color($value) {
+    $value = trim((string) $value);
+    if ($value === 'transparent') {
+        return true;
+    }
+    if (preg_match('/^#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/', $value)) {
+        return true;
+    }
+    return (bool) preg_match('/^(?:rgba?|hsla?)\(\s*[0-9.%\s,\/]+\)$/i', $value);
+}

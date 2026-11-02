@@ -21,7 +21,8 @@ wp_add_inline_style('post_fv_2_style', $custom_css);
     }
     if($thumbnail_url):
     ?>
-        <div class="image_thumbnail" style="background-image: url(<?=$thumbnail_url?>);" itemprop="image">
+        <?php // FV 画像は投稿メタ（寄稿者も書ける）。属性に入れる前に必ず URL として整える（2026-11-02 の点検 T1） ?>
+        <div class="image_thumbnail" style="background-image: url(<?= lw_css_url( $thumbnail_url ) ?>);" itemprop="image">
             <div class="post_category" itemprop="articleSection">
                 <?php 
                 $fv_category = Lw_theme_mod_set("single_post_layout_fv_category", "active");

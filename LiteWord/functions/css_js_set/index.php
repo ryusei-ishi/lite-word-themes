@@ -235,13 +235,22 @@ function Lw_font_family_switch($font_family) {
 function Lw_font_sets(){
     //body
     $font_body_page = Lw_put_text("font_body");
+    // ページ・投稿のメタのフォント名は、フォント名に使う文字だけ（英数字・空白・- _ .）。
+    // 🚨 2.5.2 までは寄稿者が自分の投稿にこの値を保存でき、属性と CSS にそのまま入っていた（2026-11-02 の点検）。
+    //    保存の側（custom_post/page.php）は固定ページだけに絞ったが、前から入っている値もあるのでここでも確かめる
+    if ( ! empty( $font_body_page ) && ! preg_match( '/^[A-Za-z0-9 _.\-]{1,80}$/', (string) $font_body_page ) ) {
+        $font_body_page = '';
+    }
     $font_body = $font_body_page;
     if(empty($font_body_page)){
         $font_body = Lw_theme_mod_set("font_body", "gothic");
     }
-    $font_body_cdn_set = "<div data-lw_font_set='$font_body'></div>";
+    $font_body_cdn_set = "<div data-lw_font_set='" . esc_attr( $font_body ) . "'></div>";
     $font_body_style_set = Lw_font_family_switch($font_body);
     $font_body_weight_page = Lw_put_text("font_body_weight");
+    if ( ! empty( $font_body_weight_page ) && ! preg_match( '/^[1-9]00$/', (string) $font_body_weight_page ) ) {
+        $font_body_weight_page = '';
+    }
     $font_body_weight = $font_body_weight_page;
     $font_df_size_pc = "17px";
     $font_df_size_tb = "16px";
@@ -254,7 +263,7 @@ function Lw_font_sets(){
         if(empty($font_body_page)){
             $font_body = Lw_theme_mod_set("font_page", "$font_body");
         }
-        $font_body_cdn_set = "<div data-lw_font_set='$font_body'></div>";
+        $font_body_cdn_set = "<div data-lw_font_set='" . esc_attr( $font_body ) . "'></div>";
         $font_page_style_set = Lw_font_family_switch($font_body);
         if(empty($font_body_weight_page)){
             $font_page_weight = Lw_theme_mod_set("font_page_weight", "$font_body_weight");
@@ -277,7 +286,7 @@ function Lw_font_sets(){
         $font_single = Lw_theme_mod_set("font_single", "$font_body");
         $font_body_style_set = Lw_font_family_switch($font_single);
         $font_body_weight = Lw_theme_mod_set("font_single_weight", "$font_body_weight");
-        $font_body_cdn_set = "<div data-lw_font_set='$font_single'></div>";
+        $font_body_cdn_set = "<div data-lw_font_set='" . esc_attr( $font_single ) . "'></div>";
         $font_single_style_set = Lw_font_family_switch($font_single);
         $font_df_size_pc = Lw_theme_mod_set("font_single_size_pc", $font_df_size_pc);
         $font_df_size_tb = Lw_theme_mod_set("font_single_size_tb", $font_df_size_tb);

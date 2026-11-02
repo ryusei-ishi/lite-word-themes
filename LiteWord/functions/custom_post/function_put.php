@@ -1,5 +1,22 @@
 <?php
 if ( !defined( 'ABSPATH' ) ) exit;
+
+/**
+ * CSS の url(…)（引用符なし）に入れる URL を作る（2026-11-02 の点検 T1）。
+ * esc_url() だけでは ) や空白が残り、url( を途中で閉じて別の CSS を書き足せる。括弧・空白などを %XX にする。
+ *
+ * @param string $url
+ * @return string
+ */
+function lw_css_url( $url ) {
+    $url = esc_url( (string) $url );
+    return str_replace(
+        array( '(', ')', ' ', ';', '\\' ),
+        array( '%28', '%29', '%20', '%3B', '%5C' ),
+        $url
+    );
+}
+
 //put_text(出力先の処理)
 function Lw_put_text($value,$ex = "",$page_id = ""){
     if (is_admin() ){return;}

@@ -13,13 +13,17 @@ wp_enqueue_style(
 	<?php
 	$thumbnail_url = Lw_put_text( 'fv_image' );
     $fv_image_ratio = Lw_put_text( 'fv_image_ratio', '16 / 8' );
+	// 比率は「数字/数字」か auto だけ（投稿メタは寄稿者も書けるので、style 属性に入れる前に形を確かめる・2026-11-02 の点検 T1）
+	if ( 'auto' !== $fv_image_ratio && ! preg_match( '#^\d{1,3}\s*/\s*\d{1,3}$#', (string) $fv_image_ratio ) ) {
+		$fv_image_ratio = '16 / 8';
+	}
 	if ( empty( $thumbnail_url ) ) {
 		$thumbnail_url = get_the_post_thumbnail_url();
 	}
 	if ( $thumbnail_url ) :
 	?>
         <?php if ( $fv_image_ratio !== 'auto' ) : ?>
-            <div class="image_thumbnail" style="background-image:url(<?= esc_url( $thumbnail_url ); ?>); aspect-ratio: <?=$fv_image_ratio?>;" itemprop="image"></div>
+            <div class="image_thumbnail" style="background-image:url(<?= lw_css_url( $thumbnail_url ); ?>); aspect-ratio: <?= esc_attr( $fv_image_ratio ) ?>;" itemprop="image"></div>
         <?php else : ?>
             <div class="image_thumbnail" style="aspect-ratio: initial;">
                 <img src="<?= esc_url( $thumbnail_url ); ?>" alt="<?= esc_attr( get_the_title() ); ?>" itemprop="image" style="width: 100%; height: auto;">

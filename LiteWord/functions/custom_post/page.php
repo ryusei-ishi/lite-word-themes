@@ -351,6 +351,12 @@ function Lw_save_page_setting_meta_fields( $post_id ) {
     if ( ! current_user_can( 'edit_page', $post_id ) ) {
         return;
     }
+    /* この設定は固定ページ（page）だけに出している（add_meta_box の 'page'）。
+     * 🚨 2.5.2 までは種類を見ておらず、meta_nonce が投稿の入力フォームと同じ名前のため、
+     *    寄稿者が自分の投稿にこの欄（フォント・ヘッダーの種類など）を送って保存できた（2026-11-02 の点検）。 */
+    if ( get_post_type( $post_id ) !== 'page' ) {
+        return;
+    }
 
     /* ---------- メタキー一覧 ---------- */
     $input = [
