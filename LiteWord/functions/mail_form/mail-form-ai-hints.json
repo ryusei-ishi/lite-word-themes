@@ -1,8 +1,8 @@
 {
 	"_meta": {
 		"description": "LiteWordメールフォーム機能のAI向けメタ情報。管理画面の設定項目・フォームの仕組み・ショートコード・送信処理をAIが理解するためのファイル。WordPressの動作には一切影響しない。",
-		"version": "1.0",
-		"lastUpdated": "2026-03-21"
+		"version": "1.1",
+		"lastUpdated": "2026-11-02"
 	},
 
 	"overview": {
@@ -293,10 +293,15 @@
 					"userGuide": "件名にお客様の名前を入れたい場合は [your_name] を使う。"
 				},
 				"to_mail": {
-					"aiDescription": "サンクスメールの送信先。通常は [your_mail] を指定して、フォームに入力されたメールアドレスに送る。固定アドレスの直接指定も可能。",
+					"aiDescription": "サンクスメールの送信先。通常は [your_mail] を指定して、フォームに入力されたメールアドレスに送る。固定アドレスの直接指定も可能（カンマ区切りで複数可）。お客様が入力した値は「正しいメールアドレス1つ」のときだけ使われ、カンマや空白で複数並べた入力には送らない（迷惑メールの踏み台にしないため・2026-11-02〜）。",
 					"optionKey": "form_send_thanks_{パターン番号}_{フォーム番号}_to_mail",
 					"defaultValue": "[your_mail]",
 					"userGuide": "[your_mail] と入力すると、お客様がフォームに入力したメールアドレスに送られる。"
+				},
+				"sendLimits": {
+					"aiDescription": "サンクスメールには送信数の上限がある（2026-11-02〜）。同じ接続元から1時間に5通まで・サイト全体で1日300通まで。上限を超えたときはサンクスメールだけが送られず、お問い合わせ自体は管理者に届き、送信も成功として扱われる。管理者（manage_options）がログインして送ったテストは数えない。",
+					"filters": [ "lw_mail_form_thanks_rate_limit", "lw_mail_form_thanks_rate_window", "lw_mail_form_thanks_daily_site_limit" ],
+					"userGuide": "テストで何度も送ってサンクスメールが届かなくなったときは、1時間ほど待つか、管理者としてログインした状態で送る。"
 				},
 				"from_name": {
 					"aiDescription": "サンクスメールの差出人名。",

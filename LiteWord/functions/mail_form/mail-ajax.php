@@ -232,7 +232,13 @@ if ( is_array( $settings ) ) {
 	* 10 パターン分のサンクスメール
 	*-------------------------------*/
 	$mail_form_thanks_mail_switch = Lw_theme_mod_set("lw_extensions_mail_form_thanks_mail_switch", "on");
-	if ( $mail_form_thanks_mail_switch == 'on' ) {
+	// 迷惑メールの踏み台にしない（thanks_mail_guard.php）。上限を超えたらサンクスメールだけ送らない（問い合わせは管理者に届く）
+	$lw_thanks_allowed = lw_mail_form_thanks_mail_allowed();
+	$lw_thanks_sent    = false;
+	if ( $mail_form_thanks_mail_switch == 'on' && ! $lw_thanks_allowed ) {
+		error_log( '[LW Mail Form] サンクスメールの回数の上限に達したため、この送信では送らなかった' );
+	}
+	if ( $mail_form_thanks_mail_switch == 'on' && $lw_thanks_allowed ) {
 		for ( $i = 1; $i <= 5; $i ++ ) {
 	
 			/* ── スイッチ判定 ── */
@@ -261,11 +267,22 @@ if ( is_array( $settings ) ) {
 				}
 				return $tpl;
 			};
+			/* 宛先に入れる訪問者の値は「正しいメールアドレス1つ」のときだけ（カンマで並べた宛先は使わない）。
+			 * 管理者がテンプレートに直接書いた固定の宛先は今までどおり。 */
+			$replace_to = function ( $tpl ) use ( $sc_map ) {
+				foreach ( $sc_map as $sc => $val ) {
+					$tpl = str_replace( '[' . $sc . ']', lw_mail_form_thanks_recipient_value( $val ), $tpl );
+				}
+				return $tpl;
+			};
 			$subject = $replace( $subj_tpl );
 			$body    = $replace( $body_tpl );
-			$to_addr = $replace( $to_tpl );
-			$from_nm = $replace( $fnm_tpl );
-			$from_ml = $replace( $fml_tpl );
+			$to_addr = $replace_to( $to_tpl );
+			$from_nm = lw_mail_form_clean_header_name( $replace( $fnm_tpl ) );
+			$from_ml = sanitize_email( $replace( $fml_tpl ) );
+			if ( $from_ml === '' || ! is_email( $from_ml ) ) {
+				$from_ml = $default_from;
+			}
 	
 			/* ── [form_data] 展開 ── */
 			if ( strpos( $body, '[form_data]' ) !== false ) {
@@ -287,7 +304,8 @@ if ( is_array( $settings ) ) {
 				'is_email'
 			);
 			if ( empty( $recipients ) ) {
-				error_log( '[LW Mail Form] サンクスメール送信先が無効です: ' . $to_addr );
+				// 宛先（訪問者のメールアドレス）はログに書かない（個人情報・2026-11-02 の点検 T11）
+				error_log( '[LW Mail Form] サンクスメールの送信先が無いか正しくないため送らなかった（パターン ' . $i . '）' );
 				continue;
 			}
 	
@@ -303,8 +321,13 @@ if ( is_array( $settings ) ) {
 			];
 	
 			/* ── 送信 ── */
-			wp_mail( $recipients, $subject, $body_html, $thanks_headers );
+			if ( wp_mail( $recipients, $subject, $body_html, $thanks_headers ) ) {
+				$lw_thanks_sent = true;
+			}
 		}
+	}
+	if ( $lw_thanks_sent ) {
+		lw_mail_form_count_thanks_mail(); // 1回の送信で何パターン送っても1回と数える
 	}
 
 	/* -------------------------------

@@ -5,6 +5,8 @@ if ( !defined( 'ABSPATH' ) ) exit;
 get_template_part('./functions/mail_form/functions');
 //添付ファイルの流量制限（IP・回数・累積バイト）
 get_template_part('./functions/mail_form/upload_rate');
+// サンクスメールの宛先・回数・差出人の確かめ（upload_rate の接続元の取り方を使う。2026-11-02）
+get_template_part('./functions/mail_form/thanks_mail_guard');
 //添付ファイルの形式判定（許可形式・サイズ上限・ファイル名）
 get_template_part('./functions/mail_form/upload_types');
 //添付ファイルの保存先（専用ディレクトリ・スクリプト実行の禁止）
