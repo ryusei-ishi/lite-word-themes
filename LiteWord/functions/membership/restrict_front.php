@@ -17,6 +17,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * ⚠️ 一覧（アーカイブ・検索・新着ブロック・RSS）からの除外は行っていない（Ryuichi 判断で見送り）。
  *    会員限定の記事もタイトルとサムネイルは一覧に出る（開くとログイン画面）。
  *    ページ以外の経路（REST API・RSS・メディア一覧）で本文が出ないようにするのは restrict_api.php。
+ *    WordPress 標準のブロック（最新の投稿・クエリーループの本文と抜粋）は restrict_blocks.php。
  *    一覧の抜粋・関連記事は、それぞれのテンプレートが lw_membership_can_view_post() で見ている。
  *    → doc/specs/membership-restriction.md
  */

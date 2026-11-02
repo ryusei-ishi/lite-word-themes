@@ -30,6 +30,8 @@ if(is_admin()){
     get_template_part('./functions/membership/restrict_front');
     // REST API・RSS・メディア一覧からの本文の流出止め（ページ以外の経路）
     get_template_part('./functions/membership/restrict_api');
+    // 標準のブロック（最新の投稿・クエリーループの本文と抜粋・block-renderer）からの本文の流出止め（restrict_api の関数を使う）
+    get_template_part('./functions/membership/restrict_blocks');
     // ログイン画面の差し替えとログイン失敗時の処理（wp-login.php でも読み込まれる）
     get_template_part('./functions/membership/login_handler');
 }
