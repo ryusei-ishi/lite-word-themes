@@ -48,10 +48,91 @@ function lw_get_remote_update_data() {
 		set_site_transient( $cache_key, 'none', 30 * MINUTE_IN_SECONDS );
 		return false;
 	}
+	// 🚨 取り先は決まった配布元（https）だけ。JSON（lite-word.com）が書き換えられても、別の場所の zip を入れさせない（2026-11-02 の点検 T6）
+	if ( ! is_string( $data->version ) || ! preg_match( '/^[0-9][0-9A-Za-z.\-]{0,30}$/', $data->version )
+		|| ! lw_theme_update_package_url_allowed( $data->download_url ) ) {
+		error_log( '[LiteWord] 更新情報の版または取り先の形が正しくないため、更新を案内しなかった' );
+		set_site_transient( $cache_key, 'none', 30 * MINUTE_IN_SECONDS );
+		return false;
+	}
 
 	set_site_transient( $cache_key, $data, 6 * HOUR_IN_SECONDS );
 	return $data;
 }
+
+/**
+ * 更新ファイル（zip）の取り先として許すか。
+ * 今の配布元は GitHub の lite-word-themes のリリース（https）。以前の lite-word.com/theme-files/ も残す。
+ * 配布元を移すときは lw_theme_update_allowed_package_prefixes フィルタか、ここを直す。
+ *
+ * @param mixed $url
+ * @return bool
+ */
+function lw_theme_update_package_url_allowed( $url ) {
+	if ( ! is_string( $url ) || $url === '' || strpos( $url, '..' ) !== false ) {
+		return false;
+	}
+	$prefixes = apply_filters(
+		'lw_theme_update_allowed_package_prefixes',
+		array(
+			'https://github.com/ryusei-ishi/lite-word-themes/releases/download/',
+			'https://lite-word.com/theme-files/',
+		)
+	);
+	foreach ( (array) $prefixes as $prefix ) {
+		if ( is_string( $prefix ) && $prefix !== '' && strpos( $url, $prefix ) === 0 && preg_match( '#\.zip$#i', $url ) ) {
+			return true;
+		}
+	}
+	return false;
+}
+
+/*====================================
+ * 0.5) 落とした更新ファイルの指紋を照らし合わせる
+ *===================================*/
+/**
+ * 更新情報 JSON に sha256（64桁の16進）が書いてあれば、WordPress が落とした zip の指紋と照らし合わせる。
+ * 合わなければ更新を止める。書いていない JSON（2.5.2 まで）は今までどおり通す。
+ *
+ * 🚨 リリースのときに theme-update.json へ "sha256": "<配布 zip の SHA-256>" を足すこと。
+ *    JSON（lite-word.com）と zip（GitHub）の両方を同時に取られない限り、偽の更新を配れなくなる。
+ *
+ * @param bool|string|WP_Error $reply      ほかのフィルタの結果（false なら未処理）
+ * @param string               $package    取りに行く URL
+ * @param WP_Upgrader          $upgrader
+ * @param array                $hook_extra
+ * @return bool|string|WP_Error
+ */
+function lw_theme_update_verify_package( $reply, $package, $upgrader = null, $hook_extra = array() ) {
+	if ( false !== $reply ) {
+		return $reply;
+	}
+	if ( is_array( $hook_extra ) && isset( $hook_extra['theme'] ) && $hook_extra['theme'] !== LW_THEME_SLUG ) {
+		return $reply;
+	}
+	$data = lw_get_remote_update_data();
+	if ( false === $data || ! isset( $data->download_url ) || $package !== $data->download_url ) {
+		return $reply; // LiteWord の更新ではない
+	}
+	$expected = isset( $data->sha256 ) && is_string( $data->sha256 ) ? strtolower( trim( $data->sha256 ) ) : '';
+	if ( ! preg_match( '/^[0-9a-f]{64}$/', $expected ) ) {
+		return $reply; // 指紋の無い JSON（今までどおり WordPress に任せる）
+	}
+	if ( ! function_exists( 'download_url' ) ) {
+		require_once ABSPATH . 'wp-admin/includes/file.php';
+	}
+	$tmp = download_url( $package, 300 );
+	if ( is_wp_error( $tmp ) ) {
+		return $tmp;
+	}
+	$actual = hash_file( 'sha256', $tmp );
+	if ( ! is_string( $actual ) || ! hash_equals( $expected, strtolower( $actual ) ) ) {
+		wp_delete_file( $tmp );
+		return new WP_Error( 'lw_package_hash_mismatch', 'LiteWord の更新ファイルが配布元の記録と一致しないため、更新を止めました。時間をおいてもう一度お試しください。' );
+	}
+	return $tmp;
+}
+add_filter( 'upgrader_pre_download', 'lw_theme_update_verify_package', 10, 4 );
 
 /*====================================
  * 1) 更新情報を流し込む（マルチサイト対応版）
