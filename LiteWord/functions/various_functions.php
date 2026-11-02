@@ -1,7 +1,40 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) exit;
 // 簡易的セキュリティ対策
 function hh($s) {
     return htmlspecialchars($s, ENT_QUOTES, "UTF-8");
+}
+/**
+ * ヘッダー・フッター・ドロワーのパターン名として使ってよい形か（英小文字・数字・_ だけ）
+ *
+ * パターン名は固定ページのメタ（header_select など・固定ページを書ける人が入れる）とカスタマイザーから来る。
+ * get_template_part() にそのまま渡すと ../ で別の場所の index.php を読ませられた（2026-11-02 再点検）。
+ * 'none'（非表示）もこの形に入る（ファイルが無いので、読み込む側で何も出さない＝今までどおり）。
+ *
+ * @param mixed $ptn
+ * @return bool
+ */
+function lw_is_ptn_name( $ptn ) {
+    return is_string( $ptn ) && 1 === preg_match( '/^[a-z0-9_]+$/', $ptn );
+}
+/**
+ * templates/{$dir}/{$ptn}/index.php を読む（形が正しく、テーマ（子テーマを含む）に本当にあるときだけ）
+ *
+ * 2.6.0 で投稿の FV（templates/post_fv/index.php）に入れた形と同じ。
+ * 無いパターン（'none' など）は今までどおり何も出さない。
+ *
+ * @param string $dir 'header' / 'footer' / 'drawer'
+ * @param mixed  $ptn パターン名
+ * @return void
+ */
+function lw_ptn_template_part( $dir, $ptn ) {
+    if ( ! lw_is_ptn_name( $dir ) || ! lw_is_ptn_name( $ptn ) ) {
+        return;
+    }
+    if ( '' === locate_template( "templates/{$dir}/{$ptn}/index.php" ) ) {
+        return;
+    }
+    get_template_part( "templates/{$dir}/{$ptn}/index" );
 }
 //textarea内で改行したら自動的にbrを付与して。「n\」などは無効にする
 function brSt($item){

@@ -682,13 +682,15 @@ function lw_render_fullscreen_code_editor() {
 				var cssContent = cssEditor ? cssEditor.getValue() : '';
 				var jsContent = jsEditor ? jsEditor.getValue() : ''; // ★ JS追加
 				
+				// 送り先は同じオリジン（このページと同じ管理画面）のプレビューだけ（2026-11-02 再点検）。
+				// '*' だと、プレビューの窓が別のサイトに移っていても、編集中の HTML・CSS・JS をそこへ送っていた
 				previewWindow.postMessage({
 					type: 'lw_preview_update',
 					html: htmlContent,
 					css: cssContent,
 					js: jsContent, // ★ JS追加
 					fullWidth: isFullWidth
-				}, '*');
+				}, window.location.origin);
 			}
 			
 			// ★ プレビューボタン
@@ -716,7 +718,11 @@ function lw_render_fullscreen_code_editor() {
 			});
 			
 			// ★ プレビューウィンドウからの準備完了メッセージ
+			// 受け取るのは、同じオリジンで、自分が開いたプレビューの窓から来たものだけ（2026-11-02 再点検）
 			window.addEventListener('message', function(event) {
+				if (event.origin !== window.location.origin || !previewWindow || event.source !== previewWindow) {
+					return;
+				}
 				if (event.data && event.data.type === 'lw_preview_ready') {
 					console.log('プレビューウィンドウ準備完了');
 					setTimeout(function() {

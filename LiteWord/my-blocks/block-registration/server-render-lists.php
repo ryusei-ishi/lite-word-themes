@@ -194,7 +194,18 @@ function lw_server_list_inject( $content, $class_name, $items ) {
 function lw_server_list_get_posts( $attrs ) {
     $number    = isset( $attrs['numberOfPosts'] ) ? (int) $attrs['numberOfPosts'] : 6;
     $category  = isset( $attrs['categoryId'] ) ? trim( (string) $attrs['categoryId'] ) : '';
-    $post_type = ! empty( $attrs['postType'] ) ? (string) $attrs['postType'] : 'post';
+    $post_type = ( ! empty( $attrs['postType'] ) && is_scalar( $attrs['postType'] ) ) ? (string) $attrs['postType'] : 'post';
+
+    // 🚨 表に出してよい投稿タイプだけ（2026-11-02 再点検）。
+    //    ブロックの設定（postType）は投稿を書ける人なら自由に書けるので、マイパーツ（lw_my_parts）や
+    //    再利用ブロック（wp_block）のような公開しない投稿タイプの題名・抜粋まで HTML に出せていた。
+    //    出せない投稿タイプは何も出さない（JS も REST が 404・401 になり、何も出さないのと同じ）。
+    //    ⚠️ is_post_type_viewable() だけでは足りない。マイパーツはプレビューのために publicly_queryable を
+    //       true にしているので「見られる」と判定される。public（公開する投稿タイプ）も見る。
+    $post_type_object = get_post_type_object( $post_type );
+    if ( ! $post_type_object || empty( $post_type_object->public ) || ! is_post_type_viewable( $post_type_object ) ) {
+        return array();
+    }
 
     $args = array(
         'post_type'           => $post_type,

@@ -794,6 +794,31 @@
       .replace(/'/g, '&#39;');
   }
 
+  // （2026-11-02 の点検 T10）AI の回答・履歴は先に全部文字参照にし、そのあと決まった書式
+  // （**太字**・[文字](https://…)・[文字](/…)・番号と点の箇条書き・改行・裸の URL）だけをタグに置き換える。
+  // 以前は回答をそのまま innerHTML に入れていたので、回答に入った <img onerror> などが動いた。
+  // （2026-11-02 再点検）作ったリンクは、いったん印（\u0000番号\u0000）に置き換えてから最後に戻す。
+  // 前は [文字](URL) で作った <a href="…"> の中の URL を、あとの「裸の URL」の置き換えがもう一度タグにしていたため、
+  // href の中に <a …> と属性ができた（回答に細工があると onmouseover なども入った）。
+  // リンクの URL には空白・< ・印を入れない。
+  function formatAiText(text) {
+    var links = [];
+    var keepLink = function (url, label) {
+      links.push('<a href="' + url + '" target="_blank" rel="noopener">' + label + '</a>');
+      return '\u0000' + (links.length - 1) + '\u0000';
+    };
+    var c = escapeHtmlAll(String(text == null ? '' : text).replace(/\u0000/g, ''));
+    c = c.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
+    c = c.replace(/\[([^\u0000\n]+?)\]\((https?:\/\/[^\s<)\u0000]+)\)/g, function (m, label, url) { return keepLink(url, label); });
+    c = c.replace(/\[([^\u0000\n]+?)\]\((\/[^\s<)\u0000]+)\)/g, function (m, label, url) { return keepLink(url, label); });
+    c = c.replace(/^(\d+)\.\s/gm, '<br>$1. ');
+    c = c.replace(/^[\-\*]\s/gm, '<br>• ');
+    c = c.replace(/\n/g, '<br>');
+    // 文字参照にした引用符（&quot; &#39;）の直後と、そこで URL を切る（前は " ' の直後を除いていた）
+    c = c.replace(/(?<!")(?<!')(?<!&quot;)(?<!&#39;)(https?:\/\/(?:(?!&quot;|&#39;)[^\s<,)\u0000])+)/g, function (m, url) { return keepLink(url, url); });
+    return c.replace(/\u0000(\d+)\u0000/g, function (m, i) { return links[+i] || ''; });
+  }
+
   function addMessage(text, isUser) {
     var msgs = document.getElementById('lw-ai-chat-messages');
     if (!msgs) return;
@@ -810,19 +835,7 @@
     if (isUser) {
       html += escapeHtml(text);
     } else {
-      // （2026-11-02 の点検 T10）AI の回答・履歴は先に全部文字参照にし、そのあと決まった書式
-      // （**太字**・[文字](https://…)・[文字](/…)・番号と点の箇条書き・改行・裸の URL）だけをタグに置き換える。
-      // 以前は回答をそのまま innerHTML に入れていたので、回答に入った <img onerror> などが動いた。
-      var c = escapeHtmlAll(text);
-      c = c.replace(/\*\*(.+?)\*\*/g, '<strong>$1</strong>');
-      c = c.replace(/\[(.+?)\]\((https?:\/\/[^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-      c = c.replace(/\[(.+?)\]\((\/[^\)]+)\)/g, '<a href="$2" target="_blank" rel="noopener">$1</a>');
-      c = c.replace(/^(\d+)\.\s/gm, '<br>$1. ');
-      c = c.replace(/^[\-\*]\s/gm, '<br>• ');
-      c = c.replace(/\n/g, '<br>');
-      // 文字参照にした引用符（&quot; &#39;）の直後と、そこで URL を切る（前は " ' の直後を除いていた）
-      c = c.replace(/(?<!")(?<!')(?<!&quot;)(?<!&#39;)(https?:\/\/(?:(?!&quot;|&#39;)[^\s<,)])+)/g, '<a href="$1" target="_blank" rel="noopener">$1</a>');
-      html += c;
+      html += formatAiText(text);
     }
 
     html += '</div>';

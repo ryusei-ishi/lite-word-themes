@@ -200,18 +200,9 @@ function wdl_render_block_callback( $block_name, $style_css_file, $content ) {
 	}
 
 	static $loaded_styles = [];
-	static $unlocked_blocks_cache = null;
-
-	// 購入済み/アンロック済みブロックのリストを取得（キャッシュ）
-	if ( $unlocked_blocks_cache === null ) {
-		$unlocked_blocks_cache = wdl_get_unlocked_blocks();
-	}
-
-	// このブロックがアンロックされているかチェック
-	$is_unlocked = in_array( $block_name, $unlocked_blocks_cache, true );
 
 	// 未購入ブロックの場合は警告メッセージを表示
-	if ( ! $is_unlocked ) {
+	if ( ! wdl_is_block_unlocked( $block_name ) ) {
 		return wdl_get_locked_block_html( $block_name );
 	}
 
@@ -221,6 +212,65 @@ function wdl_render_block_callback( $block_name, $style_css_file, $content ) {
 		$loaded_styles[] = $block_name;
 	}
 	return $content;
+}
+
+/**
+ * このブロックが使える（購入済み・アンロック済み）か
+ * ------------------------------------------------------------
+ * 一覧は1リクエストに1回だけ作る（wdl_render_block_callback() と render.php のブロックで共通）。
+ *
+ * @param string $block_name ブロック名（wdl/ を除いた名前）
+ * @return bool
+ */
+function wdl_is_block_unlocked( $block_name ) {
+	static $unlocked_blocks_cache = null;
+
+	// 購入済み/アンロック済みブロックのリストを取得（キャッシュ）
+	if ( $unlocked_blocks_cache === null ) {
+		$unlocked_blocks_cache = wdl_get_unlocked_blocks();
+	}
+
+	return in_array( $block_name, $unlocked_blocks_cache, true );
+}
+
+/**
+ * render.php を持つブロックの描画（契約の確かめのあとで render.php を読む）
+ * ------------------------------------------------------------
+ * 🚨 2.6.0 までは render.php のあるブロック（wdl/lw-pr-fv-17）だけ block.json の render に任せていて、
+ *    wdl_render_block_callback() の確かめを通らず、無料のサイトでもプレミアムのブロックが表に出た（2026-11-02 再点検 R9）。
+ *    確かめはほかのブロックと同じ（未購入なら render.php を読まず、編集できる人には未購入のお知らせ・訪問者には何も出さない）。
+ *    管理画面の中では今までどおり確かめない（wdl_render_block_callback() と同じ）。
+ *    CSS は block.json の style（file:./style.css）として WordPress が読むので、ここでは触らない。
+ *
+ * @param string        $block_name    ブロック名（wdl/ を除いた名前）
+ * @param string        $template_path render.php の場所
+ * @param array         $attributes    ブロックの設定
+ * @param string        $content       中身
+ * @param WP_Block|null $block         ブロック
+ * @return string
+ */
+function wdl_render_block_with_file( $block_name, $template_path, $attributes, $content, $block ) {
+	if ( ! is_admin() && ! wdl_is_block_unlocked( $block_name ) ) {
+		return wdl_get_locked_block_html( $block_name );
+	}
+	return wdl_render_block_file( $template_path, $attributes, $content, $block );
+}
+
+/**
+ * render.php を読んで出力を返す（WordPress が block.json の render で行うのと同じ形）
+ * ------------------------------------------------------------
+ * render.php の中で使える変数は、WordPress と同じ $attributes・$content・$block（と $template_path）。
+ *
+ * @param string        $template_path render.php の場所
+ * @param array         $attributes    ブロックの設定
+ * @param string        $content       中身
+ * @param WP_Block|null $block         ブロック
+ * @return string
+ */
+function wdl_render_block_file( $template_path, $attributes, $content, $block ) {
+	ob_start();
+	require $template_path;
+	return ob_get_clean();
 }
 
 /* =============================================================
@@ -490,9 +540,15 @@ function wdl_register_blocks() {
 			$current_block_name = $block_name;
 			$current_style_file = $style_css_file;
 
-			// render.phpが存在する場合はblock.jsonのrenderに任せる（動的ブロック対応）
+			// render.phpが存在する場合は、契約の確かめをしてから render.php を読む（動的ブロック対応）
+			// 🚨 block.json の render にそのまま任せると、未購入でも表に出る（2026-11-02 再点検 R9）
 			if ( $has( 'render.php' ) ) {
-				register_block_type( $block_dir_path );
+				$current_render_file = $resolve( 'render.php' );
+				register_block_type( $block_dir_path, [
+					'render_callback' => function ( $attributes, $content, $block ) use ( $current_block_name, $current_render_file ) {
+						return wdl_render_block_with_file( $current_block_name, $current_render_file, $attributes, $content, $block );
+					},
+				] );
 			} else {
 				// render.phpがない場合は従来通りrender_callbackを使用
 				register_block_type( $block_dir_path, [

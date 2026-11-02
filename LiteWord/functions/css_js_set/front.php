@@ -43,6 +43,10 @@ function add_files() {
         $header_set_ptn_df = Lw_theme_mod_set("header_set_ptn_df", "ptn_1");
         if(is_page()){
             $header_ptn_set = Lw_put_text("header_select");
+            // ../ などの形の違う値は「未選択」と同じ扱い（templates/header/index.php と同じ。2026-11-02 再点検）
+            if(!lw_is_ptn_name($header_ptn_set)){
+                $header_ptn_set = '';
+            }
             if(empty($header_ptn_set)){
                 $header_ptn_set = Lw_theme_mod_set("header_set_ptn_page", $header_set_ptn_df);
             }
@@ -58,8 +62,9 @@ function add_files() {
         }
         // 🐛 ヘッダーを「ショートコード」（ptn_short_code）にすると assets/css/header/ptn_short_code/ が無く、
         //    毎ページ 404 を読みに行っていた。ファイルがあるパターンだけ読み込む
+        // パターン名は英小文字・数字・_ だけ（../ で別の場所の CSS を読ませない。2026-11-02 再点検）
         $header_css_path = '/assets/css/header/'.$header_ptn_set.'/style.min.css';
-        if(file_exists(get_template_directory() . $header_css_path)){
+        if(lw_is_ptn_name($header_ptn_set) && file_exists(get_template_directory() . $header_css_path)){
             wp_enqueue_style('style_header', get_template_directory_uri() . $header_css_path, array(), css_version(), 'all');
         }
         wp_enqueue_style('style_header_sub_menu', get_template_directory_uri() . '/assets/css/header/sub_menu/style.min.css', array(), css_version(), 'all');

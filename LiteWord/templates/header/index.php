@@ -1,21 +1,26 @@
 <?php
 if ( !defined( 'ABSPATH' ) ) exit; 
 $header_set_ptn_df = Lw_theme_mod_set("header_set_ptn_df", "ptn_1");
+// パターン名は形を確かめてから読む（lw_ptn_template_part()・various_functions.php）。
+// 固定ページのメタに ../ などの形の違う値が入っていたら「未選択」と同じ扱い（2026-11-02 再点検）
 if(is_page()){
     $ptn_set = Lw_put_text("header_select");
+    if(!lw_is_ptn_name($ptn_set)){
+        $ptn_set = '';
+    }
     if(empty($ptn_set)){
         $ptn_set = Lw_theme_mod_set("header_set_ptn_page", $header_set_ptn_df);
     }
-    get_template_part( "templates/header/".$ptn_set."/index" );
+    lw_ptn_template_part( 'header', $ptn_set );
 }
 else if(is_single()){
-    get_template_part( "templates/header/".Lw_theme_mod_set("header_set_ptn_post", $header_set_ptn_df)."/index" );
+    lw_ptn_template_part( 'header', Lw_theme_mod_set("header_set_ptn_post", $header_set_ptn_df) );
 }
 else if(is_archive()){
-    get_template_part( "templates/header/".Lw_theme_mod_set("header_set_ptn_archive", $header_set_ptn_df)."/index" );
+    lw_ptn_template_part( 'header', Lw_theme_mod_set("header_set_ptn_archive", $header_set_ptn_df) );
 }
 else{
-    get_template_part( "templates/header/".$header_set_ptn_df."/index" );
+    lw_ptn_template_part( 'header', $header_set_ptn_df );
 }
 
 //ヘッダー追従設定

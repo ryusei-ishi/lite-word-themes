@@ -1822,11 +1822,27 @@ function lw_ai_system_select_parts( WP_REST_Request $request ) {
         return new WP_REST_Response( array( 'success' => false, 'message' => 'セクションが空です' ), 400 );
     }
 
+    // （2026-11-02 再点検）1件ごとに Gemini を呼ぶので、1回で受け付ける数に上限を置く。
+    // 上限が無いと、1回のリクエスト（回数の数え上げは1回）で何百回も呼ばせられた。画面は1件ずつ送っている。
+    $max_sections = 30;
+    if ( count( $sections ) > $max_sections ) {
+        return new WP_REST_Response( array( 'success' => false, 'message' => 'セクションが多すぎます（1回に' . $max_sections . '件まで）' ), 400 );
+    }
+
+    // 形も先に確かめる。type に配列が来ると isset( $purposes[ 配列 ] ) で PHP が止まり 500 になっていた
+    foreach ( $sections as $section ) {
+        if ( ! is_array( $section )
+            || ( isset( $section['type'] ) && ! is_string( $section['type'] ) )
+            || ( isset( $section['content'] ) && ! is_scalar( $section['content'] ) ) ) {
+            return new WP_REST_Response( array( 'success' => false, 'message' => 'セクションの形が正しくありません' ), 400 );
+        }
+    }
+
     $result_sections = array();
 
     foreach ( $sections as $section ) {
         $section_type = isset( $section['type'] ) ? $section['type'] : '';
-        $content      = isset( $section['content'] ) ? $section['content'] : '';
+        $content      = isset( $section['content'] ) ? (string) $section['content'] : '';
 
         // 利用可能なパーツ一覧を取得
         $available_parts = lw_ai_system_get_available_parts( $section_type );

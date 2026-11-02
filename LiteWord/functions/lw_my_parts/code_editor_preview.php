@@ -139,7 +139,12 @@ function lw_render_code_preview() {
 			var lw_executed_scripts = [];
 			
 			// postMessageでコンテンツを受信
+			// 受け取るのは、同じオリジンで、このプレビューを開いた編集画面（window.opener）から来たものだけ（2026-11-02 再点検）。
+			// 送り元を見ていなかったので、この窓に届くメッセージなら誰のものでも HTML と JS をこの管理画面で動かしていた
 			window.addEventListener('message', function(event) {
+				if (event.origin !== window.location.origin || !window.opener || event.source !== window.opener) {
+					return;
+				}
 				if (event.data && event.data.type === 'lw_preview_update') {
 					var html = event.data.html || '';
 					var css = event.data.css || '';
@@ -340,12 +345,12 @@ function lw_render_code_preview() {
 				}
 			});
 			
-			// 親ウィンドウに準備完了を通知
+			// 親ウィンドウに準備完了を通知（送り先は同じオリジンの編集画面だけ。2026-11-02 再点検）
 			if (window.opener) {
 				window.opener.postMessage({
 					type: 'lw_preview_ready',
-					postId: <?php echo $post_id; ?>
-				}, '*');
+					postId: <?php echo (int) $post_id; ?>
+				}, window.location.origin);
 				console.log('✅ プレビューウィンドウ準備完了を通知しました');
 			}
 			
