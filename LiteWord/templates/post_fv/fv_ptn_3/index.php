@@ -27,9 +27,9 @@ wp_add_inline_style('post_fv_2_style', $custom_css);
     <div class="image_thumbnail" style="background-image: url(<?= lw_css_url( (string) $thumbnail_url ) ?>);" itemprop="image">
         <div class="ttl_wrap_in">
             <h1 class="post_title" itemprop="headline">
-                <?=brSt(Lw_put_text("ttl_main",get_the_title()))?>
+                <?=Lw_put_text_br("ttl_main",get_the_title())/* 設定の値は文字として出す（2026-11-02 再チェック R1） */?>
             </h1>
-            <p><?=brSt(Lw_put_text("ttl_sub",""))?></p>
+            <p><?=Lw_put_text_br("ttl_sub","")?></p>
         </div>
     </div>
 </header>

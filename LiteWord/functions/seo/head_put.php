@@ -103,7 +103,7 @@ function lw_build_seo_title( $main_key, $sep_key, $sub_key ) {
 /* ----------------------------------------------------------------
  * D) <title> 出力フィルター
  * ---------------------------------------------------------------- */
-function lw_filter_document_title( $title ) {
+function lw_build_document_title_raw( $title ) {
 
 	/* === 1) 個別フィールド（seo_title, category_seo_title）優先 === */
 
@@ -227,6 +227,21 @@ function lw_filter_document_title( $title ) {
 
 	/* === 3) 上記すべて空なら WP デフォルト === */
 	return $title;
+}
+
+/**
+ * pre_get_document_title に返すタイトル。文字として出す（esc_html）。
+ * WordPress の通常のタイトル（wp_get_document_title()）もエスケープ済みの文字を返すので、同じ形にそろえた。
+ * esc_html は &amp; などを二重にしない。og:title（esc_attr）やパンくずも同じ値を使う。
+ * （2026-11-02 再チェック R1）2.6.0 までは seo_title をそのまま返していたため、
+ * 標準のカスタムフィールドから入れた </title> のあとのタグが動いた（パンくずでは HTML としてそのまま出ていた）。
+ *
+ * @param string $title
+ * @return string
+ */
+function lw_filter_document_title( $title ) {
+	$built = lw_build_document_title_raw( $title );
+	return ( is_string( $built ) && $built !== '' ) ? esc_html( $built ) : $built;
 }
 add_filter( 'pre_get_document_title', 'lw_filter_document_title', 20 );
 

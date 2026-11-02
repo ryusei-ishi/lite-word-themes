@@ -46,7 +46,7 @@ function lw_generate_css_variables() {
     :root {
         /* ------- layout ---------*/
         --max-width-clm-1: <?php 
-            $max_width_clm_1 = get_post_meta(get_the_ID(),"max_width_clm_1",true);
+            $max_width_clm_1 = lw_meta_css_length(get_the_ID(), 'max_width_clm_1');
             if(empty($max_width_clm_1)){
                 echo Lw_theme_mod_set("page_post_layout_max_width_clm_1", "1120px");
             } else {
@@ -60,7 +60,7 @@ function lw_generate_css_variables() {
         --color-red: #d34a4a;
         --color-yellow: #f9d648;
         --color-main: <?php 
-            $color_main = get_post_meta(get_the_ID(), 'color_main', true);
+            $color_main = lw_meta_color(get_the_ID(), 'color_main');
             if(empty($color_main) || $color_main === "#ada993"){
                 echo Lw_theme_mod_set("color_main", "#1a72ad");
             }else{
@@ -68,7 +68,7 @@ function lw_generate_css_variables() {
             }
         ?>;
         --color-sub: <?php 
-            $color_sub = get_post_meta(get_the_ID(), 'color_sub', true);
+            $color_sub = lw_meta_color(get_the_ID(), 'color_sub');
             if(empty($color_sub) || $color_sub === "#ada993"){
                 echo Lw_theme_mod_set("color_sub", "#0e1013");
             } else {
@@ -77,7 +77,7 @@ function lw_generate_css_variables() {
         ?>;
 
         --color-accent: <?php 
-            $color_accent = get_post_meta(get_the_ID(), 'color_accent', true);
+            $color_accent = lw_meta_color(get_the_ID(), 'color_accent');
             if(empty($color_accent) || $color_accent === "#ada993"){
                 echo Lw_theme_mod_set("color_accent", "#d34a4a");
             } else {
@@ -85,7 +85,7 @@ function lw_generate_css_variables() {
             }
         ?>;
         --color-page-bg-pc: <?php 
-            $color_page_bg_pc = get_post_meta(get_the_ID(), 'color_page_bg_pc', true);
+            $color_page_bg_pc = lw_meta_color(get_the_ID(), 'color_page_bg_pc');
             if(empty($color_page_bg_pc) || $color_page_bg_pc === "#ada993"){
                 echo Lw_theme_mod_set("color_page_bg_pc", "#ffffff");
             } else {
@@ -93,7 +93,7 @@ function lw_generate_css_variables() {
             }
         ?>;
         --color-page-bg-sp: <?php 
-            $color_page_bg_sp = get_post_meta(get_the_ID(), 'color_page_bg_sp', true);
+            $color_page_bg_sp = lw_meta_color(get_the_ID(), 'color_page_bg_sp');
             if(empty($color_page_bg_sp) || $color_page_bg_sp === "#ada993"){
                 echo Lw_theme_mod_set("color_page_bg_sp", "#ffffff");
             } else {
@@ -101,7 +101,7 @@ function lw_generate_css_variables() {
             }
         ?>;
         --color-content-bg-pc: <?php 
-            $color_content_bg_pc = get_post_meta(get_the_ID(), 'color_content_bg_pc', true);
+            $color_content_bg_pc = lw_meta_color(get_the_ID(), 'color_content_bg_pc');
             if(empty($color_content_bg_pc) || $color_content_bg_pc === "#ada993"){
                 echo Lw_theme_mod_set("color_content_bg_pc", "#ffffff");
             } else {
@@ -109,7 +109,7 @@ function lw_generate_css_variables() {
             }
         ?>;
         --color-content-bg-sp: <?php 
-            $color_content_bg_sp = get_post_meta(get_the_ID(), 'color_content_bg_sp', true);
+            $color_content_bg_sp = lw_meta_color(get_the_ID(), 'color_content_bg_sp');
             if(empty($color_content_bg_sp) || $color_content_bg_sp === "#ada993"){
                 if(!empty($color_content_bg_pc) && $color_content_bg_pc !== "#ada993"){
                     echo $color_content_bg_pc;
@@ -121,7 +121,7 @@ function lw_generate_css_variables() {
             }
         ?>;
         --color-1: <?php 
-            $color_1 = get_post_meta(get_the_ID(), 'color_1', true);
+            $color_1 = lw_meta_color(get_the_ID(), 'color_1');
             if(empty($color_1) || $color_1 === "#ada993"){
                 echo Lw_theme_mod_set("color_1", $color_main);
             } else {
@@ -129,7 +129,7 @@ function lw_generate_css_variables() {
             }
         ?>;
          --color-2: <?php 
-            $color_2 = get_post_meta(get_the_ID(), 'color_2', true);
+            $color_2 = lw_meta_color(get_the_ID(), 'color_2');
             if(empty($color_2) || $color_2 === "#ada993"){
                 echo Lw_theme_mod_set("color_2", $color_main);
             } else {
@@ -137,7 +137,7 @@ function lw_generate_css_variables() {
             }
         ?>;
          --color-3: <?php 
-            $color_3 = get_post_meta(get_the_ID(), 'color_3', true);
+            $color_3 = lw_meta_color(get_the_ID(), 'color_3');
             if(empty($color_3) || $color_3 === "#ada993"){
                 echo Lw_theme_mod_set("color_3", $color_main);
             } else {
@@ -148,7 +148,7 @@ function lw_generate_css_variables() {
         --color-link-common: <?= Lw_theme_mod_set("color_link_common", "#0066cc") ?>;
         /* 基本の文字の色 */
         --color-text: <?php 
-            $color_text = get_post_meta(get_the_ID(), 'color_text', true);;
+            $color_text = lw_meta_color(get_the_ID(), 'color_text');;
             if(empty($color_text) || $color_text === "#ada993"){
                 echo Lw_theme_mod_set("color_text", "#060606");
             } else {

@@ -222,19 +222,4 @@ function lw_post_setting_sanitize_value($field, $value) {
     }
 }
 
-/**
- * CSS の色として安全か（#rgb〜#rrggbbaa・rgb()/rgba()/hsl()/hsla() の数字だけ・transparent）。
- *
- * @param string $value
- * @return bool
- */
-function lw_is_safe_css_color($value) {
-    $value = trim((string) $value);
-    if ($value === 'transparent') {
-        return true;
-    }
-    if (preg_match('/^#(?:[0-9a-fA-F]{3,4}|[0-9a-fA-F]{6}|[0-9a-fA-F]{8})$/', $value)) {
-        return true;
-    }
-    return (bool) preg_match('/^(?:rgba?|hsla?)\(\s*[0-9.%\s,\/]+\)$/i', $value);
-}
+// lw_is_safe_css_color() は functions/custom_post/meta_guard.php に移した（表側のテンプレートでも使うため・2026-11-02 再チェック R1）

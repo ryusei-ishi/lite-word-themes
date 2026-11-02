@@ -120,7 +120,8 @@ get_template_part( "templates/deadline_setting/index" );
 get_template_part( "templates/creator_comment/index" );
 $lw_custom_css = Lw_put_text("lw_custom_css","");
 if( !empty($lw_custom_css) ) {
-    echo "<style>{$lw_custom_css}</style>";
+    // style 要素を閉じる文字列を無害にしてから出す（2026-11-02 再チェック R1）
+    echo "<style>" . lw_css_for_style_tag($lw_custom_css) . "</style>";
 }
 get_footer(); 
 

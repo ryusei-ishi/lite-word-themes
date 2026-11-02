@@ -419,22 +419,10 @@ function Lw_save_page_setting_meta_fields( $post_id ) {
     /* ---------- HTML を許可したいメタキー ---------- */
     $html_fields = [ 'logo_header_page_text', 'logo_footer_page_text' ];
 
-    /* ---------- 許可タグ（必要に応じて追加してください） ---------- */
-    $allowed_tags = [
-        'a'    => [ 'href' => [], 'title' => [], 'target' => [] ],
-        'span' => [
-            'class'            => [],
-            'style'            => [],
-            'data-lw_font_set' => [],   // ←★ これを追加
-        ],
-        'mark' => [ 'style' => [] ],
-        'br'   => [],
-        'b'    => [], 'strong' => [],
-        'i'    => [], 'em'     => [],
-        'u'    => [],
-        'small'=> [],
-        'sup'  => [], 'sub'    => [],
-    ];
+    /* ---------- 許可タグ ----------
+     * 出す側（customizer/functions.php のロゴ）でも同じものを使うので、custom_post/meta_guard.php にまとめた（2026-11-02 再チェック R1）。
+     * 足すときは lw_logo_text_allowed_tags() を直す */
+    $allowed_tags = lw_logo_text_allowed_tags();
 
     /* ---------- 保存ループ ---------- */
     foreach ( $input as $field ) {

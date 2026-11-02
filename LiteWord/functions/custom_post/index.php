@@ -1,5 +1,7 @@
 <?php
 if ( !defined( 'ABSPATH' ) ) exit;
+//投稿メタの守り（標準のカスタムフィールド・XML-RPC から書けなくする・出すときの確かめ。表側でも使うので最初に読む。2026-11-02 再チェック R1）
+get_template_part('./functions/custom_post/meta_guard');
 //出力用関数
 get_template_part('./functions/custom_post/function_put');
 get_template_part('./functions/custom_post/page_template_arr/index');

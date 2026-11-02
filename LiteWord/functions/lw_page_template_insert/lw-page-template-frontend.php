@@ -163,7 +163,7 @@ function lw_handle_template_preview_page() {
     $page_content_shadow = function_exists('Lw_put_text') ? Lw_put_text("page_content_shadow", "off") : "off";
     $page_content_shadow = ($page_content_shadow === "on") ? "shadow" : "";
 
-    $color_page_bg_pc_opacity = function_exists('Lw_put_text') ? Lw_put_text("color_page_bg_pc_opacity", "100") : "100";
+    $color_page_bg_pc_opacity = function_exists('Lw_put_text') ? lw_meta_number(Lw_put_text("color_page_bg_pc_opacity", "100"), "100") : "100"; // 数字だけ（2026-11-02 再チェック R1）
     $lw_custom_css = function_exists('Lw_put_text') ? Lw_put_text("lw_custom_css", "") : "";
     $head_set_before = function_exists('Lw_theme_mod_set') ? Lw_theme_mod_set("head_set_before") : "";
     $head_set_after = function_exists('Lw_theme_mod_set') ? Lw_theme_mod_set("head_set_after") : "";
@@ -291,7 +291,7 @@ function lw_handle_template_preview_page() {
         body:after{
             opacity: <?php echo esc_attr($color_page_bg_pc_opacity); ?>%;
         }
-        <?php if (!empty($lw_custom_css)) { echo $lw_custom_css; } ?>
+        <?php if (!empty($lw_custom_css)) { echo lw_css_for_style_tag($lw_custom_css); /* 2026-11-02 再チェック R1 */ } ?>
     </style>
 </head>
 <body <?php body_class('w-admin page lw-template-preview'); ?> id="body">
@@ -456,7 +456,7 @@ function lw_render_template_preview($request) {
     $page_content_shadow = function_exists('Lw_put_text') ? Lw_put_text("page_content_shadow", "off") : "off";
     $page_content_shadow = ($page_content_shadow === "on") ? "shadow" : "";
     
-    $color_page_bg_pc_opacity = function_exists('Lw_put_text') ? Lw_put_text("color_page_bg_pc_opacity", "100") : "100";
+    $color_page_bg_pc_opacity = function_exists('Lw_put_text') ? lw_meta_number(Lw_put_text("color_page_bg_pc_opacity", "100"), "100") : "100"; // 数字だけ（2026-11-02 再チェック R1）
     $lw_custom_css = function_exists('Lw_put_text') ? Lw_put_text("lw_custom_css", "") : "";
     $head_set_before = function_exists('Lw_theme_mod_set') ? Lw_theme_mod_set("head_set_before") : "";
     $head_set_after = function_exists('Lw_theme_mod_set') ? Lw_theme_mod_set("head_set_after") : "";
@@ -501,7 +501,7 @@ function lw_render_template_preview($request) {
         body:after{
             opacity: <?php echo esc_attr($color_page_bg_pc_opacity); ?>%;
         }
-        <?php if (!empty($lw_custom_css)) { echo $lw_custom_css; } ?>
+        <?php if (!empty($lw_custom_css)) { echo lw_css_for_style_tag($lw_custom_css); /* 2026-11-02 再チェック R1 */ } ?>
     </style>
 </head>
 <body <?php body_class('w-admin page'); ?> id="body">

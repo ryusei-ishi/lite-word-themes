@@ -1368,10 +1368,11 @@ function Lw_logo_set($item = []) {
         <img src="<?php echo esc_url($logo_url); ?>" alt="<?=$df_logo_text?>" itemprop="logo">
     <?php 
     elseif($logo_switch === "logo_text" || empty($logo_url)): ?>
-        <span class="text fw-<?=$font_weight?>" data-lw_font_set="<?=$font_family?>">
+        <span class="text fw-<?=esc_attr($font_weight)?>" data-lw_font_set="<?=esc_attr($font_family)?>">
             <?php
                 if(!empty($logo_page_text)){
-                    echo $logo_page_text;
+                    // 固定ページの設定のロゴの文字は、保存のときと同じ許可タグだけ通す（2026-11-02 再チェック R1）
+                    echo wp_kses($logo_page_text, lw_logo_text_allowed_tags());
                 }else{
                     echo Lw_theme_mod_set("{$set_id}_logo_text", $df_logo_text);
                 }

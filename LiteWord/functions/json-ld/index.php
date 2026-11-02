@@ -77,11 +77,16 @@ function output_custom_json_ld() {
         // nullでも空文字でもない場合のみ出力
         if ( $custom_json_ld !== null && $custom_json_ld !== '' ) {
             // JSON形式の妥当性を確認
-            $json = json_decode( $custom_json_ld, true );
+            $json = json_decode( $custom_json_ld );
             if ( json_last_error() === JSON_ERROR_NONE ) {
-                echo '<script type="application/ld+json">' . "\n";
-                echo $custom_json_ld . "\n";
-                echo '</script>' . "\n";
+                // 入っていた文字のまま出さず、読み込んだ JSON を書き直して出す。< > は < > になる
+                // （正しい JSON の文字列の中に </script> を入れると script から抜けられたため。2026-11-02 再チェック R1）
+                $json_out = wp_json_encode( $json, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_HEX_TAG );
+                if ( is_string( $json_out ) && $json_out !== '' ) {
+                    echo '<script type="application/ld+json">' . "\n";
+                    echo $json_out . "\n";
+                    echo '</script>' . "\n";
+                }
             }
         }
     }
@@ -258,7 +263,8 @@ function lw_json_dl_single(){
     ];
 
     echo '<script type="application/ld+json">' . "\n";
-    echo wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT ) . "\n";
+    // JSON_HEX_TAG: SEO の欄の値に </script> が入っていても script から抜けられないように（2026-11-02 再チェック R1）
+    echo wp_json_encode( $data, JSON_UNESCAPED_UNICODE | JSON_UNESCAPED_SLASHES | JSON_PRETTY_PRINT | JSON_HEX_TAG ) . "\n";
     echo '</script>' . "\n";
 }
 

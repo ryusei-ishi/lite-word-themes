@@ -102,7 +102,7 @@ if ( $profile_image ) {
 			</div><!-- /.left -->
 
 			<div class="right">
-				<p><?= brSt( $page_comment ); ?></p>
+				<p><?= brSt( esc_html( $page_comment ) ); /* 文字として出す（2026-11-02 再チェック R1） */ ?></p>
 
 				<?php if ( $profile_site_url ) : ?>
 					<div class="btn none_800px">
