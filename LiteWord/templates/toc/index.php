@@ -42,29 +42,36 @@ document.addEventListener('DOMContentLoaded', function() {
   tocList.classList.add('toc_list');
   let currentH2 = null;
 
+  // 目次の1項目（a > div.text）を作る。
+  // 見出しの文字は textContent で入れる（HTML として組み立て直さない）。
+  // （2026-11-02 再チェック R2）以前は textContent を innerHTML の中に入れていたため、見出しに文字で
+  // 「<img src=x onerror=…>」と書くと、目次の中で本物のタグになって JS が動いた（寄稿者の下書きを管理者がプレビューした時点で）。
+  const makeTocItem = (id, text) => {
+      const listItem = document.createElement('li');
+      const link = document.createElement('a');
+      link.setAttribute('href', '#' + id);
+      const label = document.createElement('div');
+      label.className = 'text';
+      label.textContent = text;
+      link.appendChild(label);
+      listItem.appendChild(link);
+      return listItem;
+  };
+
   // 目次の項目を生成
   headings.forEach((heading, index) => {
       const id = `heading-${index}`;
       heading.id = id;
 
       if (heading.tagName.toLowerCase() === 'h2') {
-          const listItem = document.createElement('li');
-          listItem.innerHTML = `
-              <a href="#${id}">
-                  <div class="text">${heading.textContent}</div>
-              </a>
-              <ul class="toc_list_sub"></ul>
-          `;
+          const listItem = makeTocItem(id, heading.textContent);
+          const subList = document.createElement('ul');
+          subList.className = 'toc_list_sub';
+          listItem.appendChild(subList);
           tocList.appendChild(listItem);
-          currentH2 = listItem.querySelector('ul');
+          currentH2 = subList;
       } else if (heading.tagName.toLowerCase() === 'h3' && currentH2) {
-          const listItem = document.createElement('li');
-          listItem.innerHTML = `
-              <a href="#${id}">
-                  <div class="text">${heading.textContent}</div>
-              </a>
-          `;
-          currentH2.appendChild(listItem);
+          currentH2.appendChild(makeTocItem(id, heading.textContent));
       }
   });
 

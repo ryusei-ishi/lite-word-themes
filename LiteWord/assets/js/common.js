@@ -281,12 +281,18 @@ document.addEventListener("DOMContentLoaded", () => {
 
     // 不正な文字が含まれているかチェック
     if (hasInvalidCharsInTel(telPart)) {
-      // 一時的なdiv要素を作成してHTMLをデコード
-      const tempDiv = document.createElement("div");
-      tempDiv.innerHTML = telPart;
-
-      // テキストコンテンツのみを取得（HTMLタグを除去）
-      const plainText = tempDiv.textContent || tempDiv.innerText || "";
+      // 文字参照を戻して文字だけを取り出す。
+      // （2026-11-02 再チェック R3）以前はページの div の innerHTML に入れていたため、
+      // href="tel:&lt;img src=x onerror=…&gt;" のようなリンク（寄稿者の本文や、コメントのリンクでも作れる）で
+      // 画面に付けていない div でも img が読み込まれ、onerror の JS が動いた。
+      // DOMParser で作る文書は画像を読まず、JS も動かさないので、ここで読んでも何も起きない。
+      let plainText = "";
+      try {
+        const parsed = new DOMParser().parseFromString(telPart, "text/html");
+        plainText = parsed && parsed.documentElement ? parsed.documentElement.textContent || "" : "";
+      } catch (e) {
+        plainText = "";
+      }
 
       // 電話番号として有効な文字のみを抽出
       // 数字、ハイフン、括弧、プラス、スペースのみ許可
