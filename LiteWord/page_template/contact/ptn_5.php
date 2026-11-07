@@ -118,7 +118,7 @@
 <div class="wp-block-wdl-lw-space-1 lw_space_1"><div class="pc" style="height:32px"></div><div class="tb" style="height:32px"></div><div class="sp" style="height:16px"></div></div>
 <!-- /wp:wdl/lw-space-1 -->
 
-<!-- wp:wdl/paid-block-custom-title-7 {"subTitle":"Entry Form","mainTitle":"お申込み方法","mainTitleColor":"#1d77be","borderLeftColor":"#1d77be","borderRightColor":"#1d77be","sizeClass":"size_l"} -->
+<!-- wp:wdl/paid-block-custom-title-7 {"subTitle":"Entry Form","mainTitle":"お申込みフォーム","mainTitleColor":"#1d77be","borderLeftColor":"#1d77be","borderRightColor":"#1d77be","sizeClass":"size_l"} -->
 <div class="wp-block-wdl-paid-block-custom-title-7 paid-block-custom-title-7 size_l position_center"><h2 class="ttl"><span class="sub" style="color:#1d77be">Entry Form</span><span class="main">お申込みフォーム</span><span class="border_wrap"><span class="border_inner" style="border-radius:10px"><span class="border left" style="background-color:#1d77be;opacity:0.2"></span><span class="border right" style="background-color:#1d77be;opacity:1"></span></span></span></h2></div>
 <!-- /wp:wdl/paid-block-custom-title-7 -->
 

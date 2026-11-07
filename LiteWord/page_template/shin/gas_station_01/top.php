@@ -7,11 +7,16 @@
 <!-- /wp:wdl/lw-space-1 -->
 
 <!-- wp:wdl/shin-gas-station-01-custom-title-1 {"mainTitle":"\u003cmark style=\u0022background-color:rgba(0, 0, 0, 0);color:#03a0c6\u0022 class=\u0022has-inline-color\u0022\u003eDrive freely live comfortably.\u003c/mark\u003e"} -->
-<h2 class="wp-block-wdl-shin-gas-station-01-custom-title-1 shin-gas-station-01-custom-title-1"><span class="main" data-lw_font_set="Montserrat"><mark style="background-color:rgba(0, 0, 0, 0);color:#03a0c6" class="has-inline-color">Drive freely live comfortably.</mark></span></h2>
+<h2 class="wp-block-wdl-shin-gas-station-01-custom-title-1 shin-gas-station-01-custom-title-1 title-"><span class="main" data-lw_font_set="Montserrat"><mark style="background-color:rgba(0, 0, 0, 0);color:#03a0c6" class="has-inline-color">Drive freely live comfortably.</mark></span><style>
+          .title- .main::after{
+              height:1px;
+              background:#C6C6C6;
+          }
+        </style></h2>
 <!-- /wp:wdl/shin-gas-station-01-custom-title-1 -->
 
-<!-- wp:paragraph {"align":"center","className":"has-999-font-size is-style-p_sp_left","maxWidth":"820px","lineHeightClass":"lh-3","lineHeightSpClass":"lh-sp-2","fontSizeClass":"fs-1-3","fontSizeSpClass":"fs-sp-1"} -->
-<p class="has-text-align-center has-999-font-size is-style-p_sp_left lh-3 lh-sp-2 fs-1-3 fs-sp-1" style="max-width:820px"><span class="custom-font-settings custom-font-settings" data-lw_font_set="">DriveEaseは、「Drive freely, live comfortably.<br>（自由に走り、快適に暮らす）」を掲げ、人々の車生活をより豊かにするためのサービスを展開しています。<br>エネルギー事業とリース事業を中心に移動の自由と快適さを支える車関連事業を行っています。</span></p>
+<!-- wp:paragraph {"align":"center","className":"has-text-align-center has-999-font-size is-style-p_sp_left","maxWidth":"820px","fontSizeClass":"fs-1-3","fontSizeSpClass":"fs-sp-1","lineHeightClass":"lh-3","lineHeightSpClass":"lh-sp-2"} -->
+<p class="has-text-align-center has-999-font-size is-style-p_sp_left lh-3 lh-sp-2 fs-1-3 fs-sp-1" style="max-width:820pxpx"><span class="custom-font-settings custom-font-settings" data-lw_font_set="">DriveEaseは、「Drive freely, live comfortably.<br>（自由に走り、快適に暮らす）」を掲げ、人々の車生活をより豊かにするためのサービスを展開しています。<br>エネルギー事業とリース事業を中心に移動の自由と快適さを支える車関連事業を行っています。</span></p>
 <!-- /wp:paragraph -->
 
 <!-- wp:wdl/lw-space-1 -->
@@ -19,7 +24,7 @@
 <!-- /wp:wdl/lw-space-1 -->
 
 <!-- wp:wdl/custom-title-1 {"mainTitle":"\u003cspan data-lw_font_set=\u0022\u0022 class=\u0022custom-font-settings custom-font-settings fs-0-8\u0022\u003e私たちの事業\u003c/span\u003e","subTitle":"\u003cmark style=\u0022background-color:rgba(0, 0, 0, 0);color:#bebebe\u0022 class=\u0022has-inline-color\u0022\u003e\u003cspan data-lw_font_set=\u0022\u0022 class=\u0022custom-font-settings custom-font-settings fw-500\u0022\u003eService\u003c/span\u003e\u003c/mark\u003e"} -->
-<h2 class="wp-block-wdl-custom-title-1 custom-title-1"><span class="main"><span data-lw_font_set="" class="custom-font-settings custom-font-settings fs-0-8">私たちの事業</span></span><span class="sub"><mark style="background-color:rgba(0, 0, 0, 0);color:#bebebe" class="has-inline-color"><span data-lw_font_set="" class="custom-font-settings custom-font-settings fw-500">Service</span></mark></span></h2>
+<h2 class="wp-block-wdl-custom-title-1 custom-title-1" style="--custom-title-sub-margin-top-pc:0.2em;--custom-title-sub-margin-top-sp:0.2em"><span class="main"><span data-lw_font_set="" class="custom-font-settings custom-font-settings fs-0-8">私たちの事業</span></span><span class="sub"><mark style="background-color:rgba(0, 0, 0, 0);color:#bebebe" class="has-inline-color"><span data-lw_font_set="" class="custom-font-settings custom-font-settings fw-500">Service</span></mark></span></h2>
 <!-- /wp:wdl/custom-title-1 -->
 
 <!-- wp:wdl/shin-gas-station-01-list-1 -->
@@ -36,80 +41,72 @@
 是非、お近くの店舗へお立ち寄りください。</p><a class="btn" href="#"><span class="btn-label">事業所案内</span><svg xmlns="http://www.w3.org/2000/svg" width="39.5" height="4.197" viewBox="0 0 39.5 4.197"><g transform="translate(-179.5 -2154.803)" fill="var(--color-main)"><path d="M0,0,8,4.2H0Z" transform="translate(211 2154.803)"></path><path d="M32,.5H0v-1H32Z" transform="translate(179.5 2158.5)"></path></g></svg></a></div></li></ul></div>
 <!-- /wp:wdl/shin-gas-station-01-list-2 -->
 
-<!-- wp:wdl/shin-gas-station-01-news -->
-<div class="wp-block-wdl-shin-gas-station-01-news"><div class="shin-gas-station-01-news"><h2 class="ttl"><span class="main">お知らせ</span><span class="sub" data-lw_font_set="Montserrat">News</span></h2><div class="shin-gas-station-01-news_in" data-number="4" data-category="" data-type="post" data-date-font="Montserrat" data-date-font-weight="400" data-cat-font="Montserrat" data-cat-font-weight="600" data-cat-bg-color="var(--color-main)" data-title-font="Noto Sans JP" data-title-font-weight="400"><ul class="shin-gas-station-01-news__wrap"></ul></div><a class="btn" href="#"><span class="text">詳しく見る</span><svg xmlns="http://www.w3.org/2000/svg" width="39.5" height="4.197" viewBox="0 0 39.5 4.197"><g id="グループ_16" data-name="グループ 16" transform="translate(-179.5 -2154.803)"><path id="パス_28" data-name="パス 28" d="M0,0,8,4.2H0Z" transform="translate(211 2154.803)" fill="var(--color-main)"></path><line id="線_1" data-name="線 1" x2="32" transform="translate(179.5 2158.5)" fill="none" stroke="var(--color-main)" stroke-width="1"></line></g></svg></a><div class="filter"></div></div><script>
+<!-- wp:wdl/shin-gas-station-01-news {"buttonUrl":"#"} -->
+<div class="wp-block-wdl-shin-gas-station-01-news shin-gas-station-01-news"><h2 class="ttl"><span class="main">お知らせ</span><span class="sub" data-lw_font_set="Montserrat">News</span></h2><div class="shin-gas-station-01-news_in" data-number="4" data-category="" data-type="post" data-date-font="Montserrat" data-date-font-weight="400" data-cat-font="Montserrat" data-cat-font-weight="600" data-cat-bg-color="var(--color-main)" data-title-font="Noto Sans JP" data-title-font-weight="400"><ul class="shin-gas-station-01-news__wrap"></ul></div><a class="btn" href="#"><span class="text">詳しく見る</span><svg xmlns="http://www.w3.org/2000/svg" width="39.5" height="4.197" viewBox="0 0 39.5 4.197"><g id="グループ_16" data-name="グループ 16" transform="translate(-179.5 -2154.803)"><path id="パス_28" data-name="パス 28" d="M0,0,8,4.2H0Z" transform="translate(211 2154.803)" fill="var(--color-main)"></path><line id="線_1" data-name="線 1" x2="32" transform="translate(179.5 2158.5)" fill="none" stroke="var(--color-main)" stroke-width="1"></line></g></svg></a><div class="filter"></div><script>
                         document.addEventListener('DOMContentLoaded', () => {
                             const newsList1Container = document.querySelector('.shin-gas-station-01-news_in');
-                            
-                            if (newsList1Container) {
-                                const newsList1NumberOfPosts = newsList1Container.getAttribute('data-number') || 4;
-                                const newsList1CategoryId = newsList1Container.getAttribute('data-category');
-                                const newsList1PostType = newsList1Container.getAttribute('data-type') || 'post';
+                            if (!newsList1Container) return;
 
-                                const newsList1DateFont = newsList1Container.getAttribute('data-date-font');
-                                const newsList1DateFontWeight = newsList1Container.getAttribute('data-date-font-weight');
-                                const newsList1CatFont = newsList1Container.getAttribute('data-cat-font');
-                                const newsList1CatFontWeight = newsList1Container.getAttribute('data-cat-font-weight');
-                                const newsList1CatBgColor = newsList1Container.getAttribute('data-cat-bg-color');
-                                const newsList1TitleFont = newsList1Container.getAttribute('data-title-font');
-                                const newsList1TitleFontWeight = newsList1Container.getAttribute('data-title-font-weight');
+                            const newsList1NumberOfPosts = newsList1Container.getAttribute('data-number') || 4;
+                            const newsList1CategoryId   = newsList1Container.getAttribute('data-category');
+                            const newsList1PostType     = newsList1Container.getAttribute('data-type') || 'post';
 
-                                let newsList1ApiUrl = `${MyThemeSettings.home_Url}/wp-json/wp/v2/${newsList1PostType === 'post' ? 'posts' : newsList1PostType}?per_page=${newsList1NumberOfPosts}&orderby=date&order=desc&_embed`;
-                                if (newsList1CategoryId) {
-                                    newsList1ApiUrl += `&categories=${newsList1CategoryId}`;
-                                }
+                            const newsList1DateFont        = newsList1Container.getAttribute('data-date-font');
+                            const newsList1DateFontWeight  = newsList1Container.getAttribute('data-date-font-weight');
+                            const newsList1CatFont         = newsList1Container.getAttribute('data-cat-font');
+                            const newsList1CatFontWeight   = newsList1Container.getAttribute('data-cat-font-weight');
+                            const newsList1CatBgColor      = newsList1Container.getAttribute('data-cat-bg-color');
+                            const newsList1TitleFont       = newsList1Container.getAttribute('data-title-font');
+                            const newsList1TitleFontWeight = newsList1Container.getAttribute('data-title-font-weight');
 
-                                fetch(newsList1ApiUrl)
-                                    .then(response => {
-                                        if (!response.ok) {
-                                            throw new Error('投稿の取得に失敗しました');
-                                        }
-                                        return response.json();
-                                    })
-                                    .then(posts => {
-                                        let newsList1Html = '<ul class="shin-gas-station-01-news__wrap">';
-
-                                        posts.forEach(post => {
-                                            const newsList1Date = new Date(post.date).toISOString().split('T')[0].replace(/-/g, '.');
-                                            const newsList1Title = post.title.rendered;
-                                            const newsList1Link = post.link;
-                                            const newsList1Category = post._embedded && post._embedded['wp:term'] && post._embedded['wp:term'][0]
-                                                ? post._embedded['wp:term'][0][0].name
-                                                : 'カテゴリーなし';
-
-                                            newsList1Html += `
-                                                <li>
-                                                    <a href="${newsList1Link}">
-                                                        <div class="data">
-                                                            <div class="date" style="font-weight: ${newsList1DateFontWeight};" data-lw_font_set="${newsList1DateFont}">
-                                                                <span>${newsList1Date}</span>
-                                                            </div>
-                                                            <div class="cat" style="background-color: ${newsList1CatBgColor}; font-weight: ${newsList1CatFontWeight};" data-lw_font_set="${newsList1CatFont}">
-                                                                <span>${newsList1Category}</span>
-                                                            </div>
-                                                        </div>
-                                                        <div class="post_title">
-                                                            <h3 style="font-weight: ${newsList1TitleFontWeight};" data-lw_font_set="${newsList1TitleFont}">${newsList1Title}</h3>
-                                                            <svg xmlns="http://www.w3.org/2000/svg" width="39.5" height="4.197" viewBox="0 0 39.5 4.197">
-                                                                <g id="グループ_16" data-name="グループ 16" transform="translate(-179.5 -2154.803)">
-                                                                    <path id="パス_28" data-name="パス 28" d="M0,0,8,4.2H0Z" transform="translate(211 2154.803)" fill="${newsList1CatBgColor}"/>
-                                                                    <line id="線_1" data-name="線 1" x2="32" transform="translate(179.5 2158.5)" fill="none" stroke="${newsList1CatBgColor}" stroke-width="1"/>
-                                                                </g>
-                                                            </svg>
-                                                        </div>
-                                                    </a>
-                                                </li>
-                                            `;
-                                        });
-
-                                        newsList1Html += '</ul>';
-                                        newsList1Container.innerHTML = newsList1Html;
-                                    })
-                                    .catch(error => {
-                                        console.error('投稿を取得できませんでした:', error);
-                                        newsList1Container.innerHTML = '<p>投稿を読み込めませんでした。</p>';
-                                    });
+                            let newsList1ApiUrl = `${MyThemeSettings.home_Url}/wp-json/wp/v2/${newsList1PostType === 'post' ? 'posts' : newsList1PostType}?per_page=${newsList1NumberOfPosts}&orderby=date&order=desc&_embed`;
+                            if (newsList1CategoryId) {
+                                newsList1ApiUrl += `&categories=${newsList1CategoryId}`;
                             }
+
+                            fetch(newsList1ApiUrl)
+                                .then(res => {
+                                    if (!res.ok) throw new Error('投稿の取得に失敗しました');
+                                    return res.json();
+                                })
+                                .then(posts => {
+                                    let html = '<ul class="shin-gas-station-01-news__wrap">';
+                                    posts.forEach(post => {
+                                        const date = new Date(post.date).toISOString().split('T')[0].replace(/-/g, '.');
+                                        const title = post.title.rendered;
+                                        const link = post.link;
+                                        const category = post._embedded?.['wp:term']?.[0]?.[0]?.name || 'カテゴリーなし';
+
+                                        html += `
+                                            <li>
+                                                <a href="${link}">
+                                                    <div class="data">
+                                                        <div class="date" style="font-weight:${newsList1DateFontWeight};" data-lw_font_set="${newsList1DateFont}">
+                                                            <span>${date}</span>
+                                                        </div>
+                                                        <div class="cat" style="background-color:${newsList1CatBgColor};font-weight:${newsList1CatFontWeight};" data-lw_font_set="${newsList1CatFont}">
+                                                            <span>${category}</span>
+                                                        </div>
+                                                    </div>
+                                                    <div class="post_title">
+                                                        <h3 style="font-weight:${newsList1TitleFontWeight};" data-lw_font_set="${newsList1TitleFont}">${title}</h3>
+                                                        <svg xmlns="http://www.w3.org/2000/svg" width="39.5" height="4.197" viewBox="0 0 39.5 4.197">
+                                                            <g transform="translate(-179.5 -2154.803)">
+                                                                <path d="M0,0,8,4.2H0Z" transform="translate(211 2154.803)" fill="${newsList1CatBgColor}"/>
+                                                                <line x2="32" transform="translate(179.5 2158.5)" fill="none" stroke="${newsList1CatBgColor}" stroke-width="1"/>
+                                                            </g>
+                                                        </svg>
+                                                    </div>
+                                                </a>
+                                            </li>`;
+                                    });
+                                    html += '</ul>';
+                                    newsList1Container.innerHTML = html;
+                                })
+                                .catch(err => {
+                                    console.error('投稿を取得できませんでした:', err);
+                                    newsList1Container.innerHTML = '<p>投稿を読み込めませんでした。</p>';
+                                });
                         });
                         </script></div>
 <!-- /wp:wdl/shin-gas-station-01-news -->
@@ -218,7 +215,7 @@
 <!-- /wp:wdl/shin-gas-station-01-post-list -->
 
 <!-- wp:wdl/shin-gas-station-01-cta2 -->
-<div class="wp-block-wdl-shin-gas-station-01-cta2 shin-gas-station-01-cta2"><div class="shin-gas-station-01-cta2__inner"><div class="head"><h2 class="shin-gas-station-01-cta2__title heading_style_reset"><span class="main">お問い合わせ・ご相談</span></h2><p class="shin-gas-station-01-cta2__text">フランチャイズ加盟に関するご相談や当運営店舗に関するご意見など<br>お気軽にお問い合わせくださいませ。</p></div><a class="shin-gas-station-01-cta2__button" href="#"><div class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><!--!Font Awesome Free 6.6.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license/free Copyright 2024 Fonticons, Inc.--><path d="M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z"/></svg></div><span class="text">お問い合わせ</span></a><span class="bg_text" data-lw_font_set="Montserrat">Contact us.</span><div class="filter" style="background-color:#054161"></div></div><style>
+<div class="wp-block-wdl-shin-gas-station-01-cta2 shin-gas-station-01-cta2"><div class="shin-gas-station-01-cta2__inner"><div class="head"><h2 class="shin-gas-station-01-cta2__title heading_style_reset"><span class="main">お問い合わせ・ご相談</span></h2><p class="shin-gas-station-01-cta2__text">フランチャイズ加盟に関するご相談や当運営店舗に関するご意見など<br>お気軽にお問い合わせくださいませ。</p></div><a class="shin-gas-station-01-cta2__button" href="#"><div class="icon-svg"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M64 112c-8.8 0-16 7.2-16 16l0 22.1L220.5 291.7c20.7 17 50.4 17 71.1 0L464 150.1l0-22.1c0-8.8-7.2-16-16-16L64 112zM48 212.2L48 384c0 8.8 7.2 16 16 16l384 0c8.8 0 16-7.2 16-16l0-171.8L322 328.8c-38.4 31.5-93.7 31.5-132 0L48 212.2zM0 128C0 92.7 28.7 64 64 64l384 0c35.3 0 64 28.7 64 64l0 256c0 35.3-28.7 64-64 64L64 448c-35.3 0-64-28.7-64-64L0 128z"/></svg></div><span class="text">お問い合わせ</span></a><span class="bg_text" data-lw_font_set="Montserrat">Contact us.</span><div class="filter" style="background-color:#054161;opacity:0.05"></div></div><style>
 					.shin-gas-station-01-cta2__button{
 						background-color: var(--color-main);
 						border-color: var(--color-main);
