@@ -193,6 +193,7 @@ function lw_header_premium_pattern_labels() {
     return [
         'ptn_7' => 'ヘッダーパターン7（浮遊カプセル）',
         'ptn_8' => 'ヘッダーパターン8（ショップ・検索とカート）',
+        'ptn_9' => 'ヘッダーパターン9（受付案内と予約）',
     ];
 }
 // プレミアム（有料・14日試用を含む）かどうか
@@ -1529,7 +1530,7 @@ function Lw_header_menu_put($item = []){
             }
             /* 第１階層目の処理 */
             <?php 
-            if($ptn === "ptn_1" || $ptn === "ptn_4" || $ptn === "ptn_5" || $ptn === "ptn_6" || $ptn === "ptn_7" || $ptn === "ptn_8")://ptn_1の場合のhover時の処理（下線型）
+            if($ptn === "ptn_1" || $ptn === "ptn_4" || $ptn === "ptn_5" || $ptn === "ptn_6" || $ptn === "ptn_7" || $ptn === "ptn_8" || $ptn === "ptn_9")://ptn_1の場合のhover時の処理（下線型）
             ?> 
                 <?=$class?> .header_menu_pc >li >a:hover{
                     color: <?=$menu_1st_layer_hover_text_color?>;
