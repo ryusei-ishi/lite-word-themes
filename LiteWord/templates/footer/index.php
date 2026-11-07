@@ -1,6 +1,7 @@
 <?php 
 if ( !defined( 'ABSPATH' ) ) exit; 
-$footer_set_ptn_df = Lw_theme_mod_set("footer_set_ptn_df", "ptn_1");
+// プレミアム限定のパターンは、契約が無ければパターン1で出す（lw_footer_renderable_ptn()・pattern_registry.php。いまは該当なし）
+$footer_set_ptn_df = lw_footer_renderable_ptn( Lw_theme_mod_set("footer_set_ptn_df", "ptn_1") );
 // パターン名は形を確かめてから読む（lw_ptn_template_part()・various_functions.php）。
 // 固定ページのメタに ../ などの形の違う値が入っていたら「未選択」と同じ扱い（2026-11-02 再点検）
 if(is_page()){
@@ -11,13 +12,13 @@ if(is_page()){
     if(empty($ptn_set)){
         $ptn_set = Lw_theme_mod_set("footer_set_ptn_page", $footer_set_ptn_df);
     }
-    lw_ptn_template_part( 'footer', $ptn_set );
+    lw_ptn_template_part( 'footer', lw_footer_renderable_ptn( $ptn_set ) );
 }
 else if(is_single()){
-    lw_ptn_template_part( 'footer', Lw_theme_mod_set("footer_set_ptn_post", $footer_set_ptn_df) );
+    lw_ptn_template_part( 'footer', lw_footer_renderable_ptn( Lw_theme_mod_set("footer_set_ptn_post", $footer_set_ptn_df) ) );
 }
 else if(is_archive()){
-    lw_ptn_template_part( 'footer', Lw_theme_mod_set("footer_set_ptn_archive", $footer_set_ptn_df) );
+    lw_ptn_template_part( 'footer', lw_footer_renderable_ptn( Lw_theme_mod_set("footer_set_ptn_archive", $footer_set_ptn_df) ) );
 }
 else{
     lw_ptn_template_part( 'footer', $footer_set_ptn_df );

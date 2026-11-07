@@ -2,6 +2,8 @@
 if ( !defined( 'ABSPATH' ) ) exit;
 //関数
 get_template_part('./functions/customizer/functions');
+//ヘッダー・フッターのパターンの一覧と、選べる人の確かめ（選択肢・設定欄・ウィザードが読む）
+get_template_part('./functions/customizer/pattern_registry');
 //カスタマイザイーを開いて時のみの処理
 if(is_customize_preview()){
     //カラー
@@ -20,21 +22,8 @@ if(is_customize_preview()){
     get_template_part('./functions/customizer/archive/ptn_short_code');
     //ヘッダー
     get_template_part('./functions/customizer/header/header_set');
-    get_template_part("./functions/customizer/header/ptn_1_set");
-    get_template_part("./functions/customizer/header/ptn_2_set");
-    get_template_part("./functions/customizer/header/ptn_3_set");
-    if (templateSettingCheck("shin_gas_station_01")  || templateSettingCheck("template_001")) {
-        get_template_part("./functions/customizer/header/ptn_4_set");
-    }
-    get_template_part("./functions/customizer/header/ptn_5_set");
-    get_template_part("./functions/customizer/header/ptn_6_set");
-    // パターン7〜10はプレミアム限定（lw_header_premium_pattern_labels()）
-    if (lw_header_has_premium()) {
-        get_template_part("./functions/customizer/header/ptn_7_set");
-        get_template_part("./functions/customizer/header/ptn_8_set");
-        get_template_part("./functions/customizer/header/ptn_9_set");
-        get_template_part("./functions/customizer/header/ptn_10_set");
-    }
+    // 各パターンの設定欄（ptn_N_set.php）は、そのサイトで選べるものだけ番号の順に読む（pattern_registry.php）
+    lw_customizer_load_part_pattern_settings('header');
     get_template_part("./functions/customizer/header/ptn_short_code");
     //ドロワー
     get_template_part('./functions/customizer/drawer/drawer_set');
@@ -43,12 +32,8 @@ if(is_customize_preview()){
     }
     //フッター
     get_template_part('./functions/customizer/footer/footer_set');
-    get_template_part("./functions/customizer/footer/ptn_1_set");
-    get_template_part("./functions/customizer/footer/ptn_2_set");
-    if (templateSettingCheck("shin_gas_station_01") || templateSettingCheck("template_001")) {
-        get_template_part("./functions/customizer/footer/ptn_3_set");
-    }
-    get_template_part("./functions/customizer/footer/ptn_4_set");
+    // 各パターンの設定欄（ptn_N_set.php）は、そのサイトで選べるものだけ番号の順に読む（pattern_registry.php）
+    lw_customizer_load_part_pattern_settings('footer');
     get_template_part("./functions/customizer/footer/ptn_short_code");
     //追従CTA
     get_template_part('./functions/customizer/follow_bottom_cta/follow_bottom_cta_set');

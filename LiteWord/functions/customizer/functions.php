@@ -186,7 +186,7 @@ function lw_ptn_arr($df_text="未選択", $max=2){
 //ヘッダー
 /**
  * プレミアム限定のヘッダーのパターン（キー → 選択肢の表示）。ここが唯一の一覧（2026-11-07・パターン7から）。
- * 選択肢（header_ptn_arr）・表示（lw_header_renderable_ptn）・カスタマイザーの設定欄・初期設定ウィザードがここを読む。
+ * 選択肢・表示・カスタマイザーの設定欄・初期設定ウィザードは pattern_registry.php の関数を通してここを読む。
  * 注意: 選択肢から隠すだけでは足りない（ウィザードの保存や固定ページのメタからも入る）。表示するときにも確かめる。
  */
 function lw_header_premium_pattern_labels() {
@@ -207,33 +207,11 @@ function lw_header_has_premium() {
  * templates/header/index.php と functions/css_js_set/front.php の両方から呼ぶ（テンプレートと CSS をそろえるため）。
  */
 function lw_header_renderable_ptn($ptn) {
-    if (is_string($ptn) && array_key_exists($ptn, lw_header_premium_pattern_labels()) && !lw_header_has_premium()) {
-        return 'ptn_1';
-    }
-    return $ptn;
+    return lw_part_renderable_ptn('header', $ptn);
 }
+// 選択肢はテンプレートのフォルダから作る（pattern_registry.php。ヘッダー4は特定テンプレート・プレミアム限定は契約があるときだけ）
 function header_ptn_arr() {
-    $header_ptn = [];
-
-    $header_ptn['']       = '未選択';
-    $header_ptn['ptn_1']  = 'ヘッダーパターン1（デフォルト）';
-    $header_ptn['ptn_2']  = 'ヘッダーパターン2';
-    $header_ptn['ptn_3']  = 'ヘッダーパターン3';
-
-    if (templateSettingCheck("shin_gas_station_01") || templateSettingCheck("template_001")) {
-        $header_ptn['ptn_4'] = 'ヘッダーパターン4';
-    }
-
-    $header_ptn['ptn_5'] = 'ヘッダーパターン5';
-    $header_ptn['ptn_6'] = 'ヘッダーパターン6';
-    // プレミアム限定のパターン（lw_header_premium_pattern_labels）
-    if (lw_header_has_premium()) {
-        $header_ptn += lw_header_premium_pattern_labels();
-    }
-    $header_ptn['ptn_short_code'] = 'ショートコード';
-    $header_ptn['none']  = '非表示';
-
-    return $header_ptn;
+    return lw_part_ptn_arr('header', 'ヘッダー');
 }
 function drawer_ptn_arr(){
     $drawer_ptn_arr = [
@@ -243,20 +221,9 @@ function drawer_ptn_arr(){
     ];
     return $drawer_ptn_arr;
 }
+// 選択肢はテンプレートのフォルダから作る（pattern_registry.php。フッター3は特定テンプレートだけ）
 function footer_ptn_arr() {
-    $footer_ptn = [];
-
-    $footer_ptn['']       = '未選択';
-    $footer_ptn['ptn_1']  = 'フッターパターン1（デフォルト）';
-    $footer_ptn['ptn_2']  = 'フッターパターン2';
-    if (templateSettingCheck("shin_gas_station_01") || templateSettingCheck("template_001")) {
-        $footer_ptn['ptn_3']  = 'フッターパターン3';
-    }
-    $footer_ptn['ptn_4']  = 'フッターパターン4';
-    $footer_ptn['ptn_short_code'] = 'ショートコード';
-    $footer_ptn['none']   = '非表示';
-
-    return $footer_ptn;
+    return lw_part_ptn_arr('footer', 'フッター');
 }
 
 // プレミアム限定の追従CTAパターン（ptn_3〜ptn_12）
@@ -1531,7 +1498,8 @@ function Lw_header_menu_put($item = []){
             }
             /* 第１階層目の処理 */
             <?php 
-            if($ptn === "ptn_1" || $ptn === "ptn_4" || $ptn === "ptn_5" || $ptn === "ptn_6" || $ptn === "ptn_7" || $ptn === "ptn_8" || $ptn === "ptn_9" || $ptn === "ptn_10")://ptn_1の場合のhover時の処理（下線型）
+            // 下線型（パターン2・3以外。新しいパターンは下線型が既定・lw_header_menu_hover_type()）
+            if(lw_header_menu_hover_type($ptn) === "underline"):
             ?> 
                 <?=$class?> .header_menu_pc >li >a:hover{
                     color: <?=$menu_1st_layer_hover_text_color?>;
@@ -1550,7 +1518,8 @@ function Lw_header_menu_put($item = []){
                 }
             <?php endif; ?>
             <?php 
-            if($ptn === "ptn_2" || $ptn === "ptn_3")://ptn_2の場合のhover時の処理
+            // 塗り型（パターン2・3）
+            if(lw_header_menu_hover_type($ptn) === "fill"):
             ?> 
                 <?=$class?> .header_menu_pc>li.current-menu-item>a{
                     color: <?=$menu_current_text_color?>;

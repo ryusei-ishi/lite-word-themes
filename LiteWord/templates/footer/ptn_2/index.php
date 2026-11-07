@@ -1,5 +1,5 @@
 <?php if ( !defined( 'ABSPATH' ) ) exit; ?>
-<link rel="stylesheet" href="<?=get_template_directory_uri()?>/templates/footer/ptn_2/style.css">
+<?php lw_footer_ptn_style_link("ptn_2"); // このパターンの CSS（版の印つき・pattern_registry.php） ?>
 <footer class="lw_footer_main footer_ptn_2">
     <?php
         // footer_widget_area_all は常に表示
