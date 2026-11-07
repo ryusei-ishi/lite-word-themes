@@ -37,8 +37,10 @@ get_template_part("templates/return_top/$ptn/index");
         let scrollY = window.scrollY;
         let followCta = document.querySelector('.follow_bottom_cta');
 
-        // .follow_bottom_ctaが存在する場合、スクロールトップボタンを無効化して非表示
-        if (followCta) {
+        // 追従CTA（.follow_bottom_cta）がこの画面幅で表示されている場合、スクロールトップボタンを無効化して非表示。
+        // 「スマホの時のみ表示」などで追従CTAが display:none の幅では、スクロールトップボタンを出す
+        // （ページにあるだけで隠すと、その幅ではどちらのボタンも無くなっていた・2026-11-07）
+        if (followCta && followCta.getClientRects().length > 0) {
             $return_top.classList.remove('on');
             $return_top.style.display = 'none';
             return; // 処理を終了
