@@ -14,7 +14,7 @@ function follow_bottom_cta_ptn_4_set_custom( $wp_customize ) {
     ]);
     $items = [];
     $items[] = [
-        ['text', "price", "", '<h2 class="ctm_ttl_ptn_1">価格の設定</h2>価格（数字のみ）'],
+        ['text', "price", "", '<h2 class="ctm_ttl_ptn_1">価格の設定</h2>価格（数字のみ。空欄で非表示）'],
         ['text', "price_unit", "", '価格のあとに続くテキスト'],
         ['text', "badge_text", "", '補足バッジ（空欄で非表示）'],
     ];

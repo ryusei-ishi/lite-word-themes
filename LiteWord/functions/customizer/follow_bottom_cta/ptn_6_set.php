@@ -14,10 +14,10 @@ function follow_bottom_cta_ptn_6_set_custom( $wp_customize ) {
     ]);
     $items = [];
     $items[] = [
-        ['text', "ribbon_text", "", '<h2 class="ctm_ttl_ptn_1">コーナーリボンの設定</h2>表示テキスト'],
+        ['text', "ribbon_text", "", '<h2 class="ctm_ttl_ptn_1">コーナーリボンの設定</h2>表示テキスト（空欄で非表示）'],
     ];
     $items[] = [
-        ['text', "main_text", "", '<h2 class="ctm_ttl_ptn_1">訴求文の設定</h2>メインテキスト'],
+        ['text', "main_text", "", '<h2 class="ctm_ttl_ptn_1">訴求文の設定</h2>メインテキスト（空欄で非表示）'],
         ['text', "sub_text", "", 'サブテキスト（空欄で非表示）'],
     ];
     $items[] = [

@@ -7,9 +7,10 @@ $responsive_class = '';
 if ($responsive === 'sp_only') $responsive_class = ' lw_follow_cta_sp_only';
 if ($responsive === 'pc_only') $responsive_class = ' lw_follow_cta_pc_only';
 
-$ribbon_text = Lw_theme_mod_set("follow_bottom_cta_ptn_6_set_ribbon_text","今だけ");
-$main_text   = Lw_theme_mod_set("follow_bottom_cta_ptn_6_set_main_text","初回限定 50%OFF");
-$sub_text    = Lw_theme_mod_set("follow_bottom_cta_ptn_6_set_sub_text","今月末まで");
+// リボン・訴求文・期限は、入れたときだけ出す（前は既定で「今だけ」「初回限定 50%OFF」「今月末まで」が出ていた。実在しない割引や期限を公開ページに出さない・2026-11-07）
+$ribbon_text = Lw_theme_mod_set("follow_bottom_cta_ptn_6_set_ribbon_text","");
+$main_text   = Lw_theme_mod_set("follow_bottom_cta_ptn_6_set_main_text","");
+$sub_text    = Lw_theme_mod_set("follow_bottom_cta_ptn_6_set_sub_text","");
 $btn_text    = Lw_theme_mod_set("follow_bottom_cta_ptn_6_set_btn_text","詳しくみる");
 $btn_link    = Lw_theme_mod_set("follow_bottom_cta_ptn_6_set_btn_link","");
 $color_bg    = Lw_theme_mod_set("follow_bottom_cta_ptn_6_set_color_bg","");
@@ -18,10 +19,12 @@ $color_bg    = Lw_theme_mod_set("follow_bottom_cta_ptn_6_set_color_bg","");
     <?php if (!empty($ribbon_text)) : ?>
     <span class="follow_bottom_cta_06__ribbon"><?= esc_html($ribbon_text) ?></span>
     <?php endif; ?>
+    <?php if (!empty($main_text) || !empty($sub_text)) : ?>
     <div class="follow_bottom_cta_06__copy">
-        <strong><?= esc_html($main_text) ?></strong>
+        <?php if (!empty($main_text)) : ?><strong><?= esc_html($main_text) ?></strong><?php endif; ?>
         <?php if (!empty($sub_text)) : ?><span><?= esc_html($sub_text) ?></span><?php endif; ?>
     </div>
+    <?php endif; ?>
     <a href="<?= esc_url($btn_link) ?>" class="follow_bottom_cta_06__btn" style="color:<?=$color_bg?>;"><?= esc_html($btn_text) ?></a>
 </div>
 <style>

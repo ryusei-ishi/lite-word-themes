@@ -14,8 +14,8 @@ function follow_bottom_cta_ptn_10_set_custom( $wp_customize ) {
     ]);
     $items = [];
     $items[] = [
-        ['text', "rating", "", '<h2 class="ctm_ttl_ptn_1">評価の設定</h2>評価点（例：4.8）'],
-        ['text', "review_count_text", "", 'レビュー件数テキスト'],
+        ['text', "rating", "", '<h2 class="ctm_ttl_ptn_1">評価の設定</h2>評価点（例：4.8。空欄で非表示）'],
+        ['text', "review_count_text", "", 'レビュー件数テキスト（空欄で非表示）'],
         ['text', "users_text", "", '利用者数テキスト（空欄で非表示）'],
     ];
     $items[] = [

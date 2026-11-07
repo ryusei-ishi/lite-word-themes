@@ -7,19 +7,22 @@ $responsive_class = '';
 if ($responsive === 'sp_only') $responsive_class = ' lw_follow_cta_sp_only';
 if ($responsive === 'pc_only') $responsive_class = ' lw_follow_cta_pc_only';
 
-$price       = Lw_theme_mod_set("follow_bottom_cta_ptn_4_set_price","980");
+// 価格と補足バッジは、入れたときだけ出す（前は既定で「¥980」「今なら初月無料」が出ていた。実在しない値段や特典を公開ページに出さない・2026-11-07）
+$price       = Lw_theme_mod_set("follow_bottom_cta_ptn_4_set_price","");
 $price_unit  = Lw_theme_mod_set("follow_bottom_cta_ptn_4_set_price_unit","/月（税込）");
-$badge_text  = Lw_theme_mod_set("follow_bottom_cta_ptn_4_set_badge_text","今なら初月無料");
+$badge_text  = Lw_theme_mod_set("follow_bottom_cta_ptn_4_set_badge_text","");
 $btn_text    = Lw_theme_mod_set("follow_bottom_cta_ptn_4_set_btn_text","今すぐ申し込む");
 $btn_link    = Lw_theme_mod_set("follow_bottom_cta_ptn_4_set_btn_link","");
 $color_accent = Lw_theme_mod_set("follow_bottom_cta_ptn_4_set_color_accent","");
 ?>
 <div class="follow_bottom_cta_04 follow_bottom_cta<?= $responsive_class ?>" style="border-top-color:<?=$color_accent?>;">
+    <?php if (!empty($price)) : ?>
     <div class="follow_bottom_cta_04__price">
         <span class="follow_bottom_cta_04__yen">¥</span><?= esc_html($price) ?><span class="follow_bottom_cta_04__unit"><?= esc_html($price_unit) ?></span>
     </div>
+    <?php endif; ?>
     <?php if (!empty($badge_text)) : ?>
-    <div class="follow_bottom_cta_04__divider"></div>
+    <?php if (!empty($price)) : ?><div class="follow_bottom_cta_04__divider"></div><?php endif; ?>
     <div class="follow_bottom_cta_04__badge" style="color:<?=$color_accent?>;"><?= esc_html($badge_text) ?></div>
     <?php endif; ?>
     <a href="<?= esc_url($btn_link) ?>" class="follow_bottom_cta_04__btn" style="background-color:<?=$color_accent?>;"><?= esc_html($btn_text) ?></a>
