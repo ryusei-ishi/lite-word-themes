@@ -2458,17 +2458,21 @@ function lw_ajax_get_header_pattern() {
     // ptn_4は特定テンプレート購入者のみ利用可能
     $has_ptn4_access = function_exists('templateSettingCheck') &&
         (templateSettingCheck("shin_gas_station_01") || templateSettingCheck("template_001"));
+    // プレミアム限定のパターン（lw_header_premium_pattern_labels()）は契約が無ければ鍵（2026-11-07・パターン7）
+    $premium_ptns = array_keys(lw_header_premium_pattern_labels());
+    $has_premium = lw_header_has_premium();
 
-    for ($i = 1; $i <= 6; $i++) {
+    for ($i = 1; $i <= 7; $i++) {
         $ptn_value = 'ptn_' . $i;
-        $is_locked = ($i === 4 && !$has_ptn4_access);
+        $is_premium_locked = in_array($ptn_value, $premium_ptns, true) && !$has_premium;
+        $is_locked = ($i === 4 && !$has_ptn4_access) || $is_premium_locked;
 
         $patterns[] = array(
             'value' => $ptn_value,
             'label' => 'パターン ' . $i,
             'image' => $base_url . $ptn_value . '.webp',
             'locked' => $is_locked,
-            'locked_message' => $is_locked ? '特定テンプレートの購入が必要です' : ''
+            'locked_message' => $is_premium_locked ? 'プレミアムプランで使えます' : ($is_locked ? '特定テンプレートの購入が必要です' : '')
         );
     }
 
@@ -2491,9 +2495,13 @@ function lw_ajax_save_header_pattern() {
     $header_ptn = sanitize_text_field($_POST['header_ptn']);
 
     // パターン値のバリデーション
-    $valid_patterns = array('ptn_1', 'ptn_2', 'ptn_3', 'ptn_4', 'ptn_5', 'ptn_6');
+    $valid_patterns = array('ptn_1', 'ptn_2', 'ptn_3', 'ptn_4', 'ptn_5', 'ptn_6', 'ptn_7');
     if (!in_array($header_ptn, $valid_patterns)) {
         wp_send_json_error('無効なパターンです');
+    }
+    // プレミアム限定のパターンは契約が無ければ断る（表示でも lw_header_renderable_ptn() がパターン1にする）
+    if (array_key_exists($header_ptn, lw_header_premium_pattern_labels()) && !lw_header_has_premium()) {
+        wp_send_json_error('プレミアムプランで使えます');
     }
 
     set_theme_mod('header_set_ptn_df', $header_ptn);

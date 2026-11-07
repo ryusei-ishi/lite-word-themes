@@ -40,7 +40,8 @@ function add_files() {
             }
         }
         //header
-        $header_set_ptn_df = Lw_theme_mod_set("header_set_ptn_df", "ptn_1");
+        // プレミアム限定のパターンは、契約が無ければパターン1（templates/header/index.php と同じ。2026-11-07）
+        $header_set_ptn_df = lw_header_renderable_ptn( Lw_theme_mod_set("header_set_ptn_df", "ptn_1") );
         if(is_page()){
             $header_ptn_set = Lw_put_text("header_select");
             // ../ などの形の違う値は「未選択」と同じ扱い（templates/header/index.php と同じ。2026-11-02 再点検）
@@ -60,6 +61,7 @@ function add_files() {
         else{
             $header_ptn_set = $header_set_ptn_df;
         }
+        $header_ptn_set = lw_header_renderable_ptn( $header_ptn_set );
         // 🐛 ヘッダーを「ショートコード」（ptn_short_code）にすると assets/css/header/ptn_short_code/ が無く、
         //    毎ページ 404 を読みに行っていた。ファイルがあるパターンだけ読み込む
         // パターン名は英小文字・数字・_ だけ（../ で別の場所の CSS を読ませない。2026-11-02 再点検）

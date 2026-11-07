@@ -28,6 +28,10 @@ if(is_customize_preview()){
     }
     get_template_part("./functions/customizer/header/ptn_5_set");
     get_template_part("./functions/customizer/header/ptn_6_set");
+    // パターン7（浮遊カプセル）はプレミアム限定（lw_header_premium_pattern_labels()）
+    if (lw_header_has_premium()) {
+        get_template_part("./functions/customizer/header/ptn_7_set");
+    }
     get_template_part("./functions/customizer/header/ptn_short_code");
     //ドロワー
     get_template_part('./functions/customizer/drawer/drawer_set');

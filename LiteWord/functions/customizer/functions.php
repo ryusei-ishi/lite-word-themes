@@ -184,6 +184,31 @@ function lw_ptn_arr($df_text="未選択", $max=2){
 }
 
 //ヘッダー
+/**
+ * プレミアム限定のヘッダーのパターン（キー → 選択肢の表示）。ここが唯一の一覧（2026-11-07・パターン7から）。
+ * 選択肢（header_ptn_arr）・表示（lw_header_renderable_ptn）・カスタマイザーの設定欄・初期設定ウィザードがここを読む。
+ * 注意: 選択肢から隠すだけでは足りない（ウィザードの保存や固定ページのメタからも入る）。表示するときにも確かめる。
+ */
+function lw_header_premium_pattern_labels() {
+    return [
+        'ptn_7' => 'ヘッダーパターン7（浮遊カプセル）',
+    ];
+}
+// プレミアム（有料・14日試用を含む）かどうか
+function lw_header_has_premium() {
+    return defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true;
+}
+/**
+ * 表示してよいヘッダーのパターンを返す。
+ * プレミアム限定のパターンが選ばれていても、契約が無ければパターン1にする（ヘッダーを消さない）。
+ * templates/header/index.php と functions/css_js_set/front.php の両方から呼ぶ（テンプレートと CSS をそろえるため）。
+ */
+function lw_header_renderable_ptn($ptn) {
+    if (is_string($ptn) && array_key_exists($ptn, lw_header_premium_pattern_labels()) && !lw_header_has_premium()) {
+        return 'ptn_1';
+    }
+    return $ptn;
+}
 function header_ptn_arr() {
     $header_ptn = [];
 
@@ -198,6 +223,10 @@ function header_ptn_arr() {
 
     $header_ptn['ptn_5'] = 'ヘッダーパターン5';
     $header_ptn['ptn_6'] = 'ヘッダーパターン6';
+    // プレミアム限定のパターン（lw_header_premium_pattern_labels）
+    if (lw_header_has_premium()) {
+        $header_ptn += lw_header_premium_pattern_labels();
+    }
     $header_ptn['ptn_short_code'] = 'ショートコード';
     $header_ptn['none']  = '非表示';
 
@@ -1499,7 +1528,7 @@ function Lw_header_menu_put($item = []){
             }
             /* 第１階層目の処理 */
             <?php 
-            if($ptn === "ptn_1" || $ptn === "ptn_4" || $ptn === "ptn_5" || $ptn === "ptn_6")://ptn_1の場合のhover時の処理
+            if($ptn === "ptn_1" || $ptn === "ptn_4" || $ptn === "ptn_5" || $ptn === "ptn_6" || $ptn === "ptn_7")://ptn_1の場合のhover時の処理（下線型）
             ?> 
                 <?=$class?> .header_menu_pc >li >a:hover{
                     color: <?=$menu_1st_layer_hover_text_color?>;
