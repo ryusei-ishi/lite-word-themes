@@ -27,8 +27,10 @@ add_action('customize_save_after', 'lw_clear_css_vars_cache');
 function lw_generate_css_variables() {
     $post_id = get_the_ID();
 
-    // カスタマイザープレビュー中はキャッシュをスキップ
-    $use_cache = !is_customize_preview();
+    // カスタマイザープレビュー中と、テンプレート挿入画面の見本ではキャッシュを使わない。
+    // 見本はテンプレートの色で出すので（lw-page-template-frontend.php）、そのページの値としてキャッシュに残すと、
+    // ふだんの表示までその色になる（2026-11-07）
+    $use_cache = !is_customize_preview() && empty($GLOBALS['lw_is_template_preview']);
 
     // トランジェントキャッシュを使用してパフォーマンスを向上
     if ($use_cache && $post_id) {

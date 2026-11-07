@@ -154,6 +154,23 @@ function lw_handle_template_preview_page() {
 
     // $lw_is_template_preview は init フックで既に設定済み
 
+    // テンプレートが色と書体を持っていれば、見本もその色と書体で出す（挿入したページと同じ見た目にする・2026-11-07）。
+    // 色と書体を出す側（css_js_set/index.php）はページの設定（投稿メタ）を読むので、この見本の要求のあいだだけ、
+    // そのキーにテンプレートの値を返す。'page_meta' が無いテンプレートは何もしない（今までどおりサイトの色）。
+    // ⚠️ 読みに行くのは get_the_ID() のページの設定。サイトに投稿も固定ページも1つも無いときは効かず、サイトの色で出る
+    if (!function_exists('lw_page_template_page_meta')) {
+        require_once __DIR__ . '/lw-page-template-admin.php';
+    }
+    $lw_tpl_page_meta = function_exists('lw_page_template_page_meta') ? lw_page_template_page_meta($template_path) : [];
+    if (!empty($lw_tpl_page_meta)) {
+        add_filter('get_post_metadata', function ($value, $object_id, $meta_key, $single) use ($lw_tpl_page_meta) {
+            if (is_string($meta_key) && array_key_exists($meta_key, $lw_tpl_page_meta)) {
+                return [$lw_tpl_page_meta[$meta_key]];
+            }
+            return $value;
+        }, 10, 4);
+    }
+
     // プレビュー中はブロック二重登録のNoticeを抑制
     $prev_display = ini_get('display_errors');
     @ini_set('display_errors', '0');

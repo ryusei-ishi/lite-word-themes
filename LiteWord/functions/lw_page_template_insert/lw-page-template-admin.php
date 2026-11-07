@@ -1218,6 +1218,24 @@ function lw_get_integrated_template_configs() {
                             'path' => 'page_template/esthe2/menu_herb_1/index.php',
                             'public' => false,
                         ],
+                        [
+                            'name' => 'パーソナルカラーサロン トップページ（1ページで完結）',
+                            'description' => 'パーソナルカラー・スタイル提案サロンのトップページ<b>【型C2：色見本と写真が主役】</b>。<br>写真と文を左右に分けたファーストビュー→ページ内へ飛ぶボタン3つ→<b>4シーズンの配色例（色見本のカード4枚）</b>→写真と文の2段（左右を入れ替え）→写真3枚のギャラリー→<b>プラン2つの料金カード</b>→はじめての方へのよくある質問→サロンのご案内。<br>「似合う色」を先に色で見せてから、相談の中身と料金へ進む並びです。骨格診断・メイクレッスン・スタイリスト・ネイルなど「色や見た目を提案する」お店にも使えます。<br><b>挿入すると、このページの色（ローズ系）と書体（Zen Kaku Gothic New）も入ります。</b>色はブロックの設定にも入っているので、別の色にするときはページの「カラー設定」とブロックの色の両方を変えてください。<br><b>差し替え:</b> サロン名（iroha.）・料金・時間・写真はすべて架空の見本です（写真は AI で作ったものです）。「架空の制作サンプル」と書いた文も、ご自身の案内に書き換えてください。',
+                            'preview_url' => '',
+                            'path' => 'page_template/onepage/color_salon_1/index.php',
+                            'public' => false,
+                            'page_meta' => [
+                                'color_main' => '#b75461',
+                                'color_accent' => '#8b789f',
+                                'color_text' => '#514554',
+                                'color_1' => '#fff6f2',
+                                'color_2' => '#ffffff',
+                                'color_3' => '#f0ebf7',
+                                'color_return_btn' => '#b75461',
+                                'font_body' => 'Zen Kaku Gothic New',
+                                'font_body_weight' => '400',
+                            ],
+                        ],
                     ]
                 ],
                 'professional' => [
@@ -1466,6 +1484,61 @@ function lw_get_integrated_template_configs() {
                             'path' => 'page_template/school/trial_1/index.php',
                             'public' => false,
                         ],
+
+                        [
+                            'name' => 'ピラティススタジオ トップページ（1ページで完結）',
+                            'description' => '【型M2：通いはじめるまでが主役／1ページで完結】女性向けピラティススタジオの<b>1ページで完結する</b>トップページ。写真のファーストビュー→ページ内へ飛ぶボタン3つ→ひとこと→こんな方に（チェックリスト）→<b>選べる3つのクラス（写真カード）</b>→スタジオの写真と説明→<b>体験の3ステップ</b>→<b>料金の表</b>→よくある質問→最後のひと押し（クラスと体験の流れへ戻るボタン）。「スクール・教室 トップページ」（型M）の考え方を1ページにまとめた形で、体験・クラス・料金を同じページの中で行き来できます。ヨガ・パーソナルジム・ダンス・整体など「体験から通いはじめる」お店にも使えます。<br><b>挿入すると、このページの色（グリーン系）と書体（Noto Sans JP）も入ります。</b>色はブロックの設定にも入っているので、別の色にするときはページの「カラー設定」とブロックの色の両方を変えてください。<br><b>差し替え:</b> スタジオ名（mio pilates）・クラス・料金・写真はすべて架空の見本です（写真は AI で作ったものです）。「架空の制作サンプル」と書いた文も、ご自身の案内に書き換えてください。',
+                            'preview_url' => '',
+                            'path' => 'page_template/onepage/pilates_1/index.php',
+                            'public' => false,
+                            'page_meta' => [
+                                'color_main' => '#397c71',
+                                'color_accent' => '#8eb998',
+                                'color_text' => '#435d56',
+                                'color_1' => '#edf7f3',
+                                'color_2' => '#ffffff',
+                                'color_3' => '#cce4da',
+                                'color_return_btn' => '#397c71',
+                                'font_body' => 'Noto Sans JP',
+                                'font_body_weight' => '400',
+                            ],
+                        ],
+
+                        [
+                            'name' => '焼き菓子・料理教室 トップページ（1ページで完結）',
+                            'description' => '【型C4：レッスンの写真が主役／1ページで完結】焼き菓子と紅茶の教室の<b>1ページで完結する</b>トップページ。左に文・右に写真のファーストビュー→ひとこと→<b>レッスン6つを写真で横に送るスライダー</b>→教室の写真と説明→参加前に確認したいこと（リスト）→<b>時間と料金の表</b>→よくある質問→教室からのご案内。レッスンの中身を写真で見せてから、時間と料金へ進む並びです。お菓子・料理・パン・紅茶・フラワーアレンジなど「作って楽しむ」教室やワークショップにも使えます。<br><b>挿入すると、このページの色（ブラウン系）と書体（Zen Maru Gothic）も入ります。</b>色はブロックの設定に入っているので、別の色にするときはブロックごとの色を変えてください。<br><b>差し替え:</b> 教室名（Miel &amp; Leaf）・レッスン・料金・写真はすべて架空の見本です（写真は AI で作ったものです）。「架空の制作サンプル」と書いた文も、ご自身の案内に書き換えてください。',
+                            'preview_url' => '',
+                            'path' => 'page_template/onepage/baking_class_1/index.php',
+                            'public' => false,
+                            'page_meta' => [
+                                'color_main' => '#80523b',
+                                'color_accent' => '#707657',
+                                'color_text' => '#4c4137',
+                                'color_return_btn' => '#80523b',
+                                'font_body' => 'Zen Maru Gothic',
+                                'font_body_weight' => '400',
+                            ],
+                        ],
+                    ]
+                ],
+                'photo_studio' => [
+                    'label' => '写真スタジオ',
+                    'templates' => [
+                        [
+                            'name' => '写真スタジオ トップページ（1ページで完結）',
+                            'description' => '【型C3：撮りたい場面を写真で選ぶ／1ページで完結】女性向けフォトスタジオの<b>1ページで完結する</b>トップページ。写真の上に文を置いたファーストビュー→<b>「ひとり」「ふたり」を写真で選ぶ2つの入口</b>→スタジオの写真と説明→撮影の例（写真2枚）→<b>撮影プラン2つの料金カード</b>→撮影の日の3ステップ→よくある質問→スタジオからのご案内。最初に「どんな時間を撮りたいか」を選んでもらい、そのプランへ飛ぶ並びです。出張撮影・プロフィール撮影・家族写真・ブライダルフォトなどにも使えます。<br><b>挿入すると、このページの色（モーブ系）と書体（Noto Sans JP）も入ります。</b>色はブロックの設定にも入っているので、別の色にするときはページの「カラー設定」とブロックの色の両方を変えてください。<br><b>差し替え:</b> スタジオ名（mellow portrait）・プラン・料金・写真はすべて架空の見本です（写真は AI で作ったもので、実際の撮影作品ではありません）。「架空の制作サンプル」と書いた文も、ご自身の案内に書き換えてください。',
+                            'preview_url' => '',
+                            'path' => 'page_template/onepage/photo_studio_1/index.php',
+                            'public' => false,
+                            'page_meta' => [
+                                'color_main' => '#665268',
+                                'color_accent' => '#b39196',
+                                'color_text' => '#4a3e50',
+                                'color_return_btn' => '#665268',
+                                'font_body' => 'Noto Sans JP',
+                                'font_body_weight' => '400',
+                            ],
+                        ],
                     ]
                 ],
                 'saas' => [
@@ -1581,6 +1654,70 @@ function lw_get_current_templates() {
 }
 
 /**
+ * 登録簿から、パスが完全に一致するテンプレート1本を返す（無ければ null）。
+ * 挿入（lw_create_page_from_template）と、挿入画面の見本（lw-page-template-frontend.php）で使う。
+ *
+ * @param string $template_path
+ * @return array|null
+ */
+function lw_page_template_find($template_path) {
+    foreach (lw_get_integrated_template_configs() as $category) {
+        if (empty($category['items']) || !is_array($category['items'])) {
+            continue;
+        }
+        foreach ($category['items'] as $item) {
+            if (empty($item['templates']) || !is_array($item['templates'])) {
+                continue;
+            }
+            foreach ($item['templates'] as $template) {
+                if (isset($template['path']) && $template['path'] === $template_path) {
+                    return $template;
+                }
+            }
+        }
+    }
+    return null;
+}
+
+/**
+ * テンプレートが持つページの色と書体のうち、入れてよいものだけを返す（2026-11-07）。
+ *
+ * 登録簿の 'page_meta' に書いた値を、挿入したページの設定（投稿メタ）に入れる。
+ * サイト全体の設定（カスタマイザー）には触らない。'page_meta' が無いテンプレートは空の配列。
+ * 入れてよいのは、色（$color_keys の7つ）と書体（font_body・font_body_weight）だけ。
+ * 値は表示する側（css_js_set/index.php）と同じ形で確かめる。
+ * #ada993 は固定ページの設定で「未設定」の印なので入れない。
+ *
+ * @param string $template_path
+ * @return array キー => 値
+ */
+function lw_page_template_page_meta($template_path) {
+    $template = lw_page_template_find($template_path);
+    if (empty($template['page_meta']) || !is_array($template['page_meta'])) {
+        return [];
+    }
+    $color_keys = ['color_main', 'color_accent', 'color_text', 'color_1', 'color_2', 'color_3', 'color_return_btn'];
+    $out = [];
+    foreach ($template['page_meta'] as $key => $value) {
+        $value = trim((string) $value);
+        if (in_array($key, $color_keys, true)) {
+            if ($value !== '#ada993' && function_exists('lw_is_safe_css_color') && lw_is_safe_css_color($value)) {
+                $out[$key] = $value;
+            }
+        } elseif ($key === 'font_body') {
+            if (preg_match('/^[A-Za-z0-9 _.\-]{1,80}$/', $value)) {
+                $out[$key] = $value;
+            }
+        } elseif ($key === 'font_body_weight') {
+            if (preg_match('/^[1-9]00$/', $value)) {
+                $out[$key] = $value;
+            }
+        }
+    }
+    return $out;
+}
+
+/**
  * テンプレートファイル取得エンドポイント
  */
 
@@ -1670,6 +1807,12 @@ function lw_create_page_from_template() {
     if ($page_id) {
         update_post_meta($page_id, '_lw_template_source', $template_name);
         update_post_meta($page_id, '_lw_template_path', $template_path);
+        
+        // テンプレートが色と書体を持っていれば、このページの設定にだけ入れる（2026-11-07）。
+        // 登録簿に 'page_meta' が無いテンプレートは何も入れない（今までどおり本文だけ）
+        foreach (lw_page_template_page_meta($template_path) as $meta_key => $meta_value) {
+            update_post_meta($page_id, $meta_key, $meta_value);
+        }
         
         wp_send_json_success(array(
             'page_id' => $page_id,
