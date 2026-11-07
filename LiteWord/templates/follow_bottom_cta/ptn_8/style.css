@@ -50,6 +50,7 @@
 }
 @media (max-width: 600px) {
   .follow_bottom_cta_08__half {
+    flex: none;
     flex-direction: row;
     height: 52px;
     gap: 10px;

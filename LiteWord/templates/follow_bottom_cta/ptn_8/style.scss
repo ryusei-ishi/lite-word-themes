@@ -43,6 +43,8 @@
             opacity: 0.85;
         }
         @media (max-width: 600px){
+            // 上下2段のときは、flex: 1（もとの高さ 0）のままだと height が効かず 18px につぶれる（2026-11-07 に直した）
+            flex: none;
             flex-direction: row;
             height: 52px;
             gap: 10px;
