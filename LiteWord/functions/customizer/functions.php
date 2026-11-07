@@ -226,41 +226,122 @@ function footer_ptn_arr() {
     return lw_part_ptn_arr('footer', 'フッター');
 }
 
-// プレミアム限定の追従CTAパターン（ptn_3〜ptn_12）
 /**
- * プレミアム限定パターンのキー→ラベル。ここが唯一の情報源。
- * 🚨 lw_follow_bottom_cta_premium_ptns() と follow_bottom_cta_arr() が
- *    それぞれ独立にこの10種を書いていると、将来ptn_13等を追加した際に
- *    片方だけ更新し忘れる事故（課金バイパス／選べるのに表示されない）に直結する。
+ * 追従CTAのパターンの一覧（2026-11-07）。名前・プレミアム限定か・説明を、ここ1か所に書く。
+ * 新しいパターンは、ここに1つ足せば次の全部に効く（ほかの場所に番号を書き足さない）:
+ *  - 選択肢 follow_bottom_cta_arr()（カスタマイザー・固定ページの「追従CTA設定」・【LW】追従CTA ウィジェット）
+ *  - 表示してよいかの確かめ lw_follow_bottom_cta_is_renderable()（プレミアム限定は、契約が無いと何も出さない）
+ *  - カスタマイザーの各パターンの設定欄の読み込み lw_customizer_load_follow_bottom_cta_settings()
+ *  - 設定欄の「完成イメージ」の題と説明 lw_follow_bottom_cta_preview_meta()（画像は functions/customizer/follow_bottom_cta/preview/ptn_N.png）
+ * 選択肢の名前は「追従CTAパターンN（name）」になる。並びはこの表の順。
+ * 🚨 premium を true にし忘れると、契約の無いサイトでも選べて表示される（課金を通らない）。新しいパターンは true が既定。
  */
-function lw_follow_bottom_cta_premium_pattern_labels(){
+function lw_follow_bottom_cta_patterns(){
     return [
-        'ptn_3' => '追従CTAパターン3（ミニマル・フローティングピル型）',
-        'ptn_4' => '追従CTAパターン4（価格訴求・EC型）',
-        'ptn_5' => '追従CTAパターン5（営業時間・受付状況型）',
-        'ptn_6' => '追従CTAパターン6（期間限定・キャンペーン訴求型）',
-        'ptn_7' => '追従CTAパターン7（チャット風フローティング展開型）',
-        'ptn_8' => '追従CTAパターン8（左右2分割・振り分け型）',
-        'ptn_9' => '追従CTAパターン9（読了率連動・スクロールバー型）',
-        'ptn_10' => '追従CTAパターン10（信頼・実績訴求型）',
-        'ptn_11' => '追従CTAパターン11（フォーム埋め込み・リード獲得型）',
-        'ptn_12' => '追従CTAパターン12（アコーディオン開閉・多チャンネル型）',
+        'ptn_1' => [
+            'name'    => 'シンプル型',
+            'premium' => false,
+            'desc'    => '中央に並んだボタン1〜2個だけのシンプルな追従バー。業種を選ばず使える基本形。',
+        ],
+        'ptn_2' => [
+            'name'    => '士業・クリニック型',
+            'premium' => false,
+            'desc'    => 'ロゴ・特徴バッジ・電話番号・ボタンを並べた横長バー（スマホは2つのタブ風ボタン）。実績や強みを一緒に見せたい士業・クリニック向け。',
+        ],
+        'ptn_3' => [
+            'name'    => 'ミニマル・フローティングピル型',
+            'premium' => true,
+            'desc'    => '「オンラインで相談受付中」のような一言＋丸いボタンだけの控えめな1個だけのフローティングボタン。常時出しても邪魔になりにくい。',
+        ],
+        'ptn_4' => [
+            'name'    => '価格訴求・EC型',
+            'premium' => true,
+            'desc'    => '「¥980/月・今なら初月無料」のような価格情報＋申込ボタン。料金プランやEC商品の購入導線向け。',
+        ],
+        'ptn_5' => [
+            'name'    => '営業時間・受付状況型',
+            'premium' => true,
+            'desc'    => '「只今受付中」などの受付状況・営業時間＋電話・LINEボタン。実店舗への即時問い合わせ向け。',
+        ],
+        'ptn_6' => [
+            'name'    => '期間限定・キャンペーン訴求型',
+            'premium' => true,
+            'desc'    => '「今だけ・初回限定50%OFF」のような期間限定の訴求＋詳細ボタン。キャンペーン告知向け。',
+        ],
+        'ptn_7' => [
+            'name'    => 'チャット風フローティング展開型',
+            'premium' => true,
+            'desc'    => '右下のチャット風ボタン。クリックで開閉する。問い合わせのハードルを下げたいサイト向け。',
+        ],
+        'ptn_8' => [
+            'name'    => '左右2分割・振り分け型',
+            'premium' => true,
+            'desc'    => '画面下を2色で左右に分け、「はじめての方／在校生の方」のように訪問者を属性で振り分ける。会員制サイト・スクール向け。',
+        ],
+        'ptn_9' => [
+            'name'    => '読了率連動・スクロールバー型',
+            'premium' => true,
+            'desc'    => 'スクロール量に応じて進捗バーが伸びる＋「続きが気になる方へ」ボタン。読了率の高いコラム・オウンドメディア向け。',
+        ],
+        'ptn_10' => [
+            'name'    => '信頼・実績訴求型',
+            'premium' => true,
+            'desc'    => '星評価やレビュー数・利用者数などの実績＋ボタン。信頼を数字で見せたいサイト向け。',
+        ],
+        'ptn_11' => [
+            'name'    => 'フォーム埋め込み・リード獲得型',
+            'premium' => true,
+            'desc'    => 'メールアドレス入力欄がその場にあり、送信するとお知らせメール通知＋管理画面の一覧に記録される。資料請求・メルマガ登録の獲得向け（プレミアム限定）。',
+        ],
+        'ptn_12' => [
+            'name'    => 'アコーディオン開閉・多チャンネル型',
+            'premium' => true,
+            'desc'    => '「お問い合わせ方法を見る」で開閉し、電話・LINE・メールなど複数の問い合わせ手段をまとめて表示。窓口を複数持つサイト向け。',
+        ],
     ];
+}
+// 選択肢の名前（例: 追従CTAパターン3（ミニマル・フローティングピル型））。表に無いパターンは空
+function lw_follow_bottom_cta_pattern_label($ptn){
+    $patterns = lw_follow_bottom_cta_patterns();
+    if(!isset($patterns[$ptn])){
+        return '';
+    }
+    return '追従CTAパターン' . substr($ptn, 4) . '（' . $patterns[$ptn]['name'] . '）';
+}
+// プレミアム限定のパターン（キー → 選択肢の名前）。表の premium から作る
+function lw_follow_bottom_cta_premium_pattern_labels(){
+    $labels = [];
+    foreach(lw_follow_bottom_cta_patterns() as $ptn => $pattern){
+        if(!empty($pattern['premium'])){
+            $labels[$ptn] = lw_follow_bottom_cta_pattern_label($ptn);
+        }
+    }
+    return $labels;
 }
 function lw_follow_bottom_cta_premium_ptns(){
     return array_keys(lw_follow_bottom_cta_premium_pattern_labels());
 }
+// 選択肢（未選択・表の順のパターン・非表示）。プレミアム限定のパターンは契約があるときだけ並べる
 function follow_bottom_cta_arr(){
+    $has_premium = defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true;
     $follow_bottom_cta_arr = [
         '' => '未選択',
-        'ptn_1' => '追従CTAパターン1（シンプル型）',
-        'ptn_2' => '追従CTAパターン2（士業・クリニック型）',
     ];
-    if (defined('LW_HAS_SUBSCRIPTION') && LW_HAS_SUBSCRIPTION === true) {
-        $follow_bottom_cta_arr += lw_follow_bottom_cta_premium_pattern_labels();
+    foreach(lw_follow_bottom_cta_patterns() as $ptn => $pattern){
+        if(!empty($pattern['premium']) && !$has_premium){
+            continue;
+        }
+        $follow_bottom_cta_arr[$ptn] = lw_follow_bottom_cta_pattern_label($ptn);
     }
     $follow_bottom_cta_arr['none'] = '非表示';
     return $follow_bottom_cta_arr;
+}
+// カスタマイザーの各パターンの設定欄（functions/customizer/follow_bottom_cta/ptn_N_set.php）を、表の順に読む。
+// 契約が無いサイトでも、プレミアム限定のパターンの設定欄は読む（2026-11-07 より前と同じ動き。選択肢には出ない）
+function lw_customizer_load_follow_bottom_cta_settings(){
+    foreach(array_keys(lw_follow_bottom_cta_patterns()) as $ptn){
+        get_template_part("./functions/customizer/follow_bottom_cta/{$ptn}_set");
+    }
 }
 /**
  * 追従CTAのパターンを解決する（サイト全体設定→投稿タイプ別設定→固定ページ個別上書きの順）。

@@ -37,9 +37,8 @@ if(is_customize_preview()){
     get_template_part("./functions/customizer/footer/ptn_short_code");
     //追従CTA
     get_template_part('./functions/customizer/follow_bottom_cta/follow_bottom_cta_set');
-    for ($i=1; $i <= 12; $i++) {
-        get_template_part("./functions/customizer/follow_bottom_cta/ptn_{$i}_set");
-    }
+    // 各パターンの設定欄（ptn_N_set.php）は、パターンの表（lw_follow_bottom_cta_patterns・functions.php）の順に読む
+    lw_customizer_load_follow_bottom_cta_settings();
     //サイドの追従SNSリンク
     get_template_part('./functions/customizer/side_follow_sns/side_follow_sns_set');
     for ($i=1; $i <= 4; $i++) {
