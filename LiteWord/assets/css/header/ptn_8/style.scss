@@ -1,0 +1,311 @@
+// ヘッダーパターン8「ショップ」（プレミアム限定・2026-11-07）
+// 上の段: ロゴ・検索窓・マイページとカート。下の段: カテゴリ（ヘッダーのメニュー）。
+// 1080px 以下は、上の段をロゴ・カート・☰ にして、検索窓を下の段へ回す（同じフォームを order で並べ替える）。
+.lw_header_main.header_ptn_8 {
+    position: relative;
+    z-index: 80;
+    background: #fff;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.08);
+    // common.scss の .lw_header_main.fixed_on と同じ強さなので、追従のときの position をここでも書く
+    &.fixed_on {
+        position: fixed;
+        z-index: 900;
+    }
+}
+.header_ptn_8 {
+    .inner {
+        padding: 0 40px;
+        height: 88px;
+        display: flex;
+        align-items: center;
+        @media (max-width: 1280px) {
+            padding: 0 24px;
+        }
+        @media (max-width: 1080px) {
+            padding: 0 16px;
+            height: auto;
+            flex-wrap: wrap;
+        }
+        @media (max-width: 600px) {
+            padding: 0 12px;
+        }
+    }
+    .logo {
+        flex-shrink: 0;
+        height: 88px;
+        // メニューが消える幅では、ロゴがカートと ☰ 以外の幅を使い、長い文字のロゴだけ「…」にする
+        @media (max-width: 1080px) {
+            flex: 1 1 0;
+            min-width: 0;
+            height: 64px;
+        }
+        @media (max-width: 600px) {
+            height: 56px;
+        }
+        a {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            color: #111;
+            img {
+                display: block;
+                width: auto;
+                max-width: 100%;
+                object-fit: contain;
+            }
+            .text {
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+    .search_form {
+        flex: 0 1 600px;
+        margin: 0 auto;
+        padding: 0 32px;
+        @media (max-width: 1280px) {
+            padding: 0 24px;
+        }
+        @media (max-width: 1080px) {
+            order: 10;
+            flex: 1 1 100%;
+            margin: 0 0 12px;
+            padding: 0;
+        }
+    }
+    .search_box {
+        height: 48px;
+        display: flex;
+        align-items: center;
+        border: 1px solid #d6d6d2;
+        border-radius: 100px;
+        background: #f7f7f5;
+        transition: border-color 0.2s, background 0.2s, box-shadow 0.2s;
+        @media (max-width: 1080px) {
+            height: 44px;
+        }
+        &:focus-within {
+            background: #fff;
+            border-color: var(--color-main);
+            box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.06);
+        }
+        .search_btn {
+            flex-shrink: 0;
+            width: 48px;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: none;
+            background: none;
+            color: #555;
+            cursor: pointer;
+            svg {
+                display: block;
+                width: 20px;
+                height: 20px;
+            }
+        }
+        input {
+            flex: 1 1 auto;
+            min-width: 0;
+            height: 100%;
+            padding: 0 20px 0 0;
+            border: none;
+            background: none;
+            font-size: 15px;
+            color: #222;
+            appearance: none;
+            // スマホで 16px より小さいと、入力のたびに画面が拡大される
+            @media (max-width: 1080px) {
+                font-size: 16px;
+            }
+            &::placeholder {
+                color: #8a8a85;
+            }
+            &:focus {
+                outline: none;
+            }
+        }
+    }
+    .shop_links {
+        flex-shrink: 0;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        @media (max-width: 1080px) {
+            gap: 0;
+        }
+    }
+    .shop_link {
+        min-width: 64px;
+        padding: 6px 8px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 4px;
+        color: #222;
+        font-size: 11px;
+        line-height: 1.2;
+        letter-spacing: 0.04em;
+        transition: color 0.2s;
+        @media (max-width: 1080px) {
+            min-width: 0;
+            padding: 0;
+            width: 44px;
+            height: 44px;
+            justify-content: center;
+        }
+        &:hover {
+            color: var(--color-main);
+        }
+        .icon {
+            width: 26px;
+            height: 26px;
+            @media (max-width: 1080px) {
+                width: 24px;
+                height: 24px;
+            }
+            svg {
+                display: block;
+                width: 100%;
+                height: 100%;
+            }
+        }
+        .label {
+            white-space: nowrap;
+            // スマホではアイコンだけ（読み上げは a の aria-label が受け持つ）
+            @media (max-width: 1080px) {
+                display: none;
+            }
+        }
+        // スマホの上の段は、参考の作りどおりカートと ☰ だけにする
+        &.mypage {
+            @media (max-width: 1080px) {
+                display: none;
+            }
+        }
+    }
+    .ham_btn {
+        position: relative;
+        flex-shrink: 0;
+        margin-left: 4px;
+        width: 44px;
+        height: 44px;
+        display: none;
+        cursor: pointer;
+        @media (max-width: 1080px) {
+            display: block;
+        }
+        div {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 22px;
+            height: 2px;
+            border-radius: 2px;
+            background: #222;
+            transition: all 0.4s;
+            &:nth-of-type(1) {
+                transform: translateY(-7px);
+            }
+            &:nth-of-type(3) {
+                transform: translateY(7px);
+            }
+        }
+        &.active {
+            div {
+                &:nth-of-type(1) {
+                    transform: translateY(0) rotate(45deg);
+                }
+                &:nth-of-type(2) {
+                    opacity: 0;
+                }
+                &:nth-of-type(3) {
+                    transform: translateY(0) rotate(-45deg);
+                }
+            }
+        }
+    }
+    // 下の段のカテゴリ
+    .header_nav {
+        height: 48px;
+        display: flex;
+        justify-content: center;
+        border-top: 1px solid rgba(0, 0, 0, 0.06);
+        @media (max-width: 1080px) {
+            display: none;
+        }
+        // メニューは div（menu-◯◯-container・メニュー未割り当てのときは div.menu）に包まれて出る（パターン6・7と同じ対処）
+        > div {
+            height: 100%;
+        }
+    }
+    .header_menu_pc,
+    .header_nav > .menu > ul {
+        height: 100%;
+        display: flex;
+        justify-content: center;
+        font-size: 14px;
+        > li {
+            position: relative;
+            height: 100%;
+            // 2つ目からの前に縦の区切り線
+            & + li::before {
+                position: absolute;
+                top: 0;
+                bottom: 0;
+                left: 0;
+                margin: auto;
+                width: 1px;
+                height: 14px;
+                content: "";
+                display: block;
+                background: rgba(0, 0, 0, 0.18);
+            }
+            > a {
+                position: relative;
+                padding: 0 1.8em;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                color: #222; // メニューを割り当てていないとき（ページの一覧）の色。設定の色はあとに出るインラインの style が勝つ
+                letter-spacing: 0.04em;
+                white-space: nowrap;
+                transition: color 0.3s;
+                @media (max-width: 1280px) {
+                    padding: 0 1.3em;
+                }
+                &::after {
+                    position: absolute;
+                    bottom: 8px;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    width: 0;
+                    height: 2px;
+                    content: "";
+                    display: block;
+                    border-radius: 2px;
+                    transition: width 0.3s;
+                }
+                &:hover::after {
+                    width: calc(100% - 3.6em);
+                    @media (max-width: 1280px) {
+                        width: calc(100% - 2.6em);
+                    }
+                }
+            }
+            &.current-menu-item > a::after {
+                width: calc(100% - 3.6em);
+                @media (max-width: 1280px) {
+                    width: calc(100% - 2.6em);
+                }
+            }
+        }
+    }
+}
