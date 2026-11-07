@@ -1,0 +1,247 @@
+// ヘッダーパターン10「斜めカットCTA」（プレミアム限定・2026-11-07）
+// 濃い色の帯（背景色はテンプレートのインラインの style・既定はメインカラー）に、ロゴ・メニュー・右端の斜めのボタン。
+// 斜めの形は、ボタンの背景（::after）とスマホの斜めの部分の背景（::before）を clip-path で切って作る。
+.lw_header_main.header_ptn_10 {
+    position: relative;
+    z-index: 80;
+    background: var(--color-main);
+    // common.scss の .lw_header_main.fixed_on と同じ強さなので、追従のときの position をここでも書く
+    &.fixed_on {
+        position: fixed;
+        z-index: 900;
+    }
+}
+.header_ptn_10 {
+    .inner {
+        padding-left: 40px;
+        height: 72px;
+        display: flex;
+        @media (max-width: 1280px) {
+            padding-left: 24px;
+        }
+        @media (max-width: 1080px) {
+            padding-left: 16px;
+            height: 56px;
+        }
+        @media (max-width: 600px) {
+            padding-left: 12px;
+            height: 52px;
+        }
+    }
+    .logo {
+        flex-shrink: 0;
+        margin-right: auto;
+        // メニューが消える幅では、長い文字のロゴだけ縮めて「…」にする
+        @media (max-width: 1080px) {
+            flex-shrink: 1;
+            min-width: 0;
+        }
+        a {
+            height: 100%;
+            display: flex;
+            align-items: center;
+            color: #fff;
+            img {
+                display: block;
+                width: auto;
+                max-width: 100%;
+                object-fit: contain;
+            }
+            .text {
+                letter-spacing: 0.06em;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+            }
+        }
+    }
+    .header_nav {
+        margin-left: 24px;
+        display: flex;
+        align-items: center;
+        @media (max-width: 1080px) {
+            display: none;
+        }
+        // メニューは div（menu-◯◯-container・メニュー未割り当てのときは div.menu）に包まれて出る（パターン6〜9と同じ対処）
+        > div {
+            height: 100%;
+        }
+    }
+    .header_menu_pc,
+    .header_nav > .menu > ul {
+        height: 100%;
+        display: flex;
+        font-size: 14px;
+        > li {
+            position: relative;
+            height: 100%;
+            > a {
+                position: relative;
+                padding: 0 1.4em;
+                height: 100%;
+                display: flex;
+                align-items: center;
+                color: #fff; // メニューを割り当てていないとき（ページの一覧）の色。設定の色はあとに出るインラインの style が勝つ
+                font-weight: 500;
+                letter-spacing: 0.06em;
+                white-space: nowrap;
+                @media (max-width: 1280px) {
+                    padding: 0 1em;
+                }
+                &::after {
+                    position: absolute;
+                    bottom: 18px;
+                    left: 0;
+                    right: 0;
+                    margin: auto;
+                    width: 0;
+                    height: 2px;
+                    content: "";
+                    display: block;
+                    transition: width 0.3s;
+                }
+                &:hover::after {
+                    width: calc(100% - 2.8em);
+                    @media (max-width: 1280px) {
+                        width: calc(100% - 2em);
+                    }
+                }
+            }
+            &.current-menu-item > a::after {
+                width: calc(100% - 2.8em);
+                @media (max-width: 1280px) {
+                    width: calc(100% - 2em);
+                }
+            }
+        }
+    }
+    // 右端の斜めのボタン（共通のボタンの部品。背景は ::after に入る）
+    .cta_btn {
+        position: relative;
+        z-index: 0; // ::after（z-index: -1）をボタンの中に収める
+        flex-shrink: 0;
+        margin-left: 24px;
+        padding: 0 44px 0 64px;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 15px;
+        font-weight: 700;
+        letter-spacing: 0.06em;
+        white-space: nowrap;
+        @media (max-width: 1280px) {
+            padding: 0 32px 0 52px;
+        }
+        @media (max-width: 1080px) {
+            display: none;
+        }
+        // 矢印（文字の後ろに出す。線の色はボタンの文字の色）
+        &::before {
+            order: 1;
+            flex-shrink: 0;
+            width: 20px;
+            height: 20px;
+            content: "";
+            display: block;
+            background: currentColor;
+            -webkit-mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15M13 6l6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+            mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='black' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M4 12h15M13 6l6 6-6 6'/%3E%3C/svg%3E") center / contain no-repeat;
+            transition: transform 0.3s;
+        }
+        &:hover::before {
+            transform: translateX(4px);
+        }
+        &::after {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            content: "";
+            display: block;
+            clip-path: polygon(32px 0, 100% 0, 100% 100%, 0 100%);
+            transition: opacity 0.3s;
+        }
+        &:hover::after {
+            opacity: 0.9;
+        }
+    }
+    // スマホの斜めの部分（メールのアイコンと ☰）。色はテンプレートが --ptn10-cta-bg と color で渡す
+    .sp_actions {
+        position: relative;
+        z-index: 0;
+        flex-shrink: 0;
+        margin-left: 12px;
+        padding: 0 6px 0 26px;
+        display: none;
+        align-items: center;
+        @media (max-width: 1080px) {
+            display: flex;
+        }
+        &::before {
+            position: absolute;
+            top: 0;
+            left: 0;
+            z-index: -1;
+            width: 100%;
+            height: 100%;
+            content: "";
+            display: block;
+            background: var(--ptn10-cta-bg, #d6f431);
+            clip-path: polygon(20px 0, 100% 0, 100% 100%, 0 100%);
+        }
+    }
+    .sp_mail {
+        width: 44px;
+        height: 44px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        color: inherit;
+        svg {
+            display: block;
+            width: 22px;
+            height: 22px;
+        }
+    }
+    .ham_btn {
+        position: relative;
+        flex-shrink: 0;
+        width: 44px;
+        height: 44px;
+        cursor: pointer;
+        div {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            margin: auto;
+            width: 22px;
+            height: 2px;
+            border-radius: 2px;
+            background: currentColor;
+            transition: all 0.4s;
+            &:nth-of-type(1) {
+                transform: translateY(-7px);
+            }
+            &:nth-of-type(3) {
+                transform: translateY(7px);
+            }
+        }
+        &.active {
+            div {
+                &:nth-of-type(1) {
+                    transform: translateY(0) rotate(45deg);
+                }
+                &:nth-of-type(2) {
+                    opacity: 0;
+                }
+                &:nth-of-type(3) {
+                    transform: translateY(0) rotate(-45deg);
+                }
+            }
+        }
+    }
+}

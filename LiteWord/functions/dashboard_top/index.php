@@ -2462,7 +2462,7 @@ function lw_ajax_get_header_pattern() {
     $premium_ptns = array_keys(lw_header_premium_pattern_labels());
     $has_premium = lw_header_has_premium();
 
-    for ($i = 1; $i <= 9; $i++) {
+    for ($i = 1; $i <= 10; $i++) {
         $ptn_value = 'ptn_' . $i;
         $is_premium_locked = in_array($ptn_value, $premium_ptns, true) && !$has_premium;
         $is_locked = ($i === 4 && !$has_ptn4_access) || $is_premium_locked;
@@ -2495,7 +2495,7 @@ function lw_ajax_save_header_pattern() {
     $header_ptn = sanitize_text_field($_POST['header_ptn']);
 
     // パターン値のバリデーション
-    $valid_patterns = array('ptn_1', 'ptn_2', 'ptn_3', 'ptn_4', 'ptn_5', 'ptn_6', 'ptn_7', 'ptn_8', 'ptn_9');
+    $valid_patterns = array('ptn_1', 'ptn_2', 'ptn_3', 'ptn_4', 'ptn_5', 'ptn_6', 'ptn_7', 'ptn_8', 'ptn_9', 'ptn_10');
     if (!in_array($header_ptn, $valid_patterns)) {
         wp_send_json_error('無効なパターンです');
     }
