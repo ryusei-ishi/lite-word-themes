@@ -7,6 +7,7 @@ if ( !defined( 'ABSPATH' ) ) exit;
  * 動画マニュアルはクロラボ（app.kurosuta.supologe.com）へ移設したため、
  * テーマに内蔵していたマニュアル本体（旧 contents.php ＋ pages/*.php・13ページ）は削除した。
  * このファイルは「クロラボに動画マニュアルがあること」を伝えてリンクへ送るだけの1枚。
+ * 隣に「サポートに質問」ボタン（shop のサポート窓口）も置いている（2026-11-25）。
  *
  * 🚨 メニューのスラッグ 'lw-manual-viewer' は変えないこと。
  *    ①ダッシュボード左の「動画マニュアル」ボタン（dashboard_top/index.php）
@@ -27,6 +28,25 @@ define( 'LW_MANUAL_URL', get_template_directory_uri() . '/functions/manual/' );
 define( 'LW_MANUAL_KURORABO_URL', 'https://app.kurosuta.supologe.com/menu/18' );
 // 迷ったとき用のクロラボのトップ
 define( 'LW_MANUAL_KURORABO_TOP_URL', 'https://app.kurosuta.supologe.com/' );
+// 「サポートに質問」の行き先（shop のサポート窓口）
+define( 'LW_MANUAL_SUPPORT_URL', 'https://shop.lite-word.com/support/' );
+
+/**
+ * クロラボへのリンクに「LiteWord から来た」印（utm）を付ける。
+ * 🚨 リンクは rel="noreferrer" なので、印が無いとクロラボにはどこから来たかが伝わらない。
+ *    新しく登録した人はクロラボの流入元の集計に、登録済みの人はページ閲覧の記録に、この印のまま残る。
+ *    名前はクロラボの流入元の決まりに合わせる: source＝どこから来たか・medium＝どのリンクか・campaign＝signup
+ */
+function lw_manual_kurorabo_link( $url, $medium ) {
+    return add_query_arg(
+        array(
+            'utm_source'   => 'liteword',
+            'utm_medium'   => $medium,
+            'utm_campaign' => 'signup',
+        ),
+        $url
+    );
+}
 
 add_action( 'admin_menu', 'lw_manual_add_menu' );
 function lw_manual_add_menu() {
@@ -85,11 +105,18 @@ function lw_manual_render_page() {
                 <?php endforeach; ?>
             </ul>
 
-            <a href="<?php echo esc_url( LW_MANUAL_KURORABO_URL ); ?>"
-               target="_blank" rel="noopener noreferrer" class="lw-manual-btn">
-                クロラボで動画を見る
-                <span class="dashicons dashicons-arrow-right-alt2"></span>
-            </a>
+            <div class="lw-manual-actions">
+                <a href="<?php echo esc_url( lw_manual_kurorabo_link( LW_MANUAL_KURORABO_URL, 'manual_button' ) ); ?>"
+                   target="_blank" rel="noopener noreferrer" class="lw-manual-btn">
+                    クロラボで動画を見る
+                    <span class="dashicons dashicons-arrow-right-alt2"></span>
+                </a>
+                <a href="<?php echo esc_url( LW_MANUAL_SUPPORT_URL ); ?>"
+                   target="_blank" rel="noopener noreferrer" class="lw-manual-btn is-support">
+                    サポートに質問
+                    <span class="dashicons dashicons-arrow-right-alt2"></span>
+                </a>
+            </div>
 
             <?php // 🚨 flexの直下にテキストと<strong>を並べない。地の文と<strong>が別々のflexアイテムに
                   //    なって、文章がgapの幅で分断される。文字はまとめて<span>1つに入れること。 ?>
@@ -100,7 +127,7 @@ function lw_manual_render_page() {
 
             <p class="lw-manual-sub">
                 うまく開けないときは
-                <a href="<?php echo esc_url( LW_MANUAL_KURORABO_TOP_URL ); ?>" target="_blank" rel="noopener noreferrer">クロラボのトップ</a>
+                <a href="<?php echo esc_url( lw_manual_kurorabo_link( LW_MANUAL_KURORABO_TOP_URL, 'manual_top_link' ) ); ?>" target="_blank" rel="noopener noreferrer">クロラボのトップ</a>
                 から「WordPress」→「LiteWordの使い方」と進んでください。
             </p>
         </div>
