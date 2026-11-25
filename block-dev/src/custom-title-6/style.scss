@@ -22,6 +22,25 @@
       font-size: 18px;
     }
   }
+  // サイズ（サイドバーの「サイズ設定」）。今の大きさ＝中なので size_m のクラスは無い
+  &.size_l .main {
+    font-size: 32px;
+    @container (max-width:800px) {
+      font-size: 26px;
+    }
+    @container (max-width:500px) {
+      font-size: 22px;
+    }
+  }
+  &.size_s .main {
+    font-size: 20px;
+    @container (max-width:800px) {
+      font-size: 18px;
+    }
+    @container (max-width:500px) {
+      font-size: 16px;
+    }
+  }
   .accent {
     position: absolute;
     top: 0;

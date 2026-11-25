@@ -6,12 +6,12 @@
 	"title": "見出しタイトル 02",
 	"category": "lw-heading",
 	"icon": "editor-textcolor",
-	"description": "メインタイトルとサブタイトルを表示する見出しブロック（位置調整可能）",
+	"description": "メインタイトルとサブタイトルを表示する見出しブロック（位置・サイズ調整可能）",
 	"supports": {
 		"anchor": true
 	},
 	"aiHint": {
-		"description": "位置調整可能な見出し。メインタイトル+サブタイトル。左寄せ/中央/右寄せ対応",
+		"description": "位置・サイズ調整可能な見出し。メインタイトル+サブタイトル。左寄せ/中央/右寄せ対応。メインとサブの大きさを別々に大・中・小から選べる",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["mainTitle", "subTitle"],
 		"imageAttributes": []
@@ -36,6 +36,16 @@
 			"type": "number",
 			"default": 2,
 			"aiHint": { "skip": true }
+		},
+		"mainSizeClass": {
+			"type": "string",
+			"default": "main_size_l",
+			"aiHint": { "role": "size", "contentGuide": "メインタイトルの大きさ。main_size_l＝大（既定。PC 60px／スマホ 44px）、main_size_m＝中（PC 44px／スマホ 32px）、main_size_s＝小（PC 32px／スマホ 26px）。日本語の長い見出しは中か小" }
+		},
+		"subSizeClass": {
+			"type": "string",
+			"default": "sub_size_m",
+			"aiHint": { "role": "size", "contentGuide": "サブタイトルの大きさ。sub_size_l＝大（PC 20px／スマホ 16px）、sub_size_m＝中（既定。PC 16px／スマホ 14px）、sub_size_s＝小（PC 14px／スマホ 12px）" }
 		}
 	},
 	"editorScript": "file:./custom-title-2.js",

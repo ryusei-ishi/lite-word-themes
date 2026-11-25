@@ -6,10 +6,30 @@ import './editor.scss';
 
 import metadata from './block.json';
 
+// サイズの選択肢。値がそのままクラス名になる（main_size_l など）
+const sizeOptions = (prefix) => [
+    { label: '大 (L)', value: `${prefix}_size_l` },
+    { label: '中 (M)', value: `${prefix}_size_m` },
+    { label: '小 (S)', value: `${prefix}_size_s` },
+];
+
+// 今の大きさ（メイン＝大・サブ＝中）のときはクラスを付けない。
+// 付けると、置いてある見出しの保存済み HTML と save() の出力がずれ、エディタで「無効なコンテンツ」になる。
+const sizeClassNames = (mainSizeClass, subSizeClass) => {
+    const classes = [];
+    if (mainSizeClass === 'main_size_m' || mainSizeClass === 'main_size_s') {
+        classes.push(mainSizeClass);
+    }
+    if (subSizeClass === 'sub_size_l' || subSizeClass === 'sub_size_s') {
+        classes.push(subSizeClass);
+    }
+    return classes.length ? ` ${classes.join(' ')}` : '';
+};
+
 registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
-        const { mainTitle, subTitle, textAlignment, headingLevel } = attributes;
+        const { mainTitle, subTitle, textAlignment, headingLevel, mainSizeClass, subSizeClass } = attributes;
 
         const onChangeMainTitle = (value) => {
             setAttributes({ mainTitle: value });
@@ -32,7 +52,7 @@ registerBlockType(metadata.name, {
         const TagName = `h${headingLevel}`;
 
         const blockProps = useBlockProps({
-            className: `custom-title-2 ${alignmentClass}`,
+            className: `custom-title-2 ${alignmentClass}${sizeClassNames(mainSizeClass, subSizeClass)}`,
         });
 
         return (
@@ -51,6 +71,20 @@ registerBlockType(metadata.name, {
                     </ToolbarGroup>
                 </BlockControls>
                 <InspectorControls>
+                    <PanelBody title="サイズ設定">
+                        <RadioControl
+                            label="メインタイトル"
+                            selected={mainSizeClass}
+                            options={sizeOptions('main')}
+                            onChange={(value) => setAttributes({ mainSizeClass: value })}
+                        />
+                        <RadioControl
+                            label="サブタイトル"
+                            selected={subSizeClass}
+                            options={sizeOptions('sub')}
+                            onChange={(value) => setAttributes({ subSizeClass: value })}
+                        />
+                    </PanelBody>
                     <PanelBody title="配置設定">
                         <RadioControl
                             selected={textAlignment}
@@ -84,14 +118,14 @@ registerBlockType(metadata.name, {
     },
     save: function (props) {
         const { attributes } = props;
-        const { mainTitle, subTitle, textAlignment, headingLevel } = attributes;
+        const { mainTitle, subTitle, textAlignment, headingLevel, mainSizeClass, subSizeClass } = attributes;
 
         const alignmentClass = textAlignment === 'right' ? 'right' : textAlignment === 'center' ? 'center' : 'left';
 
         const TagName = `h${headingLevel}`;
 
         const blockProps = useBlockProps.save({
-            className: `custom-title-2 ${alignmentClass}`,
+            className: `custom-title-2 ${alignmentClass}${sizeClassNames(mainSizeClass, subSizeClass)}`,
         });
 
         return (

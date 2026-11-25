@@ -6,12 +6,12 @@
 	"title": "見出しタイトル 06",
 	"category": "lw-heading",
 	"icon": "editor-textcolor",
-	"description": "メインタイトルを表示する見出しブロック（アクセントカラー付き）",
+	"description": "メインタイトルを表示する見出しブロック（アクセントカラー付き・サイズ調整可能）",
 	"supports": {
 		"anchor": true
 	},
 	"aiHint": {
-		"description": "アクセントカラー付きシンプル見出し。メインタイトルのみ。サブタイトル不要な場面に",
+		"description": "アクセントカラー付きシンプル見出し。メインタイトルのみ。サブタイトル不要な場面に。大きさは大・中・小から選べる",
 		"excludeFromAutoSelect": false,
 		"contentAttributes": ["mainTitle"],
 		"imageAttributes": []
@@ -31,6 +31,11 @@
 			"type": "number",
 			"default": 2,
 			"aiHint": { "skip": true }
+		},
+		"sizeClass": {
+			"type": "string",
+			"default": "size_m",
+			"aiHint": { "role": "size", "contentGuide": "見出しの大きさ。size_l＝大（PC 32px／スマホ 22px）、size_m＝中（既定。PC 24px／スマホ 18px）、size_s＝小（PC 20px／スマホ 16px）" }
 		}
 	},
 	"editorScript": "file:./custom-title-6.js",

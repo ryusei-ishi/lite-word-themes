@@ -36,6 +36,37 @@
       font-size: 0.7em;
     }
   }
+  // サイズ（サイドバーの「サイズ設定」）。今の大きさ＝メインは大・サブは中なので、その2つのクラスは無い
+  &.main_size_m .main {
+    font-size: 2.2em;
+    @container (max-width:700px) {
+      font-size: 1.8em;
+    }
+    @container (max-width:500px) {
+      font-size: 1.6em;
+    }
+  }
+  &.main_size_s .main {
+    font-size: 1.6em;
+    @container (max-width:700px) {
+      font-size: 1.4em;
+    }
+    @container (max-width:500px) {
+      font-size: 1.3em;
+    }
+  }
+  &.sub_size_l .sub {
+    font-size: 1em;
+    @container (max-width:600px) {
+      font-size: 0.8em;
+    }
+  }
+  &.sub_size_s .sub {
+    font-size: 0.7em;
+    @container (max-width:600px) {
+      font-size: 0.6em;
+    }
+  }
   .main,
   .sub {
     strong {

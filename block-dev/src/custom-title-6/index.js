@@ -1,15 +1,19 @@
 import { registerBlockType } from '@wordpress/blocks';
 import { RichText, InspectorControls, BlockControls, ColorPalette, useBlockProps } from '@wordpress/block-editor';
-import { PanelBody, ToolbarGroup, ToolbarButton } from '@wordpress/components';
+import { PanelBody, RadioControl, ToolbarGroup, ToolbarButton } from '@wordpress/components';
 import './style.scss';
 import './editor.scss';
 
 import metadata from './block.json';
 
+// 今の大きさ（中）のときはクラスを付けない。
+// 付けると、置いてある見出しの保存済み HTML と save() の出力がずれ、エディタで「無効なコンテンツ」になる。
+const sizeClassName = (sizeClass) => (sizeClass === 'size_l' || sizeClass === 'size_s' ? ` ${sizeClass}` : '');
+
 registerBlockType(metadata.name, {
     edit: function (props) {
         const { attributes, setAttributes } = props;
-        const { mainTitle, accentColor, headingLevel } = attributes;
+        const { mainTitle, accentColor, headingLevel, sizeClass } = attributes;
 
         const onChangeMainTitle = (value) => {
             setAttributes({ mainTitle: value });
@@ -26,7 +30,7 @@ registerBlockType(metadata.name, {
         const TagName = `h${headingLevel}`;
 
         const blockProps = useBlockProps({
-            className: 'custom-title-6',
+            className: `custom-title-6${sizeClassName(sizeClass)}`,
         });
 
         return (
@@ -45,6 +49,18 @@ registerBlockType(metadata.name, {
                     </ToolbarGroup>
                 </BlockControls>
                 <InspectorControls>
+                    <PanelBody title="サイズ設定">
+                        <RadioControl
+                            label="サイズ"
+                            selected={sizeClass}
+                            options={[
+                                { label: '大 (L)', value: 'size_l' },
+                                { label: '中 (M)', value: 'size_m' },
+                                { label: '小 (S)', value: 'size_s' },
+                            ]}
+                            onChange={(value) => setAttributes({ sizeClass: value })}
+                        />
+                    </PanelBody>
                     <PanelBody title="色設定">
                         <ColorPalette
                             value={accentColor}
@@ -68,12 +84,12 @@ registerBlockType(metadata.name, {
     },
     save: function (props) {
         const { attributes } = props;
-        const { mainTitle, accentColor, headingLevel } = attributes;
+        const { mainTitle, accentColor, headingLevel, sizeClass } = attributes;
 
         const TagName = `h${headingLevel}`;
 
         const blockProps = useBlockProps.save({
-            className: 'custom-title-6',
+            className: `custom-title-6${sizeClassName(sizeClass)}`,
         });
 
         return (

@@ -24,6 +24,33 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+// サイズの選択肢。値がそのままクラス名になる（main_size_l など）
+var sizeOptions = function sizeOptions(prefix) {
+  return [{
+    label: '大 (L)',
+    value: "".concat(prefix, "_size_l")
+  }, {
+    label: '中 (M)',
+    value: "".concat(prefix, "_size_m")
+  }, {
+    label: '小 (S)',
+    value: "".concat(prefix, "_size_s")
+  }];
+};
+
+// 今の大きさ（メイン＝大・サブ＝中）のときはクラスを付けない。
+// 付けると、置いてある見出しの保存済み HTML と save() の出力がずれ、エディタで「無効なコンテンツ」になる。
+var sizeClassNames = function sizeClassNames(mainSizeClass, subSizeClass) {
+  var classes = [];
+  if (mainSizeClass === 'main_size_m' || mainSizeClass === 'main_size_s') {
+    classes.push(mainSizeClass);
+  }
+  if (subSizeClass === 'sub_size_l' || subSizeClass === 'sub_size_s') {
+    classes.push(subSizeClass);
+  }
+  return classes.length ? " ".concat(classes.join(' ')) : '';
+};
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
   edit: function edit(props) {
     var attributes = props.attributes,
@@ -31,7 +58,9 @@ __webpack_require__.r(__webpack_exports__);
     var mainTitle = attributes.mainTitle,
       subTitle = attributes.subTitle,
       textAlignment = attributes.textAlignment,
-      headingLevel = attributes.headingLevel;
+      headingLevel = attributes.headingLevel,
+      mainSizeClass = attributes.mainSizeClass,
+      subSizeClass = attributes.subSizeClass;
     var onChangeMainTitle = function onChangeMainTitle(value) {
       setAttributes({
         mainTitle: value
@@ -55,7 +84,7 @@ __webpack_require__.r(__webpack_exports__);
     var alignmentClass = textAlignment === 'right' ? 'right' : textAlignment === 'center' ? 'center' : 'left';
     var TagName = "h".concat(headingLevel);
     var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
-      className: "custom-title-2 ".concat(alignmentClass)
+      className: "custom-title-2 ".concat(alignmentClass).concat(sizeClassNames(mainSizeClass, subSizeClass))
     });
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, [1, 2, 3, 4, 5].map(function (level) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
@@ -66,6 +95,26 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, "H".concat(level));
     }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u30B5\u30A4\u30BA\u8A2D\u5B9A"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RadioControl, {
+      label: "\u30E1\u30A4\u30F3\u30BF\u30A4\u30C8\u30EB",
+      selected: mainSizeClass,
+      options: sizeOptions('main'),
+      onChange: function onChange(value) {
+        return setAttributes({
+          mainSizeClass: value
+        });
+      }
+    }), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RadioControl, {
+      label: "\u30B5\u30D6\u30BF\u30A4\u30C8\u30EB",
+      selected: subSizeClass,
+      options: sizeOptions('sub'),
+      onChange: function onChange(value) {
+        return setAttributes({
+          subSizeClass: value
+        });
+      }
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: "\u914D\u7F6E\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RadioControl, {
       selected: textAlignment,
@@ -99,11 +148,13 @@ __webpack_require__.r(__webpack_exports__);
     var mainTitle = attributes.mainTitle,
       subTitle = attributes.subTitle,
       textAlignment = attributes.textAlignment,
-      headingLevel = attributes.headingLevel;
+      headingLevel = attributes.headingLevel,
+      mainSizeClass = attributes.mainSizeClass,
+      subSizeClass = attributes.subSizeClass;
     var alignmentClass = textAlignment === 'right' ? 'right' : textAlignment === 'center' ? 'center' : 'left';
     var TagName = "h".concat(headingLevel);
     var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-      className: "custom-title-2 ".concat(alignmentClass)
+      className: "custom-title-2 ".concat(alignmentClass).concat(sizeClassNames(mainSizeClass, subSizeClass))
     });
     return /*#__PURE__*/React.createElement(TagName, blockProps, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.RichText.Content, {
       tagName: "span",
@@ -179,7 +230,7 @@ module.exports = window["wp"]["components"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-2","version":"1.0.0","title":"見出しタイトル 02","category":"lw-heading","icon":"editor-textcolor","description":"メインタイトルとサブタイトルを表示する見出しブロック（位置調整可能）","supports":{"anchor":true},"aiHint":{"description":"位置調整可能な見出し。メインタイトル+サブタイトル。左寄せ/中央/右寄せ対応","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":[]},"attributes":{"mainTitle":{"type":"string","default":"CONTENT","aiHint":{"role":"heading","contentGuide":"セクション見出し（英語 or 日本語）。3〜15文字","example":"SERVICE"}},"subTitle":{"type":"string","default":"SUB TITLE TEXT","aiHint":{"role":"subheading","contentGuide":"補足テキスト or 英語サブタイトル","example":"サービス紹介"}},"textAlignment":{"type":"string","default":"left","aiHint":{"skip":true}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}}},"editorScript":"file:./custom-title-2.js","no":2}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-2","version":"1.0.0","title":"見出しタイトル 02","category":"lw-heading","icon":"editor-textcolor","description":"メインタイトルとサブタイトルを表示する見出しブロック（位置・サイズ調整可能）","supports":{"anchor":true},"aiHint":{"description":"位置・サイズ調整可能な見出し。メインタイトル+サブタイトル。左寄せ/中央/右寄せ対応。メインとサブの大きさを別々に大・中・小から選べる","excludeFromAutoSelect":false,"contentAttributes":["mainTitle","subTitle"],"imageAttributes":[]},"attributes":{"mainTitle":{"type":"string","default":"CONTENT","aiHint":{"role":"heading","contentGuide":"セクション見出し（英語 or 日本語）。3〜15文字","example":"SERVICE"}},"subTitle":{"type":"string","default":"SUB TITLE TEXT","aiHint":{"role":"subheading","contentGuide":"補足テキスト or 英語サブタイトル","example":"サービス紹介"}},"textAlignment":{"type":"string","default":"left","aiHint":{"skip":true}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}},"mainSizeClass":{"type":"string","default":"main_size_l","aiHint":{"role":"size","contentGuide":"メインタイトルの大きさ。main_size_l＝大（既定。PC 60px／スマホ 44px）、main_size_m＝中（PC 44px／スマホ 32px）、main_size_s＝小（PC 32px／スマホ 26px）。日本語の長い見出しは中か小"}},"subSizeClass":{"type":"string","default":"sub_size_m","aiHint":{"role":"size","contentGuide":"サブタイトルの大きさ。sub_size_l＝大（PC 20px／スマホ 16px）、sub_size_m＝中（既定。PC 16px／スマホ 14px）、sub_size_s＝小（PC 14px／スマホ 12px）"}}},"editorScript":"file:./custom-title-2.js","no":2}');
 
 /***/ })
 

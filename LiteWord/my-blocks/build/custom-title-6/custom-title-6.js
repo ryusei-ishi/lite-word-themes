@@ -24,13 +24,20 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+// 今の大きさ（中）のときはクラスを付けない。
+// 付けると、置いてある見出しの保存済み HTML と save() の出力がずれ、エディタで「無効なコンテンツ」になる。
+var sizeClassName = function sizeClassName(sizeClass) {
+  return sizeClass === 'size_l' || sizeClass === 'size_s' ? " ".concat(sizeClass) : '';
+};
 (0,_wordpress_blocks__WEBPACK_IMPORTED_MODULE_0__.registerBlockType)(_block_json__WEBPACK_IMPORTED_MODULE_5__.name, {
   edit: function edit(props) {
     var attributes = props.attributes,
       setAttributes = props.setAttributes;
     var mainTitle = attributes.mainTitle,
       accentColor = attributes.accentColor,
-      headingLevel = attributes.headingLevel;
+      headingLevel = attributes.headingLevel,
+      sizeClass = attributes.sizeClass;
     var onChangeMainTitle = function onChangeMainTitle(value) {
       setAttributes({
         mainTitle: value
@@ -48,7 +55,7 @@ __webpack_require__.r(__webpack_exports__);
     };
     var TagName = "h".concat(headingLevel);
     var blockProps = (0,_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps)({
-      className: 'custom-title-6'
+      className: "custom-title-6".concat(sizeClassName(sizeClass))
     });
     return /*#__PURE__*/React.createElement(React.Fragment, null, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.BlockControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarGroup, null, [1, 2, 3, 4, 5].map(function (level) {
       return /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.ToolbarButton, {
@@ -59,6 +66,26 @@ __webpack_require__.r(__webpack_exports__);
         }
       }, "H".concat(level));
     }))), /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.InspectorControls, null, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
+      title: "\u30B5\u30A4\u30BA\u8A2D\u5B9A"
+    }, /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.RadioControl, {
+      label: "\u30B5\u30A4\u30BA",
+      selected: sizeClass,
+      options: [{
+        label: '大 (L)',
+        value: 'size_l'
+      }, {
+        label: '中 (M)',
+        value: 'size_m'
+      }, {
+        label: '小 (S)',
+        value: 'size_s'
+      }],
+      onChange: function onChange(value) {
+        return setAttributes({
+          sizeClass: value
+        });
+      }
+    })), /*#__PURE__*/React.createElement(_wordpress_components__WEBPACK_IMPORTED_MODULE_2__.PanelBody, {
       title: "\u8272\u8A2D\u5B9A"
     }, /*#__PURE__*/React.createElement(_wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.ColorPalette, {
       value: accentColor,
@@ -81,10 +108,11 @@ __webpack_require__.r(__webpack_exports__);
     var attributes = props.attributes;
     var mainTitle = attributes.mainTitle,
       accentColor = attributes.accentColor,
-      headingLevel = attributes.headingLevel;
+      headingLevel = attributes.headingLevel,
+      sizeClass = attributes.sizeClass;
     var TagName = "h".concat(headingLevel);
     var blockProps = _wordpress_block_editor__WEBPACK_IMPORTED_MODULE_1__.useBlockProps.save({
-      className: 'custom-title-6'
+      className: "custom-title-6".concat(sizeClassName(sizeClass))
     });
     return /*#__PURE__*/React.createElement(TagName, blockProps, /*#__PURE__*/React.createElement("div", {
       className: "main"
@@ -162,7 +190,7 @@ module.exports = window["wp"]["components"];
   \***************************************/
 /***/ ((module) => {
 
-module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-6","version":"1.0.0","title":"見出しタイトル 06","category":"lw-heading","icon":"editor-textcolor","description":"メインタイトルを表示する見出しブロック（アクセントカラー付き）","supports":{"anchor":true},"aiHint":{"description":"アクセントカラー付きシンプル見出し。メインタイトルのみ。サブタイトル不要な場面に","excludeFromAutoSelect":false,"contentAttributes":["mainTitle"],"imageAttributes":[]},"attributes":{"mainTitle":{"type":"string","default":"CONTENT","aiHint":{"role":"heading","contentGuide":"セクション見出し（英語 or 日本語）。3〜15文字","example":"FAQ"}},"accentColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}}},"editorScript":"file:./custom-title-6.js","no":6}');
+module.exports = /*#__PURE__*/JSON.parse('{"$schema":"https://schemas.wp.org/trunk/block.json","apiVersion":3,"name":"wdl/custom-title-6","version":"1.0.0","title":"見出しタイトル 06","category":"lw-heading","icon":"editor-textcolor","description":"メインタイトルを表示する見出しブロック（アクセントカラー付き・サイズ調整可能）","supports":{"anchor":true},"aiHint":{"description":"アクセントカラー付きシンプル見出し。メインタイトルのみ。サブタイトル不要な場面に。大きさは大・中・小から選べる","excludeFromAutoSelect":false,"contentAttributes":["mainTitle"],"imageAttributes":[]},"attributes":{"mainTitle":{"type":"string","default":"CONTENT","aiHint":{"role":"heading","contentGuide":"セクション見出し（英語 or 日本語）。3〜15文字","example":"FAQ"}},"accentColor":{"type":"string","default":"var(--color-main)","aiHint":{"skip":true}},"headingLevel":{"type":"number","default":2,"aiHint":{"skip":true}},"sizeClass":{"type":"string","default":"size_m","aiHint":{"role":"size","contentGuide":"見出しの大きさ。size_l＝大（PC 32px／スマホ 22px）、size_m＝中（既定。PC 24px／スマホ 18px）、size_s＝小（PC 20px／スマホ 16px）"}}},"editorScript":"file:./custom-title-6.js","no":6}');
 
 /***/ })
 
