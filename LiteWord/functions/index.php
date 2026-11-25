@@ -112,6 +112,8 @@ get_template_part('./functions/title_put');//fvタイトルなどの情報取得
 get_template_part('./functions/lazy_loading');//画像の遅延読み込み
 get_template_part('./functions/lw_premium_login/setup');//ショップURL設定
 get_template_part('./functions/lw_premium_login/popup');//ショップログインポップアップ
+// PHP が古いときの警告（ログインの処理は is_admin() が false なので、is_admin() の外で読む必要がある）
+get_template_part('./functions/php_version_notice/index');
 // AIシステム（REST APIを使用するため、is_admin()の外で読み込む必要がある）
 get_template_part('./functions/lw_ai_system/index');
 // AIチャットサポート（ダッシュボードポップアップ + REST APIプロキシ）

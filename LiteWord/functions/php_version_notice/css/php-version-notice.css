@@ -1,0 +1,162 @@
+/**
+ * PHP が古いときの警告のポップアップ（functions/php_version_notice）
+ *
+ * 🚨 重ね順（z-index）は、お試しのポップアップ（lw_check_trial_popup.php の 999999）より下にする。
+ *    お試しの期限切れのポップアップは管理画面のどこでも出るので、同じ画面に両方が出ることがある。
+ *    そのときはお試しが上に来て、閉じると下のこれが見える。
+ */
+
+.lw-php-notice {
+    padding: 16px;
+
+    position: fixed;
+    inset: 0;
+    z-index: 999990;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background: rgba(15, 23, 42, 0.55);
+}
+
+.lw-php-notice-card {
+    padding: 32px;
+
+    width: 100%;
+    max-width: 520px;
+    max-height: calc(100vh - 32px);
+    overflow-y: auto;
+
+    background: #fff;
+
+    border-radius: 16px;
+    box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
+
+    /* 開いたときに JS が箱へ当てる（tabindex="-1"）。箱の輪は出さない */
+    &:focus {
+        outline: none;
+    }
+
+    @media screen and (max-width: 782px) {
+        padding: 24px;
+    }
+}
+
+.lw-php-notice-title {
+    margin: 0 0 16px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    color: #2d3748;
+
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 1.5;
+
+    /* dashicons は width / height / font-size を3つ揃える（揃えないとグリフが上にズレる） */
+    .dashicons {
+        width: 24px;
+        height: 24px;
+
+        flex-shrink: 0;
+
+        color: #d97706;
+
+        font-size: 24px;
+    }
+}
+
+.lw-php-notice-text {
+    margin: 0 0 12px;
+
+    color: #4a5568;
+
+    font-size: 14px;
+    line-height: 1.9;
+
+    strong {
+        color: #2d3748;
+    }
+}
+
+.lw-php-notice-actions {
+    margin-top: 24px;
+
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 12px;
+}
+
+/* 閉じる（白地に灰色の枠）。枠の1px ぶん padding を減らし、記事のボタンと同じ大きさにする */
+.lw-php-notice-close {
+    padding: 11px 23px;
+
+    display: inline-flex;
+    align-items: center;
+
+    background: #fff;
+    border: 1px solid #cbd5e0;
+    color: #4a5568;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+
+    border-radius: 999px;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+        background: #f8fafc;
+        color: #2d3748;
+    }
+
+    &:focus-visible {
+        outline: 2px solid #2271b1;
+        outline-offset: 2px;
+    }
+}
+
+/* 理由と切り替え方を見る（紺のグラデーション。動画マニュアルの画面のボタンと同じ色） */
+.lw-php-notice-link {
+    padding: 12px 24px;
+
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+
+    background: linear-gradient(135deg, #1e3a5f 0%, #2d5a87 50%, #3a7bd5 100%);
+    color: #fff;
+
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.5;
+    text-decoration: none;
+
+    border-radius: 999px;
+    box-shadow: 0 6px 20px rgba(45, 90, 135, 0.3);
+
+    &:hover,
+    &:focus {
+        color: #fff;
+        box-shadow: 0 8px 24px rgba(45, 90, 135, 0.42);
+    }
+
+    &:focus-visible {
+        outline: 2px solid #2271b1;
+        outline-offset: 2px;
+    }
+
+    .dashicons {
+        width: 16px;
+        height: 16px;
+
+        font-size: 16px;
+    }
+}
