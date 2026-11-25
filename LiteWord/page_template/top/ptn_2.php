@@ -1,5 +1,5 @@
-<!-- wp:wdl/fv-4 {"backgroundImage":"https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/salon_1.webp","mainTitle":"\u003cspan data-lw_font_set=\u0022Noto Serif JP\u0022 class=\u0022custom-font-settings custom-font-settings fw-500\u0022\u003ePhoto Miki\u003c/span\u003e","subTitle":"一生に一度を綺麗に残す","description":"キャリア30年 | ウェディング撮影専門\u003cbr\u003e撮影からメイクまで一貫してお任せください！","filterBackgroundColor":"#000000","filterOpacity":0.35} -->
-<div class="wp-block-wdl-fv-4 fv-4 min-h-pc-480px min-h-tb-400px min-h-sp-360px"><div class="fv-4_inner pc_left sp_left" style="max-width:1040px"><h1 style="color:#fff"><span class="sub" style="color:#fff">一生に一度を綺麗に残す</span><span class="main" style="color:#fff"><span data-lw_font_set="Noto Serif JP" class="custom-font-settings custom-font-settings fw-500">Photo Miki</span></span></h1><p style="color:#fff">キャリア30年 | ウェディング撮影専門<br>撮影からメイクまで一貫してお任せください！</p></div><div class="filter" style="background-color:#000000;opacity:0.35"></div><picture class="bg_image"><source srcset="" media="(max-width: 800px)"/><source srcset="https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/salon_1.webp" media="(min-width: 801px)"/><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/salon_1.webp" alt="背景画像" loading="eager" fetchpriority="high"/></picture></div>
+<!-- wp:wdl/fv-4 {"backgroundImage":"https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/photographer_1.webp","mainTitle":"\u003cspan data-lw_font_set=\u0022Noto Serif JP\u0022 class=\u0022custom-font-settings custom-font-settings fw-500\u0022\u003ePhoto Miki\u003c/span\u003e","subTitle":"一生に一度を綺麗に残す","description":"キャリア30年 | ウェディング撮影専門\u003cbr\u003e撮影からメイクまで一貫してお任せください！","filterBackgroundColor":"#000000","filterOpacity":0.35} -->
+<div class="wp-block-wdl-fv-4 fv-4 min-h-pc-480px min-h-tb-400px min-h-sp-360px"><div class="fv-4_inner pc_left sp_left" style="max-width:1040px"><h1 style="color:#fff"><span class="sub" style="color:#fff">一生に一度を綺麗に残す</span><span class="main" style="color:#fff"><span data-lw_font_set="Noto Serif JP" class="custom-font-settings custom-font-settings fw-500">Photo Miki</span></span></h1><p style="color:#fff">キャリア30年 | ウェディング撮影専門<br>撮影からメイクまで一貫してお任せください！</p></div><div class="filter" style="background-color:#000000;opacity:0.35"></div><picture class="bg_image"><source srcset="" media="(max-width: 800px)"/><source srcset="https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/photographer_1.webp" media="(min-width: 801px)"/><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/fv/photographer_1.webp" alt="背景画像" loading="eager" fetchpriority="high"/></picture></div>
 <!-- /wp:wdl/fv-4 -->
 
 <!-- wp:wdl/custom-title-5 {"subTitle":"お知らせ","mainTitle":"\u003cspan data-lw_font_set=\u0022Noto Serif JP\u0022 class=\u0022custom-font-settings custom-font-settings fw-500\u0022\u003eNews\u003c/span\u003e"} -->
@@ -86,8 +86,8 @@
 <h2 class="wp-block-wdl-custom-title-1 custom-title-1"><span class="main"><span class="custom-font-settings custom-font-settings fw-500" data-lw_font_set="Noto Serif JP">Consept</span></span><span class="sub">コンセプト</span></h2>
 <!-- /wp:wdl/custom-title-1 -->
 
-<!-- wp:wdl/lw-gallery-01 {"text_1":"「Photo Miki」は、人生で最も特別な瞬間を、鮮やかに、\u003cbr\u003eそして美しく永遠に残すことを使命としています。\u003cbr\u003e30年以上のキャリアを持つウェディング撮影のプロフェッショナルとして、お客様の想いや希望を丁寧に聞き取り、その瞬間を理想以上のかたちで表現します。","text_2":"撮影だけでなく、メイクやスタイリングまで一貫してお任せいただくことで、トータルで満足いただけるサービスを提供しています。\u003cbr\u003e挙式当日からリハーサル、前撮りや後撮りに至るまで、いつまでも色褪せない写真を創り出すため、細部にこだわり抜き、光と影を活かした一瞬を丁寧に捉えます。\u003cbr\u003e「Photo Miki」の作品は、ただの記録写真ではなく、お二人の物語を映し出す芸術です。\u003cbr\u003e結婚式という一生に一度の舞台で、かけがえのない瞬間を形にして残したいと願うお二人に、最高のフォトグラフィー体験をお届けします。","maxWidthText":840,"maxWidth":1000} -->
-<nav class="wp-block-wdl-lw-gallery-01 lw-gallery-01"><p class="center_pc left_sp" style="max-width:840px">「Photo Miki」は、人生で最も特別な瞬間を、鮮やかに、<br>そして美しく永遠に残すことを使命としています。<br>30年以上のキャリアを持つウェディング撮影のプロフェッショナルとして、お客様の想いや希望を丁寧に聞き取り、その瞬間を理想以上のかたちで表現します。</p><ul class="lw-gallery-01__wrap" style="max-width:1000px"><li><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/1.webp" alt=""/></li><li><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/2.webp" alt=""/></li><li><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/3.webp" alt=""/></li></ul><p class="center_pc left_sp" style="max-width:840px">撮影だけでなく、メイクやスタイリングまで一貫してお任せいただくことで、トータルで満足いただけるサービスを提供しています。<br>挙式当日からリハーサル、前撮りや後撮りに至るまで、いつまでも色褪せない写真を創り出すため、細部にこだわり抜き、光と影を活かした一瞬を丁寧に捉えます。<br>「Photo Miki」の作品は、ただの記録写真ではなく、お二人の物語を映し出す芸術です。<br>結婚式という一生に一度の舞台で、かけがえのない瞬間を形にして残したいと願うお二人に、最高のフォトグラフィー体験をお届けします。</p></nav>
+<!-- wp:wdl/lw-gallery-01 {"text_1":"「Photo Miki」は、人生で最も特別な瞬間を、鮮やかに、\u003cbr\u003eそして美しく永遠に残すことを使命としています。\u003cbr\u003e30年以上のキャリアを持つウェディング撮影のプロフェッショナルとして、お客様の想いや希望を丁寧に聞き取り、その瞬間を理想以上のかたちで表現します。","text_2":"撮影だけでなく、メイクやスタイリングまで一貫してお任せいただくことで、トータルで満足いただけるサービスを提供しています。\u003cbr\u003e挙式当日からリハーサル、前撮りや後撮りに至るまで、いつまでも色褪せない写真を創り出すため、細部にこだわり抜き、光と影を活かした一瞬を丁寧に捉えます。\u003cbr\u003e「Photo Miki」の作品は、ただの記録写真ではなく、お二人の物語を映し出す芸術です。\u003cbr\u003e結婚式という一生に一度の舞台で、かけがえのない瞬間を形にして残したいと願うお二人に、最高のフォトグラフィー体験をお届けします。","items":[{"imgUrl":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/photographer/1.webp","alt":""},{"imgUrl":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/photographer/7.webp","alt":""},{"imgUrl":"https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/photographer/3.webp","alt":""}],"maxWidthText":840,"maxWidth":1000} -->
+<nav class="wp-block-wdl-lw-gallery-01 lw-gallery-01"><p class="center_pc left_sp" style="max-width:840px">「Photo Miki」は、人生で最も特別な瞬間を、鮮やかに、<br>そして美しく永遠に残すことを使命としています。<br>30年以上のキャリアを持つウェディング撮影のプロフェッショナルとして、お客様の想いや希望を丁寧に聞き取り、その瞬間を理想以上のかたちで表現します。</p><ul class="lw-gallery-01__wrap" style="max-width:1000px"><li><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/photographer/1.webp" alt=""/></li><li><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/photographer/7.webp" alt=""/></li><li><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/photographer/3.webp" alt=""/></li></ul><p class="center_pc left_sp" style="max-width:840px">撮影だけでなく、メイクやスタイリングまで一貫してお任せいただくことで、トータルで満足いただけるサービスを提供しています。<br>挙式当日からリハーサル、前撮りや後撮りに至るまで、いつまでも色褪せない写真を創り出すため、細部にこだわり抜き、光と影を活かした一瞬を丁寧に捉えます。<br>「Photo Miki」の作品は、ただの記録写真ではなく、お二人の物語を映し出す芸術です。<br>結婚式という一生に一度の舞台で、かけがえのない瞬間を形にして残したいと願うお二人に、最高のフォトグラフィー体験をお届けします。</p></nav>
 <!-- /wp:wdl/lw-gallery-01 -->
 
 <!-- wp:wdl/lw-button-02 {"btnText":"お申込み・ご相談はこちら"} -->
@@ -104,27 +104,27 @@
 
 <!-- wp:gallery {"linkTo":"none"} -->
 <figure class="wp-block-gallery has-nested-images columns-default is-cropped"><!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/6.webp" alt=""/></figure>
+<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/photographer/2.webp" alt=""/></figure>
 <!-- /wp:image -->
 
 <!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/1.webp" alt=""/></figure>
+<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/photographer/5.webp" alt=""/></figure>
 <!-- /wp:image -->
 
 <!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/4.webp" alt=""/></figure>
+<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/photographer/8.webp" alt=""/></figure>
 <!-- /wp:image -->
 
 <!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/3.webp" alt=""/></figure>
+<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/photographer/6.webp" alt=""/></figure>
 <!-- /wp:image -->
 
 <!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/2.webp" alt=""/></figure>
+<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/photographer/9.webp" alt=""/></figure>
 <!-- /wp:image -->
 
 <!-- wp:image {"sizeSlug":"large","linkDestination":"none"} -->
-<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/shop/5.webp" alt=""/></figure>
+<figure class="wp-block-image size-large"><img src="https://liteword-assets.bigi-ishikawa.workers.dev/t/sample/photographer/4.webp" alt=""/></figure>
 <!-- /wp:image --></figure>
 <!-- /wp:gallery -->
 

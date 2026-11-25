@@ -3621,3 +3621,10 @@ post_style
 #lw-image-popup .lw-image-popup__close:hover {
   opacity: 1;
 }
+
+
+/* 余白ブロックのすぐ後ろの .last_content は要らない（余白が二重になるため）
+   — .has-background / .wp-block-cover と同じ扱い */
+.wp-block-wdl-lw-space-1 + .last_content {
+  display: none;
+}
