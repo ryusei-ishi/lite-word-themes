@@ -15,7 +15,9 @@
     border-radius: 4px;
 }
 
-.lw-diagnose-button {
+/* WordPress の「.wp-core-ui .button」（display: inline-block）に負けないよう、親から書く。
+   負けるとアイコンが上の段、文字が下の段に分かれる */
+.lw-diagnose-controls .lw-diagnose-button {
     display: inline-flex;
     align-items: center;
     gap: 10px;
@@ -24,10 +26,12 @@
     text-align: left;
 }
 
-.lw-diagnose-button .dashicons {
+/* WordPress 7.0 からボタンの中のアイコンは行の高さが38pxになり、絵が下へずれる。絵の大きさに戻す */
+.lw-diagnose-controls .lw-diagnose-button .dashicons {
     width: 22px;
     height: 22px;
     font-size: 22px;
+    line-height: 1;
 }
 
 .lw-diagnose-button-labels {

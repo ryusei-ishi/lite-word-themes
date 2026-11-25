@@ -286,7 +286,7 @@ function lw_render_code_editor_metabox( $post ) {
 						</button>
 						<div style="display: flex; gap: 10px;">
 							<button type="button" id="lw-ai-preview-regenerate" class="button" style="padding: 10px 20px;">
-								<span class="dashicons dashicons-update" style="font-size: 16px; vertical-align: middle; margin-right: 5px;"></span>
+								<span class="dashicons dashicons-update" style="font-size: 16px; width: 16px; height: 16px; line-height: 1; vertical-align: middle; margin-right: 5px;"></span>
 								再分析
 							</button>
 							<button type="button" id="lw-ai-preview-confirm" class="button button-primary" style="padding: 10px 30px; font-weight: bold; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); border: none;">
@@ -425,9 +425,9 @@ function lw_render_code_editor_metabox( $post ) {
 					<div style="flex: 1; min-width: 180px;">
 						<label style="font-size: 12px; opacity: 0.9; display: block; margin-bottom: 4px;">AIモデル</label>
 						<select id="lw-ai-model" style="width: 100%; padding: 8px 12px; border: none; border-radius: 4px; font-size: 14px;">
-							<option value="gemini-3.5-flash">Gemini 3.5 Flash（推奨・高速）</option>
+							<option value="gemini-3.8-flash">Gemini 3.8 Flash（推奨・高速）</option>
 							<option value="gemini-3.1-flash-lite">Gemini 3.1 Flash Lite（最速）</option>
-							<option value="gemini-2.5-pro">Gemini 2.5 Pro（高品質）</option>
+							<option value="gemini-4-hydrogen">Gemini 4 Hydrogen（高品質）</option>
 						</select>
 					</div>
 				</div>
@@ -438,7 +438,7 @@ function lw_render_code_editor_metabox( $post ) {
 					<div style="display: flex; gap: 10px; align-items: center;">
 						<input type="file" id="lw-ai-reference-image" accept="image/*" style="display: none;">
 						<button type="button" id="lw-ai-upload-btn" class="button" style="background: rgba(255,255,255,0.2); color: #fff; border: 1px solid rgba(255,255,255,0.3);">
-							<span class="dashicons dashicons-upload" style="vertical-align: middle; margin-right: 5px;"></span>
+							<span class="dashicons dashicons-upload" style="line-height: 1; vertical-align: middle; margin-right: 5px;"></span>
 							画像を選択
 						</button>
 						<span id="lw-ai-image-name" style="font-size: 12px; opacity: 0.8;"></span>
@@ -474,7 +474,7 @@ function lw_render_code_editor_metabox( $post ) {
 							</span>
 						</button>
 						<button type="button" id="lw-ai-reset-btn" class="button" style="background: rgba(255,255,255,0.2); color: #fff; border: 1px solid rgba(255,255,255,0.3); padding: 10px 15px; display: none;">
-							<span class="dashicons dashicons-trash" style="font-size: 16px; vertical-align: middle; margin-right: 3px;"></span>
+							<span class="dashicons dashicons-trash" style="font-size: 16px; width: 16px; height: 16px; line-height: 1; vertical-align: middle; margin-right: 3px;"></span>
 							リセット
 						</button>
 						<span id="lw-ai-mode-indicator" style="display: none; background: rgba(255,255,255,0.2); padding: 4px 12px; border-radius: 4px; font-size: 12px;">

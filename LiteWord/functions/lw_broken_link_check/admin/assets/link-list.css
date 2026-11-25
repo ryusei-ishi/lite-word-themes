@@ -342,6 +342,13 @@
     border-top: 1px solid #dcdcde;
 }
 
+/* 「リンク有効性をチェック」「中止」のアイコン。WordPress 7.0 からボタンの中のアイコンは
+   行の高さが38pxになり、絵が下へずれるので、絵の大きさに戻して文字の真ん中にそろえる */
+.lw-link-check-controls .button .dashicons {
+    line-height: 1;
+    vertical-align: middle;
+}
+
 .lw-link-check-progress {
     display: none;
     margin-top: 15px;
@@ -602,12 +609,14 @@
     white-space: normal;
 }
 
+/* WordPress 7.0 からボタンの中のアイコンは行の高さが38pxになり、絵が下へずれる。絵の大きさに戻す */
 .lw-scan-modes .lw-scan-button .dashicons {
     flex: none;
     width: 20px;
     height: 20px;
     margin-right: 8px;
     font-size: 20px;
+    line-height: 1;
 }
 
 .lw-scan-button-labels {

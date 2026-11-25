@@ -345,7 +345,7 @@ class LW_AI_Generator_Admin_Settings {
         // 決め打ちの gemini-2.5-flash をやめた（2026-10-02・class-gemini-api.php の API_ENDPOINT）
         $model_endpoint = class_exists( 'LW_AI_Generator_Gemini_API' )
             ? LW_AI_Generator_Gemini_API::API_ENDPOINT
-            : 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
+            : 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent';
         $endpoint = $model_endpoint . '?key=' . $api_key;
 
         $response = wp_remote_post( $endpoint, array(
@@ -597,8 +597,8 @@ class LW_AI_Generator_Admin_Settings {
             <div class="lw-ai-card">
                 <div class="lw-ai-card-body" style="text-align:center; padding: 20px;">
                     <p style="margin-bottom: 12px;">APIキーの設定・変更はセットアップウィザードから行えます。</p>
-                    <a href="<?php echo esc_url( home_url( '/lw-ai-setup/' ) ); ?>" class="button button-primary" style="font-size: 14px; padding: 8px 24px;">
-                        <span class="dashicons dashicons-admin-tools" style="margin-top: 4px;"></span>
+                    <a href="<?php echo esc_url( home_url( '/lw-ai-setup/' ) ); ?>" class="button button-primary" style="display: inline-flex; align-items: center; gap: 6px; font-size: 14px; padding: 8px 24px;">
+                        <span class="dashicons dashicons-admin-tools" style="line-height: 1;"></span>
                         セットアップウィザードを開く
                     </a>
                 </div>

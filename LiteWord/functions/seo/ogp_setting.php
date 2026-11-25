@@ -382,6 +382,10 @@ foreach ( array( 'lw_og_default_image', 'lw_front_og_image' ) as $lw_og_field ) 
     width: 16px;
     height: 16px;
 }
+/* WordPress 7.0 からボタンの中のアイコンは行の高さが38pxになり、絵が下へずれる。絵の大きさに戻す */
+.lw-ogp-image-controls .button .dashicons {
+    line-height: 1;
+}
 
 @media (max-width: 782px) {
     .lw-ogp-image-field {

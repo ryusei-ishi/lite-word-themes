@@ -45,21 +45,40 @@ class LW_AI_Generator_Usage_Tracker {
             'input'  => 0.10,
             'output' => 0.40,
         ),
-        // 🔸 3.x の単価は暫定（公式単価が判明したら要更新）。行が無いと get_pricing() の
-        //    フォールバック（gemini-2.5-flash 単価）で集計されるため、近い旧世代の単価を暫定採用。
+        // 🔸 3.5-flash の単価は暫定（終わり扱いになり、もう使っていない。過去の記録の見積もり用）。
         'gemini-3.5-flash' => array(
             'input'  => 0.30,   // 暫定: 2.5-flash と同値
             'output' => 2.50,   // 暫定
         ),
+        // 2026-11-26 に Google の公式の料金表（https://ai.google.dev/gemini-api/docs/pricing）で確かめた単価。
         'gemini-3.1-flash-lite' => array(
-            'input'  => 0.10,   // 暫定: 2.5-flash-lite と同値
-            'output' => 0.40,   // 暫定
+            'input'  => 0.25,
+            'output' => 1.50,
+        ),
+        'gemini-3.8-flash' => array(
+            'input'  => 0.75,   // 2027-01-01 から 1.50（self::PRICING_CHANGES）
+            'output' => 3.75,   // 2027-01-01 から 7.50（思考トークンを含む）
+        ),
+        'gemini-4-hydrogen' => array(
+            'input'  => 1.50,
+            'output' => 7.50,   // 思考トークンを含む
         ),
         'imagen-4.0' => array(
             'per_image' => 0.04,  // Imagen 4 標準は $0.04 per image（$0.03 は旧 Imagen 3 の価格）
         ),
         'gemini-2.5-flash-image' => array(
             'per_image' => 0.039, // 1画像≒1290出力トークン × $30/1M
+        ),
+    );
+
+    /**
+     * 決まった日から料金が変わるモデル（公式の料金表に書いてある日付。2026-11-26 確認）
+     */
+    const PRICING_CHANGES = array(
+        'gemini-3.8-flash' => array(
+            'from'   => '2027-01-01',
+            'input'  => 1.50,
+            'output' => 7.50,
         ),
     );
 
@@ -238,7 +257,15 @@ class LW_AI_Generator_Usage_Tracker {
             return strlen( $b ) - strlen( $a );
         } );
 
-        return reset( $candidates );
+        $price = reset( $candidates );
+        $name  = key( $candidates );
+
+        // 決まった日から料金が変わるモデル
+        if ( isset( self::PRICING_CHANGES[ $name ] ) && gmdate( 'Y-m-d' ) >= self::PRICING_CHANGES[ $name ]['from'] ) {
+            $price = self::PRICING_CHANGES[ $name ];
+        }
+
+        return $price;
     }
 
     public static function calculate_cost( $model, $input_tokens, $output_tokens, $image_count ) {

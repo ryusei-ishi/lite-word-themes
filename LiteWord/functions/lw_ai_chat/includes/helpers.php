@@ -70,11 +70,13 @@ function lw_ai_chat_get_model_name() {
     $user_id = get_current_user_id();
     $model = $user_id ? get_user_meta($user_id, 'lw_ai_chat_ai_model', true) : '';
     if (empty($model)) $model = 'flash';
+    // 2026-11-26: 2.5-flash は 2026-12-01 に止まり新しいキーでは使えない、
+    // 2.5-pro-preview-05-06 は 2025-12-02 に止まっていた（選ぶと 404）ので、新しいモデルへ
     $models = [
-        'flash' => 'gemini-2.5-flash',
-        'pro'   => 'gemini-2.5-pro-preview-05-06',
+        'flash' => 'gemini-3.8-flash',
+        'pro'   => 'gemini-4-hydrogen',
     ];
-    return $models[$model] ?? 'gemini-2.5-flash';
+    return $models[$model] ?? 'gemini-3.8-flash';
 }
 
 /**

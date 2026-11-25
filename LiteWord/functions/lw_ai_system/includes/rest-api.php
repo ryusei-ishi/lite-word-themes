@@ -321,7 +321,7 @@ function lw_ai_system_register_rest_routes() {
                 'required'          => false,
                 'type'              => 'string',
                 // 既定は推奨モデル。許可リストは class-gemini-api.php の ALLOWED_MYPARTS_MODELS が正
-                'default'           => 'gemini-3.5-flash',
+                'default'           => 'gemini-3.8-flash',
                 'sanitize_callback' => 'sanitize_text_field',
             ),
             'referenceImage' => array(

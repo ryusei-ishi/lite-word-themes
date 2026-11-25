@@ -33,19 +33,22 @@ class LW_AI_Generator_Gemini_API {
     /**
      * Gemini API エンドポイント（高速処理用）
      *
+     * 🚨 2026-11-26 に gemini-3.5-flash → gemini-3.8-flash へ変えた。3.5-flash は Google が終わり扱いにし、
+     *    3.6-flash へ自動で回していた。3.8-flash は無料枠があり、料金は 3.6-flash と同じ。
      * 🚨 2026-10-02 に gemini-2.5-flash → gemini-3.5-flash へ変えた。
      *    Google は 2.5 のモデルを「過去に使ったことのある利用者」に限るようにしたため
      *    （https://ai.google.dev/gemini-api/docs/deprecations）、新しくキーを作った人は 2.5 で止まる。
      *    使っているのは optimize_block / process_auto_highlight / process_auto_highlight_multi /
      *    generate_text / check_typo / review_and_fix_content の6つ（利用量の記録のモデル名も同じにしてある）。
      */
-    const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.5-flash:generateContent';
+    const API_ENDPOINT = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-3.8-flash:generateContent';
 
     /**
-     * Gemini API エンドポイント（高品質ページ生成用 - 2.5 Flash）
-     * 注意: 2.5 Proが400エラーになる場合は2.5 Flashを使用
+     * Gemini API エンドポイント（高品質）
+     * 2026-11-26 に gemini-2.5-pro → gemini-4-hydrogen へ変えた。2.5-pro は 2026-12-01 に止まり、
+     * 新しく作ったキーでは今も使えない。4-hydrogen は Gemini 4 のうち無料枠があるもの。
      */
-    const API_ENDPOINT_PRO = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-pro:generateContent';
+    const API_ENDPOINT_PRO = 'https://generativelanguage.googleapis.com/v1beta/models/gemini-4-hydrogen:generateContent';
 
     /**
      * Imagen 4 画像生成 API エンドポイント（2025年推奨）
@@ -59,10 +62,12 @@ class LW_AI_Generator_Gemini_API {
 
     /**
      * マイパーツ / 参考画像分析で許可するモデル（モデル名はURLに直結するため許可リストで検証）。
-     * 2026-07-19 実測ベンチ（下記 get_default_model コメント参照）に基づく推奨セット:
-     *   推奨=gemini-3.5-flash（2.5-flash と同等品質で高速）/ 高速=gemini-3.1-flash-lite /
-     *   高品質=gemini-2.5-pro（3.x pro は未ベンチのため据え置き）。
-     * 旧 2.5 系（flash / flash-lite）は後方互換（保存済み設定・既存呼び出し）のため残す。
+     * 推奨セット（2026-11-26・Google の公式の資料と実測で決めた。下記 get_default_model コメント参照）:
+     *   推奨=gemini-3.8-flash / 最速=gemini-3.1-flash-lite（2027-05-07 まで）/ 高品質=gemini-4-hydrogen。
+     *   どれも無料枠がある（Gemini 4 の carbon・argon・neon は無料枠が無く、無料のキーではエラーになる）。
+     *   gemini-3.5-flash-lite は thinkingBudget 0 を 400 で断り、3.8-flash より遅かったので使わない。
+     * gemini-2.5-flash-lite は後方互換（保存済み設定・既存呼び出し）のため残す。
+     * 止まる・終わり扱いの旧モデルは self::LEGACY_MODEL_MAP で新しいモデルに読み替える。
      * 未知モデルは self::DEFAULT_MYPARTS_MODEL に降格する。
      * 🚨 この定数を変えたら以下も必ず揃える:
      *   - ドロップダウン: functions/lw_my_parts/code_editor.php（AIモデル select）
@@ -70,17 +75,39 @@ class LW_AI_Generator_Gemini_API {
      *   - 料金表:         functions/lw_ai_system/includes/class-usage-tracker.php（PRICING）
      */
     const ALLOWED_MYPARTS_MODELS = array(
-        'gemini-3.5-flash',
+        'gemini-3.8-flash',
         'gemini-3.1-flash-lite',
-        'gemini-2.5-pro',
-        'gemini-2.5-flash',
+        'gemini-4-hydrogen',
         'gemini-2.5-flash-lite',
+    );
+
+    /**
+     * 止まる・終わり扱いの旧モデル → 読み替える先（保存済みの選択や設定に残っている値のため）。
+     * gemini-2.5-flash・gemini-2.5-pro は 2026-12-01 に止まり、新しく作ったキーでは今も使えない。
+     * gemini-2.5-pro-preview-05-06 は 2025-12-02 に止まった。gemini-3.5-flash は終わり扱い。
+     */
+    const LEGACY_MODEL_MAP = array(
+        'gemini-3.5-flash'             => 'gemini-3.8-flash',
+        'gemini-2.5-flash'             => 'gemini-3.8-flash',
+        'gemini-2.5-pro'               => 'gemini-4-hydrogen',
+        'gemini-2.5-pro-preview-05-06' => 'gemini-4-hydrogen',
     );
 
     /**
      * 許可リスト外だったときに降格する既定モデル（＝推奨モデル）。
      */
-    const DEFAULT_MYPARTS_MODEL = 'gemini-3.5-flash';
+    const DEFAULT_MYPARTS_MODEL = 'gemini-3.8-flash';
+
+    /**
+     * 旧モデル名を新しいモデル名に読み替える（知らない名前はそのまま返す）
+     *
+     * @param string $model モデル名
+     * @return string モデル名
+     */
+    public static function upgrade_legacy_model( $model ) {
+        $model = trim( (string) $model );
+        return isset( self::LEGACY_MODEL_MAP[ $model ] ) ? self::LEGACY_MODEL_MAP[ $model ] : $model;
+    }
 
     /**
      * モデル名からAPIエンドポイントを取得
@@ -88,7 +115,7 @@ class LW_AI_Generator_Gemini_API {
      * @param string $model モデル名
      * @return string APIエンドポイント
      */
-    public static function get_model_endpoint( $model = 'gemini-2.5-flash' ) {
+    public static function get_model_endpoint( $model = 'gemini-3.8-flash' ) {
         return 'https://generativelanguage.googleapis.com/v1beta/models/' . $model . ':generateContent';
     }
 
@@ -106,7 +133,10 @@ class LW_AI_Generator_Gemini_API {
      *   gemini-3.1-flash-lite  4,092ms /  7セクション / 2,667字  ← 速いが構成が薄くなる
      *
      * 既定を gemini-3.5-flash に更新（2026-07-24・上記ベンチで 2.5-flash と同等品質かつ高速）。
-     * オプション lw_ai_generator_model で切り替えられる（保存済みの値があればそれが優先）。
+     * 既定を gemini-3.8-flash に更新（2026-11-26・3.5-flash が終わり扱いになったため）。
+     *   実測（200字ほどの日本語・2回）: 3.8-flash 2.8〜3.6秒 / 3.1-flash-lite 1.9〜2.0秒 /
+     *   4-hydrogen 6.9〜14.0秒（思考あり）/ 3.5-flash-lite 4.5〜5.3秒。
+     * オプション lw_ai_generator_model で切り替えられる（保存済みの値があればそれが優先。旧モデル名は読み替える）。
      *
      * @return string モデル名
      */
@@ -114,8 +144,9 @@ class LW_AI_Generator_Gemini_API {
         $model = get_option( 'lw_ai_generator_model', '' );
 
         if ( ! is_string( $model ) || '' === trim( $model ) ) {
-            $model = 'gemini-3.5-flash';
+            $model = 'gemini-3.8-flash';
         }
+        $model = self::upgrade_legacy_model( $model );
 
         /**
          * 使用するGeminiモデルを差し替えるフィルタ
@@ -142,6 +173,7 @@ class LW_AI_Generator_Gemini_API {
         if ( ! is_string( $model ) || '' === trim( $model ) ) {
             $model = self::get_default_model();
         }
+        $model = self::upgrade_legacy_model( $model );
 
         /**
          * パーツ選定に使うモデルを差し替えるフィルタ
@@ -202,7 +234,7 @@ class LW_AI_Generator_Gemini_API {
             return new WP_Error( 'no_api_key', 'Gemini APIキーが設定されていません' );
         }
 
-        $model           = isset( $config['model'] ) ? $config['model'] : self::get_default_model();
+        $model           = isset( $config['model'] ) ? self::upgrade_legacy_model( $config['model'] ) : self::get_default_model();
         $temperature     = isset( $config['temperature'] ) ? $config['temperature'] : 0.7;
         $max_tokens      = isset( $config['maxOutputTokens'] ) ? $config['maxOutputTokens'] : 8192;
         $timeout         = isset( $config['timeout'] ) ? $config['timeout'] : 60;
@@ -3489,7 +3521,7 @@ RULES;
         // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
         $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-            LW_AI_Generator_Usage_Tracker::log_usage( 'optimize', 'gemini-3.5-flash', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'optimize', 'gemini-3.8-flash', $input_tokens, $output_tokens, 0 );
         }
 
         // JSONを抽出
@@ -3752,6 +3784,8 @@ PROMPT;
         // generate_myparts 経由は検証済みだが、RESTの previewOnly 経路は
         // リクエストの model がそのままここへ届くので、この関数側でも守る。
         // 許可リストは self::ALLOWED_MYPARTS_MODELS に一本化（generate_myparts と共有）。
+        // 止まる旧モデル（保存済みの選択など）は、先に新しいモデルへ読み替える。
+        $model = self::upgrade_legacy_model( $model );
         if ( ! in_array( $model, self::ALLOWED_MYPARTS_MODELS, true ) ) {
             $model = self::DEFAULT_MYPARTS_MODEL;
         }
@@ -4977,7 +5011,7 @@ PROMPT;
         // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
         $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-            LW_AI_Generator_Usage_Tracker::log_usage( 'auto_highlight', 'gemini-3.5-flash', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'auto_highlight', 'gemini-3.8-flash', $input_tokens, $output_tokens, 0 );
         }
 
         // JSONを抽出してパース
@@ -5039,7 +5073,7 @@ PROMPT;
         // 返すのは短い JSON だけなので思考は不要（思考オフ）。
         // 思考を止めないと上限 500 のうち約480を思考が使い、JSON が途中で切れて読めなかった
         // （2.5-flash の頃から。finishReason=MAX_TOKENS・2026-10-02 に確認）。
-        $thinking_config = self::build_thinking_config( 'gemini-3.5-flash', 0 );
+        $thinking_config = self::build_thinking_config( 'gemini-3.8-flash', 0 );
         if ( null !== $thinking_config ) {
             $request_body['generationConfig']['thinkingConfig'] = $thinking_config;
         }
@@ -5085,7 +5119,7 @@ PROMPT;
         // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
         $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-            LW_AI_Generator_Usage_Tracker::log_usage( 'auto_highlight_multi', 'gemini-3.5-flash', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'auto_highlight_multi', 'gemini-3.8-flash', $input_tokens, $output_tokens, 0 );
         }
 
         // JSONを抽出してパース
@@ -5207,7 +5241,7 @@ PROMPT;
         // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
         $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-            LW_AI_Generator_Usage_Tracker::log_usage( 'generate_text', 'gemini-3.5-flash', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'generate_text', 'gemini-3.8-flash', $input_tokens, $output_tokens, 0 );
         }
 
         // テキストのみを返す（余分な説明は削除）
@@ -5752,7 +5786,7 @@ PROMPT;
             $output_tokens = isset( $data['usageMetadata']['candidatesTokenCount'] ) ? $data['usageMetadata']['candidatesTokenCount'] : 0;
             // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
             $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
-            LW_AI_Generator_Usage_Tracker::log_usage( 'typo_check', 'gemini-3.5-flash', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'typo_check', 'gemini-3.8-flash', $input_tokens, $output_tokens, 0 );
         }
 
         return $results_with_client_id;
@@ -5780,7 +5814,8 @@ PROMPT;
         self::debug_log( '[LW MyParts Gemini] APIキー: 設定済み' );
 
         // モデル名のバリデーション（許可リストは self::ALLOWED_MYPARTS_MODELS に一本化・
-        // analyze_reference_image と共有。未知モデルは推奨モデルに降格）
+        // analyze_reference_image と共有。未知モデルは推奨モデルに降格。止まる旧モデルは先に読み替える）
+        $model = self::upgrade_legacy_model( $model );
         if ( ! in_array( $model, self::ALLOWED_MYPARTS_MODELS, true ) ) {
             $model = self::DEFAULT_MYPARTS_MODEL;
         }
@@ -7717,7 +7752,7 @@ PROMPT;
         // 思考トークンは candidatesTokenCount に含まれないが出力として課金されるため加算する
         $output_tokens += isset( $data['usageMetadata']['thoughtsTokenCount'] ) ? (int) $data['usageMetadata']['thoughtsTokenCount'] : 0;
         if ( class_exists( 'LW_AI_Generator_Usage_Tracker' ) ) {
-            LW_AI_Generator_Usage_Tracker::log_usage( 'content_review', 'gemini-3.5-flash', $input_tokens, $output_tokens, 0 );
+            LW_AI_Generator_Usage_Tracker::log_usage( 'content_review', 'gemini-3.8-flash', $input_tokens, $output_tokens, 0 );
         }
 
         // 修正を元のブロック配列に適用

@@ -193,12 +193,20 @@
 			"estimated_cost_usd": "推定コスト（USD）"
 		},
 		"pricing": {
-			"gemini-2.5-flash": {
-				"input": "$0.075 / 1M tokens",
-				"output": "$0.30 / 1M tokens"
+			"gemini-3.8-flash": {
+				"input": "$0.75 / 1M tokens（2027-01-01 から $1.50）",
+				"output": "$3.75 / 1M tokens（2027-01-01 から $7.50）"
+			},
+			"gemini-3.1-flash-lite": {
+				"input": "$0.25 / 1M tokens",
+				"output": "$1.50 / 1M tokens"
+			},
+			"gemini-4-hydrogen": {
+				"input": "$1.50 / 1M tokens",
+				"output": "$7.50 / 1M tokens"
 			},
 			"imagen-4.0": {
-				"per_image": "$0.03 / image"
+				"per_image": "$0.04 / image"
 			}
 		},
 		"stats": {
@@ -270,9 +278,9 @@
 	"technicalDetails": {
 		"aiDescription": "技術的な実装詳細。",
 		"geminiApi": {
-			"aiDescription": "Google Gemini APIを使用。テキスト生成はgemini-2.5-flash、画像生成はImagen 4.0。APIキーはLW_AI_Generator_Admin_Settings::get_api_key()で取得（復号化済み）。共通のcall_gemini_text_api() + parse_json_response()パターンを使用。",
+			"aiDescription": "Google Gemini APIを使用。テキスト生成はgemini-3.8-flash（最速はgemini-3.1-flash-lite、高品質はgemini-4-hydrogen）、画像生成はImagen 4.0。APIキーはLW_AI_Generator_Admin_Settings::get_api_key()で取得（復号化済み）。共通のcall_gemini_text_api() + parse_json_response()パターンを使用。",
 			"models": {
-				"text": "gemini-2.5-flash",
+				"text": "gemini-3.8-flash",
 				"image": "imagen-4.0"
 			},
 			"securityMeasures": {
