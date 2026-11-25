@@ -1,6 +1,6 @@
 {
-    "version": "2.6.1",
-    "changelog": "セキュリティを強化しました（投稿の設定、会員限定の記事、マイパーツ ほか）。投稿の編集画面の「カスタムフィールド」には、テーマの設定（SEO・色・FV など）が出なくなりました。テーマの設定は今までどおり各設定欄から変えられます。あわせて「マイパーツ > APIキャッシュ」の画面をなくしました。更新をおすすめします。",
-    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.6.1/LiteWord.zip",
-    "sha256": "3b295f0a33e5b7403ef5214729a4a5e9325781e99c7f6f7b2c096236c407bdfd"
+    "version": "2.7.0",
+    "changelog": "見出しタイトル02・06 に大きさの切り替え（大・中・小）を足しました。ヘッダーのパターンを4つ足しました（プレミアム）。1ページで完結するページのテンプレートを4本足しました。PHP が古いサイト（8.3 未満）では、管理者がログインしたあとにお知らせを出します。ほかに、追従CTA・テンプレートの写真・ページの下の余白などを直しました。",
+    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.7.0/LiteWord.zip",
+    "sha256": "9e8e5c632a049d40bfc13e2702f30c2f7c9b568cdece6a776d6e1a9ff19d2525"
 }
