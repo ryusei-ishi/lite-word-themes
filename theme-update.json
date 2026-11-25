@@ -1,6 +1,6 @@
 {
     "version": "2.7.0",
-    "changelog": "見出しタイトル02・06 に大きさの切り替え（大・中・小）を足しました。ヘッダーのパターンを4つ足しました（プレミアム）。1ページで完結するページのテンプレートを4本足しました。PHP が古いサイト（8.3 未満）では、管理者がログインしたあとにお知らせを出します。ほかに、追従CTA・テンプレートの写真・ページの下の余白などを直しました。",
-    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.7.0/LiteWord.zip",
-    "sha256": "9e8e5c632a049d40bfc13e2702f30c2f7c9b568cdece6a776d6e1a9ff19d2525"
+    "changelog": "見出しタイトル02・06 に大きさの切り替え（大・中・小）を足しました。ヘッダーのパターンを4つ足しました（プレミアム）。1ページで完結するページのテンプレートを4本足しました。PHP が古いサイト（8.3 未満）では、管理者がログインしたあとにお知らせを出します。ほかに、追従CTA・テンプレートの写真・ページの下の余白などを直しました。管理画面のボタンのアイコンのずれ（WordPress 7）を直し、AI の Gemini を新しいモデルにしました。",
+    "download_url": "https://github.com/ryusei-ishi/lite-word-themes/releases/download/v2.7.0/LiteWord-2.7.0-r2.zip",
+    "sha256": "9e6a096315c6fcab492b8425d3f97f95fc058868e63aefeb3de1585a3b33f830"
 }
